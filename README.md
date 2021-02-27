@@ -1,2 +1,7 @@
-# new_karaite
-Experiments on sefaria data
+# new karaite
+
+Experiments on Sefaria data
+
+
+Just a Django project with postgresql and react
+
