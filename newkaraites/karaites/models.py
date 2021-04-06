@@ -58,6 +58,7 @@ class Comment(models.Model):
                                         verbose_name=_('Comment language'))
 
     comment_author = models.ForeignKey(CommentAuthor,
+                                       on_delete=models.DO_NOTHING,
                                        verbose_name=_('Who comment'))
 
     def __str__(self):
@@ -76,11 +77,16 @@ class BookText(models.Model):
                              on_delete=models.CASCADE,
                              verbose_name=_('Book'))
 
-    chapter = models.IntegerField(default=0,
-                                  verbose_name=_("Chapter"))
+    chapter_en = models.IntegerField(default=0,
+                                     verbose_name=_("Chapter"))
 
-    verse = models.IntegerField(default=0,
-                                verbose_name=_("Verse"))
+    verse_en = models.IntegerField(default=0,
+                                   verbose_name=_("Verse"))
+    chapter_he = models.IntegerField(default=0,
+                                     verbose_name=_("Chapter"))
+
+    verse_he = models.IntegerField(default=0,
+                                   verbose_name=_("Verse"))
 
     text_en = models.TextField(null=True,
                                verbose_name=_("English chapter Verse text"))
@@ -97,3 +103,5 @@ class BookText(models.Model):
         verbose_name_plural = _("Book text")
 
 
+class Ref(models.Model):
+    """  References """
