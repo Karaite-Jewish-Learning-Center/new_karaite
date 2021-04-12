@@ -66,7 +66,7 @@ class Comment(models.Model):
     book = models.ForeignKey(Organization,
                              null=True,
                              blank=True,
-                             on_delete=models.DO_NOTHING,
+                             on_delete=models.CASCADE,
                              verbose_name=_('Book'))
 
     chapter = models.IntegerField(default=1,
@@ -75,19 +75,22 @@ class Comment(models.Model):
     verse = models.IntegerField(default=1,
                                 verbose_name=_("Verse"))
 
-    comment = models.TextField(null=True,
-                               verbose_name=_("A comment"))
+    comment_en = models.TextField(null=True,
+                                  verbose_name=_("Comment English"))
 
-    comment_language = models.CharField(max_length=2,
-                                        choices=LANGUAGES,
-                                        verbose_name=_('Comment language'))
+    comment_he = models.TextField(null=True,
+                                  verbose_name=_("Comment Hebrew"))
 
     comment_author = models.ForeignKey(CommentAuthor,
                                        on_delete=models.DO_NOTHING,
-                                       verbose_name=_('Who comment'))
+                                       verbose_name=_('Author'))
+
+    comments_count = models.IntegerField(default=0,
+                                         editable=False,
+                                         verbose_name=_('Comment count'))
 
     def __str__(self):
-        return f"{self.comment_author} - {self.comment}"
+        return f"{self.comment_author} - {self.book}"
 
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""

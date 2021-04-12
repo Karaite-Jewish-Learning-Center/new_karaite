@@ -30,9 +30,11 @@ admin.site.register(CommentAuthor, CommentAuthorAdmin)
 
 class CommentAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('book', 'chapter', 'verse', 'comment',
-                    'comment_language', 'comment_author')
-    list_filter = ('comment_language',)
+    list_display = ('book', 'chapter', 'verse', 'comment_en',
+                    'comment_he', 'comment_author',
+                    'comments_count')
+
+    list_filter = ('comment_author', 'book')
 
     def get_actions(self, request):
         actions = super().get_actions(request)
@@ -50,6 +52,11 @@ class BookTextAdmin(admin.ModelAdmin):
                     'text_en', 'text_he', 'comments_count')
 
     list_filter = ('book', 'chapter', 'verse')
+
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',)
+        }
 
 
 admin.site.register(BookText, BookTextAdmin)

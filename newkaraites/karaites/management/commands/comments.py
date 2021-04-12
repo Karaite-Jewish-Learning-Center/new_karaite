@@ -28,16 +28,16 @@ class Command(BaseCommand):
         data_he = json.loads(json_data)
         json_file.close()
 
-        chapters = data_en['text'].keys()
-        organization.chapters = len(chapters)
-        organization.save()
-
-        for chapter in chapters:
-            for verse in data_en['text'][chapter]:
-                BookText.objects.get_or_create(
-                    book=organization,
-                    chapter=int(chapter) + 1,
-                    verse=int(verse) + 1,
-                    text_en=data_en['text'][chapter][verse],
-                    text_he=data_he['text'][chapter][verse]
-                )
+        # chapters = data_en['text'].keys()
+        # organization.chapters = len(chapters)
+        # organization.save()
+        #
+        # for chapter in chapters:
+        #     for verse in data_en['text'][chapter]:
+        #         BookText.objects.get_or_create(
+        #             book=organization,
+        #             chapter=int(chapter) + 1,
+        #             verse=int(verse) + 1,
+        #             text_en=data_en['text'][chapter][verse],
+        #             text_he=data_he['text'][chapter][verse]
+        #         )
