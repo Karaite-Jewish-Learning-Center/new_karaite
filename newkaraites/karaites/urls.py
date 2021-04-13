@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import
+from .views import BooksPresentation
 
 app_name = 'karaites'
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('about', about, name='about')
+    path('books-list/', BooksPresentation.as_view(), name='books_list'),
 ]

@@ -36,6 +36,11 @@ class Organization(models.Model):
     def __str__(self):
         return f"{self.book_title_en}"
 
+    @staticmethod
+    def get_list_of_books():
+        """ Return a a list of dict, each dict is a book  """
+        return list(Organization.objects.values())
+
     class Meta:
         verbose_name_plural = _("  Organizations")
         ordering = ['order']
