@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext as _
-from .constants import (LANGUAGES,
-                        FIRST_LEVEL,
+from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL)
 
 
@@ -39,7 +38,9 @@ class Organization(models.Model):
     @staticmethod
     def get_list_of_books():
         """ Return a a list of dict, each dict is a book  """
-        return list(Organization.objects.values())
+        return list(Organization.objects.values().order_by('first_level',
+                                                           'second_level',
+                                                           'order'))
 
     class Meta:
         verbose_name_plural = _("  Organizations")

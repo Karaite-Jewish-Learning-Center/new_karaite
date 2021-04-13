@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from socket import gethostname
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -35,11 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webpack_loader',
+    'corsheaders',
     'karaites',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,3 +120,14 @@ if DEBUG:
     DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# change this to your local machine
+if gethostname() == 'Sandros-MacBook-Pro.local':
+
+    ALLOWED_HOSTS = [
+                     'localhost',
+                     '192.168.0.2',
+                     '192.168.0.3',
+                     '127.0.0.1',
+                     ]
+CORS_ORIGIN_ALLOW_ALL = True
