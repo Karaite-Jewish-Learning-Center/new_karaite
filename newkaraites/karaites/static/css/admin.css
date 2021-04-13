@@ -1,3 +1,23 @@
-.field-text_he {
+#id_text_he {
     text-align: right;
+}
+
+td.field-text_he {
+    text-align: right;
+}
+
+#id_comment_he {
+      text-align: right;
+}
+
+td.field-comment_he {
+    text-align: right;
+}
+
+#id_book_title_he {
+     text-align: right;
+}
+
+td.field-book_title_he {
+     text-align: right;
 }

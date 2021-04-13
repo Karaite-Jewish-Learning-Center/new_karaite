@@ -14,6 +14,11 @@ class OrganizationAdmin(admin.ModelAdmin):
     list_filter = ('book_title_en', 'book_title_he')
     list_editable = ('order',)
 
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',)
+        }
+
 
 admin.site.register(Organization, OrganizationAdmin)
 
@@ -24,6 +29,10 @@ class CommentAuthorAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
 
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',)
+        }
 
 admin.site.register(CommentAuthor, CommentAuthorAdmin)
 
@@ -42,6 +51,10 @@ class CommentAdmin(admin.ModelAdmin):
             del actions['delete_selected']
         return actions
 
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',)
+        }
 
 admin.site.register(Comment, CommentAdmin)
 

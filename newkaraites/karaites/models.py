@@ -79,6 +79,7 @@ class Comment(models.Model):
                                   verbose_name=_("Comment English"))
 
     comment_he = models.TextField(null=True,
+                                  blank=True,
                                   verbose_name=_("Comment Hebrew"))
 
     comment_author = models.ForeignKey(CommentAuthor,
