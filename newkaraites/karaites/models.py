@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
@@ -25,25 +26,49 @@ class Organization(models.Model):
                                      null=True,
                                      verbose_name=_("Book title Hebrew"))
 
+    chapters = models.IntegerField(default=1,
+                                   verbose_name="How many chapters in a book")
+
+    verses = ArrayField(models.IntegerField(),
+                        null=True,
+                        blank=True,
+                        editable=False)
+
     order = models.IntegerField(default=0,
                                 db_index=True,
                                 verbose_name=_('Presentation order'))
-
-    chapters = models.IntegerField(default=0,
-                                   verbose_name=_('Number of Chapters'))
 
     def __str__(self):
         return f"{self.book_title_en}"
 
     @staticmethod
     def get_list_of_books():
-        """ Return a a list of dict, each dict is a book  """
-        return list(Organization.objects.values().order_by('first_level',
-                                                           'second_level',
-                                                           'order'))
+        """ Return a dict with a list of book each second_level"""
+        books = Organization.objects.values().order_by('first_level',
+                                                       'second_level',
+                                                       'order')
+        data = []
+        temp = []
+        i = 0
+        count = books.count()
+        while i < count:
+            level = books[i]
+            book = level
+            page = 0
+            while book['second_level'] == level['second_level']:
+                temp.append(books[i])
+                i += 1
+                page += 1
+                #  we want to display 3 books in a line
+                if i >= count or page % 3 == 0:
+                    break
+                book = books[i]
+            data.append(temp)
+            temp = []
+        return data
 
     class Meta:
-        verbose_name_plural = _("  Organizations")
+        verbose_name_plural = _("   Organizations")
         ordering = ['order']
 
 
@@ -154,7 +179,7 @@ class BookText(models.Model):
         return f"{self.book.book_title_en}"
 
     class Meta:
-        verbose_name_plural = _("Book text")
+        verbose_name_plural = _("  Book text")
         unique_together = ('book', 'chapter', 'verse')
         ordering = ('book', 'chapter', 'verse')
 

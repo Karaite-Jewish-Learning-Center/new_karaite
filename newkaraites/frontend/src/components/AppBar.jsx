@@ -144,6 +144,7 @@ export default function PrimarySearchAppBar() {
                 <IconButton aria-label="Go to sign up page" color="inherit">
                     <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
                 </IconButton>
+                <p>Sign up</p>
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">

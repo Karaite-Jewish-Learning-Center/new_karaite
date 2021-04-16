@@ -1,20 +1,30 @@
+import React from "react";
 import {useState, useEffect} from 'react';
-import Card from '@material-ui/core/Card';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import bookListUrl from "../constants";
+import Grid from '@material-ui/core/Grid';
+import {bookListUrl, organization} from "../constants";
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
     root: {
-        display:"flex",
-        maxWidth:200,
-        height:50,
-        margin:20,
-        alignItems:"center",
-        justifyContent:"center",
+        flexGrow: 1,
+        marginTop: theme.spacing(5),
     },
-
-});
+    paper: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+        textAlign: "center",
+        verticalAlign: "middle",
+        height: 40,
+        width: 150
+    },
+    org: {
+        marginTop: theme.spacing(5)
+    },
+    centerDiv: {}
+}))
 
 export default function BookList() {
     const classes = useStyles();
@@ -27,6 +37,7 @@ export default function BookList() {
             .then(res => res.json())
             .then(
                 (result) => {
+                    debugger
                     setIsLoaded(true);
                     setBooks(result);
                 },
@@ -38,20 +49,29 @@ export default function BookList() {
     }, [])
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
     } else {
         return (
-            <div>
-                {books.map(book => (
-                    <Card className={classes.root} key={book.id}>
-                        <Typography variant="h5" component="h2">
-                            {book.book_title_en}
-                        </Typography>
-                    </Card>
+            <div className={classes.centerDiv}>
+                <Typography align="center" variant="h4" className={classes.org}>
+                    Tanakh
+                </Typography>
+                {books.map((bookList, index) => (
+                    <Grid container direction="row" justify="flex-start" alignItems="center" key={index}>
+                        {bookList.map(book => (
+                            <Grid item xs={3} key={book.id}>
+                                <Paper className={classes.paper} elevation={3}>
+                                    {book.book_title_en}
+                                </Paper>
+                            </Grid>
+                        ))}
+                    </Grid>
                 ))}
             </div>
-        );
+        )
     }
 }
+
+

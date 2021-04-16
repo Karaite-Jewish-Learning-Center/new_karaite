@@ -13,48 +13,48 @@ class Command(BaseCommand):
 
         data_map = [{'source': '../newkaraites/data/Tanakh/Torah/',
                      'books': (['Genesis', 'בראשית'],
-                               ['Exodus', 'סֵפֶר שֵׁמוֹת'],
-                               ['Leviticus', 'סֵפֶר וַיִקְרָא'],
-                               ['Numbers', 'מספרים'],
-                               ['Deuteronomy', 'ספר דברים'])},
+                               ['Exodus', 'שמות'],
+                               ['Leviticus', 'ויקרא'],
+                               ['Numbers', 'במדבר'],
+                               ['Deuteronomy', 'דברים'])},
 
                     {'source': '../newkaraites/data/Tanakh/Prophets/',
-                     'books': (['Amos', ''],
-                               ['Ezekiel', ''],
-                               ['Habakkuk', ''],
-                               ['Haggai', ''],
-                               ['Hosea', ''],
-                               ['I Kings', ''],
-                               ['I Samuel', ''],
-                               ['II Kings', ''],
-                               ['II Samuel', ''],
-                               ['Isaiah', ''],
-                               ['Jeremiah', ''],
-                               ['Joel', ''],
-                               ['Jonah', ''],
-                               ['Joshua', ''],
-                               ['Judges', ''],
-                               ['Malachi', ''],
-                               ['Micah', ''],
-                               ['Nahum', ''],
-                               ['Obadiah', ''],
-                               ['Zechariah', ''],
-                               ['Zephaniah', ''])
+                     'books': (['Amos', 'עמוס'],
+                               ['Ezekiel', 'יחזקאל'],
+                               ['Habakkuk', 'חבקוק'],
+                               ['Haggai', 'חגי'],
+                               ['Hosea', 'הושע'],
+                               ['I Kings', 'מלכים א'],
+                               ['I Samuel', 'שמואל א'],
+                               ['II Kings', 'מלכים ב'],
+                               ['II Samuel', 'שמואל ב'],
+                               ['Isaiah', 'ישעיה'],
+                               ['Jeremiah', 'ירמיה'],
+                               ['Joel', 'יואל'],
+                               ['Jonah', 'יונה'],
+                               ['Joshua', 'יהושע'],
+                               ['Judges', 'שופטים'],
+                               ['Malachi', 'מלאכי'],
+                               ['Micah', 'מיכה'],
+                               ['Nahum', 'נחום'],
+                               ['Obadiah', 'עובדיה'],
+                               ['Zechariah', 'זכריה'],
+                               ['Zephaniah', 'צפניה'])
                      },
                     {'source': '../newkaraites/data/Tanakh/Writings/',
-                     'books': (['Daniel', ''],
-                               ['Ecclesiastes', ''],
-                               ['Esther', ''],
-                               ['Ezra', ''],
-                               ['I Chronicles', ''],
-                               ['II Chronicles', ''],
-                               ['Job', ''],
-                               ['Lamentations', ''],
-                               ['Nehemiah', ''],
-                               ['Proverbs', ''],
-                               ['Psalms', ''],
-                               ['Ruth', ''],
-                               ['Song of Songs', ''])
+                     'books': (['Daniel', 'דניאל'],
+                               ['Ecclesiastes', 'קהלת'],
+                               ['Esther', 'אסתר'],
+                               ['Ezra', 'עזרא'],
+                               ['I Chronicles', 'דברי הימים א'],
+                               ['II Chronicles', 'דברי הימים ב'],
+                               ['Job', 'איוב'],
+                               ['Lamentations', 'איכה'],
+                               ['Nehemiah', 'נחמיה'],
+                               ['Proverbs', 'משלי'],
+                               ['Psalms', 'תהילים'],
+                               ['Ruth', 'רות'],
+                               ['Song of Songs', 'שיר השירים'])
                      }
                     ]
 
@@ -95,10 +95,13 @@ class Command(BaseCommand):
 
                 for chapter in chapters:
                     for verse in data_en['text'][chapter]:
-                        BookText.objects.get_or_create(
+                        verse_count = int(verse) + 1
+                        book, created = BookText.objects.get_or_create(
                             book=organization,
                             chapter=int(chapter) + 1,
-                            verse=int(verse) + 1,
                             text_en=data_en['text'][chapter][verse],
                             text_he=data_he['text'][chapter][verse]
                         )
+                    self.stdout.write(f"{list(range(1, verse_count + 1))}")
+                    book.verses = list(range(1, verse_count + 1))
+                    book.save()

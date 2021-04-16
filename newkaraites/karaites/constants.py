@@ -11,7 +11,6 @@ FIRST_LEVEL = [
 ]
 
 SECOND_LEVEL = [
-
     (1, 'Torah'),
     (2, 'Prophets'),
     (3, 'Writings')
