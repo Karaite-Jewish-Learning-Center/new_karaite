@@ -93,15 +93,18 @@ class Command(BaseCommand):
                 organization.save()
                 self.stdout.write(f'Importing book: {organization.book_title_en}')
 
+                list_of_verses = []
                 for chapter in chapters:
                     for verse in data_en['text'][chapter]:
-                        verse_count = int(verse) + 1
-                        book, created = BookText.objects.get_or_create(
+                        verse_number = int(verse) + 1
+                        BookText.objects.get_or_create(
                             book=organization,
                             chapter=int(chapter) + 1,
+                            verse=verse_number,
                             text_en=data_en['text'][chapter][verse],
                             text_he=data_he['text'][chapter][verse]
                         )
-                    self.stdout.write(f"{list(range(1, verse_count + 1))}")
-                    book.verses = list(range(1, verse_count + 1))
-                    book.save()
+                    list_of_verses.append(verse_number)
+
+                organization.verses = list_of_verses
+                organization.save()

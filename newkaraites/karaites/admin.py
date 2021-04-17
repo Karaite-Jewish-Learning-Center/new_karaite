@@ -10,7 +10,7 @@ class OrganizationAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('first_level', 'second_level',
                     'book_title_en', 'book_title_he',
-                    'order')
+                    'chapters', 'verses', 'order')
     search_fields = ('book_title_en', 'book_title_he')
     list_filter = ('book_title_en', 'book_title_he')
     list_editable = ('order',)

@@ -27,12 +27,13 @@ class Organization(models.Model):
                                      verbose_name=_("Book title Hebrew"))
 
     chapters = models.IntegerField(default=1,
-                                   verbose_name="How many chapters in a book")
+                                   verbose_name=_("How many chapters in this book"))
 
     verses = ArrayField(models.IntegerField(),
                         null=True,
                         blank=True,
-                        editable=False)
+                        editable=False,
+                        verbose_name=_("How many verses in each chapter"))
 
     order = models.IntegerField(default=0,
                                 db_index=True,
@@ -180,7 +181,6 @@ class BookText(models.Model):
 
     class Meta:
         verbose_name_plural = _("  Book text")
-        unique_together = ('book', 'chapter', 'verse')
         ordering = ('book', 'chapter', 'verse')
 
 
