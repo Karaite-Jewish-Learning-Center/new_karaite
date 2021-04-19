@@ -1,7 +1,8 @@
 import json
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
-                       BookText)
+                       BookText,
+                       BookJson)
 from ...utils import search_level
 
 
@@ -91,13 +92,15 @@ class Command(BaseCommand):
                 chapters = data_en['text'].keys()
                 organization.chapters = len(chapters)
                 organization.save()
+
+                # just give feed back
                 self.stdout.write(f'Importing book: {organization.book_title_en}')
 
                 list_of_verses = []
                 for chapter in chapters:
                     for verse in data_en['text'][chapter]:
                         verse_number = int(verse) + 1
-                        BookText.objects.get_or_create(
+                        book_text, _ = BookText.objects.get_or_create(
                             book=organization,
                             chapter=int(chapter) + 1,
                             verse=verse_number,
@@ -106,5 +109,13 @@ class Command(BaseCommand):
                         )
                     list_of_verses.append(verse_number)
 
+                # update verses in organization
                 organization.verses = list_of_verses
                 organization.save()
+
+                # Save a json book version.
+                book_json = BookJson()
+                book_json.book = book_text
+                book_json.book_json_en = data_en
+                book_json.book_json_he = data_he
+                book_json.save()

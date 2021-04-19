@@ -1,0 +1,14 @@
+{
+    "text": {
+        "0_Orach Chaim": {},
+        "1_Yoreh De'ah": {},
+        "2_Even HaEzer": {
+            "0_": {},
+            "1_Seder HaGet": {},
+            "2_Seder Chalitza": {}
+        },
+        "3_Choshen Mishpat": {}
+    },
+    "meta": "Siman-Paragraph",
+    "work": "Arukh HaShulchan"
+}

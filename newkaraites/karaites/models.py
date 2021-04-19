@@ -1,4 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
+from django.db.models import JSONField
 from django.db import models
 from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
@@ -12,7 +13,7 @@ class Organization(models.Model):
 
     first_level = models.IntegerField(default=0,
                                       choices=FIRST_LEVEL,
-                                      verbose_name=_('First Level'))
+                                      verbose_name=_('Law'))
 
     second_level = models.IntegerField(default=0,
                                        choices=SECOND_LEVEL,
@@ -177,11 +178,36 @@ class BookText(models.Model):
                                          verbose_name=_("Total Comments"))
 
     def __str__(self):
-        return f"{self.book.book_title_en}"
+        return f'{self.book.book_title_en}           {self.book.book_title_he:>40}'
+
+    def save(self, *args, **kwargs):
+        super(BookText,self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = _("  Book text")
         ordering = ('book', 'chapter', 'verse')
+
+
+class BookJson(models.Model):
+    """ Store all book as json"""
+    book = models.ForeignKey(BookText,
+                             on_delete=models.CASCADE,
+                             verbose_name="Book"
+                             )
+
+    book_json_en = JSONField(null=True,
+                             blank=True,
+                             verbose_name="Book as Json English")
+
+    book_json_he = JSONField(null=True,
+                             blank=True,
+                             verbose_name="Book as Json Hebrew")
+
+    def __str__(self):
+        return f'{self.book.book.book_title_en} {self.book.book.book_title_he:>20}'
+
+    class Meta:
+        verbose_name_plural = "Books as Json"
 
 
 class Ref(models.Model):
