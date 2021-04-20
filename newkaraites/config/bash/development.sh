@@ -3,7 +3,7 @@ ME="develop"
 NAME="dev"
 
 # django app dir
-DJANGODIR=/home/develop/anaconda3/envs/dev/new_karaites/newkaraites/
+DJANGODIR=/home/develop/anaconda3/envs/dev/new_karaite/newkaraites
 # your sock file - do not create it manually
 SOCKFILE=/home/develop/sock/gunicorn.sock
 USER=develop
