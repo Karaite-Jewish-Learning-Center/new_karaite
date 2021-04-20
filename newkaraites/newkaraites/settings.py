@@ -114,7 +114,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 
 
 # server dev environment
-elif os.environ['CONDA_DEFAULT_ENV'] == 'dev':
+elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
 
@@ -133,7 +133,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'dev':
     }
 
 # server production environment
-elif os.environ['CONDA_DEFAULT_ENV'] == 'prod':
+elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
 
     DEBUG = False
 
