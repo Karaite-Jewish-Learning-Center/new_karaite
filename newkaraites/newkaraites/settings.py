@@ -99,7 +99,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dev.farmstandcart.com']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '']
 
     DATABASES = {
         'default': {
@@ -117,7 +117,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
-
+    ALLOWED_HOSTS = ['161.35.130.12']
     THUMBNAIL_DEBUG = DEBUG
 
     DATABASES = {
@@ -136,7 +136,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
 
     DEBUG = False
-
+    ALLOWED_HOSTS = ['161.35.130.12']
     THUMBNAIL_DEBUG = DEBUG
 
     DATABASES = {
