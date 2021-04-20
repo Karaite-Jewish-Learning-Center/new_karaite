@@ -1,17 +1,16 @@
-#!/bin/bash
 
 ME="develop"
-NAME="dev-meadowstone"
+NAME="dev"
 
 # django app dir
-DJANGODIR=/home/develop/anaconda3/envs/dev/new_karaite/newkaraites/
+DJANGODIR=/home/develop/anaconda3/envs/dev/Karaite
 # your sock file - do not create it manually
 SOCKFILE=/home/develop/sock/gunicorn.sock
 USER=develop
 GROUP=develop
-NUM_WORKERS=3
-DJANGO_SETTINGS_MODULE=newkaraites.settings
-DJANGO_WSGI_MODULE=newkaraites.wsgi
+NUM_WORKERS=1
+DJANGO_SETTINGS_MODULE=sefaria.settings
+DJANGO_WSGI_MODULE=sefaria.wsgi
 echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
@@ -24,14 +23,5 @@ echo "Virtual environment: `pwd`"
 # RUNDIR=$(dirname $SOCKFILE)
 # test -d $RUNDIR || mkdir -p $RUNDIR
 
-# Start your Django Gunicorn
-# Programs meant to be run under supervisor should not demonize themselves (do not use --daemon)
-
-exec gunicorn ${DJANGO_WSGI_MODULE}:application -b 127.0.0.1:8000 \
-  --name $NAME \
-  --workers $NUM_WORKERS \
-  --user=$USER --group=$GROUP \
-  --log-level=debug \
-  --log-file=/home/develop/logs/gunicorn/gunicorn.log
-
-
+# Start your Django
+exec python manage.py runserver 161.35.130.125:8080

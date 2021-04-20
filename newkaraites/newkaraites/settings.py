@@ -116,7 +116,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 # server dev environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = ['161.35.130.125']
     THUMBNAIL_DEBUG = DEBUG
 
