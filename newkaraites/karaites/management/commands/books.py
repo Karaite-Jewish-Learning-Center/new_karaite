@@ -12,14 +12,14 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Used google translate, please check if this is fine """
 
-        data_map = [{'source': '../newkaraites/data/Tanakh/Torah/',
+        data_map = [{'source': '../newkaraites/data/Tanakh/Torah',
                      'books': (['Genesis', 'בראשית'],
                                ['Exodus', 'שמות'],
                                ['Leviticus', 'ויקרא'],
                                ['Numbers', 'במדבר'],
                                ['Deuteronomy', 'דברים'])},
 
-                    {'source': '../newkaraites/data/Tanakh/Prophets/',
+                    {'source': '../newkaraites/data/Tanakh/Prophets',
                      'books': (['Amos', 'עמוס'],
                                ['Ezekiel', 'יחזקאל'],
                                ['Habakkuk', 'חבקוק'],
@@ -42,7 +42,7 @@ class Command(BaseCommand):
                                ['Zechariah', 'זכריה'],
                                ['Zephaniah', 'צפניה'])
                      },
-                    {'source': '../newkaraites/data/Tanakh/Writings/',
+                    {'source': '../newkaraites/data/Tanakh/Writings',
                      'books': (['Daniel', 'דניאל'],
                                ['Ecclesiastes', 'קהלת'],
                                ['Esther', 'אסתר'],
