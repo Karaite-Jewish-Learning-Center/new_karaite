@@ -3,14 +3,14 @@ ME="develop"
 NAME="dev"
 
 # django app dir
-DJANGODIR=/home/develop/anaconda3/envs/dev/Karaite
+DJANGODIR=/home/develop/anaconda3/envs/dev/new_karaites/newkaraite/
 # your sock file - do not create it manually
 SOCKFILE=/home/develop/sock/gunicorn.sock
 USER=develop
 GROUP=develop
 NUM_WORKERS=1
-DJANGO_SETTINGS_MODULE=sefaria.settings
-DJANGO_WSGI_MODULE=sefaria.wsgi
+DJANGO_SETTINGS_MODULE=new_karaites.settings
+DJANGO_WSGI_MODULE=new_karaites.wsgi
 echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
