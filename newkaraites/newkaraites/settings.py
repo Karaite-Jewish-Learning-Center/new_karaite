@@ -203,3 +203,7 @@ if gethostname() == 'Sandros-MacBook-Pro.local':
                      '127.0.0.1',
                      ]
 CORS_ORIGIN_ALLOW_ALL = True
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
