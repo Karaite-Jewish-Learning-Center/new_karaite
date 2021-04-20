@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from socket import gethostname
 from pathlib import Path
-
+from django.core.management.utils import get_random_secret_key
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*go^xt$u*a(x6j3r++84#01qnr(6i)2fzkna%u&sq1(^+_(jcv'
+SECRET_KEY = os.environ("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -92,6 +92,66 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+
+# local dev environment
+if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
+
+    DEBUG = True
+    THUMBNAIL_DEBUG = DEBUG
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dev.farmstandcart.com']
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'Karaites',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
+
+# server dev environment
+elif os.environ['CONDA_DEFAULT_ENV'] == 'dev':
+
+    DEBUG = False
+
+    THUMBNAIL_DEBUG = DEBUG
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'Karaites-dev',
+            'USER': 'doadmin',
+            'PASSWORD': os.environ['DEV'],
+            'HOST': 'db-postgresql-nyc3-9557-do-user-8337676-0.b.db.ondigitalocean.com',
+            'PORT': '25060',
+            'OPTIONS': {'sslmode': 'require'}
+        }
+    }
+
+# server production environment
+elif os.environ['CONDA_DEFAULT_ENV'] == 'prod':
+
+    DEBUG = False
+
+    THUMBNAIL_DEBUG = DEBUG
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'Karaites-prod',
+            'USER': 'doadmin',
+            'PASSWORD': os.environ['PROD'],
+            'HOST': '',
+            'PORT': '25060',
+            'OPTIONS': {'sslmode': 'require'}
+        }
+    }
+else:
+    raise Exception("Invalid environment")
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

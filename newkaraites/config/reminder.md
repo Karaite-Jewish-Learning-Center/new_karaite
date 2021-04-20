@@ -1,0 +1,1 @@
+Add gunicorn logs to logrotate
