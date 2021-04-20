@@ -117,7 +117,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.12']
+    ALLOWED_HOSTS = ['161.35.130.125']
     THUMBNAIL_DEBUG = DEBUG
 
     DATABASES = {
@@ -136,7 +136,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.12']
+    ALLOWED_HOSTS = ['161.35.130.125']
     THUMBNAIL_DEBUG = DEBUG
 
     DATABASES = {
