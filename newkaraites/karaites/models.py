@@ -154,7 +154,7 @@ class Comment(models.Model):
 
 class BookText(models.Model):
     """
-       A bible book text
+       A bible text book
     """
 
     book = models.ForeignKey(Organization,
@@ -181,7 +181,14 @@ class BookText(models.Model):
         return f'{self.book.book_title_en}           {self.book.book_title_he:>40}'
 
     def save(self, *args, **kwargs):
-        super(BookText,self).save(*args, **kwargs)
+        """ Update json book version """
+        json_book = BookJson.objects.get(book=self.book)
+        json_book.book_json_en['text'][f'{self.chapter}'][f'{self.verse}'] = self.text_en
+        json_book.book_json_he['text'][f'{self.chapter}'][f'{self.verse}'] = self.text_he
+        json_book.save()
+
+        # save data to BookText
+        super(BookText, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = _("  Book text")
@@ -190,7 +197,7 @@ class BookText(models.Model):
 
 class BookJson(models.Model):
     """ Store all book as json"""
-    book = models.ForeignKey(BookText,
+    book = models.ForeignKey(Organization,
                              on_delete=models.CASCADE,
                              verbose_name="Book"
                              )

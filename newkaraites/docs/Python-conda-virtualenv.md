@@ -98,7 +98,7 @@ $ conda env config vars list -n dev
 $ conda env config vars set CONDA_DEFAULT_ENV="LOCAL"
 
 ### set to DEV for development server
-$ conda env config vars set CONDA_DEFAULT_ENV="LOCAL"
+$ conda env config vars set CONDA_DEFAULT_ENV="DEV"
 
 ### set to PROD for production  server
-$ conda env config vars set CONDA_DEFAULT_ENV="LOCAL"
+$ conda env config vars set CONDA_DEFAULT_ENV="PROD"

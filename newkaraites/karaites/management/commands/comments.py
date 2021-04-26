@@ -15,7 +15,7 @@ class Command(BaseCommand):
         file_name = 'merged.json'
 
         author, _ = CommentAuthor.objects.get_or_create(
-            name= 'Abarbanel'
+            name='Abarbanel'
         )
 
         json_file = open(f"{source}/English/{file_name}", "r")

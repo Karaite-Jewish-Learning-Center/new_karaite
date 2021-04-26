@@ -115,7 +115,7 @@ class Command(BaseCommand):
 
                 # Save a json book version.
                 book_json = BookJson()
-                book_json.book = book_text
+                book_json.book = organization
                 book_json.book_json_en = data_en
                 book_json.book_json_he = data_he
                 book_json.save()
