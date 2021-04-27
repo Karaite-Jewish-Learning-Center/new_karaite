@@ -4,6 +4,7 @@ from .models import (Organization,
                      CommentAuthor,
                      Comment,
                      BookText)
+from .admin_forms import  AdminCommentForm
 
 
 class OrganizationAdmin(admin.ModelAdmin):
@@ -55,6 +56,7 @@ admin.site.register(CommentAuthor, CommentAuthorAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
+    form = AdminCommentForm
     save_on_top = True
     list_display = ('book', 'chapter', 'verse', 'comment_en',
                     'comment_he', 'comment_author',

@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from socket import gethostname
 from pathlib import Path
+from django.utils.translation import ugettext_lazy as _
 from django.core.management.utils import get_random_secret_key
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'tinymce',
     'corsheaders',
     'karaites',
 ]
@@ -92,7 +95,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
 
 # local dev environment
 if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
@@ -176,6 +178,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = (
+    ('en', _('English')),
+    ('he', _('Hebrew'))
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -195,15 +201,33 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # change this to your local machine
 if gethostname() == 'Sandros-MacBook-Pro.local':
-
     ALLOWED_HOSTS = [
-                     'localhost',
-                     '192.168.0.2',
-                     '192.168.0.3',
-                     '127.0.0.1',
-                     ]
+        'localhost',
+        '192.168.0.2',
+        '192.168.0.3',
+        '127.0.0.1',
+    ]
 CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'
+TINYMCE_COMPRESSOR = False
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "320px",
+    "width": "960px",
+    "menubar": "file edit view insert format tools table help",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
+               "fullscreen insertdatetime media table paste code help spellchecker",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+               "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+               "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+               "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+               "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+    "language": 'en_US',
+}
+TINYMCE_SPELLCHECKER = False
+TINYMCE_COMPRESSOR = False

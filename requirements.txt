@@ -1,5 +1,9 @@
+# python=3.8
 Django==3.2
 psycopg2-binary
 django-cors-headers
 pytest
 django-extensions
+beautifulsoup4
+lxml
+django-tinymce

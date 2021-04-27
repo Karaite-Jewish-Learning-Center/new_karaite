@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL)
+from tinymce.models import HTMLField
 
 
 class Organization(models.Model):
@@ -108,12 +109,13 @@ class Comment(models.Model):
     verse = models.IntegerField(default=1,
                                 verbose_name=_("Verse"))
 
-    comment_en = models.TextField(null=True,
-                                  verbose_name=_("Comment English"))
+    comment_en = HTMLField(null=True,
+                           blank=True,
+                           verbose_name=_("Comment English"))
 
-    comment_he = models.TextField(null=True,
-                                  blank=True,
-                                  verbose_name=_("Comment Hebrew"))
+    comment_he = HTMLField(null=True,
+                           blank=True,
+                           verbose_name=_("Comment Hebrew"))
 
     comment_author = models.ForeignKey(CommentAuthor,
                                        on_delete=models.DO_NOTHING,
