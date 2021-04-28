@@ -1,4 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
+from django.utils.safestring import mark_safe
 from django.db.models import JSONField
 from django.db import models
 from django.utils.translation import gettext as _
@@ -127,6 +128,18 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.comment_author} - {self.book}"
+
+    @mark_safe
+    def english(self):
+        return self.comment_en
+
+    english.short_description = "English Comment"
+
+    @mark_safe
+    def hebrew(self):
+        return self.comment_he
+
+    english.short_description = "Hebrew Comment"
 
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
