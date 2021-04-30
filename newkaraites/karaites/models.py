@@ -198,8 +198,8 @@ class BookText(models.Model):
     def save(self, *args, **kwargs):
         """ Update json book version """
         json_book = BookJson.objects.get(book=self.book)
-        json_book.book_json_en['text'][f'{self.chapter}'][f'{self.verse}'] = self.text_en
-        json_book.book_json_he['text'][f'{self.chapter}'][f'{self.verse}'] = self.text_he
+        json_book.book_json_en['text'][f'{self.chapter-1}'][f'{self.verse-1}'] = self.text_en
+        json_book.book_json_he['text'][f'{self.chapter-1}'][f'{self.verse-1}'] = self.text_he
         json_book.save()
 
         # save data to BookText
