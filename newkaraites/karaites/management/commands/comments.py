@@ -61,12 +61,12 @@ class Command(BaseCommand):
         verse = None
         if html is not None:
             try:
-                text = html.text.replace(' ', '')
+                text = html.text
                 # 11:9-11:10
-                pattern = re.search('[0-9]*:[0-9]*–[0-9]*:[0-9]*', text)
-
-                if pattern is not None and pattern.start() == 0:
-                    parts = pattern.group().split(':')
+                pattern = re.search('[0-9]*:[0-9]*–[0-9]*:[0-9]* ', text)
+                if pattern is not None:
+                    print(pattern.group(), pattern.start(), 'first')
+                    parts = pattern.group().strip().split(':')
                     chapter = parts[0]
                     start = parts[1][:parts[1].find("–")]
                     end = parts[2]
@@ -75,10 +75,10 @@ class Command(BaseCommand):
                     return chapter, verse
 
                 # 11:9 , 11:9-11 -> 11:9 , 11:10, 11:11
-                pattern = re.search('[0-9,:,–]+', text)
-
-                if pattern is not None and pattern.start() == 0:
-                    chapter, possible_range = pattern.group().split(":")
+                pattern = re.search('[0-9,:,–, ]+ ', text)
+                if pattern is not None:
+                    print(pattern.group(), pattern.start(), 'second')
+                    chapter, possible_range = pattern.group().strip().split(":")
 
                     if possible_range.find('–') > 0:
                         start, end = possible_range.split('–')

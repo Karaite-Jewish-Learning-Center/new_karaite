@@ -2,6 +2,7 @@
 Django==3.2
 psycopg2-binary
 django-cors-headers
+pytest-django
 pytest
 django-extensions
 beautifulsoup4
