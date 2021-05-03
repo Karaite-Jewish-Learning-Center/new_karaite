@@ -1,5 +1,6 @@
-from .html_utils import get_chapter_verse
 from bs4 import BeautifulSoup
+from .html_utils import (get_chapter_verse,
+                         get_foot_note_index)
 
 
 class TestGetChapterVerse:
@@ -155,3 +156,58 @@ removal of His knowledge [from them]. <o:p></o:p></span></p>""", 'html5lib')
         assert chapter == '7'
         assert verse == ['1']
 
+
+class TestFootNoteIndex:
+    """ Foot note index should be an integer bigger then zero. """
+
+    def test_index_one(self):
+        html = BeautifulSoup("""<div style="mso-element:footnote" id="ftn1">
+<p class="MsoFootnoteText"><a style="mso-footnote-id:ftn1" href="#_ftnref1" name="_ftn1" title=""><span class="MsoFootnoteReference"><span style="font-family:
+&quot;Times New Roman&quot;,serif"><span style="mso-special-character:footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:10.0pt;line-height:107%;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
+minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+HE">[1]</span></span><!--[endif]--></span></span></span></a><span style="font-family:
+&quot;Times New Roman&quot;,serif"> Some material is added from two manuscripts, without
+which it is very difficult to read this introductory passage.<o:p></o:p></span></p>
+</div>""", 'html5lib')
+
+        foot_index = get_foot_note_index(html)
+
+        assert foot_index == 1
+
+    def test_index_25(self):
+        html = BeautifulSoup("""<div style="mso-element:footnote" id="ftn25">
+<p class="MsoCommentText"><a style="mso-footnote-id:ftn25" href="#_ftnref25" name="_ftn25" title=""><span class="MsoFootnoteReference"><span style="font-family:
+&quot;Times New Roman&quot;,serif"><span style="mso-special-character:footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:10.0pt;line-height:107%;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
+minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+HE">[25]</span></span><!--[endif]--></span></span></span></a><span style="font-family:&quot;Times New Roman&quot;,serif"> It is true that Radak maintained
+that the final <i>yod </i>of <i>bilti </i>is part of the root, which would
+distinguish it from <i>zulat/i </i>since it sometimes appears without a <i>yod</i>.<i>
+</i>However, this is not how Aaron usually expresses that a letter is not part
+of the root. Perhaps the reading <i>shezé</i> in a few manuscripts is correct
+(with a <i>zayin</i> instead of a <i>vav</i>): “It is not like <i>bilti</i>,
+for this is [<i>shez</i></span><i><span lang="X-NONE" style="font-family:&quot;Times New Roman&quot;,serif;
+mso-ansi-language:X-NONE">é</span></i><span lang="X-NONE" style="font-family:
+&quot;Times New Roman&quot;,serif;mso-ansi-language:X-NONE">]</span><span style="font-family:&quot;Times New Roman&quot;,serif"> with or with a <i>yod</i>.”
+Meaning, <i>bilti</i> never appears without a <i>yod</i> (when there is no
+pronominal suffix), whereas <i>zulati</i> also appears as <i>zulat</i>—it
+appears with and without a <i>yod</i>. <o:p></o:p></span></p>
+</div>""", 'html5lib')
+
+        foot_index = get_foot_note_index(html)
+        print(foot_index)
+        assert foot_index == 25
+
+    def test_index_112(self):
+        html = BeautifulSoup("""<div style="mso-element:footnote" id="ftn112">
+<p class="MsoFootnoteText"><a style="mso-footnote-id:ftn112" href="#_ftnref112" name="_ftn112" title=""><span class="MsoFootnoteReference"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="mso-special-character:
+footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:10.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;mso-ansi-language:
+EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE">[112]</span></span><!--[endif]--></span></span></span></a><span style="font-family:&quot;Times New Roman&quot;,serif"> See Aaron’s commentary at length
+at the beginning of Exodus 32. <o:p></o:p></span></p>
+</div>""", 'html5lib')
+
+        foot_index = get_foot_note_index(html)
+
+        assert foot_index == 112

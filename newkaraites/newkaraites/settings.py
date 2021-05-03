@@ -214,6 +214,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'
+TINYMCE_EXTRA_MEDIA = ('../static/css/comments.css',)  # did not work
 TINYMCE_COMPRESSOR = False
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",

@@ -1,14 +1,14 @@
-import re
+from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
                        CommentAuthor,
                        Comment)
-from ...html_utils import get_chapter_verse
-from bs4 import BeautifulSoup
+from ...html_utils import (get_chapter_verse,
+                           get_foot_note_index)
 
 
 class Command(BaseCommand):
-    help = 'Populate Database with comments'
+    help = 'Populate Database with comments at this point is only for the book bellow'
 
     def handle(self, *args, **options):
         """ Comments"""
@@ -19,15 +19,27 @@ class Command(BaseCommand):
 
         html_tree = BeautifulSoup(html, 'html5lib')
 
-        # foot_notes_node = html_tree.find_all('p', class_='MsoFootnoteText')
-        #
-        # foot_notes ={}
-        # for notes in foot_notes_node:
-        #
+        # first div is the book text, next 498 are the notes
+        divs = html_tree.find_all('div')
+        end = len(divs)
+        foot_notes = {}
+        for note in divs[1:end]:
+            foot_notes[get_foot_note_index(note)] = note.text
+
+        # check that we don't miss any foot note
+        processed = True
+        for i in range(1, end - 1):
+            if foot_notes.get(i, None) is None:
+                print(f'Missing note: {i}')
+                processed = False
+
+        # stop processing and let the operator do some thing about missing notes
+        if not processed:
+            exit(1)
 
         organization = Organization.objects.get(book_title_en="Deuteronomy")
         author = CommentAuthor.objects.get(name='me')
-        for child in html_tree.find_all("p", class_="MsoNormal"):
+        for child in divs[0].find_all("p", class_="MsoNormal"):
             if child.name is not None:
                 if child.name == 'p' and child.get_attribute_list('class') == ['MsoNormal']:
 

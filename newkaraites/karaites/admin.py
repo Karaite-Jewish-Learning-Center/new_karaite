@@ -56,6 +56,7 @@ class CommentAdmin(admin.ModelAdmin):
     class Media:
         css = {
             'all': ('../static/css/admin.css',)
+
         }
 
 

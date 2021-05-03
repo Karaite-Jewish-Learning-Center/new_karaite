@@ -8,6 +8,7 @@ def get_chapter_verse(html):
     verse = None
     if html is not None:
         try:
+            # replace(' ', '', 1) case that 1: 9
             text = html.text.replace(' ', '', 1).replace('\n', '').strip()
 
             # 11:9-11:10
@@ -67,3 +68,19 @@ def get_chapter_verse(html):
 # writing].<o:p></o:p></span></p>""", 'html5lib')
 #
 # get_chapter_verse(html)
+
+
+def get_foot_note_index(html):
+    """ Parse foot note number
+        typical foot note = '[2] Babylonian Talmud, Ḳiddushin\n38a.'
+        should return 2
+    """
+    index = None
+    match = re.search("\\d+", html.text)
+    if match is not None:
+        index = match.group()
+        try:
+            index = int(index)
+        except ValueError:
+            pass
+    return index
