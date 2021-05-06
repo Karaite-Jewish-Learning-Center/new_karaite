@@ -8,3 +8,4 @@ django-extensions
 beautifulsoup4
 lxml
 django-tinymce
+requests

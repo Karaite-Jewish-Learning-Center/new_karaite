@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('karaites.urls')),
     path('tinymce/', include('tinymce.urls')),
+
 ]

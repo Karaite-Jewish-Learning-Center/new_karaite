@@ -129,6 +129,27 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.comment_author} - {self.book}"
 
+    def to_json(self):
+        """ Serialize instance to json"""
+        return {'id': self.book.id,
+                'book_title_en': self.book.book_title_en,
+                'book_title_he': self.book.book_title_he,
+                'chapter': self.chapter,
+                'verse': self.verse,
+                'comment_en': self.comment_en,
+                'comment_he': self.comment_he,
+                'author': self.comment_author.name,
+                'comment_count': self.comments_count,
+                }
+
+    @staticmethod
+    def to_json_comments(book, chapter):
+        """ Serialize several instance to json """
+        result = []
+        for comment in Comment.objects.filter(book=book, chapter=chapter):
+            result.append(comment.to_json())
+        return result
+
     @mark_safe
     def english(self):
         return self.comment_en
@@ -195,11 +216,35 @@ class BookText(models.Model):
     def __str__(self):
         return f'{self.book.book_title_en}           {self.book.book_title_he:>40}'
 
+    def to_json(self):
+        """Serialize instance to json"""
+        return {'id': self.book.id,
+                'book_title_en': self.book.book_title_en,
+                'book_title_he': self.book.book_title_he,
+                'chapter': self.chapter,
+                'verse': self.verse,
+                'text_en': self.text_en,
+                'text_he': self.text_he,
+                'comments_count': self.comments_count
+                }
+
+    @staticmethod
+    def to_json_books(book, chapter, verse=None):
+        """ Serialize several instances"""
+        if verse is None:
+            book_text = BookText.objects.filter(book=book, chapter=chapter)
+        else:
+            book_text = BookText.objects.filter(book=book, chapter=chapter, verse=verse)
+        result = []
+        for book in book_text:
+            result.append(book.to_json())
+        return result
+
     def save(self, *args, **kwargs):
         """ Update json book version """
         json_book = BookJson.objects.get(book=self.book)
-        json_book.book_json_en['text'][f'{self.chapter-1}'][f'{self.verse-1}'] = self.text_en
-        json_book.book_json_he['text'][f'{self.chapter-1}'][f'{self.verse-1}'] = self.text_he
+        json_book.book_json_en['text'][f'{self.chapter - 1}'][f'{self.verse - 1}'] = self.text_en
+        json_book.book_json_he['text'][f'{self.chapter - 1}'][f'{self.verse - 1}'] = self.text_he
         json_book.save()
 
         # save data to BookText
@@ -211,7 +256,7 @@ class BookText(models.Model):
 
 
 class BookJson(models.Model):
-    """ Store all book as json"""
+    """ Store book as json"""
     book = models.ForeignKey(Organization,
                              on_delete=models.CASCADE,
                              verbose_name="Book"
