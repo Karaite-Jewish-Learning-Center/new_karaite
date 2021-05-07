@@ -45,7 +45,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('book', 'chapter', 'verse', 'english',
                     'hebrew', 'comment_author',
                     'comments_count')
-    list_filter = ('comment_author', 'book')
+    list_filter = ('comment_author', 'book', 'chapter')
 
     # def get_actions(self, request):
     #     actions = super().get_actions(request)

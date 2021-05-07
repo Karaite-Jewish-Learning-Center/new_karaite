@@ -72,7 +72,7 @@ class Organization(models.Model):
         return data
 
     class Meta:
-        verbose_name_plural = _("   Organizations")
+        verbose_name_plural = _("   Architecture")
         ordering = ['order']
 
 
@@ -91,7 +91,7 @@ class CommentAuthor(models.Model):
         return f"{self.name}"
 
     class Meta:
-        verbose_name_plural = "Comment Author"
+        verbose_name_plural = "Commentary Author"
 
 
 class Comment(models.Model):
@@ -129,6 +129,15 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.comment_author} - {self.book}"
 
+    def to_json_book_details(self):
+        """ We dont need to send book details with every comment"""
+        return {'id': self.book.id,
+                'book_title_en': self.book.book_title_en,
+                'book_title_he': self.book.book_title_he,
+                'author': self.comment_author.name,
+                'comment_count': self.comments_count,
+                }
+
     def to_json(self):
         """ Serialize instance to json"""
         return {'id': self.book.id,
@@ -143,10 +152,15 @@ class Comment(models.Model):
                 }
 
     @staticmethod
-    def to_json_comments(book, chapter):
+    def to_json_comments(book=None, chapter=None, verse=None):
         """ Serialize several instance to json """
         result = []
-        for comment in Comment.objects.filter(book=book, chapter=chapter):
+        if verse is None:
+            query = Comment.objects.filter(book=book, chapter=chapter)
+        else:
+            query = Comment.objects.filter(book=book, chapter=chapter, verse=verse)
+
+        for comment in query:
             result.append(comment.to_json())
         return result
 
@@ -184,7 +198,7 @@ class Comment(models.Model):
         super(Comment, self).delete(using=using, keep_parents=keep_parents)
 
     class Meta:
-        verbose_name_plural = "Comments"
+        verbose_name_plural = "Commentaries"
         ordering = ('book', 'chapter', 'verse')
 
 
@@ -251,7 +265,7 @@ class BookText(models.Model):
         super(BookText, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = _("  Book text")
+        verbose_name_plural = _("  Biblical Text")
         ordering = ('book', 'chapter', 'verse')
 
 
