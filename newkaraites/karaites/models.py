@@ -45,6 +45,14 @@ class Organization(models.Model):
     def __str__(self):
         return f"{self.book_title_en}"
 
+    def to_json(self):
+        return {'id': self.id,
+                'book_title_en': self.book_title_en,
+                'book_title_he': self.book_title_he,
+                'chapters': self.chapters,
+                'verses': self.verses,
+                }
+
     @staticmethod
     def get_list_of_books():
         """ Return a dict with a list of book each second_level"""
@@ -302,13 +310,29 @@ class BookAsArray(models.Model):
     book_text = ArrayField(ArrayField(models.TextField(), size=3))
 
     def to_json(self):
-        return {'id': self.book.id,
-                'chapter': self.chapter,
-                'book_text': self.book_text
+
+        return {'chapter': self.chapter,
+                'text': self.book_text
                 }
+
+    @staticmethod
+    def to_json_book_array(book, chapter=None):
+        result = []
+        if chapter is None:
+            query = BookAsArray.objects.filter(book=book)
+        else:
+            query = BookAsArray.objects.filter(book=book, chapter=chapter)
+
+        for book in query:
+            result.append(book.to_json())
+
+        return result
 
     def __str__(self):
         return self.book.book_title_en
+
+    class Meta:
+        ordering = ('book', 'chapter')
 
 
 class Ref(models.Model):

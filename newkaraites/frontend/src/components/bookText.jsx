@@ -2,24 +2,24 @@ import React from "react";
 import {useState, useEffect} from 'react';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
-import {bookTextUrl} from "../constants";
+import {bookChapterUrl} from "../constants";
 
 
 export default function BookText() {
-    const [error, setError] =useState(null)
+    const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
-    const [bookText, setBookText] = useState([]);
+    const [bookData, setBookData] = useState([]);
 
 
     useEffect(() => {
-        axios.get(bookTextUrl + 'Genesis/')
+        axios.get(bookChapterUrl + 'Genesis/1/')
             .then((response) => {
-                debugger
-                setBookText(response.data.book_text);
+                setBookData(response.data);
                 setIsLoaded(true);
             })
             .catch(error => {
-                console.log(`Error on ${bookTextUrl}: ${error.response.data.message}`)
+                setError(error)
+                console.log(`Error on ${bookChapterUrl}: ${error.response.data.message}`)
             })
     }, [])
     if (error) {
@@ -27,18 +27,25 @@ export default function BookText() {
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
+        const book = bookData.book
+        const chapters = bookData.chapters
         return (<Container>
-            <h1>Book</h1>
-            {/*<h2 lang="en" dir="LTR">{comment['book_title_en']}</h2>*/}
-            {/*<h2 lang="he" dir="RTL">{comment['book_title_he']}</h2>*/}
-            {bookText.map(html => (
-                <div>
-                    <p lang="en" dir="LTR">
-                        {html.text_en}
-                    </p>
-                    <p lang="he" dir="RTL">
-                        {html.text_he}
-                    </p>
+
+            <h3 lang="en" dir="LTR">{book['book_title_en']}</h3>
+            <h3 lang="he" dir="RTL">{book['book_title_he']}</h3>
+            {chapters.map((chapter, c) => (
+                <div key={`i-${c}`}>
+                    <h1 key={`ch-${c}`}>{chapter.chapter}</h1>
+                    {chapter.text.map((verse, v) => (
+                        <div key={`inner-${c}-${v}`}>
+                            <p lang="en" key={`en-${c}-${v}`} dir="LTR">
+                                {verse[0]}
+                            </p>
+                            <p lang="he" key={`-${c}-${v}`} dir="RTL">
+                                {verse[1]}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             ))}
         </Container>)

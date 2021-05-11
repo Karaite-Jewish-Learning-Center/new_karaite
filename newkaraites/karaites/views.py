@@ -64,8 +64,9 @@ def book_chapter_verse(request, *args, **kwargs):
         return JsonResponse({'book_text': book})
 
     if model == 'bookAsArray':
-        book = BookAsArray().to_json(book=book_title, chapter=chapter)
-        return JsonResponse({'book_text': book})
+        book = BookAsArray().to_json_book_array(book=book_title, chapter=chapter)
+        return JsonResponse({'chapters': book,
+                             'book': book_title.to_json()})
 
 
 class GetComments(View):

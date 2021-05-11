@@ -18,7 +18,8 @@ export default function Comments() {
                 setComments(response.data.comments);
                 setIsLoaded(true);
             })
-            .catch(error => {
+            .catch(error =>{
+                setError(error)
                 console.log(`Error on ${getComments}: ${error.response.data.message}`)
             })
     }, [])

@@ -16,6 +16,7 @@ urlpatterns = [
     path('get-book/<str:book>/<str:chapter>/', GetBookChapterVerses.as_view(), name='get_book'),
 
     path('get-book-chapter/<str:book>/<str:chapter>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
+    path('get-book-chapter/<str:book>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 
     path('get-book/<str:book>/', GetBookChapterVerses.as_view(), name='get_book'),
     path('get-book/', GetBookChapterVerses.as_view(), name='get_book'),
