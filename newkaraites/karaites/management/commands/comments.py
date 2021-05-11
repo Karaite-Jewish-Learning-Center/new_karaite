@@ -38,7 +38,7 @@ class Command(BaseCommand):
             exit(1)
 
         organization = Organization.objects.get(book_title_en="Deuteronomy")
-        author = CommentAuthor.objects.get(name='me')
+        author, _ = CommentAuthor.objects.get_or_create(name='Aaron ben Elija')
         for child in divs[0].find_all("p", class_="MsoNormal"):
             if child.name is not None:
                 if child.name == 'p' and child.get_attribute_list('class') == ['MsoNormal']:
@@ -61,5 +61,5 @@ class Command(BaseCommand):
                             comment.comment_en = str(child)
                             comment.comment_he = ''
                             comment.comment_author = author
-                        print(comment.book)
+
                         comment.save()

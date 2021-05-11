@@ -4,6 +4,7 @@ TEST_URL = 'http://localhost:8000/api'
 
 
 class TestApiGetComment:
+    """Must run books first to populate comments table"""
     url = f"{TEST_URL}/get-comments/"
 
     def test_comments_with_no_parameters(self):
@@ -21,8 +22,8 @@ class TestApiGetComment:
     def test_comments_with_a_book_name_no_chapter(self):
         response = requests.get(f"{self.url}Deuteronomy/")
 
-        assert response.status_code == 400
-        assert response.json()['message'] == "Need a Chapter number"
+        assert response.status_code == 200
+        assert len(response.json()['comments']) == 899
 
     def test_comments_with_a_book_name_with_invalid_chapter(self):
         response = requests.get(f"{self.url}Deuteronomy/-1/")

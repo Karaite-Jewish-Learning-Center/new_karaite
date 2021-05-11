@@ -2,6 +2,8 @@ import React from "react";
 import {Route} from "react-router-dom";
 import MyAppBar from "./components/AppBar";
 import BookList from "./components/BookList";
+import BookText from "./components/bookText";
+import BookJson from "./components/BookJson"
 import Comments from "./components/Coments";
 
 function App() {
@@ -14,7 +16,12 @@ function App() {
             <Route path="/comments">
                 <Comments/>
             </Route>
-
+            <Route path="/texts">
+                <BookText/>
+            </Route>
+            <Route path="/book-json">
+                <BookJson/>
+            </Route>
         </div>
     );
 }

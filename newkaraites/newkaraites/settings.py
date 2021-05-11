@@ -195,7 +195,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 if DEBUG:
-    DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000
+    DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

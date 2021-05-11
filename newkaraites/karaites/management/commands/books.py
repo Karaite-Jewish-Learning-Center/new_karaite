@@ -2,7 +2,7 @@ import json
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
                        BookText,
-                       BookJson)
+                       BookAsArray)
 from ...utils import search_level
 
 
@@ -95,27 +95,33 @@ class Command(BaseCommand):
 
                 # just give feed back
                 self.stdout.write(f'Importing book: {organization.book_title_en}')
-
                 list_of_verses = []
                 for chapter in chapters:
+                    book_as_array = []
                     for verse in data_en['text'][chapter]:
                         verse_number = int(verse) + 1
+                        chapter_number = int(chapter) + 1
                         book_text, _ = BookText.objects.get_or_create(
                             book=organization,
-                            chapter=int(chapter) + 1,
+                            chapter=chapter_number,
                             verse=verse_number,
                             text_en=data_en['text'][chapter][verse],
                             text_he=data_he['text'][chapter][verse]
                         )
+
+                        book_as_array.append([data_en['text'][chapter][verse],
+                                             data_he['text'][chapter][verse],
+                                             0])
+
+                    # update book as array
+                    BookAsArray.objects.get_or_create(
+                        book=organization,
+                        chapter=chapter_number,
+                        book_text=book_as_array,
+                    )
+
                     list_of_verses.append(verse_number)
 
                 # update verses in organization
                 organization.verses = list_of_verses
                 organization.save()
-
-                # Save a json book version.
-                book_json = BookJson()
-                book_json.book = organization
-                book_json.book_json_en = data_en
-                book_json.book_json_he = data_he
-                book_json.save()

@@ -83,6 +83,10 @@ class CommentAuthor(models.Model):
 
     name = models.CharField(max_length=50)
 
+    comments_count = models.IntegerField(default=0,
+                                         editable=False,
+                                         verbose_name=_('Comment count'))
+
     history = models.TextField(null=True,
                                blank=True,
                                verbose_name=_("History"))
@@ -122,20 +126,17 @@ class Comment(models.Model):
                                        on_delete=models.DO_NOTHING,
                                        verbose_name=_('Author'))
 
-    comments_count = models.IntegerField(default=0,
-                                         editable=False,
-                                         verbose_name=_('Comment count'))
-
     def __str__(self):
         return f"{self.comment_author} - {self.book}"
 
     def to_json_book_details(self):
         """ We dont need to send book details with every comment"""
+        # todo
         return {'id': self.book.id,
                 'book_title_en': self.book.book_title_en,
                 'book_title_he': self.book.book_title_he,
                 'author': self.comment_author.name,
-                'comment_count': self.comments_count,
+                'comment_count': self.comment_author.comments_count,
                 }
 
     def to_json(self):
@@ -148,14 +149,16 @@ class Comment(models.Model):
                 'comment_en': self.comment_en,
                 'comment_he': self.comment_he,
                 'author': self.comment_author.name,
-                'comment_count': self.comments_count,
+                'comment_count': self.comment_author.comments_count,
                 }
 
     @staticmethod
     def to_json_comments(book=None, chapter=None, verse=None):
         """ Serialize several instance to json """
         result = []
-        if verse is None:
+        if chapter is None and verse is None:
+            query = Comment.objects.filter(book=book)
+        elif verse is None:
             query = Comment.objects.filter(book=book, chapter=chapter)
         else:
             query = Comment.objects.filter(book=book, chapter=chapter, verse=verse)
@@ -174,7 +177,7 @@ class Comment(models.Model):
     def hebrew(self):
         return self.comment_he
 
-    english.short_description = "Hebrew Comment"
+    hebrew.short_description = "Hebrew Comment"
 
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
@@ -185,6 +188,9 @@ class Comment(models.Model):
             book.comments_count += 1
             book.save()
 
+            self.comment_author.comments_count += 1
+            self.comment_author.save()
+
         super(Comment, self).save(*args, **kwargs)
 
     def delete(self, using=None, keep_parents=False):
@@ -194,6 +200,9 @@ class Comment(models.Model):
                                     verse=self.verse)
         book.comments_count -= 1
         book.save()
+
+        self.comment_author.comments_count -= 1
+        self.comment_author.save()
 
         super(Comment, self).delete(using=using, keep_parents=keep_parents)
 
@@ -245,21 +254,31 @@ class BookText(models.Model):
     @staticmethod
     def to_json_books(book, chapter, verse=None):
         """ Serialize several instances"""
-        if verse is None:
+
+        if chapter is None and verse is None:
+            book_text = BookText.objects.filter(book=book)
+        elif verse is None:
             book_text = BookText.objects.filter(book=book, chapter=chapter)
         else:
             book_text = BookText.objects.filter(book=book, chapter=chapter, verse=verse)
+
         result = []
         for book in book_text:
             result.append(book.to_json())
         return result
 
     def save(self, *args, **kwargs):
-        """ Update json book version """
-        json_book = BookJson.objects.get(book=self.book)
-        json_book.book_json_en['text'][f'{self.chapter - 1}'][f'{self.verse - 1}'] = self.text_en
-        json_book.book_json_he['text'][f'{self.chapter - 1}'][f'{self.verse - 1}'] = self.text_he
-        json_book.save()
+        """ Update bookText and BookAsArray version
+            0 -> text English
+            1 -> text Hebrew
+            2 -> comment_count
+        """
+        verse = self.verse - 1
+        book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
+        book_as_array.book_text[verse][0] = self.text_en
+        book_as_array.book_text[verse][1] = self.text_he
+        book_as_array.book_text[verse][2] = self.comments_count
+        book_as_array.save()
 
         # save data to BookText
         super(BookText, self).save(*args, **kwargs)
@@ -269,26 +288,27 @@ class BookText(models.Model):
         ordering = ('book', 'chapter', 'verse')
 
 
-class BookJson(models.Model):
-    """ Store book as json"""
+class BookAsArray(models.Model):
+    """ Map book to postgresql array field """
+
     book = models.ForeignKey(Organization,
                              on_delete=models.CASCADE,
                              verbose_name="Book"
                              )
 
-    book_json_en = JSONField(null=True,
-                             blank=True,
-                             verbose_name="Book as Json English")
+    chapter = models.IntegerField(default=0)
 
-    book_json_he = JSONField(null=True,
-                             blank=True,
-                             verbose_name="Book as Json Hebrew")
+    # text english, text hebrew, comment_count. Verse is position in the array
+    book_text = ArrayField(ArrayField(models.TextField(), size=3))
+
+    def to_json(self):
+        return {'id': self.book.id,
+                'chapter': self.chapter,
+                'book_text': self.book_text
+                }
 
     def __str__(self):
-        return f'{self.book.book.book_title_en} {self.book.book.book_title_he:>20}'
-
-    class Meta:
-        verbose_name_plural = "Books as Json"
+        return self.book.book_title_en
 
 
 class Ref(models.Model):

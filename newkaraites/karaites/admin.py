@@ -26,7 +26,7 @@ admin.site.register(Organization, OrganizationAdmin)
 
 class CommentAuthorAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('name', 'history')
+    list_display = ('name', 'comments_count', 'history')
     search_fields = ('name',)
     list_filter = ('name',)
 
@@ -43,15 +43,24 @@ class CommentAdmin(admin.ModelAdmin):
     form = AdminCommentForm
     save_on_top = True
     list_display = ('book', 'chapter', 'verse', 'english',
-                    'hebrew', 'comment_author',
-                    'comments_count')
-    list_filter = ('comment_author', 'book', 'chapter')
+                    'hebrew', 'comment_author')
 
-    # def get_actions(self, request):
-    #     actions = super().get_actions(request)
-    #     if 'delete_selected' in actions:
-    #         del actions['delete_selected']
-    #     return actions
+    list_filter = ('comment_author', 'book', 'chapter')
+    actions = ['delete_model']
+
+    def get_actions(self, request):
+        """ remove default delete"""
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+
+    def delete_model(self, request, obj):
+        """need to call model delete to keep comment_count up to date"""
+        for instance in obj.all():
+            Comment.objects.get(pk=instance.pk).delete()
+
+    delete_model.short_description = 'Delete selected'
 
     class Media:
         css = {
