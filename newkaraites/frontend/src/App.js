@@ -7,19 +7,22 @@ import Comments from "./components/Coments";
 
 function App() {
     return (
-        <div className="App">
+        <React.Fragment>
             <MyAppBar/>
+
             <Route exact path="/">
                 <BookList/>
             </Route>
+
             <Route path="/comments">
                 <Comments/>
             </Route>
+
             <Route path="/texts">
                 <BookText/>
             </Route>
 
-        </div>
+        </React.Fragment>
     );
 }
 

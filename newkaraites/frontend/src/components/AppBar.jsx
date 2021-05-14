@@ -86,6 +86,9 @@ const useStyles = makeStyles((theme) => ({
         bottom: theme.spacing(2),
         right: theme.spacing(3),
     },
+    toolBar :{
+        padding:theme.spacing(5)
+    }
 }));
 
 export default function PrimarySearchAppBar() {
@@ -167,8 +170,8 @@ export default function PrimarySearchAppBar() {
     );
 
     return (
-        <div className={classes.grow}>
-            <AppBar position="sticky">
+        <div className={classes.toolBar}>
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton
                         edge="start"
