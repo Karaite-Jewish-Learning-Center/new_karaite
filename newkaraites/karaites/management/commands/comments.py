@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
-                       CommentAuthor,
+                       Author,
+                       OtherBooks,
                        Comment)
 from ...html_utils import (get_chapter_verse,
                            get_foot_note_index)
@@ -38,7 +39,12 @@ class Command(BaseCommand):
             exit(1)
 
         organization = Organization.objects.get(book_title_en="Deuteronomy")
-        author, _ = CommentAuthor.objects.get_or_create(name='Aaron ben Elija')
+        author, _ = Author.objects.get_or_create(name='Aaron ben Elija')
+        source_book, _ = OtherBooks.objects.get_or_create(
+            book_title_en='Keter Torah',
+            author=author,
+            classification=1
+        )
         for child in divs[0].find_all("p", class_="MsoNormal"):
             if child.name is not None:
                 if child.name == 'p' and child.get_attribute_list('class') == ['MsoNormal']:
@@ -61,5 +67,5 @@ class Command(BaseCommand):
                             comment.comment_en = str(child)
                             comment.comment_he = ''
                             comment.comment_author = author
-
+                            comment.source_book = source_book
                         comment.save()

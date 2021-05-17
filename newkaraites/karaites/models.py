@@ -1,6 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
-from django.db.models import JSONField
 from django.db import models
 from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
@@ -80,13 +79,13 @@ class Organization(models.Model):
         return data
 
     class Meta:
-        verbose_name_plural = _("   Architecture")
+        verbose_name_plural = _("    Architecture")
         ordering = ['order']
 
 
-class CommentAuthor(models.Model):
+class Author(models.Model):
     """
-        Who made the comment
+        Who is the Author
     """
 
     name = models.CharField(max_length=50)
@@ -103,7 +102,38 @@ class CommentAuthor(models.Model):
         return f"{self.name}"
 
     class Meta:
-        verbose_name_plural = "Commentary Author"
+        verbose_name_plural = "Author's"
+
+
+class OtherBooks(models.Model):
+    """ Other books relate do bible but no biblical text"""
+
+    class BookClassification(models.IntegerChoices):
+        COMMENTARIES = 1
+        OTHER = 100
+
+    book_title_en = models.CharField(max_length=100,
+                                     null=True,
+                                     verbose_name=_("Book title English"))
+
+    book_title_he = models.CharField(max_length=100,
+                                     null=True,
+                                     blank=True,
+                                     verbose_name=_("Book title Hebrew"))
+
+    author = models.ForeignKey(Author,
+                               on_delete=models.CASCADE,
+                               verbose_name=_('Author')
+                               )
+
+    classification = models.SmallIntegerField(choices=BookClassification.choices,
+                                              verbose_name=_('Book classification'))
+
+    def __str__(self):
+        return self.book_title_en
+
+    class Meta:
+        verbose_name_plural = _("  Other books")
 
 
 class Comment(models.Model):
@@ -114,7 +144,7 @@ class Comment(models.Model):
                              null=True,
                              blank=True,
                              on_delete=models.CASCADE,
-                             verbose_name=_('Book'))
+                             verbose_name=_('Comments on Book'))
 
     chapter = models.IntegerField(default=1,
                                   verbose_name=_("Chapter"))
@@ -130,9 +160,15 @@ class Comment(models.Model):
                            blank=True,
                            verbose_name=_("Comment Hebrew"))
 
-    comment_author = models.ForeignKey(CommentAuthor,
+    comment_author = models.ForeignKey(Author,
                                        on_delete=models.DO_NOTHING,
                                        verbose_name=_('Author'))
+
+    source_book = models.ForeignKey(OtherBooks,
+                                    null=True,
+                                    blank=True,
+                                    on_delete=models.CASCADE,
+                                    verbose_name=_('Source book'))
 
     def __str__(self):
         return f"{self.comment_author} - {self.book}"

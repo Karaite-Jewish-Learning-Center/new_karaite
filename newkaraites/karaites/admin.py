@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import (Organization,
-                     CommentAuthor,
+                     Author,
                      Comment,
+                     OtherBooks,
                      BookText)
 from .admin_forms import AdminCommentForm
 
@@ -24,7 +25,17 @@ class OrganizationAdmin(admin.ModelAdmin):
 admin.site.register(Organization, OrganizationAdmin)
 
 
-class CommentAuthorAdmin(admin.ModelAdmin):
+class OtherBooksAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display = ('book_title_en', 'book_title_he', 'author', 'classification')
+    search_fields = ('book_title_en', 'book_title_he', 'author')
+    list_filter = ('classification',)
+
+
+admin.site.register(OtherBooks, OtherBooksAdmin)
+
+
+class AuthorAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('name', 'comments_count', 'history')
     search_fields = ('name',)
@@ -36,7 +47,7 @@ class CommentAuthorAdmin(admin.ModelAdmin):
         }
 
 
-admin.site.register(CommentAuthor, CommentAuthorAdmin)
+admin.site.register(Author, AuthorAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
