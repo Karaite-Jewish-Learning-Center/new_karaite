@@ -12,8 +12,8 @@ class TestGetChapterVerse:
 
         chapter, verse = get_chapter_verse(html_1_1)
 
-        assert chapter == '1'
-        assert verse == ['1']
+        assert chapter == 1
+        assert verse == [1]
 
         # still 1:1
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-left:.5in;text-align:justify"><i><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
@@ -64,8 +64,29 @@ Joshua only with some difficulty. <o:p></o:p></span></p>""", 'html5lib')
 
         chapter, verse = get_chapter_verse(html)
 
-        assert chapter == '1'
-        assert verse == ['3']
+        assert chapter == 1
+        assert verse == [3]
+
+    def test_chapter_1_verse_15(self):
+        # 1:15-1:16
+        html = BeautifulSoup("""<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:7.9pt;
+margin-left:.5in;text-align:justify;line-height:normal"><span style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+color:red">1:15–1:16 Captains of thousands</span><span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+color:black">—The intent is clear that it does not mean that for every thousand
+there is a captain. Rather, there are many different types of legal matters—capital
+crimes, personal injuries, offenses punishable by lashes, financial cases—and
+depending on the severity of the case, judges would be appointed to adjudicate </span><i><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;;color:#FFC000">between man and brother and stranger</span></i><i><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;;color:black">.</span></i><span style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
+color:black"><o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse(html)
+
+        assert chapter == 1
+        assert verse == [15, 16]
 
     def test_chapter_1_verse_6(self):
         # 1:6
@@ -82,8 +103,8 @@ in the Torah portion of <i>Va’et-ḥannan</i>.<o:p></o:p></span></p>""", 'html
 
         chapter, verse = get_chapter_verse(html)
 
-        assert chapter == '1'
-        assert verse == ['6']
+        assert chapter == 1
+        assert verse == [6]
 
         # 1:16
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-bottom:7.9pt;text-align:justify;line-height:
@@ -100,8 +121,8 @@ HE">[15]</span></span><!--[endif]--></span></span></a><o:p></o:p></span></p>""",
 
         chapter, verse = get_chapter_verse(html)
 
-        assert chapter == '1'
-        assert verse == ['16']
+        assert chapter == 1
+        assert verse == [16]
 
     def test_chapter_6_verse_9(self):
         # 6:9
@@ -121,8 +142,8 @@ writing].<o:p></o:p></span></p>""", 'html5lib')
 
         chapter, verse = get_chapter_verse(html)
 
-        assert chapter == '6'
-        assert verse == ['9']
+        assert chapter == 6
+        assert verse == [9]
 
     def test_chapter_7_verse_1(self):
         # 7:1:
@@ -137,8 +158,21 @@ removal of His knowledge [from them]. <o:p></o:p></span></p>""", 'html5lib')
 
         chapter, verse = get_chapter_verse(html)
 
-        assert chapter == '7'
-        assert verse == ['1']
+        assert chapter == 7
+        assert verse == [1]
+
+    def test_chapter_18_verse_12(self):
+        """ 18:12-3"""
+
+        html = BeautifulSoup("""<p class="MsoNormal" style="margin-left:.5in;text-align:justify"><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
+color:red">18:12–3 And because of these abominations—</span><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif">the
+people of the land were punished. Consequently, he juxtaposes, <i><span style="color:#FFC000">You shall be at peace with Adonai your God.<span lang="HE" dir="RTL"><o:p></o:p></span></span></i></span></p>""",
+                             'html5lib')
+
+        chapter, verse = get_chapter_verse(html)
+
+        assert chapter == 18
+        assert verse == list(range(3, 13))
 
 
 class TestFootNoteIndex:

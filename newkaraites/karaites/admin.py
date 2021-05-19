@@ -54,7 +54,8 @@ class CommentAdmin(admin.ModelAdmin):
     form = AdminCommentForm
     save_on_top = True
     list_display = ('book', 'chapter', 'verse', 'english',
-                    'hebrew', 'comment_author')
+                    'hebrew', 'foot_note_admin',
+                    'comment_author', 'source_book')
 
     list_filter = ('comment_author', 'book', 'chapter')
     actions = ['delete_model']

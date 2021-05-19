@@ -152,6 +152,9 @@ class Comment(models.Model):
     verse = models.IntegerField(default=1,
                                 verbose_name=_("Verse"))
 
+    comment_number = models.SmallIntegerField(default=0,
+                                              verbose_name=_("Comment Number"))
+
     comment_en = HTMLField(null=True,
                            blank=True,
                            verbose_name=_("Comment English"))
@@ -169,6 +172,8 @@ class Comment(models.Model):
                                     blank=True,
                                     on_delete=models.CASCADE,
                                     verbose_name=_('Source book'))
+
+    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
 
     def __str__(self):
         return f"{self.comment_author} - {self.book}"
@@ -223,27 +228,41 @@ class Comment(models.Model):
 
     hebrew.short_description = "Hebrew Comment"
 
+    @mark_safe
+    def foot_note_admin(self):
+        html = ''
+        for foot_note in self.foot_notes:
+            html += f'<p>{foot_note}</p>'
+        return html
+
+    foot_note_admin.short_description = "Foot notes"
+
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
         if self.pk is None:
-            book = BookText.objects.get(book=self.book,
-                                        chapter=self.chapter,
-                                        verse=self.verse)
-            book.comments_count += 1
-            book.save()
+            book_text = BookText.objects.get(book=self.book,
+                                             chapter=self.chapter,
+                                             verse=self.verse)
+            book_text.comments_count += 1
+            book_text.save()
 
             self.comment_author.comments_count += 1
             self.comment_author.save()
+
+            self.comment_number = Comment.objects.filter(book=self.book,
+                                                         chapter=self.chapter,
+                                                         verse=self.verse).count() + 1
 
         super(Comment, self).save(*args, **kwargs)
 
     def delete(self, using=None, keep_parents=False):
         """ Update books comment count """
-        book = BookText.objects.get(book=self.book,
-                                    chapter=self.chapter,
-                                    verse=self.verse)
-        book.comments_count -= 1
-        book.save()
+        book_text = BookText.objects.get(book=self.book,
+                                         chapter=self.chapter,
+                                         verse=self.verse)
+
+        book_text.comments_count -= 1
+        book_text.save()
 
         self.comment_author.comments_count -= 1
         self.comment_author.save()
@@ -252,7 +271,7 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = "Commentaries"
-        ordering = ('book', 'chapter', 'verse')
+        ordering = ('book', 'chapter', 'verse', 'comment_number')
 
 
 class BookText(models.Model):

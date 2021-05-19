@@ -18,7 +18,7 @@ def map_docx_to_karaites_html(html):
     # comment on chapter 1 verse 1
     # find key replace by value
     translate = {"""<p class="MsoNormal" style="margin-left:.5in;text-align:justify">""":
-                     """<p class="paragraph">""",
+                 """<p class="paragraph">""",
 
                  """<span style='font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif; color:red'>""":
                      """<span class="comment-start">""",
