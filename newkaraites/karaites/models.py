@@ -180,7 +180,6 @@ class Comment(models.Model):
 
     def to_json_book_details(self):
         """ We dont need to send book details with every comment"""
-        # todo
         return {'id': self.book.id,
                 'book_title_en': self.book.book_title_en,
                 'book_title_he': self.book.book_title_he,
@@ -191,14 +190,9 @@ class Comment(models.Model):
     def to_json(self):
         """ Serialize instance to json"""
         return {'id': self.book.id,
-                'book_title_en': self.book.book_title_en,
-                'book_title_he': self.book.book_title_he,
-                'chapter': self.chapter,
-                'verse': self.verse,
                 'comment_en': self.comment_en,
                 'comment_he': self.comment_he,
-                'author': self.comment_author.name,
-                'comment_count': self.comment_author.comments_count,
+                'foot_notes': self.foot_notes
                 }
 
     @staticmethod

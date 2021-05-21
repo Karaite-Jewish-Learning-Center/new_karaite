@@ -1,8 +1,11 @@
 from bs4 import BeautifulSoup
 from .html_utils import (get_chapter_verse,
                          get_foot_note_index)
-
-from .html_sources import html_1_1
+from .comments_map import map_docx_to_karaites_html
+from .html_sources import (html_1_1,
+                           html_1_1_simplified,
+                           html_1_1_2,
+                           html_1_1_2_simplified)
 
 
 class TestGetChapterVerse:
@@ -10,7 +13,7 @@ class TestGetChapterVerse:
     def test_chapter_1_verse_1(self):
         # most verses are like the first one in Deuteronomy comments
 
-        chapter, verse = get_chapter_verse(html_1_1)
+        chapter, verse = get_chapter_verse(BeautifulSoup(html_1_1, 'html5lib'))
 
         assert chapter == 1
         assert verse == [1]
@@ -229,3 +232,13 @@ at the beginning of Exodus 32. <o:p></o:p></span></p>
         foot_index = get_foot_note_index(html)
 
         assert foot_index == 112
+
+    def test_comments_html_rewrite_1_1(self):
+        result = map_docx_to_karaites_html(html_1_1, stats=True)
+
+        assert result == html_1_1_simplified
+
+    def test_comments_html_rewrite_1_1_2(self):
+        result = map_docx_to_karaites_html(html_1_1_2, stats=True)
+
+        assert result == html_1_1_2_simplified

@@ -15,6 +15,7 @@ import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
 import axios from 'axios';
 import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
+import './css/comments.css';
 
 
 const useStyles = makeStyles({
@@ -101,6 +102,7 @@ export default function BookText() {
     } else {
         const book = bookData.book
         const chapters = bookData.chapters
+
         return (
             <Grid container
                   className={classes.root}
@@ -170,11 +172,13 @@ export default function BookText() {
 
                 </Grid>
                 <Grid Grid item xs={gridsize[1]}>
+                     <div className="div_scroll">
                     {comments.map(html => (
-                        <div className="div_scroll">
+                        <>
                             {ReactHtmlParser(html.comment_en)}
-                        </div>
+                        </>
                     ))}
+                     </div>
                 </Grid>
             </Grid>
 
