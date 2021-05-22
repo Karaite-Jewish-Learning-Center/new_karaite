@@ -32,14 +32,15 @@
 }
 
 .foot-note {
-    font-size: 18.0pt;
-    line-height: 107%;
-    font-family: "Times New Roman", serif;
-    mso-fareast-font-family: Calibri;
-    mso-fareast-theme-font: minor-latin;
-    mso-ansi-language: EN-US;
-    mso-fareast-language: EN-US;
-    mso-bidi-language: HE;
-    color: -webkit-link;
+     cursor: pointer;
+     color:-webkit-link;
+     font-size: 16.0pt;
+}
 
+.biblical-link {
+    color:-webkit-link;
+    cursor: pointer;
+}
+.citation {
+    margin-right: 3px;
 }

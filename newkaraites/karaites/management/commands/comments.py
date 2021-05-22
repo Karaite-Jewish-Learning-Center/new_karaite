@@ -7,6 +7,7 @@ from ...models import (Organization,
                        Comment)
 from ...html_utils import (get_chapter_verse,
                            get_foot_note_index)
+from ...comments_map import map_docx_to_karaites_html
 
 
 class Command(BaseCommand):
@@ -107,16 +108,22 @@ class Command(BaseCommand):
             if same_verses is not None and len(same_verses) > 1:
                 for verse in same_verses[1:]:
                     sys.stdout.write(f"\33[KAdding extra comments chapter:{same_chapter} verse {verse}\r")
-                    comment = Comment.objects.filter(comment_en__startswith=(str(child)))[0]
-                    add = Comment()
-                    add.book = comment.book
-                    add.chapter = comment.chapter
-                    add.verse = verse
-                    add.comment_en = comment.comment_en
-                    add.comment_he = comment.comment_he
-                    add.comment_author = comment.comment_author
-                    add.source_book = comment.source_book
-                    add.foot_notes = comment.foot_notes
-                    add.save()
+                    comment_query = Comment.objects.filter(comment_en__startswith=(str(child)))
+                    if comment_query.count() > 0:
+                        comment = comment_query[0]
+                        add = Comment()
+                        add.book = comment.book
+                        add.chapter = comment.chapter
+                        add.verse = verse
+                        add.comment_en = comment.comment_en
+                        add.comment_he = comment.comment_he
+                        add.comment_author = comment.comment_author
+                        add.source_book = comment.source_book
+                        add.foot_notes = comment.foot_notes
+                        add.save()
 
         sys.stdout.write(f"\33[K\r")
+        print()
+        sys.stdout.write('Please run command comments_map_html')
+        print()
+

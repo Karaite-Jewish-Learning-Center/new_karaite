@@ -232,13 +232,3 @@ at the beginning of Exodus 32. <o:p></o:p></span></p>
         foot_index = get_foot_note_index(html)
 
         assert foot_index == 112
-
-    def test_comments_html_rewrite_1_1(self):
-        result = map_docx_to_karaites_html(html_1_1, stats=True)
-
-        assert result == html_1_1_simplified
-
-    def test_comments_html_rewrite_1_1_2(self):
-        result = map_docx_to_karaites_html(html_1_1_2, stats=True)
-
-        assert result == html_1_1_2_simplified

@@ -3,16 +3,15 @@ import {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Tooltip from '@material-ui/core/Tooltip';
 import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid'
 import {Typography} from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
 import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
 import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
 import './css/comments.css';
@@ -51,13 +50,16 @@ const useStyles = makeStyles({
         height: 'auto',
 
     },
+    toolMax: {
+        maxWidth: 300,
+    }
 })
 
 export default function BookText() {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
     const [bookData, setBookData] = useState([]);
-    const [gridsize, setGridSize] = useState([12, 0])
+    const [gridsize, setGridSize] = useState([12, 1])
     const [comments, setComments] = useState([])
     const [chapterVerse, setChapterVerse] = useState([])
 
@@ -69,7 +71,7 @@ export default function BookText() {
         verse = parseInt(verse) + 1
         // toggle comments
         if (gridsize[0] === 8 && chapterVerse[0] === chapter && chapterVerse[1] === verse) {
-            setGridSize([12, 0])
+            setGridSize([12, 1])
             return
         }
 
@@ -78,6 +80,7 @@ export default function BookText() {
                 setComments(response.data.comments)
                 setChapterVerse([chapter, verse])
                 setGridSize([8, 4])
+                ReactTooltip.rebuild()
             })
             .catch(error => {
                 console.log(`Error on ${getCommentsUrl}: ${error}`)
@@ -100,21 +103,19 @@ export default function BookText() {
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
-        const book = bookData.book
         const chapters = bookData.chapters
-
         return (
             <Grid container
                   className={classes.root}
                   alignItems="baseline"
             >
+
+                <ReactTooltip className={classes.toolMax} place="bottom"/>
                 <Grid item xs={gridsize[0]}>
                     <Table className="scroll_table">
                         <TableBody>
                             {chapters.map((chapter, c) => (
-
-                                <TableRow key={`r-${c}`}>
-                                    {/*<h1 key={`ch-${c}`}>Chapter {chapter.chapter}</h1>*/}
+                                <>
 
                                     {chapter.text.map((verse, v) => (
                                         <TableRow key={`inner-${c}-${v}`}
@@ -122,7 +123,7 @@ export default function BookText() {
 
                                         >
 
-                                            <TableCell className={classes.text}>
+                                            <TableCell key={`${c}-${v}-1`} className={classes.text}>
 
                                                 <Typography
                                                     align="right"
@@ -131,54 +132,49 @@ export default function BookText() {
                                                     dir="RTL">
                                                     {verse[1]}
                                                 </Typography>
-                                                <Typography align="right"
-                                                            className={''}
-                                                >
-                                                    copy
-                                                </Typography>
                                             </TableCell>
 
-                                            <TableCell className={classes.verseNumber}>
+                                            <TableCell key={`${c}-${v}-2`} className={classes.verseNumber}>
                                                 <Typography className={classes.count}>
                                                     {v + 1}
                                                 </Typography>
                                             </TableCell>
 
-                                            <TableCell className={classes.text}>
+                                            <TableCell key={`${c}-${v}-3`} className={classes.text}>
                                                 <Typography lang="en"
                                                             key={`en-${c}-${v}`}
                                                             dir="LTR">{verse[0]}
                                                 </Typography>
                                             </TableCell>
 
-                                            <TableCell data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
+                                            <TableCell key={`${c}-${v}-4`} data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
                                                        onClick={(verse[2] !== '0' ? rowOnclick : null)}
                                             >
                                                 {(verse[2] !== '0' ?
-                                                    <Tooltip title={"Click to read this comment" + (verse[2] == "1" ? '' : 's')}>
+                                                    <span data-tip={"Click to read " + (verse[2] === "1" ? 'this comment' : 'these comments')}>
                                                         <Badge badgeContent={verse[2]} color={((chapterVerse[0] === c + 1 && chapterVerse[1] === v + 1) ? "secondary" : "primary")}>
                                                             <CommentTwoToneIcon/>
                                                         </Badge>
-                                                    </Tooltip>
+                                                    </span>
                                                     : null)}
                                             </TableCell>
 
                                         </TableRow>
                                     ))}
-                                </TableRow>
+                                </>
                             ))}
                         </TableBody>
                     </Table>
 
                 </Grid>
                 <Grid Grid item xs={gridsize[1]}>
-                     <div className="div_scroll">
-                    {comments.map(html => (
-                        <>
-                            {ReactHtmlParser(html.comment_en)}
-                        </>
-                    ))}
-                     </div>
+                    <div className="div_scroll">
+                        {comments.map(html => (
+                            <>
+                                {ReactHtmlParser(html.comment_en)}
+                            </>
+                        ))}
+                    </div>
                 </Grid>
             </Grid>
 

@@ -196,6 +196,9 @@ export default function PrimarySearchAppBar() {
                     </div>
                     <div className={classes.grow}/>
                     <div className={classes.sectionDesktop}>
+                        <Tooltip title="jsdhlfkjahdsljfahsdlfjaksdhlfjashdf">
+                            <span>{1}</span>
+                        </Tooltip>
                         <Tooltip title="Sign up">
                             <IconButton aria-label="Go to sign up form" color="inherit">
                                 <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>

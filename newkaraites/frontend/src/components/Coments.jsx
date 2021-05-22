@@ -1,6 +1,5 @@
 import React from "react";
 import {useState, useEffect} from 'react';
-import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import {makeStyles} from '@material-ui/core/styles';
@@ -48,7 +47,7 @@ export default function Comments({ chapter, verse}) {
                 setError(error)
                 console.log(`Error on ${getCommentsUrl}: ${error}`)
             })
-    }, [])
+    }, [chapter, verse])
 
     if (error) {
         return <div>Error: {error.message}</div>
