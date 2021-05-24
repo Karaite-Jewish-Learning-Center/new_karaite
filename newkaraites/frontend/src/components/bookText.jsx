@@ -55,32 +55,63 @@ const useStyles = makeStyles({
     }
 })
 
-export default function BookText() {
+export default function BookText({book}) {
+    const BOOK = 0
+    const CHAPTER = 1
+    const VERSE = 2
+    const COM_CHAPTER = 0
+    const COM_VERSE = 1
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
     const [bookData, setBookData] = useState([]);
     const [gridsize, setGridSize] = useState([12, 1])
     const [comments, setComments] = useState([])
-    const [chapterVerse, setChapterVerse] = useState([])
-
+    const [bookChapterVerse, setBookChapterVerse] = useState([book, 1, 1])
+    const [commentChapterVerse, setCommentChapterVerse] = useState([0, 0])
     const classes = useStyles();
+
+    const scroll = (e) => {
+        let table = document.getElementById('scroll_table')
+        debugger
+        table.scrollBy(0, 1000)
+        console.log(e)
+    }
+    const refClick = (e) => {
+        // parser biblical ref
+        debugger
+        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '')
+        let [book, chapterVerse] = biblicalRef.split(" ")
+        let [chapter, verse] = chapterVerse.split(":")
+        setBookChapterVerse([book, chapter, verse])
+    }
+
+    function transform(node) {
+        // rewrite the span with a onClick event handler
+        if (node.type === 'tag' && node.name === 'span') {
+            if (node['attribs']['class'] === 'biblical-link') {
+                return <span onClick={refClick} className="biblical-link">{node['children'][0]['data']}</span>
+            }
+        }
+    }
 
     const rowOnclick = (e) => {
         let [chapter, verse] = e.currentTarget.dataset.cV.split(',')
         chapter = parseInt(chapter) + 1
         verse = parseInt(verse) + 1
         // toggle comments
-        if (gridsize[0] === 8 && chapterVerse[0] === chapter && chapterVerse[1] === verse) {
+        if (gridsize[0] === 8 && bookChapterVerse[CHAPTER] === chapter && bookChapterVerse[VERSE] === verse) {
             setGridSize([12, 1])
             return
         }
 
-        axios.get(getCommentsUrl + `Deuteronomy/${chapter}/${verse}/`)
+        axios.get(getCommentsUrl + `${bookChapterVerse[BOOK]}/${chapter}/${verse}/`)
             .then((response) => {
                 setComments(response.data.comments)
-                setChapterVerse([chapter, verse])
+                setBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
+                setCommentChapterVerse([chapter, verse])
                 setGridSize([8, 4])
                 ReactTooltip.rebuild()
+
             })
             .catch(error => {
                 console.log(`Error on ${getCommentsUrl}: ${error}`)
@@ -88,7 +119,8 @@ export default function BookText() {
     }
 
     useEffect(() => {
-        axios.get(bookChapterUrl + 'Deuteronomy/1/')
+
+        axios.get(bookChapterUrl + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
             .then((response) => {
                 setBookData(response.data);
                 setIsLoaded(true);
@@ -97,87 +129,94 @@ export default function BookText() {
                 setError(error)
                 console.log(`Error on ${bookChapterUrl}: ${error.response.data.message}`)
             })
-    }, [])
+    }, [bookChapterVerse])
+
     if (error) {
         return <div>Error: {error.message}</div>
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
         const chapters = bookData.chapters
+        const [book, chapter, verse] = bookChapterVerse
         return (
-            <Grid container
-                  className={classes.root}
-                  alignItems="baseline"
-            >
+            <div>
+                <div>{book}, {chapter} , {verse}</div>
+                <button onClick={scroll}>Scroll</button>
+                <Grid container
+                      className={classes.root}
+                      alignItems="baseline"
+                >
 
-                <ReactTooltip className={classes.toolMax} place="bottom"/>
-                <Grid item xs={gridsize[0]}>
-                    <Table className="scroll_table">
-                        <TableBody>
-                            {chapters.map((chapter, c) => (
-                                <>
+                    <ReactTooltip className={classes.toolMax} place="bottom"/>
+                    <Grid item xs={gridsize[0]}>
+                        <Table className="scroll_table" id="scroll_table">
+                            <TableBody>
+                                {chapters.map((chapter, c) => (
+                                    <>
+                                        {chapter.text.map((verse, v) => (
+                                            <TableRow key={`inner-${c}-${v}`}
+                                                      hover={true}
 
-                                    {chapter.text.map((verse, v) => (
-                                        <TableRow key={`inner-${c}-${v}`}
-                                                  hover={true}
-
-                                        >
-
-                                            <TableCell key={`${c}-${v}-1`} className={classes.text}>
-
-                                                <Typography
-                                                    align="right"
-                                                    lang="he"
-                                                    key={`he-${c}-${v}`}
-                                                    dir="RTL">
-                                                    {verse[1]}
-                                                </Typography>
-                                            </TableCell>
-
-                                            <TableCell key={`${c}-${v}-2`} className={classes.verseNumber}>
-                                                <Typography className={classes.count}>
-                                                    {v + 1}
-                                                </Typography>
-                                            </TableCell>
-
-                                            <TableCell key={`${c}-${v}-3`} className={classes.text}>
-                                                <Typography lang="en"
-                                                            key={`en-${c}-${v}`}
-                                                            dir="LTR">{verse[0]}
-                                                </Typography>
-                                            </TableCell>
-
-                                            <TableCell key={`${c}-${v}-4`} data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
-                                                       onClick={(verse[2] !== '0' ? rowOnclick : null)}
                                             >
-                                                {(verse[2] !== '0' ?
-                                                    <span data-tip={"Click to read " + (verse[2] === "1" ? 'this comment' : 'these comments')}>
-                                                        <Badge badgeContent={verse[2]} color={((chapterVerse[0] === c + 1 && chapterVerse[1] === v + 1) ? "secondary" : "primary")}>
+
+                                                <TableCell key={`${c}-${v}-1`} className={classes.text}>
+
+                                                    <Typography
+                                                        align="right"
+                                                        lang="he"
+                                                        key={`he-${c}-${v}`}
+                                                        dir="RTL">
+                                                        {verse[1]}
+                                                    </Typography>
+                                                </TableCell>
+
+                                                <TableCell key={`${c}-${v}-2`} className={classes.verseNumber}>
+                                                    <Typography className={classes.count}>
+                                                        {v + 1}
+                                                    </Typography>
+                                                </TableCell>
+
+                                                <TableCell key={`${c}-${v}-3`} className={classes.text}>
+                                                    <Typography lang="en"
+                                                                key={`en-${c}-${v}`}
+                                                                dir="LTR">{verse[0]}
+                                                    </Typography>
+                                                </TableCell>
+
+                                                <TableCell key={`${c}-${v}-4`} data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
+                                                           onClick={(verse[2] !== '0' ? rowOnclick : null)}
+                                                >
+                                                    {(verse[2] !== '0' ?
+                                                        <span data-tip={"Click to read " + (verse[2] === "1" ? 'this comment' : 'these comments')}>
+                                                    <Badge badgeContent={verse[2]} color={((commentChapterVerse[COM_CHAPTER] === c + 1 && commentChapterVerse[COM_VERSE] === v + 1) ? "secondary" : "primary")}>
                                                             <CommentTwoToneIcon/>
                                                         </Badge>
                                                     </span>
-                                                    : null)}
-                                            </TableCell>
+                                                        : null)}
+                                                </TableCell>
 
-                                        </TableRow>
-                                    ))}
+                                            </TableRow>
+                                        ))}
+                                    </>
+                                ))}
+                            </TableBody>
+                        </Table>
+
+                    </Grid>
+                    <Grid Grid item xs={gridsize[1]}>
+                        <div className="div_scroll">
+                            {comments.map(html => (
+                                <>
+                                    {ReactHtmlParser(html.comment_en, {
+                                        decodeEntities: true,
+                                        transform: transform
+                                    })}
                                 </>
                             ))}
-                        </TableBody>
-                    </Table>
-
+                        </div>
+                    </Grid>
                 </Grid>
-                <Grid Grid item xs={gridsize[1]}>
-                    <div className="div_scroll">
-                        {comments.map(html => (
-                            <>
-                                {ReactHtmlParser(html.comment_en)}
-                            </>
-                        ))}
-                    </div>
-                </Grid>
-            </Grid>
-
+            </div>
         )
     }
 }

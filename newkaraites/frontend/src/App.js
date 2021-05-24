@@ -19,7 +19,7 @@ function App() {
             </Route>
 
             <Route path="/texts">
-                <BookText/>
+                <BookText book={'Deuteronomy'}/>
             </Route>
 
         </React.Fragment>

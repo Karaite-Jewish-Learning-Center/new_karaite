@@ -44,7 +44,7 @@ def book_chapter_verse(request, *args, **kwargs):
 
     if verse is not None:
         try:
-            verse = int(verse)
+            verse = int(verse.replace(',', '').replace('.', ''))
         except ValueError:
             data = {'status': 'false', 'message': _(f"Invalid verse:{verse} doesn't seams an int")}
             return JsonResponse(data=data, status=400)
