@@ -86,8 +86,8 @@ const useStyles = makeStyles((theme) => ({
         bottom: theme.spacing(2),
         right: theme.spacing(3),
     },
-    toolBar :{
-        padding:theme.spacing(5)
+    toolBar: {
+        marginBottom: theme.spacing(20)
     }
 }));
 
@@ -170,70 +170,69 @@ export default function PrimarySearchAppBar() {
     );
 
     return (
-        <div className={classes.toolBar}>
-            <AppBar position="fixed">
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="open drawer"
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon/>
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{'aria-label': 'search'}}
-                        />
+
+        <AppBar position="fixed">
+            <Toolbar>
+                <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                >
+                    <MenuIcon/>
+                </IconButton>
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon/>
                     </div>
-                    <div className={classes.grow}/>
-                    <div className={classes.sectionDesktop}>
-                        <Tooltip title="Sign up">
-                            <IconButton aria-label="Go to sign up form" color="inherit">
-                                <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Login">
-                            <IconButton aria-label="Go to Login form" color="inherit">
-                                <ExitToAppIcon></ExitToAppIcon>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Change site language">
-                            <IconButton
-                                edge="end"
-                                aria-label="Site language"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleLanguageMenuOpen}
-                                color="inherit"
-                            >
-                                <LanguageIcon/><ArrowDropDownIcon/>
-                            </IconButton>
-                        </Tooltip>
-                    </div>
-                    <div className={classes.sectionMobile}>
+                    <InputBase
+                        placeholder="Search…"
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        inputProps={{'aria-label': 'search'}}
+                    />
+                </div>
+                <div className={classes.grow}/>
+                <div className={classes.sectionDesktop}>
+                    <Tooltip title="Sign up">
+                        <IconButton aria-label="Go to sign up form" color="inherit">
+                            <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Login">
+                        <IconButton aria-label="Go to Login form" color="inherit">
+                            <ExitToAppIcon></ExitToAppIcon>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Change site language">
                         <IconButton
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
+                            edge="end"
+                            aria-label="Site language"
+                            aria-controls={menuId}
                             aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
+                            onClick={handleLanguageMenuOpen}
                             color="inherit"
                         >
-                            <MoreIcon/>
+                            <LanguageIcon/><ArrowDropDownIcon/>
                         </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
+                    </Tooltip>
+                </div>
+                <div className={classes.sectionMobile}>
+                    <IconButton
+                        aria-label="show more"
+                        aria-controls={mobileMenuId}
+                        aria-haspopup="true"
+                        onClick={handleMobileMenuOpen}
+                        color="inherit"
+                    >
+                        <MoreIcon/>
+                    </IconButton>
+                </div>
+            </Toolbar>
             {renderMobileMenu}
             {renderMenu}
-        </div>
+        </AppBar>
     );
 }
