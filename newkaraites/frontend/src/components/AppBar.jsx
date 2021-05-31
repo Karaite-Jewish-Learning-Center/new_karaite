@@ -13,10 +13,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Tooltip from '@material-ui/core/Tooltip';
+//import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: 'lightgray',
+    },
     grow: {
         flexGrow: 1,
     },
@@ -171,7 +174,9 @@ export default function PrimarySearchAppBar() {
 
     return (
 
-        <AppBar position="fixed">
+        <AppBar position="fixed"
+
+        >
             <Toolbar>
                 <IconButton
                     edge="start"
@@ -196,28 +201,23 @@ export default function PrimarySearchAppBar() {
                 </div>
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
-                    <Tooltip title="Sign up">
-                        <IconButton aria-label="Go to sign up form" color="inherit">
-                            <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Login">
-                        <IconButton aria-label="Go to Login form" color="inherit">
-                            <ExitToAppIcon></ExitToAppIcon>
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Change site language">
-                        <IconButton
-                            edge="end"
-                            aria-label="Site language"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleLanguageMenuOpen}
-                            color="inherit"
-                        >
-                            <LanguageIcon/><ArrowDropDownIcon/>
-                        </IconButton>
-                    </Tooltip>
+                    <IconButton aria-label="Go to sign up form" color="inherit" >
+                        <PermContactCalendarSharpIcon data-tip="Sign up"></PermContactCalendarSharpIcon>
+                    </IconButton>
+                    <IconButton aria-label="Go to Login form" color="inherit" data-tip="Login">
+                        <ExitToAppIcon></ExitToAppIcon>
+                    </IconButton>
+                    <IconButton
+                        edge="end"
+                        aria-label="Site language"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={handleLanguageMenuOpen}
+                        color="inherit"
+                        data-tip="Change site language"
+                    >
+                        <LanguageIcon/><ArrowDropDownIcon/>
+                    </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
                     <IconButton

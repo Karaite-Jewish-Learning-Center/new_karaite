@@ -7,6 +7,11 @@ const getComments  = async (chapter, verse) => {
    return res;
 }
 
+const makeRandomKey =() =>{
+    return `k-${Math.random()}`
+}
+
 export {
     getComments,
+    makeRandomKey
 }

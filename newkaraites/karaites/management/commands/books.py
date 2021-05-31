@@ -110,8 +110,9 @@ class Command(BaseCommand):
                         )
 
                         book_as_array.append([data_en['text'][chapter][verse],
-                                             data_he['text'][chapter][verse],
-                                             0])
+                                              data_he['text'][chapter][verse],
+                                              0,
+                                              0])
 
                     # update book as array
                     BookAsArray.objects.get_or_create(

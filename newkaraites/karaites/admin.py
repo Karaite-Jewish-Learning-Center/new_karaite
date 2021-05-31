@@ -37,7 +37,7 @@ admin.site.register(OtherBooks, OtherBooksAdmin)
 
 class AuthorAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('name', 'comments_count', 'history')
+    list_display = ('name', 'comments_count_en', 'comments_count_he', 'history')
     search_fields = ('name',)
     list_filter = ('name',)
 
@@ -54,8 +54,9 @@ class CommentAdmin(admin.ModelAdmin):
     form = AdminCommentForm
     save_on_top = True
     list_display = ('book', 'chapter', 'verse', 'english',
-                    'hebrew', 'foot_note_admin',
-                    'comment_author', 'source_book')
+                    'hebrew', 'foot_note_en_admin',
+                    'foot_note_he_admin', 'comment_author',
+                    'source_book')
 
     list_filter = ('comment_author', 'book', 'chapter')
     actions = ['delete_model']
@@ -79,6 +80,7 @@ class CommentAdmin(admin.ModelAdmin):
             'all': ('../static/css/admin.css',)
 
         }
+        js = ('../static/js/toggleFilterPanel.js',)
 
 
 admin.site.register(Comment, CommentAdmin)
@@ -87,7 +89,7 @@ admin.site.register(Comment, CommentAdmin)
 class BookTextAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('book', 'chapter', 'verse',
-                    'text_en', 'text_he', 'comments_count')
+                    'text_en', 'text_he', 'comments_count_en', 'comments_count_he')
 
     list_filter = ('book', 'chapter', 'verse')
 

@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
         # first div is the book text, next 498 are the notes for comments on Deuteronomy
         # by Aaron ben Elijah on is book Keter Torah
-        # millage may vary on author books...
+        # millage may vary on other book authors
 
         divs = html_tree.find_all('div')
         end = len(divs)
@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
         book_title = "Deuteronomy"
         organization = Organization.objects.get(book_title_en=book_title)
-        author, _ = Author.objects.get_or_create(name='Aaron ben Elija')
+        author, _ = Author.objects.get_or_create(name='Aaron ben Elijah')
 
         author.comments_count = 0
         author.save()
@@ -89,12 +89,14 @@ class Command(BaseCommand):
                 comment.comment_he = ''
                 comment.comment_author = author
                 comment.source_book = source_book
-                comment.foot_notes = foot_note_list
+                comment.foot_notes_en = foot_note_list
+                comment.foot_notes_he = ''
                 comment.save()
             else:
                 comment = Comment.objects.filter(book=organization, chapter=chapter_number, verse=verse_number).last()
                 comment.comment_en += str(child)
-                comment.foot_notes += foot_note_list
+                comment.foot_notes_en += foot_note_list
+                comment.foot_notes_he = ''
                 comment.save()
 
         # Add extra comments, those that are repeated in certain verses
@@ -126,4 +128,3 @@ class Command(BaseCommand):
         print()
         sys.stdout.write('Please run command comments_map_html')
         print()
-

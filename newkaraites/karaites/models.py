@@ -52,30 +52,48 @@ class Organization(models.Model):
                 'verses': self.verses,
                 }
 
+    def to_book_list(self):
+        return [self.get_first_level_display(),
+                self.get_second_level_display(),
+                self.book_title_en,
+                self.book_title_he,
+                self.chapters,
+                self.verses
+                ]
+
     @staticmethod
     def get_list_of_books():
-        """ Return a dict with a list of book each second_level"""
-        books = Organization.objects.values().order_by('first_level',
-                                                       'second_level',
-                                                       'order')
+        """ Return list of book """
+        books = Organization.objects.all().order_by('first_level',
+                                                    'second_level',
+                                                    'order')
+        # data = []
+        # temp = []
+        # i = 0
+        # count = books.count()
+        # while i < count:
+        #     level = books[i]
+        #     book = level
+        #     page = 0
+        #     while book['second_level'] == level['second_level']:
+        #         temp.append(books[i])
+        #         i += 1
+        #         page += 1
+        #         #  we want to display 3 books in a line
+        #         if i >= count or page % 3 == 0:
+        #             break
+        #         book = books[i]
+        #
+        #     # make sure that exists 3 elements in each row
+        #     while len(temp) < 3:
+        #         temp.append([])
+        #
+        #     data.append(temp)
+        #
+        #     temp = []
         data = []
-        temp = []
-        i = 0
-        count = books.count()
-        while i < count:
-            level = books[i]
-            book = level
-            page = 0
-            while book['second_level'] == level['second_level']:
-                temp.append(books[i])
-                i += 1
-                page += 1
-                #  we want to display 3 books in a line
-                if i >= count or page % 3 == 0:
-                    break
-                book = books[i]
-            data.append(temp)
-            temp = []
+        for book in books:
+            data.append(book.to_book_list())
         return data
 
     class Meta:
@@ -90,9 +108,13 @@ class Author(models.Model):
 
     name = models.CharField(max_length=50)
 
-    comments_count = models.IntegerField(default=0,
-                                         editable=False,
-                                         verbose_name=_('Comment count'))
+    comments_count_en = models.IntegerField(default=0,
+                                            editable=False,
+                                            verbose_name=_('Comments English'))
+
+    comments_count_he = models.IntegerField(default=0,
+                                            editable=False,
+                                            verbose_name=_('Comment Hebrew'))
 
     history = models.TextField(null=True,
                                blank=True,
@@ -173,7 +195,9 @@ class Comment(models.Model):
                                     on_delete=models.CASCADE,
                                     verbose_name=_('Source book'))
 
-    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
+    foot_notes_en = ArrayField(models.TextField(), default=list, null=True, blank=True)
+
+    foot_notes_he = ArrayField(models.TextField(), default=list, null=True, blank=True)
 
     def __str__(self):
         return f"{self.comment_author} - {self.book}"
@@ -184,7 +208,8 @@ class Comment(models.Model):
                 'book_title_en': self.book.book_title_en,
                 'book_title_he': self.book.book_title_he,
                 'author': self.comment_author.name,
-                'comment_count': self.comment_author.comments_count,
+                'comment_count_en': self.comment_author.comments_count_en,
+                'comment_count_he': self.comment_author.comments_count_he
                 }
 
     def to_json(self):
@@ -222,13 +247,22 @@ class Comment(models.Model):
     hebrew.short_description = "Hebrew Comment"
 
     @mark_safe
-    def foot_note_admin(self):
+    def foot_note_en_admin(self):
         html = ''
-        for foot_note in self.foot_notes:
+        for foot_note in self.foot_notes_en:
             html += f'<p>{foot_note}</p>'
         return html
 
-    foot_note_admin.short_description = "Foot notes"
+    foot_note_en_admin.short_description = "Foot notes EN"
+
+    @mark_safe
+    def foot_note_he_admin(self):
+        html = ''
+        for foot_note in self.foot_notes_he:
+            html += f'<p>{foot_note}</p>'
+        return html
+
+    foot_note_he_admin.short_description = "Foot notes HE"
 
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
@@ -236,10 +270,10 @@ class Comment(models.Model):
             book_text = BookText.objects.get(book=self.book,
                                              chapter=self.chapter,
                                              verse=self.verse)
-            book_text.comments_count += 1
+            book_text.comments_count_en += 1
             book_text.save()
 
-            self.comment_author.comments_count += 1
+            self.comment_author.comments_count_en += 1
             self.comment_author.save()
 
             self.comment_number = Comment.objects.filter(book=self.book,
@@ -254,10 +288,10 @@ class Comment(models.Model):
                                          chapter=self.chapter,
                                          verse=self.verse)
 
-        book_text.comments_count -= 1
+        book_text.comments_count_en -= 1
         book_text.save()
 
-        self.comment_author.comments_count -= 1
+        self.comment_author.comments_count_en -= 1
         self.comment_author.save()
 
         super(Comment, self).delete(using=using, keep_parents=keep_parents)
@@ -288,9 +322,13 @@ class BookText(models.Model):
     text_he = models.TextField(null=True,
                                verbose_name=_("Hebrew chapter Verse text"))
 
-    comments_count = models.IntegerField(default=0,
-                                         editable=False,
-                                         verbose_name=_("Total Comments"))
+    comments_count_en = models.IntegerField(default=0,
+                                            editable=False,
+                                            verbose_name=_("Total Comments EN"))
+
+    comments_count_he = models.IntegerField(default=0,
+                                            editable=False,
+                                            verbose_name=_("Total Comments HE"))
 
     def __str__(self):
         return f'{self.book.book_title_en}           {self.book.book_title_he:>40}'
@@ -304,19 +342,25 @@ class BookText(models.Model):
                 'verse': self.verse,
                 'text_en': self.text_en,
                 'text_he': self.text_he,
-                'comments_count': self.comments_count
+                'comments_count_en': self.comments_count_en,
+                'comments_count_he': self.comments_count_he,
                 }
 
     @staticmethod
-    def to_json_books(book, chapter, verse=None):
+    def to_json_books(book, chapter, verse=None, stop_verse=None):
         """ Serialize several instances"""
 
-        if chapter is None and verse is None:
+        if chapter is None and verse is None and stop_verse is None:
             book_text = BookText.objects.filter(book=book)
-        elif verse is None:
+        elif verse is None and stop_verse is None:
             book_text = BookText.objects.filter(book=book, chapter=chapter)
-        else:
+        elif verse is not None and stop_verse is None:
             book_text = BookText.objects.filter(book=book, chapter=chapter, verse=verse)
+        elif verse is not None and stop_verse is not None:
+            book_text = BookText.objects.filter(book=book, chapter=chapter, verse__gte=verse, verse__lte=stop_verse)
+        else:
+            # error on parameters
+            pass
 
         result = []
         for book in book_text:
@@ -327,13 +371,19 @@ class BookText(models.Model):
         """ Update bookText and BookAsArray version
             0 -> text English
             1 -> text Hebrew
-            2 -> comment_count
+            2 -> comment_count_en
+            3 -> comment_count_he
         """
-        verse = self.verse - 1
-        book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
-        book_as_array.book_text[verse][0] = self.text_en
-        book_as_array.book_text[verse][1] = self.text_he
-        book_as_array.book_text[verse][2] = self.comments_count
+
+        try:
+            book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
+        except BookAsArray.DoesNotExist:
+            book_as_array = BookAsArray()
+        book_as_array.book = self.book
+        book_as_array.book_text = [self.text_en,
+                                   self.text_he,
+                                   self.comments_count_en,
+                                   self.comments_count_he]
         book_as_array.save()
 
         # save data to BookText
@@ -355,7 +405,7 @@ class BookAsArray(models.Model):
     chapter = models.IntegerField(default=0)
 
     # text english, text hebrew, comment_count. Verse is position in the array
-    book_text = ArrayField(ArrayField(models.TextField(), size=3))
+    book_text = ArrayField(ArrayField(models.TextField(), size=4))
 
     def to_json(self):
 
