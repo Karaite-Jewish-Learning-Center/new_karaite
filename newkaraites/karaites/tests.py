@@ -1,19 +1,21 @@
 from bs4 import BeautifulSoup
-from .html_utils import (get_chapter_verse,
+from .html_utils import (get_chapter_verse_en,
+                         get_chapter_verse_he,
                          get_foot_note_index)
 from .comments_map import map_docx_to_karaites_html
 from .html_sources import (html_1_1,
                            html_1_1_simplified,
                            html_1_1_2,
-                           html_1_1_2_simplified)
+                           html_1_1_2_simplified,
+                           html_he_1_1)
 
 
 class TestGetChapterVerse:
 
-    def test_chapter_1_verse_1(self):
+    def test_chapter_1_verse_1_en(self):
         # most verses are like the first one in Deuteronomy comments
 
-        chapter, verse = get_chapter_verse(BeautifulSoup(html_1_1, 'html5lib'))
+        chapter, verse = get_chapter_verse_en(BeautifulSoup(html_1_1, 'html5lib'))
 
         assert chapter == 1
         assert verse == [1]
@@ -32,7 +34,7 @@ chronicles of] their journeys nor elsewhere, and indeed since he uses the words
 it does not mean they passed through actual places that bear these names.<span style="color:red"> <span lang="HE" dir="RTL"><o:p></o:p></span></span></span></p>""",
                              'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter is None
         assert verse is None
@@ -48,12 +50,12 @@ they came out of Egypt, across the Jordan, in the valley near Beth Peor, in the
 land of Sihon, king of the Amorites</span></i> <span style="color:#0070C0">(Deuteronomy
 4:45–46)</span>, and Laban, Paran, and Hazeroth are not across the Jordan.<o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter is None
         assert verse is None
 
-    def test_chapter_1_verse_3(self):
+    def test_chapter_1_verse_3_en(self):
         # 1:3
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-left:.5in;text-align:justify"><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
 color:red">1:3 In the fortieth year</span><span style="font-size:12.0pt;
@@ -65,12 +67,12 @@ weeping in mourning</span></i><span style="color:#FFC000"> </span><span style="c
 the Jordan on the tenth of the month is reconciled with the timeline stated in
 Joshua only with some difficulty. <o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 1
         assert verse == [3]
 
-    def test_chapter_1_verse_15(self):
+    def test_chapter_1_verse_15_en(self):
         # 1:15-1:16
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:7.9pt;
 margin-left:.5in;text-align:justify;line-height:normal"><span style="font-size:
@@ -86,12 +88,12 @@ depending on the severity of the case, judges would be appointed to adjudicate <
 font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
 color:black"><o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 1
         assert verse == [15, 16]
 
-    def test_chapter_1_verse_6(self):
+    def test_chapter_1_verse_6_en(self):
         # 1:6
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:7.9pt;
 margin-left:.5in;text-align:justify;line-height:normal"><span style="font-size:
@@ -104,7 +106,7 @@ prevented from entering until the fortieth year, necessitating an elucidation
 of the divine instruction—because of the decree against Moses, as is mentioned
 in the Torah portion of <i>Va’et-ḥannan</i>.<o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 1
         assert verse == [6]
@@ -122,12 +124,12 @@ font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Time
 color:black;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
 HE">[15]</span></span><!--[endif]--></span></span></a><o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 1
         assert verse == [16]
 
-    def test_chapter_6_verse_9(self):
+    def test_chapter_6_verse_9_en(self):
         # 6:9
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-left:.5in;text-align:justify;text-indent:3.0pt;
 line-height:normal"><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
@@ -143,12 +145,12 @@ mso-fareast-font-family:&quot;Times New Roman&quot;;color:#0070C0">(Proverbs 7:3
 &quot;Times New Roman&quot;;color:black;mso-themecolor:text1">[both are metaphorical
 writing].<o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 6
         assert verse == [9]
 
-    def test_chapter_7_verse_1(self):
+    def test_chapter_7_verse_1_en(self):
         # 7:1:
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-left:.5in;text-align:justify"><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
 mso-fareast-font-family:&quot;Times New Roman&quot;;color:red">7:1: When… brings you—</span><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
@@ -159,12 +161,12 @@ order to preserve the knowledge that comprises the flourishing of the soul, so
 he guides them via warnings against destructive things that can cause the
 removal of His knowledge [from them]. <o:p></o:p></span></p>""", 'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 7
         assert verse == [1]
 
-    def test_chapter_18_verse_12(self):
+    def test_chapter_18_verse_12_en(self):
         """ 18:12-3"""
 
         html = BeautifulSoup("""<p class="MsoNormal" style="margin-left:.5in;text-align:justify"><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;
@@ -172,10 +174,228 @@ color:red">18:12–3 And because of these abominations—</span><span style="fon
 people of the land were punished. Consequently, he juxtaposes, <i><span style="color:#FFC000">You shall be at peace with Adonai your God.<span lang="HE" dir="RTL"><o:p></o:p></span></span></i></span></p>""",
                              'html5lib')
 
-        chapter, verse = get_chapter_verse(html)
+        chapter, verse = get_chapter_verse_en(html)
 
         assert chapter == 18
         assert verse == list(range(3, 13))
+
+    def test_chapter_1_verse_1_he(self):
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:460.7pt"><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt">1:1</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt">אלה הדברים</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span><span style="mso-spacerun:yes">&nbsp;</span></span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;position:relative;
+top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>- כאשר היו ישראל עתידים
+לעבור את הירדן</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;position:relative;
+top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span><span style="mso-spacerun:yes">&nbsp;</span></span><span lang="HE" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:
+2.0pt">להחלק איש בנחלתו, והיו צריכים התראה ואזהרה לשמור התורה, כאשר בזמן נסוע
+מסיני להכנס בארץ &lt;התרה בהם&gt;, וכאשר אירעו להם ענינים ונמנעו מלהכנס, אז כון
+עתה לסדר גם אותם {הענינים} &lt;עניני המניעות שמסבתם נשנו עתה עניני האזהרות
+וההתראות&gt;.<a style="mso-footnote-id:ftn1" href="#_ftn1" name="_ftnref1" title=""><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character:
+footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:12.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,serif;
+mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;position:
+relative;top:-2.0pt;mso-text-raise:2.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+EN-US;mso-bidi-language:HE">[1]</span></span><!--[endif]--></span></span></a><span style="mso-spacerun:yes">&nbsp;</span>על כן החל במלת <span style="color:#FFC000">דברים</span>,
+לכלול עניני המצות ודברי תוכחה. ויהיה טעם <span style="color:#FFC000">אלה הדברים
+אשר דבר משה אל כל ישראל בעבר הירדן</span> מה שאירע להם <span style="color:#FFC000">במדבר
+בערבה מול סוף </span>,כלל מה שעבר עליהם בנסעם מסיני עד בואם לקדש ברנע:<o:p></o:p></span></p>""",
+                             'html5lib')
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 1
+        assert verse == [1]
+
+        # still 1:1
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:460.7pt"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt">1:1 במדבר בערבה </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;position:
+relative;top:-2.0pt;mso-text-raise:2.0pt">- כנזכר <span style="color:#FFC000">בארץ
+ערבה וְ</span></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt;mso-ansi-language:
+X-NONE">שׁ</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt">וּחָה </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:#0070C0;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt">(ירמיהו ב:ו)</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:black;
+mso-themecolor:text1;position:relative;top:-2.0pt;mso-text-raise:2.0pt">: <o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 1
+        assert verse == [1]
+
+    html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:460.7pt"><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;
+color:black;mso-themecolor:text1;position:relative;top:-2.0pt;mso-text-raise:
+2.0pt'>ו</span><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;
+color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt'>לבן</span><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;color:red;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt'><span style="mso-spacerun:yes"> </span></span><span lang="HE" style='font-size:12.0pt;
+font-family:"Times New Roman",serif;color:black;mso-themecolor:text1;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt'>ו</span><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt'>תפל</span><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;color:red;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt'><span style="mso-spacerun:yes"> </span></span><span lang="HE" style='font-size:12.0pt;
+font-family:"Times New Roman",serif;color:black;mso-themecolor:text1;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt'>ו</span><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt'>די זהב </span><span lang="HE" style='font-size:12.0pt;font-family:"Times New Roman",serif;position:relative;
+top:-2.0pt;mso-text-raise:2.0pt'>לא נזכרו במסעים גם לא נזכרו במקום אחר, ואולם
+אחר שאומר <span style="color:#FFC000">בין ובין </span>אין הטעם שעברו באותם
+המקומות עצמם שנזכרו בשמות אלו. <o:p></o:p></span></p>""", 'html5lib')
+
+    chapter, verse = get_chapter_verse_he(html)
+
+    assert chapter is None
+    assert verse is None
+
+    def test_chapter_1_verse_3_he(self):
+        # 1:3
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:460.7pt"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt">1:3 <span style="color:red">ויהי
+בארבעים שנה </span>- מדרך סברא אמרו חכמינו ע"ה כי בכלל חדש שבט נאמר הספר,
+ובראש חדש אדר מת משה, כאשר מת אהרן בראש חדש אב. ועל דרך דוחק יִשְּׁבוּ <span style="color:#FFC000">ימי בכי אבל משה </span><span style="color:#0070C0">(דברים
+לד:ח)</span><span style="color:#FFC000"> </span>עד שעלו מן הירדן בעשור לחדש, עם
+הימים הנאמרים ביהושע. ודעת בעלי הקבלה שבשבעה באדר מת משה, אם בדרך סברא על פי עיון
+הכתוב יקשה הענין.<o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 1
+        assert verse == [3]
+
+    def test_chapter_3_verse_10_he(self):
+        # 3:10
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:460.7pt"><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt">:10</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>3</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span><span style="mso-spacerun:yes">&nbsp;</span></span><span lang="HE" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;
+mso-text-raise:2.0pt">כל ערי המישור</span><span lang="HE" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:
+2.0pt"><span style="mso-spacerun:yes">&nbsp;</span>- נקשר למאמר <span style="color:#FFC000">ונקח בעת ההיא </span><span style="color:#0070C0">(דברים
+ג:ח)</span>: <o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 3
+        assert verse == [10]
+
+    def test_chapter_1_verse_15_he(self):
+        # 1:15-16
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:326.0pt 460.7pt"><span dir="LTR"></span><span dir="LTR" style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;
+top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span>-16</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>1:15 שרי
+אלפים </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt">- נתבאר בו הרצון, שאין הטעם
+בכל אלף שר. אמנם בעבור שעניני הדין למינים רבים, מהם דיני נפשות, ומהם דיני מומים,
+ומהם דיני מלקות, ומהם דיני ממונות, כפי חמר הדין היו מתמנים שופטים בדין, <span style="color:#FFC000">בין איש ובין אחיו ובין גרו</span>:<o:p></o:p></span></p>
+""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 1
+        assert verse == [15, 16]
+
+    def test_chapter_1_verse_6_he(self):
+        # 1:6
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:326.0pt 460.7pt"><span lang="HE" style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;mso-text-raise:
+2.0pt">1:6 ה' אלהינו דבר אלינו בחורב - </span><span lang="HE" style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;
+mso-text-raise:2.0pt">החל לבאר הסבה אשר היו מצטרכים מצוה ואזהרה בעבור הכנסם
+לארץ, ומה גרם להם לתקן שרי אלפים ושרי מאות, ומפני איזה ענין נמנעו ונמשך הזמן עד
+שנת הארבעים עד שהצרכו בבאור התורה, בעבור הגזרה שנגזרה למשה ע"ה כאשר נרמז
+בפרשת ואתחנן:<o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 1
+        assert verse == [6]
+
+    def test_chapter_1_verse_29_he(self):
+        # 1:29-31
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:326.0pt 460.7pt"><span dir="LTR"></span><span dir="LTR" style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;
+top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span>1</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>1:29-3 ואומר
+אליכם לא תערצון ולא תיראון מהם, ה' אלהיכם ההולך לפניכם </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;position:relative;
+top:-2.0pt;mso-text-raise:2.0pt">- הטעם כאשר על דרך פלא עשה מה שעשה במצרים והספיק
+לך במדבר <span style="color:#FFC000">עד בואכם עד המקום הזה</span>, כן יש לו כח
+להלחם עם שבעה עממים:</span><span dir="LTR" style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 1
+        assert verse == [29, 30, 31]
+
+    def test_chapter_3_verse_4_he(self):
+        # 3:4-5
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+tab-stops:460.7pt"><span dir="LTR"></span><span dir="LTR" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;
+mso-text-raise:2.0pt"><span dir="LTR"></span>-5</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>3:4 ששים
+עיר חבל ארגוב</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span style="mso-spacerun:yes">&nbsp;</span>- יש מפרשים הטעם גורל, מלשון <span style="color:#FFC000;mso-themecolor:accent4">חבלים</span> <span style="color:#0070C0">(תהלים טז:ו)</span>, וארגוב שם איש שישב המקום. </span><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;position:
+relative;top:-2.0pt;mso-text-raise:2.0pt"><o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 3
+        assert verse == [4, 5]
+
+    def test_chapter_24_verse_3_he(self):
+        # 24:3
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red">24:3
+ונתן</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif">
+<span style="color:red">בידה</span> - הטעם ברשותה. <o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 24
+        assert verse == [3]
+
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif">והנה האיש
+מגרש ברצונו והאשה מגורשת בעל כרחה, ואולם יש גרושין שהדבר בהפך כאשר נתבאר בספר
+מצות: <o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter is None
+        assert verse is None
+
+    def test_chapter_24_verse_2_4_he(self):
+        # 24:2-4
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red">4</span><span dir="LTR"></span><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red"><span dir="LTR"></span>-</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red"><span dir="RTL"></span>24:2 והלכה והיתה לאיש אחר</span><span lang="HE" style="font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;,serif"> - כולל את המאורשה, הואיל ולשון
+היות כולל את האירושין כאשר נאמר<span style="color:#FFC000"> ושנאה האיש האחרון</span><span style="color:red"> </span><span style="color:#FFC000">וכתב לה ספר כריתות.</span>
+ואם אמר <span style="color:#FFC000">אחרי אשר הוטמאה</span>, הוא בעבור שבאה
+ברשות אחר: <o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 24
+        assert verse == [2, 3, 4]
+
+    def test_chapter_24_verse_24_he(self):
+        # 24:24
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><b><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-ascii-theme-font:
+major-bidi;mso-hansi-theme-font:major-bidi">24:24 לֹֽא־יוּכַ֣ל בַּעְלָ֣הּ
+הָֽרִאשׁ֣וֹן אֲשֶֽׁר־שִׁ֠לְּחָהּ לָשׁ֨וּב לְקַחְתָּ֜הּ לִֽהְי֧וֹת ל֣וֹ
+לְאִשָּׁ֗ה אַֽחֲרֵי֙ אֲשֶׁ֣ר הֻטַּמָּ֔אָה כִּֽי־תוֹעֵבָ֥ה הִ֖וא לִפְנֵ֣י
+יְהוָ֑ה וְלֹ֤א תַֽחֲטִיא֙ אֶת־הָאָ֔רֶץ אֲשֶׁר֙ יְהוָ֣ה אֱלֹהֶ֔יךָ נֹתֵ֥ן לְךָ֖
+נַֽחֲלָֽה׃ </span></b><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif"><o:p></o:p></span></p>""",
+                             'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 24
+        assert verse == [24]
 
 
 class TestFootNoteIndex:

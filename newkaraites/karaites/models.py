@@ -61,6 +61,12 @@ class Organization(models.Model):
                 self.verses
                 ]
 
+    @mark_safe
+    def chapter_show(self):
+        return f"""<p style="text-align:right">{self.chapters}</p>"""
+
+    chapter_show.short_description = "Chapters"
+
     @staticmethod
     def get_list_of_books():
         """ Return list of book """
@@ -267,6 +273,10 @@ class Comment(models.Model):
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
         if self.pk is None:
+            # print("8" * 90)
+            # print(self.book, self.chapter, self.verse)
+            # print("8" * 90)
+
             book_text = BookText.objects.get(book=self.book,
                                              chapter=self.chapter,
                                              verse=self.verse)
@@ -381,8 +391,8 @@ class BookText(models.Model):
             book_as_array = BookAsArray()
         book_as_array.book = self.book
         book_as_array.book_text = [self.text_en,
-                                   self.text_he,
                                    self.comments_count_en,
+                                   self.text_he,
                                    self.comments_count_he]
         book_as_array.save()
 
@@ -405,7 +415,7 @@ class BookAsArray(models.Model):
     chapter = models.IntegerField(default=0)
 
     # text english, text hebrew, comment_count. Verse is position in the array
-    book_text = ArrayField(ArrayField(models.TextField(), size=4))
+    book_text = ArrayField(ArrayField(models.TextField(), size=4), default=list)
 
     def to_json(self):
 
