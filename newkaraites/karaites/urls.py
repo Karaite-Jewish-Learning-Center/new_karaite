@@ -12,7 +12,7 @@ urlpatterns = [
     path('books-list/', BooksPresentation.as_view(), name='books_list'),
 
     # books
-    path('get-book/<str:book>/<str:chapter>/<str:verse>/<str:stopverse>/', GetBookChapterVerses.as_view(), name='get_book'),
+    path('get-book/<str:book>/<str:chapter>/<str:verse>/<str:stop_verse>/', GetBookChapterVerses.as_view(), name='get_book'),
     path('get-book/<str:book>/<str:chapter>/<str:verse>/', GetBookChapterVerses.as_view(), name='get_book'),
     path('get-book/<str:book>/<str:chapter>/', GetBookChapterVerses.as_view(), name='get_book'),
 

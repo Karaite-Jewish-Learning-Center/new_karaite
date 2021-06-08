@@ -4,11 +4,11 @@ from django.core.management.base import BaseCommand
 from ...models import (Organization,
                        Author,
                        OtherBooks,
-                       Comment)
+                       Comment,
+                       CommentTmp)
 from ...html_utils import (get_chapter_verse_en,
                            get_chapter_verse_he,
                            get_foot_note_index)
-from ...comments_map import map_docx_to_karaites_html
 
 
 class Command(BaseCommand):
@@ -78,72 +78,67 @@ class Command(BaseCommand):
         verse_number = 1
 
         # English
-        # for child in divs_en[0].find_all("p", class_="MsoNormal"):
-        #
-        #     # find foot notes
-        #     foot_note_list_en = self.get_a_tag_in_child(child, foot_notes)
-        #
-        #     same_chapter, same_verses = get_chapter_verse_en(child)
-        #
-        #     sys.stdout.write(
-        #         f"\33[KImport English comments from {book_title}, chapter:{chapter_number} verse {verse_number}\r")
-        #
-        #     if same_chapter is not None and same_verses is not None:
-        #
-        #         chapter_number = same_chapter
-        #         verse_number = same_verses[0]
-        #         comment = Comment()
-        #         comment.book = organization
-        #         comment.chapter = chapter_number
-        #         comment.verse = verse_number
-        #         comment.comment_en = f"""{child}"""
-        #         comment.comment_he = ""
-        #         comment.comment_author = author
-        #         comment.source_book = source_book
-        #         comment.foot_notes_en = foot_note_list_en
-        #         comment.foot_notes_he = []
-        #         comment.save()
-        #     else:
-        #         comment = Comment.objects.filter(book=organization, chapter=chapter_number,
-        #                                          verse=verse_number).last()
-        #         comment.comment_en += f"""{child}"""
-        #         comment.foot_notes_en += foot_note_list_en
-        #         comment.save()
+        for child in divs_en[0].find_all("p", class_="MsoNormal"):
+
+            # find foot notes
+            foot_note_list_en = self.get_a_tag_in_child(child, foot_notes)
+
+            same_chapter, same_verses = get_chapter_verse_en(child)
+
+            sys.stdout.write(
+                f"\33[K Import English comments from {book_title}, chapter:{chapter_number} verse {verse_number}\r")
+
+            if same_chapter is not None and same_verses is not None:
+
+                chapter_number = same_chapter
+                verse_number = same_verses[0]
+                comment = Comment()
+                comment.book = organization
+                comment.chapter = chapter_number
+                comment.verse = verse_number
+                comment.comment_en = f"""{child}"""
+                comment.comment_he = ""
+                comment.comment_author = author
+                comment.source_book = source_book
+                comment.foot_notes_en = foot_note_list_en
+                comment.foot_notes_he = []
+                comment.save()
+            else:
+                comment = Comment.objects.filter(book=organization, chapter=chapter_number,
+                                                 verse=verse_number).last()
+                comment.comment_en += f"""{child}"""
+                comment.foot_notes_en += foot_note_list_en
+                comment.save()
 
         chapter_number = 1
         verse_number = 1
         # hebrew
         for child in divs_he[0].find_all("p", class_="MsoNormal"):
-            if str(child).find("color:red") < 0:
+            # title
+            if child.select_one('.MsoNormal b:first-child') is not None:
                 continue
-
-            foot_note_list_he = self.get_a_tag_in_child(child, foot_notes_he)
+            if child.attrs.get('align', None) == 'center':
+                continue
 
             sys.stdout.write(
-                f"\33[KImport Hebrew comments from {book_title}, chapter:{chapter_number} verse {verse_number}\r")
-
-            # if chapter_number == 24 and verse_number == 3:
-            #     print("*" * 90)
-            #     print(child)
-            #     print("*" * 90)
-            #     print(get_chapter_verse_he(child))
-            #     print("*" * 90)
-            #     input('>')
-            #     sys.exit()
+                f"\33[K Import Hebrew comments from {book_title}, chapter:{chapter_number} verse:{verse_number}\r")
 
             same_chapter, same_verses = get_chapter_verse_he(child)
-            # black titles
-            if str(child).find("color:red") < 0 and same_chapter is None and same_verses is None:
-                continue
+            foot_note_list_he = self.get_a_tag_in_child(child, foot_notes_he)
 
             # typo
             if same_chapter == 24 and same_verses == [24]:
                 same_verses = [2, 4]
 
             if same_chapter is not None and same_verses is not None:
+
+                # possible title
+                if str(child).find("color:red") < 0:
+                    continue
+
                 chapter_number = same_chapter
                 verse_number = same_verses[0]
-                comment = Comment()
+                comment = CommentTmp()
                 comment.book = organization
                 comment.chapter = chapter_number
                 comment.verse = verse_number
@@ -153,49 +148,72 @@ class Command(BaseCommand):
                 comment.foot_notes_he = foot_note_list_he
                 comment.save()
             else:
-                comment = Comment.objects.filter(book=organization, chapter=chapter_number,
-                                                 verse=verse_number).last()
+                comment = CommentTmp.objects.filter(book=organization, chapter=chapter_number,
+                                                    verse=verse_number).last()
                 comment.comment_he += f"""{child}"""
                 comment.foot_notes_he += foot_note_list_he
                 comment.save()
-        # Add extra comments, those that are repeated in certain verses
-        # 1:2-3 => comment is repeated in verse 2 and 3
-        #
-        # sys.stdout.write(f"\33[K\r")
-        #
-        # en = divs_en[0].find_all("p", class_="MsoNormal")
-        # he = divs_he[0].find_all("p", class_="MsoNormal")
-        # i = 0
-        # for language in [en, he]:
-        #     for child in language:
-        #         if i == 0:
-        #             same_chapter, same_verses = get_chapter_verse_en(child)
-        #         else:
-        #             same_chapter, same_verses = get_chapter_verse_he(child)
-        #         # interested in 12:1-2 ...
-        #         if same_verses is not None and len(same_verses) > 1:
-        #             for verse in same_verses[1:]:
-        #                 sys.stdout.write(f"\33[KAdding extra comments chapter:{same_chapter} verse {verse}\r")
-        #                 if i == 0:
-        #                     comment_query = Comment.objects.filter(comment_en__startswith=f"""{child}""")
-        #                 else:
-        #                     comment_query = Comment.objects.filter(comment_he__startswith=f"""{child}""")
-        #
-        #                 if comment_query.count() > 0:
-        #                     comment = comment_query[0]
-        #                     add = Comment()
-        #                     add.book = comment.book
-        #                     add.chapter = comment.chapter
-        #                     add.verse = verse
-        #                     add.comment_en = comment.comment_en
-        #                     add.comment_he = comment.comment_he
-        #                     add.comment_author = comment.comment_author
-        #                     add.source_book = comment.source_book
-        #                     add.foot_notes_en = comment.foot_notes_en
-        #                     add.foot_notes_he = comment.foot_notes_he
-        #                     add.save()
-        #     i += 1
-        # sys.stdout.write(f"\33[K\r")
-        # print()
-        # sys.stdout.write('Please run ./manage.py comments_map_html')
-        # print()
+
+        # # Add extra comments, those that are repeated in certain verses
+        # # 1:2-3 => comment is repeated in verse 2 and 3
+        # #
+        sys.stdout.write(f"\33[K\r")
+
+        en = divs_en[0].find_all("p", class_="MsoNormal")
+        he = divs_he[0].find_all("p", class_="MsoNormal")
+        i = 0
+        for language in [en, he]:
+            for child in language:
+                if i == 0:
+                    same_chapter, same_verses = get_chapter_verse_en(child)
+                else:
+                    same_chapter, same_verses = get_chapter_verse_he(child)
+                # interested in 12:1-2 ...
+                if same_verses is not None and len(same_verses) > 1:
+                    for verse in same_verses[1:]:
+                        if i == 0:
+                            sys.stdout.write(
+                                f"\33[K Adding English extra comments chapter:{same_chapter} verse:{verse}\r")
+                            comment_query = Comment.objects.filter(comment_en__startswith=f"""{child}""")
+                        else:
+                            sys.stdout.write(
+                                f"\33[K Adding Hebrew extra comments chapter:{same_chapter} verse:{verse}\r")
+                            comment_query = CommentTmp.objects.filter(comment_he__startswith=f"""{child}""")
+
+                        if comment_query.count() > 0:
+                            comment = comment_query[0]
+                            if i == 0:
+                                add = Comment()
+                            else:
+                                add = CommentTmp()
+
+                            add.book = comment.book
+                            add.chapter = comment.chapter
+                            add.verse = verse
+                            add.comment_en = comment.comment_en
+                            add.comment_he = comment.comment_he
+                            add.comment_author = comment.comment_author
+                            add.source_book = comment.source_book
+                            add.foot_notes_en = comment.foot_notes_en
+                            add.foot_notes_he = comment.foot_notes_he
+                            add.save()
+            i += 1
+        sys.stdout.write(f"\33[K\r")
+
+        # merge commentTmp into  comments
+        for chapter in range(1, organization.chapters + 1):
+            for verse in range(1, organization.verses[chapter - 1] + 1):
+
+                sys.stdout.write(f"\33[K Merging English and  Hebrew comments chapter:{chapter} verse:{verse}\r")
+
+                comm = Comment.objects.filter(book=organization, chapter=chapter, verse=verse)
+                temp = CommentTmp.objects.filter(book=organization, chapter=chapter, verse=verse)
+
+                for comment, tmp_comment in zip(comm, temp):
+                    comment.comment_he = tmp_comment.comment_he
+                    comment.foot_notes_he = tmp_comment.foot_notes_he
+                    comment.save()
+
+        print()
+        sys.stdout.write('Please run ./manage.py comments_map_html')
+        print()

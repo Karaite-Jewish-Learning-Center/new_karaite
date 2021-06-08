@@ -2,8 +2,18 @@ import re
 from bs4 import BeautifulSoup
 
 
+def full_range_verse(pattern):
+    # 5:19-5:23, must have same chapter
+    parts = pattern.group().strip().split('-')
+    start_chapter, verse = parts[0].split(':')
+    start = int(verse)
+    end_chapter, verse = parts[1].split(':')
+    end = int(verse)
+    verses = list(range(start, end + 1))
+    return int(end_chapter), verses
+
+
 def range_verse(pattern):
-    # print(pattern.group(), pattern.start(), 'first')
     parts = pattern.group().strip().split(':')
 
     chapter = int(parts[0])
@@ -16,9 +26,9 @@ def range_verse(pattern):
 
 def possible_range(pattern=None, group=None):
     if pattern is not None:
-        chapter, possible = pattern.group().strip().split(":")
+        chapter, possible = pattern.group().strip().replace('>', '').replace('<', '').split(":")
     else:
-        chapter, possible = group.strip().split(":")
+        chapter, possible = group.strip().replace('>', '').replace('<', '').split(":")
 
     char = None
     if possible.find('–') > 0:
@@ -38,7 +48,7 @@ def possible_range(pattern=None, group=None):
 
 
 def simple_range(pattern):
-    chapter, verse = pattern.strip().split(":")
+    chapter, verse = pattern.strip().replace('>', '').replace('<', '').split(":")
     return int(chapter), [int(verse)]
 
 
@@ -80,7 +90,12 @@ def get_chapter_verse_he(html):
         if pattern is not None:
             return range_verse(pattern)
 
-        # 11:9-11 -> 11:9 , 11:10, 11:11, 1:29-31
+        # 5:19-5:23
+        pattern = re.search('[0-9]+:[0-9]+-[0-9]+:[0-9]+', text)
+        if pattern is not None:
+            return full_range_verse(pattern)
+
+        # 11:9-11 -> 11:9 , 11:10, 11:11, 1:29-31]
         pattern = re.search('[0-9]+:[0-9,-]+', text)
         if pattern is not None:
             second_pattern = re.search('>-?[0-9]+<', text)
@@ -94,29 +109,44 @@ def get_chapter_verse_he(html):
                 return possible_range(pattern=None, group=verse_range)
             else:
                 return possible_range(pattern=pattern)
-        pattern = re.search('>[0-9]+<', text)
-        if pattern is not None:
-            second_pattern = re.search('>:[0-9]+<', text)
-            if second_pattern is not None:
-                return simple_range((pattern.group() + second_pattern.group()).replace('>', '').replace('<', ''))
 
+        pattern = re.search('>[0-9]+', text)
+        if pattern is not None:
+            # :24-25
+            second_pattern = re.search('>:[0-9]+-[0-9]+<', text)
+            if second_pattern is not None:
+                second = second_pattern.group()
+                first = pattern.group()
+                if second.find('-') > 0:
+                    return possible_range(pattern=None, group=first + second)
+                else:
+                    return simple_range(first + second)
+            else:
+                # 3:10
+                second_pattern = re.search('>:[0-9]+<', text)
+                if second_pattern is not None:
+                    first = pattern.group() + second_pattern.group()
+                    return simple_range(first)
     return chapter, verse
 
-#
-# html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
-# tab-stops:460.7pt"><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
-# color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt">:10</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
-# color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>3</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
-# color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span><span style="mso-spacerun:yes">&nbsp;</span></span><span lang="HE" style="font-size:12.0pt;
-# font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;
-# mso-text-raise:2.0pt">כל ערי המישור</span><span lang="HE" style="font-size:12.0pt;
-# font-family:&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:
-# 2.0pt"><span style="mso-spacerun:yes">&nbsp;</span>- נקשר למאמר <span style="color:#FFC000">ונקח בעת ההיא </span><span style="color:#0070C0">(דברים
-# ג:ח)</span>: <o:p></o:p></span></p>""",
+
+# html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red">5:19-5:23
+# ותקרבון</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;
+# font-family:&quot;Times New Roman&quot;,serif;color:red"><span dir="LTR"></span> </span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+# color:red"><span dir="RTL"></span>{ותעמדון על כן נאמר}&lt;... ותאמרו&gt;<a style="mso-footnote-id:ftn22" href="#_ftn22" name="_ftnref22" title=""><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character:footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:12.0pt;line-height:115%;
+# font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
+# minor-latin;color:red;mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+# mso-bidi-language:HE">[22]</span></span><!--[endif]--></span></span></a> הן הראנו
+# ה' אלהינו את כבודו ואת גדלו ואת קולו שמענו מתוך האש... ועתה למה נמות </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif">- כי קודם
+# לכן אמרו <span style="color:#FFC000">דבר עתה עמנו ונשמעה</span> <span style="color:#0070C0">(שמות כ:יט)</span>,<span style="color:#0070C0"> </span>ועשה
+# כן, הוא הנאמר <span style="color:#FFC000">אנכי עומד בין ה' וביניכם</span> <span style="color:#0070C0">(דברים ה:ה)</span>, וכאשר שמעו את הקול וקצרה רוחם ומעטה
+# נשמתם, ולא עצרו כח מן המעמד וקולות המחרידות, אמרו עוד <span style="color:#FFC000">ועתה
+# למה נמות כי תאכלנו האש הגדולה הזאת</span>. על כן אמרו <span style="color:#FFC000">קרב
+# אתה ושמע</span>, כי מעתה סר הספק בהשפעת הנבואה, כאמרם <span style="color:#FFC000">היום
+# הזה ראינו כי ידבר אלהים את האדם וחי: <o:p></o:p></span></span></p>""""",
 #                      'html5lib')
 #
 # print(get_chapter_verse_he(html))
-
 
 def get_foot_note_index(html):
     """ Parse foot note number

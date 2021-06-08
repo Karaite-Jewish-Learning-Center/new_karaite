@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useReducer} from "react";
 import {useState, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -72,7 +72,8 @@ export default function BookText({book}) {
     const COM_VERSE = 1
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
-    const [bookData, setBookData] = useState([]);
+    const [bookData, setBookData] = useState();
+    const [bookChapters, setBookChapters] = useState()
     const [gridsize, setGridSize] = useState([12, 1])
     const [comments, setComments] = useState([])
     const [bookChapterVerse, setBookChapterVerse] = useState([book, 1, 1])
@@ -136,14 +137,16 @@ export default function BookText({book}) {
 
         axios.get(bookChapterUrl + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
             .then((response) => {
-                setBookData(response.data);
+                setBookData(response.data.book);
+                setBookChapters(response.data.chapters)
+                debugger
                 setIsLoaded(true);
                 ReactTooltip.rebuild()
                 scroll()
             })
             .catch(error => {
                 setError(error)
-                console.log(`Error on ${bookChapterUrl}: ${error.response.data.message}`)
+                console.log(`Error on ${bookChapterUrl}: ${error.response}`)
             })
     }, [bookChapterVerse])
 
@@ -152,7 +155,8 @@ export default function BookText({book}) {
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
-        const {chapters} = bookData
+        const {chapters} = bookChapters
+        debugger
         const [book, chapter, verse] = bookChapterVerse
 
         return (
@@ -169,7 +173,7 @@ export default function BookText({book}) {
                     <Grid item xs={gridsize[0]}>
                         <Table className="scroll_table">
                             <TableBody>
-                                {chapters.map((chapter_text, c) => (
+                                {[].map((chapter_text, c) => (
                                     <>
                                         {chapter_text.text.map((verse, v) => (
                                             <TableRow id={`inner-1-${v + 1}`} key={`inner-${c}-${v}`}

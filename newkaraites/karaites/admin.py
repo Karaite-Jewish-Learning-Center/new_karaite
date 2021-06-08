@@ -2,8 +2,10 @@ from django.contrib import admin
 from .models import (Organization,
                      Author,
                      Comment,
+                     CommentTmp,
                      OtherBooks,
-                     BookText)
+                     BookText,
+                     BookAsArray)
 from .admin_forms import AdminCommentForm
 
 
@@ -84,6 +86,34 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment, CommentAdmin)
+
+
+class CommentTmpAdmin(CommentAdmin):
+    def get_actions(self, request):
+        """ remove default delete"""
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+
+    def delete_model(self, request, obj):
+        """need to call model delete to keep comment_count up to date"""
+        for instance in obj.all():
+            CommentTmp.objects.get(pk=instance.pk).delete()
+
+    delete_model.short_description = 'Delete selected'
+
+
+admin.site.register(CommentTmp, CommentTmpAdmin)
+
+
+class BookAsArrayAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display = ('book', 'chapter', 'text')
+    list_filter = ('book', 'chapter')
+
+
+admin.site.register(BookAsArray, BookAsArrayAdmin)
 
 
 class BookTextAdmin(admin.ModelAdmin):

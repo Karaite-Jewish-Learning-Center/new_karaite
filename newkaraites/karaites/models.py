@@ -192,6 +192,8 @@ class Comment(models.Model):
                            verbose_name=_("Comment Hebrew"))
 
     comment_author = models.ForeignKey(Author,
+                                       null=True,
+                                       blank=True,
                                        on_delete=models.DO_NOTHING,
                                        verbose_name=_('Author'))
 
@@ -273,13 +275,10 @@ class Comment(models.Model):
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
         if self.pk is None:
-            # print("8" * 90)
-            # print(self.book, self.chapter, self.verse)
-            # print("8" * 90)
-
             book_text = BookText.objects.get(book=self.book,
                                              chapter=self.chapter,
                                              verse=self.verse)
+
             book_text.comments_count_en += 1
             book_text.save()
 
@@ -308,6 +307,152 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = "Commentaries"
+        ordering = ('book', 'chapter', 'verse', 'comment_number')
+
+
+class CommentTmp(models.Model):
+    """ This can safely be delete after all comment are
+        load.
+    """
+    book = models.ForeignKey(Organization,
+                             null=True,
+                             blank=True,
+                             on_delete=models.CASCADE,
+                             verbose_name=_('Comments on Book'))
+
+    chapter = models.IntegerField(default=1,
+                                  verbose_name=_("Chapter"))
+
+    verse = models.IntegerField(default=1,
+                                verbose_name=_("Verse"))
+
+    comment_number = models.SmallIntegerField(default=0,
+                                              verbose_name=_("Comment Number"))
+
+    comment_en = HTMLField(null=True,
+                           blank=True,
+                           verbose_name=_("Comment English"))
+
+    comment_he = HTMLField(null=True,
+                           blank=True,
+                           verbose_name=_("Comment Hebrew"))
+
+    comment_author = models.ForeignKey(Author,
+                                       null=True,
+                                       blank=True,
+                                       on_delete=models.DO_NOTHING,
+                                       verbose_name=_('Author'))
+
+    source_book = models.ForeignKey(OtherBooks,
+                                    null=True,
+                                    blank=True,
+                                    on_delete=models.CASCADE,
+                                    verbose_name=_('Source book'))
+
+    foot_notes_en = ArrayField(models.TextField(), default=list, null=True, blank=True)
+
+    foot_notes_he = ArrayField(models.TextField(), default=list, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.comment_author} - {self.book}"
+
+    def to_json_book_details(self):
+        """ We dont need to send book details with every comment"""
+        return {'id': self.book.id,
+                'book_title_en': self.book.book_title_en,
+                'book_title_he': self.book.book_title_he,
+                'author': self.comment_author.name,
+                'comment_count_en': self.comment_author.comments_count_en,
+                'comment_count_he': self.comment_author.comments_count_he
+                }
+
+    def to_json(self):
+        """ Serialize instance to json"""
+        return {'id': self.book.id,
+                'comment_en': self.comment_en,
+                'comment_he': self.comment_he,
+                }
+
+    @staticmethod
+    def to_json_comments(book=None, chapter=None, verse=None):
+        """ Serialize several instance to json """
+        result = []
+        if chapter is None and verse is None:
+            query = Comment.objects.filter(book=book)
+        elif verse is None:
+            query = Comment.objects.filter(book=book, chapter=chapter)
+        else:
+            query = Comment.objects.filter(book=book, chapter=chapter, verse=verse)
+
+        for comment in query:
+            result.append(comment.to_json())
+        return result
+
+    @mark_safe
+    def english(self):
+        return self.comment_en
+
+    english.short_description = "English Comment"
+
+    @mark_safe
+    def hebrew(self):
+        return self.comment_he
+
+    hebrew.short_description = "Hebrew Comment"
+
+    @mark_safe
+    def foot_note_en_admin(self):
+        html = ''
+        for foot_note in self.foot_notes_en:
+            html += f'<p>{foot_note}</p>'
+        return html
+
+    foot_note_en_admin.short_description = "Foot notes EN"
+
+    @mark_safe
+    def foot_note_he_admin(self):
+        html = ''
+        for foot_note in self.foot_notes_he:
+            html += f'<p>{foot_note}</p>'
+        return html
+
+    foot_note_he_admin.short_description = "Foot notes HE"
+
+    # def save(self, *args, **kwargs):
+    #     """ Update books comment count if new comment"""
+    #     if self.pk is None:
+    #
+    #         book_text = BookText.objects.get(book=self.book,
+    #                                          chapter=self.chapter,
+    #                                          verse=self.verse)
+    #         book_text.comments_count_en += 1
+    #         book_text.save()
+    #
+    #         self.comment_author.comments_count_en += 1
+    #         self.comment_author.save()
+    #
+    #         self.comment_number = CommentTmp.objects.filter(book=self.book,
+    #                                                         chapter=self.chapter,
+    #                                                         verse=self.verse).count() + 1
+    #
+    #     super(CommentTmp, self).save(*args, **kwargs)
+
+    # def delete(self, using=None, keep_parents=False):
+    #     """ Update books comment count """
+    #     book_text = BookText.objects.get(book=self.book,
+    #                                      chapter=self.chapter,
+    #                                      verse=self.verse)
+    #
+    #     book_text.comments_count_en -= 1
+    #     book_text.save()
+    #
+    #     self.comment_author.comments_count_en -= 1
+    #     self.comment_author.save()
+    #
+    #     super(CommentTmp, self).delete(using=using, keep_parents=keep_parents)
+
+    class Meta:
+        verbose_name_plural = 'Comments Tmp'
         ordering = ('book', 'chapter', 'verse', 'comment_number')
 
 
@@ -377,28 +522,6 @@ class BookText(models.Model):
             result.append(book.to_json())
         return result
 
-    def save(self, *args, **kwargs):
-        """ Update bookText and BookAsArray version
-            0 -> text English
-            1 -> text Hebrew
-            2 -> comment_count_en
-            3 -> comment_count_he
-        """
-
-        try:
-            book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
-        except BookAsArray.DoesNotExist:
-            book_as_array = BookAsArray()
-        book_as_array.book = self.book
-        book_as_array.book_text = [self.text_en,
-                                   self.comments_count_en,
-                                   self.text_he,
-                                   self.comments_count_he]
-        book_as_array.save()
-
-        # save data to BookText
-        super(BookText, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name_plural = _("  Biblical Text")
         ordering = ('book', 'chapter', 'verse')
@@ -417,9 +540,18 @@ class BookAsArray(models.Model):
     # text english, text hebrew, comment_count. Verse is position in the array
     book_text = ArrayField(ArrayField(models.TextField(), size=4), default=list)
 
-    def to_json(self):
+    @mark_safe
+    def text(self):
+        html = ''
+        for text in self.book_text:
+            html += f'<div><span style="float:left;width:48%">{text[0]}</span>'
+            html += f'<span dir=\'rtl\' style="float:right;width:48%">{text[1]}</span></div>'
+            # html += f'<p>{text[2]}</p'
+        return html
+    text.short_description = "Book Text"
 
-        return {'chapter': self.chapter,
+    def to_json(self):
+        return {
                 'text': self.book_text
                 }
 

@@ -98,9 +98,9 @@ class Command(BaseCommand):
                 list_of_verses = []
                 for chapter in chapters:
                     book_as_array = []
+                    chapter_number = int(chapter) + 1
                     for verse in data_en['text'][chapter]:
                         verse_number = int(verse) + 1
-                        chapter_number = int(chapter) + 1
                         book_text, _ = BookText.objects.get_or_create(
                             book=organization,
                             chapter=chapter_number,

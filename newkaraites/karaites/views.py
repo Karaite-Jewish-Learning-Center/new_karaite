@@ -19,7 +19,7 @@ def book_chapter_verse(request, *args, **kwargs):
     book = kwargs.get('book', None)
     chapter = kwargs.get('chapter', None)
     verse = kwargs.get('verse', None)
-    stopverse = kwargs.get('stopverse', None)
+    stop_verse = kwargs.get('stop_verse', None)
     model = kwargs.get('model', None)
 
     if book is None:
@@ -61,7 +61,7 @@ def book_chapter_verse(request, *args, **kwargs):
         return JsonResponse({'comments': comments})
 
     if model == 'bookText':
-        book = BookText().to_json_books(book=book_title, chapter=chapter, verse=verse, stop_verse=stopverse)
+        book = BookText().to_json_books(book=book_title, chapter=chapter, verse=verse, stop_verse=stop_verse)
         return JsonResponse({'book_text': book})
 
     if model == 'bookAsArray':

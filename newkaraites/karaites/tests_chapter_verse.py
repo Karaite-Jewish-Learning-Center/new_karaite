@@ -2,12 +2,7 @@ from bs4 import BeautifulSoup
 from .html_utils import (get_chapter_verse_en,
                          get_chapter_verse_he,
                          get_foot_note_index)
-from .comments_map import map_docx_to_karaites_html
-from .html_sources import (html_1_1,
-                           html_1_1_simplified,
-                           html_1_1_2,
-                           html_1_1_2_simplified,
-                           html_he_1_1)
+from .html_sources import html_1_1
 
 
 class TestGetChapterVerse:
@@ -261,24 +256,6 @@ position:relative;top:-2.0pt;mso-text-raise:2.0pt">1:3 <span style="color:red">�
         assert chapter == 1
         assert verse == [3]
 
-    def test_chapter_3_verse_10_he(self):
-        # 3:10
-        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
-tab-stops:460.7pt"><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
-color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt">:10</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
-color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>3</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
-color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span><span style="mso-spacerun:yes">&nbsp;</span></span><span lang="HE" style="font-size:12.0pt;
-font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;
-mso-text-raise:2.0pt">כל ערי המישור</span><span lang="HE" style="font-size:12.0pt;
-font-family:&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:
-2.0pt"><span style="mso-spacerun:yes">&nbsp;</span>- נקשר למאמר <span style="color:#FFC000">ונקח בעת ההיא </span><span style="color:#0070C0">(דברים
-ג:ח)</span>: <o:p></o:p></span></p>""", 'html5lib')
-
-        chapter, verse = get_chapter_verse_he(html)
-
-        assert chapter == 3
-        assert verse == [10]
-
     def test_chapter_1_verse_15_he(self):
         # 1:15-16
         html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
@@ -325,7 +302,8 @@ position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>1:29-3
 top:-2.0pt;mso-text-raise:2.0pt">- הטעם כאשר על דרך פלא עשה מה שעשה במצרים והספיק
 לך במדבר <span style="color:#FFC000">עד בואכם עד המקום הזה</span>, כן יש לו כח
 להלחם עם שבעה עממים:</span><span dir="LTR" style="font-size:12.0pt;font-family:
-&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><o:p></o:p></span></p>""", 'html5lib')
+&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><o:p></o:p></span></p>""",
+                             'html5lib')
 
         chapter, verse = get_chapter_verse_he(html)
 
@@ -347,6 +325,96 @@ relative;top:-2.0pt;mso-text-raise:2.0pt"><o:p></o:p></span></p>""", 'html5lib')
 
         assert chapter == 3
         assert verse == [4, 5]
+
+    def test_chapter_3_verse_10_he(self):
+        # 3:10
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+    tab-stops:460.7pt"><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+    color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt">:10</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+    color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>3</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+    color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="LTR"></span><span style="mso-spacerun:yes">&nbsp;</span></span><span lang="HE" style="font-size:12.0pt;
+    font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;
+    mso-text-raise:2.0pt">כל ערי המישור</span><span lang="HE" style="font-size:12.0pt;
+    font-family:&quot;Times New Roman&quot;,serif;position:relative;top:-2.0pt;mso-text-raise:
+    2.0pt"><span style="mso-spacerun:yes">&nbsp;</span>- נקשר למאמר <span style="color:#FFC000">ונקח בעת ההיא </span><span style="color:#0070C0">(דברים
+    ג:ח)</span>: <o:p></o:p></span></p>""", 'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 3
+        assert verse == [10]
+
+    def test_chapter_3_verse_22_he(self):
+        # 3:22
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal;
+        tab-stops:460.7pt"><span dir="LTR"></span><span dir="LTR" style="font-size:12.0pt;
+        font-family:&quot;Times New Roman&quot;,serif;color:red;position:relative;top:-2.0pt;
+        mso-text-raise:2.0pt"><span dir="LTR"></span>:22</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red;
+        position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span dir="RTL"></span>3 כי ה'
+        אלהיכם</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+        position:relative;top:-2.0pt;mso-text-raise:2.0pt"><span style="mso-spacerun:yes">&nbsp;</span>- כאשר נצח אלו המלכים, כן ינצח למלכי כנען:<o:p></o:p></span></p>""",
+                             'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 3
+        assert verse == [22]
+
+    def test_chapter_3_verse_23_24_he(self):
+        # 3:23-24
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span dir="LTR"></span><span dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red"><span dir="LTR"></span>:23-24</span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red"><span dir="RTL"></span>3</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red"><span dir="LTR"></span> </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red">בעת ההיא</span><span lang="HE" style="font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;,serif"> - אחרי שנלחם עם סיחון ועוג ונסע מקדש, ונאמר לו: <span style="color:#FFC000">עלה אל הר העברים</span> <span style="color:#0070C0">(דברים
+לב:מט)</span>. וזהו טעם</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red"><span dir="LTR"></span> </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:#FFC000">ה' אלהים אתה החלות</span><span lang="HE" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif">, כאשר נאמר לו <span style="color:#FFC000;
+mso-themecolor:accent4">אחל תת פחדך ויראתך </span><span style="color:#0070C0">(דברים
+ב:כה)</span>: <o:p></o:p></span></p>""",
+                             'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 3
+        assert verse == [23, 24]
+
+    def test_chapter_4_verse_4_he(self):
+        # 4:4
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red">4:4
+</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif">והעיר
+בענין בעל פעור</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif"><span dir="LTR"></span>
+</span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:#FFC000">ואתם הדבקים<b> </b></span><span lang="HE" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif">כי ע״ז אמצעית ביניכם לבין השם, ועל כן <span style="color:#FFC000">ואתם הדבקים בה׳ אלהיכם חיים כלכם היום,</span> הפך <span style="color:#FFC000">כי כל האיש אשר הלך אחרי בעל פעור השמידו ה'</span>:<o:p></o:p></span></p>""",
+                             'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 4
+        assert verse == [4]
+
+    def test_chapter_5_verse_19_5_23_he(self):
+        # 4:4
+        html = BeautifulSoup("""<p class="MsoNormal" dir="RTL" style="text-align:justify;line-height:normal"><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;color:red">5:19-5:23
+ותקרבון</span><span dir="LTR"></span><span lang="HE" dir="LTR" style="font-size:12.0pt;
+font-family:&quot;Times New Roman&quot;,serif;color:red"><span dir="LTR"></span> </span><span dir="RTL"></span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif;
+color:red"><span dir="RTL"></span>{ותעמדון על כן נאמר}&lt;... ותאמרו&gt;<a style="mso-footnote-id:ftn22" href="#_ftn22" name="_ftnref22" title=""><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character:footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:12.0pt;line-height:115%;
+font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
+minor-latin;color:red;mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+mso-bidi-language:HE">[22]</span></span><!--[endif]--></span></span></a> הן הראנו
+ה' אלהינו את כבודו ואת גדלו ואת קולו שמענו מתוך האש... ועתה למה נמות </span><span lang="HE" style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif">- כי קודם
+לכן אמרו <span style="color:#FFC000">דבר עתה עמנו ונשמעה</span> <span style="color:#0070C0">(שמות כ:יט)</span>,<span style="color:#0070C0"> </span>ועשה
+כן, הוא הנאמר <span style="color:#FFC000">אנכי עומד בין ה' וביניכם</span> <span style="color:#0070C0">(דברים ה:ה)</span>, וכאשר שמעו את הקול וקצרה רוחם ומעטה
+נשמתם, ולא עצרו כח מן המעמד וקולות המחרידות, אמרו עוד <span style="color:#FFC000">ועתה
+למה נמות כי תאכלנו האש הגדולה הזאת</span>. על כן אמרו <span style="color:#FFC000">קרב
+אתה ושמע</span>, כי מעתה סר הספק בהשפעת הנבואה, כאמרם <span style="color:#FFC000">היום
+הזה ראינו כי ידבר אלהים את האדם וחי: <o:p></o:p></span></span></p>""",
+                             'html5lib')
+
+        chapter, verse = get_chapter_verse_he(html)
+
+        assert chapter == 5
+        assert verse == [19, 20, 21, 22, 23]
 
     def test_chapter_24_verse_3_he(self):
         # 24:3
