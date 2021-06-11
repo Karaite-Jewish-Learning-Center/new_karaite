@@ -7,7 +7,7 @@ td.field-text_he {
 }
 
 #id_comment_he {
-      text-align: right;
+    text-align: right;
 }
 
 td.field-comment_he {
@@ -15,9 +15,23 @@ td.field-comment_he {
 }
 
 #id_book_title_he {
-     text-align: right;
+    text-align: right;
 }
 
 td.field-book_title_he {
-     text-align: right;
+    text-align: right;
 }
+
+/*.results {*/
+/*    overflow-y: auto;*/
+/*    height: 500px;*/
+/*}*/
+
+/*.results th {*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*}*/
+
+/*#result_list tbody  {*/
+/*    top:30px;*/
+/*}*/

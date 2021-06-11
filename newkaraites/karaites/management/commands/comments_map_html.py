@@ -11,7 +11,8 @@ class Command(BaseCommand):
         """ Comments"""
 
         for comment in Comment.objects.all():
-            comment.comment_en = map_docx_to_karaites_html(comment.comment_en, foot_notes_list=comment.foot_notes)
+            sys.stdout.write(f"\33[K Rewriting English html comments chapter:{comment.chapter} verse:{comment.verse}\r")
+            comment.comment_en = map_docx_to_karaites_html(comment.comment_en, foot_notes_list=comment.foot_notes_en)
             comment.save()
 
         sys.stdout.write(f"\33[K\r")

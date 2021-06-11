@@ -180,9 +180,6 @@ class Comment(models.Model):
     verse = models.IntegerField(default=1,
                                 verbose_name=_("Verse"))
 
-    comment_number = models.SmallIntegerField(default=0,
-                                              verbose_name=_("Comment Number"))
-
     comment_en = HTMLField(null=True,
                            blank=True,
                            verbose_name=_("Comment English"))
@@ -274,40 +271,67 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         """ Update books comment count if new comment"""
+
+        update_count_en = 0
+        update_count_he = 0
+
+        book_text = BookText.objects.get(book=self.book,
+                                         chapter=self.chapter,
+                                         verse=self.verse)
         if self.pk is None:
-            book_text = BookText.objects.get(book=self.book,
-                                             chapter=self.chapter,
-                                             verse=self.verse)
+            if self.comment_en != '':
+                update_count_en = 1
+            if self.comment_he != '':
+                update_count_he = 1
+        else:
+            # editing a record
+            previous_state = Comment.objects.get(pk=self.pk)
+            if previous_state.comment_en == '' and self.comment_en != '':
+                update_count_en = 1
+            if previous_state.comment_en != '' and self.comment_en == '':
+                update_count_en = -1
+            if previous_state.comment_he == '' and self.comment_he != '':
+                update_count_he = 1
+            if previous_state.comment_he != '' and self.comment_he == '':
+                update_count_he = -1
 
-            book_text.comments_count_en += 1
-            book_text.save()
+        book_text.comments_count_en += update_count_en
+        book_text.comments_count_he += update_count_he
+        book_text.save()
 
-            self.comment_author.comments_count_en += 1
-            self.comment_author.save()
+        book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
+        verse = self.verse - 1
+        book_as_array.book_text[verse][2] = book_text.comments_count_en
+        book_as_array.book_text[verse][3] = book_text.comments_count_he
+        book_as_array.save()
 
-            self.comment_number = Comment.objects.filter(book=self.book,
-                                                         chapter=self.chapter,
-                                                         verse=self.verse).count() + 1
+        self.comment_author.comments_count_en += update_count_en
+        self.comment_author.comments_count_he += update_count_he
+        self.comment_author.save()
 
         super(Comment, self).save(*args, **kwargs)
 
     def delete(self, using=None, keep_parents=False):
-        """ Update books comment count """
+        """ Update books comment count and Author comment count """
         book_text = BookText.objects.get(book=self.book,
                                          chapter=self.chapter,
                                          verse=self.verse)
+        if self.comment_en != '':
+            book_text.comments_count_en -= 1
+            self.comment_author.comments_count_en -= 1
 
-        book_text.comments_count_en -= 1
+        if self.comment_he != '':
+            book_text.comments_count_he -= 1
+            self.comment_author.comments_count_he -= 1
+
         book_text.save()
-
-        self.comment_author.comments_count_en -= 1
         self.comment_author.save()
 
         super(Comment, self).delete(using=using, keep_parents=keep_parents)
 
     class Meta:
         verbose_name_plural = "Commentaries"
-        ordering = ('book', 'chapter', 'verse', 'comment_number')
+        ordering = ('book', 'chapter', 'verse')
 
 
 class CommentTmp(models.Model):
@@ -418,39 +442,6 @@ class CommentTmp(models.Model):
 
     foot_note_he_admin.short_description = "Foot notes HE"
 
-    # def save(self, *args, **kwargs):
-    #     """ Update books comment count if new comment"""
-    #     if self.pk is None:
-    #
-    #         book_text = BookText.objects.get(book=self.book,
-    #                                          chapter=self.chapter,
-    #                                          verse=self.verse)
-    #         book_text.comments_count_en += 1
-    #         book_text.save()
-    #
-    #         self.comment_author.comments_count_en += 1
-    #         self.comment_author.save()
-    #
-    #         self.comment_number = CommentTmp.objects.filter(book=self.book,
-    #                                                         chapter=self.chapter,
-    #                                                         verse=self.verse).count() + 1
-    #
-    #     super(CommentTmp, self).save(*args, **kwargs)
-
-    # def delete(self, using=None, keep_parents=False):
-    #     """ Update books comment count """
-    #     book_text = BookText.objects.get(book=self.book,
-    #                                      chapter=self.chapter,
-    #                                      verse=self.verse)
-    #
-    #     book_text.comments_count_en -= 1
-    #     book_text.save()
-    #
-    #     self.comment_author.comments_count_en -= 1
-    #     self.comment_author.save()
-    #
-    #     super(CommentTmp, self).delete(using=using, keep_parents=keep_parents)
-
     class Meta:
         verbose_name_plural = 'Comments Tmp'
         ordering = ('book', 'chapter', 'verse', 'comment_number')
@@ -542,18 +533,20 @@ class BookAsArray(models.Model):
 
     @mark_safe
     def text(self):
-        html = ''
-        for text in self.book_text:
-            html += f'<div><span style="float:left;width:48%">{text[0]}</span>'
-            html += f'<span dir=\'rtl\' style="float:right;width:48%">{text[1]}</span></div>'
-            # html += f'<p>{text[2]}</p'
+        html = '<table><tbody>'
+        for i, text in enumerate(self.book_text):
+            html += f'<tr><td>{text[2]}</td><td>{text[0]}</td>'
+            html += f'<td>{i + 1}</td>'
+            html += f'<td dir=\'rtl\'>{text[1]}</td><td>{text[3]}</td></tr>'
+        html += '</tbody></table>'
         return html
+
     text.short_description = "Book Text"
 
     def to_json(self):
         return {
-                'text': self.book_text
-                }
+            'text': self.book_text
+        }
 
     @staticmethod
     def to_json_book_array(book, chapter=None):

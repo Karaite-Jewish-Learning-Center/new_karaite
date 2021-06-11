@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid'
 import {Typography} from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
-import BooksToolBar from "./css/BooksToolbar";
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import {bookChapterUrl, getCommentsUrl} from "../constants";
@@ -73,7 +72,7 @@ export default function BookText({book}) {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
     const [bookData, setBookData] = useState();
-    const [bookChapters, setBookChapters] = useState()
+    const [bookChapters, setBookChapters] = useState([])
     const [gridsize, setGridSize] = useState([12, 1])
     const [comments, setComments] = useState([])
     const [bookChapterVerse, setBookChapterVerse] = useState([book, 1, 1])
@@ -155,7 +154,7 @@ export default function BookText({book}) {
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
-        const {chapters} = bookChapters
+        const {text} = bookChapters
         debugger
         const [book, chapter, verse] = bookChapterVerse
 
@@ -173,7 +172,7 @@ export default function BookText({book}) {
                     <Grid item xs={gridsize[0]}>
                         <Table className="scroll_table">
                             <TableBody>
-                                {[].map((chapter_text, c) => (
+                                {bookChapters.map((chapter_text, c) => (
                                     <>
                                         {chapter_text.text.map((verse, v) => (
                                             <TableRow id={`inner-1-${v + 1}`} key={`inner-${c}-${v}`}

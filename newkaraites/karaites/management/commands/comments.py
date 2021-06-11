@@ -204,7 +204,7 @@ class Command(BaseCommand):
         for chapter in range(1, organization.chapters + 1):
             for verse in range(1, organization.verses[chapter - 1] + 1):
 
-                sys.stdout.write(f"\33[K Merging English and  Hebrew comments chapter:{chapter} verse:{verse}\r")
+                sys.stdout.write(f"\33[K Merging English and Hebrew comments chapter:{chapter} verse:{verse}\r")
 
                 comm = Comment.objects.filter(book=organization, chapter=chapter, verse=verse)
                 temp = CommentTmp.objects.filter(book=organization, chapter=chapter, verse=verse)
