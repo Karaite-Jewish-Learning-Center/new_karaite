@@ -1,6 +1,90 @@
 import re
 from bs4 import BeautifulSoup
 
+MAP_P_STYLE_TO_CLASSES = {
+    'margin-left:.5in;text-align:justify':
+        ['MsoNormal', 'paragraph'],
+    'margin-left: .5in; text-align: justify;':
+        ['MsoNormal', 'paragraph'],
+    'text-align: justify; line-height: normal; margin: 0in 0in 7.9pt .5in;':
+        ['MsoNormal', 'paragraph'],
+
+}
+MAP_SPAN_STYLE_TO_CLASSES = {
+    "font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;":
+        ['red'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:red':
+        ['red'],
+    'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: red;':
+        ['red'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:red':
+        ['red'],
+
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black':
+        ['black'],
+    'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: black;':
+        ['black'],
+    'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: black;':
+        ['black'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black':
+        ['black'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
+        ['black'],
+
+    'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif;':
+        ['black-text-serif'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif':
+        ['black-text-serif'],
+    'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\';':
+        ['black-text-serif'],
+    'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; color: black; mso-themecolor: text1;':
+        ['black-text-serif'],
+
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1':
+        ['black-text-theme'],
+    'color:black;mso-themecolor:text1;':
+        ['black-text-theme'],
+    'color:black;mso-themecolor:text1':
+        ['black-text-theme'],
+
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#FFC000':
+        ['orange'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:#FFC000':
+        ['orange'],
+    'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; color: #ffc000;':
+        ['orange'],
+    'font-size: 12.0pt; line-height: 107%; font-family:"Times New Roman",serif; color: #ffc000;':
+        ['orange'],
+    'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #ffc000;':
+        ['orange'],
+    'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #ffc000;':
+        ['orange'],
+    'color:#FFC000':
+        ['orange'],
+    'color:#ffc000':
+        ['orange'],
+    'color: #ffc000;':
+        ['orange'],
+
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#0070C0':
+        ['biblical-ref'],
+    'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #0070c0;':
+        ['biblical-ref'],
+    'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #0070c0;':
+        ['biblical-ref'],
+    'color:#0070C0':
+        ['biblical-ref'],
+    'color: #0070c0;':
+        ['biblical-ref'],
+
+    'mso-special-character:footnote':
+        ['foot-note-char'],
+
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
+        ['foot-note']
+
+}
+
 
 def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
     """
@@ -15,7 +99,6 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
 
         return html_str
 
-    # find key replace by value
     translate = {"""<p class="MsoNormal" style="margin-left:.5in;text-align:justify">""":
                      """<p class="paragraph">""",
                  """<p class="MsoNormal" style="margin-left: .5in; text-align: justify;">""":
@@ -144,7 +227,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
                  """<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: red;">""":
                      """<span class="red">""",
                  """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">""":
-                    """<span class="red">""",
+                     """<span class="red">""",
                  """<span style="font-size:12.0pt; font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;; color:black">—Similar to </span>""":
                      """<span class="black">""",
 
@@ -175,19 +258,39 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
 
                  }
 
-    new_html = html.replace('\n', '').replace('\r', '')
-    for k in translate.keys():
-        if callable(translate[k]):
-            new_html = translate[k](new_html, k)
-        else:
-            new_html = new_html.replace(k, translate[k])
+    # new_html = html.replace('\n', '').replace('\r', '')
+    # for k in translate.keys():
+    #     if callable(translate[k]):
+    #         new_html = translate[k](new_html, k)
+    #     else:
+    #         new_html = new_html.replace(k, translate[k])
 
-    html_tree = BeautifulSoup(new_html, 'html5lib')
+    html_tree = BeautifulSoup(html, 'html5lib')
 
     # first remove all empty tags
     for child in html_tree.find_all():
         if len(child.get_text(strip=True)) == 0:
             child.extract()
+
+    # style to classes
+    for child in html_tree.find_all('p', class_="MsoNormal"):
+        style = child.attrs.get('style', None)
+        classes = MAP_P_STYLE_TO_CLASSES.get(style, None)
+        if classes is not None:
+            child.attrs.pop('style')
+            if child.attrs['class'] == [classes[0]]:
+                child.attrs['class'] = [classes[1]]
+
+        for span_child in child.find_all('span'):
+            style = span_child.attrs.get('style', '').replace('\r', '').replace('\n', '')
+            classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
+            if classes is not None:
+                span_child.attrs.pop('style')
+                span_child.attrs['class'] = classes
+            else:
+                print("-" * 60)
+                print(style)
+                print("-" * 60)
 
     # replace complicate <a></a> tag with <span class="footnote-char">[foot note number]</span>
     foot_note = 0
@@ -206,10 +309,10 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
         print("-" * 90)
         print(html_has_string)
         print(f"html as string len:{len(html)}, new_html len:{len(html_has_string)}")
-
+        input('> enter to carry on.')
     return html_has_string
+
 #
-#
-# html = """<p class="MsoNormal" style="text-align: justify; line-height: normal; margin: 0in 0in 7.9pt .5in;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: red;">1:5 Moses began [<em>ho&rsquo;il</em>]<em> </em>to elucidate [<em>be&rsquo;er</em>]<em> </em>this divine instruction [<em>tora</em>]</span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;">&mdash;Similar to </span><em><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #ffc000;">he left [</span></em><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #ffc000;">ḥamaḳ<em>], went away [</em>&lsquo;avar<em>]</em> </span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #0070c0;">(Song of Songs 5:6)</span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;">.</span><a style="mso-footnote-id: ftn9;" title="" href="#_ftn9" name="_ftnref9"><span class="MsoFootnoteReference"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black; mso-themecolor: text1;"><span style="mso-special-character: footnote;"><!-- [if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black; mso-themecolor: text1; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: HE;">[9]</span></span><!--[endif]--></span></span></span></a><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;"> </span></p>
-# <p class="MsoNormal" style="text-align: justify; line-height: normal; margin: 0in 0in 7.9pt .5in;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;">It seems that the beginning of this </span><em><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #ffc000;">instruction</span></em><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #ffc000;"> </span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;">is from the chapter beginning with the words: </span><em><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #ffc000;">Now, Israel, listen to the statutes and to the ordinances</span></em><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;"> </span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #0070c0;">(Deuteronomy 4:1)</span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman';">.</span></p>"""
+# html = """<p class="paragraph"><span class="red">1:1 These are the matters [<em>devarim</em>]</span><span class="black">&mdash;</span><span class="black-text">When the Israelites were about to cross the Jordan in order to divide themselves up according to their portions,<span style="color: black; mso-themecolor: text1;">they required warning </span>and admonishment to observe the Torah, just as he exhorted them when they were traveling from Sinai to enter the land. Since events occurred that prevented them from entering, he now wishes also to articulate the impediments on account of which the warnings and admonishments must be repeated [now].<span class="foot-note" data-tip="[1] Some material is added from two manuscripts, without which it is very difficult to read this introductory passage."><sup>[1]</sup></span> Consequently, he begins with the word <em><span class="orange">matters [</span></em><span class="orange">devarim<em>]</em></span>, to include the subject matter of the commandments and words of rebuke. The meaning of the verse would be <em><span class="orange">These are the matters which Moses spoke to all of Israel across the Jordan</span></em>: what befell them <em><span class="orange">in the wilderness, in the wasteland, opposite Suph</span></em>, including what happened to them when they traveled from Sinai until their arrival at Kadesh Barnea. </span></p>
+# <p class="paragraph"><em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">Laban</span></em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">, </span><em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">Tophel</span></em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">, and </span><em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">Dizahab </span></em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">are neither mentioned in [the chronicles of] their journeys nor elsewhere, and indeed since he uses the words <em><span class="orange">between</span></em><span class="orange"> <em>[Paran]</em> <em>and</em> <em>between</em></span> <em><span class="orange">[Tophel]</span></em>, it does not mean they passed through actual places that bear these names.</span></p>"""
 # map_docx_to_karaites_html(html, foot_notes_list=['[9] TESTE'], stats=True)
