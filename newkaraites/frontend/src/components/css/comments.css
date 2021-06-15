@@ -114,11 +114,15 @@
     mso-bidi-language: HE;
 }
 
-.biblical-link {
+.biblical-ref {
     color: -webkit-link;
     cursor: pointer;
 }
 
+.he-biblical-ref {
+    color: -webkit-link;
+    cursor: pointer;
+}
 .citation {
     margin-right: 3px;
 }

@@ -264,7 +264,7 @@ class Comment(models.Model):
     def foot_note_he_admin(self):
         html = ''
         for foot_note in self.foot_notes_he:
-            html += f'<p>{foot_note}</p>'
+            html += f'<p dir="RTL">{foot_note}</p>'
         return html
 
     foot_note_he_admin.short_description = "Foot notes HE"

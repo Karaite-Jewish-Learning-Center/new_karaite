@@ -56,7 +56,7 @@ class CommentAdmin(admin.ModelAdmin):
     form = AdminCommentForm
     save_on_top = True
     list_display = ('book', 'chapter', 'verse', 'english',
-                    'hebrew','foot_note_en_admin',
+                    'foot_note_en_admin', 'hebrew',
                     'foot_note_he_admin', 'comment_author',
                     'source_book')
 

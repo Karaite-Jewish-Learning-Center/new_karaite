@@ -1,5 +1,17 @@
 import re
+import sys
 from bs4 import BeautifulSoup
+
+REPLACE_TAGS = {
+    """<!-- [if !supportFootnotes]-->""":
+        """""",
+    """<!--[endif]-->""":
+        """""",
+    """<o:p>""":
+        """<p>""",
+    """</o:p>""":
+        """</p>""",
+}
 
 MAP_P_STYLE_TO_CLASSES = {
     'margin-left:.5in;text-align:justify':
@@ -8,6 +20,67 @@ MAP_P_STYLE_TO_CLASSES = {
         ['MsoNormal', 'paragraph'],
     'text-align: justify; line-height: normal; margin: 0in 0in 7.9pt .5in;':
         ['MsoNormal', 'paragraph'],
+    'font-size:12.0pt;line-height:107%;font-family:\'Times New Roman\',serif;mso-fareast-font-family:\'Times New Roman\';color:black;mso-themecolor:text1;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE;':
+        ['MsoNormal', 'paragraph'],
+    'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-bottom:7.9pt;text-align:justify;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-bottom:7.9pt;text-align:justify;text-indent:.5in;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify;line-height:normal;tab-stops:405.0pt':
+        ['MsoNormal', 'paragraph'],
+    'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify;line-height:normal;tab-stops:5.0in':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:.5in;text-align:justify;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:.5in;text-align:justify;text-indent:3.0pt;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'text-align:justify;text-indent:.5in':
+        ['MsoNormal', 'paragraph'],
+    'text-align:justify':
+        ['MsoNormal', 'paragraph'],
+    'text-align:justify;text-indent:.5in;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:35.45pt;text-align:justify;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:.5in':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:.5in;text-align:justify;line-height:normal;tab-stops:.5in':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:24.0pt;text-align:justify;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:.5in;line-height:normal':
+        ['MsoNormal', 'paragraph'],
+    'margin-left:.5in;text-align:justify;line-height:normal;tab-stops:3.0in':
+        ['MsoNormal', 'paragraph'],
+
+
+    # Hebrew
+    'text-align: justify; line-height: normal; tab-stops: 460.7pt;':
+        ['MsoNormal', 'he-paragraph'],
+    'text-align:justify;line-height:normal;tab-stops:460.7pt':
+        ['MsoNormal', 'he-paragraph'],
+    'text-align:justify;line-height:normal;tab-stops:326.0pt 460.7pt':
+        ['MsoNormal', 'he-paragraph'],
+    'text-align:justify;line-height:normal':
+        ['MsoNormal', 'he-paragraph'],
+    'margin-left:11.35pt;text-align:justify;line-height:normal;tab-stops:460.7pt':
+        ['MsoNormal', 'he-paragraph'],
+    'margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:11.35pt;text-align:justify;line-height:normal;tab-stops:460.7pt':
+        ['MsoNormal', 'he-paragraph'],
+    'margin-bottom:8.0pt;text-align:justify;line-height:107%':
+        ['MsoNormal', 'he-paragraph'],
+    'margin-bottom:0in;text-align:justify;line-height:normal':
+        ['MsoNormal', 'he-paragraph'],
+    'text-align:justify;line-height:normal;tab-stops:165.2pt':
+        ['MsoNormal', 'he-paragraph'],
+    'text-align:justify;line-height:normal;tab-stops:165.2pt 188.55pt':
+        ['MsoNormal', 'he-paragraph'],
 
 }
 MAP_SPAN_STYLE_TO_CLASSES = {
@@ -18,6 +91,14 @@ MAP_SPAN_STYLE_TO_CLASSES = {
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: red;':
         ['red'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:red':
+        ['red'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:red':
+        ['red'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:red':
+        ['red'],
+    "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red;":
+        ['red'],
+    'color:red':
         ['red'],
 
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black':
@@ -30,6 +111,31 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['black'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
         ['black'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-themecolor:text1':
+        ['black'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-themecolor:text1':
+        ['black'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"':
+        ['black'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1':
+        ['black'],
+    "font-size: 12.0pt; font-family: 'Times New Roman',serif;":
+        ['black'],
+    'color:black':
+        ['black'],
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1;mso-bidi-font-style:italic':
+        ['black-text-italic'],
+    'mso-bidi-font-style:italic':
+        ['black-text-italic'],
+    'color:black;mso-themecolor:text1;mso-bidi-font-style:italic':
+        ['black-text-italic'],
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;text-transform:uppercase':
+        ['black-text-uppercase'],
+
+    'mso-bidi-font-weight:bold':
+        ['black-text-bold'],
 
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif;':
         ['black-text-serif'],
@@ -37,19 +143,32 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['black-text-serif'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\';':
         ['black-text-serif'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"':
+        ['black-text-serif'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; color: black; mso-themecolor: text1;':
         ['black-text-serif'],
-
+    'font-size:12.0pt;font-family:"Times New Roman",serif':
+        ['black-text-serif'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1':
+        ['black-text-theme'],
+    'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: black; mso-themecolor: text1;':
+        ['black-text-theme'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:black;mso-themecolor:text1':
         ['black-text-theme'],
     'color:black;mso-themecolor:text1;':
         ['black-text-theme'],
     'color:black;mso-themecolor:text1':
         ['black-text-theme'],
 
+    "font-size: 12.0pt; font-family:'Times New Roman',serif; mso-fareast-font-family:'Times New Roman';color:#ffc000;":
+        ['orange'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#FFC000':
         ['orange'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#FFC000':
+        ['orange'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:#FFC000':
+        ['orange'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000':
         ['orange'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; color: #ffc000;':
         ['orange'],
@@ -59,6 +178,8 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['orange'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #ffc000;':
         ['orange'],
+    'font-size:12.0pt;line-height:107%;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";color:#FFC000':
+        ['orange'],
     'color:#FFC000':
         ['orange'],
     'color:#ffc000':
@@ -66,22 +187,80 @@ MAP_SPAN_STYLE_TO_CLASSES = {
     'color: #ffc000;':
         ['orange'],
 
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#0070C0':
+        ['biblical-ref'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#0070C0':
         ['biblical-ref'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #0070c0;':
         ['biblical-ref'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #0070c0;':
         ['biblical-ref'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#0070C0':
+        ['biblical-ref'],
+    'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:#0070C0':
+        ['biblical-ref'],
     'color:#0070C0':
         ['biblical-ref'],
     'color: #0070c0;':
         ['biblical-ref'],
 
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#0070C0;mso-bidi-font-style:italic':
+        ['biblical-ref-italic'],
+    'color:#0070C0;mso-bidi-font-style:italic':
+        ['biblical-ref-italic'],
+
     'mso-special-character:footnote':
         ['foot-note-char'],
 
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
-        ['foot-note']
+        ['foot-note'],
+
+    'mso-ansi-font-size:12.0pt;mso-bidi-font-size:12.0pt':
+        ['font-1'],
+    'mso-bookmark:_Hlk532297566':
+        ['book-mark'],
+
+    # Hebrew
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-red'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;color:red':
+        ['he-red'],
+    "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
+        ['he-red'],
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-text-color-black'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ansi-language:X-NONE':
+        ['he-text-color-black'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi':
+        ['he-text-color-black'],
+    "font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
+        ['he-text-color-black'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-text-color-black-theme'],
+    "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
+        ['he-text-color-black-theme'],
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt;mso-ansi-language:X-NONE':
+        ['he-orange'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-orange'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;mso-themecolor:accent4;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-orange'],
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;mso-ansi-language:X-NONE':
+        ['he-orange'],
+    "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
+        ['he-orange'],
+
+    'color:#FFC000;mso-themecolor:accent4':
+        ['he-orange-accent4'],
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;color:#0070C0;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-biblical-ref'],
+
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:#0070C0;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
+        ['he-biblical-ref'],
 
 }
 
@@ -99,173 +278,22 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
 
         return html_str
 
-    translate = {"""<p class="MsoNormal" style="margin-left:.5in;text-align:justify">""":
-                     """<p class="paragraph">""",
-                 """<p class="MsoNormal" style="margin-left: .5in; text-align: justify;">""":
-                     """<p class="paragraph">""",
-                 """<p class="MsoNormal" style="text-align: justify; line-height: normal; margin: 0in 0in 7.9pt .5in;">""":
-                     """<p class="paragraph">""",
-
-                 """<p class="MsoNormal" style="margin-top:0in;margin-right:0in;margin-bottom:7.9pt; margin-left:.5in;text-align:justify;line-height:normal">""":
-                     """<p class="paragraph-normal">""",
-                 """<p class="MsoNormal" style="margin-bottom:7.9pt;text-align:justify;text-indent: .5in;line-height:normal">""":
-                     """<p class="paragraph-indent">""",
-                 """<p class="MsoNormal" style="margin-bottom:7.9pt;text-align:justify;line-height: normal">""":
-                     """<p class="paragraph-normal">""",
-
-                 """<span style=\'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif; color:red\'>""":
-                     """<span class="comment-start">""",
-                 """<span style=\'font-size:12.0pt;font-family:"Times New Roman",serif; mso-fareast-font-family:"Times New Roman";color:red\'>""":
-                     """<span class="comment-start">""",
-                 """<span style=\'font-size:12.0pt;font-family: "Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:red\'>""":
-                     """<span class="comment-start">""",
-
-                 """<span style=\'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif; mso-fareast-font-family:"Times New Roman";color:black\'>""":
-                     """<span class="comment-text">""",
-                 """</span><span style=\'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family: "Times New Roman";color:black\'>""":
-                     """<span class="comment-text">""",
-                 """<span style=\'font-size:12.0pt;font-family:"Times New Roman",serif; mso-fareast-font-family:"Times New Roman";color:black\'""":
-                     """<span class="comment-text">""",
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family:"Times New Roman",serif;">""":
-                     """<span class="comment-text">""",
-
-                 """<span style=\'font-size:12.0pt; line-height:107%;font-family:"Times New Roman",serif\'>""":
-                     """<span class="dash">""",
-
-                 """<span style="color:#00B050;"> </span>""":
-                     """""",
-
-                 """<span style="color: #FFC000">""":
-                     """<span class="citation">""",
-
-                 """<span style="color:#FFC000">""":
-                     """<span class="citation">""",
-
-                 """<span style="color: #ffc000;">""":
-                     """<span class="citation">""",
-
-                 """<span style="color: black; mso-themecolor: text1;">""":
-                     """<span class="text-color">""",
-
-                 """<span style="color:black; mso-themecolor:text1">""":
-                     """<span class="text-color">""",
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">""":
-                     """<span class="text-color">""",
-
-                 """<span style='font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif'>""":
-                     """<span class="text-font">""",
-
-                 """<!-- [if !supportFootnotes]-->""":
-                     """""",
-
-                 """<!--[endif]-->""":
-                     """""",
-
-                 """<span style='font-size:12.0pt;line-height:107%; font-family:"Times New Roman",serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font: minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language: HE'>""":
-                     """<span class="footnote-char">""",
-                 """<span style="mso-special-character: footnote;">""":
-                     """<span class="footnote-char">""",
-                 """<span class="MsoFootnoteReference">""":
-                     """<span class="foot-note-ref">""",
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: HE;">""":
-                     """<span class="foot-note">""",
-
-                 """<o:p>""":
-                     """<p>""",
-
-                 """</o:p>""":
-                     """</p>""",
-
-                 """<span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif; mso-fareast-font-family:&quot;Times New Roman&quot;;color:#0070C0">""":
-                     """<span class="biblical-link">""",
-
-                 """<span style="color: #0070c0;">""":
-                     """<span class="biblical-link">""",
-                 """<span style="color:#0070C0">""":
-                     """<span class="biblical-link">""",
-                 """<span style="color: #0070C0">""":
-                     """<span class="biblical-link">""",
-                 """<span style=\"font-size:12.0pt; line-height:107%;font-family:\"Times New Roman\",serif;mso-fareast-font-family:\"Times New Roman\";color:#0070C0\">""":
-                     """<span class="biblical-link">""",
-                 """<span style=\"font-size:12.0pt;font-family:\"Times New Roman\",serif; mso-fareast-font-family:\"Times New Roman\";color:#0070C0\">""":
-                     """<span class="biblical-link">""",
-                 """<span style="font-size:12.0pt; line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family: "Times New Roman";color:#0070C0">""":
-                     """<span class="biblical-link">""",
-                 """<span style="font-size:12.0pt;font-family:"Times New Roman",serif; mso-fareast-font-family:"Times New Roman";color:#0070C0">""":
-                     """<span class="biblical-link">""",
-                 """<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #0070c0;">(Song of Songs 5:6)</span>&lt;<span class="black">.</span><span class="foot-note" data-tip="[9] TESTE"><sup>[9]</sup></span>&lt;</p><p class="paragraph">&lt;<span class="black">It seems that the beginning of this </span><em><span class="yellow">instruction</span></em>&lt;<span class="black">is from the chapter beginning with the words: </span><em><span class="yellow">Now, Israel, listen to the statutes and to the ordinances</span></em>&lt;<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #0070c0;">""":
-                     """<span class="biblical-link">""",
-                 """<span style="font-size:12.0pt; font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;; color:#0070C0">""":
-                     """<span class="biblical-link">""",
-                 """</span><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #0070c0;">""":
-                     """<span class="biblical-link">""",
-
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">""":
-                     """<span class="person-name">""",
-
-                 """<span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;,serif; mso-fareast-font-family:&quot;Times New Roman&quot;;color:#FFC000">""":
-                     """<span class="yellow">""",
-
-                 """<span style="font-size:12.0pt;line-height:107%; font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"; color:#FFC000">""":
-                     """<span class="yellow">""",
-                 """<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: #ffc000;">""":
-                     """<span class="yellow">""",
-
-                 """<span style="font-size: 12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;; color:red">""":
-                     """<span class="red">""",
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">""":
-                     """<span class="red">""",
-                 """<span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;color:red">""":
-                     """<span class="red">""",
-                 """<span style="color: red;">""":
-                     """<span class="red">""",
-                 """<span style="font-size: 12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"; color:red">""":
-                     """<span class="red">""",
-
-                 """<span style="font-size: 12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;; color:red">""":
-                     """<span class="red">""",
-                 """<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: red;">""":
-                     """<span class="red">""",
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">""":
-                     """<span class="red">""",
-                 """<span style="font-size:12.0pt; font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;; color:black">—Similar to </span>""":
-                     """<span class="black">""",
-
-                 """<span style="font-size: 12.0pt;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;; color:black">""":
-                     """<span class="black">""",
-                 """<span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:&quot;Times New Roman&quot;;color:black">""":
-                     """<span class="black">""",
-                 """<span style="font-size:12.0pt;line-height:107%;font-family:&quot;Times New Roman&quot;,serif">""":
-                     """<span class="black">""",
-
-                 """<span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;">""":
-                     """<span class="black">""",
-                 """span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman'; color: black;">""":
-                     """<span class="black">""",
-                 """<span style="font-size: 12.0pt; font-family: 'Times New Roman',serif; mso-fareast-font-family: 'Times New Roman';">""":
-                     """<span class="black">""",
-                 """<span style=\'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif; color:black;mso-themecolor:text1\'>""":
-                     """<span class="Consequently">""",
-                 """<span style=\'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1\'>""":
-                     """<span class="Consequently">""",
-                 """<span style=\'font-size: 12.0pt;line-height:107%;font-family:"Times New Roman",serif\'>""":
-                     """<span class="divine">""",
-                 """<span style=\"font-size: 12.0pt;line-height:107%;font-family:"Times New Roman",serif\">""":
-                     """<span class="divine">""",
-
-                 """<span style="color: #00b050;">""":
-                     """<span class="green">""",
-
-                 }
-
-    # new_html = html.replace('\n', '').replace('\r', '')
-    # for k in translate.keys():
-    #     if callable(translate[k]):
-    #         new_html = translate[k](new_html, k)
-    #     else:
-    #         new_html = new_html.replace(k, translate[k])
-
     html_tree = BeautifulSoup(html, 'html5lib')
+
+    # replace complicate <a></a> tag with <span class="footnote-char">[foot note number]</span>
+    if len(foot_notes_list) > 0:
+        foot_note = 0
+        for child in html_tree.find_all('a'):
+            if hasattr(child, 'find'):
+                try:
+                    note_ref = re.match('\\[[0-9]*.\\]', foot_notes_list[foot_note]).group()
+                    child.replace_with(BeautifulSoup(
+                        f'<span class="foot-note" data-tip="{foot_notes_list[foot_note]}"><sup>{note_ref}</sup></span>',
+                        'html5lib'))
+                    foot_note += 1
+                except IndexError:
+                    print(foot_note, len(foot_notes_list), foot_notes_list)
+                    sys.exit()
 
     # first remove all empty tags
     for child in html_tree.find_all():
@@ -274,12 +302,18 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
 
     # style to classes
     for child in html_tree.find_all('p', class_="MsoNormal"):
-        style = child.attrs.get('style', None)
+        style = child.attrs.get('style', '').replace('\n', '').replace('\r', '')
         classes = MAP_P_STYLE_TO_CLASSES.get(style, None)
         if classes is not None:
             child.attrs.pop('style')
             if child.attrs['class'] == [classes[0]]:
                 child.attrs['class'] = [classes[1]]
+        else:
+            if style is not None and style != '':
+                print("<p>", "-" * 60)
+                print(style)
+                print("-" * 60)
+                sys.exit()
 
         for span_child in child.find_all('span'):
             style = span_child.attrs.get('style', '').replace('\r', '').replace('\n', '')
@@ -288,31 +322,28 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
                 span_child.attrs.pop('style')
                 span_child.attrs['class'] = classes
             else:
-                print("-" * 60)
-                print(style)
-                print("-" * 60)
+                if style is not None and style != '':
+                    print("<span>", "-" * 60)
+                    print(style)
+                    print("-" * 60)
+                    sys.exit()
 
-    # replace complicate <a></a> tag with <span class="footnote-char">[foot note number]</span>
-    foot_note = 0
-    for child in html_tree.find_all('a'):
-        if hasattr(child, 'find'):
-            note_ref = re.match('\\[[0-9]*.\\]', foot_notes_list[foot_note]).group()
-            child.replace_with(BeautifulSoup(
-                f'<span class="foot-note" data-tip="{foot_notes_list[foot_note]}"><sup>{note_ref}</sup></span>',
-                'html5lib'))
-            foot_note += 1
-
-    html_has_string = remove_tag_simple(str(html_tree).replace('\n', ' '))
+    new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
+    for k in REPLACE_TAGS.keys():
+        if callable(REPLACE_TAGS[k]):
+            new_html = REPLACE_TAGS[k](new_html, k)
+        else:
+            new_html = new_html.replace(k, REPLACE_TAGS[k])
 
     if stats:
         print(html)
         print("-" * 90)
-        print(html_has_string)
-        print(f"html as string len:{len(html)}, new_html len:{len(html_has_string)}")
+        print(new_html)
+        print(f"html as string len:{len(html)}, new_html len:{len(new_html)}")
         input('> enter to carry on.')
-    return html_has_string
+    return new_html
 
 #
-# html = """<p class="paragraph"><span class="red">1:1 These are the matters [<em>devarim</em>]</span><span class="black">&mdash;</span><span class="black-text">When the Israelites were about to cross the Jordan in order to divide themselves up according to their portions,<span style="color: black; mso-themecolor: text1;">they required warning </span>and admonishment to observe the Torah, just as he exhorted them when they were traveling from Sinai to enter the land. Since events occurred that prevented them from entering, he now wishes also to articulate the impediments on account of which the warnings and admonishments must be repeated [now].<span class="foot-note" data-tip="[1] Some material is added from two manuscripts, without which it is very difficult to read this introductory passage."><sup>[1]</sup></span> Consequently, he begins with the word <em><span class="orange">matters [</span></em><span class="orange">devarim<em>]</em></span>, to include the subject matter of the commandments and words of rebuke. The meaning of the verse would be <em><span class="orange">These are the matters which Moses spoke to all of Israel across the Jordan</span></em>: what befell them <em><span class="orange">in the wilderness, in the wasteland, opposite Suph</span></em>, including what happened to them when they traveled from Sinai until their arrival at Kadesh Barnea. </span></p>
-# <p class="paragraph"><em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">Laban</span></em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">, </span><em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">Tophel</span></em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;">, and </span><em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: #ffc000;">Dizahab </span></em><span style="font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif;">are neither mentioned in [the chronicles of] their journeys nor elsewhere, and indeed since he uses the words <em><span class="orange">between</span></em><span class="orange"> <em>[Paran]</em> <em>and</em> <em>between</em></span> <em><span class="orange">[Tophel]</span></em>, it does not mean they passed through actual places that bear these names.</span></p>"""
+# html = """<p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span dir="LTR" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">1:1</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">אלה הדברים</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">- כאשר היו ישראל עתידים לעבור את הירדן</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">להחלק איש בנחלתו, והיו צריכים התראה ואזהרה לשמור התורה, כאשר בזמן נסוע מסיני להכנס בארץ &lt;התרה בהם&gt;, וכאשר אירעו להם ענינים ונמנעו מלהכנס, אז כון עתה לסדר גם אותם {הענינים} &lt;עניני המניעות שמסבתם נשנו עתה עניני האזהרות וההתראות&gt;.<a style="mso-footnote-id: ftn1;" title="" href="#_ftn1" name="_ftnref1"><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character: footnote;"><!-- [if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size: 12.0pt; line-height: 115%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; position: relative; top: -2.0pt; mso-text-raise: 2.0pt; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: HE;">[1]</span></span><!--[endif]--></span></span></a><span style="mso-spacerun: yes;">&nbsp;</span>על כן החל במלת <span style="color: #ffc000;">דברים</span>, לכלול עניני המצות ודברי תוכחה. ויהיה טעם <span style="color: #ffc000;">אלה הדברים אשר דבר משה אל כל ישראל בעבר הירדן</span> מה שאירע להם <span style="color: #ffc000;">במדבר בערבה מול סוף </span>,כלל מה שעבר עליהם בנסעם מסיני עד בואם לקדש ברנע:</span></p>
+# <p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">לבן</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">תפל</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">די זהב </span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">לא נזכרו במסעים גם לא נזכרו במקום אחר, ואולם אחר שאומר <span style="color: #ffc000;">בין ובין </span>אין הטעם שעברו באותם המקומות עצמם שנזכרו בשמות אלו. </span></p>"""
 # map_docx_to_karaites_html(html, foot_notes_list=['[9] TESTE'], stats=True)
