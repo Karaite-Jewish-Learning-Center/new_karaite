@@ -59,28 +59,27 @@ MAP_P_STYLE_TO_CLASSES = {
     'margin-left:.5in;text-align:justify;line-height:normal;tab-stops:3.0in':
         ['MsoNormal', 'paragraph'],
 
-
     # Hebrew
     'text-align: justify; line-height: normal; tab-stops: 460.7pt;':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'text-align:justify;line-height:normal;tab-stops:460.7pt':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'text-align:justify;line-height:normal;tab-stops:326.0pt 460.7pt':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'text-align:justify;line-height:normal':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'margin-left:11.35pt;text-align:justify;line-height:normal;tab-stops:460.7pt':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:11.35pt;text-align:justify;line-height:normal;tab-stops:460.7pt':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'margin-bottom:8.0pt;text-align:justify;line-height:107%':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'margin-bottom:0in;text-align:justify;line-height:normal':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'text-align:justify;line-height:normal;tab-stops:165.2pt':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
     'text-align:justify;line-height:normal;tab-stops:165.2pt 188.55pt':
-        ['MsoNormal', 'he-paragraph'],
+        ['MsoNormal', 'paragraph'],
 
 }
 MAP_SPAN_STYLE_TO_CLASSES = {
@@ -223,49 +222,49 @@ MAP_SPAN_STYLE_TO_CLASSES = {
     # Hebrew
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:red;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-red'],
+        ['red'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;color:red':
-        ['he-red'],
+        ['red'],
     "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
-        ['he-red'],
+        ['red'],
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-text-color-black'],
+        ['text-color-black'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ansi-language:X-NONE':
-        ['he-text-color-black'],
+        ['text-color-black'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi':
-        ['he-text-color-black'],
+        ['text-color-black'],
     "font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
-        ['he-text-color-black'],
+        ['text-color-black'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-text-color-black-theme'],
+        ['text-color-black-theme'],
     "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
-        ['he-text-color-black-theme'],
+        ['text-color-black-theme'],
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt;mso-ansi-language:X-NONE':
-        ['he-orange'],
+        ['orange'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-orange'],
+        ['orange'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;mso-themecolor:accent4;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-orange'],
+        ['orange'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000;mso-ansi-language:X-NONE':
-        ['he-orange'],
+        ['orange'],
     "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;":
-        ['he-orange'],
+        ['orange'],
 
     'color:#FFC000;mso-themecolor:accent4':
-        ['he-orange-accent4'],
+        ['orange-accent4'],
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:#0070C0;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-biblical-ref'],
+        ['biblical-ref'],
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:#0070C0;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
-        ['he-biblical-ref'],
+        ['biblical-ref'],
 
 }
 
 
-def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
+def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False):
     """
         Map docx generated html to a lighter and css class oriented html
     """
@@ -280,16 +279,21 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
 
     html_tree = BeautifulSoup(html, 'html5lib')
 
-    # replace complicate <a></a> tag with <span class="footnote-char">[foot note number]</span>
+    # replace complicate <a></a>
     if len(foot_notes_list) > 0:
         foot_note = 0
         for child in html_tree.find_all('a'):
             if hasattr(child, 'find'):
                 try:
                     note_ref = re.match('\\[[0-9]*.\\]', foot_notes_list[foot_note]).group()
-                    child.replace_with(BeautifulSoup(
-                        f'<span class="foot-note" data-tip="{foot_notes_list[foot_note]}"><sup>{note_ref}</sup></span>',
-                        'html5lib'))
+                    if language == "en":
+                        child.replace_with(BeautifulSoup(
+                            f'<span class="{language}-foot-note" data-tip="{foot_notes_list[foot_note]}"><sup>{note_ref}</sup></span>',
+                            'html5lib'))
+                    if language == "he":
+                        child.replace_with(BeautifulSoup(
+                            f'<span class="{language}-foot-note" data-tip="<p dir=\"rtl\">{foot_notes_list[foot_note]}</p>"><sup>{note_ref}</sup></span>',
+                            'html5lib'))
                     foot_note += 1
                 except IndexError:
                     print(foot_note, len(foot_notes_list), foot_notes_list)
@@ -307,7 +311,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
         if classes is not None:
             child.attrs.pop('style')
             if child.attrs['class'] == [classes[0]]:
-                child.attrs['class'] = [classes[1]]
+                child.attrs['class'] = [f'{language}-{classes[1]}']
         else:
             if style is not None and style != '':
                 print("<p>", "-" * 60)
@@ -320,7 +324,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
             classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
             if classes is not None:
                 span_child.attrs.pop('style')
-                span_child.attrs['class'] = classes
+                span_child.attrs['class'] = [f'{language}-{classes[0]}']
             else:
                 if style is not None and style != '':
                     print("<span>", "-" * 60)
@@ -330,10 +334,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
 
     new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
     for k in REPLACE_TAGS.keys():
-        if callable(REPLACE_TAGS[k]):
-            new_html = REPLACE_TAGS[k](new_html, k)
-        else:
-            new_html = new_html.replace(k, REPLACE_TAGS[k])
+        new_html = new_html.replace(k, REPLACE_TAGS[k])
 
     if stats:
         print(html)
@@ -343,7 +344,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, stats=False):
         input('> enter to carry on.')
     return new_html
 
-#
+# to test and debug uncomment this
 # html = """<p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span dir="LTR" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">1:1</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">אלה הדברים</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">- כאשר היו ישראל עתידים לעבור את הירדן</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">להחלק איש בנחלתו, והיו צריכים התראה ואזהרה לשמור התורה, כאשר בזמן נסוע מסיני להכנס בארץ &lt;התרה בהם&gt;, וכאשר אירעו להם ענינים ונמנעו מלהכנס, אז כון עתה לסדר גם אותם {הענינים} &lt;עניני המניעות שמסבתם נשנו עתה עניני האזהרות וההתראות&gt;.<a style="mso-footnote-id: ftn1;" title="" href="#_ftn1" name="_ftnref1"><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character: footnote;"><!-- [if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size: 12.0pt; line-height: 115%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; position: relative; top: -2.0pt; mso-text-raise: 2.0pt; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: HE;">[1]</span></span><!--[endif]--></span></span></a><span style="mso-spacerun: yes;">&nbsp;</span>על כן החל במלת <span style="color: #ffc000;">דברים</span>, לכלול עניני המצות ודברי תוכחה. ויהיה טעם <span style="color: #ffc000;">אלה הדברים אשר דבר משה אל כל ישראל בעבר הירדן</span> מה שאירע להם <span style="color: #ffc000;">במדבר בערבה מול סוף </span>,כלל מה שעבר עליהם בנסעם מסיני עד בואם לקדש ברנע:</span></p>
 # <p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">לבן</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">תפל</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">די זהב </span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">לא נזכרו במסעים גם לא נזכרו במקום אחר, ואולם אחר שאומר <span style="color: #ffc000;">בין ובין </span>אין הטעם שעברו באותם המקומות עצמם שנזכרו בשמות אלו. </span></p>"""
-# map_docx_to_karaites_html(html, foot_notes_list=['[9] TESTE'], stats=True)
+# map_docx_to_karaites_html(html, foot_notes_list=['[9] TEST'],, stats=True)

@@ -331,7 +331,7 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = "Commentaries"
-        ordering = ('book', 'chapter', 'verse')
+        ordering = ('book', 'chapter', 'verse', 'pk')
 
 
 class CommentTmp(models.Model):

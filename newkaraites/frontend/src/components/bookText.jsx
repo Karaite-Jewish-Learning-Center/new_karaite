@@ -1,5 +1,4 @@
-import React, {useReducer} from "react";
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from "react";
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +9,9 @@ import Grid from '@material-ui/core/Grid'
 import {Typography} from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import {bookChapterUrl, getCommentsUrl} from "../constants";
@@ -17,51 +19,25 @@ import './css/scroll.css';
 import './css/comments.css';
 
 
-const useStyles = makeStyles({
-    root: {
-        position: 'fixed',
-        flexGrow: 1,
-        marginTop: 100,
-        marginBottom: 100,
+function TabPanel(props) {
+    const {children, value, index, ...other} = props;
 
-    },
-
-    table: {
-        padding: '30px',
-    },
-    text: {
-        width: "45%",
-        verticalAlign: 'text-top',
-    },
-    verseNumber: {
-        width: "5%",
-        verticalAlign: 'text-top',
-    },
-    count: {
-        fontSize: '0.9em',
-        color: 'gray',
-        textAlign: 'center'
-    },
-    header: {
-        width: '50%',
-        textAlign: 'left'
-    },
-    comments: {
-        cursor: 'pointer',
-    },
-
-    selectColor: {
-        backgroundColor: '#96c5f3'
-    },
-    bookHeader: {
-        position: 'relative',
-        width: '100%',
-        height: 30,
-        backgroundColor: "gray",
-        color: 'black',
-    }
-})
-
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box p={2}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
 
 export default function BookText({book}) {
     const BOOK = 0
@@ -77,8 +53,14 @@ export default function BookText({book}) {
     const [comments, setComments] = useState([])
     const [bookChapterVerse, setBookChapterVerse] = useState([book, 1, 1])
     const [commentChapterVerse, setCommentChapterVerse] = useState([0, 0])
-
+    const [commentTab, setCommentTab] = useState(0)
     const classes = useStyles();
+
+    const onTabChange = (event, tab) => {
+        setCommentTab(tab)
+        debugger
+       ReactTooltip.rebuild()
+    }
 
     const scroll = () => {
         // let element = document.getElementById(`inner-${bookChapterVerse[CHAPTER]}-${bookChapterVerse[VERSE]}`)
@@ -102,28 +84,31 @@ export default function BookText({book}) {
     function transform(node) {
         // rewrite the span with a onClick event handler
         if (node.type === 'tag' && node.name === 'span') {
-            if (node['attribs']['class'] === 'biblical-link') {
-                return <span onClick={refClick} className="biblical-link">{node['children'][0]['data']}</span>
+            if (node['attribs']['class'] === 'en-biblical-ref') {
+                return <span onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
+            }
+            if (node['attribs']['class'] === 'he-biblical-ref') {
+                return <span onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
             }
         }
     }
-
     const rowOnclick = (e) => {
         let [chapter, verse] = e.currentTarget.dataset.cV.split(',')
         chapter = parseInt(chapter) + 1
         verse = parseInt(verse) + 1
         // toggle comments
-        if (gridsize[0] === 8 && bookChapterVerse[CHAPTER] === chapter && bookChapterVerse[VERSE] === verse) {
-            setGridSize([12, 1])
-            return
-        }
+        // if (gridsize[0] === 8 && bookChapterVerse[CHAPTER] === chapter && bookChapterVerse[VERSE] === verse) {
+        //     setGridSize([12, 1])
+        //     return
+        // }
 
         axios.get(getCommentsUrl + `${bookChapterVerse[BOOK]}/${chapter}/${verse}/`)
             .then((response) => {
                 setComments(response.data.comments)
-                setBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
+                // setBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
                 setCommentChapterVerse([chapter, verse])
                 setGridSize([8, 4])
+                debugger
                 ReactTooltip.rebuild()
 
             })
@@ -138,8 +123,8 @@ export default function BookText({book}) {
             .then((response) => {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
-                debugger
                 setIsLoaded(true);
+                debugger
                 ReactTooltip.rebuild()
                 scroll()
             })
@@ -154,9 +139,6 @@ export default function BookText({book}) {
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
-        const {text} = bookChapters
-        debugger
-        const [book, chapter, verse] = bookChapterVerse
 
         return (
             <div>
@@ -165,10 +147,9 @@ export default function BookText({book}) {
                 {/*</BooksToolBar>*/}
                 <Grid container
                       className={classes.root}
-
                 >
 
-                    {/*<ReactTooltip className={classes.toolTipMax} place="bottom"/>*/}
+                    {/*<ReactTooltip className={classes.toolTipMax} place="bottom"/>*!/*/}
                     <Grid item xs={gridsize[0]}>
                         <Table className="scroll_table">
                             <TableBody>
@@ -227,15 +208,38 @@ export default function BookText({book}) {
                     </Grid>
                     {(comments.length > 0 ?
                         <Grid Grid item xs={gridsize[1]}>
+
                             <div className="div_scroll">
-                                {comments.map(html => (
-                                    <>
-                                        {ReactHtmlParser(html.comment_en, {
-                                            decodeEntities: true,
-                                            transform: transform
-                                        })}
-                                    </>
-                                ))}
+
+                                <Tabs
+                                    value={commentTab}
+                                    onChange={onTabChange}
+                                    className={classes.tabs}
+                                    aria-label="comments English Hebrew">
+                                    <Tab label="English" id={0}/>
+                                    <Tab label="Hebrew" id={1}/>
+                                </Tabs>
+                                <TabPanel value={commentTab} index={0}>
+                                    {comments.map(html => (
+                                        <>
+                                            {ReactHtmlParser(html.comment_en, {
+                                                decodeEntities: true,
+                                                transform: transform
+                                            })}
+
+                                        </>
+                                    ))}
+                                </TabPanel>
+                                <TabPanel value={commentTab} index={1}>
+                                    {comments.map(html => (
+                                        <>
+                                            {ReactHtmlParser(html.comment_he, {
+                                                decodeEntities: true,
+                                                transform: transform
+                                            })}
+                                        </>
+                                    ))}
+                                </TabPanel>
                             </div>
                         </Grid>
                         : null)}
@@ -244,3 +248,57 @@ export default function BookText({book}) {
         )
     }
 }
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        position: 'fixed',
+        flexGrow: 1,
+        marginTop: 100,
+        marginBottom: 100,
+
+    },
+
+    table: {
+        padding: '30px',
+    },
+    text: {
+        width: "45%",
+        verticalAlign: 'text-top',
+    },
+    verseNumber: {
+        width: "5%",
+        verticalAlign: 'text-top',
+    },
+    count: {
+        fontSize: '0.9em',
+        color: 'gray',
+        textAlign: 'center'
+    },
+    header: {
+        width: '50%',
+        textAlign: 'left'
+    },
+    comments: {
+        cursor: 'pointer',
+    },
+
+    selectColor: {
+        backgroundColor: '#96c5f3'
+    },
+    bookHeader: {
+        position: 'relative',
+        width: '100%',
+        height: 30,
+        backgroundColor: "gray",
+        color: 'black',
+    },
+    toolHe: {
+        toolTipMaxWidth: {
+            maxWidth: 300,
+        },
+        direction: 'rtl',
+    },
+}))
+
+

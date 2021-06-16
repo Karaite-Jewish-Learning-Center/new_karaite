@@ -10,15 +10,23 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Comments"""
         for i, comment in enumerate(Comment.objects.all()):
-            # sys.stdout.write(f"\33[K Rewriting English html comments chapter:{comment.chapter} verse:{comment.verse}\r")
+            sys.stdout.write(
+                f"\33[K Rewriting English html comments chapter:{comment.chapter} verse:{comment.verse} , {i}\r")
 
-            print(
-                f"Rewriting English html comments chapter:{comment.chapter} verse:{comment.verse}, {comment.id}  , {i}")
-            comment.comment_en = map_docx_to_karaites_html(comment.comment_he,
-                                                           foot_notes_list=comment.foot_notes_he,
+            comment.comment_en = map_docx_to_karaites_html(comment.comment_en,
+                                                           foot_notes_list=comment.foot_notes_en,
                                                            language="en",
                                                            stats=False)
-            print('-' * 50)
-
             comment.save()
-        # sys.stdout.write(f"\33[K\r")
+
+        for i, comment in enumerate(Comment.objects.all()):
+            sys.stdout.write(
+                f"\33[K Rewriting Hebrew html comments chapter:{comment.chapter} verse:{comment.verse} , {i}\r")
+
+            comment.comment_he = map_docx_to_karaites_html(comment.comment_he,
+                                                           foot_notes_list=comment.foot_notes_he,
+                                                           language="he",
+                                                           stats=False)
+            comment.save()
+
+        sys.stdout.write(f"\33[K\r")

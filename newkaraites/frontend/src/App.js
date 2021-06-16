@@ -6,19 +6,34 @@ import MyAppBar from "./components/AppBar";
 import BookList from "./components/BookList";
 import BookText from "./components/bookText";
 import Comments from "./components/Coments";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: '#ffffff',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#11c4f1',
+    },
+  },
+});
 
 const useStyles = makeStyles({
-  toolTipMaxWidth:{
-      maxWidth:300,
-  }
+    toolTipMaxWidth: {
+        maxWidth: 300,
+    }
 })
 
 function App() {
     const classes = useStyles()
 
     return (
-        <React.Fragment>
-            <ReactTooltip  className={classes.toolTipMaxWidth} />
+        <ThemeProvider theme={theme}>
+            <ReactTooltip  className={classes.toolTipMaxWidth} html={true}/>
             <MyAppBar/>
 
             <Route exact path="/">
@@ -33,7 +48,7 @@ function App() {
                 <BookText book={'Deuteronomy'}/>
             </Route>
 
-        </React.Fragment>
+        </ThemeProvider>
     );
 }
 

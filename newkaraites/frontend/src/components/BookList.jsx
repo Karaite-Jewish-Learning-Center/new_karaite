@@ -1,8 +1,5 @@
-import React, {useReducer} from "react";
-import Box from '@material-ui/core/Box';
+import React from "react";
 import {useState, useEffect} from 'react';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import {bookListUrl} from "../constants";
 
