@@ -4,16 +4,18 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import Badge from '@material-ui/core/Badge';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Grid from '@material-ui/core/Grid'
 import {Typography} from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
-import CommentTwoToneIcon from '@material-ui/icons/CommentTwoTone';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
+import CommentBadge from '../components/CommentBadge';
+import {hebrewToIndoArabic, hebrewBookNameToEnglish} from "../utils/utils";
 import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
 import './css/comments.css';
@@ -21,7 +23,6 @@ import './css/comments.css';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
-
     return (
         <div
             role="tabpanel"
@@ -30,11 +31,9 @@ function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box p={2}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
+            <Box p={2}>
+                <Typography>{children}</Typography>
+            </Box>
         </div>
     );
 }
@@ -54,12 +53,11 @@ export default function BookText({book}) {
     const [bookChapterVerse, setBookChapterVerse] = useState([book, 1, 1])
     const [commentChapterVerse, setCommentChapterVerse] = useState([0, 0])
     const [commentTab, setCommentTab] = useState(0)
+
     const classes = useStyles();
 
     const onTabChange = (event, tab) => {
         setCommentTab(tab)
-        debugger
-       ReactTooltip.rebuild()
     }
 
     const scroll = () => {
@@ -75,40 +73,60 @@ export default function BookText({book}) {
     }
     const refClick = (e) => {
         // parse biblical ref
-        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '')
-        let [book, chapterVerse] = biblicalRef.split(" ")
-        let [chapter, verse] = chapterVerse.split(":")
-        setBookChapterVerse([book, chapter, verse])
+        let book, chapter, verse
+        let language = e.target.childNodes[0].parentElement.lang
+        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '')
+        let [refBook, chapterVerse] = biblicalRef.split(" ")
+        let [refChapter, refVerse] = chapterVerse.split(":")
+
+        if (language === 'HE') {
+            [book, chapter, verse] = [hebrewBookNameToEnglish(refBook), hebrewToIndoArabic(refChapter), hebrewToIndoArabic(refVerse)]
+            debugger
+        } else{
+            [book, chapter, verse] = [refBook, refChapter, refVerse]
+        }
+
+        if(book === undefined || chapter === undefined || verse === undefined){
+            console.log(refBook, refChapter, refChapter)
+        }else {
+            setBookChapterVerse([book, chapter, verse])
+        }
+
     }
 
     function transform(node) {
         // rewrite the span with a onClick event handler
         if (node.type === 'tag' && node.name === 'span') {
             if (node['attribs']['class'] === 'en-biblical-ref') {
-                return <span onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
+                return <span lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
             }
             if (node['attribs']['class'] === 'he-biblical-ref') {
-                return <span onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
+                return <span lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
             }
+
         }
     }
+
     const rowOnclick = (e) => {
         let [chapter, verse] = e.currentTarget.dataset.cV.split(',')
         chapter = parseInt(chapter) + 1
         verse = parseInt(verse) + 1
-        // toggle comments
-        // if (gridsize[0] === 8 && bookChapterVerse[CHAPTER] === chapter && bookChapterVerse[VERSE] === verse) {
-        //     setGridSize([12, 1])
-        //     return
-        // }
+        let isCommentLoaded = commentChapterVerse[COM_CHAPTER] === chapter && commentChapterVerse[COM_VERSE] === verse
+        // avoid multiple calls to same comment
+        if (isCommentLoaded) {
+            // open tab if closed
+            if (gridsize[0] === 12) {
+                setGridSize([8, 4])
+                return
+            }
+            return
+        }
 
         axios.get(getCommentsUrl + `${bookChapterVerse[BOOK]}/${chapter}/${verse}/`)
             .then((response) => {
                 setComments(response.data.comments)
-                // setBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
                 setCommentChapterVerse([chapter, verse])
                 setGridSize([8, 4])
-                debugger
                 ReactTooltip.rebuild()
 
             })
@@ -123,8 +141,8 @@ export default function BookText({book}) {
             .then((response) => {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
+                setCommentChapterVerse([0, 0])
                 setIsLoaded(true);
-                debugger
                 ReactTooltip.rebuild()
                 scroll()
             })
@@ -148,9 +166,10 @@ export default function BookText({book}) {
                 <Grid container
                       className={classes.root}
                 >
-
-                    {/*<ReactTooltip className={classes.toolTipMax} place="bottom"/>*!/*/}
                     <Grid item xs={gridsize[0]}>
+                        <div className={classes.textHeader}>
+                            Header
+                        </div>
                         <Table className="scroll_table">
                             <TableBody>
                                 {bookChapters.map((chapter_text, c) => (
@@ -164,7 +183,6 @@ export default function BookText({book}) {
 
                                                 <TableCell key={`${c}-${v}-1`} className={classes.text}>
                                                     <Typography
-                                                        align="right"
                                                         lang="he"
                                                         key={`he-${c}-${v}`}
                                                         dir="RTL">
@@ -188,13 +206,8 @@ export default function BookText({book}) {
                                                 <TableCell key={`${c}-${v}-4`} data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
                                                            onClick={(verse[2] !== '0' ? rowOnclick : null)}
                                                 >
-                                                    {(verse[2] !== '0' ?
-                                                        <span data-tip={"Click to read " + (verse[2] === "1" ? 'this comment' : 'these comments')}>
-                                                    <Badge badgeContent={verse[2]} color={((commentChapterVerse[COM_CHAPTER] === c + 1 && commentChapterVerse[COM_VERSE] === v + 1) ? "secondary" : "primary")}>
-                                                            <CommentTwoToneIcon/>
-                                                        </Badge>
-                                                    </span>
-                                                        : null)}
+                                                    <CommentBadge commentsCount={verse[2]} sameChapterAndVerse={(commentChapterVerse[COM_CHAPTER] === c + 1 && commentChapterVerse[COM_VERSE] === v + 1)}/>
+
                                                 </TableCell>
 
                                             </TableRow>
@@ -208,16 +221,23 @@ export default function BookText({book}) {
                     </Grid>
                     {(comments.length > 0 ?
                         <Grid Grid item xs={gridsize[1]}>
-
+                            <div className={classes.resources}>
+                                <IconButton
+                                    aria-label="Close comments pane"
+                                    component="span"
+                                    onClick={() => (setGridSize([12, 1]))}
+                                >
+                                    <HighlightOffIcon/>
+                                </IconButton>
+                            </div>
                             <div className="div_scroll">
-
                                 <Tabs
                                     value={commentTab}
                                     onChange={onTabChange}
                                     className={classes.tabs}
                                     aria-label="comments English Hebrew">
-                                    <Tab label="English" id={0}/>
-                                    <Tab label="Hebrew" id={1}/>
+                                    <Tab label="English" id={0} aria-label="Comments in English"/>
+                                    <Tab label="Hebrew" id={1} aria-label="Comments in Hebrew"/>
                                 </Tabs>
                                 <TabPanel value={commentTab} index={0}>
                                     {comments.map(html => (
@@ -293,12 +313,16 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "gray",
         color: 'black',
     },
-    toolHe: {
-        toolTipMaxWidth: {
-            maxWidth: 300,
-        },
-        direction: 'rtl',
+    resources: {
+        minHeight: 50,
+        backgroundColor: '#eaeaea',
+        borderLeft: '1px solid darkgrey',
     },
+    textHeader: {
+        minHeight: 50,
+        backgroundColor: '#eaeaea',
+
+    }
 }))
 
 

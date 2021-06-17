@@ -7,13 +7,6 @@ from .models import (Organization,
                      Comment)
 
 
-class BooksPresentation(View):
-
-    @staticmethod
-    def get(request):
-        return JsonResponse(Organization.get_list_of_books(), safe=False)
-
-
 def book_chapter_verse(request, *args, **kwargs):
     """ Do Book chapter and verse check"""
     book = kwargs.get('book', None)
@@ -70,6 +63,21 @@ def book_chapter_verse(request, *args, **kwargs):
                              'book': book_title.to_json()})
 
 
+def get_biblical_ref(request, ref):
+    """ 1 is a English ref or a Hebrew ref
+        2 Parse English
+        3 Translate Hebrew to English
+        dispatch to book_chapter_verse
+    """
+
+
+class BooksPresentation(View):
+
+    @staticmethod
+    def get(request):
+        return JsonResponse(Organization.get_list_of_books(), safe=False)
+
+
 class GetComments(View):
     """"""
 
@@ -80,6 +88,14 @@ class GetComments(View):
 
 
 class GetBookChapterVerses(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        kwargs.update({'model': 'bookText'})
+        return book_chapter_verse(request, *args, **kwargs)
+
+
+class GetBookChapterVersesFromRef(View):
 
     @staticmethod
     def get(request, *args, **kwargs):

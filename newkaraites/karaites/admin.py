@@ -119,7 +119,9 @@ admin.site.register(BookAsArray, BookAsArrayAdmin)
 class BookTextAdmin(admin.ModelAdmin):
     save_on_top = True
     list_display = ('book', 'chapter', 'verse',
-                    'text_en', 'text_he', 'comments_count_en', 'comments_count_he')
+                    'text_en', 'comments_count_en',
+                    'comments_count_he', 'text_he', 'verse_he_admin',
+                    'chapter_he_admin', 'book_he_admin',)
 
     list_filter = ('book', 'chapter', 'verse')
 
@@ -127,6 +129,7 @@ class BookTextAdmin(admin.ModelAdmin):
         css = {
             'all': ('../static/css/admin.css',)
         }
+        js = ('../static/js/toggleFilterPanel.js',)
 
 
 admin.site.register(BookText, BookTextAdmin)

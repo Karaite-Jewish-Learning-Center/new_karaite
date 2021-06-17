@@ -286,14 +286,12 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
             if hasattr(child, 'find'):
                 try:
                     note_ref = re.match('\\[[0-9]*.\\]', foot_notes_list[foot_note]).group()
-                    if language == "en":
-                        child.replace_with(BeautifulSoup(
-                            f'<span class="{language}-foot-note" data-tip="{foot_notes_list[foot_note]}"><sup>{note_ref}</sup></span>',
-                            'html5lib'))
-                    if language == "he":
-                        child.replace_with(BeautifulSoup(
-                            f'<span class="{language}-foot-note" data-tip="<p dir=\"rtl\">{foot_notes_list[foot_note]}</p>"><sup>{note_ref}</sup></span>',
-                            'html5lib'))
+                    child.replace_with(BeautifulSoup(
+                        f"""<span class="{language}-foot-note" 
+                        data-for='{language}' 
+                        data-tip='{foot_notes_list[foot_note]}'>
+                        <sup class="{language}-foot-index">{note_ref}</sup></span>""",
+                        'html5lib'))
                     foot_note += 1
                 except IndexError:
                     print(foot_note, len(foot_notes_list), foot_notes_list)
@@ -344,7 +342,8 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
         input('> enter to carry on.')
     return new_html
 
+
 # to test and debug uncomment this
 # html = """<p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span dir="LTR" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">1:1</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">אלה הדברים</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">- כאשר היו ישראל עתידים לעבור את הירדן</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">להחלק איש בנחלתו, והיו צריכים התראה ואזהרה לשמור התורה, כאשר בזמן נסוע מסיני להכנס בארץ &lt;התרה בהם&gt;, וכאשר אירעו להם ענינים ונמנעו מלהכנס, אז כון עתה לסדר גם אותם {הענינים} &lt;עניני המניעות שמסבתם נשנו עתה עניני האזהרות וההתראות&gt;.<a style="mso-footnote-id: ftn1;" title="" href="#_ftn1" name="_ftnref1"><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character: footnote;"><!-- [if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size: 12.0pt; line-height: 115%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; position: relative; top: -2.0pt; mso-text-raise: 2.0pt; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: HE;">[1]</span></span><!--[endif]--></span></span></a><span style="mso-spacerun: yes;">&nbsp;</span>על כן החל במלת <span style="color: #ffc000;">דברים</span>, לכלול עניני המצות ודברי תוכחה. ויהיה טעם <span style="color: #ffc000;">אלה הדברים אשר דבר משה אל כל ישראל בעבר הירדן</span> מה שאירע להם <span style="color: #ffc000;">במדבר בערבה מול סוף </span>,כלל מה שעבר עליהם בנסעם מסיני עד בואם לקדש ברנע:</span></p>
 # <p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">לבן</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">תפל</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: black; mso-themecolor: text1; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">ו</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: #ffc000; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">די זהב </span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">לא נזכרו במסעים גם לא נזכרו במקום אחר, ואולם אחר שאומר <span style="color: #ffc000;">בין ובין </span>אין הטעם שעברו באותם המקומות עצמם שנזכרו בשמות אלו. </span></p>"""
-# map_docx_to_karaites_html(html, foot_notes_list=['[9] TEST'],, stats=True)
+# map_docx_to_karaites_html(html, foot_notes_list=['[9] TEST'], language="he", stats=True)

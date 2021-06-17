@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL)
 from tinymce.models import HTMLField
+from .hebrew_numbers import indo_arabic_to_hebrew
 
 
 class Organization(models.Model):
@@ -463,21 +464,45 @@ class BookText(models.Model):
                                 verbose_name=_("Verse"))
 
     text_en = models.TextField(null=True,
-                               verbose_name=_("English chapter Verse text"))
+                               verbose_name=_("English text"))
 
     text_he = models.TextField(null=True,
-                               verbose_name=_("Hebrew chapter Verse text"))
+                               verbose_name=_("Hebrew text"))
 
     comments_count_en = models.IntegerField(default=0,
                                             editable=False,
-                                            verbose_name=_("Total Comments EN"))
+                                            verbose_name=_("EN Cmt."))
 
     comments_count_he = models.IntegerField(default=0,
                                             editable=False,
-                                            verbose_name=_("Total Comments HE"))
+                                            verbose_name=_("HE Cmt."))
 
     def __str__(self):
         return f'{self.book.book_title_en}           {self.book.book_title_he:>40}'
+
+    def verse_he(self):
+        return indo_arabic_to_hebrew(self.verse)
+
+    def chapter_he(self):
+        return indo_arabic_to_hebrew(self.chapter)
+
+    @mark_safe
+    def book_he_admin(self):
+        return self.book.book_title_he
+
+    book_he_admin.short_description = 'Book_he'
+
+    @mark_safe
+    def verse_he_admin(self):
+        return self.verse_he()
+
+    verse_he_admin.short_description = "verse_he"
+
+    @mark_safe
+    def chapter_he_admin(self):
+        return self.chapter_he()
+
+    chapter_he_admin.short_description = "chapter_he"
 
     def to_json(self):
         """Serialize instance to json"""
@@ -485,7 +510,9 @@ class BookText(models.Model):
                 'book_title_en': self.book.book_title_en,
                 'book_title_he': self.book.book_title_he,
                 'chapter': self.chapter,
+                'chapter_he': self.chapter_he(),
                 'verse': self.verse,
+                'verse_he': self.verse_he(),
                 'text_en': self.text_en,
                 'text_he': self.text_he,
                 'comments_count_en': self.comments_count_en,

@@ -22,18 +22,25 @@ const theme = createMuiTheme({
   },
 });
 
+// tooltips
 const useStyles = makeStyles({
-    toolTipMaxWidth: {
+    english: {
         maxWidth: 300,
+    },
+    hebrew:{
+      maxWidth: 300,
+      direction:'rtl',
     }
 })
+
 
 function App() {
     const classes = useStyles()
 
     return (
         <ThemeProvider theme={theme}>
-            <ReactTooltip  className={classes.toolTipMaxWidth} html={true}/>
+            <ReactTooltip id='en' className={classes.english} place="bottom"/>
+            <ReactTooltip id='he' className={classes.hebrew} place="bottom"/>
             <MyAppBar/>
 
             <Route exact path="/">
