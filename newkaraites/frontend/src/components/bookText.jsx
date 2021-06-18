@@ -15,6 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import CommentBadge from '../components/CommentBadge';
+import SelectChapter from '../components/SelectChapter';
 import {hebrewToIndoArabic, hebrewBookNameToEnglish} from "../utils/utils";
 import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
@@ -73,23 +74,31 @@ export default function BookText({book}) {
     }
     const refClick = (e) => {
         // parse biblical ref
-        let book, chapter, verse
+        let book
+        let chapter
+        let verse
         let language = e.target.childNodes[0].parentElement.lang
-        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '')
-        let [refBook, chapterVerse] = biblicalRef.split(" ")
-        let [refChapter, refVerse] = chapterVerse.split(":")
-
+        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').trim()
         if (language === 'HE') {
-            [book, chapter, verse] = [hebrewBookNameToEnglish(refBook), hebrewToIndoArabic(refChapter), hebrewToIndoArabic(refVerse)]
-            debugger
-        } else{
-            [book, chapter, verse] = [refBook, refChapter, refVerse]
+            let spacePos = biblicalRef.lastIndexOf(' ') + 1
+            let refChapterVerse = biblicalRef.substr(spacePos)
+            let [refChapter, refVerse] = refChapterVerse.split(':')
+            let refBook = biblicalRef.replace(refChapterVerse, '')
+            book = hebrewBookNameToEnglish(refBook)
+            chapter = hebrewToIndoArabic(refChapter)
+            verse = hebrewToIndoArabic(refVerse)
+        } else {
+            let re = /[0-9]+/g
+            let chapterVerse = biblicalRef.match(re)
+            chapter = chapterVerse[0]
+            verse = chapterVerse[1]
+            book = biblicalRef.replace(`${chapter}:${verse}`, '').trim()
         }
 
-        if(book === undefined || chapter === undefined || verse === undefined){
-            console.log(refBook, refChapter, refChapter)
-        }else {
+        if ((book !== undefined && chapter !== undefined && verse !== undefined)) {
             setBookChapterVerse([book, chapter, verse])
+        } else {
+            console.log(book, chapter, verse)
         }
 
     }
@@ -157,7 +166,6 @@ export default function BookText({book}) {
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
-
         return (
             <div>
                 {/*<BooksToolBar className={classes.bookHeader}>*/}
@@ -168,7 +176,7 @@ export default function BookText({book}) {
                 >
                     <Grid item xs={gridsize[0]}>
                         <div className={classes.textHeader}>
-                            Header
+                            <SelectChapter book={bookData} chapter={bookChapterVerse[CHAPTER]}/>
                         </div>
                         <Table className="scroll_table">
                             <TableBody>
@@ -274,11 +282,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         position: 'fixed',
         flexGrow: 1,
-        marginTop: 100,
+        marginTop: 70,
         marginBottom: 100,
 
     },
-
     table: {
         padding: '30px',
     },

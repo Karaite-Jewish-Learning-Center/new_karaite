@@ -215,7 +215,7 @@ const hebrewToIndoArabic = (hebrew_number) => {
         'קצט': 199,
         'ר': 200,
     }
-    return table[hebrew_number]
+    return table[hebrew_number.trim()]
 }
 
 const hebrewBookNameToEnglish = (hebrewBookName) => {
@@ -261,7 +261,7 @@ const hebrewBookNameToEnglish = (hebrewBookName) => {
         'שיר השירים': 'Song of Songs'
     }
 
-    return books[hebrewBookName]
+    return books[hebrewBookName.trim()]
 }
 export {
     getComments,
