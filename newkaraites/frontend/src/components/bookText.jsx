@@ -4,40 +4,26 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Grid from '@material-ui/core/Grid'
 import {Typography} from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
+
+import TabPanel from "./TabPanel";
+import Message from "./Message";
 import CommentBadge from '../components/CommentBadge';
 import SelectChapter from '../components/SelectChapter';
-import {hebrewToIndoArabic, hebrewBookNameToEnglish} from "../utils/utils";
+import Comments from "./Coments";
+import {hebrewToIndoArabic, hebrewBookNameToEnglish, makeRandomKey} from "../utils/utils";
 import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
 import './css/comments.css';
 
-
-function TabPanel(props) {
-    const {children, value, index, ...other} = props;
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            <Box p={2}>
-                <Typography>{children}</Typography>
-            </Box>
-        </div>
-    );
-}
 
 export default function BookText({book}) {
     const BOOK = 0
@@ -61,10 +47,11 @@ export default function BookText({book}) {
         setCommentTab(tab)
     }
 
+    const onChapterChange = (e) => {
+        setBookChapterVerse([bookChapterVerse[BOOK], e.target.value, 1])
+    }
     const scroll = () => {
-        // let element = document.getElementById(`inner-${bookChapterVerse[CHAPTER]}-${bookChapterVerse[VERSE]}`)
         let element = document.getElementById(`inner-1-${bookChapterVerse[VERSE]}`)
-
         if (element !== null) {
             let bounding = element.getBoundingClientRect()
             if (!(bounding.top >= 0 && bounding.left >= 0 && bounding.right <= window.innerWidth && bounding.bottom <= window.innerHeight)) {
@@ -78,21 +65,23 @@ export default function BookText({book}) {
         let chapter
         let verse
         let language = e.target.childNodes[0].parentElement.lang
-        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').trim()
+        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(',', '').replace('.', '').trim()
         if (language === 'HE') {
             let spacePos = biblicalRef.lastIndexOf(' ') + 1
             let refChapterVerse = biblicalRef.substr(spacePos)
             let [refChapter, refVerse] = refChapterVerse.split(':')
-            let refBook = biblicalRef.replace(refChapterVerse, '')
+            let refBook = biblicalRef.replace(refChapterVerse, '').trim()
+            refVerse = refVerse.split('-')
             book = hebrewBookNameToEnglish(refBook)
             chapter = hebrewToIndoArabic(refChapter)
-            verse = hebrewToIndoArabic(refVerse)
+            verse = hebrewToIndoArabic(refVerse[0])
         } else {
             let re = /[0-9]+/g
             let chapterVerse = biblicalRef.match(re)
-            chapter = chapterVerse[0]
-            verse = chapterVerse[1]
-            book = biblicalRef.replace(`${chapter}:${verse}`, '').trim()
+            chapter = parseInt(chapterVerse[0])
+            verse = parseInt(chapterVerse[1])
+            re = /[a-z,A-Z]+/g
+            book = biblicalRef.match(re)
         }
 
         if ((book !== undefined && chapter !== undefined && verse !== undefined)) {
@@ -102,20 +91,6 @@ export default function BookText({book}) {
         }
 
     }
-
-    function transform(node) {
-        // rewrite the span with a onClick event handler
-        if (node.type === 'tag' && node.name === 'span') {
-            if (node['attribs']['class'] === 'en-biblical-ref') {
-                return <span lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
-            }
-            if (node['attribs']['class'] === 'he-biblical-ref') {
-                return <span lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
-            }
-
-        }
-    }
-
     const rowOnclick = (e) => {
         let [chapter, verse] = e.currentTarget.dataset.cV.split(',')
         chapter = parseInt(chapter) + 1
@@ -162,34 +137,35 @@ export default function BookText({book}) {
     }, [bookChapterVerse])
 
     if (error) {
-        return <div>Error: {error.message}</div>
-    } else if (!isLoaded) {
-        return <div>Loading...</div>
+        return <Message error={error}/>
     } else {
         return (
             <div>
-                {/*<BooksToolBar className={classes.bookHeader}>*/}
-                {/*    <p>{book}, {chapter} , {verse}</p>*/}
-                {/*</BooksToolBar>*/}
-                <Grid container
-                      className={classes.root}
-                >
+                <Grid container className={classes.root}>
                     <Grid item xs={gridsize[0]}>
-                        <div className={classes.textHeader}>
-                            <SelectChapter book={bookData} chapter={bookChapterVerse[CHAPTER]}/>
-                        </div>
+
+                        <SelectChapter book={bookData}
+                                       chapter={bookChapterVerse[CHAPTER]}
+                                       onSelectChange={onChapterChange}
+                                       isloaded={isLoaded}
+                        />
+
                         <Table className="scroll_table">
+                            <TableHead>
+                            <TableRow/>
+                            </TableHead>
                             <TableBody>
                                 {bookChapters.map((chapter_text, c) => (
                                     <>
                                         {chapter_text.text.map((verse, v) => (
-                                            <TableRow id={`inner-1-${v + 1}`} key={`inner-${c}-${v}`}
+                                            <TableRow key={makeRandomKey()}
+                                                      id={`inner-1-${v + 1}`}
                                                       hover={true}
                                                       selected={(v + 1) === bookChapterVerse[VERSE]}
-                                                      className={(v + 1 === bookChapterVerse[VERSE] ? classes.selectColor : "")}
+
                                             >
 
-                                                <TableCell key={`${c}-${v}-1`} className={classes.text}>
+                                                <TableCell className={classes.textHe}>
                                                     <Typography
                                                         lang="he"
                                                         key={`he-${c}-${v}`}
@@ -198,20 +174,20 @@ export default function BookText({book}) {
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell id={`pos-${c + 1}-${v + 1}`} key={`${c}-${v}-2`} className={classes.verseNumber}>
+                                                <TableCell id={`pos-${c + 1}-${v + 1}`} className={classes.verseNumber}>
                                                     <Typography className={classes.count}>
                                                         {v + 1}
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell key={`${c}-${v}-3`} className={classes.text}>
+                                                <TableCell className={classes.text}>
                                                     <Typography lang="en"
                                                                 key={`en-${c}-${v}`}
                                                                 dir="LTR">{verse[0]}
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell key={`${c}-${v}-4`} data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
+                                                <TableCell data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
                                                            onClick={(verse[2] !== '0' ? rowOnclick : null)}
                                                 >
                                                     <CommentBadge commentsCount={verse[2]} sameChapterAndVerse={(commentChapterVerse[COM_CHAPTER] === c + 1 && commentChapterVerse[COM_VERSE] === v + 1)}/>
@@ -224,11 +200,9 @@ export default function BookText({book}) {
                                 ))}
                             </TableBody>
                         </Table>
-
-
                     </Grid>
                     {(comments.length > 0 ?
-                        <Grid Grid item xs={gridsize[1]}>
+                        <Grid item xs={gridsize[1]}>
                             <div className={classes.resources}>
                                 <IconButton
                                     aria-label="Close comments pane"
@@ -247,26 +221,12 @@ export default function BookText({book}) {
                                     <Tab label="English" id={0} aria-label="Comments in English"/>
                                     <Tab label="Hebrew" id={1} aria-label="Comments in Hebrew"/>
                                 </Tabs>
-                                <TabPanel value={commentTab} index={0}>
-                                    {comments.map(html => (
-                                        <>
-                                            {ReactHtmlParser(html.comment_en, {
-                                                decodeEntities: true,
-                                                transform: transform
-                                            })}
 
-                                        </>
-                                    ))}
+                                <TabPanel value={commentTab} index={0}>
+                                    <Comments language="en" comments={comments} refClick={refClick}/>
                                 </TabPanel>
                                 <TabPanel value={commentTab} index={1}>
-                                    {comments.map(html => (
-                                        <>
-                                            {ReactHtmlParser(html.comment_he, {
-                                                decodeEntities: true,
-                                                transform: transform
-                                            })}
-                                        </>
-                                    ))}
+                                    <Comments language="he" comments={comments} refClick={refClick}/>
                                 </TabPanel>
                             </div>
                         </Grid>
@@ -293,6 +253,11 @@ const useStyles = makeStyles((theme) => ({
         width: "45%",
         verticalAlign: 'text-top',
     },
+    textHe: {
+        width: "45%",
+        textAlign: 'right',
+        verticalAlign: 'text-top',
+    },
     verseNumber: {
         width: "5%",
         verticalAlign: 'text-top',
@@ -311,7 +276,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     selectColor: {
-        backgroundColor: '#96c5f3'
+        backgroundColor: '#0980f5'
     },
     bookHeader: {
         position: 'relative',
@@ -325,11 +290,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#eaeaea',
         borderLeft: '1px solid darkgrey',
     },
-    textHeader: {
-        minHeight: 50,
-        backgroundColor: '#eaeaea',
 
-    }
+
 }))
 
 

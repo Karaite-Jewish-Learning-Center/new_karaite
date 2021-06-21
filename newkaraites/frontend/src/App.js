@@ -9,30 +9,6 @@ import Comments from "./components/Coments";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      // Purple and green play nicely together.
-      main: '#ffffff',
-    },
-    secondary: {
-      // This is green.A700 as hex.
-      main: '#11c4f1',
-    },
-  },
-});
-
-// tooltips
-const useStyles = makeStyles({
-    english: {
-        maxWidth: 300,
-    },
-    hebrew:{
-      maxWidth: 300,
-      direction:'rtl',
-    }
-})
-
 
 function App() {
     const classes = useStyles()
@@ -60,3 +36,27 @@ function App() {
 }
 
 export default App;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: '#ffffff',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#11c4f1',
+    },
+  },
+});
+
+// tooltips
+const useStyles = makeStyles({
+    english: {
+        maxWidth: 300,
+    },
+    hebrew:{
+      maxWidth: 300,
+      direction:'rtl',
+    }
+})

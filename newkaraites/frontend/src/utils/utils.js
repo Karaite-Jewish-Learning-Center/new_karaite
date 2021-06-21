@@ -8,7 +8,7 @@ const getComments = async (chapter, verse) => {
 }
 
 const makeRandomKey = () => {
-    return `k-${Math.random()}`
+    return `k-${Math.random()* 10000000000}`
 }
 
 
