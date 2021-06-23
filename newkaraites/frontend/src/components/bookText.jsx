@@ -5,32 +5,37 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Grid from '@material-ui/core/Grid'
 import {Typography} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 
 import TabPanel from "./TabPanel";
 import Message from "./Message";
 import CommentBadge from '../components/CommentBadge';
-import SelectChapter from '../components/SelectChapter';
 import Comments from "./Coments";
-import {hebrewToIndoArabic, hebrewBookNameToEnglish, makeRandomKey} from "../utils/utils";
-import {bookChapterUrl, getCommentsUrl} from "../constants";
+import CommentRef from "./commenstRef";
+import {
+    hebrewToIndoArabic,
+    hebrewBookNameToEnglish,
+    makeRandomKey,
+    englishBookNameToHebrew,
+    toEnglish,
+    equals
+} from "../utils/utils";
+import {bookChapterUrl, getCommentsUrl, HEBREW} from "../constants";
 import './css/scroll.css';
 import './css/comments.css';
+import HeaderSelect from "./HeaderSelect";
+import {LANGUAGE_TAG} from "../constants";
 
 
 export default function BookText({book}) {
     const BOOK = 0
     const CHAPTER = 1
     const VERSE = 2
-    const COM_CHAPTER = 0
-    const COM_VERSE = 1
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
     const [bookData, setBookData] = useState();
@@ -38,20 +43,28 @@ export default function BookText({book}) {
     const [gridsize, setGridSize] = useState([12, 1])
     const [comments, setComments] = useState([])
     const [bookChapterVerse, setBookChapterVerse] = useState([book, 1, 1])
-    const [commentChapterVerse, setCommentChapterVerse] = useState([0, 0])
+    const [commentBookChapterVerse, setCommentBookChapterVerse] = useState([book, 0, 0])
     const [commentTab, setCommentTab] = useState(0)
-
+    const [verseRange, setVerseRange] = useState([1])
     const classes = useStyles();
 
     const onTabChange = (event, tab) => {
         setCommentTab(tab)
     }
-
     const onChapterChange = (e) => {
-        setBookChapterVerse([bookChapterVerse[BOOK], e.target.value, 1])
+        setBookChapterVerse([bookChapterVerse[BOOK], parseInt(e.target.value), 1])
+        setVerseRange([1])
     }
+    const onBookChange = (e) => {
+        setBookChapterVerse([toEnglish(e.target.value), 1, 1])
+        setVerseRange([1])
+    }
+    const closeCommentTab = () => {
+        setGridSize([12, 1])
+    }
+
     const scroll = () => {
-        let element = document.getElementById(`inner-1-${bookChapterVerse[VERSE]}`)
+        let element = document.getElementById(`inner-${bookChapterVerse[CHAPTER]}-${bookChapterVerse[VERSE]}`)
         if (element !== null) {
             let bounding = element.getBoundingClientRect()
             if (!(bounding.top >= 0 && bounding.left >= 0 && bounding.right <= window.innerWidth && bounding.bottom <= window.innerHeight)) {
@@ -64,9 +77,11 @@ export default function BookText({book}) {
         let book
         let chapter
         let verse
+        let chapterVerse
         let language = e.target.childNodes[0].parentElement.lang
+        debugger
         let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(',', '').replace('.', '').trim()
-        if (language === 'HE') {
+        if (language.toLowerCase() === 'he' ) {
             let spacePos = biblicalRef.lastIndexOf(' ') + 1
             let refChapterVerse = biblicalRef.substr(spacePos)
             let [refChapter, refVerse] = refChapterVerse.split(':')
@@ -75,27 +90,33 @@ export default function BookText({book}) {
             book = hebrewBookNameToEnglish(refBook)
             chapter = hebrewToIndoArabic(refChapter)
             verse = hebrewToIndoArabic(refVerse[0])
+            chapterVerse = refVerse.map(hebrewNumber => hebrewToIndoArabic(hebrewNumber))
         } else {
+            debugger
             let re = /[0-9]+/g
-            let chapterVerse = biblicalRef.match(re)
+            chapterVerse = biblicalRef.match(re)
             chapter = parseInt(chapterVerse[0])
             verse = parseInt(chapterVerse[1])
             re = /[a-z,A-Z]+/g
-            book = biblicalRef.match(re)
+            book = biblicalRef.match(re)[0]
+            chapterVerse = chapterVerse.slice(1).map(arabic => parseInt(arabic))
         }
 
         if ((book !== undefined && chapter !== undefined && verse !== undefined)) {
             setBookChapterVerse([book, chapter, verse])
+            setVerseRange(chapterVerse)
         } else {
             console.log(book, chapter, verse)
         }
 
     }
     const rowOnclick = (e) => {
+
         let [chapter, verse] = e.currentTarget.dataset.cV.split(',')
-        chapter = parseInt(chapter) + 1
+        chapter = parseInt(chapter)
         verse = parseInt(verse) + 1
-        let isCommentLoaded = commentChapterVerse[COM_CHAPTER] === chapter && commentChapterVerse[COM_VERSE] === verse
+        debugger
+        let isCommentLoaded = commentBookChapterVerse[CHAPTER] === chapter && commentBookChapterVerse[VERSE] === verse
         // avoid multiple calls to same comment
         if (isCommentLoaded) {
             // open tab if closed
@@ -109,7 +130,7 @@ export default function BookText({book}) {
         axios.get(getCommentsUrl + `${bookChapterVerse[BOOK]}/${chapter}/${verse}/`)
             .then((response) => {
                 setComments(response.data.comments)
-                setCommentChapterVerse([chapter, verse])
+                setCommentBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
                 setGridSize([8, 4])
                 ReactTooltip.rebuild()
 
@@ -120,12 +141,12 @@ export default function BookText({book}) {
     }
 
     useEffect(() => {
-
         axios.get(bookChapterUrl + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
             .then((response) => {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
-                setCommentChapterVerse([0, 0])
+                // setBookChapters({[bookChapterVerse[BOOK]]: response.data.chapters})
+
                 setIsLoaded(true);
                 ReactTooltip.rebuild()
                 scroll()
@@ -136,45 +157,54 @@ export default function BookText({book}) {
             })
     }, [bookChapterVerse])
 
+    if (!isLoaded) return (<div>Loading</div>)
+
     if (error) {
         return <Message error={error}/>
     } else {
+        const bookName = bookChapterVerse[BOOK]
+        const chapter = bookChapterVerse[CHAPTER]
+
         return (
             <div>
                 <Grid container className={classes.root}>
                     <Grid item xs={gridsize[0]}>
 
-                        <SelectChapter book={bookData}
-                                       chapter={bookChapterVerse[CHAPTER]}
-                                       onSelectChange={onChapterChange}
-                                       isloaded={isLoaded}
+                        <HeaderSelect book_en={bookName}
+                                      book_he={englishBookNameToHebrew(bookName)}
+                                      chapters={bookData.verses.length}
+                                      chapter={chapter}
+                                      onSelectChangeChapter={onChapterChange}
+                                      onSelectChangeBook={onBookChange}
+                                      isloaded={isLoaded}
+
                         />
 
                         <Table className="scroll_table">
                             <TableHead>
-                            <TableRow/>
+                                <TableRow/>
                             </TableHead>
                             <TableBody>
                                 {bookChapters.map((chapter_text, c) => (
                                     <>
                                         {chapter_text.text.map((verse, v) => (
                                             <TableRow key={makeRandomKey()}
-                                                      id={`inner-1-${v + 1}`}
+                                                      id={`inner-${chapter}-${v + 1}`}
                                                       hover={true}
-                                                      selected={(v + 1) === bookChapterVerse[VERSE]}
+                                                      selected={verseRange.includes(v + 1)}
 
                                             >
 
                                                 <TableCell className={classes.textHe}>
                                                     <Typography
                                                         lang="he"
-                                                        key={`he-${c}-${v}`}
+                                                        key={`he-${chapter}-${v}`}
                                                         dir="RTL">
                                                         {verse[1]}
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell id={`pos-${c + 1}-${v + 1}`} className={classes.verseNumber}>
+                                                <TableCell id={`pos-${chapter}-${v + 1}`} className={classes.verseNumber}>
                                                     <Typography className={classes.count}>
                                                         {v + 1}
                                                     </Typography>
@@ -182,16 +212,15 @@ export default function BookText({book}) {
 
                                                 <TableCell className={classes.text}>
                                                     <Typography lang="en"
-                                                                key={`en-${c}-${v}`}
+                                                                key={`en-${chapter}-${v}`}
                                                                 dir="LTR">{verse[0]}
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell data-c-v={`${c},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
+                                                <TableCell data-c-v={`${chapter},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
                                                            onClick={(verse[2] !== '0' ? rowOnclick : null)}
                                                 >
-                                                    <CommentBadge commentsCount={verse[2]} sameChapterAndVerse={(commentChapterVerse[COM_CHAPTER] === c + 1 && commentChapterVerse[COM_VERSE] === v + 1)}/>
-
+                                                    <CommentBadge commentsCount={verse[2]} sameChapterAndVerse={equals(commentBookChapterVerse, [bookName, c + chapter, v + 1])}/>
                                                 </TableCell>
 
                                             </TableRow>
@@ -203,15 +232,13 @@ export default function BookText({book}) {
                     </Grid>
                     {(comments.length > 0 ?
                         <Grid item xs={gridsize[1]}>
-                            <div className={classes.resources}>
-                                <IconButton
-                                    aria-label="Close comments pane"
-                                    component="span"
-                                    onClick={() => (setGridSize([12, 1]))}
-                                >
-                                    <HighlightOffIcon/>
-                                </IconButton>
-                            </div>
+                            <CommentRef book={commentBookChapterVerse[BOOK]}
+                                        chapter={commentBookChapterVerse[CHAPTER]}
+                                        verse={commentBookChapterVerse[VERSE]}
+                                        language={commentTab}
+                                        closeCommentTabHandler={closeCommentTab}
+                                        biblicalRef={refClick}
+                            />
                             <div className="div_scroll">
                                 <Tabs
                                     value={commentTab}
