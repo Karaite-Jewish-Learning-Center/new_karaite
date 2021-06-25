@@ -137,21 +137,21 @@
     margin-right: 0.3em;
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: 'Times New Roman', serif;
+    font-family: 'SBL Hebrew';
     color: red;
 }
 
 .he-comment-text {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: 'Times New Roman', serif;
-    mso-fareast-font-family: 'Times New Roman';
+    font-family: 'SBL Hebrew';
+    mso-fareast-font-family: 'SBL Hebrew';
     color: black
 }
 .he-dash {
     font-size:12.0pt;
     line-height:107%;
-    font-family:"Times New Roman",serif
+    font-family:'SBL Hebrew';
 }
 .he-citation {
     color: #FFC000;
@@ -160,32 +160,32 @@
 .he-orange {
     font-size:12.0pt;
     line-height:107%;
-    font-family:"Times New Roman",serif;
+    font-family:'SBL Hebrew';
     color:#FFC000;
 }
 .he-red {
     font-size:12.0pt;
     line-height:107%;
-    font-family:"Times New Roman",serif;
+    font-family:'SBL Hebrew';
     color:red
 }
 .he-consequently {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: "Times New Roman", serif;
+    font-family: 'SBL Hebrew';
     color: black;
 }
 
 .he-divine {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: "Times New Roman", serif;
+    font-family:'SBL Hebrew';
 }
 
 .he-person-name {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: 'Times New Roman',serif;
+    font-family: 'SBL Hebrew';
     color: #ffc000;
 }
 .he-text-color {
@@ -195,20 +195,20 @@
 .he-text-font {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: "Times New Roman", serif;
+    font-family: 'SBL Hebrew';
 }
 
 .he-foot-note {
     cursor: pointer;
     color: -webkit-link;
-    font-size: 16.0pt;
+    font-size: 12.0pt;
     direction: rtl;
 }
 
 .he-footnote-reference {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: "Times New Roman", serif;
+    font-family: 'SBL Hebrew';
     mso-fareast-font-family: Calibri;
     mso-ansi-language: he-US;
     mso-fareast-language: he-US;
@@ -218,7 +218,7 @@
 .he-footnote-char {
     font-size: 12.0pt;
     line-height: 107%;
-    font-family: "Times New Roman", serif;
+    font-family: 'SBL Hebrew';
     mso-fareast-font-family: Calibri;
     mso-ansi-language: he-US;
     mso-fareast-language: he-US;
@@ -230,3 +230,6 @@
     cursor: pointer;
 }
 
+.hebrew-font {
+     font-family: 'SBL Hebrew';
+}

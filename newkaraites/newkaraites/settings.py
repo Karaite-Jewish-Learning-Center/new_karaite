@@ -118,7 +118,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 # server dev environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
-    DEBUG = True
+    DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125']
     THUMBNAIL_DEBUG = DEBUG
 
@@ -199,7 +199,7 @@ if DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-# change this to your local machine
+# Change this to your local machine
 if gethostname() == 'Sandros-MacBook-Pro.local':
     ALLOWED_HOSTS = [
         'localhost',

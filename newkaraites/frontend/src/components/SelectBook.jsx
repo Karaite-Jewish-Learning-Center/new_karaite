@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Select from '@material-ui/core/Select';
 import {englishBook, hebrewBooks} from "../utils/utils";
-import {LANGUAGE, ENGLISH, HEBREW} from "../constants";
+import {ENGLISH, HEBREW} from "../constants";
 
 
 export default function SelectBook({book, language, onSelectBookChange}) {
@@ -19,12 +19,13 @@ export default function SelectBook({book, language, onSelectBookChange}) {
         <div>
             <Select
                 native
-                value={book}
                 onChange={onSelectBookChange}
                 dir={(language === HEBREW ? "RTL" : "LTR")}
+                className={(language === HEBREW ? "hebrew-font" : "")}
+                defaultValue ={book}
             >
                 {books.map((bookTitle, i) => (
-                    <option key={i} value={bookTitle}  selected={bookTitle===book}>{bookTitle}</option>
+                    <option key={i} value={bookTitle}>{bookTitle}</option>
                 ))}
             </Select>
         </div>

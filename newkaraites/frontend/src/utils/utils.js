@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getCommentsUrl, LANGUAGE} from "../constants"
+import {getCommentsUrl} from "../constants"
 
 const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)

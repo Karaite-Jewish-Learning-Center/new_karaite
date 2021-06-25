@@ -25,11 +25,10 @@ import {
     toEnglish,
     equals
 } from "../utils/utils";
-import {bookChapterUrl, getCommentsUrl, HEBREW} from "../constants";
+import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
 import './css/comments.css';
 import HeaderSelect from "./HeaderSelect";
-import {LANGUAGE_TAG} from "../constants";
 
 
 export default function BookText({book}) {
@@ -52,10 +51,12 @@ export default function BookText({book}) {
         setCommentTab(tab)
     }
     const onChapterChange = (e) => {
+        setIsLoaded(false)
         setBookChapterVerse([bookChapterVerse[BOOK], parseInt(e.target.value), 1])
         setVerseRange([1])
     }
     const onBookChange = (e) => {
+        setIsLoaded(false)
         setBookChapterVerse([toEnglish(e.target.value), 1, 1])
         setVerseRange([1])
     }
@@ -79,9 +80,8 @@ export default function BookText({book}) {
         let verse
         let chapterVerse
         let language = e.target.childNodes[0].parentElement.lang
-        debugger
         let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(',', '').replace('.', '').trim()
-        if (language.toLowerCase() === 'he' ) {
+        if (language.toLowerCase() === 'he') {
             let spacePos = biblicalRef.lastIndexOf(' ') + 1
             let refChapterVerse = biblicalRef.substr(spacePos)
             let [refChapter, refVerse] = refChapterVerse.split(':')
@@ -170,19 +170,19 @@ export default function BookText({book}) {
                 <Grid container className={classes.root}>
                     <Grid item xs={gridsize[0]}>
 
-                        <HeaderSelect book_en={bookName}
-                                      book_he={englishBookNameToHebrew(bookName)}
-                                      chapters={bookData.verses.length}
-                                      chapter={chapter}
-                                      onSelectChangeChapter={onChapterChange}
-                                      onSelectChangeBook={onBookChange}
-                                      isloaded={isLoaded}
 
-                        />
-
-                        <Table className="scroll_table">
+                        <Table stickyHeader aria-label="sticky table" className="scroll_table">
                             <TableHead>
-                                <TableRow/>
+                                <TableRow>
+                                    <HeaderSelect book_en={bookName}
+                                                  book_he={englishBookNameToHebrew(bookName)}
+                                                  chapters={bookData.verses.length}
+                                                  chapter={chapter}
+                                                  onSelectChangeChapter={onChapterChange}
+                                                  onSelectChangeBook={onBookChange}
+                                                  isloaded={isLoaded}/>
+
+                                </TableRow>
                             </TableHead>
                             <TableBody>
                                 {bookChapters.map((chapter_text, c) => (
@@ -195,8 +195,9 @@ export default function BookText({book}) {
 
                                             >
 
-                                                <TableCell className={classes.textHe}>
+                                                <TableCell className={`${classes.textHe} ${classes.textWidth}`}>
                                                     <Typography
+                                                        className={classes.hebrewFont}
                                                         lang="he"
                                                         key={`he-${chapter}-${v}`}
                                                         dir="RTL">
@@ -204,17 +205,21 @@ export default function BookText({book}) {
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell id={`pos-${chapter}-${v + 1}`} className={classes.verseNumber}>
+                                                <TableCell id={`pos-${chapter}-${v + 1}`} className={`${classes.verseNumber} ${classes.verseWidth}`}>
                                                     <Typography className={classes.count}>
                                                         {v + 1}
                                                     </Typography>
                                                 </TableCell>
 
-                                                <TableCell className={classes.text}>
+                                                <TableCell className={`${classes.text} ${classes.textWidth}`}>
+
+
                                                     <Typography lang="en"
                                                                 key={`en-${chapter}-${v}`}
                                                                 dir="LTR">{verse[0]}
                                                     </Typography>
+
+
                                                 </TableCell>
 
                                                 <TableCell data-c-v={`${chapter},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}
@@ -276,17 +281,26 @@ const useStyles = makeStyles((theme) => ({
     table: {
         padding: '30px',
     },
-    text: {
+    tableHeader: {
+        width: '100%',
+    },
+    textWidth: {
         width: "45%",
+    },
+    text: {
         verticalAlign: 'text-top',
     },
     textHe: {
-        width: "45%",
         textAlign: 'right',
         verticalAlign: 'text-top',
     },
-    verseNumber: {
+    hebrewFont: {
+        fontFamily: 'SBL Hebrew',
+    },
+    verseWidth: {
         width: "5%",
+    },
+    verseNumber: {
         verticalAlign: 'text-top',
     },
     count: {

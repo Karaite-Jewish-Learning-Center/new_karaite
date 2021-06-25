@@ -3,7 +3,9 @@ from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
-                        SECOND_LEVEL)
+                        SECOND_LEVEL,
+                        LANGUAGES,
+                        BOOK_CLASSIFICATION)
 from tinymce.models import HTMLField
 from .hebrew_numbers import indo_arabic_to_hebrew
 
@@ -595,5 +597,53 @@ class BookAsArray(models.Model):
         ordering = ('book', 'chapter')
 
 
-class Ref(models.Model):
-    """  References """
+class KaraitesBookDetails(models.Model):
+    """  Karaites books """
+
+    book_language = models.CharField(max_length=2,
+                                     choices=LANGUAGES,
+                                     verbose_name=_('Book language'))
+
+    book_classification = models.CharField(max_length=2,
+                                           choices=BOOK_CLASSIFICATION,
+                                           verbose_name=_('Classification'))
+
+    author = models.ForeignKey(Author,
+                               blank=True,
+                               null=True,
+                               on_delete=models.DO_NOTHING,
+                               verbose_name=_('Book Author')
+                               )
+
+    book_title = models.CharField(max_length=100,
+                                  verbose_name=_('Book_title'))
+
+    def __str__(self):
+        return self.book_title
+
+    class Meta:
+        verbose_name_plural = 'Karaites book details'
+
+
+class KaraitesBookText(models.Model):
+
+    book = models.ForeignKey(KaraitesBookDetails,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name=_('Karaite book details')
+                             )
+    chapter = models.IntegerField(default=1,
+                                  verbose_name=_('Chapter'))
+
+    chapter_title = models.CharField(max_length=200,
+                                     verbose_name=_('Chapter title'))
+
+    chapter_text = models.TextField(verbose_name=_('Chapter text'))
+
+    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
+
+    def __str__(self):
+        return self.book.book_title
+
+    class Meta:
+        verbose_name_plural = 'Karaites book text'
+
