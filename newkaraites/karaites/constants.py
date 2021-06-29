@@ -2,8 +2,8 @@
 
 
 LANGUAGES = [
-    ('En', ' English'),
-    ('He', 'Hebrew')
+    ('en', ' English'),
+    ('he', 'Hebrew')
 ]
 
 BOOK_CLASSIFICATION = [

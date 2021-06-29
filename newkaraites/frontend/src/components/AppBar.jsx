@@ -202,9 +202,9 @@ export default function PrimarySearchAppBar() {
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
                     <IconButton aria-label="Go to sign up form" color="inherit" >
-                        <PermContactCalendarSharpIcon data-tip="Sign up"></PermContactCalendarSharpIcon>
+                        <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
-                    <IconButton aria-label="Go to Login form" color="inherit" data-tip="Login">
+                    <IconButton aria-label="Go to Login form" color="inherit" data-for="en" data-tip="Login">
                         <ExitToAppIcon></ExitToAppIcon>
                     </IconButton>
                     <IconButton
@@ -215,8 +215,9 @@ export default function PrimarySearchAppBar() {
                         onClick={handleLanguageMenuOpen}
                         color="inherit"
                         data-tip="Change site language"
+                        data-for="en"
                     >
-                        <LanguageIcon/><ArrowDropDownIcon/>
+                        <LanguageIcon /><ArrowDropDownIcon/>
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>

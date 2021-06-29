@@ -15,7 +15,7 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <ReactTooltip id='en' className={classes.english} place="bottom"/>
+            <ReactTooltip id='en' className={classes.english} place="top"/>
             <ReactTooltip id='he' className={classes.hebrew} place="bottom"/>
             <MyAppBar/>
 

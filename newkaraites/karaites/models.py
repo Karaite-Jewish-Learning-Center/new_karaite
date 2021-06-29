@@ -564,9 +564,10 @@ class BookAsArray(models.Model):
     def text(self):
         html = '<table><tbody>'
         for i, text in enumerate(self.book_text):
-            html += f'<tr><td>{text[2]}</td><td>{text[0]}</td>'
+            html += f'<tr>'
+            html += f'<td>{text[2]}</td><td class="en-verse">{text[0]}</td>'
             html += f'<td>{i + 1}</td>'
-            html += f'<td dir=\'rtl\'>{text[1]}</td><td>{text[3]}</td></tr>'
+            html += f'<td class="he-verse" dir=\'rtl\'>{text[1]}</td><td>{text[3]}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -611,7 +612,7 @@ class KaraitesBookDetails(models.Model):
     author = models.ForeignKey(Author,
                                blank=True,
                                null=True,
-                               on_delete=models.DO_NOTHING,
+                               on_delete=models.CASCADE,
                                verbose_name=_('Book Author')
                                )
 
@@ -626,15 +627,18 @@ class KaraitesBookDetails(models.Model):
 
 
 class KaraitesBookText(models.Model):
-
+    """ """
     book = models.ForeignKey(KaraitesBookDetails,
-                             on_delete=models.DO_NOTHING,
+                             on_delete=models.CASCADE,
                              verbose_name=_('Karaite book details')
                              )
-    chapter = models.IntegerField(default=1,
-                                  verbose_name=_('Chapter'))
 
-    chapter_title = models.CharField(max_length=200,
+    chapter_number = models.TextField(null=True,
+                                      blank=True,
+                                      verbose_name=_('Chapter number'))
+
+    chapter_title = models.TextField(null=True,
+                                     blank=True,
                                      verbose_name=_('Chapter title'))
 
     chapter_text = models.TextField(verbose_name=_('Chapter text'))
@@ -644,6 +648,32 @@ class KaraitesBookText(models.Model):
     def __str__(self):
         return self.book.book_title
 
+    @mark_safe
+    def chapter_admin(self):
+        return self.chapter_number
+
+    chapter_admin.short_description = 'Chapter Number'
+
+    @mark_safe
+    def chapter_title_admin(self):
+        return self.chapter_title
+
+    chapter_title_admin.short_description = 'Chapter Title'
+
+    @mark_safe
+    def chapter_text_admin(self):
+        return self.chapter_text
+
+    chapter_text_admin.short_description = 'Chapter Text'
+
+    @mark_safe
+    def foot_notes_admin(self):
+        html = ''
+        for foot_note in self.foot_notes:
+            html += f'<p dir="RTL">{foot_note}</p>'
+        return html
+
+    foot_notes_admin.short_description = 'Foot notes'
+
     class Meta:
         verbose_name_plural = 'Karaites book text'
-

@@ -35,6 +35,7 @@ export default function BookText({book}) {
     const BOOK = 0
     const CHAPTER = 1
     const VERSE = 2
+    const classes = useStyles();
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);
     const [bookData, setBookData] = useState();
@@ -45,10 +46,11 @@ export default function BookText({book}) {
     const [commentBookChapterVerse, setCommentBookChapterVerse] = useState([book, 0, 0])
     const [commentTab, setCommentTab] = useState(0)
     const [verseRange, setVerseRange] = useState([1])
-    const classes = useStyles();
+
 
     const onTabChange = (event, tab) => {
         setCommentTab(tab)
+        ReactTooltip.rebuild()
     }
     const onChapterChange = (e) => {
         setIsLoaded(false)
@@ -62,8 +64,15 @@ export default function BookText({book}) {
     }
     const closeCommentTab = () => {
         setGridSize([12, 1])
+        ReactTooltip.hide()
+        ReactTooltip.rebuild()
     }
+    const openCommentTab = () => {
 
+        setGridSize([8, 4])
+        ReactTooltip.hide()
+        ReactTooltip.rebuild()
+    }
     const scroll = () => {
         let element = document.getElementById(`inner-${bookChapterVerse[CHAPTER]}-${bookChapterVerse[VERSE]}`)
         if (element !== null) {
@@ -82,6 +91,7 @@ export default function BookText({book}) {
         let language = e.target.childNodes[0].parentElement.lang
         let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(',', '').replace('.', '').trim()
         if (language.toLowerCase() === 'he') {
+            debugger
             let spacePos = biblicalRef.lastIndexOf(' ') + 1
             let refChapterVerse = biblicalRef.substr(spacePos)
             let [refChapter, refVerse] = refChapterVerse.split(':')
@@ -121,7 +131,8 @@ export default function BookText({book}) {
         if (isCommentLoaded) {
             // open tab if closed
             if (gridsize[0] === 12) {
-                setGridSize([8, 4])
+                openCommentTab()
+                // setGridSize([8, 4])
                 return
             }
             return
@@ -131,9 +142,10 @@ export default function BookText({book}) {
             .then((response) => {
                 setComments(response.data.comments)
                 setCommentBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
-                setGridSize([8, 4])
-                ReactTooltip.rebuild()
-
+                // setGridSize([8, 4])
+                // ReactTooltip.hide()
+                // ReactTooltip.rebuild()
+                openCommentTab()
             })
             .catch(error => {
                 console.log(`Error on ${getCommentsUrl}: ${error}`)
@@ -146,7 +158,6 @@ export default function BookText({book}) {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
                 // setBookChapters({[bookChapterVerse[BOOK]]: response.data.chapters})
-
                 setIsLoaded(true);
                 ReactTooltip.rebuild()
                 scroll()

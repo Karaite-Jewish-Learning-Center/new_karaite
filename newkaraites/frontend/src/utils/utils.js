@@ -76,6 +76,7 @@ const hebrewBookNames = {
     'שמואל ב': 'II Samuel',
     'ישעיה': 'Isaiah',
     'ירמיה': 'Jeremiah',
+    'ירמיהו':'Jeremiah',
     'יואל': 'Joel',
     'יונה': 'Jonah',
     'יהושע': 'Joshua',
@@ -530,7 +531,6 @@ const englishBook = () => {
 const toEnglish = (bookName) => {
     // return a english title even if bookName is Hebrew
     let title = hebrewBookNameToEnglish(bookName)
-    debugger
     if (title === undefined) {
         return bookName
     }

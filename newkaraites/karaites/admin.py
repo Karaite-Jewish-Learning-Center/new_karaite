@@ -115,6 +115,12 @@ class BookAsArrayAdmin(admin.ModelAdmin):
     list_display = ('book', 'chapter', 'text')
     list_filter = ('book', 'chapter')
 
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',)
+        }
+        js = ('../static/js/toggleFilterPanel.js',)
+
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
 
@@ -157,10 +163,10 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 class KaraitesBookTextAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('book', 'chapter', 'chapter_title',
-                    'chapter_text', 'foot_notes')
+    list_display = ('book', 'chapter_admin', 'chapter_title_admin',
+                    'chapter_text_admin', 'foot_notes_admin')
 
-    list_filter = ('book', 'chapter',
+    list_filter = ('book',
                    'book__book_language', 'book__book_classification')
 
     class Media:
