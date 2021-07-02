@@ -103,7 +103,6 @@ class Command(BaseCommand):
                         verse_number = int(verse) + 1
                         book_text, _ = BookText.objects.get_or_create(
                             book=organization,
-                            book_he=organization.book_title_he,
                             chapter=chapter_number,
                             verse=verse_number,
                             text_en=data_en['text'][chapter][verse],
@@ -113,7 +112,8 @@ class Command(BaseCommand):
                         book_as_array.append([data_en['text'][chapter][verse],
                                               data_he['text'][chapter][verse],
                                               0,
-                                              0])
+                                              0,
+                                              verse_number])
 
                     # update book as array
                     BookAsArray.objects.get_or_create(

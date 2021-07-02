@@ -557,16 +557,16 @@ class BookAsArray(models.Model):
 
     chapter = models.IntegerField(default=0)
 
-    # text english, text hebrew, comment_count. Verse is position in the array
-    book_text = ArrayField(ArrayField(models.TextField(), size=4), default=list)
+    # text english, text hebrew, comment_count and Verse
+    book_text = ArrayField(ArrayField(models.TextField(), size=5), default=list)
 
     @mark_safe
     def text(self):
         html = '<table><tbody>'
-        for i, text in enumerate(self.book_text):
+        for text in self.book_text:
             html += f'<tr>'
             html += f'<td>{text[2]}</td><td class="en-verse">{text[0]}</td>'
-            html += f'<td>{i + 1}</td>'
+            html += f'<td>{text[4]}</td>'
             html += f'<td class="he-verse" dir=\'rtl\'>{text[1]}</td><td>{text[3]}</td></tr>'
         html += '</tbody></table>'
         return html
@@ -586,7 +586,7 @@ class BookAsArray(models.Model):
         else:
             query = BookAsArray.objects.filter(book=book, chapter=chapter)
 
-        for book in query:
+        for i, book in enumerate(query):
             result.append(book.to_json())
 
         return result
@@ -622,6 +622,17 @@ class KaraitesBookDetails(models.Model):
     def __str__(self):
         return self.book_title
 
+    @staticmethod
+    def to_json(book_title):
+        details = KaraitesBookDetails.objects.get(book_title=book_title)
+        return {
+            'book_id': details.id,
+            'book_language': details.book_language,
+            'book_classification': details.book_classification,
+            'author': details.author.name,
+            'book_title': details.book_title
+        }
+
     class Meta:
         verbose_name_plural = 'Karaites book details'
 
@@ -633,9 +644,13 @@ class KaraitesBookText(models.Model):
                              verbose_name=_('Karaite book details')
                              )
 
-    chapter_number = models.TextField(null=True,
-                                      blank=True,
-                                      verbose_name=_('Chapter number'))
+    chapter_number = models.IntegerField(default=0,
+                                         verbose_name=_('Chapter #'))
+
+    chapter_number_la = models.CharField(max_length=4,
+                                         null=True,
+                                         blank=True,
+                                         verbose_name=_('Chapter #'))
 
     chapter_title = models.TextField(null=True,
                                      blank=True,
@@ -648,11 +663,22 @@ class KaraitesBookText(models.Model):
     def __str__(self):
         return self.book.book_title
 
-    @mark_safe
-    def chapter_admin(self):
-        return self.chapter_number
+    @staticmethod
+    def to_json(book, chapter_number):
+        chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
+        return {
+            'index': 1,
+            'chapter_number': chapter.chapter_number,
+            'chapter_number_la': chapter.chapter_number_la,
+            'chapter_title': chapter.chapter_title,
+            'chapter_text': chapter.chapter_text,
+        }
 
-    chapter_admin.short_description = 'Chapter Number'
+    @mark_safe
+    def chapter_number_la_admin(self):
+        return self.chapter_number_la
+
+    chapter_number_la_admin.short_description = 'Chapter #'
 
     @mark_safe
     def chapter_title_admin(self):

@@ -5,6 +5,8 @@ import ReactTooltip from 'react-tooltip';
 import MyAppBar from "./components/AppBar";
 import BookList from "./components/BookList";
 import BookText from "./components/bookText";
+import KaraitesBooks from "./components/karaitesBooks";
+import BiblicalText from "./components/BiblicalText";
 import Comments from "./components/Coments";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -30,7 +32,12 @@ function App() {
             <Route path="/texts">
                 <BookText book={'Deuteronomy'}/>
             </Route>
-
+             <Route path="/karaites/">
+                <KaraitesBooks book={'Yeriot Shelomo'}/>
+            </Route>
+             <Route path="/bible/">
+                <BiblicalText book={'Deuteronomy'}/>
+            </Route>
         </ThemeProvider>
     );
 }

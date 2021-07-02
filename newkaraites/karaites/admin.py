@@ -163,8 +163,9 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 class KaraitesBookTextAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('book', 'chapter_admin', 'chapter_title_admin',
-                    'chapter_text_admin', 'foot_notes_admin')
+    list_display = ('book', 'chapter_number', 'chapter_number_la_admin',
+                    'chapter_title_admin', 'chapter_text_admin',
+                    'foot_notes_admin')
 
     list_filter = ('book',
                    'book__book_language', 'book__book_classification')

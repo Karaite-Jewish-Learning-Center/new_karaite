@@ -29,6 +29,74 @@ import {bookChapterUrl, getCommentsUrl} from "../constants";
 import './css/scroll.css';
 import './css/comments.css';
 import HeaderSelect from "./HeaderSelect";
+const useStyles = makeStyles((theme) => ({
+    root: {
+        position: 'fixed',
+        flexGrow: 1,
+        marginTop: 70,
+        marginBottom: 100,
+
+    },
+    table: {
+        padding: '30px',
+    },
+    tableHeader: {
+        width: '100%',
+    },
+    textWidth: {
+        width: "45%",
+    },
+    text: {
+        verticalAlign: 'text-top',
+    },
+    textHe: {
+        textAlign: 'right',
+        verticalAlign: 'text-top',
+    },
+    hebrewFont: {
+        fontFamily: 'SBL Hebrew',
+    },
+    verseWidth: {
+        width: "5%",
+    },
+    verseNumber: {
+        verticalAlign: 'text-top',
+    },
+    count: {
+        fontSize: '0.9em',
+        color: 'gray',
+        textAlign: 'center'
+    },
+    header: {
+        width: '50%',
+        textAlign: 'left'
+    },
+    comments: {
+        cursor: 'pointer',
+    },
+
+    selectColor: {
+        backgroundColor: '#0980f5'
+    },
+    bookHeader: {
+        position: 'relative',
+        width: '100%',
+        height: 30,
+        backgroundColor: "gray",
+        color: 'black',
+    },
+    resources: {
+        minHeight: 50,
+        backgroundColor: '#eaeaea',
+        borderLeft: '1px solid darkgrey',
+    },
+
+
+}))
+
+
+
+
 
 
 export default function BookText({book}) {
@@ -279,71 +347,3 @@ export default function BookText({book}) {
         )
     }
 }
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        position: 'fixed',
-        flexGrow: 1,
-        marginTop: 70,
-        marginBottom: 100,
-
-    },
-    table: {
-        padding: '30px',
-    },
-    tableHeader: {
-        width: '100%',
-    },
-    textWidth: {
-        width: "45%",
-    },
-    text: {
-        verticalAlign: 'text-top',
-    },
-    textHe: {
-        textAlign: 'right',
-        verticalAlign: 'text-top',
-    },
-    hebrewFont: {
-        fontFamily: 'SBL Hebrew',
-    },
-    verseWidth: {
-        width: "5%",
-    },
-    verseNumber: {
-        verticalAlign: 'text-top',
-    },
-    count: {
-        fontSize: '0.9em',
-        color: 'gray',
-        textAlign: 'center'
-    },
-    header: {
-        width: '50%',
-        textAlign: 'left'
-    },
-    comments: {
-        cursor: 'pointer',
-    },
-
-    selectColor: {
-        backgroundColor: '#0980f5'
-    },
-    bookHeader: {
-        position: 'relative',
-        width: '100%',
-        height: 30,
-        backgroundColor: "gray",
-        color: 'black',
-    },
-    resources: {
-        minHeight: 50,
-        backgroundColor: '#eaeaea',
-        borderLeft: '1px solid darkgrey',
-    },
-
-
-}))
-
-

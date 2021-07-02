@@ -3,7 +3,8 @@ from .views import (BooksPresentation,
                     GetBookChapterVerses,
                     GetBookAsArrayJson,
                     GetBookChapterVersesFromRef,
-                    GetComments)
+                    GetComments,
+                    GetKaraitesBook)
 
 app_name = 'karaites'
 
@@ -25,6 +26,9 @@ urlpatterns = [
     path('get-book/', GetBookChapterVerses.as_view(), name='get_book'),
 
     path('get-book-from-ref/<str:biblical_ref>/', GetBookChapterVersesFromRef.as_view()),
+
+    # karaite books
+    path('get-karaites-book/<str:book>/<str:chapter>/', GetKaraitesBook.as_view(), name='get_karaites_book'),
 
     # comments
     path('get-comments/<str:book>/<str:chapter>/<str:verse>/', GetComments.as_view(), name='get_comments'),

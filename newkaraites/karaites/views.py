@@ -4,7 +4,9 @@ from django.views.generic import View
 from .models import (Organization,
                      BookText,
                      BookAsArray,
-                     Comment)
+                     Comment,
+                     KaraitesBookDetails,
+                     KaraitesBookText)
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -63,12 +65,27 @@ def book_chapter_verse(request, *args, **kwargs):
                              'book': book_title.to_json()})
 
 
-def get_biblical_ref(request, ref):
-    """ 1 is a English ref or a Hebrew ref
-        2 Parse English
-        3 Translate Hebrew to English
-        dispatch to book_chapter_verse
-    """
+def karaites_book_chapter(request, *args, **kwargs):
+    """ Do Book and chapter check"""
+    book = kwargs.get('book', None)
+    chapter = kwargs.get('chapter', None)
+
+    if book is None:
+        return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+    if chapter is None:
+        return JsonResponse(data={'status': 'false', 'message': _('Need a chapter number.')}, status=400)
+    try:
+        book_details = KaraitesBookDetails().to_json(book_title=book)
+    except KaraitesBookDetails.DoesNotExist:
+        return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
+
+    try:
+        book_chapter = KaraitesBookText().to_json(book=book_details['book_id'], chapter_number=int(chapter))
+    except KaraitesBookText.DoesNotExist:
+        return JsonResponse(data={'status': 'false', 'message': _(f'Chapter {chapter} not found.')}, status=400)
+
+    return JsonResponse({'book_details': book_details,
+                         'book_chapter': book_chapter})
 
 
 class BooksPresentation(View):
@@ -109,3 +126,10 @@ class GetBookAsArrayJson(View):
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
         return book_chapter_verse(request, *args, **kwargs)
+
+
+class GetKaraitesBook(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        return karaites_book_chapter(request, *args, **kwargs)

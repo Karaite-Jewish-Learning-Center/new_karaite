@@ -12,26 +12,6 @@ from ...utils import clear_terminal_line
 class Command(BaseCommand):
     help = 'Populate Database with Karaites books at this point is only for the books bellow'
 
-    # @staticmethod
-    # def get_foot_notes(divs):
-    #
-    #     end = len(divs)
-    #     foot_notes = {}
-    #     for note in divs[1:end]:
-    #         foot_notes[get_foot_note_index(note)] = note.text
-    #     return foot_notes
-    #
-    # @staticmethod
-    # def get_a_tag_in_child(child, foot_notes):
-    #     foot_note_list = []
-    #     for a_tag in child.find_all('a'):
-    #         try:
-    #             foot_note_number = int(a_tag.attrs['href'].replace('#_ftn', ''))
-    #             foot_note_list.append(foot_notes[foot_note_number].strip())
-    #         except KeyError:
-    #             pass
-    #     return foot_note_list
-
     def handle(self, *args, **options):
         """ Karaites books """
         source = '../newkaraites/data_karaites/Yeriot_Shelomo_Hebrew only.html'
@@ -64,10 +44,13 @@ class Command(BaseCommand):
             next_child = child.find_next_sibling()
 
             if next_child is not None and next_child.attrs.get('align', '') == 'center':
-                chapter_number = str(children[i])
+                chapter_raw = str(children[i].text)
+                print(chapter_raw)
+                chapter_number_la, chapter_number = chapter_raw.split(' ')
                 karaites = KaraitesBookText()
                 karaites.book = book_details
-                karaites.chapter_number = chapter_number
+                karaites.chapter_number = int(chapter_number)
+                karaites.chapter_number_la = chapter_number_la
                 karaites.chapter_title = str(next_child)
                 karaites.chapter_text = ''
                 karaites.foot_notes = []

@@ -300,17 +300,9 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
         return html_str
 
     html_tree = BeautifulSoup(html, 'html5lib')
-    """<a style="mso-footnote-id:
-ftn5" href="#_ftn5" name="_ftnref5" title=""><span class="MsoFootnoteReference"><span style="mso-special-character:footnote"><!--[if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size:12.0pt;line-height:107%;
-font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
-minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
-HE">[5]</span></span><!--[endif]--></span></span></a>"""
 
-    """<a href="#_ftn2" name="_ftnref2" style="mso-footnote-id:ftn2" title=""><span class="MsoFootnoteReference"><span class="he-foot-note-char" dir="LTR"><span class="MsoFootnoteReference"><span class="he-foot-note-number">[2]</span></span></span></span></a> """
     # replace complicate <a></a>
     if len(foot_notes_list) > 0:
-        print(foot_notes_list)
-        input('>>>')
         foot_note = 0
         for child in html_tree.find_all('a'):
             if hasattr(child, 'find'):
@@ -350,7 +342,6 @@ HE">[5]</span></span><!--[endif]--></span></span></a>"""
                 print("<p>", "-" * 60)
                 print(style)
                 print("-" * 60)
-
                 sys.exit()
 
         for span_child in child.find_all('span'):

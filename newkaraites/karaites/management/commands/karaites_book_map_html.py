@@ -21,10 +21,7 @@ class Command(BaseCommand):
                                                               foot_notes_list=[],
                                                               language="he",
                                                               stats=False)
-            chapter.chapter_number = map_docx_to_karaites_html(chapter.chapter_number,
-                                                               foot_notes_list=[],
-                                                               language="he",
-                                                               stats=False)
+
             chapter.save()
 
         sys.stdout.write(f"\33[K\r")
