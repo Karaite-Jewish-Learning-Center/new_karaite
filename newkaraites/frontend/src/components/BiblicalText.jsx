@@ -16,6 +16,8 @@ export default function BiblicalText({book}) {
     const BIBLE_COMMENTS_ENGLISH = 2
     const BIBLE_COMMENTS_HEBREW = 3
     const BIBLE_VERSE = 4
+    const BIBLE_CHAPTER = 5
+    const [firstItem, setFirstItem] = useState(0)
     const [loading, setLoading] = useState('Loading...')
     const [error, setError] = useState(null)
     const [bookData, setBookData] = useState({
@@ -26,18 +28,44 @@ export default function BiblicalText({book}) {
         verses: []
     });
     const [chapters, setChapters] = useState(new Array(MAX_CHAPTERS_IN_BOOK_BIBLE).fill(null))
-    const [bookChapterVerse, setBookChapterVerse] = useState({book: book, chapter: 5, verse: 1})
-
+    const [bookChapterVerse, setBookChapterVerse] = useState({book: book, chapter: 5, verse: 0})
     const classes = useStyles()
 
     const itemContent = (item, data) => {
+        let chapterHtml = null
+        let chapter = data[BIBLE_CHAPTER]
+        if (chapter !== 0 ) {
+            if(chapter===1) {
+                chapterHtml = (<div className={classes.chapter}>
+                    <div className={classes.chapterTitle_he}>
+                        <Typography className={`${classes.he} ${classes.hebrewFont}`}>{bookData.book_title_he}</Typography>
+                    </div>
+                    <div className={classes.chapterNumber}>
+                        <Typography className={classes.ch}>{chapter}</Typography>
+                    </div>
+                    <div className={classes.chapterTitle_en}>
+                        <Typography className={classes.en}>{bookData.book_title_en}</Typography>
+                    </div>
+
+                </div>)
+            } else {
+                chapterHtml = (<div className={classes.chapter}>
+                    <div className={classes.chapterNumber}>
+                        <Typography className={classes.ch}>{chapter}</Typography>
+                        <hr/>
+                    </div>
+                </div>)
+            }
+        }
         return (
-            <div className={`${classes.textContainer} ${(bookChapterVerse.verse === data[BIBLE_VERSE] ? classes.selectVerse : '')}`}>
+            <div className={`${classes.textContainer} ${(bookChapterVerse.verse === data[BIBLE_VERSE] ? classes.selectVerse : '')}`}
+            >
+                {chapterHtml}
                 <div className={classes.verseHe}>
-                    <Typography lang="HE" dir="RTL">{data[BIBLE_HEBREW]}</Typography>
+                    <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                 </div>
                 <div className={classes.verseNumber}>
-                    <Typography>{data[BIBLE_VERSE]}</Typography>
+                    <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
                 <div className={classes.verseEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
@@ -51,29 +79,52 @@ export default function BiblicalText({book}) {
         for (let i = 0; i < chapters.length; i++) {
             if (chapters[i] !== null) {
                 for (let x = 0; x < chapters[i].length; x++) {
-                    text.push(chapters[i][x])
+                    let tmp = chapters[i][x]
+                    tmp.push((x === 0 ? i +1 : 0))
+                    text.push(tmp)
                 }
             }
         }
         return text
     }
-    const loadChapters = () => {
-        let chapter = bookChapterVerse.chapter + 1
-        if (chapter <= bookData.chapters) {
-            axios.get(bookChapterUrl + `${bookChapterVerse.book}/${chapter}/`)
+    const previousChapter = () => {
+        let {book, chapter, verse} = bookChapterVerse
+        --chapter
+        if (chapters[chapter] === null && chapter >= 1) {
+            axios.get(bookChapterUrl + `${book}/${chapter}`)
                 .then((response) => {
                     setBookData(response.data.book)
                     let allChapters = chapters
                     allChapters[chapter - 1] = response.data.chapters[0]['text']
                     setChapters(allChapters)
-                    setBookChapterVerse({book: book, chapter: chapter, verse: 1})
+                    setBookChapterVerse({book: book, chapter: chapter, verse: verse})
                 })
                 .catch(error => {
                     setError(error)
                     console.log(`Error on ${bookChapterUrl}: ${error.response}`)
                 })
+
         } else {
-            setLoading('Book end.')
+            setLoading('Book begin.')
+        }
+    }
+
+    const loadChapters = () => {
+        let {book, chapter, verse} = bookChapterVerse
+        ++chapter
+        if (chapters[chapter] === null && chapter <= bookData['chapters']) {
+            axios.get(bookChapterUrl + `${book}/${chapter}/`)
+                .then((response) => {
+                    setBookData(response.data.book)
+                    let allChapters = chapters
+                    allChapters[chapter - 1] = response.data.chapters[0]['text']
+                    setChapters(allChapters)
+                    setBookChapterVerse({book: book, chapter: chapter, verse: verse})
+                })
+                .catch(error => {
+                    setError(error)
+                    console.log(`Error on ${bookChapterUrl}: ${error.response}`)
+                })
         }
     }
 
@@ -87,8 +138,10 @@ export default function BiblicalText({book}) {
         return (
             <div className={classes.container}>
                 <Virtuoso data={getText()}
+                          firstItemIndex={0}
+                          initialTopMostItemIndex={0}
                           itemContent={itemContent}
-                          // startReached={loadChapters}
+                          startReached={previousChapter}
                           endReached={loadChapters}
                           components={{
                               Footer: () => {
@@ -126,9 +179,51 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'top',
-        borderBottom: '2px solid',
-        MozBorderBottomColors: Colors['verseOnMouseOver'],
-        borderBottomColor: Colors['verseOnMouseOver'],
+        // borderBottom: '2px solid',
+        // MozBorderBottomColors: Colors['verseOnMouseOver'],
+        // borderBottomColor: Colors['verseOnMouseOver'],
+    },
+    chapter: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    chapterTitle_he: {
+        maxWidth: '40%',
+        minWidth: '40%',
+        margin: 10,
+    },
+    he: {
+        fontSize: 22,
+        direction: 'RTL',
+        textDecoration: 'underline',
+        textDecorationColor: Colors['underline'],
+    },
+    en: {
+        fontSize: 22,
+        textDecoration: 'underline',
+        textDecorationColor: Colors['underline'],
+    },
+    ch: {
+        fontSize: 18,
+        color: 'gray',
+    },
+    chapterTitle_en: {
+        maxWidth: '40%',
+        minWidth: '40%',
+        margin: 10,
+    },
+    chapterNumber: {
+        maxWidth: '5%',
+        minWidth: '5%',
+        margin: 10,
+        textAlign: 'center',
+        verticalAlign: 'text-top',
+        fontSize: 20,
+        color: 'gray'
     },
     verseHe: {
         maxWidth: '40%',
@@ -145,6 +240,10 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         verticalAlign: 'text-top',
     },
+    vn: {
+        fontSize: 12,
+        color: Colors['gray']
+    },
     verseEn: {
         maxWidth: '40%',
         minWidth: '40%',
@@ -152,12 +251,11 @@ const useStyles = makeStyles((theme) => ({
         verticalAlign: 'text-top',
         margin: 10
     },
+    hebrewFont: {
+        direction: 'RTL',
+        fontFamily: 'SBL Hebrew',
+    },
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']
-    },
-    chapterNumber: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: 'gray',
     },
 }))

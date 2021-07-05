@@ -36,7 +36,7 @@ function App() {
                 <KaraitesBooks book={'Yeriot Shelomo'}/>
             </Route>
              <Route path="/bible/">
-                <BiblicalText book={'Deuteronomy'}/>
+                <BiblicalText book={'Psalms'}/>
             </Route>
         </ThemeProvider>
     );
