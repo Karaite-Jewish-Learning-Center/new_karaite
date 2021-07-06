@@ -558,7 +558,7 @@ class BookAsArray(models.Model):
     chapter = models.IntegerField(default=0)
 
     # text english, text hebrew, comment_count and Verse
-    book_text = ArrayField(ArrayField(models.TextField(), size=5), default=list)
+    book_text = ArrayField(ArrayField(models.TextField(), size=6), default=list)
 
     @mark_safe
     def text(self):
@@ -579,17 +579,17 @@ class BookAsArray(models.Model):
         }
 
     @staticmethod
-    def to_json_book_array(book, chapter=None):
+    def to_list(book, chapter=None):
         result = []
         if chapter is None:
             query = BookAsArray.objects.filter(book=book)
+            for book in query:
+                result += book.book_text
+            return result
+
         else:
             query = BookAsArray.objects.filter(book=book, chapter=chapter)
-
-        for i, book in enumerate(query):
-            result.append(book.to_json())
-
-        return result
+            return query[0].book_text
 
     def __str__(self):
         return self.book.book_title_en

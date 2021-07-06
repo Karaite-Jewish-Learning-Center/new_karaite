@@ -17,16 +17,16 @@ export default function KaraitesBooks({book}) {
 
     const [data, setData] = useState(() => generateItems(100))
     const style = {top: 100, height: 300}
-    const itemContent = (index) => <div>Item {index}</div>
+   // const itemContent = (index) => <div>Item {index}</div>
 
-    // const itemContent = (item) => {
-    //     debugger
-    //     return <>
-    //         {ReactHtmlParser(bookChapters[item]['chapter_text'], {
-    //             decodeEntities: true,
-    //         })}
-    //     </>
-    // }
+    const itemContent = (item) => {
+        debugger
+        return <>
+            {ReactHtmlParser(bookChapters[item]['chapter_text'], {
+                decodeEntities: true,
+            })}
+        </>
+    }
 
     function generateItems(length) {
         return Array.from({length}, (_, index) => `My Item ${index}`)

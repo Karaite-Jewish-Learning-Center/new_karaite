@@ -60,9 +60,8 @@ def book_chapter_verse(request, *args, **kwargs):
         return JsonResponse({'book_text': book})
 
     if model == 'bookAsArray':
-        book = BookAsArray().to_json_book_array(book=book_title, chapter=chapter)
-        return JsonResponse({'chapters': book,
-                             'book': book_title.to_json()})
+        chapter = BookAsArray().to_list(book=book_title, chapter=chapter)
+        return JsonResponse([chapter, book_title.to_json()], safe=False)
 
 
 def karaites_book_chapter(request, *args, **kwargs):

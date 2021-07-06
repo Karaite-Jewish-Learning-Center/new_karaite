@@ -1,41 +1,30 @@
-import React, {useState, useEffect} from "react";
-import axios from 'axios';
+import React, {useState, useEffect, useRef} from "react";
 import {Virtuoso} from 'react-virtuoso'
-import Message from "./Message";
 import {makeStyles} from '@material-ui/core/styles';
 import {bookChapterUrl} from "../constants";
 import Colors from "../constants/colors";
 import Typography from '@material-ui/core/Typography';
 import './css/comments.css';
+import Loading from "./Loading";
 
 
-export default function BiblicalText({book}) {
-    const MAX_CHAPTERS_IN_BOOK_BIBLE = 149
+export default function BiblicalText({book, chapter, verse}) {
     const BIBLE_ENGLISH = 0
     const BIBLE_HEBREW = 1
-    const BIBLE_COMMENTS_ENGLISH = 2
-    const BIBLE_COMMENTS_HEBREW = 3
     const BIBLE_VERSE = 4
     const BIBLE_CHAPTER = 5
-    const [firstItem, setFirstItem] = useState(0)
-    const [loading, setLoading] = useState('Loading...')
-    const [error, setError] = useState(null)
-    const [bookData, setBookData] = useState({
-        book_title_en: "",
-        book_title_he: "",
-        chapters: 10,
-        id: 0,
-        verses: []
-    });
-    const [chapters, setChapters] = useState(new Array(MAX_CHAPTERS_IN_BOOK_BIBLE).fill(null))
-    const [bookChapterVerse, setBookChapterVerse] = useState({book: book, chapter: 5, verse: 0})
+    const [bookData, setBookData] = useState({});
+    const [chapters, setChapters] = useState([])
+    const [highlight, setHighLight] = useState(1)
+
+    const virtuoso = useRef(null);
     const classes = useStyles()
 
     const itemContent = (item, data) => {
         let chapterHtml = null
         let chapter = data[BIBLE_CHAPTER]
-        if (chapter !== 0 ) {
-            if(chapter===1) {
+        if (chapter !== "0") {
+            if (chapter === "1") {
                 chapterHtml = (<div className={classes.chapter}>
                     <div className={classes.chapterTitle_he}>
                         <Typography className={`${classes.he} ${classes.hebrewFont}`}>{bookData.book_title_he}</Typography>
@@ -58,110 +47,68 @@ export default function BiblicalText({book}) {
             }
         }
         return (
-            <div className={`${classes.textContainer} ${(bookChapterVerse.verse === data[BIBLE_VERSE] ? classes.selectVerse : '')}`}
-            >
+            <div>
                 {chapterHtml}
-                <div className={classes.verseHe}>
-                    <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
-                </div>
-                <div className={classes.verseNumber}>
-                    <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
-                </div>
-                <div className={classes.verseEn}>
-                    <Typography>{data[BIBLE_ENGLISH]}</Typography>
+                <div className={`${classes.textContainer} ${(highlight === item ? classes.selectVerse : '')}`}>
+                    <div className={classes.verseHe}>
+                        <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
+                    </div>
+                    <div className={classes.verseNumber}>
+                        <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
+                    </div>
+                    <div className={classes.verseEn}>
+                        <Typography>{data[BIBLE_ENGLISH]}</Typography>
+                    </div>
                 </div>
             </div>
         )
     }
 
-    const getText = () => {
-        let text = []
-        for (let i = 0; i < chapters.length; i++) {
-            if (chapters[i] !== null) {
-                for (let x = 0; x < chapters[i].length; x++) {
-                    let tmp = chapters[i][x]
-                    tmp.push((x === 0 ? i +1 : 0))
-                    text.push(tmp)
-                }
-            }
-        }
-        return text
-    }
-    const previousChapter = () => {
-        let {book, chapter, verse} = bookChapterVerse
-        --chapter
-        if (chapters[chapter] === null && chapter >= 1) {
-            axios.get(bookChapterUrl + `${book}/${chapter}`)
-                .then((response) => {
-                    setBookData(response.data.book)
-                    let allChapters = chapters
-                    allChapters[chapter - 1] = response.data.chapters[0]['text']
-                    setChapters(allChapters)
-                    setBookChapterVerse({book: book, chapter: chapter, verse: verse})
-                })
-                .catch(error => {
-                    setError(error)
-                    console.log(`Error on ${bookChapterUrl}: ${error.response}`)
-                })
-
+    const getBook = async () => {
+        const response = await fetch(bookChapterUrl + `${book}/`)
+        if (response.ok) {
+            let data = await response.json()
+            setBookData(data[1])
+            setChapters(data[0])
+            let i = data[1].verses.slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
+            virtuoso.current.scrollToIndex({
+                index: i,
+                align:'center',
+            });
+            setHighLight(i)
         } else {
-            setLoading('Book begin.')
-        }
-    }
-
-    const loadChapters = () => {
-        let {book, chapter, verse} = bookChapterVerse
-        ++chapter
-        if (chapters[chapter] === null && chapter <= bookData['chapters']) {
-            axios.get(bookChapterUrl + `${book}/${chapter}/`)
-                .then((response) => {
-                    setBookData(response.data.book)
-                    let allChapters = chapters
-                    allChapters[chapter - 1] = response.data.chapters[0]['text']
-                    setChapters(allChapters)
-                    setBookChapterVerse({book: book, chapter: chapter, verse: verse})
-                })
-                .catch(error => {
-                    setError(error)
-                    console.log(`Error on ${bookChapterUrl}: ${error.response}`)
-                })
+            alert("HTTP-Error: " + response.status)
         }
     }
 
     useEffect(() => {
-        loadChapters()
+        getBook()
     }, [])
 
-    if (error) {
-        return <Message error={error}/>
-    } else {
-        return (
-            <div className={classes.container}>
-                <Virtuoso data={getText()}
-                          firstItemIndex={0}
-                          initialTopMostItemIndex={0}
-                          itemContent={itemContent}
-                          startReached={previousChapter}
-                          endReached={loadChapters}
-                          components={{
-                              Footer: () => {
-                                  return (
-                                      <div
-                                          style={{
-                                              padding: '2rem',
-                                              display: 'flex',
-                                              justifyContent: 'center',
-                                          }}
-                                      >
-                                          {loading}
-                                      </div>
-                                  )
-                              }
-                          }}
-                />
-            </div>
-        )
-    }
+
+    return (
+        <div className={classes.container}>
+            <Virtuoso data={chapters}
+                      ref={virtuoso}
+                      itemContent={itemContent}
+                      components={{
+                          Footer: () => {
+                              return (
+                                  <div
+                                      style={{
+                                          padding: '2rem',
+                                          display: 'flex',
+                                          justifyContent: 'center',
+                                      }}
+                                  >
+                                      <Loading/>
+                                  </div>
+                              )
+                          }
+                      }}
+            />
+        </div>
+    )
 }
 
 
@@ -170,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         width: '100%',
         height: '85vh',
-        top: 70,
+        top: 75,
     },
     textContainer: {
         width: '100%',

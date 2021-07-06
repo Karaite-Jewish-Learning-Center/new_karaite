@@ -8,8 +8,8 @@ import BookText from "./components/bookText";
 import KaraitesBooks from "./components/karaitesBooks";
 import BiblicalText from "./components/BiblicalText";
 import Comments from "./components/Coments";
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/styles';
 
 
 function App() {
@@ -32,11 +32,11 @@ function App() {
             <Route path="/texts">
                 <BookText book={'Deuteronomy'}/>
             </Route>
-             <Route path="/karaites/">
+            <Route path="/karaites/">
                 <KaraitesBooks book={'Yeriot Shelomo'}/>
             </Route>
-             <Route path="/bible/">
-                <BiblicalText book={'Psalms'}/>
+            <Route path="/bible/">
+                <BiblicalText book={'Psalms'} chapter={2} verse={9}/>
             </Route>
         </ThemeProvider>
     );
@@ -45,25 +45,30 @@ function App() {
 export default App;
 
 const theme = createMuiTheme({
-  palette: {
-    primary: {
-      // Purple and green play nicely together.
-      main: '#ffffff',
-    },
-    secondary: {
-      // This is green.A700 as hex.
-      main: '#11c4f1',
-    },
-  },
-});
+        palette: {
+            primary: {
+                // Purple and green play nicely together.
+                main: '#ffffff',
+            }
+            ,
+            secondary: {
+                // This is green.A700 as hex.
+                main: '#11c4f1',
+            }
+            ,
+        }
+        ,
+    }
+);
 
 // tooltips
 const useStyles = makeStyles({
-    english: {
-        maxWidth: 300,
-    },
-    hebrew:{
-      maxWidth: 300,
-      direction:'rtl',
+        english: {
+            maxWidth: 300,
+        },
+        hebrew: {
+            maxWidth: 300,
+            direction: 'rtl',
+        }
     }
-})
+)
