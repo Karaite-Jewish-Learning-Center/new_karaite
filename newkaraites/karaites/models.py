@@ -591,6 +591,20 @@ class BookAsArray(models.Model):
             query = BookAsArray.objects.filter(book=book, chapter=chapter)
             return query[0].book_text
 
+    @staticmethod
+    def to_json_book_array(book, chapter=None):
+        """ deprecated """
+        result = []
+        if chapter is None:
+            query = BookAsArray.objects.filter(book=book)
+        else:
+            query = BookAsArray.objects.filter(book=book, chapter=chapter)
+
+        for i, book in enumerate(query):
+            result.append(book.to_json())
+
+        return result
+
     def __str__(self):
         return self.book.book_title_en
 
@@ -673,6 +687,18 @@ class KaraitesBookText(models.Model):
             'chapter_title': chapter.chapter_title,
             'chapter_text': chapter.chapter_text,
         }
+
+    @staticmethod
+    def to_list(book, chapter_number=None):
+        if chapter_number is None:
+            query = KaraitesBookText.objects.filter(book=book)
+        else:
+            query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
+
+        result = []
+        for book in query:
+            result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
+        return result
 
     @mark_safe
     def chapter_number_la_admin(self):

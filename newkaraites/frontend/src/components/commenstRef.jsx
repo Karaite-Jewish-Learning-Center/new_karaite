@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {makeStyles} from '@material-ui/core/styles';
 import {indoArabicToHebrew, englishBookNameToHebrew} from "../utils/utils";
-import {LANGUAGE, HEBREW} from "../constants";
+import {LANGUAGE, HEBREW} from "../constants/constants";
 
 
 const CommentRef = ({book, chapter, verse, language, closeCommentTabHandler, biblicalRef}) => {

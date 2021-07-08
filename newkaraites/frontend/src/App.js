@@ -33,10 +33,10 @@ function App() {
                 <BookText book={'Deuteronomy'}/>
             </Route>
             <Route path="/karaites/">
-                <KaraitesBooks book={'Yeriot Shelomo'}/>
+                <KaraitesBooks book={'Yeriot Shelomo'} chapter={0} fullBook={true}/>
             </Route>
             <Route path="/bible/">
-                <BiblicalText book={'Psalms'} chapter={2} verse={9}/>
+                <BiblicalText book={'Psalms'} chapter={2} verse={9} fullBook={true}/>
             </Route>
         </ThemeProvider>
     );

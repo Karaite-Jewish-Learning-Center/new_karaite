@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from '@material-ui/core/Select';
 import {englishBook, hebrewBooks} from "../utils/utils";
-import {ENGLISH, HEBREW} from "../constants";
+import {ENGLISH, HEBREW} from "../constants/constants";
 
 
 export default function SelectBook({book, language, onSelectBookChange}) {

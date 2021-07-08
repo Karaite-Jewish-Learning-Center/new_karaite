@@ -63,6 +63,12 @@ def book_chapter_verse(request, *args, **kwargs):
         chapter = BookAsArray().to_list(book=book_title, chapter=chapter)
         return JsonResponse([chapter, book_title.to_json()], safe=False)
 
+    # deprecated
+    if model == 'bookAsArrayOld':
+        book = BookAsArray().to_json_book_array(book=book_title, chapter=chapter)
+        return JsonResponse({'chapters': book,
+                             'book': book_title.to_json()})
+
 
 def karaites_book_chapter(request, *args, **kwargs):
     """ Do Book and chapter check"""
@@ -71,20 +77,21 @@ def karaites_book_chapter(request, *args, **kwargs):
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
-    if chapter is None:
-        return JsonResponse(data={'status': 'false', 'message': _('Need a chapter number.')}, status=400)
+
     try:
         book_details = KaraitesBookDetails().to_json(book_title=book)
     except KaraitesBookDetails.DoesNotExist:
         return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
 
     try:
-        book_chapter = KaraitesBookText().to_json(book=book_details['book_id'], chapter_number=int(chapter))
+        if chapter is None:
+            book_chapter = KaraitesBookText().to_list(book=book_details['book_id'])
+        else:
+            book_chapter = KaraitesBookText().to_list(book=book_details['book_id'], chapter_number=int(chapter))
     except KaraitesBookText.DoesNotExist:
         return JsonResponse(data={'status': 'false', 'message': _(f'Chapter {chapter} not found.')}, status=400)
 
-    return JsonResponse({'book_details': book_details,
-                         'book_chapter': book_chapter})
+    return JsonResponse([book_chapter, book_details], safe=False)
 
 
 class BooksPresentation(View):
@@ -124,6 +131,14 @@ class GetBookAsArrayJson(View):
     @staticmethod
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
+        return book_chapter_verse(request, *args, **kwargs)
+
+
+class GetBookAsArrayJsonOld(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        kwargs.update({'model': 'bookAsArrayOld'})
         return book_chapter_verse(request, *args, **kwargs)
 
 

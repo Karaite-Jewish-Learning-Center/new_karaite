@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getCommentsUrl} from "../constants"
+import {getCommentsUrl, karaitesBookUrl} from "../constants/constants"
 
 const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)
@@ -12,6 +12,10 @@ const equals = (a, b) => {
 const getComments = async (chapter, verse) => {
     const res = await axios.get(getCommentsUrl + `Deuteronomy/${chapter}/${verse}`)
     return res;
+}
+
+const makeBookUrl = (url, book, chapter, full) => {
+    return (full ? `${url}${book}/` : `${url}${book}/${chapter}/`)
 }
 
 const makeRandomKey = () => {
@@ -76,7 +80,7 @@ const hebrewBookNames = {
     'שמואל ב': 'II Samuel',
     'ישעיה': 'Isaiah',
     'ירמיה': 'Jeremiah',
-    'ירמיהו':'Jeremiah',
+    'ירמיהו': 'Jeremiah',
     'יואל': 'Joel',
     'יונה': 'Jonah',
     'יהושע': 'Joshua',
@@ -548,4 +552,5 @@ export {
     hebrewBooks,
     englishBook,
     toEnglish,
+    makeBookUrl,
 }

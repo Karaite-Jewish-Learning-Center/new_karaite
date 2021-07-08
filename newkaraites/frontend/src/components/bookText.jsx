@@ -25,7 +25,7 @@ import {
     toEnglish,
     equals
 } from "../utils/utils";
-import {bookChapterUrl, getCommentsUrl} from "../constants";
+import {bookChapterUrlOld, getCommentsUrl} from "../constants/constants";
 import './css/scroll.css';
 import './css/comments.css';
 import HeaderSelect from "./HeaderSelect";
@@ -221,10 +221,11 @@ export default function BookText({book}) {
     }
 
     useEffect(() => {
-        axios.get(bookChapterUrl + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
+        axios.get(bookChapterUrlOld + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
             .then((response) => {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
+                debugger
                 // setBookChapters({[bookChapterVerse[BOOK]]: response.data.chapters})
                 setIsLoaded(true);
                 ReactTooltip.rebuild()
@@ -232,7 +233,7 @@ export default function BookText({book}) {
             })
             .catch(error => {
                 setError(error)
-                console.log(`Error on ${bookChapterUrl}: ${error.response}`)
+                console.log(`Error on ${bookChapterUrlOld}: ${error.response}`)
             })
     }, [bookChapterVerse])
 
@@ -243,7 +244,7 @@ export default function BookText({book}) {
     } else {
         const bookName = bookChapterVerse[BOOK]
         const chapter = bookChapterVerse[CHAPTER]
-
+        debugger
         return (
             <div>
                 <Grid container className={classes.root}>

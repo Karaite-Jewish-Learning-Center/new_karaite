@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import {makeStyles} from '@material-ui/core/styles';
 import SelectBook from "./SelectBook";
-import {HEBREW, ENGLISH} from "../constants";
+import {HEBREW, ENGLISH} from "../constants/constants";
 import Loading from "./Loading";
 import SelectChapter from "./SelectChapter";
 
@@ -32,7 +32,7 @@ export default function HeaderSelect({
             <Box p={1}>
                 <SelectBook book={book_en} language={ENGLISH} onSelectBookChange={onSelectChangeBook}/>
             </Box>
-            <Box p={1}><Loading isLoaded={isloaded}/></Box>
+            <Box p={1}/>
             <Box p={1}/>
             <Box p={1}/>
             <Box p={1}/>

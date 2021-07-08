@@ -8,7 +8,9 @@ export default function HebrewText(props) {
     const {style, children} = props
 
     return (
-        <Typography className={{...classes.hebrewFont,...style}}>{children}</Typography>
+        <div >
+            <Typography className={{...classes.hebrewFont, ...style}}>{children}</Typography>
+        </div>
     )
 }
 
@@ -17,6 +19,5 @@ const useStyles = makeStyles(() => ({
     hebrewFont: {
         direction: 'RTL',
         fontFamily: 'SBL Hebrew',
-
     },
 }))
