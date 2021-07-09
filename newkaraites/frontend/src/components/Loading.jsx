@@ -1,16 +1,30 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
+import {makeStyles} from '@material-ui/core/styles';
 import Colors from '../constants/colors'
 
-const Loading = ({color, type, style}) => {
-
-    if (color === undefined) color = Colors.loading
-    if (type === undefined) type = 'spin'
+const Loading = (props) => {
+    const classes = useStyles()
+    const {color, type, text} = props
     return (
-        <div className={style}>
-            <ReactLoading type={type} color={color} height={30} width={30}/>
+        <div className={classes.loading}>
+            {(text ? <p>{text}</p>:<ReactLoading type={type} color={color} height={30} width={30}/>)}
         </div>
     )
 }
 
 export default Loading
+
+Loading.defaultProps = {
+    color:Colors.loading,
+    type:'spin'
+}
+
+const useStyles = makeStyles(() => ({
+
+    loading: {
+        padding: '2rem',
+        display: 'flex',
+        justifyContent: 'center',
+    }
+}))

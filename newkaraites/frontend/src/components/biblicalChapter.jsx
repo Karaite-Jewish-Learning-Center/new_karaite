@@ -64,6 +64,9 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'top',
+        "&:hover": {
+            background: Colors['verseOnMouseOver']
+        },
         // borderBottom: '2px solid',
         // MozBorderBottomColors: Colors['verseOnMouseOver'],
         // borderBottomColor: Colors['verseOnMouseOver'],
@@ -102,7 +105,6 @@ const useStyles = makeStyles(() => ({
         margin: 10,
     },
     chapterNumber: {
-        maxWidth: '5%',
         minWidth: '5%',
         margin: 10,
         textAlign: 'center',

@@ -23,18 +23,22 @@ export default function BiblicalText({book, chapter, verse, fullBook}) {
         )
     }
 
+    const calculateIndex =(data)=>{
+        return (fullBook? data['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1:  verse-1 )
+    }
+
     const getBook = async () => {
         const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, fullBook))
         if (response.ok) {
             const data = await response.json()
             setChapters(data[BOOK_CHAPTERS])
             setBookData(data[BOOK_DATA])
-            const i = data[1]['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
+            const index = calculateIndex(data[BOOK_DATA])
             virtuoso.current.scrollToIndex({
-                index: i,
+                index: index,
                 align: 'center',
             });
-            setHighLight(i)
+            setHighLight(index)
         } else {
             alert("HTTP-Error: " + response.status)
         }
@@ -46,13 +50,13 @@ export default function BiblicalText({book, chapter, verse, fullBook}) {
 
 
     return (
-        <div className={classes.container}>
+        <div className={classes.virtuoso}>
             <Virtuoso data={chapters}
                       ref={virtuoso}
                       itemContent={itemContent}
                       components={{
                           Footer: () => {
-                              return <Loading style={classes.loading}/>
+                              return <Loading text={(fullBook ? 'Book end.' : 'End of chapter.')}/>
                           }
                       }}
             />
@@ -61,15 +65,10 @@ export default function BiblicalText({book, chapter, verse, fullBook}) {
 }
 
 const useStyles = makeStyles(() => ({
-    container: {
-        position: 'fixed',
+    virtuoso: {
         width: '100%',
-        height: '85vh',
-        top: 75,
+        height: '100%',
+        position:'',
     },
-    loading: {
-        padding: '2rem',
-        display: 'flex',
-        justifyContent: 'center',
-    }
+
 }))
