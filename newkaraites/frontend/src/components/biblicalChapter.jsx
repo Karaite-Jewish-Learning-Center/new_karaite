@@ -10,7 +10,7 @@ import {
 } from "../constants/constants";
 
 
-export default function ChapterHeader(props) {
+export default function ChapterHeaderVerse(props) {
     const {item, data, highlight, bookData} = props
     let classes = useStyles()
     let chapterHtml = null
@@ -67,9 +67,6 @@ const useStyles = makeStyles(() => ({
         "&:hover": {
             background: Colors['verseOnMouseOver']
         },
-        // borderBottom: '2px solid',
-        // MozBorderBottomColors: Colors['verseOnMouseOver'],
-        // borderBottomColor: Colors['verseOnMouseOver'],
     },
     chapter: {
         width: '100%',
@@ -97,7 +94,7 @@ const useStyles = makeStyles(() => ({
     },
     ch: {
         fontSize: 18,
-        color: 'gray',
+        color: Colors['gray'],
     },
     chapterTitle_en: {
         maxWidth: '40%',
@@ -110,7 +107,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center',
         verticalAlign: 'text-top',
         fontSize: 20,
-        color: 'gray'
+        color: Colors['gray']
     },
     verseHe: {
         maxWidth: '40%',

@@ -4,7 +4,9 @@ const Colors = {
     bibleSelectedVerse:'#11c4f114',
     verseOnMouseOver:'#f5f2f2',
     underline:'#c6c6c6',
-    gray:'gray'
+    gray:'gray',
+    headerBackgroundColor:'#eaeaea'
+
 }
 
 export default Colors;

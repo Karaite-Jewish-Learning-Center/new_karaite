@@ -1,11 +1,13 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef} from 'react'
 import {Virtuoso} from 'react-virtuoso'
-import {makeStyles} from '@material-ui/core/styles';
-import {bookChapterUrl, BOOK_DATA, BOOK_CHAPTERS} from "../constants/constants";
-import {makeBookUrl} from "../utils/utils";
-import ChapterHeader from '../components/biblicalChapter'
+import {makeStyles} from '@material-ui/core/styles'
+import {bookChapterUrl, BOOK_DATA, BOOK_CHAPTERS} from '../constants/constants'
+import {makeBookUrl} from '../utils/utils'
+import ChapterHeaderVerse from '../components/biblicalChapter'
+
 import './css/comments.css';
 import Loading from "./Loading";
+import PaneHeader from "./PaneHeader";
 
 
 export default function BiblicalText({book, chapter, verse, fullBook}) {
@@ -19,7 +21,7 @@ export default function BiblicalText({book, chapter, verse, fullBook}) {
 
     const itemContent = (item, data) => {
         return (
-            <ChapterHeader item={item} data={data} highlight={highlight} bookData={bookData}/>
+            <ChapterHeaderVerse item={item} data={data} highlight={highlight} bookData={bookData}/>
         )
     }
 

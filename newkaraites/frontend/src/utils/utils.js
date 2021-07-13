@@ -513,7 +513,11 @@ const hebrewToIndoArabic = (hebrew_number) => {
         'קצט': 199,
         'ר': 200,
     }
-    return table[hebrew_number.trim()]
+
+    let translate = table[hebrew_number.trim()]
+    if(translate === undefined) translate = table[hebrew_number.replace('\'', '')]
+    return translate
+
 }
 
 const englishBookNameToHebrew = (englishBookName) => {

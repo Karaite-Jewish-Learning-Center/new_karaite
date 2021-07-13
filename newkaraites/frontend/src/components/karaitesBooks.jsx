@@ -3,20 +3,35 @@ import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import {BOOK_CHAPTERS, BOOK_DATA, karaitesBookUrl} from "../constants/constants"
-import {makeBookUrl} from "../utils/utils"
-import commStyles from "../constants/common-css"
+import {makeBookUrl, makeRandomKey} from "../utils/utils"
+import ReactTooltip from 'react-tooltip';
 import Loading from "./Loading"
+import PaneHeader from "./PaneHeader";
 
 
-export default function KaraitesBooks({book, chapter, fullBook}) {
+export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
     const classes = useStyles()
     const [chapters, setChapters] = useState()
     const [bookData, setBookData] = useState()
 
+    const transform = (node) => {
+        if (node.type === 'tag') {
+            // rewrite the span with a onClick event handler
+            if (node.name === 'span') {
+                if (node['attribs']['class'] === 'en-biblical-ref') {
+                    return <span key={makeRandomKey()} lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
+                }
+                if (node['attribs']['class'] === 'he-biblical-ref') {
+                    return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
+                }
+            }
+        }
+    }
     const itemContent = (item, data) => {
         return (<div className={classes.paragraphContainer}>
             {ReactHtmlParser(data[0], {
                 decodeEntities: true,
+                transform: transform
             })}
         </div>)
     }
@@ -35,6 +50,7 @@ export default function KaraitesBooks({book, chapter, fullBook}) {
 
     useEffect(() => {
         getKaraitesBook()
+        ReactTooltip.rebuild()
     }, [])
 
     return (
@@ -56,7 +72,7 @@ const useStyles = makeStyles(() => ({
     virtuoso: {
         width: '100%',
         height: '100%',
-        position:'',
+        position: '',
     },
     paragraphContainer: {
         marginRight: 30,

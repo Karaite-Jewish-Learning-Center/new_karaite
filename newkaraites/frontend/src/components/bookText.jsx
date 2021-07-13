@@ -18,17 +18,18 @@ import CommentBadge from '../components/CommentBadge';
 import Comments from "./Coments";
 import CommentRef from "./commenstRef";
 import {
-    hebrewToIndoArabic,
-    hebrewBookNameToEnglish,
     makeRandomKey,
     englishBookNameToHebrew,
     toEnglish,
     equals
 } from "../utils/utils";
+import parseBiblicalReference from "../utils/parseBiblicalReference";
 import {bookChapterUrlOld, getCommentsUrl} from "../constants/constants";
 import './css/scroll.css';
 import './css/comments.css';
 import HeaderSelect from "./HeaderSelect";
+import Speech from 'react-speech';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'fixed',
@@ -95,10 +96,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-
-
-
-
 export default function BookText({book}) {
     const BOOK = 0
     const CHAPTER = 1
@@ -151,42 +148,13 @@ export default function BookText({book}) {
         }
     }
     const refClick = (e) => {
-        // parse biblical ref
-        let book
-        let chapter
-        let verse
-        let chapterVerse
-        let language = e.target.childNodes[0].parentElement.lang
-        let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(',', '').replace('.', '').trim()
-        if (language.toLowerCase() === 'he') {
-            debugger
-            let spacePos = biblicalRef.lastIndexOf(' ') + 1
-            let refChapterVerse = biblicalRef.substr(spacePos)
-            let [refChapter, refVerse] = refChapterVerse.split(':')
-            let refBook = biblicalRef.replace(refChapterVerse, '').trim()
-            refVerse = refVerse.split('-')
-            book = hebrewBookNameToEnglish(refBook)
-            chapter = hebrewToIndoArabic(refChapter)
-            verse = hebrewToIndoArabic(refVerse[0])
-            chapterVerse = refVerse.map(hebrewNumber => hebrewToIndoArabic(hebrewNumber))
-        } else {
-            debugger
-            let re = /[0-9]+/g
-            chapterVerse = biblicalRef.match(re)
-            chapter = parseInt(chapterVerse[0])
-            verse = parseInt(chapterVerse[1])
-            re = /[a-z,A-Z]+/g
-            book = biblicalRef.match(re)[0]
-            chapterVerse = chapterVerse.slice(1).map(arabic => parseInt(arabic))
-        }
-
-        if ((book !== undefined && chapter !== undefined && verse !== undefined)) {
+        try {
+            const {book, chapter, verse, chapterVerse} = parseBiblicalReference(e)
             setBookChapterVerse([book, chapter, verse])
             setVerseRange(chapterVerse)
-        } else {
-            console.log(book, chapter, verse)
+        } catch (error) {
+            alert(error)
         }
-
     }
     const rowOnclick = (e) => {
 
@@ -283,6 +251,7 @@ export default function BookText({book}) {
                                                         dir="RTL">
                                                         {verse[1]}
                                                     </Typography>
+                                                    <Speech text={verse[1]} lang="he-IL" voice="Carmit" rate={0.7}/>
                                                 </TableCell>
 
                                                 <TableCell id={`pos-${chapter}-${v + 1}`} className={`${classes.verseNumber} ${classes.verseWidth}`}>
@@ -298,8 +267,7 @@ export default function BookText({book}) {
                                                                 key={`en-${chapter}-${v}`}
                                                                 dir="LTR">{verse[0]}
                                                     </Typography>
-
-
+                                                    <Speech text={verse[0]} voice="Daniel" rate={0.7}/>
                                                 </TableCell>
 
                                                 <TableCell data-c-v={`${chapter},${v}`} className={(verse[2] !== '0' ? classes.comments : '')}

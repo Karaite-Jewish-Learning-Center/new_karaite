@@ -162,3 +162,4 @@ def get_foot_note_index(html):
         except ValueError:
             pass
     return index
+
