@@ -149,9 +149,9 @@ export default function BookText({book}) {
     }
     const refClick = (e) => {
         try {
-            const {book, chapter, verse, chapterVerse} = parseBiblicalReference(e)
+            const {book, chapter, verse, highlight} = parseBiblicalReference(e)
             setBookChapterVerse([book, chapter, verse])
-            setVerseRange(chapterVerse)
+            setVerseRange(highlight)
         } catch (error) {
             alert(error)
         }
@@ -161,7 +161,6 @@ export default function BookText({book}) {
         let [chapter, verse] = e.currentTarget.dataset.cV.split(',')
         chapter = parseInt(chapter)
         verse = parseInt(verse) + 1
-        debugger
         let isCommentLoaded = commentBookChapterVerse[CHAPTER] === chapter && commentBookChapterVerse[VERSE] === verse
         // avoid multiple calls to same comment
         if (isCommentLoaded) {
@@ -193,7 +192,6 @@ export default function BookText({book}) {
             .then((response) => {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
-                debugger
                 // setBookChapters({[bookChapterVerse[BOOK]]: response.data.chapters})
                 setIsLoaded(true);
                 ReactTooltip.rebuild()
@@ -212,7 +210,6 @@ export default function BookText({book}) {
     } else {
         const bookName = bookChapterVerse[BOOK]
         const chapter = bookChapterVerse[CHAPTER]
-        debugger
         return (
             <div>
                 <Grid container className={classes.root}>

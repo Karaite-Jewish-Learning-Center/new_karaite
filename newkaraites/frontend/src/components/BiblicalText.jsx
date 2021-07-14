@@ -4,17 +4,17 @@ import {makeStyles} from '@material-ui/core/styles'
 import {bookChapterUrl, BOOK_DATA, BOOK_CHAPTERS} from '../constants/constants'
 import {makeBookUrl} from '../utils/utils'
 import ChapterHeaderVerse from '../components/biblicalChapter'
-
+import CommentBadge from '../components/CommentBadge';
 import './css/comments.css';
 import Loading from "./Loading";
 import PaneHeader from "./PaneHeader";
 
 
-export default function BiblicalText({book, chapter, verse, fullBook}) {
-
+export default function BiblicalText({book, chapter, verse, highlight, fullBook, onClosePane}) {
+    console.log(book, chapter, verse)
     const [bookData, setBookData] = useState({});
     const [chapters, setChapters] = useState([])
-    const [highlight, setHighLight] = useState(1)
+    // const [highlight, setHighLight] = useState([1])
 
     const virtuoso = useRef(null);
     const classes = useStyles()
@@ -40,7 +40,7 @@ export default function BiblicalText({book, chapter, verse, fullBook}) {
                 index: index,
                 align: 'center',
             });
-            setHighLight(index)
+            // setHighLight(index)
         } else {
             alert("HTTP-Error: " + response.status)
         }
@@ -48,11 +48,12 @@ export default function BiblicalText({book, chapter, verse, fullBook}) {
 
     useEffect(() => {
         getBook()
-    }, [])
+    }, [book, chapter,verse])
 
 
     return (
         <div className={classes.virtuoso}>
+            <PaneHeader book={book} chapter={chapter} verse={verse} onClosePane={onClosePane}/>
             <Virtuoso data={chapters}
                       ref={virtuoso}
                       itemContent={itemContent}

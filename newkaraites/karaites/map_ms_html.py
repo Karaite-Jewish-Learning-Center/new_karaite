@@ -332,6 +332,11 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
         classes = MAP_P_STYLE_TO_CLASSES.get(style, None)
         if classes is not None:
             child.attrs.pop('style')
+            # if classes[1] == 'biblical-ref':
+            #     print(child)
+            #     print('*' * 80)
+            #     input('>>')
+
             if child.attrs['class'] == [classes[0]]:
                 child.attrs['class'] = [f'{language}-{classes[1]}']
 
@@ -350,6 +355,10 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
             if classes is not None:
                 span_child.attrs.pop('style')
                 span_child.attrs['class'] = [f'{language}-{classes[0]}']
+                # if classes[0] == 'biblical-ref' and language == 'he':
+                #     print(child)
+                #     print('-' * 80)
+                #     input('>>')
             else:
                 if style is not None and style != '':
                     print("-" * 60)

@@ -14,6 +14,7 @@ export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
     const [chapters, setChapters] = useState()
     const [bookData, setBookData] = useState()
 
+
     const transform = (node) => {
         if (node.type === 'tag') {
             // rewrite the span with a onClick event handler
@@ -55,6 +56,8 @@ export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
 
     return (
         <div className={classes.virtuoso}>
+
+            <PaneHeader book={book} chapter={chapter}/>
             <Virtuoso data={chapters}
                       itemContent={itemContent}
                       components={{

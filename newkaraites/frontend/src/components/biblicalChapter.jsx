@@ -6,12 +6,20 @@ import {
     BIBLE_ENGLISH,
     BIBLE_HEBREW,
     BIBLE_VERSE,
-    BIBLE_CHAPTER
-} from "../constants/constants";
+    BIBLE_CHAPTER,
+    BIBLE_EN_CM,
+    BIBLE_HE_CM,
 
+} from "../constants/constants";
+import {equals} from "../utils/utils";
+import CommentBadge from "./CommentBadge";
+import Speech from 'react-speech';
+import BibleBottomNavigation from "./BottomNavigate";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 export default function ChapterHeaderVerse(props) {
     const {item, data, highlight, bookData} = props
+    debugger
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
@@ -41,17 +49,41 @@ export default function ChapterHeaderVerse(props) {
     return (
         <div>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(highlight === item ? classes.selectVerse : '')}`}>
+            <div className={`${classes.textContainer} ${( highlight.indexOf(item+1) >=0 ? classes.selectVerse : '')}`}>
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
+
                 </div>
+                 <MoreVertIcon/>
                 <div className={classes.verseNumber}>
                     <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
                 <div className={classes.verseEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
+
+                {/*<div className={classes.comments}>*/}
+                {/*    <CommentBadge commentsCount={1} sameChapterAndVerse={false}/>*/}
+                {/*</div>*/}
             </div>
+            {/*<div className={`${classes.textContainer} ${(highlight === item ? classes.selectVerse : '')}`}>*/}
+            {/*    <div className={classes.verseHe}>*/}
+            {/*        <CommentBadge commentsCount={1} sameChapterAndVerse={false}/>*/}
+            {/*        <Speech text={data[BIBLE_HEBREW]}*/}
+            {/*                lang="he-IL"*/}
+            {/*                voice="Carmit"*/}
+            {/*                rate={0.7}*/}
+            {/*            // stop={true}*/}
+            {/*            // pause={true}*/}
+            {/*            // resume={true}*/}
+            {/*                style={style.play}*/}
+            {/*        />*/}
+            {/*    </div>*/}
+            {/*    <div className={classes.verseNumber}></div>*/}
+            {/*    <div className={classes.verseEn}>*/}
+            {/*        <CommentBadge commentsCount={8} sameChapterAndVerse={false}/>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </div>
     )
 }
@@ -142,4 +174,43 @@ const useStyles = makeStyles(() => ({
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']
     },
+    comments: {
+        cursor: 'pointer',
+    },
 }))
+
+const style = {
+    container: {},
+    text: {},
+    buttons: {},
+    play: {
+        hover: {
+            backgroundColor: 'GhostWhite'
+        },
+        button: {
+            width: '28',
+            height: '28',
+            cursor: 'pointer',
+            pointerEvents: 'none',
+            outline: 'none',
+            backgroundColor: 'yellow',
+            border: 'solid 1px rgba(255,255,255,1)',
+            borderRadius: 6
+        },
+    },
+    pause: {
+        play: {},
+        hover: {},
+    },
+    stop: {
+        play: {},
+        hover: {},
+        button: {},
+    },
+    resume: {
+        play: {
+            hover: {},
+            button: {}
+        },
+    }
+}
