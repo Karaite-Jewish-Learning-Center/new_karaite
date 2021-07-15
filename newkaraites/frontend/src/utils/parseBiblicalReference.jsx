@@ -14,7 +14,6 @@ const parseBiblicalReference = (e) => {
     biblicalRef = biblicalRef .replace(', ', ':').replace(',', ':').replace('.', '').trim()
 
     if (language.toLowerCase() === 'he') {
-        debugger
         let spacePos = biblicalRef.lastIndexOf(' ') + 1
         let refChapterVerse = biblicalRef.substr(spacePos)
         let [refChapter, refVerse] = refChapterVerse.split(':')
@@ -29,9 +28,7 @@ const parseBiblicalReference = (e) => {
         chapter = gematriya(refChapter)
         verse = gematriya(refVerse[0])
         highlight = refVerse.map(hebrewNumber => gematriya(hebrewNumber))
-        debugger
     } else {
-        debugger
         let re = /[0-9]+/g
         chapterVerse = biblicalRef.match(re)
         chapter = parseInt(chapterVerse[0])

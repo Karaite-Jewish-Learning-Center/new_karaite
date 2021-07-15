@@ -7,22 +7,30 @@ import {
     BIBLE_HEBREW,
     BIBLE_VERSE,
     BIBLE_CHAPTER,
-    BIBLE_EN_CM,
     BIBLE_HE_CM,
-
+    BIBLE_EN_CM
 } from "../constants/constants";
-import {equals} from "../utils/utils";
 import CommentBadge from "./CommentBadge";
-import Speech from 'react-speech';
-import BibleBottomNavigation from "./BottomNavigate";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import ttSpeech from '../utils/ttspeech'
+
 
 export default function ChapterHeaderVerse(props) {
     const {item, data, highlight, bookData} = props
-    debugger
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
+
+    const counts =() =>{
+        return parseInt(data[BIBLE_HE_CM]) + parseInt(data[BIBLE_EN_CM])
+    }
+
+    const onDoubleClickEn =()=>{
+        ttSpeech(data[BIBLE_ENGLISH],'en', 'Daniel', 1, 0.7)
+    }
+
+    const onDoubleClickHe=()=>{
+        ttSpeech(data[BIBLE_HEBREW],'he-IL', 'Carmit', 1, 0.7)
+    }
     if (chapter !== "0") {
         if (chapter === "1") {
             chapterHtml = (<div className={classes.chapter}>
@@ -49,41 +57,24 @@ export default function ChapterHeaderVerse(props) {
     return (
         <div>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${( highlight.indexOf(item+1) >=0 ? classes.selectVerse : '')}`}>
-                <div className={classes.verseHe}>
+            <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}>
+                <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
-
                 </div>
-                 <MoreVertIcon/>
+
                 <div className={classes.verseNumber}>
                     <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
-                <div className={classes.verseEn}>
-                    <Typography>{data[BIBLE_ENGLISH]}</Typography>
+                <div className={classes.verseEn} onDoubleClick={onDoubleClickEn}>
+                   <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
-
-                {/*<div className={classes.comments}>*/}
-                {/*    <CommentBadge commentsCount={1} sameChapterAndVerse={false}/>*/}
-                {/*</div>*/}
+                <div className={classes.comments}>
+                    <CommentBadge commentsCount={counts()}
+                                  sameChapterAndVerse={false}
+                    />
+                </div>
             </div>
-            {/*<div className={`${classes.textContainer} ${(highlight === item ? classes.selectVerse : '')}`}>*/}
-            {/*    <div className={classes.verseHe}>*/}
-            {/*        <CommentBadge commentsCount={1} sameChapterAndVerse={false}/>*/}
-            {/*        <Speech text={data[BIBLE_HEBREW]}*/}
-            {/*                lang="he-IL"*/}
-            {/*                voice="Carmit"*/}
-            {/*                rate={0.7}*/}
-            {/*            // stop={true}*/}
-            {/*            // pause={true}*/}
-            {/*            // resume={true}*/}
-            {/*                style={style.play}*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*    <div className={classes.verseNumber}></div>*/}
-            {/*    <div className={classes.verseEn}>*/}
-            {/*        <CommentBadge commentsCount={8} sameChapterAndVerse={false}/>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+
         </div>
     )
 }
@@ -109,8 +100,8 @@ const useStyles = makeStyles(() => ({
         alignItems: 'center',
     },
     chapterTitle_he: {
-        maxWidth: '40%',
-        minWidth: '40%',
+        maxWidth: '35%',
+        minWidth: '35%',
         margin: 10,
     },
     he: {
@@ -129,8 +120,8 @@ const useStyles = makeStyles(() => ({
         color: Colors['gray'],
     },
     chapterTitle_en: {
-        maxWidth: '40%',
-        minWidth: '40%',
+        maxWidth: '35%',
+        minWidth: '35%',
         margin: 10,
     },
     chapterNumber: {
@@ -142,8 +133,8 @@ const useStyles = makeStyles(() => ({
         color: Colors['gray']
     },
     verseHe: {
-        maxWidth: '40%',
-        minWidth: '40%',
+        maxWidth: '35%',
+        minWidth: '35%',
         textAlign: 'right',
         verticalAlign: 'text-top',
         margin: 10,
@@ -161,8 +152,8 @@ const useStyles = makeStyles(() => ({
         color: Colors['gray']
     },
     verseEn: {
-        maxWidth: '40%',
-        minWidth: '40%',
+        maxWidth: '35%',
+        minWidth: '35%',
         textAlign: 'left',
         verticalAlign: 'text-top',
         margin: 10
@@ -176,41 +167,12 @@ const useStyles = makeStyles(() => ({
     },
     comments: {
         cursor: 'pointer',
+        alignSelf: 'center',
+        maxWidth:'5%',
+    },
+    playButton:{
+        cursor:'pointer',
+        position:'absolute',
+        minWidth:'50',
     },
 }))
-
-const style = {
-    container: {},
-    text: {},
-    buttons: {},
-    play: {
-        hover: {
-            backgroundColor: 'GhostWhite'
-        },
-        button: {
-            width: '28',
-            height: '28',
-            cursor: 'pointer',
-            pointerEvents: 'none',
-            outline: 'none',
-            backgroundColor: 'yellow',
-            border: 'solid 1px rgba(255,255,255,1)',
-            borderRadius: 6
-        },
-    },
-    pause: {
-        play: {},
-        hover: {},
-    },
-    stop: {
-        play: {},
-        hover: {},
-        button: {},
-    },
-    resume: {
-        play: {
-            hover: {},
-            button: {}
-        },
-    }
-}

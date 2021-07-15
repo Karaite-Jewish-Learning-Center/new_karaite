@@ -4,7 +4,6 @@ import {makeStyles} from '@material-ui/core/styles'
 import {bookChapterUrl, BOOK_DATA, BOOK_CHAPTERS} from '../constants/constants'
 import {makeBookUrl} from '../utils/utils'
 import ChapterHeaderVerse from '../components/biblicalChapter'
-import CommentBadge from '../components/CommentBadge';
 import './css/comments.css';
 import Loading from "./Loading";
 import PaneHeader from "./PaneHeader";
@@ -14,7 +13,6 @@ export default function BiblicalText({book, chapter, verse, highlight, fullBook,
     console.log(book, chapter, verse)
     const [bookData, setBookData] = useState({});
     const [chapters, setChapters] = useState([])
-    // const [highlight, setHighLight] = useState([1])
 
     const virtuoso = useRef(null);
     const classes = useStyles()
@@ -40,7 +38,6 @@ export default function BiblicalText({book, chapter, verse, highlight, fullBook,
                 index: index,
                 align: 'center',
             });
-            // setHighLight(index)
         } else {
             alert("HTTP-Error: " + response.status)
         }

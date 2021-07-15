@@ -8,7 +8,6 @@ import ReactTooltip from 'react-tooltip';
 import Loading from "./Loading"
 import PaneHeader from "./PaneHeader";
 
-
 export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
     const classes = useStyles()
     const [chapters, setChapters] = useState()
@@ -26,6 +25,7 @@ export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
                     return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
                 }
             }
+
         }
     }
     const itemContent = (item, data) => {

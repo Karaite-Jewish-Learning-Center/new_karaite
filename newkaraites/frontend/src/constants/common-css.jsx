@@ -1,3 +1,4 @@
+import {makeStyles} from '@material-ui/core/styles'
 
 const commStyles = {
     container: {
@@ -8,4 +9,21 @@ const commStyles = {
     },
 }
 
-export default commStyles
+const container = makeStyles((theme) => ({
+    container: {
+        flexGrow: 1,
+        position: 'fixed',
+        width: '100%',
+        height: '85vh',
+        top: 60,
+    },
+    left: {
+        height: '85vh',
+        top: 70,
+    }
+
+}));
+export {
+    commStyles,
+    container
+}
