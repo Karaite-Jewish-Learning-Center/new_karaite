@@ -548,7 +548,7 @@ class BookText(models.Model):
 
 
 class BookAsArray(models.Model):
-    """ Map book to postgresql array field """
+    """ Map Biblical book to postgresql array field """
 
     book = models.ForeignKey(Organization,
                              on_delete=models.CASCADE,
@@ -558,7 +558,7 @@ class BookAsArray(models.Model):
     chapter = models.IntegerField(default=0)
 
     # text english, text hebrew, comment_count and Verse
-    book_text = ArrayField(ArrayField(models.TextField(), size=6), default=list)
+    book_text = ArrayField(ArrayField(models.TextField(), size=7), default=list)
 
     @mark_safe
     def text(self):

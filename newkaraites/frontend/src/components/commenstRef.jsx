@@ -21,7 +21,7 @@ const CommentRef = ({book, chapter, verse, language, closeCommentTabHandler, bib
             <Box display="flex" direction="row" justifyContent="space-between" p={1} m={1} className={classes.grid}>
                 <Box p={1} alignContent="flex-start" className={classes.link}>
                     <span lang={LANGUAGE[language]}
-                          class={LANGUAGE[language] + '-biblical-ref'}
+                          className={LANGUAGE[language] + '-biblical-ref'}
                           onClick={biblicalRef}>{link}
                     </span>
                 </Box>

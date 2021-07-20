@@ -176,6 +176,7 @@ export default function BookText({book}) {
         axios.get(getCommentsUrl + `${bookChapterVerse[BOOK]}/${chapter}/${verse}/`)
             .then((response) => {
                 setComments(response.data.comments)
+                debugger
                 setCommentBookChapterVerse([bookChapterVerse[BOOK], chapter, verse])
                 // setGridSize([8, 4])
                 // ReactTooltip.hide()

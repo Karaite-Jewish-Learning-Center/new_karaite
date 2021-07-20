@@ -1,4 +1,4 @@
-import {hebrewBookNameToEnglish, hebrewToIndoArabic} from "./utils";
+import {hebrewBookNameToEnglish} from "./utils";
 import gematriya from 'gematriya';
 
 
@@ -11,7 +11,7 @@ const parseBiblicalReference = (e) => {
     let highlight
     let language = e.target.childNodes[0].parentElement.lang
     let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(':(', '')
-    biblicalRef = biblicalRef .replace(', ', ':').replace(',', ':').replace('.', '').trim()
+    biblicalRef = biblicalRef .replace(', ', ':',1).replace(',', ':',1).replace('.', '').trim()
 
     if (language.toLowerCase() === 'he') {
         let spacePos = biblicalRef.lastIndexOf(' ') + 1

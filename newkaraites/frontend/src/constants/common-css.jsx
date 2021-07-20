@@ -19,10 +19,16 @@ const container = makeStyles((theme) => ({
     },
     left: {
         height: '85vh',
-        top: 70,
+        top: 60,
+    },
+    scroll:{
+        overflow: 'auto',
+        width: 'auto',
+        height: '85vh',
+        paddingRight: '30px !important'
     }
-
 }));
+
 export {
     commStyles,
     container

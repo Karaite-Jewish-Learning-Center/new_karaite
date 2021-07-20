@@ -23,7 +23,7 @@ export default function Comments({language, comments, refClick}) {
     // field name
     const ref = 'comment_' + language
     return (
-        <>
+        <div key={makeRandomKey}>
             {comments.map(html => (
                 <>
                     {ReactHtmlParser(html[ref], {
@@ -32,7 +32,7 @@ export default function Comments({language, comments, refClick}) {
                     })}
                 </>
             ))}
-        </>
+        </div>
     )
 
 

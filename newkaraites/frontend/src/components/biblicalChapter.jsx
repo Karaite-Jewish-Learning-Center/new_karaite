@@ -7,6 +7,7 @@ import {
     BIBLE_HEBREW,
     BIBLE_VERSE,
     BIBLE_CHAPTER,
+    BIBLE_RENDER_CHAPTER,
     BIBLE_HE_CM,
     BIBLE_EN_CM
 } from "../constants/constants";
@@ -15,23 +16,24 @@ import ttSpeech from '../utils/ttspeech'
 
 
 export default function ChapterHeaderVerse(props) {
-    const {item, data, highlight, bookData} = props
+    const {item, data, highlight, bookData, onCommentOpen, paneNumber, comment} = props
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
+    let renderChapter = data[BIBLE_RENDER_CHAPTER]
 
-    const counts =() =>{
+    const counts = () => {
         return parseInt(data[BIBLE_HE_CM]) + parseInt(data[BIBLE_EN_CM])
     }
 
-    const onDoubleClickEn =()=>{
-        ttSpeech(data[BIBLE_ENGLISH],'en', 'Daniel', 1, 0.7)
+    const onDoubleClickEn = () => {
+        ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
     }
 
-    const onDoubleClickHe=()=>{
-        ttSpeech(data[BIBLE_HEBREW],'he-IL', 'Carmit', 1, 0.7)
+    const onDoubleClickHe = () => {
+        ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
     }
-    if (chapter !== "0") {
+    if (renderChapter === "1") {
         if (chapter === "1") {
             chapterHtml = (<div className={classes.chapter}>
                 <div className={classes.chapterTitle_he}>
@@ -43,7 +45,11 @@ export default function ChapterHeaderVerse(props) {
                 <div className={classes.chapterTitle_en}>
                     <Typography className={classes.en}>{bookData.book_title_en}</Typography>
                 </div>
-
+                <div className={classes.comments}>
+                    <CommentBadge commentsCount={0}
+                                  sameChapterAndVerse={false}
+                    />
+                </div>
             </div>)
         } else {
             chapterHtml = (<div className={classes.chapter}>
@@ -51,13 +57,21 @@ export default function ChapterHeaderVerse(props) {
                     <Typography className={classes.ch}>{chapter}</Typography>
                     <hr/>
                 </div>
+                <div className={classes.comments}>
+                    <CommentBadge commentsCount={0}
+                                  sameChapterAndVerse={false}
+                    />
+                </div>
             </div>)
         }
     }
+    const commentCount = counts()
     return (
         <div>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}>
+            <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
+                 onClick={(onCommentOpen === undefined || commentCount === 0) ? null : onCommentOpen.bind(this, paneNumber, bookData.book_title_en, chapter, data[BIBLE_VERSE])}
+            >
                 <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                 </div>
@@ -66,11 +80,11 @@ export default function ChapterHeaderVerse(props) {
                     <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
                 <div className={classes.verseEn} onDoubleClick={onDoubleClickEn}>
-                   <Typography>{data[BIBLE_ENGLISH]}</Typography>
+                    <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
                 <div className={classes.comments}>
-                    <CommentBadge commentsCount={counts()}
-                                  sameChapterAndVerse={false}
+                    <CommentBadge commentsCount={commentCount}
+                                  sameChapterAndVerse={comment !== undefined && comment.chapter == chapter && comment.verse== item +1}
                     />
                 </div>
             </div>
@@ -168,11 +182,11 @@ const useStyles = makeStyles(() => ({
     comments: {
         cursor: 'pointer',
         alignSelf: 'center',
-        maxWidth:'5%',
+        maxWidth: '5%',
     },
-    playButton:{
-        cursor:'pointer',
-        position:'absolute',
-        minWidth:'50',
+    playButton: {
+        cursor: 'pointer',
+        position: 'absolute',
+        minWidth: '50',
     },
 }))

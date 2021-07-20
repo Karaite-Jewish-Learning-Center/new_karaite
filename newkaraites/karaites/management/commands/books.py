@@ -100,6 +100,8 @@ class Command(BaseCommand):
                     book_as_array = []
                     chapter_number = int(chapter) + 1
                     book_chapter = chapter_number
+                    #  render a chapter number
+                    render_chapter = 1
                     for verse in data_en['text'][chapter]:
                         verse_number = int(verse) + 1
                         book_text, _ = BookText.objects.get_or_create(
@@ -116,8 +118,9 @@ class Command(BaseCommand):
                                               0,
                                               verse_number,
                                               book_chapter,
+                                              render_chapter,
                                               ])
-                        book_chapter = 0
+                        render_chapter = 0
 
                     # update book as array
                     BookAsArray.objects.get_or_create(

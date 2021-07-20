@@ -7,9 +7,20 @@ import ChapterHeaderVerse from '../components/biblicalChapter'
 import './css/comments.css';
 import Loading from "./Loading";
 import PaneHeader from "./PaneHeader";
+import {makeRandomKey} from "../utils/utils";
 
+export default function BiblicalText({
+                                         book,
+                                         chapter,
+                                         verse,
+                                         highlight,
+                                         fullBook,
+                                         comment,
+                                         onClosePane,
+                                         onCommentOpen,
+                                         paneNumber
+                                     }) {
 
-export default function BiblicalText({book, chapter, verse, highlight, fullBook, onClosePane}) {
     console.log(book, chapter, verse)
     const [bookData, setBookData] = useState({});
     const [chapters, setChapters] = useState([])
@@ -19,12 +30,19 @@ export default function BiblicalText({book, chapter, verse, highlight, fullBook,
 
     const itemContent = (item, data) => {
         return (
-            <ChapterHeaderVerse item={item} data={data} highlight={highlight} bookData={bookData}/>
+            <ChapterHeaderVerse item={item}
+                                data={data}
+                                highlight={highlight}
+                                bookData={bookData}
+                                onCommentOpen={onCommentOpen}
+                                paneNumber={paneNumber}
+                                comment={comment}
+            />
         )
     }
 
-    const calculateIndex =(data)=>{
-        return (fullBook? data['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1:  verse-1 )
+const calculateIndex =(data)=>{
+        return (fullBook ? data['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1 : verse - 1)
     }
 
     const getBook = async () => {
@@ -45,11 +63,11 @@ export default function BiblicalText({book, chapter, verse, highlight, fullBook,
 
     useEffect(() => {
         getBook()
-    }, [book, chapter,verse])
+    }, [book, chapter, verse])
 
 
     return (
-        <div className={classes.virtuoso}>
+        <div className={classes.virtuoso} key={makeRandomKey}>
             <PaneHeader book={book} chapter={chapter} verse={verse} onClosePane={onClosePane}/>
             <Virtuoso data={chapters}
                       ref={virtuoso}
@@ -68,7 +86,7 @@ const useStyles = makeStyles(() => ({
     virtuoso: {
         width: '100%',
         height: '100%',
-        position:'',
+        position: '',
     },
 
 }))

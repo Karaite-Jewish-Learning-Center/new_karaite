@@ -9,8 +9,8 @@ const equals = (a, b) => {
     return a.length === b.length && a.every((v, i) => v === b[i]);
 }
 
-const getComments = async (chapter, verse) => {
-    const res = await axios.get(getCommentsUrl + `Deuteronomy/${chapter}/${verse}`)
+const getComments = async (book, chapter, verse) => {
+    const res = await axios.get(getCommentsUrl + `${book}/${chapter}/${verse}`)
     return res;
 }
 

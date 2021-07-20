@@ -17,6 +17,7 @@ const BIBLE_EN_CM = 2
 const BIBLE_HE_CM = 3
 const BIBLE_VERSE = 4
 const BIBLE_CHAPTER = 5
+const BIBLE_RENDER_CHAPTER = 6
 const BOOK_CHAPTERS = 0
 const BOOK_DATA = 1
 
@@ -39,6 +40,7 @@ export {
     BIBLE_HE_CM,
     BIBLE_VERSE,
     BIBLE_CHAPTER,
+    BIBLE_RENDER_CHAPTER,
     BOOK_CHAPTERS,
     BOOK_DATA,
 
