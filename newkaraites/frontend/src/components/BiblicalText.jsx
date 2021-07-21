@@ -1,8 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {Virtuoso} from 'react-virtuoso'
 import {makeStyles} from '@material-ui/core/styles'
-import {bookChapterUrl, BOOK_DATA, BOOK_CHAPTERS} from '../constants/constants'
-import {makeBookUrl} from '../utils/utils'
 import ChapterHeaderVerse from '../components/biblicalChapter'
 import './css/comments.css';
 import Loading from "./Loading";
@@ -18,12 +16,10 @@ export default function BiblicalText({
                                          comment,
                                          onClosePane,
                                          onCommentOpen,
-                                         paneNumber
+                                         paneNumber,
+                                         bookData,
+                                         chapters
                                      }) {
-
-    console.log(book, chapter, verse)
-    const [bookData, setBookData] = useState({});
-    const [chapters, setChapters] = useState([])
 
     const virtuoso = useRef(null);
     const classes = useStyles()
@@ -41,29 +37,16 @@ export default function BiblicalText({
         )
     }
 
-const calculateIndex =(data)=>{
+    const calculateIndex = (data) => {
         return (fullBook ? data['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1 : verse - 1)
     }
 
-    const getBook = async () => {
-        const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, fullBook))
-        if (response.ok) {
-            const data = await response.json()
-            setChapters(data[BOOK_CHAPTERS])
-            setBookData(data[BOOK_DATA])
-            const index = calculateIndex(data[BOOK_DATA])
-            virtuoso.current.scrollToIndex({
-                index: index,
+    useEffect(() => {
+        virtuoso.current.scrollToIndex({
+                index: calculateIndex(bookData),
                 align: 'center',
             });
-        } else {
-            alert("HTTP-Error: " + response.status)
-        }
-    }
-
-    useEffect(() => {
-        getBook()
-    }, [book, chapter, verse])
+    }, [])
 
 
     return (

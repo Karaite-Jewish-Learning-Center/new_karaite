@@ -1,16 +1,15 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Typography from '@material-ui/core/Typography';
-import Colors from "../constants/colors";
+import {resources} from "../constants/common-css";
 import {indoArabicToHebrew, englishBookNameToHebrew} from "../utils/utils";
 import {LANGUAGE, HEBREW} from "../constants/constants";
 
 
 export default function PaneHeader({book, chapter, verse, onClosePane}) {
-    const classes = useStyles()
+    const classes = resources()
 
     return (
         <div className={classes.resources}>
@@ -38,23 +37,3 @@ export default function PaneHeader({book, chapter, verse, onClosePane}) {
     )
 }
 
-
-const useStyles = makeStyles({
-    resources: {
-        minHeight: 50,
-        backgroundColor: Colors['headerBackgroundColor'],
-    },
-    grid: {
-        padding: 0,
-        marginRight: 0,
-    },
-    iconGrid: {
-        margin: 0,
-        padding: 0,
-
-    },
-    iconButton: {
-        marginRight: 12
-    }
-
-})

@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles'
+import Colors from "./colors";
 
 const commStyles = {
     container: {
@@ -29,7 +30,29 @@ const container = makeStyles((theme) => ({
     }
 }));
 
+
+const resources = makeStyles({
+    resources: {
+        minHeight: 50,
+        backgroundColor: Colors['headerBackgroundColor'],
+    },
+    grid: {
+        padding: 0,
+        marginRight: 0,
+    },
+    iconGrid: {
+        margin: 0,
+        padding: 0,
+
+    },
+    iconButton: {
+        marginRight: 12
+    }
+
+})
+
 export {
     commStyles,
-    container
+    container,
+    resources
 }

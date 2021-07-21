@@ -1,18 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
-import {BOOK_CHAPTERS, BOOK_DATA, karaitesBookUrl} from "../constants/constants"
-import {makeBookUrl, makeRandomKey} from "../utils/utils"
-import ReactTooltip from 'react-tooltip';
-import Loading from "./Loading"
+import {makeRandomKey} from "../utils/utils"
 import PaneHeader from "./PaneHeader";
+import Loading from "./Loading";
 
-export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
+export default function KaraitesBooks({book, chapter, chapters, refClick, fullBook}) {
     const classes = useStyles()
-    const [chapters, setChapters] = useState()
-    const [bookData, setBookData] = useState()
-
 
     const transform = (node) => {
         if (node.type === 'tag') {
@@ -28,6 +23,7 @@ export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
 
         }
     }
+
     const itemContent = (item, data) => {
         return (<div className={classes.paragraphContainer}>
             {ReactHtmlParser(data[0], {
@@ -37,26 +33,8 @@ export default function KaraitesBooks({book, chapter, fullBook, refClick}) {
         </div>)
     }
 
-    const getKaraitesBook = async () => {
-        const response = await fetch(makeBookUrl(karaitesBookUrl, book, chapter, fullBook))
-        if (response.ok) {
-            const data = await response.json()
-            setChapters(data[BOOK_CHAPTERS])
-            setBookData(data[BOOK_DATA])
-        } else {
-            alert("HTTP-Error: " + response.status)
-        }
-    }
-
-
-    useEffect(() => {
-        getKaraitesBook()
-        ReactTooltip.rebuild()
-    }, [])
-
     return (
         <div className={classes.virtuoso}>
-
             <PaneHeader book={book} chapter={chapter}/>
             <Virtuoso data={chapters}
                       itemContent={itemContent}

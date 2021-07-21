@@ -2,13 +2,13 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import {makeStyles} from '@material-ui/core/styles';
 import {indoArabicToHebrew, englishBookNameToHebrew} from "../utils/utils";
 import {LANGUAGE, HEBREW} from "../constants/constants";
+import {resources} from "../constants/common-css";
 
 
 const CommentRef = ({book, chapter, verse, language, closeCommentTabHandler, biblicalRef}) => {
-    const classes = useStyles()
+    const classes = resources()
     let link
     if (language === HEBREW) {
         link = `${englishBookNameToHebrew(book)} ${indoArabicToHebrew(chapter)}:${indoArabicToHebrew(verse)}`
@@ -38,27 +38,6 @@ const CommentRef = ({book, chapter, verse, language, closeCommentTabHandler, bib
         </div>
     )
 }
-
-
-const useStyles = makeStyles({
-    resources: {
-        minHeight: 50,
-        backgroundColor: '#eaeaea',
-        borderLeft: '1px solid darkgrey',
-    },
-    grid: {
-        padding: 0,
-        margin: 0,
-    },
-    iconGrid: {
-        margin: 0,
-        padding: 0,
-
-    },
-    link:{
-        padding:15,
-    }
-})
 
 
 export default CommentRef
