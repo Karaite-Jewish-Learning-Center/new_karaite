@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {Virtuoso} from 'react-virtuoso'
 import {makeStyles} from '@material-ui/core/styles'
 import ChapterHeaderVerse from '../components/biblicalChapter'
@@ -42,10 +42,11 @@ export default function BiblicalText({
     }
 
     useEffect(() => {
+        let i = calculateIndex(bookData)
         virtuoso.current.scrollToIndex({
-                index: calculateIndex(bookData),
-                align: 'center',
-            });
+            index: i,
+            align: 'center',
+        });
     }, [])
 
 
@@ -53,6 +54,7 @@ export default function BiblicalText({
         <div className={classes.virtuoso} key={makeRandomKey}>
             <PaneHeader book={book} chapter={chapter} verse={verse} onClosePane={onClosePane}/>
             <Virtuoso data={chapters}
+                      // initialTopMostItemIndex={ calculateIndex(bookData)}
                       ref={virtuoso}
                       itemContent={itemContent}
                       components={{

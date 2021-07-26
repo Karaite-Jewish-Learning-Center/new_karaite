@@ -7,6 +7,7 @@ from .models import (Organization,
                      BookText,
                      BookAsArray,
                      KaraitesBookDetails,
+                     KaraitesBookAsArray,
                      KaraitesBookText)
 
 from .admin_forms import AdminCommentForm
@@ -159,6 +160,23 @@ class KaraitesBookDetailsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
+
+
+class KaraitesBookTextAsArrayAdmin(admin.ModelAdmin):
+    save_on_top = True
+    list_display = ('book', 'page', 'paragraph_number', 'text', 'foot_notes')
+
+    list_filter = ('book',
+                   'book__book_language', 'book__book_classification')
+
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',)
+        }
+        js = ('../static/js/toggleFilterPanel.js',)
+
+
+admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)
 
 
 class KaraitesBookTextAdmin(admin.ModelAdmin):

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
@@ -6,8 +6,9 @@ import {makeRandomKey} from "../utils/utils"
 import PaneHeader from "./PaneHeader";
 import Loading from "./Loading";
 
-export default function KaraitesBooks({book, chapter, chapters, refClick, fullBook}) {
+export default function KaraitesBooks({book, chapter, chapters, refClick, fullBook, visible}) {
     const classes = useStyles()
+
 
     const transform = (node) => {
         if (node.type === 'tag') {
@@ -37,6 +38,8 @@ export default function KaraitesBooks({book, chapter, chapters, refClick, fullBo
         <div className={classes.virtuoso}>
             <PaneHeader book={book} chapter={chapter}/>
             <Virtuoso data={chapters}
+                      //rangeChanged={visible}
+                      //initialTopMostItemIndex={visible.start}
                       itemContent={itemContent}
                       components={{
                           Footer: () => {

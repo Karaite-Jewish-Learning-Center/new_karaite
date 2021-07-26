@@ -22,10 +22,6 @@ export default function ChapterHeaderVerse(props) {
     let chapter = data[BIBLE_CHAPTER]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
 
-    const counts = () => {
-        return parseInt(data[BIBLE_HE_CM]) + parseInt(data[BIBLE_EN_CM])
-    }
-
     const onDoubleClickEn = () => {
         ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
     }
@@ -65,12 +61,11 @@ export default function ChapterHeaderVerse(props) {
             </div>)
         }
     }
-    const commentCount = counts()
     return (
         <div>
             {chapterHtml}
             <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
-                 onClick={(onCommentOpen === undefined || commentCount === 0) ? null : onCommentOpen.bind(this, paneNumber, bookData.book_title_en, chapter, data[BIBLE_VERSE])}
+                 onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, bookData.book_title_en, chapter, data[BIBLE_VERSE])}
             >
                 <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -83,7 +78,7 @@ export default function ChapterHeaderVerse(props) {
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
                 <div className={classes.comments}>
-                    <CommentBadge commentsCount={commentCount}
+                    <CommentBadge commentsCount={data[BIBLE_EN_CM]}
                                   sameChapterAndVerse={comment !== undefined && comment.chapter == chapter && comment.verse== item +1}
                     />
                 </div>

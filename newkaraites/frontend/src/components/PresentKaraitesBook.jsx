@@ -18,6 +18,10 @@ import {makeBookUrl, makeRandomKey} from "../utils/utils";
 const PresentKaraitesBooks = () => {
     const [panes, setPanes] = useState([])
     const [karaites, setKaraites] = useState()
+     const [visibleRange, setVisibleRange] = useState({
+        startIndex: 0,
+        endIndex: 0,
+    })
     // const [message, setMessage] = useState("")
 
     const classes = useStyles()
@@ -51,6 +55,7 @@ const PresentKaraitesBooks = () => {
     }
 
     const refClick = (e) => {
+        debugger
         const {book, chapter, verse, highlight} = parseBiblicalReference(e)
         getBook(book, chapter, verse, highlight)
     }
@@ -147,7 +152,9 @@ const PresentKaraitesBooks = () => {
                                    chapter={karaitesBookChapter}
                                    chapters={karaites}
                                    refClick={refClick}
-                                   fullBook={true}  />
+                                   fullBook={true}
+                                   visible = {setVisibleRange}
+                    />
                 </Grid>
                 {panes.map((pane, i) => (
                     <>
