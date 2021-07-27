@@ -1,6 +1,6 @@
 import sys
 from django.core.management.base import BaseCommand
-from ...models import KaraitesBookText
+from ...models import KaraitesBookAsArray
 from ...map_ms_html import map_docx_to_karaites_html
 
 
@@ -9,19 +9,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Comments"""
-        for i, chapter in enumerate(KaraitesBookText.objects.all()):
+        for i, paragraph in enumerate(KaraitesBookAsArray.objects.all()):
             sys.stdout.write(
                 f"\33[K Rewriting Karaites book chapter: {i}\r")
 
-            chapter.chapter_text = map_docx_to_karaites_html(chapter.chapter_text,
-                                                             foot_notes_list=chapter.foot_notes,
-                                                             language="he",
-                                                             stats=False)
-            chapter.chapter_title = map_docx_to_karaites_html(chapter.chapter_title,
-                                                              foot_notes_list=[],
-                                                              language="he",
-                                                              stats=False)
+            paragraph.book_text = [map_docx_to_karaites_html(paragraph.book_text[0],
+                                                            foot_notes_list=paragraph.foot_notes,
+                                                            language="he",
+                                                            stats=False)]
 
-            chapter.save()
+            paragraph.save()
 
         sys.stdout.write(f"\33[K\r")

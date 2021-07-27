@@ -99,6 +99,8 @@ td.field-book_title_he {
     width: 40%;
     font-family: 'SBL Hebrew';
     direction: rtl;
+    text-align: left;
+
 }
 
 .en-verse {

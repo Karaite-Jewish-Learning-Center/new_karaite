@@ -2,6 +2,13 @@ import re
 from bs4 import BeautifulSoup
 
 
+def remove_empty_tags(html_tree):
+    for child in html_tree.find_all():
+        if len(child.get_text(strip=True)) == 0:
+            child.extract()
+    return html_tree
+
+
 def full_range_verse(pattern):
     # 5:19-5:23, must have same chapter
     parts = pattern.group().strip().split('-')

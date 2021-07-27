@@ -682,7 +682,6 @@ class KaraitesBookText(models.Model):
     def to_json(book, chapter_number):
         chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
         return {
-            'index': 1,
             'chapter_number': chapter.chapter_number,
             'chapter_number_la': chapter.chapter_number_la,
             'chapter_title': chapter.chapter_title,
@@ -750,6 +749,28 @@ class KaraitesBookAsArray(models.Model):
     def __str__(self):
         return self.book.book_title
 
+    @staticmethod
+    def to_json(book, chapter_number):
+        chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
+        return {
+            'chapter_number': chapter.chapter_number,
+            'chapter_number_la': chapter.chapter_number_la,
+            'chapter_title': chapter.chapter_title,
+            'chapter_text': chapter.chapter_text,
+        }
+
+    @staticmethod
+    def to_list(book, chapter_number=None):
+        if chapter_number is None:
+            query = KaraitesBookText.objects.filter(book=book)
+        else:
+            query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
+
+        result = []
+        for book in query:
+            result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
+        return result
+
     @mark_safe
     def text(self):
         html = '<table><tbody><tr>'
@@ -759,6 +780,15 @@ class KaraitesBookAsArray(models.Model):
         return html
 
     text.short_description = "Book Text"
+
+    @mark_safe
+    def foot_notes_admin(self):
+        html = ''
+        for foot_note in self.foot_notes:
+            html += f'<p dir="RTL">{foot_note}</p>'
+        return html
+
+    foot_notes_admin.short_description = 'Foot notes'
 
     class Meta:
         ordering = ('book', 'page', 'paragraph_number')

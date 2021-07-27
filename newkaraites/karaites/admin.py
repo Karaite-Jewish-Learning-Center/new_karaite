@@ -24,7 +24,8 @@ class OrganizationAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
 
 
@@ -49,7 +50,8 @@ class AuthorAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
 
 
@@ -83,7 +85,8 @@ class CommentAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
 
         }
         js = ('../static/js/toggleFilterPanel.js',)
@@ -118,7 +121,8 @@ class BookAsArrayAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
         js = ('../static/js/toggleFilterPanel.js',)
 
@@ -137,7 +141,8 @@ class BookTextAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
         js = ('../static/js/toggleFilterPanel.js',)
 
@@ -154,7 +159,8 @@ class KaraitesBookDetailsAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
         js = ('../static/js/toggleFilterPanel.js',)
 
@@ -164,14 +170,15 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 class KaraitesBookTextAsArrayAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('book', 'page', 'paragraph_number', 'text', 'foot_notes')
+    list_display = ('book', 'page', 'paragraph_number', 'text', 'foot_notes_admin')
 
     list_filter = ('book',
                    'book__book_language', 'book__book_classification')
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
         js = ('../static/js/toggleFilterPanel.js',)
 
@@ -190,7 +197,8 @@ class KaraitesBookTextAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
         js = ('../static/js/toggleFilterPanel.js',)
 

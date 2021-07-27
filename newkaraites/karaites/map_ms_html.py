@@ -1,6 +1,7 @@
 import re
 import sys
 from bs4 import BeautifulSoup
+from .html_utils import remove_empty_tags
 
 REPLACE_TAGS = {
     """<!-- [if !supportFootnotes]-->""":
@@ -88,6 +89,23 @@ MAP_P_STYLE_TO_CLASSES = {
         ['MsoNormal', 'paragraph'],
     'text-align:center;line-height:150%':
         ['MsoNormal', 'paragraph'],
+    'line-height:150%':
+        ['MsoNormal', 'page'],
+    'margin-top:0in;margin-right:71.7pt;margin-bottom:0in;margin-left:71.7pt;margin-bottom:.0001pt;text-align:justify;line-height:150%':
+        ['MsoNormal', 'page-a'],
+    'text-align:left;line-height:  150%':
+        ['MsoNormal', 'toc-dest'],
+    'text-align:center;line-height:  150%':
+        ['MsoNormal', 'toc-end-salute'],
+    'margin-top:0in;margin-right:65.2pt;margin-bottom:0in;margin-left:65.2pt;margin-bottom:.0001pt;text-align:justify;text-indent:-65.2pt;line-height:150%;tab-stops:53.6pt':
+        ['MsoNormal', 'detail-book'],
+    'text-align:justify;line-height:150%;tab-stops:53.6pt':
+        ['MsoNormal', 'can-find'],
+    'margin-right:.5in;text-align:center;line-height:150%':
+        ['MsoNormal', 'text-a'],
+    'margin-bottom:6.0pt;text-align:justify;line-height:150%':
+        ['MsoNormal', 'text-b'],
+
 }
 
 MAP_SPAN_STYLE_TO_CLASSES = {
@@ -282,6 +300,16 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['foot-note-number'],
     'display:none;mso-hide:all':
         ['hide'],
+    'line-height:150%':
+        ['page-number'],
+    'font-family:"David",sans-serif;mso-ascii-font-family:  "Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['toc-dest'],
+    'font-size:10.0pt;line-height:150%;font-family:  "David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:  "Times New Roman"':
+        ['toc-end-salute'],
+    'font-size:16.0pt;line-height:150%;font-family:"David",sans-serif':
+        ['some-text'],
+    'font-size:16.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['some-text-a'],
 
 }
 
@@ -322,6 +350,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                     sys.exit()
 
     # first remove all empty tags
+    #  html_tree = remove_empty_tags(html_tree)
     for child in html_tree.find_all():
         if len(child.get_text(strip=True)) == 0:
             child.extract()
