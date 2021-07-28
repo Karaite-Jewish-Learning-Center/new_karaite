@@ -18,15 +18,38 @@ class Command(BaseCommand):
         source = '../newkaraites/data_karaites/Yeriot Shelomo volume 1.html'
 
         handle = open(source, 'r')
-        html = handle.read()
+        html = f"""{handle.read()}"""
         handle.close()
+
+        ignore = ['(#default#VML)',
+                  '(Web)',
+                  '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
+                  """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
+                  """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+                  """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
+                  """(ראה הערה מספר 8""",
+                  '(בחג הסוכות)',
+                  '(אַתְּ)',
+                  '(הֹלֶכֶת)',
+                  """(ח', י"ט)""",
+                  """(וְקִבְּלוּ)""",
+                  """(יַעַשׂ)""",
+                  ]
+
+        for bible_ref in re.findall(r'\([^()]*\)', html):
+            if bible_ref in ignore:#  or bible_ref.find('span') > 0:
+                continue
+
+            html = html.replace(bible_ref, f'<span lang="HE" class="biblical-ref">{bible_ref}</span>')
+
         html_tree = BeautifulSoup(html, 'html5lib')
+
         # html_tree = remove_empty_tags(html_tree)
         divs = html_tree.find_all('div', class_="WordSection1")
 
         clear_terminal_line()
 
-        book_title = "Yeriot Shelomo"
+        book_title = "Yeriot Shelomo Volume 1"
         author, _ = Author.objects.get_or_create(name='Yeriot Shelomo')
         author.save()
 
@@ -42,7 +65,9 @@ class Command(BaseCommand):
 
         page = 0
         paragraph_number = 1
+
         for child in children:
+
             if child.get_text() == '\xa0':
                 continue
 
@@ -56,7 +81,7 @@ class Command(BaseCommand):
             paragraph_number += 1
 
         # add foot notes
-        for paragraph  in KaraitesBookAsArray.objects.filter(book=book_details):
+        for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
             notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
             unique = {}
             for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):

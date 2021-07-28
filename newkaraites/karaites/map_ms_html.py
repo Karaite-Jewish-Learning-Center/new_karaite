@@ -1,6 +1,7 @@
 import re
 import sys
 from bs4 import BeautifulSoup
+from  html import escape
 from .html_utils import remove_empty_tags
 
 REPLACE_TAGS = {
@@ -310,7 +311,16 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['some-text'],
     'font-size:16.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
         ['some-text-a'],
-
+    'font-size:13.5pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";color:blue':
+        ['marked-text-blue'],
+    'font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";color:blue':
+        ['marked-text-blue'],
+    'font-size:14.0pt;line-height:150%;font-family:"David",sans-serif;  mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['some-song'],
+    'font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";  mso-hansi-font-family:"Times New Roman"':
+        ['some-song'],
+    'font-family:"David",sans-serif;  mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['some-song'],
 }
 
 
@@ -341,7 +351,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" 
                             data-for='{language}' 
-                            data-tip='{foot_notes_list[foot_note]}'>
+                            data-tip="{escape(foot_notes_list[foot_note])}">
                             <sup class="{language}-foot-index">{ref}</sup></span>""",
                             'html5lib'))
                         foot_note += 1

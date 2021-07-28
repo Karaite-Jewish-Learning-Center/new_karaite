@@ -99,7 +99,7 @@ td.field-book_title_he {
     width: 40%;
     font-family: 'SBL Hebrew';
     direction: rtl;
-    text-align: left;
+    text-align: right;
 
 }
 
@@ -109,4 +109,9 @@ td.field-book_title_he {
 td.field-hebrew {
     font-family: 'SBL Hebrew';
     direction: rtl;
+}
+
+.biblical-ref {
+    color:red;
+    cursor:pointer;
 }
