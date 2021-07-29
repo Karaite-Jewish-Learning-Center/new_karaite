@@ -106,6 +106,15 @@ MAP_P_STYLE_TO_CLASSES = {
         ['MsoNormal', 'text-a'],
     'margin-bottom:6.0pt;text-align:justify;line-height:150%':
         ['MsoNormal', 'text-b'],
+    # karaite book Yeriot_Shelomo volume 2
+    'text-align:center':
+        ['text-center'],
+    'text-align:center;line-height:200%':
+        ['header-toc'],
+    'text-align:left':
+        ['page-number'],
+    'margin-right:22.0pt;text-align:center;line-height:150%':
+        ['sheet'],
 
 }
 
@@ -288,7 +297,7 @@ MAP_SPAN_STYLE_TO_CLASSES = {
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:#0070C0;position:relative;top:-2.0pt;mso-text-raise:2.0pt':
         ['biblical-ref'],
 
-    # karaite book Yeriot_Shelomo
+    # karaite book Yeriot_Shelomo volume 1
     'font-size:14.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
         ['text-color-black-bold'],
     'font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
@@ -321,6 +330,14 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['some-song'],
     'font-family:"David",sans-serif;  mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
         ['some-song'],
+    'font-size:14.0pt;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['part'],
+    'font-size:18.0pt;line-height:200%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['toc-item'],
+    'font-size:13.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['text'],
+    'font-size:18.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['foreword'],
 }
 
 
@@ -346,7 +363,12 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
             if hasattr(child, 'find'):
                 try:
                     note_ref = re.match('\\[[0-9]*.\\]', foot_notes_list[foot_note])
+                    if note_ref is None:
+                        # volume 2
+                        note_ref = re.match('[0-9]*.', foot_notes_list[foot_note])
+
                     if note_ref is not None:
+
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" 

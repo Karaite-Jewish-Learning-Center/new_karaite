@@ -25,7 +25,7 @@ class Organization(models.Model):
 
     book_title_en = models.CharField(max_length=100,
                                      null=True,
-                                     verbose_name=_("Book title English"))
+                                     verbose_name=_("Bible book title English"))
 
     book_title_he = models.CharField(max_length=100,
                                      null=True,
@@ -632,7 +632,7 @@ class KaraitesBookDetails(models.Model):
                                )
 
     book_title = models.CharField(max_length=100,
-                                  verbose_name=_('Book_title'))
+                                  verbose_name=_('Karaites book title'))
 
     def __str__(self):
         return self.book_title
@@ -795,31 +795,27 @@ class KaraitesBookAsArray(models.Model):
         verbose_name_plural = 'Karaites book text as array'
 
 
-class TableOfContents(models.Model):
-    """ Karaites Books table of contents"""
-
-    karaite_book = models.ForeignKey(KaraitesBookDetails,
-                                     on_delete=models.CASCADE,
-                                     verbose_name=_('Karaite book'))
-
-    subject = models.CharField(max_length=100,
-                               verbose_name=_('Subject, chapter , sheet ...'))
-
-    start_paragraph = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f'{self.karaite_book.book_title}'
-
-    class Meta:
-        verbose_name_plural =_('Table of contents')
+# class TableOfContents(models.Model):
+#     """ Karaites Books table of contents"""
+#
+#     karaite_book = models.ForeignKey(KaraitesBookDetails,
+#                                      on_delete=models.CASCADE,
+#                                      verbose_name=_('Karaite book'))
+#
+#     subject = models.CharField(max_length=100,
+#                                verbose_name=_('Subject, chapter , sheet ...'))
+#
+#     start_paragraph = models.IntegerField(default=0)
+#
+#     def __str__(self):
+#         return f'{self.karaite_book.book_title}'
+#
+#     class Meta:
+#         verbose_name_plural =_('Table of contents')
 
 
 class References(models.Model):
     """ References between karaite books and Bible books"""
-
-    bible_book = models.ForeignKey(Organization,
-                                   on_delete=models.CASCADE,
-                                   verbose_name=_('Bible book'))
 
     karaites_book = models.ForeignKey(KaraitesBookDetails,
                                       on_delete=models.CASCADE,
@@ -827,6 +823,10 @@ class References(models.Model):
 
     paragraph_number = models.IntegerField(default=0,
                                            verbose_name=_('Karaites paragraph that references Bible book'))
+
+    bible_book = models.ForeignKey(Organization,
+                                   on_delete=models.CASCADE,
+                                   verbose_name=_('Bible book'))
 
     def __str__(self):
         return f'{self.karaites_book.book_title} on paragraph {self.paragraph_number} references to: {self.bible_book.book_title_en}'

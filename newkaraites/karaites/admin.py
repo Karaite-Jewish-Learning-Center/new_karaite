@@ -8,13 +8,24 @@ from .models import (Organization,
                      BookAsArray,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
-                     KaraitesBookText)
+                     KaraitesBookText,
+                     References)
 
 from .admin_forms import AdminCommentForm
 
 
-class OrganizationAdmin(admin.ModelAdmin):
+class KAdmin(admin.ModelAdmin):
     save_on_top = True
+
+    class Media:
+        css = {
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
+        }
+        js = ('../static/js/toggleFilterPanel.js',)
+
+
+class OrganizationAdmin(KAdmin):
     list_display = ('first_level', 'second_level',
                     'book_title_en', 'book_title_he',
                     'chapter_show', 'verses', 'order')
@@ -22,18 +33,11 @@ class OrganizationAdmin(admin.ModelAdmin):
     list_filter = ('book_title_en', 'book_title_he')
     list_editable = ('order',)
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
-
 
 admin.site.register(Organization, OrganizationAdmin)
 
 
-class OtherBooksAdmin(admin.ModelAdmin):
-    save_on_top = True
+class OtherBooksAdmin(KAdmin):
     list_display = ('book_title_en', 'book_title_he', 'author', 'classification')
     search_fields = ('book_title_en', 'book_title_he', 'author')
     list_filter = ('classification',)
@@ -42,25 +46,17 @@ class OtherBooksAdmin(admin.ModelAdmin):
 admin.site.register(OtherBooks, OtherBooksAdmin)
 
 
-class AuthorAdmin(admin.ModelAdmin):
-    save_on_top = True
+class AuthorAdmin(KAdmin):
     list_display = ('name', 'comments_count_en', 'comments_count_he', 'history')
     search_fields = ('name',)
     list_filter = ('name',)
-
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
 
 
 admin.site.register(Author, AuthorAdmin)
 
 
-class CommentAdmin(admin.ModelAdmin):
+class CommentAdmin(KAdmin):
     form = AdminCommentForm
-    save_on_top = True
     list_display = ('book', 'chapter', 'verse', 'english',
                     'foot_note_en_admin', 'hebrew',
                     'foot_note_he_admin', 'comment_author',
@@ -82,14 +78,6 @@ class CommentAdmin(admin.ModelAdmin):
             Comment.objects.get(pk=instance.pk).delete()
 
     delete_model.short_description = 'Delete selected'
-
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-
-        }
-        js = ('../static/js/toggleFilterPanel.js',)
 
 
 admin.site.register(Comment, CommentAdmin)
@@ -114,24 +102,15 @@ class CommentTmpAdmin(CommentAdmin):
 admin.site.register(CommentTmp, CommentTmpAdmin)
 
 
-class BookAsArrayAdmin(admin.ModelAdmin):
-    save_on_top = True
+class BookAsArrayAdmin(KAdmin):
     list_display = ('book', 'chapter', 'text')
     list_filter = ('book', 'chapter')
-
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
-        js = ('../static/js/toggleFilterPanel.js',)
 
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
 
 
-class BookTextAdmin(admin.ModelAdmin):
-    save_on_top = True
+class BookTextAdmin(KAdmin):
     list_display = ('book', 'chapter', 'verse',
                     'text_en', 'comments_count_en',
                     'comments_count_he', 'text_he', 'verse_he_admin',
@@ -139,55 +118,32 @@ class BookTextAdmin(admin.ModelAdmin):
 
     list_filter = ('book', 'chapter', 'verse')
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
-        js = ('../static/js/toggleFilterPanel.js',)
-
 
 admin.site.register(BookText, BookTextAdmin)
 
 
-class KaraitesBookDetailsAdmin(admin.ModelAdmin):
+class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
     list_display = ('book_language', 'book_classification',
                     'book_title', 'author')
 
     list_filter = ('book_language', 'book_classification')
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
-        js = ('../static/js/toggleFilterPanel.js',)
-
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 
-class KaraitesBookTextAsArrayAdmin(admin.ModelAdmin):
-    save_on_top = True
+class KaraitesBookTextAsArrayAdmin(KAdmin):
     list_display = ('book', 'page', 'paragraph_number', 'text', 'foot_notes_admin')
 
     list_filter = ('book',
                    'book__book_language', 'book__book_classification')
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
-        js = ('../static/js/toggleFilterPanel.js',)
-
 
 admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)
 
 
-class KaraitesBookTextAdmin(admin.ModelAdmin):
-    save_on_top = True
+class KaraitesBookTextAdmin(KAdmin):
     list_display = ('book', 'chapter_number', 'chapter_number_la_admin',
                     'chapter_title_admin', 'chapter_text_admin',
                     'foot_notes_admin')
@@ -195,12 +151,14 @@ class KaraitesBookTextAdmin(admin.ModelAdmin):
     list_filter = ('book',
                    'book__book_language', 'book__book_classification')
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
-        }
-        js = ('../static/js/toggleFilterPanel.js',)
-
 
 admin.site.register(KaraitesBookText, KaraitesBookTextAdmin)
+
+
+class ReferencesAdmin(KAdmin):
+    list_display = ('karaites_book', 'bible_book', 'paragraph_number')
+
+    list_filter = ('bible_book__book_title_en', 'karaites_book__book_title')
+
+
+admin.site.register(References, ReferencesAdmin)
