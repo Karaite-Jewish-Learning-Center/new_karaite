@@ -9,3 +9,4 @@ beautifulsoup4
 lxml
 django-tinymce
 requests
+python-hebrew-number

@@ -236,7 +236,9 @@ class Comment(models.Model):
         elif verse is None:
             query = Comment.objects.filter(book=book, chapter=chapter)
         else:
-            query = Comment.objects.filter(book=book, chapter=chapter, verse=verse)
+            query = Comment.objects.filter(book=book,
+                                           chapter=chapter,
+                                           verse=verse)
 
         for comment in query:
             result.append(comment.to_json())
@@ -775,7 +777,8 @@ class KaraitesBookAsArray(models.Model):
     def text(self):
         html = '<table><tbody><tr>'
         for text in self.book_text:
-            html += f'<td class="he-verse" dir=\'rtl\'>{text}</td>'  # <td>{text[1]}</td><td>' # {text[2]}</td><td>{text[3]}</td><td>{text[4]}</td></tr>'
+            # <td>{text[1]}</td><td>' # {text[2]}</td><td>{text[3]}</td><td>{text[4]}</td></tr>'
+            html += f'<td class="he-verse" dir=\'rtl\'>{text}</td>'
         html += '</tr></tbody></table>'
         return html
 
@@ -823,6 +826,8 @@ class References(models.Model):
 
     paragraph_number = models.IntegerField(default=0,
                                            verbose_name=_('Karaites paragraph that references Bible book'))
+
+    paragraph_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     bible_book = models.ForeignKey(Organization,
                                    on_delete=models.CASCADE,

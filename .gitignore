@@ -2,3 +2,5 @@ db.sqlite3
 newkaraites/newkaraites/__pycache__/*
 .idea/
 .pyc
+__pycache__
+data/

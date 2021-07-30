@@ -1,3 +1,4 @@
+from os import CLD_CONTINUED
 import sys
 import re
 from bs4 import BeautifulSoup
@@ -14,45 +15,56 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Karaites books as array """
-        for volume in [1,2]:
+        ignore = ['(#default#VML)',
+                  '(Web)',
+                  '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
+                  '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
+                  """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+                  """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
+                  '(ברוך)',
+                  """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
+                  """(נגד דת הנצרות)""",
+                  """(ראה הערה מספר 8)."""
+                  """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+                  """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
+                  '(בחג הסוכות)',
+                  '(אַתְּ)',
+                  '(הֹלֶכֶת)',
+                  """(ח', י"ט)""",
+                  """(וְקִבְּלוּ)""",
+                  """(יַעַשׂ)""",
+                  # volume 2
+                  """(ח', י"ט)"""
+                  '(י"א,  ל"ג),',
+                  '(יִהְיוּ-) ',
+                  '(שָׁחוּט)',
+                  '(דְּבָרוֹ)',
+                  '(כ"ו, י"ט)',
+                  '(רַגְלְךָ)',
+                  '(הוא הנ"ל)',
+                  '(ח"ב, כ"ג)',
+                  """(ט', א')""",
+                  """(ח', י,ט)""",
+                  """(י"א,ל"ג)""",
+                  """(יִהְיוּ-)""",
+                  ]
+
+        for volume in [1, 2]:
             source = f'../newkaraites/data_karaites/Yeriot Shelomo volume {volume}.html'
 
             handle = open(source, 'r')
             html = f"""{handle.read()}"""
             handle.close()
-
-            ignore = ['(#default#VML)',
-                      '(Web)',
-                      '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
-                      """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
-                      """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-                      """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
-                      """(ראה הערה מספר 8""",
-                      '(בחג הסוכות)',
-                      '(אַתְּ)',
-                      '(הֹלֶכֶת)',
-                      """(ח', י"ט)""",
-                      """(וְקִבְּלוּ)""",
-                      """(יַעַשׂ)""",
-                      # volume 2
-                      '(י"א,  ל"ג),',
-                      '(יִהְיוּ-) ',
-                      '(שָׁחוּט)',
-                      '(דְּבָרוֹ)',
-                      '(כ"ו, י"ט)',
-                      '(רַגְלְךָ)',
-                      '(הוא הנ"ל)',
-                      '(ח"ב, כ"ג)',
-                      """(ט', א')""",
-                      """(ח', י,ט)""",
-                      """(י"א,ל"ג)""",
-                      """(יִהְיוּ-)""",
-                      ]
-
+           
             for bible_ref in re.findall(r'\([^()]*\)', html):
+                if len(bible_ref) > 30:
+                    continue
+                # fix this !
+                if bible_ref.find('8') > 0:
+                    continue
                 if bible_ref in ignore:
                     continue
-
+              
                 html = html.replace(bible_ref, f'<span lang="HE" class="biblical-ref">{bible_ref}</span>')
 
             html_tree = BeautifulSoup(html, 'html5lib')
