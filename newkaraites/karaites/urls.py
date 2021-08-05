@@ -1,14 +1,16 @@
 from django.urls import path
-from .views import (BooksPresentation,
+from .views import (GetFirstLevel,
+                    BooksPresentation,
                     GetBookAsArrayJson,
-                    GetBookAsArrayJsonOld,
                     GetComments,
+                    getKaraitesAllBookDetails,
                     GetKaraitesBookAsArray)
 
 app_name = 'karaites'
 
 urlpatterns = [
 
+    path('get-first-level/', GetFirstLevel.as_view(), name='books_list'),
     # book list
     path('books-list/', BooksPresentation.as_view(), name='books_list'),
 
@@ -24,6 +26,8 @@ urlpatterns = [
          name='get_karaites_book_chapter'),
 
     path('get-karaites-book/<str:book>/', GetKaraitesBookAsArray.as_view(), name='get_karaites_book'),
+
+    path('get-karaites-book-details/', getKaraitesAllBookDetails.as_view(), name='get_all_karaites_book_details'),
 
     # comments
     path('get-comments/<str:book>/<str:chapter>/<str:verse>/', GetComments.as_view(), name='get_comments'),

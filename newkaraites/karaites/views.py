@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
@@ -65,6 +66,15 @@ def book_chapter_verse(request, *args, **kwargs):
                              'book': book_title.to_json()})
 
 
+def karaites_book_details(request, *args, **kwargs):
+    """ get all books details"""
+    response = []
+    for details in KaraitesBookDetails.objects.all():
+        response.append(details.to_json(details.book_title))
+
+    return JsonResponse({'details': response}, safe=False)
+
+
 def karaites_book_as_array(request, *args, **kwargs):
     """ Do Book and chapter check"""
     book = kwargs.get('book', None)
@@ -89,6 +99,18 @@ def karaites_book_as_array(request, *args, **kwargs):
     return JsonResponse([book_chapter, book_details], safe=False)
 
 
+class GetFirstLevel(View):
+    """ Get first level classification"""
+    @staticmethod
+    def get(request):
+        """ for the time being just fake the database query"""
+        level = OrderedDict()
+        level['Tanakh'] = """Torah, Prophets, and Writings, which together make up the Hebrew Bible, Judaism's foundational text."""
+        level['Halakhah'] = """Legal works providing guidance on all aspects of Jewish life. Rooted in past sources and growing to address changing realities"""
+
+        return JsonResponse(level)
+
+
 class BooksPresentation(View):
 
     @staticmethod
@@ -104,6 +126,7 @@ class GetComments(View):
         kwargs.update({'model': 'comments'})
         return book_chapter_verse(request, *args, **kwargs)
 
+
 class GetBookAsArrayJson(View):
 
     @staticmethod
@@ -118,6 +141,15 @@ class GetBookAsArrayJsonOld(View):
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArrayOld'})
         return book_chapter_verse(request, *args, **kwargs)
+
+
+class getKaraitesAllBookDetails(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        kwargs.update({'model': 'allBookDetails'})
+        return karaites_book_details(request, *args, **kwargs)
+
 
 class GetKaraitesBookAsArray(View):
 

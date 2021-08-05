@@ -3,8 +3,9 @@ import {Route} from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import ReactTooltip from 'react-tooltip';
 import MyAppBar from "./components/AppBar";
-import BookList from "./components/BookList";
+import FirsLevel from "./components/FirstLevel";
 import BookText from "./components/bookText";
+import ListKaraitesBooks  from './components/ListKaraitesBooks'
 import PresentKaraitesBooks from "./components/PresentKaraitesBook";
 import Comments from "./components/Coments";
 import {createMuiTheme} from '@material-ui/core/styles';
@@ -22,7 +23,7 @@ function App() {
             <MyAppBar/>
 
             <Route exact path="/">
-                <BookList/>
+                <FirsLevel/>
             </Route>
 
             <Route path="/comments">
@@ -32,12 +33,15 @@ function App() {
             <Route path="/texts">
                 <BookText book={'Deuteronomy'}/>
             </Route>
-            {/*<Route path="/karaites/">*/}
-            {/*    <KaraitesBooks book={'Yeriot Shelomo'} chapter={0} fullBook={true}/>*/}
-            {/*</Route>*/}
+            
             <Route path="/bible/">
                 <BibleBooksWithComments book={'Deuteronomy'} chapter={2} verse={9} fullBook={true}/>
             </Route>
+
+            <Route path="/list-karaites-books/">
+                <ListKaraitesBooks/>
+            </Route>
+
             <Route path="/presentation/">
                 <PresentKaraitesBooks />
             </Route>

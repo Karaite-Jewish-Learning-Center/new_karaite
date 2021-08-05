@@ -543,12 +543,16 @@ class KaraitesBookDetails(models.Model):
     @staticmethod
     def to_json(book_title):
         details = KaraitesBookDetails.objects.get(book_title=book_title)
+        toc = TableOfContents.objects.filter(karaite_book=details)
+
         return {
             'book_id': details.id,
+            'book_first_level': details.first_level,
             'book_language': details.book_language,
             'book_classification': details.book_classification,
             'author': details.author.name,
-            'book_title': details.book_title
+            'book_title': details.book_title,
+            'toc': [t.to_json() for t in toc]
         }
 
     class Meta:
@@ -639,9 +643,15 @@ class TableOfContents(models.Model):
         return f'<span class="toc">{self.subject[0]}</span><span class="index">{self.subject[1]}</span>'
     admin_subject.short_description = "Toc"
 
+    def to_json(self):
+        return {'subject': self.subject[1],
+                'index': self.subject[0],
+                'start_paragraph': self.start_paragraph
+                }
+
     class Meta:
         verbose_name_plural = _('Karaites  table of contents')
-        ordering = ('subject',)
+        ordering = ('start_paragraph',)
 
 
 class References(models.Model):

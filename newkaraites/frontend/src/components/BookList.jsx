@@ -37,9 +37,6 @@ export default function BookList() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [books, setBooks] = useState([]);
-    // const [firstLevel, setFirstLevel] = useState('Tanakh')
-    //const [secondLevel, setSecondLevel] = useState('Torah')
-
 
     const BookHeaderFirst = ({i}) => {
         if (i === 0) return <h1>{books[i][FIRSTLEVEL]}</h1>
@@ -92,23 +89,3 @@ export default function BookList() {
     }
 }
 
-//
-//
-//  <Typography align="center" variant="h4" className={classes.org}>
-// Tanakh
-// </Typography>
-//
-//
-//     {
-//        books.map((bookList, index) => (
-//                    <Box display="flex" justifyContent="center" flexDirection="row" p={1} key={index}>
-//                         {bookList.map(book => (
-//                             <Box p={2} m={1}>
-//                                 <Paper className={classes.paper}>
-//                                     {book.book_title_en}
-//                                 </Paper>
-//                             </Box>
-//
-//                         ))}
-//                     </Box>
-//                 ))}
