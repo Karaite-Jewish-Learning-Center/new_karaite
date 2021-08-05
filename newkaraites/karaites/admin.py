@@ -1,15 +1,12 @@
 from django.contrib import admin
-from .models import (Classification,
-                     Organization,
+from .models import (Organization,
                      Author,
                      Comment,
                      CommentTmp,
                      OtherBooks,
-                     BookText,
                      BookAsArray,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
-                     KaraitesBookText,
                      TableOfContents,
                      References)
 
@@ -25,16 +22,6 @@ class KAdmin(admin.ModelAdmin):
                     '../static/css/tooltip.css',)
         }
         js = ('../static/js/toggleFilterPanel.js',)
-
-
-class ClassificationAdmin(KAdmin):
-    list_display = ('language', 'category', 'sub_category', 'description', 'order')
-
-    list_filter = ('language', 'category', 'sub_category')
-    list_editable = ('order',)
-
-
-admin.site.register(Classification, ClassificationAdmin)
 
 
 class OrganizationAdmin(KAdmin):
@@ -112,7 +99,7 @@ class CommentTmpAdmin(CommentAdmin):
     delete_model.short_description = 'Delete selected'
 
 
-admin.site.register(CommentTmp, CommentTmpAdmin)
+# admin.site.register(CommentTmp, CommentTmpAdmin)
 
 
 class BookAsArrayAdmin(KAdmin):
@@ -121,18 +108,6 @@ class BookAsArrayAdmin(KAdmin):
 
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
-
-
-class BookTextAdmin(KAdmin):
-    list_display = ('book', 'chapter', 'verse',
-                    'text_en', 'comments_count_en',
-                    'comments_count_he', 'text_he', 'verse_he_admin',
-                    'chapter_he_admin', 'book_he_admin',)
-
-    list_filter = ('book', 'chapter', 'verse')
-
-
-admin.site.register(BookText, BookTextAdmin)
 
 
 class KaraitesBookDetailsAdmin(KAdmin):
@@ -154,18 +129,6 @@ class KaraitesBookTextAsArrayAdmin(KAdmin):
 
 
 admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)
-
-
-class KaraitesBookTextAdmin(KAdmin):
-    list_display = ('book', 'chapter_number', 'chapter_number_la_admin',
-                    'chapter_title_admin', 'chapter_text_admin',
-                    'foot_notes_admin')
-
-    list_filter = ('book',
-                   'book__book_language', 'book__book_classification')
-
-
-admin.site.register(KaraitesBookText, KaraitesBookTextAdmin)
 
 
 class TableOfContentsAdmin(KAdmin):

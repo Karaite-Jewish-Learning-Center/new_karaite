@@ -10,32 +10,6 @@ from tinymce.models import HTMLField
 from .hebrew_numbers import indo_arabic_to_hebrew
 
 
-class Classification(models.Model):
-    """ Book classification """
-
-    language = models.CharField(max_length=5,
-                                choices=LANGUAGES,
-                                verbose_name=_('Language'))
-
-    category = models.IntegerField(choices=FIRST_LEVEL,
-                                   verbose_name=_('Category'))
-
-    sub_category = models.IntegerField(choices=SECOND_LEVEL,
-                                       verbose_name=_('Sub-category'))
-
-    description = models.TextField(verbose_name=_('Description'))
-
-    order = models.IntegerField(default=0,
-                                verbose_name=_('Classification Order'))
-
-    def __str__(self):
-        return f'{self.language} {self.category}  {self.sub_category}'
-
-    class Meta:
-        verbose_name_plural = _('     Book Classification')
-        ordering = ('category', 'sub_category', 'language')
-
-
 class Organization(models.Model):
     """
         Books order
@@ -312,9 +286,6 @@ class Comment(models.Model):
         update_count_en = 0
         update_count_he = 0
 
-        book_text = BookText.objects.get(book=self.book,
-                                         chapter=self.chapter,
-                                         verse=self.verse)
         if self.pk is None:
             if self.comment_en != '':
                 update_count_en = 1
@@ -332,14 +303,10 @@ class Comment(models.Model):
             if previous_state.comment_he != '' and self.comment_he == '':
                 update_count_he = -1
 
-        book_text.comments_count_en += update_count_en
-        book_text.comments_count_he += update_count_he
-        book_text.save()
-
         book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
         verse = self.verse - 1
-        book_as_array.book_text[verse][2] = book_text.comments_count_en
-        book_as_array.book_text[verse][3] = book_text.comments_count_he
+        book_as_array.book_text[verse][2] = int(book_as_array.book_text[verse][2]) + update_count_en
+        book_as_array.book_text[verse][3] = int(book_as_array.book_text[verse][3]) + update_count_he
         book_as_array.save()
 
         self.comment_author.comments_count_en += update_count_en
@@ -350,18 +317,13 @@ class Comment(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         """ Update books comment count and Author comment count """
-        book_text = BookText.objects.get(book=self.book,
-                                         chapter=self.chapter,
-                                         verse=self.verse)
+
         if self.comment_en != '':
-            book_text.comments_count_en -= 1
             self.comment_author.comments_count_en -= 1
 
         if self.comment_he != '':
-            book_text.comments_count_he -= 1
             self.comment_author.comments_count_he -= 1
 
-        book_text.save()
         self.comment_author.save()
 
         super(Comment, self).delete(using=using, keep_parents=keep_parents)
@@ -484,103 +446,6 @@ class CommentTmp(models.Model):
         ordering = ('book', 'chapter', 'verse', 'comment_number')
 
 
-class BookText(models.Model):
-    """
-       A bible text book
-    """
-
-    book = models.ForeignKey(Organization,
-                             on_delete=models.CASCADE,
-                             verbose_name=_('Book'))
-
-    chapter = models.IntegerField(default=0,
-                                  verbose_name=_("Chapter"))
-
-    verse = models.IntegerField(default=0,
-                                verbose_name=_("Verse"))
-
-    text_en = models.TextField(null=True,
-                               verbose_name=_("English text"))
-
-    text_he = models.TextField(null=True,
-                               verbose_name=_("Hebrew text"))
-
-    comments_count_en = models.IntegerField(default=0,
-                                            editable=False,
-                                            verbose_name=_("EN Cmt."))
-
-    comments_count_he = models.IntegerField(default=0,
-                                            editable=False,
-                                            verbose_name=_("HE Cmt."))
-
-    def __str__(self):
-        return f'{self.book.book_title_en}           {self.book.book_title_he:>40}'
-
-    def verse_he(self):
-        return indo_arabic_to_hebrew(self.verse)
-
-    def chapter_he(self):
-        return indo_arabic_to_hebrew(self.chapter)
-
-    @mark_safe
-    def book_he_admin(self):
-        return self.book.book_title_he
-
-    book_he_admin.short_description = 'Book_he'
-
-    @mark_safe
-    def verse_he_admin(self):
-        return self.verse_he()
-
-    verse_he_admin.short_description = "verse_he"
-
-    @mark_safe
-    def chapter_he_admin(self):
-        return self.chapter_he()
-
-    chapter_he_admin.short_description = "chapter_he"
-
-    def to_json(self):
-        """Serialize instance to json"""
-        return {'id': self.book.id,
-                'book_title_en': self.book.book_title_en,
-                'book_title_he': self.book.book_title_he,
-                'chapter': self.chapter,
-                'chapter_he': self.chapter_he(),
-                'verse': self.verse,
-                'verse_he': self.verse_he(),
-                'text_en': self.text_en,
-                'text_he': self.text_he,
-                'comments_count_en': self.comments_count_en,
-                'comments_count_he': self.comments_count_he,
-                }
-
-    @staticmethod
-    def to_json_books(book, chapter, verse=None, stop_verse=None):
-        """ Serialize several instances"""
-
-        if chapter is None and verse is None and stop_verse is None:
-            book_text = BookText.objects.filter(book=book)
-        elif verse is None and stop_verse is None:
-            book_text = BookText.objects.filter(book=book, chapter=chapter)
-        elif verse is not None and stop_verse is None:
-            book_text = BookText.objects.filter(book=book, chapter=chapter, verse=verse)
-        elif verse is not None and stop_verse is not None:
-            book_text = BookText.objects.filter(book=book, chapter=chapter, verse__gte=verse, verse__lte=stop_verse)
-        else:
-            # error on parameters
-            pass
-
-        result = []
-        for book in book_text:
-            result.append(book.to_json())
-        return result
-
-    class Meta:
-        verbose_name_plural = _("  Biblical Text")
-        ordering = ('book', 'chapter', 'verse')
-
-
 class BookAsArray(models.Model):
     """ Map Biblical book to postgresql array field """
 
@@ -690,85 +555,6 @@ class KaraitesBookDetails(models.Model):
         verbose_name_plural = 'Karaites book details'
 
 
-class KaraitesBookText(models.Model):
-    """ """
-    book = models.ForeignKey(KaraitesBookDetails,
-                             on_delete=models.CASCADE,
-                             verbose_name=_('Karaite book details')
-                             )
-
-    chapter_number = models.IntegerField(default=0,
-                                         verbose_name=_('Chapter #'))
-
-    chapter_number_la = models.CharField(max_length=4,
-                                         null=True,
-                                         blank=True,
-                                         verbose_name=_('Chapter #'))
-
-    chapter_title = models.TextField(null=True,
-                                     blank=True,
-                                     verbose_name=_('Chapter title'))
-
-    chapter_text = models.TextField(verbose_name=_('Chapter text'))
-
-    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    def __str__(self):
-        return self.book.book_title
-
-    @staticmethod
-    def to_json(book, chapter_number):
-        chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
-        return {
-            'chapter_number': chapter.chapter_number,
-            'chapter_number_la': chapter.chapter_number_la,
-            'chapter_title': chapter.chapter_title,
-            'chapter_text': chapter.chapter_text,
-        }
-
-    @staticmethod
-    def to_list(book, chapter_number=None):
-        if chapter_number is None:
-            query = KaraitesBookText.objects.filter(book=book)
-        else:
-            query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
-
-        result = []
-        for book in query:
-            result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
-        return result
-
-    @mark_safe
-    def chapter_number_la_admin(self):
-        return self.chapter_number_la
-
-    chapter_number_la_admin.short_description = 'Chapter #'
-
-    @mark_safe
-    def chapter_title_admin(self):
-        return self.chapter_title
-
-    chapter_title_admin.short_description = 'Chapter Title'
-
-    @mark_safe
-    def chapter_text_admin(self):
-        return self.chapter_text
-
-    chapter_text_admin.short_description = 'Chapter Text'
-
-    @mark_safe
-    def foot_notes_admin(self):
-        html = ''
-        for foot_note in self.foot_notes:
-            html += f'<p dir="RTL">{foot_note}</p>'
-        return html
-
-    foot_notes_admin.short_description = 'Foot notes'
-
-    class Meta:
-        verbose_name_plural = 'Karaites book text'
-
-
 class KaraitesBookAsArray(models.Model):
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
@@ -789,27 +575,27 @@ class KaraitesBookAsArray(models.Model):
     def __str__(self):
         return self.book.book_title
 
-    @staticmethod
-    def to_json(book, chapter_number):
-        chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
-        return {
-            'chapter_number': chapter.chapter_number,
-            'chapter_number_la': chapter.chapter_number_la,
-            'chapter_title': chapter.chapter_title,
-            'chapter_text': chapter.chapter_text,
-        }
+    # @staticmethod
+    # def to_json(book, chapter_number):
+    #     chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
+    #     return {
+    #         'chapter_number': chapter.chapter_number,
+    #         'chapter_number_la': chapter.chapter_number_la,
+    #         'chapter_title': chapter.chapter_title,
+    #         'chapter_text': chapter.chapter_text,
+    #     }
 
-    @staticmethod
-    def to_list(book, chapter_number=None):
-        if chapter_number is None:
-            query = KaraitesBookText.objects.filter(book=book)
-        else:
-            query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
+    # @staticmethod
+    # def to_list(book, chapter_number=None):
+    #     if chapter_number is None:
+    #         query = KaraitesBookText.objects.filter(book=book)
+    #     else:
+    #         query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
 
-        result = []
-        for book in query:
-            result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
-        return result
+    #     result = []
+    #     for book in query:
+    #         result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
+    #     return result
 
     @mark_safe
     def text(self):

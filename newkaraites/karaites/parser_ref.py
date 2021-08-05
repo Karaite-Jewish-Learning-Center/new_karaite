@@ -50,7 +50,6 @@ def parse_reference(ref):
     """ Parse hebrew biblical ref and translate to English"""
     ref = ref.replace('\n', ' ')
     parts = ref.replace('(', '').replace(')', '').split(' ')
-    print(len(parts), parts)
 
     if len(parts) == 2:
         # if parts[0].find('\n') > 0:

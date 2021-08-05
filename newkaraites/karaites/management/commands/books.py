@@ -1,7 +1,6 @@
 import json
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
-                       BookText,
                        BookAsArray)
 from ...utils import search_level
 
@@ -104,13 +103,6 @@ class Command(BaseCommand):
                     render_chapter = 1
                     for verse in data_en['text'][chapter]:
                         verse_number = int(verse) + 1
-                        book_text, _ = BookText.objects.get_or_create(
-                            book=organization,
-                            chapter=chapter_number,
-                            verse=verse_number,
-                            text_en=data_en['text'][chapter][verse],
-                            text_he=data_he['text'][chapter][verse]
-                        )
 
                         book_as_array.append([data_en['text'][chapter][verse],
                                               data_he['text'][chapter][verse],

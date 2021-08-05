@@ -1,15 +1,11 @@
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie, vary_on_headers
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
-from .models import (KaraitesBookAsArray, Organization,
-                     BookText,
+from .models import (Organization,
                      BookAsArray,
                      Comment,
                      KaraitesBookDetails,
-                     KaraitesBookText)
+                     KaraitesBookAsArray,)
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -58,10 +54,6 @@ def book_chapter_verse(request, *args, **kwargs):
         comments = Comment().to_json_comments(book=book_title, chapter=chapter, verse=verse)
         return JsonResponse({'comments': comments})
 
-    if model == 'bookText':
-        book = BookText().to_json_books(book=book_title, chapter=chapter, verse=verse, stop_verse=stop_verse)
-        return JsonResponse({'book_text': book})
-
     if model == 'bookAsArray':
         chapter = BookAsArray().to_list(book=book_title, chapter=chapter)
         return JsonResponse([chapter, book_title.to_json()], safe=False)
@@ -71,30 +63,6 @@ def book_chapter_verse(request, *args, **kwargs):
         book = BookAsArray().to_json_book_array(book=book_title, chapter=chapter)
         return JsonResponse({'chapters': book,
                              'book': book_title.to_json()})
-
-
-def karaites_book_chapter(request, *args, **kwargs):
-    """ Do Book and chapter check"""
-    book = kwargs.get('book', None)
-    chapter = kwargs.get('chapter', None)
-
-    if book is None:
-        return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
-
-    try:
-        book_details = KaraitesBookDetails().to_json(book_title=book)
-    except KaraitesBookDetails.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
-
-    try:
-        if chapter is None:
-            book_chapter = KaraitesBookText().to_list(book=book_details['book_id'])
-        else:
-            book_chapter = KaraitesBookText().to_list(book=book_details['book_id'], chapter_number=int(chapter))
-    except KaraitesBookText.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Chapter {chapter} not found.')}, status=400)
-
-    return JsonResponse([book_chapter, book_details], safe=False)
 
 
 def karaites_book_as_array(request, *args, **kwargs):
@@ -115,7 +83,7 @@ def karaites_book_as_array(request, *args, **kwargs):
             book_chapter = KaraitesBookAsArray().to_list(book=book_details['book_id'])
         else:
             book_chapter = KaraitesBookAsArray().to_list(book=book_details['book_id'], chapter_number=int(chapter))
-    except KaraitesBookText.DoesNotExist:
+    except KaraitesBookAsArray.DoesNotExist:
         return JsonResponse(data={'status': 'false', 'message': _(f'Chapter {chapter} not found.')}, status=400)
 
     return JsonResponse([book_chapter, book_details], safe=False)
@@ -136,23 +104,6 @@ class GetComments(View):
         kwargs.update({'model': 'comments'})
         return book_chapter_verse(request, *args, **kwargs)
 
-
-class GetBookChapterVerses(View):
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        kwargs.update({'model': 'bookText'})
-        return book_chapter_verse(request, *args, **kwargs)
-
-
-class GetBookChapterVersesFromRef(View):
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        kwargs.update({'model': 'bookText'})
-        return book_chapter_verse(request, *args, **kwargs)
-
-
 class GetBookAsArrayJson(View):
 
     @staticmethod
@@ -167,14 +118,6 @@ class GetBookAsArrayJsonOld(View):
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArrayOld'})
         return book_chapter_verse(request, *args, **kwargs)
-
-
-class GetKaraitesBook(View):
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        return karaites_book_chapter(request, *args, **kwargs)
-
 
 class GetKaraitesBookAsArray(View):
 
