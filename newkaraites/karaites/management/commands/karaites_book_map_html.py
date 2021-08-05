@@ -23,11 +23,11 @@ class Command(BaseCommand):
         # for i, chapter in enumerate(KaraitesBookText.objects.all()):
         #     sys.stdout.write(
         #         f"\33[K Rewriting Karaites book chapter: {i}\r")
-        #
+
         #     chapter.chapter_text = [map_docx_to_karaites_html(chapter.chapter_text,
-        #                                                      foot_notes_list=chapter.foot_notes,
-        #                                                      language="he",
-        #                                                      stats=False)]
-        #
+        #                                                       foot_notes_list=chapter.foot_notes,
+        #                                                       language="he",
+        #                                                       stats=False)]
+
         #     chapter.save()
-        sys.stdout.write(f"\33[K\r")
+        sys.stdout.write("\33[K\r")

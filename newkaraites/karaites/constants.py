@@ -2,8 +2,9 @@
 
 
 LANGUAGES = [
-    ('en', ' English'),
-    ('he', 'Hebrew')
+    ('en', 'English'),
+    ('he', 'Hebrew'),
+    ('en/he', 'English/Hebrew'),
 ]
 
 BOOK_CLASSIFICATION = [
@@ -16,7 +17,9 @@ BOOK_CLASSIFICATION = [
 ]
 
 FIRST_LEVEL = [
-    (1, 'Tanakh')
+    (1, 'Tanakh'),
+    # (2, 'Talmud'),
+    (3, 'Halakhah'),
 ]
 
 SECOND_LEVEL = [

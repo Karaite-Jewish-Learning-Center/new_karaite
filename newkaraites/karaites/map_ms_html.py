@@ -1,7 +1,7 @@
 import re
 import sys
 from bs4 import BeautifulSoup
-from  html import escape
+from html import escape
 from .html_utils import remove_empty_tags
 
 REPLACE_TAGS = {
@@ -371,8 +371,8 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
 
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
-                            f"""<span class="{language}-foot-note" 
-                            data-for='{language}' 
+                            f"""<span class="{language}-foot-note"
+                            data-for='{language}'
                             data-tip="{escape(foot_notes_list[foot_note])}">
                             <sup class="{language}-foot-index">{ref}</sup></span>""",
                             'html5lib'))

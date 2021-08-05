@@ -14,7 +14,9 @@ export default function BibleBooksWithComments({book, chapter, verse, highlight,
 
     const getComments = async (book, chapter, verse) => {
         const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
+        debugger
         if (response.ok) {
+            debugger
             const data = await response.json()
             setComments(data.comments)
         } else {

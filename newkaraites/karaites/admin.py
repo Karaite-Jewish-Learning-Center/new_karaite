@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import (Organization,
+from .models import (Classification,
+                     Organization,
                      Author,
                      Comment,
                      CommentTmp,
@@ -9,6 +10,7 @@ from .models import (Organization,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      KaraitesBookText,
+                     TableOfContents,
                      References)
 
 from .admin_forms import AdminCommentForm
@@ -25,9 +27,20 @@ class KAdmin(admin.ModelAdmin):
         js = ('../static/js/toggleFilterPanel.js',)
 
 
+class ClassificationAdmin(KAdmin):
+    list_display = ('language', 'category', 'sub_category', 'description', 'order')
+
+    list_filter = ('language', 'category', 'sub_category')
+    list_editable = ('order',)
+
+
+admin.site.register(Classification, ClassificationAdmin)
+
+
 class OrganizationAdmin(KAdmin):
     list_display = ('first_level', 'second_level',
-                    'book_title_en', 'book_title_he',
+                    'book_title_en', 'summary_en',
+                    'book_title_he', 'summary_he',
                     'chapter_show', 'verses', 'order')
     search_fields = ('book_title_en', 'book_title_he')
     list_filter = ('book_title_en', 'book_title_he')
@@ -134,7 +147,7 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 
 class KaraitesBookTextAsArrayAdmin(KAdmin):
-    list_display = ('book', 'page', 'paragraph_number', 'text', 'foot_notes_admin')
+    list_display = ('book', 'ref_chapter', 'paragraph_number', 'text', 'foot_notes_admin')
 
     list_filter = ('book',
                    'book__book_language', 'book__book_classification')
@@ -155,10 +168,19 @@ class KaraitesBookTextAdmin(KAdmin):
 admin.site.register(KaraitesBookText, KaraitesBookTextAdmin)
 
 
-class ReferencesAdmin(KAdmin):
-    list_display = ('karaites_book', 'bible_book', 'paragraph_number')
+class TableOfContentsAdmin(KAdmin):
+    list_display = ('karaite_book', 'admin_subject', 'start_paragraph')
 
-    list_filter = ('bible_book__book_title_en', 'karaites_book__book_title')
+    list_filter = ('karaite_book',)
+
+
+admin.site.register(TableOfContents, TableOfContentsAdmin)
+
+
+class ReferencesAdmin(KAdmin):
+    list_display = ('karaites_book', 'bible_ref_en', 'bible_ref_he', 'paragraph_number')
+
+    list_filter = ('karaites_book', 'bible_ref_en',)
 
 
 admin.site.register(References, ReferencesAdmin)

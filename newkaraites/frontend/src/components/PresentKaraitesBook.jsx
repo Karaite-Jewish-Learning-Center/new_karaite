@@ -30,6 +30,7 @@ const PresentKaraitesBooks = () => {
 
 
     const getBook = async (book, chapter, verse, highlight) => {
+        debugger
         let isOpen = panes.some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
@@ -37,6 +38,7 @@ const PresentKaraitesBooks = () => {
             const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, false))
             if (response.ok) {
                 const data = await response.json()
+                debugger
                 setPanes([...panes,
                     {
                         book: book,
@@ -131,14 +133,19 @@ const PresentKaraitesBooks = () => {
     }
 
 
-    useEffect(async () => {
-        const response = await fetch(makeBookUrl(karaitesBookUrl, karaitesBookName, karaitesBookChapter, true))
-        if (response.ok) {
-            const data = await response.json()
-            setKaraites(data[BOOK_CHAPTERS])
-        } else {
-            alert("HTTP-Error: " + response.status)
+    useEffect( () => {
+        async function fetchData() {
+            const response = await fetch(makeBookUrl(karaitesBookUrl, karaitesBookName, karaitesBookChapter, true))
+            debugger
+            if (response.ok) {
+                debugger
+                const data = await response.json()
+                setKaraites(data[BOOK_CHAPTERS])
+            } else {
+                alert("HTTP-Error: " + response.status)
+            }
         }
+        fetchData()
     }, [])
 
 
