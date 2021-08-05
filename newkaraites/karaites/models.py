@@ -600,9 +600,7 @@ class KaraitesBookAsArray(models.Model):
     @mark_safe
     def text(self):
         html = '<table><tbody><tr>'
-        for text in self.book_text:
-            # <td>{text[1]}</td><td>' # {text[2]}</td><td>{text[3]}</td><td>{text[4]}</td></tr>'
-            html += f'<td class="he-verse" dir=\'rtl\'>{text}</td>'
+        html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[0]}</td>'
         html += '</tr></tbody></table>'
         return html
 

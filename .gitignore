@@ -4,3 +4,6 @@ newkaraites/newkaraites/__pycache__/*
 .pyc
 __pycache__
 data/
+.pytest_cache
+.DS_Store
+.vscode

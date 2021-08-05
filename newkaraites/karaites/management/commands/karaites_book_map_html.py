@@ -16,7 +16,8 @@ class Command(BaseCommand):
             paragraph.book_text = [map_docx_to_karaites_html(paragraph.book_text[0],
                                                              foot_notes_list=paragraph.foot_notes,
                                                              language="he",
-                                                             stats=False)]
+                                                             stats=False),
+                                   paragraph.book_text[1]]
 
             paragraph.save()
 

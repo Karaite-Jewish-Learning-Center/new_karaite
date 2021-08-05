@@ -11,6 +11,7 @@ from ...models import (Author,
 from ...utils import clear_terminal_line
 from ...parser_ref import parse_reference
 
+
 class Command(BaseCommand):
     help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
 
@@ -136,16 +137,22 @@ class Command(BaseCommand):
                             TableOfContents.objects.get_or_create(
                                 karaite_book=book_details,
                                 subject=toc,
-                                start_paragraph=paragraph_number
+                                start_paragraph=paragraph_number - 1
                             )
                             ref_chapter = toc[0]
+                            # update previous record thats the header for chapter
+                            header = KaraitesBookAsArray.objects.get(book=book_details,
+                                                                     paragraph_number=paragraph_number - 1)
+                            header.ref_chapter = ref_chapter
+                            header.book_text = [header.book_text[0], 1]
+                            header.save()
                             break
 
                 KaraitesBookAsArray.objects.get_or_create(
                     book=book_details,
                     ref_chapter=ref_chapter,
                     paragraph_number=paragraph_number,
-                    book_text=[str(child)],
+                    book_text=[str(child), 0],
                     foot_notes=[]
                 )
                 paragraph_number += 1
