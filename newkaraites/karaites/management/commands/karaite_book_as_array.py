@@ -91,6 +91,7 @@ class Command(BaseCommand):
             author.save()
 
             book_details, _ = KaraitesBookDetails.objects.get_or_create(
+                first_level=3,  # Halakhah
                 book_language='he',
                 book_classification='03',
                 author=author,

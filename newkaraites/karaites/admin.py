@@ -112,7 +112,8 @@ admin.site.register(BookAsArray, BookAsArrayAdmin)
 
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
-    list_display = ('book_language', 'book_classification',
+    list_display = ('first_level', 'book_language',
+                    'book_classification',
                     'book_title', 'author')
 
     list_filter = ('book_language', 'book_classification')
