@@ -15,7 +15,7 @@ import ReactTooltip from 'react-tooltip';
 import TabPanel from "./TabPanel";
 import Message from "./Message";
 import CommentBadge from '../components/CommentBadge';
-import Comments from "./Coments";
+import Comments from "./Comments";
 import CommentRef from "./commenstRef";
 import {
     makeRandomKey,

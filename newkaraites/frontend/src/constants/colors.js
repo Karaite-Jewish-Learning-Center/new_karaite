@@ -5,8 +5,8 @@ const Colors = {
     verseOnMouseOver:'#f5f2f2',
     underline:'#c6c6c6',
     gray:'gray',
-    headerBackgroundColor:'#eaeaea'
-
+    headerBackgroundColor:'#eaeaea',
+    rulerColor:'#36363614',
 }
 
 export default Colors;

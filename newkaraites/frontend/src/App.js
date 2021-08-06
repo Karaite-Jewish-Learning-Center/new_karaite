@@ -1,81 +1,73 @@
 import React from "react";
-import {Route} from "react-router-dom";
-import {makeStyles} from '@material-ui/core/styles';
-import ReactTooltip from 'react-tooltip';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MyAppBar from "./components/AppBar";
 import FirsLevel from "./components/FirstLevel";
+import Tanakh from "./components/Tanakh";
 import BookText from "./components/bookText";
-import ListKaraitesBooks  from './components/ListKaraitesBooks'
+import ListKaraitesBooks from './components/ListKaraitesBooks'
 import PresentKaraitesBooks from "./components/PresentKaraitesBook";
-import Comments from "./components/Coments";
-import {createMuiTheme} from '@material-ui/core/styles';
-import {ThemeProvider} from '@material-ui/styles';
+import Comments from "./components/Comments";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import BibleBooksWithComments from "./components/BibleBooksWithComments";
 
 
 function App() {
-    const classes = useStyles()
 
     return (
-        <ThemeProvider theme={theme}>
-            <ReactTooltip id='en' className={classes.english} place="top"/>
-            <ReactTooltip id='he' className={classes.hebrew} place="bottom"/>
-            <MyAppBar/>
+        <BrowserRouter>
+            <Switch>
+                <ThemeProvider theme={theme}>
 
-            <Route exact path="/">
-                <FirsLevel/>
-            </Route>
+                    <MyAppBar />
 
-            <Route path="/comments">
-                <Comments/>
-            </Route>
+                    <Route exact path="/">
+                        <FirsLevel />
+                    </Route>
+                    
+                    <Route path="/Tanakh/">
+                        <Tanakh />
+                    </Route>
+                    <Route path="/comments">
+                        <Comments />
+                    </Route>
 
-            <Route path="/texts">
-                <BookText book={'Deuteronomy'}/>
-            </Route>
-            
-            <Route path="/bible/">
-                <BibleBooksWithComments book={'Deuteronomy'} chapter={2} verse={9} fullBook={true}/>
-            </Route>
+                    <Route path="/texts">
+                        <BookText book={'Deuteronomy'} />
+                    </Route>
 
-            <Route path="/list-karaites-books/">
-                <ListKaraitesBooks/>
-            </Route>
+                    <Route path="/bible/">
+                        <BibleBooksWithComments book={'Deuteronomy'} chapter={2} verse={9} fullBook={true} />
+                    </Route>
 
-            <Route path="/presentation/">
-                <PresentKaraitesBooks />
-            </Route>
-        </ThemeProvider>
+                    <Route path="/list-karaites-books/">
+                        <ListKaraitesBooks />
+                    </Route>
+
+                    <Route path="/presentation/">
+                        <PresentKaraitesBooks />
+                    </Route>
+                </ThemeProvider>
+            </Switch>
+        </BrowserRouter>
     );
 }
 
 export default App;
 
 const theme = createMuiTheme({
-        palette: {
-            primary: {
-                // Purple and green play nicely together.
-                main: '#ffffff',
-            }
-            ,
-            secondary: {
-                // This is green.A700 as hex.
-                main: '#11c4f1',
-            }
-            ,
+    palette: {
+        primary: {
+            // Purple and green play nicely together.
+            main: '#ffffff',
+        }
+        ,
+        secondary: {
+            // This is green.A700 as hex.
+            main: '#11c4f1',
         }
         ,
     }
+    ,
+}
 );
-
-// tooltips
-const useStyles = makeStyles({
-        english: {
-            maxWidth: 300,
-        },
-        hebrew: {
-            maxWidth: 300,
-            direction: 'rtl',
-        }
-    }
-)

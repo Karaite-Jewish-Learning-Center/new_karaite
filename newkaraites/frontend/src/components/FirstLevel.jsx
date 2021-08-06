@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -33,9 +34,11 @@ const FistLevel = () => {
         <Grid item xs>
             <Card className={classes.card}>
                 <CardContent>
+                    <Link to={'/'+key+'/'}>
                         <Typography variant="h6" component="h2">{key}</Typography>
-                        <p></p>
-                        <Typography variant="body3" component="p">{classification[key]}</Typography>
+                    </Link>
+                    <p></p>
+                    <Typography variant="body3" component="p">{classification[key]}</Typography>
                 </CardContent>
             </Card>
         </Grid>)

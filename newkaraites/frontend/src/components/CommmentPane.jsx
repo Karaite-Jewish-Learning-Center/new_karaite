@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import TabPanel from "./TabPanel";
-import Comments from "./Coments";
+import Comments from "./Comments";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import CommentRef from "./commenstRef";
