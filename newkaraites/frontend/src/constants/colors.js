@@ -6,7 +6,8 @@ const Colors = {
     underline:'#c6c6c6',
     gray:'gray',
     headerBackgroundColor:'#eaeaea',
-    rulerColor:'#36363614',
+    rulerColor: '#36363614',
+    chapterMenu: '#f7f7f2',
 }
 
 export default Colors;

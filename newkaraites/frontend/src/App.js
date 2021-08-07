@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MyAppBar from "./components/AppBar";
-import FirsLevel from "./components/FirstLevel";
-import Tanakh from "./components/Tanakh";
-import BookText from "./components/bookText";
+import FirsLevel from "./components/FirstLevel"
+import Tanakh from "./components/Tanakh"
+import BookText from "./components/bookText"
 import ListKaraitesBooks from './components/ListKaraitesBooks'
-import PresentKaraitesBooks from "./components/PresentKaraitesBook";
-import Comments from "./components/Comments";
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import BibleBooksWithComments from "./components/BibleBooksWithComments";
-
+import PresentKaraitesBooks from "./components/PresentKaraitesBook"
+import Comments from "./components/Comments"
+import { createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/styles'
+import BibleBooksWithComments from "./components/BibleBooksWithComments"
+import ChapterMenu  from './components/ChapterMenu'
 
 function App() {
 
@@ -25,9 +25,14 @@ function App() {
                         <FirsLevel />
                     </Route>
                     
+                    <Route path="/menu/">
+                        <ChapterMenu bibleBook='Genesis' />
+                    </Route>
+
                     <Route path="/Tanakh/">
                         <Tanakh />
                     </Route>
+
                     <Route path="/comments">
                         <Comments />
                     </Route>

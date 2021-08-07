@@ -51,8 +51,34 @@ const resources = makeStyles({
 
 })
 
+
+const booksMenu = makeStyles((theme) => ({
+    container: {
+        width: '50%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        height: 'auto',
+        marginTop: 50,
+    },
+    card: {
+        maxWidth: 350,
+        height: 100,
+    },
+    title: {
+        marginBottom: 50,
+        color: 'gray',
+    },
+    ruler: {
+        borderColor: Colors.rulerColor,
+    },
+    filler: {
+        marginTop: 70,
+    }
+}));
+
 export {
     commStyles,
     container,
-    resources
+    resources,
+    booksMenu,
 }

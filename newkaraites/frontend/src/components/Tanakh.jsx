@@ -1,9 +1,8 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Colors from '../constants/colors'
+import { booksMenu } from '../constants/common-css'
 
 
 const torah = {
@@ -57,7 +56,7 @@ const writings = {
 const books = { 'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings }
 
 const Tanakh = () => {
-    const classes = container()
+    const classes = booksMenu()
 
     const populate = (obj) => {
         return Object.keys(obj).map(key =>
@@ -96,27 +95,4 @@ const Tanakh = () => {
 }
 
 
-const container = makeStyles((theme) => ({
-    container: {
-        width: '50%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        height: 'auto',
-        marginTop: 50,
-    },
-    card: {
-        maxWidth: 350,
-        height: 100,
-    },
-    title: {
-        marginBottom: 50,
-        color: 'gray',
-    },
-    ruler: {
-        borderColor: Colors.rulerColor,
-    },
-    filler: {
-        marginTop: 70,
-    }
-}));
 export default Tanakh

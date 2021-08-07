@@ -4,6 +4,7 @@ import {getCommentsUrl, karaitesBookUrl} from "../constants/constants"
 const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)
 }
+
 const equals = (a, b) => {
     // compare 2 arrays, arrays must not be nested
     return a.length === b.length && a.every((v, i) => v === b[i]);
