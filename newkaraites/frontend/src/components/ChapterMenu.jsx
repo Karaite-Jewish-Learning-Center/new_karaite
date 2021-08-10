@@ -1,24 +1,22 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import { chaptersByBibleBook } from '../constants/constants'
 import { range } from '../utils/utils'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
 import { Link } from 'react-router-dom'
+import { Typography } from '@material-ui/core'
 
 
 
-const ChapterMenu = ({ bibleBook }) => {
-    const numberOfChapters = chaptersByBibleBook[bibleBook]
-    const columns = 10
+const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
     const chapters = range(numberOfChapters)
     const classes = container()
 
     const createMenu = () => {
         return chapters.map(chapter =>
-            <Grid item className={classes.item}>
-                <Link to={`/${bibleBook}/${chapter}/`} >
-                    <span>{chapter}</span>
+            <Grid item xs={1} className={classes.item} key={chapter}>
+                <Link className={classes.link} to={`/${bibleBook}/${chapter}/`} >
+                    {chapter}
                 </Link>
             </Grid>
         )
@@ -26,8 +24,11 @@ const ChapterMenu = ({ bibleBook }) => {
 
     return (
         <div className={classes.container}>
-            <div className={classes.filler}>&nbsp;</div>
-            <Grid container xs={columns}
+            <Typography variant="h4" component="h1" className={classes.title}>{bibleBook}</Typography>
+            <Typography variant="h6" component="h1" className={classes.subtitle}>{level}</Typography>
+            <hr />
+            <Typography variant="h5" component="h1" className={classes.chapters}>Chapters</Typography>
+            <Grid container
                 spacing={1}
                 justifyContent="center"
                 alignItems="center"
@@ -55,29 +56,30 @@ const container = makeStyles((theme) => ({
         margin: 2,
     },
     link: {
-        // display: 'block',
-        // height: '100%',
-        // width: '100%',
-        // verticalAlign: 'middle',
-        // fontSize: 18,
-        // fontWeight: 'lighter',
-        // textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        cursor: 'pointer',
-
     },
     title: {
-        marginBottom: 50,
+        marginTop: 100,
+        marginBottom: 15,
         color: 'gray',
     },
     ruler: {
         borderColor: Colors.rulerColor,
     },
     filler: {
-        marginTop: 70,
-    }
+        marginTop: 100,
+        marginBottom: 30,
+
+    },
+    subtitle: {
+        marginBottom: 25,
+        color: Colors.tanakh,
+    },
+    chapters: {
+        marginBottom: 15,
+    },
 }));
 
 export default ChapterMenu

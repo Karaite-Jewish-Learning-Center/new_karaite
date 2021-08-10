@@ -3,37 +3,54 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MyAppBar from "./components/AppBar";
 import FirsLevel from "./components/FirstLevel"
 import Tanakh from "./components/Tanakh"
+import { chaptersByBibleBook } from './constants/constants'
+import BibleBooksWithComments from './components/BibleBooksWithComments'
 import BookText from "./components/bookText"
 import ListKaraitesBooks from './components/ListKaraitesBooks'
 import PresentKaraitesBooks from "./components/PresentKaraitesBook"
 import Comments from "./components/Comments"
 import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles'
-import BibleBooksWithComments from "./components/BibleBooksWithComments"
-import ChapterMenu  from './components/ChapterMenu'
+//import { ThemeProvider } from '@material-ui/styles'
+
+import ChapterMenu from './components/ChapterMenu'
+const tanakhBooksLink = () =>
+    Object.keys(chaptersByBibleBook).map(book =>
+        <Route path={`/${book}/`} >
+            <ChapterMenu bibleBook={book} numberOfChapters={chaptersByBibleBook[book]} level="Tanakh"  />
+        </Route>
+    )
+
 
 function App() {
+
 
     return (
         <BrowserRouter>
             <Switch>
-                <ThemeProvider theme={theme}>
+                <>
+                    {/* <ThemeProvider theme={theme}> */}
 
                     <MyAppBar />
 
                     <Route exact path="/">
                         <FirsLevel />
                     </Route>
-                    
-                    <Route path="/menu/">
-                        <ChapterMenu bibleBook='Genesis' />
-                    </Route>
-
                     <Route path="/Tanakh/">
                         <Tanakh />
                     </Route>
 
-                    <Route path="/comments">
+                    {tanakhBooksLink()}
+
+                    <Route path="/bible/">
+                        <BibleBooksWithComments book={'Deuteronomy'} chapter={4} verse={1} totalChapters={50} />
+                    </Route>
+
+
+                    {/* <Route path="/bible/">
+                        <BibleBooksWithComments book={'Deuteronomy'} chapter={2} verse={9} fullBook={true} />
+                    </Route> */}
+
+                    {/* <Route path="/comments">
                         <Comments />
                     </Route>
 
@@ -52,7 +69,12 @@ function App() {
                     <Route path="/presentation/">
                         <PresentKaraitesBooks />
                     </Route>
-                </ThemeProvider>
+                    <Route path="/presentation/">
+                        <PresentKaraitesBooks />
+                    </Route> */}
+
+                    {/* </ThemeProvider> */}
+                </>
             </Switch>
         </BrowserRouter>
     );

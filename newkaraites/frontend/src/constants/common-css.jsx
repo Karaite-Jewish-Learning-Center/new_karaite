@@ -1,6 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles'
 import Colors from "./colors";
 
+
 const commStyles = {
     container: {
         position: 'fixed',
@@ -63,6 +64,8 @@ const booksMenu = makeStyles((theme) => ({
     card: {
         maxWidth: 350,
         height: 100,
+        marginTop:20,
+        marginBottom:20,
     },
     title: {
         marginBottom: 50,

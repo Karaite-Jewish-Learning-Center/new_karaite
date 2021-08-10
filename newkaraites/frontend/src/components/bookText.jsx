@@ -24,7 +24,7 @@ import {
     equals
 } from "../utils/utils";
 import parseBiblicalReference from "../utils/parseBiblicalReference";
-import {bookChapterUrlOld, getCommentsUrl} from "../constants/constants";
+import {bookChapterUrl, getCommentsUrl} from "../constants/constants";
 import './css/scroll.css';
 import './css/comments.css';
 import HeaderSelect from "./HeaderSelect";
@@ -189,7 +189,7 @@ export default function BookText({book}) {
     }
 
     useEffect(() => {
-        axios.get(bookChapterUrlOld + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
+        axios.get(bookChapterUrl + `${bookChapterVerse[BOOK]}/${bookChapterVerse[CHAPTER]}/`)
             .then((response) => {
                 setBookData(response.data.book);
                 setBookChapters(response.data.chapters)
@@ -200,7 +200,7 @@ export default function BookText({book}) {
             })
             .catch(error => {
                 setError(error)
-                console.log(`Error on ${bookChapterUrlOld}: ${error.response}`)
+                console.log(`Error on ${bookChapterUrl}: ${error.response}`)
             })
     }, [bookChapterVerse])
 

@@ -11,7 +11,7 @@ import {
     getCommentsUrl,
     karaitesBookUrl
 } from "../constants/constants";
-import CommentsPane from "./CommmentPane";
+import CommentsPane from "./CommentPane";
 import {makeBookUrl, makeRandomKey} from "../utils/utils";
 //import Message from "./Message"
 

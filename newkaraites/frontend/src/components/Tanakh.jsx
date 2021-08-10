@@ -59,26 +59,25 @@ const Tanakh = () => {
     const classes = booksMenu()
 
     const populate = (obj) => {
-        return Object.keys(obj).map(key =>
-            <Grid item xs={6}>
+        return Object.keys(obj).map((key, index) =>
+            <Grid item xs={6} key={index}>
                 <div className={classes.card}>
                     <Link to={'/' + key + '/'}>
                         <Typography variant="h6" component="h2">{key}</Typography>
                     </Link>
-                    <p></p>
-                    <Typography variant="body3" component="p">{obj[key]}</Typography>
+                    <br/>
+                    <Typography variant="body2" component="p">{obj[key]}</Typography>
                 </div>
                 <hr className={classes.ruler} />
             </Grid>)
     }
     const makeMenu = () => {
-        return Object.keys(books).map(key =>
-            <div className={classes.container}>
+        return Object.keys(books).map((key, index) =>
+            <div className={classes.container} key={index}>
                 <Typography className={classes.title} variant="h6" component="h2">{key}</Typography>
                 <hr className={classes.ruler}></hr>
                 <Grid container spacing={1}
                     direction="row"
-                    justifyContent="space-around"
                     alignItems="center">
                     {populate(books[key])}
                 </Grid>

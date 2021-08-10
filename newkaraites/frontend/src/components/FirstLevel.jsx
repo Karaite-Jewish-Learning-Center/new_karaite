@@ -31,8 +31,9 @@ const FistLevel = () => {
                     <Link to={'/'+key+'/'}>
                         <Typography variant="h6" component="h2">{key}</Typography>
                     </Link>
-                    <p></p>
-                    <Typography variant="body3" component="p">{classification[key]}</Typography>
+                    <br/>
+                <Typography variant="body3" component="p">{classification[key]}</Typography>
+                <hr/>
             </div>
         </Grid>)
 

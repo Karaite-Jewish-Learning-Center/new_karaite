@@ -8,6 +8,7 @@ const Colors = {
     headerBackgroundColor:'#eaeaea',
     rulerColor: '#36363614',
     chapterMenu: '#f7f7f2',
+    tanakh: '#b4b4a9',
 }
 
 export default Colors;

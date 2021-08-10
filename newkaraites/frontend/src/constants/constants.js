@@ -2,7 +2,6 @@ const apiUrl = 'http://localhost:8000/'
 const bookListUrl = apiUrl + 'api/books-list/'
 const bookTextUrl = apiUrl + 'api/get-book/'
 const bookChapterUrl = apiUrl + 'api/get-book-chapter/'
-const bookChapterUrlOld = apiUrl + 'api/get-book-chapter-old/'
 const bookFromRef = apiUrl + 'api/get-book-from-ref/'
 const getCommentsUrl = apiUrl + 'api/get-comments/'
 const getFirstLevelUrl = apiUrl + 'api/get-first-level/'
@@ -71,7 +70,6 @@ export {
     bookListUrl,
     bookTextUrl,
     bookChapterUrl,
-    bookChapterUrlOld,
     bookFromRef,
     getCommentsUrl,
     getFirstLevelUrl,

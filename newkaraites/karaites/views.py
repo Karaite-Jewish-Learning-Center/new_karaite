@@ -57,7 +57,7 @@ def book_chapter_verse(request, *args, **kwargs):
 
     if model == 'bookAsArray':
         chapter = BookAsArray().to_list(book=book_title, chapter=chapter)
-        return JsonResponse([chapter, book_title.to_json()], safe=False)
+        return JsonResponse(chapter, safe=False)
 
     # deprecated
     if model == 'bookAsArrayOld':
