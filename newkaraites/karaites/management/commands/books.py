@@ -125,4 +125,5 @@ class Command(BaseCommand):
 
                 # update verses in organization
                 organization.verses = list_of_verses
+                organization.total_verses = sum(list_of_verses)
                 organization.save()

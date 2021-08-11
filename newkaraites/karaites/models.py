@@ -46,6 +46,8 @@ class Organization(models.Model):
                         editable=False,
                         verbose_name=_("How many verses in each chapter"))
 
+    total_verses = models.IntegerField(default=0)
+
     order = models.IntegerField(default=0,
                                 db_index=True,
                                 verbose_name=_('Presentation order'))
@@ -59,6 +61,7 @@ class Organization(models.Model):
                 'book_title_he': self.book_title_he,
                 'chapters': self.chapters,
                 'verses': self.verses,
+                'total_verses': self.total_verses,
                 }
 
     def to_book_list(self):
@@ -75,41 +78,6 @@ class Organization(models.Model):
         return f"""<p style="text-align:right">{self.chapters}</p>"""
 
     chapter_show.short_description = "Chapters"
-
-    @staticmethod
-    def get_list_of_books():
-        """ Return list of book """
-        books = Organization.objects.all().order_by('first_level',
-                                                    'second_level',
-                                                    'order')
-        # data = []
-        # temp = []
-        # i = 0
-        # count = books.count()
-        # while i < count:
-        #     level = books[i]
-        #     book = level
-        #     page = 0
-        #     while book['second_level'] == level['second_level']:
-        #         temp.append(books[i])
-        #         i += 1
-        #         page += 1
-        #         #  we want to display 3 books in a line
-        #         if i >= count or page % 3 == 0:
-        #             break
-        #         book = books[i]
-        #
-        #     # make sure that exists 3 elements in each row
-        #     while len(temp) < 3:
-        #         temp.append([])
-        #
-        #     data.append(temp)
-        #
-        #     temp = []
-        data = []
-        for book in books:
-            data.append(book.to_book_list())
-        return data
 
     class Meta:
         verbose_name_plural = _("    Architecture")

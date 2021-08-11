@@ -4,7 +4,6 @@ import MyAppBar from "./components/AppBar";
 import FirsLevel from "./components/FirstLevel"
 import Tanakh from "./components/Tanakh"
 import { chaptersByBibleBook } from './constants/constants'
-import BibleBooksWithComments from './components/BibleBooksWithComments'
 import BookText from "./components/bookText"
 import ListKaraitesBooks from './components/ListKaraitesBooks'
 import PresentKaraitesBooks from "./components/PresentKaraitesBook"
@@ -13,6 +12,9 @@ import { createMuiTheme } from '@material-ui/core/styles'
 //import { ThemeProvider } from '@material-ui/styles'
 
 import ChapterMenu from './components/ChapterMenu'
+import LoadBook from "./components/LoadBook";
+
+
 const tanakhBooksLink = () =>
     Object.keys(chaptersByBibleBook).map(book =>
         <Route path={`/${book}/`} >
@@ -42,7 +44,7 @@ function App() {
                     {tanakhBooksLink()}
 
                     <Route path="/bible/">
-                        <BibleBooksWithComments book={'Deuteronomy'} chapter={4} verse={1} totalChapters={50} />
+                        <LoadBook book={'Genesis'} chapter={1} verse={1} />
                     </Route>
 
 

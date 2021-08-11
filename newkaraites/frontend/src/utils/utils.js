@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getCommentsUrl, karaitesBookUrl} from "../constants/constants"
+import { getCommentsUrl, karaitesBookUrl } from "../constants/constants"
 
 const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)
@@ -22,6 +22,7 @@ const makeBookUrl = (url, book, chapter, full) => {
 const makeRandomKey = () => {
     return `k-${Math.random() * 10000000000}`
 }
+
 
 
 const englishBookNames = {
@@ -82,7 +83,7 @@ const hebrewBookNames = {
     'מלכים ב': 'II Kings',
     'שמואל ב': 'II Samuel',
     'ישעיה': 'Isaiah',
-    'ישעיהו':'Isaiah' , // typo ?
+    'ישעיהו': 'Isaiah', // typo ?
     'ירמיה': 'Jeremiah',
     'ירמיהו': 'Jeremiah', // typo ?
     'יואל': 'Joel',
@@ -105,7 +106,7 @@ const hebrewBookNames = {
     'איכה': 'Lamentations',
     'נחמיה': 'Nehemiah',
     'משלי': 'Proverbs',
-    'תהלים':'Psalms', // possible typo
+    'תהלים': 'Psalms', // possible typo
     'תהילים': 'Psalms',
     'רות': 'Ruth',
     'שיר השירים': 'Song of Songs'
@@ -522,7 +523,7 @@ const hebrewToIndoArabic = (hebrew_number) => {
     console.log(hebrew_number)
     let translate = table[hebrew_number]
     if (translate === undefined)
-    translate = hebrewOrdinalToIndoArabic(hebrew_number)
+        translate = hebrewOrdinalToIndoArabic(hebrew_number)
     return translate
 
 }
@@ -705,6 +706,30 @@ const toEnglish = (bookName) => {
     }
     return title
 }
+
+const calculateIndex = (data,chapter,verse) => {
+   return data.book['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
+}
+const makeDataStructure = (data) => {
+    let totalVerses = parseInt(data.book['total_verses'])
+    let indexData = []
+    for (let i = 0; i < totalVerses; i++) {
+        indexData.push([])
+    }
+    return indexData
+}
+
+const fillDataStructure = (data, chapter, verse, indexData) => {
+    let dataStart = calculateIndex(data, chapter, verse)
+    let z = 0
+    for (let i = dataStart; i < dataStart + data.chapter.length; i++) {
+        indexData[i] = data.chapter[z]
+        z++
+    }
+    return indexData
+}
+
+
 export {
     range,
     equals,
@@ -718,4 +743,7 @@ export {
     englishBook,
     toEnglish,
     makeBookUrl,
+    makeDataStructure,
+    fillDataStructure,
+    calculateIndex,
 }
