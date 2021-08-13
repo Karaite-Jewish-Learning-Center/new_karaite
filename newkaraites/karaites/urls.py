@@ -15,7 +15,7 @@ urlpatterns = [
     path('books-list/', BooksPresentation.as_view(), name='books_list'),
 
     
-    path('get-book-chapter/<str:book>/<str:chapter>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
+    path('get-book-chapter/<str:book>/<str:chapter>/<int:first>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 
     path('get-book-chapter/<str:book>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 

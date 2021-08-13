@@ -446,17 +446,26 @@ class BookAsArray(models.Model):
         }
 
     @staticmethod
-    def to_list(book, chapter=None):
-        result = []
-        if chapter is None:
-            query = BookAsArray.objects.filter(book=book)
+    def to_list(book, chapter=None, book_title=None, first=None):
+        def flat(query):
+            result = []
             for book in query:
                 result += book.book_text
             return result
 
+        # if book is less then 11 chapters, read all book
+        if book_title.chapters <= 10:
+            chapter = None
+
+        if chapter is None:
+            query = BookAsArray.objects.filter(book=book)
         else:
-            query = BookAsArray.objects.filter(book=book, chapter=chapter)
-            return query[0].book_text
+            if first == 0:
+                query = BookAsArray.objects.filter(book=book, chapter__gte=1, chapter__lte=chapter)
+            else:
+                query = BookAsArray.objects.filter(book=book, chapter=chapter)
+
+        return flat(query)
 
     @staticmethod
     def to_json_book_array(book, chapter=None):

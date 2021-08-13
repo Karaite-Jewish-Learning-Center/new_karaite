@@ -15,8 +15,8 @@ const getComments = async (book, chapter, verse) => {
     return res;
 }
 
-const makeBookUrl = (url, book, chapter, full) => {
-    return (full ? `${url}${book}/` : `${url}${book}/${chapter}/`)
+const makeBookUrl = (url, book, chapter, first, full) => {
+    return (full ? `${url}${book}/` : `${url}${book}/${chapter}/${first}/`)
 }
 
 const makeRandomKey = () => {
@@ -707,27 +707,28 @@ const toEnglish = (bookName) => {
     return title
 }
 
-const calculateIndex = (data,chapter,verse) => {
-   return data.book['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
-}
-const makeDataStructure = (data) => {
-    let totalVerses = parseInt(data.book['total_verses'])
-    let indexData = []
-    for (let i = 0; i < totalVerses; i++) {
-        indexData.push([])
-    }
-    return indexData
-}
+// const calculateIndex = (data,chapter,verse) => {
+//    return data.book['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
+// }
+// const makeDataStructure = (data) => {
+//     let totalVerses = parseInt(data.book['total_verses'])
+//     let indexData = []
+//     for (let i = 0; i < totalVerses; i++) {
+//         indexData.push([])
+//     }
+//     return indexData
+// }
 
-const fillDataStructure = (data, chapter, verse, indexData) => {
-    let dataStart = calculateIndex(data, chapter, verse)
-    let z = 0
-    for (let i = dataStart; i < dataStart + data.chapter.length; i++) {
-        indexData[i] = data.chapter[z]
-        z++
-    }
-    return indexData
-}
+// const fillDataStructure = (data, chapter, verse, indexData) => {
+//     debugger
+//     let dataStart = calculateIndex(data, chapter, verse)
+//     let z = 0
+//     for (let i = dataStart; i < dataStart + data.chapter.length; i++) {
+//         indexData[i] = data.chapter[z]
+//         z++
+//     }
+//     return indexData
+// }
 
 
 export {
@@ -743,7 +744,4 @@ export {
     englishBook,
     toEnglish,
     makeBookUrl,
-    makeDataStructure,
-    fillDataStructure,
-    calculateIndex,
 }

@@ -14,7 +14,7 @@ def book_chapter_verse(request, *args, **kwargs):
     book = kwargs.get('book', None)
     chapter = kwargs.get('chapter', None)
     verse = kwargs.get('verse', None)
-    stop_verse = kwargs.get('stop_verse', None)
+    first = kwargs.get('first', None)
     model = kwargs.get('model', None)
 
     if book is None:
@@ -51,19 +51,17 @@ def book_chapter_verse(request, *args, **kwargs):
             message += _(f"chapter:{chapter} must be between 1 and {verses_on_this_chapter}")
             return JsonResponse(data={'status': 'false', 'message': message}, status=400)
 
+    if first is None:
+        message = _("first parameter missing: first  must be between 0 and 1.")
+        return JsonResponse(data={'status': 'false', 'message': message}, status=400)
+    
     if model == 'comments':
         comments = Comment().to_json_comments(book=book_title, chapter=chapter, verse=verse)
         return JsonResponse({'comments': comments})
 
     if model == 'bookAsArray':
-        chapter = BookAsArray().to_list(book=book_title, chapter=chapter)
-        return JsonResponse({'chapter': chapter, 'book': book_title.to_json()}, safe=False)
-
-    # deprecated
-    if model == 'bookAsArrayOld':
-        book = BookAsArray().to_json_book_array(book=book_title, chapter=chapter)
-        return JsonResponse({'chapters': book,
-                             'book': book_title.to_json()})
+        chapters = BookAsArray().to_list(book=book_title, chapter=chapter, book_title=book_title, first=first)
+        return JsonResponse({'chapter': chapters, 'book': book_title.to_json()}, safe=False)
 
 
 def karaites_book_details(request, *args, **kwargs):

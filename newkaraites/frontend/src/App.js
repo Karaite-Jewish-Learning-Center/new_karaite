@@ -13,7 +13,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 import ChapterMenu from './components/ChapterMenu'
 import LoadBook from "./components/LoadBook";
-
+import BibleBooksWithComments from "./components/bible"
 
 const tanakhBooksLink = () =>
     Object.keys(chaptersByBibleBook).map(book =>
@@ -44,7 +44,7 @@ function App() {
                     {tanakhBooksLink()}
 
                     <Route path="/bible/">
-                        <LoadBook book={'Genesis'} chapter={1} verse={1} />
+                        <BibleBooksWithComments book={'Hosea'} chapter={10} verse={10} />
                     </Route>
 
 

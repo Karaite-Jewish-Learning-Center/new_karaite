@@ -2,22 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { makeBookUrl } from "../utils/utils";
 import BibleBooksWithComments from "../components/bible"
 import { bookChapterUrl } from '../constants/constants'
-import { makeDataStructure, fillDataStructure } from '../utils/utils'
 
 
 
 const LoadBook = ({ book, chapter, verse }) => {
-
-    const [bookData, setBookData] = useState(null)
     const [bookUtils, setBookUtils] = useState(null)
 
     async function fetchData(item) {
-
         const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, false))
         if (response.ok) {
             const data = await response.json()
-
-            setBookData(fillDataStructure(data, chapter, verse, makeDataStructure(data)))
+            debugger
             setBookUtils(data)
 
         } else {
@@ -29,10 +24,10 @@ const LoadBook = ({ book, chapter, verse }) => {
         fetchData()
     }, [])
 
-    if (bookData === null) return null
+   
 
     return (
-        <BibleBooksWithComments book={book} chapter={chapter} verse={verse} dataPlaceHolder={bookData} bookUtils={bookUtils} />
+        <BibleBooksWithComments book={book} chapter={chapter} verse={verse} bookUtils={bookUtils} />
     )
 }
 

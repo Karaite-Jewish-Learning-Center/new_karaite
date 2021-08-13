@@ -5,27 +5,28 @@ import { Virtuoso } from 'react-virtuoso'
 import CommentsPane from "./CommentPane";
 import { getCommentsUrl } from "../constants/constants";
 import { bookChapterUrl } from '../constants/constants'
-import { makeBookUrl, calculateIndex, fillDataStructure } from "../utils/utils";
+import { makeBookUrl } from "../utils/utils";
 import Loading from './Loading';
 import { BIBLE_ENGLISH, BIBLE_HEBREW, BIBLE_VERSE } from '../constants/constants'
+import { chaptersByBibleBook } from '../constants/constants'
 
 
-export default function BibleBooksWithComments({ book, chapter, verse, dataPlaceHolder, bookUtils }) {
+export default function BibleBooksWithComments({ book, chapter, verse }) {
     const [comments, setComments] = useState([])
     const [commentChapter, setCommentChapter] = useState(0)
     const [commentVerse, setCommentVerse] = useState(0)
-    const [bookData, setBookData] = useState([...dataPlaceHolder])
+    const [bookUtils, setBookUtils] = useState(null)
     const [currentChapter, setCurrentChapter] = useState(chapter)
-
+    const [loadingText, setLoadingText] = useState(null)
+    const [first, setFirst] = useState(0)
+    const [bookData, setBookData] = useState([])
     const classes = useStyles()
 
     const virtuoso = useRef(null);
 
     const getComments = async (book, chapter, verse) => {
         const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
-        debugger
         if (response.ok) {
-            debugger
             const data = await response.json()
             setComments(data.comments)
         } else {
@@ -60,60 +61,64 @@ export default function BibleBooksWithComments({ book, chapter, verse, dataPlace
         )
     }
 
-    async function fetchData(chapter) {
-
-        const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, false))
-        if (response.ok) {
-            const data = await response.json()
-            setBookData(fillDataStructure(data, currentChapter, verse, bookData))
+    async function fetchData() {
+        if (currentChapter <= chaptersByBibleBook[book]) {
+            const response = await fetch(makeBookUrl(bookChapterUrl, book, currentChapter, first, false))
+            if (response.ok) {
+                const data = await response.json()
+                setBookData([...bookData, ...data.chapter])
+                setBookUtils(data.book)
+                setCurrentChapter((currentChapter) => currentChapter + 1)
+                setFirst(1)
+            } else {
+                alert("HTTP-Error: " + response.status)
+            }
         } else {
-            alert("HTTP-Error: " + response.status)
+            setLoadingText('End of book.')
         }
     }
 
-    const checkRange = (visible) => {
-        let index = Math.round(calculateIndex(bookUtils, currentChapter + 1, verse) * 0.70)
-        if (index >= visible.endIndex) {
-            setCurrentChapter((currentChapter) => currentChapter + 1)
-            fetchData(currentChapter)
-        }
-
-        // index = Math.round(calculateIndex(bookUtils, currentChapter -1 , verse) * 0.70)
-        // if (index < visible.endIndex) {
-        //     debugger
-        //     fetchData(currentChapter- 1)
-        // }
-        console.log(visible.startIndex, visible.endIndex, index)
+    const calculateIndex = () => {
+        return [9, 25, 5, 19, 15, 11, 16, 14, 17, 15, 11, 15, 15, 10].slice(0, currentChapter - 1).reduce((x, y) => x + y, 0) + verse - 1
     }
+
+
+
     useEffect(() => {
-        if (bookUtils !== null) {
-            let i = calculateIndex(bookUtils, currentChapter, verse)
-            console.log('index', i)
-            virtuoso.current.scrollToIndex({
-                index: i,
-                align: 'center',
-            });
-        }
+        return fetchData()
+
+        // if (virtuoso.current !== null) {
+        //     let i = calculateIndex()
+        //     console.log('index', i)
+        //     virtuoso.current.scrollToIndex({
+        //         index: i,
+        //         align: 'center',
+        //     });
+        // }
     }, [])
 
-
-    if (bookUtils === null) {
+    // if (virtuoso.current !== null) {
+    //     let i = calculateIndex()
+    //     console.log('index', i)
+    //     virtuoso.current.scrollToIndex({
+    //         index: i,
+    //         align: 'center',
+    //     });
+    // }
+    if (bookData.length === 0) {
         return null
     }
-
     return (
         <div className={classes.container}>
-            <Grid container
-
-            >
+            <Grid container>
                 <div className={classes.container}>
                     <Virtuoso data={bookData}
-                        rangeChanged={checkRange}
                         ref={virtuoso}
+                        endReached={fetchData}
                         itemContent={itemContent}
                         components={{
                             Footer: () => {
-                                return <Loading />
+                                return <Loading text={loadingText} />
                             }
                         }}
                     />
