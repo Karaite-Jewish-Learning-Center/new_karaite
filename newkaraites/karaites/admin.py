@@ -72,10 +72,10 @@ class CommentAdmin(KAdmin):
             del actions['delete_selected']
         return actions
 
-    # def delete_model(self, request, obj):
-    #     """need to call model delete to keep comment_count up to date"""
-    #     for instance in obj.all():
-    #         Comment.objects.get(pk=instance.pk).delete()
+    def delete_model(self, request, obj):
+        """need to call model delete to keep comment_count up to date"""
+        for instance in obj.all():
+            Comment.objects.get(pk=instance.pk).delete()
 
     delete_model.short_description = 'Delete selected'
 
