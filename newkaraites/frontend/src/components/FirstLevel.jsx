@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {getFirstLevelUrl} from '../constants/constants'
+import { getFirstLevelUrl } from '../constants/constants'
 import { booksMenu } from '../constants/common-css'
 
 
@@ -28,12 +28,12 @@ const FistLevel = () => {
     const levels = Object.keys(classification).map(key =>
         <Grid item xs>
             <div className={classes.card}>
-                    <Link to={'/'+key+'/'}>
-                        <Typography variant="h6" component="h2">{key}</Typography>
-                    </Link>
-                    <br/>
+                <Link to={'/' + key + '/'} >
+                    <Typography variant="h6" component="h2">{key}</Typography>
+                </Link>
+                <br />
                 <Typography variant="body3" component="p">{classification[key]}</Typography>
-                <hr/>
+                <hr />
             </div>
         </Grid>)
 
