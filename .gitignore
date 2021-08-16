@@ -1,2 +1,9 @@
 db.sqlite3
+newkaraites/newkaraites/__pycache__/*
 .idea/
+.pyc
+__pycache__
+data/
+.pytest_cache
+.DS_Store
+.vscode

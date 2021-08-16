@@ -13,10 +13,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Tooltip from '@material-ui/core/Tooltip';
+//import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: 'lightgray',
+    },
     grow: {
         flexGrow: 1,
     },
@@ -86,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
         bottom: theme.spacing(2),
         right: theme.spacing(3),
     },
+    toolBar: {
+        marginBottom: theme.spacing(20)
+    }
 }));
 
 export default function PrimarySearchAppBar() {
@@ -167,70 +173,67 @@ export default function PrimarySearchAppBar() {
     );
 
     return (
-        <div className={classes.grow}>
-            <AppBar position="sticky">
-                <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="open drawer"
-                    >
-                        <MenuIcon/>
+
+        <AppBar position="fixed"
+
+        >
+            <Toolbar>
+                <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                >
+                    <MenuIcon/>
+                </IconButton>
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon/>
+                    </div>
+                    <InputBase
+                        placeholder="Search…"
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        inputProps={{'aria-label': 'search'}}
+                    />
+                </div>
+                <div className={classes.grow}/>
+                <div className={classes.sectionDesktop}>
+                    <IconButton aria-label="Go to sign up form" color="inherit" >
+                        <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon/>
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{'aria-label': 'search'}}
-                        />
-                    </div>
-                    <div className={classes.grow}/>
-                    <div className={classes.sectionDesktop}>
-                        <Tooltip title="Sign up">
-                            <IconButton aria-label="Go to sign up form" color="inherit">
-                                <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Login">
-                            <IconButton aria-label="Go to Login form" color="inherit">
-                                <ExitToAppIcon></ExitToAppIcon>
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Change site language">
-                            <IconButton
-                                edge="end"
-                                aria-label="Site language"
-                                aria-controls={menuId}
-                                aria-haspopup="true"
-                                onClick={handleLanguageMenuOpen}
-                                color="inherit"
-                            >
-                                <LanguageIcon/><ArrowDropDownIcon/>
-                            </IconButton>
-                        </Tooltip>
-                    </div>
-                    <div className={classes.sectionMobile}>
-                        <IconButton
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon/>
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
+                    <IconButton aria-label="Go to Login form" color="inherit" data-for="en" data-tip="Login">
+                        <ExitToAppIcon></ExitToAppIcon>
+                    </IconButton>
+                    <IconButton
+                        edge="end"
+                        aria-label="Site language"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={handleLanguageMenuOpen}
+                        color="inherit"
+                        data-tip="Change site language"
+                        data-for="en"
+                    >
+                        <LanguageIcon /><ArrowDropDownIcon/>
+                    </IconButton>
+                </div>
+                <div className={classes.sectionMobile}>
+                    <IconButton
+                        aria-label="show more"
+                        aria-controls={mobileMenuId}
+                        aria-haspopup="true"
+                        onClick={handleMobileMenuOpen}
+                        color="inherit"
+                    >
+                        <MoreIcon/>
+                    </IconButton>
+                </div>
+            </Toolbar>
             {renderMobileMenu}
             {renderMenu}
-        </div>
+        </AppBar>
     );
 }

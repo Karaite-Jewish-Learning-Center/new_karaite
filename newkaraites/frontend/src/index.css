@@ -1,13 +1,36 @@
+@font-face {
+  font-family: "SBL Hebrew";
+  src: url("../src/fonts/SBL_BLit.ttf");
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "SBL Hebrew", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.hebrew-font {
+  font-family: "SBL Hebrew" !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-family: "Times New Roman", Times, serif;
+  color: rgb(161, 161, 161);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(82, 82, 82);
+  text-decoration: underline;
 }

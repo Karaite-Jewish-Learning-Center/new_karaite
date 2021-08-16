@@ -1,23 +1,125 @@
+@font-face {
+  font-family: "SBL Hebrew";
+  src: url("../fonts/SBL_BLit.ttf");
+}
+
 #id_text_he {
-    text-align: right;
+  font-family: "SBL Hebrew";
+  text-align: right;
 }
 
 td.field-text_he {
-    text-align: right;
+  font-family: "SBL Hebrew";
+  direction: rtl;
 }
 
 #id_comment_he {
-      text-align: right;
+  font-family: "SBL Hebrew";
+  direction: rtl;
 }
 
 td.field-comment_he {
-    text-align: right;
+  font-family: "SBL Hebrew";
+  direction: rtl;
 }
 
 #id_book_title_he {
-     text-align: right;
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+#id_summary_he {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+td.field-book_title_he {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-verse_he_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-chapter_he_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-hebrew {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-comment_author {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-source_book {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-foot_note_he_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-chapter_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-chapter_title_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-chapter_text_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+td.field-foot_notes_admin {
+  font-family: "SBL Hebrew";
+  direction: rtl;
 }
 
 td.field-book_title_he {
-     text-align: right;
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+.he-verse {
+  width: 40%;
+  font-family: "SBL Hebrew";
+  direction: rtl;
+  text-align: right;
+}
+
+.en-verse {
+  width: 40%;
+}
+td.field-hebrew {
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+.biblical-ref {
+  color: red;
+  cursor: pointer;
+}
+
+.toc {
+  float: right;
+  font-family: "SBL Hebrew";
+  direction: rtl;
+}
+
+.index {
+  float: left;
+  font-family: "SBL Hebrew";
+  direction: rtl;
 }

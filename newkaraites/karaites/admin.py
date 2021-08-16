@@ -1,93 +1,150 @@
 from django.contrib import admin
 from .models import (Organization,
-                     # ChapterVerse,
-                     CommentAuthor,
+                     Author,
                      Comment,
-                     BookText)
+                     CommentTmp,
+                     OtherBooks,
+                     BookAsArray,
+                     KaraitesBookDetails,
+                     KaraitesBookAsArray,
+                     TableOfContents,
+                     References)
+
+from .admin_forms import AdminCommentForm
 
 
-class OrganizationAdmin(admin.ModelAdmin):
+class KAdmin(admin.ModelAdmin):
     save_on_top = True
-    list_display = ('first_level', 'second_level',
-                    'book_title_en', 'book_title_he',
-                    'chapters', 'verses', 'order')
-    search_fields = ('book_title_en', 'book_title_he')
-    list_filter = ('book_title_en', 'book_title_he')
-    list_editable = ('order',)
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',)
+            'all': ('../static/css/admin.css',
+                    '../static/css/tooltip.css',)
         }
+        js = ('../static/js/toggleFilterPanel.js',)
+
+
+class OrganizationAdmin(KAdmin):
+    list_display = ('first_level', 'second_level',
+                    'book_title_en', 'summary_en',
+                    'book_title_he', 'summary_he',
+                    'chapter_show', 'verses', 'order')
+    search_fields = ('book_title_en', 'book_title_he')
+    list_filter = ('book_title_en', 'book_title_he')
+    list_editable = ('order',)
 
 
 admin.site.register(Organization, OrganizationAdmin)
 
 
-# class ChapterVerseAdmin(admin.ModelAdmin):
-#     save_on_top = True
-#     list_display = ('book', 'chapter', 'verses')
-#     search_fields = ('book',)
-#     list_filter = ('book',)
-#
-#     class Media:
-#         css = {
-#             'all': ('../static/css/admin.css',)
-#         }
-#
-#
-# admin.site.register(ChapterVerse, ChapterVerseAdmin)
+class OtherBooksAdmin(KAdmin):
+    list_display = ('book_title_en', 'book_title_he', 'author', 'classification')
+    search_fields = ('book_title_en', 'book_title_he', 'author')
+    list_filter = ('classification',)
 
 
-class CommentAuthorAdmin(admin.ModelAdmin):
-    save_on_top = True
-    list_display = ('name', 'history')
+admin.site.register(OtherBooks, OtherBooksAdmin)
+
+
+class AuthorAdmin(KAdmin):
+    list_display = ('name', 'comments_count_en', 'comments_count_he', 'history')
     search_fields = ('name',)
     list_filter = ('name',)
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',)
-        }
+
+admin.site.register(Author, AuthorAdmin)
 
 
-admin.site.register(CommentAuthor, CommentAuthorAdmin)
+class CommentAdmin(KAdmin):
+    form = AdminCommentForm
+    list_display = ('book', 'chapter', 'verse', 'english',
+                    'foot_note_en_admin', 'hebrew',
+                    'foot_note_he_admin', 'comment_author',
+                    'source_book')
 
-
-class CommentAdmin(admin.ModelAdmin):
-    save_on_top = True
-    list_display = ('book', 'chapter', 'verse', 'comment_en',
-                    'comment_he', 'comment_author',
-                    'comments_count')
-
-    list_filter = ('comment_author', 'book')
+    list_filter = ('comment_author', 'book', 'chapter')
+    actions = ['delete_model']
 
     def get_actions(self, request):
+        """ remove default delete"""
         actions = super().get_actions(request)
         if 'delete_selected' in actions:
             del actions['delete_selected']
         return actions
 
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',)
-        }
+    def delete_model(self, request, obj):
+        """need to call model delete to keep comment_count up to date"""
+        for instance in obj.all():
+            Comment.objects.get(pk=instance.pk).delete()
+
+    delete_model.short_description = 'Delete selected'
 
 
 admin.site.register(Comment, CommentAdmin)
 
 
-class BookTextAdmin(admin.ModelAdmin):
+class CommentTmpAdmin(CommentAdmin):
+    def get_actions(self, request):
+        """ remove default delete"""
+        actions = super().get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+
+    def delete_model(self, request, obj):
+        """need to call model delete to keep comment_count up to date"""
+        for instance in obj.all():
+            CommentTmp.objects.get(pk=instance.pk).delete()
+
+    delete_model.short_description = 'Delete selected'
+
+
+# admin.site.register(CommentTmp, CommentTmpAdmin)
+
+
+class BookAsArrayAdmin(KAdmin):
+    list_display = ('book', 'chapter', 'text')
+    list_filter = ('book', 'chapter')
+
+
+admin.site.register(BookAsArray, BookAsArrayAdmin)
+
+
+class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
-    list_display = ('book', 'chapter', 'verse',
-                    'text_en', 'text_he', 'comments_count')
+    list_display = ('first_level', 'book_language',
+                    'book_classification',
+                    'book_title', 'author')
 
-    list_filter = ('book', 'chapter', 'verse')
-
-    class Media:
-        css = {
-            'all': ('../static/css/admin.css',)
-        }
+    list_filter = ('book_language', 'book_classification')
 
 
-admin.site.register(BookText, BookTextAdmin)
+admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
+
+
+class KaraitesBookTextAsArrayAdmin(KAdmin):
+    list_display = ('book', 'ref_chapter', 'paragraph_number', 'text', 'foot_notes_admin')
+
+    list_filter = ('book',
+                   'book__book_language', 'book__book_classification')
+
+
+admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)
+
+
+class TableOfContentsAdmin(KAdmin):
+    list_display = ('karaite_book', 'admin_subject', 'start_paragraph')
+
+    list_filter = ('karaite_book',)
+
+
+admin.site.register(TableOfContents, TableOfContentsAdmin)
+
+
+class ReferencesAdmin(KAdmin):
+    list_display = ('karaites_book', 'bible_ref_en', 'bible_ref_he', 'paragraph_number')
+
+    list_filter = ('karaites_book', 'bible_ref_en',)
+
+
+admin.site.register(References, ReferencesAdmin)

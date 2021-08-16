@@ -1,0 +1,235 @@
+
+.en-paragraph {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    text-align: justify
+}
+
+.en-paragraph-normal {
+    margin: 0 0 7.9pt .5in;
+    text-align: justify;
+    line-height: normal;
+}
+
+.en-paragraph-indent {
+    margin-bottom:7.9pt;
+    text-align:justify;
+    text-indent: .5in;
+    line-height:normal
+}
+
+.en-comment-start {
+    margin-right: 0.3em;
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'Times New Roman', serif;
+    color: red;
+}
+
+.en-comment-text {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'Times New Roman', serif;
+    mso-fareast-font-family: 'Times New Roman';
+    color: black
+}
+.en-dash {
+    font-size:12.0pt;
+    line-height:107%;
+    font-family:"Times New Roman",serif
+}
+.en-citation {
+    color: #FFC000;
+}
+
+.en-orange {
+    font-size:12.0pt;
+    line-height:107%;
+    font-family:"Times New Roman",serif;
+    color: #050505;
+}
+.en-red {
+    font-size:12.0pt;
+    line-height:107%;
+    font-family:"Times New Roman",serif;
+    color:red
+}
+.en-consequently {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: "Times New Roman", serif;
+    color: black;
+}
+
+.en-divine {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: "Times New Roman", serif;
+}
+
+.en-person-name {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'Times New Roman',serif;
+    color: #ffc000;
+}
+.en-text-color {
+    color: black;
+}
+
+.en-text-font {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: "Times New Roman", serif;
+}
+
+.en-foot-note {
+    cursor: pointer;
+    color: -webkit-link;
+    font-size: 16.0pt;
+}
+
+.en-footnote-reference {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: Calibri;
+    mso-ansi-language: EN-US;
+    mso-fareast-language: EN-US;
+    mso-bidi-language: HE;
+}
+
+.en-footnote-char {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: "Times New Roman", serif;
+    mso-fareast-font-family: Calibri;
+    mso-ansi-language: EN-US;
+    mso-fareast-language: EN-US;
+    mso-bidi-language: HE;
+}
+
+.en-biblical-ref {
+    color: -webkit-link;
+    cursor: pointer;
+}
+/* hebrew  */
+.he-paragraph {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    text-align: justify
+}
+
+.he-paragraph-normal {
+    margin: 0 0 7.9pt .5in;
+    text-align: justify;
+    line-height: normal;
+}
+
+.he-paragraph-indent {
+    margin-bottom:7.9pt;
+    text-align:justify;
+    text-indent: .5in;
+    line-height:normal
+}
+
+.he-comment-start {
+    margin-right: 0.3em;
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+    color: red;
+}
+
+.he-comment-text {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+    mso-fareast-font-family: 'SBL Hebrew';
+    color: black
+}
+.he-dash {
+    font-size:12.0pt;
+    line-height:107%;
+    font-family:'SBL Hebrew';
+}
+.he-citation {
+    color: #FFC000;
+}
+
+.he-orange {
+    font-size:12.0pt;
+    line-height:107%;
+    font-family:'SBL Hebrew';
+    color:#FFC000;
+}
+.he-red {
+    font-size:12.0pt;
+    line-height:107%;
+    font-family:'SBL Hebrew';
+    color:red
+}
+.he-consequently {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+    color: black;
+}
+
+.he-divine {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family:'SBL Hebrew';
+}
+
+.he-person-name {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+    color: #ffc000;
+}
+.he-text-color {
+    color: black;
+}
+
+.he-text-font {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+}
+
+.he-foot-note {
+    cursor: pointer;
+    color: -webkit-link;
+    font-size: 12.0pt;
+    direction: rtl;
+}
+
+.he-footnote-reference {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+    mso-fareast-font-family: Calibri;
+    mso-ansi-language: he-US;
+    mso-fareast-language: he-US;
+    mso-bidi-language: HE;
+}
+
+.he-footnote-char {
+    font-size: 12.0pt;
+    line-height: 107%;
+    font-family: 'SBL Hebrew';
+    mso-fareast-font-family: Calibri;
+    mso-ansi-language: he-US;
+    mso-fareast-language: he-US;
+    mso-bidi-language: HE;
+}
+
+.he-biblical-ref {
+    color: -webkit-link;
+    cursor: pointer;
+}
+
+.hebrew-font {
+     font-family: 'SBL Hebrew';
+}

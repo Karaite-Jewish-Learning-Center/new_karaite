@@ -1,0 +1,14 @@
+/* comments css ti be applied on the comments TinyMCE editor
+
+ */
+
+p.MsoNormal {
+    background-color: aqua; !important;
+    margin-left:.5in;
+    text-align:justify;
+    line-height:normal
+}
+
+.t {
+color:#0070c0;
+}
