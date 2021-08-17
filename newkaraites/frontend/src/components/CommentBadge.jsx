@@ -4,10 +4,11 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export default function CommentBadge({commentsCount, sameChapterAndVerse}) {
     const classes = useStyles()
-
-    if (parseInt(commentsCount) !== 0) {
+    let count = parseInt(commentsCount)
+    
+    if ( count !== 0) {
         return (
-            <span data-for='en' data-tip={"Click to read " + (commentsCount === 1 ? 'this comment' : 'these comments')}>
+            <span class="tip-bottom" data-for='en' data-tip={"Click to read " + (count === 1 ? 'this comment' : 'these comments')}>
                 <Badge badgeContent={commentsCount}
                        color={(sameChapterAndVerse ? "error" : "secondary")}
                        anchorOrigin={{vertical: 'top', horizontal: 'left'}}

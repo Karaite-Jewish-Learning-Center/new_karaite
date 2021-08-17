@@ -51,15 +51,15 @@ def book_chapter_verse(request, *args, **kwargs):
             message += _(f"chapter:{chapter} must be between 1 and {verses_on_this_chapter}")
             return JsonResponse(data={'status': 'false', 'message': message}, status=400)
 
-    if first is None:
-        message = _("first parameter missing: first  must be between 0 and 1.")
-        return JsonResponse(data={'status': 'false', 'message': message}, status=400)
-    
     if model == 'comments':
         comments = Comment().to_json_comments(book=book_title, chapter=chapter, verse=verse)
         return JsonResponse({'comments': comments})
 
     if model == 'bookAsArray':
+        if first is None:
+            message = _("first parameter missing: first  must be between 0 and 1.")
+            return JsonResponse(data={'status': 'false', 'message': message}, status=400)
+
         chapters = BookAsArray().to_list(book=book_title, chapter=chapter, book_title=book_title, first=first)
         return JsonResponse({'chapter': chapters, 'book': book_title.to_json()}, safe=False)
 
@@ -130,14 +130,6 @@ class GetBookAsArrayJson(View):
     @staticmethod
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
-        return book_chapter_verse(request, *args, **kwargs)
-
-
-class GetBookAsArrayJsonOld(View):
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        kwargs.update({'model': 'bookAsArrayOld'})
         return book_chapter_verse(request, *args, **kwargs)
 
 

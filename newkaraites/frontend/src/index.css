@@ -34,3 +34,62 @@ a:hover {
   color: rgb(82, 82, 82);
   text-decoration: underline;
 }
+
+/* https://rimdev.io/css-only-tooltip-for-all-screen-sizes/ */
+[data-tip] {
+  cursor: pointer;
+  position: relative;
+}
+[data-tip]::after {
+  background-color:black;
+  border-radius: 0.3rem;
+  color: #fff;
+  content: attr(data-tip);
+  font-size: 1rem;
+  font-size: 85%;
+  font-weight: normal;
+  line-height: 1.15rem;
+  visibility: hidden;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  width: 80px !important;
+}
+
+[data-tip].tooltip-top::before {
+  visibility: hidden;
+  top: 0;
+  left: 50%;
+  margin-left: -0.3rem;
+}
+[data-tip].tooltip-top::after {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 1000;
+
+}
+[data-tip].tip-bottom::after {
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 1000;
+}
+
+[data-tip].en-foot-note::after {
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+[data-tip].he-foot-note::after {
+  top: 100%;
+  left: 50%;
+  direction: rtl;
+  transform: translate(-50%);
+}
+
+[data-tip]:hover::after,
+[data-tip][class*="tooltip-"]:hover::before {
+  visibility: visible;
+  opacity: 1;
+}

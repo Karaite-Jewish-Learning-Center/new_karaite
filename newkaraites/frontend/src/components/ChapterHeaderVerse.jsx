@@ -1,5 +1,5 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Colors from "../constants/colors";
 import Typography from '@material-ui/core/Typography';
 import {
@@ -15,12 +15,11 @@ import ttSpeech from '../utils/ttspeech'
 
 
 export default function ChapterHeaderVerse(props) {
-    const {item, data, highlight, bookUtils, onCommentOpen, paneNumber, comment} = props
+    const { item, data, highlight, bookUtils, onCommentOpen, paneNumber, comment } = props
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
-
     const onDoubleClickEn = () => {
         ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
     }
@@ -42,7 +41,7 @@ export default function ChapterHeaderVerse(props) {
                 </div>
                 <div className={classes.comments}>
                     <CommentBadge commentsCount={0}
-                                  sameChapterAndVerse={false}
+                        sameChapterAndVerse={false}
                     />
                 </div>
             </div>)
@@ -50,23 +49,25 @@ export default function ChapterHeaderVerse(props) {
             chapterHtml = (<div className={classes.chapter}>
                 <div className={classes.chapterNumber}>
                     <Typography className={classes.ch}>{chapter}</Typography>
-                    <hr/>
+                    <hr />
                 </div>
                 <div className={classes.comments}>
                     <CommentBadge commentsCount={0}
-                                  sameChapterAndVerse={false}
+                        sameChapterAndVerse={false}
                     />
                 </div>
             </div>)
         }
     }
+    console.log(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0')
     return (
         <div>
             {chapterHtml}
-            {/* <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`} */}
+            <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
 
-            <div className={classes.textContainer}
-                 onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, bookUtils.book_title_en, chapter, data[BIBLE_VERSE])}
+                // onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, chapter, data[BIBLE_VERSE])}
+                onClick={onCommentOpen.bind(this, paneNumber, chapter, data[BIBLE_VERSE])}
+
             >
                 <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -80,7 +81,7 @@ export default function ChapterHeaderVerse(props) {
                 </div>
                 <div className={classes.comments}>
                     <CommentBadge commentsCount={data[BIBLE_EN_CM]}
-                                  sameChapterAndVerse={comment !== undefined && comment.chapter == chapter && comment.verse== item +1}
+                        sameChapterAndVerse={comment !== undefined && comment.chapter == chapter && comment.verse == item + 1}
                     />
                 </div>
             </div>

@@ -2,18 +2,15 @@
 .en-paragraph {
     margin-left: 1.5em;
     margin-bottom: 1em;
-    text-align: justify
 }
 
 .en-paragraph-normal {
     margin: 0 0 7.9pt .5in;
-    text-align: justify;
     line-height: normal;
 }
 
 .en-paragraph-indent {
     margin-bottom:7.9pt;
-    text-align:justify;
     text-indent: .5in;
     line-height:normal
 }
@@ -86,7 +83,6 @@
 .en-foot-note {
     cursor: pointer;
     color: -webkit-link;
-    font-size: 16.0pt;
 }
 
 .en-footnote-reference {
@@ -117,7 +113,6 @@
 .he-paragraph {
     margin-left: 1.5em;
     margin-bottom: 1em;
-    text-align: justify
 }
 
 .he-paragraph-normal {
@@ -201,7 +196,6 @@
 .he-foot-note {
     cursor: pointer;
     color: -webkit-link;
-    font-size: 12.0pt;
     direction: rtl;
 }
 
