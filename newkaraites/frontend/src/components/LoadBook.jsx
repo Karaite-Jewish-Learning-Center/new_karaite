@@ -6,7 +6,7 @@ import { bookChapterUrl } from '../constants/constants'
 import { getCommentsUrl } from "../constants/constants";
 import { Grid } from '@material-ui/core';
 import CommentsPane from "./CommentPane";
-
+import parseBiblicalReference from '../utils/parseBiblicalReference';
 
 
 const LoadBook = ({ book, chapter, verse }) => {
@@ -14,10 +14,16 @@ const LoadBook = ({ book, chapter, verse }) => {
     const [comments, setComments] = useState([])
     const [commentChapter, setCommentChapter] = useState(0)
     const [commentVerse, setCommentVerse] = useState(0)
-    const [grid, setGrid] = useState([12, 0])
+    const [grid, setGrid] = useState([12, 1])
 
+  
     const classes = useStyles()
     const first = 0  // loading book for the first time
+
+    const refClick = (e) => {
+        debugger
+        const { refbook, refChapter, refVerse, RefHighlight } = parseBiblicalReference(e)
+    }
 
     async function fetchData(item) {
         const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, first, false))
@@ -39,8 +45,8 @@ const LoadBook = ({ book, chapter, verse }) => {
         }
     }
 
-    const onCommentOpen = (chapter, verse) => {
-        chapter = parseInt(chapter) + 1
+    const onCommentOpen = (paneNumber, chapter, verse) => {
+        chapter = parseInt(chapter) 
         if (chapter !== commentChapter || verse !== commentVerse) {
             setCommentChapter(chapter)
             setCommentVerse(verse)
@@ -51,7 +57,7 @@ const LoadBook = ({ book, chapter, verse }) => {
         setCommentChapter(0)
         setCommentVerse(0)
         setComments([])
-        setGrid([12, 0])
+        setGrid([12, 1])
     }
 
     useEffect(() => {
@@ -62,28 +68,29 @@ const LoadBook = ({ book, chapter, verse }) => {
     if (bookUtils === null) return null
 
     return (
-            <Grid container className={classes.root}>
-                <Grid item xs>
-                    <Bible book={book}
-                        chapter={chapter}
-                        verse={verse}
-                        bookUtils={bookUtils}
-                        onCommentOpen={onCommentOpen}
-                        onCommentClose={onCommentClose}
-                        comments={comments}
-                        commentChapter={commentChapter}
-                        commentVerse={commentVerse}
-                    />
-                </Grid>
+        <Grid container className={classes.root}>
+            <Grid item xs={true}>
+                <Bible book={book}
+                    chapter={chapter}
+                    verse={verse}
+                    bookUtils={bookUtils}
+                    onCommentOpen={onCommentOpen}
+                    onCommentClose={onCommentClose}
+                    comments={comments}
+                />
+            </Grid>
+            {comments.length > 0 ?
                 <Grid item xs={grid[1]}>
                     <CommentsPane book={book}
                         chapter={commentChapter}
                         verse={commentVerse}
                         comment={comments}
-                        closeCommentTabHandler={onCommentClose} />
-
+                        closeCommentTabHandler={onCommentClose}
+                        refClick={refClick}
+                    />
                 </Grid >
-            </Grid>
+                : null}
+        </Grid>
     )
 }
 

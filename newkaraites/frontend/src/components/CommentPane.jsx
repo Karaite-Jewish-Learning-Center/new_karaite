@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import TabPanel from "./TabPanel";
 import Comments from "./Comments";
+import { makeStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import CommentRef from "./commenstRef";
+import CommentRef from "./commentsRef";
 import { container } from "../constants/common-css";
 import './css/comments.css'
 
@@ -11,7 +12,7 @@ import './css/comments.css'
 
 const CommentsPane = ({ book, chapter, verse, comment, closeCommentTabHandler, refClick }) => {
     const [commentTab, setCommentTab] = useState(0)
-    const classes = container()
+    const classes = useStyles()
 
 
     if (comment.length === 0) return null
@@ -21,14 +22,13 @@ const CommentsPane = ({ book, chapter, verse, comment, closeCommentTabHandler, r
     }
 
     return (
-        <div>
+        <div className={classes.container}>
             <CommentRef book={book}
                 chapter={chapter}
                 verse={verse}
                 language={commentTab}
                 closeCommentTabHandler={closeCommentTabHandler}
-                biblicalRef={() => {
-                }}
+                refClick={refClick}
             />
             <Tabs
                 className={classes.root}
@@ -49,4 +49,26 @@ const CommentsPane = ({ book, chapter, verse, comment, closeCommentTabHandler, r
         </div>
     )
 }
+
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+        flexGrow: 1,
+        width: 'auto',
+        position: 'fixed',
+        
+    },
+    scroll: {
+        height: '70vh',
+        overflow: 'auto',
+        paddingRight: 10,
+        paddingBottom:20,
+        
+    },
+    root: {
+        marginBottom: 20,
+    },
+}));
+
+
 export default CommentsPane

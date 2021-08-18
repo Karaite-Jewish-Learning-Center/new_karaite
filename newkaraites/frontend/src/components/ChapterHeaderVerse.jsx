@@ -12,14 +12,19 @@ import {
 } from "../constants/constants";
 import CommentBadge from "./CommentBadge";
 import ttSpeech from '../utils/ttspeech'
+import store from '../stores/BibleStore';
+
 
 
 export default function ChapterHeaderVerse(props) {
-    const { item, data, highlight, bookUtils, onCommentOpen, paneNumber, comment } = props
+    const { item, data, highlight, bookUtils, onCommentOpen, paneNumber } = props
+    let color = true
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
+    let verse = data[BIBLE_VERSE]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
+
     const onDoubleClickEn = () => {
         ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
     }
@@ -27,47 +32,33 @@ export default function ChapterHeaderVerse(props) {
     const onDoubleClickHe = () => {
         ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
     }
-    if (renderChapter === "1") {
-        if (chapter === "1") {
-            chapterHtml = (<div className={classes.chapter}>
-                <div className={classes.chapterTitle_he}>
-                    <Typography className={`${classes.he} ${classes.hebrewFont}`}>{bookUtils.book_title_he}</Typography>
-                </div>
-                <div className={classes.chapterNumber}>
-                    <Typography className={classes.ch}>{chapter}</Typography>
-                </div>
-                <div className={classes.chapterTitle_en}>
-                    <Typography className={classes.en}>{bookUtils.book_title_en}</Typography>
-                </div>
-                <div className={classes.comments}>
-                    <CommentBadge commentsCount={0}
-                        sameChapterAndVerse={false}
-                    />
-                </div>
-            </div>)
-        } else {
-            chapterHtml = (<div className={classes.chapter}>
-                <div className={classes.chapterNumber}>
-                    <Typography className={classes.ch}>{chapter}</Typography>
-                    <hr />
-                </div>
-                <div className={classes.comments}>
-                    <CommentBadge commentsCount={0}
-                        sameChapterAndVerse={false}
-                    />
-                </div>
-            </div>)
-        }
+    const handleOnClick = (e) => {
+        if (onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') return
+        onCommentOpen(paneNumber, chapter, verse)
     }
-    console.log(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0')
+
+    if (renderChapter === "1") {
+
+        store.updateChapter(chapter)
+        
+        chapterHtml = (<div className={classes.chapter}>
+            <div className={classes.chapterNumber}>
+                <Typography className={classes.ch}>{chapter}</Typography>
+                <hr />
+            </div>
+            <div className={classes.comments}>
+                <CommentBadge commentsCount={0}
+                    sameChapterAndVerse={color}
+                />
+            </div>
+        </div>)
+    }
     return (
         <div>
             {chapterHtml}
             <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
-
-                // onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, chapter, data[BIBLE_VERSE])}
-                onClick={onCommentOpen.bind(this, paneNumber, chapter, data[BIBLE_VERSE])}
-
+                onClick={handleOnClick}
+            // onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, chapter, verse)}
             >
                 <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -81,7 +72,7 @@ export default function ChapterHeaderVerse(props) {
                 </div>
                 <div className={classes.comments}>
                     <CommentBadge commentsCount={data[BIBLE_EN_CM]}
-                        sameChapterAndVerse={comment !== undefined && comment.chapter == chapter && comment.verse == item + 1}
+                        sameChapterAndVerse={color}
                     />
                 </div>
             </div>

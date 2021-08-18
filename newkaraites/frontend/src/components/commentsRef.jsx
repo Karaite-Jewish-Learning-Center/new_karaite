@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
 
 
-const CommentRef = ({ book, chapter, verse, language, closeCommentTabHandler, biblicalRef }) => {
+const CommentRef = ({ book, chapter, verse, language, closeCommentTabHandler, refClick }) => {
     const classes = useStyles()
 
     let link
@@ -20,10 +20,10 @@ const CommentRef = ({ book, chapter, verse, language, closeCommentTabHandler, bi
 
     return (
         <Grid container className={classes.root}>
-            <Grid xs className={classes.header}>
+            <Grid item xs={true} className={classes.header}>
                 <span lang={LANGUAGE[language]}
                     className={LANGUAGE[language] + '-biblical-ref'}
-                    onClick={biblicalRef}>{link}
+                    onClick={refClick}>{link}
                 </span>
             </Grid>
             <Grid className={classes.icon}>

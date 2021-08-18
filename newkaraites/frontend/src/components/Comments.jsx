@@ -17,7 +17,8 @@ export default function Comments({language, comments, refClick}) {
                     return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
                 }
             }
-
+            if (node.name === 'p') {
+            }
         }
     }
     // field name

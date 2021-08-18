@@ -20,13 +20,12 @@ const container = makeStyles((theme) => ({
         top: 60,
     },
     left: {
-        height: '85vh',
+        height: '80vh',
         top: 60,
     },
     scroll: {
-       
-        height: '50vh',
-        overflow: 'auto',
+        maxHeight: '100vh',
+        overflowY: 'auto',
         // width: 'auto',
         // height: '85vh',
         // paddingRight: '30px !important'
