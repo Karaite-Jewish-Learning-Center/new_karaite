@@ -16,7 +16,7 @@ const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
     const createMenu = () => {
         return chapters.map(chapter =>
             <Grid item xs={1} className={classes.item} key={chapter}>
-                <Link className={classes.link} to={`/${slug(bibleBook)}/${chapter}/`} >
+                <Link className={classes.link} to={`/${level}/${slug(bibleBook)}/${chapter}/`} >
                     {chapter}
                 </Link>
             </Grid>

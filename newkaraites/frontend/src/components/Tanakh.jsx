@@ -60,7 +60,7 @@ const Tanakh = () => {
     return (
         <div>
             <div className={classes.filler}>&nbsp;</div>
-            <RenderMenu books={books} />
+            <RenderMenu books={books} path={'Tanakh'} />
         </div>
     )
 

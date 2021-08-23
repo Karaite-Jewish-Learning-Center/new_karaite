@@ -17,9 +17,10 @@ function App() {
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')
-        if (parts.length === 3) {
+        debugger
+        if (parts.length === 4) {
             return Object.keys(chaptersByBibleBook).map(book =>
-                <Route path={`/${book}/`} >
+                <Route path={`/Tanakh/${book}/`} >
                     <ChapterMenu bibleBook={book} key={makeRandomKey()}
                         numberOfChapters={chaptersByBibleBook[book]}
                         level="Tanakh" />
@@ -31,7 +32,7 @@ function App() {
     const HalakhahBookLink = () => {
         return null
     }
-    const Child = () => {
+    const Load = () => {
         let { book, chapter } = useParams()
         return (
             <LoadBook book={book} chapter={chapter} verse={1} />
@@ -48,20 +49,19 @@ function App() {
                     <FirsLevel />
                 </Route>/
 
-                <Route path="/Tanakh/">
-                    <Tanakh />
-                </Route>
-
-                <Route path="/Halakhah/">
-                    <Halakhah />
-                </Route>
                 <Switch>
                     <>
-                        <Route path="/:book/:chapter/" children={<Child />} />
+                        <Route exact path="/Tanakh/:book/:chapter/" children={<Load />} />
 
-                        <Route path="/:book/" children={<TanakhBooksLink />} />
+                        <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink />} />
+                        <Route exact path="/Tanakh/">
+                            <Tanakh />
+                        </Route>
 
-                        {/* <Route path="/Halakhah/:book/" children={<HalakhahBookLink />} /> */}
+                        <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink />} />
+                        <Route exact path="/Halakhah/">
+                            <Halakhah />
+                        </Route>
                     </>
                 </Switch>
             </BrowserRouter >

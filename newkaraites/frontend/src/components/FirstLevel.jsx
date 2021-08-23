@@ -32,7 +32,7 @@ const FistLevel = () => {
                     <Typography variant="h6" component="h2">{key}</Typography>
                 </Link>
                 <br />
-                <Typography component="p">{classification[key]}</Typography>
+                <Typography variante="body3" component="p">{classification[key]}</Typography>
                 <hr />
             </div>
         </Grid>)

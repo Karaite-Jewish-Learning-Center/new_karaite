@@ -6,7 +6,7 @@ import { booksMenu } from '../constants/common-css'
 import { slug } from '../utils/utils'
 
 
-const RenderMenu = ({ books }) => {
+const RenderMenu = ({ books, path }) => {
 
     const classes = booksMenu()
 
@@ -14,7 +14,7 @@ const RenderMenu = ({ books }) => {
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={6} key={index}>
                 <div className={classes.card}>
-                    <Link to={'/' + slug(key) + '/'}>
+                    <Link to={`/${path}/${slug(key)}/`}>
                         <Typography variant="h6" component="h2">{key}</Typography>
                     </Link>
                     <br />

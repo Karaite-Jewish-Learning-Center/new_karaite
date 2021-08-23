@@ -54,7 +54,7 @@ export default function ChapterHeaderVerse(props) {
         </div>)
     }
     return (
-        <div className="verse"
+        <div className={classes.verse}
             onMouseEnter={() => { setCommentsNumber(data[BIBLE_EN_CM]) }}
         >
             {chapterHtml}
@@ -154,6 +154,9 @@ const useStyles = makeStyles(() => ({
     vn: {
         fontSize: 12,
         color: Colors['gray']
+    },
+    verse: {
+        cursor: 'pointer',
     },
     verseEn: {
         maxWidth: '35%',
