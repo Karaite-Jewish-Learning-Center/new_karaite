@@ -1,41 +1,41 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import SelectBook from "./SelectBook";
-import {HEBREW, ENGLISH} from "../constants/constants";
+import { HEBREW, ENGLISH } from "../constants/constants";
 import Loading from "./Loading";
 import SelectChapter from "./SelectChapter";
 
 
 export default function HeaderSelect({
-                                         book_en,
-                                         book_he,
-                                         chapters,
-                                         chapter,
-                                         onSelectChangeChapter,
-                                         onSelectChangeBook,
-                                         isloaded
-                                     }) {
+    book_en,
+    book_he,
+    chapters,
+    chapter,
+    onSelectChangeChapter,
+    onSelectChangeBook,
+    isloaded
+}) {
 
     const classes = useStyles()
-    if (!isloaded) return <Loading/>
+    if (!isloaded) return <Loading />
     return (
-        <Box display="flex" justifyContent="center" m={1} p={1} className={`${classes.grid} ${classes.textHeader}`}>
+        <Box display="flex" justifycontent="center" m={1} p={1} className={`${classes.grid} ${classes.textHeader}`}>
             <Box p={1} className={classes.hebrewName}>
-                <SelectBook book={book_he} language={HEBREW} onSelectBookChange={onSelectChangeBook}/>
+                <SelectBook book={book_he} language={HEBREW} onSelectBookChange={onSelectChangeBook} />
             </Box>
-            <Box p={1}/>
+            <Box p={1} />
             <Box p={1} className={classes.chapters}>
-                <SelectChapter chapters={chapters} chapter={chapter} onSelectChange={onSelectChangeChapter}/>
+                <SelectChapter chapters={chapters} chapter={chapter} onSelectChange={onSelectChangeChapter} />
             </Box>
-            <Box p={1}/>
+            <Box p={1} />
             <Box p={1}>
-                <SelectBook book={book_en} language={ENGLISH} onSelectBookChange={onSelectChangeBook}/>
+                <SelectBook book={book_en} language={ENGLISH} onSelectBookChange={onSelectChangeBook} />
             </Box>
-            <Box p={1}/>
-            <Box p={1}/>
-            <Box p={1}/>
-            <Box p={1}/>
+            <Box p={1} />
+            <Box p={1} />
+            <Box p={1} />
+            <Box p={1} />
         </Box>
     )
 }

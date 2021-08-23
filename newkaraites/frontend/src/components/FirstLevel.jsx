@@ -26,13 +26,13 @@ const FistLevel = () => {
     if (classification === null) return null;
 
     const levels = Object.keys(classification).map(key =>
-        <Grid item xs>
+        <Grid item xs key={key}>
             <div className={classes.card}>
                 <Link to={'/' + key + '/'} >
                     <Typography variant="h6" component="h2">{key}</Typography>
                 </Link>
                 <br />
-                <Typography variant="body3" component="p">{classification[key]}</Typography>
+                <Typography component="p">{classification[key]}</Typography>
                 <hr />
             </div>
         </Grid>)
@@ -42,7 +42,7 @@ const FistLevel = () => {
             <div className={classes.filler}>&nbsp;</div>
             <Grid container
                 direction="column"
-                justifyContent="center"
+                justifycontent="center"
                 alignItems="center">
                 {levels}
             </Grid>

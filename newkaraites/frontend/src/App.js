@@ -8,9 +8,8 @@ import ChapterMenu from './components/ChapterMenu'
 import LoadBook from "./components/LoadBook";
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
-import { slug } from './utils/utils'
 import Halakhah from './components/Halakhah'
-
+import { makeRandomKey } from './utils/utils'
 
 
 function App() {
@@ -18,11 +17,10 @@ function App() {
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')
-        debugger
         if (parts.length === 3) {
             return Object.keys(chaptersByBibleBook).map(book =>
-                <Route path={`/${slug(book)}/`} >
-                    <ChapterMenu bibleBook={book}
+                <Route path={`/${book}/`} >
+                    <ChapterMenu bibleBook={book} key={makeRandomKey()}
                         numberOfChapters={chaptersByBibleBook[book]}
                         level="Tanakh" />
                 </Route>
