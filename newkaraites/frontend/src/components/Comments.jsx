@@ -1,9 +1,9 @@
 import React from "react";
-import {makeRandomKey} from "../utils/utils";
+import { makeRandomKey } from "../utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 
 
-export default function Comments({language, comments, refClick}) {
+export default function Comments({ language, comments, refClick }) {
 
     const transform = (node) => {
 
@@ -24,7 +24,7 @@ export default function Comments({language, comments, refClick}) {
     // field name
     const ref = 'comment_' + language
     return (
-        <div key={makeRandomKey}>
+        <div key={makeRandomKey()}>
             {comments.map(html => (
                 <>
                     {ReactHtmlParser(html[ref], {

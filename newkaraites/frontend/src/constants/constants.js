@@ -9,6 +9,7 @@ const organization = { 1: 'Torah', 2: 'Prophets', 3: 'Writings' }
 const karaitesBookUrl = apiUrl + 'api/get-karaites-book/'
 const karaitesBookAsArrayUrl = apiUrl + 'api/get-karaites-book/'
 const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
+const karaitesBookToc = apiUrl + 'get-karaites-book-toc/'
 const LANGUAGE = { 0: 'en', 1: 'he' }
 const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
 const ENGLISH = 0
@@ -41,28 +42,28 @@ const chaptersByBibleBook = {
     'Hosea': 14,
     'Joel': 4,
     'Amos': 9,
-    'Obadiah':1 ,
+    'Obadiah': 1,
     'Jonah': 4,
     'Micah': 7,
-    'Nahum':3 ,
-    'Habakkuk':3 ,
-    'Zephaniah':3 ,
-    'Haggai':2 ,
-    'Zechariah':14 ,
-    'Malachi':3 ,
+    'Nahum': 3,
+    'Habakkuk': 3,
+    'Zephaniah': 3,
+    'Haggai': 2,
+    'Zechariah': 14,
+    'Malachi': 3,
     'Psalms': 150,
     'Proverbs': 31,
-    'Job':42,
-    'Song of Songs':8 ,
+    'Job': 42,
+    'Song of Songs': 8,
     'Ruth': 4,
-    'Lamentations':5 ,
-    'Ecclesiastes':12 ,
+    'Lamentations': 5,
+    'Ecclesiastes': 12,
     'Esther': 10,
-    'Daniel':12,
+    'Daniel': 12,
     'Ezra': 10,
-    'Nehemiah':13,
+    'Nehemiah': 13,
     'I Chronicles': 29,
-    'II Chronicles':36,
+    'II Chronicles': 36,
 }
 
 

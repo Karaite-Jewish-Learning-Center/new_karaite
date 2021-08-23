@@ -1,115 +1,96 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Virtuoso } from 'react-virtuoso'
-import { bookChapterUrl } from '../constants/constants'
-import { makeBookUrl } from "../utils/utils";
-import Loading from './Loading';
-import { chaptersByBibleBook } from '../constants/constants'
-import ChapterHeaderVerse from './ChapterHeaderVerse';
-import Colors from '../constants/colors';
-import { Typography } from '@material-ui/core';
-import store from '../stores/BibleStore';
-import { observer } from "mobx-react-lite";
+import React, { useState } from 'react'
+import { Grid } from '@material-ui/core';
+import { getCommentsUrl } from '../constants/constants'
+import CommentsPane from '../components/CommentPane'
+import RenderText from './RenderText'
+import RightPane from './RightPane';
 
 
-const calculateChapter = (bookUtils, chapter) => {
-
-    if (bookUtils.book['verses'].length <= 10) {
-        return bookUtils.book['verses'].length
-    }
-    return parseInt(chapter) + 1
-}
-
-const CurrentChapter = observer(({ cc }) => (
-    <Typography>{cc.currentChapter}</Typography>
-))
+export default function Bible({ book, chapter, verse, bookUtils, paneNumber, highlight, refClick }) {
+    const [comments, setComments] = useState(null)
 
 
-export default function Bible({ book, chapter, verse, bookUtils, onCommentOpen, comments }) {
-
-    const [currentChapter, setCurrentChapter] = useState(calculateChapter(bookUtils, chapter))
-    const [loadingText, setLoadingText] = useState(null)
-    const [bookData, setBookData] = useState(bookUtils.chapter)
-
-    const classes = useStyles()
-    const first = 1 // it's not the first time that we read data for this book
-
-    const virtuoso = useRef(null);
+    const [commentsNumber, setCommentsNumber] = useState(0)
+    const [rightPaneOpen, setRightPaneOpen] = useState(false)
 
 
-    const itemContent = (item, data) => {
-        return (
-            <ChapterHeaderVerse item={item}
-                data={data}
-                highlight={[]}
-                bookUtils={bookUtils.book}
-                onCommentOpen={onCommentOpen}
-                paneNumber={0}
-                comment={comments}
-            />
-        )
+    const openRightPane = () => {
+        setRightPaneOpen(true)
     }
 
-    async function fetchData() {
-        if (currentChapter <= chaptersByBibleBook[book]) {
-            const response = await fetch(makeBookUrl(bookChapterUrl, book, currentChapter, first, false))
-            if (response.ok) {
-                const data = await response.json()
-                setBookData([...bookData, ...data.chapter])
-                setCurrentChapter((currentChapter) => currentChapter + 1)
-            } else {
-                alert("HTTP-Error: " + response.status)
-            }
+    const closeRightPane = () => {
+        setRightPaneOpen(false)
+    }
+
+    const RenderRightPane = ({ commentsNumber }) => {
+        if (rightPaneOpen) {
+            return (
+                <Grid item xs={3}>
+                    <RightPane close={closeRightPane} commentsNumber={commentsNumber} />
+
+                    {/* <RenderComments comments={comments} /> */}
+                </Grid>
+            )
+        }
+        return null
+
+    }
+
+
+    const getComments = async (paneNumber, book, chapter, verse) => {
+
+        const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
+        if (response.ok) {
+            const data = await response.json()
+            setComments({ html: data.comments, book: book, chapter: chapter, verse: verse })
         } else {
-            setLoadingText('End of book.')
+            alert("HTTP-Error: " + response.status)
         }
     }
 
-    const jump = () => {
-        virtuoso.current.scrollToIndex({
-            index: bookUtils.book['verses'].slice(0, currentChapter - 2).reduce((x, y) => x + y, 0) + verse - 1,
-            align: 'center',
-        });
+    const onCommentOpen = (paneNumber, book, chapter, verse) => {
+        getComments(paneNumber, book, chapter, verse)
     }
-    useEffect(() => {
-        setTimeout(() => {
-            jump()
-        }, 30);
-    }, [])
+
+    const onCommentClose = (paneNumber) => {
+        setComments(null)
+    }
+
+
+
+    const RenderComments = ({ comments }) => {
+
+        if (comments !== null) {
+            console.log("rendering RenderComments")
+            const { html, book, chapter, verse } = comments
+            return (
+                <CommentsPane book={book}
+                    chapter={chapter}
+                    verse={verse}
+                    comment={html}
+                    closeCommentTabHandler={onCommentClose}
+                    refClick={refClick} />
+            )
+        }
+        return null
+    }
+
+
 
     return (
-
-        <div className={classes.container}>
-            <div className={classes.header}>
-                <CurrentChapter cc={store} />
-            </div>
-            <Virtuoso
-                data={bookData}
-                ref={virtuoso}
-                endReached={fetchData}
-                itemContent={itemContent}
-                components={{
-                    Footer: () => {
-                        return <Loading text={loadingText} />
-                    }
-                }}
-            />
-        </div>
+        <Grid container>
+            <Grid item xs={true}>
+                <RenderText book={book}
+                    chapter={chapter}
+                    verse={verse}
+                    verses={bookUtils.book['verses']}
+                    bookUtils={bookUtils}
+                    openRightPane={openRightPane}
+                    setCommentsNumber={setCommentsNumber}
+                />
+            </Grid>
+            <RenderRightPane commentsNumber={commentsNumber} />
+        </Grid >
     )
 }
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        flexGrow: 1,
-        width: '100%',
-        height: '100%',
-        
-    },
-    header: {
-        minHeight: 50,
-        maxHeight: 50,
-        width: '100%',
-        backgroundColor: Colors['headerBackgroundColor'],
-    },
-}));
 

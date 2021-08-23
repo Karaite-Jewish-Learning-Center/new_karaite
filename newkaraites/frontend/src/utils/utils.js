@@ -23,7 +23,9 @@ const makeRandomKey = () => {
     return `k-${Math.random() * 10000000000}`
 }
 
-
+const slug = (str) => {
+    return str.replaceAll(' ', '-')
+}
 
 const englishBookNames = {
     'Genesis': 'בראשית',
@@ -736,6 +738,7 @@ export {
     equals,
     getComments,
     makeRandomKey,
+    slug,
     indoArabicToHebrew,
     hebrewToIndoArabic,
     hebrewBookNameToEnglish,

@@ -12,13 +12,13 @@ import {
 } from "../constants/constants";
 import CommentBadge from "./CommentBadge";
 import ttSpeech from '../utils/ttspeech'
-import store from '../stores/BibleStore';
+import { makeRandomKey } from '../utils/utils';
 
 
 
 export default function ChapterHeaderVerse(props) {
-    const { item, data, highlight, bookUtils, onCommentOpen, paneNumber } = props
-    let color = true
+    const { item, data, highlight, book, openRightPane, paneNumber, setCommentsNumber } = props
+    let color = false
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
@@ -33,14 +33,14 @@ export default function ChapterHeaderVerse(props) {
         ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
     }
     const handleOnClick = (e) => {
-        if (onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') return
-        onCommentOpen(paneNumber, chapter, verse)
+        if (openRightPane === undefined || data[BIBLE_EN_CM] === '0') return
+        //onCommentOpen(paneNumber, book, chapter, verse)
+        openRightPane()
     }
+
 
     if (renderChapter === "1") {
 
-        store.updateChapter(chapter)
-        
         chapterHtml = (<div className={classes.chapter}>
             <div className={classes.chapterNumber}>
                 <Typography className={classes.ch}>{chapter}</Typography>
@@ -54,7 +54,9 @@ export default function ChapterHeaderVerse(props) {
         </div>)
     }
     return (
-        <div>
+        <div className="verse"
+            onMouseEnter={() => { setCommentsNumber(data[BIBLE_EN_CM]) }}
+        >
             {chapterHtml}
             <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
                 onClick={handleOnClick}

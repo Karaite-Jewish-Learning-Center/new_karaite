@@ -1,22 +1,22 @@
-import React  from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import { range } from '../utils/utils'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
 import { Link } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
-
+import { slug } from '../utils/utils'
 
 
 const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
     const chapters = range(numberOfChapters)
     const classes = container()
 
-   
+
     const createMenu = () => {
         return chapters.map(chapter =>
             <Grid item xs={1} className={classes.item} key={chapter}>
-                <Link className={classes.link} to={`/${bibleBook}/${chapter}/`} >
+                <Link className={classes.link} to={`/${slug(bibleBook)}/${chapter}/`} >
                     {chapter}
                 </Link>
             </Grid>

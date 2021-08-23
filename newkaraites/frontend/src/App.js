@@ -7,7 +7,10 @@ import { chaptersByBibleBook } from './constants/constants'
 import ChapterMenu from './components/ChapterMenu'
 import LoadBook from "./components/LoadBook";
 import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles'
+import { slug } from './utils/utils'
+import Halakhah from './components/Halakhah'
+
 
 
 function App() {
@@ -15,15 +18,19 @@ function App() {
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')
+        debugger
         if (parts.length === 3) {
             return Object.keys(chaptersByBibleBook).map(book =>
-                <Route path={`/${book}/`} >
+                <Route path={`/${slug(book)}/`} >
                     <ChapterMenu bibleBook={book}
                         numberOfChapters={chaptersByBibleBook[book]}
                         level="Tanakh" />
                 </Route>
             )
         }
+        return null
+    }
+    const HalakhahBookLink = () => {
         return null
     }
     const Child = () => {
@@ -47,18 +54,16 @@ function App() {
                     <Tanakh />
                 </Route>
 
-
+                <Route path="/Halakhah/">
+                    <Halakhah />
+                </Route>
                 <Switch>
                     <>
                         <Route path="/:book/:chapter/" children={<Child />} />
 
                         <Route path="/:book/" children={<TanakhBooksLink />} />
-                        {/* <LoadBook book={book} chapter={chapter} verse={verse} /> */}
 
-                        {/* <Route path="/presentation/">
-                        <PresentKaraitesBooks />
-                    </Route>  */}
-
+                        {/* <Route path="/Halakhah/:book/" children={<HalakhahBookLink />} /> */}
                     </>
                 </Switch>
             </BrowserRouter >

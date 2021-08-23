@@ -12,6 +12,7 @@ const parseBiblicalReference = (e) => {
     let language = e.target.childNodes[0].parentElement.lang
     let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(':(', '')
     biblicalRef = biblicalRef.replace(', ', ':',1).replace(',', ':',1).replace('.', '').trim()
+    debugger
 
     if (language.toLowerCase() === 'he') {
         let spacePos = biblicalRef.lastIndexOf(' ') + 1
@@ -39,7 +40,8 @@ const parseBiblicalReference = (e) => {
     }
 
     if ((book !== undefined && chapter !== undefined && verse !== undefined)) {
-        return {book: book, chapter: chapter, verse: verse, highlight: highlight}
+        return { refBook: book, refChapter: chapter, refVerse: verse, refHighlight: highlight }
+
     }
     console.log(book, chapter, verse, highlight)
     throw('Invalid reference:' + biblicalRef)

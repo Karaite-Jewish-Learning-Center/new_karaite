@@ -2,9 +2,11 @@ from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
+from .utils import slug_back
 from .models import (Organization,
                      BookAsArray,
                      Comment,
+                     TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,)
 
@@ -19,6 +21,9 @@ def book_chapter_verse(request, *args, **kwargs):
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+    book = slug_back(book)
+    print(book, len(book))
     try:
         book_title = Organization.objects.get(book_title_en=book)
     except Organization.DoesNotExist:
@@ -80,6 +85,8 @@ def karaites_book_as_array(request, *args, **kwargs):
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+    book = slug_back(book)
 
     try:
         book_details = KaraitesBookDetails().to_json(book_title=book)
@@ -146,3 +153,19 @@ class GetKaraitesBookAsArray(View):
     @staticmethod
     def get(request, *args, **kwargs):
         return karaites_book_as_array(request, *args, **kwargs)
+
+
+class GetTOC(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        book = kwargs.get('book', None)
+        if book is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+        karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
+        result = []
+        for toc in TableOfContents.objects.filter(karaite_book=karaites_book):
+            result.append(toc.to_json())
+
+        return JsonResponse(result)
