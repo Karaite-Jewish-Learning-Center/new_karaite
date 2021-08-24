@@ -8,22 +8,25 @@ import {
     BIBLE_VERSE,
     BIBLE_CHAPTER,
     BIBLE_RENDER_CHAPTER,
-    BIBLE_EN_CM
+    BIBLE_EN_CM,
+    BIBLE_REFS
 } from "../constants/constants";
-import CommentBadge from "./CommentBadge";
+import RefsBadge from "./RefsBadge";
 import ttSpeech from '../utils/ttspeech'
 import { makeRandomKey } from '../utils/utils';
 
 
 
 export default function ChapterHeaderVerse(props) {
-    const { item, data, highlight, book, openRightPane, paneNumber, setCommentsNumber } = props
+    const { item, data, highlight, book, openRightPane, paneNumber, setRightPaneNumbers } = props
     let color = false
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
     let verse = data[BIBLE_VERSE]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
+    let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
+
 
     const onDoubleClickEn = () => {
         ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
@@ -33,7 +36,7 @@ export default function ChapterHeaderVerse(props) {
         ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
     }
     const handleOnClick = (e) => {
-        if (openRightPane === undefined || data[BIBLE_EN_CM] === '0') return
+        if (openRightPane === undefined) return
         //onCommentOpen(paneNumber, book, chapter, verse)
         openRightPane()
     }
@@ -47,15 +50,14 @@ export default function ChapterHeaderVerse(props) {
                 <hr />
             </div>
             <div className={classes.comments}>
-                <CommentBadge commentsCount={0}
-                    sameChapterAndVerse={color}
-                />
+                <RefsBadge refsCount={0} />
             </div>
         </div>)
     }
+    console.log('comment', parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS]))
     return (
         <div className={classes.verse}
-            onMouseEnter={() => { setCommentsNumber(data[BIBLE_EN_CM]) }}
+            onMouseEnter={() => { setRightPaneNumbers([data[BIBLE_EN_CM], data[BIBLE_REFS]]) }}
         >
             {chapterHtml}
             <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
@@ -73,9 +75,7 @@ export default function ChapterHeaderVerse(props) {
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
                 <div className={classes.comments}>
-                    <CommentBadge commentsCount={data[BIBLE_EN_CM]}
-                        sameChapterAndVerse={color}
-                    />
+                    <RefsBadge refsCount={refs} />
                 </div>
             </div>
 

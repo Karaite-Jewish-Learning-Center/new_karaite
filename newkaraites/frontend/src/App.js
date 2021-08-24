@@ -17,7 +17,6 @@ function App() {
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')
-        debugger
         if (parts.length === 4) {
             return Object.keys(chaptersByBibleBook).map(book =>
                 <Route path={`/Tanakh/${book}/`} >

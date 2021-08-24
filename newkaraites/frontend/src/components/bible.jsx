@@ -10,11 +10,12 @@ export default function Bible({ book, chapter, verse, bookUtils, paneNumber, hig
     const [comments, setComments] = useState(null)
 
 
-    const [commentsNumber, setCommentsNumber] = useState(0)
+    const [rightPaneNumbers, setRightPaneNumbers] = useState([0, 0])
     const [rightPaneOpen, setRightPaneOpen] = useState(false)
 
 
     const openRightPane = () => {
+        debugger
         setRightPaneOpen(true)
     }
 
@@ -22,11 +23,11 @@ export default function Bible({ book, chapter, verse, bookUtils, paneNumber, hig
         setRightPaneOpen(false)
     }
 
-    const RenderRightPane = ({ commentsNumber }) => {
+    const RenderRightPane = ({ rightPaneNumbers }) => {
         if (rightPaneOpen) {
             return (
                 <Grid item xs={3}>
-                    <RightPane close={closeRightPane} commentsNumber={commentsNumber} />
+                    <RightPane close={closeRightPane} rightPaneNumbers={rightPaneNumbers} />
 
                     {/* <RenderComments comments={comments} /> */}
                 </Grid>
@@ -37,43 +38,43 @@ export default function Bible({ book, chapter, verse, bookUtils, paneNumber, hig
     }
 
 
-    const getComments = async (paneNumber, book, chapter, verse) => {
+    // const getComments = async (paneNumber, book, chapter, verse) => {
 
-        const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
-        if (response.ok) {
-            const data = await response.json()
-            setComments({ html: data.comments, book: book, chapter: chapter, verse: verse })
-        } else {
-            alert("HTTP-Error: " + response.status)
-        }
-    }
+    //     const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
+    //     if (response.ok) {
+    //         const data = await response.json()
+    //         setComments({ html: data.comments, book: book, chapter: chapter, verse: verse })
+    //     } else {
+    //         alert("HTTP-Error: " + response.status)
+    //     }
+    // }
 
-    const onCommentOpen = (paneNumber, book, chapter, verse) => {
-        getComments(paneNumber, book, chapter, verse)
-    }
+    // const onCommentOpen = (paneNumber, book, chapter, verse) => {
+    //     getComments(paneNumber, book, chapter, verse)
+    // }
 
-    const onCommentClose = (paneNumber) => {
-        setComments(null)
-    }
+    // const onCommentClose = (paneNumber) => {
+    //     setComments(null)
+    // }
 
 
 
-    const RenderComments = ({ comments }) => {
+    // const RenderComments = ({ comments }) => {
 
-        if (comments !== null) {
-            console.log("rendering RenderComments")
-            const { html, book, chapter, verse } = comments
-            return (
-                <CommentsPane book={book}
-                    chapter={chapter}
-                    verse={verse}
-                    comment={html}
-                    closeCommentTabHandler={onCommentClose}
-                    refClick={refClick} />
-            )
-        }
-        return null
-    }
+    //     if (comments !== null) {
+    //         console.log("rendering RenderComments")
+    //         const { html, book, chapter, verse } = comments
+    //         return (
+    //             <CommentsPane book={book}
+    //                 chapter={chapter}
+    //                 verse={verse}
+    //                 comment={html}
+    //                 closeCommentTabHandler={onCommentClose}
+    //                 refClick={refClick} />
+    //         )
+    //     }
+    //     return null
+    // }
 
 
 
@@ -85,11 +86,11 @@ export default function Bible({ book, chapter, verse, bookUtils, paneNumber, hig
                     verse={verse}
                     verses={bookUtils.book['verses']}
                     bookUtils={bookUtils}
-                    openRightPane={openRightPane}
-                    setCommentsNumber={setCommentsNumber}
+                    openRightPane={() => { setRightPaneOpen(true) }}
+                    setRightPaneNumbers={setRightPaneNumbers}
                 />
             </Grid>
-            <RenderRightPane commentsNumber={commentsNumber} />
+            <RenderRightPane rightPaneNumbers={rightPaneNumbers} />
         </Grid >
     )
 }

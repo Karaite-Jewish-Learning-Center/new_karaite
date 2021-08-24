@@ -16,7 +16,7 @@ const calculateChapter = (bookUtils, chapter) => {
     return parseInt(chapter) + 1
 }
 
-const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, openRightPane, setCommentsNumber }) => {
+const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, openRightPane, setRightPaneNumbers }) => {
     const [currentChapter, setCurrentChapter] = useState(calculateChapter(bookUtils, chapter))
     const [chapterViewPort, setChapterViewPort] = useState()
     const [comments, setComments] = useState(null)
@@ -37,7 +37,7 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
                 openRightPane={openRightPane}
                 paneNumber={paneNumber}
                 comment={comments}
-                setCommentsNumber={setCommentsNumber}
+                setRightPaneNumbers={setRightPaneNumbers}
             />
         )
     }

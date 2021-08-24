@@ -424,8 +424,10 @@ class BookAsArray(models.Model):
 
     chapter = models.IntegerField(default=0)
 
-    # [text english, text hebrew, comment_count and Verse , chapter, need_render_chapter]
-    book_text = ArrayField(ArrayField(models.TextField(), size=7), default=list)
+    # [text english, text hebrew, comment count En, comment count He,
+    # Verse number , Chapter, need render chapter title,
+    # number of  Halakhah references]
+    book_text = ArrayField(ArrayField(models.TextField(), size=8), default=list)
 
     @mark_safe
     def text(self):
