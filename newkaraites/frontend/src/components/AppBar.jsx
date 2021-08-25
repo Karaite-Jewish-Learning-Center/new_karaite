@@ -1,5 +1,5 @@
 import React from 'react';
-import {fade, makeStyles} from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,7 +13,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-//import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -123,10 +122,10 @@ export default function PrimarySearchAppBar() {
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             id={menuId}
             keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
@@ -139,10 +138,10 @@ export default function PrimarySearchAppBar() {
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             id={mobileMenuId}
             keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
@@ -165,7 +164,7 @@ export default function PrimarySearchAppBar() {
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    <LanguageIcon/><ArrowDropDownIcon/>
+                    <LanguageIcon /><ArrowDropDownIcon />
                 </IconButton>
                 <p>Site Language</p>
             </MenuItem>
@@ -184,11 +183,11 @@ export default function PrimarySearchAppBar() {
                     color="inherit"
                     aria-label="open drawer"
                 >
-                    <MenuIcon/>
+                    <MenuIcon />
                 </IconButton>
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
-                        <SearchIcon/>
+                        <SearchIcon />
                     </div>
                     <InputBase
                         placeholder="Search…"
@@ -196,10 +195,10 @@ export default function PrimarySearchAppBar() {
                             root: classes.inputRoot,
                             input: classes.inputInput,
                         }}
-                        inputProps={{'aria-label': 'search'}}
+                        inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
-                <div className={classes.grow}/>
+                <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                     <IconButton aria-label="Go to sign up form" color="inherit" >
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
@@ -217,7 +216,7 @@ export default function PrimarySearchAppBar() {
                         data-tip="Change site language"
                         data-for="en"
                     >
-                        <LanguageIcon /><ArrowDropDownIcon/>
+                        <LanguageIcon /><ArrowDropDownIcon />
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
@@ -228,7 +227,7 @@ export default function PrimarySearchAppBar() {
                         onClick={handleMobileMenuOpen}
                         color="inherit"
                     >
-                        <MoreIcon/>
+                        <MoreIcon />
                     </IconButton>
                 </div>
             </Toolbar>

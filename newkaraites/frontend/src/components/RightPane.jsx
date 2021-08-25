@@ -4,14 +4,17 @@ import RightPaneHeader from './RightPanelHeader'
 import RightPaneBody from './RightPaneBody'
 import Colors from '../constants/colors'
 
-const RightPane = ({ close, rightPaneNumbers }) => {
+const RightPane = ({ close, rightPaneNumbers, showState, setShowState }) => {
 
     const classes = useStyles()
-
+    console.log("rendering Right Pane")
     return (
         <div className={classes.container}>
             <RightPaneHeader close={close} />
-            <RightPaneBody rightPaneNumbers={rightPaneNumbers} />
+            <RightPaneBody
+                rightPaneNumbers={rightPaneNumbers}
+                showState={showState}
+                setShowState={setShowState} />
         </div>
     )
 

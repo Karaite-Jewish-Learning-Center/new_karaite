@@ -13,17 +13,14 @@ import {
 } from "../constants/constants";
 import RefsBadge from "./RefsBadge";
 import ttSpeech from '../utils/ttspeech'
-import { makeRandomKey } from '../utils/utils';
 
 
 
 export default function ChapterHeaderVerse(props) {
-    const { item, data, highlight, book, openRightPane, paneNumber, setRightPaneNumbers } = props
-    let color = false
+    const { item, data, highlight, book, openRightPane, setRightPaneNumbers } = props
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
-    let verse = data[BIBLE_VERSE]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
@@ -37,13 +34,11 @@ export default function ChapterHeaderVerse(props) {
     }
     const handleOnClick = (e) => {
         if (openRightPane === undefined) return
-        //onCommentOpen(paneNumber, book, chapter, verse)
         openRightPane()
     }
 
 
     if (renderChapter === "1") {
-
         chapterHtml = (<div className={classes.chapter}>
             <div className={classes.chapterNumber}>
                 <Typography className={classes.ch}>{chapter}</Typography>
@@ -54,15 +49,15 @@ export default function ChapterHeaderVerse(props) {
             </div>
         </div>)
     }
-    console.log('comment', parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS]))
+
+    const found = highlight.indexOf(item + 1) >= 0
+    if (found) setRightPaneNumbers([data, book])
+
     return (
-        <div className={classes.verse}
-            onMouseEnter={() => { setRightPaneNumbers([data[BIBLE_EN_CM], data[BIBLE_REFS]]) }}
-        >
+        <div className={classes.verse}>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
+            <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
                 onClick={handleOnClick}
-            // onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, chapter, verse)}
             >
                 <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -91,9 +86,9 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'top',
-        "&:hover": {
-            background: Colors['verseOnMouseOver']
-        },
+        // "&:hover": {
+        //     background: Colors['verseOnMouseOver']
+        // },
     },
     chapter: {
         width: '100%',

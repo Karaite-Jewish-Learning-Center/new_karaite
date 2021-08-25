@@ -11,6 +11,7 @@ const RightPaneHeader = ({ close }) => {
 
     const classes = useStyles()
 
+    console.log("Rendering Right Pane header")
     return (
         <Grid container
             direction="row-reverse"
@@ -40,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
     container: {
         flexGrow: 1,
         width: '100%',
-
         top: 70,
         backgroundColor: Colors['headerBackgroundColor']
     },
@@ -50,5 +50,5 @@ const useStyles = makeStyles((theme) => ({
     },
     icon: {
         backgroundColor: Colors['headerBackgroundColor'],
-    }
+    },
 }));

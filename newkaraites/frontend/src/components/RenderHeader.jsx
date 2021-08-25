@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 50,
         maxHeight: 50,
         width: '100%',
-        backgroundColor: Colors['headerBackgroundColor'],
+        backgroundColor: Colors['rightPaneBackGround'],
         textAlign: 'center'
     },
     hebrewBook: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     chapterView: {
         textAlign: 'center',
         verticalAlign: 'middle',
-        paddingRight: 30,
+        paddingRight: 23,
     },
     englishBook: {
         verticalAlign: 'middle',
