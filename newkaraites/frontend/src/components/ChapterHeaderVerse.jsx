@@ -12,7 +12,6 @@ import {
     BIBLE_REFS
 } from "../constants/constants";
 import RefsBadge from "./RefsBadge";
-import ttSpeech from '../utils/ttspeech'
 
 
 
@@ -25,13 +24,6 @@ export default function ChapterHeaderVerse(props) {
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
 
-    const onDoubleClickEn = () => {
-        ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
-    }
-
-    const onDoubleClickHe = () => {
-        ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
-    }
     const handleOnClick = (e) => {
         if (openRightPane === undefined) return
         openRightPane()
