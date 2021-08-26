@@ -44,7 +44,7 @@ export default function ChapterHeaderVerse(props) {
                 <Typography className={classes.ch}>{chapter}</Typography>
                 <hr />
             </div>
-            <div className={classes.comments}>
+            <div className={classes.references}>
                 <RefsBadge refsCount={0} />
             </div>
         </div>)
@@ -69,7 +69,7 @@ export default function ChapterHeaderVerse(props) {
                 <div className={classes.verseEn} onDoubleClick={onDoubleClickEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
-                <div className={classes.comments}>
+                <div className={classes.references}>
                     <RefsBadge refsCount={refs} />
                 </div>
             </div>
@@ -167,7 +167,7 @@ const useStyles = makeStyles(() => ({
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']
     },
-    comments: {
+    references: {
         cursor: 'pointer',
         alignSelf: 'center',
         maxWidth: '5%',

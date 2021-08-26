@@ -143,7 +143,7 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 class ReferencesAdmin(KAdmin):
     list_display = ('karaites_book', 'bible_ref_en', 'bible_ref_he', 'paragraph_number')
-
+    search_fields = ('bible_ref_en',)
     list_filter = ('karaites_book', 'bible_ref_en',)
 
 

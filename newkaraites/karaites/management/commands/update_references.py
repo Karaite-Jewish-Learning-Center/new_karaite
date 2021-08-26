@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 chapter, verse = chapter_verse.split(':')
                 bible_book = Organization.objects.get(book_title_en=book)
                 chapter_text = BookAsArray.objects.get(book=bible_book, chapter=chapter)
-                verse = int(verse)
+                verse = int(verse) - 1
                 chapter_text.book_text[verse][7] = f'{int(chapter_text.book_text[verse][7]) + 1}'
                 chapter_text.save()
                 sys.stdout.write(f"\33[K Updating: {i}\r")

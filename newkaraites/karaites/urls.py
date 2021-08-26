@@ -5,13 +5,15 @@ from .views import (GetFirstLevel,
                     GetComments,
                     getKaraitesAllBookDetails,
                     GetKaraitesBookAsArray,
-                    GetTOC)
+                    GetTOC,
+                    getHalakhah)
 
 app_name = 'karaites'
 
 urlpatterns = [
 
-    path('get-first-level/', GetFirstLevel.as_view(), name='books_list'),
+    path('get-first-level/', GetFirstLevel.as_view(), name='first_level'),
+
     # book list
     path('books-list/', BooksPresentation.as_view(), name='books_list'),
 
@@ -20,7 +22,6 @@ urlpatterns = [
          GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 
     path('get-book-chapter/<str:book>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
-
 
     # karaite books
     path('get-karaites-book/<str:book>/<str:chapter>/',
@@ -38,5 +39,9 @@ urlpatterns = [
     path('get-comments/<str:book>/<str:chapter>/', GetComments.as_view(), name='get_comments'),
     path('get-comments/<str:book>/', GetComments.as_view(), name='get_comments'),
     path('get-comments/', GetComments.as_view(), name='get_comments'),
+
+    # references Halakhah
+    path('get-references/<str:book>/<str:chapter>/<str:verse>/', getHalakhah.as_view(), name='get_references'),
+
 
 ]

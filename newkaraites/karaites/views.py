@@ -8,7 +8,8 @@ from .models import (Organization,
                      Comment,
                      TableOfContents,
                      KaraitesBookDetails,
-                     KaraitesBookAsArray,)
+                     KaraitesBookAsArray,
+                     References)
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -22,8 +23,6 @@ def book_chapter_verse(request, *args, **kwargs):
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
-    book = slug_back(book)
-    print(book, len(book))
     try:
         book_title = Organization.objects.get(book_title_en=book)
     except Organization.DoesNotExist:
@@ -67,6 +66,11 @@ def book_chapter_verse(request, *args, **kwargs):
 
         chapters = BookAsArray().to_list(book=book_title, chapter=chapter, book_title=book_title, first=first)
         return JsonResponse({'chapter': chapters, 'book': book_title.to_json()}, safe=False)
+
+    if model == 'halakhah':
+        ref = f'({book} {chapter}:{verse})'
+        references = References().to_list(ref)
+        return JsonResponse({'references': references}, safe=False)
 
 
 def karaites_book_details(request, *args, **kwargs):
@@ -168,4 +172,14 @@ class GetTOC(View):
         for toc in TableOfContents.objects.filter(karaite_book=karaites_book):
             result.append(toc.to_json())
 
-        return JsonResponse(result)
+        return JsonResponse(result, safe=False)
+
+
+class getHalakhah(View):
+    """
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        kwargs.update({'model': 'halakhah'})
+        return book_chapter_verse(request, *args, **kwargs)

@@ -9,14 +9,11 @@ import PauseIcon from '@material-ui/icons/Pause'
 import StopIcon from '@material-ui/icons/Stop'
 import Colors from '../constants/colors'
 import CommentsPane from './CommentPane'
+import HalakhahPane from './HalakhahPane'
 import {
-    BIBLE_ENGLISH,
-    BIBLE_HEBREW,
     BIBLE_EN_CM,
-    BIBLE_HE_CM,
     BIBLE_VERSE,
     BIBLE_CHAPTER,
-    BIBLE_RENDER_CHAPTER,
     BIBLE_REFS
 } from '../constants/constants'
 
@@ -30,7 +27,8 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
     const verseData = rightPaneNumbers[0]
     const book = rightPaneNumbers[1]
     const classes = useStyles()
-    debugger
+
+
     const Item = () => {
         return items.map((item, i) => {
             return (
@@ -55,7 +53,8 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
     switch (showState) {
         case 0: {
             return (
-                <CommentsPane book={book}
+                <CommentsPane
+                    book={book}
                     chapter={verseData[BIBLE_CHAPTER]}
                     verse={verseData[BIBLE_VERSE]}
                     setShowState={setShowState}
@@ -64,8 +63,11 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
                 />)
         }
         case 1: {
-            // show  halakhah
-            break;
+            return (<HalakhahPane
+                book={book}
+                chapter={verseData[BIBLE_CHAPTER]}
+                verse={verseData[BIBLE_VERSE]}
+            />)
         }
         default: {
             return (

@@ -10,6 +10,7 @@ const karaitesBookUrl = apiUrl + 'api/get-karaites-book/'
 const karaitesBookAsArrayUrl = apiUrl + 'api/get-karaites-book/'
 const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
 const karaitesBookToc = apiUrl + 'get-karaites-book-toc/'
+const referencesUrl = apiUrl + 'api/get-references/'
 const LANGUAGE = { 0: 'en', 1: 'he' }
 const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
 const ENGLISH = 0
@@ -78,6 +79,7 @@ export {
     organization,
     karaitesBookUrl,
     karaitesBookDetailsUrl,
+    referencesUrl,
     LANGUAGE,
     LANGUAGE_TAG,
     ENGLISH,

@@ -17,11 +17,15 @@ export default function Bible({ book, chapter, verse, bookUtils, paneNumber, hig
         setShowState(null)
     }
 
+    const backButton = () => {
+        setShowState(null)
+    }
     const RenderRightPane = () => {
         if (rightPaneOpen) {
             return (
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     <RightPane
+                        back={backButton}
                         close={closeRightPane}
                         rightPaneNumbers={rightPaneNumbers}
                         showState={showState}

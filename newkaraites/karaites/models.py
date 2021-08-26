@@ -656,5 +656,23 @@ class References(models.Model):
     def __str__(self):
         return f'{self.karaites_book.book_title} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'
 
+    def to_json(self):
+        return {'book_name': self.karaites_book.book_title,
+                'author': self.karaites_book.author.name,
+                'language': self.karaites_book.book_language,
+                'paragraph_number': self.paragraph_number,
+                'paragraph_html': self.paragraph_text,
+                'bible_ref_he': self.bible_ref_he,
+                'bible_ref_en': self.bible_ref_en,
+                }
+
+    def to_list(self, bible_ref_en):
+
+        result = []
+        for ref in References.objects.filter(bible_ref_en=bible_ref_en):
+            result.append(ref.to_json())
+
+        return result
+
     class Meta:
         verbose_name_plural = _('Karaites Bible references.')
