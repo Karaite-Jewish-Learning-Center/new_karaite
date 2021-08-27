@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Button from '@material-ui/core/Button'
 import { referencesUrl } from '../constants/constants.js'
 import { makeStyles } from '@material-ui/core/styles'
 import { makeRandomKey } from "../utils/utils";
@@ -6,18 +7,12 @@ import ReactHtmlParser from 'react-html-parser';
 import { Typography } from '@material-ui/core';
 import Colors from '../constants/colors.js';
 
-const BOOK_NAME = 0
-const AUTHOR = 1
-const LANGUAGE = 2
-const PARA_NUMBER = 3
-const PARA_HTML = 4
-const REF_HE = 5
-const FEF_EN = 6
 
 
 const HalakhahPane = ({ book, chapter, verse }) => {
     const [references, setReferences] = useState([])
-
+    const [showPane, setShowPane] = useState(null)
+    const [current, setCurrent] = useState(null)
     const classes = useStyles()
 
     const transform = (node) => {
@@ -37,6 +32,10 @@ const HalakhahPane = ({ book, chapter, verse }) => {
         }
     }
 
+    const onClick = (i) => {
+        setShowPane(0)
+        setCurrent(i)
+    }
     const getHalakhah = async (book, chapter, verse) => {
 
         const response = await fetch(referencesUrl + `${book}/${chapter}/${verse}/`)
@@ -53,24 +52,55 @@ const HalakhahPane = ({ book, chapter, verse }) => {
     }, [])
 
     if (referencesUrl.length === 0) return null
+    switch (showPane) {
+        case 0: {
+            return (
+                <div className={classes.container}>
+                    <Typography className={classes.headerColor}>{references[current]['book_name']}</Typography>
 
-    return (
-        <div className={classes.container}>
-            <Typography className={classes.headerColor}>Halakhah ({references.length})</Typography>
-            <hr className={classes.ruler} />
+                    <Typography className={classes.headerColor}>{references[current]['author']}</Typography>
+                    <hr className={classes.ruler} />
 
+                    <div key={makeRandomKey()}>
+                        <>
+                            {ReactHtmlParser(references[current]['paragraph_html'], {
+                                decodeEntities: true,
+                                transform: transform
+                            })}
+                        </>
+                    </div>
 
-            <div key={makeRandomKey()}>
-                {references.map(obj => (
-                    <>
-                        <Typography className={classes.text} >{obj['book_name']},{obj['author']}</Typography>
-                        <hr className={classes.ruler} />
-                    </>
-                ))}
-            </div>
-        </div>
-    )
+                </div>
+
+            )
+        }
+        default: {
+            return (
+                <div className={classes.container}>
+                    <Typography className={classes.headerColor}>Halakhah ({references.length})</Typography>
+                    <hr className={classes.ruler} />
+                    <div key={makeRandomKey()}>
+                        {references.map((obj, i) => (
+                            <>
+                                <Button
+                                    variant="text"
+                                    className={classes.button}
+                                    fullWidth={true}
+                                    onClick={onClick.bind(this, i)}
+                                >
+                                    {obj['book_name']}, {obj['author']}
+                                </Button>
+                                <hr className={classes.ruler} />
+                            </>
+                        ))}
+                    </div>
+                </div>
+
+            )
+        }
+    }
 }
+
 
 export default HalakhahPane
 
@@ -89,6 +119,10 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         fontSize: 14,
+    },
+    button: {
+        textTransform: 'none',
+        justifyContent: 'left',
     },
 }));
 
