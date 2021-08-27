@@ -3,10 +3,7 @@ import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
-import IconButton from '@material-ui/core/IconButton'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow'
-import PauseIcon from '@material-ui/icons/Pause'
-import StopIcon from '@material-ui/icons/Stop'
+
 import Colors from '../constants/colors'
 import CommentsPane from './CommentPane'
 import HalakhahPane from './HalakhahPane'
@@ -14,8 +11,12 @@ import {
     BIBLE_EN_CM,
     BIBLE_VERSE,
     BIBLE_CHAPTER,
-    BIBLE_REFS
+    BIBLE_REFS,
+    BIBLE_ENGLISH,
+    BIBLE_HEBREW,
 } from '../constants/constants'
+import Player from './Player'
+
 
 
 const items = ['Commentary', 'Halakhah']
@@ -76,22 +77,10 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
                     <Typography className={classes.headerColor}>Related texts</Typography>
                     <hr className={classes.ruler} />
                     <Item />
-                    <Typography className={classes.headerColor}>Audio English</Typography>
                     <hr className={classes.ruler} />
-                    <Typography className={classes.headerColor}>Audio Hebrew</Typography>
-                    <hr className={classes.ruler} />
-                    <div className={classes.root}>
-                        <IconButton aria-label="play">
-                            <PlayArrowIcon />
-                        </IconButton>
-                        <IconButton aria-label="pause" disabled>
-                            <PauseIcon />
-                        </IconButton>
-                        <IconButton aria-label="stop" disabled>
-                            <StopIcon />
-                        </IconButton>
+                    <Player text={verseData[BIBLE_ENGLISH]} language={"English"} />
+                    <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"} />
 
-                    </div>
                 </div>
             )
         }

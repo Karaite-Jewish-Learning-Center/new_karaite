@@ -8,7 +8,7 @@ import Colors from '../constants/colors'
 
 
 
-const RightPaneHeader = ({ back, close }) => {
+const RightPaneHeader = ({ back, close, showState }) => {
 
     const classes = useStyles()
 
@@ -21,13 +21,15 @@ const RightPaneHeader = ({ back, close }) => {
             className={classes.container}
         >
             <Grid item xs={10}>
-                <IconButton
-                    aria-label="Back"
-                    component="span"
-                    onClick={back}
-                >
-                    <ChevronLeftIcon className={classes.iconGrid} />
-                </IconButton>
+                {(showState !== null ?
+                    <IconButton
+                        aria-label="Back"
+                        component="span"
+                        onClick={back}
+                    >
+                        <ChevronLeftIcon className={classes.iconGrid} />
+                    </IconButton>
+                    : null)}
             </Grid>
             <Grid item className={classes.icon}>
                 <IconButton

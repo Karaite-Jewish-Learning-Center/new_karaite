@@ -1,29 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Loading from './Loading';
+import React, { useState, useEffect, useRef } from 'react'
+import Loading from './Loading'
 import { chaptersByBibleBook } from '../constants/constants'
 import { bookChapterUrl } from '../constants/constants'
-import { makeBookUrl } from "../utils/utils";
+import { makeBookUrl } from "../utils/utils"
 import { Virtuoso } from 'react-virtuoso'
-import ChapterHeaderVerse from './ChapterHeaderVerse';
-import RenderHeader from './RenderHeader';
+import ChapterHeaderVerse from './ChapterHeaderVerse'
+import RenderHeader from './RenderHeader'
 
-const calculateChapter = (bookUtils, chapter) => {
-    // keep in sync with backend, see
-    if (bookUtils.book['verses'].length <= 10) {
-        return bookUtils.book['verses'].length
-    }
-    return parseInt(chapter) + 1
-}
 
 const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, openRightPane, setRightPaneNumbers, isRightPaneOpen }) => {
-    const [currentChapter, setCurrentChapter] = useState(calculateChapter(bookUtils, chapter))
+    const [currentChapter, setCurrentChapter] = useState(parseInt(chapter) + 1)
     const [chapterViewPort, setChapterViewPort] = useState()
     const [loadingText, setLoadingText] = useState(null)
     const [bookData, setBookData] = useState(bookUtils.chapter)
     const [highlight, setHighLight] = useState([])
     const first = 1 // it's not the first time that we read data for this book
     const virtuoso = useRef(null);
-
 
 
     const itemContent = (item, data) => {

@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core';
-//import { getCommentsUrl } from '../constants/constants'
-//import CommentsPane from '../components/CommentPane'
 import RenderText from './RenderText'
 import RightPane from './RightPane';
 

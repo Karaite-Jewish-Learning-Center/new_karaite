@@ -10,7 +10,7 @@ const RightPane = ({ back, close, rightPaneNumbers, showState, setShowState }) =
     console.log("rendering Right Pane")
     return (
         <div className={classes.container}>
-            <RightPaneHeader back={back} close={close} />
+            <RightPaneHeader back={back} close={close} showState={showState} />
             <RightPaneBody
                 rightPaneNumbers={rightPaneNumbers}
                 showState={showState}

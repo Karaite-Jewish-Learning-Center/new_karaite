@@ -661,7 +661,7 @@ class References(models.Model):
                 'author': self.karaites_book.author.name,
                 'language': self.karaites_book.book_language,
                 'paragraph_number': self.paragraph_number,
-                'paragraph_html': self.paragraph_text,
+                'paragraph_html': self.paragraph_text[0],
                 'bible_ref_he': self.bible_ref_he,
                 'bible_ref_en': self.bible_ref_en,
                 }

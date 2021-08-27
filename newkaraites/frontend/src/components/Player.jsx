@@ -14,13 +14,13 @@ const Player = ({ text, language }) => {
 
     const classes = useStyles()
 
-    const onDoubleClickEn = () => {
-        ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
-    }
+    // const onDoubleClickEn = () => {
+    //     ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
+    // }
 
-    const onDoubleClickHe = () => {
-        ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
-    }
+    // const onDoubleClickHe = () => {
+    //     ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
+    // }
 
     const ttSpeech = (text, lang, voice, pitch, rate) => {
         let utterThis = new SpeechSynthesisUtterance(text)

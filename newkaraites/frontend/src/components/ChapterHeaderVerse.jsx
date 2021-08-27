@@ -51,14 +51,14 @@ export default function ChapterHeaderVerse(props) {
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
                 onClick={handleOnClick}
             >
-                <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
+                <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                 </div>
 
                 <div className={classes.verseNumber}>
                     <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
-                <div className={classes.verseEn} onDoubleClick={onDoubleClickEn}>
+                <div className={classes.verseEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
                 <div className={classes.references}>
