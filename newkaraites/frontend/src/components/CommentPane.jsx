@@ -60,11 +60,11 @@ const CommentsPane = ({ book, chapter, verse, refClick, commentTab, setCommentTa
 const useStyles = makeStyles((theme) => ({
     container: {
         flexGrow: 1,
-        width: 'auto',
         position: 'fixed',
-
+        width: '100%'
     },
     scroll: {
+        maxWidth: 400,
         height: '70vh',
         overflow: 'auto',
         paddingRight: 10,

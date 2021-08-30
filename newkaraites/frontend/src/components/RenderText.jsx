@@ -8,7 +8,7 @@ import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
 
 
-const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, openRightPane, setRightPaneNumbers, isRightPaneOpen }) => {
+const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, openRightPane, setRightPaneNumbers, isRightPaneOpen, closePane }) => {
     const [currentChapter, setCurrentChapter] = useState(parseInt(chapter) + 1)
     const [chapterViewPort, setChapterViewPort] = useState()
     const [loadingText, setLoadingText] = useState(null)
@@ -93,7 +93,7 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
 
     return (
         <>
-            <RenderHeader book={book} chapterViewPort={chapterViewPort} />
+            <RenderHeader book={book} chapterViewPort={chapterViewPort} onClose={closePane.bind(this, paneNumber)} />
             <Virtuoso
                 data={bookData}
                 ref={virtuoso}

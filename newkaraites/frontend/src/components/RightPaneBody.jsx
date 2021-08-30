@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
-
+import { makeRandomKey } from '../utils/utils'
 import Colors from '../constants/colors'
 import CommentsPane from './CommentPane'
 import HalakhahPane from './HalakhahPane'
@@ -22,7 +22,7 @@ import Player from './Player'
 const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
 
-const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
+const RightPaneBody = ({ rightPaneNumbers, showState, setShowState, refClick }) => {
     const [commentTab, setCommentTab] = useState(0)
 
     const verseData = rightPaneNumbers[0]
@@ -33,18 +33,17 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
     const Item = () => {
         return items.map((item, i) => {
             return (
-                <>
-                    <Button
-                        variant="text"
-                        className={classes.button}
-                        fullWidth={true}
-                        disabled={verseData[references[i]] === '0'}
-                        startIcon={<MenuBookIcon className={classes.icon} />}
-                        onClick={() => { setShowState(i) }}
-                    >
-                        {item} ({verseData[references[i]]})
-                    </Button>
-                </>
+                <Button
+                    variant="text"
+                    className={classes.button}
+                    fullWidth={true}
+                    disabled={verseData[references[i]] === '0'}
+                    startIcon={<MenuBookIcon className={classes.icon} />}
+                    onClick={() => { setShowState(i) }}
+                    key={makeRandomKey()}
+                >
+                    {item} ({verseData[references[i]]})
+                </Button>
             )
         })
     }
@@ -58,6 +57,7 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
                     book={book}
                     chapter={verseData[BIBLE_CHAPTER]}
                     verse={verseData[BIBLE_VERSE]}
+                    refClick={refClick}
                     setShowState={setShowState}
                     commentTab={commentTab}
                     setCommentTab={setCommentTab}
@@ -68,6 +68,7 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState }) => {
                 book={book}
                 chapter={verseData[BIBLE_CHAPTER]}
                 verse={verseData[BIBLE_VERSE]}
+                refClick={refClick}
             />)
         }
         default: {

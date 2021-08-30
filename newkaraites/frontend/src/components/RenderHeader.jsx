@@ -4,19 +4,31 @@ import { Typography } from '@material-ui/core';
 import { englishBookNameToHebrew } from '../utils/utils'
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close';
 
 
 
-const RenderHeader = ({ book, chapterViewPort }) => {
+const RenderHeader = ({ book, chapterViewPort, onClose }) => {
     console.log("rendering RenderHeader")
     const classes = useStyles()
     return (
         <Grid container className={classes.header}
             direction="row"
-            justifycontent="center"
-            alignItems="center"
+
         >
-            <Grid item xs={4} key={1}>
+            <Grid item xs={1} key={0}>
+                <IconButton
+                    aria-label="Close pane"
+                    component="span"
+                    onClick={onClose}
+                >
+                    <CloseIcon className={classes.iconGrid} />
+                </IconButton>
+
+            </Grid>
+            <Grid item xs={3} key={1}>
+
                 <Typography className={classes.hebrewBook}>{englishBookNameToHebrew(book)}</Typography>
             </Grid>
             <Grid item xs={4} key={2}>

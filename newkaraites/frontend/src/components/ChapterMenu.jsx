@@ -31,7 +31,7 @@ const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
             <Typography variant="h5" component="h1" className={classes.chapters}>Chapters</Typography>
             <Grid container
                 spacing={1}
-                justifyContent="center"
+                justifycontent="center"
                 alignItems="center"
             >
                 {createMenu()}

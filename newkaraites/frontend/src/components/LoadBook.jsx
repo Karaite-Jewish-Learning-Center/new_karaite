@@ -5,9 +5,13 @@ import Bible from "./Bible"
 import { bookChapterUrl } from '../constants/constants'
 import { Grid } from '@material-ui/core';
 import parseBiblicalReference from '../utils/parseBiblicalReference';
+import { Redirect } from 'react-router-dom';
+
+
 
 const LoadBook = ({ book, chapter, verse }) => {
     const [panes, setPanes] = useState([])
+    const [isLastPane, setIsLastPane] = useState(false)
 
     const getBook = async (book, chapter, verse, highlight) => {
         let isOpen = panes.some((pane) => {
@@ -42,18 +46,28 @@ const LoadBook = ({ book, chapter, verse }) => {
         getBook(refBook, refChapter, refVerse, refHighlight)
     }
 
+    const closePane = (paneNumber) => {
+        panes.splice(paneNumber, 1)
+        setPanes([...panes])
+        if (panes.length === 0) setIsLastPane(true)
+    }
+
 
     useEffect(() => {
         getBook(book, chapter, verse, [])
     }, [])
 
-    if (panes.length === 0) return null
     console.log("rendering LoadBook")
+
+    if (isLastPane) return <Redirect to={`/Tanakh/${book}/`} />
+
     return (
-
-        <Grid container className={classes.root}
-
+        <Grid container
+            className={classes.root}
+            direction="row"
+            justifycontent="center"
         >
+
             {panes.map((pane, i) => (
                 <Bible book={pane.book}
                     chapter={pane.chapter}
@@ -62,6 +76,7 @@ const LoadBook = ({ book, chapter, verse }) => {
                     paneNumber={i}
                     highlight={pane.highlight}
                     refClick={refClick}
+                    closePane={closePane}
                     key={makeRandomKey()}
                 />
             ))
@@ -72,7 +87,6 @@ const LoadBook = ({ book, chapter, verse }) => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
         width: '100%',
         height: 'calc(95vh - 70px)',
         overflowY: 'hidden',

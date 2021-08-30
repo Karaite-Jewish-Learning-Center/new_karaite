@@ -19,8 +19,8 @@ function App() {
         let parts = location.pathname.split('/')
         if (parts.length === 4) {
             return Object.keys(chaptersByBibleBook).map(book =>
-                <Route path={`/Tanakh/${book}/`} >
-                    <ChapterMenu bibleBook={book} key={makeRandomKey()}
+                <Route path={`/Tanakh/${book}/`} key={makeRandomKey()} >
+                    <ChapterMenu bibleBook={book}
                         numberOfChapters={chaptersByBibleBook[book]}
                         level="Tanakh" />
                 </Route>
@@ -37,6 +37,7 @@ function App() {
             <LoadBook book={book} chapter={chapter} verse={1} />
         );
     }
+
 
     return (
         <ThemeProvider theme={theme}>

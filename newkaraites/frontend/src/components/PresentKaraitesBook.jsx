@@ -150,7 +150,7 @@ const PresentKaraitesBooks = () => {
 
 
     return (
-        <Grid container className={classes.container}>
+        <Grid container className={classes.container} xs>
             <Grid item xs className={classes.left}>
                 <KaraitesBooks book={karaitesBookName}
                     chapter={karaitesBookChapter}
