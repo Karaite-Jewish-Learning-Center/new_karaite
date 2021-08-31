@@ -14,6 +14,7 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
     const [loadingText, setLoadingText] = useState(null)
     const [bookData, setBookData] = useState(bookUtils.chapter)
     const [highlight, setHighLight] = useState([])
+
     const first = 1 // it's not the first time that we read data for this book
     const virtuoso = useRef(null);
 
@@ -26,6 +27,7 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
                 book={book}
                 openRightPane={openRightPane}
                 setRightPaneNumbers={setRightPaneNumbers}
+                paneNumber={paneNumber}
             />
         )
     }

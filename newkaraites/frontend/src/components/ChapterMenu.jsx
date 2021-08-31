@@ -26,7 +26,9 @@ const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
     return (
         <div className={classes.container}>
             <Typography variant="h4" component="h1" className={classes.title}>{bibleBook}</Typography>
-            <Typography variant="h6" component="h1" className={classes.subtitle}>{level}</Typography>
+            <Typography variant="h6" component="h1" className={classes.subtitle}>
+                <Link to={`/${level}/`}>{level}</Link>
+            </Typography>
             <hr />
             <Typography variant="h5" component="h1" className={classes.chapters}>Chapters</Typography>
             <Grid container

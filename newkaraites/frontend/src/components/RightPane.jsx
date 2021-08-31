@@ -4,7 +4,7 @@ import RightPaneHeader from './RightPanelHeader'
 import RightPaneBody from './RightPaneBody'
 import Colors from '../constants/colors'
 
-const RightPane = ({ back, close, rightPaneNumbers, showState, setShowState, refClick }) => {
+const RightPane = ({ back, close, rightPaneNumbers, showState, paneNumber, setPanesState, refClick }) => {
 
     const classes = useStyles()
     console.log("rendering Right Pane")
@@ -14,7 +14,8 @@ const RightPane = ({ back, close, rightPaneNumbers, showState, setShowState, ref
             <RightPaneBody
                 rightPaneNumbers={rightPaneNumbers}
                 showState={showState}
-                setShowState={setShowState}
+                paneNumber={paneNumber}
+                setPanesState={setPanesState}
                 refClick={refClick}
             />
         </div>

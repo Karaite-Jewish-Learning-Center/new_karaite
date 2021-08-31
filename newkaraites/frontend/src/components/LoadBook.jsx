@@ -13,6 +13,14 @@ const LoadBook = ({ book, chapter, verse }) => {
     const [panes, setPanes] = useState([])
     const [isLastPane, setIsLastPane] = useState(false)
 
+
+    const setPanesState = (paneNumber, property, state) => {
+        for (let p = 0; p < property.length; p++) {
+            panes[paneNumber][property[p]] = state[p]
+        }
+        setPanes([...panes])
+    }
+
     const getBook = async (book, chapter, verse, highlight) => {
         let isOpen = panes.some((pane) => {
             return pane.book === book && pane.chapter === chapter
@@ -28,6 +36,8 @@ const LoadBook = ({ book, chapter, verse }) => {
                     verse: verse,
                     highlight: highlight,
                     bookUtils: data,
+                    isRightPaneOpen: false,
+                    showState: null,
 
                 }])
             } else {
@@ -69,12 +79,10 @@ const LoadBook = ({ book, chapter, verse }) => {
         >
 
             {panes.map((pane, i) => (
-                <Bible book={pane.book}
-                    chapter={pane.chapter}
-                    verse={pane.verse}
-                    bookUtils={pane.bookUtils}
+                <Bible
                     paneNumber={i}
-                    highlight={pane.highlight}
+                    panes={panes}
+                    setPanesState={setPanesState}
                     refClick={refClick}
                     closePane={closePane}
                     key={makeRandomKey()}

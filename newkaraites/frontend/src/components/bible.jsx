@@ -5,35 +5,47 @@ import RightPane from './RightPane';
 import { makeStyles } from '@material-ui/core/styles'
 
 
-export default function Bible({ book, chapter, verse, bookUtils, paneNumber, highlight, refClick, closePane }) {
-
+export default function Bible({ paneNumber, panes, refClick, closePane, setPanesState }) {
     const [rightPaneNumbers, setRightPaneNumbers] = useState([])
-    const [rightPaneOpen, setRightPaneOpen] = useState(false)
-    const [showState, setShowState] = useState(null)
+    const pane = panes[paneNumber]
+    const book = pane['book']
+    const chapter = pane['chapter']
+    const verse = pane['verse']
+    const bookUtils = pane['bookUtils']
 
     const classes = useStyles()
 
     const closeRightPane = () => {
-        setRightPaneOpen(false)
-        setShowState(null)
+        setPanesState(paneNumber,
+            ['isRightPaneOpen', 'showState'],
+            [false, null]
+        )
     }
     const openRightPane = () => {
-        setRightPaneOpen(true)
+        setPanesState(paneNumber,
+            ['isRightPaneOpen', 'showState'],
+            [true, null]
+        )
     }
     const backButton = () => {
-        setShowState(null)
+        setPanesState(paneNumber, ['showState'], [null])
     }
+
     const RenderRightPane = () => {
-        if (rightPaneOpen) {
+        let pane = panes[paneNumber]
+
+        if (pane.isRightPaneOpen) {
             return (
                 <Grid item xs className={classes.rightPane}>
                     <RightPane
                         back={backButton}
                         close={closeRightPane}
                         rightPaneNumbers={rightPaneNumbers}
-                        showState={showState}
-                        setShowState={setShowState}
+                        showState={pane.showState}
+                        paneNumber={paneNumber}
+                        setPanesState={setPanesState}
                         refClick={refClick}
+
                     />
                 </Grid>
             )
@@ -53,7 +65,7 @@ export default function Bible({ book, chapter, verse, bookUtils, paneNumber, hig
                     paneNumber={paneNumber}
                     openRightPane={openRightPane}
                     setRightPaneNumbers={setRightPaneNumbers}
-                    isRightPaneOpen={rightPaneOpen}
+                    isRightPaneOpen={panes[paneNumber]['isRightPaneOpen']}
                     closePane={closePane}
                 />
             </Grid>

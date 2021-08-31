@@ -16,7 +16,7 @@ import RefsBadge from "./RefsBadge";
 
 
 export default function ChapterHeaderVerse(props) {
-    const { item, data, highlight, book, openRightPane, setRightPaneNumbers } = props
+    const { item, data, highlight, book, openRightPane, setRightPaneNumbers, paneNumber } = props
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
@@ -26,9 +26,8 @@ export default function ChapterHeaderVerse(props) {
 
     const handleOnClick = (e) => {
         if (openRightPane === undefined) return
-        openRightPane()
+        openRightPane(paneNumber)
     }
-
 
     if (renderChapter === "1") {
         chapterHtml = (<div className={classes.chapter}>

@@ -22,7 +22,7 @@ import Player from './Player'
 const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
 
-const RightPaneBody = ({ rightPaneNumbers, showState, setShowState, refClick }) => {
+const RightPaneBody = ({ rightPaneNumbers, showState, paneNumber, setPanesState, refClick }) => {
     const [commentTab, setCommentTab] = useState(0)
 
     const verseData = rightPaneNumbers[0]
@@ -39,7 +39,7 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState, refClick }) 
                     fullWidth={true}
                     disabled={verseData[references[i]] === '0'}
                     startIcon={<MenuBookIcon className={classes.icon} />}
-                    onClick={() => { setShowState(i) }}
+                    onClick={() => { setPanesState(paneNumber, ['showState'], [i]) }}
                     key={makeRandomKey()}
                 >
                     {item} ({verseData[references[i]]})
@@ -58,7 +58,6 @@ const RightPaneBody = ({ rightPaneNumbers, showState, setShowState, refClick }) 
                     chapter={verseData[BIBLE_CHAPTER]}
                     verse={verseData[BIBLE_VERSE]}
                     refClick={refClick}
-                    setShowState={setShowState}
                     commentTab={commentTab}
                     setCommentTab={setCommentTab}
                 />)
