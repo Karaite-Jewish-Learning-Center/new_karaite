@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { makeBookUrl, makeRandomKey } from "../utils/utils";
 import { makeStyles } from '@material-ui/core/styles'
 import Bible from "./Bible"
-import { bookChapterUrl } from '../constants/constants'
+import { bookChapterUrl, karaitesBookUrl } from '../constants/constants'
 import { Grid } from '@material-ui/core';
 import parseBiblicalReference from '../utils/parseBiblicalReference';
 import { Redirect } from 'react-router-dom';
+import KaraitesBooks from '../components/karaitesBooks'
 
 
 
-const LoadBook = ({ book, chapter, verse }) => {
+const PARAGRAPHS = 0
+const BOOKS_DETAILS = 1
+
+const LoadBook = ({ book, chapter, verse, type }) => {
+    // chapter is use as start if type is 'karaites, verse in ignored
+
     const [panes, setPanes] = useState([])
     const [isLastPane, setIsLastPane] = useState(false)
 
@@ -22,30 +28,56 @@ const LoadBook = ({ book, chapter, verse }) => {
     }
 
     const getBook = async (book, chapter, verse, highlight) => {
+
         let isOpen = panes.some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
         if (!isOpen) {
-            const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, first, false))
-            if (response.ok) {
-                const data = await response.json()
-                setPanes([...panes,
-                {
-                    book: book,
-                    chapter: chapter,
-                    verse: verse,
-                    highlight: highlight,
-                    bookUtils: data,
-                    isRightPaneOpen: false,
-                    showState: null,
+            if (type === "bible") {
+                const response = await fetch(makeBookUrl(bookChapterUrl, book, chapter, first, false))
+                if (response.ok) {
+                    const data = await response.json()
+                    setPanes([...panes,
+                    {
+                        book: book,
+                        chapter: chapter,
+                        verse: verse,
+                        highlight: highlight,
+                        bookUtils: data,
+                        type: type,
+                        isRightPaneOpen: false,
+                        showState: null,
 
-                }])
-            } else {
-                alert("HTTP-Error: " + response.status)
+                    }])
+                } else {
+                    alert("HTTP-Error: " + response.status)
+                }
             }
-        } else {
-            // setMessage(`${book} ${chapter}:${verse} is already open.`)
+            if (type === "karaites") {
+                const response = await fetch(`${karaitesBookUrl}${book}/${chapter}`)
+                debugger
+                if (response.ok) {
+                    const data = await response.json()
+                    debugger
+                    setPanes([...panes,
+                    {
+                        book: book,
+                        chapter: chapter,
+                        verse: verse,
+                        paragraphs: data[PARAGRAPHS],
+                        book_details: data[BOOKS_DETAILS],
+                        highlight: highlight,
+                        type: type,
+                        isRightPaneOpen: false,
+                        showState: null,
+
+                    }])
+                } else {
+                    alert("HTTP-Error: " + response.status)
+                }
+            }
         }
+
     }
 
     const classes = useStyles()
@@ -62,6 +94,28 @@ const LoadBook = ({ book, chapter, verse }) => {
         if (panes.length === 0) setIsLastPane(true)
     }
 
+    const BookRender = ({ pane, i }) => {
+        debugger
+        if (pane.type === 'bible') {
+            return (
+                <Bible
+                    paneNumber={i}
+                    panes={panes}
+                    setPanesState={setPanesState}
+                    refClick={refClick}
+                    closePane={closePane}
+                    key={makeRandomKey()}
+                />
+            )
+        }
+        if (pane.type === 'karaites') {
+            return (
+                <KaraitesBooks pane={pane} paneNumber={i} refClick={() => { }} />
+            )
+        }
+
+        return null
+    }
 
     useEffect(() => {
         getBook(book, chapter, verse, [])
@@ -79,14 +133,7 @@ const LoadBook = ({ book, chapter, verse }) => {
         >
 
             {panes.map((pane, i) => (
-                <Bible
-                    paneNumber={i}
-                    panes={panes}
-                    setPanesState={setPanesState}
-                    refClick={refClick}
-                    closePane={closePane}
-                    key={makeRandomKey()}
-                />
+                <BookRender pane={pane} i={i} />
             ))
             }
         </Grid>

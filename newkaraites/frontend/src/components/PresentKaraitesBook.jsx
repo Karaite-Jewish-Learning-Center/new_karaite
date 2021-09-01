@@ -136,7 +136,6 @@ const PresentKaraitesBooks = () => {
     useEffect(() => {
         async function fetchData() {
             const response = await fetch(makeBookUrl(karaitesBookUrl, karaitesBookName, karaitesBookChapter, true))
-            debugger
             if (response.ok) {
                 debugger
                 const data = await response.json()

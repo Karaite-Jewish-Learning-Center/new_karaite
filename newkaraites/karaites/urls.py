@@ -24,14 +24,12 @@ urlpatterns = [
     path('get-book-chapter/<str:book>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 
     # karaite books
-    path('get-karaites-book/<str:book>/<str:chapter>/',
+    path('get-karaites-book-chapter/<str:book>/<str:chapter>/',
          GetKaraitesBookAsArray.as_view(),
          name='get_karaites_book_chapter'),
 
     path('get-karaites-book/<str:book>/', GetKaraitesBookAsArray.as_view(), name='get_karaites_book'),
-
     path('get-karaites-book-details/', getKaraitesAllBookDetails.as_view(), name='get_all_karaites_book_details'),
-
     path('get-karaites-book-toc/<str:book>/', GetTOC.as_view(), name='get_karaites_book_toc'),
 
     # comments

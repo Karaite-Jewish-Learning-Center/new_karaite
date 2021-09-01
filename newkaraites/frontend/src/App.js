@@ -32,13 +32,12 @@ function App() {
         let { book } = useParams()
         return (<HalakhahMenu book={book} />)
     }
-    const Load = () => {
+    const Load = ({ type }) => {
         let { book, chapter } = useParams()
         return (
-            <LoadBook book={book} chapter={chapter} verse={1} />
+            <LoadBook book={book} chapter={chapter} verse={1} type={type} />
         );
     }
-
 
     return (
         <ThemeProvider theme={theme}>
@@ -52,16 +51,13 @@ function App() {
 
                 <Switch>
                     <>
-                        <Route exact path="/Tanakh/:book/:chapter/" children={<Load />} />
-
+                        <Route exact path="/Tanakh/:book/:chapter/" children={<Load type="bible" />} />
                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink />} />
-                        <Route exact path="/Tanakh/">
-                            <Tanakh />
-                        </Route>
+                        <Route exact path="/Tanakh/"><Tanakh /></Route>
 
+                        <Route exact path="/Halakhah/:book/:chapter/" children={<Load type="karaites" />} />
                         <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink />} />
-                        <Route exact path="/Halakhah/">
-                            <Halakhah />
+                        <Route exact path="/Halakhah/"><Halakhah />
                         </Route>
                     </>
                 </Switch>

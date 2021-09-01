@@ -558,27 +558,18 @@ class KaraitesBookAsArray(models.Model):
     def __str__(self):
         return self.book.book_title
 
-    # @staticmethod
-    # def to_json(book, chapter_number):
-    #     chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
-    #     return {
-    #         'chapter_number': chapter.chapter_number,
-    #         'chapter_number_la': chapter.chapter_number_la,
-    #         'chapter_title': chapter.chapter_title,
-    #         'chapter_text': chapter.chapter_text,
-    #     }
+    @staticmethod
+    def to_list(book, paragraph_number=None):
+        LIMIT = 100
+        if paragraph_number is None:
+            query = KaraitesBookAsArray.objects.filter(book=book)[:LIMIT]
+        else:
+            query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=paragraph_number)[:LIMIT]
 
-    # @staticmethod
-    # def to_list(book, chapter_number=None):
-    #     if chapter_number is None:
-    #         query = KaraitesBookText.objects.filter(book=book)
-    #     else:
-    #         query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
-
-    #     result = []
-    #     for book in query:
-    #         result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
-    #     return result
+        result = []
+        for book in query:
+            result.append([book.ref_chapter, book.paragraph_number, book.book_text])
+        return result
 
     @mark_safe
     def text(self):

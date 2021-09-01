@@ -85,7 +85,7 @@ def karaites_book_details(request, *args, **kwargs):
 def karaites_book_as_array(request, *args, **kwargs):
     """ Do Book and chapter check"""
     book = kwargs.get('book', None)
-    chapter = kwargs.get('chapter', None)
+    paragraph_number = kwargs.get('chapter', None)
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
@@ -98,14 +98,15 @@ def karaites_book_as_array(request, *args, **kwargs):
         return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
 
     try:
-        if chapter is None:
-            book_chapter = KaraitesBookAsArray().to_list(book=book_details['book_id'])
+        if paragraph_number is None:
+            book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'])
         else:
-            book_chapter = KaraitesBookAsArray().to_list(book=book_details['book_id'], chapter_number=int(chapter))
+            book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'],
+                                                            paragraph_number=int(paragraph_number))
     except KaraitesBookAsArray.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Chapter {chapter} not found.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _(f'Paragraph_number {paragraph_number} not found.')}, status=400)
 
-    return JsonResponse([book_chapter, book_details], safe=False)
+    return JsonResponse([book_paragraphs, book_details], safe=False)
 
 
 class GetFirstLevel(View):
