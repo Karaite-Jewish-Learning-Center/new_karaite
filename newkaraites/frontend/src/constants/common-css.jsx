@@ -80,7 +80,20 @@ const booksMenu = makeStyles((theme) => ({
     },
     filler: {
         marginTop: 70,
-    }
+    },
+    he: {
+        direction: 'ltr',
+        fontFamily: 'SBL Hebrew',
+        fontSize: 18,
+        color: Colors.gray,
+    },
+    left: {
+        minWidth: 600,
+
+    },
+    right: {
+        minWidth: 100,
+    },
 }));
 
 export {

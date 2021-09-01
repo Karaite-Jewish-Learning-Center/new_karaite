@@ -623,10 +623,16 @@ class TableOfContents(models.Model):
     admin_subject.short_description = "Toc"
 
     def to_json(self):
-        return {'subject': self.subject[1],
-                'index': self.subject[0],
+        return {'subject': self.subject[0],
+                'index': self.subject[1],
                 'start_paragraph': self.start_paragraph
                 }
+
+    def to_list(self):
+        return [self.subject[0],
+                self.subject[1],
+                self.start_paragraph
+                ]
 
     class Meta:
         verbose_name_plural = _('Karaites  table of contents')

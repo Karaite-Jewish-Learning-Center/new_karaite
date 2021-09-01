@@ -168,9 +168,11 @@ class GetTOC(View):
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
         karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
+        print(karaites_book)
         result = []
-        for toc in TableOfContents.objects.filter(karaite_book=karaites_book):
-            result.append(toc.to_json())
+        for k_book in karaites_book:
+            for toc in TableOfContents.objects.filter(karaite_book=k_book):
+                result.append(toc.to_list())
 
         return JsonResponse(result, safe=False)
 

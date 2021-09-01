@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, useLocation, useParams } from "react-router-dom";
 import MyAppBar from "./components/AppBar";
-import FirsLevel from "./components/FirstLevel"
+import FirstLevel from "./components/FirstLevel"
 import Tanakh from "./components/Tanakh"
 import { chaptersByBibleBook } from './constants/constants'
 import ChapterMenu from './components/ChapterMenu'
@@ -10,14 +10,14 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Halakhah from './components/Halakhah'
 import { makeRandomKey } from './utils/utils'
-
+import HalakhahMenu from "./components/HalakhahMenu";
 
 function App() {
 
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')
-        if (parts.length === 4) {
+        if (parts.length === 4 && parts[1] === 'Tanakh') {
             return Object.keys(chaptersByBibleBook).map(book =>
                 <Route path={`/Tanakh/${book}/`} key={makeRandomKey()} >
                     <ChapterMenu bibleBook={book}
@@ -29,7 +29,8 @@ function App() {
         return null
     }
     const HalakhahBookLink = () => {
-        return null
+        let { book } = useParams()
+        return (<HalakhahMenu book={book} />)
     }
     const Load = () => {
         let { book, chapter } = useParams()
@@ -46,7 +47,7 @@ function App() {
                 <MyAppBar />
 
                 <Route exact path="/texts/">
-                    <FirsLevel />
+                    <FirstLevel />
                 </Route>/
 
                 <Switch>

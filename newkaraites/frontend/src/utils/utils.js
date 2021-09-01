@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCommentsUrl, karaitesBookUrl } from "../constants/constants"
+import { getCommentsUrl } from "../constants/constants"
 
 const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)
@@ -26,7 +26,9 @@ const makeRandomKey = () => {
 const slug = (str) => {
     return str.replaceAll(' ', '-')
 }
-
+const unslug = (str) => {
+    return str.replaceAll('-', ' ')
+}
 const englishBookNames = {
     'Genesis': 'בראשית',
     'Exodus': 'שמות',
@@ -739,6 +741,7 @@ export {
     getComments,
     makeRandomKey,
     slug,
+    unslug,
     indoArabicToHebrew,
     hebrewToIndoArabic,
     hebrewBookNameToEnglish,

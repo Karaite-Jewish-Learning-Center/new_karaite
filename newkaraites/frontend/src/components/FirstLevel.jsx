@@ -6,7 +6,7 @@ import { getFirstLevelUrl } from '../constants/constants'
 import { booksMenu } from '../constants/common-css'
 
 
-const FistLevel = () => {
+const FirstLevel = () => {
     const [classification, setClassification] = useState(null)
     const classes = booksMenu()
 
@@ -51,4 +51,4 @@ const FistLevel = () => {
 }
 
 
-export default FistLevel
+export default FirstLevel

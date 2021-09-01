@@ -15,7 +15,7 @@ const Halakhah = () => {
     return (
         <div>
             <div className={classes.filler}>&nbsp;</div>
-            <RenderMenu books={books} />
+            <RenderMenu books={books} path={'Halakhah'} />
         </div>
     )
 

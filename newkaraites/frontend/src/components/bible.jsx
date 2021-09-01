@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100%'
     },
     rightPane: {
-        maxWidth: 400,
+        maxWidth: '400',
+        width: 'auto'
     }
 }));
