@@ -1,29 +1,149 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import RightPaneHeader from './RightPanelHeader'
-import RightPaneBody from './RightPaneBody'
 import Colors from '../constants/colors'
+import { Grid } from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import HighlightOffIcon from '@material-ui/icons/HighlightOff'
+import Button from '@material-ui/core/Button'
+import { Typography } from '@material-ui/core'
+import MenuBookIcon from '@material-ui/icons/MenuBook'
+import { makeRandomKey } from '../utils/utils'
+import CommentsPane from './CommentPane'
+import HalakhahPane from './HalakhahPane'
+import {
+    BIBLE_EN_CM,
+    BIBLE_VERSE,
+    BIBLE_CHAPTER,
+    BIBLE_REFS,
+    BIBLE_ENGLISH,
+    BIBLE_HEBREW,
+} from '../constants/constants'
+import Player from './Player'
+import store from '../stores/appState'
+import { observer } from 'mobx-react-lite'
 
-const RightPane = ({ back, close, rightPaneNumbers, showState, paneNumber, setPanesState, refClick }) => {
 
+const items = ['Commentary', 'Halakhah']
+const references = [BIBLE_EN_CM, BIBLE_REFS]
+
+
+
+const RightPane = ({ refClick, paneNumber }) => {
+    const [commentTab, setCommentTab] = useState(0)
+    const [showState, setShowState] = useState([])
+    const [currentShowState, setCurrentShowState] = useState(null)
+
+    const verseData = store.getVerseData(paneNumber)
+    const book = store.getBook(paneNumber)
     const classes = useStyles()
-    console.log("rendering Right Pane")
+
+    const onClose = () => {
+        store.setIsRightPaneOpen(false)
+    }
+
+
+    const Item = () => {
+        return items.map((item, i) => {
+            return (
+                <Button
+                    variant="text"
+                    className={classes.button}
+                    fullWidth={true}
+                    disabled={verseData[references[i]] === '0'}
+                    startIcon={<MenuBookIcon className={classes.icon} />}
+                    onClick={() => { setShowState([...showState, i]); setCurrentShowState(i) }}
+                    key={makeRandomKey()}
+                >
+                    {item} ({verseData[references[i]]})
+                </Button>
+            )
+        })
+    }
+    const Header = () => {
+        return (
+            <Grid container
+                direction="row"
+                justifycontent="flex-end"
+                alignItems="center"
+                className={classes.header}
+            >
+                <Grid item xs={10}>
+                    {(showState.length > 0 ?
+                        <IconButton
+                            aria-label="Back"
+                            component="span"
+                            onClick={() => { }}
+                        >
+                            <ChevronLeftIcon className={classes.iconGrid} />
+                        </IconButton>
+                        : null)}
+                </Grid>
+                <Grid item className={classes.icon}>
+                    <IconButton
+                        aria-label="Close pane"
+                        component="span"
+                        onClick={onClose}
+                    >
+                        <HighlightOffIcon className={classes.iconGrid} />
+                    </IconButton>
+                </Grid>
+            </Grid>
+        )
+    }
+
+
+    const PaneBody = () => {
+
+        switch (currentShowState) {
+            case 0: {
+                return (
+                    <CommentsPane
+                        book={book}
+                        chapter={verseData[BIBLE_CHAPTER]}
+                        verse={verseData[BIBLE_VERSE]}
+                        refClick={refClick}
+                        commentTab={commentTab}
+                        setCommentTab={setCommentTab}
+                    />)
+            }
+            case 1: {
+                return (<HalakhahPane
+                    book={book}
+                    chapter={verseData[BIBLE_CHAPTER]}
+                    verse={verseData[BIBLE_VERSE]}
+                    refClick={refClick}
+                />)
+            }
+            default: {
+                return (
+
+                    <div className={classes.body}>
+                        <Typography className={classes.headerColor}>Related texts</Typography>
+                        <hr className={classes.ruler} />
+                        <Item />
+                        <hr className={classes.ruler} />
+                        <Player text={verseData[BIBLE_ENGLISH]} language={"English"} />
+                        <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"} />
+
+                    </div>
+                )
+            }
+        }
+    }
+
+    console.log("Rendering Right pane ...", store.getIsRightPaneOpen())
+
     return (
         <div className={classes.container}>
-            <RightPaneHeader back={back} close={close} showState={showState} />
-            <RightPaneBody
-                rightPaneNumbers={rightPaneNumbers}
-                showState={showState}
-                paneNumber={paneNumber}
-                setPanesState={setPanesState}
-                refClick={refClick}
-            />
+            <Header />
+            <PaneBody />
+
         </div>
     )
-
 }
 
-export default RightPane
+export default observer(RightPane)
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,4 +154,31 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: Colors['rightPaneBackGround']
     },
 
+    header: {
+        minHeight: 50,
+        backgroundColor: Colors['headerBackgroundColor'],
+    },
+    body: {
+        marginTop: 40,
+        marginLeft: 30,
+        marginRight: 30,
+    },
+    ruler: {
+        borderColor: Colors.rulerColor,
+    },
+    headerColor: {
+        color: Colors.leftPaneHeader,
+        marginTop: 20,
+    },
+    icon: {
+        color: Colors.leftPaneHeader,
+        fontSize: 20,
+    },
+    text: {
+        fontSize: 14,
+    },
+    button: {
+        textTransform: 'none',
+        justifyContent: 'left',
+    },
 }));

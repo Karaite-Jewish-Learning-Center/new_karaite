@@ -13,7 +13,6 @@ import { makeRandomKey } from './utils/utils'
 import HalakhahMenu from "./components/HalakhahMenu";
 
 function App() {
-
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')
@@ -38,7 +37,6 @@ function App() {
             <LoadBook book={book} chapter={chapter} verse={1} type={type} />
         );
     }
-
     return (
         <ThemeProvider theme={theme}>
 

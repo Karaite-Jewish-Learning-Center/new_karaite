@@ -15,7 +15,6 @@ const HalakhahMenu = ({ book }) => {
         const response = await fetch(`${karaitesBookToc}${book}/`)
         if (response.ok) {
             const data = await response.json()
-            debugger
             setToc(data)
         } else {
             alert("HTTP-Error: " + response.status)

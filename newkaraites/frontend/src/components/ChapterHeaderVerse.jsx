@@ -12,21 +12,20 @@ import {
     BIBLE_REFS
 } from "../constants/constants";
 import RefsBadge from "./RefsBadge";
+import store from '../stores/appState'
 
 
 
 export default function ChapterHeaderVerse(props) {
-    const { item, data, highlight, book, openRightPane, setRightPaneNumbers, paneNumber } = props
+    const { data, item, paneNumber } = props
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
-
-    const handleOnClick = (e) => {
-        if (openRightPane === undefined) return
-        openRightPane(paneNumber)
+    const openRightPane = (e) => {
+        store.setIsRightPaneOpen(true)
     }
 
     if (renderChapter === "1") {
@@ -41,14 +40,14 @@ export default function ChapterHeaderVerse(props) {
         </div>)
     }
 
-    const found = highlight.indexOf(item + 1) >= 0
-    if (found) setRightPaneNumbers([data, book])
+    const found = false// highlight.indexOf(item + 1) >= 0
+    // if (found) setRightPaneNumbers([data, book])
 
     return (
         <div className={classes.verse}>
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                onClick={handleOnClick}
+                onClick={openRightPane}
             >
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>

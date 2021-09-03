@@ -6,27 +6,30 @@ import { makeBookUrl } from "../utils/utils"
 import { Virtuoso } from 'react-virtuoso'
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
+import store from '../stores/appState'
+import { observer } from 'mobx-react-lite';
 
 
-const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, openRightPane, setRightPaneNumbers, isRightPaneOpen, closePane }) => {
-    const [currentChapter, setCurrentChapter] = useState(parseInt(chapter) + 1)
-    const [chapterViewPort, setChapterViewPort] = useState()
-    const [loadingText, setLoadingText] = useState(null)
-    const [bookData, setBookData] = useState(bookUtils.chapter)
-    const [highlight, setHighLight] = useState([])
 
-    const first = 1 // it's not the first time that we read data for this book
+const RenderTextGrid = ({ paneNumber }) => {
     const virtuoso = useRef(null);
+    const book = store.getBook(paneNumber)
+    const verse = store.getVerse(paneNumber)
 
+    const [chapterViewPort, setChapterViewPort] = useState()
+    const [loadingText, setLoadingText] = useState([])
+    const [verses, setVerses] = useState([''])
+    const [currentChapter, setCurrentChapter] = useState(store.getChapter(paneNumber))
+    const [bookData, setBookData] = useState([])
+    const [first, setFirst] = useState(0) // it's the first time that we read data for this book
 
     const itemContent = (item, data) => {
+        if (store.isRightPaneOpen) store.setVerseData(data, paneNumber)
+
         return (
-            <ChapterHeaderVerse item={item}
+            <ChapterHeaderVerse
                 data={data}
-                highlight={[highlight]}
-                book={book}
-                openRightPane={openRightPane}
-                setRightPaneNumbers={setRightPaneNumbers}
+                item={item}
                 paneNumber={paneNumber}
             />
         )
@@ -37,8 +40,12 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
             const response = await fetch(makeBookUrl(bookChapterUrl, book, currentChapter, first, false))
             if (response.ok) {
                 const data = await response.json()
+                setVerses(data.book.verses)
                 setBookData([...bookData, ...data.chapter])
-                setCurrentChapter((currentChapter) => currentChapter + 1)
+                setCurrentChapter(() => currentChapter + 1)
+                if (first === 0) {
+                    setFirst(1)
+                }
             } else {
                 alert("HTTP-Error: " + response.status)
             }
@@ -55,19 +62,18 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
         // calc highligh position
         let hl = visibleRange.startIndex + Math.round((visibleRange.endIndex - visibleRange.startIndex) / 2)
         // calc Current Chapter
-        console.log("isRightPaneOpen", isRightPaneOpen)
         let avg = visibleRange.startIndex + 1
         let start = 0
         let end = 0
         for (let i = 0; i < verses.length; i++) {
             end += verses[i]
             if (avg >= start && avg <= end) {
-                if (isRightPaneOpen) {
+                if (store.getIsRightPaneOpen()) {
                     setChapterViewPort(i + 1)
-                    setHighLight(hl)
+                    //  setHighLight(hl)
                 } else {
                     setChapterViewPort(i + 1)
-                    setHighLight(-1)
+                    //  setHighLight(-1)
                 }
                 return
             }
@@ -78,6 +84,7 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
     const visibleRange = (range) => {
         calculateCurrentChapter(range)
     }
+
     const jump = () => {
         virtuoso.current.scrollToIndex({
             index: calcIndex(),
@@ -85,17 +92,19 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
         });
     }
 
+    if (virtuoso.current !== null && first === 0) jump()
+
+
+
     useEffect(() => {
-        setTimeout(() => {
-            jump()
-        }, 30);
+        fetchData()
     }, [])
 
-    console.log("rendering RenderText")
 
+    console.log("rendering RenderText")
     return (
         <>
-            <RenderHeader book={book} chapterViewPort={chapterViewPort} onClose={closePane.bind(this, paneNumber)} />
+            <RenderHeader book={book} chapterViewPort={chapterViewPort} paneNumber={paneNumber} />
             <Virtuoso
                 data={bookData}
                 ref={virtuoso}
@@ -113,13 +122,14 @@ const RenderTextGrid = ({ book, chapter, verse, verses, bookUtils, paneNumber, o
 }
 
 const anyChange = (prevProps, nextProps) => {
-    // console.log("Book", prevProps.book === nextProps.book)
-    // console.log("Chapter", prevProps.chapter === nextProps.chapter)
-    // console.log("Verse", prevProps.verse === nextProps.verse)
-    // console.log("Verses", prevProps.verses === nextProps.verses)
-    // // console.log("bookData", equals(prevProps.bookData, nextProps.bookData))
-    // console.log("Verses", prevProps.paneNumber === nextProps.paneNumber)
-    // console.log("Verses", prevProps.paneNumber === nextProps.paneNumber)
+    console.log({ prevProps })
+    console.log("Book", prevProps.book === nextProps.book)
+    console.log("Chapter", prevProps.chapter === nextProps.chapter)
+    console.log("Verse", prevProps.verse === nextProps.verse)
+    console.log("Verses", prevProps.verses === nextProps.verses)
+    // console.log("bookData", equals(prevProps.bookData, nextProps.bookData))
+    console.log("Verses", prevProps.paneNumber === nextProps.paneNumber)
+    console.log("Verses", prevProps.paneNumber === nextProps.paneNumber)
     let result = prevProps.book === nextProps.book &&
         prevProps.chapter === nextProps.chapter &&
         prevProps.verse === nextProps.verse &&
@@ -134,5 +144,5 @@ const anyChange = (prevProps, nextProps) => {
 
 const RenderText = React.memo(RenderTextGrid, anyChange)
 
-export default RenderText
+export default RenderTextGrid
 

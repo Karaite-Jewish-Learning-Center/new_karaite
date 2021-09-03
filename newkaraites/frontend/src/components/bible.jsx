@@ -3,49 +3,21 @@ import { Grid } from '@material-ui/core';
 import RenderText from './RenderText'
 import RightPane from './RightPane';
 import { makeStyles } from '@material-ui/core/styles'
+import store from '../stores/appState';
+import { observer } from 'mobx-react-lite';
 
 
-export default function Bible({ paneNumber, panes, refClick, closePane, setPanesState }) {
-    const [rightPaneNumbers, setRightPaneNumbers] = useState([])
-    const pane = panes[paneNumber]
-    const book = pane['book']
-    const chapter = pane['chapter']
-    const verse = pane['verse']
-    const bookUtils = pane['bookUtils']
 
+const Bible = ({ paneNumber, refClick }) => {
     const classes = useStyles()
 
-    const closeRightPane = () => {
-        setPanesState(paneNumber,
-            ['isRightPaneOpen', 'showState'],
-            [false, null]
-        )
-    }
-    const openRightPane = () => {
-        setPanesState(paneNumber,
-            ['isRightPaneOpen', 'showState'],
-            [true, null]
-        )
-    }
-    const backButton = () => {
-        setPanesState(paneNumber, ['showState'], [null])
-    }
-
-    const RenderRightPane = () => {
-        let pane = panes[paneNumber]
-
-        if (pane.isRightPaneOpen) {
+    const RenderRightPane = ({ isOpen }) => {
+        if (isOpen) {
             return (
-                <Grid item xs className={classes.rightPane}>
+                <Grid item className={classes.rightPane}>
                     <RightPane
-                        back={backButton}
-                        close={closeRightPane}
-                        rightPaneNumbers={rightPaneNumbers}
-                        showState={pane.showState}
                         paneNumber={paneNumber}
-                        setPanesState={setPanesState}
                         refClick={refClick}
-
                     />
                 </Grid>
             )
@@ -55,21 +27,12 @@ export default function Bible({ paneNumber, panes, refClick, closePane, setPanes
 
     return (
         <>
-            <Grid item xs className={classes.item} >
+            <Grid item xs={true} className={classes.item} >
                 <RenderText
-                    book={book}
-                    chapter={chapter}
-                    verse={verse}
-                    verses={bookUtils.book['verses']}
-                    bookUtils={bookUtils}
                     paneNumber={paneNumber}
-                    openRightPane={openRightPane}
-                    setRightPaneNumbers={setRightPaneNumbers}
-                    isRightPaneOpen={panes[paneNumber]['isRightPaneOpen']}
-                    closePane={closePane}
                 />
             </Grid>
-            <RenderRightPane />
+            <RenderRightPane isOpen={store.isRightPaneOpen} />
         </>
     )
 }
@@ -86,7 +49,9 @@ const useStyles = makeStyles((theme) => ({
         height: '100%'
     },
     rightPane: {
-        maxWidth: '400',
-        width: 'auto'
+        maxWidth: '400 ! important',
     }
 }));
+
+
+export default observer(Bible)

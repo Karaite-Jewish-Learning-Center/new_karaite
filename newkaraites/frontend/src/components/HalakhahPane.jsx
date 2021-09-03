@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { makeRandomKey } from "../utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 import Colors from '../constants/colors.js';
 
 
@@ -15,6 +16,7 @@ const HalakhahPane = ({ book, chapter, verse }) => {
     const [current, setCurrent] = useState(null)
     const classes = useStyles()
 
+    // todo refactor
     const transform = (node) => {
 
         if (node.type === 'tag') {
@@ -69,7 +71,8 @@ const HalakhahPane = ({ book, chapter, verse }) => {
                             })}
                         </>
                     </div>
-
+                    <hr className={classes.ruler} />
+                    <Link to={`/Halakhah/${book}/${chapter}/${verse}/`}>Open book</Link>
                 </div>
 
             )

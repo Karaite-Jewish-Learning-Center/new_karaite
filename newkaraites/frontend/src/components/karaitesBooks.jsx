@@ -34,7 +34,7 @@ export default function KaraitesBooks({ pane, paneNumber, refClick }) {
             })}
         </div>)
     }
-    if (pane.paragraphs.length === 0) return null
+    if (pane === undefined) return null
 
     return (
         <div className={classes.virtuoso}>

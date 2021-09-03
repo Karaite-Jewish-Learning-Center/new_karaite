@@ -6,12 +6,19 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close';
+import store from '../stores/appState';
+import { observer } from 'mobx-react-lite';
 
 
 
-const RenderHeader = ({ book, chapterViewPort, onClose }) => {
+const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
     console.log("rendering RenderHeader")
     const classes = useStyles()
+
+    const onClose = () => {
+        store.closePane(paneNumber)
+    }
+
     return (
         <Grid container className={classes.header}
             direction="row"
@@ -66,4 +73,4 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default RenderHeader
+export default observer(RenderHeader)
