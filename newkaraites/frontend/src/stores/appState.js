@@ -105,9 +105,15 @@ class AppState {
 
     setParagraphs = (paragraphs, i) => {
 
-        this.panes[i].paragraphs = [...this.panes[i].paragraphs, paragraphs]
+        this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
         debugger
     }
+
+    setBookDetails = (details, i) => {
+        this.panes[i].book_details = details
+    }
+    getBookDetails = (i) => this.panes[i].book_details
+
 }
 
 

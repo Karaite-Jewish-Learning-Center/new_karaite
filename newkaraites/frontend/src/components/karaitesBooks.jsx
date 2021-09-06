@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Virtuoso } from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import { makeRandomKey } from "../utils/utils"
-import PaneHeader from "./PaneHeader";
+import KaraitePaneHeader from "./KaraitePaneHeader";
 import { karaitesBookUrl } from '../constants/constants'
 import store
     from '../stores/appState'
@@ -20,7 +20,6 @@ const BOOKS_DETAILS = 1
 const KaraitesBooks = ({ paneNumber, refClick }) => {
     const [paragraphs, setParagraphs] = useState([])
     const [bookEnded, setBookEnded] = useState(false)
-    const [book_details, setBooksDetails] = useState([])
     const classes = useStyles()
 
     async function fetchData() {
@@ -32,6 +31,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
                 setBookEnded(() => data[PARAGRAPHS][0].length === 0)
                 setParagraphs([...paragraphs, ...data[PARAGRAPHS][0]])
                 store.setChapter(data[PARAGRAPHS][1], paneNumber)
+                store.setBookDetails(data[BOOKS_DETAILS], paneNumber)
             } else {
                 alert("HTTP-Error: " + response.status)
             }
@@ -70,7 +70,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
 
     return (
         <div className={classes.virtuoso}>
-            <PaneHeader book={store.getBook(paneNumber)} chapter={store.getChapter(paneNumber)} />
+            <KaraitePaneHeader paneNumber={paneNumber} />
             <Virtuoso data={paragraphs}
                 itemContent={itemContent}
                 endReached={fetchData}

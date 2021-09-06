@@ -117,7 +117,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     console.log("rendering LoadBook")
 
     const books = bookRender()
-    debugger
     return (
         <Grid container
             className={classes.root}
