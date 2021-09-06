@@ -1,33 +1,63 @@
 import { makeAutoObservable } from "mobx"
 
 class AppState {
-    // right panel
-    isRightPaneOpen = false
-
     // mains panes bible book , comment, karaites books etc
     panes = []
+    // only true when last pane is closed
+    isLastPane = false
+
 
     constructor() {
         makeAutoObservable(this)
     }
 
-    setRightPaneState = (state, i) => {
-        this.rightPaneState = state
-        console.log(this.rightPaneState)
+    setIsRightPaneOpen = (state, paneNumber) => {
+        this.panes[paneNumber].isRightPaneOpen = state
     }
-    getRightPaneState = () => {
-        return this.rightPaneState
+
+    getIsRightPaneOpen = (paneNumber) => {
+        return this.panes[paneNumber].isRightPaneOpen
     }
-    setIsRightPaneOpen = (state) => {
-        this.isRightPaneOpen = state
-        console.log("setting isRightPaneOPne", this.isRightPaneOpen)
+
+
+    // comment Tab
+    setCommentTab = (tab, paneNumber) => {
+        this.panes[paneNumber].commentTab = tab
     }
-    getIsRightPaneOpen = () => {
-        return this.isRightPaneOpen
+    getCommentTab = (paneNumber) => this.panes[paneNumber].commentTab
+
+    setComments = (comments, paneNumber) => {
+        this.panes[paneNumber].comments = comments
     }
+    getComments = (paneNumber) => this.panes[paneNumber].comments
+
+    hasNoComments = (paneNumber) => this.panes[paneNumber].comments.length === 0
+
+    setCommentsChapter = (chapter, paneNumber) => {
+        this.panes[paneNumber].commentsChapter = chapter
+    }
+    getCommentsChapter = (paneNumber) => this.panes[paneNumber].commentsChapter
+
+    setCommentsVerse = (verse, paneNumber) => {
+        this.panes[paneNumber].commentsVerse = verse
+    }
+    getCommentsVerse = (paneNumber) => this.panes[paneNumber].commentsVerse
+
+    needUpdateComment = (chapter, verse, paneNumber) => {
+        return this.getCommentsVerse(paneNumber) !== verse || this.getCommentsChapter(paneNumber) !== chapter
+    }
+
+
+    // references
+    setReferences = (references, paneNumber) => {
+        this.panes[paneNumber].references = references
+    }
+    getReferences = (paneNumber) => this.panes[paneNumber].references
+
+    hasNoReferences = (paneNumber) => this.panes[paneNumber].references.length === 0
+
 
     // book , chapter , verse
-
     setBook = (book, i) => {
         this.panes[i].book = book
     }
@@ -53,8 +83,6 @@ class AppState {
 
     // panes
 
-    isLastPane = () => this.panes.length === 0
-
     setPanes = (pane) => {
         this.panes = [...this.panes, pane]
     }
@@ -63,11 +91,23 @@ class AppState {
 
     getPaneByNumber = (i) => this.panes[i]
 
-    closePane = () => {
-        this.panes.splice(this.currentPane, 1)
+    setIsLastPane = (state) => {
+        this.isLastPane = state
     }
 
+    closePane = (i) => {
+        this.panes.splice(i, 1)
+        this.setIsLastPane(this.panes.length === 0)
+    }
+    getIsLastStatePane = (state) => this.isLastPane = state
 
+    // karaites books
+
+    setParagraphs = (paragraphs, i) => {
+
+        this.panes[i].paragraphs = [...this.panes[i].paragraphs, paragraphs]
+        debugger
+    }
 }
 
 

@@ -24,7 +24,7 @@ const RenderTextGrid = ({ paneNumber }) => {
     const [first, setFirst] = useState(0) // it's the first time that we read data for this book
 
     const itemContent = (item, data) => {
-        if (store.isRightPaneOpen) store.setVerseData(data, paneNumber)
+        if (store.getIsRightPaneOpen(paneNumber)) store.setVerseData(data, paneNumber)
 
         return (
             <ChapterHeaderVerse
@@ -68,7 +68,7 @@ const RenderTextGrid = ({ paneNumber }) => {
         for (let i = 0; i < verses.length; i++) {
             end += verses[i]
             if (avg >= start && avg <= end) {
-                if (store.getIsRightPaneOpen()) {
+                if (store.getIsRightPaneOpen(paneNumber)) {
                     setChapterViewPort(i + 1)
                     //  setHighLight(hl)
                 } else {

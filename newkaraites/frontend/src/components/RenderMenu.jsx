@@ -9,7 +9,6 @@ import { slug } from '../utils/utils'
 const RenderMenu = ({ books, path }) => {
 
     const classes = booksMenu()
-
     const populate = (obj) => {
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={6} key={index}>

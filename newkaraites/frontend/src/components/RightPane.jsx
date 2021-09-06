@@ -30,18 +30,20 @@ const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 
 const RightPane = ({ refClick, paneNumber }) => {
-    const [commentTab, setCommentTab] = useState(0)
     const [showState, setShowState] = useState([])
-    const [currentShowState, setCurrentShowState] = useState(null)
 
     const verseData = store.getVerseData(paneNumber)
     const book = store.getBook(paneNumber)
     const classes = useStyles()
 
     const onClose = () => {
-        store.setIsRightPaneOpen(false)
+        store.setIsRightPaneOpen(false, paneNumber)
     }
 
+    const backButton = () => {
+        showState.pop()
+        setShowState([...showState])
+    }
 
     const Item = () => {
         return items.map((item, i) => {
@@ -52,7 +54,7 @@ const RightPane = ({ refClick, paneNumber }) => {
                     fullWidth={true}
                     disabled={verseData[references[i]] === '0'}
                     startIcon={<MenuBookIcon className={classes.icon} />}
-                    onClick={() => { setShowState([...showState, i]); setCurrentShowState(i) }}
+                    onClick={() => { setShowState([...showState, i]) }}
                     key={makeRandomKey()}
                 >
                     {item} ({verseData[references[i]]})
@@ -73,7 +75,7 @@ const RightPane = ({ refClick, paneNumber }) => {
                         <IconButton
                             aria-label="Back"
                             component="span"
-                            onClick={() => { }}
+                            onClick={backButton}
                         >
                             <ChevronLeftIcon className={classes.iconGrid} />
                         </IconButton>
@@ -94,17 +96,14 @@ const RightPane = ({ refClick, paneNumber }) => {
 
 
     const PaneBody = () => {
-
-        switch (currentShowState) {
+        const show = showState.slice(-1)[0]
+        console.log("showState", showState)
+        switch (show) {
             case 0: {
                 return (
                     <CommentsPane
-                        book={book}
-                        chapter={verseData[BIBLE_CHAPTER]}
-                        verse={verseData[BIBLE_VERSE]}
                         refClick={refClick}
-                        commentTab={commentTab}
-                        setCommentTab={setCommentTab}
+                        paneNumber={paneNumber}
                     />)
             }
             case 1: {
@@ -113,6 +112,7 @@ const RightPane = ({ refClick, paneNumber }) => {
                     chapter={verseData[BIBLE_CHAPTER]}
                     verse={verseData[BIBLE_VERSE]}
                     refClick={refClick}
+                    paneNumber={paneNumber}
                 />)
             }
             default: {
@@ -132,7 +132,7 @@ const RightPane = ({ refClick, paneNumber }) => {
         }
     }
 
-    console.log("Rendering Right pane ...", store.getIsRightPaneOpen())
+    console.log("Rendering Right pane ...", store.getIsRightPaneOpen(paneNumber))
 
     return (
         <div className={classes.container}>
@@ -148,7 +148,7 @@ export default observer(RightPane)
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        width: '100%',
+        maxWidth: 400,
         height: '100%',
         top: 70,
         backgroundColor: Colors['rightPaneBackGround']

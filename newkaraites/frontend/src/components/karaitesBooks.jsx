@@ -1,24 +1,52 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Virtuoso } from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import { makeRandomKey } from "../utils/utils"
 import PaneHeader from "./PaneHeader";
+import { karaitesBookUrl } from '../constants/constants'
+import store
+    from '../stores/appState'
 import Loading from "./Loading";
 import './css/comments.css'
+import { observer } from 'mobx-react-lite'
 
 
-export default function KaraitesBooks({ pane, paneNumber, refClick }) {
+const PARAGRAPHS = 0
+const BOOKS_DETAILS = 1
+
+
+
+const KaraitesBooks = ({ paneNumber, refClick }) => {
+    const [paragraphs, setParagraphs] = useState([])
+    const [bookEnded, setBookEnded] = useState(false)
+    const [book_details, setBooksDetails] = useState([])
     const classes = useStyles()
+
+    async function fetchData() {
+        if (!bookEnded) {
+            const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${store.getChapter(paneNumber)}/${store.getChapter(paneNumber)}/`)
+            if (response.ok) {
+                const data = await response.json()
+                debugger
+                setBookEnded(() => data[PARAGRAPHS][0].length === 0)
+                setParagraphs([...paragraphs, ...data[PARAGRAPHS][0]])
+                store.setChapter(data[PARAGRAPHS][1], paneNumber)
+            } else {
+                alert("HTTP-Error: " + response.status)
+            }
+        }
+
+    }
 
     const transform = (node) => {
         if (node.type === 'tag') {
             // rewrite the span with a onClick event handler
             if (node.name === 'span') {
-                if (node['attribs']['class'] === 'en-biblical-ref') {
+                if (node['attribs']['class'] === 'biblical-ref') {
                     return <span key={makeRandomKey()} lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
                 }
-                if (node['attribs']['class'] === 'he-biblical-ref') {
+                if (node['attribs']['class'] === 'biblical-ref') {
                     return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
                 }
             }
@@ -27,25 +55,30 @@ export default function KaraitesBooks({ pane, paneNumber, refClick }) {
     }
 
     const itemContent = (item, data) => {
+        console.log('data', data[2][0].length, typeof (data[2][0]))
         return (<div className={classes.paragraphContainer}>
-            {ReactHtmlParser(data[2], {
+            {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
                 decodeEntities: true,
                 transform: transform
             })}
         </div>)
     }
-    if (pane === undefined) return null
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <div className={classes.virtuoso}>
-            <PaneHeader book={pane.book} chapter={pane.chapter} />
-            <Virtuoso data={pane.paragraphs}
+            <PaneHeader book={store.getBook(paneNumber)} chapter={store.getChapter(paneNumber)} />
+            <Virtuoso data={paragraphs}
                 itemContent={itemContent}
-            // components={{
-            //     Footer: () => {
-            //         return <Loading text={(fullBook ? 'Book end.' : null)} />
-            //     }
-            // }}
+                endReached={fetchData}
+                components={{
+                    Footer: () => {
+                        return <Loading text={'Book end.'} />
+                    }
+                }}
             />
         </div>
     )
@@ -54,6 +87,8 @@ export default function KaraitesBooks({ pane, paneNumber, refClick }) {
 
 const useStyles = makeStyles(() => ({
     virtuoso: {
+        top: 70,
+        position: 'fixed',
         width: '100%',
         height: '100%',
     },
@@ -63,3 +98,6 @@ const useStyles = makeStyles(() => ({
     },
 
 }))
+
+
+export default observer(KaraitesBooks)

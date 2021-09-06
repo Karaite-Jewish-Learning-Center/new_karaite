@@ -56,7 +56,6 @@ const books = { 'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings }
 const Tanakh = () => {
     const classes = booksMenu()
 
-
     return (
         <div>
             <div className={classes.filler}>&nbsp;</div>

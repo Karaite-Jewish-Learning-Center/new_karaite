@@ -29,8 +29,6 @@ const HalakhahMenu = ({ book }) => {
                 spacing={2}
                 xs={true}
             >
-
-
                 <Grid item className={classes.left} >
                     <Link to={`/Halakhah/${book}/${index[2]}/`} >
                         <Typography className={classes.he}>{index[1]}</Typography>

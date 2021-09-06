@@ -170,6 +170,7 @@ class Command(BaseCommand):
                         karaites_book=book_details,
                         paragraph_number=book_text.paragraph_number,
                         paragraph_text=book_text.book_text,
+                        foot_notes=book_text.foot_notes,
                         bible_ref_he=ref,
                         bible_ref_en=english_ref,
                     )

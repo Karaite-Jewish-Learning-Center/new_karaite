@@ -21,11 +21,13 @@ export default function ChapterHeaderVerse(props) {
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
+    let verse = data[BIBLE_VERSE]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
     const openRightPane = (e) => {
-        store.setIsRightPaneOpen(true)
+        store.setIsRightPaneOpen(true, paneNumber)
+        console.log("open right pane", paneNumber, store.getIsRightPaneOpen(paneNumber))
     }
 
     if (renderChapter === "1") {
@@ -42,6 +44,9 @@ export default function ChapterHeaderVerse(props) {
 
     const found = false// highlight.indexOf(item + 1) >= 0
     // if (found) setRightPaneNumbers([data, book])
+
+    store.setCommentsChapter(chapter, paneNumber)
+    store.setCommentsVerse(verse, paneNumber)
 
     return (
         <div className={classes.verse}>

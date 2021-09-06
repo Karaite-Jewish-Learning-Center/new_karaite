@@ -86,9 +86,13 @@ def karaites_book_as_array(request, *args, **kwargs):
     """ Do Book and chapter check"""
     book = kwargs.get('book', None)
     paragraph_number = kwargs.get('chapter', None)
+    offset = kwargs.get('offset', None)
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+    if offset is None:
+        return JsonResponse(data={'status': 'false', 'message': _('Need an offset number.')}, status=400)
 
     book = slug_back(book)
 

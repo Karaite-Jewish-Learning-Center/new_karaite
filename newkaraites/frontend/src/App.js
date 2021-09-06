@@ -12,7 +12,9 @@ import Halakhah from './components/Halakhah'
 import { makeRandomKey } from './utils/utils'
 import HalakhahMenu from "./components/HalakhahMenu";
 
+
 function App() {
+
     const TanakhBooksLink = () => {
         let location = useLocation()
         let parts = location.pathname.split('/')

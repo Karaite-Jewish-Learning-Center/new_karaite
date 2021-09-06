@@ -7,11 +7,13 @@ import ReactHtmlParser from 'react-html-parser';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import Colors from '../constants/colors.js';
+import store from '../stores/appState.js';
+import { observer } from 'mobx-react-lite';
+import './css/comments.css'
 
 
 
-const HalakhahPane = ({ book, chapter, verse }) => {
-    const [references, setReferences] = useState([])
+const HalakhahPane = ({ refClick, paneNumber }) => {
     const [showPane, setShowPane] = useState(null)
     const [current, setCurrent] = useState(null)
     const classes = useStyles()
@@ -23,10 +25,10 @@ const HalakhahPane = ({ book, chapter, verse }) => {
             // rewrite the span with a onClick event handler
             if (node.name === 'span') {
                 if (node['attribs']['class'] === 'en-biblical-ref') {
-                    return <span key={makeRandomKey()} lang="EN" onClick={() => { }} className="en-biblical-ref">{node['children'][0]['data']}</span>
+                    return <span key={makeRandomKey()} lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
                 }
                 if (node['attribs']['class'] === 'he-biblical-ref') {
-                    return <span key={makeRandomKey()} lang="HE" onClick={() => { }} className="he-biblical-ref">{node['children'][0]['data']}</span>
+                    return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
                 }
             }
             if (node.name === 'p') {
@@ -43,19 +45,23 @@ const HalakhahPane = ({ book, chapter, verse }) => {
         const response = await fetch(referencesUrl + `${book}/${chapter}/${verse}/`)
         if (response.ok) {
             const data = await response.json()
-            debugger
-            setReferences(data.references)
+            store.setReferences(data.references, paneNumber)
         } else {
             alert("HTTP-Error: " + response.status)
         }
     }
+
+    const OpenBook = (book, chapter, verse) => <Link to={`/Halakhah/${book}/${chapter}/${verse}/`}>Open book</Link>
+
     useEffect(() => {
-        getHalakhah(book, chapter, verse)
+        getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
     }, [])
 
-    if (referencesUrl.length === 0) return null
+    if (store.hasNoReferences(paneNumber)) return null
+
     switch (showPane) {
         case 0: {
+            const references = store.getReferences(paneNumber)
             return (
                 <div className={classes.container}>
                     <Typography className={classes.headerColor}>{references[current]['book_name']}</Typography>
@@ -72,12 +78,14 @@ const HalakhahPane = ({ book, chapter, verse }) => {
                         </>
                     </div>
                     <hr className={classes.ruler} />
-                    <Link to={`/Halakhah/${book}/${chapter}/${verse}/`}>Open book</Link>
+
+                    <OpenBook />
                 </div>
 
             )
         }
         default: {
+            const references = store.getReferences(paneNumber)
             return (
                 <div className={classes.container}>
                     <Typography className={classes.headerColor}>Halakhah ({references.length})</Typography>
@@ -105,7 +113,8 @@ const HalakhahPane = ({ book, chapter, verse }) => {
 }
 
 
-export default HalakhahPane
+export default observer(HalakhahPane)
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
