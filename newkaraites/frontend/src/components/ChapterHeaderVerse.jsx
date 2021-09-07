@@ -13,11 +13,12 @@ import {
 } from "../constants/constants";
 import RefsBadge from "./RefsBadge";
 import store from '../stores/appState'
+import { observer } from 'mobx-react-lite';
 
 
+const ChapterHeaderVerse = (props) => {
+    const { data, item, gridVisibleRange, paneNumber } = props
 
-export default function ChapterHeaderVerse(props) {
-    const { data, item, paneNumber } = props
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
@@ -25,9 +26,10 @@ export default function ChapterHeaderVerse(props) {
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
-    const openRightPane = (e) => {
+
+    const openRightPane = (i) => {
         store.setIsRightPaneOpen(true, paneNumber)
-        console.log("open right pane", paneNumber, store.getIsRightPaneOpen(paneNumber))
+        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
 
     if (renderChapter === "1") {
@@ -42,17 +44,19 @@ export default function ChapterHeaderVerse(props) {
         </div>)
     }
 
-    const found = false// highlight.indexOf(item + 1) >= 0
-    // if (found) setRightPaneNumbers([data, book])
+    const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
 
-    store.setCommentsChapter(chapter, paneNumber)
-    store.setCommentsVerse(verse, paneNumber)
+    if (found) {
+        store.setCommentsChapter(chapter, paneNumber)
+        store.setCommentsVerse(verse, paneNumber)
+        store.setVerseData(data, paneNumber)
+    }
 
     return (
         <div className={classes.verse}>
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                onClick={openRightPane}
+                onClick={openRightPane.bind(this, item)}
             >
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -173,3 +177,6 @@ const useStyles = makeStyles(() => ({
         minWidth: '50',
     },
 }))
+
+
+export default observer(ChapterHeaderVerse)

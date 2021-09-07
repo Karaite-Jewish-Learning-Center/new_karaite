@@ -22,6 +22,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
     const [bookEnded, setBookEnded] = useState(false)
     const classes = useStyles()
 
+
     async function fetchData() {
         if (!bookEnded) {
             const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${store.getChapter(paneNumber)}/${store.getChapter(paneNumber)}/`)
@@ -43,10 +44,10 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
         if (node.type === 'tag') {
             // rewrite the span with a onClick event handler
             if (node.name === 'span') {
-                if (node['attribs']['class'] === 'biblical-ref') {
+                if (node['attribs']['class'] === 'en-biblical-ref') {
                     return <span key={makeRandomKey()} lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
                 }
-                if (node['attribs']['class'] === 'biblical-ref') {
+                if (node['attribs']['class'] === 'he-biblical-ref') {
                     return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
                 }
             }
@@ -69,7 +70,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
     }, [])
 
     return (
-        <div className={classes.virtuoso}>
+        <>
             <KaraitePaneHeader paneNumber={paneNumber} />
             <Virtuoso data={paragraphs}
                 itemContent={itemContent}
@@ -80,7 +81,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
                     }
                 }}
             />
-        </div>
+        </>
     )
 }
 

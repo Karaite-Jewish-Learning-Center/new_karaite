@@ -109,7 +109,7 @@ class Command(BaseCommand):
                 if self.ignore_ref(bible_ref):
                     continue
 
-                html = html.replace(bible_ref, f'<span lang="HE" class="biblical-ref">{bible_ref}</span>')
+                html = html.replace(bible_ref, f'<span lang="HE" class="he-biblical-ref">{bible_ref}</span>')
 
             html_tree = BeautifulSoup(html, 'html5lib')
 

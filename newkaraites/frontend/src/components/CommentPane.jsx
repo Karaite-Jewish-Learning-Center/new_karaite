@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import TabPanel from "./TabPanel"
 import Comments from "./Comments"
 import { getCommentsUrl } from '../constants/constants'
@@ -11,9 +11,11 @@ import './css/comments.css'
 
 
 const CommentsPane = ({ refClick, paneNumber }) => {
+
     const classes = useStyles()
 
     const getComments = async (book, chapter, verse) => {
+        //todo , why this all ways false, loading 3 time same comment 
         console.log("need update", store.needUpdateComment(chapter, verse, paneNumber))
 
         const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)

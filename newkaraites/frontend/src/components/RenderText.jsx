@@ -21,15 +21,16 @@ const RenderTextGrid = ({ paneNumber }) => {
     const [verses, setVerses] = useState([''])
     const [currentChapter, setCurrentChapter] = useState(store.getChapter(paneNumber))
     const [bookData, setBookData] = useState([])
+    const [gridVisibleRange, setGridVisibleRange] = useState({ startIndex: 0, endIndex: 0 })
     const [first, setFirst] = useState(0) // it's the first time that we read data for this book
 
     const itemContent = (item, data) => {
-        if (store.getIsRightPaneOpen(paneNumber)) store.setVerseData(data, paneNumber)
 
         return (
             <ChapterHeaderVerse
                 data={data}
                 item={item}
+                gridVisibleRange={gridVisibleRange}
                 paneNumber={paneNumber}
             />
         )
@@ -59,8 +60,6 @@ const RenderTextGrid = ({ paneNumber }) => {
         return verses.slice(0, currentChapter - 2).reduce((x, y) => x + y, 0) + verse - 1
     }
     const calculateCurrentChapter = (visibleRange) => {
-        // calc highligh position
-        let hl = visibleRange.startIndex + Math.round((visibleRange.endIndex - visibleRange.startIndex) / 2)
         // calc Current Chapter
         let avg = visibleRange.startIndex + 1
         let start = 0
@@ -68,13 +67,7 @@ const RenderTextGrid = ({ paneNumber }) => {
         for (let i = 0; i < verses.length; i++) {
             end += verses[i]
             if (avg >= start && avg <= end) {
-                if (store.getIsRightPaneOpen(paneNumber)) {
-                    setChapterViewPort(i + 1)
-                    //  setHighLight(hl)
-                } else {
-                    setChapterViewPort(i + 1)
-                    //  setHighLight(-1)
-                }
+                setChapterViewPort(i + 1)
                 return
             }
             start = end
@@ -83,6 +76,7 @@ const RenderTextGrid = ({ paneNumber }) => {
 
     const visibleRange = (range) => {
         calculateCurrentChapter(range)
+        setGridVisibleRange(range)
     }
 
     const jump = () => {

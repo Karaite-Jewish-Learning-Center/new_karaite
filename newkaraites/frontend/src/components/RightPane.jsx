@@ -97,7 +97,6 @@ const RightPane = ({ refClick, paneNumber }) => {
 
     const PaneBody = () => {
         const show = showState.slice(-1)[0]
-        console.log("showState", showState)
         switch (show) {
             case 0: {
                 return (
@@ -138,7 +137,6 @@ const RightPane = ({ refClick, paneNumber }) => {
         <div className={classes.container}>
             <Header />
             <PaneBody />
-
         </div>
     )
 }

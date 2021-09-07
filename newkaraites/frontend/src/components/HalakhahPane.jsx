@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import Colors from '../constants/colors.js';
 import store from '../stores/appState.js';
 import { observer } from 'mobx-react-lite';
+import { slug } from '../utils/utils';
 import './css/comments.css'
 
 
@@ -51,7 +52,6 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
         }
     }
 
-    const OpenBook = (book, chapter, verse) => <Link to={`/Halakhah/${book}/${chapter}/${verse}/`}>Open book</Link>
 
     useEffect(() => {
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
@@ -68,20 +68,23 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
 
                     <Typography className={classes.headerColor}>{references[current]['author']}</Typography>
                     <hr className={classes.ruler} />
+                    <div className={classes.scroll}>
+                        <div key={makeRandomKey()} className={classes.content}>
+                            <>
+                                {ReactHtmlParser(references[current]['paragraph_html'], {
+                                    decodeEntities: true,
+                                    transform: transform
+                                })}
+                            </>
+                        </div>
+                        <hr className={classes.ruler} />
+                        <Link
+                            className={classes.content}
+                            to={`/Halakhah/${slug(references[current]['book_name'])}/${references[current]['paragraph_number']}/`}
+                        >Open book</Link>
 
-                    <div key={makeRandomKey()}>
-                        <>
-                            {ReactHtmlParser(references[current]['paragraph_html'], {
-                                decodeEntities: true,
-                                transform: transform
-                            })}
-                        </>
                     </div>
-                    <hr className={classes.ruler} />
-
-                    <OpenBook />
                 </div>
-
             )
         }
         default: {
@@ -96,7 +99,7 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
                                 <Button
                                     variant="text"
                                     className={classes.button}
-                                    fullWidth={true}
+                                    fullWidth={false}
                                     onClick={onClick.bind(this, i)}
                                 >
                                     {obj['book_name']}, {obj['author']}
@@ -118,16 +121,26 @@ export default observer(HalakhahPane)
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        marginTop: 40,
-        marginLeft: 30,
-        marginRight: 30,
+        flexGrow: 1,
+        position: 'fixed',
+        maxWidth: '400px !important',
     },
     ruler: {
         borderColor: Colors.rulerColor,
+        marginTop: 20,
+        marginLeft: 15,
+        marginRight: 15,
+
+    },
+    ruler1: {
+        borderColor: Colors.rulerColor,
+        marginTop: 20,
     },
     headerColor: {
         color: Colors.leftPaneHeader,
         marginTop: 20,
+        marginLeft: 15
+
     },
     text: {
         fontSize: 14,
@@ -135,6 +148,16 @@ const useStyles = makeStyles((theme) => ({
     button: {
         textTransform: 'none',
         justifyContent: 'left',
+        paddingRight: 15,
+        paddingLeft: 15,
+    },
+    scroll: {
+        width: '100%',
+        height: '70vh',
+        overflow: 'auto',
+    },
+    content: {
+        margin: 15,
     },
 }));
 

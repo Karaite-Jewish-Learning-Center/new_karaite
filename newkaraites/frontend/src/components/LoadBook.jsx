@@ -17,7 +17,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     const classes = useStyles()
 
     const getBook = async (book, chapter, verse) => {
-
+        debugger
         let isOpen = store.getPanes().some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
@@ -37,6 +37,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     commentsVerse: 0,
                     isRightPaneOpen: false,
                     references: [],
+                    distance: 2,
                 })
 
             }

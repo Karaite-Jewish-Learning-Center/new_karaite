@@ -44,7 +44,7 @@ class AppState {
     getCommentsVerse = (paneNumber) => this.panes[paneNumber].commentsVerse
 
     needUpdateComment = (chapter, verse, paneNumber) => {
-        return this.getCommentsVerse(paneNumber) !== verse || this.getCommentsChapter(paneNumber) !== chapter
+        return this.getCommentsChapter(paneNumber) !== chapter || this.getCommentsVerse(paneNumber) !== verse
     }
 
 
@@ -80,6 +80,12 @@ class AppState {
     }
 
     getVerseData = (i) => this.panes[i].verseData
+
+    setDistance = (distance, i) => {
+        this.panes[i].distance = distance
+    }
+    getDistance = (i) => this.panes[i].distance
+
 
     // panes
 
