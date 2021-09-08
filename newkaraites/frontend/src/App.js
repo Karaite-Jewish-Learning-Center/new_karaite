@@ -9,7 +9,7 @@ import LoadBook from "./components/LoadBook";
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/core/styles'
 import Halakhah from './components/Halakhah'
-import { makeRandomKey } from './utils/utils'
+import { makeRandomKey, unslug } from './utils/utils'
 import HalakhahMenu from "./components/HalakhahMenu";
 
 
@@ -22,7 +22,7 @@ function App() {
             return Object.keys(chaptersByBibleBook).map(book =>
                 <Route path={`/Tanakh/${book}/`} key={makeRandomKey()} >
                     <ChapterMenu bibleBook={book}
-                        numberOfChapters={chaptersByBibleBook[book]}
+                        numberOfChapters={chaptersByBibleBook[unslug(book)]}
                         level="Tanakh" />
                 </Route>
             )

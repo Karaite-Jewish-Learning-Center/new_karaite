@@ -34,9 +34,13 @@ const chaptersByBibleBook = {
     'Joshua': 24,
     'Judges': 21,
     'I Samuel': 31,
+    'I-Samuel': 31,
     'II Samuel': 24,
-    'I kings': 22,
-    'II kings': 25,
+    'II-Samuel': 24,
+    'I Kings': 22,
+    'I-Kings': 22,
+    'II Kings': 25,
+    'II-Kings': 25,
     'Isaiah': 66,
     'Jeremiah': 52,
     'Ezekiel': 48,
@@ -56,6 +60,7 @@ const chaptersByBibleBook = {
     'Proverbs': 31,
     'Job': 42,
     'Song of Songs': 8,
+    'Song-of-Songs': 8,
     'Ruth': 4,
     'Lamentations': 5,
     'Ecclesiastes': 12,
@@ -64,7 +69,9 @@ const chaptersByBibleBook = {
     'Ezra': 10,
     'Nehemiah': 13,
     'I Chronicles': 29,
+    'I-Chronicles': 29,
     'II Chronicles': 36,
+    'II-Chronicles': 36,
 }
 
 

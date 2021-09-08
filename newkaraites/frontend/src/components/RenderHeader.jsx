@@ -1,7 +1,7 @@
 import React from 'react'
 import Colors from '../constants/colors';
 import { Typography } from '@material-ui/core';
-import { englishBookNameToHebrew } from '../utils/utils'
+import { englishBookNameToHebrew, unslug } from '../utils/utils'
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
@@ -12,6 +12,7 @@ import { observer } from 'mobx-react-lite';
 
 
 const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
+    book = unslug(book)
     console.log("rendering RenderHeader")
     const classes = useStyles()
 

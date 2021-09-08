@@ -23,6 +23,8 @@ def book_chapter_verse(request, *args, **kwargs):
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
+    book = slug_back(book)
+
     try:
         book_title = Organization.objects.get(book_title_en=book)
     except Organization.DoesNotExist:

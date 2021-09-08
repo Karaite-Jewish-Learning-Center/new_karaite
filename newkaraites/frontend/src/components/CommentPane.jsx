@@ -8,7 +8,7 @@ import Tab from '@material-ui/core/Tab'
 import store from "../stores/appState"
 import { observer } from 'mobx-react-lite'
 import './css/comments.css'
-
+//import '../../../karaites/static/css/tooltip.css'
 
 const CommentsPane = ({ refClick, paneNumber }) => {
 
