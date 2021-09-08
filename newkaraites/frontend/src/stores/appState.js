@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable, runInAction } from "mobx"
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -98,14 +98,14 @@ class AppState {
     getPaneByNumber = (i) => this.panes[i]
 
     setIsLastPane = (state) => {
-        this.isLastPane = state
+        runInAction(() => { this.isLastPane = state })
     }
+    getIsLastPane = () => this.isLastPane
 
     closePane = (i) => {
         this.panes.splice(i, 1)
         this.setIsLastPane(this.panes.length === 0)
     }
-    getIsLastStatePane = (state) => this.isLastPane = state
 
     // karaites books
 

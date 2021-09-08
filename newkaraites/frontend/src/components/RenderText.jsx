@@ -7,7 +7,6 @@ import { Virtuoso } from 'react-virtuoso'
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
 import store from '../stores/appState'
-import { observer } from 'mobx-react-lite';
 
 
 

@@ -18,6 +18,9 @@ const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
 
     const onClose = () => {
         store.closePane(paneNumber)
+        if (store.getPanes.length === 0) {
+            store.setIsLastPane(true)
+        }
     }
 
     return (
@@ -36,7 +39,6 @@ const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
 
             </Grid>
             <Grid item xs={3} key={1}>
-
                 <Typography className={classes.hebrewBook}>{englishBookNameToHebrew(book)}</Typography>
             </Grid>
             <Grid item xs={4} key={2}>

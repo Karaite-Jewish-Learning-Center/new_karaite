@@ -7,17 +7,20 @@ import { Grid } from '@material-ui/core'
 import store from '../stores/appState'
 import { unslug } from '../utils/utils'
 import Colors from '../constants/colors'
-
+import { observer } from 'mobx-react-lite'
 
 
 const KaraitesPaneHeader = ({ paneNumber }) => {
     const classes = resources()
 
     const onClosePane = () => {
+        debugger
         store.closePane(paneNumber)
+        if (store.getPanes.length === 0) {
+            store.setIsLastPane(true)
+        }
     }
-    const t = store.getBookDetails(paneNumber)
-    debugger
+
     return (
         <Grid container
             direction="row"
@@ -59,4 +62,4 @@ const resources = makeStyles({
     }
 
 })
-export default KaraitesPaneHeader
+export default observer(KaraitesPaneHeader)

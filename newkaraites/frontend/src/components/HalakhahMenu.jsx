@@ -4,11 +4,14 @@ import { booksMenu } from '../constants/common-css'
 import { Grid, Typography } from '@material-ui/core'
 import { unslug } from '../utils/utils'
 import { Link } from 'react-router-dom'
+import store from '../stores/appState'
 
 const HalakhahMenu = ({ book }) => {
     const [toc, setToc] = useState([])
 
     const classes = booksMenu()
+    // todo find a better solution
+    store.setIsLastPane(false)
 
     const getTOC = async (book) => {
 

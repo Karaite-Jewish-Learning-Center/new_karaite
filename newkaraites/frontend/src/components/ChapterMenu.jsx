@@ -6,11 +6,15 @@ import Colors from '../constants/colors'
 import { Link } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import { unslug } from '../utils/utils'
+import store from '../stores/appState'
 
 
 const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
     const chapters = range(numberOfChapters)
     const classes = container()
+    // todo find a better solution
+    store.setIsLastPane(false)
+
 
     const createMenu = () => {
         return chapters.map(chapter =>

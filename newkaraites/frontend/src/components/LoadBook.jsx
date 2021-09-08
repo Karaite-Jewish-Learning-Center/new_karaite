@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite'
 import RightPane from './RightPane';
 import RenderText from './RenderText'
 import { makeRandomKey } from '../utils/utils';
+import { Redirect } from 'react-router-dom';
 
 
 const LoadBook = ({ book, chapter, verse, type }) => {
@@ -17,7 +18,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     const classes = useStyles()
 
     const getBook = async (book, chapter, verse) => {
-        debugger
         let isOpen = store.getPanes().some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
@@ -103,7 +103,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                 ))
             }
         }
-
         return jsx
     }
 
@@ -111,13 +110,16 @@ const LoadBook = ({ book, chapter, verse, type }) => {
         getBook(book, chapter, verse)
     }, [])
 
-
-    console.log("is last", store.isLastPane)
-    // if (store.isLastPane) return <Redirect to={`/Tanakh/${book}/`} />
-
-    console.log("rendering LoadBook")
-
     const books = bookRender()
+    debugger
+    if (store.getIsLastPane() && books.length === 0) {
+        if (type === 'bible') {
+            return (<Redirect to={`/Tanakh/${book}/`} />)
+        } else {
+            return (<Redirect to={`/Halakhah/${book}/`} />)
+        }
+    }
+
     return (
         <Grid container
             className={classes.root}
@@ -127,6 +129,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
             {books.map(jsx => jsx)}
         </Grid>
     )
+
 }
 
 const useStyles = makeStyles((theme) => ({
