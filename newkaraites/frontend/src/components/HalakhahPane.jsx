@@ -15,6 +15,7 @@ import './css/comments.css'
 
 const HalakhahPane = ({ refClick, paneNumber }) => {
     const [showPane, setShowPane] = useState(null)
+    const [references, setReferences] = useState([])
     const [current, setCurrent] = useState(null)
     const classes = useStyles()
 
@@ -36,7 +37,7 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
         }
     }
     const buttonOnClick = () => {
-        const references = store.getReferences(paneNumber)
+
         store.setPanes({
             book: slug(references[current]['book_name']),
             chapter: references[current]['paragraph_number'],
@@ -57,7 +58,8 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
         const response = await fetch(referencesUrl + `${book}/${chapter}/${verse}/`)
         if (response.ok) {
             const data = await response.json()
-            store.setReferences(data.references, paneNumber)
+            debugger
+            setReferences(data.references)
         } else {
             alert("HTTP-Error: " + response.status)
         }
@@ -68,11 +70,8 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
     }, [])
 
-    if (store.hasNoReferences(paneNumber)) return null
-
     switch (showPane) {
         case 0: {
-            const references = store.getReferences(paneNumber)
             return (
                 <div className={classes.container}>
                     <Typography className={classes.headerColor}>{references[current]['book_name']}</Typography>
@@ -99,7 +98,6 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
             )
         }
         default: {
-            const references = store.getReferences(paneNumber)
             return (
                 <div className={classes.container}>
                     <Typography className={classes.headerColor}>Halakhah ({references.length})</Typography>

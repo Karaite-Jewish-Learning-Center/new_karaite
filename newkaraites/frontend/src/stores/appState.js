@@ -48,13 +48,13 @@ class AppState {
     }
 
 
-    // references
-    setReferences = (references, paneNumber) => {
-        this.panes[paneNumber].references = references
-    }
-    getReferences = (paneNumber) => this.panes[paneNumber].references
+    // // references
+    // setReferences = (references, paneNumber) => {
+    //     this.panes[paneNumber].references = references
+    // }
+    // getReferences = (paneNumber) => this.panes[paneNumber].references
 
-    hasNoReferences = (paneNumber) => this.panes[paneNumber].references.length === 0
+    // hasNoReferences = (paneNumber) => this.panes[paneNumber].references.length === 0
 
 
     // book , chapter , verse

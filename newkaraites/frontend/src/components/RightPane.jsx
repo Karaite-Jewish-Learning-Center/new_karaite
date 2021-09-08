@@ -13,8 +13,6 @@ import CommentsPane from './CommentPane'
 import HalakhahPane from './HalakhahPane'
 import {
     BIBLE_EN_CM,
-    BIBLE_VERSE,
-    BIBLE_CHAPTER,
     BIBLE_REFS,
     BIBLE_ENGLISH,
     BIBLE_HEBREW,
@@ -31,11 +29,9 @@ const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 const RightPane = ({ paneNumber, refClick }) => {
 
-
     const [showState, setShowState] = useState([])
-
     const verseData = store.getVerseData(paneNumber)
-    const book = store.getBook(paneNumber)
+
     const classes = useStyles()
 
     const onClose = () => {
