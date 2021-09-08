@@ -17,7 +17,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     const classes = useStyles()
 
-    const getBook = async (book, chapter, verse) => {
+    const getBook = async (book, chapter, verse, highlight, type) => {
         let isOpen = store.getPanes().some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
@@ -54,7 +54,11 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
             }
         }
+    }
 
+    const refClick = (e) => {
+        const { refBook, refChapter, refVerse, refHighlight } = parseBiblicalReference(e)
+        getBook(refBook, refChapter, refVerse, refHighlight, 'bible')
     }
 
     const RenderRightPane = ({ isOpen, paneNumber }) => {
@@ -69,10 +73,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
             )
         }
         return null
-    }
-    const refClick = (e) => {
-        const { refBook, refChapter, refVerse, refHighlight } = parseBiblicalReference(e)
-        getBook(refBook, refChapter, refVerse, refHighlight)
     }
 
 
@@ -107,7 +107,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     }
 
     useEffect(() => {
-        getBook(book, chapter, verse)
+        getBook(book, chapter, verse, [], type)
     }, [])
 
     const books = bookRender()

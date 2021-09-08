@@ -29,7 +29,9 @@ const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 
 
-const RightPane = ({ refClick, paneNumber }) => {
+const RightPane = ({ paneNumber, refClick }) => {
+
+
     const [showState, setShowState] = useState([])
 
     const verseData = store.getVerseData(paneNumber)
@@ -107,9 +109,6 @@ const RightPane = ({ refClick, paneNumber }) => {
             }
             case 1: {
                 return (<HalakhahPane
-                    book={book}
-                    chapter={verseData[BIBLE_CHAPTER]}
-                    verse={verseData[BIBLE_VERSE]}
                     refClick={refClick}
                     paneNumber={paneNumber}
                 />)

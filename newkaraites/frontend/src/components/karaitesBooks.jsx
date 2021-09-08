@@ -20,19 +20,24 @@ const BOOKS_DETAILS = 1
 const KaraitesBooks = ({ paneNumber, refClick }) => {
     const [paragraphs, setParagraphs] = useState([])
     const [bookEnded, setBookEnded] = useState(false)
+    const [chapter, setChapter] = useState(store.getChapter(paneNumber))
+
+    //const [booksDetails, setBookDetails] = useState([])
+    const book = store.getBook(paneNumber)
+    const verse = store.getVerse(paneNumber)
+
     const classes = useStyles()
 
 
     async function fetchData() {
         if (!bookEnded) {
-            const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${store.getChapter(paneNumber)}/${store.getChapter(paneNumber)}/`)
+            const response = await fetch(`${karaitesBookUrl}${book}/${chapter}/${verse}/`)
             if (response.ok) {
                 const data = await response.json()
-                debugger
                 setBookEnded(() => data[PARAGRAPHS][0].length === 0)
                 setParagraphs([...paragraphs, ...data[PARAGRAPHS][0]])
-                store.setChapter(data[PARAGRAPHS][1], paneNumber)
-                store.setBookDetails(data[BOOKS_DETAILS], paneNumber)
+                setChapter(data[PARAGRAPHS][1])
+                //setBookDetails(data[BOOKS_DETAILS])
             } else {
                 alert("HTTP-Error: " + response.status)
             }

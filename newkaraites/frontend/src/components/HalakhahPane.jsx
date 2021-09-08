@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { makeRandomKey } from "../utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 import { Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom'
 import Colors from '../constants/colors.js';
 import store from '../stores/appState.js';
 import { observer } from 'mobx-react-lite';
@@ -36,7 +35,19 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
             }
         }
     }
+    const buttonOnClick = () => {
+        const references = store.getReferences(paneNumber)
+        store.setPanes({
+            book: slug(references[current]['book_name']),
+            chapter: references[current]['paragraph_number'],
+            verse: 1,
+            paragraphs: [],
+            book_details: [],
+            highlight: [],
+            type: 'karaites'
+        })
 
+    }
     const onClick = (i) => {
         setShowPane(0)
         setCurrent(i)
@@ -78,10 +89,10 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
                             </>
                         </div>
                         <hr className={classes.ruler} />
-                        <Link
-                            className={classes.content}
-                            to={`/Halakhah/${slug(references[current]['book_name'])}/${references[current]['paragraph_number']}/`}
-                        >Open book</Link>
+                        <Button
+                            className={classes.button}
+                            onClick={buttonOnClick}
+                        >Open book</Button>
 
                     </div>
                 </div>
