@@ -9,8 +9,8 @@ SOCKFILE=/home/develop/sock/gunicorn.sock
 USER=develop
 GROUP=develop
 NUM_WORKERS=1
-DJANGO_SETTINGS_MODULE=new_karaites.settings
-DJANGO_WSGI_MODULE=new_karaites.wsgi
+DJANGO_SETTINGS_MODULE=newkaraites.settings
+DJANGO_WSGI_MODULE=newkaraites.wsgi
 echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
