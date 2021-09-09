@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core';
 import parseBiblicalReference from '../utils/parseBiblicalReference';
-//import { Redirect } from 'react-router-dom';
 import KaraitesBooks from '../components/karaitesBooks'
 import store from '../stores/appState'
 import { observer } from 'mobx-react-lite'
@@ -38,6 +37,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     isRightPaneOpen: false,
                     references: [],
                     distance: 2,
+                    currentItem: 0
                 })
 
             }
@@ -50,6 +50,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     book_details: [],
                     highlight: [],
                     type: type,
+                    currentItem: 0
                 })
 
             }
@@ -111,7 +112,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     }, [])
 
     const books = bookRender()
-    debugger
+
     if (store.getIsLastPane() && books.length === 0) {
         if (type === 'bible') {
             return (<Redirect to={`/Tanakh/${book}/`} />)
