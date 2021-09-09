@@ -195,3 +195,10 @@ class getHalakhah(View):
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'halakhah'})
         return book_chapter_verse(request, *args, **kwargs)
+
+
+class Test(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        return JsonResponse({"ok": True})
