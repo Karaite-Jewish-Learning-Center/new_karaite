@@ -11,12 +11,12 @@ Comments (Aaron ben Elijah)
 
 Karaite Books (Yeriot Shelomo volume 1 and 2 )
 
-1. karaite_books_as_array
-2. karaite_books_map_html
+1. karaites_books_as_array
+2. karaites_books_map_html
 
 Update references (updates bible references)
 
-1. update_references
+1. updates_references
 
 Update references markup
 

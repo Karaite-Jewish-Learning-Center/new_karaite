@@ -24,4 +24,10 @@ echo "Virtual environment: `pwd`"
 # test -d $RUNDIR || mkdir -p $RUNDIR
 
 # Start your Django
-exec python manage.py runserver 161.35.130.125:8080
+exec gunicorn ${DJANGO_WSGI_MODULE}:application -b 127.0.0.1:8000 \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --user=$USER --group=$GROUP \
+  --log-level=debug \
+  --log-file=/home/develop/logs/gunicorn/gunicorn.log
+
