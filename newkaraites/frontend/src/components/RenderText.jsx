@@ -78,15 +78,15 @@ const RenderTextGrid = ({ paneNumber }) => {
         setGridVisibleRange(range)
     }
 
-    const jump = () => {
+    const jump = (index) => {
         virtuoso.current.scrollToIndex({
-            index: calcIndex(),
+            index: index,
             align: 'center',
         });
     }
 
-    if (virtuoso.current !== null && first === 0) jump()
-
+    if (virtuoso.current !== null && first === 0) jump(calcIndex())
+    //if (virtuoso.current !== null && first !== 0) jump(store.getCurrentItem(paneNumber))
 
 
     useEffect(() => {

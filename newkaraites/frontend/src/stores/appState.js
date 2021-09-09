@@ -47,16 +47,6 @@ class AppState {
         return this.getCommentsChapter(paneNumber) !== chapter || this.getCommentsVerse(paneNumber) !== verse
     }
 
-
-    // // references
-    // setReferences = (references, paneNumber) => {
-    //     this.panes[paneNumber].references = references
-    // }
-    // getReferences = (paneNumber) => this.panes[paneNumber].references
-
-    // hasNoReferences = (paneNumber) => this.panes[paneNumber].references.length === 0
-
-
     // book , chapter , verse
     setBook = (book, i) => {
         this.panes[i].book = book
@@ -76,7 +66,7 @@ class AppState {
     getVerses = (i) => this.panes[i].verses
 
     setVerseData = (data, i) => {
-        this.panes[i].verseData = data
+        runInAction(() => { this.panes[i].verseData = data })
     }
 
     getVerseData = (i) => this.panes[i].verseData
@@ -86,6 +76,11 @@ class AppState {
     }
     getDistance = (i) => this.panes[i].distance
 
+    setCurrentItem = (item, i) => {
+        runInAction(() => { this.panes[i].currentItem = item })
+    }
+
+    getCurrentItem = (i) => this.panes[i].currentItem
 
     // panes
 

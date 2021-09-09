@@ -44,12 +44,14 @@ const ChapterHeaderVerse = (props) => {
         </div>)
     }
 
-    const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
+    const select = gridVisibleRange.startIndex + store.getDistance(paneNumber)
+    const found = item === select
 
     if (found) {
         store.setCommentsChapter(chapter, paneNumber)
         store.setCommentsVerse(verse, paneNumber)
         store.setVerseData(data, paneNumber)
+        store.setCurrentItem(select, paneNumber)
     }
 
     return (

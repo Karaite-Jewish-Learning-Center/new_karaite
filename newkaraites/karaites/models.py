@@ -559,18 +559,19 @@ class KaraitesBookAsArray(models.Model):
         return self.book.book_title
 
     @staticmethod
-    def to_list(book, paragraph_number=None, offset=0):
-        # chapter don't exist so we read paragraphs
+    def to_list(book, paragraph_number, first):
+        # chapters don't exist so we read paragraphs
         LIMIT = 100
-        if paragraph_number is None:
-            paragraph_number = 0
-
-        query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=paragraph_number)
+        if first == 0:
+            query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=0,
+                                                       paragraph_number__lte=paragraph_number)
+        else:
+            query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=paragraph_number)[0:LIMIT]
 
         result = []
-        for book in query[offset:offset + LIMIT]:
+        for book in query:
             result.append([book.ref_chapter, book.paragraph_number, book.book_text])
-        return [result, paragraph_number + LIMIT]
+        return [result, query.count()]
 
     @mark_safe
     def text(self):

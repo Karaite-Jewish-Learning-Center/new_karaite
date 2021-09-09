@@ -24,7 +24,7 @@ urlpatterns = [
     path('get-book-chapter/<str:book>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 
     # karaite books
-    path('get-karaites-book-chapter/<str:book>/<str:chapter>/<int:offset>/',
+    path('get-karaites-book-chapter/<str:book>/<str:chapter>/<int:first>/',
          GetKaraitesBookAsArray.as_view(),
          name='get_karaites_book_chapter'),
 
