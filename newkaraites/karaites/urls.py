@@ -6,7 +6,8 @@ from .views import (GetFirstLevel,
                     getKaraitesAllBookDetails,
                     GetKaraitesBookAsArray,
                     GetTOC,
-                    getHalakhah)
+                    getHalakhah,
+                    Test)
 
 app_name = 'karaites'
 
@@ -41,5 +42,5 @@ urlpatterns = [
     # references Halakhah
     path('get-references/<str:book>/<str:chapter>/<str:verse>/', getHalakhah.as_view(), name='get_references'),
 
-
+    path('test/', Test.as_view(), name='test'),
 ]
