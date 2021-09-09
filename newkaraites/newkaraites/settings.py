@@ -195,7 +195,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
 if DEBUG:
     DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
 

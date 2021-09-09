@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:8000/'
+const apiUrl = 'http://161.35.130.125/'
 const bookListUrl = apiUrl + 'api/books-list/'
 const bookTextUrl = apiUrl + 'api/get-book/'
 const bookChapterUrl = apiUrl + 'api/get-book-chapter/'
