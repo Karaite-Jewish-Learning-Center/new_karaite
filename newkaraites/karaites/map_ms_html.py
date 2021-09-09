@@ -247,6 +247,9 @@ MAP_SPAN_STYLE_TO_CLASSES = {
     'mso-special-character:footnote':
         ['foot-note-char'],
 
+    'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:David;mso-ansi-language:EN-US;mso-fareast-language:HE;mso-bidi-language:HE':
+        ['foot-note-char'],
+
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
         ['foot-note'],
 

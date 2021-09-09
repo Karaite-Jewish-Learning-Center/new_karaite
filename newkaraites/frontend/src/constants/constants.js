@@ -6,9 +6,10 @@ const bookFromRef = apiUrl + 'api/get-book-from-ref/'
 const getCommentsUrl = apiUrl + 'api/get-comments/'
 const getFirstLevelUrl = apiUrl + 'api/get-first-level/'
 const organization = { 1: 'Torah', 2: 'Prophets', 3: 'Writings' }
-const karaitesBookUrl = apiUrl + 'api/get-karaites-book/'
-const karaitesBookAsArrayUrl = apiUrl + 'api/get-karaites-book/'
+const karaitesBookUrl = apiUrl + 'api/get-karaites-book-chapter/'
 const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
+const karaitesBookToc = apiUrl + 'api/get-karaites-book-toc/'
+const referencesUrl = apiUrl + 'api/get-references/'
 const LANGUAGE = { 0: 'en', 1: 'he' }
 const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
 const ENGLISH = 0
@@ -20,6 +21,7 @@ const BIBLE_HE_CM = 3
 const BIBLE_VERSE = 4
 const BIBLE_CHAPTER = 5
 const BIBLE_RENDER_CHAPTER = 6
+const BIBLE_REFS = 7
 const BOOK_CHAPTERS = 0
 const BOOK_DATA = 1
 
@@ -32,37 +34,44 @@ const chaptersByBibleBook = {
     'Joshua': 24,
     'Judges': 21,
     'I Samuel': 31,
+    'I-Samuel': 31,
     'II Samuel': 24,
-    'I kings': 22,
-    'II kings': 25,
+    'II-Samuel': 24,
+    'I Kings': 22,
+    'I-Kings': 22,
+    'II Kings': 25,
+    'II-Kings': 25,
     'Isaiah': 66,
     'Jeremiah': 52,
     'Ezekiel': 48,
     'Hosea': 14,
     'Joel': 4,
     'Amos': 9,
-    'Obadiah':1 ,
+    'Obadiah': 1,
     'Jonah': 4,
     'Micah': 7,
-    'Nahum':3 ,
-    'Habakkuk':3 ,
-    'Zephaniah':3 ,
-    'Haggai':2 ,
-    'Zechariah':14 ,
-    'Malachi':3 ,
+    'Nahum': 3,
+    'Habakkuk': 3,
+    'Zephaniah': 3,
+    'Haggai': 2,
+    'Zechariah': 14,
+    'Malachi': 3,
     'Psalms': 150,
     'Proverbs': 31,
-    'Job':42,
-    'Song of Songs':8 ,
+    'Job': 42,
+    'Song of Songs': 8,
+    'Song-of-Songs': 8,
     'Ruth': 4,
-    'Lamentations':5 ,
-    'Ecclesiastes':12 ,
+    'Lamentations': 5,
+    'Ecclesiastes': 12,
     'Esther': 10,
-    'Daniel':12,
+    'Daniel': 12,
     'Ezra': 10,
-    'Nehemiah':13,
+    'Nehemiah': 13,
     'I Chronicles': 29,
-    'II Chronicles':36,
+    'I-Chronicles': 29,
+    'II Chronicles': 36,
+    'II-Chronicles': 36,
 }
 
 
@@ -76,6 +85,8 @@ export {
     organization,
     karaitesBookUrl,
     karaitesBookDetailsUrl,
+    karaitesBookToc,
+    referencesUrl,
     LANGUAGE,
     LANGUAGE_TAG,
     ENGLISH,
@@ -87,6 +98,7 @@ export {
     BIBLE_VERSE,
     BIBLE_CHAPTER,
     BIBLE_RENDER_CHAPTER,
+    BIBLE_REFS,
     BOOK_CHAPTERS,
     BOOK_DATA,
     chaptersByBibleBook,

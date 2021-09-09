@@ -1,84 +1,68 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useLocation, useParams } from "react-router-dom";
 import MyAppBar from "./components/AppBar";
-import FirsLevel from "./components/FirstLevel"
+import FirstLevel from "./components/FirstLevel"
 import Tanakh from "./components/Tanakh"
 import { chaptersByBibleBook } from './constants/constants'
-import BookText from "./components/bookText"
-import ListKaraitesBooks from './components/ListKaraitesBooks'
-import PresentKaraitesBooks from "./components/PresentKaraitesBook"
-import Comments from "./components/Comments"
-import { createMuiTheme } from '@material-ui/core/styles'
-//import { ThemeProvider } from '@material-ui/styles'
-
 import ChapterMenu from './components/ChapterMenu'
 import LoadBook from "./components/LoadBook";
-import BibleBooksWithComments from "./components/bible"
-
-const tanakhBooksLink = () =>
-    Object.keys(chaptersByBibleBook).map(book =>
-        <Route path={`/${book}/`} >
-            <ChapterMenu bibleBook={book} numberOfChapters={chaptersByBibleBook[book]} level="Tanakh"  />
-        </Route>
-    )
+import { createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/core/styles'
+import Halakhah from './components/Halakhah'
+import { makeRandomKey, unslug } from './utils/utils'
+import HalakhahMenu from "./components/HalakhahMenu";
 
 
 function App() {
 
-
+    const TanakhBooksLink = () => {
+        let location = useLocation()
+        let parts = location.pathname.split('/')
+        if (parts.length === 4 && parts[1] === 'Tanakh') {
+            return Object.keys(chaptersByBibleBook).map(book =>
+                <Route path={`/Tanakh/${book}/`} key={makeRandomKey()} >
+                    <ChapterMenu bibleBook={book}
+                        numberOfChapters={chaptersByBibleBook[unslug(book)]}
+                        level="Tanakh" />
+                </Route>
+            )
+        }
+        return null
+    }
+    const HalakhahBookLink = () => {
+        let { book } = useParams()
+        return (<HalakhahMenu book={book} />)
+    }
+    const Load = ({ type }) => {
+        let { book, chapter } = useParams()
+        return (
+            <LoadBook book={book} chapter={chapter} verse={1} type={type} />
+        );
+    }
     return (
-        <BrowserRouter>
-            <Switch>
-                <>
-                    {/* <ThemeProvider theme={theme}> */}
+        <ThemeProvider theme={theme}>
 
-                    <MyAppBar />
+            <BrowserRouter>
+                <MyAppBar />
 
-                    <Route exact path="/">
-                        <FirsLevel />
-                    </Route>
-                    <Route path="/Tanakh/">
-                        <Tanakh />
-                    </Route>
+                <Route exact path="/texts/">
+                    <FirstLevel />
+                </Route>/
 
-                    {tanakhBooksLink()}
+                <Switch>
+                    <>
+                        <Route exact path="/Tanakh/:book/:chapter/" children={<Load type="bible" />} />
+                        <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink />} />
+                        <Route exact path="/Tanakh/"><Tanakh /></Route>
 
-                    <Route path="/bible/">
-                        <BibleBooksWithComments book={'Hosea'} chapter={10} verse={10} />
-                    </Route>
-
-
-                    {/* <Route path="/bible/">
-                        <BibleBooksWithComments book={'Deuteronomy'} chapter={2} verse={9} fullBook={true} />
-                    </Route> */}
-
-                    {/* <Route path="/comments">
-                        <Comments />
-                    </Route>
-
-                    <Route path="/texts">
-                        <BookText book={'Deuteronomy'} />
-                    </Route>
-
-                    <Route path="/bible/">
-                        <BibleBooksWithComments book={'Deuteronomy'} chapter={2} verse={9} fullBook={true} />
-                    </Route>
-
-                    <Route path="/list-karaites-books/">
-                        <ListKaraitesBooks />
-                    </Route>
-
-                    <Route path="/presentation/">
-                        <PresentKaraitesBooks />
-                    </Route>
-                    <Route path="/presentation/">
-                        <PresentKaraitesBooks />
-                    </Route> */}
-
-                    {/* </ThemeProvider> */}
-                </>
-            </Switch>
-        </BrowserRouter>
+                        <Route exact path="/Halakhah/:book/:chapter/" children={<Load type="karaites" />} />
+                        <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink />} />
+                        <Route exact path="/Halakhah/"><Halakhah />
+                        </Route>
+                    </>
+                </Switch>
+            </BrowserRouter >
+        </ThemeProvider>
     );
 }
 

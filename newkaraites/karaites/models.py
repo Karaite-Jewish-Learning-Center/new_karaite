@@ -424,8 +424,10 @@ class BookAsArray(models.Model):
 
     chapter = models.IntegerField(default=0)
 
-    # [text english, text hebrew, comment_count and Verse , chapter, need_render_chapter]
-    book_text = ArrayField(ArrayField(models.TextField(), size=7), default=list)
+    # [text english, text hebrew, comment count En, comment count He,
+    # Verse number , Chapter, need render chapter title,
+    # number of  Halakhah references]
+    book_text = ArrayField(ArrayField(models.TextField(), size=8), default=list)
 
     @mark_safe
     def text(self):
@@ -548,7 +550,7 @@ class KaraitesBookAsArray(models.Model):
 
     paragraph_number = models.IntegerField(default=0)
 
-    # [paragraph, page number page number hebrew, is_title]
+    # [paragraph, page number, page number hebrew, is_title]
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
@@ -556,27 +558,19 @@ class KaraitesBookAsArray(models.Model):
     def __str__(self):
         return self.book.book_title
 
-    # @staticmethod
-    # def to_json(book, chapter_number):
-    #     chapter = KaraitesBookText.objects.get(book=book, chapter_number=chapter_number)
-    #     return {
-    #         'chapter_number': chapter.chapter_number,
-    #         'chapter_number_la': chapter.chapter_number_la,
-    #         'chapter_title': chapter.chapter_title,
-    #         'chapter_text': chapter.chapter_text,
-    #     }
+    @staticmethod
+    def to_list(book, paragraph_number=None, offset=0):
+        # chapter don't exist so we read paragraphs
+        LIMIT = 100
+        if paragraph_number is None:
+            paragraph_number = 0
 
-    # @staticmethod
-    # def to_list(book, chapter_number=None):
-    #     if chapter_number is None:
-    #         query = KaraitesBookText.objects.filter(book=book)
-    #     else:
-    #         query = KaraitesBookText.objects.filter(book=book, chapter_number=chapter_number)
+        query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=paragraph_number)
 
-    #     result = []
-    #     for book in query:
-    #         result.append([book.chapter_title + book.chapter_text, book.chapter_number, book.chapter_number_la])
-    #     return result
+        result = []
+        for book in query[offset:offset + LIMIT]:
+            result.append([book.ref_chapter, book.paragraph_number, book.book_text])
+        return [result, paragraph_number + LIMIT]
 
     @mark_safe
     def text(self):
@@ -621,10 +615,16 @@ class TableOfContents(models.Model):
     admin_subject.short_description = "Toc"
 
     def to_json(self):
-        return {'subject': self.subject[1],
-                'index': self.subject[0],
+        return {'subject': self.subject[0],
+                'index': self.subject[1],
                 'start_paragraph': self.start_paragraph
                 }
+
+    def to_list(self):
+        return [self.subject[0],
+                self.subject[1],
+                self.start_paragraph
+                ]
 
     class Meta:
         verbose_name_plural = _('Karaites  table of contents')
@@ -643,6 +643,8 @@ class References(models.Model):
 
     paragraph_text = ArrayField(ArrayField(models.TextField()), default=list)
 
+    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
+
     bible_ref_he = models.CharField(max_length=40,
                                     default='',
                                     verbose_name=_('ref. Hebrew'))
@@ -653,6 +655,37 @@ class References(models.Model):
 
     def __str__(self):
         return f'{self.karaites_book.book_title} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'
+
+    @mark_safe
+    def paragraph_admin(self):
+        return self.paragraph_text[0]
+
+    paragraph_admin.short_description = 'Reference text'
+
+    @mark_safe
+    def foot_notes_admin(self):
+        html = ''
+        for foot_note in self.foot_notes:
+            html += f'<p dir="RTL">{foot_note}</p>'
+        return html
+
+    def to_json(self):
+        return {'book_name': self.karaites_book.book_title,
+                'author': self.karaites_book.author.name,
+                'language': self.karaites_book.book_language,
+                'paragraph_number': self.paragraph_number,
+                'paragraph_html': self.paragraph_text[0],
+                'bible_ref_he': self.bible_ref_he,
+                'bible_ref_en': self.bible_ref_en,
+                }
+
+    def to_list(self, bible_ref_en):
+
+        result = []
+        for ref in References.objects.filter(bible_ref_en=bible_ref_en):
+            result.append(ref.to_json())
+
+        return result
 
     class Meta:
         verbose_name_plural = _('Karaites Bible references.')

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {getFirstLevelUrl} from '../constants/constants'
+import { getFirstLevelUrl } from '../constants/constants'
 import { booksMenu } from '../constants/common-css'
 
 
-const FistLevel = () => {
+const FirstLevel = () => {
     const [classification, setClassification] = useState(null)
     const classes = booksMenu()
 
@@ -26,14 +26,14 @@ const FistLevel = () => {
     if (classification === null) return null;
 
     const levels = Object.keys(classification).map(key =>
-        <Grid item xs>
+        <Grid item xs key={key}>
             <div className={classes.card}>
-                    <Link to={'/'+key+'/'}>
-                        <Typography variant="h6" component="h2">{key}</Typography>
-                    </Link>
-                    <br/>
-                <Typography variant="body3" component="p">{classification[key]}</Typography>
-                <hr/>
+                <Link to={'/' + key + '/'} >
+                    <Typography variant="h6" component="h2">{key}</Typography>
+                </Link>
+                <br />
+                <Typography variante="body3" component="p">{classification[key]}</Typography>
+                <hr />
             </div>
         </Grid>)
 
@@ -42,7 +42,7 @@ const FistLevel = () => {
             <div className={classes.filler}>&nbsp;</div>
             <Grid container
                 direction="column"
-                justifyContent="center"
+                justifycontent="center"
                 alignItems="center">
                 {levels}
             </Grid>
@@ -51,4 +51,4 @@ const FistLevel = () => {
 }
 
 
-export default FistLevel
+export default FirstLevel

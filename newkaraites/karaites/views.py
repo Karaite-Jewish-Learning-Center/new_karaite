@@ -2,11 +2,14 @@ from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
+from .utils import slug_back
 from .models import (Organization,
                      BookAsArray,
                      Comment,
+                     TableOfContents,
                      KaraitesBookDetails,
-                     KaraitesBookAsArray,)
+                     KaraitesBookAsArray,
+                     References)
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -19,6 +22,9 @@ def book_chapter_verse(request, *args, **kwargs):
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+    book = slug_back(book)
+
     try:
         book_title = Organization.objects.get(book_title_en=book)
     except Organization.DoesNotExist:
@@ -51,17 +57,22 @@ def book_chapter_verse(request, *args, **kwargs):
             message += _(f"chapter:{chapter} must be between 1 and {verses_on_this_chapter}")
             return JsonResponse(data={'status': 'false', 'message': message}, status=400)
 
-    if first is None:
-        message = _("first parameter missing: first  must be between 0 and 1.")
-        return JsonResponse(data={'status': 'false', 'message': message}, status=400)
-    
     if model == 'comments':
         comments = Comment().to_json_comments(book=book_title, chapter=chapter, verse=verse)
         return JsonResponse({'comments': comments})
 
     if model == 'bookAsArray':
+        if first is None:
+            message = _("first parameter missing: first  must be between 0 and 1.")
+            return JsonResponse(data={'status': 'false', 'message': message}, status=400)
+
         chapters = BookAsArray().to_list(book=book_title, chapter=chapter, book_title=book_title, first=first)
         return JsonResponse({'chapter': chapters, 'book': book_title.to_json()}, safe=False)
+
+    if model == 'halakhah':
+        ref = f'({book} {chapter}:{verse})'
+        references = References().to_list(ref)
+        return JsonResponse({'references': references}, safe=False)
 
 
 def karaites_book_details(request, *args, **kwargs):
@@ -76,10 +87,16 @@ def karaites_book_details(request, *args, **kwargs):
 def karaites_book_as_array(request, *args, **kwargs):
     """ Do Book and chapter check"""
     book = kwargs.get('book', None)
-    chapter = kwargs.get('chapter', None)
+    paragraph_number = kwargs.get('chapter', None)
+    offset = kwargs.get('offset', None)
 
     if book is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+    if offset is None:
+        return JsonResponse(data={'status': 'false', 'message': _('Need an offset number.')}, status=400)
+
+    book = slug_back(book)
 
     try:
         book_details = KaraitesBookDetails().to_json(book_title=book)
@@ -87,14 +104,15 @@ def karaites_book_as_array(request, *args, **kwargs):
         return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
 
     try:
-        if chapter is None:
-            book_chapter = KaraitesBookAsArray().to_list(book=book_details['book_id'])
+        if paragraph_number is None:
+            book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'])
         else:
-            book_chapter = KaraitesBookAsArray().to_list(book=book_details['book_id'], chapter_number=int(chapter))
+            book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'],
+                                                            paragraph_number=int(paragraph_number))
     except KaraitesBookAsArray.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Chapter {chapter} not found.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _(f'Paragraph_number {paragraph_number} not found.')}, status=400)
 
-    return JsonResponse([book_chapter, book_details], safe=False)
+    return JsonResponse([book_paragraphs, book_details], safe=False)
 
 
 class GetFirstLevel(View):
@@ -133,14 +151,6 @@ class GetBookAsArrayJson(View):
         return book_chapter_verse(request, *args, **kwargs)
 
 
-class GetBookAsArrayJsonOld(View):
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        kwargs.update({'model': 'bookAsArrayOld'})
-        return book_chapter_verse(request, *args, **kwargs)
-
-
 class getKaraitesAllBookDetails(View):
 
     @staticmethod
@@ -154,3 +164,31 @@ class GetKaraitesBookAsArray(View):
     @staticmethod
     def get(request, *args, **kwargs):
         return karaites_book_as_array(request, *args, **kwargs)
+
+
+class GetTOC(View):
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        book = kwargs.get('book', None)
+        if book is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+        karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
+        print(karaites_book)
+        result = []
+        for k_book in karaites_book:
+            for toc in TableOfContents.objects.filter(karaite_book=k_book):
+                result.append(toc.to_list())
+
+        return JsonResponse(result, safe=False)
+
+
+class getHalakhah(View):
+    """
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        kwargs.update({'model': 'halakhah'})
+        return book_chapter_verse(request, *args, **kwargs)

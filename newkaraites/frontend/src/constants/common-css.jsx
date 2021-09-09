@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import Colors from "./colors";
 
 
@@ -20,15 +20,19 @@ const container = makeStyles((theme) => ({
         top: 60,
     },
     left: {
-        height: '85vh',
+        height: '80vh',
         top: 60,
     },
-    scroll:{
-        overflow: 'auto',
-        width: 'auto',
-        height: '85vh',
-        paddingRight: '30px !important'
-    }
+    scroll: {
+        maxHeight: '100vh',
+        overflowY: 'auto',
+        // width: 'auto',
+        // height: '85vh',
+        // paddingRight: '30px !important'
+    },
+    root: {
+        marginBottom: 20,
+    },
 }));
 
 
@@ -64,8 +68,8 @@ const booksMenu = makeStyles((theme) => ({
     card: {
         maxWidth: 350,
         height: 100,
-        marginTop:20,
-        marginBottom:20,
+        marginTop: 20,
+        marginBottom: 20,
     },
     title: {
         marginBottom: 50,
@@ -76,7 +80,20 @@ const booksMenu = makeStyles((theme) => ({
     },
     filler: {
         marginTop: 70,
-    }
+    },
+    he: {
+        direction: 'ltr',
+        fontFamily: 'SBL Hebrew',
+        fontSize: 18,
+        color: Colors.gray,
+    },
+    left: {
+        minWidth: 600,
+
+    },
+    right: {
+        minWidth: 100,
+    },
 }));
 
 export {

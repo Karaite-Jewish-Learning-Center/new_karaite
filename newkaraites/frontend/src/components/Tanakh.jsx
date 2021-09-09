@@ -1,8 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import { booksMenu } from '../constants/common-css'
+import RenderMenu from '../components/RenderMenu'
 
 
 const torah = {
@@ -18,8 +16,8 @@ const prophets = {
     'Judges': ' Cycles of sin, foreign oppression, repentance, and redemption through leaders appointed by God.',
     'I Samuel': 'The prophet Samuel, the advent of monarchy with the reign of Saul, and the rise of a young David.',
     'II Samuel': 'King David’s triumphs and challenges as he establishes a united kingdom with Jerusalem as its capital.',
-    'I kings': 'Solomon’s kingship, construction of the Temple, a schism in the kingdom, and Elijah the Prophet.',
-    'II kings': 'Stories and miracles of the prophet Elisha, the decline of Israel’s kingdoms, and the Temple’s destruction.',
+    'I Kings': 'Solomon’s kingship, construction of the Temple, a schism in the kingdom, and Elijah the Prophet.',
+    'II Kings': 'Stories and miracles of the prophet Elisha, the decline of Israel’s kingdoms, and the Temple’s destruction.',
     'Isaiah': 'Criticism of religious corruption, calls for change, and descriptions of a utopian future',
     'Jeremiah': 'Warnings of Jerusalem’s destruction and demands for repentance, largely rejected by the people, some of whom torture and persecute him.',
     'Ezekiel': 'Dramatic symbolism conveying rebuke or hope, and visions of a future Temple.',
@@ -58,36 +56,10 @@ const books = { 'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings }
 const Tanakh = () => {
     const classes = booksMenu()
 
-    const populate = (obj) => {
-        return Object.keys(obj).map((key, index) =>
-            <Grid item xs={6} key={index}>
-                <div className={classes.card}>
-                    <Link to={'/' + key + '/'}>
-                        <Typography variant="h6" component="h2">{key}</Typography>
-                    </Link>
-                    <br/>
-                    <Typography variant="body2" component="p">{obj[key]}</Typography>
-                </div>
-                <hr className={classes.ruler} />
-            </Grid>)
-    }
-    const makeMenu = () => {
-        return Object.keys(books).map((key, index) =>
-            <div className={classes.container} key={index}>
-                <Typography className={classes.title} variant="h6" component="h2">{key}</Typography>
-                <hr className={classes.ruler}></hr>
-                <Grid container spacing={1}
-                    direction="row"
-                    alignItems="center">
-                    {populate(books[key])}
-                </Grid>
-            </div>)
-    }
-
     return (
         <div>
             <div className={classes.filler}>&nbsp;</div>
-            {makeMenu()}
+            <RenderMenu books={books} path={'Tanakh'} />
         </div>
     )
 

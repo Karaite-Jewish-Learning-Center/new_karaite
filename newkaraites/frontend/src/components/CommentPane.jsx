@@ -1,46 +1,83 @@
-import React, {useState} from "react";
-import TabPanel from "./TabPanel";
-import Comments from "./Comments";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import CommentRef from "./commenstRef";
-import {container} from "../constants/common-css";
+import React, { useState, useEffect } from "react"
+import TabPanel from "./TabPanel"
+import Comments from "./Comments"
+import { getCommentsUrl } from '../constants/constants'
+import { makeStyles } from '@material-ui/core/styles'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import store from "../stores/appState"
+import { observer } from 'mobx-react-lite'
+import './css/comments.css'
+//import '../../../karaites/static/css/tooltip.css'
 
-const CommentsPane = ({book, chapter, verse, comment, closeCommentTabHandler, refClick}) => {
-    const [commentTab, setCommentTab] = useState(0)
-    const classes = container()
+const CommentsPane = ({ refClick, paneNumber }) => {
 
-    const onTabChange = (event, tab) => {
-        setCommentTab(tab)
-        //ReactTooltip.rebuild()
+    const classes = useStyles()
+
+    const getComments = async (book, chapter, verse) => {
+        //todo , why this all ways false, loading 3 time same comment 
+        console.log("need update", store.needUpdateComment(chapter, verse, paneNumber))
+
+        const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
+        if (response.ok) {
+            const data = await response.json()
+            store.setComments(data.comments, paneNumber)
+        } else {
+            alert("HTTP-Error: " + response.status)
+        }
     }
 
+    useEffect(() => {
+        getComments(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
+    }, [])
+
+    // if (store.hasNoComments(paneNumber)) return null
+
+    const onTabChange = (event, tab) => {
+        store.setCommentTab(tab, paneNumber)
+    }
+
+    console.log('rendering Comment pane')
     return (
-        <div>
-            <CommentRef book={book}
-                        chapter={chapter}
-                        verse={verse}
-                        language={commentTab}
-                        closeCommentTabHandler={closeCommentTabHandler}
-                        biblicalRef={() => {
-                        }}
-            />
+        <div className={classes.container}>
             <Tabs
-                value={commentTab}
-                onChange={onTabChange}
+                className={classes.root}
+                value={store.getCommentTab(paneNumber)}
+                onChange={(onTabChange)}
                 aria-label="comments English Hebrew">
-                <Tab label="English" id={0} aria-label="Comments in English"/>
-                <Tab label="Hebrew" id={1} aria-label="Comments in Hebrew"/>
+                <Tab label="English" id={0} aria-label="Comments in English" />
+                <Tab label="Hebrew" id={1} aria-label="Comments in Hebrew" />
             </Tabs>
             <div className={classes.scroll}>
-                <TabPanel value={commentTab} index={0}>
-                    <Comments language="en" comments={comment} refClick={refClick}/>
+                <TabPanel value={store.getCommentTab(paneNumber)} index={0}>
+                    <Comments language="en" comments={store.getComments(paneNumber)} refClick={refClick} />
                 </TabPanel>
-                <TabPanel value={commentTab} index={1}>
-                    <Comments language="he" comments={comment} refClick={refClick}/>
+                <TabPanel value={store.getCommentTab(paneNumber)} index={1}>
+                    <Comments language="he" comments={store.getComments(paneNumber)} refClick={refClick} />
                 </TabPanel>
             </div>
         </div>
     )
 }
-export default CommentsPane
+
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+        flexGrow: 1,
+        position: 'fixed',
+        maxWidth: '400px !important',
+
+    },
+    scroll: {
+        height: '70vh',
+        overflow: 'auto',
+        paddingRight: 10,
+        paddingBottom: 20,
+    },
+    root: {
+        marginBottom: 20,
+    },
+}));
+
+
+export default observer(CommentsPane)

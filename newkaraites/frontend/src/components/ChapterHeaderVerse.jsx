@@ -1,5 +1,5 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Colors from "../constants/colors";
 import Typography from '@material-ui/core/Typography';
 import {
@@ -8,79 +8,68 @@ import {
     BIBLE_VERSE,
     BIBLE_CHAPTER,
     BIBLE_RENDER_CHAPTER,
-    BIBLE_HE_CM,
-    BIBLE_EN_CM
+    BIBLE_EN_CM,
+    BIBLE_REFS
 } from "../constants/constants";
-import CommentBadge from "./CommentBadge";
-import ttSpeech from '../utils/ttspeech'
+import RefsBadge from "./RefsBadge";
+import store from '../stores/appState'
+import { observer } from 'mobx-react-lite';
 
 
-export default function ChapterHeaderVerse(props) {
-    const {item, data, highlight, bookData, onCommentOpen, paneNumber, comment} = props
+const ChapterHeaderVerse = (props) => {
+    const { data, item, gridVisibleRange, paneNumber } = props
+
     let classes = useStyles()
     let chapterHtml = null
     let chapter = data[BIBLE_CHAPTER]
+    let verse = data[BIBLE_VERSE]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
+    let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
-    const onDoubleClickEn = () => {
-        ttSpeech(data[BIBLE_ENGLISH], 'en', 'Daniel', 1, 0.7)
+
+    const openRightPane = (i) => {
+        store.setIsRightPaneOpen(true, paneNumber)
+        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
 
-    const onDoubleClickHe = () => {
-        ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
-    }
     if (renderChapter === "1") {
-        if (chapter === "1") {
-            chapterHtml = (<div className={classes.chapter}>
-                <div className={classes.chapterTitle_he}>
-                    <Typography className={`${classes.he} ${classes.hebrewFont}`}>{bookData.book_title_he}</Typography>
-                </div>
-                <div className={classes.chapterNumber}>
-                    <Typography className={classes.ch}>{chapter}</Typography>
-                </div>
-                <div className={classes.chapterTitle_en}>
-                    <Typography className={classes.en}>{bookData.book_title_en}</Typography>
-                </div>
-                <div className={classes.comments}>
-                    <CommentBadge commentsCount={0}
-                                  sameChapterAndVerse={false}
-                    />
-                </div>
-            </div>)
-        } else {
-            chapterHtml = (<div className={classes.chapter}>
-                <div className={classes.chapterNumber}>
-                    <Typography className={classes.ch}>{chapter}</Typography>
-                    <hr/>
-                </div>
-                <div className={classes.comments}>
-                    <CommentBadge commentsCount={0}
-                                  sameChapterAndVerse={false}
-                    />
-                </div>
-            </div>)
-        }
+        chapterHtml = (<div className={classes.chapter}>
+            <div className={classes.chapterNumber}>
+                <Typography className={classes.ch}>{chapter}</Typography>
+                <hr />
+            </div>
+            <div className={classes.references}>
+                <RefsBadge refsCount={0} />
+            </div>
+        </div>)
     }
+
+    const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
+
+    if (found) {
+        store.setCommentsChapter(chapter, paneNumber)
+        store.setCommentsVerse(verse, paneNumber)
+        store.setVerseData(data, paneNumber)
+    }
+
     return (
-        <div>
+        <div className={classes.verse}>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(highlight.indexOf(item + 1) >= 0 ? classes.selectVerse : '')}`}
-                 onClick={(onCommentOpen === undefined || data[BIBLE_EN_CM] === '0') ? null : onCommentOpen.bind(this, paneNumber, bookData.book_title_en, chapter, data[BIBLE_VERSE])}
+            <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
+                onClick={openRightPane.bind(this, item)}
             >
-                <div className={classes.verseHe} onDoubleClick={onDoubleClickHe}>
+                <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                 </div>
 
                 <div className={classes.verseNumber}>
                     <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
-                <div className={classes.verseEn} onDoubleClick={onDoubleClickEn}>
+                <div className={classes.verseEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
-                <div className={classes.comments}>
-                    <CommentBadge commentsCount={data[BIBLE_EN_CM]}
-                                  sameChapterAndVerse={comment !== undefined && comment.chapter == chapter && comment.verse== item +1}
-                    />
+                <div className={classes.references}>
+                    <RefsBadge refsCount={refs} />
                 </div>
             </div>
 
@@ -96,9 +85,9 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'top',
-        "&:hover": {
-            background: Colors['verseOnMouseOver']
-        },
+        // "&:hover": {
+        //     background: Colors['verseOnMouseOver']
+        // },
     },
     chapter: {
         width: '100%',
@@ -160,6 +149,9 @@ const useStyles = makeStyles(() => ({
         fontSize: 12,
         color: Colors['gray']
     },
+    verse: {
+        cursor: 'pointer',
+    },
     verseEn: {
         maxWidth: '35%',
         minWidth: '35%',
@@ -174,7 +166,7 @@ const useStyles = makeStyles(() => ({
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']
     },
-    comments: {
+    references: {
         cursor: 'pointer',
         alignSelf: 'center',
         maxWidth: '5%',
@@ -185,3 +177,6 @@ const useStyles = makeStyles(() => ({
         minWidth: '50',
     },
 }))
+
+
+export default observer(ChapterHeaderVerse)

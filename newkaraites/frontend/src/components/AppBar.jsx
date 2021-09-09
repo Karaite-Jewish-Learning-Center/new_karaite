@@ -1,20 +1,154 @@
 import React from 'react';
-import {fade, makeStyles} from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import PermContactCalendarSharpIcon from '@material-ui/icons/PermContactCalendarSharp';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-//import Tooltip from '@material-ui/core/Tooltip';
+import { Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
+
+
+export default function PrimarySearchAppBar() {
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleLanguageMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    };
+
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const menuId = 'site-language';
+    const renderMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+        >
+            <MenuItem onClick={handleMenuClose}>English</MenuItem>
+            <MenuItem onClick={handleMenuClose}>עברית</MenuItem>
+        </Menu>
+    );
+
+    const mobileMenuId = 'site-language-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem>
+                <IconButton aria-label="Go to sign up page" color="inherit">
+                    <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
+                </IconButton>
+                <p>Sign up</p>
+            </MenuItem>
+            <MenuItem>
+                <IconButton aria-label="show 11 new notifications" color="inherit">
+                    <ExitToAppIcon></ExitToAppIcon>
+                </IconButton>
+                <p>Login</p>
+            </MenuItem>
+            <MenuItem onClick={handleLanguageMenuOpen}>
+                <IconButton
+                    aria-label="Change site language"
+                    aria-controls="site-language"
+                    color="inherit"
+                >
+                    <LanguageIcon /><ArrowDropDownIcon />
+                </IconButton>
+                <p>Site Language</p>
+            </MenuItem>
+        </Menu>
+    );
+
+    return (
+
+        <AppBar position="fixed"
+
+        >
+            <Toolbar>
+                <Typography className={classes.name} component="h3" >Karaites</Typography>
+                <Link className={classes.link} to="/texts/" >Texts</Link>
+                <div className={classes.grow} />
+                <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                        <SearchIcon />
+                    </div>
+                    <InputBase
+                        placeholder="Search…"
+                        classes={{
+                            root: classes.inputRoot,
+                            input: classes.inputInput,
+                        }}
+                        inputProps={{ 'aria-label': 'search' }}
+                    />
+                </div>
+                <div className={classes.sectionDesktop}>
+                    <IconButton aria-label="Go to sign up form" color="inherit" >
+                        <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
+                    </IconButton>
+                    <IconButton aria-label="Go to Login form" color="inherit">
+                        <ExitToAppIcon></ExitToAppIcon>
+                    </IconButton>
+                    <IconButton
+                        edge="end"
+                        aria-label="Site language"
+                        aria-controls={menuId}
+                        onClick={handleLanguageMenuOpen}
+                        color="inherit"
+                    >
+                        <LanguageIcon /><ArrowDropDownIcon />
+                    </IconButton>
+                </div>
+                <div className={classes.sectionMobile}>
+                    <IconButton
+                        aria-label="show more"
+                        aria-controls={mobileMenuId}
+                        onClick={handleMobileMenuOpen}
+                        color="inherit"
+                    >
+                        <MoreIcon />
+                    </IconButton>
+                </div>
+            </Toolbar>
+            {renderMobileMenu}
+            {renderMenu}
+        </AppBar>
+    );
+}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -91,149 +225,15 @@ const useStyles = makeStyles((theme) => ({
     },
     toolBar: {
         marginBottom: theme.spacing(20)
-    }
+    },
+    name: {
+        fontSize: 18,
+        color: 'black',
+    },
+    link: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 2,
+        color: 'black',
+    },
 }));
-
-export default function PrimarySearchAppBar() {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-    const handleLanguageMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
-
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
-
-    const handleMobileMenuOpen = (event) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-
-    const menuId = 'site-language';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-            id={menuId}
-            keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>English</MenuItem>
-            <MenuItem onClick={handleMenuClose}>עברית</MenuItem>
-        </Menu>
-    );
-
-    const mobileMenuId = 'site-language-mobile';
-    const renderMobileMenu = (
-        <Menu
-            anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-            id={mobileMenuId}
-            keepMounted
-            transformOrigin={{vertical: 'top', horizontal: 'right'}}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
-            <MenuItem>
-                <IconButton aria-label="Go to sign up page" color="inherit">
-                    <PermContactCalendarSharpIcon></PermContactCalendarSharpIcon>
-                </IconButton>
-                <p>Sign up</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <ExitToAppIcon></ExitToAppIcon>
-                </IconButton>
-                <p>Login</p>
-            </MenuItem>
-            <MenuItem onClick={handleLanguageMenuOpen}>
-                <IconButton
-                    aria-label="Change site language"
-                    aria-controls="site-language"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <LanguageIcon/><ArrowDropDownIcon/>
-                </IconButton>
-                <p>Site Language</p>
-            </MenuItem>
-        </Menu>
-    );
-
-    return (
-
-        <AppBar position="fixed"
-
-        >
-            <Toolbar>
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                >
-                    <MenuIcon/>
-                </IconButton>
-                <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon/>
-                    </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{'aria-label': 'search'}}
-                    />
-                </div>
-                <div className={classes.grow}/>
-                <div className={classes.sectionDesktop}>
-                    <IconButton aria-label="Go to sign up form" color="inherit" >
-                        <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
-                    </IconButton>
-                    <IconButton aria-label="Go to Login form" color="inherit" data-for="en" data-tip="Login">
-                        <ExitToAppIcon></ExitToAppIcon>
-                    </IconButton>
-                    <IconButton
-                        edge="end"
-                        aria-label="Site language"
-                        aria-controls={menuId}
-                        aria-haspopup="true"
-                        onClick={handleLanguageMenuOpen}
-                        color="inherit"
-                        data-tip="Change site language"
-                        data-for="en"
-                    >
-                        <LanguageIcon /><ArrowDropDownIcon/>
-                    </IconButton>
-                </div>
-                <div className={classes.sectionMobile}>
-                    <IconButton
-                        aria-label="show more"
-                        aria-controls={mobileMenuId}
-                        aria-haspopup="true"
-                        onClick={handleMobileMenuOpen}
-                        color="inherit"
-                    >
-                        <MoreIcon/>
-                    </IconButton>
-                </div>
-            </Toolbar>
-            {renderMobileMenu}
-            {renderMenu}
-        </AppBar>
-    );
-}

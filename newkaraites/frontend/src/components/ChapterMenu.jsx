@@ -5,17 +5,21 @@ import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
 import { Link } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
-
+import { unslug } from '../utils/utils'
+import store from '../stores/appState'
 
 
 const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
     const chapters = range(numberOfChapters)
     const classes = container()
+    // todo find a better solution
+    store.setIsLastPane(false)
+
 
     const createMenu = () => {
         return chapters.map(chapter =>
             <Grid item xs={1} className={classes.item} key={chapter}>
-                <Link className={classes.link} to={`/${bibleBook}/${chapter}/`} >
+                <Link className={classes.link} to={`/${level}/${bibleBook}/${chapter}/`} >
                     {chapter}
                 </Link>
             </Grid>
@@ -24,13 +28,15 @@ const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
 
     return (
         <div className={classes.container}>
-            <Typography variant="h4" component="h1" className={classes.title}>{bibleBook}</Typography>
-            <Typography variant="h6" component="h1" className={classes.subtitle}>{level}</Typography>
+            <Typography variant="h4" component="h1" className={classes.title}>{unslug(bibleBook)}</Typography>
+            <Typography variant="h6" component="h1" className={classes.subtitle}>
+                <Link to={`/${level}/`}>{level}</Link>
+            </Typography>
             <hr />
             <Typography variant="h5" component="h1" className={classes.chapters}>Chapters</Typography>
             <Grid container
                 spacing={1}
-                justifyContent="center"
+                justifycontent="center"
                 alignItems="center"
             >
                 {createMenu()}

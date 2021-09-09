@@ -17,3 +17,11 @@ def search_level(search_string):
 
 def clear_terminal_line():
     sys.stdout.write(f"\33[K\r")
+
+
+def slug(str):
+    return str.replace(' ', '-')
+
+
+def slug_back(str):
+    return str.replace('-', ' ')
