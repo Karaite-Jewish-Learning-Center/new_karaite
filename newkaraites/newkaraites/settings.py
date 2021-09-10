@@ -211,8 +211,8 @@ if gethostname() == 'Sandros-MacBook-Pro.local':
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static-django/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static-django')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'
