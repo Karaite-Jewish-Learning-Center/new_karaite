@@ -11,6 +11,8 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import Halakhah from './components/Halakhah'
 import { makeRandomKey, unslug } from './utils/utils'
 import HalakhahMenu from "./components/HalakhahMenu";
+import Home from "./components/Home";
+
 
 
 function App() {
@@ -45,9 +47,13 @@ function App() {
             <BrowserRouter>
                 <MyAppBar />
 
+                <Route exact path="/">
+                    <Home />
+                </Route>
+
                 <Route exact path="/texts/">
                     <FirstLevel />
-                </Route>/
+                </Route>
 
                 <Switch>
                     <>
