@@ -1,4 +1,9 @@
-const apiUrl = 'http://161.35.130.125/'
+let apiUrl = 'http://161.35.130.125/'
+
+if (process.env.NODE_ENV === 'development') {
+    apiUrl = 'http://localhost:8000/'
+}
+
 const bookListUrl = apiUrl + 'api/books-list/'
 const bookTextUrl = apiUrl + 'api/get-book/'
 const bookChapterUrl = apiUrl + 'api/get-book-chapter/'
