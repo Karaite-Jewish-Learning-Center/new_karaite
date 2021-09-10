@@ -8,6 +8,7 @@ const Home = () => {
         <div className={classes.container}>
             <div className={classes.center}>
                 <p>Karaites the journey begins</p>
+                <hr></hr>
             </div>
         </div>
     )
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         top: '40%',
         left: '33%',
+        maxWidth: 460,
+
     }
 }));
 
