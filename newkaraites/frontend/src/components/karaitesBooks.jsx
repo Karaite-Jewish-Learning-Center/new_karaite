@@ -33,7 +33,6 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
             const response = await fetch(`${karaitesBookUrl}${book}/${chapter}/${first}/`)
             if (response.ok) {
                 const data = await response.json()
-                debugger
                 setBookEnded(() => data[PARAGRAPHS][0].length === 0)
                 setParagraphs([...paragraphs, ...data[PARAGRAPHS][0]])
                 setChapter(data[PARAGRAPHS][1])
@@ -44,7 +43,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
         }
 
     }
-
+    // todo refactor
     const transform = (node) => {
         if (node.type === 'tag') {
             // rewrite the span with a onClick event handler
@@ -61,8 +60,9 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
     }
 
     const itemContent = (item, data) => {
-        console.log('data', data[2][0].length, typeof (data[2][0]))
+        debugger
         return (<div className={classes.paragraphContainer}>
+            <p>{data[1]}</p>
             {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
                 decodeEntities: true,
                 transform: transform

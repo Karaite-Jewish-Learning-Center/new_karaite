@@ -22,7 +22,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
             return pane.book === book && pane.chapter === chapter
         })
         if (isOpen) {
-            debugger
             store.setMessage('All ready open.')
         }
 
@@ -129,6 +128,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     return (
         <div>
+            <Message />
             <Grid container
                 className={classes.root}
                 direction="row"

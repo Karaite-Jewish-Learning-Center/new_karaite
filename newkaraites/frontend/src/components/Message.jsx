@@ -9,9 +9,8 @@ import { observer } from 'mobx-react-lite';
 
 
 
-const Message = ({ severity = 1, hide = 2000 }) => {
+const Message = ({ severity = 1, hide = 3000 }) => {
   const classes = useStyles();
-  debugger
 
   const handleClose = () => {
     store.setMessage('')
@@ -24,8 +23,8 @@ const Message = ({ severity = 1, hide = 2000 }) => {
         autoHideDuration={hide}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: 'top',
+          horizontal: 'right',
         }}
         message={<span id="message-id">{store.getMessage()}</span>}
         action={[
