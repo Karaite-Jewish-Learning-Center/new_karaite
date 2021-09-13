@@ -5,8 +5,7 @@ import ReactHtmlParser from 'react-html-parser'
 import { makeRandomKey } from "../utils/utils"
 import KaraitePaneHeader from "./KaraitePaneHeader";
 import { karaitesBookUrl } from '../constants/constants'
-import store
-    from '../stores/appState'
+import store from '../stores/appState'
 import Loading from "./Loading";
 import './css/comments.css'
 import { observer } from 'mobx-react-lite'
