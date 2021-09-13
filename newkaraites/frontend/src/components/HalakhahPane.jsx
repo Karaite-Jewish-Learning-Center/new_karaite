@@ -9,6 +9,7 @@ import Colors from '../constants/colors.js';
 import store from '../stores/appState.js';
 import { observer } from 'mobx-react-lite';
 import { slug } from '../utils/utils';
+import transform from '../utils/transform.jsx'
 import './css/comments.css'
 
 
@@ -19,23 +20,7 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
     const [current, setCurrent] = useState(null)
     const classes = useStyles()
 
-    // todo refactor
-    const transform = (node) => {
 
-        if (node.type === 'tag') {
-            // rewrite the span with a onClick event handler
-            if (node.name === 'span') {
-                if (node['attribs']['class'] === 'en-biblical-ref') {
-                    return <span key={makeRandomKey()} lang="EN" onClick={refClick} className="en-biblical-ref">{node['children'][0]['data']}</span>
-                }
-                if (node['attribs']['class'] === 'he-biblical-ref') {
-                    return <span key={makeRandomKey()} lang="HE" onClick={refClick} className="he-biblical-ref">{node['children'][0]['data']}</span>
-                }
-            }
-            if (node.name === 'p') {
-            }
-        }
-    }
     const buttonOnClick = () => {
 
         store.setPanes({
@@ -58,7 +43,6 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
         const response = await fetch(referencesUrl + `${book}/${chapter}/${verse}/`)
         if (response.ok) {
             const data = await response.json()
-            debugger
             setReferences(data.references)
         } else {
             alert("HTTP-Error: " + response.status)
@@ -83,7 +67,7 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
                             <>
                                 {ReactHtmlParser(references[current]['paragraph_html'], {
                                     decodeEntities: true,
-                                    transform: transform
+                                    transform: transform.bind(this, refClick)
                                 })}
                             </>
                         </div>
