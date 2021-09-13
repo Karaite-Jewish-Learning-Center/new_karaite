@@ -22,6 +22,7 @@ import store from '../stores/appState'
 import { observer } from 'mobx-react-lite'
 
 
+
 const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
 
@@ -67,6 +68,7 @@ const RightPane = ({ paneNumber, refClick }) => {
                 justifycontent="flex-end"
                 alignItems="center"
                 className={classes.header}
+
             >
                 <Grid item xs={10}>
                     {(showState.length > 0 ?

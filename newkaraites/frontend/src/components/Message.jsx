@@ -1,29 +1,46 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import store from '../stores/appState'
+import { observer } from 'mobx-react-lite';
 
 
-export default function Message({message, severity, hide=2000 ,onClose}) {
+
+const Message = ({ severity = 1, hide = 2000 }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(true);
-  const handleClose = () => {
-    onClose()
-    setOpen(false);
-  };
   debugger
-  if(message === "") return null
+
+  const handleClose = () => {
+    store.setMessage('')
+  };
 
   return (
     <div className={classes.root}>
-      <Snackbar open={open} autoHideDuration={hide} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={severity}>
-          {[message]}
-        </Alert>
+      <Snackbar
+        open={store.getMessage() !== ''}
+        autoHideDuration={hide}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        message={<span id="message-id">{store.getMessage()}</span>}
+        action={[
+
+          <IconButton
+            key="close"
+            aria-label="close"
+            color="inherit"
+            className={classes.close}
+            onClick={handleClose}
+          >
+            <CloseIcon />
+          </IconButton>,
+        ]}
+      >
       </Snackbar>
 
     </div>
@@ -37,4 +54,10 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  close: {
+    padding: theme.spacing(0.5),
+  },
+
 }));
+
+export default observer(Message)

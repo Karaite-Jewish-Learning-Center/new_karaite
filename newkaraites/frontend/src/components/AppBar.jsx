@@ -100,7 +100,8 @@ export default function PrimarySearchAppBar() {
 
         >
             <Toolbar>
-                <Typography className={classes.name} component="h3" >Karaites</Typography>
+                <Typography className={classes.name} component="h3" >
+                    <Link className={classes.link} to="/">Karaites</Link></Typography>
                 <Link className={classes.link} to="/texts/" >Texts</Link>
                 <div className={classes.grow} />
                 <div className={classes.search}>

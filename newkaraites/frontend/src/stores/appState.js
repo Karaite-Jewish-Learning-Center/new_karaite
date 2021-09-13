@@ -5,7 +5,8 @@ class AppState {
     panes = []
     // only true when last pane is closed
     isLastPane = false
-
+    // messages
+    message = ''
 
     constructor() {
         makeAutoObservable(this)
@@ -90,6 +91,11 @@ class AppState {
 
     getPanes = () => this.panes
 
+    getPaneNumber = (book, chapter) => {
+        return this.panes.findIndex(pane =>
+            pane.book === book && pane.chapter === chapter
+        )
+    }
     getPaneByNumber = (i) => this.panes[i]
 
     setIsLastPane = (state) => {
@@ -115,6 +121,12 @@ class AppState {
     }
     getBookDetails = (i) => this.panes[i].book_details
 
+
+    // messages
+    setMessage = (message) => {
+        this.message = message
+    }
+    getMessage = () => this.message
 }
 
 
