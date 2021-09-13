@@ -13,16 +13,12 @@ import { observer } from 'mobx-react-lite'
 
 
 const PARAGRAPHS = 0
-const BOOKS_DETAILS = 1
-
 
 
 const KaraitesBooks = ({ paneNumber, refClick }) => {
     const [paragraphs, setParagraphs] = useState([])
     const [bookEnded, setBookEnded] = useState(false)
-    const [chapter, setChapter] = useState(store.getChapter(paneNumber))
     const [first, setFirst] = useState(0)
-    //const [booksDetails, setBookDetails] = useState([])
     const book = store.getBook(paneNumber)
 
     const classes = useStyles()
@@ -30,12 +26,13 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
 
     async function fetchData() {
         if (!bookEnded) {
+            const chapter = (paragraphs.length === 0 ? store.getChapter(paneNumber) : paragraphs.length)
+
             const response = await fetch(`${karaitesBookUrl}${book}/${chapter}/${first}/`)
             if (response.ok) {
                 const data = await response.json()
                 setBookEnded(() => data[PARAGRAPHS][0].length === 0)
                 setParagraphs([...paragraphs, ...data[PARAGRAPHS][0]])
-                setChapter(data[PARAGRAPHS][1])
                 setFirst(1)
             } else {
                 alert("HTTP-Error: " + response.status)
@@ -60,9 +57,7 @@ const KaraitesBooks = ({ paneNumber, refClick }) => {
     }
 
     const itemContent = (item, data) => {
-        debugger
         return (<div className={classes.paragraphContainer}>
-            <p>{data[1]}</p>
             {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
                 decodeEntities: true,
                 transform: transform

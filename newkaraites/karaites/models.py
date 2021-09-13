@@ -566,7 +566,7 @@ class KaraitesBookAsArray(models.Model):
             query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=0,
                                                        paragraph_number__lte=paragraph_number)
         else:
-            query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=paragraph_number)[0:LIMIT]
+            query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gt=paragraph_number)[0:LIMIT]
 
         result = []
         for book in query:
