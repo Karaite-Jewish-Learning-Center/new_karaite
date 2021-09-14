@@ -20,6 +20,7 @@ import {
 import Player from './Player'
 import store from '../stores/appState'
 import { observer } from 'mobx-react-lite'
+import Header from './RightPaneHeader'
 
 
 
@@ -36,6 +37,7 @@ const RightPane = ({ paneNumber, refClick }) => {
     const classes = useStyles()
 
     const onClose = () => {
+        debugger
         store.setIsRightPaneOpen(false, paneNumber)
     }
 
@@ -61,39 +63,6 @@ const RightPane = ({ paneNumber, refClick }) => {
             )
         })
     }
-    const Header = () => {
-        return (
-            <Grid container
-                direction="row"
-                justifycontent="flex-end"
-                alignItems="center"
-                className={classes.header}
-
-            >
-                <Grid item xs={10}>
-                    {(showState.length > 0 ?
-                        <IconButton
-                            aria-label="Back"
-                            component="span"
-                            onClick={backButton}
-                        >
-                            <ChevronLeftIcon className={classes.iconGrid} />
-                        </IconButton>
-                        : null)}
-                </Grid>
-                <Grid item className={classes.icon}>
-                    <IconButton
-                        aria-label="Close pane"
-                        component="span"
-                        onClick={onClose}
-                    >
-                        <HighlightOffIcon className={classes.iconGrid} />
-                    </IconButton>
-                </Grid>
-            </Grid>
-        )
-    }
-
 
     const PaneBody = () => {
         const show = showState.slice(-1)[0]
@@ -103,26 +72,34 @@ const RightPane = ({ paneNumber, refClick }) => {
                     <CommentsPane
                         refClick={refClick}
                         paneNumber={paneNumber}
+                        backButton={backButton}
+                        onClose={onClose}
                     />)
             }
             case 1: {
                 return (<HalakhahPane
                     refClick={refClick}
                     paneNumber={paneNumber}
+                    backButton={backButton}
+                    onClose={onClose}
                 />)
             }
             default: {
                 return (
+                    <>
+                        <Header onClose={onClose} />
+                        <div className={classes.body}>
 
-                    <div className={classes.body}>
-                        <Typography className={classes.headerColor}>Related texts</Typography>
-                        <hr className={classes.ruler} />
-                        <Item />
-                        <hr className={classes.ruler} />
-                        <Player text={verseData[BIBLE_ENGLISH]} language={"English"} />
-                        <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"} />
+                            <Typography className={classes.headerColor}>Related texts</Typography>
+                            <hr className={classes.ruler} />
+                            <Item />
+                            <hr className={classes.ruler} />
+                            <Player text={verseData[BIBLE_ENGLISH]} language={"English"} />
+                            <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"} />
 
-                    </div>
+
+                        </div>
+                    </>
                 )
             }
         }
@@ -132,7 +109,6 @@ const RightPane = ({ paneNumber, refClick }) => {
 
     return (
         <div className={classes.container}>
-            <Header />
             <PaneBody />
         </div>
     )

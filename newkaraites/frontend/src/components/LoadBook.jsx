@@ -42,7 +42,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     references: [],
                     distance: 2,
                     currentItem: 0,
-                    flashAlreadyOpen: false,
                 })
 
             }
@@ -68,17 +67,15 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     }
 
     const RenderRightPane = ({ isOpen, paneNumber }) => {
-        if (isOpen) {
-            return (
-                <Grid item xs={true} className={classes.rightPane}>
-                    <RightPane
-                        paneNumber={paneNumber}
-                        refClick={refClick}
-                    />
-                </Grid>
-            )
-        }
-        return null
+        return (
+            <Grid item xs={true} className={(isOpen ? classes.rightPane : classes.hiddenRightPane)}>
+                <RightPane
+                    paneNumber={paneNumber}
+                    refClick={refClick}
+                />
+            </Grid>
+        )
+
     }
 
 
@@ -127,16 +124,17 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     }
 
     return (
-        <div>
+        <>
             <Message />
             <Grid container
                 className={classes.root}
                 direction="row"
                 justifycontent="center"
+                key={makeRandomKey()}
             >
                 {books.map(jsx => jsx)}
             </Grid>
-        </div>
+        </>
     )
 
 }
@@ -156,6 +154,9 @@ const useStyles = makeStyles((theme) => ({
     rightPane: {
         maxWidth: '400px !important',
         width: '100%',
+    },
+    hiddenRightPane: {
+        display: 'none'
     }
 }));
 

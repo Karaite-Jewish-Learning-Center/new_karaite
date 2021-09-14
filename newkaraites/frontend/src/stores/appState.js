@@ -60,7 +60,7 @@ class AppState {
     getChapter = (i) => parseInt(this.panes[i].chapter)
 
     setVerse = (verse, i) => {
-        this.panes[i].verse = verse
+        runInAction(() => { this.panes[i].verse = verse })
     }
     getVerse = (i) => this.panes[i].verse
 
@@ -127,6 +127,7 @@ class AppState {
         this.message = message
     }
     getMessage = () => this.message
+
 }
 
 

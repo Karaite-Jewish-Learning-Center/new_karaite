@@ -13,7 +13,6 @@ import store from '../stores/appState'
 const RenderTextGrid = ({ paneNumber }) => {
     const virtuoso = useRef(null);
     const book = store.getBook(paneNumber)
-    const verse = store.getVerse(paneNumber)
 
     const [chapterViewPort, setChapterViewPort] = useState()
     const [loadingText, setLoadingText] = useState([])
@@ -56,8 +55,10 @@ const RenderTextGrid = ({ paneNumber }) => {
 
     const calcIndex = () => {
         // calc index of virtuoso element based on chapter and verse
-        return verses.slice(0, currentChapter - 2).reduce((x, y) => x + y, 0) + verse - 1
+        console.log("verser number", store.getVerse(paneNumber))
+        return verses.slice(0, currentChapter - 2).reduce((x, y) => x + y, 0) + store.getVerse(paneNumber) - 1
     }
+
     const calculateCurrentChapter = (visibleRange) => {
         // calc Current Chapter
         let avg = visibleRange.startIndex + 1
@@ -85,7 +86,7 @@ const RenderTextGrid = ({ paneNumber }) => {
         });
     }
 
-    if (virtuoso.current !== null && first === 0) jump(calcIndex())
+    //if (virtuoso.current !== null && first === 0) jump(calcIndex())
     //if (virtuoso.current !== null && first !== 0) jump(store.getCurrentItem(paneNumber))
 
 
