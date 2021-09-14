@@ -11,16 +11,23 @@ import { observer } from 'mobx-react-lite';
 import { slug } from '../utils/utils';
 import transform from '../utils/transform.jsx'
 import './css/comments.css'
+import Header from './RightPaneHeader.jsx';
 
 
 
-const HalakhahPane = ({ refClick, paneNumber }) => {
-    const [showPane, setShowPane] = useState(null)
+const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
+    const [showPane, setShowPane] = useState(1)
     const [references, setReferences] = useState([])
     const [current, setCurrent] = useState(null)
     const classes = useStyles()
 
-
+    const back = () => {
+        if (showPane === 0) {
+            setShowPane(1)
+        } else {
+            backButton()
+        }
+    }
     const buttonOnClick = () => {
 
         store.setPanes({
@@ -57,52 +64,57 @@ const HalakhahPane = ({ refClick, paneNumber }) => {
     switch (showPane) {
         case 0: {
             return (
-                <div className={classes.container}>
-                    <Typography className={classes.headerColor}>{references[current]['book_name']}</Typography>
+                <>
+                    <Header backButton={back} onClose={onClose} />
+                    <div className={classes.container}>
+                        <Typography className={classes.headerColor}>{references[current]['book_name']}</Typography>
 
-                    <Typography className={classes.headerColor}>{references[current]['author']}</Typography>
-                    <hr className={classes.ruler} />
-                    <div className={classes.scroll}>
-                        <div key={makeRandomKey()} className={classes.content}>
-                            <>
-                                {ReactHtmlParser(references[current]['paragraph_html'], {
-                                    decodeEntities: true,
-                                    transform: transform.bind(this, refClick)
-                                })}
-                            </>
-                        </div>
+                        <Typography className={classes.headerColor}>{references[current]['author']}</Typography>
                         <hr className={classes.ruler} />
-                        <Button
-                            className={classes.button}
-                            onClick={buttonOnClick}
-                        >Open book</Button>
+                        <div className={classes.scroll}>
+                            <div key={makeRandomKey()} className={classes.content}>
+                                <>
+                                    {ReactHtmlParser(references[current]['paragraph_html'], {
+                                        decodeEntities: true,
+                                        transform: transform.bind(this, refClick)
+                                    })}
+                                </>
+                            </div>
+                            <hr className={classes.ruler} />
+                            <Button
+                                className={classes.button}
+                                onClick={buttonOnClick}
+                            >Open book</Button>
 
+                        </div>
                     </div>
-                </div>
+                </>
             )
         }
         default: {
             return (
-                <div className={classes.container}>
-                    <Typography className={classes.headerColor}>Halakhah ({references.length})</Typography>
-                    <hr className={classes.ruler} />
-                    <div key={makeRandomKey()}>
-                        {references.map((obj, i) => (
-                            <>
-                                <Button
-                                    variant="text"
-                                    className={classes.button}
-                                    fullWidth={false}
-                                    onClick={onClick.bind(this, i)}
-                                >
-                                    {obj['book_name']}, {obj['author']}
-                                </Button>
-                                <hr className={classes.ruler} />
-                            </>
-                        ))}
+                <>
+                    <Header backButton={backButton} onClose={onClose} />
+                    <div className={classes.container}>
+                        <Typography className={classes.headerColor}>Halakhah ({references.length})</Typography>
+                        <hr className={classes.ruler} />
+                        <div key={makeRandomKey()}>
+                            {references.map((obj, i) => (
+                                <>
+                                    <Button
+                                        variant="text"
+                                        className={classes.button}
+                                        fullWidth={false}
+                                        onClick={onClick.bind(this, i)}
+                                    >
+                                        {obj['book_name']}, {obj['author']}
+                                    </Button>
+                                    <hr className={classes.ruler} />
+                                </>
+                            ))}
+                        </div>
                     </div>
-                </div>
-
+                </>
             )
         }
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import TabPanel from "./TabPanel"
 import Comments from "./Comments"
 import { getCommentsUrl } from '../constants/constants'
@@ -8,10 +8,11 @@ import Tab from '@material-ui/core/Tab'
 import store from "../stores/appState"
 import { observer } from 'mobx-react-lite'
 import './css/comments.css'
-//import '../../../karaites/static/css/tooltip.css'
+import Header from "./RightPaneHeader"
 
-const CommentsPane = ({ refClick, paneNumber }) => {
 
+const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
+    debugger
     const classes = useStyles()
 
     const getComments = async (book, chapter, verse) => {
@@ -40,6 +41,7 @@ const CommentsPane = ({ refClick, paneNumber }) => {
     console.log('rendering Comment pane')
     return (
         <>
+            <Header backButton={backButton} onClose={onClose} />
             <Tabs
                 className={classes.root}
                 value={store.getCommentTab(paneNumber)}

@@ -26,6 +26,8 @@ const ChapterHeaderVerse = (props) => {
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
+    // store.setVerse(verse, paneNumber)
+    // console.log("verse", store.getVerse(paneNumber))
 
     const openRightPane = (i) => {
         store.setIsRightPaneOpen(true, paneNumber)
