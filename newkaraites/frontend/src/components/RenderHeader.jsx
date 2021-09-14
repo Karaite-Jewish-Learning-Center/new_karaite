@@ -10,7 +10,6 @@ import store from '../stores/appState';
 import { observer } from 'mobx-react-lite';
 
 
-
 const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
     book = unslug(book)
     console.log("rendering RenderHeader")
@@ -26,7 +25,6 @@ const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
     return (
         <Grid container className={classes.header}
             direction="row"
-
         >
             <Grid item xs={1} key={0}>
                 <IconButton
@@ -47,7 +45,7 @@ const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
             <Grid item xs={4} key={3}>
                 <Typography className={classes.englishBook}>{book} </Typography>
             </Grid>
-        </Grid>
+        </Grid >
     )
 }
 

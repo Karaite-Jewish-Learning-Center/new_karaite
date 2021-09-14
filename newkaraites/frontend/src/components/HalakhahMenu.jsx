@@ -6,6 +6,8 @@ import { unslug } from '../utils/utils'
 import { Link } from 'react-router-dom'
 import store from '../stores/appState'
 
+
+
 const HalakhahMenu = ({ book }) => {
     const [toc, setToc] = useState([])
 
@@ -30,7 +32,7 @@ const HalakhahMenu = ({ book }) => {
             <Grid container
                 direction="row"
                 spacing={2}
-                xs={true}
+                key={`h-${index[2]}`}
             >
                 <Grid item className={classes.left} >
                     <Link to={`/Halakhah/${book}/${index[2]}/`} >
@@ -38,8 +40,8 @@ const HalakhahMenu = ({ book }) => {
                     </Link>
                 </Grid>
 
-                <Grid item className={classes.right}  >
-                    <Link to={`/Halakhah/${book}/${index[2]}/`} >
+                <Grid item className={classes.right}>
+                    <Link to={`/Halakhah/${book}/${index[2]}/`}>
                         <Typography className={classes.he}>{index[0]}</Typography>
                     </Link>
                 </Grid>
@@ -53,9 +55,12 @@ const HalakhahMenu = ({ book }) => {
     }, [book])
 
     return (
-        <div container className={classes.container}>
+        <div className={classes.container}>
             <div className={classes.filler}>&nbsp;</div>
-            <Typography className={classes.title} variant="h6" component="h2">{unslug(book)}</Typography>
+            <Typography className={classes.titleHalakhah} variant="h6" component="h2">{unslug(book)}</Typography>
+
+            <Link className={classes.link} to='/Halakhah/'>Books list</Link>
+
             <hr className={classes.ruler} />
             <TableOfContents />
         </div>

@@ -14,7 +14,6 @@ const KaraitesPaneHeader = ({ paneNumber }) => {
     const classes = resources()
 
     const onClosePane = () => {
-        debugger
         store.closePane(paneNumber)
         if (store.getPanes.length === 0) {
             store.setIsLastPane(true)

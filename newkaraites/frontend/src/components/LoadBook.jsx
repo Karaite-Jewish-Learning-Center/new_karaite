@@ -9,6 +9,7 @@ import RightPane from './RightPane';
 import RenderText from './RenderText'
 import { makeRandomKey } from '../utils/utils';
 import { Redirect } from 'react-router-dom';
+import Message from './Message'
 
 
 const LoadBook = ({ book, chapter, verse, type }) => {
@@ -20,6 +21,9 @@ const LoadBook = ({ book, chapter, verse, type }) => {
         let isOpen = store.getPanes().some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
+        if (isOpen) {
+            store.setMessage('All ready open.')
+        }
 
         if (!isOpen) {
             if (type === "bible") {
@@ -37,7 +41,8 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     isRightPaneOpen: false,
                     references: [],
                     distance: 2,
-                    currentItem: 0
+                    currentItem: 0,
+                    flashAlreadyOpen: false,
                 })
 
             }
@@ -122,13 +127,16 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     }
 
     return (
-        <Grid container
-            className={classes.root}
-            direction="row"
-            justifycontent="center"
-        >
-            {books.map(jsx => jsx)}
-        </Grid>
+        <div>
+            <Message />
+            <Grid container
+                className={classes.root}
+                direction="row"
+                justifycontent="center"
+            >
+                {books.map(jsx => jsx)}
+            </Grid>
+        </div>
     )
 
 }

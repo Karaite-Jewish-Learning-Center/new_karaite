@@ -75,7 +75,15 @@ const booksMenu = makeStyles((theme) => ({
         marginBottom: 50,
         color: 'gray',
     },
+    titleHalakhah: {
+        marginBottom: 20,
+        color: 'gray',
+    },
+    link: {
+        marginBottom: 30,
+    },
     ruler: {
+        marginTop: 30,
         borderColor: Colors.rulerColor,
     },
     filler: {

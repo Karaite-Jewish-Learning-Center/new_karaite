@@ -39,7 +39,7 @@ const CommentsPane = ({ refClick, paneNumber }) => {
 
     console.log('rendering Comment pane')
     return (
-        <div className={classes.container}>
+        <>
             <Tabs
                 className={classes.root}
                 value={store.getCommentTab(paneNumber)}
@@ -56,7 +56,7 @@ const CommentsPane = ({ refClick, paneNumber }) => {
                     <Comments language="he" comments={store.getComments(paneNumber)} refClick={refClick} />
                 </TabPanel>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -1,4 +1,4 @@
-import {hebrewBookNameToEnglish} from "./utils";
+import { hebrewBookNameToEnglish } from "./utils";
 import gematriya from 'gematriya';
 
 
@@ -11,8 +11,7 @@ const parseBiblicalReference = (e) => {
     let highlight
     let language = e.target.childNodes[0].parentElement.lang
     let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(':(', '')
-    biblicalRef = biblicalRef.replace(', ', ':',1).replace(',', ':',1).replace('.', '').trim()
-    debugger
+    biblicalRef = biblicalRef.replace(', ', ':', 1).replace(',', ':', 1).replace('.', '').trim()
 
     if (language.toLowerCase() === 'he') {
         let spacePos = biblicalRef.lastIndexOf(' ') + 1
@@ -20,9 +19,9 @@ const parseBiblicalReference = (e) => {
         let [refChapter, refVerse] = refChapterVerse.split(':')
 
         let refBook = biblicalRef.replace(refChapterVerse, '').trim()
-        if(refVerse.indexOf('-')>0) {
+        if (refVerse.indexOf('-') > 0) {
             refVerse = refVerse.split('-')
-        }else{
+        } else {
             refVerse = refVerse.split(',')
         }
         book = hebrewBookNameToEnglish(refBook)
@@ -44,7 +43,7 @@ const parseBiblicalReference = (e) => {
 
     }
     console.log(book, chapter, verse, highlight)
-    throw('Invalid reference:' + biblicalRef)
+    throw ('Invalid reference:' + biblicalRef)
 
 }
 

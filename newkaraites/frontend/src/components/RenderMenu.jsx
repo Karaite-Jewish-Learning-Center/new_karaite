@@ -25,7 +25,8 @@ const RenderMenu = ({ books, path }) => {
     const makeMenu = () => {
         return Object.keys(books).map((key, index) =>
             <div className={classes.container} key={index}>
-                <Typography className={classes.title} variant="h6" component="h2">{key}</Typography>
+                <Typography className={classes.titleHalakhah} variant="h6" component="h2">{key}</Typography>
+                <Link className={classes.link} to='/texts/'>Texts</Link>
                 <hr className={classes.ruler}></hr>
                 <Grid container spacing={1}
                     direction="row"
