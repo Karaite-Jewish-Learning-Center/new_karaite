@@ -83,6 +83,14 @@ class AppState {
 
     getCurrentItem = (i) => this.panes[i].currentItem
 
+    // right pane
+    // comments
+    setRightPaneState = (state, i) => {
+        this.panes[i].rightPaneState = state
+    }
+    getRightPaneState = (i) => this.panes[i].rightPaneState
+
+
     // panes
 
     setPanes = (pane) => {

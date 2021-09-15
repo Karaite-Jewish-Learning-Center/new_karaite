@@ -12,7 +12,6 @@ import Header from "./RightPaneHeader"
 
 
 const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
-    debugger
     const classes = useStyles()
 
     const getComments = async (book, chapter, verse) => {
@@ -38,7 +37,6 @@ const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
         store.setCommentTab(tab, paneNumber)
     }
 
-    console.log('rendering Comment pane')
     return (
         <>
             <Header backButton={backButton} onClose={onClose} />

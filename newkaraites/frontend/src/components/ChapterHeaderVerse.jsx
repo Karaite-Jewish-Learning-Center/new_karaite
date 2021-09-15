@@ -26,12 +26,20 @@ const ChapterHeaderVerse = (props) => {
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
-    // store.setVerse(verse, paneNumber)
-    // console.log("verse", store.getVerse(paneNumber))
+    const onMouseEnter = () => {
+        console.log('on mouse enter')
 
-    const openRightPane = (i) => {
+        store.setCommentsChapter(chapter, paneNumber)
+        store.setCommentsVerse(verse, paneNumber)
+        store.setVerseData(data, paneNumber)
+        store.setCurrentItem(item, paneNumber)
+    }
+
+    const openRightPane = () => {
+        console.log('opening right pane.....')
+        store.setCurrentItem(item, paneNumber)
+        //store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
         store.setIsRightPaneOpen(true, paneNumber)
-        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
 
     if (renderChapter === "1") {
@@ -46,21 +54,20 @@ const ChapterHeaderVerse = (props) => {
         </div>)
     }
 
-    const select = gridVisibleRange.startIndex + store.getDistance(paneNumber)
-    const found = item === select
+    // const select = gridVisibleRange.startIndex + store.getDistance(paneNumber)
+    // const found = item === select
 
-    if (found) {
-        store.setCommentsChapter(chapter, paneNumber)
-        store.setCommentsVerse(verse, paneNumber)
-        store.setVerseData(data, paneNumber)
-        store.setCurrentItem(select, paneNumber)
-    }
+    // if (found) {
+    //     store.setCommentsChapter(chapter, paneNumber)
+    //     store.setCommentsVerse(verse, paneNumber)
+    //     store.setVerseData(data, paneNumber)
+    // }
 
     return (
-        <div className={classes.verse}>
+        <div className={classes.verse} onMouseEnter={onMouseEnter}>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                onClick={openRightPane.bind(this, item)}
+            <div className={`${classes.textContainer} ${(false ? classes.selectVerse : '')}`}
+                onClick={openRightPane}
             >
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -89,9 +96,9 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'top',
-        // "&:hover": {
-        //     background: Colors['verseOnMouseOver']
-        // },
+        "&:hover": {
+            background: Colors['verseOnMouseOver']
+        },
     },
     chapter: {
         width: '100%',

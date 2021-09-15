@@ -20,6 +20,7 @@ const RenderTextGrid = ({ paneNumber }) => {
     const [currentChapter, setCurrentChapter] = useState(store.getChapter(paneNumber))
     const [bookData, setBookData] = useState([])
     const [gridVisibleRange, setGridVisibleRange] = useState({ startIndex: 0, endIndex: 0 })
+    //const [verse, setVerse] = useState(store.getVerse(paneNumber))
     const [first, setFirst] = useState(0) // it's the first time that we read data for this book
 
     const itemContent = (item, data) => {
@@ -54,9 +55,7 @@ const RenderTextGrid = ({ paneNumber }) => {
     }
 
     const calcIndex = () => {
-        // calc index of virtuoso element based on chapter and verse
-        console.log("verser number", store.getVerse(paneNumber))
-        return verses.slice(0, currentChapter - 2).reduce((x, y) => x + y, 0) + store.getVerse(paneNumber) - 1
+        //return verses.slice(0, currentChapter - 2).reduce((x, y) => x + y, 0) + verse - 1
     }
 
     const calculateCurrentChapter = (visibleRange) => {
@@ -80,14 +79,17 @@ const RenderTextGrid = ({ paneNumber }) => {
     }
 
     const jump = (index) => {
+        console.log('index', index)
         virtuoso.current.scrollToIndex({
             index: index,
             align: 'center',
         });
     }
 
-    //if (virtuoso.current !== null && first === 0) jump(calcIndex())
-    //if (virtuoso.current !== null && first !== 0) jump(store.getCurrentItem(paneNumber))
+    if (virtuoso.current !== null && first === 0) {
+        jump(store.getCurrentItem(paneNumber))
+        //jump(calcIndex())
+    }
 
 
     useEffect(() => {

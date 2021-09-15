@@ -41,7 +41,9 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     isRightPaneOpen: false,
                     references: [],
                     distance: 2,
-                    currentItem: 0,
+                    currentItem: 112,
+                    rightPaneState: [],
+                    rightPaneStateHalakhah: 1,
                 })
 
             }
@@ -54,7 +56,8 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     book_details: [],
                     highlight: [],
                     type: type,
-                    currentItem: 0
+                    currentItem: 0,
+
                 })
 
             }

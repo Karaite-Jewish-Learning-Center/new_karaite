@@ -8,7 +8,6 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 
 
 const Header = ({ backButton, onClose }) => {
-    debugger
     const classes = useStyles()
 
     console.log("Rendering Right pane  header...")

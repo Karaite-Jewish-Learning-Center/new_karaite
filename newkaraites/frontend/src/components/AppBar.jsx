@@ -101,8 +101,11 @@ export default function PrimarySearchAppBar() {
         >
             <Toolbar>
                 <Typography className={classes.name} component="h3" >
-                    <Link className={classes.link} to="/">Karaites</Link></Typography>
-                <Link className={classes.link} to="/texts/" >Texts</Link>
+                    <Link className={classes.link} to="/">Karaites</Link>
+                </Typography>
+                <Typography component="h3" >
+                    <Link className={classes.link} to="/texts/" >Texts</Link>
+                </Typography>
                 <div className={classes.grow} />
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
@@ -228,7 +231,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(20)
     },
     name: {
-        fontSize: 18,
+        fontSize: 24,
         color: 'black',
     },
     link: {

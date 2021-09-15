@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
-import { Grid } from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
@@ -31,13 +27,17 @@ const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 const RightPane = ({ paneNumber, refClick }) => {
 
-    const [showState, setShowState] = useState([])
+    const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
     const verseData = store.getVerseData(paneNumber)
 
     const classes = useStyles()
 
+    const clickToOpen = (e) => {
+        store.setRightPaneState(showState, paneNumber)
+        refClick(e)
+    }
     const onClose = () => {
-        debugger
+        store.setRightPaneState([], paneNumber)
         store.setIsRightPaneOpen(false, paneNumber)
     }
 
@@ -70,7 +70,7 @@ const RightPane = ({ paneNumber, refClick }) => {
             case 0: {
                 return (
                     <CommentsPane
-                        refClick={refClick}
+                        refClick={clickToOpen}
                         paneNumber={paneNumber}
                         backButton={backButton}
                         onClose={onClose}
@@ -78,10 +78,11 @@ const RightPane = ({ paneNumber, refClick }) => {
             }
             case 1: {
                 return (<HalakhahPane
-                    refClick={refClick}
+                    refClick={clickToOpen}
                     paneNumber={paneNumber}
                     backButton={backButton}
                     onClose={onClose}
+
                 />)
             }
             default: {
