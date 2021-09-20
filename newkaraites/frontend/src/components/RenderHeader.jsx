@@ -12,7 +12,6 @@ import { observer } from 'mobx-react-lite';
 
 const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
     book = unslug(book)
-    console.log("rendering RenderHeader")
     const classes = useStyles()
 
     const onClose = () => {

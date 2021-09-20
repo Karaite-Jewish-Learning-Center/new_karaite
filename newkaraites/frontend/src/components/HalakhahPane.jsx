@@ -17,8 +17,8 @@ import Header from './RightPaneHeader.jsx';
 const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
     const [references, setReferences] = useState([])
     const classes = useStyles()
-    const getHalakhah = async (book, chapter, verse) => {
 
+    const getHalakhah = async (book, chapter, verse) => {
         const response = await fetch(referencesUrl + `${book}/${chapter}/${verse}/`)
         if (response.ok) {
             const data = await response.json()
@@ -48,7 +48,7 @@ const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
                             <>
                                 {ReactHtmlParser(reference['paragraph_html'], {
                                     decodeEntities: true,
-                                    transform: transform.bind(this, refClick)
+                                    transform: transform.bind(this, refClick, undefined, "bible", undefined)
                                 })}
                             </>
                         </div>

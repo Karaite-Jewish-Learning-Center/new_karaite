@@ -78,6 +78,7 @@ class AppState {
     getDistance = (i) => this.panes[i].distance
 
     setCurrentItem = (item, i) => {
+        console.log("setting current item", item)
         runInAction(() => { this.panes[i].currentItem = item })
     }
 

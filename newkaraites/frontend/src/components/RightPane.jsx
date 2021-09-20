@@ -106,7 +106,6 @@ const RightPane = ({ paneNumber, refClick }) => {
         }
     }
 
-    console.log("Rendering Right pane ...", store.getIsRightPaneOpen(paneNumber))
 
     return (
         <div className={classes.container}>

@@ -43,7 +43,6 @@ const parseBiblicalReference = (e) => {
 
     }
     console.log(book, chapter, verse, highlight)
-    throw ('Invalid reference:' + biblicalRef)
 
 }
 
