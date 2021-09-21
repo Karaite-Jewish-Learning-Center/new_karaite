@@ -32,11 +32,13 @@ const RightPane = ({ paneNumber, refClick }) => {
 
     const classes = useStyles()
 
-    const clickToOpen = (e) => {
+    const clickToOpen = (item, type, panNumber, e) => {
         store.setRightPaneState(showState, paneNumber)
-        refClick(e)
+        refClick(item, 'bible', paneNumber, e)
     }
     const onClose = () => {
+        debugger
+        store.setDistance(0, paneNumber)
         store.setRightPaneState([], paneNumber)
         store.setIsRightPaneOpen(false, paneNumber)
     }

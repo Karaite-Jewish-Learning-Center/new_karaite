@@ -28,9 +28,12 @@ const ChapterHeaderVerse = (props) => {
 
 
     const openRightPane = (i) => {
-        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
-        store.setIsRightPaneOpen(true, paneNumber)
         store.setCurrentItem(i, paneNumber)
+
+        if (store.getIsRightPaneOpen(paneNumber)) {
+            store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+        }
+        store.setIsRightPaneOpen(true, paneNumber)
     }
 
     if (renderChapter === "1") {

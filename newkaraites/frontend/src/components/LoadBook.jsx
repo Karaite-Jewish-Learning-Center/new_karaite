@@ -11,7 +11,9 @@ import { makeRandomKey } from '../utils/utils';
 import { Redirect } from 'react-router-dom';
 import Message from './Message'
 import { versesByBibleBook } from '../constants/constants'
+import { karaitesBookUrl } from '../constants/constants'
 
+const PARAGRAPHS = 0
 
 
 const LoadBook = ({ book, chapter, verse, type }) => {
@@ -20,7 +22,27 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     const classes = useStyles()
 
+    async function fetchData(paneNumber) {
+        debugger
+        const x = store.getParagraphs(paneNumber).length
+        debugger
+        if (store.getParagraphs(paneNumber).length === 0) {
+            const chapter = store.getKaraitesChapter(paneNumber)
+            debugger
+            const response = await fetch(`${karaitesBookUrl}${book}/${chapter}/${0}/`)
+            if (response.ok) {
+                const data = await response.json()
+                store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
+            } else {
+                alert("HTTP-Error: " + response.status)
+            }
+        }
+
+    }
+
     const getBook = async (book, chapter, verse, highlight, type) => {
+        type = type.toLowerCase()
+
         let isOpen = store.getPanes().some((pane) => {
             return pane.book === book && pane.chapter === chapter
         })
@@ -51,11 +73,11 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                 })
 
             }
-            console.log('chapter', chapter)
+
             if (type === "karaites") {
                 store.setPanes({
                     book: book,
-                    chapter: chapter,
+                    chapter: 9999999,
                     verse: verse,
                     paragraphs: [],
                     book_details: [],
@@ -64,12 +86,12 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     currentItem: chapter,
 
                 })
-
+                fetchData(store.panes.length - 1)
             }
         }
     }
 
-    const refClick = (item, kind = 'Bible', paneNumber, e) => {
+    const refClick = (item, kind = 'bible', paneNumber, e) => {
         debugger
         if (item !== undefined) {
             store.setCurrentItem(item, paneNumber)
@@ -96,7 +118,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
         let jsx = []
 
         for (let i = 0; i < panes.length; i++) {
-            if (panes[i].type === 'bible') {
+            if (panes[i].type.toLowerCase() === 'bible') {
 
                 jsx.push((
                     <>
@@ -109,10 +131,10 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                 ))
 
             }
-            if (panes[i].type === 'karaites') {
+            if (panes[i].type.toLowerCase() === 'karaites') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks paneNumber={i} refClick={refClick} highlight={[]} type={'karaites'} />
+                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)} />
                     </Grid>
 
                 ))

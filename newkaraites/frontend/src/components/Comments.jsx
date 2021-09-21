@@ -15,7 +15,7 @@ export default function Comments({ language, comments, refClick }) {
                 <>
                     {ReactHtmlParser(html[ref], {
                         decodeEntities: true,
-                        transform: transform.bind(this, refClick, undefined, 'Bible', undefined)
+                        transform: transform.bind(this, refClick, 1, 'bible', 0)
                     })}
                 </>
             ))}

@@ -120,10 +120,12 @@ class AppState {
     // karaites books
 
     setParagraphs = (paragraphs, i) => {
-
         this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
-        debugger
     }
+
+    getParagraphs = (i) => this.panes[i].paragraphs
+
+    getKaraitesChapter = (i) => (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
     setBookDetails = (details, i) => {
         this.panes[i].book_details = details

@@ -74,7 +74,6 @@ const RenderTextGrid = ({ paneNumber }) => {
     }
 
     const jump = (index) => {
-
         virtuoso.current.scrollToIndex({
             index: index,
             align: 'top',
