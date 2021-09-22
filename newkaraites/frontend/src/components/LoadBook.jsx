@@ -92,7 +92,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     }
 
     const refClick = (item, kind = 'bible', paneNumber, e) => {
-        debugger
         if (item !== undefined) {
             store.setCurrentItem(item, paneNumber)
         }

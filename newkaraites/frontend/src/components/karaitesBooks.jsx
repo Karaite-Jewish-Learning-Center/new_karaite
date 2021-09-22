@@ -9,13 +9,22 @@ import Loading from "./Loading";
 import './css/comments.css'
 import Colors from '../constants/colors'
 
+
+
+
 const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
 
     const classes = useStyles()
 
-    const itemContent = (item, data) => {
-        return (<div className={`${classes.paragraphContainer} ${store.getCurrentItem(paneNumber) === item ? classes.selected : ''}`}>{item}
+    const selectCurrent = (item) => {
+        if (store.panes.length === 1) {
+            return false
+        }
+        return store.getCurrentItem(paneNumber) === item
 
+    }
+    const itemContent = (item, data) => {
+        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
                 decodeEntities: true,
                 transform: transform.bind(this, refClick, item, 'Bible', paneNumber)
@@ -28,7 +37,7 @@ const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
         <>
             <KaraitePaneHeader paneNumber={paneNumber} />
             <Virtuoso data={paragraphs}
-                initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber))}
+                initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}
                 itemContent={itemContent}
                 components={{
                     Footer: () => {
