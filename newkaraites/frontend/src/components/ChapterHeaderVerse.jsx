@@ -18,22 +18,25 @@ import { observer } from 'mobx-react-lite';
 
 const ChapterHeaderVerse = (props) => {
     const { data, item, gridVisibleRange, paneNumber } = props
-
+    const allBookData = store.getBookData(paneNumber)
     let classes = useStyles()
     let chapterHtml = null
+
+
     let chapter = data[BIBLE_CHAPTER]
-    let verse = data[BIBLE_VERSE]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
 
     const openRightPane = (i) => {
+        debugger
         store.setCurrentItem(i, paneNumber)
-
-        if (store.getIsRightPaneOpen(paneNumber)) {
-            store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
-        }
-        store.setIsRightPaneOpen(true, paneNumber)
+        // if (store.getIsRightPaneOpen(paneNumber)) store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+        // store.setIsRightPaneOpen(true, paneNumber)
+        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+        store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
+        store.setCommentsVerse(allBookData[i][BIBLE_VERSE], paneNumber)
+        store.setVerseData(allBookData[i], paneNumber)
     }
 
     if (renderChapter === "1") {
@@ -48,12 +51,14 @@ const ChapterHeaderVerse = (props) => {
         </div>)
     }
 
+
     const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
 
     if (found) {
-        store.setCommentsChapter(chapter, paneNumber)
-        store.setCommentsVerse(verse, paneNumber)
-        store.setVerseData(data, paneNumber)
+        store.setCommentsChapter(allBookData[item][BIBLE_CHAPTER], paneNumber)
+        store.setCommentsVerse(allBookData[item][BIBLE_VERSE], paneNumber)
+        store.setVerseData(allBookData[item], paneNumber)
+
     }
     return (
         <div className={classes.verse} >
@@ -67,7 +72,7 @@ const ChapterHeaderVerse = (props) => {
                 </div>
 
                 <div className={classes.verseNumber}>
-                    <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
+                    <Typography className={classes.vn}>{data[BIBLE_VERSE]}--{item}</Typography>
                 </div>
                 <div className={classes.verseEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>

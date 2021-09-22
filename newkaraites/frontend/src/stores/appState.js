@@ -20,6 +20,11 @@ class AppState {
         return this.panes[paneNumber].isRightPaneOpen
     }
 
+    setFirst = (value, i) => {
+        this.panes[i].first = value
+    }
+
+    getFirst = (i) => this.panes[i].first
 
     // comment Tab
     setCommentTab = (tab, paneNumber) => {
@@ -57,7 +62,7 @@ class AppState {
     setChapter = (chapter, i) => {
         this.panes[i].chapter = parseInt(chapter)
     }
-    getChapter = (i) => parseInt(this.panes[i].chapter)
+    getChapter = (i) => this.panes[i].chapter
 
     setVerse = (verse, i) => {
         runInAction(() => { this.panes[i].verse = verse })
@@ -71,6 +76,11 @@ class AppState {
     }
 
     getVerseData = (i) => this.panes[i].verseData
+
+    setBookData = (data, i) => {
+        this.panes[i].bookData = [...this.panes[i].bookData, ...data]
+    }
+    getBookData = (i) => this.panes[i].bookData
 
     setDistance = (distance, i) => {
         this.panes[i].distance = distance
@@ -111,6 +121,9 @@ class AppState {
         runInAction(() => { this.isLastPane = state })
     }
     getIsLastPane = () => this.isLastPane
+
+    isPaneOpen = (book, chapter) => this.getPanes().some((pane) => pane.book === book && parseInt(pane.chapter) === chapter)
+
 
     closePane = (i) => {
         this.panes.splice(i, 1)

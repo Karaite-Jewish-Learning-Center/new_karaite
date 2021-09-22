@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getCommentsUrl } from "../constants/constants"
+import { versesByBibleBook } from '../constants/constants'
+
 
 const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)
@@ -29,6 +31,11 @@ const slug = (str) => {
 const unslug = (str) => {
     return str.replaceAll('-', ' ')
 }
+
+const calculateItemNumber = (book, chapter, verse) => {
+    return versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+}
+
 const englishBookNames = {
     'Genesis': 'בראשית',
     'Exodus': 'שמות',
@@ -711,29 +718,6 @@ const toEnglish = (bookName) => {
     return title
 }
 
-// const calculateIndex = (data,chapter,verse) => {
-//    return data.book['verses'].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
-// }
-// const makeDataStructure = (data) => {
-//     let totalVerses = parseInt(data.book['total_verses'])
-//     let indexData = []
-//     for (let i = 0; i < totalVerses; i++) {
-//         indexData.push([])
-//     }
-//     return indexData
-// }
-
-// const fillDataStructure = (data, chapter, verse, indexData) => {
-//     debugger
-//     let dataStart = calculateIndex(data, chapter, verse)
-//     let z = 0
-//     for (let i = dataStart; i < dataStart + data.chapter.length; i++) {
-//         indexData[i] = data.chapter[z]
-//         z++
-//     }
-//     return indexData
-// }
-
 
 export {
     range,
@@ -742,6 +726,7 @@ export {
     makeRandomKey,
     slug,
     unslug,
+    calculateItemNumber,
     indoArabicToHebrew,
     hebrewToIndoArabic,
     hebrewBookNameToEnglish,

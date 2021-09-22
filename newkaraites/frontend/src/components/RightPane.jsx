@@ -37,10 +37,9 @@ const RightPane = ({ paneNumber, refClick }) => {
         refClick(item, 'bible', paneNumber, e)
     }
     const onClose = () => {
-        debugger
         store.setDistance(0, paneNumber)
         store.setRightPaneState([], paneNumber)
-        store.setIsRightPaneOpen(false, paneNumber)
+        // store.setIsRightPaneOpen(false, paneNumber)
     }
 
     const backButton = () => {

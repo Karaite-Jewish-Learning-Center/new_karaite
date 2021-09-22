@@ -50,10 +50,10 @@ const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
             </Tabs>
             <div className={classes.scroll}>
                 <TabPanel value={store.getCommentTab(paneNumber)} index={0}>
-                    <Comments language="en" comments={store.getComments(paneNumber)} refClick={refClick} />
+                    <Comments language="en" paneNumber={paneNumber} refClick={refClick} />
                 </TabPanel>
                 <TabPanel value={store.getCommentTab(paneNumber)} index={1}>
-                    <Comments language="he" comments={store.getComments(paneNumber)} refClick={refClick} />
+                    <Comments language="he" paneNumber={paneNumber} refClick={refClick} />
                 </TabPanel>
             </div>
         </>

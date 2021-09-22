@@ -10,22 +10,37 @@ import RenderText from './RenderText'
 import { makeRandomKey } from '../utils/utils';
 import { Redirect } from 'react-router-dom';
 import Message from './Message'
-import { versesByBibleBook } from '../constants/constants'
 import { karaitesBookUrl } from '../constants/constants'
+import { calculateItemNumber } from '../utils/utils';
+import { chaptersByBibleBook } from '../constants/constants'
+import { bookChapterUrl } from '../constants/constants'
+import { makeBookUrl } from "../utils/utils"
+
 
 const PARAGRAPHS = 0
 
 
 const LoadBook = ({ book, chapter, verse, type }) => {
-    // chapter is use as start if type is 'karaites, verse in ignored
-
+    // if type is 'karaites, chapter is use as start  and is verse in ignored
 
     const classes = useStyles()
 
-    async function fetchData(paneNumber) {
+    async function fetchDataBible(paneNumber) {
+        let c = store.getBookData(paneNumber).length
         debugger
-        const x = store.getParagraphs(paneNumber).length
-        debugger
+        if (store.getBookData(paneNumber).length === 0) {
+            const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], 0, false))
+            if (response.ok) {
+                const data = await response.json()
+                //setVerses(data.book.verses)
+                store.setBookData(data.chapter, paneNumber)
+            } else {
+                alert("HTTP-Error: " + response.status)
+            }
+        }
+    }
+
+    async function fetchDataKaraites(paneNumber) {
         if (store.getParagraphs(paneNumber).length === 0) {
             const chapter = store.getKaraitesChapter(paneNumber)
             debugger
@@ -40,22 +55,20 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     }
 
-    const getBook = async (book, chapter, verse, highlight, type) => {
-        type = type.toLowerCase()
 
-        let isOpen = store.getPanes().some((pane) => {
-            return pane.book === book && pane.chapter === chapter
-        })
+    const getBook = async (book, chapter, verse, highlight, type) => {
+        debugger
+        type = type.toLowerCase()
+        let isOpen = store.isPaneOpen(book, chapter)
+
         if (isOpen) {
             store.setMessage('All ready open.')
-            //store.setCurrentItem(versesByBibleBook[book].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1, store.getPaneNumber(book, chapter))
-        }
+        } else {
 
-        if (!isOpen) {
             if (type === "bible") {
                 store.setPanes({
                     book: book,
-                    chapter: chapter,
+                    chapter: parseInt(chapter) - 1,
                     verse: verse,
                     highlight: [],
                     type: type,
@@ -67,11 +80,14 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     isRightPaneOpen: false,
                     references: [],
                     distance: 0,
-                    currentItem: versesByBibleBook[book].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1,
+                    currentItem: calculateItemNumber(book, chapter, verse),
                     rightPaneState: [],
                     rightPaneStateHalakhah: 1,
+                    bookData: [],
+                    first: 0,
                 })
 
+                fetchDataBible(store.panes.length - 1)
             }
 
             if (type === "karaites") {
@@ -86,7 +102,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     currentItem: chapter,
 
                 })
-                fetchData(store.panes.length - 1)
+                fetchDataKaraites(store.panes.length - 1)
             }
         }
     }
@@ -94,6 +110,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     const refClick = (item, kind = 'bible', paneNumber, e) => {
         if (item !== undefined) {
             store.setCurrentItem(item, paneNumber)
+            store.setDistance(0, paneNumber)
         }
         const { refBook, refChapter, refVerse, refHighlight } = parseBiblicalReference(e)
         getBook(refBook, refChapter, refVerse, refHighlight, kind)
@@ -101,7 +118,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     const RenderRightPane = ({ isOpen, paneNumber }) => {
         return (
-            <Grid item xs={true} className={(isOpen ? classes.rightPane : classes.hiddenRightPane)}>
+            <Grid item xs={true} className={(true ? classes.rightPane : classes.hiddenRightPane)}>
                 <RightPane
                     paneNumber={paneNumber}
                     refClick={refClick}
@@ -125,7 +142,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                             <RenderText paneNumber={i}
                             />
                         </Grid>
-                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} />
+                        <RenderRightPane isOpen={true} paneNumber={i} />
                     </>
                 ))
 

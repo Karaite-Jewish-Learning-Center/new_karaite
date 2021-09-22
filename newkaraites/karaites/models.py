@@ -199,6 +199,9 @@ class Comment(models.Model):
         return {'id': self.book.id,
                 'comment_en': self.comment_en,
                 'comment_he': self.comment_he,
+                'book': self.book.book_title_en,
+                'chapter': self.chapter,
+                'verse': self.verse,
                 }
 
     @staticmethod
