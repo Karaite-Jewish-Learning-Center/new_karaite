@@ -12,6 +12,7 @@ import Halakhah from './components/Halakhah'
 import { makeRandomKey, unslug } from './utils/utils'
 import HalakhahMenu from "./components/HalakhahMenu";
 import Home from "./components/Home";
+import store from "./stores/appState";
 
 
 
@@ -31,16 +32,22 @@ function App() {
         }
         return null
     }
+
     const HalakhahBookLink = () => {
+        store.resetPanes()
         let { book } = useParams()
         return (<HalakhahMenu book={book} />)
     }
+
     const Load = ({ type }) => {
+        store.resetPanes()
+
         let { book, chapter } = useParams()
         return (
             <LoadBook book={book} chapter={chapter} verse={1} type={type} />
         );
     }
+
     return (
         <ThemeProvider theme={theme}>
 

@@ -42,8 +42,6 @@ const parseBiblicalReference = (e) => {
         return { refBook: book, refChapter: chapter, refVerse: verse, refHighlight: highlight }
 
     }
-    console.log(book, chapter, verse, highlight)
-    throw ('Invalid reference:' + biblicalRef)
 
 }
 

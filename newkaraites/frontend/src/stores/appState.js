@@ -20,7 +20,6 @@ class AppState {
         return this.panes[paneNumber].isRightPaneOpen
     }
 
-
     // comment Tab
     setCommentTab = (tab, paneNumber) => {
         this.panes[paneNumber].commentTab = tab
@@ -57,7 +56,7 @@ class AppState {
     setChapter = (chapter, i) => {
         this.panes[i].chapter = parseInt(chapter)
     }
-    getChapter = (i) => parseInt(this.panes[i].chapter)
+    getChapter = (i) => this.panes[i].chapter
 
     setVerse = (verse, i) => {
         runInAction(() => { this.panes[i].verse = verse })
@@ -72,16 +71,30 @@ class AppState {
 
     getVerseData = (i) => this.panes[i].verseData
 
+    setBookData = (data, i) => {
+        this.panes[i].bookData = [...this.panes[i].bookData, ...data]
+    }
+    getBookData = (i) => this.panes[i].bookData
+
     setDistance = (distance, i) => {
         this.panes[i].distance = distance
     }
     getDistance = (i) => this.panes[i].distance
 
     setCurrentItem = (item, i) => {
+        console.log("setting current item", item)
         runInAction(() => { this.panes[i].currentItem = item })
     }
 
     getCurrentItem = (i) => this.panes[i].currentItem
+
+    // right pane
+    // comments
+    setRightPaneState = (state, i) => {
+        this.panes[i].rightPaneState = state
+    }
+    getRightPaneState = (i) => this.panes[i].rightPaneState
+
 
     // panes
 
@@ -103,18 +116,25 @@ class AppState {
     }
     getIsLastPane = () => this.isLastPane
 
+    isPaneOpen = (book, chapter) => this.getPanes().some((pane) => pane.book === book)
+
     closePane = (i) => {
         this.panes.splice(i, 1)
         this.setIsLastPane(this.panes.length === 0)
     }
 
+    resetPanes = () => {
+        this.panes = []
+    }
     // karaites books
 
     setParagraphs = (paragraphs, i) => {
-
         this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
-        debugger
     }
+
+    getParagraphs = (i) => this.panes[i].paragraphs
+
+    getKaraitesChapter = (i) => (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
     setBookDetails = (details, i) => {
         this.panes[i].book_details = details
@@ -127,6 +147,12 @@ class AppState {
         this.message = message
     }
     getMessage = () => this.message
+
+    setHeaderChapter = (chapter, i) => {
+        runInAction(() => { this.panes[i].headerChapter = chapter })
+    }
+
+    getHeaderChapter = (i) => this.panes[i].headerChapter
 
 }
 

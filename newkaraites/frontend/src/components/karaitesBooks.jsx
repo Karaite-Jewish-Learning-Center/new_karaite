@@ -1,65 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Virtuoso } from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import KaraitePaneHeader from "./KaraitePaneHeader";
-import { karaitesBookUrl } from '../constants/constants'
 import transform from '../utils/transform'
 import store from '../stores/appState'
 import Loading from "./Loading";
 import './css/comments.css'
-import { observer } from 'mobx-react-lite'
+import Colors from '../constants/colors'
 
 
-const PARAGRAPHS = 0
 
 
-const KaraitesBooks = ({ paneNumber, refClick }) => {
-    const [paragraphs, setParagraphs] = useState([])
-    const [bookEnded, setBookEnded] = useState(false)
-    const [first, setFirst] = useState(0)
-    const book = store.getBook(paneNumber)
+const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
 
     const classes = useStyles()
 
-
-    async function fetchData() {
-        if (!bookEnded) {
-            const chapter = (paragraphs.length === 0 ? store.getChapter(paneNumber) : paragraphs.length)
-
-            const response = await fetch(`${karaitesBookUrl}${book}/${chapter}/${first}/`)
-            if (response.ok) {
-                const data = await response.json()
-                setBookEnded(() => data[PARAGRAPHS][0].length === 0)
-                setParagraphs([...paragraphs, ...data[PARAGRAPHS][0]])
-                setFirst(1)
-            } else {
-                alert("HTTP-Error: " + response.status)
-            }
+    const selectCurrent = (item) => {
+        if (store.panes.length === 1) {
+            return false
         }
+        return store.getCurrentItem(paneNumber) === item
 
     }
-
-
     const itemContent = (item, data) => {
-        return (<div className={classes.paragraphContainer}>
+        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
                 decodeEntities: true,
-                transform: transform.bind(this, refClick)
+                transform: transform.bind(this, refClick, item, 'Bible', paneNumber)
             })}
         </div>)
     }
 
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     return (
         <>
             <KaraitePaneHeader paneNumber={paneNumber} />
             <Virtuoso data={paragraphs}
+                initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}
                 itemContent={itemContent}
-                endReached={fetchData}
                 components={{
                     Footer: () => {
                         return <Loading text={'Book end.'} />
@@ -81,9 +60,14 @@ const useStyles = makeStyles(() => ({
     paragraphContainer: {
         marginRight: 30,
         marginLeft: 30,
+        "&:hover": {
+            background: Colors['bibleSelectedVerse']
+        },
     },
-
+    selected: {
+        backgroundColor: Colors['rulerColor']
+    }
 }))
 
 
-export default observer(KaraitesBooks)
+export default KaraitesBooks

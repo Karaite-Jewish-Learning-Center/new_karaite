@@ -59,7 +59,7 @@ const HalakhahMenu = ({ book }) => {
             <div className={classes.filler}>&nbsp;</div>
             <Typography className={classes.titleHalakhah} variant="h6" component="h2">{unslug(book)}</Typography>
 
-            <Link className={classes.link} to='/Halakhah/'>Books list</Link>
+            <Link className={classes.link} to='/Halakhah/'>To books list</Link>
 
             <hr className={classes.ruler} />
             <TableOfContents />

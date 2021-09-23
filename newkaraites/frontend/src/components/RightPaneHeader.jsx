@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
 import { Grid } from '@material-ui/core'
@@ -8,10 +8,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 
 
 const Header = ({ backButton, onClose }) => {
-    debugger
     const classes = useStyles()
 
-    console.log("Rendering Right pane  header...")
     return (
         <Grid container
             direction="row"

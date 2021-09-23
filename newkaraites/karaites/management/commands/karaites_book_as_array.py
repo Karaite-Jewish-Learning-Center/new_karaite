@@ -82,8 +82,9 @@ class Command(BaseCommand):
         """ Karaites books as array """
 
         toc = []
-        paragraph_number = 1
         for volume in [1, 2]:
+            paragraph_number = 1
+
             print(f'Processing volume: {volume}')
 
             book_title = f"Yeriot Shelomo Volume {volume}"
