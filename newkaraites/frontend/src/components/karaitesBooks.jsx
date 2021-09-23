@@ -41,7 +41,7 @@ const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
                 itemContent={itemContent}
                 components={{
                     Footer: () => {
-                        return <Loading text={'Book end.'} />
+                        return <Loading />
                     }
                 }}
             />
