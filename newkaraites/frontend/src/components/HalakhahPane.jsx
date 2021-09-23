@@ -32,37 +32,46 @@ const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
     useEffect(() => {
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
     }, [])
+    if (references.length !== 0) {
+        return (
+            <>
+                <Header backButton={backButton} onClose={onClose} />
+                <div className={classes.scroll}>
+                    {references.map((reference, i) => (
+                        <>
+                            <Typography className={classes.headerColor}>{reference['book_name']}</Typography>
 
-    return (
-        <>
-            <Header backButton={backButton} onClose={onClose} />
-            <div className={classes.scroll}>
-                {references.map((reference, i) => (
-                    <>
-                        <Typography className={classes.headerColor}>{reference['book_name']}</Typography>
+                            <Typography className={classes.headerColor}>{reference['author']}</Typography>
+                            <hr className={classes.ruler} />
 
-                        <Typography className={classes.headerColor}>{reference['author']}</Typography>
-                        <hr className={classes.ruler} />
+                            <div key={makeRandomKey()} className={classes.content}>
+                                <>
+                                    {ReactHtmlParser(reference['paragraph_html'], {
+                                        decodeEntities: true,
+                                        transform: transform.bind(this, refClick, undefined, "bible", undefined)
+                                    })}
+                                </>
+                            </div>
+                            <Button
+                                className={classes.button}
+                                onClick={() => { }}
+                            >Open book </Button>
+                            <hr className={classes.ruler} />
 
-                        <div key={makeRandomKey()} className={classes.content}>
-                            <>
-                                {ReactHtmlParser(reference['paragraph_html'], {
-                                    decodeEntities: true,
-                                    transform: transform.bind(this, refClick, undefined, "bible", undefined)
-                                })}
-                            </>
-                        </div>
-                        <Button
-                            className={classes.button}
-                            onClick={() => { }}
-                        >Open book </Button>
-                        <hr className={classes.ruler} />
+                        </>
+                    ))}
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <Header backButton={backButton} onClose={onClose} />
 
-                    </>
-                ))}
-            </div>
-        </>
-    )
+                <Typography className={classes.no}>No references</Typography>
+            </>
+        )
+    }
 }
 
 
@@ -102,6 +111,10 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         margin: 15,
+    },
+    no: {
+        marginTop: 20,
+        marginLeft: 50,
     },
 }));
 
