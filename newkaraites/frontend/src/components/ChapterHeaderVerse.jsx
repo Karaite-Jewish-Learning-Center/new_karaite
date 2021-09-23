@@ -44,9 +44,9 @@ const ChapterHeaderVerse = (props) => {
     }
 
     const onClick = (i) => {
-        debugger
         store.setCurrentItem(i, paneNumber)
         store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+
         store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
         store.setCommentsVerse(allBookData[i][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[i], paneNumber)
@@ -56,6 +56,8 @@ const ChapterHeaderVerse = (props) => {
     const openRightPane = (i) => {
         debugger
         // store.setCurrentItem(i, paneNumber)
+        store.setDistance(0, paneNumber)
+
         store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
         // store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
         // store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
