@@ -39,7 +39,7 @@ const RightPane = ({ paneNumber, refClick }) => {
     const onClose = () => {
         store.setDistance(0, paneNumber)
         store.setRightPaneState([], paneNumber)
-        // store.setIsRightPaneOpen(false, paneNumber)
+        store.setIsRightPaneOpen(false, paneNumber)
     }
 
     const backButton = () => {

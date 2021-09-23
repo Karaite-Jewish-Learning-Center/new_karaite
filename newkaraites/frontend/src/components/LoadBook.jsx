@@ -26,9 +26,8 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     const classes = useStyles()
 
     async function fetchDataBible(paneNumber) {
-        let c = store.getBookData(paneNumber).length
-        debugger
         if (store.getBookData(paneNumber).length === 0) {
+            const book = store.getBook(paneNumber)
             const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], 0, false))
             if (response.ok) {
                 const data = await response.json()
@@ -43,8 +42,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
     async function fetchDataKaraites(paneNumber) {
         if (store.getParagraphs(paneNumber).length === 0) {
             const chapter = store.getKaraitesChapter(paneNumber)
-            debugger
-            const response = await fetch(`${karaitesBookUrl}${book}/${chapter}/${0}/`)
+            const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${chapter}/${0}/`)
             if (response.ok) {
                 const data = await response.json()
                 store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
@@ -57,9 +55,8 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
 
     const getBook = async (book, chapter, verse, highlight, type) => {
-        debugger
         type = type.toLowerCase()
-        let isOpen = store.isPaneOpen(book, chapter)
+        let isOpen = store.isPaneOpen(book)
 
         if (isOpen) {
             store.setMessage('All ready open.')
@@ -84,7 +81,6 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                     rightPaneState: [],
                     rightPaneStateHalakhah: 1,
                     bookData: [],
-                    first: 0,
                 })
 
                 fetchDataBible(store.panes.length - 1)
@@ -118,7 +114,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     const RenderRightPane = ({ isOpen, paneNumber }) => {
         return (
-            <Grid item xs={true} className={(true ? classes.rightPane : classes.hiddenRightPane)}>
+            <Grid item xs={true} className={(isOpen ? classes.rightPane : classes.hiddenRightPane)}>
                 <RightPane
                     paneNumber={paneNumber}
                     refClick={refClick}
@@ -142,7 +138,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                             <RenderText paneNumber={i}
                             />
                         </Grid>
-                        <RenderRightPane isOpen={true} paneNumber={i} />
+                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} />
                     </>
                 ))
 

@@ -20,12 +20,6 @@ class AppState {
         return this.panes[paneNumber].isRightPaneOpen
     }
 
-    setFirst = (value, i) => {
-        this.panes[i].first = value
-    }
-
-    getFirst = (i) => this.panes[i].first
-
     // comment Tab
     setCommentTab = (tab, paneNumber) => {
         this.panes[paneNumber].commentTab = tab
@@ -122,14 +116,16 @@ class AppState {
     }
     getIsLastPane = () => this.isLastPane
 
-    isPaneOpen = (book, chapter) => this.getPanes().some((pane) => pane.book === book && parseInt(pane.chapter) === chapter)
-
+    isPaneOpen = (book, chapter) => this.getPanes().some((pane) => pane.book === book)
 
     closePane = (i) => {
         this.panes.splice(i, 1)
         this.setIsLastPane(this.panes.length === 0)
     }
 
+    resetPanes = () => {
+        this.panes = []
+    }
     // karaites books
 
     setParagraphs = (paragraphs, i) => {
@@ -151,6 +147,12 @@ class AppState {
         this.message = message
     }
     getMessage = () => this.message
+
+    setHeaderChapter = (chapter, i) => {
+        runInAction(() => { this.panes[i].headerChapter = chapter })
+    }
+
+    getHeaderChapter = (i) => this.panes[i].headerChapter
 
 }
 

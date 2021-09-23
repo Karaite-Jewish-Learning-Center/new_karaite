@@ -10,7 +10,6 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 const Header = ({ backButton, onClose }) => {
     const classes = useStyles()
 
-    console.log("Rendering Right pane  header...")
     return (
         <Grid container
             direction="row"

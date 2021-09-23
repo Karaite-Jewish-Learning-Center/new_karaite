@@ -14,6 +14,8 @@ import {
 import RefsBadge from "./RefsBadge";
 import store from '../stores/appState'
 import { observer } from 'mobx-react-lite';
+import { versesByBibleBook } from '../constants/constants';
+
 
 
 const ChapterHeaderVerse = (props) => {
@@ -27,19 +29,42 @@ const ChapterHeaderVerse = (props) => {
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
+    const calculateCurrentChapter = () => {
+        let book = store.getBook(paneNumber)
+        let avg = gridVisibleRange.startIndex + 1
+        let start = 0
+        let end = 0
+        for (let i = 0; i < versesByBibleBook[book].length; i++) {
+            end += versesByBibleBook[book][i]
+            if (avg >= start && avg <= end) {
+                return i + 1
+            }
+            start = end
+        }
+    }
 
-    const openRightPane = (i) => {
+    const onClick = (i) => {
         debugger
         store.setCurrentItem(i, paneNumber)
-        // if (store.getIsRightPaneOpen(paneNumber)) store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
-        // store.setIsRightPaneOpen(true, paneNumber)
         store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
         store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
         store.setCommentsVerse(allBookData[i][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[i], paneNumber)
+
+    }
+
+    const openRightPane = (i) => {
+        debugger
+        // store.setCurrentItem(i, paneNumber)
+        store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
+        // store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+        // store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
+        // store.setCommentsVerse(allBookData[i][BIBLE_VERSE], paneNumber)
+        // store.setVerseData(allBookData[i], paneNumber)
     }
 
     if (renderChapter === "1") {
+        store.setHeaderChapter(calculateCurrentChapter(), paneNumber)
         chapterHtml = (<div className={classes.chapter}>
             <div className={classes.chapterNumber}>
                 <Typography className={classes.ch}>{chapter}</Typography>
@@ -65,14 +90,14 @@ const ChapterHeaderVerse = (props) => {
 
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                onClick={openRightPane.bind(this, item)}
+                onClick={onClick.bind(this, item)} onDoubleClick={openRightPane.bind(this, item)}
             >
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                 </div>
 
                 <div className={classes.verseNumber}>
-                    <Typography className={classes.vn}>{data[BIBLE_VERSE]}--{item}</Typography>
+                    <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                 </div>
                 <div className={classes.verseEn}>
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>

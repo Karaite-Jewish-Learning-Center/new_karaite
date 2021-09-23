@@ -10,7 +10,9 @@ import store from '../stores/appState';
 import { observer } from 'mobx-react-lite';
 
 
-const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
+
+
+const RenderHeader = ({ book, paneNumber }) => {
     book = unslug(book)
     const classes = useStyles()
 
@@ -20,6 +22,7 @@ const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
             store.setIsLastPane(true)
         }
     }
+
 
     return (
         <Grid container className={classes.header}
@@ -39,7 +42,7 @@ const RenderHeader = ({ book, chapterViewPort, paneNumber }) => {
                 <Typography className={classes.hebrewBook}>{englishBookNameToHebrew(book)}</Typography>
             </Grid>
             <Grid item xs={4} key={2}>
-                <Typography className={classes.chapterView}>{chapterViewPort} </Typography>
+                <Typography className={classes.chapterView}>{store.getHeaderChapter(paneNumber)}</Typography>
             </Grid>
             <Grid item xs={4} key={3}>
                 <Typography className={classes.englishBook}>{book} </Typography>
