@@ -1,4 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
+from django.db.models.fields import TextField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext as _
@@ -693,3 +694,23 @@ class References(models.Model):
 
     class Meta:
         verbose_name_plural = _('Karaites Bible references.')
+
+
+class FullTextSearch(models.Model):
+
+    reference_en = models.CharField(max_length=100, default='')
+
+    text_en = models.TextField(default='')
+
+    reference_he = models.CharField(max_length=100, default='')
+
+    text_he = models.TextField(default='')
+
+    # False entry is humman curated, so don't delete on rebuild database
+    delete = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return self.reference_en
+
+    class Meta:
+        verbose_name_plural = 'Full text search'
