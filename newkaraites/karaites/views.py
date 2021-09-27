@@ -1,9 +1,10 @@
 from collections import OrderedDict
+from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
 from .utils import slug_back
-from .models import (Organization,
+from .models import (FullTextSearch, Organization,
                      BookAsArray,
                      Comment,
                      TableOfContents,
@@ -178,7 +179,7 @@ class GetTOC(View):
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
         karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
-        print(karaites_book)
+
         result = []
         for k_book in karaites_book:
             for toc in TableOfContents.objects.filter(karaite_book=k_book):
@@ -198,7 +199,69 @@ class getHalakhah(View):
 
 
 class Test(View):
-
+    """
+     A very simple test to check if backend is running
+    """
     @staticmethod
     def get(request, *args, **kwargs):
         return JsonResponse({"ok": True})
+
+
+class AutoComplete(View):
+    """
+    Autocomplete
+    """
+    # vector = SearchVector('text_en', config='english')
+    # query = SearchQuery(search, search_type='phrase')
+    # result = FullTextSearch.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank')[0:100]
+
+    # searchresult = OrderedDict()
+    # for text in result:
+    #     searchresult[text.reference_en] = text.text_en
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        search = kwargs.get('search', None)
+
+        if search is None:
+            JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+
+        search = f'{search.strip()}'
+        result = FullTextSearch.objects.filter(text_en__search=search)
+
+        autocomplete_list = OrderedDict()
+        for text in result:
+            words = text.text_en.lower().split(search)
+
+            # if words[1][0] == ' ':
+            #     auto = f"{search} {words[1].strip().split(' ')[0]}"
+            # else:
+            #     auto = f"{search}{words[1].strip().split(' ')[0]}"
+
+            # if auto not in autocomplete_list:
+            autocomplete_list[text.text_en] = text.reference_en
+
+        return JsonResponse(autocomplete_list, safe=False)
+
+
+class Search(View):
+    """
+        search based on the autocomplete selected
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        search = kwargs.get('search', None)
+
+        if search is None:
+            JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+
+        vector = SearchVector('text_en', config='english')
+        query = SearchQuery(search, search_type='phrase')
+        result = FullTextSearch.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank')[0:100]
+
+        searchresult = OrderedDict()
+        for text in result:
+            searchresult[text.reference_en] = text.text_en
+
+        return JsonResponse(searchresult, safe=False)

@@ -7,7 +7,8 @@ from .views import (GetFirstLevel,
                     GetKaraitesBookAsArray,
                     GetTOC,
                     getHalakhah,
-                    Test)
+                    Test,
+                    AutoComplete)
 
 app_name = 'karaites'
 
@@ -42,5 +43,11 @@ urlpatterns = [
     # references Halakhah
     path('get-references/<str:book>/<str:chapter>/<str:verse>/', getHalakhah.as_view(), name='get_references'),
 
+    # very simple test
     path('test/', Test.as_view(), name='test'),
+
+    # autocomplete
+    path('autocomplete/<str:search>/', AutoComplete.as_view(), name='autocomplete'),
+
+
 ]
