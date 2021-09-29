@@ -11,3 +11,4 @@ django-tinymce
 requests
 python-hebrew-numbers
 html5lib
+gensim

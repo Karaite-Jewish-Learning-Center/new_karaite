@@ -1,5 +1,10 @@
+from sys import getsizeof
 from collections import OrderedDict
-from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
+from django.contrib.postgres.search import (SearchQuery,
+                                            SearchVector,
+                                            SearchRank,
+                                            SearchHeadline)
+
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
@@ -10,7 +15,10 @@ from .models import (FullTextSearch, Organization,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
+                     AutoComplete,
                      References)
+
+from .utils import replace_punctuation_marks
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -207,17 +215,10 @@ class Test(View):
         return JsonResponse({"ok": True})
 
 
-class AutoComplete(View):
+class AutoCompleteView(View):
     """
     Autocomplete
     """
-    # vector = SearchVector('text_en', config='english')
-    # query = SearchQuery(search, search_type='phrase')
-    # result = FullTextSearch.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank')[0:100]
-
-    # searchresult = OrderedDict()
-    # for text in result:
-    #     searchresult[text.reference_en] = text.text_en
 
     @staticmethod
     def get(request, *args, **kwargs):
@@ -226,22 +227,9 @@ class AutoComplete(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        search = f'{search.strip()}'
-        result = FullTextSearch.objects.filter(text_en__search=search)
+        result = AutoComplete.objects.filter(word_en__istartswith=search).values_list('word_en', flat=True)[0:10]
 
-        autocomplete_list = OrderedDict()
-        for text in result:
-            words = text.text_en.lower().split(search)
-
-            # if words[1][0] == ' ':
-            #     auto = f"{search} {words[1].strip().split(' ')[0]}"
-            # else:
-            #     auto = f"{search}{words[1].strip().split(' ')[0]}"
-
-            # if auto not in autocomplete_list:
-            autocomplete_list[text.text_en] = text.reference_en
-
-        return JsonResponse(autocomplete_list, safe=False)
+        return JsonResponse(list(result), safe=False)
 
 
 class Search(View):
@@ -258,10 +246,10 @@ class Search(View):
 
         vector = SearchVector('text_en', config='english')
         query = SearchQuery(search, search_type='phrase')
-        result = FullTextSearch.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank')[0:100]
+        result = FullTextSearch.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank')
 
         searchresult = OrderedDict()
         for text in result:
             searchresult[text.reference_en] = text.text_en
-
+        print(len(searchresult), getsizeof(searchresult))
         return JsonResponse(searchresult, safe=False)

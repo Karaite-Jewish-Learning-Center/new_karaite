@@ -696,6 +696,17 @@ class References(models.Model):
         verbose_name_plural = _('Karaites Bible references.')
 
 
+class AutoComplete(models.Model):
+
+    word_en = models.CharField(max_length=30,
+                               db_index=True)
+
+    word_count = models.IntegerField(default=1)
+
+    class Meta:
+        ordering = ('word_en',)
+
+
 class FullTextSearch(models.Model):
 
     reference_en = models.CharField(max_length=100, default='')

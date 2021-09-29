@@ -2,13 +2,14 @@ from django.urls import path
 from .views import (GetFirstLevel,
                     BooksPresentation,
                     GetBookAsArrayJson,
-                    GetComments,
+                    GetComments, Search,
                     getKaraitesAllBookDetails,
                     GetKaraitesBookAsArray,
                     GetTOC,
                     getHalakhah,
                     Test,
-                    AutoComplete)
+                    AutoCompleteView,
+                    Search)
 
 app_name = 'karaites'
 
@@ -47,7 +48,8 @@ urlpatterns = [
     path('test/', Test.as_view(), name='test'),
 
     # autocomplete
-    path('autocomplete/<str:search>/', AutoComplete.as_view(), name='autocomplete'),
+    path('autocomplete/<str:search>/', AutoCompleteView.as_view(), name='autocomplete'),
+    path('search/<str:search>/', Search.as_view(), name='autocomplete'),
 
 
 ]
