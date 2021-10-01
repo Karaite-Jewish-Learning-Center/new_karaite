@@ -3,10 +3,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import PermContactCalendarSharpIcon from '@material-ui/icons/PermContactCalendarSharp';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -14,6 +12,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Complete from './autocomplete';
 
 
 
@@ -106,21 +105,9 @@ export default function PrimarySearchAppBar() {
                 <Typography component="h3" >
                     <Link className={classes.link} to="/texts/" >Texts</Link>
                 </Typography>
-                <div className={classes.grow} />
-                <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon />
-                    </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                </div>
+
                 <div className={classes.sectionDesktop}>
+                    <Complete />
                     <IconButton aria-label="Go to sign up form" color="inherit" >
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
@@ -185,15 +172,7 @@ const useStyles = makeStyles((theme) => ({
             width: 'auto',
         },
     },
-    searchIcon: {
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+
     inputRoot: {
         color: 'inherit',
     },
@@ -208,13 +187,15 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     sectionDesktop: {
-        display: 'none',
+        flexGrow: 1,
+        justifyContent: 'flex-end',
         [theme.breakpoints.up('md')]: {
             display: 'flex',
         },
     },
     sectionMobile: {
-        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'flex-end',
         [theme.breakpoints.up('md')]: {
             display: 'none',
         },

@@ -227,7 +227,7 @@ class AutoCompleteView(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        result = AutoComplete.objects.filter(word_en__istartswith=search).values_list('word_en', flat=True)[0:10]
+        result = AutoComplete.objects.filter(word_en__istartswith=search).values_list('word_en', flat=True)[0:9]
 
         return JsonResponse(list(result), safe=False)
 
@@ -246,7 +246,8 @@ class Search(View):
 
         vector = SearchVector('text_en', config='english')
         query = SearchQuery(search, search_type='phrase')
-        result = FullTextSearch.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank')
+        result = FullTextSearch.objects.annotate(rank=SearchRank(
+            vector, query, weights=[0.2, 0.4, 0.6, 0.8])).order_by('-rank')[0:100]
 
         searchresult = OrderedDict()
         for text in result:

@@ -15,6 +15,8 @@ const karaitesBookUrl = apiUrl + 'api/get-karaites-book-chapter/'
 const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
 const karaitesBookToc = apiUrl + 'api/get-karaites-book-toc/'
 const referencesUrl = apiUrl + 'api/get-references/'
+const autocompleteUrl = apiUrl + 'api/autocomplete/'
+
 const LANGUAGE = { 0: 'en', 1: 'he' }
 const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
 const ENGLISH = 0
@@ -142,6 +144,7 @@ export {
     karaitesBookDetailsUrl,
     karaitesBookToc,
     referencesUrl,
+    autocompleteUrl,
     LANGUAGE,
     LANGUAGE_TAG,
     ENGLISH,

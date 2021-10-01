@@ -698,7 +698,7 @@ class References(models.Model):
 
 class AutoComplete(models.Model):
 
-    word_en = models.CharField(max_length=30,
+    word_en = models.CharField(max_length=100,
                                db_index=True)
 
     word_count = models.IntegerField(default=1)

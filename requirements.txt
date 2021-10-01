@@ -12,3 +12,4 @@ requests
 python-hebrew-numbers
 html5lib
 gensim
+more_itertools

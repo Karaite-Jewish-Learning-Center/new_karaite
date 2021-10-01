@@ -33,7 +33,10 @@ const unslug = (str) => {
 }
 
 const calculateItemNumber = (book, chapter, verse) => {
-    return versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+    if (versesByBibleBook !== undefined) {
+        return versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+    }
+    return 0
 }
 
 const englishBookNames = {
