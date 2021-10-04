@@ -45,7 +45,7 @@ class Command(BaseCommand):
                         auto.save()
 
                 sys.stdout.write(f"\33[KProcessing verse: {i}\r")
-                # make a windows with 2,3,4 words
+                # make a windowed with 2,3,4...n words
                 for n in [2, 3, 4, 5, 6]:
                     for combo in windowed(word_list, n=n, step=1):
                         auto, created = AutoComplete.objects.get_or_create(

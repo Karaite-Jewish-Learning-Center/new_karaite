@@ -6,23 +6,15 @@ import { autocompleteUrl } from '../constants/constants';
 
 
 const Complete = () => {
-    const [head, setHead] = useState([])
     const [search, setSearch] = useState('')
     const [options, setOptions] = useState([])
 
     const getAutoComplete = async () => {
-        let lookup = search
-        if (search.length < 2 || search.endsWith(' ')) return undefined
-        if (search.includes(' ') && !search.endsWith(' ')) {
-            let parts = search.split(' ')
-            lookup = parts.pop()
-            setHead(parts)
-        }
-
-        const response = await fetch(`${autocompleteUrl}${lookup}/`)
+        if (search.length < 2) return undefined
+        const response = await fetch(`${autocompleteUrl}${search}/`)
         if (response.ok) {
             const data = await response.json()
-            setOptions(data.map(item => head.join(' ') + ' ' + item))
+            setOptions(data)
         } else {
             alert("HTTP-Error: " + response.status)
         }
@@ -35,7 +27,6 @@ const Complete = () => {
     const onChange = (e) => {
         if (e.target.value.length < 2) {
             setOptions([])
-            setHead([])
         }
         setSearch(e.target.value)
     }

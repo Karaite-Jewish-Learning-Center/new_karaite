@@ -698,8 +698,10 @@ class References(models.Model):
 
 class AutoComplete(models.Model):
 
-    word_en = models.CharField(max_length=100,
+    word_en = models.CharField(max_length=60,
                                db_index=True)
+
+    # book_chatper_verse = models.CharField(max_length=12)
 
     word_count = models.IntegerField(default=1)
 
