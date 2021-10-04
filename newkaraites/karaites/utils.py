@@ -25,3 +25,8 @@ def slug(str):
 
 def slug_back(str):
     return str.replace('-', ' ')
+
+
+def replace_punctuation_marks(s):
+    s = s.replace('‘', '').replace('’', '')
+    return s.translate(str.maketrans('''!()-[]{};:'"\\,"<>./?@#$%^&*_~''', " " * 29))

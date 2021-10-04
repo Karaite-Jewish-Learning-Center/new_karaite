@@ -1,15 +1,24 @@
+from sys import getsizeof
 from collections import OrderedDict
+from django.contrib.postgres.search import (SearchQuery,
+                                            SearchVector,
+                                            SearchRank,
+                                            SearchHeadline)
+
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
 from .utils import slug_back
-from .models import (Organization,
+from .models import (FullTextSearch, Organization,
                      BookAsArray,
                      Comment,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
+                     AutoComplete,
                      References)
+
+from .utils import replace_punctuation_marks
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -178,7 +187,7 @@ class GetTOC(View):
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
         karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
-        print(karaites_book)
+
         result = []
         for k_book in karaites_book:
             for toc in TableOfContents.objects.filter(karaite_book=k_book):
@@ -198,7 +207,50 @@ class getHalakhah(View):
 
 
 class Test(View):
-
+    """
+     A very simple test to check if backend is running
+    """
     @staticmethod
     def get(request, *args, **kwargs):
         return JsonResponse({"ok": True})
+
+
+class AutoCompleteView(View):
+    """
+    Autocomplete
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        search = kwargs.get('search', None)
+
+        if search is None:
+            JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+
+        result = AutoComplete.objects.filter(word_en__istartswith=search).values_list('word_en', flat=True)[0:9]
+
+        return JsonResponse(list(result), safe=False)
+
+
+class Search(View):
+    """
+        search based on the autocomplete selected
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        search = kwargs.get('search', None)
+
+        if search is None:
+            JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+
+        vector = SearchVector('text_en', config='english')
+        query = SearchQuery(search, search_type='phrase')
+        result = FullTextSearch.objects.annotate(rank=SearchRank(
+            vector, query, weights=[0.2, 0.4, 0.6, 0.8])).order_by('-rank')[0:100]
+
+        searchresult = OrderedDict()
+        for text in result:
+            searchresult[text.reference_en] = text.text_en
+        print(len(searchresult), getsizeof(searchresult))
+        return JsonResponse(searchresult, safe=False)

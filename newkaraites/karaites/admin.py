@@ -8,7 +8,8 @@ from .models import (Organization,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      TableOfContents,
-                     References)
+                     References,
+                     FullTextSearch)
 
 from .admin_forms import AdminCommentForm
 
@@ -149,3 +150,11 @@ class ReferencesAdmin(KAdmin):
 
 
 admin.site.register(References, ReferencesAdmin)
+
+
+class FullTextSearchAdmin(KAdmin):
+    list_display = ('reference_en', 'text_en', 'reference_he', 'text_he', 'delete')
+    search_fields = ('reference_en',)
+
+
+admin.site.register(FullTextSearch, FullTextSearchAdmin)
