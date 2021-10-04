@@ -21,3 +21,12 @@ Update references (updates bible references)
 Update references markup
 
 1. references_map_html
+
+Update search
+
+1. update_full_text_search
+
+Update autocomplete
+
+1. autocomplete
+
