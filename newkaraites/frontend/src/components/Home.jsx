@@ -1,14 +1,18 @@
-import React from "react"
-import { makeStyles } from '@material-ui/core/styles'
+import React from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 
 const Home = () => {
     const classes = useStyles()
+    const slogan ='Karaites the journey begins'
+    const matches = useMediaQuery('(min-width:600px)')
+
     return (
         <div className={classes.container}>
             <div className={classes.center}>
-                <p>Karaites the journey begins</p>
-                <hr></hr>
+                <p className={(matches ? classes.fontLarge: classes.fontSmall)}>{slogan}</p>
+                <hr/>
             </div>
         </div>
     )
@@ -16,19 +20,22 @@ const Home = () => {
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        flexGrow: 1,
-        position: 'fixed',
+        display:"flex",
         width: '100%',
         height: '100%',
+        justifyContent:'center',
     },
     center: {
-        fontSize: 40,
-        position: 'relative',
-        top: '40%',
-        left: '33%',
-        maxWidth: 460,
+        display:'flex',
+        alignItems:'center',
 
-    }
+    },
+    fontSmall:{
+         fontSize:25,
+    },
+    fontLarge:{
+        fontSize:40,
+    },
 }));
 
 
