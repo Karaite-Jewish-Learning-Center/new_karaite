@@ -1,5 +1,4 @@
 import React from 'react'
-import { booksMenu } from '../constants/common-css'
 import RenderMenu from '../components/RenderMenu'
 
 
@@ -51,19 +50,10 @@ const writings = {
     'II Chronicles': 'Recounts of events in the Prophets, from Solomon through the First Temple’s destruction.',
 }
 
-const books = { 'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings }
+const books = {'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings}
 
 const Tanakh = () => {
-    const classes = booksMenu()
-
-    return (
-        <div>
-            <div className={classes.filler}>&nbsp;</div>
-            <RenderMenu books={books} path={'Tanakh'} />
-        </div>
-    )
-
+    return <RenderMenu books={books} path={'Tanakh'}/>
 }
-
 
 export default Tanakh

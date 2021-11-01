@@ -1,12 +1,12 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-
+import {q640} from "../constants/constants";
 
 const Home = () => {
     const classes = useStyles()
     const slogan ='Karaites the journey begins'
-    const matches = useMediaQuery('(min-width:600px)')
+    const matches = useMediaQuery(q640)
 
     return (
         <div className={classes.container}>

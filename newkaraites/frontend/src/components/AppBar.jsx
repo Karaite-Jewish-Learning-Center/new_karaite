@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,10 +17,10 @@ import Complete from './autocomplete';
 
 
 export default function PrimarySearchAppBar() {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
+    const classes = useStyles();
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -135,8 +135,8 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                 </div>
             </Toolbar>
-            {renderMobileMenu}
             {renderMenu}
+            {renderMobileMenu}
         </AppBar>
     );
 }
@@ -196,7 +196,7 @@ const useStyles = makeStyles((theme) => ({
     sectionMobile: {
         flexGrow: 1,
         justifyContent: 'flex-end',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
             display: 'none',
         },
     },

@@ -1,7 +1,7 @@
 let apiUrl = 'http://161.35.130.125/'
 
 if (process.env.NODE_ENV === 'development') {
-    apiUrl = 'http://localhost:8000/'
+    apiUrl = 'http://192.168.0.110:8000/'
 }
 
 const bookListUrl = apiUrl + 'api/books-list/'
@@ -131,6 +131,7 @@ const versesByBibleBook = {
     'II-Chronicles': [18, 17, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 23, 14, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23],
 }
 
+const q640 = '(min-width:640px)'
 
 export {
     bookListUrl,
@@ -160,6 +161,7 @@ export {
     BOOK_CHAPTERS,
     BOOK_DATA,
     chaptersByBibleBook,
-    versesByBibleBook
+    versesByBibleBook,
+    q640
 
 }
