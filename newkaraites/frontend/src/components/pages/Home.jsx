@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import {q640} from "../constants/constants";
+import {q640} from "../../constants/constants"
 
 const Home = () => {
     const classes = useStyles()

@@ -698,7 +698,7 @@ class References(models.Model):
 
 class AutoComplete(models.Model):
 
-    word_en = models.CharField(max_length=60,
+    word_en = models.CharField(max_length=100,
                                db_index=True)
 
     # book_chatper_verse = models.CharField(max_length=12)
@@ -706,7 +706,7 @@ class AutoComplete(models.Model):
     word_count = models.IntegerField(default=1)
 
     class Meta:
-        ordering = ('word_en',)
+        ordering = ('word_en', '-word_count')
 
 
 class FullTextSearch(models.Model):
@@ -719,7 +719,7 @@ class FullTextSearch(models.Model):
 
     text_he = models.TextField(default='')
 
-    # False entry is humman curated, so don't delete on rebuild database
+    # False entry is human curated, so don't delete on rebuild database
     delete = models.BooleanField(default=False)
 
     def __str__(self) -> str:

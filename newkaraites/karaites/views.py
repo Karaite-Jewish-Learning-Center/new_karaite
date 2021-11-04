@@ -1,4 +1,5 @@
 from sys import getsizeof
+import re
 from collections import OrderedDict
 from django.contrib.postgres.search import (SearchQuery,
                                             SearchVector,
@@ -129,12 +130,15 @@ def karaites_book_as_array(request, *args, **kwargs):
 
 class GetFirstLevel(View):
     """ Get first level classification"""
+
     @staticmethod
     def get(request):
         """ for the time being just fake the database query"""
         level = OrderedDict()
-        level['Tanakh'] = """Torah, Prophets, and Writings, which together make up the Hebrew Bible, Judaism's foundational text."""
-        level['Halakhah'] = """Legal works providing guidance on all aspects of Jewish life. Rooted in past sources and growing to address changing realities"""
+        level[
+            'Tanakh'] = """Torah, Prophets, and Writings, which together make up the Hebrew Bible, Judaism's foundational text."""
+        level[
+            'Halakhah'] = """Legal works providing guidance on all aspects of Jewish life. Rooted in past sources and growing to address changing realities"""
 
         return JsonResponse(level)
 
@@ -210,14 +214,16 @@ class Test(View):
     """
      A very simple test to check if backend is running
     """
+
     @staticmethod
     def get(request, *args, **kwargs):
         return JsonResponse({"ok": True})
 
 
+
 class AutoCompleteView(View):
     """
-    Autocomplete
+        search based on the autocomplete selected
     """
 
     @staticmethod
@@ -227,9 +233,21 @@ class AutoCompleteView(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        result = AutoComplete.objects.filter(word_en__istartswith=search).values_list('word_en', flat=True)[0:9]
+        search = re.sub(' +', ' ', search.strip())
+        search = re.sub(' ', ' & ', search)
 
-        return JsonResponse(list(result), safe=False)
+        print(search)
+
+        sql = f"""select id,word_en, word_count  from  autocomplete_view
+                  where to_tsvector(word_en) @@ to_tsquery('{search}' || ':*')
+                  order by word_count desc limit 15"""
+
+        auto = []
+        for word in AutoComplete.objects.raw(sql):
+            auto.append(word.word_en)
+
+
+        return JsonResponse(auto, safe=False)
 
 
 class Search(View):
@@ -249,8 +267,9 @@ class Search(View):
         result = FullTextSearch.objects.annotate(rank=SearchRank(
             vector, query, weights=[0.2, 0.4, 0.6, 0.8])).order_by('-rank')[0:100]
 
-        searchresult = OrderedDict()
+        search_result = OrderedDict()
         for text in result:
-            searchresult[text.reference_en] = text.text_en
-        print(len(searchresult), getsizeof(searchresult))
-        return JsonResponse(searchresult, safe=False)
+            search_result[text.reference_en] = text.text_en
+        print(len(search_result), getsizeof(search_result))
+        return JsonResponse(search_result, safe=False)
+

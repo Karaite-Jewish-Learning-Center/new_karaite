@@ -28,7 +28,7 @@ const RenderMenu = ({books, path}) => {
     }
     const MakeMenu = () => {
         return Object.keys(books).map((key, index) =>
-            <Grid xs={12} sm={columns} key={index} >
+            <Grid xs={12} sm={columns} key={index}>
                 <Grid item className={localClasses.title}>
                     <Typography className={classes.titleHalakhah} variant="h6" component="h2">{key}</Typography>
                     <Link className={classes.link} to='/texts/'>To texts</Link>
@@ -41,7 +41,7 @@ const RenderMenu = ({books, path}) => {
     }
     return (
         <div className={localClasses.container}>
-            <Grid container xs
+            <Grid container
                   direction="column"
                   justifyContent="space-evenly"
                   alignItems="center"
@@ -58,7 +58,7 @@ const local = makeStyles((theme) => ({
     container: {
         width: '100%',
         height: '100%',
-        margin:10,
+        margin: 10,
     },
     title: {
         marginTop: 50,
@@ -67,7 +67,29 @@ const local = makeStyles((theme) => ({
         width: '100%',
         height: 100,
         marginTop: 40,
-        marginBottom: 80,
+         [theme.breakpoints.down('xl')]: {
+            //backgroundColor: 'pink',
+            marginBottom: 10,
+            fontsize:40,
+        },
+         [theme.breakpoints.down('lg')]: {
+            //backgroundColor: 'green',
+            marginBottom: 10,
+        },
+         [theme.breakpoints.down('md')]: {
+            //backgroundColor: 'blue',
+            marginBottom: 30,
+        },
+         [theme.breakpoints.down('sm')]: {
+            //backgroundColor: 'yellow',
+            marginBottom: 100,
+        },
+        [theme.breakpoints.down('xs')]: {
+            //backgroundColor: 'red',
+            marginBottom: 80,
+        },
+
+
     },
 }));
 

@@ -7,10 +7,12 @@ import LoadBook from "./components/LoadBook";
 import {createMuiTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/core/styles'
 import Halakhah from './components/Halakhah'
-import Home from "./components/Home";
+import Home from "./components/pages/Home";
 import store from "./stores/appState";
 import {TanakhBooksLink} from "./components/menu/TanakBooksLink";
 import {HalakhahBookLink} from "./components/menu/HalakhahBookList";
+import {SearchResult} from "./components/pages/SearchResult";
+// import MainMenu from "./components/menu/MainMenu";
 
 
 function App() {
@@ -27,14 +29,18 @@ function App() {
         <ThemeProvider theme={theme}>
 
             <BrowserRouter>
+                {/*<MainMenu/>*/}
                 <MyAppBar/>
-
                 <Route exact path="/">
                     <Home/>
                 </Route>
 
                 <Route exact path="/texts/">
                     <FirstLevel/>
+                </Route>
+
+                <Route exact path="/search-result/">
+                    <SearchResult search={'god'}/>
                 </Route>
 
                 <Switch>

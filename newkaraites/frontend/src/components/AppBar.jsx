@@ -12,7 +12,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Complete from './autocomplete';
+import Complete from '../components/autcomplete/autocomplete'
 
 
 
@@ -95,9 +95,7 @@ export default function PrimarySearchAppBar() {
 
     return (
 
-        <AppBar position="fixed"
-
-        >
+        <AppBar position="fixed">
             <Toolbar>
                 <Typography className={classes.name} component="h3" >
                     <Link className={classes.link} to="/">Karaites</Link>
@@ -189,15 +187,21 @@ const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
         flexGrow: 1,
         justifyContent: 'flex-end',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.down('xl')]: {
             display: 'flex',
         },
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        }
     },
     sectionMobile: {
         flexGrow: 1,
         justifyContent: 'flex-end',
-        [theme.breakpoints.up('sm')]: {
+         [theme.breakpoints.down('xl')]: {
             display: 'none',
+        },
+        [theme.breakpoints.down('sm')]: {
+            display: 'flex',
         },
     },
     fab: {
