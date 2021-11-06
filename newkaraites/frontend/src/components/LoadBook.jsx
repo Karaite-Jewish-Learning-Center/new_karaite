@@ -1,33 +1,37 @@
-import React, { useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core';
+import React, {useEffect, useContext} from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import {Grid} from '@material-ui/core';
 import parseBiblicalReference from '../utils/parseBiblicalReference';
 import KaraitesBooks from '../components/karaitesBooks'
-import store from '../stores/appState'
-import { observer } from 'mobx-react-lite'
+import {observer} from 'mobx-react-lite'
 import RightPane from './RightPane';
 import RenderText from './RenderText'
-import { makeRandomKey } from '../utils/utils';
-import { Redirect } from 'react-router-dom';
+import {makeRandomKey} from '../utils/utils';
+import {Redirect, useParams} from 'react-router-dom';
 import Message from './Message'
-import { karaitesBookUrl } from '../constants/constants'
-import { calculateItemNumber } from '../utils/utils';
-import { chaptersByBibleBook } from '../constants/constants'
-import { bookChapterUrl } from '../constants/constants'
-import { makeBookUrl } from "../utils/utils"
+import {karaitesBookUrl} from '../constants/constants'
+import {calculateItemNumber} from '../utils/utils';
+import {chaptersByBibleBook} from '../constants/constants'
+import {bookChapterUrl} from '../constants/constants'
+import {makeBookUrl} from "../utils/utils"
+import {storeContext} from "../stores/context";
 
 
 const PARAGRAPHS = 0
 
 
-const LoadBook = ({ book, chapter, verse, type }) => {
-    // if type is 'karaites, chapter is use as start  and is verse in ignored
+const LoadBook = ({type}) => {
+    const store = useContext(storeContext)
+    const {book, chapter} = useParams()
+    const verse = 1
+    // if type is karaites, chapter is used as start  and verse is ignored
 
     const classes = useStyles()
 
     async function fetchDataBible(paneNumber) {
         if (store.getBookData(paneNumber).length === 0) {
             const book = store.getBook(paneNumber)
+            debugger
             const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], 0, false))
             if (response.ok) {
                 const data = await response.json()
@@ -108,11 +112,11 @@ const LoadBook = ({ book, chapter, verse, type }) => {
             store.setCurrentItem(item, paneNumber)
             store.setDistance(0, paneNumber)
         }
-        const { refBook, refChapter, refVerse, refHighlight } = parseBiblicalReference(e)
+        const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
         getBook(refBook, refChapter, refVerse, refHighlight, kind)
     }
 
-    const RenderRightPane = ({ isOpen, paneNumber }) => {
+    const RenderRightPane = ({isOpen, paneNumber}) => {
         return (
             <Grid item xs={true} className={(isOpen ? classes.rightPane : classes.hiddenRightPane)}>
                 <RightPane
@@ -138,7 +142,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
                             <RenderText paneNumber={i}
                             />
                         </Grid>
-                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} />
+                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i}/>
                     </>
                 ))
 
@@ -146,7 +150,7 @@ const LoadBook = ({ book, chapter, verse, type }) => {
             if (panes[i].type.toLowerCase() === 'karaites') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)} />
+                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)}/>
                     </Grid>
 
                 ))
@@ -163,20 +167,20 @@ const LoadBook = ({ book, chapter, verse, type }) => {
 
     if (store.getIsLastPane() && books.length === 0) {
         if (type === 'bible') {
-            return (<Redirect to={`/Tanakh/${book}/`} />)
+            return (<Redirect to={`/Tanakh/${book}/`}/>)
         } else {
-            return (<Redirect to={`/Halakhah/${book}/`} />)
+            return (<Redirect to={`/Halakhah/${book}/`}/>)
         }
     }
 
     return (
         <>
-            <Message />
+            <Message/>
             <Grid container
-                className={classes.root}
-                direction="row"
-                justifycontent="center"
-                key={makeRandomKey()}
+                  className={classes.root}
+                  direction="row"
+                  justifycontent="center"
+                  key={makeRandomKey()}
             >
                 {books.map(jsx => jsx)}
             </Grid>

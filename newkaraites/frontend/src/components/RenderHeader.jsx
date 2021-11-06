@@ -1,18 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Colors from '../constants/colors';
-import { Typography } from '@material-ui/core';
-import { englishBookNameToHebrew, unslug } from '../utils/utils'
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles'
+import {Typography} from '@material-ui/core';
+import {englishBookNameToHebrew, unslug} from '../utils/utils'
+import {Grid} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close';
-import store from '../stores/appState';
-import { observer } from 'mobx-react-lite';
+import {observer} from 'mobx-react-lite';
+import {storeContext} from "../stores/context";
 
 
+const RenderHeader = ({book, paneNumber}) => {
+    const store = useContext(storeContext)
 
-
-const RenderHeader = ({ book, paneNumber }) => {
     book = unslug(book)
     const classes = useStyles()
 
@@ -26,7 +26,7 @@ const RenderHeader = ({ book, paneNumber }) => {
 
     return (
         <Grid container className={classes.header}
-            direction="row"
+              direction="row"
         >
             <Grid item xs={1} key={0}>
                 <IconButton
@@ -34,7 +34,7 @@ const RenderHeader = ({ book, paneNumber }) => {
                     component="span"
                     onClick={onClose}
                 >
-                    <CloseIcon className={classes.iconGrid} />
+                    <CloseIcon className={classes.iconGrid}/>
                 </IconButton>
 
             </Grid>
@@ -47,7 +47,7 @@ const RenderHeader = ({ book, paneNumber }) => {
             <Grid item xs={4} key={3}>
                 <Typography className={classes.englishBook}>{book} </Typography>
             </Grid>
-        </Grid >
+        </Grid>
     )
 }
 

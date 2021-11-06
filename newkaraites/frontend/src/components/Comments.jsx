@@ -1,15 +1,15 @@
-import React from "react";
-import { makeRandomKey } from "../utils/utils";
+import React, {useContext} from "react";
+import {makeRandomKey} from "../utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 import transform from "../utils/transform"
-import store from "../stores/appState";
-import { observer } from "mobx-react-lite";
-import { calculateItemNumber } from "../utils/utils";
-import { Typography } from "@material-ui/core";
+import {observer} from "mobx-react-lite";
+import {calculateItemNumber} from "../utils/utils";
+import {Typography} from "@material-ui/core";
+import {storeContext} from "../stores/context";
 
 
-const Comments = ({ language, paneNumber, refClick }) => {
-
+const Comments = ({language, paneNumber, refClick}) => {
+    const store = useContext(storeContext)
     const ref = 'comment_' + language
     const comments = store.getComments(paneNumber)
 

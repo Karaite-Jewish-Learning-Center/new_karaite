@@ -1,19 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Virtuoso } from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import KaraitePaneHeader from "./KaraitePaneHeader";
 import transform from '../utils/transform'
-import store from '../stores/appState'
 import Loading from "./Loading";
 import './css/comments.css'
 import Colors from '../constants/colors'
+import {storeContext} from "../stores/context";
 
 
 
 
 const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
-
+    const store = useContext(storeContext)
     const classes = useStyles()
 
     const selectCurrent = (item) => {

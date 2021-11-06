@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useParams} from "react-router-dom";
 import HalakhahMenu from "../HalakhahMenu";
-import store from "../../stores/appState";
+import {storeContext} from "../../stores/context";
 
 
 export const HalakhahBookLink = () => {
+        const store = useContext(storeContext)
         store.resetPanes()
-        let { book } = useParams()
+        const { book } = useParams()
         return (<HalakhahMenu book={book} />)
     }

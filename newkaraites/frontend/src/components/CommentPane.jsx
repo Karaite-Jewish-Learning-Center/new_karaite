@@ -1,17 +1,19 @@
-import React, { useEffect } from "react"
+import React, {useContext, useEffect} from "react"
 import TabPanel from "./TabPanel"
 import Comments from "./Comments"
 import { getCommentsUrl } from '../constants/constants'
 import { makeStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import store from "../stores/appState"
 import { observer } from 'mobx-react-lite'
 import './css/comments.css'
 import Header from "./RightPaneHeader"
+import {storeContext} from "../stores/context";
 
 
 const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
+    const store = useContext(storeContext)
+    debugger
     const classes = useStyles()
 
     const getComments = async (book, chapter, verse) => {
