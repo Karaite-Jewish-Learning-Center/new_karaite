@@ -1,8 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
+import {searchResultsUrl} from "../../constants/constants";
+
+
 
 export const SearchResult = ({search}) => {
     const classes = useStyles()
+    //
+    //  const getSearchResult= async () => {
+    //
+    //     const response = await fetch(searchResultsUrl + `${book}/${chapter}/${verse}/`)
+    //     if (response.ok) {
+    //         const data = await response.json()
+    //     } else {
+    //         alert("HTTP-Error: " + response.status)
+    //     }
+    // }
+    //
+    // useEffect(() => {
+    //     getSearchResult()
+    // }, [])
 
     return (
         <div className={classes.container}>

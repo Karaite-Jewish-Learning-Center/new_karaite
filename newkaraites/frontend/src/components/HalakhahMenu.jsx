@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { karaitesBookToc } from '../constants/constants'
 import { booksMenu } from '../constants/common-css'
 import { Grid, Typography } from '@material-ui/core'
 import { unslug } from '../utils/utils'
 import { Link } from 'react-router-dom'
-import store from '../stores/appState'
+import {storeContext} from "../stores/context";
 
 
 
 const HalakhahMenu = ({ book }) => {
+    const store = useContext(storeContext)
     const [toc, setToc] = useState([])
 
     const classes = booksMenu()

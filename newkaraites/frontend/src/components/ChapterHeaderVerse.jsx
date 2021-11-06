@@ -1,5 +1,5 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useContext} from 'react'
+import {makeStyles} from '@material-ui/core/styles';
 import Colors from "../constants/colors";
 import Typography from '@material-ui/core/Typography';
 import {
@@ -12,14 +12,14 @@ import {
     BIBLE_REFS
 } from "../constants/constants";
 import RefsBadge from "./RefsBadge";
-import store from '../stores/appState'
-import { observer } from 'mobx-react-lite';
-import { versesByBibleBook } from '../constants/constants';
-
+import {observer} from 'mobx-react-lite';
+import {versesByBibleBook} from '../constants/constants';
+import {storeContext} from "../stores/context";
 
 
 const ChapterHeaderVerse = (props) => {
-    const { data, item, gridVisibleRange, paneNumber } = props
+    const store = useContext(storeContext)
+    const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
     let classes = useStyles()
     let chapterHtml = null
@@ -70,10 +70,10 @@ const ChapterHeaderVerse = (props) => {
         chapterHtml = (<div className={classes.chapter}>
             <div className={classes.chapterNumber}>
                 <Typography className={classes.ch}>{chapter}</Typography>
-                <hr />
+                <hr/>
             </div>
             <div className={classes.references}>
-                <RefsBadge refsCount={0} />
+                <RefsBadge refsCount={0}/>
             </div>
         </div>)
     }
@@ -88,11 +88,11 @@ const ChapterHeaderVerse = (props) => {
 
     }
     return (
-        <div className={classes.verse} >
+        <div className={classes.verse}>
 
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                onClick={onClick.bind(this, item)} onDoubleClick={openRightPane.bind(this, item)}
+                 onClick={onClick.bind(this, item)} onDoubleClick={openRightPane.bind(this, item)}
             >
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -105,7 +105,7 @@ const ChapterHeaderVerse = (props) => {
                     <Typography>{data[BIBLE_ENGLISH]}</Typography>
                 </div>
                 <div className={classes.references}>
-                    <RefsBadge refsCount={refs} />
+                    <RefsBadge refsCount={refs}/>
                 </div>
             </div>
 

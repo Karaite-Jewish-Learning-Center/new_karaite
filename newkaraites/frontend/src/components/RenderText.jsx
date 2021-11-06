@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, {useContext, useState} from 'react'
 import Loading from './Loading'
 import { Virtuoso } from 'react-virtuoso'
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
-import store from '../stores/appState'
 import { observer } from 'mobx-react-lite'
-
+import {storeContext} from "../stores/context";
 
 
 const RenderTextGrid = ({ paneNumber }) => {
+     const store = useContext(storeContext)
     const book = store.getBook(paneNumber)
     const [gridVisibleRange, setGridVisibleRange] = useState({ startIndex: 0, endIndex: 0 })
 

@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx"
+import {makeAutoObservable, runInAction} from "mobx"
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -59,14 +59,18 @@ class AppState {
     getChapter = (i) => this.panes[i].chapter
 
     setVerse = (verse, i) => {
-        runInAction(() => { this.panes[i].verse = verse })
+        runInAction(() => {
+            this.panes[i].verse = verse
+        })
     }
     getVerse = (i) => this.panes[i].verse
 
     getVerses = (i) => this.panes[i].verses
 
     setVerseData = (data, i) => {
-        runInAction(() => { this.panes[i].verseData = data })
+        runInAction(() => {
+            this.panes[i].verseData = data
+        })
     }
 
     getVerseData = (i) => this.panes[i].verseData
@@ -83,7 +87,9 @@ class AppState {
 
     setCurrentItem = (item, i) => {
         console.log("setting current item", item)
-        runInAction(() => { this.panes[i].currentItem = item })
+        runInAction(() => {
+            this.panes[i].currentItem = item
+        })
     }
 
     getCurrentItem = (i) => this.panes[i].currentItem
@@ -112,7 +118,9 @@ class AppState {
     getPaneByNumber = (i) => this.panes[i]
 
     setIsLastPane = (state) => {
-        runInAction(() => { this.isLastPane = state })
+        runInAction(() => {
+            this.isLastPane = state
+        })
     }
     getIsLastPane = () => this.isLastPane
 
@@ -149,7 +157,9 @@ class AppState {
     getMessage = () => this.message
 
     setHeaderChapter = (chapter, i) => {
-        runInAction(() => { this.panes[i].headerChapter = chapter })
+        runInAction(() => {
+            this.panes[i].headerChapter = chapter
+        })
     }
 
     getHeaderChapter = (i) => this.panes[i].headerChapter
@@ -157,7 +167,8 @@ class AppState {
 }
 
 
+const appStore = () => {
+    return new AppState()
+}
 
-const store = new AppState()
-
-export default store
+export default appStore

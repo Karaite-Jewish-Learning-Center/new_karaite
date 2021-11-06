@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useContext, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../constants/colors'
 import Button from '@material-ui/core/Button'
@@ -14,9 +14,9 @@ import {
     BIBLE_HEBREW,
 } from '../constants/constants'
 import Player from './Player'
-import store from '../stores/appState'
 import { observer } from 'mobx-react-lite'
 import Header from './RightPaneHeader'
+import {storeContext} from "../stores/context";
 
 
 
@@ -26,6 +26,7 @@ const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 
 const RightPane = ({ paneNumber, refClick }) => {
+    const store = useContext(storeContext)
 
     const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
     const verseData = store.getVerseData(paneNumber)

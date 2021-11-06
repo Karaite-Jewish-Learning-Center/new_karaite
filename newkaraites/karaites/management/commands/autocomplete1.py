@@ -39,12 +39,15 @@ class Command(BaseCommand):
                 word_list = nlp(verse[ENGLISH])
                 for nouns in word_list.noun_chunks:
 
-                    word = nouns.text.strip().lower()
+                    word = nouns.text
+                    word = word.strip().lower()
 
                     if word.startswith(', '):
                         word = word.replace(', ', '')
                     if word.startswith('; '):
                         word = word.replace('; ', '')
+                    if word.startswith("'"):
+                        word = word.replace("'", '')
 
                     auto, created = AutoComplete.objects.get_or_create(
                         word_en=word
