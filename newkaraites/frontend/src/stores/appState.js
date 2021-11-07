@@ -7,6 +7,9 @@ class AppState {
     isLastPane = false
     // messages
     message = ''
+    // search
+    search = ''
+    searchResultData = null
 
     constructor() {
         makeAutoObservable(this)
@@ -164,11 +167,19 @@ class AppState {
 
     getHeaderChapter = (i) => this.panes[i].headerChapter
 
+    // search
+    setSearch = (search) => this.search = search
+    getSearch =()=> this.search
+
+    // search result
+    setSearchResultData =( result)=> this.searchResultData = result
+    getSearchResultData =() => this.searchResultData
 }
 
 
 const appStore = () => {
     return new AppState()
 }
+
 
 export default appStore

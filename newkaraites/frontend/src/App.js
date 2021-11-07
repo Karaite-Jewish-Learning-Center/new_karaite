@@ -13,7 +13,7 @@ import {HalakhahBookLink} from "./components/menu/HalakhahBookList";
 import {SearchResult} from "./components/pages/SearchResult";
 // import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
-import {NotFound404} from "./components/pages/notFound404";
+import {NotFound404} from "./components/pages/NotFound404";
 
 
 function App() {
@@ -21,36 +21,33 @@ function App() {
     return (
         <StoreProvider>
             <ThemeProvider theme={theme}>
-
                 <BrowserRouter>
                     {/*<MainMenu/>*/}
                     <MyAppBar/>
                     <Switch>
-                        <>
-                            <Route exact path="/">
-                                <Home/>
-                            </Route>
+                        <Route exact path="/">
+                            <Home/>
+                        </Route>
 
-                            <Route exact path="/texts/">
-                                <FirstLevel/>
-                            </Route>
+                        <Route exact path="/texts/">
+                            <FirstLevel/>
+                        </Route>
 
-                            <Route exact path="/search-result/">
-                                <SearchResult search={'god'}/>
-                            </Route>
+                        <Route exact path="/search-result/">
+                            <SearchResult/>
+                        </Route>
 
+                        <Route exact path="/Tanakh/:book/:chapter/" children={<LoadBook type={'bible'}/>}/>
+                        <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
+                        <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                            <Route exact path="/Tanakh/:book/:chapter/" children={<LoadBook type={'bible'}/>}/>
-                            <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
-                            <Route exact path="/Tanakh/"><Tanakh/></Route>
+                        <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
+                        <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
+                        <Route exact path="/Halakhah/"><Halakhah/></Route>
 
-                            <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
-                            <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
-                            <Route exact path="/Halakhah/"><Halakhah/></Route>
-                            <Route path='*'>
-                                <NotFound404 />
-                            </Route>
-                        </>
+                        <Route path='*'>
+                            <NotFound404/>
+                        </Route>
                     </Switch>
                 </BrowserRouter>
             </ThemeProvider>
