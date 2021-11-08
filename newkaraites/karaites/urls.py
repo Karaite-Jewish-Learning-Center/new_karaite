@@ -49,6 +49,7 @@ urlpatterns = [
 
     # autocomplete / searching
     path('autocomplete/<str:search>/', AutoCompleteView.as_view(), name='autocomplete'),
+    path('search/<str:search>/<int:page>/', Search.as_view(), name='autocomplete'),
     path('search/<str:search>/', Search.as_view(), name='autocomplete'),
 
 

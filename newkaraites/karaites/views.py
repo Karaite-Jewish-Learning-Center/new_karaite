@@ -1,11 +1,10 @@
-from sys import getsizeof
 import re
 from collections import OrderedDict
 from django.contrib.postgres.search import (SearchQuery,
                                             SearchVector,
                                             SearchRank,
                                             SearchHeadline)
-
+from django.core.paginator import Paginator
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
@@ -220,7 +219,6 @@ class Test(View):
         return JsonResponse({"ok": True})
 
 
-
 class AutoCompleteView(View):
     """
         search based on the autocomplete selected
@@ -246,8 +244,10 @@ class AutoCompleteView(View):
         for word in AutoComplete.objects.raw(sql):
             auto.append(word.word_en)
 
-
         return JsonResponse(auto, safe=False)
+
+
+ITEMS_PER_PAGE = 15
 
 
 class Search(View):
@@ -258,18 +258,26 @@ class Search(View):
     @staticmethod
     def get(request, *args, **kwargs):
         search = kwargs.get('search', None)
-
+        page = kwargs.get('page', 1)
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        vector = SearchVector('text_en', config='english')
+        weight = [0.2, 0.4, 0.6, 0.8]
+        vector = SearchVector('reference_en', config='english') + SearchVector('text_en', config='english')
         query = SearchQuery(search, search_type='phrase')
-        result = FullTextSearch.objects.annotate(rank=SearchRank(
-            vector, query, weights=[0.2, 0.4, 0.6, 0.8])).order_by('-rank')[0:100]
+        rank = SearchRank(vector, query, weights=weight, cover_density=True)
+        headline = SearchHeadline('text_en', query, start_sel='<b>', stop_sel='</b>')
 
-        search_result = OrderedDict()
-        for text in result:
-            search_result[text.reference_en] = text.text_en
-        print(len(search_result), getsizeof(search_result))
-        return JsonResponse(search_result, safe=False)
+        result = FullTextSearch.objects.all().values('reference_en', 'text_en')
 
+        paginator = Paginator(result, ITEMS_PER_PAGE)
+        page_number = paginator.get_page(page)
+
+        pages = []
+        for p in page_number.object_list:
+            pages.append({'ref': p['reference_en'], 'text': p['text_en']})
+
+        return JsonResponse({'pages': pages,
+                             'next': page_number.next_page_number(),
+                             'last': paginator.count // 15},
+                            safe=False)

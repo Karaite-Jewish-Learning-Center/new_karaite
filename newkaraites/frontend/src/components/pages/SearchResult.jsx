@@ -5,21 +5,26 @@ import {storeContext} from "../../stores/context";
 import {Grid, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Colors from "../../constants/colors";
-import {addTagToString} from "../../utils/addTagToString";
 import ReactHtmlParser from 'react-html-parser';
+import {addTagToString} from "../../utils/addTagToString";
+
 
 export const SearchResult = () => {
     const store = useContext(storeContext)
     const [results, setResults] = useState([])
+    const [nextPage, setNextPage] = useState(1)
+    const [last, setLast] = useState(0)
     const classes = useStyles()
-    const search = 'kings'
+    const search = 'god'
 
     const getSearchResult = async () => {
-        const response = await fetch(searchResultsUrl + `${search}/`)
+        console.log(nextPage)
+        const response = await fetch(searchResultsUrl + `${search}/${nextPage}/`)
         if (response.ok) {
             const data = await response.json()
-            debugger
-            setResults(data)
+            setResults(data['pages'])
+            setNextPage(data['next'])
+            setLast(data['last'])
         } else {
             alert("HTTP-Error: " + response.status)
         }
@@ -33,19 +38,17 @@ export const SearchResult = () => {
         return (
             <div className={classes.header}>
                 <Typography className={classes.title} variant="h4">Results for "{search}"</Typography>
-                <Typography className={classes.sub} variant="h6">100 Results</Typography>
+                <Typography className={classes.sub} variant="h6">{last} Results</Typography>
             </div>
         )
     }
     const Results = () => {
-        return Object.keys(results).map(key =>
-            <Grid item key={key} className={classes.card}>
-                <Link to={'/' + key + '/'}>
-                    <Typography variant="h6" component="h2">{key}</Typography>
+        return results.map( (result, index) =>
+            <Grid item key={index} className={classes.card}>
+                <Link to={`/${result['ref']}/`}>
+                    <Typography variant="h6" component="h2">{result['ref']}</Typography>
                 </Link>
-                <br/>
-                //todo: do this is the backend
-                {ReactHtmlParser( `<p >${addTagToString(results[key], search, 'b')}</p>`)}
+                {ReactHtmlParser( `<p>${addTagToString(result['text'],search,'b')}</p>`)}
                 <hr/>
             </Grid>)
     }
@@ -54,7 +57,7 @@ export const SearchResult = () => {
     return (
         <div className={classes.container}>
             <ResultsHeader/>
-            <Grid container xs
+            <Grid container
                   direction="row"
                   spacing={2}
             >
@@ -87,8 +90,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 40,
     },
     card: {
-        maxWidth: '80%',
-        minWidth: '80%',
+
+        // maxWidth: '80%',
+        // minWidth: '80%',
         margin: 20,
 
     },
