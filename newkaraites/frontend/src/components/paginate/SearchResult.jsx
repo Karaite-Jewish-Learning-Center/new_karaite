@@ -11,20 +11,18 @@ import {addTagToString} from "../../utils/addTagToString";
 
 export const SearchResult = () => {
     const store = useContext(storeContext)
-    const [results, setResults] = useState([])
     const [nextPage, setNextPage] = useState(1)
-    const [last, setLast] = useState(0)
+    const [results, setResults] = useState([])
     const classes = useStyles()
     const search = 'god'
 
     const getSearchResult = async () => {
-        console.log(nextPage)
         const response = await fetch(searchResultsUrl + `${search}/${nextPage}/`)
         if (response.ok) {
             const data = await response.json()
-            setResults(data['pages'])
-            setNextPage(data['next'])
-            setLast(data['last'])
+            debugger
+            setResults(data['data'])
+            setNextPage(()=>parseInt(data['page']))
         } else {
             alert("HTTP-Error: " + response.status)
         }
@@ -38,7 +36,7 @@ export const SearchResult = () => {
         return (
             <div className={classes.header}>
                 <Typography className={classes.title} variant="h4">Results for "{search}"</Typography>
-                <Typography className={classes.sub} variant="h6">{last} Results</Typography>
+                <Typography className={classes.sub} variant="h6"> Results</Typography>
             </div>
         )
     }
@@ -52,7 +50,6 @@ export const SearchResult = () => {
                 <hr/>
             </Grid>)
     }
-
 
     return (
         <div className={classes.container}>

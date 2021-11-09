@@ -1,4 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx"
+import {searchResultsUrl} from "../constants/constants";
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -8,8 +9,9 @@ class AppState {
     // messages
     message = ''
     // search
-    search = ''
-    searchResultData = null
+    search = 'god'
+    searchResultData = []
+    pageNumber = 0
 
     constructor() {
         makeAutoObservable(this)
@@ -172,8 +174,25 @@ class AppState {
     getSearch =()=> this.search
 
     // search result
-    setSearchResultData =( result)=> this.searchResultData = result
+    setSearchResultData =( result)=> [...this.searchResultData, ...result]
     getSearchResultData =() => this.searchResultData
+
+    // search page
+    setNextPageNumber =(page)=> this.pageNumber = page
+    getNextPageNumber =() => this.pageNumber + 1
+
+    // fetch data
+    getSearchResult = async () => {
+        const response = await fetch(searchResultsUrl + `${this.getSearch()}/${this.getNextPageNumber()}/`)
+        if (response.ok) {
+            const data = await response.json()
+            this.setSearchResultData(data['data'])
+            this.setNextPageNumber(parseInt(data['page']))
+        } else {
+            alert("HTTP-Error: " + response.status)
+        }
+    }
+
 }
 
 

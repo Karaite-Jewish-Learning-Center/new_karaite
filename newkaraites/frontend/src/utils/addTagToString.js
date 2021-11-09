@@ -4,7 +4,11 @@
 // this is the text that <b>I</b> want to tag, so <b>I</b> said
 
 
-export const addTagToString = (string, arg, tag) => {
-    const argToReplace = new RegExp(arg, "gi")
-    return string.replace(argToReplace, `<${tag}>${arg}</${tag}>`)
+export const addTagToString = (string, args, tag) => {
+    const arg = args.split(' & ')
+    for (let index in args.split(' & ')) {
+        const argToReplace = new RegExp(arg[index], "gi")
+        string = string.replace(argToReplace, `<${tag}>${arg[index]}</${tag}>`)
+    }
+    return string
 }

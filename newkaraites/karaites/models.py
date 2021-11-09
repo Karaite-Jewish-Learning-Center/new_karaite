@@ -1,5 +1,4 @@
 from django.contrib.postgres.fields import ArrayField
-from django.db.models.fields import TextField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext as _
@@ -8,7 +7,8 @@ from .constants import (FIRST_LEVEL,
                         LANGUAGES,
                         BOOK_CLASSIFICATION)
 from tinymce.models import HTMLField
-from .hebrew_numbers import indo_arabic_to_hebrew
+from django.contrib.postgres.search import SearchVectorField
+from django.contrib.postgres.indexes import GinIndex
 
 
 class Organization(models.Model):
@@ -715,9 +715,13 @@ class FullTextSearch(models.Model):
 
     text_en = models.TextField(default='')
 
+    text_en_search = SearchVectorField(null=True)
+
     reference_he = models.CharField(max_length=100, default='')
 
     text_he = models.TextField(default='')
+
+    text_he_search = SearchVectorField(null=True)
 
     # False entry is human curated, so don't delete on rebuild database
     delete = models.BooleanField(default=False)
@@ -727,3 +731,4 @@ class FullTextSearch(models.Model):
 
     class Meta:
         verbose_name_plural = 'Full text search'
+        indexes = [GinIndex(fields=["text_en_search"])]
