@@ -1,31 +1,32 @@
-import React, {useState, useEffect} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import React, {useState, useEffect} from 'react'
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 import {autocompleteUrl} from '../../constants/constants'
+import {apiFetch} from "../api/apiFetch";
 
+export const AutoComplete = () => {
 
-const Complete = () => {
-     const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
     const [search, setSearch] = useState('')
     const [options, setOptions] = useState([])
 
-    const getAutoComplete = async () => {
+    const getAutoComplete = () => {
         if (search.length < 2) return undefined
-        const response = await fetch(`${autocompleteUrl}${search}/`)
-        if (response.ok) {
-            const data = await response.json()
-            setOptions(data)
-        } else {
-            alert("HTTP-Error: " + response.status)
+         apiFetch(`${autocompleteUrl}${search}/`)
+             .then((response)=> {
+              setOptions(response)
+          })
+             .catch(e=> {
+             console.log(e)
+          })
         }
-    }
 
     useEffect(() => {
         getAutoComplete()
     }, [search]);
 
-
     const onChange = (e) => {
+        debugger
         if (e.target.value.length < 2) {
             setOptions([])
         }
@@ -38,23 +39,23 @@ const Complete = () => {
 
     const onKeyDown = (event) => {
         if (event.code === "Enter") {
-            console.log('Key', event)
+           window.location =`/search-result/${search}/`;
         }
     }
 
     return (
         <>
-            <p>The search:{search}</p>
-             <p>Value:{value}</p>
             <Autocomplete
-                value ={value}
+                value={value}
                 options={options}
                 autoComplete={true}
+                autoSelect={true}
                 onClose={onClose}
                 onKeyDown={onKeyDown}
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}
+                // onChange={onChange}
                 getOptionLabel={(option) => option}
                 style={{width: 300, marginRight: 40}}
                 inputValue={search}
@@ -73,6 +74,3 @@ const Complete = () => {
         </>
     );
 }
-
-
-export default Complete

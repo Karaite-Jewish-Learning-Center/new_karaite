@@ -14,7 +14,8 @@ import {SearchResults} from "./components/pages/SearchResults";
 // import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
-
+import {Please} from "./components/pages/Please";
+import Message from './components/Message'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                 <BrowserRouter>
                     {/*<MainMenu/>*/}
                     <MyAppBar/>
+                    <Message/>
                     <Switch>
                         <Route exact path="/">
                             <Home/>
@@ -33,8 +35,12 @@ function App() {
                             <FirstLevel/>
                         </Route>
 
-                        <Route exact path="/search-result/">
+                        <Route exact path="/search-result/:search/">
                             <SearchResults/>
+                        </Route>
+
+                        <Route exact path="/search-result/">
+                            <Please reason="search" />
                         </Route>
 
                         <Route exact path="/Tanakh/:book/:chapter/" children={<LoadBook type={'bible'}/>}/>

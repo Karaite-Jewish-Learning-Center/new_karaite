@@ -1,4 +1,5 @@
 import sys
+import re
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL)
 
@@ -30,3 +31,10 @@ def slug_back(str):
 def replace_punctuation_marks(s):
     s = s.replace('‘', '').replace('’', '')
     return s.translate(str.maketrans('''!()-[]{};:'"\\,"<>./?@#$%^&*_~''', " " * 29))
+
+
+def prep_search(search):
+    """ postgres full text search"""
+    search = search.replace("'", '')
+    search = re.sub(' +', ' ', search.strip())
+    return re.sub(' ', ' & ', search)

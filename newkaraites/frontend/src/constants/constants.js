@@ -33,6 +33,8 @@ export const BIBLE_RENDER_CHAPTER = 6
 export const BIBLE_REFS = 7
 export const BOOK_CHAPTERS = 0
 export const BOOK_DATA = 1
+// this value is define in the views.py if changed there must be changed here
+export const ITEMS_PER_PAGE = 15
 
 export const chaptersByBibleBook = {
     'Genesis': 50,

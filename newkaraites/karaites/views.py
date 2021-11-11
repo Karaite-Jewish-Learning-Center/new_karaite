@@ -1,14 +1,10 @@
 import re
 from collections import OrderedDict
-from django.contrib.postgres.search import (SearchQuery,
-                                            SearchVector,
-                                            SearchRank,
-                                            SearchHeadline)
-from django.core.paginator import Paginator
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
-from .utils import slug_back
+from .utils import (slug_back,
+                    prep_search)
 from .models import (FullTextSearch, Organization,
                      BookAsArray,
                      Comment,
@@ -18,7 +14,6 @@ from .models import (FullTextSearch, Organization,
                      AutoComplete,
                      References)
 
-from .utils import replace_punctuation_marks
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -231,10 +226,7 @@ class AutoCompleteView(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        search = re.sub(' +', ' ', search.strip())
-        search = re.sub(' ', ' & ', search)
-
-        print(search)
+        search = prep_search(search)
 
         sql = f"""select id,word_en, word_count  from  autocomplete_view
                   where to_tsvector(word_en) @@ to_tsquery('{search}' || ':*')
@@ -262,6 +254,8 @@ class Search(View):
 
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+
+        search = prep_search(search)
 
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE

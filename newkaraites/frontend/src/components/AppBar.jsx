@@ -12,7 +12,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Complete from '../components/autcomplete/autocomplete'
+import {AutoComplete} from '../components/autcomplete/autocomplete'
 
 
 
@@ -105,7 +105,7 @@ export default function PrimarySearchAppBar() {
                 </Typography>
 
                 <div className={classes.sectionDesktop}>
-                    <Complete />
+                    <AutoComplete />
                     <IconButton aria-label="Go to sign up form" color="inherit" >
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>

@@ -1,12 +1,22 @@
-import React from "react";
-import {searchResultsUrl} from "../../constants/constants";
+async function timeoutFetch(url, options = {}) {
+    const {timeout = 5000} = options;
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
 
-export const getSearchResult = async (search) => {
-    const response = await fetch(searchResultsUrl + `${search}/`)
-    if (response.ok) {
-        const data = await response.json()
-    } else {
-        throw new Error(response.status)
-    }
+    const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+    });
+    clearTimeout(id);
+    return response;
 }
 
+export const apiFetch = async (url, options = {}) => {
+    try {
+        const response = await timeoutFetch(url, options)
+        const data = response.json()
+        return data
+    } catch (error) {
+        console.log(error.message)
+    }
+}
