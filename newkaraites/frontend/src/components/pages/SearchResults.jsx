@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from "react";
-import {Virtuoso} from "react-virtuoso";
-import Loading from "../Loading";
-import {useParams} from "react-router-dom";
-import {makeStyles} from "@material-ui/core/styles";
-import {searchResultsUrl} from "../../constants/constants";
-import {Link} from "react-router-dom";
-import ReactHtmlParser from "react-html-parser";
-import {addTagToString} from "../../utils/addTagToString";
-import {Typography} from "@material-ui/core";
-import {ITEMS_PER_PAGE} from "../../constants/constants";
+import React, {useContext, useEffect, useState} from "react"
+import {observer} from 'mobx-react-lite'
+import {Virtuoso} from "react-virtuoso"
+import Loading from "../Loading"
+import {makeStyles} from "@material-ui/core/styles"
+import {searchResultsUrl} from "../../constants/constants"
+import {Link} from "react-router-dom"
+import ReactHtmlParser from "react-html-parser"
+import {addTagToString} from "../../utils/addTagToString"
+import {Typography} from "@material-ui/core"
+import {ITEMS_PER_PAGE} from "../../constants/constants"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
+import {storeContext} from "../../stores/context"
 
 
-
-export const SearchResults = () => {
-    const {search} = useParams()
+const SearchResults = () => {
+    const store = useContext(storeContext)
     const classes = useStyles()
     const [searchResultData, setSearchResultData] = useState([])
     const [nextPageNumber, setNextPageNumber] = useState(1)
@@ -29,12 +29,13 @@ export const SearchResults = () => {
                 <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
                     <Typography variant="h6" component="h2">{data['ref']}</Typography>
                 </Link>
-                {ReactHtmlParser(`<p>${addTagToString(data['text'], search, 'b')}</p>`)}
+                {ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}
                 <hr/>
             </div>)
     }
 
     const nextPage = () => {
+        debugger
         if (moreResults) {
             setNextPageNumber(() => nextPageNumber + 1)
         }
@@ -42,7 +43,7 @@ export const SearchResults = () => {
 
     const getSearchResult = async () => {
 
-        const response = await fetch(searchResultsUrl + `${search}/${nextPageNumber}/`)
+        const response = await fetch(searchResultsUrl + `${store.getSearch()}/${nextPageNumber}/`)
         if (response.ok) {
             const data = await response.json()
 
@@ -52,7 +53,7 @@ export const SearchResults = () => {
 
             if (data['data'].length < ITEMS_PER_PAGE) {
                 setMoreResults(() => false)
-                setMessage(() => `End of search results for "${search.replace(' & ', ' ')}"`)
+                setMessage(() => `End of search results for "${store.getSearch().replace(' & ', ' ')}"`)
             }
             setSearchResultData(() => [...searchResultData, ...data['data']])
         } else {
@@ -66,7 +67,7 @@ export const SearchResults = () => {
 
     return (
         <div className={classes.container}>
-            <Typography className={classes.header} variant="h5">Results for "{search.replace(' & ', ' ')}"</Typography>
+            <Typography className={classes.header} variant="h5">Results for "{store.getSearch().replace(' & ', ' ')}"</Typography>
             <Virtuoso
                 data={searchResultData}
                 endReached={nextPage}
@@ -94,4 +95,6 @@ const useStyles = makeStyles((theme) => ({
     header: {
         marginLeft: 20,
     },
-}));
+}))
+
+export default observer(SearchResults)

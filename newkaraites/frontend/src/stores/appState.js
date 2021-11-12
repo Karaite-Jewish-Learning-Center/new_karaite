@@ -9,7 +9,7 @@ class AppState {
     // messages
     message = ''
     // search
-    search = 'god'
+    search = ''
     searchResultData = []
     pageNumber = 0
 
@@ -168,7 +168,10 @@ class AppState {
     getHeaderChapter = (i) => this.panes[i].headerChapter
 
     // search arg
-    setSearch = (search) => this.search = search
+    setSearch = (searchArg) => {
+        console.log('set search', searchArg)
+        this.search = searchArg
+    }
     getSearch =()=> this.search
 
     // search result

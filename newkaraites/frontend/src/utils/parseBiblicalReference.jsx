@@ -1,6 +1,6 @@
 import { hebrewBookNameToEnglish } from "./utils";
 import gematriya from 'gematriya';
-
+import {slug} from "./utils";
 
 export const parseHebrewRef = (biblicalRef) => {
     let spacePos = biblicalRef.lastIndexOf(' ') + 1
@@ -15,7 +15,7 @@ export const parseHebrewRef = (biblicalRef) => {
     }
 
     return {
-        refBook: hebrewBookNameToEnglish(refBook),
+        refBook: slug(hebrewBookNameToEnglish(refBook)),
         refChapter: gematriya(refChapter),
         refVerse: gematriya(refVerse[0]),
         refHighlight: refVerse.map(hebrewNumber => gematriya(hebrewNumber))
@@ -29,7 +29,7 @@ export const parseEnglishRef = (biblicalRef) => {
     let chapterVerse = biblicalRef.match(re)
     re = /[a-z,A-Z,' ']+/g
     return {
-        refBook: biblicalRef.match(re)[0].trim(),
+        refBook: slug(biblicalRef.match(re)[0].trim()),
         refChapter: parseInt(chapterVerse[0]),
         refVerse: parseInt(chapterVerse[1]),
         refHighlight: chapterVerse.slice(1).map(arabic => parseInt(arabic)),

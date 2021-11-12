@@ -10,11 +10,10 @@ import Halakhah from './components/Halakhah'
 import Home from "./components/pages/Home";
 import {TanakhBooksLink} from "./components/menu/TanakBooksLink";
 import {HalakhahBookLink} from "./components/menu/HalakhahBookList";
-import {SearchResults} from "./components/pages/SearchResults";
+import SearchResults from "./components/pages/SearchResults";
 // import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
-import {Please} from "./components/pages/Please";
 import Message from './components/Message'
 
 function App() {
@@ -40,7 +39,7 @@ function App() {
                         </Route>
 
                         <Route exact path="/search-result/">
-                            <Please reason="search" />
+                            <SearchResults/>
                         </Route>
 
                         <Route exact path="/Tanakh/:book/:chapter/:verse/" children={<LoadBook type={'bible'}/>}/>

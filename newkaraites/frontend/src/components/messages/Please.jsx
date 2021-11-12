@@ -10,7 +10,6 @@ export const Please =({reason})=> {
             break
         default:
             break
-
     }
     return (
         <>
