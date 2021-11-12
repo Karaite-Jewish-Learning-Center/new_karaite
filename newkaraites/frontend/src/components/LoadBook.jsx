@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Grid} from '@material-ui/core';
-import parseBiblicalReference from '../utils/parseBiblicalReference';
+import {parseBiblicalReference} from '../utils/parseBiblicalReference';
 import KaraitesBooks from '../components/karaitesBooks'
 import {observer} from 'mobx-react-lite'
 import RightPane from './RightPane';
@@ -22,8 +22,8 @@ const PARAGRAPHS = 0
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
-    const {book, chapter} = useParams()
-    const verse = 1
+
+    const {book, chapter, verse = 1} = useParams()
     // if type is karaites, chapter is used as start  and verse is ignored
 
     const classes = useStyles()

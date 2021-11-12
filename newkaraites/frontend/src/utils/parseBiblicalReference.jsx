@@ -2,9 +2,7 @@ import { hebrewBookNameToEnglish } from "./utils";
 import gematriya from 'gematriya';
 
 
-
-
-const parseHebrew = (biblicalRef) => {
+export const parseHebrewRef = (biblicalRef) => {
     let spacePos = biblicalRef.lastIndexOf(' ') + 1
     let refChapterVerse = biblicalRef.substr(spacePos)
     let [refChapter, refVerse] = refChapterVerse.split(':')
@@ -26,7 +24,7 @@ const parseHebrew = (biblicalRef) => {
 }
 
 
-const parseEnglish = (biblicalRef) => {
+export const parseEnglishRef = (biblicalRef) => {
     let re = /[0-9]+/g
     let chapterVerse = biblicalRef.match(re)
     re = /[a-z,A-Z,' ']+/g
@@ -39,18 +37,17 @@ const parseEnglish = (biblicalRef) => {
 }
 
 
-const parseBiblicalReference = (e) => {
+export const parseBiblicalReference = (e) => {
 
     let language = e.target.childNodes[0].parentElement.lang
     let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(':(', '')
     biblicalRef = biblicalRef.replace(', ', ':', 1).replace(',', ':', 1).replace('.', '').trim()
 
     if (language.toLowerCase() === 'he') {
-        return parseHebrew(biblicalRef)
+        return parseHebrewRef(biblicalRef)
     }
 
-    return parseEnglish(biblicalRef)
+    return parseEnglishRef(biblicalRef)
 
 }
 
-export default parseBiblicalReference

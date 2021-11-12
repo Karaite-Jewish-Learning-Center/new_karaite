@@ -91,7 +91,6 @@ class AppState {
     getDistance = (i) => this.panes[i].distance
 
     setCurrentItem = (item, i) => {
-        console.log("setting current item", item)
         runInAction(() => {
             this.panes[i].currentItem = item
         })
@@ -108,7 +107,6 @@ class AppState {
 
 
     // panes
-
     setPanes = (pane) => {
         this.panes = [...this.panes, pane]
     }
@@ -139,8 +137,8 @@ class AppState {
     resetPanes = () => {
         this.panes = []
     }
-    // karaites books
 
+    // karaites books
     setParagraphs = (paragraphs, i) => {
         this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
     }
@@ -161,15 +159,15 @@ class AppState {
     }
     getMessage = () => this.message
 
+    // header chapters
     setHeaderChapter = (chapter, i) => {
         runInAction(() => {
             this.panes[i].headerChapter = chapter
         })
     }
-
     getHeaderChapter = (i) => this.panes[i].headerChapter
 
-    // search
+    // search arg
     setSearch = (search) => this.search = search
     getSearch =()=> this.search
 

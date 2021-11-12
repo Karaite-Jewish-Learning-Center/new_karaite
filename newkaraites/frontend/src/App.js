@@ -43,6 +43,7 @@ function App() {
                             <Please reason="search" />
                         </Route>
 
+                        <Route exact path="/Tanakh/:book/:chapter/:verse/" children={<LoadBook type={'bible'}/>}/>
                         <Route exact path="/Tanakh/:book/:chapter/" children={<LoadBook type={'bible'}/>}/>
                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                         <Route exact path="/Tanakh/"><Tanakh/></Route>

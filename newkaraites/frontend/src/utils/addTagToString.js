@@ -3,7 +3,9 @@ import pluralize from 'pluralize'
 // tag = b
 // arg = I
 // this is the text that <b>I</b> want to tag, so <b>I</b> said
-// make last word plural if is singular, singular if is plural
+// Make last word plural if is singular, singular if is plural
+// and tag
+// tag individual words
 
 export const addTagToString = (string, args, tag) => {
     // all the sentence

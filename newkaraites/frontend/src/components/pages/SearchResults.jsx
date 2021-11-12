@@ -9,6 +9,8 @@ import ReactHtmlParser from "react-html-parser";
 import {addTagToString} from "../../utils/addTagToString";
 import {Typography} from "@material-ui/core";
 import {ITEMS_PER_PAGE} from "../../constants/constants";
+import {parseEnglishRef} from "../../utils/parseBiblicalReference"
+
 
 
 export const SearchResults = () => {
@@ -19,10 +21,12 @@ export const SearchResults = () => {
     const [moreResults, setMoreResults] = useState(true)
     const [message, setMessage] = useState('Loading')
 
-    const itemContent = (item, data) => {
+    const itemContent = (item, data) =>{
+        const { refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
+
         return (
             <div className={classes.card}>
-                <Link to={`/${data['ref']}/`}>
+                <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
                     <Typography variant="h6" component="h2">{data['ref']}</Typography>
                 </Link>
                 {ReactHtmlParser(`<p>${addTagToString(data['text'], search, 'b')}</p>`)}
