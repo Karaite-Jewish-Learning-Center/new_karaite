@@ -4,6 +4,8 @@ from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
 from .utils import (slug_back,
+                    normalize_search,
+                    only_english_stop_word,
                     prep_search)
 from .models import (FullTextSearch, Organization,
                      BookAsArray,
@@ -226,6 +228,7 @@ class AutoCompleteView(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
+        search = normalize_search(search)
         search = prep_search(search)
 
         sql = f"""select id,word_en, word_count  from  autocomplete_view
@@ -255,8 +258,9 @@ class Search(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
+        search = normalize_search(search)
         search = prep_search(search)
-
+        print(search)
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
         sql = """SELECT id, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
@@ -269,40 +273,3 @@ class Search(View):
 
         return JsonResponse({'data': items, 'page': page}, safe=False)
 
-# class Search(View):
-#     """
-#         search based on the autocomplete selected
-#     """
-#
-#     @staticmethod
-#     def get(request, *args, **kwargs):
-#         search = kwargs.get('search', None)
-#         page = kwargs.get('page', 1)
-#         if search is None:
-#             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
-#
-#         weight = [0.2, 0.4, 0.6, 0.8]
-#         vector = SearchVector('text_en_search', config='english')
-#         query = SearchQuery(search, search_type='phrase')
-#         rank = SearchRank(vector, query, weights=weight, cover_density=True)
-#         headline = SearchHeadline('text_en', query, start_sel='<b>', stop_sel='</b>')
-#
-#         # result = FullTextSearch.objects.all().values('reference_en', 'text_en')
-#         result = FullTextSearch.objects.annotate(rank=rank,
-#                                                  search=query
-#                                                  ).order_by('-rank').values('reference_en',
-#                                                                             'text_en')
-#         # result = FullTextSearch.objects.filter(text_en_search=query)
-#         paginator = Paginator(result, ITEMS_PER_PAGE)
-#         page_number = paginator.get_page(page)
-#
-#         print(page_number.object_list)
-#
-#         pages = []
-#         for p in page_number.object_list:
-#             pages.append({'ref': p['reference_en'], 'text': p['text_en']})
-#
-#         return JsonResponse({'pages': pages,
-#                              'next': page_number.next_page_number(),
-#                              'last': paginator.count // 15},
-#                             safe=False)

@@ -6,15 +6,19 @@ import {apiFetch} from "../api/apiFetch";
 import {storeContext} from "../../stores/context"
 import {useHistory} from "react-router-dom"
 
+
 export const AutoComplete = () => {
+
     const store = useContext(storeContext)
-    const [value, setValue] = useState(store.getSearch())
+    const [isOpen, setIsOpen] = useState(true)
     const [search, setSearch] = useState(store.getSearch())
     const [options, setOptions] = useState([])
     let history = useHistory()
 
     const getAutoComplete = () => {
-        if (search.length < 2) return undefined
+
+        if (search.length < 2) return
+
         apiFetch(`${autocompleteUrl}${search}/`)
             .then((response) => {
                 setOptions(response)
@@ -24,39 +28,51 @@ export const AutoComplete = () => {
             })
     }
 
-    useEffect(() => {
-        getAutoComplete()
-    }, [search]);
-
-    const onClose = () => {
-        setValue('')
-    }
-
-    const onKeyDown = (event) => {
-        if (event.code === "Enter") {
+    const showResults = () => {
+        if (search.length === 0) return
+        if (store.getSearch() !== search || window.location.pathname !== '/search-result/') {
             store.setSearch(search)
             history.push('/search-result/')
         }
     }
 
+    const onInputChange = (e, newValue) => {
+        setSearch(() => newValue)
+    }
+
+    const onKeyUp = (event) => {
+        if (event.code === "Enter") {
+            showResults()
+        }
+    }
+
+    const onChange = (e, value, reason) => {
+        if (reason === 'select-option') {
+            setSearch(() => value)
+        }
+    }
+
+    const onClose = () => {
+        setIsOpen(false)
+    }
+
+    useEffect(() => {
+        getAutoComplete()
+    }, [search]);
+
     return (
         <Autocomplete
-            value={value}
+            freeSolo
+            open={true}
+            value={search}
             options={options}
-            autoComplete={true}
-            autoSelect={true}
+            onKeyUp={onKeyUp}
+            onChange={onChange}
             onClose={onClose}
-            onKeyDown={onKeyDown}
-            onChange={(e, newValue) => {
-                setValue(newValue);
-            }}
-
             getOptionLabel={(option) => option}
             style={{width: 300, marginRight: 40}}
             inputValue={search}
-            onInputChange={(e, newValue) => {
-                setSearch(() => newValue)
-            }}
+            onInputChange={onInputChange}
             renderInput={(params) => (
                 <TextField
                     {...params}

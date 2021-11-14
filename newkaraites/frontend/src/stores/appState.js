@@ -169,18 +169,20 @@ class AppState {
 
     // search arg
     setSearch = (searchArg) => {
-        console.log('set search', searchArg)
         this.search = searchArg
+        this.searchResultData = []
+        this.pageNumber = 1
     }
-    getSearch =()=> this.search
+
+    getSearch = () => this.search
 
     // search result
-    setSearchResultData =( result)=> [...this.searchResultData, ...result]
-    getSearchResultData =() => this.searchResultData
+    setSearchResultData = (result) => this.searchResultData = [...this.searchResultData, ...result]
+    getSearchResultData = () => this.searchResultData
 
     // search page
-    setNextPageNumber =(page)=> this.pageNumber = page
-    getNextPageNumber =() => this.pageNumber + 1
+    setPageNumber = (page) => this.pageNumber = page
+    getPageNumber = () => this.pageNumber
 
     // fetch data
     getSearchResult = async () => {

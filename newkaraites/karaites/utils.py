@@ -1,7 +1,8 @@
 import sys
 import re
 from .constants import (FIRST_LEVEL,
-                        SECOND_LEVEL)
+                        SECOND_LEVEL,
+                        ENGLISH_STOP_WORDS)
 
 
 def search_level(search_string):
@@ -33,8 +34,25 @@ def replace_punctuation_marks(s):
     return s.translate(str.maketrans('''!()-[]{};:'"\\,"<>./?@#$%^&*_~''', " " * 29))
 
 
-def prep_search(search):
-    """ postgres full text search"""
+def normalize_search(search):
+    """ only one space, remove ' """
     search = search.replace("'", '')
-    search = re.sub(' +', ' ', search.strip())
+    return re.sub(' +', ' ', search.strip())
+
+
+def only_english_stop_word(search):
+    """ Expects a normalized string
+        return True if all words are English stop words
+        return false if at list one is not a stop word
+    """
+    for word in search.split(''):
+        if word in ENGLISH_STOP_WORDS:
+            break
+    else:
+        return False
+    return True
+
+
+def prep_search(search):
+    """ postgres full text search expect a normalize string"""
     return re.sub(' ', ' & ', search)

@@ -1,7 +1,7 @@
 let apiUrl = 'http://161.35.130.125/'
 
 if (process.env.NODE_ENV === 'development') {
-    apiUrl = 'http://192.168.0.108:8000/'
+    apiUrl = 'http://192.168.0.106:8000/'
 }
 export const organization = { 1: 'Torah', 2: 'Prophets', 3: 'Writings' }
 
