@@ -14,13 +14,14 @@ import {
 import RefsBadge from "./RefsBadge";
 import {observer} from 'mobx-react-lite';
 import {versesByBibleBook} from '../constants/constants';
-import {storeContext} from "../stores/context";
+import {storeContext} from '../stores/context'
 
 
 const ChapterHeaderVerse = (props) => {
     const store = useContext(storeContext)
     const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
+    debugger
     let classes = useStyles()
     let chapterHtml = null
 
@@ -82,9 +83,10 @@ const ChapterHeaderVerse = (props) => {
     const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
 
     if (found) {
-        store.setCommentsChapter(allBookData[item][BIBLE_CHAPTER], paneNumber)
-        store.setCommentsVerse(allBookData[item][BIBLE_VERSE], paneNumber)
-        store.setVerseData(allBookData[item], paneNumber)
+
+        // store.setCommentsChapter(allBookData[item][BIBLE_CHAPTER], paneNumber)
+        // store.setCommentsVerse(allBookData[item][BIBLE_VERSE], paneNumber)
+        // store.setVerseData(allBookData[item], paneNumber)
 
     }
     return (

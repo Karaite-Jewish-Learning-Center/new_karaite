@@ -7,11 +7,11 @@ import { Grid } from '@material-ui/core'
 import { unslug } from '../utils/utils'
 import Colors from '../constants/colors'
 import { observer } from 'mobx-react-lite'
-import StoreProvider from "../stores/context";
+import {storeContext} from '../../src/stores/context'
 
 
 const KaraitesPaneHeader = ({ paneNumber }) => {
-    const store= useContext(StoreProvider)
+    const store= useContext(storeContext)
     const classes = resources()
 
     const onClosePane = () => {

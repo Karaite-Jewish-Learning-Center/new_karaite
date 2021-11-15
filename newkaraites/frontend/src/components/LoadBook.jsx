@@ -7,8 +7,7 @@ import {observer} from 'mobx-react-lite'
 import RightPane from './RightPane';
 import RenderText from './RenderText'
 import {makeRandomKey} from '../utils/utils';
-import {Redirect, useParams} from 'react-router-dom';
-import Message from './Message'
+import {Redirect, useParams, useHistory} from 'react-router-dom';
 import {karaitesBookUrl} from '../constants/constants'
 import {calculateItemNumber} from '../utils/utils';
 import {chaptersByBibleBook} from '../constants/constants'
@@ -22,16 +21,14 @@ const PARAGRAPHS = 0
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
-
     const {book, chapter, verse = 1} = useParams()
     // if type is karaites, chapter is used as start  and verse is ignored
-
+    const history = useHistory()
     const classes = useStyles()
 
     async function fetchDataBible(paneNumber) {
         if (store.getBookData(paneNumber).length === 0) {
             const book = store.getBook(paneNumber)
-            debugger
             const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], 0, false))
             if (response.ok) {
                 const data = await response.json()
@@ -63,7 +60,7 @@ const LoadBook = ({type}) => {
         let isOpen = store.isPaneOpen(book)
 
         if (isOpen) {
-            store.setMessage('All ready open.')
+             if(history.action!=='POP') store.setMessage('Already open.')
         } else {
 
             if (type === "bible") {
@@ -112,8 +109,12 @@ const LoadBook = ({type}) => {
             store.setCurrentItem(item, paneNumber)
             store.setDistance(0, paneNumber)
         }
-        const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
-        getBook(refBook, refChapter, refVerse, refHighlight, kind)
+        try {
+            const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
+            getBook(refBook, refChapter, refVerse, refHighlight, kind)
+        } catch (e){
+            store.setMessage(e.message)
+        }
     }
 
     const RenderRightPane = ({isOpen, paneNumber}) => {
@@ -125,7 +126,6 @@ const LoadBook = ({type}) => {
                 />
             </Grid>
         )
-
     }
 
 
@@ -175,7 +175,6 @@ const LoadBook = ({type}) => {
 
     return (
         <>
-            <Message/>
             <Grid container
                   className={classes.root}
                   direction="row"

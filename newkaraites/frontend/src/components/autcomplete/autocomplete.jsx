@@ -10,7 +10,6 @@ import {useHistory} from "react-router-dom"
 export const AutoComplete = () => {
 
     const store = useContext(storeContext)
-    const [isOpen, setIsOpen] = useState(true)
     const [search, setSearch] = useState(store.getSearch())
     const [options, setOptions] = useState([])
     let history = useHistory()
@@ -52,9 +51,7 @@ export const AutoComplete = () => {
         }
     }
 
-    const onClose = () => {
-        setIsOpen(false)
-    }
+
 
     useEffect(() => {
         getAutoComplete()
@@ -63,12 +60,10 @@ export const AutoComplete = () => {
     return (
         <Autocomplete
             freeSolo
-            open={true}
             value={search}
             options={options}
             onKeyUp={onKeyUp}
             onChange={onChange}
-            onClose={onClose}
             getOptionLabel={(option) => option}
             style={{width: 300, marginRight: 40}}
             inputValue={search}

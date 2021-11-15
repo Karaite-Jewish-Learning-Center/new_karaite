@@ -8,9 +8,9 @@ import {Link} from "react-router-dom"
 import ReactHtmlParser from "react-html-parser"
 import {addTagToString} from "../../utils/addTagToString"
 import {Typography} from "@material-ui/core"
-import {ITEMS_PER_PAGE} from "../../constants/constants"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
+import {Please} from "./Please"
 
 const SearchResults = () => {
     const store = useContext(storeContext)
@@ -40,6 +40,7 @@ const SearchResults = () => {
     }
 
     const getSearchResult = async () => {
+        if(search ==='') return
 
         const response = await fetch(searchResultsUrl + `${search}/${store.getPageNumber()}/`)
         if (response.ok) {
@@ -48,7 +49,7 @@ const SearchResults = () => {
             // if search result length is an exact multiple of ITEMS_PER_PAGE
             // an extra call is done to figure out that next page
             // is empty, In all other cases there is no need to do an extra call.
-            console.log('data', data['data'].length)
+
             if (data['data'].length ===0) {
                 setMoreResults(() => false)
                 setMessage(() => `End of search results for "${search.replace(' & ', ' ')}"`)
@@ -63,7 +64,7 @@ const SearchResults = () => {
         getSearchResult()
     }, [search, store.getPageNumber()])
 
-    //if (search === '') return <Please reason="search"/>
+    if (search === '') return <Please reason="search"/>
     //console.log(store.getSearchResultData())
     return (
         <div className={classes.container}>
@@ -89,8 +90,6 @@ const useStyles = makeStyles((theme) => ({
         margin: 20
     },
     card: {
-        // maxWidth: '80%',
-        // minWidth: '80%',
         margin: 20,
     },
     header: {
