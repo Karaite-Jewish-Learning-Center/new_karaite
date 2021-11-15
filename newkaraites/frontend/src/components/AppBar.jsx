@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -12,15 +12,15 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Complete from './autocomplete';
+import {AutoComplete} from '../components/autcomplete/autocomplete'
 
 
 
 export default function PrimarySearchAppBar() {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
+    const classes = useStyles();
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -95,9 +95,7 @@ export default function PrimarySearchAppBar() {
 
     return (
 
-        <AppBar position="fixed"
-
-        >
+        <AppBar position="fixed">
             <Toolbar>
                 <Typography className={classes.name} component="h3" >
                     <Link className={classes.link} to="/">Karaites</Link>
@@ -107,7 +105,7 @@ export default function PrimarySearchAppBar() {
                 </Typography>
 
                 <div className={classes.sectionDesktop}>
-                    <Complete />
+                    <AutoComplete />
                     <IconButton aria-label="Go to sign up form" color="inherit" >
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
@@ -135,8 +133,8 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                 </div>
             </Toolbar>
-            {renderMobileMenu}
             {renderMenu}
+            {renderMobileMenu}
         </AppBar>
     );
 }
@@ -189,15 +187,21 @@ const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
         flexGrow: 1,
         justifyContent: 'flex-end',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.down('xl')]: {
             display: 'flex',
         },
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        }
     },
     sectionMobile: {
         flexGrow: 1,
         justifyContent: 'flex-end',
-        [theme.breakpoints.up('md')]: {
+         [theme.breakpoints.down('xl')]: {
             display: 'none',
+        },
+        [theme.breakpoints.down('sm')]: {
+            display: 'flex',
         },
     },
     fab: {

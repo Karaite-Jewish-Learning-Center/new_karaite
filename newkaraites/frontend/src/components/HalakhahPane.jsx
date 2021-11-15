@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Button from '@material-ui/core/Button'
 import { referencesUrl } from '../constants/constants.js'
 import { makeStyles } from '@material-ui/core/styles'
@@ -6,15 +6,16 @@ import { makeRandomKey } from "../utils/utils";
 import ReactHtmlParser from 'react-html-parser';
 import { Typography } from '@material-ui/core';
 import Colors from '../constants/colors.js';
-import store from '../stores/appState.js';
 import { observer } from 'mobx-react-lite';
 import transform from '../utils/transform.jsx'
 import './css/comments.css'
 import Header from './RightPaneHeader.jsx';
+import {storeContext} from "../stores/context";
 
 
 
 const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
+    const store = useContext(storeContext)
     const [references, setReferences] = useState([])
     const classes = useStyles()
 

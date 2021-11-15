@@ -1,14 +1,12 @@
-from sys import getsizeof
+import re
 from collections import OrderedDict
-from django.contrib.postgres.search import (SearchQuery,
-                                            SearchVector,
-                                            SearchRank,
-                                            SearchHeadline)
-
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
-from .utils import slug_back
+from .utils import (slug_back,
+                    normalize_search,
+                    only_english_stop_word,
+                    prep_search)
 from .models import (FullTextSearch, Organization,
                      BookAsArray,
                      Comment,
@@ -18,7 +16,6 @@ from .models import (FullTextSearch, Organization,
                      AutoComplete,
                      References)
 
-from .utils import replace_punctuation_marks
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -129,12 +126,15 @@ def karaites_book_as_array(request, *args, **kwargs):
 
 class GetFirstLevel(View):
     """ Get first level classification"""
+
     @staticmethod
     def get(request):
         """ for the time being just fake the database query"""
         level = OrderedDict()
-        level['Tanakh'] = """Torah, Prophets, and Writings, which together make up the Hebrew Bible, Judaism's foundational text."""
-        level['Halakhah'] = """Legal works providing guidance on all aspects of Jewish life. Rooted in past sources and growing to address changing realities"""
+        level[
+            'Tanakh'] = """Torah, Prophets, and Writings, which together make up the Hebrew Bible, Judaism's foundational text."""
+        level[
+            'Halakhah'] = """Legal works providing guidance on all aspects of Jewish life. Rooted in past sources and growing to address changing realities"""
 
         return JsonResponse(level)
 
@@ -210,29 +210,13 @@ class Test(View):
     """
      A very simple test to check if backend is running
     """
+
     @staticmethod
     def get(request, *args, **kwargs):
         return JsonResponse({"ok": True})
 
 
 class AutoCompleteView(View):
-    """
-    Autocomplete
-    """
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        search = kwargs.get('search', None)
-
-        if search is None:
-            JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
-
-        result = AutoComplete.objects.filter(word_en__istartswith=search).values_list('word_en', flat=True)[0:9]
-
-        return JsonResponse(list(result), safe=False)
-
-
-class Search(View):
     """
         search based on the autocomplete selected
     """
@@ -244,13 +228,48 @@ class Search(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        vector = SearchVector('text_en', config='english')
-        query = SearchQuery(search, search_type='phrase')
-        result = FullTextSearch.objects.annotate(rank=SearchRank(
-            vector, query, weights=[0.2, 0.4, 0.6, 0.8])).order_by('-rank')[0:100]
+        search = normalize_search(search)
+        search = prep_search(search)
 
-        searchresult = OrderedDict()
-        for text in result:
-            searchresult[text.reference_en] = text.text_en
-        print(len(searchresult), getsizeof(searchresult))
-        return JsonResponse(searchresult, safe=False)
+        sql = f"""select id,word_en, word_count  from  autocomplete_view
+                  where to_tsvector(word_en) @@ to_tsquery('{search}' || ':*')
+                  order by word_count desc limit 15"""
+
+        auto = []
+        for word in AutoComplete.objects.raw(sql):
+            auto.append(word.word_en)
+
+        return JsonResponse(auto, safe=False)
+
+
+ITEMS_PER_PAGE = 15
+
+
+class Search(View):
+    """
+        search based on the autocomplete selected
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        search = kwargs.get('search', None)
+        page = kwargs.get('page', 1)
+
+        if search is None:
+            JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+
+        search = normalize_search(search)
+        search = prep_search(search)
+        print(search)
+        limit = ITEMS_PER_PAGE
+        offset = (page - 1) * ITEMS_PER_PAGE
+        sql = """SELECT id, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
+        sql += f"""FROM karaites_fulltextsearch, to_tsquery('{search}') query """
+        sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+
+        items = []
+        for result in FullTextSearch.objects.raw(sql):
+            items.append({'ref': result.reference_en, 'text': result.text_en})
+
+        return JsonResponse({'data': items, 'page': page}, safe=False)
+

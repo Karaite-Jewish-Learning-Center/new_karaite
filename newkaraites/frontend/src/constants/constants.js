@@ -1,38 +1,42 @@
 let apiUrl = 'http://161.35.130.125/'
 
 if (process.env.NODE_ENV === 'development') {
-    apiUrl = 'http://localhost:8000/'
+    apiUrl = 'http://192.168.0.106:8000/'
 }
+export const organization = { 1: 'Torah', 2: 'Prophets', 3: 'Writings' }
 
-const bookListUrl = apiUrl + 'api/books-list/'
-const bookTextUrl = apiUrl + 'api/get-book/'
-const bookChapterUrl = apiUrl + 'api/get-book-chapter/'
-const bookFromRef = apiUrl + 'api/get-book-from-ref/'
-const getCommentsUrl = apiUrl + 'api/get-comments/'
-const getFirstLevelUrl = apiUrl + 'api/get-first-level/'
-const organization = { 1: 'Torah', 2: 'Prophets', 3: 'Writings' }
-const karaitesBookUrl = apiUrl + 'api/get-karaites-book-chapter/'
-const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
-const karaitesBookToc = apiUrl + 'api/get-karaites-book-toc/'
-const referencesUrl = apiUrl + 'api/get-references/'
-const autocompleteUrl = apiUrl + 'api/autocomplete/'
+export const bookListUrl = apiUrl + 'api/books-list/'
+export const bookTextUrl = apiUrl + 'api/get-book/'
+export const bookChapterUrl = apiUrl + 'api/get-book-chapter/'
+export const bookFromRef = apiUrl + 'api/get-book-from-ref/'
+export const getCommentsUrl = apiUrl + 'api/get-comments/'
+export const getFirstLevelUrl = apiUrl + 'api/get-first-level/'
+export const karaitesBookUrl = apiUrl + 'api/get-karaites-book-chapter/'
+export const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
+export const karaitesBookToc = apiUrl + 'api/get-karaites-book-toc/'
+export const referencesUrl = apiUrl + 'api/get-references/'
+export const autocompleteUrl = apiUrl + 'api/autocomplete/'
+export const searchResultsUrl = apiUrl + 'api/search/'
 
-const LANGUAGE = { 0: 'en', 1: 'he' }
-const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
-const ENGLISH = 0
-const HEBREW = 1
-const BIBLE_ENGLISH = 0
-const BIBLE_HEBREW = 1
-const BIBLE_EN_CM = 2
-const BIBLE_HE_CM = 3
-const BIBLE_VERSE = 4
-const BIBLE_CHAPTER = 5
-const BIBLE_RENDER_CHAPTER = 6
-const BIBLE_REFS = 7
-const BOOK_CHAPTERS = 0
-const BOOK_DATA = 1
 
-const chaptersByBibleBook = {
+export const LANGUAGE = { 0: 'en', 1: 'he' }
+export const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
+export const ENGLISH = 0
+export const HEBREW = 1
+export const BIBLE_ENGLISH = 0
+export const BIBLE_HEBREW = 1
+export const BIBLE_EN_CM = 2
+export const BIBLE_HE_CM = 3
+export const BIBLE_VERSE = 4
+export const BIBLE_CHAPTER = 5
+export const BIBLE_RENDER_CHAPTER = 6
+export const BIBLE_REFS = 7
+export const BOOK_CHAPTERS = 0
+export const BOOK_DATA = 1
+// this value is define in the views.py if changed there must be changed here
+export const ITEMS_PER_PAGE = 15
+
+export const chaptersByBibleBook = {
     'Genesis': 50,
     'Exodus': 40,
     'Leviticus': 27,
@@ -82,7 +86,7 @@ const chaptersByBibleBook = {
 }
 
 // verses by chapter
-const versesByBibleBook = {
+export const versesByBibleBook = {
     'Genesis': [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 54, 33, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26],
     'Exodus': [22, 25, 22, 31, 23, 30, 29, 28, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 23, 37, 30, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38],
     'Leviticus': [17, 16, 17, 35, 26, 23, 38, 36, 24, 20, 47, 8, 59, 57, 33, 34, 16, 30, 37, 27, 24, 33, 44, 23, 55, 46, 34],
@@ -131,35 +135,4 @@ const versesByBibleBook = {
     'II-Chronicles': [18, 17, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 23, 14, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23],
 }
 
-
-export {
-    bookListUrl,
-    bookTextUrl,
-    bookChapterUrl,
-    bookFromRef,
-    getCommentsUrl,
-    getFirstLevelUrl,
-    organization,
-    karaitesBookUrl,
-    karaitesBookDetailsUrl,
-    karaitesBookToc,
-    referencesUrl,
-    autocompleteUrl,
-    LANGUAGE,
-    LANGUAGE_TAG,
-    ENGLISH,
-    HEBREW,
-    BIBLE_ENGLISH,
-    BIBLE_HEBREW,
-    BIBLE_EN_CM,
-    BIBLE_HE_CM,
-    BIBLE_VERSE,
-    BIBLE_CHAPTER,
-    BIBLE_RENDER_CHAPTER,
-    BIBLE_REFS,
-    BOOK_CHAPTERS,
-    BOOK_DATA,
-    chaptersByBibleBook,
-    versesByBibleBook
-
-}
+export const q640 = '(min-width:640px)'

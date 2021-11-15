@@ -59,20 +59,21 @@ const resources = makeStyles({
 
 const booksMenu = makeStyles((theme) => ({
     container: {
-        width: '50%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        height: 'auto',
-        marginTop: 50,
+        display:"flex",
+        width: '100%',
+        height: '100%',
+        justifyContent:'center',
+        alignItems:'flex-start'
     },
     card: {
         maxWidth: 350,
+        width:'auto',
         height: 100,
-        marginTop: 20,
+        marginTop: 40,
         marginBottom: 20,
     },
     title: {
-        marginBottom: 50,
+        marginBottom: 20,
         color: 'gray',
     },
     titleHalakhah: {
@@ -80,14 +81,11 @@ const booksMenu = makeStyles((theme) => ({
         color: 'gray',
     },
     link: {
-        marginBottom: 30,
+        marginBottom: 20,
     },
     ruler: {
         marginTop: 30,
         borderColor: Colors.rulerColor,
-    },
-    filler: {
-        marginTop: 70,
     },
     he: {
         direction: 'ltr',
@@ -101,6 +99,9 @@ const booksMenu = makeStyles((theme) => ({
     },
     right: {
         minWidth: 100,
+    },
+    filler:{
+        marginTop:70,
     },
 }));
 

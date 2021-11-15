@@ -1,25 +1,26 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Grid from '@material-ui/core/Grid'
-import { range } from '../utils/utils'
-import { makeStyles } from '@material-ui/core/styles'
+import {range} from '../utils/utils'
+import {makeStyles} from '@material-ui/core/styles'
 import Colors from '../constants/colors'
-import { Link } from 'react-router-dom'
-import { Typography } from '@material-ui/core'
-import { unslug } from '../utils/utils'
-import store from '../stores/appState'
+import {Link} from 'react-router-dom'
+import {Typography} from '@material-ui/core'
+import {unslug} from '../utils/utils'
+import {storeContext} from "../stores/context";
 
 
-const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
+const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
+    const store = useContext(storeContext)
     const chapters = range(numberOfChapters)
     const classes = container()
-    // todo find a better solution
+    // todo: find a better solution
     store.setIsLastPane(false)
 
 
     const createMenu = () => {
         return chapters.map(chapter =>
             <Grid item xs={1} className={classes.item} key={chapter}>
-                <Link className={classes.link} to={`/${level}/${bibleBook}/${chapter}/`} >
+                <Link className={classes.link} to={`/${level}/${bibleBook}/${chapter}/`}>
                     {chapter}
                 </Link>
             </Grid>
@@ -32,19 +33,18 @@ const ChapterMenu = ({ bibleBook, numberOfChapters, level }) => {
             <Typography variant="h6" component="h1" className={classes.subtitle}>
                 <Link to={`/${level}/`}>{level}</Link>
             </Typography>
-            <hr />
+            <hr/>
             <Typography variant="h5" component="h1" className={classes.chapters}>Chapters</Typography>
             <Grid container
-                spacing={1}
-                justifycontent="center"
-                alignItems="center"
+                  spacing={1}
+                  justifycontent="center"
+                  alignItems="center"
             >
                 {createMenu()}
             </Grid>
         </div>
     )
 }
-
 
 
 const container = makeStyles((theme) => ({

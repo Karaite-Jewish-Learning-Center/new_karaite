@@ -1,4 +1,5 @@
-import { makeAutoObservable, runInAction } from "mobx"
+import {makeAutoObservable, runInAction} from "mobx"
+import {searchResultsUrl} from "../constants/constants";
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -7,6 +8,10 @@ class AppState {
     isLastPane = false
     // messages
     message = ''
+    // search
+    search = ''
+    searchResultData = []
+    pageNumber = 0
 
     constructor() {
         makeAutoObservable(this)
@@ -59,14 +64,18 @@ class AppState {
     getChapter = (i) => this.panes[i].chapter
 
     setVerse = (verse, i) => {
-        runInAction(() => { this.panes[i].verse = verse })
+        runInAction(() => {
+            this.panes[i].verse = verse
+        })
     }
     getVerse = (i) => this.panes[i].verse
 
     getVerses = (i) => this.panes[i].verses
 
     setVerseData = (data, i) => {
-        runInAction(() => { this.panes[i].verseData = data })
+        runInAction(() => {
+            this.panes[i].verseData = data
+        })
     }
 
     getVerseData = (i) => this.panes[i].verseData
@@ -82,8 +91,9 @@ class AppState {
     getDistance = (i) => this.panes[i].distance
 
     setCurrentItem = (item, i) => {
-        console.log("setting current item", item)
-        runInAction(() => { this.panes[i].currentItem = item })
+        runInAction(() => {
+            this.panes[i].currentItem = item
+        })
     }
 
     getCurrentItem = (i) => this.panes[i].currentItem
@@ -97,7 +107,6 @@ class AppState {
 
 
     // panes
-
     setPanes = (pane) => {
         this.panes = [...this.panes, pane]
     }
@@ -112,7 +121,9 @@ class AppState {
     getPaneByNumber = (i) => this.panes[i]
 
     setIsLastPane = (state) => {
-        runInAction(() => { this.isLastPane = state })
+        runInAction(() => {
+            this.isLastPane = state
+        })
     }
     getIsLastPane = () => this.isLastPane
 
@@ -126,8 +137,8 @@ class AppState {
     resetPanes = () => {
         this.panes = []
     }
-    // karaites books
 
+    // karaites books
     setParagraphs = (paragraphs, i) => {
         this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
     }
@@ -148,16 +159,49 @@ class AppState {
     }
     getMessage = () => this.message
 
+    // header chapters
     setHeaderChapter = (chapter, i) => {
-        runInAction(() => { this.panes[i].headerChapter = chapter })
+        runInAction(() => {
+            this.panes[i].headerChapter = chapter
+        })
+    }
+    getHeaderChapter = (i) => this.panes[i].headerChapter
+
+    // search arg
+    setSearch = (searchArg) => {
+        this.search = searchArg
+        this.searchResultData = []
+        this.pageNumber = 1
     }
 
-    getHeaderChapter = (i) => this.panes[i].headerChapter
+    getSearch = () => this.search
+
+    // search result
+    setSearchResultData = (result) => this.searchResultData = [...this.searchResultData, ...result]
+    getSearchResultData = () => this.searchResultData
+
+    // search page
+    setPageNumber = (page) => this.pageNumber = page
+    getPageNumber = () => this.pageNumber
+
+    // fetch data
+    getSearchResult = async () => {
+        const response = await fetch(searchResultsUrl + `${this.getSearch()}/${this.getNextPageNumber()}/`)
+        if (response.ok) {
+            const data = await response.json()
+            this.setSearchResultData(data['data'])
+            this.setNextPageNumber(parseInt(data['page']))
+        } else {
+            alert("HTTP-Error: " + response.status)
+        }
+    }
 
 }
 
 
+const appStore = () => {
+    return new AppState()
+}
 
-const store = new AppState()
 
-export default store
+export default appStore

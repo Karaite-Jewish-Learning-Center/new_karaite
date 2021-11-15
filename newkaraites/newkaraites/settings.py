@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-from socket import gethostname
 from pathlib import Path
 from django.utils.translation import ugettext_lazy as _
 from django.core.management.utils import get_random_secret_key
@@ -103,7 +102,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '']
+    ALLOWED_HOSTS = ['*']
 
     DATABASES = {
         'default': {
@@ -199,15 +198,6 @@ if DEBUG:
     DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
-# Change this to your local machine
-if gethostname() == 'Sandros-MacBook-Pro.local':
-    ALLOWED_HOSTS = [
-        'localhost',
-        '192.168.0.2',
-        '192.168.0.3',
-        '127.0.0.1',
-    ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 

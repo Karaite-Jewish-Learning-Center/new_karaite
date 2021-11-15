@@ -11,6 +11,7 @@ const Colors = {
     chapterMenu: '#f7f7f2',
     tanakh: '#b4b4a9',
     leftPaneHeader: '#666',
+    black:'black'
 
 }
 
