@@ -52,8 +52,6 @@ const writings = {
 
 const books = {'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings}
 
-const Tanakh = () => {
-    return <RenderMenu books={books} path={'Tanakh'}/>
-}
+const Tanakh = () => <RenderMenu books={books} path={'Tanakh'} languages={['en','en']}/>
 
 export default Tanakh

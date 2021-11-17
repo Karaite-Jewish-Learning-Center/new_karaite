@@ -1,5 +1,5 @@
 # taken from postgresql stop words
-
+# /Applications/Postgres.app/Contents/Versions/10/share/postgresql/tsearch_data/
 i
 me
 my

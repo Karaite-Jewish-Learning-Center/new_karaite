@@ -14,10 +14,10 @@ import {chaptersByBibleBook} from '../constants/constants'
 import {bookChapterUrl} from '../constants/constants'
 import {makeBookUrl} from "../utils/utils"
 import {storeContext} from "../stores/context";
+import {translateMessage} from "./messages/translateMessages";
 
 
 const PARAGRAPHS = 0
-
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
@@ -113,7 +113,7 @@ const LoadBook = ({type}) => {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
             getBook(refBook, refChapter, refVerse, refHighlight, kind)
         } catch (e){
-            store.setMessage(e.message)
+            store.setMessage( translateMessage(e))
         }
     }
 

@@ -64,7 +64,7 @@ const HalakhahMenu = ({book}) => {
                 </tr>
                 <tr>
                     <th colSpan="2" className={classes.ruler}>
-                        <hr></hr>
+                        <hr/>
                     </th>
                 </tr>
                 </thead>
@@ -109,13 +109,13 @@ const useStyles = makeStyles({
         borderColor: Colors.rulerColor,
     },
     he: {
-        direction: 'ltr',
+        direction: 'RTL',
         fontFamily: 'SBL Hebrew',
         fontSize: 18,
         color: Colors.gray,
     },
     left: {
-        minWidth: 600,
+        minWidth: 300,
 
     },
     right: {

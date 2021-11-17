@@ -5,7 +5,8 @@ from django.utils.translation import gettext as _
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         LANGUAGES,
-                        BOOK_CLASSIFICATION)
+                        BOOK_CLASSIFICATION,
+                        AUTOCOMPLETE_TYPE)
 from tinymce.models import HTMLField
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
@@ -617,6 +618,7 @@ class TableOfContents(models.Model):
     @mark_safe
     def admin_subject(self):
         return f'<span class="toc">{self.subject[0]}</span><span class="index">{self.subject[1]}</span>'
+
     admin_subject.short_description = "Toc"
 
     def to_json(self):
@@ -697,11 +699,13 @@ class References(models.Model):
 
 
 class AutoComplete(models.Model):
-
     word_en = models.CharField(max_length=100,
                                db_index=True)
 
-    # book_chatper_verse = models.CharField(max_length=12)
+    classification = models.CharField(max_length=1,
+                                      choices=AUTOCOMPLETE_TYPE,
+                                      default='V'
+                                      )
 
     word_count = models.IntegerField(default=1)
 
@@ -710,7 +714,6 @@ class AutoComplete(models.Model):
 
 
 class FullTextSearch(models.Model):
-
     reference_en = models.CharField(max_length=100, default='')
 
     text_en = models.TextField(default='')

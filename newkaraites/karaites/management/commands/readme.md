@@ -1,6 +1,13 @@
-Order of execution:
+#Order of execution:
 
-Bible books
+All commands are executed: ./manage command name
+
+#must activate conda environment
+
+$ conda activate dev | prod
+$ cd anaconda3/envs/dev/newkaraites/newkaraites/
+
+#Bible books
 
 1. books, has no dependencies,
 
@@ -17,10 +24,7 @@ Karaite Books (Yeriot Shelomo volume 1 and 2 )
 Update references (updates bible references)
 
 1. updates_references
-
-Update references markup
-
-1. references_map_html
+2.references_map_html
 
 Update search
 
@@ -28,5 +32,5 @@ Update search
 
 Update autocomplete
 
-1. autocomplete
+1. autocomplete1
 

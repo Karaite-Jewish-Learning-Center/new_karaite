@@ -534,7 +534,6 @@ const hebrewToIndoArabic = (hebrew_number) => {
         'ר': 200,
     }
     hebrew_number = hebrew_number.trim()
-    console.log(hebrew_number)
     let translate = table[hebrew_number]
     if (translate === undefined)
         translate = hebrewOrdinalToIndoArabic(hebrew_number)

@@ -12,7 +12,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import {AutoComplete} from '../components/autcomplete/autocomplete'
+import AutoComplete from '../components/autcomplete/autocomplete'
 
 
 

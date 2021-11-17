@@ -12,6 +12,7 @@ class AppState {
     search = ''
     searchResultData = []
     pageNumber = 0
+    moreResults = true
 
     constructor() {
         makeAutoObservable(this)
@@ -172,6 +173,7 @@ class AppState {
         this.search = searchArg
         this.searchResultData = []
         this.pageNumber = 1
+        this.moreResults = true
     }
 
     getSearch = () => this.search
@@ -184,15 +186,19 @@ class AppState {
     setPageNumber = (page) => this.pageNumber = page
     getPageNumber = () => this.pageNumber
 
+    setMoreResults =(more) => {
+        this.moreResults = more
+    }
+    getMoreResults = () => this.moreResults
     // fetch data
     getSearchResult = async () => {
-        const response = await fetch(searchResultsUrl + `${this.getSearch()}/${this.getNextPageNumber()}/`)
+        const response = await fetch(searchResultsUrl + `${this.getSearch()}/${this.getPageNumber()}/`)
         if (response.ok) {
             const data = await response.json()
             this.setSearchResultData(data['data'])
-            this.setNextPageNumber(parseInt(data['page']))
+            this.setPageNumber(parseInt(data['page']))
         } else {
-            alert("HTTP-Error: " + response.status)
+            this.setMessage(response.status)
         }
     }
 

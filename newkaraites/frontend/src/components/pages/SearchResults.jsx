@@ -3,7 +3,7 @@ import {observer} from 'mobx-react-lite'
 import {Virtuoso} from "react-virtuoso"
 import Loading from "../Loading"
 import {makeStyles} from "@material-ui/core/styles"
-import {searchResultsUrl} from "../../constants/constants"
+import {searchResultsUrl, ITEMS_PER_PAGE} from "../../constants/constants"
 import {Link} from "react-router-dom"
 import ReactHtmlParser from "react-html-parser"
 import {addTagToString} from "../../utils/addTagToString"
@@ -15,10 +15,7 @@ import {Please} from "./Please"
 const SearchResults = () => {
     const store = useContext(storeContext)
     const classes = useStyles()
-    const [moreResults, setMoreResults] = useState(true)
     const [message, setMessage] = useState('Loading')
-
-    const search = store.getSearch()
 
     const itemContent = (item, data) => {
         const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
@@ -28,31 +25,32 @@ const SearchResults = () => {
                 <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
                     <Typography variant="h6" component="h2">{data['ref']}</Typography>
                 </Link>
-                {ReactHtmlParser(`<p>${addTagToString(data['text'], search, 'b')}</p>`)}
+                {ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}
                 <hr/>
             </div>)
     }
 
     const nextPage = () => {
-        if (moreResults) {
+        if (store.getMoreResults()) {
             store.setPageNumber( store.getPageNumber() + 1)
         }
     }
 
     const getSearchResult = async () => {
-        if(search ==='') return
+        if(store.getSearch() ==='') return
 
-        const response = await fetch(searchResultsUrl + `${search}/${store.getPageNumber()}/`)
+        const response = await fetch(searchResultsUrl + `${store.getSearch()}/${store.getPageNumber()}/`)
         if (response.ok) {
             const data = await response.json()
 
             // if search result length is an exact multiple of ITEMS_PER_PAGE
             // an extra call is done to figure out that next page
             // is empty, In all other cases there is no need to do an extra call.
+           // alert(data['data'].length < ITEMS_PER_PAGE)
 
-            if (data['data'].length ===0) {
-                setMoreResults(() => false)
-                setMessage(() => `End of search results for "${search.replace(' & ', ' ')}"`)
+            if (data['data'].length < ITEMS_PER_PAGE) {
+                store.setMoreResults(false)
+                setMessage(() => `End of search results for "${store.getSearch().replace(' & ', ' ')}"`)
             }
             store.setSearchResultData(data['data'])
         } else {
@@ -62,10 +60,10 @@ const SearchResults = () => {
 
     useEffect(() => {
         getSearchResult()
-    }, [search, store.getPageNumber()])
+    }, [store.getSearch(), store.getPageNumber()])
 
-    if (search === '') return <Please reason="search"/>
-    //console.log(store.getSearchResultData())
+    if (store.getSearch() === '') return <Please reason="search"/>
+
     return (
         <div className={classes.container}>
             <Typography className={classes.header} variant="h5">Results for
