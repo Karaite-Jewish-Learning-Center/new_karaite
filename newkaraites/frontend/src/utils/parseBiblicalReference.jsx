@@ -1,8 +1,9 @@
-import { hebrewBookNameToEnglish } from "./utils";
-import gematriya from 'gematriya';
-import {slug} from "./utils";
+import {hebrewBookNameToEnglish} from "./utils"
+import gematriya from 'gematriya'
+import {slug, capitalize} from "./utils"
 
 export const parseHebrewRef = (biblicalRef) => {
+
     let spacePos = biblicalRef.lastIndexOf(' ') + 1
     let refChapterVerse = biblicalRef.substr(spacePos)
     let [refChapter, refVerse] = refChapterVerse.split(':')
@@ -25,9 +26,31 @@ export const parseHebrewRef = (biblicalRef) => {
 
 
 export const parseEnglishRef = (biblicalRef) => {
+    biblicalRef = capitalize(biblicalRef)
     let re = /[0-9]+/g
     let chapterVerse = biblicalRef.match(re)
-    re = /[a-z,A-Z,' ']+/g
+
+     re = /[a-z,A-Z,' ']+/g
+    if (chapterVerse === null) {
+        // missing chapter and verse
+        return {
+            refBook: slug(biblicalRef.match(re)[0].trim()),
+            refChapter: null,
+            refVerse: null,
+            refHighlight: null
+        }
+    }
+
+    if (chapterVerse !== null && chapterVerse.length === 1) {
+        // missing verse assume 1
+        return {
+            refBook: slug(biblicalRef.match(re)[0].trim()),
+            refChapter: parseInt(chapterVerse[0]),
+            refVerse: 1,
+            refHighlight: null
+        }
+    }
+    // full reference
     return {
         refBook: slug(biblicalRef.match(re)[0].trim()),
         refChapter: parseInt(chapterVerse[0]),

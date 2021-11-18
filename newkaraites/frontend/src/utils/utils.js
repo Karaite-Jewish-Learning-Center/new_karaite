@@ -1,45 +1,47 @@
 import axios from 'axios';
-import { getCommentsUrl } from "../constants/constants"
-import { versesByBibleBook } from '../constants/constants'
+import {getCommentsUrl} from "../constants/constants"
+import {versesByBibleBook} from '../constants/constants'
 
+export const capitalize = (string) => string === "" ? "": string[0].toUpperCase() + string.slice(1).toLowerCase()
 
-const range = (l) => {
+export const range = (l) => {
     return Array(l).fill(1).map((_, i) => i + 1)
 }
 
-const equals = (a, b) => {
+export const equals = (a, b) => {
     // compare 2 arrays, arrays must not be nested
     return a.length === b.length && a.every((v, i) => v === b[i]);
 }
 
-const getComments = async (book, chapter, verse) => {
+export const getComments = async (book, chapter, verse) => {
     const res = await axios.get(getCommentsUrl + `${book}/${chapter}/${verse}`)
     return res;
 }
 
-const makeBookUrl = (url, book, chapter, first, full) => {
+export const makeBookUrl = (url, book, chapter, first, full) => {
     return (full ? `${url}${book}/` : `${url}${book}/${chapter}/${first}/`)
 }
 
-const makeRandomKey = () => {
+export const makeRandomKey = () => {
     return `k-${Math.random() * 10000000000}`
 }
 
-const slug = (str) => {
+export const slug = (str) => {
     return str.replaceAll(' ', '-')
 }
-const unslug = (str) => {
+
+export const unslug = (str) => {
     return str.replaceAll('-', ' ')
 }
 
-const calculateItemNumber = (book, chapter, verse) => {
+export const calculateItemNumber = (book, chapter, verse) => {
     if (versesByBibleBook !== undefined) {
         return versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
     }
     return 0
 }
 
-const englishBookNames = {
+export const englishBookNames = {
     'Genesis': 'בראשית',
     'Exodus': 'שמות',
     'Leviticus': 'ויקרא',
@@ -81,7 +83,7 @@ const englishBookNames = {
     'Song of Songs': 'שיר השירים'
 }
 
-const hebrewBookNames = {
+export const hebrewBookNames = {
     'בראשית': 'Genesis',
     'שמות': 'Exodus',
     'ויקרא': 'Leviticus',
@@ -125,7 +127,7 @@ const hebrewBookNames = {
     'רות': 'Ruth',
     'שיר השירים': 'Song of Songs'
 }
-const indoArabicToHebrew = (number) => {
+export const indoArabicToHebrew = (number) => {
     const table = {
         1: 'א',
         2: 'ב',
@@ -330,7 +332,7 @@ const indoArabicToHebrew = (number) => {
     }
     return table[number]
 }
-const hebrewToIndoArabic = (hebrew_number) => {
+export const hebrewToIndoArabic = (hebrew_number) => {
     const table = {
         'א': 1,
         'ב': 2,
@@ -540,7 +542,7 @@ const hebrewToIndoArabic = (hebrew_number) => {
     return translate
 
 }
-const hebrewOrdinalToIndoArabic = (hebrew_ordinal) => {
+export const hebrewOrdinalToIndoArabic = (hebrew_ordinal) => {
     let table = {
         'א׳': 1,
         'ב׳': 2,
@@ -695,46 +697,30 @@ const hebrewOrdinalToIndoArabic = (hebrew_ordinal) => {
     return table[hebrew_ordinal]
 
 }
-const englishBookNameToHebrew = (englishBookName) => {
+export const englishBookNameToHebrew = (englishBookName) => {
     return englishBookNames[englishBookName.trim()]
 }
 
 
-const hebrewBookNameToEnglish = (hebrewBookName) => {
+export const hebrewBookNameToEnglish = (hebrewBookName) => {
     return hebrewBookNames[hebrewBookName]
 }
 
-const hebrewBooks = () => {
+export const hebrewBooks = () => {
     return Object.keys(hebrewBookNames)
 }
 
-const englishBook = () => {
+export const englishBook = () => {
     return Object.keys(englishBookNames)
 }
-const toEnglish = (bookName) => {
+
+export const isABibleBook = (book) => capitalize(book.trim().split(' ')[0]) in englishBookNames
+
+export const toEnglish = (bookName) => {
     // return a english title even if bookName is Hebrew
     let title = hebrewBookNameToEnglish(bookName)
     if (title === undefined) {
         return bookName
     }
     return title
-}
-
-
-export {
-    range,
-    equals,
-    getComments,
-    makeRandomKey,
-    slug,
-    unslug,
-    calculateItemNumber,
-    indoArabicToHebrew,
-    hebrewToIndoArabic,
-    hebrewBookNameToEnglish,
-    englishBookNameToHebrew,
-    hebrewBooks,
-    englishBook,
-    toEnglish,
-    makeBookUrl,
 }

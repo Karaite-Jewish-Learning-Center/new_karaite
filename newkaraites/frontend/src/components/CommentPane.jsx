@@ -13,7 +13,6 @@ import {storeContext} from "../stores/context";
 
 const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
     const store = useContext(storeContext)
-    debugger
     const classes = useStyles()
 
     const getComments = async (book, chapter, verse) => {

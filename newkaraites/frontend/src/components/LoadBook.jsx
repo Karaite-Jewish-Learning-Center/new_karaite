@@ -58,9 +58,10 @@ const LoadBook = ({type}) => {
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
         let isOpen = store.isPaneOpen(book)
-
         if (isOpen) {
-             if(history.action!=='POP') store.setMessage('Already open.')
+            if (history.action !== 'POP') {
+                store.setCurrentItem(calculateItemNumber(book, chapter, verse), store.getPaneNumber(book))
+            }
         } else {
 
             if (type === "bible") {
@@ -112,8 +113,8 @@ const LoadBook = ({type}) => {
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
             getBook(refBook, refChapter, refVerse, refHighlight, kind)
-        } catch (e){
-            store.setMessage( translateMessage(e))
+        } catch (e) {
+            store.setMessage(translateMessage(e))
         }
     }
 
@@ -161,7 +162,7 @@ const LoadBook = ({type}) => {
 
     useEffect(() => {
         getBook(book, chapter, verse, [], type)
-    }, [])
+    }, [book, chapter, verse])
 
     const books = bookRender()
 

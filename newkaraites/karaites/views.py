@@ -233,7 +233,7 @@ class AutoCompleteView(View):
 
         sql = f"""select id,word_en, word_count,classification  from  autocomplete_view
                   where to_tsvector( word_en) @@ to_tsquery('{search}' || ':*')
-                  order by word_count desc limit 15"""
+                  limit 15"""
         auto = []
 
         for word in AutoComplete.objects.raw(sql):

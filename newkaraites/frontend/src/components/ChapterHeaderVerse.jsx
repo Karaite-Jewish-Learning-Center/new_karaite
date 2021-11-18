@@ -21,7 +21,7 @@ const ChapterHeaderVerse = (props) => {
     const store = useContext(storeContext)
     const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
-    debugger
+
     let classes = useStyles()
     let chapterHtml = null
 
@@ -55,7 +55,6 @@ const ChapterHeaderVerse = (props) => {
     }
 
     const openRightPane = (i) => {
-        debugger
         // store.setCurrentItem(i, paneNumber)
         store.setDistance(0, paneNumber)
 

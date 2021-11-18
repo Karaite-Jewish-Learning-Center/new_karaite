@@ -8,19 +8,21 @@ import pluralize from 'pluralize'
 // tag individual words
 
 export const addTagToString = (string, args, tag) => {
+    // sanitize args
+    args = args.replace('[', '').replace(']', '')
     // all the sentence
-     if(pluralize.isPlural(args)) {
-         string = string.replace(new RegExp(args, "gi"), `<${tag}>${args}</${tag}>`)
-         const singular = pluralize.singular(args)
-         string = string.replace(new RegExp(singular, "gi") , `<${tag}>${singular}</${tag}>`)
+    if (pluralize.isPlural(args)) {
+        string = string.replace(new RegExp(args, "gi"), `<${tag}>${args}</${tag}>`)
+        const singular = pluralize.singular(args)
+        string = string.replace(new RegExp(singular, "gi"), `<${tag}>${singular}</${tag}>`)
     }
-     if(pluralize.isSingular(args)) {
-         string = string.replace(new RegExp(args, "gi"), `<${tag}>${args}</${tag}>`)
-         const plural = pluralize.plural(args)
-         string = string.replace(new RegExp(plural, "gi") , `<${tag}>${plural}</${tag}>`)
+    if (pluralize.isSingular(args)) {
+        string = string.replace(new RegExp(args, "gi"), `<${tag}>${args}</${tag}>`)
+        const plural = pluralize.plural(args)
+        string = string.replace(new RegExp(plural, "gi"), `<${tag}>${plural}</${tag}>`)
     }
     // individual words
-    const arg =  args.split(' ')
+    const arg = args.split(' ')
     for (let index in arg) {
         const argToReplace = new RegExp(` ${arg[index]} `, "gi")
         string = string.replace(argToReplace, `<${tag}> ${arg[index]} </${tag}>`)

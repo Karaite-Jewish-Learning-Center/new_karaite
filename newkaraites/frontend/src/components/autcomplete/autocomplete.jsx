@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {Redirect} from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {autocompleteUrl} from '../../constants/constants'
@@ -10,6 +9,8 @@ import {observer} from 'mobx-react-lite'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
 import ImportContactsIcon from '@material-ui/icons/ImportContacts'
 import {parseEnglishRef} from '../../utils/parseBiblicalReference'
+import {validateBiblicalReference} from "../../utils/validateBiblicalReference";
+import {isABibleBook} from "../../utils/utils";
 
 
 const AutoComplete = () => {
@@ -36,13 +37,26 @@ const AutoComplete = () => {
 
 
     const showResults = () => {
-        debugger
+        if (search.length === 0) return
+
         if (isBook) {
             const {refBook, refChapter, refVerse} = parseEnglishRef(search)
-            history.push(`/Tanakh/${refBook}/${refChapter}/${refVerse}/`)
-        }
 
-        if (search.length === 0) return
+            // show chapters menu
+            if(refChapter === null && refVerse === null && refBook !== null){
+                history.push(`/Tanakh/${refBook}/`)
+                return
+            }
+            // invalid  Biblical ref
+            const validMessage = validateBiblicalReference(refBook,refChapter,refVerse)
+            if(validMessage !== ''){
+                store.setMessage(validMessage)
+                return
+            }
+            // open book
+            history.push(`/Tanakh/${refBook}/${refChapter}/${refVerse}/`)
+            return
+        }
 
         if (store.getSearch() !== search || window.location.pathname !== '/search-result/') {
             store.setSearch(search)
@@ -50,13 +64,19 @@ const AutoComplete = () => {
         }
     }
 
-    const onInputChange = (e, newValue) => {
-        if (options[0] !== undefined && options[0].c === 'B' && options[0].w.length <= newValue.length) {
+    const bibleBook=(value) =>{
+
+        if (options[0] !== undefined && options[0].c === 'B' && isABibleBook(value)) {
             setIsBook(() => true)
         } else {
             setIsBook(() => false)
         }
+    }
+
+    const onInputChange = (e, newValue) => {
+        bibleBook(newValue)
         setSearch(() => newValue)
+        if(newValue ==='') setOptions([])
     }
 
     const onKeyUp = (event) => {
@@ -70,6 +90,7 @@ const AutoComplete = () => {
 
     const onChange = (e, value, reason) => {
         if (reason === 'select-option') {
+            bibleBook(options[value].w)
             setSearch(() => options[value].w)
         }
     }
@@ -90,7 +111,7 @@ const AutoComplete = () => {
             onKeyUp={onKeyUp}
             onChange={onChange}
             getOptionLabel={(option) => option}
-            style={{width: 300, marginRight: 40}}
+            style={{width: 350, marginRight: 40}}
             inputValue={search}
             onInputChange={onInputChange}
             renderOption={(i) =>

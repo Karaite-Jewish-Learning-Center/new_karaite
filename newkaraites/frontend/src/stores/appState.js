@@ -114,9 +114,9 @@ class AppState {
 
     getPanes = () => this.panes
 
-    getPaneNumber = (book, chapter) => {
+    getPaneNumber = (book) => {
         return this.panes.findIndex(pane =>
-            pane.book === book && pane.chapter === chapter
+            pane.book === book
         )
     }
     getPaneByNumber = (i) => this.panes[i]
@@ -128,7 +128,7 @@ class AppState {
     }
     getIsLastPane = () => this.isLastPane
 
-    isPaneOpen = (book, chapter) => this.getPanes().some((pane) => pane.book === book)
+    isPaneOpen = (book) => this.getPanes().some((pane) => pane.book === book)
 
     closePane = (i) => {
         this.panes.splice(i, 1)

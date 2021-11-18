@@ -41,13 +41,22 @@ class Command(BaseCommand):
 
                     word = nouns.text
                     word = word.strip().lower()
+                    word = word.replace('[', '').replace(']', '')
 
                     if word.startswith(', '):
-                        word = word.replace(', ', '')
+                        word = word.replace(', ', '', 1)
                     if word.startswith('; '):
-                        word = word.replace('; ', '')
+                        word = word.replace('; ', '', 1)
                     if word.startswith("'"):
-                        word = word.replace("'", '')
+                        word = word.replace("'", '', 1)
+                    if word.startswith("-"):
+                        word = word.replace("-", '', 1)
+                    if word.startswith("("):
+                        word = word.replace("(", '', 1)
+                    if word.startswith(":"):
+                        word = word.replace(":", '', 1)
+                    if word.strip() == '':
+                        continue
 
                     auto, created = AutoComplete.objects.get_or_create(
                         word_en=word,
