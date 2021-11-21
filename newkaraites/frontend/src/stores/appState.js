@@ -13,6 +13,8 @@ class AppState {
     searchResultData = []
     pageNumber = 0
     moreResults = true
+    // 0 english 1 hebrew
+    language = 0
 
     constructor() {
         makeAutoObservable(this)
@@ -186,7 +188,7 @@ class AppState {
     setPageNumber = (page) => this.pageNumber = page
     getPageNumber = () => this.pageNumber
 
-    setMoreResults =(more) => {
+    setMoreResults = (more) => {
         this.moreResults = more
     }
     getMoreResults = () => this.moreResults
@@ -201,6 +203,10 @@ class AppState {
             this.setMessage(response.status)
         }
     }
+
+    // language
+    setLanguage = (language) => this.language = language
+    getLanguage = () => this.language
 
 }
 

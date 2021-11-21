@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles';
-import Colors from "../constants/colors";
+import Colors from "../../constants/colors";
 import Typography from '@material-ui/core/Typography';
 import {
     BIBLE_ENGLISH,
@@ -10,11 +10,11 @@ import {
     BIBLE_RENDER_CHAPTER,
     BIBLE_EN_CM,
     BIBLE_REFS
-} from "../constants/constants";
-import RefsBadge from "./general/RefsBadge";
+} from "../../constants/constants";
+import RefsBadge from "../general/RefsBadge";
 import {observer} from 'mobx-react-lite';
-import {versesByBibleBook} from '../constants/constants';
-import {storeContext} from '../stores/context'
+import {versesByBibleBook} from '../../constants/constants';
+import {storeContext} from '../../stores/context'
 
 
 const ChapterHeaderVerse = (props) => {
@@ -57,7 +57,6 @@ const ChapterHeaderVerse = (props) => {
     const openRightPane = (i) => {
         // store.setCurrentItem(i, paneNumber)
         store.setDistance(0, paneNumber)
-
         store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
         // store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
         // store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
@@ -67,15 +66,16 @@ const ChapterHeaderVerse = (props) => {
 
     if (renderChapter === "1") {
         store.setHeaderChapter(calculateCurrentChapter(), paneNumber)
-        chapterHtml = (<div className={classes.chapter}>
-            <div className={classes.chapterNumber}>
-                <Typography className={classes.ch}>{chapter}</Typography>
-                <hr/>
-            </div>
-            <div className={classes.references}>
-                <RefsBadge refsCount={0}/>
-            </div>
-        </div>)
+        chapterHtml = (
+            <div className={classes.chapter}>
+                <div className={classes.chapterNumber}>
+                    <Typography className={classes.ch}>{chapter}</Typography>
+                    <hr/>
+                </div>
+                <div className={classes.references}>
+                    <RefsBadge refsCount={0}/>
+                </div>
+            </div>)
     }
 
 
@@ -93,7 +93,8 @@ const ChapterHeaderVerse = (props) => {
 
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                 onClick={onClick.bind(this, item)} onDoubleClick={openRightPane.bind(this, item)}
+                 onClick={onClick.bind(this, item)}
+                 onDoubleClick={openRightPane.bind(this, item)}
             >
                 <div className={classes.verseHe}>
                     <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>

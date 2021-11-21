@@ -5,7 +5,7 @@ import {parseBiblicalReference} from '../utils/parseBiblicalReference';
 import KaraitesBooks from './karaites/karaitesBooks'
 import {observer} from 'mobx-react-lite'
 import RightPane from './panes/RightPane';
-import RenderText from './RenderText'
+import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
 import {Redirect, useParams, useHistory} from 'react-router-dom';
 import {karaitesBookUrl} from '../constants/constants'
@@ -83,6 +83,7 @@ const LoadBook = ({type}) => {
                     rightPaneState: [],
                     rightPaneStateHalakhah: 1,
                     bookData: [],
+                    language: 0,
                 })
 
                 fetchDataBible(store.panes.length - 1)
@@ -98,6 +99,7 @@ const LoadBook = ({type}) => {
                     highlight: [],
                     type: type,
                     currentItem: chapter,
+                    language: 0,
 
                 })
                 fetchDataKaraites(store.panes.length - 1)

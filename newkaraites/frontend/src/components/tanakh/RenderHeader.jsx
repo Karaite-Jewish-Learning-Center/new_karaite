@@ -1,13 +1,13 @@
 import React, {useContext} from 'react'
-import Colors from '../constants/colors';
+import Colors from '../../constants/colors';
 import {Typography} from '@material-ui/core';
-import {englishBookNameToHebrew, unslug} from '../utils/utils'
+import {englishBookNameToHebrew, unslug} from '../../utils/utils'
 import {Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close';
 import {observer} from 'mobx-react-lite';
-import {storeContext} from "../stores/context";
+import {storeContext} from "../../stores/context";
 
 
 const RenderHeader = ({book, paneNumber}) => {
@@ -32,9 +32,8 @@ const RenderHeader = ({book, paneNumber}) => {
                 <IconButton
                     aria-label="Close pane"
                     component="span"
-                    onClick={onClose}
-                >
-                    <CloseIcon className={classes.iconGrid}/>
+                    onClick={onClose}>
+                    <CloseIcon/>
                 </IconButton>
 
             </Grid>
@@ -44,8 +43,16 @@ const RenderHeader = ({book, paneNumber}) => {
             <Grid item xs={4} key={2}>
                 <Typography className={classes.chapterView}>{store.getHeaderChapter(paneNumber)}</Typography>
             </Grid>
-            <Grid item xs={4} key={3}>
+            <Grid item xs={3} key={3}>
                 <Typography className={classes.englishBook}>{book} </Typography>
+            </Grid>
+            <Grid item xs={1} key={4}>
+                <IconButton
+                    aria-label="select language"
+                    component="span"
+                    className={classes.langButton}>
+                    {'A\u2135'}
+                </IconButton>
             </Grid>
         </Grid>
     )
@@ -74,6 +81,14 @@ const useStyles = makeStyles((theme) => ({
         verticalAlign: 'middle',
         textAlign: 'left',
     },
+    langButton: {
+        minWidth: 48,
+        minHeight: 48,
+        fontFamily: "SBL Hebrew",
+        fontSize: 18,
+        lineHeight: 0,
+        padding: 1,
+    }
 }));
 
 export default observer(RenderHeader)

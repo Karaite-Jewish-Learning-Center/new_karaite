@@ -1,4 +1,4 @@
-const ttSpeech = (text, lang, voice, pitch, rate) => {
+export const ttSpeech = (text, lang, voice, pitch, rate) => {
     let utterThis = new SpeechSynthesisUtterance(text)
     let synth = window.speechSynthesis
     let voices = synth.getVoices()
@@ -13,4 +13,3 @@ const ttSpeech = (text, lang, voice, pitch, rate) => {
     synth.speak(utterThis)
 }
 
-export default ttSpeech
