@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react"
 import {observer} from 'mobx-react-lite'
 import {Virtuoso} from "react-virtuoso"
-import Loading from "../Loading"
+import Loading from "../general/Loading"
 import {makeStyles} from "@material-ui/core/styles"
 import {searchResultsUrl, ITEMS_PER_PAGE} from "../../constants/constants"
 import {Link} from "react-router-dom"

@@ -1,11 +1,11 @@
 import React, {useContext} from "react";
-import {makeRandomKey} from "../utils/utils";
+import {makeRandomKey} from "../../utils/utils";
 import ReactHtmlParser from 'react-html-parser';
-import transform from "../utils/transform"
+import transform from "../../utils/transform"
 import {observer} from "mobx-react-lite";
-import {calculateItemNumber} from "../utils/utils";
+import {calculateItemNumber} from "../../utils/utils";
 import {Typography} from "@material-ui/core";
-import {storeContext} from "../stores/context";
+import {storeContext} from "../../stores/context";
 
 
 const Comments = ({language, paneNumber, refClick}) => {

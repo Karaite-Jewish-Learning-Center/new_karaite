@@ -2,9 +2,9 @@ import React, {useEffect, useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Grid} from '@material-ui/core';
 import {parseBiblicalReference} from '../utils/parseBiblicalReference';
-import KaraitesBooks from '../components/karaitesBooks'
+import KaraitesBooks from './karaites/karaitesBooks'
 import {observer} from 'mobx-react-lite'
-import RightPane from './RightPane';
+import RightPane from './panes/RightPane';
 import RenderText from './RenderText'
 import {makeRandomKey} from '../utils/utils';
 import {Redirect, useParams, useHistory} from 'react-router-dom';

@@ -2,11 +2,11 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {slug} from '../utils/utils'
-import Filler from '../components/Filler'
+import {slug} from '../../utils/utils'
+import Filler from '../general/Filler'
 import {makeStyles} from "@material-ui/core/styles"
-import {languageDirection} from "../utils/languageDirection"
-import Colors from "../constants/colors";
+import {languageDirection} from "../../utils/languageDirection"
+import Colors from "../../constants/colors";
 
 
 const RenderMenu = ({books, path, languages = ['en', 'en']}) => {

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import Loading from './Loading'
+import Loading from './general/Loading'
 import { Virtuoso } from 'react-virtuoso'
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'

@@ -1,12 +1,12 @@
 import React, {useContext} from 'react'
 import Grid from '@material-ui/core/Grid'
-import {range} from '../utils/utils'
+import {range} from '../../utils/utils'
 import {makeStyles} from '@material-ui/core/styles'
-import Colors from '../constants/colors'
+import Colors from '../../constants/colors'
 import {Link} from 'react-router-dom'
 import {Typography} from '@material-ui/core'
-import {unslug} from '../utils/utils'
-import {storeContext} from "../stores/context";
+import {unslug} from '../../utils/utils'
+import {storeContext} from "../../stores/context";
 
 
 const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {

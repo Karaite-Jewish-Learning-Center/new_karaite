@@ -2,7 +2,7 @@ import React from "react";
 import {Route, useLocation} from "react-router-dom";
 import {chaptersByBibleBook} from "../../constants/constants";
 import {makeRandomKey, unslug} from "../../utils/utils";
-import ChapterMenu from "../ChapterMenu";
+import ChapterMenu from "../menu/ChapterMenu";
 
 
 export const TanakhBooksLink = () => {

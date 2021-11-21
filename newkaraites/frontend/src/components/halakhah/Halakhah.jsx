@@ -1,5 +1,5 @@
 import React from 'react'
-import RenderMenu from './RenderMenu'
+import RenderMenu from '../menu/RenderMenu'
 
 // this will be an api call !
 const halakhah = {

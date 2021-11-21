@@ -1,4 +1,7 @@
 import pluralize from 'pluralize'
+import {stopWords} from "../constants/englishStopWords";
+
+
 // this is the text that I want to tag, so I said
 // tag = b
 // arg = I
@@ -10,6 +13,8 @@ import pluralize from 'pluralize'
 export const addTagToString = (string, args, tag) => {
     // sanitize args
     args = args.replace('[', '').replace(']', '')
+    // remove all stop words
+
     // all the sentence
     if (pluralize.isPlural(args)) {
         string = string.replace(new RegExp(args, "gi"), `<${tag}>${args}</${tag}>`)

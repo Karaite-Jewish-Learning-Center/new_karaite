@@ -11,7 +11,7 @@ import {
     BIBLE_EN_CM,
     BIBLE_REFS
 } from "../constants/constants";
-import RefsBadge from "./RefsBadge";
+import RefsBadge from "./general/RefsBadge";
 import {observer} from 'mobx-react-lite';
 import {versesByBibleBook} from '../constants/constants';
 import {storeContext} from '../stores/context'

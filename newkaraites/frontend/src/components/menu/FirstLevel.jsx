@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {getFirstLevelUrl} from '../constants/constants'
-import {booksMenu} from '../constants/common-css'
-import Filler from "./Filler";
+import {getFirstLevelUrl} from '../../constants/constants'
+import {booksMenu} from '../../constants/common-css'
+import Filler from "../general/Filler";
 
 
 const FirstLevel = () => {

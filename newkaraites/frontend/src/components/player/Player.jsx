@@ -5,7 +5,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import PauseIcon from '@material-ui/icons/Pause'
 import StopIcon from '@material-ui/icons/Stop'
 import { makeStyles } from '@material-ui/core/styles'
-import Colors from '../constants/colors.js';
+import Colors from '../../constants/colors.js';
 
 
 const Player = ({ text, language }) => {

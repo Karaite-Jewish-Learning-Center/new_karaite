@@ -3,11 +3,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Virtuoso } from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import KaraitePaneHeader from "./KaraitePaneHeader";
-import transform from '../utils/transform'
-import Loading from "./Loading";
-import './css/comments.css'
-import Colors from '../constants/colors'
-import {storeContext} from "../stores/context";
+import transform from '../../utils/transform'
+import Loading from "../general/Loading";
+import '../css/comments.css'
+import Colors from '../../constants/colors'
+import {storeContext} from "../../stores/context";
 
 
 

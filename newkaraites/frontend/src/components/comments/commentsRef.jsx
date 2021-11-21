@@ -2,10 +2,10 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { indoArabicToHebrew, englishBookNameToHebrew } from "../utils/utils";
-import { LANGUAGE, HEBREW } from "../constants/constants";
+import { indoArabicToHebrew, englishBookNameToHebrew } from "../../utils/utils";
+import { LANGUAGE, HEBREW } from "../../constants/constants";
 import { makeStyles } from '@material-ui/core/styles'
-import Colors from '../constants/colors'
+import Colors from '../../constants/colors'
 
 
 const CommentRef = ({ book, chapter, verse, language, closeCommentTabHandler, refClick }) => {

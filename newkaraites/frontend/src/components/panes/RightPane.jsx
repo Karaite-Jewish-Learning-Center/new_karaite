@@ -1,22 +1,22 @@
 import React, {useContext, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Colors from '../constants/colors'
+import Colors from '../../constants/colors'
 import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
-import { makeRandomKey } from '../utils/utils'
-import CommentsPane from './CommentPane'
-import HalakhahPane from './HalakhahPane'
+import { makeRandomKey } from '../../utils/utils'
+import CommentsPane from '../comments/CommentPane'
+import HalakhahPane from '../halakhah/HalakhahPane'
 import {
     BIBLE_EN_CM,
     BIBLE_REFS,
     BIBLE_ENGLISH,
     BIBLE_HEBREW,
-} from '../constants/constants'
-import Player from './Player'
+} from '../../constants/constants'
+import Player from '../player/Player'
 import { observer } from 'mobx-react-lite'
-import Header from './RightPaneHeader'
-import {storeContext} from "../stores/context";
+import Header from '../pages/RightPaneHeader'
+import {storeContext} from "../../stores/context";
 
 
 

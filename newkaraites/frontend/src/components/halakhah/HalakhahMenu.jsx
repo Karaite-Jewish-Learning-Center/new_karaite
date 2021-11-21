@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {karaitesBookToc} from '../constants/constants'
+import {karaitesBookToc} from '../../constants/constants'
 import {Typography} from '@material-ui/core'
-import {unslug} from '../utils/utils'
+import {unslug} from '../../utils/utils'
 import {Link} from 'react-router-dom'
-import {storeContext} from "../stores/context";
-import Colors from "../constants/colors";
+import {storeContext} from "../../stores/context";
+import Colors from "../../constants/colors";
 import {makeStyles} from "@material-ui/core/styles";
 
 
@@ -59,7 +59,7 @@ const HalakhahMenu = ({book}) => {
                     </th>
                 </tr>
                 <tr>
-                    <th className={classes.backlink}><Link className={classes.link} to='/Halakhah/'>To books list</Link>
+                    <th className={classes.backlink}><Link className={classes.link} to='/Halakhah/'>To book list</Link>
                     </th>
                 </tr>
                 <tr>

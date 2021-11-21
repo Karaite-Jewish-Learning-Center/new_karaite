@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {useParams} from "react-router-dom";
-import HalakhahMenu from "../HalakhahMenu";
+import HalakhahMenu from "./HalakhahMenu";
 import {storeContext} from "../../stores/context";
 
 

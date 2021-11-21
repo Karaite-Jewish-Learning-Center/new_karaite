@@ -4,10 +4,10 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core'
-import { unslug } from '../utils/utils'
-import Colors from '../constants/colors'
+import { unslug } from '../../utils/utils'
+import Colors from '../../constants/colors'
 import { observer } from 'mobx-react-lite'
-import {storeContext} from '../../src/stores/context'
+import {storeContext} from '../../stores/context'
 
 
 const KaraitesPaneHeader = ({ paneNumber }) => {

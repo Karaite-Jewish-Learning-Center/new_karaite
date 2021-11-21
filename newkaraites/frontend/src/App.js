@@ -1,20 +1,20 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import MyAppBar from "./components/AppBar";
-import FirstLevel from "./components/FirstLevel"
-import Tanakh from "./components/Tanakh"
+import FirstLevel from "./components/menu/FirstLevel"
+import Tanakh from "./components/tanakh/Tanakh"
 import LoadBook from "./components/LoadBook";
 import {createMuiTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/core/styles'
-import Halakhah from './components/Halakhah'
+import Halakhah from './components/halakhah/Halakhah'
 import Home from "./components/pages/Home";
-import {TanakhBooksLink} from "./components/menu/TanakBooksLink";
-import {HalakhahBookLink} from "./components/menu/HalakhahBookList";
+import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
+import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
 import SearchResults from "./components/pages/SearchResults";
 // import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
-import Message from './components/Message'
+import Message from './components/messages/Message'
 
 function App() {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import {makeStyles} from '@material-ui/core/styles';
-import Colors from '../constants/colors'
+import Colors from '../../constants/colors'
 
 const Loading = (props) => {
     const classes = useStyles()
