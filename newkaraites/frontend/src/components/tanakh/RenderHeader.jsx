@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close';
 import {observer} from 'mobx-react-lite';
 import {storeContext} from "../../stores/context";
+import LanguageButton from "../language/LanguageButton";
 
 
 const RenderHeader = ({book, paneNumber}) => {
@@ -47,12 +48,7 @@ const RenderHeader = ({book, paneNumber}) => {
                 <Typography className={classes.englishBook}>{book} </Typography>
             </Grid>
             <Grid item xs={1} key={4}>
-                <IconButton
-                    aria-label="select language"
-                    component="span"
-                    className={classes.langButton}>
-                    {'A\u2135'}
-                </IconButton>
+                <LanguageButton paneNumber={paneNumber}/>
             </Grid>
         </Grid>
     )
@@ -81,14 +77,7 @@ const useStyles = makeStyles((theme) => ({
         verticalAlign: 'middle',
         textAlign: 'left',
     },
-    langButton: {
-        minWidth: 48,
-        minHeight: 48,
-        fontFamily: "SBL Hebrew",
-        fontSize: 18,
-        lineHeight: 0,
-        padding: 1,
-    }
+
 }));
 
 export default observer(RenderHeader)

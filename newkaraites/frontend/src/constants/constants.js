@@ -3,7 +3,7 @@ let apiUrl = 'http://161.35.130.125/'
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 }
-export const organization = { 1: 'Torah', 2: 'Prophets', 3: 'Writings' }
+export const organization = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
 export const bookListUrl = apiUrl + 'api/books-list/'
 export const bookTextUrl = apiUrl + 'api/get-book/'
@@ -18,14 +18,17 @@ export const referencesUrl = apiUrl + 'api/get-references/'
 export const autocompleteUrl = apiUrl + 'api/autocomplete/'
 export const searchResultsUrl = apiUrl + 'api/search/'
 
+// there will be more languages as project evolves
+export const LANGUAGE = {0: 'en', 1: 'he', 2: 'en_he'}
+export const LANGUAGE_KEY = {'en':0, 'he':1, 'en_he':2}
+export const LANGUAGE_SYMBOL = {0: 'A', 1: '\u2135', 2: 'A\u2135'}
 
-export const LANGUAGE = { 0: 'en', 1: 'he' }
-export const LANGUAGE_TAG = { 'en': 0, 'he': 1 }
 export const ENGLISH = 0
 export const HEBREW = 1
 export const BIBLE_ENGLISH = 0
 export const BIBLE_HEBREW = 1
 export const BIBLE_EN_CM = 2
+
 export const BIBLE_HE_CM = 3
 export const BIBLE_VERSE = 4
 export const BIBLE_CHAPTER = 5
@@ -33,7 +36,8 @@ export const BIBLE_RENDER_CHAPTER = 6
 export const BIBLE_REFS = 7
 export const BOOK_CHAPTERS = 0
 export const BOOK_DATA = 1
-// this value is define in the views.py if changed there must be changed here
+
+// this value is define in the views.py if changed there must be changed here too.
 export const ITEMS_PER_PAGE = 15
 
 export const chaptersByBibleBook = {
@@ -135,4 +139,5 @@ export const versesByBibleBook = {
     'II-Chronicles': [18, 17, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 23, 14, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23],
 }
 
+// this experimental and probably remove in the future.
 export const q640 = '(min-width:640px)'

@@ -83,7 +83,7 @@ const LoadBook = ({type}) => {
                     rightPaneState: [],
                     rightPaneStateHalakhah: 1,
                     bookData: [],
-                    language: 0,
+                    language: 'en_he',
                 })
 
                 fetchDataBible(store.panes.length - 1)
@@ -99,7 +99,7 @@ const LoadBook = ({type}) => {
                     highlight: [],
                     type: type,
                     currentItem: chapter,
-                    language: 0,
+                    language: 'he',
 
                 })
                 fetchDataKaraites(store.panes.length - 1)
