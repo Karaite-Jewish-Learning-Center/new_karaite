@@ -6,10 +6,11 @@ import PauseIcon from '@material-ui/icons/Pause'
 import StopIcon from '@material-ui/icons/Stop'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../../constants/colors.js';
+//import {ttSpeech} from "./ttspeech";
 
 
 const Player = ({ text, language }) => {
-    let utterThis = new SpeechSynthesisUtterance(text)
+    //let utterThis = new SpeechSynthesisUtterance(text)
 
     const classes = useStyles()
 
@@ -21,20 +22,20 @@ const Player = ({ text, language }) => {
     //     ttSpeech(data[BIBLE_HEBREW], 'he-IL', 'Carmit', 1, 0.7)
     // }
 
-    const ttSpeech = (text, lang, voice, pitch, rate) => {
-        let utterThis = new SpeechSynthesisUtterance(text)
-        let synth = window.speechSynthesis
-        let voices = synth.getVoices()
-        // should be moved to config
-        for (let i = 0; i < voices.length; i++) {
-            if (voices[i].name === voice) {
-                utterThis.voice = voices[i]
-            }
-        }
-        utterThis.pitch = pitch
-        utterThis.rate = rate
-        synth.speak(utterThis)
-    }
+    // const ttSpeech = (text, lang, voice, pitch, rate) => {
+    //     let utterThis = new SpeechSynthesisUtterance(text)
+    //     let synth = window.speechSynthesis
+    //     let voices = synth.getVoices()
+    //     // should be moved to config
+    //     for (let i = 0; i < voices.length; i++) {
+    //         if (voices[i].name === voice) {
+    //             utterThis.voice = voices[i]
+    //         }
+    //     }
+    //     utterThis.pitch = pitch
+    //     utterThis.rate = rate
+    //     synth.speak(utterThis)
+    // }
     return (
         <div className={classes.root}>
             <IconButton aria-label="play" disabled>

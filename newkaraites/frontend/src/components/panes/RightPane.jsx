@@ -19,7 +19,6 @@ import Header from '../pages/RightPaneHeader'
 import {storeContext} from "../../stores/context";
 
 
-
 const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
 
@@ -37,6 +36,7 @@ const RightPane = ({ paneNumber, refClick }) => {
         store.setRightPaneState(showState, paneNumber)
         refClick(item, 'bible', paneNumber, e)
     }
+
     const onClose = () => {
         store.setDistance(0, paneNumber)
         store.setRightPaneState([], paneNumber)
@@ -92,15 +92,12 @@ const RightPane = ({ paneNumber, refClick }) => {
                     <>
                         <Header onClose={onClose} />
                         <div className={classes.body}>
-
                             <Typography className={classes.headerColor}>Related texts</Typography>
                             <hr className={classes.ruler} />
                             <Item />
                             <hr className={classes.ruler} />
                             <Player text={verseData[BIBLE_ENGLISH]} language={"English"} />
                             <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"} />
-
-
                         </div>
                     </>
                 )

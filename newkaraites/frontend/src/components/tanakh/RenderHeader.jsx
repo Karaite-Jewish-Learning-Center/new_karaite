@@ -9,6 +9,7 @@ import {observer} from 'mobx-react-lite';
 import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
+import {devLog} from "../messages/devLog";
 
 
 const RenderHeader = ({book, paneNumber}) => {
@@ -56,6 +57,9 @@ const RenderHeader = ({book, paneNumber}) => {
                         </Typography>
                     </Grid>
                 )
+            default: {
+                devLog(`Unknown language: ${lang}`)
+            }
         }
     }
 
@@ -103,4 +107,4 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default observer(RenderHeader)
+export default (RenderHeader)

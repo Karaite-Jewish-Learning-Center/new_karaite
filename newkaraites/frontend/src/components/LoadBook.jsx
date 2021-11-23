@@ -83,7 +83,7 @@ const LoadBook = ({type}) => {
                     rightPaneState: [],
                     rightPaneStateHalakhah: 1,
                     bookData: [],
-                    languages: ['en_he','he', 'en'],
+                    languages: ['en_he', 'he', 'en'],
                 })
 
                 fetchDataBible(store.panes.length - 1)
@@ -140,13 +140,12 @@ const LoadBook = ({type}) => {
             if (panes[i].type.toLowerCase() === 'bible') {
 
                 jsx.push((
-                    <>
-                        <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                            <RenderText paneNumber={i}
-                            />
+                    <React.Fragment key={makeRandomKey()}>
+                        <Grid item xs={true} className={classes.item}>
+                            <RenderText paneNumber={i}/>
                         </Grid>
                         <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i}/>
-                    </>
+                    </React.Fragment>
                 ))
 
             }
@@ -177,16 +176,13 @@ const LoadBook = ({type}) => {
     }
 
     return (
-        <>
-            <Grid container
-                  className={classes.root}
-                  direction="row"
-                  justifycontent="center"
-                  key={makeRandomKey()}
-            >
-                {books.map(jsx => jsx)}
-            </Grid>
-        </>
+        <Grid container
+              className={classes.root}
+              direction="row"
+              justifycontent="center"
+        >
+            {books.map(jsx => jsx)}
+        </Grid>
     )
 
 }
@@ -209,6 +205,10 @@ const useStyles = makeStyles((theme) => ({
     },
     hiddenRightPane: {
         display: 'none'
+    },
+    items: {
+        width: '100%',
+        height: '100%',
     }
 }));
 
