@@ -203,27 +203,14 @@ class AppState {
     }
 
     // language
-    setLanguage = (language, i) => this.panes[i].language = language
-    getLanguage = (i) => this.panes[i].language
-    //LANGUAGE = {0: 'en', 1: 'he', 2: 'en_he'} see constant.js
+    setLanguage = (language, i) => this.panes[i].languages = language
+    getLanguage = (i) => this.panes[i].languages[0]
+
     nextLanguage = (i) => {
-        switch (this.getLanguage(i)) {
-            case 'en_he':
-                return this.setLanguage('en', i)
-            case 'en':
-                return this.setLanguage('he', i)
-            case 'he':
-                return this.setLanguage('en_he', i)
-            default: {
-                this.setMessage('Something is wrong Language button' + this.getLanguage(i))
-            }
-
-        }
-
+        return this.panes[i].languages.push(this.panes[i].languages.shift())
     }
 
 }
-
 
 const appStore = () => {
     return new AppState()
