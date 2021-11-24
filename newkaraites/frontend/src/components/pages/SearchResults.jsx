@@ -16,6 +16,8 @@ const SearchResults = () => {
     const store = useContext(storeContext)
     const classes = useStyles()
     const [message, setMessage] = useState('Loading')
+    const [search] = useState(store.getSearch().replace(' & ', ' '))
+    const [page, setPage] = useState(1)
 
     const itemContent = (item, data) => {
         const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
@@ -32,42 +34,42 @@ const SearchResults = () => {
 
     const nextPage = () => {
         if (store.getMoreResults()) {
-            store.setPageNumber( store.getPageNumber() + 1)
-        }
-    }
-
-    const getSearchResult = async () => {
-        if(store.getSearch() ==='') return
-
-        const response = await fetch(searchResultsUrl + `${store.getSearch()}/${store.getPageNumber()}/`)
-        if (response.ok) {
-            const data = await response.json()
-
-            // if search result length is an exact multiple of ITEMS_PER_PAGE
-            // an extra call is done to figure out that next page
-            // is empty, In all other cases there is no need to do an extra call.
-           // alert(data['data'].length < ITEMS_PER_PAGE)
-
-            if (data['data'].length < ITEMS_PER_PAGE) {
-                store.setMoreResults(false)
-                setMessage(() => `End of search results for "${store.getSearch().replace(' & ', ' ')}"`)
-            }
-            store.setSearchResultData(data['data'])
-        } else {
-            alert("HTTP-Error: " + response.status)
+            setPage(() => page + 1)
         }
     }
 
     useEffect(() => {
+        const getSearchResult = async () => {
+            if (search === '') return {'data': [], 'page': 1}
+            const response = await fetch(searchResultsUrl + `${search}/${page}/`)
+            const data = await response.json()
+            return data
+        }
+
         getSearchResult()
-    }, [store.getSearch(), store.getPageNumber()])
+            .then((data) => {
+
+                // if search result length is an exact multiple of ITEMS_PER_PAGE
+                // an extra call is done to figure out that next page
+                // is empty, In all other cases there is no need to do an extra call.
+
+                if (data['data'].length < ITEMS_PER_PAGE) {
+                    store.setMoreResults(false)
+                    setMessage(() => `End of search results for "${store.getSearch().replace(' & ', ' ')}"`)
+                }
+                store.setSearchResultData(data['data'])
+                setPage(()=>parseInt(data['page']))
+            })
+            .catch(e => store.setMessage(e.message))
+
+    }, [search, page, store])
 
     if (store.getSearch() === '') return <Please reason="search"/>
-
     return (
         <div className={classes.container}>
-            <Typography className={classes.header} variant="h5">Results for
-                "{store.getSearch().replace(' & ', ' ')}"</Typography>
+            <Typography className={classes.header} variant="h5">
+                Results for "{search}"
+            </Typography>
             <Virtuoso
                 data={store.getSearchResultData()}
                 endReached={nextPage}

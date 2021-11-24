@@ -29,7 +29,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en']}) => {
 
     const MakeMenu = () => {
         return Object.keys(books).map((key, index) =>
-            <Grid xs={12} sm={columns} key={index}>
+            <Grid item xs={12} sm={columns} key={index}>
                 <Grid item className={classes.title}>
                     <Typography className={classes.titleHalakhah} variant="h6" component="h2">{key}</Typography>
                     <Link className={classes.link} to='/texts/'>To texts</Link>
@@ -44,7 +44,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en']}) => {
         <div className={classes.container}>
             <Grid container
                   direction="column"
-                  justifyContent="space-evenly"
+                  justifycontent="space-evenly"
                   alignItems="center"
             >
                 <Filler/>

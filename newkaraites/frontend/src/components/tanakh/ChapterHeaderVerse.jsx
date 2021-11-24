@@ -53,9 +53,6 @@ const ChapterHeaderVerse = (props) => {
     const onClick = (i) => {
         store.setCurrentItem(i, paneNumber)
         store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
-        // store.setCommentsChapter(allBookData[i][BIBLE_CHAPTER], paneNumber)
-        // store.setCommentsVerse(allBookData[i][BIBLE_VERSE], paneNumber)
-        // store.setVerseData(allBookData[i], paneNumber)
     }
 
     if (renderChapter === "1") {
@@ -78,7 +75,7 @@ const ChapterHeaderVerse = (props) => {
         store.setCommentsChapter(allBookData[item][BIBLE_CHAPTER], paneNumber)
         store.setCommentsVerse(allBookData[item][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[item], paneNumber)
-    }, [])
+    }, [allBookData,item,paneNumber,store])
 
     const ChapterBody = () => {
         switch (lang) {

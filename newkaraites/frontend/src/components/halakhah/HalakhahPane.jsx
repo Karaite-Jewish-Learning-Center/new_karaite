@@ -32,7 +32,7 @@ const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
 
     useEffect(() => {
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
-    }, [])
+    }, [paneNumber, store])
 
     if (references.length !== 0) {
         return (

@@ -34,11 +34,7 @@ function App() {
                             <FirstLevel/>
                         </Route>
 
-                        <Route exact path="/search-result/:search/">
-                            <SearchResults/>
-                        </Route>
-
-                        <Route exact path="/search-result/">
+                        <Route exact path="/search-result/" forceRefresh={true}>
                             <SearchResults/>
                         </Route>
 

@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx"
-import {searchResultsUrl} from "../constants/constants";
+
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -11,7 +11,6 @@ class AppState {
     // search
     search = ''
     searchResultData = []
-    pageNumber = 0
     moreResults = true
 
     constructor() {
@@ -48,10 +47,6 @@ class AppState {
         this.panes[paneNumber].commentsVerse = verse
     }
     getCommentsVerse = (paneNumber) => this.panes[paneNumber].commentsVerse
-
-    needUpdateComment = (chapter, verse, paneNumber) => {
-        return this.getCommentsChapter(paneNumber) !== chapter || this.getCommentsVerse(paneNumber) !== verse
-    }
 
     // book , chapter , verse
     setBook = (book, i) => {
@@ -170,9 +165,9 @@ class AppState {
 
     // search arg
     setSearch = (searchArg) => {
+        debugger
         this.search = searchArg
         this.searchResultData = []
-        this.pageNumber = 1
         this.moreResults = true
     }
 
@@ -183,24 +178,13 @@ class AppState {
     getSearchResultData = () => this.searchResultData
 
     // search page
-    setPageNumber = (page) => this.pageNumber = page
-    getPageNumber = () => this.pageNumber
-
+    // autocomplete communicates with searchResult
     setMoreResults = (more) => {
         this.moreResults = more
     }
     getMoreResults = () => this.moreResults
-    // fetch data
-    getSearchResult = async () => {
-        const response = await fetch(searchResultsUrl + `${this.getSearch()}/${this.getPageNumber()}/`)
-        if (response.ok) {
-            const data = await response.json()
-            this.setSearchResultData(data['data'])
-            this.setPageNumber(parseInt(data['page']))
-        } else {
-            this.setMessage(response.status)
-        }
-    }
+
+
 
     // language
     setLanguage = (language, i) => this.panes[i].languages = language

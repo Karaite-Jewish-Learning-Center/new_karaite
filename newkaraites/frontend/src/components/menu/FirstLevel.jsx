@@ -43,7 +43,7 @@ const FirstLevel = () => {
         <div className={classes.container}>
             <Grid container
                   direction="column"
-                  justifyContent="center"
+                  justifycontent="center"
                   alignItems="center">
                 <Filler/>
                 {levels}

@@ -86,7 +86,7 @@ const LoadBook = ({type}) => {
                     languages: ['en_he', 'he', 'en'],
                 })
 
-                fetchDataBible(store.panes.length - 1)
+                await fetchDataBible(store.panes.length - 1)
             }
 
             if (type === "karaites") {
@@ -102,7 +102,7 @@ const LoadBook = ({type}) => {
                     languages: ['en', 'he'],
 
                 })
-                fetchDataKaraites(store.panes.length - 1)
+                await fetchDataKaraites(store.panes.length - 1)
             }
         }
     }
@@ -114,10 +114,12 @@ const LoadBook = ({type}) => {
         }
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
-            getBook(refBook, refChapter, refVerse, refHighlight, kind)
+            getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
         } catch (e) {
             store.setMessage(translateMessage(e))
         }
+
+
     }
 
     const RenderRightPane = ({isOpen, paneNumber}) => {
@@ -163,7 +165,7 @@ const LoadBook = ({type}) => {
 
     useEffect(() => {
         getBook(book, chapter, verse, [], type)
-    }, [book, chapter, verse])
+    }, [book, chapter, verse, type])
 
     const books = bookRender()
 

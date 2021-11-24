@@ -2,7 +2,6 @@ import React, {useState, useEffect, useContext} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {autocompleteUrl} from '../../constants/constants'
-import {apiFetch} from '../api/apiFetch'
 import {storeContext} from '../../stores/context'
 import {useHistory} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
@@ -23,19 +22,6 @@ const AutoComplete = () => {
     const [isBook, setIsBook] = useState(false)
     let history = useHistory()
 
-    const getAutoComplete = async () => {
-
-        if (search.length < 2) return
-        if (isBook) return
-
-        apiFetch(`${autocompleteUrl}${search}/`)
-            .then((response) => {
-                setOptions(response)
-            })
-            .catch(e => console.log(e))
-    }
-
-
     const showResults = () => {
         if (search.length === 0) return
 
@@ -43,13 +29,13 @@ const AutoComplete = () => {
             const {refBook, refChapter, refVerse} = parseEnglishRef(search)
 
             // show chapters menu
-            if(refChapter === null && refVerse === null && refBook !== null){
+            if (refChapter === null && refVerse === null && refBook !== null) {
                 history.push(`/Tanakh/${refBook}/`)
                 return
             }
             // invalid  Biblical ref
-            const validMessage = validateBiblicalReference(refBook,refChapter,refVerse)
-            if(validMessage !== ''){
+            const validMessage = validateBiblicalReference(refBook, refChapter, refVerse)
+            if (validMessage !== '') {
                 store.setMessage(validMessage)
                 return
             }
@@ -58,13 +44,17 @@ const AutoComplete = () => {
             return
         }
 
-        if (store.getSearch() !== search || window.location.pathname !== '/search-result/') {
-            store.setSearch(search)
+        store.setSearch(search)
+        if (window.location.pathname === '/search-result/') {
+            // hack or page wont reload !!!
+            history.push('/empty')
+            history.goBack()
+        } else {
             history.push('/search-result/')
         }
     }
 
-    const bibleBook=(value) =>{
+    const bibleBook = (value) => {
 
         if (options[0] !== undefined && options[0].c === 'B' && isABibleBook(value)) {
             setIsBook(() => true)
@@ -76,7 +66,7 @@ const AutoComplete = () => {
     const onInputChange = (e, newValue) => {
         bibleBook(newValue)
         setSearch(() => newValue)
-        if(newValue ==='') setOptions([])
+        if (newValue === '') setOptions([])
     }
 
     const onKeyUp = (event) => {
@@ -97,8 +87,22 @@ const AutoComplete = () => {
 
 
     useEffect(() => {
+        const getAutoComplete = async () => {
+            if (search.length < 2) return []
+            if (isBook) return []
+
+            const response = await fetch(`${autocompleteUrl}${search}/`)
+            const data = await response.json()
+            return data
+        }
+
         getAutoComplete()
-    }, [search]);
+            .then((data) => {
+                setOptions(data)
+            })
+            .catch(e => store.setMessage(e.message))
+
+    }, [search, isBook, store]);
 
     return (
         <Autocomplete

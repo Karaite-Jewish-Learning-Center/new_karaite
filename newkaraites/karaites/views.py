@@ -263,7 +263,7 @@ class Search(View):
         search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
         search = prep_search(search)
 
-        print('searching for :', search)
+        print(f'searching for:{search}')
 
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
@@ -274,5 +274,7 @@ class Search(View):
         items = []
         for result in FullTextSearch.objects.raw(sql):
             items.append({'ref': result.reference_en, 'text': result.text_en})
+
+        print(items)
 
         return JsonResponse({'data': items, 'page': page}, safe=False)
