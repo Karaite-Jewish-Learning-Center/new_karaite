@@ -1,13 +1,14 @@
 import React, {useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import IconButton from '@material-ui/core/IconButton'
-import CloseIcon from '@material-ui/icons/Close'
+// import IconButton from '@material-ui/core/IconButton'
+// import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core'
 import { unslug } from '../../utils/utils'
 import Colors from '../../constants/colors'
 import { observer } from 'mobx-react-lite'
 import {storeContext} from '../../stores/context'
+import {CloseButton} from "../buttons/CloseButton";
 
 
 const KaraitesPaneHeader = ({ paneNumber }) => {
@@ -25,20 +26,12 @@ const KaraitesPaneHeader = ({ paneNumber }) => {
         <Grid container
             direction="row"
             className={classes.resources}
-            alignItems="center"
-        >
-
+            alignItems="center">
             <Grid item xs={true}>
-                <IconButton className={classes.iconButton}
-                    aria-label="Close comments pane"
-                    component="span"
-                    onClick={onClosePane}
-                >
-                    <CloseIcon className={classes.iconGrid} />
-                </IconButton>
+                <CloseButton onClick={onClosePane}/>
             </Grid>
             <Grid item xs={true}>
-                <Typography>{unslug(store.getBook(paneNumber))}, </Typography>
+                <Typography>{unslug(store.getBook(paneNumber))}</Typography>
             </Grid>
             <Grid item xs={true}></Grid>
         </Grid>

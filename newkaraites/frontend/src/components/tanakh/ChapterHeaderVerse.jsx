@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import Colors from "../../constants/colors";
 import Typography from '@material-ui/core/Typography';
@@ -72,8 +72,13 @@ const ChapterHeaderVerse = (props) => {
                 </div>
             </div>)
     }
-
     const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
+
+    useEffect(() => {
+        store.setCommentsChapter(allBookData[item][BIBLE_CHAPTER], paneNumber)
+        store.setCommentsVerse(allBookData[item][BIBLE_VERSE], paneNumber)
+        store.setVerseData(allBookData[item], paneNumber)
+    }, [])
 
     const ChapterBody = () => {
         switch (lang) {
@@ -200,10 +205,10 @@ const useStyles = makeStyles(() => ({
         color: Colors['gray']
     },
     verseHe: {
-        maxWidth: '35%',
-        minWidth: '35%',
+        maxWidth: ((props) => props.lang === 'he' ? '45%' : '35%'),
+        minWidth: ((props) => props.lang === 'he' ? '45%' : '35%'),
         textAlign: 'right',
-        verticalAlign: 'text-top',
+        verticalAlign: 'center',
         margin: 10,
         fontFamily: 'SBL Hebrew'
     },
@@ -212,7 +217,7 @@ const useStyles = makeStyles(() => ({
         maxWidth: '5%',
         minWidth: '5%',
         textAlign: 'center',
-        verticalAlign: 'text-top',
+        alignSelf: 'center',
     },
     vn: {
         fontSize: 12,
@@ -223,8 +228,8 @@ const useStyles = makeStyles(() => ({
         cursor: 'pointer',
     },
     verseEn: {
-        maxWidth: '35%',
-        minWidth: '35%',
+        maxWidth: ((props) => props.lang === 'en' ? '45%' : '35%'),
+        minWidth: ((props) => props.lang === 'en' ? '45%' : '35%'),
         textAlign: 'left',
         verticalAlign: 'text-top',
         margin: 10

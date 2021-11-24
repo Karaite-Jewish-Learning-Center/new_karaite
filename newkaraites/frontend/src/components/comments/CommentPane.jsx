@@ -9,6 +9,8 @@ import { observer } from 'mobx-react-lite'
 import '../css/comments.css'
 import Header from "../pages/RightPaneHeader"
 import {storeContext} from "../../stores/context";
+import {devLog} from "../messages/devLog";
+import {makeRandomKey} from "../../utils/utils";
 
 
 const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
@@ -16,8 +18,9 @@ const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
     const classes = useStyles()
 
     const getComments = async (book, chapter, verse) => {
+
         //todo , why this all ways false, loading 3 time same comment 
-        console.log("need update", store.needUpdateComment(chapter, verse, paneNumber))
+        devLog("Comments need update", store.needUpdateComment(chapter, verse, paneNumber))
 
         const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
         if (response.ok) {
@@ -39,7 +42,7 @@ const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
     }
 
     return (
-        <>
+        <React.Fragment key={makeRandomKey()}>
             <Header backButton={backButton} onClose={onClose} />
             <Tabs
                 className={classes.root}
@@ -57,7 +60,7 @@ const CommentsPane = ({ refClick, paneNumber, backButton, onClose }) => {
                     <Comments language="he" paneNumber={paneNumber} refClick={refClick} />
                 </TabPanel>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

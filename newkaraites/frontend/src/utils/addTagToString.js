@@ -1,6 +1,4 @@
 import pluralize from 'pluralize'
-import {stopWords} from "../constants/englishStopWords";
-
 
 // this is the text that I want to tag, so I said
 // tag = b

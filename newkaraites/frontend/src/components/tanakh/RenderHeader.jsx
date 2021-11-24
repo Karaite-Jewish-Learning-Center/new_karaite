@@ -5,7 +5,6 @@ import {englishBookNameToHebrew, unslug} from '../../utils/utils'
 import {indoArabicToHebrewCardinal} from '../../utils/english-hebrew/numberConvertion'
 import {Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles'
-import {observer} from 'mobx-react-lite';
 import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
@@ -107,4 +106,4 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default (RenderHeader)
+export default RenderHeader

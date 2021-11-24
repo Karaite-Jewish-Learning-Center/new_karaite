@@ -104,7 +104,7 @@ class AppState {
     setRightPaneState = (state, i) => {
         this.panes[i].rightPaneState = state
     }
-    getRightPaneState = (i) => this.panes[i].rightPaneState
+    getRightPaneState = (i) => this.panes[i].rightPaneState || [1]
 
 
     // panes

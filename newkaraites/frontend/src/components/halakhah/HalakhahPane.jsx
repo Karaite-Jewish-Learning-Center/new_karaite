@@ -33,13 +33,14 @@ const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
     useEffect(() => {
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
     }, [])
+
     if (references.length !== 0) {
         return (
-            <>
+            <React.Fragment key={makeRandomKey()}>
                 <Header backButton={backButton} onClose={onClose} />
                 <div className={classes.scroll}>
-                    {references.map((reference, i) => (
-                        <>
+                    {references.map((reference) => (
+                        <React.Fragment key={makeRandomKey()}>
                             <Typography className={classes.headerColor}>{reference['book_name']}</Typography>
 
                             <Typography className={classes.headerColor}>{reference['author']}</Typography>
@@ -59,10 +60,10 @@ const HalakhahPane = ({ refClick, paneNumber, backButton, onClose }) => {
                             >Open book </Button>
                             <hr className={classes.ruler} />
 
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
-            </>
+            </React.Fragment>
         )
     } else {
         return (

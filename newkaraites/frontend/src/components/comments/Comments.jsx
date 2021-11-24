@@ -17,7 +17,7 @@ const Comments = ({language, paneNumber, refClick}) => {
         return (
             <div key={makeRandomKey()}>
                 {comments.map(html => (
-                    <>
+                    <React.Fragment key={makeRandomKey()}>
                         {ReactHtmlParser(html[ref], {
                             decodeEntities: true,
                             transform: transform.bind(this,
@@ -26,7 +26,7 @@ const Comments = ({language, paneNumber, refClick}) => {
                                 'bible',
                                 paneNumber)
                         })}
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
         )

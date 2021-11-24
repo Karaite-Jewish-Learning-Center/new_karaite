@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 import Colors from '../../constants/colors'
 import Button from '@material-ui/core/Button'
-import { Typography } from '@material-ui/core'
+import {Typography} from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
-import { makeRandomKey } from '../../utils/utils'
+import {makeRandomKey} from '../../utils/utils'
 import CommentsPane from '../comments/CommentPane'
 import HalakhahPane from '../halakhah/HalakhahPane'
 import {
@@ -14,20 +14,24 @@ import {
     BIBLE_HEBREW,
 } from '../../constants/constants'
 import Player from '../player/Player'
-import { observer } from 'mobx-react-lite'
+import {observer} from 'mobx-react-lite'
 import Header from '../pages/RightPaneHeader'
 import {storeContext} from "../../stores/context";
+import {devLog} from "../messages/devLog";
 
 
 const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 
-
-const RightPane = ({ paneNumber, refClick }) => {
+const RightPane = ({paneNumber, refClick}) => {
     const store = useContext(storeContext)
 
     const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
+
+    devLog(`Panebody paneNumber: ${paneNumber}`)
+    devLog(`Panebody show state: ${store.getRightPaneState(paneNumber)}`)
+
     const verseData = store.getVerseData(paneNumber)
 
     const classes = useStyles()
@@ -56,8 +60,10 @@ const RightPane = ({ paneNumber, refClick }) => {
                     className={classes.button}
                     fullWidth={true}
                     disabled={verseData[references[i]] === '0'}
-                    startIcon={<MenuBookIcon className={classes.icon} />}
-                    onClick={() => { setShowState([...showState, i]) }}
+                    startIcon={<MenuBookIcon className={classes.icon}/>}
+                    onClick={() => {
+                        setShowState([...showState, i])
+                    }}
                     key={makeRandomKey()}
                 >
                     {item} ({verseData[references[i]]})
@@ -90,14 +96,14 @@ const RightPane = ({ paneNumber, refClick }) => {
             default: {
                 return (
                     <>
-                        <Header onClose={onClose} />
+                        <Header onClose={onClose}/>
                         <div className={classes.body}>
                             <Typography className={classes.headerColor}>Related texts</Typography>
-                            <hr className={classes.ruler} />
-                            <Item />
-                            <hr className={classes.ruler} />
-                            <Player text={verseData[BIBLE_ENGLISH]} language={"English"} />
-                            <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"} />
+                            <hr className={classes.ruler}/>
+                            <Item/>
+                            <hr className={classes.ruler}/>
+                            <Player text={verseData[BIBLE_ENGLISH]} language={"English"}/>
+                            <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"}/>
                         </div>
                     </>
                 )
@@ -108,7 +114,7 @@ const RightPane = ({ paneNumber, refClick }) => {
 
     return (
         <div className={classes.container}>
-            <PaneBody />
+            <PaneBody/>
         </div>
     )
 }
