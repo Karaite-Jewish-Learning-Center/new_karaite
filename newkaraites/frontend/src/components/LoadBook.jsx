@@ -164,7 +164,7 @@ const LoadBook = ({type}) => {
     }
 
     useEffect(() => {
-        getBook(book, chapter, verse, [], type)
+        getBook(book, chapter, verse, [], type).then().catch()
     }, [book, chapter, verse, type])
 
     const books = bookRender()

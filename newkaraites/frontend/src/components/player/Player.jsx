@@ -54,7 +54,9 @@ const Player = ({ text, language }) => {
 
 
 const useStyles = makeStyles((theme) => ({
+    root:{
 
+    },
     ruler: {
         borderColor: Colors.rulerColor,
     },

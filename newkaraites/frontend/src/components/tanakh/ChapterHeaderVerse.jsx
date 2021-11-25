@@ -69,13 +69,16 @@ const ChapterHeaderVerse = (props) => {
                 </div>
             </div>)
     }
-    const found = item === gridVisibleRange.startIndex + store.getDistance(paneNumber)
+    const current = gridVisibleRange.startIndex + store.getDistance(paneNumber)
+    const found = item === current
+
+    //devLog(`chapter header item :${current}  distance:${store.getDistance(paneNumber)}`)
 
     useEffect(() => {
-        store.setCommentsChapter(allBookData[item][BIBLE_CHAPTER], paneNumber)
-        store.setCommentsVerse(allBookData[item][BIBLE_VERSE], paneNumber)
-        store.setVerseData(allBookData[item], paneNumber)
-    }, [allBookData,item,paneNumber,store])
+        store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
+        store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
+        store.setVerseData(allBookData[current], paneNumber)
+    }, [allBookData,current,paneNumber,store])
 
     const ChapterBody = () => {
         switch (lang) {
@@ -126,13 +129,12 @@ const ChapterHeaderVerse = (props) => {
                     </>
                 )
             default: {
-                devLog(`Unknown language: ${lang}`)
+              devLog(`Unknown language: ${lang}`)
             }
         }
     }
     return (
         <div className={classes.verse}>
-
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
                  onClick={onClick.bind(this, item)}

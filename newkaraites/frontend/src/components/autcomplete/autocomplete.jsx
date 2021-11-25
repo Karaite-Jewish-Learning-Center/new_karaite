@@ -19,13 +19,12 @@ const AutoComplete = () => {
     const [isOpen, setIsOpen] = useState(true)
     const [search, setSearch] = useState('')
     const [options, setOptions] = useState([])
-    const [isBook, setIsBook] = useState(false)
     let history = useHistory()
 
     const showResults = () => {
         if (search.length === 0) return
 
-        if (isBook) {
+        if (isABibleBook(search)) {
             const {refBook, refChapter, refVerse} = parseEnglishRef(search)
 
             // show chapters menu
@@ -44,27 +43,20 @@ const AutoComplete = () => {
             return
         }
 
-        store.setSearch(search)
+
         if (window.location.pathname === '/search-result/') {
             // hack or page wont reload !!!
+            store.setSearch(search)
             history.push('/empty')
             history.goBack()
         } else {
+            store.setSearch(search)
             history.push('/search-result/')
         }
     }
 
-    const bibleBook = (value) => {
-
-        if (options[0] !== undefined && options[0].c === 'B' && isABibleBook(value)) {
-            setIsBook(() => true)
-        } else {
-            setIsBook(() => false)
-        }
-    }
 
     const onInputChange = (e, newValue) => {
-        bibleBook(newValue)
         setSearch(() => newValue)
         if (newValue === '') setOptions([])
     }
@@ -80,20 +72,17 @@ const AutoComplete = () => {
 
     const onChange = (e, value, reason) => {
         if (reason === 'select-option') {
-            bibleBook(options[value].w)
             setSearch(() => options[value].w)
         }
     }
 
-
     useEffect(() => {
         const getAutoComplete = async () => {
             if (search.length < 2) return []
-            if (isBook) return []
+            if (isABibleBook(search)) return []
 
             const response = await fetch(`${autocompleteUrl}${search}/`)
-            const data = await response.json()
-            return data
+            return await response.json()
         }
 
         getAutoComplete()
@@ -102,7 +91,7 @@ const AutoComplete = () => {
             })
             .catch(e => store.setMessage(e.message))
 
-    }, [search, isBook, store]);
+    }, [search, store]);
 
     return (
         <Autocomplete

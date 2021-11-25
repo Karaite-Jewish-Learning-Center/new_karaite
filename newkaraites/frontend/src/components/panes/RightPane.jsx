@@ -17,8 +17,6 @@ import Player from '../player/Player'
 import {observer} from 'mobx-react-lite'
 import Header from '../pages/RightPaneHeader'
 import {storeContext} from "../../stores/context";
-import {devLog} from "../messages/devLog";
-
 
 const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
@@ -28,11 +26,7 @@ const RightPane = ({paneNumber, refClick}) => {
     const store = useContext(storeContext)
 
     const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
-
-    devLog(`Panebody paneNumber: ${paneNumber}`)
-    devLog(`Panebody show state: ${store.getRightPaneState(paneNumber)}`)
-
-    const verseData = store.getVerseData(paneNumber)
+    const verseData = (store.getVerseData(paneNumber).length === 0 ? ['',''] : store.getVerseData(paneNumber))
 
     const classes = useStyles()
 

@@ -20,8 +20,7 @@ const CommentsPane = ({refClick, paneNumber, backButton, onClose}) => {
     useEffect(() => {
         const getComments = async (book, chapter, verse) => {
             const response = await fetch(getCommentsUrl + `${book}/${chapter}/${verse}/`)
-            const data = await response.json()
-            return data
+            return await response.json()
         }
 
         getComments(store.getBook(paneNumber),
