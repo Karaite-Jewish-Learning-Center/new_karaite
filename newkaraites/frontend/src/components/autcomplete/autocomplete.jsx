@@ -78,6 +78,7 @@ const AutoComplete = () => {
 
     useEffect(() => {
         const getAutoComplete = async () => {
+
             if (search.length < 2) return []
             if (isABibleBook(search)) return []
 

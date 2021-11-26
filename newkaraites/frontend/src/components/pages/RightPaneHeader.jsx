@@ -15,9 +15,8 @@ const Header = ({ backButton, onClose }) => {
             direction="row"
             justifycontent="flex-end"
             alignItems="center"
-            className={classes.header}
+            className={classes.header}>
 
-        >
             <Grid item xs={10}>
                 {(backButton !== undefined ?
                     <IconButton
@@ -29,6 +28,7 @@ const Header = ({ backButton, onClose }) => {
                     </IconButton>
                     : null)}
             </Grid>
+
             <Grid item className={classes.icon}>
                 <IconButton
                     aria-label="Close pane"
@@ -47,7 +47,8 @@ export default Header
 
 
 const useStyles = makeStyles((theme) => ({
-
+    icon:{},
+    iconGrid:{},
     header: {
         minHeight: 50,
         backgroundColor: Colors['headerBackgroundColor'],
