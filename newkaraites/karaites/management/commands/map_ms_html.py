@@ -2,7 +2,7 @@ import re
 import sys
 from bs4 import BeautifulSoup
 from html import escape
-from .html_utils import remove_empty_tags
+
 
 REPLACE_TAGS = {
     """<!-- [if !supportFootnotes]-->""":
@@ -16,80 +16,82 @@ REPLACE_TAGS = {
     # karaite book Yeriot_Shelomo
     """<!--[if !supportFootnotes]-->""":
         """""",
+    # Halakha Adderet
 }
 
 MAP_P_STYLE_TO_CLASSES = {
     'margin-left:.5in;text-align:justify':
         ['MsoNormal', 'paragraph'],
     'margin-left: .5in; text-align: justify;':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-0'],
     'text-align: justify; line-height: normal; margin: 0in 0in 7.9pt .5in;':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-1'],
     'font-size:12.0pt;line-height:107%;font-family:\'Times New Roman\',serif;mso-fareast-font-family:\'Times New Roman\';color:black;mso-themecolor:text1;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE;':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-2'],
     'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-3'],
     'margin-bottom:7.9pt;text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-4'],
     'margin-bottom:7.9pt;text-align:justify;text-indent:.5in;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-5'],
     'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-6'],
     'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify;line-height:normal;tab-stops:405.0pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-7'],
     'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify;line-height:normal;tab-stops:5.0in':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-8'],
     'margin-left:.5in;text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-9'],
     'margin-left:.5in;text-align:justify;text-indent:3.0pt;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-10'],
     'text-align:justify;text-indent:.5in':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-11'],
     'text-align:justify':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-12'],
     'text-align:justify;text-indent:.5in;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-13'],
     'margin-left:35.45pt;text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-14'],
     'margin-top:0in;margin-right:0in;margin-bottom:7.9pt;margin-left:.5in;text-align:justify':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-15'],
     'margin-left:.5in':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-16'],
     'margin-left:.5in;text-align:justify;line-height:normal;tab-stops:.5in':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-17'],
     'margin-left:24.0pt;text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-18'],
     'margin-left:.5in;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-19'],
     'margin-left:.5in;text-align:justify;line-height:normal;tab-stops:3.0in':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-20'],
 
     # Hebrew
     'text-align: justify; line-height: normal; tab-stops: 460.7pt;':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-1'],
     'text-align:justify;line-height:normal;tab-stops:460.7pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-2'],
     'text-align:justify;line-height:normal;tab-stops:326.0pt 460.7pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-3'],
     'text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-4'],
     'margin-left:11.35pt;text-align:justify;line-height:normal;tab-stops:460.7pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-5'],
     'margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:11.35pt;text-align:justify;line-height:normal;tab-stops:460.7pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-6'],
     'margin-bottom:8.0pt;text-align:justify;line-height:107%':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-7'],
     'margin-bottom:0in;text-align:justify;line-height:normal':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-8'],
     'text-align:justify;line-height:normal;tab-stops:165.2pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-9'],
     'text-align:justify;line-height:normal;tab-stops:165.2pt 188.55pt':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-10'],
+
     # karaite book Yeriot_Shelomo
     'text-align:justify;line-height:150%':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-11'],
     'text-align:center;line-height:150%':
-        ['MsoNormal', 'paragraph'],
+        ['MsoNormal', 'paragraph-he-12'],
     'line-height:150%':
         ['MsoNormal', 'page'],
     'margin-top:0in;margin-right:71.7pt;margin-bottom:0in;margin-left:71.7pt;margin-bottom:.0001pt;text-align:justify;line-height:150%':
@@ -106,6 +108,7 @@ MAP_P_STYLE_TO_CLASSES = {
         ['MsoNormal', 'text-a'],
     'margin-bottom:6.0pt;text-align:justify;line-height:150%':
         ['MsoNormal', 'text-b'],
+
     # karaite book Yeriot_Shelomo volume 2
     'text-align:center':
         ['text-center'],
@@ -116,46 +119,49 @@ MAP_P_STYLE_TO_CLASSES = {
     'margin-right:22.0pt;text-align:center;line-height:150%':
         ['sheet'],
 
+    # Halakha Adderet
+    'text-align:right;direction:rtl;unicode-bidi:embed':
+        ['MsoNormal', 'text'],
 }
 
 MAP_SPAN_STYLE_TO_CLASSES = {
     "font-size: 12.0pt; line-height: 107%; font-family: 'Times New Roman',serif; color: red;":
-        ['red'],
+        ['red-1'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:red':
-        ['red'],
+        ['red-2'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: red;':
-        ['red'],
+        ['red-3'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:red':
-        ['red'],
+        ['red-4'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:red':
-        ['red'],
+        ['red-5'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:red':
-        ['red'],
+        ['red-6'],
     "font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red;":
-        ['red'],
+        ['red-7'],
     'color:red':
-        ['red'],
+        ['red-8'],
 
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black':
-        ['black'],
+        ['black-1'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: black;':
-        ['black'],
+        ['black-2'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: black;':
-        ['black'],
+        ['black-3'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black':
-        ['black'],
+        ['black-4'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
-        ['black'],
+        ['black-5'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-themecolor:text1':
-        ['black'],
+        ['black-6'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:black;mso-themecolor:text1':
-        ['black'],
+        ['black-7'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"':
-        ['black'],
+        ['black-8'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1':
-        ['black'],
+        ['black-9'],
     "font-size: 12.0pt; font-family: 'Times New Roman',serif;":
-        ['black'],
+        ['black-10'],
     'color:black':
         ['black'],
 
@@ -173,54 +179,54 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['black-text-bold'],
 
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif;':
-        ['black-text-serif'],
+        ['black-text-serif-1'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif':
-        ['black-text-serif'],
+        ['black-text-serif-2'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\';':
-        ['black-text-serif'],
+        ['black-text-serif-3'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman"':
-        ['black-text-serif'],
+        ['black-text-serif-4'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; color: black; mso-themecolor: text1;':
-        ['black-text-serif'],
+        ['black-text-serif-5'],
     'font-size:12.0pt;font-family:"Times New Roman",serif':
-        ['black-text-serif'],
+        ['black-text-serif-6'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:black;mso-themecolor:text1':
-        ['black-text-theme'],
+        ['black-text-theme-7'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: black; mso-themecolor: text1;':
-        ['black-text-theme'],
+        ['black-text-theme-8'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-fareast-font-family:"Times New Roman";mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:black;mso-themecolor:text1':
-        ['black-text-theme'],
+        ['black-text-theme-9'],
     'color:black;mso-themecolor:text1;':
-        ['black-text-theme'],
+        ['black-text-theme-10'],
     'color:black;mso-themecolor:text1':
-        ['black-text-theme'],
+        ['black-text-theme-11'],
 
     "font-size: 12.0pt; font-family:'Times New Roman',serif; mso-fareast-font-family:'Times New Roman';color:#ffc000;":
-        ['orange'],
+        ['orange-1'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#FFC000':
-        ['orange'],
+        ['orange-2'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#FFC000':
-        ['orange'],
+        ['orange-3'],
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;color:#FFC000':
-        ['orange'],
+        ['orange-4'],
     'font-size:12.0pt;font-family:"Times New Roman",serif;color:#FFC000':
-        ['orange'],
+        ['orange-5'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; color: #ffc000;':
-        ['orange'],
+        ['orange-6'],
     'font-size: 12.0pt; line-height: 107%; font-family:"Times New Roman",serif; color: #ffc000;':
-        ['orange'],
+        ['orange-7'],
     'font-size: 12.0pt; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #ffc000;':
-        ['orange'],
+        ['orange-8'],
     'font-size: 12.0pt; line-height: 107%; font-family: \'Times New Roman\',serif; mso-fareast-font-family: \'Times New Roman\'; color: #ffc000;':
-        ['orange'],
+        ['orange-9'],
     'font-size:12.0pt;line-height:107%;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";color:#FFC000':
-        ['orange'],
+        ['orange-10'],
     'color:#FFC000':
-        ['orange'],
+        ['orange-11'],
     'color:#ffc000':
-        ['orange'],
+        ['orange-12'],
     'color: #ffc000;':
-        ['orange'],
+        ['orange-14'],
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";color:#0070C0':
         ['biblical-ref'],
@@ -245,10 +251,10 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['biblical-ref-italic'],
 
     'mso-special-character:footnote':
-        ['foot-note-char'],
+        ['foot-note-char-1'],
 
     'font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:David;mso-ansi-language:EN-US;mso-fareast-language:HE;mso-bidi-language:HE':
-        ['foot-note-char'],
+        ['foot-note-char-2'],
 
     'font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;mso-fareast-font-family:Calibri;mso-fareast-theme-font:minor-latin;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:HE':
         ['foot-note'],
@@ -341,6 +347,94 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['text'],
     'font-size:18.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
         ['foreword'],
+
+    # Halakha Adderet
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-ansi-font-weight:bold':
+        ['p-first-letter'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew"':
+        ['he-text-1'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:David':
+        ['he-text-1'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:Arial;mso-ansi-language:EN;mso-fareast-language:EN-US;mso-bidi-language:AR-SA':
+        ['foot-note-number'],
+    'mso-special-character: footnote':
+        ['foot-note-special-char'],
+    'font-family:"SBL Hebrew";color:#984806;mso-themecolor:accent6;mso-themeshade:128':
+        ['annotated-toc-start'],
+    'font-size:12.0pt;line-height:115%;font-family:"Cambria Math",serif;mso-bidi-font-family:"Cambria Math"':
+        ['foot-note-number-math'],
+    'font-size:12.0pt;line-height:115%;font-family:"Cambria",serif;mso-bidi-font-family:Cambria':
+        ['he-ō'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-ansi-font-style:italic':
+        ['he-italic'],
+    'mso-ansi-font-weight:bold;mso-ansi-font-style:italic':
+        ['he-italic'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-ansi-font-weight:bold;mso-ansi-font-style:italic':
+        ['he-italic'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:David;mso-ansi-font-style:italic':
+        ['he-italic'],
+    'mso-ansi-font-weight:bold':
+        ['he-bold'],
+    'font-family:"SBL Hebrew"':
+        ['font-family'],
+    'color:#984806;mso-themecolor:accent6;mso-themeshade:128':
+        ['annotated-toc-start-color'],
+    'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:David;mso-ansi-language:EN;mso-fareast-language:EN-US;mso-bidi-language:AR-SA':
+        ['foot-note-en'],
+    'font-family:"SBL Hebrew";color:#4BACC6;mso-themecolor:accent5':
+        ['chapter-accented-blue'],
+    'font-family:"SBL Hebrew"; color:#4BACC6;mso-themecolor:accent5;mso-ansi-font-weight:bold':
+        ['chapter-bold-blue'],
+    'font-family:"SBL Hebrew"; color:#0n0B050':
+        ['chapter-green'],
+    'font-family:"SBL Hebrew"; color:#00B050':
+        ['chapter-green'],
+    'font-family:"SBL Hebrew";color:#00B050':
+        ['chapter-green'],
+    'font-family:"SBL Hebrew"; color:red':
+        ['chapter-red'],
+    'font-family:"SBL Hebrew";color:red':
+        ['chapter-red'],
+    'font-size:20.0pt;font-family:"David",sans-serif; mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"; font-style:normal':
+        ['chapter-1'],
+    'font-size:20.0pt;font-family: "David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family: "Times New Roman";font-style:normal':
+        ['chapter-1'],
+    'font-size:20.0pt; line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:Arial; color:#00B050;mso-ansi-language:EN;mso-fareast-language:EN-US;mso-bidi-language: AR-SA':
+        ['chapter-green'],
+    'font-family:"SBL Hebrew"; color:#7030A0':
+        ['chapter-purple'],
+    'font-family:"David",sans-serif;mso-ascii-font-family: "Times New Roman";mso-hansi-font-family:"Times New Roman";font-style:normal':
+        ['chapter-1'],
+    'font-family:"David",sans-serif;mso-ascii-font-family: "Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['chapter-2'],
+    'font-size:20.0pt;line-height:115%;font-family:"SBL Hebrew"; mso-fareast-font-family:Arial;color:red;mso-ansi-language:EN;mso-fareast-language: EN-US;mso-bidi-language:AR-SA':
+        ['chapter-red-1'],
+    'font-family:"David",sans-serif;font-style: normal':
+        ['chapter-normal-1'],
+    'font-family:"David",sans-serif; mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"; font-style:normal':
+        ['chapter-normal-2'],
+    'font-size:20.0pt;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";font-style:normal':
+        ['chapter-normal-3'],
+    'font-family:"SBL Hebrew";color:#4BACC6;mso-themecolor:accent5;mso-ansi-font-weight:bold':
+        ['sp-1'],
+    'font-size:20.0pt;line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:Arial;color:#00B050;mso-ansi-language:EN;mso-fareast-language:EN-US;mso-bidi-language:AR-SA':
+        ['sp-3'],
+    'font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";font-style:normal':
+        ['sp-4'],
+    'font-size:20.0pt;line-height:115%;font-family:"SBL Hebrew";mso-fareast-font-family:Arial;color:red;mso-ansi-language:EN;mso-fareast-language:EN-US;mso-bidi-language:AR-SA':
+        ['sp-5'],
+    'font-family:"David",sans-serif;font-style:normal':
+        ['sp-6'],
+    'font-family:"SBL Hebrew";color:#7030A0':
+        ['sp-6'],
+}
+
+# chapter's ?
+MAP_H1_TO_STYLES_TO_CLASSES = {
+    # Halakha Adderet
+    'text-align:right;direction:rtl;unicode-bidi:embed':
+        ['chapter'],
+
 }
 
 
@@ -357,6 +451,62 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
 
         return html_str
 
+    def find_span(child_of):
+        """ Map span  inline style to class """
+        for span_child in child_of.find_all('span'):
+            style = span_child.attrs.get('style', '').replace('\r', '').replace('\n', '')
+            classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
+            if classes is not None:
+                span_child.attrs.pop('style')
+                span_child.attrs['class'] = [f'{language}-{classes[0]}']
+                # if classes[0] == 'biblical-ref' and language == 'he':
+                #     print(child)
+                #     print('-' * 80)
+                #     input('>>')
+            else:
+                if style is not None and style != '':
+                    print("-" * 60)
+                    print(child_of)
+                    print("<span>", "-" * 60)
+                    print(style)
+                    print("-" * 60)
+                    sys.exit()
+
+    def map_tag_class_to_style(tag, css_class=None, map_to={}):
+        """ Map inline tag style to class"""
+
+        if css_class is None:
+            tree = html_tree.find_all(tag)
+        else:
+            tree = html_tree.find_all(tag, class_=css_class)
+
+        for child_of in tree:
+            style = child_of.attrs.get('style', '').replace('\n', '').replace('\r', '')
+            classes = map_to.get(style, None)
+            if classes is not None:
+                child_of.attrs.pop('style')
+                # if classes[1] == 'biblical-ref':
+                #     print(child)
+                #     print('*' * 80)
+                #     input('>>')
+
+                if css_class is None:
+                    child_of.attrs['class'] = [f'{language}-{classes[0]}']
+                else:
+                    if child_of.attrs['class'] == [classes[0]]:
+                        child_of.attrs['class'] = [f'{language}-{classes[1]}']
+
+            else:
+                if style is not None and style != '':
+                    print("-" * 60)
+                    print(child_of)
+                    print("<p>", "-" * 60)
+                    print(style)
+                    print("-" * 60)
+                    sys.exit()
+
+            find_span(child_of)
+
     html_tree = BeautifulSoup(html, 'html5lib')
 
     # replace complicate <a></a>
@@ -371,7 +521,6 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                         note_ref = re.match('[0-9]*.', foot_notes_list[foot_note])
 
                     if note_ref is not None:
-
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note"
@@ -390,47 +539,11 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
         if len(child.get_text(strip=True)) == 0:
             child.extract()
 
-    # style to classes
-    for child in html_tree.find_all('p', class_="MsoNormal"):
-        style = child.attrs.get('style', '').replace('\n', '').replace('\r', '')
-        classes = MAP_P_STYLE_TO_CLASSES.get(style, None)
-        if classes is not None:
-            child.attrs.pop('style')
-            # if classes[1] == 'biblical-ref':
-            #     print(child)
-            #     print('*' * 80)
-            #     input('>>')
+    # p tag inline style to classes
+    map_tag_class_to_style('p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
 
-            if child.attrs['class'] == [classes[0]]:
-                child.attrs['class'] = [f'{language}-{classes[1]}']
-
-        else:
-            if style is not None and style != '':
-                print("-" * 60)
-                print(child)
-                print("<p>", "-" * 60)
-                print(style)
-                print("-" * 60)
-                sys.exit()
-
-        for span_child in child.find_all('span'):
-            style = span_child.attrs.get('style', '').replace('\r', '').replace('\n', '')
-            classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
-            if classes is not None:
-                span_child.attrs.pop('style')
-                span_child.attrs['class'] = [f'{language}-{classes[0]}']
-                # if classes[0] == 'biblical-ref' and language == 'he':
-                #     print(child)
-                #     print('-' * 80)
-                #     input('>>')
-            else:
-                if style is not None and style != '':
-                    print("-" * 60)
-                    print(child)
-                    print("<span>", "-" * 60)
-                    print(style)
-                    print("-" * 60)
-                    sys.exit()
+    # h1
+    map_tag_class_to_style('h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
 
     new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
     for k in REPLACE_TAGS.keys():

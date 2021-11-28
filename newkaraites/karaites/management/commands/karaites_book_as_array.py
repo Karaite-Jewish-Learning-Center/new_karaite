@@ -58,7 +58,8 @@ class Command(BaseCommand):
             return True
         return False
 
-    def parse_toc(self, html_tree, volume):
+    @staticmethod
+    def parse_toc(html_tree, volume):
         # parse table of contents
         if volume == 1:
             # 4 found experimenting volume 1
@@ -81,7 +82,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        toc = []
         for volume in [1, 2]:
             paragraph_number = 1
 
@@ -142,7 +142,7 @@ class Command(BaseCommand):
                                 start_paragraph=paragraph_number - 1
                             )
                             ref_chapter = toc[0]
-                            # update previous record thats the header for chapter
+                            # update previous record that's the header for chapter
                             header = KaraitesBookAsArray.objects.get(book=book_details,
                                                                      paragraph_number=paragraph_number - 1)
                             header.ref_chapter = ref_chapter

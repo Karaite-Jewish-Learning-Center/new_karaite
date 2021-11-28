@@ -11,22 +11,8 @@ import {makeStyles} from "@material-ui/core/styles";
 const HalakhahMenu = ({book}) => {
     const store = useContext(storeContext)
     const [toc, setToc] = useState([])
-
     const classes = useStyles()
-    // todo find a better solution
     store.setIsLastPane(false)
-
-    const getTOC = async (book) => {
-
-        const response = await fetch(`${karaitesBookToc}${book}/`)
-        if (response.ok) {
-            const data = await response.json()
-            setToc(data)
-        } else {
-            alert("HTTP-Error: " + response.status)
-        }
-
-    }
 
     const TableOfContents = () => {
         return toc.map(index =>
@@ -46,8 +32,16 @@ const HalakhahMenu = ({book}) => {
         )
     }
     useEffect(() => {
+        const getTOC = async (book) => {
+            const response = await fetch(`${karaitesBookToc}${book}/`)
+            return await response.json()
+        }
+
         getTOC(book)
-    }, [book])
+            .then((data) => setToc((data)))
+            .catch((e) => store.setMessage(e.message))
+
+    }, [book, store])
 
     return (
         <div className={classes.container}>
@@ -59,7 +53,8 @@ const HalakhahMenu = ({book}) => {
                     </th>
                 </tr>
                 <tr>
-                    <th className={classes.backlink}><Link className={classes.link} to='/Halakhah/'>To book list</Link>
+                    <th className={classes.backlink}>
+                        <Link className={classes.link} to='/Halakhah/'>To book list</Link>
                     </th>
                 </tr>
                 <tr>

@@ -10,7 +10,7 @@ import {addTagToString} from "../../utils/addTagToString"
 import {Typography} from "@material-ui/core"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
-import {Please} from "./Please"
+import {Please} from "../messages/Please"
 
 const SearchResults = () => {
     const store = useContext(storeContext)

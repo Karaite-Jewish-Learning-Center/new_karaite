@@ -5,6 +5,7 @@ import RenderMenu from '../menu/RenderMenu'
 const halakhah = {
     'Yeriot Shelomo Volume 1': 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אד',
     'Yeriot Shelomo Volume 2': 'לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד א',
+    'Halakha Adderet': 'שכל דת ליום התוכן. של עמוד דרכה היא, אנא אם החול יידיש ב',
 }
 
 const books = {'Halakhah': halakhah}
