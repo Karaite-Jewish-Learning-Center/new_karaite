@@ -51,6 +51,7 @@ class Command(BaseCommand):
         children = divs[0].find_all(recursive=False)
         paragraph_number = 1
         ref_chapter = ''
+
         for child in children:
             text = child.get_text()
 
@@ -58,25 +59,25 @@ class Command(BaseCommand):
                 continue
 
             # if not child.find_all('table'):
-            #
-            #     text = text[0:30].replace('\n', ' ')
-            #
-            #     for toc in table_of_contents:
-            #
-            #         if text.startswith(toc[0]):
-            #             TableOfContents.objects.get_or_create(
-            #                 karaite_book=book_details,
-            #                 subject=toc,
-            #                 start_paragraph=paragraph_number - 1
-            #             )
-            #             ref_chapter = toc[0]
-            #             # update previous record that's the header for chapter
-            #             header = KaraitesBookAsArray.objects.get(book=book_details,
-            #                                                      paragraph_number=paragraph_number - 1)
-            #             header.ref_chapter = ref_chapter
-            #             header.book_text = [header.book_text[0], 1]
-            #             header.save()
-            #             break
+
+                # text = text[0:30].replace('\n', ' ')
+
+                # for toc in table_of_contents:
+                #
+                #     if text.startswith(toc[0]):
+                #         TableOfContents.objects.get_or_create(
+                #             karaite_book=book_details,
+                #             subject=toc,
+                #             start_paragraph=paragraph_number - 1
+                #         )
+                #         ref_chapter = toc[0]
+                #         # update previous record that's the header for chapter
+                #         header = KaraitesBookAsArray.objects.get(book=book_details,
+                #                                                  paragraph_number=paragraph_number - 1)
+                #         header.ref_chapter = ref_chapter
+                #         header.book_text = [header.book_text[0], 1]
+                #         header.save()
+                #         break
 
             KaraitesBookAsArray.objects.get_or_create(
                 book=book_details,
@@ -93,7 +94,8 @@ class Command(BaseCommand):
                 ref_text = BeautifulSoup(ref).get_text().replace('\n', '').replace('\r', '')
                 if ignore_ref(ref_text):
                     continue
-
+                print("bible ref")
+                print(ref)
                 print(ref_text)
                 english_ref = parse_reference(ref_text)
 
@@ -110,19 +112,22 @@ class Command(BaseCommand):
         for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
             notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
             unique = {}
-            for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
-                fn_id = fn.text.replace('[', '').replace(']', '')
-                if fn_id in unique:
-                    continue
-                unique[fn_id] = True
+            for fn in notes_tree.find_all("a"):
+                if fn is not None and fn.attrs.get('style', None) is not None:
+                    style = fn.attrs.get('style')
+                    if style.startswith('mso-footnote-id:'):
+                        fn_id = style.split(':')[1].replace('ftn','').strip()
+                        if fn_id in unique:
+                            continue
+                        unique[fn_id] = True
 
-                notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-                if hasattr(notes, 'text'):
-                    note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-                    if note.startswith(' '):
-                        note = note[1:]
-                    paragraph.foot_notes += [note]
-                    paragraph.save()
+                        notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
+                        if hasattr(notes, 'text'):
+                            note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
+                            if note.startswith(' '):
+                                note = note[1:]
+                            paragraph.foot_notes += [note]
+                            paragraph.save()
 
     print()
     sys.stdout.write('Please run ./manage.py...')

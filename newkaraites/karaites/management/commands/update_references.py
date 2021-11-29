@@ -1,11 +1,8 @@
 import sys
-import re
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
                        BookAsArray,
                        References)
-
-from ...utils import clear_terminal_line
 
 
 class Command(BaseCommand):
@@ -13,13 +10,12 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ update references in bible books
-            increses a bit the size of data transfers, but
+            increases a bit the size of data transfers, but
             avoids lot of request to update total of comment, ref etc
         """
         # make all books array dimension  8
         i = 1
         for chapter in BookAsArray.objects.all():
-            new_text = []
             for line in chapter.book_text:
                 if len(line) == 7:
                     line.append('0')

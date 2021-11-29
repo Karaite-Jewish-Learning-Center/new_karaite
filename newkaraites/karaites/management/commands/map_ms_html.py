@@ -3,7 +3,6 @@ import sys
 from bs4 import BeautifulSoup
 from html import escape
 
-
 REPLACE_TAGS = {
     """<!-- [if !supportFootnotes]-->""":
         """""",
@@ -122,6 +121,7 @@ MAP_P_STYLE_TO_CLASSES = {
     # Halakha Adderet
     'text-align:right;direction:rtl;unicode-bidi:embed':
         ['MsoNormal', 'text'],
+
 }
 
 MAP_SPAN_STYLE_TO_CLASSES = {
@@ -427,6 +427,9 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['sp-6'],
     'font-family:"SBL Hebrew";color:#7030A0':
         ['sp-6'],
+    'font-family:"SBL Hebrew";color:gray;mso-themecolor:background1;mso-themeshade:128':
+        ['sp-7'],
+
 }
 
 # chapter's ?
@@ -451,6 +454,14 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
 
         return html_str
 
+    def remove_a_tag(html_str):
+        tree = BeautifulSoup(html_str, 'html5lib')
+        for a in tree.find_all('a'):
+            if a is not None:
+                a.decompose()
+
+        return str(tree)
+
     def find_span(child_of):
         """ Map span  inline style to class """
         for span_child in child_of.find_all('span'):
@@ -458,7 +469,8 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
             classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
             if classes is not None:
                 span_child.attrs.pop('style')
-                span_child.attrs['class'] = [f'{language}-{classes[0]}']
+                # span_child.attrs['class'] = [f'{language}-{classes[0]}']
+                span_child.attrs['class'] = [f'{classes[0]}']
                 # if classes[0] == 'biblical-ref' and language == 'he':
                 #     print(child)
                 #     print('-' * 80)
@@ -491,10 +503,10 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                 #     input('>>')
 
                 if css_class is None:
-                    child_of.attrs['class'] = [f'{language}-{classes[0]}']
+                    child_of.attrs['class'] = [f'{classes[0]}']
                 else:
                     if child_of.attrs['class'] == [classes[0]]:
-                        child_of.attrs['class'] = [f'{language}-{classes[1]}']
+                        child_of.attrs['class'] = [f'{classes[1]}']
 
             else:
                 if style is not None and style != '':
@@ -529,9 +541,12 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                             <sup class="{language}-foot-index">{ref}</sup></span>""",
                             'html5lib'))
                         foot_note += 1
+                    print(foot_notes_list)
                 except IndexError:
+                    print()
+                    print('Error')
+                    print(foot_notes_list)
                     print(foot_note, len(foot_notes_list), foot_notes_list)
-                    sys.exit()
 
     # first remove all empty tags
     #  html_tree = remove_empty_tags(html_tree)
@@ -541,11 +556,14 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
 
     # p tag inline style to classes
     map_tag_class_to_style('p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
-
+    # span inline style to classes
+    map_tag_class_to_style('span', None, MAP_SPAN_STYLE_TO_CLASSES)
     # h1
     map_tag_class_to_style('h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
 
     new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
+    new_html = remove_a_tag(new_html)
+
     for k in REPLACE_TAGS.keys():
         new_html = new_html.replace(k, REPLACE_TAGS[k])
 

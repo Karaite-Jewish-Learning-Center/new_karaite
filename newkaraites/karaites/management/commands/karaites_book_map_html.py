@@ -5,7 +5,7 @@ from .map_ms_html import map_docx_to_karaites_html
 
 
 class Command(BaseCommand):
-    help = 'Translate complicate markup from docx to karaites html'
+    help = 'Translate inline style markup from docx to karaites classes style'
 
     def handle(self, *args, **options):
         """ Comments"""

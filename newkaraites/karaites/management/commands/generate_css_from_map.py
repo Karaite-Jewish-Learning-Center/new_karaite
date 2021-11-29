@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Create a css file from maps in map_ms_html'
 
     def handle(self, *args, **options):
-        handle = open('../newkaraites/frontend/src/components/css/karaite.css', 'w')
+        handle = open('../newkaraites/frontend/src/css/karaite.css', 'w')
         handle.write('/* this file is generated with command generate_css_from_map.py\n')
         handle.write('Not supposed to be manually edited.\n')
         handle.write('To refresh just run the generate_css_from_map at command prompt\n')

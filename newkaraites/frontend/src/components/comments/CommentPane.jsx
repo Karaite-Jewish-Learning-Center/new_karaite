@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import {observer} from 'mobx-react-lite'
-import '../css/comments.css'
+import '../../css/comments.css'
 import Header from "../pages/RightPaneHeader"
 import {storeContext} from "../../stores/context";
 import {makeRandomKey} from "../../utils/utils";
