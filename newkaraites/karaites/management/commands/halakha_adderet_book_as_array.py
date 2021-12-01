@@ -37,7 +37,9 @@ class Command(BaseCommand):
             book_title=book_title
         )
 
-        html = get_html(f'../newkaraites/data_karaites/Halakha_Adderet Eliyahu_R Elijah Bashyatchi.html')
+        html = get_html(f'../newkaraites/data_karaites/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/'
+                        f'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html')
+
         regular_expression = r'\([^()]*\)'
 
         html = mark_bible_refs(html)
@@ -54,7 +56,8 @@ class Command(BaseCommand):
 
         for child in children:
             text = child.get_text()
-
+            print(text)
+            input('>>')
             if text == '\xa0':
                 continue
 

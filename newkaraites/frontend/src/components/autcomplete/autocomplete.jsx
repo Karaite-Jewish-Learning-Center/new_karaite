@@ -43,14 +43,12 @@ const AutoComplete = () => {
             return
         }
 
-
+        store.setSearch(search)
         if (window.location.pathname === '/search-result/') {
             // hack or page wont reload !!!
-            store.setSearch(search)
             history.push('/empty')
             history.goBack()
         } else {
-            store.setSearch(search)
             history.push('/search-result/')
         }
     }
