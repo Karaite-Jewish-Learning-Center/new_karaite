@@ -36,7 +36,6 @@ class Command(BaseCommand):
             author=author,
             book_title=book_title
         )
-
         html = get_html(f'../newkaraites/data_karaites/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/'
                         f'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html')
 
@@ -56,31 +55,30 @@ class Command(BaseCommand):
 
         for child in children:
             text = child.get_text()
-            print(text)
-            input('>>')
+
             if text == '\xa0':
                 continue
 
             # if not child.find_all('table'):
 
-                # text = text[0:30].replace('\n', ' ')
+            # text = text[0:30].replace('\n', ' ')
 
-                # for toc in table_of_contents:
-                #
-                #     if text.startswith(toc[0]):
-                #         TableOfContents.objects.get_or_create(
-                #             karaite_book=book_details,
-                #             subject=toc,
-                #             start_paragraph=paragraph_number - 1
-                #         )
-                #         ref_chapter = toc[0]
-                #         # update previous record that's the header for chapter
-                #         header = KaraitesBookAsArray.objects.get(book=book_details,
-                #                                                  paragraph_number=paragraph_number - 1)
-                #         header.ref_chapter = ref_chapter
-                #         header.book_text = [header.book_text[0], 1]
-                #         header.save()
-                #         break
+            # for toc in table_of_contents:
+            #
+            #     if text.startswith(toc[0]):
+            #         TableOfContents.objects.get_or_create(
+            #             karaite_book=book_details,
+            #             subject=toc,
+            #             start_paragraph=paragraph_number - 1
+            #         )
+            #         ref_chapter = toc[0]
+            #         # update previous record that's the header for chapter
+            #         header = KaraitesBookAsArray.objects.get(book=book_details,
+            #                                                  paragraph_number=paragraph_number - 1)
+            #         header.ref_chapter = ref_chapter
+            #         header.book_text = [header.book_text[0], 1]
+            #         header.save()
+            #         break
 
             KaraitesBookAsArray.objects.get_or_create(
                 book=book_details,
@@ -119,7 +117,7 @@ class Command(BaseCommand):
                 if fn is not None and fn.attrs.get('style', None) is not None:
                     style = fn.attrs.get('style')
                     if style.startswith('mso-footnote-id:'):
-                        fn_id = style.split(':')[1].replace('ftn','').strip()
+                        fn_id = style.split(':')[1].replace('ftn', '').strip()
                         if fn_id in unique:
                             continue
                         unique[fn_id] = True
@@ -132,6 +130,4 @@ class Command(BaseCommand):
                             paragraph.foot_notes += [note]
                             paragraph.save()
 
-    print()
-    sys.stdout.write('Please run ./manage.py...')
     print()

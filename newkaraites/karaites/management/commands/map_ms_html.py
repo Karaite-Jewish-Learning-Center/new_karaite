@@ -4,19 +4,17 @@ from bs4 import BeautifulSoup
 from html import escape
 
 REPLACE_TAGS = {
-    """<!-- [if !supportFootnotes]-->""":
-        """""",
-    """<!--[endif]-->""":
-        """""",
     """<o:p>""":
         """<p>""",
     """</o:p>""":
         """</p>""",
-    # karaite book Yeriot_Shelomo
-    """<!--[if !supportFootnotes]-->""":
-        """""",
-    # Halakha Adderet
 }
+
+REPLACE_FROM_TO = [
+    ["""<!-- [if !supportFootnotes]-->""", """<!--[endif]-->"""],
+    # Halakha Adderet
+    ["""<!--[if gte vml 1]>""", """<![if !vml]>"""],
+]
 
 MAP_P_STYLE_TO_CLASSES = {
     'margin-left:.5in;text-align:justify':
@@ -454,7 +452,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
 
         return html_str
 
-    def remove_a_tag(html_str):
+    def remove_a_empty_tag(html_str):
         tree = BeautifulSoup(html_str, 'html5lib')
         for a in tree.find_all('a'):
             if a is not None:
@@ -519,6 +517,18 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
 
             find_span(child_of)
 
+    for k in REPLACE_TAGS.keys():
+        html = html.replace(k, REPLACE_TAGS[k])
+
+    for open_tag, close_tag in REPLACE_FROM_TO:
+        start = html.find(open_tag)
+        if start >= 0:
+            end = html[start:].find(close_tag)
+            if end >= 0:
+                html = html[0:start] + html[end:]
+                print(html[start:end])
+                input('>>')
+
     html_tree = BeautifulSoup(html, 'html5lib')
 
     # replace complicate <a></a>
@@ -548,11 +558,20 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                     print(foot_notes_list)
                     print(foot_note, len(foot_notes_list), foot_notes_list)
 
-    # first remove all empty tags
-    #  html_tree = remove_empty_tags(html_tree)
     for child in html_tree.find_all():
-        if len(child.get_text(strip=True)) == 0:
-            child.extract()
+        text = child.get_text(strip=True)
+        if len(text) == 0:
+            child.dispose()
+            continue
+        if text.replace(' ', '').upper() in ['#TOC', '#ENDTOC']:
+            child.dispose()
+
+    # this is specific to Halakha Adderet
+    for child in html_tree.find_all('img'):
+        path = child.attrs.get('src', None)
+        if path is not None:
+            child.attrs['src'] = path.replace('Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
+                                              'static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi')
 
     # p tag inline style to classes
     map_tag_class_to_style('p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
@@ -562,7 +581,7 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
     map_tag_class_to_style('h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
 
     new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
-    new_html = remove_a_tag(new_html)
+    new_html = remove_a_empty_tag(new_html)
 
     for k in REPLACE_TAGS.keys():
         new_html = new_html.replace(k, REPLACE_TAGS[k])
