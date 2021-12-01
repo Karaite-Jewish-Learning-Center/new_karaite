@@ -99,7 +99,9 @@ class Command(BaseCommand):
                 book_title=book_title
             )
 
-            source = f'../newkaraites/data_karaites/Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html'
+            source = (f'../newkaraites/data_karaites/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/'
+                      f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
+
             handle = open(source, 'r')
             html = f"""{handle.read()}"""
             handle.close()

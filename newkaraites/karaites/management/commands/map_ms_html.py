@@ -439,98 +439,86 @@ MAP_H1_TO_STYLES_TO_CLASSES = {
 }
 
 
-def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False):
-    """
-        Map docx generated html to a lighter and css class oriented html
-    """
+# BS4 adds html, head and body to html tree if missing
+def remove_tag_simple(html_str):
+    remove_tags = ['<html>', '</html>', '<head>', '</head>', '<body>', '</body>']
+    for tag in remove_tags:
+        html_str = html_str.replace(tag, '')
 
-    # BS4 adds html, head and body to html tree if missing
-    def remove_tag_simple(html_str):
-        remove_tags = ['<html>', '</html>', '<head>', '</head>', '<body>', '</body>']
-        for tag in remove_tags:
-            html_str = html_str.replace(tag, '')
+    return html_str
 
-        return html_str
 
-    def remove_a_empty_tag(html_str):
-        tree = BeautifulSoup(html_str, 'html5lib')
-        for a in tree.find_all('a'):
-            if a is not None:
-                a.decompose()
+def remove_a_empty_tag(html_str):
+    tree = BeautifulSoup(html_str, 'html5lib')
+    for a in tree.find_all('a'):
+        if a is not None:
+            a.decompose()
 
-        return str(tree)
+    return str(tree)
 
-    def find_span(child_of):
-        """ Map span  inline style to class """
-        for span_child in child_of.find_all('span'):
-            style = span_child.attrs.get('style', '').replace('\r', '').replace('\n', '')
-            classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
-            if classes is not None:
-                span_child.attrs.pop('style')
-                # span_child.attrs['class'] = [f'{language}-{classes[0]}']
-                span_child.attrs['class'] = [f'{classes[0]}']
-                # if classes[0] == 'biblical-ref' and language == 'he':
-                #     print(child)
-                #     print('-' * 80)
-                #     input('>>')
-            else:
-                if style is not None and style != '':
-                    print("-" * 60)
-                    print(child_of)
-                    print("<span>", "-" * 60)
-                    print(style)
-                    print("-" * 60)
-                    sys.exit()
 
-    def map_tag_class_to_style(tag, css_class=None, map_to={}):
-        """ Map inline tag style to class"""
-
-        if css_class is None:
-            tree = html_tree.find_all(tag)
+def find_span(child_of):
+    """ Map span  inline style to class """
+    for span_child in child_of.find_all('span'):
+        style = span_child.attrs.get('style', '').replace('\r', '').replace('\n', '')
+        classes = MAP_SPAN_STYLE_TO_CLASSES.get(style, None)
+        if classes is not None:
+            span_child.attrs.pop('style')
+            # span_child.attrs['class'] = [f'{language}-{classes[0]}']
+            span_child.attrs['class'] = [f'{classes[0]}']
+            # if classes[0] == 'biblical-ref' and language == 'he':
+            #     print(child)
+            #     print('-' * 80)
+            #     input('>>')
         else:
-            tree = html_tree.find_all(tag, class_=css_class)
+            if style is not None and style != '':
+                print("-" * 60)
+                print(child_of)
+                print("<span>", "-" * 60)
+                print(style)
+                print("-" * 60)
+                sys.exit()
 
-        for child_of in tree:
-            style = child_of.attrs.get('style', '').replace('\n', '').replace('\r', '')
-            classes = map_to.get(style, None)
-            if classes is not None:
-                child_of.attrs.pop('style')
-                # if classes[1] == 'biblical-ref':
-                #     print(child)
-                #     print('*' * 80)
-                #     input('>>')
 
-                if css_class is None:
-                    child_of.attrs['class'] = [f'{classes[0]}']
-                else:
-                    if child_of.attrs['class'] == [classes[0]]:
-                        child_of.attrs['class'] = [f'{classes[1]}']
+def map_tag_class_to_style(html_tree, tag, css_class=None, map_to={}):
+    """ Map inline tag style to class"""
 
+    if css_class is None:
+        tree = html_tree.find_all(tag)
+    else:
+        tree = html_tree.find_all(tag, class_=css_class)
+
+    for child_of in tree:
+        style = child_of.attrs.get('style', '').replace('\n', '').replace('\r', '')
+        classes = map_to.get(style, None)
+        if classes is not None:
+            child_of.attrs.pop('style')
+            # if classes[1] == 'biblical-ref':
+            #     print(child)
+            #     print('*' * 80)
+            #     input('>>')
+
+            if css_class is None:
+                child_of.attrs['class'] = [f'{classes[0]}']
             else:
-                if style is not None and style != '':
-                    print("-" * 60)
-                    print(child_of)
-                    print("<p>", "-" * 60)
-                    print(style)
-                    print("-" * 60)
-                    sys.exit()
+                if child_of.attrs['class'] == [classes[0]]:
+                    child_of.attrs['class'] = [f'{classes[1]}']
 
-            find_span(child_of)
+        else:
+            if style is not None and style != '':
+                print("-" * 60)
+                print(child_of)
+                print("<p>", "-" * 60)
+                print(style)
+                print("-" * 60)
+                sys.exit()
 
-    for k in REPLACE_TAGS.keys():
-        html = html.replace(k, REPLACE_TAGS[k])
+        find_span(child_of)
 
-    for open_tag, close_tag in REPLACE_FROM_TO:
-        start = html.find(open_tag)
-        if start >= 0:
-            end = html[start:].find(close_tag)
-            if end >= 0:
-                html = html[0:start] + html[end:]
-                print(html[start:end])
-                input('>>')
+    return html_tree
 
-    html_tree = BeautifulSoup(html, 'html5lib')
 
+def replace_a_foot_notes(html_tree, foot_notes_list, language):
     # replace complicate <a></a>
     if len(foot_notes_list) > 0:
         foot_note = 0
@@ -558,38 +546,77 @@ def map_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False)
                     print(foot_notes_list)
                     print(foot_note, len(foot_notes_list), foot_notes_list)
 
+    return html_tree
+
+
+def remove_toc_tag(html_tree):
     for child in html_tree.find_all():
         text = child.get_text(strip=True)
         if len(text) == 0:
-            child.dispose()
+            child.decompose()
             continue
         if text.replace(' ', '').upper() in ['#TOC', '#ENDTOC']:
-            child.dispose()
+            child.decompose()
+    return html_tree
 
+
+def fix_image_source(html_tree, old_path, new_path):
     # this is specific to Halakha Adderet
+    # fix this:
+    old_path = 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld'
+    new_path = 'static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
+
     for child in html_tree.find_all('img'):
         path = child.attrs.get('src', None)
         if path is not None:
-            child.attrs['src'] = path.replace('Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
-                                              'static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi')
+            child.attrs['src'] = path.replace(old_path, new_path)
 
-    # p tag inline style to classes
-    map_tag_class_to_style('p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
-    # span inline style to classes
-    map_tag_class_to_style('span', None, MAP_SPAN_STYLE_TO_CLASSES)
-    # h1
-    map_tag_class_to_style('h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
+    return html_tree
 
-    new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
-    new_html = remove_a_empty_tag(new_html)
 
+def replace_tags(html):
     for k in REPLACE_TAGS.keys():
-        new_html = new_html.replace(k, REPLACE_TAGS[k])
+        html = html.replace(k, REPLACE_TAGS[k])
+    return html
 
+
+def replace_from_open_to_close(html):
+    for open_tag, close_tag in REPLACE_FROM_TO:
+        start = html.find(open_tag)
+        if start >= 0:
+            end = html[start:].find(close_tag)
+            if end >= 0:
+                html = html[0:start] + html[end:]
+                print(html[start:end])
+                input('>>')
+
+    return html
+
+
+def map_yeriot_shelomo_docx_to_karaites_html(html, foot_notes_list, language="en", stats=False):
+    """
+        Map  docx generated html to a lighter and css class oriented html
+    """
+
+    html_tree = BeautifulSoup(html, 'html5lib')
+
+    html_tree = replace_a_foot_notes(html_tree, foot_notes_list, language)
+    html_tree = replace_tags(str(html_tree))
+
+    # # p tag inline style to classes
+    # map_tag_class_to_style('p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
+    # # span inline style to classes
+    # map_tag_class_to_style('span', None, MAP_SPAN_STYLE_TO_CLASSES)
+    # # h1
+    # map_tag_class_to_style('h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
+    #
+    # new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
+    # new_html = remove_a_empty_tag(new_html)
+
+    new_html = str(html_tree)
     if stats:
         print(html)
         print("-" * 90)
-        print(new_html)
         print(f"html as string len:{len(html)}, new_html len:{len(new_html)}")
         input('> enter to carry on.')
     return new_html

@@ -1,7 +1,7 @@
 import sys
 from django.core.management.base import BaseCommand
 from ...models import KaraitesBookAsArray
-from .map_ms_html import map_docx_to_karaites_html
+from .map_ms_html import map_yeriot_shelomo_docx_to_karaites_html
 
 
 class Command(BaseCommand):
@@ -13,10 +13,10 @@ class Command(BaseCommand):
             sys.stdout.write(
                 f"\33[K Rewriting Karaites book chapter: {i}\r")
 
-            paragraph.book_text = [map_docx_to_karaites_html(paragraph.book_text[0],
-                                                             foot_notes_list=paragraph.foot_notes,
-                                                             language="he",
-                                                             stats=False),
+            paragraph.book_text = [map_yeriot_shelomo_docx_to_karaites_html(paragraph.book_text[0],
+                                                                            foot_notes_list=paragraph.foot_notes,
+                                                                            language="he",
+                                                                            stats=False),
                                    paragraph.book_text[1]]
 
             paragraph.save()

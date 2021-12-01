@@ -26,6 +26,12 @@ class Command(BaseCommand):
             default=False,
             help='output to file default is book.html',
         )
+        parser.add_argument(
+            '--lines',
+            dest='lines',
+            default=False,
+            help="output n lines in case you don't need the hole book. Can save lot's of time.",
+        )
 
     def handle(self, *args, **options):
         if options['list_books']:
@@ -41,6 +47,9 @@ class Command(BaseCommand):
 
         if options['out']:
             out_file = options['out']
+            out_file = out_file.replace('.htm', '.html')
+            if not out_file.endswith('.html'):
+                out_file += '.html'
         else:
             out_file = 'book.html'
 
@@ -55,12 +64,17 @@ class Command(BaseCommand):
             sys.exit(2)
 
         handle = open('../newkaraites/karaites/management/book_dumps/' + out_file, "w")
+        handle.write('<html><head><head/><body>')
         i = 1
         for paragraph in KaraitesBookAsArray.objects.filter(book=options['book_id']):
             sys.stdout.write(
                 f"\33[K Rewriting {book.book_title} as html: {i}\r")
             handle.write(paragraph.book_text[0])
             i += 1
+            if options['lines'] == i:
+                break
 
+        handle.write('<body/><html/>')
         handle.close()
+
         sys.stdout.write("\33[K\r")
