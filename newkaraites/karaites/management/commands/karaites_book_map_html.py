@@ -19,6 +19,6 @@ class Command(BaseCommand):
                                                                             stats=False),
                                    paragraph.book_text[1]]
 
-            paragraph.save()
+            #paragraph.save()
 
         sys.stdout.write("\33[K\r")

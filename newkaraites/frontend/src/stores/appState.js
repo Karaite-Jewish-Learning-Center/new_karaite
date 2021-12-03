@@ -184,8 +184,6 @@ class AppState {
     }
     getMoreResults = () => this.moreResults
 
-
-
     // language
     setLanguage = (language, i) => this.panes[i].languages = language
     getLanguage = (i) => this.panes[i].languages[0]

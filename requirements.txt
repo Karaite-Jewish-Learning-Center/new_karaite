@@ -14,3 +14,4 @@ html5lib
 gensim
 more_itertools
 spacy
+cssutils

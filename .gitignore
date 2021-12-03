@@ -8,3 +8,4 @@ data/
 .DS_Store
 .vscode
 newkaraites/karaites/management/book_dumps/
+newkaraites/karaites/management/tmp/

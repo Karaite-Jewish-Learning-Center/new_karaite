@@ -1113,6 +1113,12 @@ To refresh just run the generate_css_from_map at command prompt
    font-family:"SBL Hebrew";
    color:#7030A0
 }
+.sp-7 {
+   font-family:"SBL Hebrew";
+   color:gray;
+   mso-themecolor:background1;
+   mso-themeshade:128
+}
 .chapter {
    text-align:right;
    direction:rtl;

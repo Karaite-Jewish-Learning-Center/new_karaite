@@ -105,7 +105,16 @@ MAP_P_STYLE_TO_CLASSES = {
         ['MsoNormal', 'text-a'],
     'margin-bottom:6.0pt;text-align:justify;line-height:150%':
         ['MsoNormal', 'text-b'],
-
+    'font-size:12.0pt;  line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";  mso-hansi-font-family:"Times New Roman"':
+        ['p-1'],
+    'font-size:12.0pt;line-height:150%;mso-bidi-font-family:David':
+        ['p-2'],
+    'font-size:26.0pt;line-height:150%;font-family:"Guttman Stam";mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['p-3'],
+    'font-size:48.0pt;line-height:150%;font-family:"Guttman Stam";mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['p-4'],
+    'font-size:12.0pt;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-fareast-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-ansi-language:EN-US;mso-fareast-language:HE;mso-bidi-language:HE':
+        ['p-5'],
     # karaite book Yeriot_Shelomo volume 2
     'text-align:center':
         ['text-center'],
@@ -346,6 +355,10 @@ MAP_SPAN_STYLE_TO_CLASSES = {
     'font-size:18.0pt;line-height:150%;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
         ['foreword'],
 
+    'font-size:14.0pt;mso-bidi-font-family:David':
+        ['s-1'],
+    'font-size:26.0pt;line-height:150%;font-family:"Guttman Stam";mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['s-2'],
     # Halakha Adderet
     'font-size:12.0pt;line-height:115%;font-family:"SBL Hebrew";mso-ansi-font-weight:bold':
         ['p-first-letter'],
@@ -427,7 +440,10 @@ MAP_SPAN_STYLE_TO_CLASSES = {
         ['sp-6'],
     'font-family:"SBL Hebrew";color:gray;mso-themecolor:background1;mso-themeshade:128':
         ['sp-7'],
-
+    'font-size:48.0pt;line-height:150%;font-family:"Guttman Stam";mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman"':
+        ['sp-8'],
+    'font-size:12.0pt;font-family:"David",sans-serif;mso-ascii-font-family:"Times New Roman";mso-fareast-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";mso-ansi-language:EN-US;mso-fareast-language;HE;mso-bidi-language:HE':
+        ['sp-9'],
 }
 
 # chapter's ?
@@ -448,13 +464,11 @@ def remove_tag_simple(html_str):
     return html_str
 
 
-def remove_a_empty_tag(html_str):
-    tree = BeautifulSoup(html_str, 'html5lib')
+def remove_a_empty_tag(tree):
     for a in tree.find_all('a'):
         if a is not None:
             a.decompose()
-
-    return str(tree)
+    return tree
 
 
 def find_span(child_of):
@@ -472,12 +486,14 @@ def find_span(child_of):
             #     input('>>')
         else:
             if style is not None and style != '':
-                print("-" * 60)
-                print(child_of)
-                print("<span>", "-" * 60)
-                print(style)
-                print("-" * 60)
-                sys.exit()
+                pass
+
+                # print("-" * 60)
+                # print(child_of)
+                # print("<span>", "-" * 60)
+                # print(style)
+                # print("-" * 60)
+                #sys.exit()
 
 
 def map_tag_class_to_style(html_tree, tag, css_class=None, map_to={}):
@@ -506,12 +522,13 @@ def map_tag_class_to_style(html_tree, tag, css_class=None, map_to={}):
 
         else:
             if style is not None and style != '':
-                print("-" * 60)
-                print(child_of)
-                print("<p>", "-" * 60)
-                print(style)
-                print("-" * 60)
-                sys.exit()
+                pass
+                # print("-" * 60)
+                # print(child_of)
+                # print("<p>", "-" * 60)
+                # print(style)
+                # print("-" * 60)
+                #sys.exit()
 
         find_span(child_of)
 
@@ -597,29 +614,35 @@ def map_yeriot_shelomo_docx_to_karaites_html(html, foot_notes_list, language="en
     """
         Map  docx generated html to a lighter and css class oriented html
     """
+    html = replace_tags(html)
 
     html_tree = BeautifulSoup(html, 'html5lib')
 
+    html_tree = remove_a_empty_tag(html_tree)
     html_tree = replace_a_foot_notes(html_tree, foot_notes_list, language)
-    html_tree = replace_tags(str(html_tree))
+    # p tag inline style to classes
+    html_tree = map_tag_class_to_style(html_tree, 'p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
+    # span inline style to classes
+    html_tree = map_tag_class_to_style(html_tree, 'span', None, MAP_SPAN_STYLE_TO_CLASSES)
+    # h1
+    html_tree = map_tag_class_to_style(html_tree, 'h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
 
-    # # p tag inline style to classes
-    # map_tag_class_to_style('p', "MsoNormal", MAP_P_STYLE_TO_CLASSES)
-    # # span inline style to classes
-    # map_tag_class_to_style('span', None, MAP_SPAN_STYLE_TO_CLASSES)
-    # # h1
-    # map_tag_class_to_style('h1', None, MAP_H1_TO_STYLES_TO_CLASSES)
-    #
-    # new_html = remove_tag_simple(str(html_tree).replace('\n', ' '))
-    # new_html = remove_a_empty_tag(new_html)
+    print('html')
+    print(html)
+    print('-' * 90)
+    print(html_tree)
+    print('-' * 90)
+    input('>>')
+    html_str = remove_tag_simple(str(html_tree))
+    print(html_str)
+    print('-' * 90)
+    input('replaced >>')
 
-    new_html = str(html_tree)
     if stats:
-        print(html)
         print("-" * 90)
-        print(f"html as string len:{len(html)}, new_html len:{len(new_html)}")
+        print(f"html as string len:{len(html)}, new_html len:{len(html_str)}")
         input('> enter to carry on.')
-    return new_html
+    return html_str
 
 # to test and debug uncomment this
 # html = """<p class="MsoNormal" dir="RTL" style="text-align: justify; line-height: normal; tab-stops: 460.7pt;"><span dir="LTR" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">1:1</span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">אלה הדברים</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; color: red; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">- כאשר היו ישראל עתידים לעבור את הירדן</span><span dir="LTR" lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;"><span style="mso-spacerun: yes;">&nbsp;</span></span><span lang="HE" style="font-size: 12.0pt; font-family: 'Times New Roman',serif; position: relative; top: -2.0pt; mso-text-raise: 2.0pt;">להחלק איש בנחלתו, והיו צריכים התראה ואזהרה לשמור התורה, כאשר בזמן נסוע מסיני להכנס בארץ &lt;התרה בהם&gt;, וכאשר אירעו להם ענינים ונמנעו מלהכנס, אז כון עתה לסדר גם אותם {הענינים} &lt;עניני המניעות שמסבתם נשנו עתה עניני האזהרות וההתראות&gt;.<a style="mso-footnote-id: ftn1;" title="" href="#_ftn1" name="_ftnref1"><span class="MsoFootnoteReference"><span dir="LTR" style="mso-special-character: footnote;"><!-- [if !supportFootnotes]--><span class="MsoFootnoteReference"><span style="font-size: 12.0pt; line-height: 115%; font-family: 'Times New Roman',serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; position: relative; top: -2.0pt; mso-text-raise: 2.0pt; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: HE;">[1]</span></span><!--[endif]--></span></span></a><span style="mso-spacerun: yes;">&nbsp;</span>על כן החל במלת <span style="color: #ffc000;">דברים</span>, לכלול עניני המצות ודברי תוכחה. ויהיה טעם <span style="color: #ffc000;">אלה הדברים אשר דבר משה אל כל ישראל בעבר הירדן</span> מה שאירע להם <span style="color: #ffc000;">במדבר בערבה מול סוף </span>,כלל מה שעבר עליהם בנסעם מסיני עד בואם לקדש ברנע:</span></p>

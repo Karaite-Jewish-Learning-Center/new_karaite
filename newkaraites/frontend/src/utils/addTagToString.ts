@@ -8,7 +8,7 @@ import pluralize from 'pluralize'
 // and tag
 // tag individual words
 
-export const addTagToString = (string, args, tag) => {
+export const addTagToString = (string:string, args:string, tag:string):string => {
     // sanitize args
     args = args.replace('[', '').replace(']', '')
     // remove all stop words

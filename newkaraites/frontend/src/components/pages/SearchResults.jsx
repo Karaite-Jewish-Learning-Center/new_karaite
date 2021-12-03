@@ -42,8 +42,7 @@ const SearchResults = () => {
         const getSearchResult = async () => {
             if (search === '') return {'data': [], 'page': 1}
             const response = await fetch(searchResultsUrl + `${search}/${page}/`)
-            const data = await response.json()
-            return data
+            return  await response.json()
         }
 
         getSearchResult()
