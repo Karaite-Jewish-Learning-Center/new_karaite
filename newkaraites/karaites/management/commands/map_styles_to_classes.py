@@ -1,4 +1,5 @@
 import sys
+import re
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 
@@ -13,18 +14,17 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
         # new_html = BeautifulSoup('<div id="start"></div>', 'html5lib')
+        # source = (f'../newkaraites/data_karaites/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/'
+        css = f'/Users/sandro/anaconda3/envs/kjoa/new_karaite/newkaraites/karaites/management/tmp/karaites.css'
+        ms_css = f'../newkaraites/tmp/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/ms-tmp.css'
 
         for volume in [1, 2]:
-            # source = (f'../newkaraites/data_karaites/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/'
             source = (
                 f'/Users/sandro/anaconda3/envs/kjoa/new_karaite/newkaraites/data_karaites/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/'
                 f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
 
             out = (f'/Users/sandro/anaconda3/envs/kjoa/new_karaite/newkaraites/karaites/management/tmp/'
                    f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
-
-            css = f'/Users/sandro/anaconda3/envs/kjoa/new_karaite/newkaraites/karaites/management/tmp/tmp-{volume}.css'
-            ms_css = f'../newkaraites/tmp/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/ms-tmp.css'
 
             handle_source = open(source, 'r')
             html = handle_source.read()
@@ -41,7 +41,7 @@ class Command(BaseCommand):
                 for attr in [attr for attr in tag.attrs]:
 
                     # remove this attrs keep all other's
-                    if attr in ['dir', 'lang']:
+                    if attr in ['dir', 'lang', 'class']:
                         del tag[attr]
                         continue
 
@@ -78,14 +78,63 @@ class Command(BaseCommand):
             handle_out.write(str(divs))
             handle_out.close()
 
-            handle_css = open(css, 'w')
-            for style, class_name in style_classes.items():
-                # line_breaks = style.replace(";", ";\n   ")
-                handle_css.write(f'.{class_name} {{\n   {style}\n}}\n')
-            handle_css.close()
+        # just one css file
 
-            # handle_ms_css = open(ms_css, 'w')
-            # for class_name in ms_class:
-            #     line_breaks = style.replace
-            #     handle_ms_css.write(f'.{class_name} {{\n   {line_breaks}\n}}\n')
-            # handle_ms_css.close()
+        handle_css = open(css, 'w')
+        for style, class_name in style_classes.items():
+            css_elements = style.split(";")
+
+            # remove duplicates
+            rules = []
+            values = []
+            for css in css_elements:
+                r, v = css.split(':')
+                rules.append(r)
+                values.append(v)
+
+                if len(rules) != len(set(rules)):
+                    css_elements = []
+                    unique_rules = set(rules)
+                    for i, rule in enumerate(rules):
+                        # keep rules order
+                        if rule in unique_rules:
+                            css_elements.append(f'{rule}:{values[i]}')
+                            unique_rules.remove(rule)
+
+            # clean up css
+            cleaned = ''
+            for css in css_elements:
+                if css.startswith('mso'):
+                    continue
+                if css.startswith('tab-stops'):
+                    continue
+
+                if css.startswith('padding'):
+                    css, values = css.split(':')
+                    # remove flot point part
+                    values = re.sub(r'\.[0-9]', '', values)
+                    # replace in by pt
+                    values = values.replace('in', 'pt').replace('pt', 'pt ').strip()
+                    # remove redundant measure unit
+                    values = values.replace('0pt', '0')
+                    css = f'{css}:{values}'
+                if css.startswith('margin'):
+                    css, values = css.split(':')
+                    # remove redundant measure unit
+                    if values.startswith('0'):
+                        values = values.replace('0pt', '0').replace('0in', '0')
+                    css = f'{css}:{values}'
+
+                cleaned += f'\t {css};\n'
+
+            if cleaned == '':
+                continue
+
+            handle_css.write(f'.{class_name} {{\n   {cleaned}}}\n')
+        handle_css.close()
+
+        # handle_ms_css = open(ms_css, 'w')
+        # for class_name in ms_class:
+        #     line_breaks = style.replace
+        #     handle_ms_css.write(f'.{class_name} {{\n   {line_breaks}\n}}\n')
+        # handle_ms_css.close()

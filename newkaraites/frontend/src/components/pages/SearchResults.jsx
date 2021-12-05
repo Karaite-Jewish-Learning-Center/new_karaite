@@ -64,6 +64,7 @@ const SearchResults = () => {
     }, [search, page, store])
 
     if (store.getSearch() === '') return <Please reason="search"/>
+
     return (
         <div className={classes.container}>
             <Typography className={classes.header} variant="h5">

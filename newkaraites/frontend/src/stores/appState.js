@@ -1,4 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx"
+import {isABibleBook} from "../utils/utils";
+import {autocompleteUrl} from "../constants/constants";
 
 
 class AppState {
@@ -12,6 +14,9 @@ class AppState {
     search = ''
     searchResultData = []
     moreResults = true
+
+    // autocomplete
+    options =[]
 
     constructor() {
         makeAutoObservable(this)
@@ -183,6 +188,26 @@ class AppState {
         this.moreResults = more
     }
     getMoreResults = () => this.moreResults
+
+
+
+    // autocomplete
+    setOptions =(options)=> this.options = options
+
+    getOptions =() =>  this.options
+
+    getAutoComplete = async (search) => {
+        if (search.length < 2 || isABibleBook(search)){
+            this.setOptions([])
+            return
+        }
+
+        await fetch(`${autocompleteUrl}${search}/`)
+            .then(response =>
+                   this.setOptions(response.json())
+            ).catch(e => this.setMessage(e.message))
+    }
+
 
     // language
     setLanguage = (language, i) => this.panes[i].languages = language
