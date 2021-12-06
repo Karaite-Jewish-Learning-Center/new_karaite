@@ -1,7 +1,7 @@
 import {versesByBibleBook} from '../constants/constants'
 import {capitalize} from "./utils";
 
-export const validateBiblicalReference = (book, chapter, verse) => {
+export const validateBiblicalReference = (book:string, chapter:string, verse:string):string => {
     try {
         const theBook = capitalize(book)
         const chapterNumber = parseInt(chapter) - 1
@@ -9,7 +9,7 @@ export const validateBiblicalReference = (book, chapter, verse) => {
         const numberOfChapters = versesByBibleBook[theBook].length;
         const numberOfVerses = versesByBibleBook[theBook][chapterNumber]
 
-        if (chapter > numberOfChapters) {
+        if (chapterNumber > numberOfChapters) {
             return `The ${theBook} book has ${numberOfChapters} chapters.`
         }
         if (verseNumber > numberOfVerses) {

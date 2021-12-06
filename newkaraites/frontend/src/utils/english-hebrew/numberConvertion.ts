@@ -1,6 +1,13 @@
+interface TableIndoToHebrew {
+  [index: number]: string;
+}
 
-export const indoArabicToHebrewCardinal = (indo_arabic_number) => {
-    const table = {
+interface TableHebrewToIndo {
+  [index: string]: number;
+}
+
+export const indoArabicToHebrewCardinal = (indo_arabic_number: number): string => {
+    const table: TableIndoToHebrew = {
         1: 'א׳',
         2: 'ב׳',
         3: 'ג׳',
@@ -156,11 +163,11 @@ export const indoArabicToHebrewCardinal = (indo_arabic_number) => {
     } catch (e) {
         console.log("Number must be between 1 and 149.")
     }
-
+    return ''
 }
 
-export const indoArabicToHebrew = (number) => {
-    const table = {
+export const indoArabicToHebrew = (number:number):string => {
+    const table:TableIndoToHebrew = {
         1: 'א',
         2: 'ב',
         3: 'ג',
@@ -365,8 +372,8 @@ export const indoArabicToHebrew = (number) => {
     return table[number]
 }
 
-export const hebrewToIndoArabic = (hebrew_number) => {
-    const table = {
+export const hebrewToIndoArabic = (hebrew_number:string):number => {
+    const table:TableHebrewToIndo = {
         'א': 1,
         'ב': 2,
         'ג': 3,
@@ -576,8 +583,8 @@ export const hebrewToIndoArabic = (hebrew_number) => {
 
 }
 
-export const hebrewOrdinalToIndoArabic = (hebrew_ordinal) => {
-    let table = {
+export const hebrewOrdinalToIndoArabic = (hebrew_ordinal:string):number => {
+    let table:TableHebrewToIndo = {
         'א׳': 1,
         'ב׳': 2,
         'ג׳': 3,

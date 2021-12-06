@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import Button from '@material-ui/core/Button'
-import {referencesUrl} from '../../constants/constants.js'
+import {referencesUrl} from '../../constants/constants.ts'
 import {makeStyles} from '@material-ui/core/styles'
 import {makeRandomKey} from "../../utils/utils";
 import ReactHtmlParser from 'react-html-parser';

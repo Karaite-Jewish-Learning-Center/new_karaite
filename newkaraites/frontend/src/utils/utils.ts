@@ -1,47 +1,35 @@
-import axios from 'axios';
-import {getCommentsUrl} from "../constants/constants"
+//import axios from 'axios';
+//import {getCommentsUrl} from "../constants/constants"
 import {versesByBibleBook} from '../constants/constants'
 
-export const capitalize = (string) => string === "" ? "": string[0].toUpperCase() + string.slice(1).toLowerCase()
-
-export const range = (l) => {
-    return Array(l).fill(1).map((_, i) => i + 1)
+interface booksTable {
+    [index: string]: string
 }
 
-export const equals = (a, b) => {
-    // compare 2 arrays, arrays must not be nested
-    return a.length === b.length && a.every((v, i) => v === b[i]);
-}
+export const capitalize = (string: string): string =>
+    string === "" ? "" : string[0].toUpperCase() + string.slice(1).toLowerCase()
 
-export const getComments = async (book, chapter, verse) => {
-    const res = await axios.get(getCommentsUrl + `${book}/${chapter}/${verse}`)
-    return res;
-}
+export const range = (l: number): Array<number> =>
+    Array(l).fill(1).map((_, i) => i + 1)
 
-export const makeBookUrl = (url, book, chapter, first, full) => {
-    return (full ? `${url}${book}/` : `${url}${book}/${chapter}/${first}/`)
-}
+// compare 2 arrays, arrays must not be nested
+export const equals = (a: Array<any>, b: Array<any>): boolean =>
+    a.length === b.length && a.every((v, i) => v === b[i]);
 
-export const makeRandomKey = () => {
-    return `k-${Math.random() * 10000000000}`
-}
+export const makeBookUrl = (url: string, book: string, chapter: string, first: string, full: boolean): string =>
+    (full ? `${url}${book}/` : `${url}${book}/${chapter}/${first}/`)
 
-export const slug = (str) => {
-    return str.replaceAll(' ', '-')
-}
+export const makeRandomKey = (): string => `k-${Math.random() * 10000000000}`
 
-export const unslug = (str) => {
-    return str.replaceAll('-', ' ')
-}
+export const slug = (str: string): string => str.replaceAll(' ', '-')
 
-export const calculateItemNumber = (book, chapter, verse) => {
-    if (versesByBibleBook !== undefined) {
-        return versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
-    }
-    return 0
-}
+export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
-export const englishBookNames = {
+export const calculateItemNumber = (book: string, chapter: string, verse: string): number =>
+    versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+
+
+export const englishBookNames: booksTable = {
     'Genesis': 'בראשית',
     'Exodus': 'שמות',
     'Leviticus': 'ויקרא',
@@ -83,7 +71,7 @@ export const englishBookNames = {
     'Song of Songs': 'שיר השירים'
 }
 
-export const hebrewBookNames = {
+export const hebrewBookNames: booksTable = {
     'בראשית': 'Genesis',
     'שמות': 'Exodus',
     'ויקרא': 'Leviticus',
@@ -128,28 +116,24 @@ export const hebrewBookNames = {
     'שיר השירים': 'Song of Songs'
 }
 
-export const englishBookNameToHebrew = (englishBookName) => {
-    return englishBookNames[englishBookName.trim()]
-}
+export const englishBookNameToHebrew = (englishBookName: string): string =>
+    englishBookNames[englishBookName.trim()]
 
+export const hebrewBookNameToEnglish = (hebrewBookName: string): string =>
+    hebrewBookNames[hebrewBookName]
 
-export const hebrewBookNameToEnglish = (hebrewBookName) => {
-    return hebrewBookNames[hebrewBookName]
-}
-
-export const hebrewBooks = () => {
-    return Object.keys(hebrewBookNames)
-}
+export const hebrewBooks = () => Object.keys(hebrewBookNames)
 
 export const englishBook = () => {
     return Object.keys(englishBookNames)
 }
 
-export const isABibleBook = (book) => capitalize(book.trim().split(' ')[0]) in englishBookNames
+export const isABibleBook = (book: string): boolean =>
+    capitalize(book.trim().split(' ')[0]) in englishBookNames
 
-export const toEnglish = (bookName) => {
-    // return a english title even if bookName is Hebrew
-    let title = hebrewBookNameToEnglish(bookName)
+// return a english title even if bookName is in Hebrew
+export const toEnglish = (bookName: string): string => {
+    const title = hebrewBookNameToEnglish(bookName)
     if (title === undefined) {
         return bookName
     }

@@ -78,8 +78,8 @@ class Command(BaseCommand):
             handle_out.write(str(divs))
             handle_out.close()
 
+        # todo make this a module
         # just one css file
-
         handle_css = open(css, 'w')
         for style, class_name in style_classes.items():
             css_elements = style.split(";")
