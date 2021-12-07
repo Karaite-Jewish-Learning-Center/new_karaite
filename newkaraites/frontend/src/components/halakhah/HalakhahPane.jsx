@@ -9,7 +9,7 @@ import Colors from '../../constants/colors.js';
 import {observer} from 'mobx-react-lite';
 import transform from '../../utils/transform.jsx'
 import '../../css/comments.css'
-import '../../css/karaite.css'
+import '../../css/karaites.css'
 import Header from '../pages/RightPaneHeader.jsx';
 import {storeContext} from "../../stores/context";
 

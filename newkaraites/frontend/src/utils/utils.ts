@@ -25,8 +25,17 @@ export const slug = (str: string): string => str.replaceAll(' ', '-')
 
 export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
-export const calculateItemNumber = (book: string, chapter: string, verse: string): number =>
-    versesByBibleBook[book].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+const normalizeBookName =(book:string):string =>{
+    const pos = book.indexOf('-')+1
+    if(pos>=0){
+        return book.substr(0,pos) + capitalize(book.substr(pos))
+    }
+    return capitalize(book)
+}
+
+export const calculateItemNumber = (book: string, chapter: string, verse: string): number => {
+    return versesByBibleBook[normalizeBookName(book)].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+}
 
 
 export const englishBookNames: booksTable = {

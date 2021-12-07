@@ -36,7 +36,7 @@ class Command(BaseCommand):
             author=author,
             book_title=book_title
         )
-        html = get_html(f'../newkaraites/data_karaites/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/'
+        html = get_html(f'../newkaraites/karaites/management/tmp/'
                         f'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html')
 
         regular_expression = r'\([^()]*\)'
@@ -110,24 +110,24 @@ class Command(BaseCommand):
                 )
 
         # add foot notes
-        for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
-            notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
-            unique = {}
-            for fn in notes_tree.find_all("a"):
-                if fn is not None and fn.attrs.get('style', None) is not None:
-                    style = fn.attrs.get('style')
-                    if style.startswith('mso-footnote-id:'):
-                        fn_id = style.split(':')[1].replace('ftn', '').strip()
-                        if fn_id in unique:
-                            continue
-                        unique[fn_id] = True
-
-                        notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-                        if hasattr(notes, 'text'):
-                            note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-                            if note.startswith(' '):
-                                note = note[1:]
-                            paragraph.foot_notes += [note]
-                            paragraph.save()
+        # for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
+        #     notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
+        #     unique = {}
+        #     for fn in notes_tree.find_all("a"):
+        #         if fn is not None and fn.attrs.get('style', None) is not None:
+        #             style = fn.attrs.get('style')
+        #             if style.startswith('mso-footnote-id:'):
+        #                 fn_id = style.split(':')[1].replace('ftn', '').strip()
+        #                 if fn_id in unique:
+        #                     continue
+        #                 unique[fn_id] = True
+        #
+        #                 notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
+        #                 if hasattr(notes, 'text'):
+        #                     note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
+        #                     if note.startswith(' '):
+        #                         note = note[1:]
+        #                     paragraph.foot_notes += [note]
+        #                     paragraph.save()
 
     print()

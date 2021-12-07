@@ -69,6 +69,7 @@ const AutoComplete = () => {
     }
 
     const onChange = (e, value, reason) => {
+        debugger
         if (reason === 'select-option') {
             setSearch(() => options[value].w)
         }

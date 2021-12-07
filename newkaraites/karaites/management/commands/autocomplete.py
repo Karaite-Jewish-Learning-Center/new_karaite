@@ -6,7 +6,6 @@ from ...models import (Organization,
                        BookAsArray)
 from more_itertools import windowed
 
-
 ENGLISH = 0
 HEBREW = 1
 VERSE = 4

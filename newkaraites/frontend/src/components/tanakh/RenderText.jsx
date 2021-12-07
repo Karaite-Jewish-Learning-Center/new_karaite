@@ -13,6 +13,7 @@ const RenderTextGrid = ({paneNumber}) => {
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
 
     const itemContent = (item, data) => {
+
         return (
             <ChapterHeaderVerse
                 data={data}

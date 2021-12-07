@@ -1,7 +1,7 @@
 import sys
 import re
+from html import escape
 from bs4 import BeautifulSoup
-import sys
 from django.core.management.base import BaseCommand
 
 style_classes = {}
@@ -30,9 +30,9 @@ class Command(BaseCommand):
                     style = child.attrs['style']
                     foot_note_id = None
                     if style.startswith("mso-footnote-id:"):
-                        foot_note_id = style.split(':')[1]
+                        foot_note_id = style.split(':')[1].strip()
                     if style.startswith("mso-element:footnote"):
-                        foot_note_id = child.attrs['id']
+                        foot_note_id = child.attrs['id'].strip()
 
                     if foot_note_id is None:
                         continue
@@ -42,15 +42,15 @@ class Command(BaseCommand):
                     #     # volume 2
                     #     note_ref = re.match('[0-9]*.', foot_notes_list[foot_note])
 
-                    node = html_tree.find('div', id=foot_note_id)
+                    node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
-                            f"""<span class="{language}-foot-note"
+                            f"""<span class='{language}-foot-note'
                             data-for='{language}'
-                            data-tip="{node.text.strip()}">
-                            <sup class="{language}-foot-index">{ref}</sup></span>""",
+                            data-tip='{escape(node.text)}'>
+                            <sup class='{language}-foot-index'>{ref}</sup></span>""",
                             'html5lib'))
                 except KeyError:
                     # this seams a bug , hasattr, returns True for style, in fact no style attr
@@ -64,7 +64,8 @@ class Command(BaseCommand):
     def parse_and_save_css():
         # just one css file
         handle_css = open(f'{out_path}karaites.css', 'w')
-        for style, class_name in style_classes.items():
+        styled_order = {k: v for k, v in sorted(style_classes.items(), key=lambda item: item[1])}
+        for style, class_name in styled_order.items():
             css_elements = style.split(";")
 
             # remove duplicates
@@ -119,10 +120,10 @@ class Command(BaseCommand):
     @staticmethod
     def remove_tags(html_str):
         remove_tags = ['<html>', '</html>', '<head>',
-                       '</head>', '<body>', '</body>', '<o:p></o:p>',
+                       '</head>', '<body>', '</body>', r'<o:p></o:p>',
                        r'<o:p>', r'</o:p>', r'<!--[if !supportFootnotes]-->',
-                       '<!--[endif]-->', '<!--[if !supportLineBreakNewLine]-->',
-                       '<!--[ if !vml]-->'
+                       r'<!--[endif]-->', r'<!--[if !supportLineBreakNewLine]-->',
+                       r'<!--[ if !vml]-->'
                        ]
         for tag in remove_tags:
             html_str = html_str.replace(tag, '')
@@ -155,7 +156,7 @@ class Command(BaseCommand):
         # this is specific to Halakha Adderet
         # fix this:
         old_path = 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld'
-        new_path = 'static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
+        new_path = 'http://localhost:8000/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
 
         for child in html_tree.find_all('img'):
             path = child.attrs.get('src', None)
@@ -166,12 +167,48 @@ class Command(BaseCommand):
 
     @staticmethod
     def handle_ms_css():
-        pass
-        # handle_ms_css = open(f'{out_path}ms.css', 'w')
-        # for class_name in ms_classes:
-        #     line_breaks = style.replace
-        #     handle_ms_css.write(f'.{class_name} {{\n   {line_breaks}\n}}\n')
-        # handle_ms_css.close()
+        handle_ms_css = open(f'{out_path}ms.css', 'w')
+        ms_classes.sort()
+        for class_name in ms_classes:
+            handle_ms_css.write(f'.{class_name} {{}}\n')
+        handle_ms_css.close()
+
+    @staticmethod
+    def collect_style_map_to_class(html_tree):
+
+        divs = html_tree.find('div', class_="WordSection1", recursive=True)
+        for tag in divs.findAll(True, recursive=True):
+
+            for attr in [attr for attr in tag.attrs]:
+
+                # remove local style , replace by a class
+                if attr == 'style':
+                    # collect Ms classes  names
+                    ms_class = tag.attrs.get('class', None)
+                    if ms_class is not None:
+                        ms_class = ms_class[0].split(' ')[0]
+                        if ms_class not in ms_classes:
+                            ms_classes.append(ms_class)
+
+                    style = tag.attrs['style']
+                    if tag.name not in tags:
+                        tags[tag.name] = 0
+
+                    style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
+                    if style not in style_classes:
+                        class_name = f'{tag.name}-{tags[tag.name]:02}'
+                        style_classes.update({style: class_name})
+                        tags[tag.name] += 1
+                    else:
+                        class_name = style_classes[style]
+
+                    del tag[attr]
+
+                    if tag.attrs.get('class', None) is not None:
+                        tag.attrs['class'].append(class_name)
+                    else:
+                        tag.attrs['class'] = [class_name]
+        return divs
 
     def handle(self, *args, **kwargs):
         """
@@ -180,63 +217,29 @@ class Command(BaseCommand):
             a css file is generate
         """
         sys.stdout.write(f"\33[K Loading book's data\r")
-        for path, book in LIST_OF_BOOKS[:1]:
+        for path, book in LIST_OF_BOOKS:
             handle_source = open(f'{source_path}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
-            # sys.stdout.write(f"\33[K Processing foot-notes for book {book}\r")
-            # html_tree = self.replace_a_foot_notes(html_tree, 'he')
-            # sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
+            sys.stdout.write(f"\33[K Processing foot-notes for book {book}\r")
+            html_tree = self.replace_a_foot_notes(html_tree, 'he')
+
+            sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
             html_str = self.remove_tags(str(html_tree))
-            # sys.stdout.write(f"\33[K Removing comments for book {book}\r")
-            # html_str = self.replace_from_open_to_close(html_str)
-            #
+
+            sys.stdout.write(f"\33[K Removing comments for book {book}\r")
+            html_str = self.replace_from_open_to_close(html_str)
+
             html_tree = BeautifulSoup(html_str, 'html5lib')
-            # sys.stdout.write(f"\33[K Fix images path book {book}\r")
-            # html_tree = self.fix_image_source(html_tree)
+            sys.stdout.write(f"\33[K Fix images path book {book}\r")
+            html_tree = self.fix_image_source(html_tree)
 
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
-            divs = html_tree.find('div', class_="WordSection1", recursive=True)
-            i = 1
-            print()
-            for tag in divs.findAll(True, recursive=True):
+            divs = self.collect_style_map_to_class(html_tree)
 
-                for attr in [attr for attr in tag.attrs]:
-                    print(attr, attr == 'style', tag.name)
-                    input('>>')
-                    # remove this attrs keep all other's
-                    # if attr in ['dir', 'lang', 'class']:
-                    #     del tag[attr]
-                    #     continue
-
-                    # remove local style , replace by a class
-                    if attr == 'style':
-                        class_name = None
-                        style = tag.attrs['style']
-                        if tag.name not in tags:
-                            tags[tag.name] = 0
-
-                        style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
-                        if style not in style_classes:
-                            class_name = f'{tag.name}-{tags[tag.name]}'
-                            style_classes.update({style: class_name})
-                            tags[tag.name] += 1
-
-                        del tag[attr]
-
-                        if tag.attrs.get('class', None) is not None:
-                            ms_class = tag.attrs['class']
-                            if ms_class not in ms_classes:
-                                ms_classes.append(ms_class)
-                            if class_name is not None:
-                                tag.attrs['class'].append(class_name)
-                        else:
-                            if class_name is not None:
-                                tag.attrs['class'] = [class_name]
-                    i += 1
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
             sys.stdout.write(f"\33[K Writing files for {book} \n")

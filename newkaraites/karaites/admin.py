@@ -12,6 +12,9 @@ from .models import (Organization,
                      FullTextSearch)
 
 from .admin_forms import AdminCommentForm
+from django.conf import settings
+
+STATIC = settings.STATIC_URL
 
 
 class KAdmin(admin.ModelAdmin):
@@ -19,10 +22,10 @@ class KAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': ('../static/css/admin.css',
-                    '../static/css/tooltip.css',)
+            'all': (f'../{STATIC}/css/admin.css',
+                    f'../{STATIC}/css/tooltip.css',)
         }
-        js = ('../static/js/toggleFilterPanel.js',)
+        js = (f'../{STATIC}/js/toggleFilterPanel.js',)
 
 
 class OrganizationAdmin(KAdmin):

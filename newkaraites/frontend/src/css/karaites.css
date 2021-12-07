@@ -1,0 +1,615 @@
+.br-00 {
+   	 page-break-before:always;
+}
+.br-01 {
+   	 page-break-before:always;
+}
+.h1-00 {
+   	 text-align:right;
+	 direction:rtl;
+	 unicode-bidi:embed;
+}
+.p-00 {
+   	 text-align:left;
+	 line-height:150%;
+}
+.p-01 {
+   	 text-align:center;
+	 line-height:150%;
+}
+.p-02 {
+   	 text-align:center;
+	 line-height:300%;
+}
+.p-03 {
+   	 text-align:left;
+	 line-height:300%;
+}
+.p-04 {
+   	 text-align:center;
+	 line-height:400%;
+}
+.p-05 {
+   	 text-align:center;
+	 line-height:600%;
+}
+.p-06 {
+   	 text-align:center;
+	 line-height:200%;
+}
+.p-07 {
+   	 text-align:left;
+	 line-height:2500%;
+}
+.p-08 {
+   	 line-height:150%;
+}
+.p-09 {
+   	 text-align:justify;
+	 line-height:150%;
+}
+.p-10 {
+   	 text-align:justify;
+	 line-height:500%;
+}
+.p-11 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:left;
+	 text-indent:-28.35pt;
+	 line-height:normal;
+}
+.p-12 {
+   	 text-align:justify;
+}
+.p-13 {
+   	 text-align:center;
+}
+.p-14 {
+   	 text-align:left;
+}
+.p-15 {
+   	 text-align:center;
+	 line-height:200%;
+}
+.p-16 {
+   	 text-align:left;
+	 line-height:normal;
+}
+.p-17 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:justify;
+	 text-indent:-28.35pt;
+}
+.p-18 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:justify;
+	 text-indent:-28.35pt;
+	 line-height:normal;
+}
+.p-19 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:justify;
+}
+.p-20 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:justify;
+	 line-height:normal;
+}
+.p-21 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:left;
+	 text-indent:-28.35pt;
+}
+.p-22 {
+   	 margin-top:0;
+	 margin-right:56.7pt;
+	 margin-bottom:0;
+	 margin-left:56.7pt;
+	 text-align:left;
+	 text-indent:-28.35pt;
+	 line-height:normal;
+}
+.p-23 {
+   	 text-align:center;
+	 line-height:200%;
+}
+.p-24 {
+   	 line-height:150%;
+}
+.p-25 {
+   	 text-align:left;
+	 line-height:150%;
+}
+.p-26 {
+   	 margin-top:0;
+	 margin-right:71.7pt;
+	 margin-bottom:0;
+	 margin-left:71.7pt;
+	 text-align:justify;
+	 line-height:150%;
+}
+.p-27 {
+   	 text-align:center;
+	 line-height:150%;
+}
+.p-28 {
+   	 margin-top:0;
+	 margin-right:65.2pt;
+	 margin-bottom:0;
+	 margin-left:65.2pt;
+	 text-align:justify;
+	 text-indent:-65.2pt;
+	 line-height:150%;
+}
+.p-29 {
+   	 text-align:justify;
+	 line-height:150%;
+}
+.p-30 {
+   	 margin-right:0;
+	 text-align:justify;
+}
+.p-31 {
+   	 margin-right:0;
+	 text-align:center;
+}
+.p-32 {
+   	 margin-right:.5in;
+	 text-align:center;
+	 line-height:150%;
+}
+.p-33 {
+   	 margin-bottom:6.0pt;
+	 text-align:justify;
+	 line-height:150%;
+}
+.p-34 {
+   	 text-align:justify;
+	 line-height:200%;
+}
+.p-35 {
+   	 text-align:justify;
+	 line-height:300%;
+}
+.p-37 {
+   	 text-align:center;
+	 line-height:400%;
+}
+.p-38 {
+   	 text-align:center;
+	 line-height:2200%;
+}
+.p-39 {
+   	 margin-right:22.0pt;
+	 text-align:center;
+	 line-height:150%;
+}
+.p-40 {
+   	 margin-top:6.0pt;
+	 margin-right:28.35pt;
+	 margin-bottom:0;
+	 margin-left:28.35pt;
+	 text-align:left;
+	 text-indent:-28.35pt;
+	 line-height:normal;
+}
+.p-41 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:12.0pt;
+	 margin-left:0;
+	 text-align:justify;
+	 text-indent:-28.35pt;
+}
+.p-42 {
+   	 margin-right:28.35pt;
+	 text-align:justify;
+	 text-indent:-28.35pt;
+	 line-height:normal;
+}
+.p-43 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:6.0pt;
+	 margin-left:0;
+	 text-align:justify;
+	 text-indent:-28.35pt;
+}
+.p-44 {
+   	 margin-top:0;
+	 margin-right:28.35pt;
+	 margin-bottom:12.0pt;
+	 margin-left:0;
+	 text-align:center;
+	 text-indent:-28.35pt;
+}
+.p-45 {
+   	 text-align:left;
+	 direction:rtl;
+	 unicode-bidi:embed;
+}
+.span-00 {
+   	 font-size:12.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-01 {
+   	 font-size:12.0pt;
+	 line-height:150%;
+}
+.span-02 {
+   	 font-size:12.0pt;
+	 line-height:300%;
+	 font-family:"David",sans-serif;
+}
+.span-03 {
+   	 font-size:26.0pt;
+	 line-height:150%;
+	 font-family:"GuttmanStam";
+}
+.span-04 {
+   	 font-size:48.0pt;
+	 line-height:150%;
+	 font-family:"GuttmanStam";
+}
+.span-05 {
+   	 font-size:12.0pt;
+	 line-height:400%;
+	 font-family:"David",sans-serif;
+}
+.span-06 {
+   	 font-size:18.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-07 {
+   	 font-size:14.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-08 {
+   	 font-size:12.0pt;
+	 line-height:600%;
+	 font-family:"David",sans-serif;
+}
+.span-09 {
+   	 font-size:14.0pt;
+	 line-height:200%;
+	 font-family:"David",sans-serif;
+}
+.span-11 {
+   	 font-size:12.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-12 {
+   	 font-size:12.0pt;
+	 line-height:2500%;
+	 font-family:"David",sans-serif;
+}
+.span-13 {
+   	 font-size:20.0pt;
+	 font-family:"David",sans-serif;
+	 font-style:normal;
+}
+.span-14 {
+   	 font-family:"David",sans-serif;
+	 font-style:normal;
+}
+.span-15 {
+   	 font-family:"David",sans-serif;
+}
+.span-16 {
+   	 font-size:12.0pt;
+	 font-family:"David",sans-serif;
+}
+.span-17 {
+   	 font-size:12.0pt;
+	 line-height:150%;
+	 font-family:"TimesNewRoman",serif;
+}
+.span-18 {
+   	 font-size:12.0pt;
+	 line-height:150%;
+}
+.span-20 {
+   	 font-size:12.0pt;
+	 line-height:200%;
+	 font-family:"David",sans-serif;
+}
+.span-21 {
+   	 font-size:12.0pt;
+	 line-height:200%;
+}
+.span-22 {
+   	 font-family:"TimesNewRoman",serif;
+}
+.span-24 {
+   	 font-size:10.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-25 {
+   	 font-size:10.0pt;
+	 line-height:150%;
+}
+.span-26 {
+   	 font-family:"TimesNewRoman",serif;
+}
+.span-27 {
+   	 font-size:14.0pt;
+}
+.span-28 {
+   	 font-size:14.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-29 {
+   	 font-size:16.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-30 {
+   	 font-size:16.0pt;
+	 line-height:150%;
+}
+.span-31 {
+   	 font-size:16.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-32 {
+   	 color:blue;
+}
+.span-33 {
+   	 display:none;
+}
+.span-34 {
+   	 font-size:13.5pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+	 color:blue;
+}
+.span-35 {
+   	 font-family:"David",sans-serif;
+	 color:blue;
+}
+.span-36 {
+   	 font-size:10.0pt;
+	 font-family:"David",sans-serif;
+}
+.span-37 {
+   	 font-family:"David",sans-serif;
+	 font-style:normal;
+}
+.span-38 {
+   	 font-family:"David",sans-serif;
+	 font-weight:normal;
+}
+.span-39 {
+   	 font-size:12.0pt;
+	 line-height:400%;
+	 font-family:"David",sans-serif;
+}
+.span-40 {
+   	 font-size:14.0pt;
+	 line-height:400%;
+}
+.span-41 {
+   	 font-size:14.0pt;
+	 font-family:"David",sans-serif;
+}
+.span-42 {
+   	 font-size:14.0pt;
+}
+.span-43 {
+   	 font-size:18.0pt;
+	 line-height:200%;
+	 font-family:"David",sans-serif;
+}
+.span-44 {
+   	 font-size:18.0pt;
+	 line-height:2200%;
+	 font-family:"David",sans-serif;
+}
+.span-45 {
+   	 font-size:12.0pt;
+	 font-family:"David",sans-serif;
+}
+.span-46 {
+   	 font-size:13.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-47 {
+   	 font-size:10.0pt;
+	 line-height:150%;
+	 font-family:"David",sans-serif;
+}
+.span-48 {
+   	 font-size:10.0pt;
+	 line-height:150%;
+	 font-family:"Miriam",sans-serif;
+}
+.span-49 {
+   	 font-family:"SBLHebrew";
+	 color:#4BACC6;
+}
+.span-50 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-51 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-52 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-54 {
+   	 font-family:"SBLHebrew";
+	 color:red;
+}
+.span-55 {
+   	 font-family:"SBLHebrew";
+	 color:#4BACC6;
+}
+.span-56 {
+   	 font-family:"SBLHebrew";
+	 color:#00B050;
+}
+.span-57 {
+   	 font-family:"SBLHebrew";
+	 color:#984806;
+}
+.span-58 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"CambriaMath",serif;
+}
+.span-59 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-60 {
+   	 font-family:"SBLHebrew";
+}
+.span-61 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"Cambria",serif;
+}
+.span-62 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-63 {
+   	 font-family:"SBLHebrew";
+	 color:#7030A0;
+}
+.span-65 {
+   	 font-family:"SBLHebrew";
+}
+.span-67 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-68 {
+   	 font-size:12.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.span-69 {
+   	 color:#984806;
+}
+.span-71 {
+   	 font-family:"SBLHebrew";
+	 color:gray;
+}
+.span-72 {
+   	 font-size:8.0pt;
+	 line-height:115%;
+	 font-family:"SBLHebrew";
+}
+.table-00 {
+   	 border-collapse:collapse;
+}
+.table-01 {
+   	 border-collapse:collapse;
+}
+.table-02 {
+   	 border-collapse:collapse;
+}
+.td-00 {
+   	 width:142.1pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-01 {
+   	 width:142.15pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-02 {
+   	 width:193.1pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-03 {
+   	 width:153.5pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-04 {
+   	 width:175.45pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-05 {
+   	 width:18.1pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-06 {
+   	 width:153.85pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-07 {
+   	 width:145.15pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-08 {
+   	 width:207.8pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-09 {
+   	 width:95.2pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-10 {
+   	 width:298.65pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-11 {
+   	 width:164.9pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-12 {
+   	 width:171.8pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-13 {
+   	 width:78.7pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-14 {
+   	 width:342.3pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-15 {
+   	 width:185.7pt;
+	 padding:0 5pt 0 5pt;
+}
+.td-16 {
+   	 width:181.0pt;
+	 padding:0 5pt 0 5pt;
+}

@@ -98,8 +98,7 @@ class Command(BaseCommand):
                 author=author,
                 book_title=book_title
             )
-
-            source = (f'../newkaraites/data_karaites/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/'
+            source = (f'../newkaraites/karaites/management/tmp/'
                       f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
 
             handle = open(source, 'r')
@@ -179,23 +178,22 @@ class Command(BaseCommand):
                     )
 
             # add foot notes
-            for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
-                notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
-                unique = {}
-                for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
-                    fn_id = fn.text.replace('[', '').replace(']', '')
-                    if fn_id in unique:
-                        continue
-                    unique[fn_id] = True
-
-                    notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-                    if hasattr(notes, 'text'):
-                        note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-                        if note.startswith(' '):
-                            note = note[1:]
-                        paragraph.foot_notes += [note]
-                        paragraph.save()
+            # for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
+            #     notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
+            #     unique = {}
+            #     for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
+            #         fn_id = fn.text.replace('[', '').replace(']', '')
+            #         if fn_id in unique:
+            #             continue
+            #         unique[fn_id] = True
+            #
+            #         notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
+            #         if hasattr(notes, 'text'):
+            #             note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
+            #             if note.startswith(' '):
+            #                 note = note[1:]
+            #             paragraph.foot_notes += [note]
+            #             paragraph.save()
 
         print()
-        sys.stdout.write('Please run ./manage.py karaites_book_map_html')
         print()

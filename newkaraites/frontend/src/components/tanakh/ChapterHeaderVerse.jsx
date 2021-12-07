@@ -72,13 +72,16 @@ const ChapterHeaderVerse = (props) => {
     const current = gridVisibleRange.startIndex + store.getDistance(paneNumber)
     const found = item === current
 
-    //devLog(`chapter header item :${current}  distance:${store.getDistance(paneNumber)}`)
 
     useEffect(() => {
+        let x = gridVisibleRange.startIndex
+        let c = store.getDistance(paneNumber)
+        console.log(current)
+        debugger
         store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
         store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)
-    }, [allBookData,current,paneNumber,store])
+    }, [allBookData, current, paneNumber, store])
 
     const ChapterBody = () => {
         switch (lang) {
@@ -129,7 +132,7 @@ const ChapterHeaderVerse = (props) => {
                     </>
                 )
             default: {
-              devLog(`Unknown language: ${lang}`)
+                devLog(`Unknown language: ${lang}`)
             }
         }
     }
