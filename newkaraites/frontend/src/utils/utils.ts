@@ -25,10 +25,13 @@ export const slug = (str: string): string => str.replaceAll(' ', '-')
 
 export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
-const normalizeBookName =(book:string):string =>{
-    const pos = book.indexOf('-')+1
-    if(pos>=0){
-        return book.substr(0,pos) + capitalize(book.substr(pos))
+const normalizeBookName = (book: string): string => {
+    if (book === null) {
+        debugger
+    }
+    const pos = book.indexOf('-') + 1
+    if (pos >= 0) {
+        return book.substr(0, pos) + capitalize(book.substr(pos))
     }
     return capitalize(book)
 }
@@ -125,17 +128,49 @@ export const hebrewBookNames: booksTable = {
     'שיר השירים': 'Song of Songs'
 }
 
+export const hebrewBooks = (): Array<string> => Object.keys(hebrewBookNames)
+
+export const englishBooks = (): Array<string> => Object.keys(englishBookNames)
+
+export const matchHebrewBookName = (bibleRef: string): Array<string> => {
+    let result: Array<string> = []
+    hebrewBooks().map((name: string) => {
+        if (bibleRef.startsWith(name)) {
+            result.push(bibleRef.replace(name, ''))
+            result.push(name)
+            return result
+        }
+        return result
+    })
+    return result
+}
+
+// export const matchHebrewNumber = (hebrewNumber: string): Array<string> => {
+//     const cardinalNumbers = Object.keys(hebrewCardinalNumbers)
+//     debugger
+//     let digits: Array<string> = []
+//     cardinalNumbers.map((cardinal) => {
+//         if (hebrewNumber.endsWith(cardinal)) {
+//             digits.push(cardinal)
+//             debugger
+//             hebrewNumber = hebrewNumber.replace(cardinal, '').trimEnd()
+//         }
+//         if (hebrewNumber.length === 0) {
+//             return
+//         }
+//     })
+//     debugger
+//     // not found on cardinals
+//     if (digits) {
+//         // try on ordinals
+//     }
+//     return []
+// }
 export const englishBookNameToHebrew = (englishBookName: string): string =>
     englishBookNames[englishBookName.trim()]
 
 export const hebrewBookNameToEnglish = (hebrewBookName: string): string =>
     hebrewBookNames[hebrewBookName]
-
-export const hebrewBooks = () => Object.keys(hebrewBookNames)
-
-export const englishBook = () => {
-    return Object.keys(englishBookNames)
-}
 
 export const isABibleBook = (book: string): boolean =>
     capitalize(book.trim().split(' ')[0]) in englishBookNames

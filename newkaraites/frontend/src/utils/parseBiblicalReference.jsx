@@ -1,14 +1,23 @@
 import {hebrewBookNameToEnglish} from "./utils"
 import gematriya from 'gematriya'
-import {slug, capitalize} from "./utils"
+import {slug, capitalize, matchHebrewBookName} from "./utils"
 
 export const parseHebrewRef = (biblicalRef) => {
 
-    let spacePos = biblicalRef.lastIndexOf(' ') + 1
-    let refChapterVerse = biblicalRef.substr(spacePos)
-    let [refChapter, refVerse] = refChapterVerse.split(':')
+    let chapterVerseBook = matchHebrewBookName(biblicalRef)
+    if (chapterVerseBook.length < 2) {
+        return {
+            refBook: null,
+            refChapter: null,
+            refVerse: null,
+            refHighlight: null
+        }
+    }
 
-    let refBook = biblicalRef.replace(refChapterVerse, '').trim()
+    let refBook = chapterVerseBook[1]
+    let splitOn =( chapterVerseBook.indexOf(':') >= 0 ? ' ': ':')
+    let [refChapter, refVerse] = chapterVerseBook[0].split(splitOn)
+
     if (refVerse.indexOf('-') > 0) {
         refVerse = refVerse.split('-')
     } else {
@@ -30,7 +39,7 @@ export const parseEnglishRef = (biblicalRef) => {
     let re = /[0-9]+/g
     let chapterVerse = biblicalRef.match(re)
 
-     re = /[a-z,A-Z,' ']+/g
+    re = /[a-z,A-Z,' ']+/g
     if (chapterVerse === null) {
         // missing chapter and verse
         return {

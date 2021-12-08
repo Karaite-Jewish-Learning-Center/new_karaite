@@ -13,7 +13,6 @@ import {
 } from "../../constants/constants";
 import RefsBadge from "../general/RefsBadge";
 import {observer} from 'mobx-react-lite';
-import {versesByBibleBook} from '../../constants/constants';
 import {storeContext} from '../../stores/context'
 import {devLog} from "../messages/devLog";
 import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
@@ -32,19 +31,7 @@ const ChapterHeaderVerse = (props) => {
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
 
-    const calculateCurrentChapter = () => {
-        let book = store.getBook(paneNumber)
-        let avg = gridVisibleRange.startIndex + 1
-        let start = 0
-        let end = 0
-        for (let i = 0; i < versesByBibleBook[book].length; i++) {
-            end += versesByBibleBook[book][i]
-            if (avg >= start && avg <= end) {
-                return i + 1
-            }
-            start = end
-        }
-    }
+
     const openRightPane = () => {
         store.setDistance(0, paneNumber)
         store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
@@ -56,7 +43,6 @@ const ChapterHeaderVerse = (props) => {
     }
 
     if (renderChapter === "1") {
-        store.setHeaderChapter(calculateCurrentChapter(), paneNumber)
 
         chapterHtml = (
             <div className={classes.chapter}>
@@ -72,12 +58,7 @@ const ChapterHeaderVerse = (props) => {
     const current = gridVisibleRange.startIndex + store.getDistance(paneNumber)
     const found = item === current
 
-
     useEffect(() => {
-        let x = gridVisibleRange.startIndex
-        let c = store.getDistance(paneNumber)
-        console.log(current)
-        debugger
         store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
         store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)

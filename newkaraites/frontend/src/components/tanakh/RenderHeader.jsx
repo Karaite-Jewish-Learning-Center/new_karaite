@@ -11,7 +11,7 @@ import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
 
 
-const RenderHeader = ({book, paneNumber}) => {
+const RenderHeader = ({book, paneNumber, chapter}) => {
     const store = useContext(storeContext)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -67,7 +67,7 @@ const RenderHeader = ({book, paneNumber}) => {
             <Grid item xs={1} key={0}>
                 <CloseButton onClick={onClose}/>
             </Grid>
-            <HeaderBody chapter={store.getHeaderChapter(paneNumber)}/>
+            <HeaderBody chapter={chapter}/>
             <Grid item xs={1} key={4}>
                 <LanguageButton paneNumber={paneNumber}/>
             </Grid>

@@ -3,6 +3,7 @@ import re
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
+from django.conf import settings
 
 style_classes = {}
 ms_classes = []
@@ -156,7 +157,7 @@ class Command(BaseCommand):
         # this is specific to Halakha Adderet
         # fix this:
         old_path = 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld'
-        new_path = 'http://localhost:8000/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
+        new_path = f'{settings.IMAGE_HOS}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
 
         for child in html_tree.find_all('img'):
             path = child.attrs.get('src', None)
