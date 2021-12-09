@@ -58,7 +58,8 @@ class Command(BaseCommand):
             return True
         return False
 
-    def parse_toc(self, html_tree, volume):
+    @staticmethod
+    def parse_toc(html_tree, volume):
         # parse table of contents
         if volume == 1:
             # 4 found experimenting volume 1
@@ -81,7 +82,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        toc = []
         for volume in [1, 2]:
             paragraph_number = 1
 
@@ -98,8 +98,9 @@ class Command(BaseCommand):
                 author=author,
                 book_title=book_title
             )
+            source = (f'../newkaraites/karaites/management/tmp/'
+                      f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
 
-            source = f'../newkaraites/data_karaites/Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html'
             handle = open(source, 'r')
             html = f"""{handle.read()}"""
             handle.close()
@@ -142,7 +143,7 @@ class Command(BaseCommand):
                                 start_paragraph=paragraph_number - 1
                             )
                             ref_chapter = toc[0]
-                            # update previous record thats the header for chapter
+                            # update previous record that's the header for chapter
                             header = KaraitesBookAsArray.objects.get(book=book_details,
                                                                      paragraph_number=paragraph_number - 1)
                             header.ref_chapter = ref_chapter
@@ -177,23 +178,22 @@ class Command(BaseCommand):
                     )
 
             # add foot notes
-            for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
-                notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
-                unique = {}
-                for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
-                    fn_id = fn.text.replace('[', '').replace(']', '')
-                    if fn_id in unique:
-                        continue
-                    unique[fn_id] = True
-
-                    notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-                    if hasattr(notes, 'text'):
-                        note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-                        if note.startswith(' '):
-                            note = note[1:]
-                        paragraph.foot_notes += [note]
-                        paragraph.save()
+            # for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
+            #     notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
+            #     unique = {}
+            #     for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
+            #         fn_id = fn.text.replace('[', '').replace(']', '')
+            #         if fn_id in unique:
+            #             continue
+            #         unique[fn_id] = True
+            #
+            #         notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
+            #         if hasattr(notes, 'text'):
+            #             note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
+            #             if note.startswith(' '):
+            #                 note = note[1:]
+            #             paragraph.foot_notes += [note]
+            #             paragraph.save()
 
         print()
-        sys.stdout.write('Please run ./manage.py karaites_book_map_html')
         print()

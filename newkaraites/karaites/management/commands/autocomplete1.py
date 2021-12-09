@@ -4,7 +4,6 @@ from django.core.management.base import BaseCommand
 from ...models import (Organization,
                        AutoComplete,
                        BookAsArray)
-from more_itertools import windowed
 
 ENGLISH = 0
 HEBREW = 1
@@ -27,6 +26,7 @@ class Command(BaseCommand):
         for book in Organization.objects.all():
             AutoComplete.objects.get_or_create(
                 word_en=book.book_title_en,
+                classification='B'
             )
             sys.stdout.write(f"\33[KProcessing Books: {i}\r")
             i += 1
@@ -41,16 +41,26 @@ class Command(BaseCommand):
 
                     word = nouns.text
                     word = word.strip().lower()
+                    word = word.replace('[', '').replace(']', '')
 
                     if word.startswith(', '):
-                        word = word.replace(', ', '')
+                        word = word.replace(', ', '', 1)
                     if word.startswith('; '):
-                        word = word.replace('; ', '')
+                        word = word.replace('; ', '', 1)
                     if word.startswith("'"):
-                        word = word.replace("'", '')
+                        word = word.replace("'", '', 1)
+                    if word.startswith("-"):
+                        word = word.replace("-", '', 1)
+                    if word.startswith("("):
+                        word = word.replace("(", '', 1)
+                    if word.startswith(":"):
+                        word = word.replace(":", '', 1)
+                    if word.strip() == '':
+                        continue
 
                     auto, created = AutoComplete.objects.get_or_create(
-                        word_en=word
+                        word_en=word,
+                        classification='V'
                     )
 
                     if not created:

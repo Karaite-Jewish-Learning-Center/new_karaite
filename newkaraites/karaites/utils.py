@@ -36,7 +36,8 @@ def replace_punctuation_marks(s):
 
 def normalize_search(search):
     """ only one space, remove ' """
-    search = search.replace("'", '')
+    search = search.replace("'", '').replace('[', '').replace(']', '')
+    search = replace_punctuation_marks(search)
     return re.sub(' +', ' ', search.strip())
 
 

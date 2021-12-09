@@ -14,8 +14,7 @@ async function timeoutFetch(url, options = {}) {
 export const apiFetch = async (url, options = {}) => {
     try {
         const response = await timeoutFetch(url, options)
-        const data = response.json()
-        return data
+        return await response.json()
     } catch (error) {
         console.log(error.message)
     }

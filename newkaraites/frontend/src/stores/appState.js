@@ -1,5 +1,7 @@
 import {makeAutoObservable, runInAction} from "mobx"
-import {searchResultsUrl} from "../constants/constants";
+import {isABibleBook} from "../utils/utils";
+import {autocompleteUrl} from "../constants/constants";
+
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -11,7 +13,10 @@ class AppState {
     // search
     search = ''
     searchResultData = []
-    pageNumber = 0
+    moreResults = true
+
+    // autocomplete
+    options =[]
 
     constructor() {
         makeAutoObservable(this)
@@ -47,10 +52,6 @@ class AppState {
         this.panes[paneNumber].commentsVerse = verse
     }
     getCommentsVerse = (paneNumber) => this.panes[paneNumber].commentsVerse
-
-    needUpdateComment = (chapter, verse, paneNumber) => {
-        return this.getCommentsChapter(paneNumber) !== chapter || this.getCommentsVerse(paneNumber) !== verse
-    }
 
     // book , chapter , verse
     setBook = (book, i) => {
@@ -103,7 +104,7 @@ class AppState {
     setRightPaneState = (state, i) => {
         this.panes[i].rightPaneState = state
     }
-    getRightPaneState = (i) => this.panes[i].rightPaneState
+    getRightPaneState = (i) => this.panes[i].rightPaneState || [1]
 
 
     // panes
@@ -113,9 +114,9 @@ class AppState {
 
     getPanes = () => this.panes
 
-    getPaneNumber = (book, chapter) => {
+    getPaneNumber = (book) => {
         return this.panes.findIndex(pane =>
-            pane.book === book && pane.chapter === chapter
+            pane.book === book
         )
     }
     getPaneByNumber = (i) => this.panes[i]
@@ -127,7 +128,7 @@ class AppState {
     }
     getIsLastPane = () => this.isLastPane
 
-    isPaneOpen = (book, chapter) => this.getPanes().some((pane) => pane.book === book)
+    isPaneOpen = (book) => this.getPanes().some((pane) => pane.book === book)
 
     closePane = (i) => {
         this.panes.splice(i, 1)
@@ -171,7 +172,7 @@ class AppState {
     setSearch = (searchArg) => {
         this.search = searchArg
         this.searchResultData = []
-        this.pageNumber = 1
+        this.moreResults = true
     }
 
     getSearch = () => this.search
@@ -181,23 +182,41 @@ class AppState {
     getSearchResultData = () => this.searchResultData
 
     // search page
-    setPageNumber = (page) => this.pageNumber = page
-    getPageNumber = () => this.pageNumber
+    // autocomplete communicates with searchResult
+    setMoreResults = (more) => {
+        this.moreResults = more
+    }
+    getMoreResults = () => this.moreResults
 
-    // fetch data
-    getSearchResult = async () => {
-        const response = await fetch(searchResultsUrl + `${this.getSearch()}/${this.getNextPageNumber()}/`)
-        if (response.ok) {
-            const data = await response.json()
-            this.setSearchResultData(data['data'])
-            this.setNextPageNumber(parseInt(data['page']))
-        } else {
-            alert("HTTP-Error: " + response.status)
+
+
+    // autocomplete
+    setOptions =(options)=> this.options = options
+
+    getOptions =() =>  this.options
+
+    getAutoComplete = async (search) => {
+        if (search.length < 2 || isABibleBook(search)){
+            this.setOptions([])
+            return
         }
+
+        await fetch(`${autocompleteUrl}${search}/`)
+            .then(response =>
+                   this.setOptions(response.json())
+            ).catch(e => this.setMessage(e.message))
+    }
+
+
+    // language
+    setLanguage = (language, i) => this.panes[i].languages = language
+    getLanguage = (i) => this.panes[i].languages[0]
+
+    nextLanguage = (i) => {
+        return this.panes[i].languages.push(this.panes[i].languages.shift())
     }
 
 }
-
 
 const appStore = () => {
     return new AppState()

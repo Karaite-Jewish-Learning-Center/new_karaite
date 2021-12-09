@@ -2,10 +2,10 @@ import React, {useEffect, useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Grid} from '@material-ui/core';
 import {parseBiblicalReference} from '../utils/parseBiblicalReference';
-import KaraitesBooks from '../components/karaitesBooks'
+import KaraitesBooks from './karaites/karaitesBooks'
 import {observer} from 'mobx-react-lite'
-import RightPane from './RightPane';
-import RenderText from './RenderText'
+import RightPane from './panes/RightPane';
+import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
 import {Redirect, useParams, useHistory} from 'react-router-dom';
 import {karaitesBookUrl} from '../constants/constants'
@@ -14,10 +14,10 @@ import {chaptersByBibleBook} from '../constants/constants'
 import {bookChapterUrl} from '../constants/constants'
 import {makeBookUrl} from "../utils/utils"
 import {storeContext} from "../stores/context";
+import {translateMessage} from "./messages/translateMessages";
 
 
 const PARAGRAPHS = 0
-
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
@@ -58,9 +58,10 @@ const LoadBook = ({type}) => {
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
         let isOpen = store.isPaneOpen(book)
-
         if (isOpen) {
-             if(history.action!=='POP') store.setMessage('Already open.')
+            if (history.action !== 'POP') {
+                store.setCurrentItem(calculateItemNumber(book, chapter, verse), store.getPaneNumber(book))
+            }
         } else {
 
             if (type === "bible") {
@@ -82,9 +83,10 @@ const LoadBook = ({type}) => {
                     rightPaneState: [],
                     rightPaneStateHalakhah: 1,
                     bookData: [],
+                    languages: ['en_he', 'he', 'en'],
                 })
 
-                fetchDataBible(store.panes.length - 1)
+                await fetchDataBible(store.panes.length - 1)
             }
 
             if (type === "karaites") {
@@ -97,9 +99,10 @@ const LoadBook = ({type}) => {
                     highlight: [],
                     type: type,
                     currentItem: chapter,
+                    languages: ['en', 'he'],
 
                 })
-                fetchDataKaraites(store.panes.length - 1)
+                await fetchDataKaraites(store.panes.length - 1)
             }
         }
     }
@@ -111,10 +114,12 @@ const LoadBook = ({type}) => {
         }
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
-            getBook(refBook, refChapter, refVerse, refHighlight, kind)
-        } catch (e){
-            store.setMessage(e.message)
-        }
+            getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
+         } catch (e) {
+             store.setMessage(translateMessage(e))
+         }
+
+
     }
 
     const RenderRightPane = ({isOpen, paneNumber}) => {
@@ -137,13 +142,12 @@ const LoadBook = ({type}) => {
             if (panes[i].type.toLowerCase() === 'bible') {
 
                 jsx.push((
-                    <>
-                        <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                            <RenderText paneNumber={i}
-                            />
+                    <React.Fragment key={makeRandomKey()}>
+                        <Grid item xs={true} className={classes.item}>
+                            <RenderText paneNumber={i}/>
                         </Grid>
                         <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i}/>
-                    </>
+                    </React.Fragment>
                 ))
 
             }
@@ -160,8 +164,8 @@ const LoadBook = ({type}) => {
     }
 
     useEffect(() => {
-        getBook(book, chapter, verse, [], type)
-    }, [])
+        getBook(book, chapter, verse, [], type).then().catch()
+    }, [book, chapter, verse, type])
 
     const books = bookRender()
 
@@ -174,16 +178,13 @@ const LoadBook = ({type}) => {
     }
 
     return (
-        <>
-            <Grid container
-                  className={classes.root}
-                  direction="row"
-                  justifycontent="center"
-                  key={makeRandomKey()}
-            >
-                {books.map(jsx => jsx)}
-            </Grid>
-        </>
+        <Grid container
+              className={classes.root}
+              direction="row"
+              justifycontent="center"
+        >
+            {books.map(jsx => jsx)}
+        </Grid>
     )
 
 }
@@ -206,6 +207,10 @@ const useStyles = makeStyles((theme) => ({
     },
     hiddenRightPane: {
         display: 'none'
+    },
+    items: {
+        width: '100%',
+        height: '100%',
     }
 }));
 

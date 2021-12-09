@@ -1,13 +1,23 @@
-import { hebrewBookNameToEnglish } from "./utils";
-import gematriya from 'gematriya';
-import {slug} from "./utils";
+import {hebrewBookNameToEnglish} from "./utils"
+import gematriya from 'gematriya'
+import {slug, capitalize, matchHebrewBookName} from "./utils"
 
 export const parseHebrewRef = (biblicalRef) => {
-    let spacePos = biblicalRef.lastIndexOf(' ') + 1
-    let refChapterVerse = biblicalRef.substr(spacePos)
-    let [refChapter, refVerse] = refChapterVerse.split(':')
 
-    let refBook = biblicalRef.replace(refChapterVerse, '').trim()
+    let chapterVerseBook = matchHebrewBookName(biblicalRef)
+    if (chapterVerseBook.length < 2) {
+        return {
+            refBook: null,
+            refChapter: null,
+            refVerse: null,
+            refHighlight: null
+        }
+    }
+
+    let refBook = chapterVerseBook[1]
+    let splitOn =( chapterVerseBook.indexOf(':') >= 0 ? ' ': ':')
+    let [refChapter, refVerse] = chapterVerseBook[0].split(splitOn)
+
     if (refVerse.indexOf('-') > 0) {
         refVerse = refVerse.split('-')
     } else {
@@ -25,9 +35,31 @@ export const parseHebrewRef = (biblicalRef) => {
 
 
 export const parseEnglishRef = (biblicalRef) => {
+    biblicalRef = capitalize(biblicalRef)
     let re = /[0-9]+/g
     let chapterVerse = biblicalRef.match(re)
+
     re = /[a-z,A-Z,' ']+/g
+    if (chapterVerse === null) {
+        // missing chapter and verse
+        return {
+            refBook: slug(biblicalRef.match(re)[0].trim()),
+            refChapter: null,
+            refVerse: null,
+            refHighlight: null
+        }
+    }
+
+    if (chapterVerse !== null && chapterVerse.length === 1) {
+        // missing verse assume 1
+        return {
+            refBook: slug(biblicalRef.match(re)[0].trim()),
+            refChapter: parseInt(chapterVerse[0]),
+            refVerse: 1,
+            refHighlight: null
+        }
+    }
+    // full reference
     return {
         refBook: slug(biblicalRef.match(re)[0].trim()),
         refChapter: parseInt(chapterVerse[0]),

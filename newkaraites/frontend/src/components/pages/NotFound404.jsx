@@ -4,13 +4,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {q640} from "../../constants/constants";
 
 
-export const NotFound404 =()=>{
+export const NotFound404 = () => {
     const classes = useStyles()
-     const matches = useMediaQuery(q640)
+    const matches = useMediaQuery(q640)
     return (
         <div className={classes.container}>
             <div className={classes.center}>
-                <p className={(matches ? classes.fontLarge: classes.fontSmall)}>Error 404 page not found!</p>
+                <p className={(matches ? classes.fontLarge : classes.fontSmall)}>Error 404 page not found!</p>
             </div>
         </div>
     )

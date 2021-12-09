@@ -1,11 +1,9 @@
-import re
 from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
 from .utils import (slug_back,
                     normalize_search,
-                    only_english_stop_word,
                     prep_search)
 from .models import (FullTextSearch, Organization,
                      BookAsArray,
@@ -15,7 +13,7 @@ from .models import (FullTextSearch, Organization,
                      KaraitesBookAsArray,
                      AutoComplete,
                      References)
-
+from .constants import ENGLISH_STOP_WORDS
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -231,13 +229,15 @@ class AutoCompleteView(View):
         search = normalize_search(search)
         search = prep_search(search)
 
-        sql = f"""select id,word_en, word_count  from  autocomplete_view
-                  where to_tsvector(word_en) @@ to_tsquery('{search}' || ':*')
-                  order by word_count desc limit 15"""
+        print('searching for :', search)
 
+        sql = f"""select id,word_en, word_count,classification  from  autocomplete_view
+                  where to_tsvector( word_en) @@ to_tsquery('{search}' || ':*')
+                  limit 15"""
         auto = []
+
         for word in AutoComplete.objects.raw(sql):
-            auto.append(word.word_en)
+            auto.append({'w': word.word_en, 'c': word.classification})
 
         return JsonResponse(auto, safe=False)
 
@@ -252,6 +252,7 @@ class Search(View):
 
     @staticmethod
     def get(request, *args, **kwargs):
+
         search = kwargs.get('search', None)
         page = kwargs.get('page', 1)
 
@@ -259,8 +260,11 @@ class Search(View):
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
         search = normalize_search(search)
+        search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
         search = prep_search(search)
-        print(search)
+
+        print(f'searching for:{search}')
+
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
         sql = """SELECT id, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
@@ -271,5 +275,6 @@ class Search(View):
         for result in FullTextSearch.objects.raw(sql):
             items.append({'ref': result.reference_en, 'text': result.text_en})
 
-        return JsonResponse({'data': items, 'page': page}, safe=False)
+        print(items)
 
+        return JsonResponse({'data': items, 'page': page}, safe=False)

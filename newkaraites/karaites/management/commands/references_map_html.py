@@ -1,7 +1,7 @@
 import sys
 from django.core.management.base import BaseCommand
 from ...models import References
-from ...map_ms_html import map_docx_to_karaites_html
+from .map_ms_html import map_docx_to_karaites_html
 
 
 class Command(BaseCommand):

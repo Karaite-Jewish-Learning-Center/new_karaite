@@ -161,3 +161,8 @@ ENGLISH_STOP_WORDS = {
 HEBREW_STOP_WORDS = {
 
 }
+
+AUTOCOMPLETE_TYPE = [
+    ('B', 'Book'),
+    ('V', 'Verse')
+]

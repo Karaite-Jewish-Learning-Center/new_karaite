@@ -1,11 +1,11 @@
 import sys
 from django.core.management.base import BaseCommand
 from ...models import KaraitesBookAsArray
-from ...map_ms_html import map_docx_to_karaites_html
+from .map_ms_html import map_yeriot_shelomo_docx_to_karaites_html
 
 
 class Command(BaseCommand):
-    help = 'Translate complicate markup from docx to karaites html'
+    help = 'Translate inline style markup from docx to karaites classes style'
 
     def handle(self, *args, **options):
         """ Comments"""
@@ -13,10 +13,10 @@ class Command(BaseCommand):
             sys.stdout.write(
                 f"\33[K Rewriting Karaites book chapter: {i}\r")
 
-            paragraph.book_text = [map_docx_to_karaites_html(paragraph.book_text[0],
-                                                             foot_notes_list=paragraph.foot_notes,
-                                                             language="he",
-                                                             stats=False),
+            paragraph.book_text = [map_yeriot_shelomo_docx_to_karaites_html(paragraph.book_text[0],
+                                                                            foot_notes_list=paragraph.foot_notes,
+                                                                            language="he",
+                                                                            stats=False),
                                    paragraph.book_text[1]]
 
             paragraph.save()
