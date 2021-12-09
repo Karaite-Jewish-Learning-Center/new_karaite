@@ -12,6 +12,8 @@ source_path = '../newkaraites/data_karaites/'
 out_path = '../newkaraites/karaites/management/tmp/'
 
 LIST_OF_BOOKS = [
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
     ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html'],
     ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html'],
     ['Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html'],
@@ -46,7 +48,7 @@ class Command(BaseCommand):
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
-                        text = escape(node.text.replace('\xa0', '').replace('\n', '').replace('\r', '').strip())
+                        text = escape(node.text.replace('\xa0', '').strip())
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
@@ -99,7 +101,10 @@ class Command(BaseCommand):
                 if css.startswith('tab-stops'):
                     continue
 
-                if css.startswith('padding'):
+                if css.startswith('padding') or \
+                        css.startswith('text-indent') or \
+                        css.startswith('margin') or \
+                        css.startswith('margin'):
                     css, values = css.split(':')
                     # remove flot point part
                     values = re.sub(r'\.[0-9]', '', values)
@@ -108,6 +113,7 @@ class Command(BaseCommand):
                     # remove redundant measure unit
                     values = values.replace('0pt', '0')
                     css = f'{css}:{values}'
+
                 if css.startswith('margin'):
                     css, values = css.split(':')
                     # remove redundant measure unit
