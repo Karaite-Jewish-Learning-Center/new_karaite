@@ -92,12 +92,10 @@ class Command(BaseCommand):
         # update/create bible references
         for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=RE_BIBLE_REF):
             for ref in re.findall(regular_expression, book_text.book_text[0]):
-                ref_text = BeautifulSoup(ref).get_text().replace('\n', '').replace('\r', '')
+                ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
                 if ignore_ref(ref_text):
                     continue
-                print("bible ref")
-                print(ref)
-                print(ref_text)
+
                 english_ref = parse_reference(ref_text)
 
                 References.objects.get_or_create(
@@ -108,26 +106,5 @@ class Command(BaseCommand):
                     bible_ref_he=ref_text,
                     bible_ref_en=english_ref,
                 )
-
-        # add foot notes
-        # for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
-        #     notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
-        #     unique = {}
-        #     for fn in notes_tree.find_all("a"):
-        #         if fn is not None and fn.attrs.get('style', None) is not None:
-        #             style = fn.attrs.get('style')
-        #             if style.startswith('mso-footnote-id:'):
-        #                 fn_id = style.split(':')[1].replace('ftn', '').strip()
-        #                 if fn_id in unique:
-        #                     continue
-        #                 unique[fn_id] = True
-        #
-        #                 notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-        #                 if hasattr(notes, 'text'):
-        #                     note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-        #                     if note.startswith(' '):
-        #                         note = note[1:]
-        #                     paragraph.foot_notes += [note]
-        #                     paragraph.save()
 
     print()

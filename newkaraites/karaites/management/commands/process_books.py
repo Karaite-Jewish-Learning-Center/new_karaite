@@ -46,13 +46,18 @@ class Command(BaseCommand):
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
+                        text = escape(node.text.replace('\xa0', '').replace('\n', '').replace('\r', '').strip())
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
-                            f"""<span class='{language}-foot-note'
-                            data-for='{language}'
-                            data-tip='{escape(node.text)}'>
-                            <sup class='{language}-foot-index'>{ref}</sup></span>""",
+                            f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
                             'html5lib'))
+
+                        # print('\n')
+                        # print(foot_note_id, ref, text)
+                        # print('\n',
+                        #       f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""", )
+                        # input('>>')
+
                 except KeyError:
                     # this seams a bug , hasattr, returns True for style, in fact no style attr
                     # these are mostly emtpy a tags so remove then
@@ -157,7 +162,7 @@ class Command(BaseCommand):
         # this is specific to Halakha Adderet
         # fix this:
         old_path = 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld'
-        new_path = f'{settings.IMAGE_HOS}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
+        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
 
         for child in html_tree.find_all('img'):
             path = child.attrs.get('src', None)

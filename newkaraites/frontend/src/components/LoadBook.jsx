@@ -32,7 +32,6 @@ const LoadBook = ({type}) => {
             const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], 0, false))
             if (response.ok) {
                 const data = await response.json()
-                debugger
                 //setVerses(data.book.verses)
                 store.setBookData(data.chapter, paneNumber)
             } else {

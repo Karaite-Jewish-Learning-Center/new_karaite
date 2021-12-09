@@ -170,7 +170,6 @@ class AppState {
 
     // search arg
     setSearch = (searchArg) => {
-        debugger
         this.search = searchArg
         this.searchResultData = []
         this.moreResults = true

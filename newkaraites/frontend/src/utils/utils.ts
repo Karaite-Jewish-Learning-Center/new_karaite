@@ -25,10 +25,8 @@ export const slug = (str: string): string => str.replaceAll(' ', '-')
 
 export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
-const normalizeBookName = (book: string): string => {
-    if (book === null) {
-        debugger
-    }
+export const normalizeSluggedBookName = (book: string): string => {
+    // expect a slugged name
     const pos = book.indexOf('-') + 1
     if (pos >= 0) {
         return book.substr(0, pos) + capitalize(book.substr(pos))
@@ -37,9 +35,8 @@ const normalizeBookName = (book: string): string => {
 }
 
 export const calculateItemNumber = (book: string, chapter: string, verse: string): number => {
-    return versesByBibleBook[normalizeBookName(book)].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+    return versesByBibleBook[normalizeSluggedBookName(book)].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
 }
-
 
 export const englishBookNames: booksTable = {
     'Genesis': 'בראשית',
@@ -133,39 +130,14 @@ export const hebrewBooks = (): Array<string> => Object.keys(hebrewBookNames)
 export const englishBooks = (): Array<string> => Object.keys(englishBookNames)
 
 export const matchHebrewBookName = (bibleRef: string): Array<string> => {
-    let result: Array<string> = []
-    hebrewBooks().map((name: string) => {
+    for (let name of hebrewBooks()){
         if (bibleRef.startsWith(name)) {
-            result.push(bibleRef.replace(name, ''))
-            result.push(name)
-            return result
+            return [bibleRef.replace(name, ''), name]
         }
-        return result
-    })
-    return result
+    }
+    return []
 }
 
-// export const matchHebrewNumber = (hebrewNumber: string): Array<string> => {
-//     const cardinalNumbers = Object.keys(hebrewCardinalNumbers)
-//     debugger
-//     let digits: Array<string> = []
-//     cardinalNumbers.map((cardinal) => {
-//         if (hebrewNumber.endsWith(cardinal)) {
-//             digits.push(cardinal)
-//             debugger
-//             hebrewNumber = hebrewNumber.replace(cardinal, '').trimEnd()
-//         }
-//         if (hebrewNumber.length === 0) {
-//             return
-//         }
-//     })
-//     debugger
-//     // not found on cardinals
-//     if (digits) {
-//         // try on ordinals
-//     }
-//     return []
-// }
 export const englishBookNameToHebrew = (englishBookName: string): string =>
     englishBookNames[englishBookName.trim()]
 
