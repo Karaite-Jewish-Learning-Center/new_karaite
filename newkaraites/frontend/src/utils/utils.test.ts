@@ -2,7 +2,6 @@ import {
     capitalize,
     range,
     equals,
-    makeRandomKey,
     slug,
     unslug,
     normalizeSluggedBookName,
@@ -45,11 +44,6 @@ test('Compare 2 arrays may not be nested, always return false ', () => {
     expect(equals([1, 2, [3]], [1, 2, 3])).toBeFalsy()
 })
 
-test('Create a random key', () => {
-    expect(makeRandomKey().length).toBeGreaterThanOrEqual(17)
-    //todo: test for uniqueness ?
-})
-
 test('slug replaces spaces with -', () => {
     expect(slug('1 2 3')).toEqual('1-2-3')
 })
@@ -76,7 +70,8 @@ test('Normalize bible books name', () => {
 
 test('Calculate item number for a biblical book', () => {
     expect(calculateItemNumber('genesis', '2', '1')).toBe(31)
-    // expect(calculateItemNumber('I-king','10','10')).toBe(31)
+    expect(calculateItemNumber('I-kings','10','10')).toBe(371)
+    // expect(calculateItemNumber('unknown','10','10')).toBe(371)
 })
 
 
@@ -105,7 +100,6 @@ test('Hebrew book name to English book name', ()=>{
 })
 
 it('Is a bible book name', ()=>{
-    // expects a English book name
     expect(isABibleBook('Deuteronomy')).toBeTruthy()
     //expect(isABibleBook('DeuteronomY')).toBeTruthy()
 })
