@@ -126,6 +126,9 @@ class Command(BaseCommand):
                 f"\33[K Import Hebrew comments from {book_title}, chapter:{chapter_number} verse:{verse_number}\r")
 
             same_chapter, same_verses = get_chapter_verse_he(child)
+            # print()
+            # print(same_chapter, same_verses)
+            # input('>>')
             # foot_note_list_he = self.get_a_tag_in_child(child, foot_notes_he)
 
             # typo
@@ -135,8 +138,8 @@ class Command(BaseCommand):
             if same_chapter is not None and same_verses is not None:
 
                 # possible title
-                if str(child).find("color:red") < 0:
-                    continue
+                # if str(child).find("color:red") < 0:
+                #     continue
 
                 chapter_number = same_chapter
                 verse_number = same_verses[0]
@@ -152,6 +155,9 @@ class Command(BaseCommand):
             else:
                 comment = CommentTmp.objects.filter(book=organization, chapter=chapter_number,
                                                     verse=verse_number).last()
+                # print(comment,organization, chapter_number,verse_number)
+                # input('>>')
+
                 comment.comment_he += f"""{child}"""
                 # comment.foot_notes_he += foot_note_list_he
                 comment.save()
@@ -215,6 +221,5 @@ class Command(BaseCommand):
                     comment.comment_he = tmp_comment.comment_he
                     comment.foot_notes_he = tmp_comment.foot_notes_he
                     comment.save()
-
 
         print()

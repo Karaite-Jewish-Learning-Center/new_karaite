@@ -29,7 +29,7 @@ const ChapterHeaderVerse = (props) => {
 
     let chapter = data[BIBLE_CHAPTER]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
-    let refs = parseInt(data[BIBLE_EN_CM]) + parseInt(data[BIBLE_REFS])
+    let refs = parseInt(data[BIBLE_EN_CM]) //+ parseInt(data[BIBLE_REFS])
 
 
     const openRightPane = () => {

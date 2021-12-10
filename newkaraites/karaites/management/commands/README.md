@@ -9,28 +9,41 @@ $ cd anaconda3/envs/dev/newkaraites/newkaraites/
 
 #Bible books
 
-1. books, has no dependencies,
+Books, has no dependencies
 
+
+>> ./manage.py books
+
+Process all books
+
+>>./manage.py process_books
+  
 Comments (Aaron ben Elijah)
 
-1. comments
-2. comments_map_html
+>> ./manage.py comments
 
 Karaite Books (Yeriot Shelomo volume 1 and 2 )
 
-1. karaites_book_as_array
-2. karaites_book_map_html
+>> ./manage.py karaites_book_as_array
+
+Halakha Adderet book
+
+>> ./manage halakha_adderet_as_array
 
 Update references (updates bible references)
 
-1. updates_references
+
+>> ./manage.py updates_references
+ 
 2.references_map_html
 
 Update search
 
-1. update_full_text_search
+>> ./manage.py update_full_text_search
 
 Update autocomplete
 
-1. autocomplete1
+
+>>./manage.py autocomplete | autocomplete1
+>
 

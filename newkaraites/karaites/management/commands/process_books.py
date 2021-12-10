@@ -4,6 +4,7 @@ from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from ...constants import BIBLE_BOOKS_NAMES
 
 style_classes = {}
 ms_classes = []
@@ -12,11 +13,60 @@ source_path = '../newkaraites/data_karaites/'
 out_path = '../newkaraites/karaites/management/tmp/'
 
 LIST_OF_BOOKS = [
-    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
     ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
     ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html'],
     ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html'],
     ['Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html'],
+]
+
+
+def removing_no_breaking_spaces(html_tree):
+    spans = html_tree.find_all('span', class_='span-49')
+    for child in spans:
+        child.decompose()
+    return html_tree
+
+
+def update_bible_references_en(html_tree):
+    names = BIBLE_BOOKS_NAMES.values()
+    for klass in ['span-08','span-42', 'span-46']:
+        spans = html_tree.find_all('span', class_=klass)
+        for child in spans:
+            bible_ref = child.text
+            for name in names:
+                if bible_ref.replace('(', '').replace(')', '').strip().startswith(name):
+                    child.attrs['lang'] = "EN"
+                    child.attrs['class'] = "en-biblical-ref"
+
+    # remove &nbs;
+    spans = html_tree.find_all('span', class_='span-49')
+    for child in spans:
+        child.decompose()
+
+    return html_tree
+
+
+def update_bible_references_he(html_tree):
+    names = BIBLE_BOOKS_NAMES.keys()
+    for c in ['span-06', 'span-08', 'span-56']:
+        spans = html_tree.find_all('span', class_=c)
+        for child in spans:
+            bible_ref = child.text
+            for name in names:
+                if bible_ref.replace('(', '').replace(')', '').strip().startswith(name):
+                    child.attrs['lang'] = "HE"
+                    child.attrs['class'] = "he-biblical-ref"
+
+    return html_tree
+
+
+PROCESS = [
+    [update_bible_references_he],
+    [update_bible_references_en, removing_no_breaking_spaces],
+    [],
+    [],
+    [],
 ]
 
 
@@ -53,12 +103,6 @@ class Command(BaseCommand):
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
                             'html5lib'))
-
-                        # print('\n')
-                        # print(foot_note_id, ref, text)
-                        # print('\n',
-                        #       f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""", )
-                        # input('>>')
 
                 except KeyError:
                     # this seams a bug , hasattr, returns True for style, in fact no style attr
@@ -229,6 +273,7 @@ class Command(BaseCommand):
             a css file is generate
         """
         sys.stdout.write(f"\33[K Loading book's data\r")
+        i = 0
         for path, book in LIST_OF_BOOKS:
             handle_source = open(f'{source_path}{path}{book}', 'r')
             html = handle_source.read()
@@ -252,6 +297,10 @@ class Command(BaseCommand):
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
             divs = self.collect_style_map_to_class(html_tree)
 
+            for process in PROCESS[i]:
+                sys.stdout.write(f"\33[K {process.__name__.replace('_',' ').capitalize()} {book}\r")
+                divs = process(divs)
+
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
             sys.stdout.write(f"\33[K Writing files for {book} \n")
@@ -261,5 +310,6 @@ class Command(BaseCommand):
             handle_out.write(str(divs))
             handle_out.close()
 
+            i += 1
         self.parse_and_save_css()
         self.handle_ms_css()
