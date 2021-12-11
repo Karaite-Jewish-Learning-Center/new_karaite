@@ -28,7 +28,7 @@ Karaite Books (Yeriot Shelomo volume 1 and 2 )
 
 Halakha Adderet book
 
->> ./manage halakha_adderet_as_array
+>> ./manage halakha_adderet_book_as_array
 
 Update references (updates bible references)
 

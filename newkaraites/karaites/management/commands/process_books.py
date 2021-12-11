@@ -1,16 +1,33 @@
 import sys
 import re
+import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from ...constants import BIBLE_BOOKS_NAMES
 
+additional_css = """
+p {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    margin: 10px 5px 10px 5px;
+}
+h1, h2 {
+    text-align: center;
+}
+"""
+
 style_classes = {}
 ms_classes = []
 tags = {}
 source_path = '../newkaraites/data_karaites/'
 out_path = '../newkaraites/karaites/management/tmp/'
+css_source = out_path
+css_out = '../newkaraites/frontend/src/css/'
 
 LIST_OF_BOOKS = [
     ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
@@ -30,7 +47,7 @@ def removing_no_breaking_spaces(html_tree):
 
 def update_bible_references_en(html_tree):
     names = BIBLE_BOOKS_NAMES.values()
-    for klass in ['span-08','span-42', 'span-46']:
+    for klass in ['span-08', 'span-42', 'span-46']:
         spans = html_tree.find_all('span', class_=klass)
         for child in spans:
             bible_ref = child.text
@@ -115,7 +132,8 @@ class Command(BaseCommand):
     @staticmethod
     def parse_and_save_css():
         # just one css file
-        handle_css = open(f'{out_path}karaites.css', 'w')
+        file_name = 'karaites.css'
+        handle_css = open(f'{out_path}{file_name}', 'w')
         styled_order = {k: v for k, v in sorted(style_classes.items(), key=lambda item: item[1])}
         for style, class_name in styled_order.items():
             css_elements = style.split(";")
@@ -140,9 +158,14 @@ class Command(BaseCommand):
             # clean up css
             cleaned = ''
             for css in css_elements:
+
                 if css.startswith('mso'):
                     continue
+
                 if css.startswith('tab-stops'):
+                    continue
+
+                if css.startswith('v:line'):
                     continue
 
                 if css.startswith('padding') or \
@@ -172,6 +195,10 @@ class Command(BaseCommand):
 
             handle_css.write(f'.{class_name} {{\n   {cleaned}}}\n')
         handle_css.close()
+
+        # copy karaites.css
+        sys.stdout.write(f"\33[K Copy {file_name} to final destination.\r")
+        shutil.copy(f'{css_source}{file_name}', f'{css_out}{file_name}')
 
     @staticmethod
     def remove_tags(html_str):
@@ -298,7 +325,7 @@ class Command(BaseCommand):
             divs = self.collect_style_map_to_class(html_tree)
 
             for process in PROCESS[i]:
-                sys.stdout.write(f"\33[K {process.__name__.replace('_',' ').capitalize()} {book}\r")
+                sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
                 divs = process(divs)
 
             sys.stdout.write('\r\n')

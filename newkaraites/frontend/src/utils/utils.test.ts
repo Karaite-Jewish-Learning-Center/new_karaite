@@ -101,6 +101,6 @@ test('Hebrew book name to English book name', ()=>{
 
 it('Is a bible book name', ()=>{
     expect(isABibleBook('Deuteronomy')).toBeTruthy()
-    //expect(isABibleBook('DeuteronomY')).toBeTruthy()
+    expect(isABibleBook('DeuteronomY')).toBeFalsy()
 })
 
