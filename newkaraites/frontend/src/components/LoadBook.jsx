@@ -7,7 +7,7 @@ import {observer} from 'mobx-react-lite'
 import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
-import {Redirect, useParams, useHistory} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
 import {karaitesBookUrl} from '../constants/constants'
 import {calculateItemNumber} from '../utils/utils';
 import {chaptersByBibleBook} from '../constants/constants'
@@ -23,7 +23,6 @@ const LoadBook = ({type}) => {
     const store = useContext(storeContext)
     const {book, chapter, verse = 1} = useParams()
     // if type is karaites, chapter is used as start  and verse is ignored
-    const history = useHistory()
     const classes = useStyles()
 
     async function fetchDataBible(paneNumber) {
@@ -57,11 +56,9 @@ const LoadBook = ({type}) => {
 
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
-        let isOpen = store.isPaneOpen(book)
+        let isOpen = store.isPaneOpen(book,chapter,verse)
         if (isOpen) {
-            if (history.action !== 'POP') {
-                store.setCurrentItem(calculateItemNumber(book, chapter, verse), store.getPaneNumber(book))
-            }
+            store.setMessage(`${book} ${chapter}:${verse} already open.`)
         } else {
 
             if (type === "bible") {

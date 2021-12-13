@@ -16,7 +16,7 @@ class AppState {
     moreResults = true
 
     // autocomplete
-    options =[]
+    options = []
 
     constructor() {
         makeAutoObservable(this)
@@ -128,7 +128,8 @@ class AppState {
     }
     getIsLastPane = () => this.isLastPane
 
-    isPaneOpen = (book) => this.getPanes().some((pane) => pane.book === book)
+    isPaneOpen = (book, chapter, verse) =>
+        this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
     closePane = (i) => {
         this.panes.splice(i, 1)
@@ -189,21 +190,20 @@ class AppState {
     getMoreResults = () => this.moreResults
 
 
-
     // autocomplete
-    setOptions =(options)=> this.options = options
+    setOptions = (options) => this.options = options
 
-    getOptions =() =>  this.options
+    getOptions = () => this.options
 
     getAutoComplete = async (search) => {
-        if (search.length < 2 || isABibleBook(search)){
+        if (search.length < 2 || isABibleBook(search)) {
             this.setOptions([])
             return
         }
 
         await fetch(`${autocompleteUrl}${search}/`)
             .then(response =>
-                   this.setOptions(response.json())
+                this.setOptions(response.json())
             ).catch(e => this.setMessage(e.message))
     }
 
