@@ -8,7 +8,7 @@ import {Typography} from '@material-ui/core';
 import Colors from '../../constants/colors.js';
 import {observer} from 'mobx-react-lite';
 import transform from '../../utils/transform.jsx'
-import '../../css/comments.css'
+import '../../css/_comments.css'
 import '../../css/karaites.css'
 import Header from '../pages/RightPaneHeader.jsx';
 import {storeContext} from "../../stores/context";
@@ -27,13 +27,15 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose}) => {
         }
 
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
-            .then((data)=>setReferences(data.replace))
+            .then((data)=> {
+                setReferences(data.references)
+            })
             .catch((e)=> store.setMessage(e.message))
 
 
     }, [paneNumber, store])
 
-    if (references.length !== 0) {
+    if ( references.length ) {
         return (
             <React.Fragment key={makeRandomKey()}>
                 <Header backButton={backButton} onClose={onClose}/>

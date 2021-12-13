@@ -25,15 +25,17 @@ export const LANGUAGE_SYMBOL = {0: 'A', 1: '\u2135', 2: 'A\u2135'}
 
 export const ENGLISH = 0
 export const HEBREW = 1
+
 export const BIBLE_ENGLISH = 0
 export const BIBLE_HEBREW = 1
 export const BIBLE_EN_CM = 2
-
 export const BIBLE_HE_CM = 3
 export const BIBLE_VERSE = 4
 export const BIBLE_CHAPTER = 5
 export const BIBLE_RENDER_CHAPTER = 6
+
 export const BIBLE_REFS = 7
+
 export const BOOK_CHAPTERS = 0
 export const BOOK_DATA = 1
 

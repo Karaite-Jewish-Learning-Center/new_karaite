@@ -1,49 +1,7 @@
 from hebrew_numbers import gematria_to_int
+from .constants import BIBLE_BOOKS_NAMES
 
-hebrew_book_names = {
-    'בראשית': 'Genesis',
-    'שמות': 'Exodus',
-    'ויקרא': 'Leviticus',
-    'במדבר': 'Numbers',
-    'דברים': 'Deuteronomy',
-    'עמוס': 'Amos',
-    'יחזקאל': 'Ezekiel',
-    'חבקוק': 'Habakkuk',
-    'חגי': 'Haggai',
-    'הושע': 'Hosea',
-    'מלכים א': 'I Kings',
-    'שמואל א': 'I Samuel',
-    'מלכים ב': 'II Kings',
-    'שמואל ב': 'II Samuel',
-    'ישעיה': 'Isaiah',
-    'ישעיהו': 'Isaiah',  # typo ?
-    'ירמיה': 'Jeremiah',
-    'ירמיהו': 'Jeremiah',  # typo ?
-    'יואל': 'Joel',
-    'יונה': 'Jonah',
-    'יהושע': 'Joshua',
-    'שופטים': 'Judges',
-    'מלאכי': 'Malachi',
-    'מיכה': 'Micah',
-    'נחום': 'Nahum',
-    'עובדיה': 'Obadiah',
-    'זכריה': 'Zechariah',
-    'צפניה': 'Zephaniah',
-    'דניאל': 'Daniel',
-    'קהלת': 'Ecclesiastes',
-    'אסתר': 'Esther',
-    'עזרא': 'Ezra',
-    'דברי הימים א': 'I Chronicles',
-    'דברי הימים ב': 'II Chronicles',
-    'איוב': 'Job',
-    'איכה': 'Lamentations',
-    'נחמיה': 'Nehemiah',
-    'משלי': 'Proverbs',
-    'תהלים': 'Psalms',  # possible typo
-    'תהילים': 'Psalms',
-    'רות': 'Ruth',
-    'שיר השירים': 'Song of Songs'
-}
+hebrew_book_names = BIBLE_BOOKS_NAMES
 
 
 def parse_reference(ref):

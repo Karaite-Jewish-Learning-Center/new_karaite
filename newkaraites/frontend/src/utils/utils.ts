@@ -1,5 +1,3 @@
-//import axios from 'axios';
-//import {getCommentsUrl} from "../constants/constants"
 import {versesByBibleBook} from '../constants/constants'
 
 interface booksTable {
@@ -7,7 +5,8 @@ interface booksTable {
 }
 
 export const capitalize = (string: string): string =>
-    string === "" ? "" : string[0].toUpperCase() + string.slice(1).toLowerCase()
+    // respect all other cases
+    string === "" ? "" : string[0].toUpperCase() + string.slice(1)
 
 export const range = (l: number): Array<number> =>
     Array(l).fill(1).map((_, i) => i + 1)
@@ -26,10 +25,11 @@ export const slug = (str: string): string => str.replaceAll(' ', '-')
 export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
 export const normalizeSluggedBookName = (book: string): string => {
-    // expect a slugged name
+    // english book names
+    book = slug(book)
     const pos = book.indexOf('-') + 1
     if (pos >= 0) {
-        return book.substr(0, pos) + capitalize(book.substr(pos))
+        return book.substr(0, pos).toUpperCase() + capitalize(book.substr(pos, 1)) + book.substr(pos + 1).toLowerCase()
     }
     return capitalize(book)
 }
@@ -130,7 +130,7 @@ export const hebrewBooks = (): Array<string> => Object.keys(hebrewBookNames)
 export const englishBooks = (): Array<string> => Object.keys(englishBookNames)
 
 export const matchHebrewBookName = (bibleRef: string): Array<string> => {
-    for (let name of hebrewBooks()){
+    for (let name of hebrewBooks()) {
         if (bibleRef.startsWith(name)) {
             return [bibleRef.replace(name, ''), name]
         }
@@ -139,12 +139,13 @@ export const matchHebrewBookName = (bibleRef: string): Array<string> => {
 }
 
 export const englishBookNameToHebrew = (englishBookName: string): string =>
-    englishBookNames[englishBookName.trim()]
+    englishBookNames[capitalize(englishBookName.trim().toLowerCase())]
 
 export const hebrewBookNameToEnglish = (hebrewBookName: string): string =>
     hebrewBookNames[hebrewBookName]
 
 export const isABibleBook = (book: string): boolean =>
+    // expects an English book name
     capitalize(book.trim().split(' ')[0]) in englishBookNames
 
 // return a english title even if bookName is in Hebrew

@@ -30,7 +30,16 @@ class Command(BaseCommand):
         i = 1
         for ref in query:
             try:
-                book, chapter_verse = ref.bible_ref_en.replace('(', '').replace(')', '').split(' ')
+                # missing bible reference
+                if ref.bible_ref_en == '':
+                    continue
+
+                parts = ref.bible_ref_en.strip().replace('(', '').replace(')', '').split(' ')
+                if len(parts) == 2:
+                    book, chapter_verse = parts[0:2]
+                elif len(parts) == 3:
+                    book, chapter_verse = parts[0:2], parts[3]
+
                 chapter, verse = chapter_verse.split(':')
                 bible_book = Organization.objects.get(book_title_en=book)
                 chapter_text = BookAsArray.objects.get(book=bible_book, chapter=chapter)
@@ -39,5 +48,7 @@ class Command(BaseCommand):
                 chapter_text.save()
                 sys.stdout.write(f"\33[K Updating: {i}\r")
                 i += 1
-            except (ValueError, IndexError) as e:
-                pass
+
+            # todo list of errors and locations for further investigation
+            except (ValueError, IndexError, BookAsArray.DoesNotExist) as e:
+                print(e)

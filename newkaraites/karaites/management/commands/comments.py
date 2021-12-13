@@ -36,13 +36,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Comments"""
-        source = '../newkaraites/data_experimental/English Deuteronomy_Keter Torah_Aaron ben Elijah.html'
+        source = (f'../newkaraites/karaites/management/tmp/'
+                  'English Deuteronomy_Keter Torah_Aaron ben Elijah.html')
         handle = open(source, 'r')
         html = handle.read()
         handle.close()
         html_tree = BeautifulSoup(html, 'html5lib')
 
-        source_he = '../newkaraites/data_experimental/Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'
+        source_he = (f'../newkaraites/karaites/management/tmp/'
+                     'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html')
         handle_he = open(source_he, 'r')
         html_he = handle_he.read()
         handle_he.close()
@@ -54,10 +56,10 @@ class Command(BaseCommand):
         # millage may vary on other book authors
 
         divs_en = html_tree.find_all('div')
-        foot_notes = self.get_foot_notes(divs_en)
+        # foot_notes = self.get_foot_notes(divs_en)
 
         divs_he = html_tree_he.find_all('div')
-        foot_notes_he = self.get_foot_notes(divs_he)
+        # foot_notes_he = self.get_foot_notes(divs_he)
 
         # clear terminal output line
         sys.stdout.write(f"\33[K\r")
@@ -81,7 +83,7 @@ class Command(BaseCommand):
         for child in divs_en[0].find_all("p", class_="MsoNormal"):
 
             # find foot notes
-            foot_note_list_en = self.get_a_tag_in_child(child, foot_notes)
+            # foot_note_list_en = self.get_a_tag_in_child(child, foot_notes)
 
             same_chapter, same_verses = get_chapter_verse_en(child)
 
@@ -100,14 +102,14 @@ class Command(BaseCommand):
                 comment.comment_he = ""
                 comment.comment_author = author
                 comment.source_book = source_book
-                comment.foot_notes_en = foot_note_list_en
+                comment.foot_notes_en = []
                 comment.foot_notes_he = []
                 comment.save()
             else:
                 comment = Comment.objects.filter(book=organization, chapter=chapter_number,
                                                  verse=verse_number).last()
                 comment.comment_en += f"""{child}"""
-                comment.foot_notes_en += foot_note_list_en
+                # comment.foot_notes_en += foot_note_list_en
                 comment.save()
 
         chapter_number = 1
@@ -124,7 +126,10 @@ class Command(BaseCommand):
                 f"\33[K Import Hebrew comments from {book_title}, chapter:{chapter_number} verse:{verse_number}\r")
 
             same_chapter, same_verses = get_chapter_verse_he(child)
-            foot_note_list_he = self.get_a_tag_in_child(child, foot_notes_he)
+            # print()
+            # print(same_chapter, same_verses)
+            # input('>>')
+            # foot_note_list_he = self.get_a_tag_in_child(child, foot_notes_he)
 
             # typo
             if same_chapter == 24 and same_verses == [24]:
@@ -133,8 +138,8 @@ class Command(BaseCommand):
             if same_chapter is not None and same_verses is not None:
 
                 # possible title
-                if str(child).find("color:red") < 0:
-                    continue
+                # if str(child).find("color:red") < 0:
+                #     continue
 
                 chapter_number = same_chapter
                 verse_number = same_verses[0]
@@ -145,13 +150,16 @@ class Command(BaseCommand):
                 comment.comment_he = f"""{child}"""
                 comment.comment_author = author
                 comment.source_book = source_book
-                comment.foot_notes_he = foot_note_list_he
+                comment.foot_notes_he = []
                 comment.save()
             else:
                 comment = CommentTmp.objects.filter(book=organization, chapter=chapter_number,
                                                     verse=verse_number).last()
+                # print(comment,organization, chapter_number,verse_number)
+                # input('>>')
+
                 comment.comment_he += f"""{child}"""
-                comment.foot_notes_he += foot_note_list_he
+                # comment.foot_notes_he += foot_note_list_he
                 comment.save()
 
         # # Add extra comments, those that are repeated in certain verses
@@ -214,6 +222,4 @@ class Command(BaseCommand):
                     comment.foot_notes_he = tmp_comment.foot_notes_he
                     comment.save()
 
-        print()
-        sys.stdout.write('Please run ./manage.py comments_map_html')
         print()

@@ -1,20 +1,94 @@
 import sys
 import re
+import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from django.conf import settings
+from ...constants import BIBLE_BOOKS_NAMES
+
+# override some defaults without having to sweat on code
+# maybe replace is a better strategy, to think about !
+additional_css = """
+p {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    margin: 10px 5px 10px 5px;
+}
+h1, h2 {
+    text-align: center;
+}
+.p-03 {
+    margin-left:0;
+}
+"""
 
 style_classes = {}
 ms_classes = []
 tags = {}
 source_path = '../newkaraites/data_karaites/'
 out_path = '../newkaraites/karaites/management/tmp/'
+css_source = out_path
+css_out = '../newkaraites/frontend/src/css/'
 
 LIST_OF_BOOKS = [
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
     ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html'],
     ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html'],
     ['Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html'],
+]
+
+
+def removing_no_breaking_spaces(html_tree):
+    spans = html_tree.find_all('span', class_='span-49')
+    for child in spans:
+        child.decompose()
+    return html_tree
+
+
+def update_bible_references_en(html_tree):
+    names = BIBLE_BOOKS_NAMES.values()
+    for klass in ['span-08', 'span-42', 'span-46']:
+        spans = html_tree.find_all('span', class_=klass)
+        for child in spans:
+            bible_ref = child.text
+            for name in names:
+                if bible_ref.replace('(', '').replace(')', '').strip().startswith(name):
+                    child.attrs['lang'] = "EN"
+                    child.attrs['class'] = "en-biblical-ref"
+
+    # remove &nbs;
+    spans = html_tree.find_all('span', class_='span-49')
+    for child in spans:
+        child.decompose()
+
+    return html_tree
+
+
+def update_bible_references_he(html_tree):
+    names = BIBLE_BOOKS_NAMES.keys()
+    for c in ['span-06', 'span-08', 'span-56']:
+        spans = html_tree.find_all('span', class_=c)
+        for child in spans:
+            bible_ref = child.text
+            for name in names:
+                if bible_ref.replace('(', '').replace(')', '').strip().startswith(name):
+                    child.attrs['lang'] = "HE"
+                    child.attrs['class'] = "he-biblical-ref"
+
+    return html_tree
+
+
+PROCESS = [
+    [update_bible_references_he],
+    [update_bible_references_en, removing_no_breaking_spaces],
+    [],
+    [],
+    [],
 ]
 
 
@@ -46,17 +120,11 @@ class Command(BaseCommand):
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
-                        text = escape(node.text.replace('\xa0', '').replace('\n', '').replace('\r', '').strip())
+                        text = escape(node.text.replace('\xa0', '').strip())
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
                             'html5lib'))
-
-                        # print('\n')
-                        # print(foot_note_id, ref, text)
-                        # print('\n',
-                        #       f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""", )
-                        # input('>>')
 
                 except KeyError:
                     # this seams a bug , hasattr, returns True for style, in fact no style attr
@@ -69,7 +137,8 @@ class Command(BaseCommand):
     @staticmethod
     def parse_and_save_css():
         # just one css file
-        handle_css = open(f'{out_path}karaites.css', 'w')
+        file_name = 'karaites.css'
+        handle_css = open(f'{out_path}{file_name}', 'w')
         styled_order = {k: v for k, v in sorted(style_classes.items(), key=lambda item: item[1])}
         for style, class_name in styled_order.items():
             css_elements = style.split(";")
@@ -94,12 +163,20 @@ class Command(BaseCommand):
             # clean up css
             cleaned = ''
             for css in css_elements:
+
                 if css.startswith('mso'):
                     continue
+
                 if css.startswith('tab-stops'):
                     continue
 
-                if css.startswith('padding'):
+                if css.find('v:line') >= 0:
+                    continue
+
+                if css.startswith('padding') or \
+                        css.startswith('text-indent') or \
+                        css.startswith('margin') or \
+                        css.startswith('margin'):
                     css, values = css.split(':')
                     # remove flot point part
                     values = re.sub(r'\.[0-9]', '', values)
@@ -108,6 +185,7 @@ class Command(BaseCommand):
                     # remove redundant measure unit
                     values = values.replace('0pt', '0')
                     css = f'{css}:{values}'
+
                 if css.startswith('margin'):
                     css, values = css.split(':')
                     # remove redundant measure unit
@@ -121,7 +199,13 @@ class Command(BaseCommand):
                 continue
 
             handle_css.write(f'.{class_name} {{\n   {cleaned}}}\n')
+
+        handle_css.write(additional_css)
         handle_css.close()
+
+        # copy karaites.css
+        sys.stdout.write(f"\33[K Copy {file_name} to final destination.\r")
+        shutil.copy(f'{css_source}{file_name}', f'{css_out}{file_name}')
 
     @staticmethod
     def remove_tags(html_str):
@@ -223,6 +307,7 @@ class Command(BaseCommand):
             a css file is generate
         """
         sys.stdout.write(f"\33[K Loading book's data\r")
+        i = 0
         for path, book in LIST_OF_BOOKS:
             handle_source = open(f'{source_path}{path}{book}', 'r')
             html = handle_source.read()
@@ -246,6 +331,10 @@ class Command(BaseCommand):
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
             divs = self.collect_style_map_to_class(html_tree)
 
+            for process in PROCESS[i]:
+                sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
+                divs = process(divs)
+
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
             sys.stdout.write(f"\33[K Writing files for {book} \n")
@@ -255,5 +344,6 @@ class Command(BaseCommand):
             handle_out.write(str(divs))
             handle_out.close()
 
+            i += 1
         self.parse_and_save_css()
         self.handle_ms_css()
