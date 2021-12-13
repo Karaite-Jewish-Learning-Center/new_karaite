@@ -56,10 +56,7 @@ class Command(BaseCommand):
         # millage may vary on other book authors
 
         divs_en = html_tree.find_all('div')
-        # foot_notes = self.get_foot_notes(divs_en)
-
         divs_he = html_tree_he.find_all('div')
-        # foot_notes_he = self.get_foot_notes(divs_he)
 
         # clear terminal output line
         sys.stdout.write(f"\33[K\r")
@@ -81,9 +78,6 @@ class Command(BaseCommand):
 
         # English
         for child in divs_en[0].find_all("p", class_="MsoNormal"):
-
-            # find foot notes
-            # foot_note_list_en = self.get_a_tag_in_child(child, foot_notes)
 
             same_chapter, same_verses = get_chapter_verse_en(child)
 
@@ -126,20 +120,12 @@ class Command(BaseCommand):
                 f"\33[K Import Hebrew comments from {book_title}, chapter:{chapter_number} verse:{verse_number}\r")
 
             same_chapter, same_verses = get_chapter_verse_he(child)
-            # print()
-            # print(same_chapter, same_verses)
-            # input('>>')
-            # foot_note_list_he = self.get_a_tag_in_child(child, foot_notes_he)
 
             # typo
             if same_chapter == 24 and same_verses == [24]:
                 same_verses = [2, 4]
 
             if same_chapter is not None and same_verses is not None:
-
-                # possible title
-                # if str(child).find("color:red") < 0:
-                #     continue
 
                 chapter_number = same_chapter
                 verse_number = same_verses[0]
@@ -159,7 +145,6 @@ class Command(BaseCommand):
                 # input('>>')
 
                 comment.comment_he += f"""{child}"""
-                # comment.foot_notes_he += foot_note_list_he
                 comment.save()
 
         # # Add extra comments, those that are repeated in certain verses

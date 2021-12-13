@@ -35,11 +35,11 @@ css_source = out_path
 css_out = '../newkaraites/frontend/src/css/'
 
 LIST_OF_BOOKS = [
-    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
-    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
-    ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html'],
-    ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html'],
-    ['Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html'],
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html', 'he'],
+    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html', 'en'],
+    ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html', 'he'],
+    ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html', 'he'],
+    ['Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html', 'he'],
 ]
 
 
@@ -308,7 +308,7 @@ class Command(BaseCommand):
         """
         sys.stdout.write(f"\33[K Loading book's data\r")
         i = 0
-        for path, book in LIST_OF_BOOKS:
+        for path, book, language in LIST_OF_BOOKS:
             handle_source = open(f'{source_path}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()
@@ -316,7 +316,7 @@ class Command(BaseCommand):
             html_tree = BeautifulSoup(html, 'html5lib')
 
             sys.stdout.write(f"\33[K Processing foot-notes for book {book}\r")
-            html_tree = self.replace_a_foot_notes(html_tree, 'he')
+            html_tree = self.replace_a_foot_notes(html_tree, language)
 
             sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
             html_str = self.remove_tags(str(html_tree))
