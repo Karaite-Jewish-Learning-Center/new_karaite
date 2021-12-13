@@ -28,20 +28,17 @@ Karaite Books (Yeriot Shelomo volume 1 and 2 )
 
 Halakha Adderet book
 
->> ./manage halakha_adderet_book_as_array
+>> ./manage.py halakha_adderet_book_as_array
 
 Update references (updates bible references)
 
->> ./manage.py updates_references
+>> ./manage.py update_references
  
-2.references_map_html
-
 Update search
 
 >> ./manage.py update_full_text_search
 
 Update autocomplete
-
 
 >>./manage.py autocomplete | autocomplete1
 >
