@@ -48,6 +48,7 @@ const RightPane = ({paneNumber, refClick}) => {
 
     const Item = () => {
         return items.map((item, i) => {
+            
             return (
                 <Button
                     variant="text"

@@ -32,7 +32,6 @@ Halakha Adderet book
 
 Update references (updates bible references)
 
-
 >> ./manage.py updates_references
  
 2.references_map_html

@@ -27,13 +27,15 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose}) => {
         }
 
         getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
-            .then((data)=>setReferences(data.replace))
+            .then((data)=> {
+                setReferences(data.references)
+            })
             .catch((e)=> store.setMessage(e.message))
 
 
     }, [paneNumber, store])
 
-    if (references.length !== 0) {
+    if ( references.length ) {
         return (
             <React.Fragment key={makeRandomKey()}>
                 <Header backButton={backButton} onClose={onClose}/>

@@ -7,6 +7,8 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 from ...constants import BIBLE_BOOKS_NAMES
 
+# override some defaults without having to sweat on code
+# maybe replace is a better strategy, to think about !
 additional_css = """
 p {
     display: block;
@@ -18,6 +20,9 @@ p {
 }
 h1, h2 {
     text-align: center;
+}
+.p-03 {
+    margin-left:0;
 }
 """
 
@@ -165,7 +170,7 @@ class Command(BaseCommand):
                 if css.startswith('tab-stops'):
                     continue
 
-                if css.startswith('v:line'):
+                if css.find('v:line') >= 0:
                     continue
 
                 if css.startswith('padding') or \
@@ -194,6 +199,8 @@ class Command(BaseCommand):
                 continue
 
             handle_css.write(f'.{class_name} {{\n   {cleaned}}}\n')
+
+        handle_css.write(additional_css)
         handle_css.close()
 
         # copy karaites.css
