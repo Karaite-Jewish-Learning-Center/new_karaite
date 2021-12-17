@@ -12,7 +12,7 @@ BOOK_CLASSIFICATION = [
     ('02', 'Blessing'),
     ('03', 'Karaite Jewish practice'),
     ('04', 'Egyptian Karaite Tradition'),
-    ('05', 'Poems'),
+    ('05', 'Aliyyot Poems'),
     ('06', 'Recipes')
 ]
 
@@ -20,6 +20,7 @@ FIRST_LEVEL = [
     (1, 'Tanakh'),
     # (2, 'Talmud'),
     (3, 'Halakhah'),
+    (4, 'Liturgy')
 ]
 
 SECOND_LEVEL = [

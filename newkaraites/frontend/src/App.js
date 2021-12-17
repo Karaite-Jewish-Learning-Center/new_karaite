@@ -7,6 +7,7 @@ import LoadBook from "./components/LoadBook";
 import {createMuiTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/core/styles'
 import Halakhah from './components/halakhah/Halakhah'
+import Liturgy from "./components/liturgy/Liturgy"
 import Home from "./components/pages/Home";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
@@ -48,6 +49,7 @@ function App() {
                         <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
                         <Route exact path="/Halakhah/"><Halakhah/></Route>
 
+                        <Route exact path="/Liturgy/"><Liturgy/></Route>
                         <Route path='*'>
                             <NotFound404/>
                         </Route>

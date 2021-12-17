@@ -33,7 +33,6 @@ export const parseHebrewRef = (biblicalRef) => {
 
 }
 
-
 export const parseEnglishRef = (biblicalRef) => {
     biblicalRef = capitalize(biblicalRef)
     let re = /[0-9]+/g
@@ -50,7 +49,7 @@ export const parseEnglishRef = (biblicalRef) => {
         }
     }
 
-    if (chapterVerse !== null && chapterVerse.length === 1) {
+    if (chapterVerse.length === 1) {
         // missing verse assume 1
         return {
             refBook: slug(biblicalRef.match(re)[0].trim()),

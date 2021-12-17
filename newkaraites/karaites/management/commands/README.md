@@ -30,6 +30,10 @@ Halakha Adderet book
 
 >> ./manage.py halakha_adderet_book_as_array
 
+Anochi poems
+
+>> ./manage.py anochi_book_as_array
+
 Update references (updates bible references)
 
 >> ./manage.py update_references

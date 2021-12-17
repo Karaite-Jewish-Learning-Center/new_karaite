@@ -129,10 +129,14 @@ class GetFirstLevel(View):
     def get(request):
         """ for the time being just fake the database query"""
         level = OrderedDict()
-        level[
-            'Tanakh'] = """Torah, Prophets, and Writings, which together make up the Hebrew Bible, Judaism's foundational text."""
-        level[
-            'Halakhah'] = """Legal works providing guidance on all aspects of Jewish life. Rooted in past sources and growing to address changing realities"""
+        level['Tanakh'] = ("""Torah, Prophets, and Writings, which together make up 
+        the Hebrew Bible, Judaism's foundational text.""")
+
+        level['Halakhah'] = ("""Legal works providing guidance on all aspects of Jewish life. 
+        Rooted in past sources and growing to address changing realities""")
+
+        level['Liturgy'] = ("""Prayers, poems, and ritual texts, 
+        recited in daily worship or at specific occasions.""")
 
         return JsonResponse(level)
 

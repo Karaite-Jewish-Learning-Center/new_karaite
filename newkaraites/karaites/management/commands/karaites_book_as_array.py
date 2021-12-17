@@ -1,4 +1,3 @@
-import sys
 import re
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
@@ -9,7 +8,7 @@ from ...models import (Author,
                        References)
 
 from ...utils import clear_terminal_line
-from ...parser_ref import parse_reference
+from newkaraites.karaites.management.commands.html_utils.parser_ref import parse_reference
 
 
 class Command(BaseCommand):

@@ -9,8 +9,7 @@ import {languageDirection} from "../../utils/languageDirection"
 import Colors from "../../constants/colors";
 
 
-const RenderMenu = ({books, path, languages = ['en', 'en']}) => {
-    const columns = 6
+const RenderMenu = ({books, path, languages = ['en', 'en'], columns=6}) => {
     const classes = useStyles()
 
     const populate = (obj) => {

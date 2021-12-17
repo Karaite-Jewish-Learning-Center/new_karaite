@@ -15,7 +15,7 @@ import {bookChapterUrl} from '../constants/constants'
 import {makeBookUrl} from "../utils/utils"
 import {storeContext} from "../stores/context";
 import {translateMessage} from "./messages/translateMessages";
-
+import '../css/halakha.css'
 
 const PARAGRAPHS = 0
 

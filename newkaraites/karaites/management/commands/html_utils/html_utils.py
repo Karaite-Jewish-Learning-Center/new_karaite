@@ -1,5 +1,4 @@
 import re
-from bs4 import BeautifulSoup
 
 
 def remove_empty_tags(html_tree):
@@ -55,8 +54,14 @@ def possible_range(pattern=None, group=None):
 
 
 def simple_range(pattern):
-    chapter, verse = pattern.strip().replace('>', '').replace('<', '').split(":")
-    return int(chapter), [int(verse)]
+    try:
+        chapter, verse = pattern.strip().replace('>', '').replace('<', '').split(":")
+        return int(chapter), [int(verse)]
+    except ValueError:
+        print()
+        print(f'{pattern}, {chapter}, {verse}')
+        print()
+        input('>>>')
 
 
 def get_chapter_verse_en(html):
@@ -169,4 +174,3 @@ def get_foot_note_index(html):
         except ValueError:
             pass
     return index
-

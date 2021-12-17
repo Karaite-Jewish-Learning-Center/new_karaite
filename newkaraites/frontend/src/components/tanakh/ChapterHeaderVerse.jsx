@@ -152,6 +152,7 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
+        cursor:'default',
     },
     chapterTitle_he: {
         maxWidth: '35%',

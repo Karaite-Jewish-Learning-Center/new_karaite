@@ -7,35 +7,35 @@ from ...models import (Author,
                        References)
 
 from ...utils import clear_terminal_line
-from newkaraites.karaites.management.commands.html_utils.parser_ref import parse_reference
-from newkaraites.karaites.management.commands.html_utils.utils import (get_html,
-                                                                       mark_bible_refs,
-                                                                       ignore_ref,
-                                                                       RE_BIBLE_REF
-                                                                       )
+from .html_utils.parser_ref import parse_reference
+from .html_utils.utils import (get_html,
+                               mark_bible_refs,
+                               ignore_ref,
+                               RE_BIBLE_REF
+                               )
 
 
 class Command(BaseCommand):
-    help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
+    help = 'Populate Database with Anochi books as array '
 
     def handle(self, *args, **options):
-        """ Karaites books as array """
+        """ Anochi books as array """
 
-        print(f'Processing Halakha Adderet')
+        print(f'Processing Anochi')
 
-        book_title = "Halakha Adderet"
-        author, _ = Author.objects.get_or_create(name='Eliyahu R Elijah Bashyatchi')
+        book_title = "Anochi Anochi"
+        author, _ = Author.objects.get_or_create(name='N/A')
         author.save()
 
         book_details, _ = KaraitesBookDetails.objects.get_or_create(
-            first_level=3,  # Halakhah
+            first_level=4,  # Liturgy
             book_language='he',
             book_classification='03',
             author=author,
             book_title=book_title
         )
         html = get_html(f'../newkaraites/karaites/management/tmp/'
-                        f'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html')
+                        f'Anochi Anochi.html')
 
         html = mark_bible_refs(html)
 
@@ -54,27 +54,6 @@ class Command(BaseCommand):
 
             if text == '\xa0':
                 continue
-
-            # if not child.find_all('table'):
-
-            # text = text[0:30].replace('\n', ' ')
-
-            # for toc in table_of_contents:
-            #
-            #     if text.startswith(toc[0]):
-            #         TableOfContents.objects.get_or_create(
-            #             karaite_book=book_details,
-            #             subject=toc,
-            #             start_paragraph=paragraph_number - 1
-            #         )
-            #         ref_chapter = toc[0]
-            #         # update previous record that's the header for chapter
-            #         header = KaraitesBookAsArray.objects.get(book=book_details,
-            #                                                  paragraph_number=paragraph_number - 1)
-            #         header.ref_chapter = ref_chapter
-            #         header.book_text = [header.book_text[0], 1]
-            #         header.save()
-            #         break
 
             KaraitesBookAsArray.objects.get_or_create(
                 book=book_details,
