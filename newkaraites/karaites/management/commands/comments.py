@@ -79,7 +79,7 @@ class Command(BaseCommand):
         # English
         for child in divs_en[0].find_all("p", class_="MsoNormal"):
 
-            same_chapter, same_verses = get_chapter_verse_en(child)
+            same_chapter, same_verses = get_chapter_verse_en(child, chapter_number)
 
             sys.stdout.write(
                 f"\33[K Import English comments from {book_title}, chapter:{chapter_number} verse {verse_number}\r")
@@ -158,7 +158,7 @@ class Command(BaseCommand):
         for language in [en, he]:
             for child in language:
                 if i == 0:
-                    same_chapter, same_verses = get_chapter_verse_en(child)
+                    same_chapter, same_verses = get_chapter_verse_en(child, chapter_number)
                 else:
                     same_chapter, same_verses = get_chapter_verse_he(child)
                 # interested in 12:1-2 ...

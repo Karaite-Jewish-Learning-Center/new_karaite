@@ -77,6 +77,16 @@ def update_bible_references_he(html_tree):
     return html_tree
 
 
+def fix_chapter_verse(html_tree):
+    span = str(html_tree).replace("""<span class="span-50">:30
+This </span>""", '<span class="span-50">11:30 This </span>')
+    span = span.replace('<span class="span-58">31</span>',
+                        '<span class="span-58">31:26 Beside the ark of God’s covenant </span>')
+    span = span.replace('<span class="span-58">34</span>',
+                        '<span>34:1 From [<i>et</i>]<i> </i>Gilead</span>')
+    return span
+
+
 LIST_OF_BOOKS = [
 
     [
@@ -87,7 +97,7 @@ LIST_OF_BOOKS = [
     [
         'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
-        [update_bible_references_en, removing_no_breaking_spaces],
+        [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
@@ -106,6 +116,26 @@ LIST_OF_BOOKS = [
     ],
     [
         'Anochi/', 'Anochi Anochi.html',
+        'he',
+        []
+    ],
+    [
+        'Atsili Qum Qera/', 'Atsili Qum Qera.html',
+        'he',
+        []
+    ],
+    [
+        'Evyon Asher/', 'Evyon Asher.html',
+        'he',
+        []
+    ],
+    [
+        'Vehahochma/', 'Vehahochma.html',
+        'he',
+        []
+    ],
+    [
+        'Vehoshia/', 'Vehoshia.html',
         'he',
         []
     ],
@@ -133,10 +163,6 @@ class Command(BaseCommand):
                         continue
 
                     note_ref = re.match('\\[[0-9]*.\\]', child.text)
-                    # if note_ref is None:
-                    #     # volume 2
-                    #     note_ref = re.match('[0-9]*.', foot_notes_list[foot_note])
-
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:

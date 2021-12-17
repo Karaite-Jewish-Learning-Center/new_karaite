@@ -53,18 +53,19 @@ def possible_range(pattern=None, group=None):
     return int(chapter), verse
 
 
-def simple_range(pattern):
+def simple_range(pattern, chapter_number, html):
     try:
         chapter, verse = pattern.strip().replace('>', '').replace('<', '').split(":")
         return int(chapter), [int(verse)]
     except ValueError:
-        print()
-        print(f'{pattern}, {chapter}, {verse}')
-        print()
-        input('>>>')
+        print(pattern)
+        print(html)
+
+        input('>>')
+        return chapter_number, [int(verse)]
 
 
-def get_chapter_verse_en(html):
+def get_chapter_verse_en(html, chapter_number):
     """ Parse chapter number and verse."""
     chapter = None
     verse = None
@@ -86,7 +87,7 @@ def get_chapter_verse_en(html):
         # 11:9
         pattern = re.search('^[0-9,:,–]+', text)
         if pattern is not None:
-            return simple_range(pattern.group())
+            return simple_range(pattern.group(), chapter_number, html)
 
     return chapter, verse
 
@@ -132,13 +133,13 @@ def get_chapter_verse_he(html):
                 if second.find('-') > 0:
                     return possible_range(pattern=None, group=first + second)
                 else:
-                    return simple_range(first + second)
+                    return simple_range(first + second, 2000, html)
             else:
                 # 3:10
                 second_pattern = re.search('>:[0-9]+<', text)
                 if second_pattern is not None:
                     first = pattern.group() + second_pattern.group()
-                    return simple_range(first)
+                    return simple_range(first,10000, html)
     return chapter, verse
 
 
