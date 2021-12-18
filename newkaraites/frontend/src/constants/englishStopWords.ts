@@ -1,7 +1,7 @@
 // taken from postgresql stop words
 // /Applications/Postgres.app/Contents/Versions/10/share/postgresql/tsearch_data/
 
-export const stopWords = [
+export const stopWords:Array<string> = [
     'i',
     'me',
     'my',

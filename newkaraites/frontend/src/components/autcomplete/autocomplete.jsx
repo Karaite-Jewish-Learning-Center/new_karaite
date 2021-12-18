@@ -14,7 +14,7 @@ import {isABibleBook} from "../../utils/utils";
 
 const AutoComplete = () => {
     // The material-ui Autocomplete component has serious flaws
-    // the documented  is not accurate or even help full
+    // the documented  is not accurate or even helpful
     const store = useContext(storeContext)
     const [isOpen, setIsOpen] = useState(true)
     const [search, setSearch] = useState('')

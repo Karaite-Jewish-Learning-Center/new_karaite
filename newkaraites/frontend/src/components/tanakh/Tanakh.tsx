@@ -1,8 +1,8 @@
 import React from 'react'
 import RenderMenu from '../menu/RenderMenu'
+import {booksObj, booksMenu} from '../../types/commonTypes'
 
-
-const torah = {
+const torah:booksObj = {
     'Genesis': 'Creation, the beginning of mankind, and stories of the patriarchs and matriarchs.',
     'Exodus': 'The Israelites’ enslavement in Egypt, miraculous redemption, the giving of the Torah, and building of the Mishkan (Tabernacle).',
     'Leviticus': 'Laws of sacrificial worship in the Mishkan (Tabernacle), ritual purity, and other topics like agriculture, ethics, and holidays.',
@@ -10,7 +10,7 @@ const torah = {
     'Deuteronomy': 'Moses’ final speeches, recalling events of the desert, reviewing old laws, introducing new ones, and calling for faithfulness to God.'
 }
 
-const prophets = {
+const prophets:booksObj = {
     'Joshua': 'The Israelites enter, conquer, and settle Israel under the leadership of Joshua.',
     'Judges': ' Cycles of sin, foreign oppression, repentance, and redemption through leaders appointed by God.',
     'I Samuel': 'The prophet Samuel, the advent of monarchy with the reign of Saul, and the rise of a young David.',
@@ -34,7 +34,7 @@ const prophets = {
     'Malachi': 'Criticism of disingenuous ritual worship and descriptions of God’s future blessings.',
 }
 
-const writings = {
+const writings:booksObj = {
     'Psalms': 'Poems of despair, hope, gratitude, and supplication to God, attributed to David and others',
     'Proverbs': 'Guidance for living a wise, moral, and righteous life, in the form of poems and short statements.',
     'Job': 'Satan convinces God to strike a righteous man with tragedy, spurring conversations about suffering.',
@@ -50,7 +50,7 @@ const writings = {
     'II Chronicles': 'Recounts of events in the Prophets, from Solomon through the First Temple’s destruction.',
 }
 
-const books = {'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings}
+const books:booksMenu = {'TORAH': torah, 'PROPHETS': prophets, 'WRITINGS': writings}
 
 const Tanakh = () => <RenderMenu books={books} path={'Tanakh'} languages={['en','en']}/>
 

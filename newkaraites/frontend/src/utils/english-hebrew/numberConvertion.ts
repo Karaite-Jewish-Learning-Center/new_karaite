@@ -1,9 +1,9 @@
 interface TableIndoToHebrew {
-    [index: number]: string;
+    readonly   [index: number]: string;
 }
 
 interface TableHebrewToIndo {
-    [index: string]: number;
+    readonly [index: string]: number;
 }
 
 export const indoArabicToHebrewCardinal = (indo_arabic_number: number): string => {
@@ -577,8 +577,10 @@ export const hebrewCardinalNumbers: TableHebrewToIndo = {
 
 export const hebrewToIndoArabic = (hebrew_number: string): number => {
     hebrew_number = hebrew_number.trim()
+    // first try cardinal numbers
     let translate = hebrewCardinalNumbers[hebrew_number]
     if (translate === undefined)
+        // second try ordinal numbers
         translate = hebrewOrdinalToIndoArabic(hebrew_number)
     return translate
 

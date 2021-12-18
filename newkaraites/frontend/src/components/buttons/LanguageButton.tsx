@@ -1,12 +1,15 @@
-import React, {useContext} from "react"
+import React, {FC, useContext} from "react"
 import IconButton from "@material-ui/core/IconButton"
 import {observer} from "mobx-react-lite"
 import {makeStyles} from '@material-ui/core/styles'
 import {LANGUAGE_KEY, LANGUAGE_SYMBOL} from "../../constants/constants"
 import {storeContext} from "../../stores/context"
 
+interface langButton {
+    paneNumber:number
+}
 
-const LanguageButton = ({paneNumber}) => {
+const LanguageButton:FC<langButton> = ({paneNumber}) => {
     const store = useContext(storeContext)
     const classes = useStyles()
 
