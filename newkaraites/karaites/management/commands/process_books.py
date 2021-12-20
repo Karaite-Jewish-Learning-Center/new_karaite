@@ -31,10 +31,11 @@ h1, h2 {
 style_classes_by_book = {}
 ms_classes = []
 tags = {}
-source_path = '../newkaraites/data_karaites/'
-out_path = '../newkaraites/karaites/management/tmp/'
-css_source = out_path
-css_out = '../newkaraites/frontend/src/css/'
+
+SOURCE_PATH = '../newkaraites/data_karaites/'
+OUT_PATH = '../newkaraites/karaites/management/tmp/'
+CSS_SOURCE = OUT_PATH
+CSS_OUT = '../newkaraites/frontend/src/css/'
 
 
 def removing_no_breaking_spaces(html_tree):
@@ -87,56 +88,165 @@ This </span>""", '<span class="span-50">11:30 This </span>')
     return span
 
 
+BOOKS = [1, 2]
+
+
+def read_data(path, book_name):
+    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'r')
+    book = handle.read()
+    handle.close()
+    return book
+
+
+def write_data(path, book_name, book):
+    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'w')
+    handle.write(book)
+    handle.close()
+
+
+def fix_image_source(path, book_name, books=BOOKS):
+    # this is specific to Halakha Adderet
+    old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
+                2: 'Adderet%20Eliyahu%20Critical%20Edition%20(2nd%20half)%20(SITE).fld/'}
+
+    book_name = book_name.replace('.html', '')
+
+    for book in books:
+        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
+
+        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
+
+        for child in html_tree.find_all('img'):
+            image_path = child.attrs.get('src', None)
+            if image_path is not None:
+                child.attrs['src'] = image_path.replace(old_path[book], new_path)
+
+        write_data(path, f'{book_name}-{book}.html', str(html_tree))
+
+
+HTML = """
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    </head>
+    <body lang="EN-US">
+    </body>
+</html>
+"""
+
+
+def add_book_parts(path, book_name, books=BOOKS):
+    """added books together in a single file"""
+    # number of foot-notes in the first book
+    magical_number = 682
+    book_name = book_name.replace('.html', '')
+    tree = BeautifulSoup(HTML, 'html5lib')
+
+    for part in books:
+        book_data = read_data(path, f'{book_name}-{part}.html')
+
+        if part == 1:
+            div = BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1")
+            foot_notes1 = BeautifulSoup(book_data, 'html5lib').find('div', attrs={'style': "mso-element:footnote-list"})
+            tree.body.append(div)
+
+        if part == 2:
+            # second book we have to update all foot-notes numbers and references.
+            div = BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1")
+            foot_notes2 = BeautifulSoup(book_data, 'html5lib').find('div', attrs={'style': "mso-element:footnote-list"})
+            for child in [div, foot_notes2]:
+                for a in child.find_all('a'):
+                    if hasattr(a, 'attrs'):
+                        href = a.attrs.get('href', None)
+                        name = a.attrs.get('name', None)
+                        style = a.attrs.get('style', None)
+
+                        if href is not None and name is not None and style is not None:
+                            href = href.strip()
+                            style = style.strip()
+                            href_letters = re.sub('[0-9]', '', href)
+                            number = int(href.replace(href_letters, '')) + magical_number
+                            new_href = f'{href_letters}{number}'
+                            a.attrs['href'] = new_href
+                            a.attrs['name'] = f'_fnt{number}'
+                            a.attrs['style'] = f'{style.split(":")[0]}:fnt{number}'
+                            a.span.string = f'[{number}]'
+
+            tree.body.append(div)
+            tree.body.append(foot_notes1)
+            tree.body.append(foot_notes2)
+
+    write_data(path, f'{book_name}.html', str(tree))
+
+
+# book path
+# book name
+# language
+# post process list of function
+# pre-process list of function
+
 LIST_OF_BOOKS = [
 
     [
         'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'he',
+        [],
         [update_bible_references_he],
+
     ],
     [
         'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
+        [],
         [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
+
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
+        [],
         []
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
+        [],
         []
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
-        []
+        [fix_image_source, add_book_parts],
+        [],
     ],
     [
         'Anochi/', 'Anochi Anochi.html',
         'he',
+        [],
         []
     ],
     [
         'Atsili Qum Qera/', 'Atsili Qum Qera.html',
         'he',
+        [],
         []
     ],
     [
         'Evyon Asher/', 'Evyon Asher.html',
         'he',
+        [],
         []
     ],
     [
         'Vehahochma/', 'Vehahochma.html',
         'he',
+        [],
         []
     ],
     [
         'Vehoshia/', 'Vehoshia.html',
         'he',
+        [],
         []
     ],
 ]
@@ -173,7 +283,7 @@ class Command(BaseCommand):
                             'html5lib'))
 
                 except KeyError:
-                    # this seams a bug , hasattr, returns True for style, in fact no style attr
+                    # this seems a bug , hasattr, returns True for style, in fact no style attr
                     # these are mostly emtpy a tags so remove then
                     if len(child.text) == 0:
                         child.decompose()
@@ -184,7 +294,7 @@ class Command(BaseCommand):
     def parse_and_save_css():
         # just one css file
         file_name = 'karaites.css'
-        handle_css = open(f'{out_path}{file_name}', 'w')
+        handle_css = open(f'{OUT_PATH}{file_name}', 'w')
         handle_css.write(f'\n/*  This file was generated by command process_books, should not be edit by hand.*/\n'
                          f'/*  All changes will be lost. You have been warned.                               */\n')
 
@@ -261,7 +371,7 @@ class Command(BaseCommand):
 
         # copy karaites.css
         sys.stdout.write(f"\33[K Copy {file_name} to final destination.\r")
-        shutil.copy(f'{css_source}{file_name}', f'{css_out}{file_name}')
+        shutil.copy(f'{CSS_SOURCE}{file_name}', f'{CSS_OUT}{file_name}')
 
     @staticmethod
     def remove_tags(html_str):
@@ -298,22 +408,8 @@ class Command(BaseCommand):
         return html
 
     @staticmethod
-    def fix_image_source(html_tree):
-        # this is specific to Halakha Adderet
-        # fix this:
-        old_path = 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld'
-        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
-
-        for child in html_tree.find_all('img'):
-            path = child.attrs.get('src', None)
-            if path is not None:
-                child.attrs['src'] = path.replace(old_path, new_path)
-
-        return html_tree
-
-    @staticmethod
     def handle_ms_css():
-        handle_ms_css = open(f'{out_path}ms.css', 'w')
+        handle_ms_css = open(f'{OUT_PATH}ms.css', 'w')
         ms_classes.sort()
         for class_name in ms_classes:
             handle_ms_css.write(f'.{class_name} {{}}\n')
@@ -361,14 +457,23 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         """
+            Books are pre-process and writen to original
+            directory
+
             Books are processes and writen to tmp directory
-            tags are rewritten and styles mapped to classes
-            a css file is generate
+            tags are rewritten and styles mapped to a css
+            class.
+            A css file is generate.
         """
+        sys.stdout.write(f"\33[K Pre-processing book's\r")
+        for path, book, language, pre_processes, _ in LIST_OF_BOOKS:
+            for pre_process in pre_processes:
+                pre_process(path, book)
+
         sys.stdout.write(f"\33[K Loading book's data\r")
         i = 0
-        for path, book, language, processes in LIST_OF_BOOKS:
-            handle_source = open(f'{source_path}{path}{book}', 'r')
+        for path, book, language, _, post_processes in LIST_OF_BOOKS:
+            handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()
 
@@ -384,13 +489,13 @@ class Command(BaseCommand):
             html_str = self.replace_from_open_to_close(html_str)
 
             html_tree = BeautifulSoup(html_str, 'html5lib')
-            sys.stdout.write(f"\33[K Fix images path book {book}\r")
-            html_tree = self.fix_image_source(html_tree)
+            # sys.stdout.write(f"\33[K Fix images path book {book}\r")
+            # html_tree = self.fix_image_source(html_tree)
 
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
             divs = self.collect_style_map_to_class(html_tree, book)
 
-            for process in processes:
+            for process in post_processes:
                 sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
                 divs = process(divs)
 
@@ -399,7 +504,7 @@ class Command(BaseCommand):
             sys.stdout.write(f"\33[K Writing files for {book} \n")
             sys.stdout.write('\n')
 
-            handle_out = open(f'{out_path}{book}', 'w')
+            handle_out = open(f'{OUT_PATH}{book}', 'w')
             handle_out.write(str(divs))
             handle_out.close()
 
