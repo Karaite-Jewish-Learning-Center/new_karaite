@@ -1295,60 +1295,69 @@
 
 /*   Anochi Anochi.html    */
 .p-95 {
+   	 text-align:center;
+}
+.p-96 {
    	 text-align:right;
 	 direction:rtl;
 	 unicode-bidi:embed;
 }
-.p-96 {
+.p-97 {
    	 margin:0;
 	 text-align:center;
 }
-.p-97 {
+.p-98 {
    	 margin-top:0;
 	 margin-right:0;
 	 margin-bottom:0;
 	 margin-left:70pt;
 }
-.span-181 {
-   	 font-family:"Arial",sans-serif;
+.span-180 {
+   	 font-family:"TimesNewRoman",serif;
+}
+.span-182 {
+   	 font-family:"TimesNewRoman",serif;
 	 color:red;
 }
-.span-183 {
+.span-184 {
    	 font-family:"TimesNewRoman",serif;
 	 color:red;
 	 background:white;
 }
-.span-184 {
-   	 font-size:24.0pt;
-	 color:red;
-}
 .span-185 {
    	 font-size:24.0pt;
+	 color:red;
 }
 .span-186 {
-   	 font-size:18.0pt;
-	 color:red;
+   	 font-size:24.0pt;
 }
 .span-187 {
    	 font-size:18.0pt;
+	 color:red;
 }
 .span-188 {
-   	 font-size:24.0pt;
+   	 font-size:18.0pt;
 }
 .span-189 {
-   	 color:red;
+   	 font-size:18.0pt;
 }
 .span-190 {
+   	 font-size:24.0pt;
+}
+.span-191 {
+   	 color:red;
+}
+.span-192 {
    	 font-size:24.0pt;
 	 color:black;
 	 background:white;
 }
-.span-191 {
+.span-193 {
    	 font-size:24.0pt;
 	 color:red;
 	 background:white;
 }
-.span-192 {
+.span-194 {
    	 font-size:24.0pt;
 }
 .table-03 {
@@ -1395,62 +1404,62 @@
 
 /*   Atsili Qum Qera.html    */
 .p-100 {
-   	 text-align:justify;
+   	 text-align:center;
 }
 .p-101 {
-   	 margin:0;
+   	 text-align:justify;
 }
 .p-102 {
+   	 margin:0;
+}
+.p-103 {
    	 margin:0;
 	 text-align:right;
 	 direction:rtl;
 	 unicode-bidi:embed;
 }
-.p-103 {
+.p-104 {
    	 margin-top:0;
 	 margin-right:0;
 	 margin-bottom:0;
 	 margin-left:1pt;
 }
-.p-98 {
+.p-99 {
    	 margin:0;
 	 text-align:center;
 }
-.p-99 {
-   	 text-align:center;
-}
-.span-193 {
+.span-195 {
    	 font-size:18.0pt;
 }
-.span-195 {
-   	 font-family:"Calibri",sans-serif;
-}
-.span-196 {
-   	 font-family:"Calibri",sans-serif;
-}
 .span-197 {
+   	 font-family:"Calibri",sans-serif;
+}
+.span-198 {
+   	 font-family:"Calibri",sans-serif;
+}
+.span-199 {
    	 font-size:18.0pt;
 	 font-family:"Calibri",sans-serif;
 }
-.span-200 {
+.span-202 {
    	 font-family:"Arial",sans-serif;
 }
-.span-201 {
+.span-203 {
    	 font-size:28.0pt;
 }
-.span-202 {
-   	 font-size:24.0pt;
-}
-.span-203 {
-   	 font-size:24.0pt;
-}
 .span-204 {
-   	 color:red;
+   	 font-size:24.0pt;
 }
 .span-205 {
    	 font-size:24.0pt;
 }
 .span-206 {
+   	 color:red;
+}
+.span-207 {
+   	 font-size:24.0pt;
+}
+.span-208 {
    	 font-size:18.0pt;
 }
 .table-04 {
@@ -1572,61 +1581,61 @@
 }
 
 /*   Evyon Asher.html    */
-.p-104 {
+.p-105 {
    	 text-align:center;
 }
-.p-105 {
-   	 text-align:right;
-	 direction:rtl;
-	 unicode-bidi:embed;
-}
 .p-106 {
-   	 margin:0;
-	 text-align:right;
+   	 text-align:right;
 	 direction:rtl;
 	 unicode-bidi:embed;
 }
 .p-107 {
    	 margin:0;
+	 text-align:right;
+	 direction:rtl;
+	 unicode-bidi:embed;
 }
-.span-207 {
-   	 font-family:"Arial",sans-serif;
+.p-108 {
+   	 margin:0;
 }
 .span-209 {
-   	 font-family:"EzraSILSR";
-}
-.span-210 {
-   	 font-size:24.0pt;
+   	 font-family:"Arial",sans-serif;
 }
 .span-211 {
-   	 font-size:24.0pt;
+   	 font-family:"EzraSILSR";
 }
 .span-212 {
-   	 font-size:18.0pt;
+   	 font-size:24.0pt;
 }
 .span-213 {
-   	 font-size:18.0pt;
+   	 font-size:24.0pt;
 }
 .span-214 {
-   	 font-size:24.0pt;
-	 font-family:"TimesNewRoman",serif;
+   	 font-size:18.0pt;
 }
 .span-215 {
-   	 font-size:24.0pt;
+   	 font-size:18.0pt;
 }
 .span-216 {
-   	 font-size:28.0pt;
+   	 font-size:24.0pt;
 	 font-family:"TimesNewRoman",serif;
 }
 .span-217 {
-   	 font-size:18.0pt;
-	 color:red;
+   	 font-size:24.0pt;
 }
 .span-218 {
-   	 font-size:24.0pt;
+   	 font-size:28.0pt;
 	 font-family:"TimesNewRoman",serif;
 }
 .span-219 {
+   	 font-size:18.0pt;
+	 color:red;
+}
+.span-220 {
+   	 font-size:24.0pt;
+	 font-family:"TimesNewRoman",serif;
+}
+.span-221 {
    	 font-size:24.0pt;
 }
 .table-05 {
@@ -1691,31 +1700,31 @@
 }
 
 /*   Vehahochma.html    */
-.p-108 {
+.p-109 {
    	 text-align:right;
 }
-.p-109 {
+.p-110 {
    	 margin-top:0;
 	 margin-right:0;
 	 margin-bottom:0;
 	 margin-left:70pt;
 }
-.p-110 {
+.p-111 {
    	 margin-left:72pt;
 }
-.span-221 {
-   	 font-family:"Arial",sans-serif;
-}
-.span-222 {
-   	 font-size:24.0pt;
-}
 .span-223 {
-   	 font-size:18.0pt;
+   	 font-family:"Arial",sans-serif;
 }
 .span-224 {
    	 font-size:24.0pt;
 }
 .span-225 {
+   	 font-size:18.0pt;
+}
+.span-226 {
+   	 font-size:24.0pt;
+}
+.span-227 {
    	 font-size:24.0pt;
 	 font-family:"TimesNewRoman",serif;
 }
@@ -1762,58 +1771,58 @@
 }
 
 /*   Vehoshia.html    */
-.p-111 {
+.p-112 {
    	 text-align:center;
 }
-.p-112 {
+.p-113 {
    	 text-align:right;
 	 direction:rtl;
 	 unicode-bidi:embed;
 }
-.p-113 {
+.p-114 {
    	 margin:0;
 	 text-align:center;
 }
-.p-114 {
+.p-115 {
    	 margin-top:0;
 	 margin-right:0;
 	 margin-bottom:0;
 	 margin-left:70pt;
 }
-.span-226 {
+.span-228 {
    	 font-family:"Arial",sans-serif;
 }
-.span-228 {
-   	 font-size:24.0pt;
-	 color:red;
-}
-.span-229 {
-   	 font-size:24.0pt;
-}
 .span-230 {
-   	 font-size:18.0pt;
+   	 font-size:24.0pt;
 	 color:red;
 }
 .span-231 {
-   	 font-size:18.0pt;
+   	 font-size:24.0pt;
 }
 .span-232 {
-   	 color:red;
+   	 font-size:18.0pt;
+	 color:red;
 }
 .span-233 {
-   	 font-size:24.0pt;
+   	 font-size:18.0pt;
 }
 .span-234 {
-   	 font-size:24.0pt;
+   	 color:red;
 }
 .span-235 {
    	 font-size:24.0pt;
 }
 .span-236 {
+   	 font-size:24.0pt;
+}
+.span-237 {
+   	 font-size:24.0pt;
+}
+.span-238 {
    	 font-size:18.0pt;
 	 color:red;
 }
-.span-237 {
+.span-239 {
    	 font-size:18.0pt;
 }
 .table-07 {

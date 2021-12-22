@@ -200,25 +200,21 @@ class AppState {
 
     getOptions = (): Array<string> => this.options
 
-    // getAutoComplete = async (search:string):void => {
-    //     if (search.length < 2 || isABibleBook(search)) {
-    //         this.setOptions([])
-    //     }else {
-    //         await fetch(`${autocompleteUrl}${search}/`)
-    //             .then(response =>
-    //                 this.setOptions(response.json())
-    //             ).catch(e => this.setMessage(e.message))
-    //     }
-    // }
+    getAutoComplete = async (search: string) => {
+        if (search.length < 2) return []
+        if (isABibleBook(search)) return []
+        const response = await fetch(`${autocompleteUrl}${search}/`)
+        this.setOptions(await response.json())
+    }
 
 
     // language
     setLanguage = (language: string, i: number): void => {
         this.panes[i].languages = language
     }
-    getLanguage = (i:number):string => this.panes[i].languages[0]
+    getLanguage = (i: number): string => this.panes[i].languages[0]
 
-    nextLanguage = (i:number):Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
+    nextLanguage = (i: number): Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
 }
 
 const appStore = () => {

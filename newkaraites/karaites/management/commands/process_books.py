@@ -130,53 +130,80 @@ HTML = """
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
     </head>
     <body lang="EN-US">
+    <div class="WordSection1">    
+        {}
+        {}
+    </div>
+    <div style="mso-element:footnote-list">
+        {}
+        {}
+    </div>
     </body>
 </html>
 """
 
 
+def remove_tag(div_str, tag):
+    div_str = div_str.replace(tag, '', 1)
+    div_str = div_str[::-1]
+    div_str = div_str.replace('</div>'[::-1], '', 1)
+    div_str = div_str[::-1]
+    return div_str
+
+
+def update_index(div_str, i, index):
+    div_str = div_str.replace(f'<a href="#_ftn{i}" ',
+                              f'<a href="#_ftn{index}" ', 1)
+
+    div_str = div_str.replace(f'<a href="#_ftn{index}" name="_ftnref{i}"',
+                              f'<a href="#_ftn{index}" name="_ftnref{index}"', 1)
+
+    div_str = div_str.replace(f'<a href="#_ftn{index}" name="_ftnref{i}"',
+                              f'<a href="#_ftn{index}" name="_ftnref{index}"', 1)
+
+    div_str = div_str.replace(f'style="mso-footnote-id:ftn{i}',
+                              f'style="mso-footnote-id:ftn{index}', 1)
+
+    div_str = div_str.replace(f'>[{i}]</span>',
+                              f'>[{index}]</span>', 1)
+
+    return div_str
+
+
 def add_book_parts(path, book_name, books=BOOKS):
     """added books together in a single file"""
+
     # number of foot-notes in the first book
     magical_number = 682
     book_name = book_name.replace('.html', '')
-    tree = BeautifulSoup(HTML, 'html5lib')
 
     for part in books:
         book_data = read_data(path, f'{book_name}-{part}.html')
 
         if part == 1:
-            div = BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1")
-            foot_notes1 = BeautifulSoup(book_data, 'html5lib').find('div', attrs={'style': "mso-element:footnote-list"})
-            tree.body.append(div)
+            div1_str = str(BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1"))
+            foot_notes1 = str(BeautifulSoup(book_data, 'html5lib').find('div',
+                                                                        attrs={'style': "mso-element:footnote-list"}))
 
         if part == 2:
             # second book we have to update all foot-notes numbers and references.
-            div = BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1")
-            foot_notes2 = BeautifulSoup(book_data, 'html5lib').find('div', attrs={'style': "mso-element:footnote-list"})
-            for child in [div, foot_notes2]:
-                for a in child.find_all('a'):
-                    if hasattr(a, 'attrs'):
-                        href = a.attrs.get('href', None)
-                        name = a.attrs.get('name', None)
-                        style = a.attrs.get('style', None)
+            div2_str = str(BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1"))
 
-                        if href is not None and name is not None and style is not None:
-                            href = href.strip()
-                            style = style.strip()
-                            href_letters = re.sub('[0-9]', '', href)
-                            number = int(href.replace(href_letters, '')) + magical_number
-                            new_href = f'{href_letters}{number}'
-                            a.attrs['href'] = new_href
-                            a.attrs['name'] = f'_fnt{number}'
-                            a.attrs['style'] = f'{style.split(":")[0]}:fnt{number}'
-                            a.span.string = f'[{number}]'
+            foot_notes2 = str(BeautifulSoup(book_data, 'html5lib').find('div',
+                                                                        attrs={'style': "mso-element:footnote-list"}))
+            # process body foot-notes
+            for i in range(1, 613):
+                index = i + magical_number
+                update_index(div2_str, i, index)
+                update_index(foot_notes2, i, index)
 
-            tree.body.append(div)
-            tree.body.append(foot_notes1)
-            tree.body.append(foot_notes2)
+            div1_str = remove_tag(div1_str, '<div class="WordSection1">')
+            foot_notes1 = remove_tag(foot_notes1, '<div style="mso-element:footnote-list">')
+            div2_str = remove_tag(div2_str, '<div class="WordSection1">')
+            foot_notes2 = remove_tag(foot_notes2, '<div style="mso-element:footnote-list">')
+            html = HTML.format(div1_str, div2_str, foot_notes1, foot_notes2)
 
-    write_data(path, f'{book_name}.html', str(tree))
+    write_data(path, f'{book_name}.html', html)
 
 
 # book path
