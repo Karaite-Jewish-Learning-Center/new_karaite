@@ -13,6 +13,7 @@ from .html_utils.utils import (get_html,
                                ignore_ref,
                                RE_BIBLE_REF
                                )
+from .udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):
@@ -65,21 +66,5 @@ class Command(BaseCommand):
             paragraph_number += 1
 
         # update/create bible references
-        for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=RE_BIBLE_REF):
-            for ref in re.findall(RE_BIBLE_REF, book_text.book_text[0]):
-                ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
-                if ignore_ref(ref_text):
-                    continue
-
-                english_ref = parse_reference(ref_text)
-
-                References.objects.get_or_create(
-                    karaites_book=book_details,
-                    paragraph_number=book_text.paragraph_number,
-                    paragraph_text=book_text.book_text,
-                    foot_notes=book_text.foot_notes,
-                    bible_ref_he=ref_text,
-                    bible_ref_en=english_ref,
-                )
-
+        update_create_bible_refs(book_details)
     print()

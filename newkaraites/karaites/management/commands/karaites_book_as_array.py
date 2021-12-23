@@ -4,11 +4,10 @@ from django.core.management.base import BaseCommand
 from ...models import (Author,
                        KaraitesBookDetails,
                        KaraitesBookAsArray,
-                       TableOfContents,
-                       References)
+                       TableOfContents)
 
 from ...utils import clear_terminal_line
-from newkaraites.karaites.management.commands.html_utils.parser_ref import parse_reference
+from newkaraites.karaites.management.commands.udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):
@@ -160,39 +159,7 @@ class Command(BaseCommand):
                 paragraph_number += 1
 
             # update/create bible references
-            for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=regular_expression):
-                for ref in re.findall(regular_expression, book_text.book_text[0]):
-                    if self.ignore_ref(ref):
-                        continue
-
-                    english_ref = parse_reference(ref)
-
-                    References.objects.get_or_create(
-                        karaites_book=book_details,
-                        paragraph_number=book_text.paragraph_number,
-                        paragraph_text=book_text.book_text,
-                        foot_notes=book_text.foot_notes,
-                        bible_ref_he=ref,
-                        bible_ref_en=english_ref,
-                    )
-
-            # add foot notes
-            # for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
-            #     notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
-            #     unique = {}
-            #     for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
-            #         fn_id = fn.text.replace('[', '').replace(']', '')
-            #         if fn_id in unique:
-            #             continue
-            #         unique[fn_id] = True
-            #
-            #         notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-            #         if hasattr(notes, 'text'):
-            #             note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-            #             if note.startswith(' '):
-            #                 note = note[1:]
-            #             paragraph.foot_notes += [note]
-            #             paragraph.save()
+            update_create_bible_refs(book_details)
 
         print()
         print()

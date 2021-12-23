@@ -42,8 +42,12 @@ Update search
 
 >> ./manage.py update_full_text_search
 
-Update autocomplete
 
+Update autocomplete
+# this can take a while so 
+>> screen
 >>./manage.py autocomplete | autocomplete1
->
+# press ctrl A and then ctrl d
+# this will detach the process from the current ssh session
+# you may close the ssh, the process will keep running.
 

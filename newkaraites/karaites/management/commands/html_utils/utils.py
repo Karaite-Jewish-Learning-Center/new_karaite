@@ -42,14 +42,15 @@ def mark_bible_refs(html, regular_expression=RE_BIBLE_REF):
             continue
 
         lose_parentis = ref.replace('(', '').replace(')', '')
-        print(lose_parentis)
+        # print(lose_parentis)
         #
         striped_bible_ref = bible_ref.replace(')', '')
         striped_bible_ref = striped_bible_ref.replace(lose_parentis, '')
-        print('parsed ref', parsed_ref)
-        print('striped', striped_bible_ref)
-        print('html before', html)
-        print('bible', bible_ref)
+
+        # print('parsed ref', parsed_ref)
+        # print('striped', striped_bible_ref)
+        # print('html before', html)
+        # print('bible', bible_ref)
 
         if striped_bible_ref.startswith('(</span><span class="span-125" lang="AR-SA">'):
             if striped_bible_ref.endswith('</span><span class="span-123" lang="AR-SA">'):
@@ -59,8 +60,7 @@ def mark_bible_refs(html, regular_expression=RE_BIBLE_REF):
             else:
                 html = html.replace(bible_ref,
                                     f'</span><span lang="HE" class="he-biblical-ref">{ref}', 1)
-        else:
-            print(bible_ref)
+        # else:
+        #     print(bible_ref)
 
-    print('html', html)
     return html

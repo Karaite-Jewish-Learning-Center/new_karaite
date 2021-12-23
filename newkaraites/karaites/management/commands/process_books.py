@@ -194,8 +194,8 @@ def add_book_parts(path, book_name, books=BOOKS):
             # process body foot-notes
             for i in range(1, 613):
                 index = i + magical_number
-                update_index(div2_str, i, index)
-                update_index(foot_notes2, i, index)
+                div2_str = update_index(div2_str, i, index)
+                foot_notes2 = update_index(foot_notes2, i, index)
 
             div1_str = remove_tag(div1_str, '<div class="WordSection1">')
             foot_notes1 = remove_tag(foot_notes1, '<div style="mso-element:footnote-list">')
