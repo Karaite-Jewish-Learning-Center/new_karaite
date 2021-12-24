@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from ...constants import BIBLE_BOOKS_NAMES
+from .html_utils.utils import mark_bible_refs
 
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
@@ -47,7 +48,7 @@ def removing_no_breaking_spaces(html_tree):
 
 def update_bible_references_en(html_tree):
     names = BIBLE_BOOKS_NAMES.values()
-    for klass in ['span-08', 'span-42', 'span-46']:
+    for klass in ['span-39', 'span-43', 'span-48', 'span-52', 'span-63']:
         spans = html_tree.find_all('span', class_=klass)
         for child in spans:
             bible_ref = child.text
@@ -76,6 +77,28 @@ def update_bible_references_he(html_tree):
                     child.attrs['class'] = "he-biblical-ref"
 
     return html_tree
+
+
+def update_bible_shelomo(html_tree):
+    html_str = str(html_tree)
+    for ref in re.findall(r'\(.*\)', html_str):
+        ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+
+        # fix this, very hard to parse , so leave it like this for the time being
+        if len(ref) > 20:
+            continue
+
+        tag = ref.replace(ref, f'<span class="he-biblical-ref" lang="HE">{ref}</span>')
+        html_str = html_str.replace(ref, tag, 1)
+
+    return BeautifulSoup(html_str, 'html5lib')
+
+
+def update_bible_Adderet(html_tree):
+    """
+
+    """
+    pass
 
 
 def fix_chapter_verse(html_tree):
@@ -114,7 +137,7 @@ def fix_image_source(path, book_name, books=BOOKS):
     for book in books:
         html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
 
-        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
+        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}/'
 
         for child in html_tree.find_all('img'):
             image_path = child.attrs.get('src', None)
@@ -152,6 +175,14 @@ def remove_tag(div_str, tag):
 
 
 def update_index(div_str, i, index):
+    """ Update index for notes on the second book, both start foot-notes
+        at 1
+    """
+    div_str = div_str.replace('\n', '').replace('\t', '').replace('\r', '')
+
+    div_str = div_str.replace(f'<div id="ftn{i}" style="mso-element:footnote">',
+                              f'<div id="ftn{index}" style="mso-element:footnote">')
+
     div_str = div_str.replace(f'<a href="#_ftn{i}" ',
                               f'<a href="#_ftn{index}" ', 1)
 
@@ -161,8 +192,8 @@ def update_index(div_str, i, index):
     div_str = div_str.replace(f'<a href="#_ftn{index}" name="_ftnref{i}"',
                               f'<a href="#_ftn{index}" name="_ftnref{index}"', 1)
 
-    div_str = div_str.replace(f'style="mso-footnote-id:ftn{i}',
-                              f'style="mso-footnote-id:ftn{index}', 1)
+    div_str = div_str.replace(f'style="mso-footnote-id:ftn{i}"',
+                              f'style="mso-footnote-id:ftn{index}"', 1)
 
     div_str = div_str.replace(f'>[{i}]</span>',
                               f'>[{index}]</span>', 1)
@@ -232,19 +263,19 @@ LIST_OF_BOOKS = [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
-        []
+        [update_bible_shelomo]
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
-        []
+        [update_bible_shelomo]
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
         [fix_image_source, add_book_parts],
-        [],
+        [update_bible_Adderet],
     ],
     [
         'Anochi/', 'Anochi Anochi.html',
@@ -515,12 +546,13 @@ class Command(BaseCommand):
             sys.stdout.write(f"\33[K Removing comments for book {book}\r")
             html_str = self.replace_from_open_to_close(html_str)
 
-            html_tree = BeautifulSoup(html_str, 'html5lib')
-            # sys.stdout.write(f"\33[K Fix images path book {book}\r")
-            # html_tree = self.fix_image_source(html_tree)
-
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
+            html_tree = BeautifulSoup(html_str, 'html5lib')
             divs = self.collect_style_map_to_class(html_tree, book)
+
+            # sys.stdout.write(f"\33[K Processing Bible refs for book {book}\r")
+            # divs = mark_bible_refs(str(divs))
+            # divs = BeautifulSoup(divs, 'html5lib')
 
             for process in post_processes:
                 sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")

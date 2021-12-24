@@ -29,5 +29,5 @@ def update_create_bible_refs(book_details):
                 bible_ref_he=ref_text,
                 bible_ref_en=english_ref,
             )
-            sys.stdout.write(f"\33[K Processing Adderet bible ref  {i}\r")
+            sys.stdout.write(f"\33[K Processing bible ref  {i}\r")
             i += 1
