@@ -307,6 +307,12 @@ LIST_OF_BOOKS = [
         [],
         []
     ],
+    [
+        'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
+        'he',
+        [],
+        []
+    ]
 ]
 
 
