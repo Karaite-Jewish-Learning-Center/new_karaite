@@ -15,6 +15,4 @@ const transform = (refClick, item, kind, paneNumber, node) => {
     }
 }
 
-
-
 export default transform

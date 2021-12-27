@@ -9,10 +9,10 @@ $ cd anaconda3/envs/dev/newkaraites/newkaraites/
 
 #Bible books
 
-Books, has no dependencies
+biblical_books, has no dependencies
 
 
->> ./manage.py books
+>> ./manage.py biblical_books
 
 Process all books
 

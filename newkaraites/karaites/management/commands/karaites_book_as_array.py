@@ -1,4 +1,4 @@
-import re
+import sys
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Author,
@@ -7,54 +7,11 @@ from ...models import (Author,
                        TableOfContents)
 
 from ...utils import clear_terminal_line
-from newkaraites.karaites.management.commands.udpate_bible_ref import update_create_bible_refs
+from .udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):
     help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
-
-    ignore = ['(#default#VML)',
-              '(Web)',
-              '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
-              '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
-              """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-              """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
-              '(ברוך)',
-              """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
-              """(נגד דת הנצרות)""",
-              """(ראה הערה מספר 8)."""
-              """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-              """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
-              '(בחג הסוכות)',
-              '(אַתְּ)',
-              '(הֹלֶכֶת)',
-              """(ח', י"ט)""",
-              """(וְקִבְּלוּ)""",
-              """(יַעַשׂ)""",
-              # volume 2
-              """(ח', י"ט)"""
-              '(י"א,  ל"ג),',
-              '(יִהְיוּ-) ',
-              '(שָׁחוּט)',
-              '(דְּבָרוֹ)',
-              '(כ"ו, י"ט)',
-              '(רַגְלְךָ)',
-              '(הוא הנ"ל)',
-              '(ח"ב, כ"ג)',
-              """(ט', א')""",
-              """(ח', י,ט)""",
-              """(י"א,ל"ג)""",
-              """(יִהְיוּ-)"""]
-
-    def ignore_ref(self, bible_ref):
-        if len(bible_ref) > 30:
-            return True
-        # fix this !
-        if bible_ref.find('8') > 0:
-            return True
-        if bible_ref in self.ignore:
-            return True
-        return False
 
     @staticmethod
     def parse_toc(html_tree, volume):
@@ -83,7 +40,7 @@ class Command(BaseCommand):
         for volume in [1, 2]:
             paragraph_number = 1
 
-            print(f'Processing volume: {volume}')
+            sys.stdout.write(f'\33[K Processing volume: {volume}')
 
             book_title = f"Yeriot Shelomo Volume {volume}"
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
@@ -102,14 +59,6 @@ class Command(BaseCommand):
             handle = open(source, 'r')
             html = f"""{handle.read()}"""
             handle.close()
-
-            regular_expression = r'\([^()]*\)'
-
-            for bible_ref in re.findall(regular_expression, html):
-                if self.ignore_ref(bible_ref):
-                    continue
-
-                html = html.replace(bible_ref, f'<span lang="HE" class="he-biblical-ref">{bible_ref}</span>')
 
             html_tree = BeautifulSoup(html, 'html5lib')
 

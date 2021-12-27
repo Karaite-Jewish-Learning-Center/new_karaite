@@ -38,6 +38,39 @@ OUT_PATH = '../newkaraites/karaites/management/tmp/'
 CSS_SOURCE = OUT_PATH
 CSS_OUT = '../newkaraites/frontend/src/css/'
 
+IGNORE = ['(#default#VML)',
+          '(Web)',
+          '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
+          '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
+          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+          """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
+          '(ברוך)',
+          """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
+          """(נגד דת הנצרות)""",
+          """(ראה הערה מספר 8)."""
+          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+          """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
+          '(בחג הסוכות)',
+          '(אַתְּ)',
+          '(הֹלֶכֶת)',
+          """(ח', י"ט)""",
+          """(וְקִבְּלוּ)""",
+          """(יַעַשׂ)""",
+          # volume 2
+          """(ח', י"ט)"""
+          '(י"א,  ל"ג),',
+          '(יִהְיוּ-) ',
+          '(שָׁחוּט)',
+          '(דְּבָרוֹ)',
+          '(כ"ו, י"ט)',
+          '(רַגְלְךָ)',
+          '(הוא הנ"ל)',
+          '(ח"ב, כ"ג)',
+          """(ט', א')""",
+          """(ח', י,ט)""",
+          """(י"א,ל"ג)""",
+          """(יִהְיוּ-)"""]
+
 
 def removing_no_breaking_spaces(html_tree):
     spans = html_tree.find_all('span', class_='span-49')
@@ -79,13 +112,17 @@ def update_bible_references_he(html_tree):
     return html_tree
 
 
-def update_bible_shelomo(html_tree):
+def update_bible_re(html_tree):
     html_str = str(html_tree)
     for ref in re.findall(r'\(.*\)', html_str):
         ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+        ref = ref.replace('\n', '').replace('\r', '')
 
-        # fix this, very hard to parse , so leave it like this for the time being
-        if len(ref) > 20:
+        if len(ref) > 30:
+            continue
+        if ref.find('8') > 0:
+            continue
+        if ref in IGNORE:
             continue
 
         tag = ref.replace(ref, f'<span class="he-biblical-ref" lang="HE">{ref}</span>')
@@ -94,11 +131,10 @@ def update_bible_shelomo(html_tree):
     return BeautifulSoup(html_str, 'html5lib')
 
 
-def update_bible_Adderet(html_tree):
+def update_bible_adderet(html_tree):
     """
-
     """
-    pass
+    return BeautifulSoup(mark_bible_refs(str(html_tree)), 'html5lib')
 
 
 def fix_chapter_verse(html_tree):
@@ -108,7 +144,7 @@ This </span>""", '<span class="span-50">11:30 This </span>')
                         '<span class="span-58">31:26 Beside the ark of God’s covenant </span>')
     span = span.replace('<span class="span-58">34</span>',
                         '<span>34:1 From [<i>et</i>]<i> </i>Gilead</span>')
-    return span
+    return BeautifulSoup(span, 'html5lib')
 
 
 BOOKS = [1, 2]
@@ -159,6 +195,35 @@ HTML = """
     </div>
     <div style="mso-element:footnote-list">
         {}
+        {}
+    </div>
+    </body>
+</html>
+"""
+
+BASIC_STYLE = """
+<style>
+    .en-biblical-ref {
+       color:red;
+    }
+    .he-biblical-ref {
+       color:red;
+    }
+    .en-foot-note {
+        color:green;
+    }
+    .he-foot-note {
+        color:green;
+    }
+</style>
+"""
+BASIC_HTML = """
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        {}
+    </head>
+    <body lang="EN-US">
         {}
     </div>
     </body>
@@ -263,25 +328,25 @@ LIST_OF_BOOKS = [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
-        [update_bible_shelomo]
+        [update_bible_re]
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
-        [update_bible_shelomo]
+        [update_bible_re]
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
         [fix_image_source, add_book_parts],
-        [update_bible_Adderet],
+        [update_bible_adderet],
     ],
     [
         'Anochi/', 'Anochi Anochi.html',
         'he',
         [],
-        []
+        [update_bible_re]
     ],
     [
         'Atsili Qum Qera/', 'Atsili Qum Qera.html',
@@ -299,13 +364,13 @@ LIST_OF_BOOKS = [
         'Vehahochma/', 'Vehahochma.html',
         'he',
         [],
-        []
+        [update_bible_re]
     ],
     [
         'Vehoshia/', 'Vehoshia.html',
         'he',
         [],
-        []
+        [update_bible_re]
     ],
     [
         'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
@@ -546,15 +611,12 @@ class Command(BaseCommand):
             sys.stdout.write(f"\33[K Processing foot-notes for book {book}\r")
             html_tree = self.replace_a_foot_notes(html_tree, language)
 
-            sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
-            html_str = self.remove_tags(str(html_tree))
-
             sys.stdout.write(f"\33[K Removing comments for book {book}\r")
-            html_str = self.replace_from_open_to_close(html_str)
+            html_str = self.replace_from_open_to_close(str(html_tree))
 
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
             html_tree = BeautifulSoup(html_str, 'html5lib')
-            divs = self.collect_style_map_to_class(html_tree, book)
+            html_tree = self.collect_style_map_to_class(html_tree, book)
 
             # sys.stdout.write(f"\33[K Processing Bible refs for book {book}\r")
             # divs = mark_bible_refs(str(divs))
@@ -562,7 +624,10 @@ class Command(BaseCommand):
 
             for process in post_processes:
                 sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
-                divs = process(divs)
+                html_tree = process(html_tree)
+
+            sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
+            html_str = self.remove_tags(str(html_tree))
 
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
@@ -570,7 +635,7 @@ class Command(BaseCommand):
             sys.stdout.write('\n')
 
             handle_out = open(f'{OUT_PATH}{book}', 'w')
-            handle_out.write(str(divs))
+            handle_out.write(BASIC_HTML.format(BASIC_STYLE, html_str))
             handle_out.close()
 
             i += 1
