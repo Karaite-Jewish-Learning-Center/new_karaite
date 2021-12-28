@@ -18,23 +18,36 @@ class Command(BaseCommand):
     def parse_toc(html_tree):
         """ parse table of contents """
         print()
+        toc = []
+        record_toc = False
+        for p_child in html_tree.find_all('p'):
+            if record_toc:
+                toc.append(p_child.get_text())
+
+            for child in p_child.find_all(recursive=True):
+                # print('Text', child.get_text())
+                # print('class',  child.attrs.get('class', ''))
+                # input('>>>')
+                if hasattr(child, 'attrs'):
+                    if child.attrs.get('class', '') == ['span-163']:
+                        text_flag = child.get_text().replace('\n', ' ')
+                        if text_flag == '# TOC':
+                            record_toc = True
+                        elif text_flag == '# END TOC':
+                            record_toc = False
+                        else:
+                            print('Something went wrong!')
+
+                        print('Text', child.get_text())
+                        print('Record', record_toc)
+                        print(toc)
+                        input('>>>')
+
         # remove # TOC # End Toc
-        i = 1
         for child in html_tree.find_all('span', class_="span-163"):
             if child is not None:
-                print('decomposing', i)
                 child.decompose()
-                i += 1
 
-        toc = []
-        for child in html_tree.find_all('span', class_="span-155"):
-            if child.get_text == '':
-                continue
-            toc.append(child.get_text())
-            print(child.get_text())
-            print()
-            print(child)
-            input('>>')
         return toc
 
     def handle(self, *args, **options):
@@ -102,6 +115,5 @@ class Command(BaseCommand):
 
         # update/create bible references
         # update_create_bible_refs(book_details)
-
 
     print()
