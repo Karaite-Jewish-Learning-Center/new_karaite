@@ -20,7 +20,7 @@ def parse_reference(ref):
         verse = verse.replace("'", '').replace('"', '')
 
     if len(parts) == 4:
-        # book name has a spaces song of songs
+        # book name has one or more spaces, like in "song of songs"
         book, chapter, verse = parts[0] + ' ' + parts[1], parts[2], parts[3]
         chapter = chapter.replace("'", '').replace('"', '')
         verse = verse.replace("'", '').replace('"', '')

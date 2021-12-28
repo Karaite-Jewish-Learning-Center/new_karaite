@@ -56,6 +56,7 @@ IGNORE = ['(#default#VML)',
           """(ח', י"ט)""",
           """(וְקִבְּלוּ)""",
           """(יַעַשׂ)""",
+          """(ראה הערה מספר 8)"""
           # volume 2
           """(ח', י"ט)"""
           '(י"א,  ל"ג),',
@@ -69,7 +70,19 @@ IGNORE = ['(#default#VML)',
           """(ט', א')""",
           """(ח', י,ט)""",
           """(י"א,ל"ג)""",
-          """(יִהְיוּ-)"""]
+          """(יִהְיוּ-)""",
+          """(Biblical Verses)""",
+          """(Anochi)""",
+          """(Ani)""",
+          """(</span>Anochi)""",
+          """(Ishmael)""",
+          """(ben Joseph?)""",
+          """(and the refrain)""",
+          """(Vayyosha‘)"""
+          ]
+REMOVE = [
+    """(Anochi) """,
+]
 
 
 def removing_no_breaking_spaces(html_tree):
@@ -112,16 +125,24 @@ def update_bible_references_he(html_tree):
     return html_tree
 
 
+REF = re.compile(r'\(.*\)')
+CLEAN_HTML = re.compile('<.*?>')
+
+
 def update_bible_re(html_tree):
     html_str = str(html_tree)
-    for ref in re.findall(r'\(.*\)', html_str):
+    for ref in re.findall(REF, html_str):
         ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
         ref = ref.replace('\n', '').replace('\r', '')
+        # only text
+        ref = re.sub(CLEAN_HTML, '', ref)
 
-        if len(ref) > 30:
+        if len(ref) > 28:
             continue
-        if ref.find('8') > 0:
-            continue
+
+        for r in REMOVE:
+            ref = ref.replace(r, '')
+
         if ref in IGNORE:
             continue
 
@@ -132,8 +153,6 @@ def update_bible_re(html_tree):
 
 
 def update_bible_adderet(html_tree):
-    """
-    """
     return BeautifulSoup(mark_bible_refs(str(html_tree)), 'html5lib')
 
 
