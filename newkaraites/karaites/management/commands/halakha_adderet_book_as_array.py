@@ -1,4 +1,5 @@
 import sys
+import re
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Author,
@@ -10,6 +11,8 @@ from ...utils import clear_terminal_line
 from .html_utils.utils import get_html
 from .udpate_bible_ref import update_create_bible_refs
 
+SINGLE = re.compile('\\xa0+')
+
 
 class Command(BaseCommand):
     help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
@@ -17,31 +20,35 @@ class Command(BaseCommand):
     @staticmethod
     def parse_toc(html_tree):
         """ parse table of contents """
+
         print()
         toc = []
         record_toc = False
+        delete_childs =[]
         for p_child in html_tree.find_all('p'):
             if record_toc:
-                toc.append(p_child.get_text())
+                text = p_child.get_text().replace('\n', ' ')
+                if text not in ['\xa0', '# END TOC', ' # End TOC']:
+                    toc.append((re.sub(SINGLE, ',', text).split(',')))
+                    delete_childs.append(p_child )
 
             for child in p_child.find_all(recursive=True):
-                # print('Text', child.get_text())
-                # print('class',  child.attrs.get('class', ''))
-                # input('>>>')
+
                 if hasattr(child, 'attrs'):
                     if child.attrs.get('class', '') == ['span-163']:
-                        text_flag = child.get_text().replace('\n', ' ')
+                        text_flag = child.get_text().replace('\n', ' ').replace(chr(160), '')
                         if text_flag == '# TOC':
                             record_toc = True
-                        elif text_flag == '# END TOC':
+                        elif text_flag.lower().strip() in ['# end toc']:
+                            for d in delete_childs:
+                                d.decompose()
                             record_toc = False
+                            break
+                        elif text_flag == '':
+                            continue
                         else:
+                            print(text_flag)
                             print('Something went wrong!')
-
-                        print('Text', child.get_text())
-                        print('Record', record_toc)
-                        print(toc)
-                        input('>>>')
 
         # remove # TOC # End Toc
         for child in html_tree.find_all('span', class_="span-163"):
@@ -86,7 +93,10 @@ class Command(BaseCommand):
 
                 for toc in table_of_contents:
                     text = span.get_text()
-
+                    # print('text', text)
+                    # print('starts', text.startswith(toc[0]))
+                    # print(toc[0])
+                    # input('>>')
                     if text.startswith(toc[0]):
                         TableOfContents.objects.get_or_create(
                             karaite_book=book_details,
@@ -94,13 +104,14 @@ class Command(BaseCommand):
                             start_paragraph=paragraph_number - 1
                         )
                         ref_chapter = toc[0]
-                    # update previous record that's the header for chapter
-                    header = KaraitesBookAsArray.objects.get(book=book_details,
-                                                             paragraph_number=paragraph_number - 1)
-                    header.ref_chapter = ref_chapter
-                    header.book_text = [header.book_text[0], 1]
-                    header.save()
-                    break
+                        # update previous record that's the header for chapter
+                        header = KaraitesBookAsArray.objects.get(book=book_details,
+                                                                 paragraph_number=paragraph_number - 1)
+                        header.ref_chapter = ref_chapter
+                        header.book_text = [header.book_text[0], 1]
+                        header.save()
+                        table_of_contents.pop(0)
+                        break
 
             KaraitesBookAsArray.objects.get_or_create(
                 book=book_details,
