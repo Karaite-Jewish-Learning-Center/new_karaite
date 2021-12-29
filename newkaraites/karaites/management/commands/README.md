@@ -30,9 +30,9 @@ Halakha Adderet book
 
 >> ./manage.py halakha_adderet_book_as_array
 
-Anochi poems
+Liturgy books
 
->> ./manage.py anochi_book_as_array
+>> ./manage.py karaites_liturgy_as_array
 
 Update references (updates bible references)
 
@@ -44,10 +44,10 @@ Update search
 
 
 Update autocomplete
-# this can take a while so 
+
+# this can take a while so in the remote server 
 >> screen
 >>./manage.py autocomplete | autocomplete1
 # press ctrl A and then ctrl d
 # this will detach the process from the current ssh session
-# you may close the ssh, the process will keep running.
-
+# you may close the ssh, the process will keep running on remote server.

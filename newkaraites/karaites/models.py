@@ -91,7 +91,10 @@ class Author(models.Model):
         Who is the Author
     """
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
+
+    name_he = models.CharField(max_length=50,
+                               default='')
 
     comments_count_en = models.IntegerField(default=0,
                                             editable=False,

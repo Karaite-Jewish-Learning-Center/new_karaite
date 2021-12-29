@@ -335,32 +335,35 @@ HALAKHAH = [
         'he',
         [],
         [update_bible_references_he],
-
+        {}
     ],
     [
         'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
         [],
         [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
-
+        {}
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
-        [update_bible_re]
+        [update_bible_re],
+        {}
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
-        [update_bible_re]
+        [update_bible_re],
+        {}
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
+        {}
     ],
 
 ]
@@ -652,13 +655,13 @@ class Command(BaseCommand):
         """
 
         sys.stdout.write(f"\33[K Pre-processing book's\r")
-        for path, book, language, pre_processes, _ in LIST_OF_BOOKS:
+        for path, book, language, pre_processes, _, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:
                 pre_process(path, book)
 
         sys.stdout.write(f"\33[K Loading book's data\r")
         i = 0
-        for path, book, language, _, post_processes in LIST_OF_BOOKS:
+        for path, book, language, _, post_processes, _ in LIST_OF_BOOKS:
             handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()

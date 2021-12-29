@@ -51,7 +51,8 @@ admin.site.register(OtherBooks, OtherBooksAdmin)
 
 
 class AuthorAdmin(KAdmin):
-    list_display = ('name', 'comments_count_en', 'comments_count_he', 'history')
+    list_display = ('name', 'name_he', 'comments_count_en',
+                    'comments_count_he', 'history')
     search_fields = ('name',)
     list_filter = ('name',)
 
