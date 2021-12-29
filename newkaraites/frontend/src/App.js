@@ -12,7 +12,7 @@ import Home from "./components/pages/Home";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
 import SearchResults from "./components/pages/SearchResults";
-// import MainMenu from "./components/menu/MainMenu";
+//import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message'

@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Author,
                        KaraitesBookDetails,
-                       KaraitesBookAsArray,
-                       TableOfContents)
+                       KaraitesBookAsArray)
 
 from ...utils import clear_terminal_line
 from .udpate_bible_ref import update_create_bible_refs
+from .update_toc import update_toc
+from .html_utils.utils import get_html
 
 
 class Command(BaseCommand):
@@ -56,9 +57,7 @@ class Command(BaseCommand):
             source = (f'../newkaraites/karaites/management/tmp/'
                       f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
 
-            handle = open(source, 'r')
-            html = f"""{handle.read()}"""
-            handle.close()
+            html = f"""{get_html(source)}"""
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
@@ -84,18 +83,7 @@ class Command(BaseCommand):
                     for toc in table_of_contents:
 
                         if text.startswith(toc[0]):
-                            TableOfContents.objects.get_or_create(
-                                karaite_book=book_details,
-                                subject=toc,
-                                start_paragraph=paragraph_number - 1
-                            )
-                            ref_chapter = toc[0]
-                            # update previous record that's the header for chapter
-                            header = KaraitesBookAsArray.objects.get(book=book_details,
-                                                                     paragraph_number=paragraph_number - 1)
-                            header.ref_chapter = ref_chapter
-                            header.book_text = [header.book_text[0], 1]
-                            header.save()
+                            update_toc(book_details,paragraph_number,toc)
                             break
 
                 KaraitesBookAsArray.objects.get_or_create(

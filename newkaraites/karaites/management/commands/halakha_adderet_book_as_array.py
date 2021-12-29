@@ -3,13 +3,14 @@ import re
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Author,
-                       TableOfContents,
                        KaraitesBookDetails,
                        KaraitesBookAsArray)
 
 from ...utils import clear_terminal_line
 from .html_utils.utils import get_html
 from .udpate_bible_ref import update_create_bible_refs
+from .update_toc import update_toc
+
 
 SINGLE = re.compile('\\xa0+')
 
@@ -24,13 +25,13 @@ class Command(BaseCommand):
         print()
         toc = []
         record_toc = False
-        delete_childs =[]
+        delete_child = []
         for p_child in html_tree.find_all('p'):
             if record_toc:
                 text = p_child.get_text().replace('\n', ' ')
                 if text not in ['\xa0', '# END TOC', ' # End TOC']:
                     toc.append((re.sub(SINGLE, ',', text).split(',')))
-                    delete_childs.append(p_child )
+                    delete_child.append(p_child)
 
             for child in p_child.find_all(recursive=True):
 
@@ -40,7 +41,7 @@ class Command(BaseCommand):
                         if text_flag == '# TOC':
                             record_toc = True
                         elif text_flag.lower().strip() in ['# end toc']:
-                            for d in delete_childs:
+                            for d in delete_child:
                                 d.decompose()
                             record_toc = False
                             break
@@ -93,23 +94,9 @@ class Command(BaseCommand):
 
                 for toc in table_of_contents:
                     text = span.get_text()
-                    # print('text', text)
-                    # print('starts', text.startswith(toc[0]))
-                    # print(toc[0])
-                    # input('>>')
+
                     if text.startswith(toc[0]):
-                        TableOfContents.objects.get_or_create(
-                            karaite_book=book_details,
-                            subject=toc,
-                            start_paragraph=paragraph_number - 1
-                        )
-                        ref_chapter = toc[0]
-                        # update previous record that's the header for chapter
-                        header = KaraitesBookAsArray.objects.get(book=book_details,
-                                                                 paragraph_number=paragraph_number - 1)
-                        header.ref_chapter = ref_chapter
-                        header.book_text = [header.book_text[0], 1]
-                        header.save()
+                        update_toc(book_details, paragraph_number, toc, )
                         table_of_contents.pop(0)
                         break
 
@@ -125,6 +112,6 @@ class Command(BaseCommand):
             sys.stdout.write(f"\33[K Processing Halakha Adderet paragraph {paragraph_number}\r")
 
         # update/create bible references
-        # update_create_bible_refs(book_details)
+        update_create_bible_refs(book_details)
 
     print()

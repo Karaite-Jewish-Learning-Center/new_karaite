@@ -5,16 +5,17 @@ from ...models import (KaraitesBookAsArray,
                        References)
 
 from .html_utils.utils import (ignore_ref,
-                               RE_BIBLE_REF
-                               )
+                               RE_BIBLE_REF)
+
 from .html_utils.parser_ref import parse_reference
 
 
 def update_create_bible_refs(book_details):
     """update/create bible references"""
     i = 1
-    for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=RE_BIBLE_REF):
-        for ref in re.findall(RE_BIBLE_REF, book_text.book_text[0]):
+
+    for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=RE_BIBLE_REF[0]):
+        for ref in re.findall(RE_BIBLE_REF[0], book_text.book_text[0]):
             ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
             if ignore_ref(ref_text):
                 continue

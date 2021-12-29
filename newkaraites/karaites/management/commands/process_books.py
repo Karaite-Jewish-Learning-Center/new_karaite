@@ -33,8 +33,9 @@ style_classes_by_book = {}
 ms_classes = []
 tags = {}
 
+PATH = '../newkaraites/karaites/management/tmp/'
 SOURCE_PATH = '../newkaraites/data_karaites/'
-OUT_PATH = '../newkaraites/karaites/management/tmp/'
+OUT_PATH = PATH
 CSS_SOURCE = OUT_PATH
 CSS_OUT = '../newkaraites/frontend/src/css/'
 
@@ -327,7 +328,7 @@ def add_book_parts(path, book_name, books=BOOKS):
 # post process list of function
 # pre-process list of function
 
-LIST_OF_BOOKS = [
+HALAKHAH = [
 
     [
         'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
@@ -361,43 +362,79 @@ LIST_OF_BOOKS = [
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
     ],
+
+]
+
+LITURGY = [
     [
         'Anochi/', 'Anochi Anochi.html',
         'he',
         [],
-        [update_bible_re]
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': "אנכי אנכי, Anochi Anochi",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'}
     ],
     [
         'Atsili Qum Qera/', 'Atsili Qum Qera.html',
         'he',
         [],
-        []
+        [],
+        # name, liturgy , Poems, Author
+        {'name': r"Atsili ḳum ḳera",
+         'first_level': 4,
+         'book_classification': '08',
+         'author': 'Abraham'}
     ],
     [
         'Evyon Asher/', 'Evyon Asher.html',
         'he',
         [],
-        []
+        [],
+        # name, liturgy , Poems, Author
+        {'name': r"אביון אשר, Evyon Asher",
+         'first_level': 4,
+         'book_classification': '08',
+         'author': 'Anatoli (ben Joseph?)'}
     ],
     [
         'Vehahochma/', 'Vehahochma.html',
         'he',
         [],
-        [update_bible_re]
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'}
     ],
     [
         'Vehoshia/', 'Vehoshia.html',
         'he',
         [],
-        [update_bible_re]
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"והושיע, Vehoshiya‘",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'}
     ],
     [
         'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
         [],
-        []
+        [],
+        # name, Polemic , , Author
+        {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
+         'first_level': 5,
+         'book_classification': '07',
+         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"}
     ]
 ]
+
+LIST_OF_BOOKS = HALAKHAH + LITURGY
 
 
 class Command(BaseCommand):
@@ -613,6 +650,7 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
+
         sys.stdout.write(f"\33[K Pre-processing book's\r")
         for path, book, language, pre_processes, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:
