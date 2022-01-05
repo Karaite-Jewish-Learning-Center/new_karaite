@@ -1,8 +1,9 @@
 import React from 'react'
-import {observer} from 'mobx-react';
 import {RenderMenuSecondLevel} from '../menu/RenderMenuSecondLevel';
-//import LiturgyStore from '../../models/LiturgyStore';
-const book: Array<object> = [
+import {booksLiturgy} from '../../types/commonTypes';
+
+// should be an API call
+const book:booksLiturgy[] =[
     {
         "book_id": 208,
         "book_first_level": 4,
@@ -44,6 +45,7 @@ const book: Array<object> = [
         "intro": "<p align=\"center\" class=\"MsoNormal p-112\"><b>Name: </b><span class=\"span-239\" dir=\"RTL\" lang=\"HE\">והושיע</span><span dir=\"LTR\"></span><span dir=\"LTR\"></span>,<b> </b>Vehoshiya‘<b></b></p><p align=\"center\" class=\"MsoNormal p-112\"><b> </b></p><p class=\"MsoNormal\"><b>Introduction:</b></p><p class=\"MsoNormal\">This <span class=\"span-240\">string of verses </span>is\nrecited before the Song of the Sea. In Jewish tradition, the verses Exodus\n14:30-31, beginning <i>Adonai rescued (Vayyosha‘) on that </i>day, are\nconsidered an introduction to the Song of the Sea (which starts properly in\nExodus 15:1, the next verse). The verses in the string presented here all\ncontain at least one word that is a form from the root <i>yud-shin-‘ayin </i>“to\nrescue,” like the verb “Vayyosha‘” in Exodus 14:30. We have colored this word (or\nthese words) in red in each verse.</p><p class=\"MsoNormal\"><b> </b></p><p class=\"MsoNormal\"><b>Name: </b><span class=\"span-239\" dir=\"RTL\" lang=\"HE\">והושיע</span><span dir=\"LTR\"></span><span dir=\"LTR\"></span>,<b>\n</b>Vehoshiya‘<b></b></p><p class=\"MsoNormal\"><b>Category: </b>Liturgy</p><p class=\"MsoNormal\"><b>Sub-Category:</b> Biblical verses</p><p class=\"MsoNormal\"><b>Genre: </b>Introduction to Torah-reading<b></b></p><p class=\"MsoNormal\"><b>Occasion:</b> Shabbat Beshallaḥ</p><p class=\"MsoNormal\"><b>Composer</b>: N/A (Biblical Verses)</p><p class=\"MsoNormal\"><b>Liturgical Slot:</b> In the middle of the <i>parasha</i>,\nb<span class=\"span-240\">efore the reading of Exodus 14:30\n(Vayyosha‘ Adonai, the opening to the Song of the Sea)</span></p><p class=\"MsoNormal\"><b><span class=\"span-240\">Source:</span></b><span class=\"span-240\"> Vilna Siddur, Volume 1, page 410</span></p><p class=\"MsoNormal\"> </p><p class=\"MsoNormal\"> </p>"
     }
 ]
+
 const Liturgy = () => <RenderMenuSecondLevel liturgyStore={book} path='liturgy' languages={['en', 'he']}/>
 
-export default observer(Liturgy)
+export default Liturgy

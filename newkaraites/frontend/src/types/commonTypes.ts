@@ -1,4 +1,15 @@
 
+// liturgy
+export interface booksLiturgy {
+        'book_id':number,
+        'book_first_level':number,
+        'book_language':string,
+        'book_classification':string,
+        'book_title': string,
+        'intro': string,
+}
+
+
 // books halakhah
 export interface booksHalakhah {
     readonly [index:string]: {

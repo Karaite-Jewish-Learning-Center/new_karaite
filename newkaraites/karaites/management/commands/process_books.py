@@ -11,26 +11,34 @@ from .html_utils.utils import mark_bible_refs
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
 additional_css = """
- .MsoTableGrid {
-        width: 100%;
-        border-collapse: collapse;
-        border: none !important;
-        font-size: 16pt;
-    }
-    
-    .MsoTableGrid, tr:nth-child(even) {
-        text-align: center;
-    }
-    
-    .MsoTableGrid, td:nth-child(odd) .segmenttext {
-        font-size: 10pt;
-    }
-    
-    .MsoTableGrid, .segmenttext {
-        margin: 20px;
-    }
-   
 
+.MsoTableGrid {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 16pt;
+}
+
+.MsoTableGrid tr:nth-child(even) {
+    text-align: center;
+}
+
+
+.MsoTableGrid tr:nth-child(odd) td:first-child {
+    text-align: right;
+
+}
+
+.MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
+    text-align: left;
+}
+
+
+.MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
+    padding-right: 10px;
+}
+
+.MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
+   padding-left: 10px;
 }
 """
 
