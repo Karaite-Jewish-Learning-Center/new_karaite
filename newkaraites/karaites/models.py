@@ -93,7 +93,7 @@ class Author(models.Model):
 
     name = models.CharField(max_length=100)
 
-    name_he = models.CharField(max_length=50,
+    name_he = models.CharField(max_length=100,
                                default='')
 
     comments_count_en = models.IntegerField(default=0,
@@ -524,12 +524,37 @@ class KaraitesBookDetails(models.Model):
     book_title = models.CharField(max_length=100,
                                   verbose_name=_('Karaites book title'))
 
+    book_title_unslug = models.CharField(max_length=100,
+                                         editable=False,
+                                         default='')
+
+    introduction = models.TextField(default='')
+
     def __str__(self):
         return self.book_title
 
+    @mark_safe
+    def intro_to_html(self):
+        return self.introduction
+
     @staticmethod
-    def to_json(book_title):
-        details = KaraitesBookDetails.objects.get(book_title=book_title)
+    def get_all_books_by_first_level(level):
+        book_details = KaraitesBookDetails.objects.filter(first_level=level)
+        data = []
+        for details in book_details:
+            data.append({
+                'book_id': details.id,
+                'book_first_level': details.first_level,
+                'book_language': details.book_language,
+                'book_classification': details.book_classification,
+                'book_title': details.book_title,
+                'intro': details.introduction,
+            })
+        return data
+
+    @staticmethod
+    def to_json(book_title_unslug):
+        details = KaraitesBookDetails.objects.get(book_title_unslug=book_title_unslug)
         toc = TableOfContents.objects.filter(karaite_book=details)
 
         return {
@@ -539,11 +564,22 @@ class KaraitesBookDetails(models.Model):
             'book_classification': details.book_classification,
             'author': details.author.name,
             'book_title': details.book_title,
-            'toc': [t.to_json() for t in toc]
+            'toc': [t.to_json() for t in toc],
+            'intro': details.introduction,
         }
+
+    def save(self, *args, **kwargs):
+
+        if self.book_title.find(',') >= 0:
+            self.book_title_unslug = self.book_title.split(',')[1].strip()
+        else:
+            self.book_title_unslug = self.book_title
+
+        super(KaraitesBookDetails, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Karaites book details'
+        unique_together = ('book_title', 'author')
 
 
 class KaraitesBookAsArray(models.Model):

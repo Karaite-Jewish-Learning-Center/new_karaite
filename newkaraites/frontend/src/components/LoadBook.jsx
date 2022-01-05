@@ -32,7 +32,7 @@ const LoadBook = ({type}) => {
             if (response.ok) {
                 const data = await response.json()
                 //setVerses(data.book.verses)
-                store.setBookData(data.chapter, paneNumber)
+                store.setBookData({data: data.chapter}, paneNumber)
             } else {
                 alert("HTTP-Error: " + response.status)
             }
@@ -56,7 +56,7 @@ const LoadBook = ({type}) => {
 
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
-        let isOpen = store.isPaneOpen(book,chapter,verse)
+        let isOpen = store.isPaneOpen(book, chapter, verse)
         if (isOpen) {
             store.setMessage(`${book} ${chapter}:${verse} already open.`)
         } else {
@@ -86,7 +86,7 @@ const LoadBook = ({type}) => {
                 await fetchDataBible(store.panes.length - 1)
             }
 
-            if (type === "karaites") {
+            if (type === "karaites" || type === "liturgy") {
                 store.setPanes({
                     book: book,
                     chapter: 9999999,
@@ -112,9 +112,9 @@ const LoadBook = ({type}) => {
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
             getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
-         } catch (e) {
-             store.setMessage(translateMessage(e))
-         }
+        } catch (e) {
+            store.setMessage(translateMessage(e))
+        }
 
 
     }
@@ -151,7 +151,15 @@ const LoadBook = ({type}) => {
             if (panes[i].type.toLowerCase() === 'karaites') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)}/>
+                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)} type={type}/>
+                    </Grid>
+
+                ))
+            }
+             if (panes[i].type.toLowerCase() === 'liturgy') {
+                jsx.push((
+                    <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
+                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)} type={type}/>
                     </Grid>
 
                 ))
@@ -167,11 +175,9 @@ const LoadBook = ({type}) => {
     const books = bookRender()
 
     if (store.getIsLastPane() && books.length === 0) {
-        if (type === 'bible') {
-            return (<Redirect to={`/Tanakh/${book}/`}/>)
-        } else {
-            return (<Redirect to={`/Halakhah/${book}/`}/>)
-        }
+        if (type === 'bible') return (<Redirect to={`/Tanakh/${book}/`}/>)
+        if (type === 'karaites') return (<Redirect to={`/Halakhah/${book}/`}/>)
+        if (type === 'liturgy') return (<Redirect to={`/Liturgy/${book}/`}/>)
     }
 
     return (

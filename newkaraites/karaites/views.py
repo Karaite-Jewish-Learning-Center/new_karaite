@@ -89,7 +89,9 @@ def karaites_book_details(request, *args, **kwargs):
 
 
 def karaites_book_as_array(request, *args, **kwargs):
-    """ Do Book and chapter check"""
+    """ Load Karaites book"""
+
+    # Do Book and chapter check
     book = kwargs.get('book', None)
     paragraph_number = kwargs.get('chapter', None)
     first = kwargs.get('first', None)
@@ -105,8 +107,9 @@ def karaites_book_as_array(request, *args, **kwargs):
 
     book = slug_back(book)
 
+    print(book)
     try:
-        book_details = KaraitesBookDetails().to_json(book_title=book)
+        book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
     except KaraitesBookDetails.DoesNotExist:
         return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
 
@@ -141,6 +144,18 @@ class GetFirstLevel(View):
         return JsonResponse(level)
 
 
+class GetByLevel(View):
+    @staticmethod
+    def get(request, *args, **kwargs):
+        level = kwargs.get('level', None)
+        if level is None:
+            return JsonResponse(data={'status': 'false',
+                                      'message': _(f'Missing mandatory parameter level.')},
+                                status=400)
+
+        return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level), safe=False)
+
+
 class BooksPresentation(View):
 
     @staticmethod
@@ -165,7 +180,7 @@ class GetBookAsArrayJson(View):
         return book_chapter_verse(request, *args, **kwargs)
 
 
-class getKaraitesAllBookDetails(View):
+class GetKaraitesAllBookDetails(View):
 
     @staticmethod
     def get(request, *args, **kwargs):

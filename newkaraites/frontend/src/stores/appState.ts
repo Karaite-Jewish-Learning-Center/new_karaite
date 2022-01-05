@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction, action} from "mobx"
+import {makeAutoObservable, runInAction, action, toJS} from "mobx"
 import {isABibleBook} from "../utils/utils";
 import {autocompleteUrl} from "../constants/constants";
 

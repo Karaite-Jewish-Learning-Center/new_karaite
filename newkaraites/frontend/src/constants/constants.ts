@@ -1,9 +1,9 @@
 interface versesTable {
-   readonly [index: string]: Array<number>
+    readonly [index: string]: Array<number>
 }
 
 interface chapterTable {
-  readonly  [index: string]: number
+    readonly  [index: string]: number
 }
 
 interface numberString {
@@ -20,6 +20,12 @@ if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 }
 
+// first level  see constants.py
+export const TANAKH:string = '1'
+export const HALAKHAH:string = '3'
+export const LITURGY:string = '4'
+export const POLEMIC:string = '5'
+
 
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
@@ -31,6 +37,7 @@ export const getCommentsUrl: string = apiUrl + 'api/get-comments/'
 export const getFirstLevelUrl: string = apiUrl + 'api/get-first-level/'
 export const karaitesBookUrl: string = apiUrl + 'api/get-karaites-book-chapter/'
 export const karaitesBookDetailsUrl: string = apiUrl + 'api/get-karaites-book-details/'
+export const karaitesBookByLevel: string = apiUrl + 'api/get-karaites-books-by-level/'
 export const karaitesBookToc: string = apiUrl + 'api/get-karaites-book-toc/'
 export const referencesUrl: string = apiUrl + 'api/get-references/'
 export const autocompleteUrl: string = apiUrl + 'api/autocomplete/'
@@ -45,20 +52,20 @@ export const ENGLISH: number = 0
 export const HEBREW: number = 1
 
 export const BIBLE_ENGLISH: number = 0
-export const BIBLE_HEBREW :number= 1
-export const BIBLE_EN_CM:number = 2
-export const BIBLE_HE_CM:number = 3
-export const BIBLE_VERSE:number = 4
-export const BIBLE_CHAPTER:number = 5
-export const BIBLE_RENDER_CHAPTER:number = 6
+export const BIBLE_HEBREW: number = 1
+export const BIBLE_EN_CM: number = 2
+export const BIBLE_HE_CM: number = 3
+export const BIBLE_VERSE: number = 4
+export const BIBLE_CHAPTER: number = 5
+export const BIBLE_RENDER_CHAPTER: number = 6
 
-export const BIBLE_REFS:number = 7
+export const BIBLE_REFS: number = 7
 
-export const BOOK_CHAPTERS:number = 0
-export const BOOK_DATA:number = 1
+export const BOOK_CHAPTERS: number = 0
+export const BOOK_DATA: number = 1
 
 // this value is define in the views.py if changed there must be changed here too.
-export const ITEMS_PER_PAGE:number = 15
+export const ITEMS_PER_PAGE: number = 15
 
 
 export const chaptersByBibleBook: chapterTable = {
@@ -161,4 +168,4 @@ export const versesByBibleBook: versesTable = {
 }
 
 // this experimental and probably remove in the future.
-export const q640:string = '(min-width:640px)'
+export const q640: string = '(min-width:640px)'

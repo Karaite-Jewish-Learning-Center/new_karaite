@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "console-feed": "^3.2.2",
     "gematriya": "^2.0.0",
+    "global": "^4.4.0",
     "material-ui": "^0.20.2",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
@@ -32,6 +33,7 @@
     "react-virtuoso": "^1.9.3",
     "react-window": "^1.8.6",
     "react-window-infinite-loader": "^1.0.7",
+    "serve": "^13.0.2",
     "typescript": "^4.5.2",
     "web-vitals": "^1.0.1"
   },

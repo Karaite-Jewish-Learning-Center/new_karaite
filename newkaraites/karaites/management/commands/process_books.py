@@ -11,21 +11,26 @@ from .html_utils.utils import mark_bible_refs
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
 additional_css = """
-/*
-p {
-    display: block;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    margin: 10px 5px 10px 5px;
-}
-h1, h2 {
-    text-align: center;
-}
-*/
-.p-03 {
-    margin-left:0;
+ .MsoTableGrid {
+        width: 100%;
+        border-collapse: collapse;
+        border: none !important;
+        font-size: 16pt;
+    }
+    
+    .MsoTableGrid, tr:nth-child(even) {
+        text-align: center;
+    }
+    
+    .MsoTableGrid, td:nth-child(odd) .segmenttext {
+        font-size: 10pt;
+    }
+    
+    .MsoTableGrid, .segmenttext {
+        margin: 20px;
+    }
+   
+
 }
 """
 
@@ -222,21 +227,26 @@ HTML = """
 """
 
 BASIC_STYLE = """
-<style>
-    .en-biblical-ref {
-       color:red;
+    <style>
+        .en-biblical-ref {
+        color: red;
     }
+    
     .he-biblical-ref {
-       color:red;
+        color: red;
     }
+    
     .en-foot-note {
-        color:green;
+        color: green;
     }
+    
     .he-foot-note {
-        color:green;
+        color: green;
     }
+""" + additional_css + """    
 </style>
 """
+
 BASIC_HTML = """
 <html>
     <head>
@@ -327,7 +337,7 @@ def add_book_parts(path, book_name, books=BOOKS):
 # language
 # post process list of function
 # pre-process list of function
-
+# collect css
 HALAKHAH = [
 
     [
@@ -335,35 +345,40 @@ HALAKHAH = [
         'he',
         [],
         [update_bible_references_he],
-        {}
+        {},
+        True
     ],
     [
         'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
         [],
         [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
-        {}
+        {},
+        True
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
         [update_bible_re],
-        {}
+        {},
+        True
     ],
     [
         'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
         [update_bible_re],
-        {}
+        {},
+        True
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
-        {}
+        {},
+        True
     ],
 
 ]
@@ -378,7 +393,8 @@ LITURGY = [
         {'name': "אנכי אנכי, Anochi Anochi",
          'first_level': 4,
          'book_classification': '07',
-         'author': 'N/A (Biblical Verses)'}
+         'author': 'N/A (Biblical Verses)'},
+        False
     ],
     [
         'Atsili Qum Qera/', 'Atsili Qum Qera.html',
@@ -386,10 +402,11 @@ LITURGY = [
         [],
         [],
         # name, liturgy , Poems, Author
-        {'name': r"Atsili ḳum ḳera",
+        {'name': r"Atsili ḳum ḳera, Atsili ḳum ḳera",
          'first_level': 4,
          'book_classification': '08',
-         'author': 'Abraham'}
+         'author': 'Abraham'},
+        False
     ],
     [
         'Evyon Asher/', 'Evyon Asher.html',
@@ -400,7 +417,8 @@ LITURGY = [
         {'name': r"אביון אשר, Evyon Asher",
          'first_level': 4,
          'book_classification': '08',
-         'author': 'Anatoli (ben Joseph?)'}
+         'author': 'Anatoli (ben Joseph?)'},
+        False
     ],
     [
         'Vehahochma/', 'Vehahochma.html',
@@ -411,7 +429,8 @@ LITURGY = [
         {'name': r"והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē",
          'first_level': 4,
          'book_classification': '07',
-         'author': 'N/A (Biblical Verses)'}
+         'author': 'N/A (Biblical Verses)'},
+        False
     ],
     [
         'Vehoshia/', 'Vehoshia.html',
@@ -422,8 +441,12 @@ LITURGY = [
         {'name': r"והושיע, Vehoshiya‘",
          'first_level': 4,
          'book_classification': '07',
-         'author': 'N/A (Biblical Verses)'}
+         'author': 'N/A (Biblical Verses)'},
+        False
     ],
+]
+
+LITURGY_NO_TABLE = [
     [
         'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
@@ -433,11 +456,12 @@ LITURGY = [
         {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
          'book_classification': '07',
-         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"}
-    ]
+         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
+        True
+    ],
 ]
 
-LIST_OF_BOOKS = HALAKHAH + LITURGY
+LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_NO_TABLE
 
 
 class Command(BaseCommand):
@@ -604,7 +628,7 @@ class Command(BaseCommand):
         handle_ms_css.close()
 
     @staticmethod
-    def collect_style_map_to_class(html_tree, book):
+    def collect_style_map_to_class(html_tree, book, collect):
         style_classes = {}
         divs = html_tree.find('div', class_="WordSection1", recursive=True)
 
@@ -640,7 +664,8 @@ class Command(BaseCommand):
                     else:
                         tag.attrs['class'] = [class_name]
 
-            style_classes_by_book[book] = style_classes
+            if collect:
+                style_classes_by_book[book] = style_classes
         return divs
 
     def handle(self, *args, **kwargs):
@@ -648,20 +673,20 @@ class Command(BaseCommand):
             Books are pre-process and writen to original
             directory
 
-            Books are processes and writen to tmp directory
+            Books are post-processed and writen to tmp directory
             tags are rewritten and styles mapped to a css
             class.
             A css file is generate.
         """
 
         sys.stdout.write(f"\33[K Pre-processing book's\r")
-        for path, book, language, pre_processes, _, _ in LIST_OF_BOOKS:
+        for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:
                 pre_process(path, book)
 
         sys.stdout.write(f"\33[K Loading book's data\r")
         i = 0
-        for path, book, language, _, post_processes, _ in LIST_OF_BOOKS:
+        for path, book, language, _, post_processes, _, collect in LIST_OF_BOOKS:
             handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()
@@ -676,11 +701,8 @@ class Command(BaseCommand):
 
             sys.stdout.write(f"\33[K Collecting css for book {book}\r")
             html_tree = BeautifulSoup(html_str, 'html5lib')
-            html_tree = self.collect_style_map_to_class(html_tree, book)
 
-            # sys.stdout.write(f"\33[K Processing Bible refs for book {book}\r")
-            # divs = mark_bible_refs(str(divs))
-            # divs = BeautifulSoup(divs, 'html5lib')
+            html_tree = self.collect_style_map_to_class(html_tree, book, collect)
 
             for process in post_processes:
                 sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")

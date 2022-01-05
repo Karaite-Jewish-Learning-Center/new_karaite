@@ -1,7 +1,5 @@
 import React from 'react'
 import RenderMenu from '../menu/RenderMenu';
-//import {RenderHalakhahMenu} from './RenderHalakhahMenu'
-//import {booksHalakhah, booksMenuHalakhah} from '../../types/commonTypes'
 import {booksObj, booksMenu} from '../../types/commonTypes'
 
 // this will be an api call !
@@ -27,6 +25,9 @@ const halakhah: booksObj = {
 
 const books: booksMenu = {'Halakhah': halakhah}
 
-const Halakhah = () => <RenderMenu books={books} path={'Halakhah'} languages={['en', 'he']}/>
+const Halakhah = () =>{
+    return <RenderMenu books={books} path={'Halakhah'} languages={['en', 'he']}/>
+}
 
-export default  Halakhah
+
+export default Halakhah

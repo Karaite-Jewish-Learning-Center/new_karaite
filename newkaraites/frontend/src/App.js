@@ -49,7 +49,9 @@ function App() {
                         <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
                         <Route exact path="/Halakhah/"><Halakhah/></Route>
 
+                        <Route exact path="/Liturgy/:book/" children={<LoadBook type="liturgy"/>}/>
                         <Route exact path="/Liturgy/"><Liturgy/></Route>
+
                         <Route path='*'>
                             <NotFound404/>
                         </Route>

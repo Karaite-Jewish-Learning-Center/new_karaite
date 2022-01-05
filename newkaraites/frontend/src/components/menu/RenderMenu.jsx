@@ -11,7 +11,6 @@ import Colors from "../../constants/colors";
 
 const RenderMenu = ({books, path, languages = ['en', 'en'], columns=6}) => {
     const classes = useStyles()
-
     const populate = (obj) => {
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={columns} key={index}>
