@@ -4,7 +4,6 @@ import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from django.conf import settings
 from ...constants import BIBLE_BOOKS_NAMES
 from .html_utils.utils import mark_bible_refs
 
@@ -214,7 +213,7 @@ def fix_image_source(path, book_name, books=BOOKS):
     for book in books:
         html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
 
-        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
+        new_path = f'/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
 
         for child in html_tree.find_all('img'):
             image_path = child.attrs.get('src', None)
