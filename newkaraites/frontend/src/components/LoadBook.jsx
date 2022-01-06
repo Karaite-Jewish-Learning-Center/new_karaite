@@ -32,7 +32,7 @@ const LoadBook = ({type}) => {
             if (response.ok) {
                 const data = await response.json()
                 //setVerses(data.book.verses)
-                store.setBookData({data: data.chapter}, paneNumber)
+                store.setBookData(data.chapter, paneNumber)
             } else {
                 alert("HTTP-Error: " + response.status)
             }

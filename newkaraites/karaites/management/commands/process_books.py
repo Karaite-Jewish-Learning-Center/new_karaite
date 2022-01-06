@@ -125,7 +125,9 @@ def update_bible_references_en(html_tree):
     return html_tree
 
 
-def update_bible_references_he(html_tree):
+def update_bible_references_he(html_tree, language="HE"):
+    """ some books ( liturgy) have bible in English, even if the text is in Hebrew"""
+    language_lower = language.lower()
     names = BIBLE_BOOKS_NAMES.keys()
     for c in ['span-06', 'span-08', 'span-56']:
         spans = html_tree.find_all('span', class_=c)
@@ -133,8 +135,8 @@ def update_bible_references_he(html_tree):
             bible_ref = child.text
             for name in names:
                 if bible_ref.replace('(', '').replace(')', '').strip().startswith(name):
-                    child.attrs['lang'] = "HE"
-                    child.attrs['class'] = "he-biblical-ref"
+                    child.attrs['lang'] = language
+                    child.attrs['class'] = f"{language_lower}-biblical-ref"
 
     return html_tree
 
@@ -143,7 +145,9 @@ REF = re.compile(r'\(.*\)')
 CLEAN_HTML = re.compile('<.*?>')
 
 
-def update_bible_re(html_tree):
+def update_bible_re(html_tree, language='HE'):
+    """ some books ( liturgy) have bible in English, even if the text is in Hebrew """
+    language_lower = language.lower()
     html_str = str(html_tree)
     for ref in re.findall(REF, html_str):
         ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
@@ -160,10 +164,14 @@ def update_bible_re(html_tree):
         if ref in IGNORE:
             continue
 
-        tag = ref.replace(ref, f'<span class="he-biblical-ref" lang="HE">{ref}</span>')
+        tag = ref.replace(ref, f'<span class="{language_lower}-biblical-ref" lang="{language}">{ref}</span>')
         html_str = html_str.replace(ref, tag, 1)
 
     return BeautifulSoup(html_str, 'html5lib')
+
+
+def update_bible_he_en(html_tree, language='EN'):
+    return update_bible_re(html_tree, language=language)
 
 
 def update_bible_adderet(html_tree):
@@ -199,14 +207,14 @@ def write_data(path, book_name, book):
 def fix_image_source(path, book_name, books=BOOKS):
     # this is specific to Halakha Adderet
     old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
-                2: 'Adderet%20Eliyahu%20Critical%20Edition%20(2nd%20half)%20(SITE).fld/'}
+                2: 'Adderet%20Eliyahu%20Critical%20Edition%20(2nd%20half)%20(SITE).fld'}
 
     book_name = book_name.replace('.html', '')
 
     for book in books:
         html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
 
-        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}/'
+        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
 
         for child in html_tree.find_all('img'):
             image_path = child.attrs.get('src', None)
@@ -240,7 +248,7 @@ BASIC_STYLE = """
         color: red;
     }
     
-    .he-biblical-ref {
+    .en-biblical-ref {
         color: red;
     }
     
@@ -396,7 +404,7 @@ LITURGY = [
         'Anochi/', 'Anochi Anochi.html',
         'he',
         [],
-        [update_bible_re],
+        [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
         {'name': "אנכי אנכי, Anochi Anochi",
          'first_level': 4,
@@ -432,7 +440,7 @@ LITURGY = [
         'Vehahochma/', 'Vehahochma.html',
         'he',
         [],
-        [update_bible_re],
+        [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
         {'name': r"והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē",
          'first_level': 4,
@@ -444,7 +452,7 @@ LITURGY = [
         'Vehoshia/', 'Vehoshia.html',
         'he',
         [],
-        [update_bible_re],
+        [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
         {'name': r"והושיע, Vehoshiya‘",
          'first_level': 4,
