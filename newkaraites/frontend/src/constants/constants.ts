@@ -14,7 +14,7 @@ interface stringNumber {
     readonly [index: string]: number
 }
 
-let apiUrl: string = 'http://161.35.130.125/'
+let apiUrl: string = 'http://dev.karaites.org/'
 
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'

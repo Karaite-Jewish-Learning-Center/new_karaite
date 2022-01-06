@@ -20,8 +20,8 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
             return false
         }
         return store.getCurrentItem(paneNumber) === item
-
     }
+
     const itemContent = (item, data) => {
 
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>

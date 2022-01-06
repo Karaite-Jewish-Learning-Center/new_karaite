@@ -6,9 +6,8 @@ import Filler from "../general/Filler";
 import {makeStyles} from "@material-ui/core/styles";
 import Colors from "../../constants/colors";
 import {slug} from "../../utils/utils";
-import {languageDirection} from "../../utils/languageDirection";
 import ReactHtmlParser from 'react-html-parser'
-
+import {capitalize} from "../../utils/utils";
 
 const cleanUrl = (url) => {
     let result = slug(url.trim().split(',')[1])
@@ -29,7 +28,7 @@ export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'e
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={12} key={index}>
                 <div className={classes.card}>
-                    <Link to={`/${path}/${cleanUrl(obj[key].book_title)}/`}>
+                    <Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title)}/1/`}>
                         <Typography variant="h6" component="h2">{obj[key].book_title}</Typography>
                     </Link>
                     <br/>

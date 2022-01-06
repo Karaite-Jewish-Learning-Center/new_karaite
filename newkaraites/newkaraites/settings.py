@@ -120,7 +120,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125']
+    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org']
     THUMBNAIL_DEBUG = DEBUG
     IMAGE_HOST = 'http://161.35.130.125/'
 

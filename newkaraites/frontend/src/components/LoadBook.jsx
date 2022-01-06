@@ -57,6 +57,7 @@ const LoadBook = ({type}) => {
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
         let isOpen = store.isPaneOpen(book, chapter, verse)
+        debugger
         if (isOpen) {
             store.setMessage(`${book} ${chapter}:${verse} already open.`)
         } else {
@@ -177,7 +178,7 @@ const LoadBook = ({type}) => {
     if (store.getIsLastPane() && books.length === 0) {
         if (type === 'bible') return (<Redirect to={`/Tanakh/${book}/`}/>)
         if (type === 'karaites') return (<Redirect to={`/Halakhah/${book}/`}/>)
-        if (type === 'liturgy') return (<Redirect to={`/Liturgy/${book}/`}/>)
+        if (type === 'liturgy') return (<Redirect to={`/Liturgy/`}/>)
     }
 
     return (
