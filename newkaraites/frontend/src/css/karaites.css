@@ -1613,3 +1613,15 @@
 	margin: 0;
     text-align: justify;
 }
+
+/* Anochi */
+
+.span-196, .span-198, .span-201, .span-202, .span-204 {
+	color:red;
+}
+
+/* Vehoshia */
+
+.span-243, .span-241, .span-245, .span-249 {
+	color:red;
+}

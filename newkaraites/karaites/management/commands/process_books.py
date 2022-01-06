@@ -41,7 +41,6 @@ additional_css = """
 }
 
 /* shelomo part 1 */
-
 .p-57, .p-61 {
     margin: 0;
     text-align: justify;
@@ -53,6 +52,17 @@ additional_css = """
     text-align: justify;
 }
 
+/* Anochi */
+
+.span-196, .span-198, .span-201, .span-202, .span-204 {
+    color:red;
+}
+
+/* Vehoshia */
+
+.span-243, .span-241, .span-245, .span-249 {
+    color:red;
+}
 """
 
 style_classes_by_book = {}
