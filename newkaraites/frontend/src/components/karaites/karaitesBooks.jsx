@@ -1,6 +1,6 @@
-import React, {useContext} from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Virtuoso } from 'react-virtuoso'
+import React, {useContext, useState} from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import {Virtuoso} from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
 import KaraitePaneHeader from "./KaraitePaneHeader";
 import transform from '../../utils/transform'
@@ -10,9 +10,8 @@ import Colors from '../../constants/colors'
 import {storeContext} from "../../stores/context";
 
 
-
-
-const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
+const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
+    const [loadingMessage, setLoadingMessage]  = useState(null)
     const store = useContext(storeContext)
     const classes = useStyles()
 
@@ -21,9 +20,10 @@ const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
             return false
         }
         return store.getCurrentItem(paneNumber) === item
-
     }
+
     const itemContent = (item, data) => {
+
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
                 decodeEntities: true,
@@ -31,22 +31,39 @@ const KaraitesBooks = ({ paneNumber, refClick, paragraphs }) => {
             })}
         </div>)
     }
-
-
+    // strange error if book has only one paragraph and initialTopMostItemIndex id defined
+    if (type === 'liturgy') {
+        return (
+            <>
+                <KaraitePaneHeader paneNumber={paneNumber}/>
+                <Virtuoso data={paragraphs}
+                          endReached={(_)=>setLoadingMessage(()=>'Text end.')}
+                          itemContent={itemContent}
+                          components={{
+                              Footer: () => {
+                                   return <Loading text={loadingMessage}/>
+                              }
+                          }}
+                />
+            </>
+        )
+    }
     return (
         <>
-            <KaraitePaneHeader paneNumber={paneNumber} />
+            <KaraitePaneHeader paneNumber={paneNumber}/>
             <Virtuoso data={paragraphs}
-                initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}
-                itemContent={itemContent}
-                components={{
-                    Footer: () => {
-                        return <Loading />
-                    }
-                }}
+                      endReached={(_)=>setLoadingMessage(()=>'Text end.')}
+                      initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}
+                      itemContent={itemContent}
+                      components={{
+                          Footer: () => {
+                              return <Loading text={loadingMessage}/>
+                          }
+                      }}
             />
         </>
     )
+
 }
 
 

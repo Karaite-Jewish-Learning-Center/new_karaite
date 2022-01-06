@@ -51,7 +51,8 @@ admin.site.register(OtherBooks, OtherBooksAdmin)
 
 
 class AuthorAdmin(KAdmin):
-    list_display = ('name', 'comments_count_en', 'comments_count_he', 'history')
+    list_display = ('name', 'name_he', 'comments_count_en',
+                    'comments_count_he', 'history')
     search_fields = ('name',)
     list_filter = ('name',)
 
@@ -118,9 +119,10 @@ class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
     list_display = ('first_level', 'book_language',
                     'book_classification',
-                    'book_title', 'author')
+                    'book_title', 'author',
+                    'intro_to_html')
 
-    list_filter = ('book_language', 'book_classification')
+    list_filter = ('first_level', 'book_language', 'book_classification')
 
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)

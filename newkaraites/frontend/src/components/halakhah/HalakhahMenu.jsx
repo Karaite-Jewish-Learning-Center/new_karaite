@@ -78,9 +78,9 @@ const useStyles = makeStyles({
         height: '100%',
         direction: "row",
         justifyContent: 'center',
-        alignItems: 'center',
         marginTop: 80,
     },
+
     backlink: {
         paddingBottom: 10,
     },

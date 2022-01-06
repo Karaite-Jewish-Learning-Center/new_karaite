@@ -6,40 +6,96 @@ from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from ...constants import BIBLE_BOOKS_NAMES
+from .html_utils.utils import mark_bible_refs
 
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
 additional_css = """
-p {
-    display: block;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    margin: 10px 5px 10px 5px;
+
+.MsoTableGrid {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 16pt;
 }
-h1, h2 {
+
+.MsoTableGrid tr:nth-child(even) {
     text-align: center;
 }
-.p-03 {
-    margin-left:0;
+
+
+.MsoTableGrid tr:nth-child(odd) td:first-child {
+    text-align: right;
+
+}
+
+.MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
+    text-align: left;
+}
+
+
+.MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
+    padding-right: 10px;
+}
+
+.MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
+   padding-left: 10px;
 }
 """
 
-style_classes = {}
+style_classes_by_book = {}
 ms_classes = []
 tags = {}
-source_path = '../newkaraites/data_karaites/'
-out_path = '../newkaraites/karaites/management/tmp/'
-css_source = out_path
-css_out = '../newkaraites/frontend/src/css/'
 
-LIST_OF_BOOKS = [
-    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
-    ['Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html'],
-    ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html'],
-    ['Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html'],
-    ['Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html'],
+PATH = '../newkaraites/karaites/management/tmp/'
+SOURCE_PATH = '../newkaraites/data_karaites/'
+OUT_PATH = PATH
+CSS_SOURCE = OUT_PATH
+CSS_OUT = '../newkaraites/frontend/src/css/'
+
+IGNORE = ['(#default#VML)',
+          '(Web)',
+          '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
+          '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
+          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+          """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
+          '(ברוך)',
+          """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
+          """(נגד דת הנצרות)""",
+          """(ראה הערה מספר 8)."""
+          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+          """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
+          '(בחג הסוכות)',
+          '(אַתְּ)',
+          '(הֹלֶכֶת)',
+          """(ח', י"ט)""",
+          """(וְקִבְּלוּ)""",
+          """(יַעַשׂ)""",
+          """(ראה הערה מספר 8)"""
+          # volume 2
+          """(ח', י"ט)"""
+          '(י"א,  ל"ג),',
+          '(יִהְיוּ-) ',
+          '(שָׁחוּט)',
+          '(דְּבָרוֹ)',
+          '(כ"ו, י"ט)',
+          '(רַגְלְךָ)',
+          '(הוא הנ"ל)',
+          '(ח"ב, כ"ג)',
+          """(ט', א')""",
+          """(ח', י,ט)""",
+          """(י"א,ל"ג)""",
+          """(יִהְיוּ-)""",
+          """(Biblical Verses)""",
+          """(Anochi)""",
+          """(Ani)""",
+          """(</span>Anochi)""",
+          """(Ishmael)""",
+          """(ben Joseph?)""",
+          """(and the refrain)""",
+          """(Vayyosha‘)"""
+          ]
+REMOVE = [
+    """(Anochi) """,
 ]
 
 
@@ -52,7 +108,7 @@ def removing_no_breaking_spaces(html_tree):
 
 def update_bible_references_en(html_tree):
     names = BIBLE_BOOKS_NAMES.values()
-    for klass in ['span-08', 'span-42', 'span-46']:
+    for klass in ['span-39', 'span-43', 'span-48', 'span-52', 'span-63']:
         spans = html_tree.find_all('span', class_=klass)
         for child in spans:
             bible_ref = child.text
@@ -69,7 +125,9 @@ def update_bible_references_en(html_tree):
     return html_tree
 
 
-def update_bible_references_he(html_tree):
+def update_bible_references_he(html_tree, language="HE"):
+    """ some books ( liturgy) have bible in English, even if the text is in Hebrew"""
+    language_lower = language.lower()
     names = BIBLE_BOOKS_NAMES.keys()
     for c in ['span-06', 'span-08', 'span-56']:
         spans = html_tree.find_all('span', class_=c)
@@ -77,19 +135,349 @@ def update_bible_references_he(html_tree):
             bible_ref = child.text
             for name in names:
                 if bible_ref.replace('(', '').replace(')', '').strip().startswith(name):
-                    child.attrs['lang'] = "HE"
-                    child.attrs['class'] = "he-biblical-ref"
+                    child.attrs['lang'] = language
+                    child.attrs['class'] = f"{language_lower}-biblical-ref"
 
     return html_tree
 
 
-PROCESS = [
-    [update_bible_references_he],
-    [update_bible_references_en, removing_no_breaking_spaces],
-    [],
-    [],
-    [],
+REF = re.compile(r'\(.*\)')
+CLEAN_HTML = re.compile('<.*?>')
+
+
+def update_bible_re(html_tree, language='HE'):
+    """ some books ( liturgy) have bible in English, even if the text is in Hebrew """
+    language_lower = language.lower()
+    html_str = str(html_tree)
+    for ref in re.findall(REF, html_str):
+        ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+        ref = ref.replace('\n', '').replace('\r', '')
+        # only text
+        ref = re.sub(CLEAN_HTML, '', ref)
+
+        if len(ref) > 28:
+            continue
+
+        for r in REMOVE:
+            ref = ref.replace(r, '')
+
+        if ref in IGNORE:
+            continue
+
+        tag = ref.replace(ref, f'<span class="{language_lower}-biblical-ref" lang="{language}">{ref}</span>')
+        html_str = html_str.replace(ref, tag, 1)
+
+    return BeautifulSoup(html_str, 'html5lib')
+
+
+def update_bible_he_en(html_tree, language='EN'):
+    return update_bible_re(html_tree, language=language)
+
+
+def update_bible_adderet(html_tree):
+    return BeautifulSoup(mark_bible_refs(str(html_tree)), 'html5lib')
+
+
+def fix_chapter_verse(html_tree):
+    span = str(html_tree).replace("""<span class="span-50">:30
+This </span>""", '<span class="span-50">11:30 This </span>')
+    span = span.replace('<span class="span-58">31</span>',
+                        '<span class="span-58">31:26 Beside the ark of God’s covenant </span>')
+    span = span.replace('<span class="span-58">34</span>',
+                        '<span>34:1 From [<i>et</i>]<i> </i>Gilead</span>')
+    return BeautifulSoup(span, 'html5lib')
+
+
+BOOKS = [1, 2]
+
+
+def read_data(path, book_name):
+    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'r')
+    book = handle.read()
+    handle.close()
+    return book
+
+
+def write_data(path, book_name, book):
+    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'w')
+    handle.write(book)
+    handle.close()
+
+
+def fix_image_source(path, book_name, books=BOOKS):
+    # this is specific to Halakha Adderet
+    old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
+                2: 'Adderet%20Eliyahu%20Critical%20Edition%20(2nd%20half)%20(SITE).fld'}
+
+    book_name = book_name.replace('.html', '')
+
+    for book in books:
+        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
+
+        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
+
+        for child in html_tree.find_all('img'):
+            image_path = child.attrs.get('src', None)
+            if image_path is not None:
+                child.attrs['src'] = image_path.replace(old_path[book], new_path)
+
+        write_data(path, f'{book_name}-{book}.html', str(html_tree))
+
+
+HTML = """
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    </head>
+    <body lang="EN-US">
+    <div class="WordSection1">    
+        {}
+        {}
+    </div>
+    <div style="mso-element:footnote-list">
+        {}
+        {}
+    </div>
+    </body>
+</html>
+"""
+
+BASIC_STYLE = """
+    <style>
+        .en-biblical-ref {
+        color: red;
+    }
+    
+    .en-biblical-ref {
+        color: red;
+    }
+    
+    .en-foot-note {
+        color: green;
+    }
+    
+    .he-foot-note {
+        color: green;
+    }
+""" + additional_css + """    
+</style>
+"""
+
+BASIC_HTML = """
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        {}
+    </head>
+    <body lang="EN-US">
+        {}
+    </div>
+    </body>
+</html>
+"""
+
+
+def remove_tag(div_str, tag):
+    div_str = div_str.replace(tag, '', 1)
+    div_str = div_str[::-1]
+    div_str = div_str.replace('</div>'[::-1], '', 1)
+    div_str = div_str[::-1]
+    return div_str
+
+
+def update_index(div_str, i, index):
+    """ Update index for notes on the second book, both start foot-notes
+        at 1
+    """
+    div_str = div_str.replace('\n', '').replace('\t', '').replace('\r', '')
+
+    div_str = div_str.replace(f'<div id="ftn{i}" style="mso-element:footnote">',
+                              f'<div id="ftn{index}" style="mso-element:footnote">')
+
+    div_str = div_str.replace(f'<a href="#_ftn{i}" ',
+                              f'<a href="#_ftn{index}" ', 1)
+
+    div_str = div_str.replace(f'<a href="#_ftn{index}" name="_ftnref{i}"',
+                              f'<a href="#_ftn{index}" name="_ftnref{index}"', 1)
+
+    div_str = div_str.replace(f'<a href="#_ftn{index}" name="_ftnref{i}"',
+                              f'<a href="#_ftn{index}" name="_ftnref{index}"', 1)
+
+    div_str = div_str.replace(f'style="mso-footnote-id:ftn{i}"',
+                              f'style="mso-footnote-id:ftn{index}"', 1)
+
+    div_str = div_str.replace(f'>[{i}]</span>',
+                              f'>[{index}]</span>', 1)
+
+    return div_str
+
+
+def add_book_parts(path, book_name, books=BOOKS):
+    """added books together in a single file"""
+
+    # number of foot-notes in the first book
+    magical_number = 682
+    book_name = book_name.replace('.html', '')
+
+    for part in books:
+        book_data = read_data(path, f'{book_name}-{part}.html')
+
+        if part == 1:
+            div1_str = str(BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1"))
+            foot_notes1 = str(BeautifulSoup(book_data, 'html5lib').find('div',
+                                                                        attrs={'style': "mso-element:footnote-list"}))
+
+        if part == 2:
+            # second book we have to update all foot-notes numbers and references.
+            div2_str = str(BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1"))
+
+            foot_notes2 = str(BeautifulSoup(book_data, 'html5lib').find('div',
+                                                                        attrs={'style': "mso-element:footnote-list"}))
+            # process body foot-notes
+            for i in range(1, 613):
+                index = i + magical_number
+                div2_str = update_index(div2_str, i, index)
+                foot_notes2 = update_index(foot_notes2, i, index)
+
+            div1_str = remove_tag(div1_str, '<div class="WordSection1">')
+            foot_notes1 = remove_tag(foot_notes1, '<div style="mso-element:footnote-list">')
+            div2_str = remove_tag(div2_str, '<div class="WordSection1">')
+            foot_notes2 = remove_tag(foot_notes2, '<div style="mso-element:footnote-list">')
+            html = HTML.format(div1_str, div2_str, foot_notes1, foot_notes2)
+
+    write_data(path, f'{book_name}.html', html)
+
+
+# book path
+# book name
+# language
+# post process list of function
+# pre-process list of function
+# collect css
+HALAKHAH = [
+
+    [
+        'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
+        'he',
+        [],
+        [update_bible_references_he],
+        {},
+        True
+    ],
+    [
+        'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
+        'en',
+        [],
+        [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
+        {},
+        True
+    ],
+    [
+        'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
+        'he',
+        [],
+        [update_bible_re],
+        {},
+        True
+    ],
+    [
+        'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
+        'he',
+        [],
+        [update_bible_re],
+        {},
+        True
+    ],
+    [
+        'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
+        'he',
+        [fix_image_source, add_book_parts],
+        [update_bible_adderet],
+        {},
+        True
+    ],
+
 ]
+
+LITURGY = [
+    [
+        'Anochi/', 'Anochi Anochi.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': "אנכי אנכי, Anochi Anochi",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'},
+        False
+    ],
+    [
+        'Atsili Qum Qera/', 'Atsili Qum Qera.html',
+        'he',
+        [],
+        [],
+        # name, liturgy , Poems, Author
+        {'name': r"Atsili ḳum ḳera, Atsili ḳum ḳera",
+         'first_level': 4,
+         'book_classification': '08',
+         'author': 'Abraham'},
+        False
+    ],
+    [
+        'Evyon Asher/', 'Evyon Asher.html',
+        'he',
+        [],
+        [],
+        # name, liturgy , Poems, Author
+        {'name': r"אביון אשר, Evyon Asher",
+         'first_level': 4,
+         'book_classification': '08',
+         'author': 'Anatoli (ben Joseph?)'},
+        False
+    ],
+    [
+        'Vehahochma/', 'Vehahochma.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'},
+        False
+    ],
+    [
+        'Vehoshia/', 'Vehoshia.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"והושיע, Vehoshiya‘",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'},
+        False
+    ],
+]
+
+LITURGY_NO_TABLE = [
+    [
+        'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
+        'he',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
+         'first_level': 5,
+         'book_classification': '07',
+         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
+        True
+    ],
+]
+
+LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_NO_TABLE
 
 
 class Command(BaseCommand):
@@ -113,10 +501,6 @@ class Command(BaseCommand):
                         continue
 
                     note_ref = re.match('\\[[0-9]*.\\]', child.text)
-                    # if note_ref is None:
-                    #     # volume 2
-                    #     note_ref = re.match('[0-9]*.', foot_notes_list[foot_note])
-
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
@@ -127,7 +511,7 @@ class Command(BaseCommand):
                             'html5lib'))
 
                 except KeyError:
-                    # this seams a bug , hasattr, returns True for style, in fact no style attr
+                    # this seems a bug , hasattr, returns True for style, in fact no style attr
                     # these are mostly emtpy a tags so remove then
                     if len(child.text) == 0:
                         child.decompose()
@@ -138,74 +522,84 @@ class Command(BaseCommand):
     def parse_and_save_css():
         # just one css file
         file_name = 'karaites.css'
-        handle_css = open(f'{out_path}{file_name}', 'w')
-        styled_order = {k: v for k, v in sorted(style_classes.items(), key=lambda item: item[1])}
-        for style, class_name in styled_order.items():
-            css_elements = style.split(";")
+        handle_css = open(f'{OUT_PATH}{file_name}', 'w')
+        handle_css.write(f'\n/*  This file was generated by command process_books, should not be edit by hand.*/\n'
+                         f'/*  All changes will be lost. You have been warned.                               */\n')
 
-            # remove duplicates
-            rules = []
-            values = []
-            for css in css_elements:
-                r, v = css.split(':')
-                rules.append(r)
-                values.append(v)
+        for books in style_classes_by_book.keys():
+            # add a comment book name to identify css by book
+            handle_css.write(f'\n/*   {books}    */\n')
 
-                if len(rules) != len(set(rules)):
-                    css_elements = []
-                    unique_rules = set(rules)
-                    for i, rule in enumerate(rules):
-                        # keep rules order
-                        if rule in unique_rules:
-                            css_elements.append(f'{rule}:{values[i]}')
-                            unique_rules.remove(rule)
+            styled_order = {k: v for k, v in sorted(style_classes_by_book[books].items(), key=lambda item: item[1])}
 
-            # clean up css
-            cleaned = ''
-            for css in css_elements:
+            for style, class_name in styled_order.items():
 
-                if css.startswith('mso'):
+                # remove v:line class
+                if class_name.find('v:line') >= 0:
                     continue
 
-                if css.startswith('tab-stops'):
+                css_elements = style.split(";")
+
+                # remove duplicates
+                rules = []
+                values = []
+                for css in css_elements:
+                    r, v = css.split(':')
+                    rules.append(r)
+                    values.append(v)
+
+                    if len(rules) != len(set(rules)):
+                        css_elements = []
+                        unique_rules = set(rules)
+                        for i, rule in enumerate(rules):
+                            # keep rules order
+                            if rule in unique_rules:
+                                css_elements.append(f'{rule}:{values[i]}')
+                                unique_rules.remove(rule)
+
+                # clean up css
+                cleaned = ''
+                for css in css_elements:
+
+                    #  remove invalid solidwindowtext
+                    css = css.replace('solidwindowtext', '')
+
+                    if css.startswith('mso'):
+                        continue
+
+                    if css.startswith('tab-stops'):
+                        continue
+
+                    if css.startswith('padding') or \
+                            css.startswith('text-indent') or \
+                            css.startswith('margin') or \
+                            css.startswith('margin'):
+                        # remove redundant measure unit
+                        css = css.replace(':0pt', ':0').replace(':0in', ':0')
+
+                        css, values = css.split(':')
+
+                        # remove flot point part
+                        values = re.sub(r'\.[0-9]', '', values)
+
+                        # replace in by pt
+                        values = values.replace('in', 'pt').replace('pt', 'pt ').strip()
+
+                        css = f'{css}:{values}'
+
+                    cleaned += f'\t {css};\n'
+
+                if cleaned == '':
                     continue
 
-                if css.find('v:line') >= 0:
-                    continue
-
-                if css.startswith('padding') or \
-                        css.startswith('text-indent') or \
-                        css.startswith('margin') or \
-                        css.startswith('margin'):
-                    css, values = css.split(':')
-                    # remove flot point part
-                    values = re.sub(r'\.[0-9]', '', values)
-                    # replace in by pt
-                    values = values.replace('in', 'pt').replace('pt', 'pt ').strip()
-                    # remove redundant measure unit
-                    values = values.replace('0pt', '0')
-                    css = f'{css}:{values}'
-
-                if css.startswith('margin'):
-                    css, values = css.split(':')
-                    # remove redundant measure unit
-                    if values.startswith('0'):
-                        values = values.replace('0pt', '0').replace('0in', '0')
-                    css = f'{css}:{values}'
-
-                cleaned += f'\t {css};\n'
-
-            if cleaned == '':
-                continue
-
-            handle_css.write(f'.{class_name} {{\n   {cleaned}}}\n')
+                handle_css.write(f'.{class_name} {{\n   {cleaned}}}\n')
 
         handle_css.write(additional_css)
         handle_css.close()
 
         # copy karaites.css
         sys.stdout.write(f"\33[K Copy {file_name} to final destination.\r")
-        shutil.copy(f'{css_source}{file_name}', f'{css_out}{file_name}')
+        shutil.copy(f'{CSS_SOURCE}{file_name}', f'{CSS_OUT}{file_name}')
 
     @staticmethod
     def remove_tags(html_str):
@@ -242,31 +636,18 @@ class Command(BaseCommand):
         return html
 
     @staticmethod
-    def fix_image_source(html_tree):
-        # this is specific to Halakha Adderet
-        # fix this:
-        old_path = 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld'
-        new_path = f'{settings.IMAGE_HOST}static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi'
-
-        for child in html_tree.find_all('img'):
-            path = child.attrs.get('src', None)
-            if path is not None:
-                child.attrs['src'] = path.replace(old_path, new_path)
-
-        return html_tree
-
-    @staticmethod
     def handle_ms_css():
-        handle_ms_css = open(f'{out_path}ms.css', 'w')
+        handle_ms_css = open(f'{OUT_PATH}ms.css', 'w')
         ms_classes.sort()
         for class_name in ms_classes:
             handle_ms_css.write(f'.{class_name} {{}}\n')
         handle_ms_css.close()
 
     @staticmethod
-    def collect_style_map_to_class(html_tree):
-
+    def collect_style_map_to_class(html_tree, book, collect):
+        style_classes = {}
         divs = html_tree.find('div', class_="WordSection1", recursive=True)
+
         for tag in divs.findAll(True, recursive=True):
 
             for attr in [attr for attr in tag.attrs]:
@@ -298,50 +679,61 @@ class Command(BaseCommand):
                         tag.attrs['class'].append(class_name)
                     else:
                         tag.attrs['class'] = [class_name]
+
+            if collect:
+                style_classes_by_book[book] = style_classes
         return divs
 
     def handle(self, *args, **kwargs):
         """
-            Books are processes and writen to tmp directory
-            tags are rewritten and styles mapped to classes
-            a css file is generate
+            Books are pre-process and writen to original
+            directory
+
+            Books are post-processed and writen to tmp directory
+            tags are rewritten and styles mapped to a css
+            class.
+            A css file is generate.
         """
+
+        sys.stdout.write(f"\33[K Pre-processing book's\r")
+        for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
+            for pre_process in pre_processes:
+                pre_process(path, book)
+
         sys.stdout.write(f"\33[K Loading book's data\r")
         i = 0
-        for path, book in LIST_OF_BOOKS:
-            handle_source = open(f'{source_path}{path}{book}', 'r')
+        for path, book, language, _, post_processes, _, collect in LIST_OF_BOOKS:
+            handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
             sys.stdout.write(f"\33[K Processing foot-notes for book {book}\r")
-            html_tree = self.replace_a_foot_notes(html_tree, 'he')
+            html_tree = self.replace_a_foot_notes(html_tree, language)
+
+            sys.stdout.write(f"\33[K Removing comments for book {book}\r")
+            html_str = self.replace_from_open_to_close(str(html_tree))
+
+            sys.stdout.write(f"\33[K Collecting css for book {book}\r")
+            html_tree = BeautifulSoup(html_str, 'html5lib')
+
+            html_tree = self.collect_style_map_to_class(html_tree, book, collect)
+
+            for process in post_processes:
+                sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
+                html_tree = process(html_tree)
 
             sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
             html_str = self.remove_tags(str(html_tree))
-
-            sys.stdout.write(f"\33[K Removing comments for book {book}\r")
-            html_str = self.replace_from_open_to_close(html_str)
-
-            html_tree = BeautifulSoup(html_str, 'html5lib')
-            sys.stdout.write(f"\33[K Fix images path book {book}\r")
-            html_tree = self.fix_image_source(html_tree)
-
-            sys.stdout.write(f"\33[K Collecting css for book {book}\r")
-            divs = self.collect_style_map_to_class(html_tree)
-
-            for process in PROCESS[i]:
-                sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
-                divs = process(divs)
 
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
             sys.stdout.write(f"\33[K Writing files for {book} \n")
             sys.stdout.write('\n')
 
-            handle_out = open(f'{out_path}{book}', 'w')
-            handle_out.write(str(divs))
+            handle_out = open(f'{OUT_PATH}{book}', 'w')
+            handle_out.write(BASIC_HTML.format(BASIC_STYLE, html_str))
             handle_out.close()
 
             i += 1

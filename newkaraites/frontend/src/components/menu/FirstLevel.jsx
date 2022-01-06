@@ -29,12 +29,14 @@ const FirstLevel = () => {
 
     const levels = Object.keys(classification).map(key =>
         <Grid item xs key={key}>
-            <div className={classes.card}>
+            <div className={classes.card} >
                 <Link to={'/' + key + '/'}>
                     <Typography variant="h6" component="h2">{key}</Typography>
                 </Link>
                 <br/>
-                <Typography variante="body3" component="p">{classification[key]}</Typography>
+                <Typography
+
+                    variante="body3" component="p">{classification[key]}</Typography>
                 <hr/>
             </div>
         </Grid>)

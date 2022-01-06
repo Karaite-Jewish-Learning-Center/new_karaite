@@ -32,12 +32,14 @@ const ChapterHeaderVerse = (props) => {
     let refs = parseInt(data[BIBLE_EN_CM]) //+ parseInt(data[BIBLE_REFS])
 
 
-    const openRightPane = () => {
-        store.setDistance(0, paneNumber)
-        store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
-    }
-
     const onClick = (i) => {
+        if (!store.getIsRightPaneOpen(paneNumber)) {
+            store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
+            store.setDistance(0, paneNumber)
+            store.setCurrentItem(i, paneNumber)
+            return
+        }
+
         store.setCurrentItem(i, paneNumber)
         store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
@@ -121,8 +123,7 @@ const ChapterHeaderVerse = (props) => {
         <div className={classes.verse}>
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                 onClick={onClick.bind(this, item)}
-                 onDoubleClick={openRightPane.bind(this, item)}>
+                 onClick={onClick.bind(this, item)}>
                 <ChapterBody/>
             </div>
 
@@ -151,6 +152,7 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
+        cursor:'default',
     },
     chapterTitle_he: {
         maxWidth: '35%',

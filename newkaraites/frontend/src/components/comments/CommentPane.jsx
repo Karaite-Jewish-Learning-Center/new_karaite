@@ -70,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
     scroll: {
         height: '70vh',
         overflow: 'auto',
-        paddingRight: 10,
         paddingBottom: 20,
     },
     root: {

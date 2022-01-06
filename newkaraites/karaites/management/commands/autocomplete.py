@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
                 sys.stdout.write(f"\33[KProcessing verse: {i}\r")
                 # make a windowed with 2,3,4...n words
-                for n in [2, 3, 4, 5, 6]:
+                for n in [1, 2, 3, 4, 5]:
                     for combo in windowed(word_list, n=n, step=1):
                         auto, created = AutoComplete.objects.get_or_create(
                             word_en=" ".join(filter(None, combo))

@@ -28,10 +28,10 @@ function MainMenu(props) {
     const {window} = props;
     const classes = useStyles();
     const theme = useTheme();
-    const [isDrawerOen, SetIsDrawerOpen] = useState(false);
+    const [isDrawerOpen, SetIsDrawerOpen] = useState(false);
 
     const handleDrawerToggle = () => {
-        SetIsDrawerOpen(!isDrawerOen);
+        SetIsDrawerOpen(!isDrawerOpen);
     };
 
     const drawer = (
@@ -88,7 +88,7 @@ function MainMenu(props) {
                         container={container}
                         variant="temporary"
                         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={isDrawerOen}
+                        open={isDrawerOpen}
                         onClose={handleDrawerToggle}
                         classes={{
                             paper: classes.drawerPaper,

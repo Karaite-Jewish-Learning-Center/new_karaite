@@ -1,0 +1,34 @@
+import re
+import sys
+from bs4 import BeautifulSoup
+from ...models import (KaraitesBookAsArray,
+                       References)
+
+from .html_utils.utils import (ignore_ref,
+                               RE_BIBLE_REF)
+
+from .html_utils.parser_ref import parse_reference
+
+
+def update_create_bible_refs(book_details):
+    """update/create bible references"""
+    i = 1
+
+    for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=RE_BIBLE_REF[0]):
+        for ref in re.findall(RE_BIBLE_REF[0], book_text.book_text[0]):
+            ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
+            if ignore_ref(ref_text):
+                continue
+
+            english_ref = parse_reference(ref_text)
+
+            References.objects.get_or_create(
+                karaites_book=book_details,
+                paragraph_number=book_text.paragraph_number,
+                paragraph_text=book_text.book_text,
+                foot_notes=book_text.foot_notes,
+                bible_ref_he=ref_text,
+                bible_ref_en=english_ref,
+            )
+            sys.stdout.write(f"\33[K Processing bible ref  {i}\r")
+            i += 1

@@ -1,56 +1,74 @@
-let apiUrl = 'http://161.35.130.125/'
+interface versesTable {
+    readonly [index: string]: Array<number>
+}
+
+interface chapterTable {
+    readonly  [index: string]: number
+}
+
+interface numberString {
+    readonly [index: number]: string
+}
+
+interface stringNumber {
+    readonly [index: string]: number
+}
+
+let apiUrl: string = 'http://dev.karaites.org/'
 
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 }
-export const organization = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
-export const bookListUrl = apiUrl + 'api/books-list/'
-export const bookTextUrl = apiUrl + 'api/get-book/'
-export const bookChapterUrl = apiUrl + 'api/get-book-chapter/'
-export const bookFromRef = apiUrl + 'api/get-book-from-ref/'
-export const getCommentsUrl = apiUrl + 'api/get-comments/'
-export const getFirstLevelUrl = apiUrl + 'api/get-first-level/'
-export const karaitesBookUrl = apiUrl + 'api/get-karaites-book-chapter/'
-export const karaitesBookDetailsUrl = apiUrl + 'api/get-karaites-book-details/'
-export const karaitesBookToc = apiUrl + 'api/get-karaites-book-toc/'
-export const referencesUrl = apiUrl + 'api/get-references/'
-export const autocompleteUrl = apiUrl + 'api/autocomplete/'
-export const searchResultsUrl = apiUrl + 'api/search/'
+// first level  see constants.py
+export const TANAKH:string = '1'
+export const HALAKHAH:string = '3'
+export const LITURGY:string = '4'
+export const POLEMIC:string = '5'
+
+
+export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
+
+export const bookListUrl: string = apiUrl + 'api/books-list/'
+export const bookTextUrl: string = apiUrl + 'api/get-book/'
+export const bookChapterUrl: string = apiUrl + 'api/get-book-chapter/'
+export const bookFromRef: string = apiUrl + 'api/get-book-from-ref/'
+export const getCommentsUrl: string = apiUrl + 'api/get-comments/'
+export const getFirstLevelUrl: string = apiUrl + 'api/get-first-level/'
+export const karaitesBookUrl: string = apiUrl + 'api/get-karaites-book-chapter/'
+export const karaitesBookDetailsUrl: string = apiUrl + 'api/get-karaites-book-details/'
+export const karaitesBookByLevel: string = apiUrl + 'api/get-karaites-books-by-level/'
+export const karaitesBookToc: string = apiUrl + 'api/get-karaites-book-toc/'
+export const referencesUrl: string = apiUrl + 'api/get-references/'
+export const autocompleteUrl: string = apiUrl + 'api/autocomplete/'
+export const searchResultsUrl: string = apiUrl + 'api/search/'
 
 // there will be more languages as project evolves
-export const LANGUAGE = {0: 'en', 1: 'he', 2: 'en_he'}
-export const LANGUAGE_KEY = {'en':0, 'he':1, 'en_he':2}
-export const LANGUAGE_SYMBOL = {0: 'A', 1: '\u2135', 2: 'A\u2135'}
+export const LANGUAGE: numberString = {0: 'en', 1: 'he', 2: 'en_he'}
+export const LANGUAGE_KEY: stringNumber = {'en': 0, 'he': 1, 'en_he': 2}
+export const LANGUAGE_SYMBOL: numberString = {0: 'A', 1: '\u2135', 2: 'A\u2135'}
 
-export const ENGLISH = 0
-export const HEBREW = 1
+export const ENGLISH: number = 0
+export const HEBREW: number = 1
 
-export const BIBLE_ENGLISH = 0
-export const BIBLE_HEBREW = 1
-export const BIBLE_EN_CM = 2
-export const BIBLE_HE_CM = 3
-export const BIBLE_VERSE = 4
-export const BIBLE_CHAPTER = 5
-export const BIBLE_RENDER_CHAPTER = 6
+export const BIBLE_ENGLISH: number = 0
+export const BIBLE_HEBREW: number = 1
+export const BIBLE_EN_CM: number = 2
+export const BIBLE_HE_CM: number = 3
+export const BIBLE_VERSE: number = 4
+export const BIBLE_CHAPTER: number = 5
+export const BIBLE_RENDER_CHAPTER: number = 6
 
-export const BIBLE_REFS = 7
+export const BIBLE_REFS: number = 7
 
-export const BOOK_CHAPTERS = 0
-export const BOOK_DATA = 1
+export const BOOK_CHAPTERS: number = 0
+export const BOOK_DATA: number = 1
 
 // this value is define in the views.py if changed there must be changed here too.
-export const ITEMS_PER_PAGE = 15
+export const ITEMS_PER_PAGE: number = 15
 
-interface versesTable  {
-    [index:string]:Array<number>;
-}
 
-interface chapterTable  {
-    [index:string]:number;
-}
-
-export const chaptersByBibleBook:chapterTable = {
+export const chaptersByBibleBook: chapterTable = {
     'Genesis': 50,
     'Exodus': 40,
     'Leviticus': 27,
@@ -100,7 +118,7 @@ export const chaptersByBibleBook:chapterTable = {
 }
 
 // verses by chapter
-export const versesByBibleBook:versesTable = {
+export const versesByBibleBook: versesTable = {
     'Genesis': [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 54, 33, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26],
     'Exodus': [22, 25, 22, 31, 23, 30, 29, 28, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 23, 37, 30, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38],
     'Leviticus': [17, 16, 17, 35, 26, 23, 38, 36, 24, 20, 47, 8, 59, 57, 33, 34, 16, 30, 37, 27, 24, 33, 44, 23, 55, 46, 34],
@@ -150,4 +168,4 @@ export const versesByBibleBook:versesTable = {
 }
 
 // this experimental and probably remove in the future.
-export const q640 = '(min-width:640px)'
+export const q640: string = '(min-width:640px)'

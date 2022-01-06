@@ -7,11 +7,12 @@ import LoadBook from "./components/LoadBook";
 import {createMuiTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/core/styles'
 import Halakhah from './components/halakhah/Halakhah'
+import Liturgy from "./components/liturgy/Liturgy"
 import Home from "./components/pages/Home";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
 import SearchResults from "./components/pages/SearchResults";
-// import MainMenu from "./components/menu/MainMenu";
+//import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message'
@@ -47,6 +48,10 @@ function App() {
                         <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
                         <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
                         <Route exact path="/Halakhah/"><Halakhah/></Route>
+
+                        <Route exact path="/Liturgy/:book/1/" children={<LoadBook type="liturgy"/>}/>
+                        {/*<Route exact path="/Liturgy/:book/" children={<Liturgy/>}/>*/}
+                        <Route exact path="/Liturgy/"><Liturgy/></Route>
 
                         <Route path='*'>
                             <NotFound404/>

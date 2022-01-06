@@ -5,7 +5,7 @@ interface booksTable {
 }
 
 export const capitalize = (string: string): string =>
-    // respect all other cases
+    // respect all others cases
     string === "" ? "" : string[0].toUpperCase() + string.slice(1)
 
 export const range = (l: number): Array<number> =>

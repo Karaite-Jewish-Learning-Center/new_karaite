@@ -7,7 +7,7 @@ import {observer} from 'mobx-react-lite'
 import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
-import {Redirect, useParams, useHistory} from 'react-router-dom';
+import {Redirect, useParams} from 'react-router-dom';
 import {karaitesBookUrl} from '../constants/constants'
 import {calculateItemNumber} from '../utils/utils';
 import {chaptersByBibleBook} from '../constants/constants'
@@ -15,7 +15,7 @@ import {bookChapterUrl} from '../constants/constants'
 import {makeBookUrl} from "../utils/utils"
 import {storeContext} from "../stores/context";
 import {translateMessage} from "./messages/translateMessages";
-
+import '../css/halakha.css'
 
 const PARAGRAPHS = 0
 
@@ -23,7 +23,6 @@ const LoadBook = ({type}) => {
     const store = useContext(storeContext)
     const {book, chapter, verse = 1} = useParams()
     // if type is karaites, chapter is used as start  and verse is ignored
-    const history = useHistory()
     const classes = useStyles()
 
     async function fetchDataBible(paneNumber) {
@@ -57,11 +56,10 @@ const LoadBook = ({type}) => {
 
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
-        let isOpen = store.isPaneOpen(book)
+        let isOpen = store.isPaneOpen(book, chapter, verse)
+        debugger
         if (isOpen) {
-            if (history.action !== 'POP') {
-                store.setCurrentItem(calculateItemNumber(book, chapter, verse), store.getPaneNumber(book))
-            }
+            store.setMessage(`${book} ${chapter}:${verse} already open.`)
         } else {
 
             if (type === "bible") {
@@ -89,7 +87,7 @@ const LoadBook = ({type}) => {
                 await fetchDataBible(store.panes.length - 1)
             }
 
-            if (type === "karaites") {
+            if (type === "karaites" || type === "liturgy") {
                 store.setPanes({
                     book: book,
                     chapter: 9999999,
@@ -115,9 +113,9 @@ const LoadBook = ({type}) => {
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
             getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
-         } catch (e) {
-             store.setMessage(translateMessage(e))
-         }
+        } catch (e) {
+            store.setMessage(translateMessage(e))
+        }
 
 
     }
@@ -154,7 +152,15 @@ const LoadBook = ({type}) => {
             if (panes[i].type.toLowerCase() === 'karaites') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)}/>
+                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)} type={type}/>
+                    </Grid>
+
+                ))
+            }
+             if (panes[i].type.toLowerCase() === 'liturgy') {
+                jsx.push((
+                    <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
+                        <KaraitesBooks paneNumber={i} refClick={refClick} paragraphs={store.getParagraphs(i)} type={type}/>
                     </Grid>
 
                 ))
@@ -170,11 +176,9 @@ const LoadBook = ({type}) => {
     const books = bookRender()
 
     if (store.getIsLastPane() && books.length === 0) {
-        if (type === 'bible') {
-            return (<Redirect to={`/Tanakh/${book}/`}/>)
-        } else {
-            return (<Redirect to={`/Halakhah/${book}/`}/>)
-        }
+        if (type === 'bible') return (<Redirect to={`/Tanakh/${book}/`}/>)
+        if (type === 'karaites') return (<Redirect to={`/Halakhah/${book}/`}/>)
+        if (type === 'liturgy') return (<Redirect to={`/Liturgy/`}/>)
     }
 
     return (

@@ -1,62 +1,18 @@
 import sys
-import re
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Author,
                        KaraitesBookDetails,
-                       KaraitesBookAsArray,
-                       TableOfContents,
-                       References)
+                       KaraitesBookAsArray)
 
 from ...utils import clear_terminal_line
-from ...parser_ref import parse_reference
+from .udpate_bible_ref import update_create_bible_refs
+from .update_toc import update_toc
+from .html_utils.utils import get_html
 
 
 class Command(BaseCommand):
     help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
-
-    ignore = ['(#default#VML)',
-              '(Web)',
-              '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
-              '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
-              """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-              """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
-              '(ברוך)',
-              """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
-              """(נגד דת הנצרות)""",
-              """(ראה הערה מספר 8)."""
-              """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-              """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
-              '(בחג הסוכות)',
-              '(אַתְּ)',
-              '(הֹלֶכֶת)',
-              """(ח', י"ט)""",
-              """(וְקִבְּלוּ)""",
-              """(יַעַשׂ)""",
-              # volume 2
-              """(ח', י"ט)"""
-              '(י"א,  ל"ג),',
-              '(יִהְיוּ-) ',
-              '(שָׁחוּט)',
-              '(דְּבָרוֹ)',
-              '(כ"ו, י"ט)',
-              '(רַגְלְךָ)',
-              '(הוא הנ"ל)',
-              '(ח"ב, כ"ג)',
-              """(ט', א')""",
-              """(ח', י,ט)""",
-              """(י"א,ל"ג)""",
-              """(יִהְיוּ-)"""]
-
-    def ignore_ref(self, bible_ref):
-        if len(bible_ref) > 30:
-            return True
-        # fix this !
-        if bible_ref.find('8') > 0:
-            return True
-        if bible_ref in self.ignore:
-            return True
-        return False
 
     @staticmethod
     def parse_toc(html_tree, volume):
@@ -85,7 +41,7 @@ class Command(BaseCommand):
         for volume in [1, 2]:
             paragraph_number = 1
 
-            print(f'Processing volume: {volume}')
+            sys.stdout.write(f'\33[K Processing volume: {volume}')
 
             book_title = f"Yeriot Shelomo Volume {volume}"
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
@@ -101,17 +57,7 @@ class Command(BaseCommand):
             source = (f'../newkaraites/karaites/management/tmp/'
                       f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
 
-            handle = open(source, 'r')
-            html = f"""{handle.read()}"""
-            handle.close()
-
-            regular_expression = r'\([^()]*\)'
-
-            for bible_ref in re.findall(regular_expression, html):
-                if self.ignore_ref(bible_ref):
-                    continue
-
-                html = html.replace(bible_ref, f'<span lang="HE" class="he-biblical-ref">{bible_ref}</span>')
+            html = f"""{get_html(source)}"""
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
@@ -137,18 +83,7 @@ class Command(BaseCommand):
                     for toc in table_of_contents:
 
                         if text.startswith(toc[0]):
-                            TableOfContents.objects.get_or_create(
-                                karaite_book=book_details,
-                                subject=toc,
-                                start_paragraph=paragraph_number - 1
-                            )
-                            ref_chapter = toc[0]
-                            # update previous record that's the header for chapter
-                            header = KaraitesBookAsArray.objects.get(book=book_details,
-                                                                     paragraph_number=paragraph_number - 1)
-                            header.ref_chapter = ref_chapter
-                            header.book_text = [header.book_text[0], 1]
-                            header.save()
+                            update_toc(book_details,paragraph_number,toc)
                             break
 
                 KaraitesBookAsArray.objects.get_or_create(
@@ -161,39 +96,7 @@ class Command(BaseCommand):
                 paragraph_number += 1
 
             # update/create bible references
-            for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=regular_expression):
-                for ref in re.findall(regular_expression, book_text.book_text[0]):
-                    if self.ignore_ref(ref):
-                        continue
-
-                    english_ref = parse_reference(ref)
-
-                    References.objects.get_or_create(
-                        karaites_book=book_details,
-                        paragraph_number=book_text.paragraph_number,
-                        paragraph_text=book_text.book_text,
-                        foot_notes=book_text.foot_notes,
-                        bible_ref_he=ref,
-                        bible_ref_en=english_ref,
-                    )
-
-            # add foot notes
-            # for paragraph in KaraitesBookAsArray.objects.filter(book=book_details):
-            #     notes_tree = BeautifulSoup(paragraph.book_text[0], 'html5lib')
-            #     unique = {}
-            #     for fn in notes_tree.find_all("span", class_="MsoFootnoteReference"):
-            #         fn_id = fn.text.replace('[', '').replace(']', '')
-            #         if fn_id in unique:
-            #             continue
-            #         unique[fn_id] = True
-            #
-            #         notes = html_tree.find("div", {"id": f"ftn{fn_id}"})
-            #         if hasattr(notes, 'text'):
-            #             note = re.sub('\\s+', ' ', notes.text.replace('&nbsp;', ' '))
-            #             if note.startswith(' '):
-            #                 note = note[1:]
-            #             paragraph.foot_notes += [note]
-            #             paragraph.save()
+            update_create_bible_refs(book_details)
 
         print()
         print()

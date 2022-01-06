@@ -9,10 +9,10 @@ $ cd anaconda3/envs/dev/newkaraites/newkaraites/
 
 #Bible books
 
-Books, has no dependencies
+biblical_books, has no dependencies
 
 
->> ./manage.py books
+>> ./manage.py biblical_books
 
 Process all books
 
@@ -28,21 +28,26 @@ Karaite Books (Yeriot Shelomo volume 1 and 2 )
 
 Halakha Adderet book
 
->> ./manage halakha_adderet_book_as_array
+>> ./manage.py halakha_adderet_book_as_array
+
+Liturgy books
+
+>> ./manage.py karaites_liturgy_as_array
 
 Update references (updates bible references)
 
->> ./manage.py updates_references
+>> ./manage.py update_references
  
-2.references_map_html
-
 Update search
 
 >> ./manage.py update_full_text_search
 
+
 Update autocomplete
 
-
+# this can take a while so in the remote server 
+>> screen
 >>./manage.py autocomplete | autocomplete1
->
-
+# press ctrl A and then ctrl d
+# this will detach the process from the current ssh session
+# you may close the ssh, the process will keep running on remote server.
