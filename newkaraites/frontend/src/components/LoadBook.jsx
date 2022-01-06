@@ -57,7 +57,6 @@ const LoadBook = ({type}) => {
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
         let isOpen = store.isPaneOpen(book, chapter, verse)
-        debugger
         if (isOpen) {
             store.setMessage(`${book} ${chapter}:${verse} already open.`)
         } else {

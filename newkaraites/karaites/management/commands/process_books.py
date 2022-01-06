@@ -39,6 +39,20 @@ additional_css = """
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
    padding-left: 10px;
 }
+
+/* shelomo part 1 */
+
+.p-57, .p-61 {
+    margin: 0;
+    text-align: justify;
+    text-indent: 0;
+}
+
+.p-59 {
+    margin: 0;
+    text-align: justify;
+}
+
 """
 
 style_classes_by_book = {}
