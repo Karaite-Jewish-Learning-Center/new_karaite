@@ -103,7 +103,6 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
     ALLOWED_HOSTS = ['*']
-    IMAGE_HOST = 'http://localhost:8000/'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -122,7 +121,6 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
     DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org']
     THUMBNAIL_DEBUG = DEBUG
-    IMAGE_HOST = 'http://161.35.130.125/'
 
     DATABASES = {
         'default': {
@@ -142,7 +140,6 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
     DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125']
     THUMBNAIL_DEBUG = DEBUG
-    IMAGE_HOST = 'http://161.35.130.125/'
 
     DATABASES = {
         'default': {
