@@ -23,8 +23,6 @@ export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'e
 
     const classes = useStyles()
     const populate = (obj) => {
-
-        debugger
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={12} key={index}>
                 <div className={classes.card}>

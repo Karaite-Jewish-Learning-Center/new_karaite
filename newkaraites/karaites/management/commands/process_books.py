@@ -19,12 +19,12 @@ additional_css = """
 
 .MsoTableGrid tr:nth-child(even) {
     text-align: center;
+    line-height: 1.3em;
 }
 
 
 .MsoTableGrid tr:nth-child(odd) td:first-child {
     text-align: right;
-
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
@@ -34,10 +34,132 @@ additional_css = """
 
 .MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
     padding-right: 10px;
+    vertical-align: top;
+    height: 40px;
+
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
-   padding-left: 10px;
+    padding-left: 10px;
+    vertical-align: top;
+    height: 40px;
+}
+
+/* Anochi */
+
+.span-196, .span-198, .span-201, .span-202, .span-204 {
+    color: red;
+}
+
+
+@media (min-width: 100px) and  (max-width: 361px) {
+    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 220px;
+    }
+
+    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 220px;
+    }
+
+}
+
+@media (min-width: 362px) and  (max-width: 640px) {
+    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 150px;
+    }
+
+    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 150px;
+    }
+
+}
+
+@media (min-width: 661px) and  (max-width: 900px) {
+    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 130px;
+    }
+
+    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 130px;
+    }
+
+}
+
+
+/* Atsili ḳum ḳera */
+.table-04 tr:nth-child(even) {
+    line-height: 0.8em;
+}
+
+
+/* Evyon Asher */
+
+.table-05 tr:nth-child(even) {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    line-height: 1em;
+}
+
+
+@media (min-width: 100px) and  (max-width: 361px) {
+    .table-05 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 80px;
+    }
+
+    .table-05 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 80px;
+    }
+
+}
+
+/* Vehaḥochma Me’ayin Timmatsē */
+.table-06 tr:nth-child(even) {
+    line-height: 1.4em;
+}
+
+@media (min-width: 100px) and  (max-width: 361px) {
+    .table-06 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 120px;
+    }
+
+    .table-06 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 120px;
+    }
+
+}
+
+/* Vehoshia */
+@media (min-width: 100px) and  (max-width: 361px) {
+    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 270px;
+    }
+
+    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 270px;
+    }
+
+}
+
+@media (min-width: 361px) and  (max-width: 480px) {
+    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 160px;
+    }
+
+    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 160px;
+    }
+
+}
+
+@media (min-width: 481px) and  (max-width: 900px) {
+    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+        height: 140px;
+    }
+
+    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
+        height: 140px;
+    }
+
 }
 
 /* shelomo part 1 */
@@ -52,17 +174,6 @@ additional_css = """
     text-align: justify;
 }
 
-/* Anochi */
-
-.span-196, .span-198, .span-201, .span-202, .span-204 {
-    color:red;
-}
-
-/* Vehoshia */
-
-.span-243, .span-241, .span-245, .span-249 {
-    color:red;
-}
 """
 
 style_classes_by_book = {}
