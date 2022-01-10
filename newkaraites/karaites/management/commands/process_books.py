@@ -284,8 +284,8 @@ def update_bible_re(html_tree, language='HE'):
     language_lower = language.lower()
     html_str = str(html_tree)
     for ref in re.findall(REF, html_str):
-        ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
-        ref = ref.replace('\n', '').replace('\r', '')
+        #    ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+        ref = ref.replace('\n', ' ').replace('\r', ' ')
         # only text
         ref = re.sub(CLEAN_HTML, '', ref)
 
@@ -607,7 +607,7 @@ LITURGY_NO_TABLE = [
          'first_level': 5,
          'book_classification': '07',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
-        True
+        False
     ],
 ]
 
@@ -638,7 +638,9 @@ class Command(BaseCommand):
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
-                        text = escape(node.text.replace('\xa0', '').strip())
+                        # text = escape(node.text.replace('\xa0', '').strip())
+                        text = escape(node.text)
+
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
@@ -828,7 +830,6 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
-
         sys.stdout.write(f"\33[K Pre-processing book's\r")
         for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:

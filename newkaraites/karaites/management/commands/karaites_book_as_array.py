@@ -83,7 +83,7 @@ class Command(BaseCommand):
                     for toc in table_of_contents:
 
                         if text.startswith(toc[0]):
-                            update_toc(book_details,paragraph_number,toc)
+                            update_toc(book_details,paragraph_number, toc)
                             break
 
                 KaraitesBookAsArray.objects.get_or_create(

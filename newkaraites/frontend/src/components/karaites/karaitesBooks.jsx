@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import ReactHtmlParser from 'react-html-parser'
+import parse from 'html-react-parser';
 import KaraitePaneHeader from "./KaraitePaneHeader";
 import transform from '../../utils/transform'
 import Loading from "../general/Loading";
@@ -24,12 +25,18 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
 
     const itemContent = (item, data) => {
 
+        // return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+        //     {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
+        //         decodeEntities: true,
+        //         transform: transform.bind(this, refClick, item, 'Bible', paneNumber)
+        //     })}
+        // </div>)
+
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
-                decodeEntities: true,
-                transform: transform.bind(this, refClick, item, 'Bible', paneNumber)
-            })}
+            {parse((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]))}
         </div>)
+
+
     }
     // strange error if book has only one paragraph and initialTopMostItemIndex id defined
     if (type === 'liturgy') {

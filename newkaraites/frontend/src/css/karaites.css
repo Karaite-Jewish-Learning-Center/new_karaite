@@ -1617,302 +1617,13 @@
     background: #6AA84F;
 }
 
-/*   Sefer_Milhamot_Adonai.html    */
-.br-10 {
-    page-break-before: always;
-}
-
-.p-116 {
-    text-align: center;
-    line-height: 150%;
-    direction: ltr;
-    unicode-bidi: embed;
-}
-
-.p-117 {
-    text-align: left;
-    line-height: 150%;
-    direction: ltr;
-    unicode-bidi: embed;
-}
-
-.p-118 {
-    text-align: left;
-    direction: ltr;
-    unicode-bidi: embed;
-}
-
-.p-119 {
-    text-align: center;
-    line-height: 150%;
-}
-
-.p-120 {
-    text-align: justify;
-    line-height: 150%;
-}
-
-.p-121 {
-    line-height: 150%;
-}
-
-.p-122 {
-    text-align: justify;
-}
-
-.span-251 {
-    font-size: 12.0pt;
-    line-height: 150%;
-}
-
-.span-252 {
-    font-size: 16.0pt;
-    line-height: 150%;
-}
-
-.span-253 {
-    text-decoration: none;
-}
-
-.span-254 {
-    font-size: 12.0pt;
-}
-
-.span-255 {
-    font-size: 12.0pt;
-}
-
-.span-256 {
-    font-size: 12.0pt;
-    color: #202122;
-    background: white;
-}
-
-.span-257 {
-    font-size: 12.0pt;
-}
-
-.span-258 {
-    font-size: 12.0pt;
-    font-family: "TimesNewRoman", serif;
-}
-
-.span-259 {
-    font-size: 16.0pt;
-    line-height: 150%;
-    font-family: "David", sans-serif;
-}
-
-.span-260 {
-    font-size: 16.0pt;
-    line-height: 150%;
-}
-
-.span-261 {
-    font-size: 14.0pt;
-    line-height: 150%;
-    font-family: "David", sans-serif;
-}
-
-.span-262 {
-    font-size: 14.0pt;
-    line-height: 150%;
-}
-
-.span-263 {
-    font-family: "David", sans-serif;
-}
-
-.span-264 {
-    font-size: 12.0pt;
-    line-height: 150%;
-    font-family: "David", sans-serif;
-}
-
-.span-265 {
-    font-size: 12.0pt;
-    line-height: 150%;
-}
-
-.span-266 {
-    font-size: 12.0pt;
-    font-family: "David", sans-serif;
-}
-
-.span-267 {
-    font-size: 12.0pt;
-    font-family: "David", sans-serif;
-}
-
-.span-269 {
-    font-size: 14.0pt;
-    line-height: 150%;
-    font-family: "David", sans-serif;
-}
-
-.span-270 {
-    font-family: "David", sans-serif;
-}
-
-.span-271 {
-    font-size: 14.0pt;
-    font-family: "David", sans-serif;
-}
-
-.span-272 {
-    font-size: 12.0pt;
-    line-height: 150%;
-    font-family: "David", sans-serif;
-}
-
-.table-08 {
-    border-collapse: collapse;
-    border: none;
-}
-
-.table-09 {
-    border-collapse: collapse;
-    border: none;
-}
-
-.table-10 {
-    width: 311.8pt;
-    border-collapse: collapse;
-    border: none;
-}
-
-.table-11 {
-    width: 311.55pt;
-    margin-left: 5pt;
-    border-collapse: collapse;
-    border: none;
-}
-
-.table-12 {
-    width: 332.5pt;
-    margin-left: 5pt;
-    border-collapse: collapse;
-    border: none;
-}
-
-.table-13 {
-    width: 382.1pt;
-    margin-left: 5pt;
-    border-collapse: collapse;
-    border: none;
-}
-
-.td-52 {
-    width: 21.45pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-53 {
-    width: 233.35pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-54 {
-    width: 22.7pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-55 {
-    width: 267.5pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-56 {
-    width: 281.7pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-57 {
-    width: 277.8pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-58 {
-    width: 295.85pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-59 {
-    width: 345.5pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-60 {
-    width: 395.1pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-61 {
-    width: 22.7pt;
-    border: none;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-62 {
-    width: 352.55pt;
-    border: none;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-63 {
-    width: 28.35pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-64 {
-    width: 339.85pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-65 {
-    width: 283.45pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-66 {
-    width: 28.1pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-67 {
-    width: 304.4pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-68 {
-    width: 354.0pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-69 {
-    width: 34.45pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-70 {
-    width: 319.55pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-71 {
-    width: 346.9pt;
-    padding: 05pt 0pt 5pt;
-}
-
-.td-72 {
-    width: 325.65pt;
-    padding: 05pt 0pt 5pt;
-}
 
 .MsoTableGrid {
-    width: 100%;
-    table-layout: fixed;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 16pt;
+    table-layout: auto;
 }
 
 .MsoTableGrid tr:nth-child(even) {
@@ -1923,24 +1634,29 @@
 
 .MsoTableGrid tr:nth-child(odd) td:first-child {
     text-align: right;
+    direction: rtl;
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
     text-align: left;
+    width: auto !important;
+    height: auto !important;
 }
 
 
 .MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
     padding-right: 10px;
     vertical-align: top;
-    height: 40px;
+    width: auto !important;
+    height: auto !important;
 
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
     padding-left: 10px;
     vertical-align: top;
-    height: 40px;
+    width: auto !important;
+    height: auto !important;
 }
 
 /* Anochi */
@@ -1949,38 +1665,24 @@
     color: red;
 }
 
-
 @media (min-width: 100px) and  (max-width: 361px) {
-    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 220px;
+    .MsoTableGrid {
+        width: 100%;
     }
-
-    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 220px;
-    }
-
 }
 
 @media (min-width: 362px) and  (max-width: 640px) {
-    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 150px;
+    .MsoTableGrid {
+        width: 100%;
     }
 
-    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 150px;
-    }
 
 }
 
 @media (min-width: 661px) and  (max-width: 900px) {
-    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 130px;
+    .MsoTableGrid {
+        width: 60%;
     }
-
-    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 130px;
-    }
-
 }
 
 
@@ -2027,11 +1729,6 @@
 }
 
 /* Vehoshia */
-
-.span-243, .span-241, .span-245, .span-249 {
-	color:red;
-}
-
 @media (min-width: 100px) and  (max-width: 361px) {
     .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
         height: 270px;
@@ -2076,3 +1773,4 @@
     margin: 0;
     text-align: justify;
 }
+

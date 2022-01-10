@@ -1,9 +1,11 @@
 import sys
+import re
+import difflib
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...utils import clear_terminal_line
 from .html_utils.utils import get_html
-# from .udpate_bible_ref import update_create_bible_refs
+from .udpate_bible_ref import update_create_bible_refs
 from .process_books import (PATH,
                             LITURGY)
 from .update_book_details import update_book_details
@@ -44,6 +46,10 @@ class Command(BaseCommand):
 
             book_details, _ = update_book_details(details)
             html = get_html(f'{PATH}{book}')
+            #html1 = html.replace('> <', '>&nbsp;<')
+            # print([li for li in difflib.ndiff(html, html1) if not li.startswith(' ')])
+            # print()
+            #
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
@@ -54,12 +60,13 @@ class Command(BaseCommand):
             table = html_tree.find('table')
             table.attrs = self.clean_tag_attr(table)
             table = self.clean_table_attr(table)
-
-            update_karaites_array(book_details, 1, 1, str(table))
+            table_str = str(table)
+            update_karaites_array(book_details, 1, 1, table_str)
             table.decompose()
             children = divs[0].find_all(recursive=False)
-
-            update_book_details(details, introduction="".join([str(child) for child in children]))
+            intro = "".join([str(child) for child in children])
+            # intro = re.sub(r'(?<=>)(\s+)(?:[</])', '&nbsp;</', intro)
+            update_book_details(details, introduction=intro)
             update_toc(book_details, 2, details['name'].split(','))
         # update/create bible references
         # update_create_bible_refs(book_details)
