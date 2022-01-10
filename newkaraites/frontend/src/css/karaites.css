@@ -1694,79 +1694,15 @@
 
 
 /* Atsili ḳum ḳera */
-.table-04 tr:nth-child(even) {
-    line-height: 0.8em;
+.table-04 tr:nth-child(even) p {
+    margin: 0;
 }
 
 
 /* Evyon Asher */
 
-.table-05 tr:nth-child(even) {
-    padding-bottom: 20px;
-    padding-top: 20px;
-    line-height: 1em;
-}
-
-
-@media (min-width: 100px) and  (max-width: 361px) {
-    .table-05 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 80px;
-    }
-
-    .table-05 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 80px;
-    }
-
-}
-
-/* Vehaḥochma Me’ayin Timmatsē */
-.table-06 tr:nth-child(even) {
-    line-height: 1.4em;
-}
-
-@media (min-width: 100px) and  (max-width: 361px) {
-    .table-06 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 120px;
-    }
-
-    .table-06 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 120px;
-    }
-
-}
-
-/* Vehoshia */
-@media (min-width: 100px) and  (max-width: 361px) {
-    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 270px;
-    }
-
-    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 270px;
-    }
-
-}
-
-@media (min-width: 361px) and  (max-width: 480px) {
-    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 160px;
-    }
-
-    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 160px;
-    }
-
-}
-
-@media (min-width: 481px) and  (max-width: 900px) {
-    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 140px;
-    }
-
-    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 140px;
-    }
-
+.table-05 tr:nth-child(even) p {
+    margin: 0;
 }
 
 /* shelomo part 1 */

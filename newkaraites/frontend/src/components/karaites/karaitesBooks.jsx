@@ -33,7 +33,7 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
         // </div>)
 
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            {parse((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]))}
+            {parse(data[2][0])}
         </div>)
 
 
