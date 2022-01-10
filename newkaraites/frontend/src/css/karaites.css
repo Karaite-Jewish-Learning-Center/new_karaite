@@ -1626,9 +1626,16 @@
     table-layout: auto;
 }
 
+/* English*/
+
 .MsoTableGrid tr:nth-child(even) {
-    text-align: center;
+    column-span: all !important;
+    display: block;
+    margin-left: 30%;
+    margin-right: -30%;
     line-height: 1.3em;
+    font-style: italic;
+    font-size: 19px;
 }
 
 
