@@ -12,37 +12,51 @@ from .html_utils.utils import mark_bible_refs
 additional_css = """
 
 .MsoTableGrid {
-    width: 100%;
-    table-layout: fixed;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 16pt;
+    table-layout: auto;
 }
 
+/* English*/
+
 .MsoTableGrid tr:nth-child(even) {
-    text-align: center;
+    column-span: all !important;
+    display: block;
+    margin-left: 30%;
+    margin-right: -30%;
     line-height: 1.3em;
+    font-style: italic;
+    font-size: 19px;
 }
 
 
 .MsoTableGrid tr:nth-child(odd) td:first-child {
     text-align: right;
+    direction: rtl;
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
     text-align: left;
+    width: auto !important;
+    height: auto !important;
 }
 
 
 .MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
     padding-right: 10px;
     vertical-align: top;
-    height: 40px;
+    width: auto !important;
+    height: auto !important;
 
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
     padding-left: 10px;
     vertical-align: top;
-    height: 40px;
+    width: auto !important;
+    height: auto !important;
 }
 
 /* Anochi */
@@ -51,115 +65,37 @@ additional_css = """
     color: red;
 }
 
-
 @media (min-width: 100px) and  (max-width: 361px) {
-    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 220px;
+    .MsoTableGrid {
+        width: 100%;
     }
-
-    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 220px;
-    }
-
 }
 
 @media (min-width: 362px) and  (max-width: 640px) {
-    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 150px;
+    .MsoTableGrid {
+        width: 100%;
     }
 
-    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 150px;
-    }
 
 }
 
 @media (min-width: 661px) and  (max-width: 900px) {
-    .table-03 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 130px;
+    .MsoTableGrid {
+        width: 60%;
     }
-
-    .table-03 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 130px;
-    }
-
 }
 
 
 /* Atsili ḳum ḳera */
-.table-04 tr:nth-child(even) {
-    line-height: 0.8em;
+.table-04 tr:nth-child(even) p {
+    margin: 0;
 }
 
 
 /* Evyon Asher */
 
-.table-05 tr:nth-child(even) {
-    padding-bottom: 20px;
-    padding-top: 20px;
-    line-height: 1em;
-}
-
-
-@media (min-width: 100px) and  (max-width: 361px) {
-    .table-05 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 80px;
-    }
-
-    .table-05 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 80px;
-    }
-
-}
-
-/* Vehaḥochma Me’ayin Timmatsē */
-.table-06 tr:nth-child(even) {
-    line-height: 1.4em;
-}
-
-@media (min-width: 100px) and  (max-width: 361px) {
-    .table-06 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 120px;
-    }
-
-    .table-06 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 120px;
-    }
-
-}
-
-/* Vehoshia */
-@media (min-width: 100px) and  (max-width: 361px) {
-    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 270px;
-    }
-
-    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 270px;
-    }
-
-}
-
-@media (min-width: 361px) and  (max-width: 480px) {
-    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 160px;
-    }
-
-    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 160px;
-    }
-
-}
-
-@media (min-width: 481px) and  (max-width: 900px) {
-    .table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-        height: 140px;
-    }
-
-    .table-07 tr:nth-child(odd) td:first-child .segmenttext {
-        height: 140px;
-    }
-
+.table-05 tr:nth-child(even) p {
+    margin: 0;
 }
 
 /* shelomo part 1 */
@@ -231,6 +167,8 @@ IGNORE = ['(#default#VML)',
 REMOVE = [
     """(Anochi) """,
 ]
+
+REMOVE_CSS_CLASS = ['span-89']
 
 
 def removing_no_breaking_spaces(html_tree):
@@ -669,6 +607,10 @@ class Command(BaseCommand):
             styled_order = {k: v for k, v in sorted(style_classes_by_book[books].items(), key=lambda item: item[1])}
 
             for style, class_name in styled_order.items():
+
+                # don't save this classes
+                if class_name in REMOVE_CSS_CLASS:
+                    continue
 
                 # remove v:line class
                 if class_name.find('v:line') >= 0:

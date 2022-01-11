@@ -747,8 +747,8 @@
 }
 
 .p-49 {
-    text-align: justify;
-    line-height: 150%;
+    /*text-align: justify;*/
+    /*line-height: 150%;*/
 }
 
 .p-50 {
@@ -1065,9 +1065,9 @@
 }
 
 .span-89 {
-    font-size: 12.0pt;
-    line-height: 150%;
-    font-family: "David", sans-serif;
+    /*font-size: 12.0pt;*/
+    /*line-height: 150%;*/
+    /*font-family: "David", sans-serif;*/
 }
 
 .span-90 {
@@ -1706,6 +1706,9 @@
 }
 
 /* shelomo part 1 */
+.span-89 {
+
+}
 .p-57, .p-61 {
     margin: 0;
     text-align: justify;
