@@ -12,32 +12,90 @@ from .html_utils.utils import mark_bible_refs
 additional_css = """
 
 .MsoTableGrid {
-    width: 100%;
-    table-layout: fixed;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 16pt;
+    table-layout: auto;
 }
 
+/* English*/
+
 .MsoTableGrid tr:nth-child(even) {
-    text-align: center;
+    column-span: all !important;
+    display: block;
+    margin-left: 30%;
+    margin-right: -30%;
+    line-height: 1.3em;
+    font-style: italic;
+    font-size: 19px;
 }
 
 
 .MsoTableGrid tr:nth-child(odd) td:first-child {
     text-align: right;
-
+    direction: rtl;
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
     text-align: left;
+    width: auto !important;
+    height: auto !important;
 }
 
 
 .MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
     padding-right: 10px;
+    vertical-align: top;
+    width: auto !important;
+    height: auto !important;
+
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
-   padding-left: 10px;
+    padding-left: 10px;
+    vertical-align: top;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Anochi */
+
+.span-196, .span-198, .span-201, .span-202, .span-204 {
+    color: red;
+}
+
+@media (min-width: 100px) and  (max-width: 361px) {
+    .MsoTableGrid {
+        width: 100%;
+    }
+}
+
+@media (min-width: 362px) and  (max-width: 640px) {
+    .MsoTableGrid {
+        width: 100%;
+    }
+
+
+}
+
+@media (min-width: 661px) and  (max-width: 900px) {
+    .MsoTableGrid {
+        width: 60%;
+    }
+}
+
+
+/* Atsili ḳum ḳera */
+.table-04 tr:nth-child(even) p {
+    margin: 0;
+}
+
+
+/* Evyon Asher */
+
+.table-05 tr:nth-child(even) p {
+    margin: 0;
 }
 
 /* shelomo part 1 */
@@ -52,17 +110,6 @@ additional_css = """
     text-align: justify;
 }
 
-/* Anochi */
-
-.span-196, .span-198, .span-201, .span-202, .span-204 {
-    color:red;
-}
-
-/* Vehoshia */
-
-.span-243, .span-241, .span-245, .span-249 {
-    color:red;
-}
 """
 
 style_classes_by_book = {}
@@ -121,6 +168,8 @@ REMOVE = [
     """(Anochi) """,
 ]
 
+REMOVE_CSS_CLASS = ['span-89']
+
 
 def removing_no_breaking_spaces(html_tree):
     spans = html_tree.find_all('span', class_='span-49')
@@ -173,8 +222,8 @@ def update_bible_re(html_tree, language='HE'):
     language_lower = language.lower()
     html_str = str(html_tree)
     for ref in re.findall(REF, html_str):
-        ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
-        ref = ref.replace('\n', '').replace('\r', '')
+        #    ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+        ref = ref.replace('\n', ' ').replace('\r', ' ')
         # only text
         ref = re.sub(CLEAN_HTML, '', ref)
 
@@ -496,7 +545,7 @@ LITURGY_NO_TABLE = [
          'first_level': 5,
          'book_classification': '07',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
-        True
+        False
     ],
 ]
 
@@ -527,7 +576,9 @@ class Command(BaseCommand):
                     node = html_tree.find(id=foot_note_id)
 
                     if note_ref and node is not None:
-                        text = escape(node.text.replace('\xa0', '').strip())
+                        # text = escape(node.text.replace('\xa0', '').strip())
+                        text = escape(node.text)
+
                         ref = note_ref.group()
                         child.replace_with(BeautifulSoup(
                             f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
@@ -556,6 +607,10 @@ class Command(BaseCommand):
             styled_order = {k: v for k, v in sorted(style_classes_by_book[books].items(), key=lambda item: item[1])}
 
             for style, class_name in styled_order.items():
+
+                # don't save this classes
+                if class_name in REMOVE_CSS_CLASS:
+                    continue
 
                 # remove v:line class
                 if class_name.find('v:line') >= 0:
@@ -717,7 +772,6 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
-
         sys.stdout.write(f"\33[K Pre-processing book's\r")
         for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:

@@ -11,7 +11,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ update references in bible books
             increases a bit the size of data transfers, but
-            avoids lot of request to update total of comment, ref etc
+            avoids a lot of request to update total of comment, ref etc
         """
         # make all books array dimension  8
         i = 1

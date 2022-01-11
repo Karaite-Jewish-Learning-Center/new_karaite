@@ -23,8 +23,6 @@ export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'e
 
     const classes = useStyles()
     const populate = (obj) => {
-
-        debugger
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={12} key={index}>
                 <div className={classes.card}>
@@ -32,7 +30,7 @@ export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'e
                         <Typography variant="h6" component="h2">{obj[key].book_title}</Typography>
                     </Link>
                     <br/>
-                    <Typography style={{direction:'LTR' }} variant="body2" component="p">{toHtml(obj[key].intro)}</Typography>
+                    <Typography className={classes.bodyText} variant="body2" component="p">{toHtml(obj[key].intro)}</Typography>
                     <hr className={classes.ruler}/>
                 </div>
 
@@ -72,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         width: '100%',
         height: '100%',
+        fontSize:'16pt',
     },
     title: {
         marginTop: 50,
@@ -82,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         marginBottom: 20,
+    },
+    bodyText:{
+      fontSize:'14pt',
     },
     subtitle: {
         marginBottom: 20,
