@@ -1,7 +1,5 @@
 import React, {useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-// import IconButton from '@material-ui/core/IconButton'
-// import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import { Grid } from '@material-ui/core'
 import { unslug } from '../../utils/utils'
@@ -11,16 +9,13 @@ import {storeContext} from '../../stores/context'
 import {CloseButton} from "../buttons/CloseButton";
 
 
-const KaraitesPaneHeader = ({ paneNumber }) => {
+const KaraitesPaneHeader = ({ paneNumber, onClosePane}) => {
     const store= useContext(storeContext)
     const classes = resources()
 
-    const onClosePane = () => {
-        store.closePane(paneNumber)
-        if (store.getPanes.length === 0) {
-            store.setIsLastPane(true)
-        }
-    }
+   const onClose =()=> {
+        onClosePane(paneNumber)
+   }
 
     return (
         <Grid container
@@ -28,7 +23,7 @@ const KaraitesPaneHeader = ({ paneNumber }) => {
             className={classes.resources}
             alignItems="center">
             <Grid item xs={true}>
-                <CloseButton onClick={onClosePane}/>
+                <CloseButton onClick={onClose}/>
             </Grid>
             <Grid item xs={true}>
                 <Typography>{unslug(store.getBook(paneNumber))}</Typography>

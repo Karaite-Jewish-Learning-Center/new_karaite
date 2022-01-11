@@ -6,7 +6,7 @@ import Filler from "../general/Filler";
 import {makeStyles} from "@material-ui/core/styles";
 import Colors from "../../constants/colors";
 import {slug} from "../../utils/utils";
-import ReactHtmlParser from 'react-html-parser'
+import parse from 'html-react-parser';
 import {capitalize} from "../../utils/utils";
 
 const cleanUrl = (url) => {
@@ -17,7 +17,7 @@ const cleanUrl = (url) => {
     return result
 }
 
-const toHtml =(html )=> ReactHtmlParser(html)
+const toHtml =(html )=> parse(html)
 
 export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'en'], columns = 6}) => {
 

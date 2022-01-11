@@ -11,7 +11,7 @@ import Colors from '../../constants/colors'
 import {storeContext} from "../../stores/context";
 
 
-const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
+const KaraitesBooks = ({paneNumber, refClick, paragraphs, type, onClosePane}) => {
     const [loadingMessage, setLoadingMessage]  = useState(null)
     const store = useContext(storeContext)
     const classes = useStyles()
@@ -42,7 +42,7 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
     if (type === 'liturgy') {
         return (
             <>
-                <KaraitePaneHeader paneNumber={paneNumber}/>
+                <KaraitePaneHeader paneNumber={paneNumber} onClosePane={onClosePane}/>
                 <Virtuoso data={paragraphs}
                           endReached={(_)=>setLoadingMessage(()=>'Text end.')}
                           itemContent={itemContent}
@@ -57,7 +57,7 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
     }
     return (
         <>
-            <KaraitePaneHeader paneNumber={paneNumber}/>
+            <KaraitePaneHeader paneNumber={paneNumber} onClosePane={onClosePane}/>
             <Virtuoso data={paragraphs}
                       endReached={(_)=>setLoadingMessage(()=>'Text end.')}
                       initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}
