@@ -6,8 +6,10 @@ import Filler from "../general/Filler";
 import {makeStyles} from "@material-ui/core/styles";
 import Colors from "../../constants/colors";
 import {slug} from "../../utils/utils";
-import parse from 'html-react-parser';
+import parse from 'html-react-parser'
+import {TRANSFORM_TYPE} from '../../constants/constants'
 import {capitalize} from "../../utils/utils";
+import transform from "../../utils/transform";
 
 const cleanUrl = (url) => {
     let result = slug(url.trim().split(',')[1])
@@ -17,7 +19,11 @@ const cleanUrl = (url) => {
     return result
 }
 
-const toHtml =(html )=> parse(html)
+const toHtml = (html) => parse(html)
+    // , {
+    // replace: domNode => {
+    //     return transform(refClick, item, 'TRANSFORM_TYPE', paneNumber, domNode)
+    // })
 
 export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'en'], columns = 6}) => {
 
@@ -70,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     container: {
         width: '100%',
         height: '100%',
-        fontSize:'16pt',
+        fontSize: '16pt',
     },
     title: {
         marginTop: 50,
@@ -82,8 +88,8 @@ const useStyles = makeStyles((theme) => ({
     link: {
         marginBottom: 20,
     },
-    bodyText:{
-      fontSize:'14pt',
+    bodyText: {
+        fontSize: '14pt',
     },
     subtitle: {
         marginBottom: 20,

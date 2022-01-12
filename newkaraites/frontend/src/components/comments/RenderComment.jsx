@@ -1,8 +1,10 @@
 import {calculateItemNumber, makeRandomKey} from "../../utils/utils";
 import React from "react";
-import ReactHtmlParser from "react-html-parser";
-import transform from "../../utils/transform";
 import {Typography} from "@material-ui/core";
+import parse from 'html-react-parser'
+import {TRANSFORM_TYPE} from '../../constants/constants'
+import transform from "../../utils/transform";
+
 
 export const RenderComments = ({language, comments, paneNumber, refClick}) => {
     const ref = 'comment_' + language
@@ -11,13 +13,14 @@ export const RenderComments = ({language, comments, paneNumber, refClick}) => {
             <div key={makeRandomKey()}>
                 {comments.map(html => (
                     <React.Fragment key={makeRandomKey()}>
-                        {ReactHtmlParser(html[ref], {
-                            decodeEntities: true,
-                            transform: transform.bind(this,
-                                refClick,
-                                calculateItemNumber(html['book'], html['chapter'], html['verse']),
-                                'bible',
-                                paneNumber)
+                        {parse(html[ref], {
+                            replace: domNode => {
+                                return transform(refClick,
+                                    calculateItemNumber(html['book'], html['chapter'], html['verse']),
+                                    TRANSFORM_TYPE,
+                                    paneNumber,
+                                    domNode)
+                            }
                         })}
                     </React.Fragment>
                 ))}

@@ -8,7 +8,7 @@ import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
-import {karaitesBookUrl} from '../constants/constants'
+import {karaitesBookUrl, TRANSFORM_TYPE} from '../constants/constants'
 import {calculateItemNumber} from '../utils/utils';
 import {chaptersByBibleBook} from '../constants/constants'
 import {bookChapterUrl} from '../constants/constants'
@@ -24,9 +24,8 @@ const LoadBook = ({type}) => {
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
     let history = useHistory()
-    debugger
+
     const onClosePane = (paneNumber) => {
-        debugger
         store.closePane(paneNumber)
         if (store.isLastPane) {
             if (type === 'bible') {
@@ -56,7 +55,6 @@ const LoadBook = ({type}) => {
     }
 
     async function fetchDataKaraites(paneNumber) {
-        debugger
         if (store.getParagraphs(paneNumber).length === 0) {
             const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${999999}/${0}/`)
             if (response.ok) {
@@ -72,9 +70,7 @@ const LoadBook = ({type}) => {
 
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
-
         let isOpen = store.isPaneOpen(book, chapter, verse)
-        debugger
         if (isOpen) {
           //  store.setMessage(`${book} ${chapter}:${verse} already open.`)
         } else {
@@ -123,7 +119,7 @@ const LoadBook = ({type}) => {
     }
 
 
-    const refClick = (item, kind = 'bible', paneNumber, e) => {
+    const refClick = (item, kind = TRANSFORM_TYPE, paneNumber, e) => {
         if (item !== undefined) {
             store.setCurrentItem(item, paneNumber)
             store.setDistance(0, paneNumber)
@@ -203,8 +199,7 @@ const LoadBook = ({type}) => {
     getBook(book, chapter, verse, [], type).then().catch()
 
     const books = bookRender()
-    const x= books.length
-    debugger
+
     return (
         <Grid container
               className={classes.root}

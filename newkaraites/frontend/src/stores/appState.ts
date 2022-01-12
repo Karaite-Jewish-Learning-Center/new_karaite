@@ -140,12 +140,9 @@ class AppState {
         return this.panes.length === 0
     }
 
-    isPaneOpen = (book: string, chapter: number, verse: number): boolean => {
-        let c = this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
-        debugger
+    isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
+        this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
-        return this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
-    }
 
     closePane = (i: number): void => {
         this.panes.splice(i, 1)

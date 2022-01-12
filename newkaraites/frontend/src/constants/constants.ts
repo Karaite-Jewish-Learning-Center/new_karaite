@@ -21,11 +21,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // first level  see constants.py
-export const TANAKH:string = '1'
-export const HALAKHAH:string = '3'
-export const LITURGY:string = '4'
-export const POLEMIC:string = '5'
+export const TANAKH: string = '1'
+export const HALAKHAH: string = '3'
+export const LITURGY: string = '4'
+export const POLEMIC: string = '5'
 
+export const TRANSFORM_TYPE: string = 'Bible'
 
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
