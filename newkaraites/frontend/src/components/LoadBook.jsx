@@ -130,8 +130,6 @@ const LoadBook = ({type}) => {
         } catch (e) {
             store.setMessage(translateMessage(e))
         }
-
-
     }
 
     const RenderRightPane = ({isOpen, paneNumber}) => {

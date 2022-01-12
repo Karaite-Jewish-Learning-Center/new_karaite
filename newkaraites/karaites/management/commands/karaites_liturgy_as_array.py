@@ -1,6 +1,4 @@
 import sys
-import re
-import difflib
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...utils import clear_terminal_line
@@ -46,11 +44,6 @@ class Command(BaseCommand):
 
             book_details, _ = update_book_details(details)
             html = get_html(f'{PATH}{book}')
-            #html1 = html.replace('> <', '>&nbsp;<')
-            # print([li for li in difflib.ndiff(html, html1) if not li.startswith(' ')])
-            # print()
-            #
-
             html_tree = BeautifulSoup(html, 'html5lib')
 
             divs = html_tree.find_all('div', class_="WordSection1")
@@ -65,8 +58,7 @@ class Command(BaseCommand):
             table.decompose()
             children = divs[0].find_all(recursive=False)
             intro = "".join([str(child) for child in children])
-            # intro = re.sub(r'(?<=>)(\s+)(?:[</])', '&nbsp;</', intro)
-            update_book_details(details, introduction=intro)
+            update_book_details(details, introduction=intro.replace("he-biblical-ref", 'ref'))
             update_toc(book_details, 2, details['name'].split(','))
         # update/create bible references
         # update_create_bible_refs(book_details)

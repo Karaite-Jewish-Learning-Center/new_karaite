@@ -1,9 +1,9 @@
 import React from 'react'
 import {RenderMenuSecondLevel} from '../menu/RenderMenuSecondLevel';
-import {booksLiturgy} from '../../types/commonTypes';
+import {booksIntro} from '../../types/commonTypes';
 
 // should be an API call
-const book:booksLiturgy[] =[
+const books:booksIntro[] =[
     {
         "book_id": 208,
         "book_first_level": 4,
@@ -46,6 +46,6 @@ const book:booksLiturgy[] =[
     }
 ]
 
-const Liturgy = () => <RenderMenuSecondLevel liturgyStore={book} path='liturgy' languages={['en', 'he']}/>
+const Liturgy = () => <RenderMenuSecondLevel books={books} path='liturgy' languages={['en', 'he']}/>
 
 export default Liturgy

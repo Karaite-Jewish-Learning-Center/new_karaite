@@ -43,7 +43,7 @@ class Command(BaseCommand):
 
             sys.stdout.write(f'\33[K Processing volume: {volume}')
 
-            book_title = f"Yeriot Shelomo Volume {volume}"
+            book_title = f"Yeriot Shelomo, יריעות שלמה Volume {volume}"
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
             author.save()
 
@@ -52,7 +52,12 @@ class Command(BaseCommand):
                 book_language='he',
                 book_classification='03',
                 author=author,
-                book_title=book_title
+                book_title=book_title,
+                introduction="""<p class="MsoNormal"><b>Author: </b>R. Shelomo Afeda Ha-Kohen / ר שלמה אפידה הכהן</p>
+<p class="MsoNormal"><b>Date Written:</b> 1860</p>
+<p class="MsoNormal"><b>Location: </b> Constantinople / קושטא</p>
+<p class="MsoNormal"><b>Edition:</b>Ramla 1986</p>
+"""
             )
             source = (f'../newkaraites/karaites/management/tmp/'
                       f'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume {volume}.html')
@@ -83,7 +88,7 @@ class Command(BaseCommand):
                     for toc in table_of_contents:
 
                         if text.startswith(toc[0]):
-                            update_toc(book_details,paragraph_number, toc)
+                            update_toc(book_details, paragraph_number, toc)
                             break
 
                 KaraitesBookAsArray.objects.get_or_create(

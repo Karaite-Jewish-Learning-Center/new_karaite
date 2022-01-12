@@ -1,6 +1,6 @@
 
 // liturgy
-export interface booksLiturgy {
+export interface booksIntro {
         'book_id':number,
         'book_first_level':number,
         'book_language':string,
