@@ -7,9 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Colors from "../../constants/colors";
 import {slug} from "../../utils/utils";
 import parse from 'html-react-parser'
-import {TRANSFORM_TYPE} from '../../constants/constants'
 import {capitalize} from "../../utils/utils";
-import transform from "../../utils/transform";
 
 const cleanUrl = (url) => {
     let result = slug(url.trim().split(',')[1])
@@ -20,12 +18,8 @@ const cleanUrl = (url) => {
 }
 
 const toHtml = (html) => parse(html)
-    // , {
-    // replace: domNode => {
-    //     return transform(refClick, item, 'TRANSFORM_TYPE', paneNumber, domNode)
-    // })
 
-export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'en'], columns = 6}) => {
+export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], columns = 6}) => {
 
     const classes = useStyles()
     const populate = (obj) => {
@@ -47,12 +41,12 @@ export const RenderMenuSecondLevel = ({liturgyStore, path, languages = ['en', 'e
         return (
             <Grid item xs={12} sm={columns} key={1}>
                 <Grid item className={classes.title}>
-                    <Typography className={classes.subtitle} variant="h6" component="h2">Liturgy</Typography>
+                    <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
                     <Link className={classes.link} to='/texts/'>To texts</Link>
                     <hr className={classes.ruler}></hr>
                 </Grid>
                 <Grid container spacing={2}>
-                    {populate(liturgyStore)}
+                    {populate(books)}
                 </Grid>
             </Grid>)
     }
