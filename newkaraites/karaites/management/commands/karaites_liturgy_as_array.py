@@ -57,8 +57,9 @@ class Command(BaseCommand):
             update_karaites_array(book_details, 1, 1, table_str)
             table.decompose()
             children = divs[0].find_all(recursive=False)
-            intro = "".join([str(child) for child in children])
-            update_book_details(details, introduction=intro.replace("he-biblical-ref", 'ref'))
+            intro = "".join([str(child) for child in children]).replace('en-biblical-ref', 'ref')
+            update_book_details(details, introduction=intro)
+
             update_toc(book_details, 2, details['name'].split(','))
         # update/create bible references
         # update_create_bible_refs(book_details)

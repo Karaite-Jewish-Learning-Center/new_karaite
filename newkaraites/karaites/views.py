@@ -111,7 +111,7 @@ def karaites_book_as_array(request, *args, **kwargs):
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
     except KaraitesBookDetails.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _(f'Book:{book}, not found.')}, status=400)
 
     try:
         book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'],

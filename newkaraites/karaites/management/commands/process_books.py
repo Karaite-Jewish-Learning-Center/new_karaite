@@ -478,7 +478,7 @@ LITURGY = [
         [],
         [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
-        {'name': "אנכי אנכי, Anochi Anochi",
+        {'name': r"Anochi Anochi, אנכי אנכי",
          'first_level': 4,
          'book_classification': '07',
          'author': 'N/A (Biblical Verses)'},
@@ -502,7 +502,7 @@ LITURGY = [
         [],
         [],
         # name, liturgy , Poems, Author
-        {'name': r"אביון אשר, Evyon Asher",
+        {'name': r"Evyon Asher, אביון אשר",
          'first_level': 4,
          'book_classification': '08',
          'author': 'Anatoli (ben Joseph?)'},
@@ -514,7 +514,7 @@ LITURGY = [
         [],
         [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
-        {'name': r"והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē",
+        {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
          'book_classification': '07',
          'author': 'N/A (Biblical Verses)'},
@@ -526,7 +526,7 @@ LITURGY = [
         [],
         [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
-        {'name': r"והושיע, Vehoshiya‘",
+        {'name': r"Vehoshiya‘, והושיע",
          'first_level': 4,
          'book_classification': '07',
          'author': 'N/A (Biblical Verses)'},

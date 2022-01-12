@@ -6,23 +6,23 @@ import {RenderMenuSecondLevel} from '../menu/RenderMenuSecondLevel';
 // this will be an api call !
 const books: booksIntro[] = [
   {
-    "book_id": 418,
+    "book_id": 434,
     "book_first_level": 3,
     "book_language": "he",
     "book_classification": "03",
-    "book_title": "Yeriot Shelomo, יריעות שלמה Volume 1",
+    "book_title": "Yeriot Shelomo Volume 1,  יריעות שלמה",
     "intro": "<p class=\"MsoNormal\"><b>Author: </b>R. Shelomo Afeda Ha-Kohen / ר שלמה אפידה הכהן</p>\n<p class=\"MsoNormal\"><b>Date Written:</b> 1860</p>\n<p class=\"MsoNormal\"><b>Location: </b> Constantinople / קושטא</p>\n<p class=\"MsoNormal\"><b>Edition:</b>Ramla 1986</p>\n"
   },
   {
-    "book_id": 419,
+    "book_id": 435,
     "book_first_level": 3,
     "book_language": "he",
     "book_classification": "03",
-    "book_title": "Yeriot Shelomo, יריעות שלמה Volume 2",
+    "book_title": "Yeriot Shelomo Volume 2,  יריעות שלמה",
     "intro": "<p class=\"MsoNormal\"><b>Author: </b>R. Shelomo Afeda Ha-Kohen / ר שלמה אפידה הכהן</p>\n<p class=\"MsoNormal\"><b>Date Written:</b> 1860</p>\n<p class=\"MsoNormal\"><b>Location: </b> Constantinople / קושטא</p>\n<p class=\"MsoNormal\"><b>Edition:</b>Ramla 1986</p>\n"
   },
   {
-    "book_id": 420,
+    "book_id": 436,
     "book_first_level": 3,
     "book_language": "he",
     "book_classification": "03",

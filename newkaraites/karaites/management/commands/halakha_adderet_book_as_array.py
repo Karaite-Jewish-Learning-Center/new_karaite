@@ -61,8 +61,8 @@ class Command(BaseCommand):
         """ Karaites books as array """
 
         sys.stdout.write(f"\33[K Processing Halakha Adderet")
-
-        book_title = "Adderet Eliyahu, אדרת אליהו"
+        hebrew = "אדרת אליהו"
+        book_title = f"Adderet Eliyahu, {hebrew}"
         author, _ = Author.objects.get_or_create(name='Eliyahu R Elijah Bashyatchi')
         author.save()
 

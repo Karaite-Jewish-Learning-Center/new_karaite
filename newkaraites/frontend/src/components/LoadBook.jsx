@@ -1,4 +1,4 @@
-import React, { useContext} from 'react'
+import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Grid} from '@material-ui/core';
 import {parseBiblicalReference} from '../utils/parseBiblicalReference';
@@ -20,13 +20,19 @@ const PARAGRAPHS = 0
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
-    const {book, chapter=1, verse = 1} = useParams()
+    const {book, chapter = 1, verse = 1} = useParams()
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
     let history = useHistory()
 
     const onClosePane = (paneNumber) => {
         store.closePane(paneNumber)
+
+        // close all children panes
+        if (paneNumber === 0) {
+            store.resetPanes()
+        }
+
         if (store.isLastPane) {
             if (type === 'bible') {
                 history.push(`/Tanakh/${book}/`)
@@ -46,7 +52,6 @@ const LoadBook = ({type}) => {
             const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false))
             if (response.ok) {
                 const data = await response.json()
-                //setVerses(data.book.verses)
                 store.setBookData(data.chapter, paneNumber)
             } else {
                 alert("HTTP-Error: " + response.status)
@@ -71,10 +76,7 @@ const LoadBook = ({type}) => {
     const getBook = async (book, chapter, verse, highlight, type) => {
         type = type.toLowerCase()
         let isOpen = store.isPaneOpen(book, chapter, verse)
-        if (isOpen) {
-          //  store.setMessage(`${book} ${chapter}:${verse} already open.`)
-        } else {
-
+        if (!isOpen) {
             if (type === "bible") {
                 store.setPanes({
                     book: book,
@@ -100,10 +102,10 @@ const LoadBook = ({type}) => {
                 await fetchDataBible(store.panes.length - 1)
             }
 
-            if (type === "karaites" || type === "liturgy" ) {
+            if (type === "karaites" || type === "liturgy") {
                 store.setPanes({
                     book: book,
-                    chapter:  parseInt(chapter) - 1,
+                    chapter: parseInt(chapter) - 1,
                     verse: verse,
                     paragraphs: [],
                     book_details: [],
@@ -125,8 +127,18 @@ const LoadBook = ({type}) => {
             store.setDistance(0, paneNumber)
         }
         try {
+            // ********************
+            // todo: check parseBiblicalReference is returning NAN for chapter!!!!!!!
+            // ********************
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
-            getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
+            debugger
+            let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
+            debugger
+            if (isOpen) {
+                store.setMessage(`${book} ${chapter}:${verse} already open.`)
+            } else {
+                getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
+            }
         } catch (e) {
             store.setMessage(translateMessage(e))
         }

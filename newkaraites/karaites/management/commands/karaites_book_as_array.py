@@ -42,8 +42,8 @@ class Command(BaseCommand):
             paragraph_number = 1
 
             sys.stdout.write(f'\33[K Processing volume: {volume}')
-
-            book_title = f"Yeriot Shelomo, יריעות שלמה Volume {volume}"
+            hebrew = " יריעות שלמה"
+            book_title = f"Yeriot Shelomo Volume {volume}, {hebrew}"
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
             author.save()
 
