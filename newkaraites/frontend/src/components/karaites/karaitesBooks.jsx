@@ -1,17 +1,17 @@
 import React, {useContext, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
-import ReactHtmlParser from 'react-html-parser'
-import parse from 'html-react-parser';
 import KaraitePaneHeader from "./KaraitePaneHeader";
 import transform from '../../utils/transform'
 import Loading from "../general/Loading";
 import '../../css/_comments.css'
 import Colors from '../../constants/colors'
+import {TRANSFORM_TYPE} from '../../constants/constants'
+import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
 
 
-const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
+const KaraitesBooks = ({paneNumber, refClick, paragraphs, type, onClosePane}) => {
     const [loadingMessage, setLoadingMessage]  = useState(null)
     const store = useContext(storeContext)
     const classes = useStyles()
@@ -24,16 +24,12 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
     }
 
     const itemContent = (item, data) => {
-
-        // return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-        //     {ReactHtmlParser((data[2][0].length === 0 ? "<div>&nbsp;</div>" : data[2][0]), {
-        //         decodeEntities: true,
-        //         transform: transform.bind(this, refClick, item, 'Bible', paneNumber)
-        //     })}
-        // </div>)
-
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            {parse(data[2][0])}
+            {parse(data[2][0],{
+                replace: domNode => {
+                    return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                }
+            })}
         </div>)
 
 
@@ -42,7 +38,7 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
     if (type === 'liturgy') {
         return (
             <>
-                <KaraitePaneHeader paneNumber={paneNumber}/>
+                <KaraitePaneHeader paneNumber={paneNumber} onClosePane={onClosePane}/>
                 <Virtuoso data={paragraphs}
                           endReached={(_)=>setLoadingMessage(()=>'Text end.')}
                           itemContent={itemContent}
@@ -57,7 +53,7 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type}) => {
     }
     return (
         <>
-            <KaraitePaneHeader paneNumber={paneNumber}/>
+            <KaraitePaneHeader paneNumber={paneNumber} onClosePane={onClosePane}/>
             <Virtuoso data={paragraphs}
                       endReached={(_)=>setLoadingMessage(()=>'Text end.')}
                       initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}

@@ -1,15 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {getFirstLevelUrl} from '../../constants/constants'
 import {booksMenu} from '../../constants/common-css'
 import Filler from "../general/Filler";
+import {storeContext} from "../../stores/context";
 
 
 const FirstLevel = () => {
     const [classification, setClassification] = useState(null)
     const classes = booksMenu()
+    const store= useContext(storeContext)
+    store.resetPanes()
 
     useEffect(() => {
         async function fetchData() {
@@ -21,7 +24,6 @@ const FirstLevel = () => {
                 alert("HTTP-Error: " + response.status)
             }
         }
-
         fetchData()
     }, [])
 

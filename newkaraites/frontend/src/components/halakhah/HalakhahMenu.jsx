@@ -12,7 +12,6 @@ const HalakhahMenu = ({book}) => {
     const store = useContext(storeContext)
     const [toc, setToc] = useState([])
     const classes = useStyles()
-    store.setIsLastPane(false)
 
     const TableOfContents = () => {
         return toc.map(index =>

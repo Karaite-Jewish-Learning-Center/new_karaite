@@ -6,6 +6,7 @@ import ChapterMenu from "../menu/ChapterMenu";
 
 
 export const TanakhBooksLink = () => {
+    debugger
     let location = useLocation()
     let parts = location.pathname.split('/')
     if (parts.length === 4 && parts[1] === 'Tanakh') {

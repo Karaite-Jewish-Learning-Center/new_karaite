@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import {range} from '../../utils/utils'
 import {makeStyles} from '@material-ui/core/styles'
@@ -6,16 +6,11 @@ import Colors from '../../constants/colors'
 import {Link} from 'react-router-dom'
 import {Typography} from '@material-ui/core'
 import {unslug} from '../../utils/utils'
-import {storeContext} from "../../stores/context";
 
 
 const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
-    const store = useContext(storeContext)
     const chapters = range(numberOfChapters)
     const classes = container()
-    // todo: find a better solution
-    store.setIsLastPane(false)
-
 
     const createMenu = () => {
         return chapters.map(chapter =>

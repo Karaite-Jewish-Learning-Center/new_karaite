@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction, action, toJS} from "mobx"
+import {makeAutoObservable, runInAction, action, computed, observable} from "mobx"
 import {isABibleBook} from "../utils/utils";
 import {autocompleteUrl} from "../constants/constants";
 
@@ -6,8 +6,7 @@ import {autocompleteUrl} from "../constants/constants";
 class AppState {
     // mains panes bible book , comment, karaites books etc
     panes: Array<any> = []
-    // only true when last pane is closed
-    isLastPane: boolean = false
+
     // messages
     message: string = ''
     // search
@@ -19,7 +18,16 @@ class AppState {
     options: Array<any> = []
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this, {
+            panes: observable,
+            message: observable,
+            search: observable,
+            searchResultData: observable,
+            moreResults: observable,
+            options: observable,
+            isLastPane: computed,
+        })
+
     }
 
     setIsRightPaneOpen = (state: boolean, paneNumber: number): void => {
@@ -42,7 +50,7 @@ class AppState {
 
     getComments = (paneNumber: number): Array<any> => this.panes[paneNumber].comments
 
-    hasNoComments = (paneNumber: number): boolean => this.panes[paneNumber].comments.length === 0
+    //hasNoComments = (paneNumber: number): boolean => this.panes[paneNumber].comments.length === 0
 
     setCommentsChapter = (chapter: number, paneNumber: number): void => {
         this.panes[paneNumber].commentsChapter = chapter
@@ -55,15 +63,15 @@ class AppState {
     getCommentsVerse = (paneNumber: number): void => this.panes[paneNumber].commentsVerse
 
     // book , chapter , verse
-    setBook = (book: string, i: number): void => {
-        this.panes[i].book = book
-    }
+    //setBook = (book: string, i: number): void => {
+    //    this.panes[i].book = book
+    //}
     getBook = (i: number): void => this.panes[i].book
 
     setChapter = (chapter: string, i: number): void => {
         this.panes[i].chapter = parseInt(chapter)
     }
-    getChapter = (i: number): void => this.panes[i].chapter
+    //getChapter = (i: number): void => this.panes[i].chapter
 
     setVerse = (verse: number, i: number): void => {
         runInAction(() => {
@@ -116,24 +124,28 @@ class AppState {
 
     getPanes = (): Array<any> => this.panes
 
-    getPaneNumber = (book: string): number => this.panes.findIndex(pane => pane.book === book)
+    //getPaneNumber = (book: string): number => this.panes.findIndex(pane => pane.book === book)
 
-    getPaneByNumber = (i: number): Array<any> => this.panes[i]
+    // getPaneByNumber = (i: number): Array<any> => this.panes[i]
 
-    setIsLastPane = (state: boolean): void => {
-        runInAction(() => {
-            this.isLastPane = state
-        })
+
+    // setIsLastPane = (state: boolean): void => {
+    //     runInAction(() => {
+    //         this.isLastPane = state
+    //     })
+    // }
+    // getIsLastPane = (): boolean => this.isLastPane
+
+    get isLastPane() {
+        return this.panes.length === 0
     }
-    getIsLastPane = (): boolean => this.isLastPane
 
-    @action
     isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
         this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
+
     closePane = (i: number): void => {
         this.panes.splice(i, 1)
-        this.setIsLastPane(this.panes.length === 0)
     }
 
     resetPanes = (): void => {
@@ -150,10 +162,10 @@ class AppState {
     getKaraitesChapter = (i: number): number =>
         (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
-    setBookDetails = (details: string, i: number): void => {
-        this.panes[i].book_details = details
-    }
-    getBookDetails = (i: number): string => this.panes[i].book_details
+    // setBookDetails = (details: string, i: number): void => {
+    //     this.panes[i].book_details = details
+    // }
+    // getBookDetails = (i: number): string => this.panes[i].book_details
 
 
     // messages
@@ -168,7 +180,7 @@ class AppState {
             this.panes[i].headerChapter = chapter
         })
     }
-    getHeaderChapter = (i: number): string => this.panes[i].headerChapter
+    // getHeaderChapter = (i: number): string => this.panes[i].headerChapter
 
     // search arg
     setSearch = (searchArg: string): void => {

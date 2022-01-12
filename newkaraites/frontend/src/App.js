@@ -22,6 +22,7 @@ function App() {
 
     return (
         <StoreProvider>
+
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
                     {/*<MainMenu/>*/}

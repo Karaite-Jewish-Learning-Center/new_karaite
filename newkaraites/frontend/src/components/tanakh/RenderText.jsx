@@ -8,7 +8,7 @@ import {storeContext} from "../../stores/context";
 import {versesByBibleBook} from "../../constants/constants";
 
 
-const RenderTextGrid = ({paneNumber}) => {
+const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
     const book = store.getBook(paneNumber)
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
@@ -42,7 +42,7 @@ const RenderTextGrid = ({paneNumber}) => {
 
     return (
         <>
-            <RenderHeader book={book} paneNumber={paneNumber} chapter={calculateCurrentChapter()}/>
+            <RenderHeader book={book} paneNumber={paneNumber} chapter={calculateCurrentChapter()} onClosePane={onClosePane}/>
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 endReached={(_)=>setLoadingMessage(()=>'Book end.')}

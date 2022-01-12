@@ -11,12 +11,14 @@ import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
 
 
-const RenderHeader = ({book, paneNumber, chapter}) => {
+const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
     const store = useContext(storeContext)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
 
-    const onClose = () => store.closePane(paneNumber)
+    const onClose = () => {
+        onClosePane(paneNumber)
+    }
 
     book = unslug(book)
 

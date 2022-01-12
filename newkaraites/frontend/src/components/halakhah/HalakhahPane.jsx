@@ -3,11 +3,12 @@ import Button from '@material-ui/core/Button'
 import {referencesUrl} from '../../constants/constants.ts'
 import {makeStyles} from '@material-ui/core/styles'
 import {makeRandomKey} from "../../utils/utils";
-import ReactHtmlParser from 'react-html-parser';
 import {Typography} from '@material-ui/core';
 import Colors from '../../constants/colors.js';
 import {observer} from 'mobx-react-lite';
-import transform from '../../utils/transform.jsx'
+import parse from 'html-react-parser'
+import {TRANSFORM_TYPE} from '../../constants/constants'
+import transform from "../../utils/transform";
 import '../../css/_comments.css'
 import '../../css/karaites.css'
 import Header from '../pages/RightPaneHeader.jsx';
@@ -47,9 +48,8 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose}) => {
                             <hr className={classes.ruler}/>
                             <div key={makeRandomKey()} className={classes.content}>
                                 <>
-                                    {ReactHtmlParser(reference['paragraph_html'], {
-                                        decodeEntities: true,
-                                        transform: transform.bind(this, refClick, undefined, "bible", undefined)
+                                    {parse(reference['paragraph_html'], {
+                                        replace: domNode =>  transform(refClick, undefined, TRANSFORM_TYPE, paneNumber,domNode)
                                     })}
                                 </>
                             </div>
