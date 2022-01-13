@@ -72,13 +72,13 @@ const ChapterHeaderVerse = (props) => {
                 return (
                     <>
                         <div className={classes.verseHe}>
-                            <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
+                            <Typography variant="body1" className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                         </div>
                         <div className={classes.verseNumber}>
                             <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                         </div>
                         <div className={classes.verseEn}>
-                            <Typography>{data[BIBLE_ENGLISH]}</Typography>
+                            <Typography variant="body1">{data[BIBLE_ENGLISH]}</Typography>
                         </div>
                         <div className={classes.references}>
                             <RefsBadge refsCount={refs}/>
@@ -133,7 +133,9 @@ const ChapterHeaderVerse = (props) => {
 
 
 const useStyles = makeStyles(() => ({
-
+  body1 :{
+        fontSize:'21px',
+    },
     textContainer: {
         width: '100%',
         height: '100%',
@@ -195,7 +197,8 @@ const useStyles = makeStyles(() => ({
         textAlign: 'right',
         verticalAlign: 'center',
         margin: 10,
-        fontFamily: 'SBL Hebrew'
+        fontFamily: 'SBL Hebrew',
+        fontSize:'21px',
     },
     verseNumber: {
         margin: 10,
@@ -217,7 +220,8 @@ const useStyles = makeStyles(() => ({
         minWidth: ((props) => props.lang === 'en' ? '45%' : '35%'),
         textAlign: 'left',
         verticalAlign: 'text-top',
-        margin: 10
+        margin: 10,
+        fontSize:'21px',
     },
     hebrewFont: {
         direction: 'RTL',

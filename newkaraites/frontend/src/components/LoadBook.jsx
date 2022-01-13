@@ -229,6 +229,7 @@ const useStyles = makeStyles((theme) => ({
         overflowY: 'hidden',
         position: 'fixed',
         top: 70,
+        fontSize:'21px !important',
     },
     item: {
         height: '100%',

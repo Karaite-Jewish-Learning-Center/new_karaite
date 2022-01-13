@@ -203,7 +203,7 @@ class GetTOC(View):
         if book is None:
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
-        karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
+        karaites_book = KaraitesBookDetails.objects.filter(book_title_unslug=slug_back(book))
 
         result = []
         for k_book in karaites_book:

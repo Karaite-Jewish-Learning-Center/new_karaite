@@ -26,7 +26,7 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={12} key={index}>
                 <div className={classes.card}>
-                    <Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title)}/1/`}>
+                    <Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title)}/`}>
                         <Typography variant="h6" component="h2">{obj[key].book_title}</Typography>
                     </Link>
                     <br/>
