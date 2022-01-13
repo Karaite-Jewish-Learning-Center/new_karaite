@@ -554,7 +554,7 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def to_json(book_title_unslug):
-        details = KaraitesBookDetails.objects.get(book_title_unslug=book_title_unslug)
+        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
         toc = TableOfContents.objects.filter(karaite_book=details)
 
         return {
@@ -571,7 +571,7 @@ class KaraitesBookDetails(models.Model):
     def save(self, *args, **kwargs):
 
         if self.book_title.find(',') >= 0:
-            self.book_title_unslug = self.book_title.split(',')[1].strip()
+            self.book_title_unslug = self.book_title.split(',')[0].strip()
         else:
             self.book_title_unslug = self.book_title
 

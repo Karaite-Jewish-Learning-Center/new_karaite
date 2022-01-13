@@ -10,7 +10,7 @@ import parse from 'html-react-parser'
 import {capitalize} from "../../utils/utils";
 
 const cleanUrl = (url) => {
-    let result = slug(url.trim().split(',')[1])
+    let result = slug(url.trim().split(',')[0])
     if (result.startsWith('-')) {
         result = result.substring(1)
     }
@@ -26,14 +26,13 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={12} key={index}>
                 <div className={classes.card}>
-                    <Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title)}/1/`}>
+                    <Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title)}/`}>
                         <Typography variant="h6" component="h2">{obj[key].book_title}</Typography>
                     </Link>
                     <br/>
                     <Typography className={classes.bodyText} variant="body2" component="p">{toHtml(obj[key].intro)}</Typography>
                     <hr className={classes.ruler}/>
                 </div>
-
             </Grid>)
     }
     const MainMenu = () => {
@@ -55,8 +54,7 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
             <Grid container
                   direction="column"
                   justifycontent="space-evenly"
-                  alignItems="center"
-            >
+                  alignItems="center">
                 <Filler xs={12}/>
                 <MainMenu/>
             </Grid>

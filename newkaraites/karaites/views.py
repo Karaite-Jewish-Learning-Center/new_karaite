@@ -111,7 +111,7 @@ def karaites_book_as_array(request, *args, **kwargs):
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
     except KaraitesBookDetails.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Book {book} not found.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _(f'Book:{book}, not found.')}, status=400)
 
     try:
         book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'],
@@ -203,7 +203,7 @@ class GetTOC(View):
         if book is None:
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
-        karaites_book = KaraitesBookDetails.objects.filter(book_title=slug_back(book))
+        karaites_book = KaraitesBookDetails.objects.filter(book_title_unslug=slug_back(book))
 
         result = []
         for k_book in karaites_book:

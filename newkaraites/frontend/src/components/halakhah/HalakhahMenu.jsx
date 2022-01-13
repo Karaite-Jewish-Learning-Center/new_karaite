@@ -41,8 +41,9 @@ const HalakhahMenu = ({book}) => {
             .catch((e) => store.setMessage(e.message))
 
     }, [book, store])
-
+    window.scrollTo(0, 0)
     return (
+
         <div className={classes.container}>
             <table>
                 <thead>
@@ -75,7 +76,6 @@ const useStyles = makeStyles({
         display: "flex",
         width: '100%',
         height: '100%',
-        direction: "row",
         justifyContent: 'center',
         marginTop: 80,
     },
