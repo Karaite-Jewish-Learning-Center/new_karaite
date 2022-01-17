@@ -64,7 +64,11 @@ class Command(BaseCommand):
             sys.exit(2)
 
         handle = open('../newkaraites/karaites/management/book_dumps/' + out_file, "w")
-        handle.write('<html><head><head/><body>')
+        handle.write("""<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    </head>
+    <body lang="EN-US">""")
         i = 1
         for paragraph in KaraitesBookAsArray.objects.filter(book=options['book_id']):
             sys.stdout.write(

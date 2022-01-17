@@ -171,6 +171,20 @@ REMOVE = [
 REMOVE_CSS_CLASS = ['span-89']
 
 
+def fix_iframe(path, book_name):
+    book_data = read_data(path, book_name)
+    remove = """<p class=MsoNormal><b><span style='mso-bidi-language:HE'>Recording: </span></b><span
+style='mso-bidi-language:HE'>&lt;iframe width=&quot;560&quot;
+height=&quot;315&quot; <span class=SpellE>src</span>=&quot;https://www.youtube.com/embed/WZOwo9qW3iM&quot;
+title=&quot;YouTube video player&quot; frameborder=&quot;0&quot;
+allow=&quot;accelerometer; <span class=SpellE>autoplay</span>; clipboard-write;
+encrypted-media; gyroscope; picture-in-picture&quot; <span class=SpellE>allowfullscreen</span>&gt;&lt;/iframe&gt;<o:p></o:p></span></p>"""
+
+    book_data = book_data.replace(remove,
+                                  """<iframe width="560" height="315" src="https://www.youtube.com/embed/WZOwo9qW3iM"></iframe>""")
+    write_data(path, book_name, book_data)
+
+
 def removing_no_breaking_spaces(html_tree):
     spans = html_tree.find_all('span', class_='span-49')
     for child in spans:
@@ -511,7 +525,7 @@ LITURGY = [
     [
         'Vehahochma/', 'Vehahochma.html',
         'he',
-        [],
+        [fix_iframe],
         [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
@@ -546,6 +560,21 @@ LITURGY_NO_TABLE = [
          'book_classification': '07',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
         False
+    ],
+]
+
+PDF_BOOKS = [
+    [
+        'The Palanquin/', 'The Palanquin.html',
+        'he',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r"The Palanquin,  ספר מלחמות ה'",
+         'first_level': 5,
+         'book_classification': '07',
+         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
+        True
     ],
 ]
 
@@ -622,6 +651,10 @@ class Command(BaseCommand):
                 rules = []
                 values = []
                 for css in css_elements:
+
+                    if css.find(':') < 0:
+                        continue
+
                     r, v = css.split(':')
                     rules.append(r)
                     values.append(v)
@@ -726,6 +759,10 @@ class Command(BaseCommand):
         style_classes = {}
         divs = html_tree.find('div', class_="WordSection1", recursive=True)
 
+        # pdfs have no WordSection1
+        if divs is None:
+            divs = html_tree.find('body', recursive=True)
+
         for tag in divs.findAll(True, recursive=True):
 
             for attr in [attr for attr in tag.attrs]:
@@ -773,6 +810,8 @@ class Command(BaseCommand):
             A css file is generate.
         """
         sys.stdout.write(f"\33[K Pre-processing book's\r")
+        # LIST_OF_BOOKS = LITURGY
+        # LIST_OF_BOOKS = PDF_BOOKS
         for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:
                 pre_process(path, book)

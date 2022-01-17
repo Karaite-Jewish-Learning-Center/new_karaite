@@ -58,34 +58,33 @@ a:hover {
     color: #fff;
     content: attr(data-tip);
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: inherit;
     line-height: 1.15rem;
     visibility: hidden;
     padding: 0.25rem 0.5rem;
     position: absolute;
-    width: 100px !important;
 }
 
-[data-tip].tooltip-top::before {
-    visibility: hidden;
-    top: 0;
-    left: 50%;
-    margin-left: -0.3rem;
-}
+/*[data-tip].tooltip-top::before {*/
+/*    visibility: hidden;*/
+/*    top: 0;*/
+/*    left: 50%;*/
+/*    margin-left: -0.3rem;*/
+/*}*/
 
-[data-tip].tooltip-top::after {
-    bottom: 100%;
-    left: 50%;
-    transform: translate(-50%);
-    z-index: 1000;
-}
+/*[data-tip].tooltip-top::after {*/
+/*    bottom: 100%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%);*/
+/*    z-index: 1000;*/
+/*}*/
 
-[data-tip].tip-bottom::after {
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%);
-    z-index: 1000;
-}
+/*[data-tip].tip-bottom::after {*/
+/*    top: 100%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%);*/
+/*    z-index: 1000;*/
+/*}*/
 
 [data-tip].en-foot-note::after {
     top: 100%;
@@ -99,9 +98,9 @@ a:hover {
     top: 100%;
     left: 50%;
     text-align: right;
-    text-justify: inter-word;
     direction: rtl;
-    transform: translate(-50%);
+    width: auto;
+    /*transform: translate(-50%);*/
 }
 
 [data-tip]:hover::after,
