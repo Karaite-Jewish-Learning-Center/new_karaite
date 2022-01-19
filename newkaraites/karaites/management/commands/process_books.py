@@ -9,14 +9,16 @@ from .html_utils.utils import mark_bible_refs
 
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
-additional_css = """
+additional_css = """ 
 
 .MsoTableGrid {
-    width: 40%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     font-size: 16pt;
-    table-layout: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border:none;
 }
 
 /* English*/
@@ -24,8 +26,8 @@ additional_css = """
 .MsoTableGrid tr:nth-child(even) {
     column-span: all !important;
     display: block;
-    margin-left: 30%;
-    margin-right: -30%;
+    margin-left: 10%;
+    margin-right: -10%;
     line-height: 1.3em;
     font-style: italic;
     font-size: 19px;
@@ -67,13 +69,13 @@ additional_css = """
 
 @media (min-width: 100px) and  (max-width: 361px) {
     .MsoTableGrid {
-        width: 100%;
+        width: 90%;
     }
 }
 
 @media (min-width: 362px) and  (max-width: 640px) {
     .MsoTableGrid {
-        width: 100%;
+        width: 90%;
     }
 
 
@@ -87,18 +89,417 @@ additional_css = """
 
 
 /* Atsili ḳum ḳera */
-.table-04 tr:nth-child(even) p {
-    margin: 0;
+.table-04 tr:nth-child(odd) td {
+    margin-left: 100px;
+    margin-right: -200px;
+    line-height: 0.5em;
+}
+
+.table-04 tr:nth-child(odd) br {
+    content: "A" !important;
+    display: block !important;
+    margin-bottom: 1em !important;
+}
+
+.table-04 tr:nth-child(even) {
+    margin-left: 180px;
+    margin-right: -200px;
+    line-height: 0.5em;
 }
 
 
-/* Evyon Asher */
+/*Evyon Asher */
+.table-05 {
+    margin-top: 2em;
+    width: 70%;
+    line-height: 1em;
+}
 
-.table-05 tr:nth-child(even) p {
+.table-05 tr:nth-child(odd) td {
+
+    margin-left: 100px;
+    margin-right: -200px;
+    /*border: 1px solid black;*/
+    line-height: 1em;
+}
+
+.table-05 tr:nth-child(odd) td p {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.4em;
+}
+
+.table-05 tr:nth-child(even) {
+    margin: 1.2em -500px 1.2em 55%;
+}
+
+.table-05 tr:nth-child(even) td p {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5em;
+}
+
+/* supress &nbsp last line */
+.table-05 tr:nth-child(even) p:last-child {
+    display: none;
+}
+
+/* Vehaḥochma Me’ayin Timmatsē */
+
+
+.table-06 tr:nth-child(even) {
+    margin-right: -200px;
+    margin-left: 0;
+    line-height: 1.5em;
+}
+
+.table-06 tr:nth-child(even) p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/*Vehoshiya */
+.table-07 {
+    margin-top: 2em;
+}
+
+.table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+    font-size: 14pt;
+}
+
+.table-07 tr:nth-child(even) {
+    margin-left: 10%;
+    margin-right: -100%;
+}
+
+.table-07 tr:nth-child(even) p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Sefer Milḥamot Adonai */
+
+
+.table-08 tr:nth-child(even){
+    min-width: 400px;
+}
+.table-08 tr:nth-child(odd){
+    min-width: 400px;
+}
+.table-08 tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+
+}
+.table-08 tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+.table-08 tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+
+.table-08 tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.table-08 tr td  p {
     margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.table-08 tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.table-08 tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* table-09 */
+
+.table-09 {
+    border: 0 !important;
+}
+.table-09 tr:nth-child(even){
+    min-width: 400px;
+}
+.table-09 tr:nth-child(odd){
+    min-width: 400px;
+}
+.table-09 tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+
+}
+.table-09 tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+.table-09 tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+
+.table-09 tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.table-09 tr td  p {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.table-09 tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.table-09 tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/* table-10 */
+.table-10 {
+    border: 0 !important;
+}
+.table-10 tr:nth-child(even){
+    min-width: 400px;
+}
+.table-10 tr:nth-child(odd){
+    min-width: 400px;
+}
+.table-10 tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+
+}
+.table-10 tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+.table-10 tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+
+.table-10 tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.table-10 tr td  p {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.table-10 tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.table-10 tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/* table-11 */
+.table-11 {
+    border: 0 !important;
+}
+.table-11 tr:nth-child(even){
+    min-width: 400px;
+}
+.table-11 tr:nth-child(odd){
+    min-width: 400px;
+}
+.table-11 tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+
+}
+.table-11 tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+.table-11 tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+
+.table-11 tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.table-11 tr td  p {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.table-11 tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.table-11 tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/* table-12 */
+.table-12 {
+    border: 0 !important;
+}
+.table-12 tr:nth-child(even){
+    min-width: 400px;
+}
+.table-12 tr:nth-child(odd){
+    min-width: 400px;
+}
+.table-12 tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+
+}
+.table-12 tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+.table-12 tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+
+.table-12 tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.table-12 tr td  p {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.table-12 tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.table-12 tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* table-13 */
+
+.table-13 {
+    border: 0 !important;
+}
+.table-13 tr:nth-child(even){
+    min-width: 400px;
+}
+.table-13 tr:nth-child(odd){
+    min-width: 400px;
+}
+.table-13 tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+
+}
+.table-13 tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+.table-13 tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+
+.table-13 tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.table-13 tr td  p {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.table-13 tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.table-13 tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(7) > div > div > div > table > tbody > tr.tr-154 > td.td-53 > p > span > span > sup {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
+   text-align: center;
+}
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p  {
+    color:blue;
+    text-align:center;
+    margin-right: -72px;
+
+}
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
+    color: #0ae052;
+    text-align:center;
+    margin-right: -72px ;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > span {
+    color:#e74c3c;
+    text-align:center;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > i > u > span {
+    color:black;
+    margin-left: -72px ;
+
+}
+/* text bold */
+.span-261 {
+    font-weight: bold;
 }
 
 /* shelomo part 1 */
+
 .p-57, .p-61 {
     margin: 0;
     text-align: justify;
@@ -108,6 +509,14 @@ additional_css = """
 .p-59 {
     margin: 0;
     text-align: justify;
+}
+
+.makeStyles-paragraph-24 h1, .makeStyles-paragraph-24 h2 {
+    text-align: center;
+}
+
+.span-121 {
+    color: red;
 }
 
 """
@@ -534,6 +943,7 @@ LITURGY = [
          'author': 'N/A (Biblical Verses)'},
         False
     ],
+
     [
         'Vehoshia/', 'Vehoshia.html',
         'he',
@@ -548,7 +958,7 @@ LITURGY = [
     ],
 ]
 
-LITURGY_NO_TABLE = [
+LITURGY_TABLES = [
     [
         'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
@@ -562,6 +972,7 @@ LITURGY_NO_TABLE = [
         False
     ],
 ]
+
 
 PDF_BOOKS = [
     [
@@ -578,7 +989,22 @@ PDF_BOOKS = [
     ],
 ]
 
-LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_NO_TABLE
+# must be last, order of books is important
+TEST_BOOKS = [
+    [
+        'Vehahochma-2/', 'Vehahochma-2.html',
+        'he',
+        [fix_iframe],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"2 Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'},
+        False
+    ],
+]
+LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES + TEST_BOOKS
 
 
 class Command(BaseCommand):

@@ -67,6 +67,7 @@ const booksMenu = makeStyles((theme) => ({
     },
     card: {
         maxWidth: 350,
+        minWidth:350,
         width:'auto',
         height: 100,
         marginTop: 40,

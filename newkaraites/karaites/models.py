@@ -539,7 +539,7 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def get_all_books_by_first_level(level):
-        book_details = KaraitesBookDetails.objects.filter(first_level=level)
+        book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title')
         data = []
         for details in book_details:
             data.append({

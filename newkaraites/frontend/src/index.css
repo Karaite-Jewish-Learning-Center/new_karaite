@@ -90,6 +90,8 @@ a:hover {
     top: 100%;
     left: 50%;
     text-align: left;
+    min-width: 150px;
+    width: auto;
     direction: ltr;
     transform: translate(-50%);
 }
@@ -98,13 +100,15 @@ a:hover {
     top: 100%;
     left: 50%;
     text-align: right;
+    min-width: 150px;
     direction: rtl;
     width: auto;
-    /*transform: translate(-50%);*/
+    transform: translate(-50%);
 }
 
 [data-tip]:hover::after,
 [data-tip][class*="tooltip-"]:hover::before {
     visibility: visible;
+    background-color: black;
     opacity: 1;
 }
