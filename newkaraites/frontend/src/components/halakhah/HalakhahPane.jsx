@@ -10,7 +10,8 @@ import parse from 'html-react-parser'
 import {TRANSFORM_TYPE} from '../../constants/constants'
 import transform from "../../utils/transform";
 import '../../css/_comments.css'
-import '../../css/karaites.css'
+//import '../../css/karaites.css'
+import '../../css/books.css'
 import Header from '../pages/RightPaneHeader.jsx';
 import {storeContext} from "../../stores/context";
 

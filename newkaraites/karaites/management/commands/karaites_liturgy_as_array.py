@@ -5,7 +5,8 @@ from ...utils import clear_terminal_line
 from .html_utils.utils import get_html
 from .udpate_bible_ref import update_create_bible_refs
 from .process_books import (PATH,
-                            LITURGY)
+                            LITURGY,
+                            TEST_BOOKS)
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .update_toc import update_toc
@@ -19,7 +20,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        for _, book, _, _, _, details, _ in LITURGY:
+        for _, book, _, _, _, details, _ in LITURGY + TEST_BOOKS:
             sys.stdout.write(f'\33[K processing book {book}')
 
             book_details, _ = update_book_details(details)

@@ -178,44 +178,47 @@ additional_css = """
 }
 
 /* Sefer Milḥamot Adonai */
-
-
-.table-08 tr:nth-child(even){
-    min-width: 400px;
+.sefer-table {
+	width: 70%;
 }
-.table-08 tr:nth-child(odd){
-    min-width: 400px;
+.sefer-table tr:nth-child(even){
+	min-width: 500px;
 }
-.table-08 tr:nth-child(even) td:nth-child(1){
+.sefer-table tr:nth-child(even){
+	min-width: 500px;
+}
+.sefer-table  tr:nth-child(even) td:nth-child(1){
     /*border:1px red solid;*/
     min-width: 32px;
-
 }
-.table-08 tr:nth-child(even) td:nth-child(2){
+.sefer-table tr:nth-child(even) td:nth-child(2){
     /*border:1px black solid;*/
 }
-.table-08 tr:nth-child(even) td:nth-child(2) p{
+
+.sefer-table tr:nth-child(odd) td:nth-child(1) {
+	width: 30px;
+}
+.sefer-table tr:nth-child(even) td:nth-child(2) p{
     /*border:1px black solid;*/
     text-align: right;
     direction: rtl;
     margin-right: 5px;
 }
 
-
-.table-08 tr:nth-child(odd) td:nth-child(1) {
+.sefer-table tr:nth-child(odd) td:nth-child(1) {
     /*border:1px  green solid;*/
 }
-.table-08 tr td  p {
+.sefer-table tr td  p {
     margin: 0;
     font-size: 21px;
     line-height: 1.5em;
 }
 
-.table-08 tr:nth-child(odd) td:nth-child(2){
+.sefer-table tr:nth-child(odd) td:nth-child(2){
     /*border:1px  aqua solid;*/
 }
 
-.table-08 tr:nth-child(odd) td:nth-child(2) p{
+.sefer-table tr:nth-child(odd) td:nth-child(2) p{
     /*border:1px  #0070c0 solid;*/
     text-align: right;
     direction: rtl;
@@ -223,246 +226,7 @@ additional_css = """
     margin-top: 0;
     margin-bottom: 0;
 }
-
-/* table-09 */
-
-.table-09 {
-    border: 0 !important;
-}
-.table-09 tr:nth-child(even){
-    min-width: 400px;
-}
-.table-09 tr:nth-child(odd){
-    min-width: 400px;
-}
-.table-09 tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-
-}
-.table-09 tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-.table-09 tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-
-.table-09 tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.table-09 tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.table-09 tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.table-09 tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-/* table-10 */
-.table-10 {
-    border: 0 !important;
-}
-.table-10 tr:nth-child(even){
-    min-width: 400px;
-}
-.table-10 tr:nth-child(odd){
-    min-width: 400px;
-}
-.table-10 tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-
-}
-.table-10 tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-.table-10 tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-
-.table-10 tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.table-10 tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.table-10 tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.table-10 tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-/* table-11 */
-.table-11 {
-    border: 0 !important;
-}
-.table-11 tr:nth-child(even){
-    min-width: 400px;
-}
-.table-11 tr:nth-child(odd){
-    min-width: 400px;
-}
-.table-11 tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-
-}
-.table-11 tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-.table-11 tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-
-.table-11 tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.table-11 tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.table-11 tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.table-11 tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-/* table-12 */
-.table-12 {
-    border: 0 !important;
-}
-.table-12 tr:nth-child(even){
-    min-width: 400px;
-}
-.table-12 tr:nth-child(odd){
-    min-width: 400px;
-}
-.table-12 tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-
-}
-.table-12 tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-.table-12 tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-
-.table-12 tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.table-12 tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.table-12 tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.table-12 tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/* table-13 */
-
-.table-13 {
-    border: 0 !important;
-}
-.table-13 tr:nth-child(even){
-    min-width: 400px;
-}
-.table-13 tr:nth-child(odd){
-    min-width: 400px;
-}
-.table-13 tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-
-}
-.table-13 tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-.table-13 tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-
-.table-13 tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.table-13 tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.table-13 tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.table-13 tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
+/* todo: short this */
 #root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(7) > div > div > div > table > tbody > tr.tr-154 > td.td-53 > p > span > span > sup {
     font-size: 18px;
     line-height: 20px;
@@ -472,19 +236,19 @@ additional_css = """
    text-align: center;
 }
 #root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p  {
-    color:blue;
+    /*color:blue;*/
     text-align:center;
     margin-right: -72px;
 
 }
 #root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
-    color: #0ae052;
+    /*color: #0ae052;*/
     text-align:center;
     margin-right: -72px ;
 }
 
 #root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > span {
-    color:#e74c3c;
+    /*color:#e74c3c;*/
     text-align:center;
 }
 
@@ -493,6 +257,12 @@ additional_css = """
     margin-left: -72px ;
 
 }
+/* right side numbers */
+.MsoTableGrid tr td:nth-child(1) p span {
+	font-size: 19px;
+	color:red;
+}
+
 /* text bold */
 .span-261 {
     font-weight: bold;
@@ -518,7 +288,6 @@ additional_css = """
 .span-121 {
     color: red;
 }
-
 """
 
 style_classes_by_book = {}
@@ -881,7 +650,7 @@ HALAKHAH = [
         [],
         [update_bible_re],
         {},
-        True
+        False
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
@@ -889,7 +658,7 @@ HALAKHAH = [
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
         {},
-        True
+        False
     ],
 
 ]
@@ -985,7 +754,7 @@ PDF_BOOKS = [
          'first_level': 5,
          'book_classification': '07',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
-        True
+        False
     ],
 ]
 

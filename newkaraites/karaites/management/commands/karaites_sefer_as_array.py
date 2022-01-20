@@ -4,7 +4,6 @@ from django.core.management.base import BaseCommand
 
 from .process_books import (PATH,
                             LITURGY_TABLES)
-from ...utils import clear_terminal_line
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .update_toc import update_toc
@@ -50,49 +49,30 @@ class Command(BaseCommand):
                 children.decompose()
 
             update_book_details(details, introduction="".join([child for child in intro]))
-            table_class = "sefer-table"
-
-            # for children in divs[0].find_all('table', recursive=True):
-            #     children.attrs = clean_tag_attr(children, table_class=table_class)
-            #     print('-' * 50)
-            #     print(children.attrs)
-            #     print('-' * 50)
-            #     input('>>')
-            #     children = clean_table_attr(children)
-            #     print('-' * 50)
-            #     print(str(children)[0:100])
-            #     input('>>')
-            #     print('-' * 50)
-
+            table_class = 'sefer-table'
             ref_chapter = 1
             ref_paragraph = 1
+            for child in divs[0].find_all('table'):
+                child.attrs = clean_tag_attr(child, table_class=table_class)
+                for row in child.find_all(recursive=True):
+                    row.attrs = clean_tag_attr(row)
 
-            for children in divs[0].find_all(recursive=True):
-                if children.name is None:
+            for children in divs[0].find_all(recursive=False):
+                if children.name != 'table':
+                    update_karaites_array(book_details, ref_chapter, ref_paragraph, str(children))
+                if children.name == 'table':
+                    table_str = str(children)
+                    update_karaites_array(book_details, ref_chapter, ref_paragraph, table_str)
+                    children.decompose()
                     continue
 
-                input('>>' + children.name)
-
-                if children.name == 'table':
-                    children.attrs = clean_tag_attr(children, table_class=table_class)
-                    print('-' * 50)
-                    print(children.attrs)
-                    print('-' * 50)
-                    table = clean_table_attr(children)
-                    table_str = str(table)
-                    update_karaites_array(book_details, ref_chapter, ref_paragraph, table_str)
-                    table.decompose()
-
-                elif children.name == 'p' and children.attrs is not None and 'p-120' in children.attrs['class']:
-                    # update_toc(book_details, ref_paragraph, [children.text, ''])
+                if children.name == 'p' and children.attrs is not None and 'p-120' in children.attrs['class']:
+                    update_toc(book_details, ref_paragraph, [children.text, ''])
                     ref_chapter += 1
-                else:
-                    update_karaites_array(book_details, ref_chapter, ref_paragraph, str(children))
 
                 ref_paragraph += 1
 
         # update/create bible references
         # update_create_bible_refs(book_details)
-
         print()
         print()

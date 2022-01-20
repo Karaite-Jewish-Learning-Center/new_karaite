@@ -43,6 +43,9 @@ const LoadBook = ({type}) => {
             if (type === 'liturgy') {
                 history.push(`/Liturgy/`)
             }
+            if (type === 'polemic') {
+                history.push(`/Polemic/`)
+            }
         }
     }
 
@@ -212,7 +215,7 @@ const LoadBook = ({type}) => {
 
     return (
         <Grid container
-              className={classes.root}
+              className={`${classes.root} ${book}`}
               direction="row"
               justifycontent="center"
         >
