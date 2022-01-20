@@ -12,7 +12,7 @@ import {storeContext} from "../../stores/context";
 
 
 const KaraitesBooks = ({paneNumber, refClick, paragraphs, type, onClosePane}) => {
-    const [loadingMessage, setLoadingMessage]  = useState(null)
+    const [loadingMessage, setLoadingMessage] = useState(null)
     const store = useContext(storeContext)
     const classes = useStyles()
 
@@ -24,12 +24,17 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type, onClosePane}) =>
     }
 
     const itemContent = (item, data) => {
+
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            {parse(data[2][0],{
+           <div  className={(type !== 'liturgy' ? classes.paragraph: classes.liturgy)}>
+
+            {parse(data[2][0], {
                 replace: domNode => {
                     return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                 }
             })}
+
+            </div>
         </div>)
 
 
@@ -40,11 +45,11 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type, onClosePane}) =>
             <>
                 <KaraitePaneHeader paneNumber={paneNumber} onClosePane={onClosePane}/>
                 <Virtuoso data={paragraphs}
-                          endReached={(_)=>setLoadingMessage(()=>'Text end.')}
+                          endReached={(_) => setLoadingMessage(() => 'Text end.')}
                           itemContent={itemContent}
                           components={{
                               Footer: () => {
-                                   return <Loading text={loadingMessage}/>
+                                  return <Loading text={loadingMessage}/>
                               }
                           }}
                 />
@@ -55,7 +60,7 @@ const KaraitesBooks = ({paneNumber, refClick, paragraphs, type, onClosePane}) =>
         <>
             <KaraitePaneHeader paneNumber={paneNumber} onClosePane={onClosePane}/>
             <Virtuoso data={paragraphs}
-                      endReached={(_)=>setLoadingMessage(()=>'Text end.')}
+                      endReached={(_) => setLoadingMessage(() => 'Text end.')}
                       initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber) - 1)}
                       itemContent={itemContent}
                       components={{
@@ -78,11 +83,20 @@ const useStyles = makeStyles(() => ({
         height: '100%',
     },
     paragraphContainer: {
-        marginRight: 30,
-        marginLeft: 30,
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
+    },
+    paragraph: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        maxWidth:600,
+        lineHeight: 1.8,
+        margin: 'auto',
+    },
+    liturgy: {
+        maxWidth:'100%',
+        margin: 'auto',
     },
     selected: {
         backgroundColor: Colors['rulerColor']

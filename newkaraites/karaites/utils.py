@@ -21,12 +21,12 @@ def clear_terminal_line():
     sys.stdout.write(f"\33[K\r")
 
 
-def slug(str):
-    return str.replace(' ', '-')
+def slug(string):
+    return string.replace(' ', '-')
 
 
-def slug_back(str):
-    return str.replace('-', ' ')
+def slug_back(string):
+    return string.replace('-', ' ')
 
 
 def replace_punctuation_marks(s):
@@ -55,5 +55,5 @@ def only_english_stop_word(search):
 
 
 def prep_search(search):
-    """ postgres full text search expect a normalize string"""
+    """ postgres full text search expect a normalized string"""
     return re.sub(' ', ' & ', search)

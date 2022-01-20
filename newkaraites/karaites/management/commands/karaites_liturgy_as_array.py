@@ -5,41 +5,22 @@ from ...utils import clear_terminal_line
 from .html_utils.utils import get_html
 from .udpate_bible_ref import update_create_bible_refs
 from .process_books import (PATH,
-                            LITURGY)
+                            LITURGY,
+                            TEST_BOOKS)
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .update_toc import update_toc
+from .clean_table import (clean_tag_attr,
+                          clean_table_attr)
 
 
 class Command(BaseCommand):
     help = 'Populate Database with Karaites liturgy books as array'
 
-    @staticmethod
-    def clean_tag_attr(child):
-        """ clean all child attr except class """
-        if hasattr(child, 'attrs'):
-            class_ = child.attrs.get('class')
-            colspan = child.attrs.get('colspan')
-
-            if class_ is None:
-                child.attrs = {}
-            else:
-                child.attrs = {'class': class_}
-
-            if colspan is not None:
-                child.attrs.update({'colspan': colspan})
-
-        return child.attrs
-
-    def clean_table_attr(self, tree):
-        for child in tree.find_all(recursive=True):
-            child.attrs = self.clean_tag_attr(child)
-        return tree
-
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        for _, book, _, _, _, details, _ in LITURGY:
+        for _, book, _, _, _, details, _ in LITURGY + TEST_BOOKS:
             sys.stdout.write(f'\33[K processing book {book}')
 
             book_details, _ = update_book_details(details)
@@ -51,8 +32,8 @@ class Command(BaseCommand):
             clear_terminal_line()
 
             table = html_tree.find('table')
-            table.attrs = self.clean_tag_attr(table)
-            table = self.clean_table_attr(table)
+            table.attrs = clean_tag_attr(table)
+            table = clean_table_attr(table)
             table_str = str(table)
             update_karaites_array(book_details, 1, 1, table_str)
             table.decompose()

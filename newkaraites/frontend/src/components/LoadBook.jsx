@@ -43,6 +43,9 @@ const LoadBook = ({type}) => {
             if (type === 'liturgy') {
                 history.push(`/Liturgy/`)
             }
+            if (type === 'polemic') {
+                history.push(`/Polemic/`)
+            }
         }
     }
 
@@ -102,7 +105,7 @@ const LoadBook = ({type}) => {
                 await fetchDataBible(store.panes.length - 1)
             }
 
-            if (type === "karaites" || type === "liturgy") {
+            if (type === "karaites" || type === "liturgy" || type === "polemic") {
                 store.setPanes({
                     book: book,
                     chapter: parseInt(chapter) - 1,
@@ -187,7 +190,7 @@ const LoadBook = ({type}) => {
 
                 ))
             }
-            if (panes[i].type.toLowerCase() === 'liturgy') {
+            if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                         <KaraitesBooks
@@ -212,7 +215,7 @@ const LoadBook = ({type}) => {
 
     return (
         <Grid container
-              className={classes.root}
+              className={`${classes.root} ${book}`}
               direction="row"
               justifycontent="center"
         >

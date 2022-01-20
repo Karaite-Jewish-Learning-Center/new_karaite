@@ -1,4 +1,4 @@
-import { makeRandomKey } from "./utils";
+import { makeRandomKey } from "./utils"
 
 
 const transform = (refClick, item, kind, paneNumber, node) => {

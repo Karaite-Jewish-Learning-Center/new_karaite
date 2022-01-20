@@ -16,6 +16,7 @@ import SearchResults from "./components/pages/SearchResults";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message'
+import Polemic from "./components/polemic/Polemic";
 
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
                         {/*<Route exact path="/Liturgy/:book/" children={<Liturgy/>}/>*/}
                         <Route exact path="/Liturgy/"><Liturgy/></Route>
 
+                        <Route exact path="/Polemic/:book/1/" children={<LoadBook type="polemic"/>}/>
+                        <Route exact path="/Polemic/"><Polemic/></Route>
                         <Route path='*'>
                             <NotFound404/>
                         </Route>

@@ -3,10 +3,20 @@ import pluralize from 'pluralize'
 // this is the text that I want to tag, so I said
 // tag = b
 // arg = I
-// this is the text that <b>I</b> want to tag, so <b>I</b> said
+// this is the text that <b>I</b> want to tag, so <b>I</b> that said
 // Make last word plural if is singular, singular if is plural
-// and tag
-// tag individual words
+
+
+// Todo: write tests for this functions and see how they perform
+
+// export default function addTagToString1(text: string, tag: string, arg: string) {
+//   const lastWord = text.split(' ').pop()
+//   const lastWordPlural = pluralize(lastWord)
+//   const lastWordSingular = pluralize.singular(lastWord)
+//   const lastWordPluralOrSingular = lastWord === lastWordPlural ? lastWordPlural : lastWordSingular
+//   const newText = text.replace(lastWordPluralOrSingular, `${lastWordPluralOrSingular} <${tag}>${arg}</${tag}>`)
+//   return newText
+// }
 
 export const addTagToString = (string:string, args:string, tag:string):string => {
     // sanitize args

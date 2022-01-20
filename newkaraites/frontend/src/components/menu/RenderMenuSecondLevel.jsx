@@ -8,6 +8,11 @@ import Colors from "../../constants/colors";
 import {slug} from "../../utils/utils";
 import parse from 'html-react-parser'
 import {capitalize} from "../../utils/utils";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 const cleanUrl = (url) => {
     let result = slug(url.trim().split(',')[0])
@@ -24,16 +29,23 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
     const classes = useStyles()
     const populate = (obj) => {
         return Object.keys(obj).map((key, index) =>
-            <Grid item xs={12} key={index}>
-                <div className={classes.card}>
+            <Accordion className={classes.accordion}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls={`liturgy book ${cleanUrl(obj[key].book_title)}`}
+                    id="obj[key].book_title"
+                >
                     <Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title)}/1/`}>
                         <Typography variant="h6" component="h2">{obj[key].book_title}</Typography>
                     </Link>
-                    <br/>
-                    <Typography className={classes.bodyText} variant="body2" component="p">{toHtml(obj[key].intro)}</Typography>
-                    <hr className={classes.ruler}/>
-                </div>
-            </Grid>)
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        {toHtml(obj[key].intro)}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+        )
     }
     const MainMenu = () => {
 
@@ -42,7 +54,6 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
                 <Grid item className={classes.title}>
                     <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
                     <Link className={classes.link} to='/texts/'>To texts</Link>
-                    <hr className={classes.ruler}></hr>
                 </Grid>
                 <Grid container spacing={2}>
                     {populate(books)}
@@ -58,7 +69,6 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
                 <Filler xs={12}/>
                 <MainMenu/>
             </Grid>
-
         </div>
     )
 
@@ -70,8 +80,15 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         fontSize: '16pt',
     },
+    accordion:{
+        width: '100%',
+        padding: '10px',
+        margin: '1px',
+        borderRadius:0,
+    },
     title: {
         marginTop: 50,
+        marginBottom: 40,
     },
     ruler: {
         marginTop: 30,

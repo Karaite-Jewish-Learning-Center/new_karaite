@@ -9,14 +9,16 @@ from .html_utils.utils import mark_bible_refs
 
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
-additional_css = """
+additional_css = """ 
 
 .MsoTableGrid {
-    width: 40%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     font-size: 16pt;
-    table-layout: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border:none;
 }
 
 /* English*/
@@ -24,8 +26,8 @@ additional_css = """
 .MsoTableGrid tr:nth-child(even) {
     column-span: all !important;
     display: block;
-    margin-left: 30%;
-    margin-right: -30%;
+    margin-left: 10%;
+    margin-right: -10%;
     line-height: 1.3em;
     font-style: italic;
     font-size: 19px;
@@ -67,13 +69,13 @@ additional_css = """
 
 @media (min-width: 100px) and  (max-width: 361px) {
     .MsoTableGrid {
-        width: 100%;
+        width: 90%;
     }
 }
 
 @media (min-width: 362px) and  (max-width: 640px) {
     .MsoTableGrid {
-        width: 100%;
+        width: 90%;
     }
 
 
@@ -87,18 +89,187 @@ additional_css = """
 
 
 /* Atsili ḳum ḳera */
-.table-04 tr:nth-child(even) p {
-    margin: 0;
+.table-04 tr:nth-child(odd) td {
+    margin-left: 100px;
+    margin-right: -200px;
+    line-height: 0.5em;
+}
+
+.table-04 tr:nth-child(odd) br {
+    content: "A" !important;
+    display: block !important;
+    margin-bottom: 1em !important;
+}
+
+.table-04 tr:nth-child(even) {
+    margin-left: 180px;
+    margin-right: -200px;
+    line-height: 0.5em;
 }
 
 
-/* Evyon Asher */
+/*Evyon Asher */
+.table-05 {
+    margin-top: 2em;
+    width: 70%;
+    line-height: 1em;
+}
 
-.table-05 tr:nth-child(even) p {
+.table-05 tr:nth-child(odd) td {
+
+    margin-left: 100px;
+    margin-right: -200px;
+    /*border: 1px solid black;*/
+    line-height: 1em;
+}
+
+.table-05 tr:nth-child(odd) td p {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.4em;
+}
+
+.table-05 tr:nth-child(even) {
+    margin: 1.2em -500px 1.2em 55%;
+}
+
+.table-05 tr:nth-child(even) td p {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5em;
+}
+
+/* supress &nbsp last line */
+.table-05 tr:nth-child(even) p:last-child {
+    display: none;
+}
+
+/* Vehaḥochma Me’ayin Timmatsē */
+
+
+.table-06 tr:nth-child(even) {
+    margin-right: -200px;
+    margin-left: 0;
+    line-height: 1.5em;
+}
+
+.table-06 tr:nth-child(even) p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/*Vehoshiya */
+.table-07 {
+    margin-top: 2em;
+}
+
+.table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
+    font-size: 14pt;
+}
+
+.table-07 tr:nth-child(even) {
+    margin-left: 10%;
+    margin-right: -100%;
+}
+
+.table-07 tr:nth-child(even) p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Sefer Milḥamot Adonai */
+.sefer-table {
+	width: 70%;
+}
+.sefer-table tr:nth-child(even){
+	min-width: 500px;
+}
+.sefer-table tr:nth-child(even){
+	min-width: 500px;
+}
+.sefer-table  tr:nth-child(even) td:nth-child(1){
+    /*border:1px red solid;*/
+    min-width: 32px;
+}
+.sefer-table tr:nth-child(even) td:nth-child(2){
+    /*border:1px black solid;*/
+}
+
+.sefer-table tr:nth-child(odd) td:nth-child(1) {
+	width: 30px;
+}
+.sefer-table tr:nth-child(even) td:nth-child(2) p{
+    /*border:1px black solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+}
+
+.sefer-table tr:nth-child(odd) td:nth-child(1) {
+    /*border:1px  green solid;*/
+}
+.sefer-table tr td  p {
     margin: 0;
+    font-size: 21px;
+    line-height: 1.5em;
+}
+
+.sefer-table tr:nth-child(odd) td:nth-child(2){
+    /*border:1px  aqua solid;*/
+}
+
+.sefer-table tr:nth-child(odd) td:nth-child(2) p{
+    /*border:1px  #0070c0 solid;*/
+    text-align: right;
+    direction: rtl;
+    margin-right: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+/* todo: short this */
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(7) > div > div > div > table > tbody > tr.tr-154 > td.td-53 > p > span > span > sup {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
+   text-align: center;
+}
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p  {
+    /*color:blue;*/
+    text-align:center;
+    margin-right: -72px;
+
+}
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
+    /*color: #0ae052;*/
+    text-align:center;
+    margin-right: -72px ;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > span {
+    /*color:#e74c3c;*/
+    text-align:center;
+}
+
+#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > i > u > span {
+    color:black;
+    margin-left: -72px ;
+
+}
+/* right side numbers */
+.MsoTableGrid tr td:nth-child(1) p span {
+	font-size: 19px;
+	color:red;
+}
+
+/* text bold */
+.span-261 {
+    font-weight: bold;
 }
 
 /* shelomo part 1 */
+
 .p-57, .p-61 {
     margin: 0;
     text-align: justify;
@@ -110,6 +281,13 @@ additional_css = """
     text-align: justify;
 }
 
+.makeStyles-paragraph-24 h1, .makeStyles-paragraph-24 h2 {
+    text-align: center;
+}
+
+.span-121 {
+    color: red;
+}
 """
 
 style_classes_by_book = {}
@@ -169,6 +347,20 @@ REMOVE = [
 ]
 
 REMOVE_CSS_CLASS = ['span-89']
+
+
+def fix_iframe(path, book_name):
+    book_data = read_data(path, book_name)
+    remove = """<p class=MsoNormal><b><span style='mso-bidi-language:HE'>Recording: </span></b><span
+style='mso-bidi-language:HE'>&lt;iframe width=&quot;560&quot;
+height=&quot;315&quot; <span class=SpellE>src</span>=&quot;https://www.youtube.com/embed/WZOwo9qW3iM&quot;
+title=&quot;YouTube video player&quot; frameborder=&quot;0&quot;
+allow=&quot;accelerometer; <span class=SpellE>autoplay</span>; clipboard-write;
+encrypted-media; gyroscope; picture-in-picture&quot; <span class=SpellE>allowfullscreen</span>&gt;&lt;/iframe&gt;<o:p></o:p></span></p>"""
+
+    book_data = book_data.replace(remove,
+                                  """<iframe width="560" height="315" src="https://www.youtube.com/embed/WZOwo9qW3iM"></iframe>""")
+    write_data(path, book_name, book_data)
 
 
 def removing_no_breaking_spaces(html_tree):
@@ -458,7 +650,7 @@ HALAKHAH = [
         [],
         [update_bible_re],
         {},
-        True
+        False
     ],
     [
         'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
@@ -466,7 +658,7 @@ HALAKHAH = [
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
         {},
-        True
+        False
     ],
 
 ]
@@ -511,7 +703,7 @@ LITURGY = [
     [
         'Vehahochma/', 'Vehahochma.html',
         'he',
-        [],
+        [fix_iframe],
         [update_bible_he_en],
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
@@ -520,6 +712,7 @@ LITURGY = [
          'author': 'N/A (Biblical Verses)'},
         False
     ],
+
     [
         'Vehoshia/', 'Vehoshia.html',
         'he',
@@ -534,7 +727,7 @@ LITURGY = [
     ],
 ]
 
-LITURGY_NO_TABLE = [
+LITURGY_TABLES = [
     [
         'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
@@ -549,7 +742,38 @@ LITURGY_NO_TABLE = [
     ],
 ]
 
-LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_NO_TABLE
+
+PDF_BOOKS = [
+    [
+        'The Palanquin/', 'The Palanquin.html',
+        'he',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r"The Palanquin,  ספר מלחמות ה'",
+         'first_level': 5,
+         'book_classification': '07',
+         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
+        False
+    ],
+]
+
+# must be last, order of books is important
+TEST_BOOKS = [
+    [
+        'Vehahochma-2/', 'Vehahochma-2.html',
+        'he',
+        [fix_iframe],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"2 Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
+         'first_level': 4,
+         'book_classification': '07',
+         'author': 'N/A (Biblical Verses)'},
+        False
+    ],
+]
+LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES + TEST_BOOKS
 
 
 class Command(BaseCommand):
@@ -622,6 +846,10 @@ class Command(BaseCommand):
                 rules = []
                 values = []
                 for css in css_elements:
+
+                    if css.find(':') < 0:
+                        continue
+
                     r, v = css.split(':')
                     rules.append(r)
                     values.append(v)
@@ -726,6 +954,10 @@ class Command(BaseCommand):
         style_classes = {}
         divs = html_tree.find('div', class_="WordSection1", recursive=True)
 
+        # pdfs have no WordSection1
+        if divs is None:
+            divs = html_tree.find('body', recursive=True)
+
         for tag in divs.findAll(True, recursive=True):
 
             for attr in [attr for attr in tag.attrs]:
@@ -773,6 +1005,8 @@ class Command(BaseCommand):
             A css file is generate.
         """
         sys.stdout.write(f"\33[K Pre-processing book's\r")
+        # LIST_OF_BOOKS = LITURGY
+        # LIST_OF_BOOKS = PDF_BOOKS
         for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
             for pre_process in pre_processes:
                 pre_process(path, book)

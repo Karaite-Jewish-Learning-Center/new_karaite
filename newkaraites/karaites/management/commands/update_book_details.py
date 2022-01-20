@@ -2,7 +2,7 @@ from ...models import (Author,
                        KaraitesBookDetails)
 
 
-def update_book_details(data, introduction=''):
+def update_book_details(data, introduction='', language='he'):
     """ update book details """
 
     author, _ = Author.objects.get_or_create(name=data['name'])
@@ -10,7 +10,7 @@ def update_book_details(data, introduction=''):
 
     obj, create = KaraitesBookDetails.objects.get_or_create(book_title=data['name'], author=author,
                                                             defaults={'first_level': data['first_level'],
-                                                                      'book_language': 'he',
+                                                                      'book_language': language,
                                                                       'book_classification': data['book_classification'],
                                                                       'author': author,
                                                                       'book_title': data['name'],

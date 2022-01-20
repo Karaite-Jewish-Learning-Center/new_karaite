@@ -141,6 +141,8 @@ class GetFirstLevel(View):
         level['Liturgy'] = ("""Prayers, poems, and ritual texts, 
         recited in daily worship or at specific occasions.""")
 
+        level['Polemic'] = """Polemic texts."""
+
         return JsonResponse(level)
 
 
