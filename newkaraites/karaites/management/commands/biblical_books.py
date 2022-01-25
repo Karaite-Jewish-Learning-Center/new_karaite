@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = 'Populate Database with Torah books'
 
     def handle(self, *args, **options):
-        """ Used google translate, please check if this is fine """
+        """ Used Google Translate, please check if this is fine """
 
         data_map = [{'source': '../newkaraites/data/Tanakh/Torah',
                      'books': (['Genesis', 'בראשית'],

@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from newkaraites.karaites.management.commands.html_utils.html_utils import get_chapter_verse_he
+from newkaraites.karaites.management.commands.command_utils import get_chapter_verse_he
 
 
 class TestCommentsParagraph:

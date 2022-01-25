@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 from ...models import (KaraitesBookAsArray,
                        References)
 
-from .html_utils.utils import (ignore_ref,
-                               RE_BIBLE_REF)
+from .command_utils.utils import (ignore_ref,
+                                  RE_BIBLE_REF)
 
-from .html_utils.parser_ref import parse_reference
+from .command_utils.parser_ref import parse_reference
 
 
 def update_create_bible_refs(book_details):

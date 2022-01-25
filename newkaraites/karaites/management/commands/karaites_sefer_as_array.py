@@ -4,12 +4,9 @@ from django.core.management.base import BaseCommand
 
 from .process_books import (PATH,
                             LITURGY_TABLES)
-from .update_book_details import update_book_details
-from .update_karaites_array import update_karaites_array
-from .update_toc import update_toc
-from .html_utils.utils import get_html
-from .clean_table import (clean_tag_attr,
-                          clean_table_attr)
+from . import update_toc, update_book_details, update_karaites_array
+from newkaraites.karaites.management.commands.command_utils import get_html
+from newkaraites.karaites.management.commands.command_utils import (clean_tag_attr)
 
 
 class Command(BaseCommand):

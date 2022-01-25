@@ -34,6 +34,10 @@ Liturgy books
 
 >> ./manage.py karaites_liturgy_as_array
 
+Polemic books
+
+>> ./manage.py karaites_sefer_as_array
+
 Update references (updates bible references)
 
 >> ./manage.py update_references

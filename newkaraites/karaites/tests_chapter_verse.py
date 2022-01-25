@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-from newkaraites.karaites.management.commands.html_utils.html_utils import (get_chapter_verse_en,
-                                                                            get_chapter_verse_he,
-                                                                            get_foot_note_index)
+from newkaraites.karaites.management.commands.command_utils import (get_chapter_verse_en,
+                                                                    get_chapter_verse_he,
+                                                                    get_foot_note_index)
 from .html_sources import html_1_1
 
 

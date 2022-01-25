@@ -34,6 +34,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+
         if options['list_books']:
             print()
             print('Id      lang     Book name')
