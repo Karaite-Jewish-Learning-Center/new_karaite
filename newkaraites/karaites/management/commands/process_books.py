@@ -816,6 +816,10 @@ class Command(BaseCommand):
         )
 
     @staticmethod
+    def replace_class_name(str_html):
+        return str_html.replace('class="MsoNormalTable', 'class="MsoTableGrid')
+
+    @staticmethod
     def replace_a_foot_notes(html_tree, language):
         """ replace complicate <a></a> with a tooltip """
 
@@ -990,6 +994,10 @@ class Command(BaseCommand):
         style_classes = {}
         divs = html_tree.find('div', class_="WordSection1", recursive=True)
 
+        book_name = book.replace('.html', '').lower()
+        if book_name.find(' ') > 0:
+            book_name = book_name.split(' ')[0]
+
         # pdfs have no WordSection1
         if divs is None:
             divs = html_tree.find('body', recursive=True)
@@ -1008,14 +1016,17 @@ class Command(BaseCommand):
                             ms_classes.append(ms_class)
 
                     style = tag.attrs['style']
-                    if tag.name not in tags:
-                        tags[tag.name] = 0
+                    # make class independent of order of processing
+                    class_name_by_tag = f'{book_name}-{tag.name}'
+                    if class_name_by_tag not in tags:
+                        tags[class_name_by_tag] = 0
 
                     style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
                     if style not in style_classes:
-                        class_name = f'{tag.name}-{tags[tag.name]:02}'
+
+                        class_name = f'{class_name_by_tag}-{tags[class_name_by_tag]:03}'
                         style_classes.update({style: class_name})
-                        tags[tag.name] += 1
+                        tags[class_name_by_tag] += 1
                     else:
                         class_name = style_classes[style]
 
@@ -1055,8 +1066,8 @@ class Command(BaseCommand):
                 book_name = book.replace('.html', '')
 
                 if level is not None and classification is not None:
-                    book_level = FIRST_LEVEL[int(level)-1][1]
-                    book_classification = BOOK_CLASSIFICATION[int(classification)-1][1]
+                    book_level = FIRST_LEVEL[int(level) - 1][1]
+                    book_classification = BOOK_CLASSIFICATION[int(classification) - 1][1]
                     print(f'{i:02} {lang:4} {book_level:8} {book_classification:16} {book_name}')
                 else:
                     print(f'{i:02} {lang:4} {"Tanakh":8} {"-- ":16} {book_name}')
@@ -1113,7 +1124,7 @@ class Command(BaseCommand):
 
             sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
             html_str = self.remove_tags(str(html_tree))
-
+            html_str = self.replace_class_name(html_str)
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
             sys.stdout.write(f"\33[K Writing files for {book} \n")

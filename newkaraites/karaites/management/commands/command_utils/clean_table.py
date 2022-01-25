@@ -16,8 +16,8 @@ def clean_tag_attr(child, table_class=None):
         if table_class is not None and child.name == 'table':
             child.attrs['class'].append(table_class)
 
-        if colspan is not None:
-            child.attrs.update({'colspan': colspan})
+        if colspan == '3':
+            child.attrs.update({'colspan': '2'})
 
     return child.attrs
 
