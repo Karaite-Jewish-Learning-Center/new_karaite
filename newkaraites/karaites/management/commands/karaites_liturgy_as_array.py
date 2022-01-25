@@ -2,16 +2,15 @@ import sys
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...utils import clear_terminal_line
-from .html_utils.utils import get_html
-from .udpate_bible_ref import update_create_bible_refs
+from .command_utils.utils import get_html
+from .update_toc import update_toc
+from .update_book_details import update_book_details
+from .update_karaites_array import update_karaites_array
 from .process_books import (PATH,
                             LITURGY,
                             TEST_BOOKS)
-from .update_book_details import update_book_details
-from .update_karaites_array import update_karaites_array
-from .update_toc import update_toc
-from .clean_table import (clean_tag_attr,
-                          clean_table_attr)
+from .command_utils.clean_table import (clean_tag_attr,
+                                        clean_table_attr)
 
 
 class Command(BaseCommand):

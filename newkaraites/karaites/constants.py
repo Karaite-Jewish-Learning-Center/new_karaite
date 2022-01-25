@@ -20,7 +20,7 @@ BOOK_CLASSIFICATION = [
 
 FIRST_LEVEL = [
     (1, 'Tanakh'),
-    # (2, 'Talmud'),
+    (2, 'Talmud'),
     (3, 'Halakhah'),
     (4, 'Liturgy'),
     (5, 'Polemic'),

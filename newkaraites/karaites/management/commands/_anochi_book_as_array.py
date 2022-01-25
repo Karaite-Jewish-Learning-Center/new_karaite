@@ -1,19 +1,14 @@
-import re
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from ...models import (Author,
                        KaraitesBookDetails,
-                       KaraitesBookAsArray,
-                       References)
+                       KaraitesBookAsArray)
 
 from ...utils import clear_terminal_line
-from .html_utils.parser_ref import parse_reference
-from .html_utils.utils import (get_html,
-                               mark_bible_refs,
-                               ignore_ref,
-                               RE_BIBLE_REF
-                               )
-from .udpate_bible_ref import update_create_bible_refs
+from newkaraites.karaites.management.commands.command_utils import (get_html,
+                                                                    mark_bible_refs
+                                                                    )
+from newkaraites.karaites.management.commands.udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):

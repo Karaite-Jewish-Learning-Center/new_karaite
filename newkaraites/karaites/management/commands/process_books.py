@@ -4,8 +4,10 @@ import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from ...constants import BIBLE_BOOKS_NAMES
-from .html_utils.utils import mark_bible_refs
+from ...constants import (BIBLE_BOOKS_NAMES,
+                          BOOK_CLASSIFICATION,
+                          FIRST_LEVEL)
+from .command_utils.utils import mark_bible_refs
 
 # override some defaults without having to sweat on code
 # maybe replace is a better strategy, to think about !
@@ -742,7 +744,6 @@ LITURGY_TABLES = [
     ],
 ]
 
-
 PDF_BOOKS = [
     [
         'The Palanquin/', 'The Palanquin.html',
@@ -773,11 +774,50 @@ TEST_BOOKS = [
         False
     ],
 ]
-LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES + TEST_BOOKS
+LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
 
 
 class Command(BaseCommand):
     help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--all',
+            default=True,
+            action='store_true',
+            help='Process all books',
+        )
+        parser.add_argument(
+            '--liturgy',
+            dest='liturgy',
+            action='store_true',
+            default=False,
+            help='Process liturgy books',
+        )
+        parser.add_argument(
+            '--halakhah',
+            dest='halakhah',
+            action='store_true',
+            default=False,
+            help='Process halakhah books',
+        )
+        parser.add_argument(
+            '--polemic',
+            dest='polemic',
+            action='store_true',
+            default=False,
+            help="Process polemic books",
+        )
+        parser.add_argument(
+            '--list',
+            action='store_true',
+            default=False,
+            help="List all books",
+        )
+
+    @staticmethod
+    def replace_class_name(str_html):
+        return str_html.replace('class="MsoNormalTable', 'class="MsoTableGrid')
 
     @staticmethod
     def replace_a_foot_notes(html_tree, language):
@@ -954,6 +994,10 @@ class Command(BaseCommand):
         style_classes = {}
         divs = html_tree.find('div', class_="WordSection1", recursive=True)
 
+        book_name = book.replace('.html', '').lower()
+        if book_name.find(' ') > 0:
+            book_name = book_name.split(' ')[0]
+
         # pdfs have no WordSection1
         if divs is None:
             divs = html_tree.find('body', recursive=True)
@@ -972,14 +1016,17 @@ class Command(BaseCommand):
                             ms_classes.append(ms_class)
 
                     style = tag.attrs['style']
-                    if tag.name not in tags:
-                        tags[tag.name] = 0
+                    # make class independent of order of processing
+                    class_name_by_tag = f'{book_name}-{tag.name}'
+                    if class_name_by_tag not in tags:
+                        tags[class_name_by_tag] = 0
 
                     style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
                     if style not in style_classes:
-                        class_name = f'{tag.name}-{tags[tag.name]:02}'
+
+                        class_name = f'{class_name_by_tag}-{tags[class_name_by_tag]:03}'
                         style_classes.update({style: class_name})
-                        tags[tag.name] += 1
+                        tags[class_name_by_tag] += 1
                     else:
                         class_name = style_classes[style]
 
@@ -994,7 +1041,7 @@ class Command(BaseCommand):
                 style_classes_by_book[book] = style_classes
         return divs
 
-    def handle(self, *args, **kwargs):
+    def handle(self, *args, **options):
         """
             Books are pre-process and writen to original
             directory
@@ -1004,16 +1051,56 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
-        sys.stdout.write(f"\33[K Pre-processing book's\r")
         # LIST_OF_BOOKS = LITURGY
         # LIST_OF_BOOKS = PDF_BOOKS
-        for path, book, language, pre_processes, _, _, _ in LIST_OF_BOOKS:
+
+        if options['list']:
+            print()
+            print('Id La   Level    Classification   Book name')
+            print('-------------------------------------------')
+            i = 1
+            for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
+                level = details.get('first_level', 'None')
+                classification = details.get('book_classification', None)
+                lang = language.capitalize()
+                book_name = book.replace('.html', '')
+
+                if level is not None and classification is not None:
+                    book_level = FIRST_LEVEL[int(level) - 1][1]
+                    book_classification = BOOK_CLASSIFICATION[int(classification) - 1][1]
+                    print(f'{i:02} {lang:4} {book_level:8} {book_classification:16} {book_name}')
+                else:
+                    print(f'{i:02} {lang:4} {"Tanakh":8} {"-- ":16} {book_name}')
+
+                i += 1
+            print()
+            sys.exit(0)
+
+        sys.stdout.write(f"\33[K Pre-processing book's\r")
+
+        # must keep same order as LIST_OF_BOOKS defined above
+        # LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
+
+        if options['halakhah'] or options['liturgy'] or options['polemic']:
+            books_to_process = []
+            if options['halakhah']:
+                books_to_process += HALAKHAH
+
+            if options['liturgy']:
+                books_to_process += LITURGY
+
+            if options['polemic']:
+                books_to_process += LITURGY_TABLES
+        else:
+            books_to_process = LIST_OF_BOOKS
+
+        for path, book, language, pre_processes, _, _, _ in books_to_process:
             for pre_process in pre_processes:
                 pre_process(path, book)
 
         sys.stdout.write(f"\33[K Loading book's data\r")
         i = 0
-        for path, book, language, _, post_processes, _, collect in LIST_OF_BOOKS:
+        for path, book, language, _, post_processes, _, collect in books_to_process:
             handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()
@@ -1037,7 +1124,7 @@ class Command(BaseCommand):
 
             sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
             html_str = self.remove_tags(str(html_tree))
-
+            html_str = self.replace_class_name(html_str)
             sys.stdout.write('\r\n')
             sys.stdout.write(f"\33[K Processed book {book} \n")
             sys.stdout.write(f"\33[K Writing files for {book} \n")
