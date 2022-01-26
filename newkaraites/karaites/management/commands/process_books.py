@@ -8,351 +8,25 @@ from ...constants import (BIBLE_BOOKS_NAMES,
                           BOOK_CLASSIFICATION,
                           FIRST_LEVEL)
 from .command_utils.utils import mark_bible_refs
+from .command_utils.read_write_data import (read_data,
+                                            write_data)
 
-# override some defaults without having to sweat on code
-# maybe replace is a better strategy, to think about !
-additional_css = """ 
-
-.MsoTableGrid {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 16pt;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border:none;
-}
-
-/* English*/
-
-.MsoTableGrid tr:nth-child(even) {
-    column-span: all !important;
-    display: block;
-    margin-left: 10%;
-    margin-right: -10%;
-    line-height: 1.3em;
-    font-style: italic;
-    font-size: 19px;
-}
-
-
-.MsoTableGrid tr:nth-child(odd) td:first-child {
-    text-align: right;
-    direction: rtl;
-}
-
-.MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
-    text-align: left;
-    width: auto !important;
-    height: auto !important;
-}
-
-
-.MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
-    padding-right: 10px;
-    vertical-align: top;
-    width: auto !important;
-    height: auto !important;
-
-}
-
-.MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
-    padding-left: 10px;
-    vertical-align: top;
-    width: auto !important;
-    height: auto !important;
-}
-
-/* Anochi */
-
-.span-196, .span-198, .span-201, .span-202, .span-204 {
-    color: red;
-}
-
-@media (min-width: 100px) and  (max-width: 361px) {
-    .MsoTableGrid {
-        width: 90%;
-    }
-}
-
-@media (min-width: 362px) and  (max-width: 640px) {
-    .MsoTableGrid {
-        width: 90%;
-    }
-
-
-}
-
-@media (min-width: 661px) and  (max-width: 900px) {
-    .MsoTableGrid {
-        width: 60%;
-    }
-}
-
-
-/* Atsili ḳum ḳera */
-.table-04 tr:nth-child(odd) td {
-    margin-left: 100px;
-    margin-right: -200px;
-    line-height: 0.5em;
-}
-
-.table-04 tr:nth-child(odd) br {
-    content: "A" !important;
-    display: block !important;
-    margin-bottom: 1em !important;
-}
-
-.table-04 tr:nth-child(even) {
-    margin-left: 180px;
-    margin-right: -200px;
-    line-height: 0.5em;
-}
-
-
-/*Evyon Asher */
-.table-05 {
-    margin-top: 2em;
-    width: 70%;
-    line-height: 1em;
-}
-
-.table-05 tr:nth-child(odd) td {
-
-    margin-left: 100px;
-    margin-right: -200px;
-    /*border: 1px solid black;*/
-    line-height: 1em;
-}
-
-.table-05 tr:nth-child(odd) td p {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.4em;
-}
-
-.table-05 tr:nth-child(even) {
-    margin: 1.2em -500px 1.2em 55%;
-}
-
-.table-05 tr:nth-child(even) td p {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.5em;
-}
-
-/* supress &nbsp last line */
-.table-05 tr:nth-child(even) p:last-child {
-    display: none;
-}
-
-/* Vehaḥochma Me’ayin Timmatsē */
-
-
-.table-06 tr:nth-child(even) {
-    margin-right: -200px;
-    margin-left: 0;
-    line-height: 1.5em;
-}
-
-.table-06 tr:nth-child(even) p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/*Vehoshiya */
-.table-07 {
-    margin-top: 2em;
-}
-
-.table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-    font-size: 14pt;
-}
-
-.table-07 tr:nth-child(even) {
-    margin-left: 10%;
-    margin-right: -100%;
-}
-
-.table-07 tr:nth-child(even) p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/* Sefer Milḥamot Adonai */
-.sefer-table {
-	width: 70%;
-}
-.sefer-table tr:nth-child(even){
-	min-width: 500px;
-}
-.sefer-table tr:nth-child(even){
-	min-width: 500px;
-}
-.sefer-table  tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-}
-.sefer-table tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(1) {
-	width: 30px;
-}
-.sefer-table tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.sefer-table tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-/* todo: short this */
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(7) > div > div > div > table > tbody > tr.tr-154 > td.td-53 > p > span > span > sup {
-    font-size: 18px;
-    line-height: 20px;
-}
-
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
-   text-align: center;
-}
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p  {
-    /*color:blue;*/
-    text-align:center;
-    margin-right: -72px;
-
-}
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
-    /*color: #0ae052;*/
-    text-align:center;
-    margin-right: -72px ;
-}
-
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > span {
-    /*color:#e74c3c;*/
-    text-align:center;
-}
-
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > i > u > span {
-    color:black;
-    margin-left: -72px ;
-
-}
-/* right side numbers */
-.MsoTableGrid tr td:nth-child(1) p span {
-	font-size: 19px;
-	color:red;
-}
-
-/* text bold */
-.span-261 {
-    font-weight: bold;
-}
-
-/* shelomo part 1 */
-
-.p-57, .p-61 {
-    margin: 0;
-    text-align: justify;
-    text-indent: 0;
-}
-
-.p-59 {
-    margin: 0;
-    text-align: justify;
-}
-
-.makeStyles-paragraph-24 h1, .makeStyles-paragraph-24 h2 {
-    text-align: center;
-}
-
-.span-121 {
-    color: red;
-}
-"""
+from .addtional_css import additional_css
+from .constants import (SOURCE_PATH,
+                       OUT_PATH,
+                       CSS_SOURCE,
+                       CSS_OUT,
+                       IGNORE,
+                       REMOVE,
+                       REMOVE_CSS_CLASS)
 
 style_classes_by_book = {}
 ms_classes = []
 tags = {}
 
-PATH = '../newkaraites/karaites/management/tmp/'
-SOURCE_PATH = '../newkaraites/data_karaites/'
-OUT_PATH = PATH
-CSS_SOURCE = OUT_PATH
-CSS_OUT = '../newkaraites/frontend/src/css/'
-
-IGNORE = ['(#default#VML)',
-          '(Web)',
-          '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
-          '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
-          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-          """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
-          '(ברוך)',
-          """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
-          """(נגד דת הנצרות)""",
-          """(ראה הערה מספר 8)."""
-          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-          """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
-          '(בחג הסוכות)',
-          '(אַתְּ)',
-          '(הֹלֶכֶת)',
-          """(ח', י"ט)""",
-          """(וְקִבְּלוּ)""",
-          """(יַעַשׂ)""",
-          """(ראה הערה מספר 8)"""
-          # volume 2
-          """(ח', י"ט)"""
-          '(י"א,  ל"ג),',
-          '(יִהְיוּ-) ',
-          '(שָׁחוּט)',
-          '(דְּבָרוֹ)',
-          '(כ"ו, י"ט)',
-          '(רַגְלְךָ)',
-          '(הוא הנ"ל)',
-          '(ח"ב, כ"ג)',
-          """(ט', א')""",
-          """(ח', י,ט)""",
-          """(י"א,ל"ג)""",
-          """(יִהְיוּ-)""",
-          """(Biblical Verses)""",
-          """(Anochi)""",
-          """(Ani)""",
-          """(</span>Anochi)""",
-          """(Ishmael)""",
-          """(ben Joseph?)""",
-          """(and the refrain)""",
-          """(Vayyosha‘)"""
-          ]
-REMOVE = [
-    """(Anochi) """,
-]
-
-REMOVE_CSS_CLASS = ['span-89']
-
 
 def fix_iframe(path, book_name):
-    book_data = read_data(path, book_name)
+    book_data = read_data(path, book_name, SOURCE_PATH)
     remove = """<p class=MsoNormal><b><span style='mso-bidi-language:HE'>Recording: </span></b><span
 style='mso-bidi-language:HE'>&lt;iframe width=&quot;560&quot;
 height=&quot;315&quot; <span class=SpellE>src</span>=&quot;https://www.youtube.com/embed/WZOwo9qW3iM&quot;
@@ -362,7 +36,7 @@ encrypted-media; gyroscope; picture-in-picture&quot; <span class=SpellE>allowful
 
     book_data = book_data.replace(remove,
                                   """<iframe width="560" height="315" src="https://www.youtube.com/embed/WZOwo9qW3iM"></iframe>""")
-    write_data(path, book_name, book_data)
+    write_data(path, book_name, book_data, SOURCE_PATH)
 
 
 def removing_no_breaking_spaces(html_tree):
@@ -457,19 +131,6 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 BOOKS = [1, 2]
 
 
-def read_data(path, book_name):
-    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'r')
-    book = handle.read()
-    handle.close()
-    return book
-
-
-def write_data(path, book_name, book):
-    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'w')
-    handle.write(book)
-    handle.close()
-
-
 def fix_image_source(path, book_name, books=BOOKS):
     # this is specific to Halakha Adderet
     old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
@@ -478,7 +139,7 @@ def fix_image_source(path, book_name, books=BOOKS):
     book_name = book_name.replace('.html', '')
 
     for book in books:
-        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
+        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html', SOURCE_PATH), 'html5lib')
 
         new_path = f'/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
 
@@ -487,7 +148,7 @@ def fix_image_source(path, book_name, books=BOOKS):
             if image_path is not None:
                 child.attrs['src'] = image_path.replace(old_path[book], new_path)
 
-        write_data(path, f'{book_name}-{book}.html', str(html_tree))
+        write_data(path, f'{book_name}-{book}.html', str(html_tree), SOURCE_PATH)
 
 
 HTML = """
@@ -586,7 +247,7 @@ def add_book_parts(path, book_name, books=BOOKS):
     book_name = book_name.replace('.html', '')
 
     for part in books:
-        book_data = read_data(path, f'{book_name}-{part}.html')
+        book_data = read_data(path, f'{book_name}-{part}.html', SOURCE_PATH)
 
         if part == 1:
             div1_str = str(BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1"))
@@ -611,7 +272,7 @@ def add_book_parts(path, book_name, books=BOOKS):
             foot_notes2 = remove_tag(foot_notes2, '<div style="mso-element:footnote-list">')
             html = HTML.format(div1_str, div2_str, foot_notes1, foot_notes2)
 
-    write_data(path, f'{book_name}.html', html)
+    write_data(path, f'{book_name}.html', html, SOURCE_PATH)
 
 
 # book path
@@ -744,21 +405,6 @@ LITURGY_TABLES = [
     ],
 ]
 
-PDF_BOOKS = [
-    [
-        'The Palanquin/', 'The Palanquin.html',
-        'he',
-        [],
-        [],
-        # name, Polemic , , Author
-        {'name': r"The Palanquin,  ספר מלחמות ה'",
-         'first_level': 5,
-         'book_classification': '07',
-         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
-        False
-    ],
-]
-
 # must be last, order of books is important
 TEST_BOOKS = [
     [
@@ -813,6 +459,12 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help="List all books",
+        )
+        parser.add_argument(
+            '--book_id',
+            dest='book_id',
+            default=False,
+            help='Process a single book',
         )
 
     @staticmethod
@@ -1094,13 +746,29 @@ class Command(BaseCommand):
         else:
             books_to_process = LIST_OF_BOOKS
 
+        if options['book_id'] is not None:
+            books_to_process = LIST_OF_BOOKS
+
+        sys.stdout.write(f"\33[K Preprocessing book's\r")
+        i = 1
         for path, book, language, pre_processes, _, _, _ in books_to_process:
+            # process a single book
+            if options['book_id'] is not None and options['book_id'] != i:
+                continue
+
             for pre_process in pre_processes:
                 pre_process(path, book)
 
+            i += 1
         sys.stdout.write(f"\33[K Loading book's data\r")
-        i = 0
+
+        i = 1
         for path, book, language, _, post_processes, _, collect in books_to_process:
+
+            # process a single book
+            if options['book_id'] is not None and options['book_id'] != i:
+                continue
+
             handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
             html = handle_source.read()
             handle_source.close()

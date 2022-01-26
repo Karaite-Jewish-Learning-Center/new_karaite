@@ -98,6 +98,7 @@
     text-align: right;
     direction: ltr;
 }
+
 @media (min-width: 100px) and  (max-width: 361px) {
     .MsoTableGrid {
         width: 90%;
@@ -291,4 +292,80 @@
 
 .span-121 {
     color: red;
+}
+
+/* The Palanquin */
+
+.page-hebrew {
+    background-color: lightgray;
+    text-align: end;
+    direction: ltr;
+
+}
+
+.ft41, .ft41, .ft43, .ft44 {
+    background-color: red;
+}
+
+.page-english {
+    direction: ltr;
+    background-color: #98ccef;
+    text-align: justify;
+}
+
+/* hebrew */
+.ft40 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 28px;
+}
+
+/* English */
+.ft12, .ft19, .ft80, .ft82 {
+    font-weight: bold;
+}
+
+/* headers */
+.ft6, .ft18 {
+    text-align: center;
+    font-style: italic;
+
+}
+
+/* chapters */
+.ft126 {
+    margin-top: 50px;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 22px;
+    text-decoration: underline;
+}
+
+/* chapter title */
+.ft170 {
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 24px;
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+/* foot notes number indicator */
+.ft174 {
+    color:blue;
+    font-size: 18px;
+    vertical-align: super;
+}
+/* foot notes text */
+
+.ft5, .ft36, .ft195 {
+    font-size: 16px;
+
+}
+
+/* roman numerals */
+.ft4 {
+    text-align: center;
 }

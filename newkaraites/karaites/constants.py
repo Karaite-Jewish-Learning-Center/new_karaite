@@ -16,6 +16,7 @@ BOOK_CLASSIFICATION = [
     ('06', 'Recipes'),
     ('07', 'Biblical verses'),
     ('08', 'Poems'),
+    ('09', 'PDFs'),
 ]
 
 FIRST_LEVEL = [
