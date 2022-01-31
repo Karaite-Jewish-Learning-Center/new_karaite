@@ -13,12 +13,12 @@ from .command_utils.read_write_data import (read_data,
 
 from .addtional_css import additional_css
 from .constants import (SOURCE_PATH,
-                       OUT_PATH,
-                       CSS_SOURCE,
-                       CSS_OUT,
-                       IGNORE,
-                       REMOVE,
-                       REMOVE_CSS_CLASS)
+                        OUT_PATH,
+                        CSS_SOURCE,
+                        CSS_OUT,
+                        IGNORE,
+                        REMOVE,
+                        REMOVE_CSS_CLASS)
 
 style_classes_by_book = {}
 ms_classes = []
@@ -284,7 +284,7 @@ def add_book_parts(path, book_name, books=BOOKS):
 HALAKHAH = [
 
     [
-        'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'he',
         [],
         [update_bible_references_he],
@@ -292,7 +292,7 @@ HALAKHAH = [
         True
     ],
     [
-        'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
         [],
         [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
@@ -300,7 +300,7 @@ HALAKHAH = [
         True
     ],
     [
-        'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
         [update_bible_re],
@@ -308,7 +308,7 @@ HALAKHAH = [
         True
     ],
     [
-        'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
         [update_bible_re],
@@ -316,14 +316,23 @@ HALAKHAH = [
         False
     ],
     [
-        'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
+        'HTML/Halakhah/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/',
+        'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
         {},
         False
     ],
-
+    [
+        'HTML/Halakhah/The Remnant and the Relic/',
+        'Remnant and Relic English.html',
+        'en',
+        [],
+        [update_bible_re],
+        {},
+        False
+    ],
 ]
 
 LITURGY = [
@@ -420,6 +429,7 @@ TEST_BOOKS = [
         False
     ],
 ]
+
 LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
 
 
@@ -463,7 +473,7 @@ class Command(BaseCommand):
         parser.add_argument(
             '--book_id',
             dest='book_id',
-            default=False,
+            default=0,
             help='Process a single book',
         )
 
@@ -746,15 +756,12 @@ class Command(BaseCommand):
         else:
             books_to_process = LIST_OF_BOOKS
 
-        if options['book_id'] is not None:
-            books_to_process = LIST_OF_BOOKS
+        if options['book_id'] != 0:
+            books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
 
         sys.stdout.write(f"\33[K Preprocessing book's\r")
         i = 1
         for path, book, language, pre_processes, _, _, _ in books_to_process:
-            # process a single book
-            if options['book_id'] is not None and options['book_id'] != i:
-                continue
 
             for pre_process in pre_processes:
                 pre_process(path, book)
@@ -764,14 +771,11 @@ class Command(BaseCommand):
 
         i = 1
         for path, book, language, _, post_processes, _, collect in books_to_process:
+            html = read_data(path, book, SOURCE_PATH)
 
-            # process a single book
-            if options['book_id'] is not None and options['book_id'] != i:
+            if html is None:
+                sys.stdout.write(f"\33[K Skipping {book} no suitable codec found.\r")
                 continue
-
-            handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
-            html = handle_source.read()
-            handle_source.close()
 
             html_tree = BeautifulSoup(html, 'html5lib')
 

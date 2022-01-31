@@ -298,26 +298,37 @@
 
 .page-hebrew {
     background-color: lightgray;
-    text-align: end;
+    line-height: 1.4em;
+    text-align: justify;
     direction: ltr;
-
 }
 
-.ft41, .ft41, .ft43, .ft44 {
+.page-hebrew p {
+    direction: ltr;
+}
+
+.ft41, .ft42, .ft43, .ft44 {
+    direction: rtl;
     background-color: red;
+    margin: 0;
 }
 
 .page-english {
     direction: ltr;
     background-color: #98ccef;
     text-align: justify;
+    line-height: 1.3em;
 }
 
-/* hebrew */
-.ft40 {
+/* hebrew headers*/
+.ft40, .ft121{
+     direction: ltr;
     font-weight: bold;
     text-align: center;
     font-size: 28px;
+    line-height: 2em;
+    direction: rtl;
+    background-color: #2ECC71;
 }
 
 /* English */
@@ -341,7 +352,13 @@
     font-size: 22px;
     text-decoration: underline;
 }
-
+/* text */
+.ft13, .ft16 {
+    margin: 0;
+}
+.p26, .p29, .p30 {
+    text-indent:25px;
+}
 /* chapter title */
 .ft170 {
     text-align: center;
@@ -354,13 +371,14 @@
 
 /* foot notes number indicator */
 .ft174 {
-    color:blue;
+    color: blue;
     font-size: 18px;
     vertical-align: super;
 }
+
 /* foot notes text */
 
-.ft5, .ft36, .ft195 {
+.ft5, .ft24, .ft25, .ft36, .ft195 {
     font-size: 16px;
 
 }

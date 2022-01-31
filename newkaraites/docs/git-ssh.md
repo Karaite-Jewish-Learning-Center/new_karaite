@@ -1,6 +1,11 @@
 # Tell git that you are using ssh
 [://] # ( Source: https://help.github.com/articles/generating-ssh-keys/ 
 
+# check if ssh key is already in place
+```bash
+$ ssh -T git@github.com
+```
+
 # copy this from the git page 
 # can be found in the code button
 git@github.com:repo/repo.git
@@ -9,3 +14,6 @@ git@github.com:repo/repo.git
 $ git remote set-url origin git@github.com:repo/repo.git
 
 ```
+
+
+ 
