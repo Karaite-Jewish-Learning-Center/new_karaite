@@ -12,6 +12,6 @@ def read_data(path, book_name, source_path):
 
 
 def write_data(path, book_name, book, source_path):
-    handle = open(f'{source_path}{path}{book_name}', 'w', encoding='utf-8')
+    handle = open(f'{source_path}{path}{book_name}', 'w')
     handle.write(book)
     handle.close()

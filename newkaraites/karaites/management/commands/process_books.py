@@ -334,10 +334,113 @@ HALAKHAH = [
         False
     ],
 ]
-
-LITURGY = [
+HAVDALA = [
     [
-        'Anochi/', 'Anochi Anochi.html',
+        'HTML/Liturgy/Havdala Songs/', 'Essa Bechos Yesha‘.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Essa Bechos Yesha‘,",
+         'first_level': 4,
+         'book_classification': '1',
+         'author': 'Essa Bechos Yesha‘,'},
+        False
+    ],
+]
+PRAYERS = [
+    [
+        'HTML/Liturgy/Prayers/', 'En Kelohenu.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"En Kelohenu,",
+         'first_level': 4,
+         'book_classification': '1',
+         'author': 'En Kelohenu,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Prayers/', 'Lutski Prayer for a Time of Plague.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Lutski Prayer for a Time of Plague,",
+         'first_level': 4,
+         'book_classification': '1',
+         'author': 'N/A,'},
+        False
+    ],
+]
+
+SHABBAT_SONGS = [
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Ashir Le’el ‘Elyon.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ashir Le’el ‘Elyon,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Ashir Le’el ‘Elyon,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Odé Le’el Maḥsi.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Odé Le’el Maḥsi,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Odé Le’el Maḥsi,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Shabbat Menuḥa.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Shabbat Menuḥa,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Shabbat Menuḥa,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Yah Zimrati.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yah Zimrati,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yah Zimrati,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Yeter Peletat ‘Am.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yeter Peletat ‘Am,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yeter Peletat ‘Am,'},
+        False
+    ],
+]
+
+SUPPLEMENTAL = [
+    [
+        'HTML/Liturgy/Supplemental/', 'Anochi Anochi.html',
         'he',
         [],
         [update_bible_he_en],
@@ -349,7 +452,7 @@ LITURGY = [
         False
     ],
     [
-        'Atsili Qum Qera/', 'Atsili Qum Qera.html',
+        'HTML/Liturgy/Supplemental/', 'Atsili Qum Qera.html',
         'he',
         [],
         [],
@@ -361,7 +464,7 @@ LITURGY = [
         False
     ],
     [
-        'Evyon Asher/', 'Evyon Asher.html',
+        'HTML/Liturgy/Supplemental/', 'Evyon Asher.html',
         'he',
         [],
         [],
@@ -373,7 +476,7 @@ LITURGY = [
         False
     ],
     [
-        'Vehahochma/', 'Vehahochma.html',
+        'HTML/Liturgy/Supplemental/', 'Vehahochma.html',
         'he',
         [fix_iframe],
         [update_bible_he_en],
@@ -386,7 +489,7 @@ LITURGY = [
     ],
 
     [
-        'Vehoshia/', 'Vehoshia.html',
+        'HTML/Liturgy/Supplemental/', 'Vehoshia.html',
         'he',
         [],
         [update_bible_he_en],
@@ -398,10 +501,35 @@ LITURGY = [
         False
     ],
 ]
-
-LITURGY_TABLES = [
+WEDDING_SONGS = [
     [
-        'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
+        'HTML/Liturgy/Wedding Songs/', 'Amen Yehi Ratson.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Amen Yehi Ratson, אם יהיה ראסן",
+         'first_level': 4,
+         'book_classification': '12',
+         'author': 'Amen Yehi Ratson,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Wedding Songs/', 'Laḥatani Mivḥar Banai.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Laḥatani Mivḥar Banai,",
+         'first_level': 4,
+         'book_classification': '12',
+         'author': 'Laḥatani Mivḥar Banai,'},
+        False
+    ],
+]
+POLEMIC = [
+    [
+        'HTML/Polemics/Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
         [],
         [],
@@ -430,7 +558,7 @@ TEST_BOOKS = [
     ],
 ]
 
-LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
+LIST_OF_BOOKS = HALAKHAH + HAVDALA + PRAYERS + SHABBAT_SONGS + SUPPLEMENTAL + WEDDING_SONGS + POLEMIC
 
 
 class Command(BaseCommand):
@@ -654,15 +782,19 @@ class Command(BaseCommand):
     @staticmethod
     def collect_style_map_to_class(html_tree, book, collect):
         style_classes = {}
-        divs = html_tree.find('div', class_="WordSection1", recursive=True)
+        html = ''
+        for section in [1, 2, 3, 4]:
+            nodes = html_tree.find('div', class_=f"WordSection{section}", recursive=True)
+            if nodes is not None:
+                html += str(nodes)
+            if nodes is None and section == 1:
+                break
+
+        divs = BeautifulSoup(html, 'html.parser')
 
         book_name = book.replace('.html', '').lower()
         if book_name.find(' ') > 0:
             book_name = book_name.split(' ')[0]
-
-        # pdfs have no WordSection1
-        if divs is None:
-            divs = html_tree.find('body', recursive=True)
 
         for tag in divs.findAll(True, recursive=True):
 
@@ -713,7 +845,7 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
-        # LIST_OF_BOOKS = LITURGY
+        # LIST_OF_BOOKS = SUPLEMENTAL
         # LIST_OF_BOOKS = PDF_BOOKS
 
         if options['list']:
@@ -741,7 +873,7 @@ class Command(BaseCommand):
         sys.stdout.write(f"\33[K Pre-processing book's\r")
 
         # must keep same order as LIST_OF_BOOKS defined above
-        # LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
+        # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
 
         if options['halakhah'] or options['liturgy'] or options['polemic']:
             books_to_process = []
@@ -749,10 +881,10 @@ class Command(BaseCommand):
                 books_to_process += HALAKHAH
 
             if options['liturgy']:
-                books_to_process += LITURGY
+                books_to_process += HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
 
             if options['polemic']:
-                books_to_process += LITURGY_TABLES
+                books_to_process += POLEMIC
         else:
             books_to_process = LIST_OF_BOOKS
 

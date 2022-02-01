@@ -8,7 +8,7 @@ LANGUAGES = [
 ]
 
 BOOK_CLASSIFICATION = [
-    ('01', 'Prayer'),
+    ('01', 'Prayers'),
     ('02', 'Blessing'),
     ('03', 'Karaite Jewish practice'),
     ('04', 'Egyptian Karaite Tradition'),
@@ -17,6 +17,13 @@ BOOK_CLASSIFICATION = [
     ('07', 'Biblical verses'),
     ('08', 'Poems'),
     ('09', 'PDFs'),
+    # liturgy
+    ('01', 'Prayers'),
+    ('10', 'Havdala Songs'),
+    ('11', 'Shabbat Songs'),
+    ('12', 'Wedding Songs'),
+    ('13', 'Supplemental Readings for specific Torah portions'),
+
 ]
 
 FIRST_LEVEL = [
@@ -24,7 +31,9 @@ FIRST_LEVEL = [
     (2, 'Talmud'),
     (3, 'Halakhah'),
     (4, 'Liturgy'),
-    (5, 'Polemic'),
+    (5, 'Polemics'),
+    (6, 'Songs'),
+    (7, 'Prayers'),
 ]
 
 SECOND_LEVEL = [

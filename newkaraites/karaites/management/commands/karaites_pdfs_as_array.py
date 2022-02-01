@@ -8,17 +8,8 @@ from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
-from .command_utils.read_write_data import (read_data,
-                                            write_data)
-
-from .constants import (SOURCE_PATH,
-                        OUT_PATH,
-                        CSS_SOURCE,
-                        CSS_OUT,
-                        IGNORE,
-                        REMOVE,
-                        REMOVE_CSS_CLASS)
-
+from .command_utils.read_write_data import read_data
+from .constants import SOURCE_PATH
 from .list_pdf_books import PDF_BOOKS
 
 

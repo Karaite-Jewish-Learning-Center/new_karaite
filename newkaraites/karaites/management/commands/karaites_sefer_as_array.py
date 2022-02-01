@@ -2,11 +2,13 @@ import sys
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 
-from .process_books import (PATH,
-                            LITURGY_TABLES)
-from . import update_toc, update_book_details, update_karaites_array
-from newkaraites.karaites.management.commands.command_utils import get_html
-from newkaraites.karaites.management.commands.command_utils import (clean_tag_attr)
+from .constants import PATH
+from .process_books import POLEMIC
+from .update_toc import update_toc
+from .update_book_details import update_book_details
+from .update_karaites_array import update_karaites_array
+from .command_utils.utils import get_html
+from .command_utils.clean_table import clean_tag_attr
 
 
 class Command(BaseCommand):
@@ -15,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Sefer Milhamot Karaites book as array """
 
-        for _, book, _, _, _, details, _ in LITURGY_TABLES:
+        for _, book, _, _, _, details, _ in POLEMIC:
             sys.stdout.write(f'\33[K processing book {book}')
             book_details, _ = update_book_details(details)
             html = get_html(f'{PATH}{book}')
