@@ -1,5 +1,5 @@
 def clean_tag_attr(child, table_class=None):
-    """ clean all child attr except class """
+    """ clean all child attr except class and colspan """
     if hasattr(child, 'attrs'):
         class_ = child.attrs.get('class')
 
@@ -16,7 +16,7 @@ def clean_tag_attr(child, table_class=None):
         if table_class is not None and child.name == 'table':
             child.attrs['class'].append(table_class)
 
-        if colspan == '3':
+        if colspan == '3' or colspan == '2':
             child.attrs.update({'colspan': '2'})
 
     return child.attrs

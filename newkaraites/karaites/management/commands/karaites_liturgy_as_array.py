@@ -23,7 +23,7 @@ class Command(BaseCommand):
         """ Karaites books as array """
 
         for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
-            sys.stdout.write(f'\33[K processing book {book}')
+            sys.stdout.write(f'\33[K processing book {book}\n')
 
             book_details, _ = update_book_details(details)
 
@@ -31,25 +31,23 @@ class Command(BaseCommand):
             html = html.replace('class="a ', 'class="MsoTableGrid ')
             html = html.replace('class="a0 ', 'class="MsoTableGrid ')
             html = html.replace('class="a1 ', 'class="MsoTableGrid ')
+            html = html.replace('en-biblical-ref', 'ref')
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
             clear_terminal_line()
 
-            table = html_tree.find('table')
+            divs = html_tree.find_all('div', {'class': 'WordSection1'})
+
             table_str = ''
-            while table is not None:
-                print()
+            for table in divs[0].find_all('table'):
                 table.attrs = clean_tag_attr(table)
                 table = clean_table_attr(table)
                 table_str += str(table)
                 table.decompose()
-                table = html_tree.find('table')
 
             update_karaites_array(book_details, 1, 1, table_str)
-            children = html_tree.find_all(recursive=False)
-            intro = "".join([str(child) for child in children]).replace('en-biblical-ref', 'ref')
-            update_book_details(details, introduction=intro)
+            update_book_details(details, introduction=str(divs[0]))
             update_toc(book_details, 2, details['name'].split(','))
         # update/create bible references
         # update_create_bible_refs(book_details)
