@@ -795,6 +795,8 @@ class Command(BaseCommand):
         book_name = book.replace('.html', '').lower()
         if book_name.find(' ') > 0:
             book_name = book_name.split(' ')[0]
+            # remove any non-ascii character
+            book_name = book_name.encode('ascii', errors='ignore').decode()
 
         for tag in divs.findAll(True, recursive=True):
 

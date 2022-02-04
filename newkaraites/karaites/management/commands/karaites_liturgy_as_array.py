@@ -29,8 +29,8 @@ class Command(BaseCommand):
 
             html = get_html(f'{PATH}{book}')
             html = html.replace('class="a ', 'class="MsoTableGrid ')
-            html = html.replace('class="a0 ', 'class="MsoTableGrid ')
-            html = html.replace('class="a1 ', 'class="MsoTableGrid ')
+            html = html.replace('class="a0 ', 'class="a0 MsoTableGrid ')
+            html = html.replace('class="a1 ', 'class="a1 MsoTableGrid ')
             html = html.replace('en-biblical-ref', 'ref')
 
             html_tree = BeautifulSoup(html, 'html5lib')
