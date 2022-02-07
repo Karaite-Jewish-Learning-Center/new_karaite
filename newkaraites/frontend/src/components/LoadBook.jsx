@@ -115,7 +115,7 @@ const LoadBook = ({type}) => {
                     highlight: [],
                     type: type,
                     currentItem: chapter,
-                    languages: ['en', 'he'],
+                    languages: ['he', 'en'],
 
                 })
                 await fetchDataKaraites(store.panes.length - 1)
@@ -232,7 +232,7 @@ const useStyles = makeStyles((theme) => ({
         overflowY: 'hidden',
         position: 'fixed',
         top: 70,
-        fontSize:'21px !important',
+        fontSize: '21px !important',
     },
     item: {
         height: '100%',

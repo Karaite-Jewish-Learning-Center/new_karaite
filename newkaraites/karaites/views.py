@@ -14,6 +14,7 @@ from .models import (FullTextSearch, Organization,
                      AutoComplete,
                      References)
 from .constants import ENGLISH_STOP_WORDS
+import meilisearch
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -284,8 +285,6 @@ class Search(View):
         search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
         search = prep_search(search)
 
-        print(f'searching for:{search}')
-
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
         sql = """SELECT id, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
@@ -299,3 +298,22 @@ class Search(View):
         print(items)
 
         return JsonResponse({'data': items, 'page': page}, safe=False)
+
+
+# class AutoCompleteViewMeilisearch(View):
+#     """
+#     """
+#
+#     client = meilisearch.Client('http://localhost:7700', 'karaites')
+#     english = client.get_index('karaites-english')
+#     hebrew = client.get_index('karaites-hebrew')
+#
+#     @staticmethod
+#     def get(request, *args, **kwargs):
+#         search = kwargs.get('search', None)
+#         page = kwargs.get('page', 1)
+#
+#         if search is None:
+#             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
+#
+#         return JsonResponse({}, safe=False)

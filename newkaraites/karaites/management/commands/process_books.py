@@ -8,351 +8,25 @@ from ...constants import (BIBLE_BOOKS_NAMES,
                           BOOK_CLASSIFICATION,
                           FIRST_LEVEL)
 from .command_utils.utils import mark_bible_refs
+from .command_utils.read_write_data import (read_data,
+                                            write_data)
 
-# override some defaults without having to sweat on code
-# maybe replace is a better strategy, to think about !
-additional_css = """ 
-
-.MsoTableGrid {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 16pt;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border:none;
-}
-
-/* English*/
-
-.MsoTableGrid tr:nth-child(even) {
-    column-span: all !important;
-    display: block;
-    margin-left: 10%;
-    margin-right: -10%;
-    line-height: 1.3em;
-    font-style: italic;
-    font-size: 19px;
-}
-
-
-.MsoTableGrid tr:nth-child(odd) td:first-child {
-    text-align: right;
-    direction: rtl;
-}
-
-.MsoTableGrid tr:nth-child(odd) td:nth-child(2) {
-    text-align: left;
-    width: auto !important;
-    height: auto !important;
-}
-
-
-.MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
-    padding-right: 10px;
-    vertical-align: top;
-    width: auto !important;
-    height: auto !important;
-
-}
-
-.MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
-    padding-left: 10px;
-    vertical-align: top;
-    width: auto !important;
-    height: auto !important;
-}
-
-/* Anochi */
-
-.span-196, .span-198, .span-201, .span-202, .span-204 {
-    color: red;
-}
-
-@media (min-width: 100px) and  (max-width: 361px) {
-    .MsoTableGrid {
-        width: 90%;
-    }
-}
-
-@media (min-width: 362px) and  (max-width: 640px) {
-    .MsoTableGrid {
-        width: 90%;
-    }
-
-
-}
-
-@media (min-width: 661px) and  (max-width: 900px) {
-    .MsoTableGrid {
-        width: 60%;
-    }
-}
-
-
-/* Atsili ḳum ḳera */
-.table-04 tr:nth-child(odd) td {
-    margin-left: 100px;
-    margin-right: -200px;
-    line-height: 0.5em;
-}
-
-.table-04 tr:nth-child(odd) br {
-    content: "A" !important;
-    display: block !important;
-    margin-bottom: 1em !important;
-}
-
-.table-04 tr:nth-child(even) {
-    margin-left: 180px;
-    margin-right: -200px;
-    line-height: 0.5em;
-}
-
-
-/*Evyon Asher */
-.table-05 {
-    margin-top: 2em;
-    width: 70%;
-    line-height: 1em;
-}
-
-.table-05 tr:nth-child(odd) td {
-
-    margin-left: 100px;
-    margin-right: -200px;
-    /*border: 1px solid black;*/
-    line-height: 1em;
-}
-
-.table-05 tr:nth-child(odd) td p {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.4em;
-}
-
-.table-05 tr:nth-child(even) {
-    margin: 1.2em -500px 1.2em 55%;
-}
-
-.table-05 tr:nth-child(even) td p {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.5em;
-}
-
-/* supress &nbsp last line */
-.table-05 tr:nth-child(even) p:last-child {
-    display: none;
-}
-
-/* Vehaḥochma Me’ayin Timmatsē */
-
-
-.table-06 tr:nth-child(even) {
-    margin-right: -200px;
-    margin-left: 0;
-    line-height: 1.5em;
-}
-
-.table-06 tr:nth-child(even) p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/*Vehoshiya */
-.table-07 {
-    margin-top: 2em;
-}
-
-.table-07 tr:nth-child(odd) td:nth-child(2) .segmenttext {
-    font-size: 14pt;
-}
-
-.table-07 tr:nth-child(even) {
-    margin-left: 10%;
-    margin-right: -100%;
-}
-
-.table-07 tr:nth-child(even) p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/* Sefer Milḥamot Adonai */
-.sefer-table {
-	width: 70%;
-}
-.sefer-table tr:nth-child(even){
-	min-width: 500px;
-}
-.sefer-table tr:nth-child(even){
-	min-width: 500px;
-}
-.sefer-table  tr:nth-child(even) td:nth-child(1){
-    /*border:1px red solid;*/
-    min-width: 32px;
-}
-.sefer-table tr:nth-child(even) td:nth-child(2){
-    /*border:1px black solid;*/
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(1) {
-	width: 30px;
-}
-.sefer-table tr:nth-child(even) td:nth-child(2) p{
-    /*border:1px black solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
-.sefer-table tr td  p {
-    margin: 0;
-    font-size: 21px;
-    line-height: 1.5em;
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(2){
-    /*border:1px  aqua solid;*/
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(2) p{
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-/* todo: short this */
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(7) > div > div > div > table > tbody > tr.tr-154 > td.td-53 > p > span > span > sup {
-    font-size: 18px;
-    line-height: 20px;
-}
-
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
-   text-align: center;
-}
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p  {
-    /*color:blue;*/
-    text-align:center;
-    margin-right: -72px;
-
-}
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2n) > div > div > p  {
-    /*color: #0ae052;*/
-    text-align:center;
-    margin-right: -72px ;
-}
-
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > span {
-    /*color:#e74c3c;*/
-    text-align:center;
-}
-
-#root > div.MuiGrid-root.makeStyles-root-17.MuiGrid-container > div > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(3n) > div > div > p > b > i > u > span {
-    color:black;
-    margin-left: -72px ;
-
-}
-/* right side numbers */
-.MsoTableGrid tr td:nth-child(1) p span {
-	font-size: 19px;
-	color:red;
-}
-
-/* text bold */
-.span-261 {
-    font-weight: bold;
-}
-
-/* shelomo part 1 */
-
-.p-57, .p-61 {
-    margin: 0;
-    text-align: justify;
-    text-indent: 0;
-}
-
-.p-59 {
-    margin: 0;
-    text-align: justify;
-}
-
-.makeStyles-paragraph-24 h1, .makeStyles-paragraph-24 h2 {
-    text-align: center;
-}
-
-.span-121 {
-    color: red;
-}
-"""
+from .addtional_css import additional_css
+from .constants import (SOURCE_PATH,
+                        OUT_PATH,
+                        CSS_SOURCE,
+                        CSS_OUT,
+                        IGNORE,
+                        REMOVE,
+                        REMOVE_CSS_CLASS)
 
 style_classes_by_book = {}
 ms_classes = []
 tags = {}
 
-PATH = '../newkaraites/karaites/management/tmp/'
-SOURCE_PATH = '../newkaraites/data_karaites/'
-OUT_PATH = PATH
-CSS_SOURCE = OUT_PATH
-CSS_OUT = '../newkaraites/frontend/src/css/'
-
-IGNORE = ['(#default#VML)',
-          '(Web)',
-          '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
-          '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
-          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-          """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
-          '(ברוך)',
-          """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
-          """(נגד דת הנצרות)""",
-          """(ראה הערה מספר 8)."""
-          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
-          """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
-          '(בחג הסוכות)',
-          '(אַתְּ)',
-          '(הֹלֶכֶת)',
-          """(ח', י"ט)""",
-          """(וְקִבְּלוּ)""",
-          """(יַעַשׂ)""",
-          """(ראה הערה מספר 8)"""
-          # volume 2
-          """(ח', י"ט)"""
-          '(י"א,  ל"ג),',
-          '(יִהְיוּ-) ',
-          '(שָׁחוּט)',
-          '(דְּבָרוֹ)',
-          '(כ"ו, י"ט)',
-          '(רַגְלְךָ)',
-          '(הוא הנ"ל)',
-          '(ח"ב, כ"ג)',
-          """(ט', א')""",
-          """(ח', י,ט)""",
-          """(י"א,ל"ג)""",
-          """(יִהְיוּ-)""",
-          """(Biblical Verses)""",
-          """(Anochi)""",
-          """(Ani)""",
-          """(</span>Anochi)""",
-          """(Ishmael)""",
-          """(ben Joseph?)""",
-          """(and the refrain)""",
-          """(Vayyosha‘)"""
-          ]
-REMOVE = [
-    """(Anochi) """,
-]
-
-REMOVE_CSS_CLASS = ['span-89']
-
 
 def fix_iframe(path, book_name):
-    book_data = read_data(path, book_name)
+    book_data = read_data(path, book_name, SOURCE_PATH)
     remove = """<p class=MsoNormal><b><span style='mso-bidi-language:HE'>Recording: </span></b><span
 style='mso-bidi-language:HE'>&lt;iframe width=&quot;560&quot;
 height=&quot;315&quot; <span class=SpellE>src</span>=&quot;https://www.youtube.com/embed/WZOwo9qW3iM&quot;
@@ -362,7 +36,7 @@ encrypted-media; gyroscope; picture-in-picture&quot; <span class=SpellE>allowful
 
     book_data = book_data.replace(remove,
                                   """<iframe width="560" height="315" src="https://www.youtube.com/embed/WZOwo9qW3iM"></iframe>""")
-    write_data(path, book_name, book_data)
+    write_data(path, book_name, book_data, SOURCE_PATH)
 
 
 def removing_no_breaking_spaces(html_tree):
@@ -457,19 +131,6 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 BOOKS = [1, 2]
 
 
-def read_data(path, book_name):
-    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'r')
-    book = handle.read()
-    handle.close()
-    return book
-
-
-def write_data(path, book_name, book):
-    handle = open(f'{SOURCE_PATH}{path}{book_name}', 'w')
-    handle.write(book)
-    handle.close()
-
-
 def fix_image_source(path, book_name, books=BOOKS):
     # this is specific to Halakha Adderet
     old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
@@ -478,7 +139,7 @@ def fix_image_source(path, book_name, books=BOOKS):
     book_name = book_name.replace('.html', '')
 
     for book in books:
-        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html'), 'html5lib')
+        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html', SOURCE_PATH), 'html5lib')
 
         new_path = f'/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
 
@@ -487,7 +148,7 @@ def fix_image_source(path, book_name, books=BOOKS):
             if image_path is not None:
                 child.attrs['src'] = image_path.replace(old_path[book], new_path)
 
-        write_data(path, f'{book_name}-{book}.html', str(html_tree))
+        write_data(path, f'{book_name}-{book}.html', str(html_tree), SOURCE_PATH)
 
 
 HTML = """
@@ -586,7 +247,7 @@ def add_book_parts(path, book_name, books=BOOKS):
     book_name = book_name.replace('.html', '')
 
     for part in books:
-        book_data = read_data(path, f'{book_name}-{part}.html')
+        book_data = read_data(path, f'{book_name}-{part}.html', SOURCE_PATH)
 
         if part == 1:
             div1_str = str(BeautifulSoup(book_data, 'html5lib').find('div', class_="WordSection1"))
@@ -611,7 +272,7 @@ def add_book_parts(path, book_name, books=BOOKS):
             foot_notes2 = remove_tag(foot_notes2, '<div style="mso-element:footnote-list">')
             html = HTML.format(div1_str, div2_str, foot_notes1, foot_notes2)
 
-    write_data(path, f'{book_name}.html', html)
+    write_data(path, f'{book_name}.html', html, SOURCE_PATH)
 
 
 # book path
@@ -623,7 +284,7 @@ def add_book_parts(path, book_name, books=BOOKS):
 HALAKHAH = [
 
     [
-        'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'he',
         [],
         [update_bible_references_he],
@@ -631,7 +292,7 @@ HALAKHAH = [
         True
     ],
     [
-        'Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
         [],
         [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
@@ -639,7 +300,7 @@ HALAKHAH = [
         True
     ],
     [
-        'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
         [update_bible_re],
@@ -647,7 +308,7 @@ HALAKHAH = [
         True
     ],
     [
-        'Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
         [update_bible_re],
@@ -655,19 +316,131 @@ HALAKHAH = [
         False
     ],
     [
-        'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/', 'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
+        'HTML/Halakhah/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/',
+        'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
         'he',
         [fix_image_source, add_book_parts],
         [update_bible_adderet],
         {},
         False
     ],
-
+    [
+        'HTML/Halakhah/The Remnant and the Relic/',
+        'Remnant and Relic English.html',
+        'en',
+        [],
+        [update_bible_re],
+        {},
+        False
+    ],
+]
+HAVDALA = [
+    [
+        'HTML/Liturgy/Havdala Songs/', 'Essa Bechos Yesha‘.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Essa Bechos Yesha‘,",
+         'first_level': 4,
+         'book_classification': '1',
+         'author': 'Essa Bechos Yesha‘,'},
+        False
+    ],
+]
+PRAYERS = [
+    [
+        'HTML/Liturgy/Prayers/', 'En Kelohenu.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"En Kelohenu,",
+         'first_level': 4,
+         'book_classification': '1',
+         'author': 'En Kelohenu,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Prayers/', 'Lutski Prayer for a Time of Plague.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Lutski Prayer for a Time of Plague,",
+         'first_level': 4,
+         'book_classification': '1',
+         'author': 'N/A,'},
+        False
+    ],
 ]
 
-LITURGY = [
+SHABBAT_SONGS = [
     [
-        'Anochi/', 'Anochi Anochi.html',
+        'HTML/Liturgy/Shabbat Songs/', 'Ashir Le’el ‘Elyon.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ashir Le’el ‘Elyon,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Ashir Le’el ‘Elyon,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Odé Le’el Maḥsi.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Odé Le’el Maḥsi,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Odé Le’el Maḥsi,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Shabbat Menuḥa.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Shabbat Menuḥa,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Shabbat Menuḥa,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Yah Zimrati.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yah Zimrati,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yah Zimrati,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Yeter Peletat ‘Am.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yeter Peletat ‘Am,",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yeter Peletat ‘Am,'},
+        False
+    ],
+]
+
+SUPPLEMENTAL = [
+    [
+        'HTML/Liturgy/Supplemental/', 'Anochi Anochi.html',
         'he',
         [],
         [update_bible_he_en],
@@ -679,7 +452,7 @@ LITURGY = [
         False
     ],
     [
-        'Atsili Qum Qera/', 'Atsili Qum Qera.html',
+        'HTML/Liturgy/Supplemental/', 'Atsili Qum Qera.html',
         'he',
         [],
         [],
@@ -691,7 +464,7 @@ LITURGY = [
         False
     ],
     [
-        'Evyon Asher/', 'Evyon Asher.html',
+        'HTML/Liturgy/Supplemental/', 'Evyon Asher.html',
         'he',
         [],
         [],
@@ -703,7 +476,7 @@ LITURGY = [
         False
     ],
     [
-        'Vehahochma/', 'Vehahochma.html',
+        'HTML/Liturgy/Supplemental/', 'Vehahochma.html',
         'he',
         [fix_iframe],
         [update_bible_he_en],
@@ -716,7 +489,7 @@ LITURGY = [
     ],
 
     [
-        'Vehoshia/', 'Vehoshia.html',
+        'HTML/Liturgy/Supplemental/', 'Vehoshia.html',
         'he',
         [],
         [update_bible_he_en],
@@ -728,30 +501,40 @@ LITURGY = [
         False
     ],
 ]
-
-LITURGY_TABLES = [
+WEDDING_SONGS = [
     [
-        'Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
+        'HTML/Liturgy/Wedding Songs/', 'Amen Yehi Ratson.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Amen Yehi Ratson, אם יהיה ראסן",
+         'first_level': 4,
+         'book_classification': '12',
+         'author': 'Amen Yehi Ratson,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Wedding Songs/', 'Laḥatani Mivḥar Banai.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Laḥatani Mivḥar Banai,",
+         'first_level': 4,
+         'book_classification': '12',
+         'author': 'Laḥatani Mivḥar Banai,'},
+        False
+    ],
+]
+POLEMIC = [
+    [
+        'HTML/Polemics/Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
         [],
         [],
         # name, Polemic , , Author
         {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
-         'first_level': 5,
-         'book_classification': '07',
-         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
-        False
-    ],
-]
-
-PDF_BOOKS = [
-    [
-        'The Palanquin/', 'The Palanquin.html',
-        'he',
-        [],
-        [],
-        # name, Polemic , , Author
-        {'name': r"The Palanquin,  ספר מלחמות ה'",
          'first_level': 5,
          'book_classification': '07',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
@@ -774,7 +557,8 @@ TEST_BOOKS = [
         False
     ],
 ]
-LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
+
+LIST_OF_BOOKS = HALAKHAH + HAVDALA + PRAYERS + SHABBAT_SONGS + SUPPLEMENTAL + WEDDING_SONGS + POLEMIC
 
 
 class Command(BaseCommand):
@@ -813,6 +597,12 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help="List all books",
+        )
+        parser.add_argument(
+            '--book_id',
+            dest='book_id',
+            default=0,
+            help='Process a single book',
         )
 
     @staticmethod
@@ -992,15 +782,21 @@ class Command(BaseCommand):
     @staticmethod
     def collect_style_map_to_class(html_tree, book, collect):
         style_classes = {}
-        divs = html_tree.find('div', class_="WordSection1", recursive=True)
+        html = ''
+        for section in [1, 2, 3, 4]:
+            nodes = html_tree.find('div', class_=f"WordSection{section}", recursive=True)
+            if nodes is not None:
+                html += str(nodes)
+            if nodes is None and section == 1:
+                break
+
+        divs = BeautifulSoup(html, 'html.parser')
 
         book_name = book.replace('.html', '').lower()
         if book_name.find(' ') > 0:
             book_name = book_name.split(' ')[0]
-
-        # pdfs have no WordSection1
-        if divs is None:
-            divs = html_tree.find('body', recursive=True)
+            # remove any non-ascii character
+            book_name = book_name.encode('ascii', errors='ignore').decode()
 
         for tag in divs.findAll(True, recursive=True):
 
@@ -1051,7 +847,7 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
-        # LIST_OF_BOOKS = LITURGY
+        # LIST_OF_BOOKS = SUPLEMENTAL
         # LIST_OF_BOOKS = PDF_BOOKS
 
         if options['list']:
@@ -1079,7 +875,7 @@ class Command(BaseCommand):
         sys.stdout.write(f"\33[K Pre-processing book's\r")
 
         # must keep same order as LIST_OF_BOOKS defined above
-        # LIST_OF_BOOKS = HALAKHAH + LITURGY + LITURGY_TABLES
+        # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
 
         if options['halakhah'] or options['liturgy'] or options['polemic']:
             books_to_process = []
@@ -1087,23 +883,33 @@ class Command(BaseCommand):
                 books_to_process += HALAKHAH
 
             if options['liturgy']:
-                books_to_process += LITURGY
+                books_to_process += HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
 
             if options['polemic']:
-                books_to_process += LITURGY_TABLES
+                books_to_process += POLEMIC
         else:
             books_to_process = LIST_OF_BOOKS
 
+        if options['book_id'] != 0:
+            books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
+
+        sys.stdout.write(f"\33[K Preprocessing book's\r")
+        i = 1
         for path, book, language, pre_processes, _, _, _ in books_to_process:
+
             for pre_process in pre_processes:
                 pre_process(path, book)
 
+            i += 1
         sys.stdout.write(f"\33[K Loading book's data\r")
-        i = 0
+
+        i = 1
         for path, book, language, _, post_processes, _, collect in books_to_process:
-            handle_source = open(f'{SOURCE_PATH}{path}{book}', 'r')
-            html = handle_source.read()
-            handle_source.close()
+            html = read_data(path, book, SOURCE_PATH)
+
+            if html is None:
+                sys.stdout.write(f"\33[K Skipping {book} no suitable codec found.\r")
+                continue
 
             html_tree = BeautifulSoup(html, 'html5lib')
 

@@ -5,12 +5,13 @@ django-cors-headers
 pytest-django
 pytest
 django-extensions
-beautifulsoup4
+beautifulsoup4~=4.9.3
 lxml
 django-tinymce
-requests
+requests~=2.26.0
 python-hebrew-numbers
 html5lib
-gensim
+gensim~=4.1.2
 more_itertools
-spacy
+spacy~=3.1.4
+meilisearch

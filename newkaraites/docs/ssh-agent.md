@@ -14,10 +14,8 @@ if [ $run_count -eq 0 ]; then
 fi
 ```
 
-It's possible that the ssh-agent is running from a previous session, depending on time passed, github ssh authentication, may fail. Just kill the ssh-agent
-ssh logout, and ssh login.
-
-A work around this:
-https://unix.stackexchange.com/questions/136548/force-command-to-be-run-on-logout-or-disconnect/136552#136552
-
-But that's for another day.
+# Kill agent when you are done
+# add to ~/.bash_profile
+```bash
+killall ssh-agent
+```

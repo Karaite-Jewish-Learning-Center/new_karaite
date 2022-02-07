@@ -7,9 +7,9 @@ from ...models import (Author,
                        KaraitesBookAsArray)
 
 from ...utils import clear_terminal_line
-from newkaraites.karaites.management.commands.command_utils import get_html
-from . import update_toc
-from newkaraites.karaites.management.commands.command_utils import update_create_bible_refs
+from .command_utils.utils import get_html
+from .update_toc import update_toc
+from .udpate_bible_ref import update_create_bible_refs
 
 SINGLE = re.compile('\\xa0+')
 

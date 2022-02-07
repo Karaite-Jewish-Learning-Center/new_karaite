@@ -6,9 +6,9 @@ from ...models import (Organization,
                        OtherBooks,
                        Comment,
                        CommentTmp)
-from newkaraites.karaites.management.commands.command_utils import (get_chapter_verse_en,
-                                                                    get_chapter_verse_he,
-                                                                    get_foot_note_index)
+from .command_utils.html_utils import (get_chapter_verse_en,
+                                       get_chapter_verse_he,
+                                       get_foot_note_index)
 
 
 class Command(BaseCommand):
