@@ -15,7 +15,7 @@ fi
 ```
 
 # Kill agent when you are done
-# add to ~/.bash_profile
+# add to ~/.bash_logout
 ```bash
 killall ssh-agent
 ```
