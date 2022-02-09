@@ -14,6 +14,7 @@ from .process_books import (HAVDALA,
                             WEDDING_SONGS)
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
+from ...models import KaraitesBookDetails
 
 
 class Command(BaseCommand):
@@ -21,6 +22,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Karaites books as array """
+
+        sys.stdout.write('\n Deleting old Karaites liturgy books...\n')
+        KaraitesBookDetails.objects.all().delete()
 
         for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
             sys.stdout.write(f'\33[K processing book {book}\n')
@@ -31,7 +35,6 @@ class Command(BaseCommand):
             html = html.replace('class="a ', 'class="MsoTableGrid ')
             html = html.replace('class="a0 ', 'class="a0 MsoTableGrid ')
             html = html.replace('class="a1 ', 'class="a1 MsoTableGrid ')
-            html = html.replace('en-biblical-ref', 'ref')
 
             html_tree = BeautifulSoup(html, 'html5lib')
 

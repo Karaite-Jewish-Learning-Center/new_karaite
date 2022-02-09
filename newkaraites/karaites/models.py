@@ -771,6 +771,12 @@ class FullTextSearch(models.Model):
     def __str__(self) -> str:
         return self.reference_en
 
+    def to_dict(self):
+        """ Make a dictionary of the object """
+        return {'reference_en': self.reference_en,
+                'text_en': self.text_en,
+                }
+
     class Meta:
         verbose_name_plural = 'Full text search'
         indexes = [GinIndex(fields=["text_en_search"])]
