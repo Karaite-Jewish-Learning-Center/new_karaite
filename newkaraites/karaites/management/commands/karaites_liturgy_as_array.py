@@ -15,6 +15,7 @@ from .process_books import (HAVDALA,
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from ...models import KaraitesBookDetails
+from .udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):
@@ -53,7 +54,7 @@ class Command(BaseCommand):
             update_book_details(details, introduction=str(divs[0]))
             update_toc(book_details, 2, details['name'].split(','))
         # update/create bible references
-        # update_create_bible_refs(book_details)
+        update_create_bible_refs(book_details)
 
         print()
-        print()
+        print('Done!')

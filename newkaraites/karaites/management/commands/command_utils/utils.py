@@ -3,11 +3,12 @@ from .parser_ref import parse_reference
 
 IGNORE = ['(#default#VML)',
           '(Web)',
+          """(יַעַשׂ)"""
           ]
 
 RE_BIBLE_REF = [r'\([^()]*\)', r'\([^()]*\(']
 
-HTML ="""html to test"""
+HTML = """html to test"""
 
 
 def get_html(source):
@@ -30,7 +31,6 @@ def ignore_ref(bible_ref):
 
 
 def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
-
     for expression in regular_expression:
         for bible_ref in re.findall(expression, html_str):
 
@@ -55,11 +55,13 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
 
             if striped_bible_ref.startswith('(</span><span class="span-157" lang="AR-SA">'):
                 if ref.endswith(')'):
-                    html_str = html_str.replace(bible_ref, f'</span><span lang="HE" class="he-biblical-ref">{ref}</span>', 1)
+                    html_str = html_str.replace(bible_ref,
+                                                f'</span><span lang="HE" class="he-biblical-ref">{ref}</span>', 1)
                     continue
                 if ref.endswith('('):
-                    html_str = html_str.replace(bible_ref, f'</span><span lang="HE" class="he-biblical-ref">({lose_parentis})</span>', 1)
+                    html_str = html_str.replace(bible_ref,
+                                                f'</span><span lang="HE" class="he-biblical-ref">({lose_parentis})</span>',
+                                                1)
                     continue
 
     return html_str
-

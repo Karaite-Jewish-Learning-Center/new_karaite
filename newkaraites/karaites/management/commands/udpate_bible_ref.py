@@ -15,13 +15,17 @@ def update_create_bible_refs(book_details):
     i = 1
 
     for rex in RE_BIBLE_REF:
-        for book_text in KaraitesBookAsArray.objects.filter(book_text__iregex=rex):
+        for book_text in KaraitesBookAsArray.objects.filter(book=book_details).filter(book_text__iregex=rex):
             for ref in re.findall(rex, book_text.book_text[0]):
                 ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
                 if ignore_ref(ref_text):
                     continue
 
                 english_ref = parse_reference(ref_text)
+                print(f"ref {english_ref}, {ref_text}")
+                if english_ref == ref_text:
+                    print(f'Original ref{ref}')
+                    input("Press Enter to continue...")
 
                 References.objects.get_or_create(
                     karaites_book=book_details,
@@ -31,5 +35,5 @@ def update_create_bible_refs(book_details):
                     bible_ref_he=ref_text,
                     bible_ref_en=english_ref,
                 )
-                sys.stdout.write(f"\33[K Processing bible ref  {i}\r")
+                # sys.stdout.write(f"\33[K Processing bible ref  {i}\r")
                 i += 1

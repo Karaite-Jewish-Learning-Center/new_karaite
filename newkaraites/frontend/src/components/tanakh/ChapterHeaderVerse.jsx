@@ -61,9 +61,11 @@ const ChapterHeaderVerse = (props) => {
     const found = item === current
 
     useEffect(() => {
-        store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
-        store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
-        store.setVerseData(allBookData[current], paneNumber)
+        // if(allBookData[current] !==undefined) {
+            store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
+            store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
+            store.setVerseData(allBookData[current], paneNumber)
+        // }
     }, [allBookData, current, paneNumber, store])
 
     const ChapterBody = () => {

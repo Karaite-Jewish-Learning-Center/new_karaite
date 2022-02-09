@@ -35,15 +35,23 @@ class Command(BaseCommand):
             i += 1
         return toc
 
+    @staticmethod
+    def book_title(volume):
+        hebrew = " יריעות שלמה"
+        book_title = f"Yeriot Shelomo Volume {volume}, {hebrew}"
+        return book_title
+
     def handle(self, *args, **options):
         """ Karaites books as array """
+        for volume in [1, 2]:
+            book_details = KaraitesBookDetails.objects.get(book_title=self.book_title(volume))
+            KaraitesBookAsArray.objects.filter(book=book_details).delete()
+            sys.stdout.write(f'\rDeleting Karaites books as array for volume {volume}')
 
         for volume in [1, 2]:
             paragraph_number = 1
-
-            sys.stdout.write(f'\33[K Processing volume: {volume}')
-            hebrew = " יריעות שלמה"
-            book_title = f"Yeriot Shelomo Volume {volume}, {hebrew}"
+            sys.stdout.write(f'\rProcessing volume: {volume}')
+            book_title = self.book_title(volume)
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
             author.save()
 

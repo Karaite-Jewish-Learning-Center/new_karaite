@@ -1,13 +1,22 @@
 from hebrew_numbers import gematria_to_int
 from .constants import BIBLE_BOOKS_NAMES
 
+
 hebrew_book_names = BIBLE_BOOKS_NAMES
+english_book_names = BIBLE_BOOKS_NAMES.values()
 
 
 def parse_reference(ref):
-    """ Parse hebrew biblical ref and translate to English"""
+    """ Parse biblical ref and translate to English if needed.
+        reference may be in English or Hebrew
+    """
     ref = ref.replace('\n', ' ')
     parts = ref.replace('(', '').replace(')', '').split(' ')
+    book = ' '.join(parts[:-1])
+
+    # ref is in english
+    if book in english_book_names:
+        return f'({book} {parts[-1]})'
 
     if len(parts) == 2:
         # if parts[0].find('\n') > 0:
@@ -25,14 +34,13 @@ def parse_reference(ref):
         chapter = chapter.replace("'", '').replace('"', '')
         verse = verse.replace("'", '').replace('"', '')
 
-    try:
-        # some thing that I don't understand, maybe a bug in the library
-        # chapter_arabic = gematria_to_int(chapter)
-        # if chapter_arabic > 149:
-        #     chapter_arabic = int(chapter_arabic / 1000)
-        return f'({hebrew_book_names[book]} {gematria_to_int( chapter)}:{gematria_to_int(verse)})'
-
-    except (KeyError, UnboundLocalError):
-        pass
-
+    if hebrew_book_names.get(book, None) is not None:
+        try:
+            return f'({hebrew_book_names[book]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
+        except UnboundLocalError:
+            pass
+    if book in english_book_names:
+        return f'({book} {chapter}:{verse})'
     return ''
+
+# parse_reference('(ויקרא יא, מג)')

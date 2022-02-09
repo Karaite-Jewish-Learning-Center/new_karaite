@@ -36,5 +36,18 @@ class TestReferences:
 
         assert parse_reference(r"""(ויקרא יא, מג)""") == '(Leviticus 11:43)'
 
+        assert parse_reference(r"""(תהליםקט"ו, י"ז)""") == '(Psalms 35:17)'
+
+        assert parse_reference(r"""(תהליםל"ז, ל"ו)""") == '(Psalms 17: 6)'
+
+        assert parse_reference(r"""(ישעיהוס"ב, ה')""") == '(Isaiah 5: 5)'
+
+        assert parse_reference(r"""(משליכ"ז, א')""") == '(Proverbs 17: 1)'
+
         # not recognized as bible reference
         assert parse_reference("""שמות כ, יא; שמות לא, יז""") == ''
+
+        # english refs
+        assert parse_reference('(Leviticus 18:17)') == '(Leviticus 18:17)'
+
+        assert parse_reference('(Deuteronomy 30:20)') == '(Deuteronomy 30:20)'

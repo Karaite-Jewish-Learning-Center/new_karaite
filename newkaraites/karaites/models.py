@@ -6,7 +6,9 @@ from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         LANGUAGES,
                         BOOK_CLASSIFICATION,
-                        AUTOCOMPLETE_TYPE)
+                        AUTOCOMPLETE_TYPE,
+                        REF_ERROR_CODE)
+
 from tinymce.models import HTMLField
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
@@ -698,6 +700,11 @@ class References(models.Model):
     bible_ref_en = models.CharField(max_length=40,
                                     default='',
                                     verbose_name=_('ref. English'))
+
+    error = models.CharField(max_length=2,
+                             choices=REF_ERROR_CODE,
+                             default='',
+                             verbose_name=_('error'))
 
     def __str__(self):
         return f'{self.karaites_book.book_title} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'

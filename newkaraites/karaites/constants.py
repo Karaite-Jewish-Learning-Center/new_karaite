@@ -221,7 +221,16 @@ BIBLE_BOOKS_NAMES = {
     'נחמיה': 'Nehemiah',
     'משלי': 'Proverbs',
     'תהלים': 'Psalms',  # possible typo
+    'תהליםל"ז': 'Psalms',
     'תהילים': 'Psalms',
+    'תהליםקט"ו': 'Psalms',
     'רות': 'Ruth',
     'שיר השירים': 'Song of Songs'
 }
+
+REF_ERROR_CODE = [
+    ('--', '--'),
+    ('00', 'Verse number to big.'),
+    ('01', 'Chapter number to big.'),
+    ('02', 'Bible book does not exist!'),
+]

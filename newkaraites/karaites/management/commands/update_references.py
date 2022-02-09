@@ -8,6 +8,14 @@ from ...models import (Organization,
 class Command(BaseCommand):
     help = 'Update bible books with references from Karaites books'
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--debug',
+            default=False,
+            action='store_true',
+            help='Process all books',
+        )
+
     def handle(self, *args, **options):
         """ update references in bible books
             increases a bit the size of data transfers, but
@@ -15,40 +23,47 @@ class Command(BaseCommand):
         """
         # make all books array dimension  8
         i = 1
+        r = 1
         for chapter in BookAsArray.objects.all():
             for line in chapter.book_text:
                 if len(line) == 7:
                     line.append('0')
                 else:
                     line[7] = '0'
-            sys.stdout.write(f"\33[K Updating array size: {i}\r")
+            sys.stdout.write(f"\rUpdating array size: {i}")
             i += 1
             chapter.save()
 
         query = References.objects.all()
-        print(f"Processing {query.count()} references")
-        i = 1
+        sys.stdout.write(f"\rProcessing {query.count()} references")
+        print()
         for ref in query:
-            try:
-                # missing bible reference
-                if ref.bible_ref_en == '':
-                    continue
+            # missing bible reference
+            if ref.bible_ref_en != '' and ref.bible_ref_en is not None:
+                try:
+                    parts = ref.bible_ref_en.strip().replace('(', '').replace(')', '').split(' ')
+                    book, chapter_verse = " ".join(parts[:-1]), parts[-1]
+                    chapter, verse = chapter_verse.split(':')
+                    bible_book = Organization.objects.get(book_title_en=book)
+                    chapter_text = BookAsArray.objects.get(book=bible_book, chapter=chapter)
+                    verse = int(verse) - 1
+                    chapter_text.book_text[verse][7] = f'{int(chapter_text.book_text[verse][7]) + 1}'
+                    chapter_text.save()
 
-                parts = ref.bible_ref_en.strip().replace('(', '').replace(')', '').split(' ')
-                if len(parts) == 2:
-                    book, chapter_verse = parts[0:2]
-                elif len(parts) == 3:
-                    book, chapter_verse = parts[0:2], parts[3]
+                except IndexError:
+                    ref.error = '00'
+                    ref.save()
+                except ValueError:
+                    ref.error = '01'
+                    ref.save()
+                except BookAsArray.DoesNotExist:
+                    ref.error = '02'
+                    ref.save()
 
-                chapter, verse = chapter_verse.split(':')
-                bible_book = Organization.objects.get(book_title_en=book)
-                chapter_text = BookAsArray.objects.get(book=bible_book, chapter=chapter)
-                verse = int(verse) - 1
-                chapter_text.book_text[verse][7] = f'{int(chapter_text.book_text[verse][7]) + 1}'
-                chapter_text.save()
-                sys.stdout.write(f"\33[K Updating: {i}\r")
-                i += 1
+                if options['debug']:
+                    print(f"Reference: {ref.bible_ref_en}, Searching :{book} Got:{bible_book}, {chapter}, {verse}")
+                    input("Press Enter to continue...")
 
-            # todo list of errors and locations for further investigation
-            except (ValueError, IndexError, BookAsArray.DoesNotExist) as e:
-                print(e)
+            sys.stdout.write(f"\rSaving {r} references")
+            r += 1
+        print("\nDone")
