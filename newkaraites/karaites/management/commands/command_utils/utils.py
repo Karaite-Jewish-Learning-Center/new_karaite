@@ -3,7 +3,9 @@ from .parser_ref import parse_reference
 
 IGNORE = ['(#default#VML)',
           '(Web)',
-          """(יַעַשׂ)"""
+          """(יַעַשׂ)""",
+          """(השני)"""
+
           ]
 
 RE_BIBLE_REF = [r'\([^()]*\)', r'\([^()]*\(']
@@ -34,7 +36,7 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
     for expression in regular_expression:
         for bible_ref in re.findall(expression, html_str):
 
-            # (</span><span class="span-157" lang="AR-SA">תהילים\nקיט, צד)
+            # (</span><span class="halakha_ad-span-003" lang="AR-SA">תהילים\nקיט, צד)
             ref = re.sub('<.*?>', '', bible_ref)
             # (תהילים\nקיט, צד)
             ref = ref.replace('\n', ' ').replace('\r', ' ')
@@ -53,7 +55,7 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
             striped_bible_ref = bible_ref.replace(')', '')
             striped_bible_ref = striped_bible_ref.replace(lose_parentis, '')
 
-            if striped_bible_ref.startswith('(</span><span class="span-157" lang="AR-SA">'):
+            if striped_bible_ref.startswith('(</span><span class="halakha_ad-span-003" lang="AR-SA">'):
                 if ref.endswith(')'):
                     html_str = html_str.replace(bible_ref,
                                                 f'</span><span lang="HE" class="he-biblical-ref">{ref}</span>', 1)

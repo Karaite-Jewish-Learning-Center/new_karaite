@@ -130,12 +130,8 @@ const LoadBook = ({type}) => {
             store.setDistance(0, paneNumber)
         }
         try {
-            // ********************
-            // todo: check parseBiblicalReference is returning NAN for chapter!!!!!!!
-            // ********************
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
-            debugger
-            let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
+            let isOpen = store.isPaneOpen(refBook, refChapter , refVerse)
             debugger
             if (isOpen) {
                 store.setMessage(`${book} ${chapter}:${verse} already open.`)

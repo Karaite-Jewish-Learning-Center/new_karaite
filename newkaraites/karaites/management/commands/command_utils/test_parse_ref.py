@@ -36,7 +36,7 @@ class TestReferences:
 
         assert parse_reference(r"""(ויקרא יא, מג)""") == '(Leviticus 11:43)'
 
-        assert parse_reference(r"""(תהליםקט"ו, י"ז)""") == '(Psalms 35:17)'
+        assert parse_reference(r"""(תהליםקט"ז, י"ז)""") == '(Psalms 35:17)'
 
         assert parse_reference(r"""(תהליםל"ז, ל"ו)""") == '(Psalms 17: 6)'
 

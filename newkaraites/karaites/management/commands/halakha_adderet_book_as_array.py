@@ -60,11 +60,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        sys.stdout.write(f"\33[K Processing Halakha Adderet")
         hebrew = "אדרת אליהו"
         book_title = f"Adderet Eliyahu, {hebrew}"
         author, _ = Author.objects.get_or_create(name='Eliyahu R Elijah Bashyatchi')
         author.save()
+
+        sys.stdout.write(f"\nDeleting old Halakha Adderet")
+        KaraitesBookDetails.objects.filter(book_title=book_title).delete()
 
         book_details, _ = KaraitesBookDetails.objects.get_or_create(
             first_level=3,  # Halakhah
@@ -79,16 +81,17 @@ class Command(BaseCommand):
 <p class="MsoNormal"><b>English Introductory Note:</b>Eliyahu Bashyatzi’s Adderet Eliyahu (continued after his death by his student and brother-in-law Caleb Afendopolo, and originally circulated in handwritten manuscript form) has been published in three previous print editions. The first edition was printed in Constantinople by Gershom Soncino c. 1530-1531, four decades after the primary author’s death. A modern reprinting was done by Abraham Firkovich in 1835 in Gözleve (Eupatoria); another was done by Isaac Beim in 1870 in Odessa. All three printings were available to us as scanned documents; our warmest thanks are extended to Tomer Mangoubi for pointing us to the scan of the first edition.</p>
 """,
         )
+        book_details.save()
+
+        sys.stdout.write(f"\nProcessing Halakha Adderet")
 
         html = get_html(f'../newkaraites/karaites/management/tmp/'
                         f'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html')
 
-        sys.stdout.write(f"\33[K Processing Halakha Adderet bible references")
+        sys.stdout.write(f"\rProcessing Halakha Adderet bible references")
         html_tree = BeautifulSoup(html, 'html5lib')
         table_of_contents = self.parse_toc(html_tree)
         divs = html_tree.find_all('div', class_="WordSection1")
-
-        clear_terminal_line()
 
         children = divs[0].find_all(recursive=False)
         paragraph_number = 1
@@ -114,7 +117,7 @@ class Command(BaseCommand):
             )
 
             paragraph_number += 1
-            sys.stdout.write(f"\33[K Processing Halakha Adderet paragraph {paragraph_number}\r")
+            sys.stdout.write(f"\rProcessing Halakha Adderet paragraph {paragraph_number}\r")
 
         # update/create bible references
         update_create_bible_refs(book_details)

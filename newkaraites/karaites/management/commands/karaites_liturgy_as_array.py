@@ -25,7 +25,7 @@ class Command(BaseCommand):
         """ Karaites books as array """
 
         sys.stdout.write('\n Deleting old Karaites liturgy books...\n')
-        KaraitesBookDetails.objects.all().delete()
+        KaraitesBookDetails.objects.filter(first_level=4).delete()
 
         for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
             sys.stdout.write(f'\33[K processing book {book}\n')

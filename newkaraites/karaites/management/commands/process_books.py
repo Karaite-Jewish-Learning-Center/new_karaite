@@ -798,6 +798,9 @@ class Command(BaseCommand):
             # remove any non-ascii character
             book_name = book_name.encode('ascii', errors='ignore').decode()
 
+        # shorten book name
+        book_name = book_name[0:10]
+
         for tag in divs.findAll(True, recursive=True):
 
             for attr in [attr for attr in tag.attrs]:
@@ -819,7 +822,6 @@ class Command(BaseCommand):
 
                     style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
                     if style not in style_classes:
-
                         class_name = f'{class_name_by_tag}-{tags[class_name_by_tag]:03}'
                         style_classes.update({style: class_name})
                         tags[class_name_by_tag] += 1
@@ -872,7 +874,7 @@ class Command(BaseCommand):
             print()
             sys.exit(0)
 
-        sys.stdout.write(f"\33[K Pre-processing book's\r")
+        sys.stdout.write(f"\rPre-processing book's\r")
 
         # must keep same order as LIST_OF_BOOKS defined above
         # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
@@ -913,27 +915,27 @@ class Command(BaseCommand):
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
-            sys.stdout.write(f"\33[K Processing foot-notes for book {book}\r")
+            sys.stdout.write(f"\rProcessing foot-notes for book {book}\r")
             html_tree = self.replace_a_foot_notes(html_tree, language)
 
-            sys.stdout.write(f"\33[K Removing comments for book {book}\r")
+            sys.stdout.write(f"\rRemoving comments for book {book}\r")
             html_str = self.replace_from_open_to_close(str(html_tree))
 
-            sys.stdout.write(f"\33[K Collecting css for book {book}\r")
+            sys.stdout.write(f"\rCollecting css for book {book}\r")
             html_tree = BeautifulSoup(html_str, 'html5lib')
 
             html_tree = self.collect_style_map_to_class(html_tree, book, collect)
 
             for process in post_processes:
-                sys.stdout.write(f"\33[K {process.__name__.replace('_', ' ').capitalize()} {book}\r")
+                sys.stdout.write(f"\r{process.__name__.replace('_', ' ').capitalize()} {book}\r")
                 html_tree = process(html_tree)
 
             sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
             html_str = self.remove_tags(str(html_tree))
             html_str = self.replace_class_name(html_str)
             sys.stdout.write('\r\n')
-            sys.stdout.write(f"\33[K Processed book {book} \n")
-            sys.stdout.write(f"\33[K Writing files for {book} \n")
+            sys.stdout.write(f"\rProcessed book {book} \n")
+            sys.stdout.write(f"\rWriting files for {book} \n")
             sys.stdout.write('\n')
 
             handle_out = open(f'{OUT_PATH}{book}', 'w')
