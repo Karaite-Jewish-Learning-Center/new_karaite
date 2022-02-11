@@ -196,8 +196,9 @@ BIBLE_BOOKS_NAMES = {
     'שמואל א': 'I Samuel',
     'מלכים ב': 'II Kings',
     'שמואל ב': 'II Samuel',
-    'ישעיה': 'Isaiah',
+
     'ישעיהו': 'Isaiah',  # typo ?
+    'ישעיה': 'Isaiah',
     'ירמיה': 'Jeremiah',
     'ירמיהו': 'Jeremiah',  # typo ?
     'יואל': 'Joel',
@@ -220,10 +221,9 @@ BIBLE_BOOKS_NAMES = {
     'איכה': 'Lamentations',
     'נחמיה': 'Nehemiah',
     'משלי': 'Proverbs',
-    'תהלים': 'Psalms',  # possible typo
-    'תהליםל"ז': 'Psalms',
+    # 'תהליםקט': 'Psalms',
+    # 'תהליםל': 'Psalms',
     'תהילים': 'Psalms',
-    'תהליםקט"ו': 'Psalms',
     'רות': 'Ruth',
     'שיר השירים': 'Song of Songs'
 }

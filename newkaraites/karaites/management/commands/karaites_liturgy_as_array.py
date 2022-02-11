@@ -28,7 +28,7 @@ class Command(BaseCommand):
         KaraitesBookDetails.objects.filter(first_level=4).delete()
 
         for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
-            sys.stdout.write(f'\33[K processing book {book}\n')
+            sys.stdout.write(f'\nProcessing book {book}\n')
 
             book_details, _ = update_book_details(details)
 
@@ -53,8 +53,8 @@ class Command(BaseCommand):
             update_karaites_array(book_details, 1, 1, table_str)
             update_book_details(details, introduction=str(divs[0]))
             update_toc(book_details, 2, details['name'].split(','))
-        # update/create bible references
-        update_create_bible_refs(book_details)
+            # update/create bible references
+            update_create_bible_refs(book_details)
 
         print()
         print('Done!')

@@ -22,10 +22,10 @@ def update_create_bible_refs(book_details):
                     continue
 
                 english_ref = parse_reference(ref_text)
-                print(f"ref {english_ref}, {ref_text}")
-                if english_ref == ref_text:
-                    print(f'Original ref{ref}')
-                    input("Press Enter to continue...")
+                # print(f"ref {english_ref}, {ref_text}")
+                # if english_ref == ref_text:
+                #     print(f'Original ref{ref}')
+                #     input("Press Enter to continue...")
 
                 References.objects.get_or_create(
                     karaites_book=book_details,

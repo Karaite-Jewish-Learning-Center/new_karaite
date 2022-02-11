@@ -1,8 +1,53 @@
 from hebrew_numbers import gematria_to_int
-from .constants import BIBLE_BOOKS_NAMES
 
+# from .constants import BIBLE_BOOKS_NAMES
 
-hebrew_book_names = BIBLE_BOOKS_NAMES
+BIBLE_BOOKS_NAMES = {
+    'בראשית': 'Genesis',
+    'שמות': 'Exodus',
+    'ויקרא': 'Leviticus',
+    'במדבר': 'Numbers',
+    'דברים': 'Deuteronomy',
+    'עמוס': 'Amos',
+    'יחזקאל': 'Ezekiel',
+    'חבקוק': 'Habakkuk',
+    'חגי': 'Haggai',
+    'הושע': 'Hosea',
+    'מלכים א': 'I Kings',
+    'שמואל א': 'I Samuel',
+    'מלכים ב': 'II Kings',
+    'שמואל ב': 'II Samuel',
+    'ישעיה': 'Isaiah',
+    #'ישעיהו': 'Isaiah',  # typo ?
+    'ירמיה': 'Jeremiah',
+    'ירמיהו': 'Jeremiah',  # typo ?
+    'יואל': 'Joel',
+    'יונה': 'Jonah',
+    'יהושע': 'Joshua',
+    'שופטים': 'Judges',
+    'מלאכי': 'Malachi',
+    'מיכה': 'Micah',
+    'נחום': 'Nahum',
+    'עובדיה': 'Obadiah',
+    'זכריה': 'Zechariah',
+    'צפניה': 'Zephaniah',
+    'דניאל': 'Daniel',
+    'קהלת': 'Ecclesiastes',
+    'אסתר': 'Esther',
+    'עזרא': 'Ezra',
+    'דברי הימים א': 'I Chronicles',
+    'דברי הימים ב': 'II Chronicles',
+    'איוב': 'Job',
+    'איכה': 'Lamentations',
+    'נחמיה': 'Nehemiah',
+    'משלי': 'Proverbs',
+    'תהליםקט': 'Psalms',
+    'תהליםל': 'Psalms',
+    'תהילים': 'Psalms',
+    'רות': 'Ruth',
+    'שיר השירים': 'Song of Songs'
+}
+hebrew_book_names = BIBLE_BOOKS_NAMES.keys()
 english_book_names = BIBLE_BOOKS_NAMES.values()
 
 
@@ -10,37 +55,26 @@ def parse_reference(ref):
     """ Parse biblical ref and translate to English if needed.
         reference may be in English or Hebrew
     """
-    ref = ref.replace('\n', ' ')
-    parts = ref.replace('(', '').replace(')', '').split(' ')
-    book = ' '.join(parts[:-1])
+    ref = ref.replace('\n', ' ').replace('(', '').replace(')', '')
 
+    for hebrew_book_name in hebrew_book_names:
+        candidate = ref.replace(hebrew_book_name, '')
+        if candidate != ref:
+
+            if candidate.find(',') > 0:
+                chapter, verse = candidate.split(',')
+            else:
+                chapter, verse = candidate.split(':')
+
+            return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
+
+    parts = ref.split(' ')
+    book = ' '.join(parts[:-1])
     # ref is in english
     if book in english_book_names:
         return f'({book} {parts[-1]})'
 
-    if len(parts) == 2:
-        # if parts[0].find('\n') > 0:
-        #     parts = parts[0].replace('\n', ' ').split(' ')
-        parts = [parts[0]] + parts[1].split(',')
-
-    if len(parts) == 3:
-        book, chapter, verse = parts
-        chapter = chapter.replace("'", '').replace('"', '')
-        verse = verse.replace("'", '').replace('"', '')
-
-    if len(parts) == 4:
-        # book name has one or more spaces, like in "song of songs"
-        book, chapter, verse = parts[0] + ' ' + parts[1], parts[2], parts[3]
-        chapter = chapter.replace("'", '').replace('"', '')
-        verse = verse.replace("'", '').replace('"', '')
-
-    if hebrew_book_names.get(book, None) is not None:
-        try:
-            return f'({hebrew_book_names[book]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
-        except UnboundLocalError:
-            pass
-    if book in english_book_names:
-        return f'({book} {chapter}:{verse})'
     return ''
 
-# parse_reference('(ויקרא יא, מג)')
+print(parse_reference("""(ישעיהוסב, ה')"""))
+print(parse_reference('(תהליםקטז, י"ז)'))

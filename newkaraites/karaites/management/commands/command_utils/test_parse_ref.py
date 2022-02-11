@@ -38,11 +38,15 @@ class TestReferences:
 
         assert parse_reference(r"""(תהליםקט"ז, י"ז)""") == '(Psalms 35:17)'
 
-        assert parse_reference(r"""(תהליםל"ז, ל"ו)""") == '(Psalms 17: 6)'
+        assert parse_reference(r"""(תהליםל"ז, ל"ו)""") == '(Psalms 17:6)'
 
-        assert parse_reference(r"""(ישעיהוס"ב, ה')""") == '(Isaiah 5: 5)'
+        assert parse_reference(r"""(ישעיהוס"ב, ה')""") == '(Isaiah 5:5)'
 
-        assert parse_reference(r"""(משליכ"ז, א')""") == '(Proverbs 17: 1)'
+        assert parse_reference(r"""(שמות טו:כו)""") == '(Exodus 10: 26)'
+
+        assert parse_reference(r"""(דברי הימים א כא:כו-כז)""") == '(I Chronicles 1:21)'
+
+        assert parse_reference(r"""(משליכ"ז, א')""") == '(Proverbs 17:1)'
 
         # not recognized as bible reference
         assert parse_reference("""שמות כ, יא; שמות לא, יז""") == ''
