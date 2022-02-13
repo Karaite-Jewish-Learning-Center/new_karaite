@@ -15,7 +15,7 @@ export const parseHebrewRef = (biblicalRef) => {
     }
 
     let refBook = chapterVerseBook[1]
-    let splitOn =( chapterVerseBook.indexOf(':') >= 0 ? ' ': ':')
+    let splitOn = (chapterVerseBook.indexOf(':') >= 0 ? ' ' : ':')
     let [refChapter, refVerse] = chapterVerseBook[0].split(splitOn)
 
     if (refVerse.indexOf('-') > 0) {

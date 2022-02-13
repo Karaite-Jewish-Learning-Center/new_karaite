@@ -1,6 +1,27 @@
 from hebrew_numbers import gematria_to_int
 
 # from .constants import BIBLE_BOOKS_NAMES
+REMOVE = [
+    'ראה',  # see
+]
+IGNORE = [
+    """(בית חדש מאת ר' יואל סירקיש)""",
+    """(מאת ר' בצלאל אשכנזי)""",
+    """(השני)""",
+    """(שמואלא כה, כא)""",
+    """(מתחיל בסוף דף כב)""",
+    """(במדבר ל, יג; ל,טז)""",
+    """(בית חדש מאת ר' יואל סירקיש)""",
+    """(מאת ר' בצלאל אשכנזי)""",
+]
+
+ABBREVIATIONS = [
+    ('Is.', 'Isaiah'),
+    ('Ps.', 'Psalms'),
+    ('Ex.', 'Exodus'),
+    ('Lev.', 'Leviticus'),
+
+]
 
 BIBLE_BOOKS_NAMES = {
     'בראשית': 'Genesis',
@@ -18,7 +39,7 @@ BIBLE_BOOKS_NAMES = {
     'מלכים ב': 'II Kings',
     'שמואל ב': 'II Samuel',
     'ישעיה': 'Isaiah',
-    #'ישעיהו': 'Isaiah',  # typo ?
+    # 'ישעיהו': 'Isaiah',  # typo ?
     'ירמיה': 'Jeremiah',
     'ירמיהו': 'Jeremiah',  # typo ?
     'יואל': 'Joel',
@@ -57,6 +78,9 @@ def parse_reference(ref):
     """
     ref = ref.replace('\n', ' ').replace('(', '').replace(')', '')
 
+    for remove in REMOVE:
+        ref = ref.replace(remove, '')
+
     for hebrew_book_name in hebrew_book_names:
         candidate = ref.replace(hebrew_book_name, '')
         if candidate != ref:
@@ -76,5 +100,8 @@ def parse_reference(ref):
 
     return ''
 
+#
+print(parse_reference('(ראה תהילים ז, י)'))
 print(parse_reference("""(ישעיהוסב, ה')"""))
-print(parse_reference('(תהליםקטז, י"ז)'))
+# print(parse_reference('(תהליםקטז, י"ז)'))
+# print(parse_reference('(יחזקאלכ, כט)'))

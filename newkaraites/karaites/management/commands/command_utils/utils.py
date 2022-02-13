@@ -4,8 +4,8 @@ from .parser_ref import parse_reference
 IGNORE = ['(#default#VML)',
           '(Web)',
           """(יַעַשׂ)""",
-          """(השני)"""
-
+          """(השני)""",
+          """((""",
           ]
 
 RE_BIBLE_REF = [r'\([^()]*\)', r'\([^()]*\(']

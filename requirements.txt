@@ -15,3 +15,4 @@ gensim~=4.1.2
 more_itertools
 spacy~=3.1.4
 elasticsearch~=7.0.0
+regex

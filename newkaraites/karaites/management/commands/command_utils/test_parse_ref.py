@@ -55,3 +55,8 @@ class TestReferences:
         assert parse_reference('(Leviticus 18:17)') == '(Leviticus 18:17)'
 
         assert parse_reference('(Deuteronomy 30:20)') == '(Deuteronomy 30:20)'
+
+        # extra words in ref may be ignored
+
+        # remove see -> ראה
+        assert parse_reference('(ראה תהילים ז, י)') == '(Psalms 7:10)'
