@@ -1,3 +1,4 @@
+import re
 from hebrew_numbers import gematria_to_int
 
 # from .constants import BIBLE_BOOKS_NAMES
@@ -13,8 +14,14 @@ IGNORE = [
     """(במדבר ל, יג; ל,טז)""",
     """(בית חדש מאת ר' יואל סירקיש)""",
     """(מאת ר' בצלאל אשכנזי)""",
+    """("ריוח")""",
+    """("אחרית רשעים תראה")""",
+    """((""",
+    """שמות כ, יא; שמות לא, יז""",
+    """("seasilk" "byssus")""",
+    """(1777 - 1855)""",
+    """(7+1)""",
 ]
-
 ABBREVIATIONS = [
     ('Is.', 'Isaiah'),
     ('Ps.', 'Psalms'),
@@ -76,6 +83,9 @@ def parse_reference(ref):
     """ Parse biblical ref and translate to English if needed.
         reference may be in English or Hebrew
     """
+    if ref in IGNORE:
+        return ''
+
     ref = ref.replace('\n', ' ').replace('(', '').replace(')', '')
 
     for remove in REMOVE:
@@ -86,22 +96,28 @@ def parse_reference(ref):
         if candidate != ref:
 
             if candidate.find(',') > 0:
-                chapter, verse = candidate.split(',')
+                chapter, verse = candidate.strip().split(',')
             else:
-                chapter, verse = candidate.split(':')
+                chapter, verse = candidate.strip().split(':')
 
             return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
 
+    # remove repetinng spaces after :
+    ref = re.sub(r":\s*", ':', ref)
     parts = ref.split(' ')
     book = ' '.join(parts[:-1])
+    # expand abbreviations
+    for abbrev, full_name in ABBREVIATIONS:
+        book = book.replace(abbrev, full_name)
+
     # ref is in english
     if book in english_book_names:
         return f'({book} {parts[-1]})'
 
     return ''
 
-#
-print(parse_reference('(ראה תהילים ז, י)'))
-print(parse_reference("""(ישעיהוסב, ה')"""))
+
+# print(parse_reference('(Ex. 10:  26)'))
+#  print(parse_reference("""(ישעיהוסב, ה')"""))
 # print(parse_reference('(תהליםקטז, י"ז)'))
 # print(parse_reference('(יחזקאלכ, כט)'))

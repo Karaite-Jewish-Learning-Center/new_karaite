@@ -24,12 +24,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        sys.stdout.write('\n Deleting old Karaites liturgy books...\n')
+        sys.stdout.write('\nDeleting old Karaites liturgy books...\n')
         KaraitesBookDetails.objects.filter(first_level=4).delete()
-
+        sys.stdout.write(f'\nProcessing books:')
+        i = 1
         for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
-            sys.stdout.write(f'\nProcessing book {book}\n')
 
+            sys.stdout.write(f'\n {book.replace(".html","")}')
             book_details, _ = update_book_details(details)
 
             html = get_html(f'{PATH}{book}')
@@ -55,6 +56,7 @@ class Command(BaseCommand):
             update_toc(book_details, 2, details['name'].split(','))
             # update/create bible references
             update_create_bible_refs(book_details)
+            i += 1
 
         print()
-        print('Done!')
+        print(f'\nDone! processed: {i} books')

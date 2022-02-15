@@ -343,8 +343,32 @@ HAVDALA = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Essa Bechos Yesha‘,",
          'first_level': 4,
-         'book_classification': '1',
+         'book_classification': '10',
          'author': 'Essa Bechos Yesha‘,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Havdala Songs/', 'Et Kos Yeshu‘ot.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Et Kos Yeshu‘ot‘,את כוס ישועות",
+         'first_level': 4,
+         'book_classification': '10',
+         'author': 'Yosef ben Shemu’el Rodi,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Havdala Songs/', 'Malé ‘Olam Kevod Yofi.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': "מלא עולם כבוד יופי, Malé ‘Olam Kevod Yofi",
+         'first_level': 4,
+         'book_classification': '10',
+         'author': 'Mordochai ben Ya‘aḳov ben Shemu’el Politi,'},
         False
     ],
 ]
@@ -357,7 +381,7 @@ PRAYERS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"En Kelohenu,",
          'first_level': 4,
-         'book_classification': '1',
+         'book_classification': '01',
          'author': 'En Kelohenu,'},
         False
     ],
@@ -369,13 +393,26 @@ PRAYERS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Lutski Prayer for a Time of Plague,",
          'first_level': 4,
-         'book_classification': '1',
+         'book_classification': '01',
          'author': 'N/A,'},
         False
     ],
 ]
 
+
 SHABBAT_SONGS = [
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshir Ḥadash.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ashir Beshir Ḥadash, אשיר בשיר חדש",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yosef ben Nisan Poziemski,'},
+        False
+    ],
     [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Le’el ‘Elyon.html',
         'he',
@@ -389,6 +426,78 @@ SHABBAT_SONGS = [
         False
     ],
     [
+        'HTML/Liturgy/Shabbat Songs/', 'Ekkon Lemmul Shabbat.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ekkon Lemul Shabbat, אכון למול שבת",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yosef ben Yitsḥaḳ Itson,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Esmaḥ Beshir Ḥadash.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Esmaḥ Beshir Ḥadash,אשמח בשיר חדש",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Ezra ben Nisan Ha-rofé,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Ezkor Lemitsvat Melech.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ezkor Lemitsvat Melech, אזכור למצות מלך",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Shelomo ben Aharon,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Eḳra Le’el ‘Elyon.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Eḳra Le’el ‘Elyon,אקרא לאל עליון",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'R. Abraham ben Mordochai,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Mitsvat Yesod Shabbat.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Mitsvat Yesod Shabbat,מצות יסוד שבת",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Moshe Beghi,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Mizmor Leyom Shabbat.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Mizmor Leyom Shabbat,מזמור ליום שבת",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Shelomo ben Aharon,'},
+        False
+    ],
+    [
         'HTML/Liturgy/Shabbat Songs/', 'Odé Le’el Maḥsi.html',
         'he',
         [],
@@ -398,6 +507,18 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '11',
          'author': 'Odé Le’el Maḥsi,'},
+        False
+    ],
+    [
+        'HTML/Liturgy/Shabbat Songs/', 'Ori Yeḥidati.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ori Yeḥidati,אורי יחידתי",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Mordochai Sultansky,'},
         False
     ],
     [
@@ -425,6 +546,30 @@ SHABBAT_SONGS = [
         False
     ],
     [
+        'HTML/Liturgy/Shabbat Songs/', 'Yatsar Ha’el.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yatsar Ha’el, יצר האל",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Ya‘aḳov (otherwise unknown),'},
+        False
+    ],
+[
+        'HTML/Liturgy/Shabbat Songs/', 'Yerivai Ve’oyevai.html',
+        'he',
+        [],
+        [update_bible_he_en],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yerivai Ve’oyevai, יריבי ואויבי",
+         'first_level': 4,
+         'book_classification': '11',
+         'author': 'Yisra’el ben Shemu’el Ha-ma‘aravi Ha-dayyan,'},
+        False
+    ],
+    [
         'HTML/Liturgy/Shabbat Songs/', 'Yeter Peletat ‘Am.html',
         'he',
         [],
@@ -437,7 +582,6 @@ SHABBAT_SONGS = [
         False
     ],
 ]
-
 SUPPLEMENTAL = [
     [
         'HTML/Liturgy/Supplemental/', 'Anochi Anochi.html',
@@ -447,7 +591,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Anochi Anochi, אנכי אנכי",
          'first_level': 4,
-         'book_classification': '07',
+         'book_classification': '13',
          'author': 'N/A (Biblical Verses)'},
         False
     ],
@@ -459,7 +603,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Poems, Author
         {'name': r"Atsili ḳum ḳera, Atsili ḳum ḳera",
          'first_level': 4,
-         'book_classification': '08',
+         'book_classification': '13',
          'author': 'Abraham'},
         False
     ],
@@ -471,7 +615,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Poems, Author
         {'name': r"Evyon Asher, אביון אשר",
          'first_level': 4,
-         'book_classification': '08',
+         'book_classification': '13',
          'author': 'Anatoli (ben Joseph?)'},
         False
     ],
@@ -483,7 +627,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
-         'book_classification': '07',
+         'book_classification': '13',
          'author': 'N/A (Biblical Verses)'},
         False
     ],
@@ -496,7 +640,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehoshiya‘, והושיע",
          'first_level': 4,
-         'book_classification': '07',
+         'book_classification': '13',
          'author': 'N/A (Biblical Verses)'},
         False
     ],
@@ -895,7 +1039,7 @@ class Command(BaseCommand):
         if options['book_id'] != 0:
             books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
 
-        sys.stdout.write(f"\33[K Preprocessing book's\r")
+        sys.stdout.write(f"Preprocessing book's\r")
         i = 1
         for path, book, language, pre_processes, _, _, _ in books_to_process:
 
@@ -903,7 +1047,7 @@ class Command(BaseCommand):
                 pre_process(path, book)
 
             i += 1
-        sys.stdout.write(f"\33[K Loading book's data\r")
+        sys.stdout.write(f"Loading book's data\r")
 
         i = 1
         for path, book, language, _, post_processes, _, collect in books_to_process:
@@ -930,7 +1074,7 @@ class Command(BaseCommand):
                 sys.stdout.write(f"\r{process.__name__.replace('_', ' ').capitalize()} {book}\r")
                 html_tree = process(html_tree)
 
-            sys.stdout.write(f"\33[K Removing empty tags for book {book}\r")
+            sys.stdout.write(f"\rRemoving empty tags for book {book}             ")
             html_str = self.remove_tags(str(html_tree))
             html_str = self.replace_class_name(html_str)
             sys.stdout.write('\r\n')
