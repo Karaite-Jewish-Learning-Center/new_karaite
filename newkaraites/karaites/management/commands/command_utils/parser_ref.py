@@ -1,27 +1,74 @@
 import re
 from hebrew_numbers import gematria_to_int
 
-# from .constants import BIBLE_BOOKS_NAMES
+IGNORE = ['(#default#VML)',
+          '(Web)',
+          '("Yeriot%20Shelomo%20volume%201.fld/header.html")',
+          '(ששה ימים לאחר שסיים את תפקידיו במצרים)',
+          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+          """(ששה ימים לאחר שסיים את תפקידיו במצרים)""",
+          '(ברוך)',
+          """(נגד ספר"משא קרים"לאפרים דיינגרד)""",
+          """(נגד דת הנצרות)""",
+          """(ראה הערה מספר 8)."""
+          """(כפי שהיה נוהג לעשות זאת בכל הספרים שהיה מעיין בהם)""",
+          """(נגד ספר"משא קרים"לאפרים דיינגרד)"""
+          '(בחג הסוכות)',
+          '(אַתְּ)',
+          '(הֹלֶכֶת)',
+          """(ח', י"ט)""",
+          """(וְקִבְּלוּ)""",
+          """(יַעַשׂ)""",
+          """(ראה הערה מספר 8)"""
+          # volume 2
+          """(ח', י"ט)"""
+          '(י"א,  ל"ג),',
+          '(יִהְיוּ-) ',
+          '(שָׁחוּט)',
+          '(דְּבָרוֹ)',
+          '(כ"ו, י"ט)',
+          '(רַגְלְךָ)',
+          '(הוא הנ"ל)',
+          '(ח"ב, כ"ג)',
+          """(ט', א')""",
+          """(ח', י,ט)""",
+          """(י"א,ל"ג)""",
+          """(יִהְיוּ-)""",
+          """(Biblical Verses)""",
+          """(Anochi)""",
+          """(Ani)""",
+          """(</span>Anochi)""",
+          """(Ishmael)""",
+          """(ben Joseph?)""",
+          """(and the refrain)""",
+          """(Vayyosha‘)""",
+          """(בית חדש מאת ר' יואל סירקיש)""",
+          """(מאת ר' בצלאל אשכנזי)""",
+          """(השני)""",
+          """(שמואלא כה, כא)""",
+          """(מתחיל בסוף דף כב)""",
+          """(במדבר ל, יג; ל,טז)""",
+          """(בית חדש מאת ר' יואל סירקיש)""",
+          """(מאת ר' בצלאל אשכנזי)""",
+          """("ריוח")""",
+          """("אחרית רשעים תראה")""",
+          """((""",
+          """(אָנָּא זְכוֹר רַחֵם לְעַם בֹּטֵחַ)""",
+          """(Anna zechorraḥem le‘amboteyaḥ)""",
+          """שמות כ, יא; שמות לא, יז""",
+          """("seasilk" "byssus")""",
+          """(1777 - 1855)""",
+          """(7+1)""",
+          """(Songs)""",
+          """(?)""",
+          """(2nd ed., 2007)""",
+          """(2011)""",
+          ]
 REMOVE = [
-    'ראה',  # see
+    """(Anochi) """,
+    'ראה',  # seems to be a typo
 ]
-IGNORE = [
-    """(בית חדש מאת ר' יואל סירקיש)""",
-    """(מאת ר' בצלאל אשכנזי)""",
-    """(השני)""",
-    """(שמואלא כה, כא)""",
-    """(מתחיל בסוף דף כב)""",
-    """(במדבר ל, יג; ל,טז)""",
-    """(בית חדש מאת ר' יואל סירקיש)""",
-    """(מאת ר' בצלאל אשכנזי)""",
-    """("ריוח")""",
-    """("אחרית רשעים תראה")""",
-    """((""",
-    """שמות כ, יא; שמות לא, יז""",
-    """("seasilk" "byssus")""",
-    """(1777 - 1855)""",
-    """(7+1)""",
-]
+
 ABBREVIATIONS = [
     ('Is.', 'Isaiah'),
     ('Ps.', 'Psalms'),
@@ -83,6 +130,9 @@ def parse_reference(ref):
     """ Parse biblical ref and translate to English if needed.
         reference may be in English or Hebrew
     """
+
+    # if len(ref) > 30:
+    #     return ''
     if ref in IGNORE:
         return ''
 
@@ -102,8 +152,12 @@ def parse_reference(ref):
 
             return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
 
-    # remove repetinng spaces after :
+    # replace multiple spaces by one space
+    ref = re.sub(r"\s+", ' ', ref)
+    # remove repeating spaces before and after :
     ref = re.sub(r":\s*", ':', ref)
+    ref = re.sub(r"\s*:", ':', ref)
+
     parts = ref.split(' ')
     book = ' '.join(parts[:-1])
     # expand abbreviations
@@ -115,7 +169,6 @@ def parse_reference(ref):
         return f'({book} {parts[-1]})'
 
     return ''
-
 
 # print(parse_reference('(Ex. 10:  26)'))
 #  print(parse_reference("""(ישעיהוסב, ה')"""))

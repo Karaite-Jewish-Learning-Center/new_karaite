@@ -21,17 +21,6 @@ def get_html(source):
     return html
 
 
-def ignore_ref(bible_ref):
-    if bible_ref == '':
-        return True
-    if len(bible_ref) > 30:
-        return True
-
-    if bible_ref in IGNORE:
-        return True
-    return False
-
-
 def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
     for expression in regular_expression:
         for bible_ref in re.findall(expression, html_str):
@@ -47,9 +36,6 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
             if parsed_ref == '':
                 continue
 
-            if ignore_ref(parsed_ref):
-                continue
-
             lose_parentis = ref.replace('(', '').replace(')', '')
 
             striped_bible_ref = bible_ref.replace(')', '')
@@ -58,11 +44,11 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
             if striped_bible_ref.startswith('(</span><span class="halakha_ad-span-003" lang="AR-SA">'):
                 if ref.endswith(')'):
                     html_str = html_str.replace(bible_ref,
-                                                f'</span><span lang="HE" class="he-biblical-ref">{ref}</span>', 1)
+                                                f'</span><span lang="HE" class="he-biblical-ref" data="{parsed_ref}">{ref}</span>', 1)
                     continue
                 if ref.endswith('('):
                     html_str = html_str.replace(bible_ref,
-                                                f'</span><span lang="HE" class="he-biblical-ref">({lose_parentis})</span>',
+                                                f'</span><span lang="HE" class="he-biblical-ref" data="{parsed_ref} >({lose_parentis})</span>',
                                                 1)
                     continue
 

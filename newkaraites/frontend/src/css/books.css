@@ -1,5 +1,5 @@
 
-.MsoTableGrid {
+.MsoTableGrid  {
     margin-top: 50px;
     width: 50%;
     max-width: 800px;
@@ -107,64 +107,52 @@
         width: 60%;
     }
 }
-
-/* Amen Yehi Ratson */
-.amen-table-000 {
-    direction: rtl;
+/* simple-3-4 */
+.simple-3-4 {
+    min-width: 900px;
 }
-
-.amen-table-000 tr:nth-child(odd) td:nth-child(2) p {
+.simple-3-4  r:nth-child(odd) td:nth-child(2) p {
     margin: 0 5px 0 0;
     text-align: right;
     vertical-align: top;
 }
-
-.amen-table-000 tr:nth-child(odd) td:nth-child(1) p {
+.simple-3-4 tr:nth-child(odd) td:nth-child(1) p {
     margin: 0 0 0 5px;
     text-align: left;
     vertical-align: top;
 }
 
-.amen-table-000 tr:nth-child(even) {
+.simple-3-4 tr:nth-child(even) {
     text-align: left;
-    margin: 10px 20px 10px -100%;
+    margin: 10px 20px 10px -80%;
     direction: ltr;
 }
-
-.amen-table-000 tr:nth-child(even) p {
-    margin: 3px;
-}
-
-.amen-table-000 tr:nth-child(3) p {
+.simple-3-4 tr:nth-child(4n+3) {
     color: red;
 }
 
-.amen-table-000 tr:nth-child(7) p {
+.simple-3-4 tr:nth-child(4n+4) {
     color: red;
 }
 
-.amen-table-000 tr:nth-child(11) p {
-    color: red;
+.simple {
+    max-width: 600px;
+    direction: ltr;
+}
+.simple  tr:nth-child(odd) td:nth-child(1) p {
+    margin: 0 5px 0 0;
+    text-align: right;
+    vertical-align: top;
+}
+.simple tr:nth-child(odd) td:nth-child(2) p {
+    margin: 0 0 0 5px;
+    text-align: left;
+    vertical-align: top;
 }
 
-.amen-table-000 tr:nth-child(4n) p {
-    color: red;
-}
-
-.amen-table-001 tr:nth-child(3) p {
-    color: red;
-}
-
-.amen-table-001 tr:nth-child(7) p {
-    color: red;
-}
-
-.amen-table-001 tr:nth-child(11) p {
-    color: red;
-}
-
-.amen-table-001 tr:nth-child(4n) p {
-    color: red;
+/* Amen Yehi Ratson */
+.amen-table-000 {
+    min-width: 850px;
 }
 
 /* Anochi */
@@ -248,25 +236,6 @@
     color: red;
 }
 
-/* Atsili ḳum ḳera */
-.atsili-table-000 {
-    width: 70%;
-    direction: ltr;
-}
-
-.atsili-table-000 tr:nth-child(odd) td p {
-    margin: 0;
-}
-
-.atsili-table-000 tr:nth-child(odd) br {
-    content: "A" !important;
-    display: block !important;
-}
-
-.atsili-table-000 tr:nth-child(even) {
-    margin-left: 80px;
-    margin-right: -200px;
-}
 
 
 /*En Kelohenu*/
@@ -327,23 +296,13 @@
 
 /*Evyon Asher */
 .evyon-table-000 {
-    width: 80%;
+    max-width: 700px;
     direction: ltr;
 }
 
-.evyon-table-000 tr:nth-child(odd) td p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.evyon-table-000 tr:nth-child(even) td p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 .evyon-table-000 tr:nth-child(even) {
-    margin-left: 20%;
-    margin-right: -100%;
+    margin-left: 0%;
+    margin-right: -110%;
     /*border: 1px solid black;*/
 }
 
@@ -512,7 +471,7 @@
 
 /* Vehaḥochma Me’ayin Timmatsē */
 .vehahochma-table-000 {
-    width: 80%;
+    min-width: 900px ;
     direction: ltr;
 }
 
@@ -572,33 +531,6 @@
 }
 
 /* Yeter Peletat ‘Am */
-.yeter-table-000 {
-    width: 80%;
-}
-
-.yeter-table-000 tr:nth-child(odd) td:nth-child(2) p {
-    margin: 0 5px 0 0;
-    text-align: right;
-}
-
-.yeter-table-000 tr:nth-child(odd) td:nth-child(1 ) p {
-    margin: 0 0 0 5px;
-    text-align: left;
-    direction: ltr;
-}
-
-.yeter-table-000 tr:nth-child(even) p {
-    margin-left: -60%;
-}
-
-.yeter-table-000 tr:nth-child(4n+3) {
-    color: red;
-}
-
-.yeter-table-000 tr:nth-child(4n+4) {
-    color: red;
-}
-
 
 /* Sefer Milḥamot Adonai */
 .sefer-table {

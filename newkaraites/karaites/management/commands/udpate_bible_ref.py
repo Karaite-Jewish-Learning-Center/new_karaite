@@ -3,29 +3,21 @@ import sys
 from bs4 import BeautifulSoup
 from ...models import (KaraitesBookAsArray,
                        References)
-
-from .command_utils.utils import (ignore_ref,
-                                  RE_BIBLE_REF)
-
+from .command_utils.utils import RE_BIBLE_REF
 from .command_utils.parser_ref import parse_reference
 
 
 def update_create_bible_refs(book_details):
     """update/create bible references"""
     i = 1
-
     for rex in RE_BIBLE_REF:
         for book_text in KaraitesBookAsArray.objects.filter(book=book_details).filter(book_text__iregex=rex):
             for ref in re.findall(rex, book_text.book_text[0]):
                 ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
-                if ignore_ref(ref_text):
-                    continue
 
                 english_ref = parse_reference(ref_text)
-                # print(f"ref {english_ref}, {ref_text}")
-                # if english_ref == ref_text:
-                #     print(f'Original ref{ref}')
-                #     input("Press Enter to continue...")
+                if english_ref == '':
+                    continue
 
                 References.objects.get_or_create(
                     karaites_book=book_details,

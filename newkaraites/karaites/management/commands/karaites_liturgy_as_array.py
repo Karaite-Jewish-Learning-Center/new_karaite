@@ -33,14 +33,17 @@ class Command(BaseCommand):
             sys.stdout.write(f'\n {book.replace(".html","")}')
             book_details, _ = update_book_details(details)
 
+            if details.get('css_class', None) is not None:
+                class_name = f" {details.get('css_class')} "
+
             html = get_html(f'{PATH}{book}')
-            html = html.replace('class="a ', 'class="MsoTableGrid ')
-            html = html.replace('class="a0 ', 'class="a0 MsoTableGrid ')
-            html = html.replace('class="a1 ', 'class="a1 MsoTableGrid ')
+            html = html.replace('class="a ', f'class="MsoTableGrid ')
+            html = html.replace('class="a0 ', f'class="a0 MsoTableGrid ')
+            html = html.replace('class="a1 ', f'class="a1 MsoTableGrid ')
+
+            html = html.replace('class="MsoTableGrid', f'class="MsoTableGrid{class_name}')
 
             html_tree = BeautifulSoup(html, 'html5lib')
-
-            clear_terminal_line()
 
             divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
