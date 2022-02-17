@@ -13,6 +13,6 @@ python-hebrew-numbers
 html5lib
 gensim~=4.1.2
 more_itertools
-spacy~=3.1.4
+spacy
 elasticsearch~=7.0.0
 regex
