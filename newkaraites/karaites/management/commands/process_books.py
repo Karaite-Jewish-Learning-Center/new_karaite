@@ -48,7 +48,6 @@ def removing_no_breaking_spaces(html_tree):
 
 
 def update_bible_references_en(html_tree):
-    pppp
     names = BIBLE_BOOKS_NAMES.values()
     for klass in ['span-39', 'span-43', 'span-48', 'span-52', 'span-63']:
         spans = html_tree.find_all('span', class_=klass)
@@ -68,7 +67,6 @@ def update_bible_references_en(html_tree):
 
 
 def update_bible_references_he(html_tree, language="HE"):
-    hhhhhhhh
     """ some books ( liturgy) have bible in English, even if the text is in Hebrew"""
     language_lower = language.lower()
     names = BIBLE_BOOKS_NAMES.keys()

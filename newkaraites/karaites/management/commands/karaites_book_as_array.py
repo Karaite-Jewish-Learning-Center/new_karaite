@@ -44,8 +44,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
         for volume in [1, 2]:
-            book_details = KaraitesBookDetails.objects.get(book_title=self.book_title(volume))
-            KaraitesBookAsArray.objects.filter(book=book_details).delete()
+            try:
+                book_details = KaraitesBookDetails.objects.get(book_title=self.book_title(volume))
+                KaraitesBookAsArray.objects.filter(book=book_details).delete()
+            except KaraitesBookDetails.DoesNotExist:
+                pass
+
             sys.stdout.write(f'\rDeleting Karaites books as array for volume {volume}')
 
         for volume in [1, 2]:

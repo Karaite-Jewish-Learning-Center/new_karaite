@@ -294,8 +294,6 @@
 }
 
 .essa-table-000 tr:nth-child(odd) td:nth-child(1) p {
-        background-color: #3498db;
-
     direction: ltr;
     text-align: left;
     margin: 0 0 0 5px;
