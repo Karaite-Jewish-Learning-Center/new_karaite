@@ -131,6 +131,20 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 BOOKS = [1, 2]
 
 
+def fix_image_gan(path, book_name):
+    # specific for Gan Eden
+    html_tree = BeautifulSoup(read_data(path, f'{book_name}', SOURCE_PATH), 'html5lib')
+    old_path = "Gan%20Eden%20Hebrew%20Text.fld/image001.jpg"
+    new_path = f"/static-django/images/Gan Eden/image001.jpg"
+
+    for child in html_tree.find_all('img'):
+        image_path = child.attrs.get('src', None)
+        if image_path is not None:
+            child.attrs['src'] = image_path.replace(old_path, new_path)
+            child.attrs['src'] = child.attrs['src'].replace('/', '\\')
+    write_data(path, f'{book_name}', str(html_tree), SOURCE_PATH)
+
+
 def fix_image_source(path, book_name, books=BOOKS):
     # this is specific to Halakha Adderet
     old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
@@ -333,6 +347,24 @@ HALAKHAH = [
         {},
         False
     ],
+    [
+        'HTML/Halakhah/Gan Eden/',
+        'Gan Eden Hebrew Text.html',
+        'he',
+        [fix_image_gan],
+        [update_bible_re],
+        {},
+        False
+    ],
+    [
+        'HTML/Halakhah/Gan Eden/',
+        'Gan Eden TOC.html',
+        'he',
+        [fix_image_gan],
+        [update_bible_re],
+        {},
+        False
+    ]
 ]
 HAVDALA = [
     [
@@ -782,8 +814,12 @@ class Command(BaseCommand):
     @staticmethod
     def replace_a_foot_notes(html_tree, language):
         """ replace complicate <a></a> with a tooltip """
-
-        for child in html_tree.find_all('a'):
+        print()
+        i = 1
+        foot_notes = html_tree.find_all('a')
+        total_foot_notes = len(foot_notes)
+        for child in foot_notes:
+            sys.stdout.write(f'\rPopulating footnotes {i} of {total_foot_notes}')
             if hasattr(child, 'style'):
                 try:
                     style = child.attrs['style']
@@ -813,6 +849,7 @@ class Command(BaseCommand):
                     # these are mostly emtpy a tags so remove then
                     if len(child.text) == 0:
                         child.decompose()
+                i += 1
 
         return html_tree
 
@@ -1044,8 +1081,6 @@ class Command(BaseCommand):
             print()
             sys.exit(0)
 
-        sys.stdout.write(f"\rPre-processing book's\r")
-
         # must keep same order as LIST_OF_BOOKS defined above
         # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
 
@@ -1065,46 +1100,42 @@ class Command(BaseCommand):
         if options['book_id'] != 0:
             books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
 
-        sys.stdout.write(f"Preprocessing book's\r")
-
         for path, book, language, pre_processes, _, _, _ in books_to_process:
-
+            sys.stdout.write(f"\nPre-processing book: {book}")
             for pre_process in pre_processes:
                 pre_process(path, book)
 
-        sys.stdout.write(f"Loading book's data\r")
-
         i = 1
         for path, book, language, _, post_processes, details, collect in books_to_process:
+            sys.stdout.write(f"\nProcessing book: {book}")
             html = read_data(path, book, SOURCE_PATH)
 
             if html is None:
-                sys.stdout.write(f"\rSkipping {book} no suitable codec found.\r")
+                sys.stdout.write(f"\nSkipping {book} no suitable codec found.")
                 continue
 
             html_tree = BeautifulSoup(html, 'html5lib')
 
-            sys.stdout.write(f"\rProcessing foot-notes for book {book}\r")
             html_tree = self.replace_a_foot_notes(html_tree, language)
 
-            sys.stdout.write(f"\rRemoving comments for book {book}\r")
+            sys.stdout.write(f"\nRemoving comments for book {book}")
             html_str = self.replace_from_open_to_close(str(html_tree))
 
-            sys.stdout.write(f"\rCollecting css for book {book}\r")
+            sys.stdout.write(f"\nCollecting css for book {book}")
             html_tree = BeautifulSoup(html_str, 'html5lib')
 
             html_tree = self.collect_style_map_to_class(html_tree, book, collect)
 
             for process in post_processes:
-                sys.stdout.write(f"\r{process.__name__.replace('_', ' ').capitalize()} {book}\r")
+                sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book}")
                 html_tree = process(html_tree)
 
-            sys.stdout.write(f"\rRemoving empty tags for book {book}             ")
+            sys.stdout.write(f"\nRemoving empty tags for book {book}")
             html_str = self.remove_tags(str(html_tree))
             html_str = self.replace_class_name(html_str)
             sys.stdout.write('\r\n')
-            sys.stdout.write(f"\rProcessed book {book} \n")
-            sys.stdout.write(f"\rWriting files for {book} \n")
+            sys.stdout.write(f"\nProcessed book {book}")
+            sys.stdout.write(f"\nWriting files for {book}")
             sys.stdout.write('\n')
 
             handle_out = open(f'{OUT_PATH}{book}', 'w')
@@ -1114,3 +1145,4 @@ class Command(BaseCommand):
             i += 1
         self.parse_and_save_css()
         self.handle_ms_css()
+        sys.stdout.write('\n\nDone!')
