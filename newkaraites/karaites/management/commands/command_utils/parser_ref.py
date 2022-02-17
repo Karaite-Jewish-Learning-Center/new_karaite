@@ -134,8 +134,8 @@ def parse_reference(ref):
         reference may be in English or Hebrew
     """
 
-    # if len(ref) > 30:
-    #     return ''
+    if len(ref) > 30:
+        return ''
     if ref in IGNORE:
         return ''
 
@@ -147,14 +147,15 @@ def parse_reference(ref):
     for hebrew_book_name in hebrew_book_names:
         candidate = ref.replace(hebrew_book_name, '')
         if candidate != ref:
+            try:
+                if candidate.find(',') > 0:
+                    chapter, verse = candidate.strip().split(',')
+                else:
+                    chapter, verse = candidate.strip().split(':')
 
-            if candidate.find(',') > 0:
-                chapter, verse = candidate.strip().split(',')
-            else:
-                chapter, verse = candidate.strip().split(':')
-
-            return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
-
+                return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
+            except ValueError:
+                pass
     # replace multiple spaces by one space
     ref = re.sub(r"\s+", ' ', ref)
     # remove repeating spaces before and after :
