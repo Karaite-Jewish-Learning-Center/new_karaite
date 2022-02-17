@@ -74,7 +74,10 @@ ABBREVIATIONS = [
     ('Ps.', 'Psalms'),
     ('Ex.', 'Exodus'),
     ('Lev.', 'Leviticus'),
-
+    ('Deut.', 'Deuteronomy'),
+    ('Josh.', 'Joshua'),
+    ('Judg.', 'Judges'),
+    ('Ruth.', 'Ruth'),
 ]
 
 BIBLE_BOOKS_NAMES = {

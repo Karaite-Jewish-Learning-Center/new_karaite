@@ -42,7 +42,8 @@ class Command(BaseCommand):
             html = html.replace('class="a1 ', f'class="a1 MsoTableGrid ')
 
             html = html.replace('class="MsoTableGrid', f'class="MsoTableGrid{class_name}')
-
+            html = html.replace('class="a0 MsoTableGrid', f'class="MsoTableGrid{class_name}')
+            html = html.replace('class="a1 MsoTableGrid', f'class="MsoTableGrid{class_name}')
             html_tree = BeautifulSoup(html, 'html5lib')
 
             divs = html_tree.find_all('div', {'class': 'WordSection1'})

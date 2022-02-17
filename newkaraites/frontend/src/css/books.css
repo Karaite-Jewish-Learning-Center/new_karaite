@@ -111,7 +111,7 @@
 .simple-3-4 {
     min-width: 900px;
 }
-.simple-3-4  r:nth-child(odd) td:nth-child(2) p {
+.simple-3-4  tr:nth-child(odd) td:nth-child(2) p {
     margin: 0 5px 0 0;
     text-align: right;
     vertical-align: top;
@@ -136,10 +136,17 @@
 }
 
 .simple {
-    max-width: 600px;
+    min-width: 700px;
     direction: ltr;
 }
-.simple  tr:nth-child(odd) td:nth-child(1) p {
+
+.simple tr:nth-child(even) {
+    text-align: left;
+    margin-left: 30%;
+    margin-right: -150%;
+    direction: ltr;
+}
+.simple tr:nth-child(odd) td:nth-child(1) p {
     margin: 0 5px 0 0;
     text-align: right;
     vertical-align: top;
@@ -149,7 +156,6 @@
     text-align: left;
     vertical-align: top;
 }
-
 /* Amen Yehi Ratson */
 .amen-table-000 {
     min-width: 850px;
@@ -240,12 +246,11 @@
 
 /*En Kelohenu*/
 .en-table-000 {
-    width: 80%;
+    min-width: 90%;
     direction: ltr;
 }
 
 .en-table-000 tr td {
-    /*border:1px blue solid;*/
     margin: 0;
     padding-right: 10px;
     padding-left: 10px;
@@ -257,8 +262,8 @@
 }
 
 .en-table-000 tr:nth-child(even) {
-    margin-left: 20%;
-    margin-right: -110%;
+    margin-left: 40%;
+    margin-right: -100%;
 }
 
 .en-table-000 tr:nth-child(even) p {
@@ -272,7 +277,7 @@
 
 /* Essa Bechos Yesha‘ */
 .essa-table-000 {
-    width: 80%;
+    min-width: 70%;
     direction: rtl;
 }
 
@@ -282,18 +287,24 @@
     direction: ltr;
 }
 
-.essa-table-000 tr:nth-child(odd) td p {
+.essa-table-000 tr:nth-child(odd)  td:nth-child(2) p {
     direction: rtl;
     margin: 0 5px 0 0;
     text-align: right;
 }
 
 .essa-table-000 tr:nth-child(odd) td:nth-child(1) p {
+        background-color: #3498db;
+
     direction: ltr;
     text-align: left;
     margin: 0 0 0 5px;
 }
 
+/* Et Kos Yeshu‘ot‘ */
+.et-table-000 {
+    min-width: 70%;
+}
 /*Evyon Asher */
 .evyon-table-000 {
     max-width: 700px;
@@ -332,7 +343,6 @@
     text-align: left;
 }
 
-.
 .laatani-table-000 tr:nth-child(4n+3) {
     color: red;
 }
@@ -343,7 +353,7 @@
 
 /* Lutski Prayer for a Time of Plague */
 .lutski-table-000 {
-    width: 80%;
+    min-width: 70%;
     direction: ltr;
 }
 
@@ -374,7 +384,7 @@
 .lutski-table-001 tr:nth-child(even)  {
     margin-left: -80%;
     /*background-color: #ffc000;*/
-}s
+}
 .lutski-table-001  {
     direction: rtl;
 }
@@ -391,6 +401,12 @@
     margin: 0 5px 0 0;
     /*border: 1px #0038ba solid;*/
 }
+
+/*Malé ‘Olam Kevod Yofi */
+.mal-table-000 {
+    min-width: 70%;
+}
+
 /* Odé Le’el Maḥsi */
 .od-table-000 {
     width: 85%;
@@ -471,7 +487,7 @@
 
 /* Vehaḥochma Me’ayin Timmatsē */
 .vehahochma-table-000 {
-    min-width: 900px ;
+    min-width: 70% ;
     direction: ltr;
 }
 
