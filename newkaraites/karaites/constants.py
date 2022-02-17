@@ -196,8 +196,9 @@ BIBLE_BOOKS_NAMES = {
     'שמואל א': 'I Samuel',
     'מלכים ב': 'II Kings',
     'שמואל ב': 'II Samuel',
-    'ישעיה': 'Isaiah',
+
     'ישעיהו': 'Isaiah',  # typo ?
+    'ישעיה': 'Isaiah',
     'ירמיה': 'Jeremiah',
     'ירמיהו': 'Jeremiah',  # typo ?
     'יואל': 'Joel',
@@ -220,8 +221,16 @@ BIBLE_BOOKS_NAMES = {
     'איכה': 'Lamentations',
     'נחמיה': 'Nehemiah',
     'משלי': 'Proverbs',
-    'תהלים': 'Psalms',  # possible typo
+    # 'תהליםקט': 'Psalms',
+    # 'תהליםל': 'Psalms',
     'תהילים': 'Psalms',
     'רות': 'Ruth',
     'שיר השירים': 'Song of Songs'
 }
+
+REF_ERROR_CODE = [
+    ('--', '--'),
+    ('00', 'Verse number to big.'),
+    ('01', 'Chapter number to big.'),
+    ('02', 'Bible book does not exist!'),
+]

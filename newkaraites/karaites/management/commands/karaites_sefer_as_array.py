@@ -9,6 +9,7 @@ from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .command_utils.utils import get_html
 from .command_utils.clean_table import clean_tag_attr
+from .udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):
@@ -72,6 +73,6 @@ class Command(BaseCommand):
                 ref_paragraph += 1
 
         # update/create bible references
-        # update_create_bible_refs(book_details)
+        update_create_bible_refs(book_details)
         print()
-        print()
+        print('Done')

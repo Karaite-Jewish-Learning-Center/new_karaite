@@ -141,7 +141,7 @@ class AppState {
     }
 
     isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
-        this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
+        this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter -1 && pane.verse === verse)
 
 
     closePane = (i: number): void => {

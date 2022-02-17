@@ -15,6 +15,7 @@ from .process_books import (HAVDALA,
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from ...models import KaraitesBookDetails
+from .udpate_bible_ref import update_create_bible_refs
 
 
 class Command(BaseCommand):
@@ -23,22 +24,27 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        sys.stdout.write('\n Deleting old Karaites liturgy books...\n')
-        KaraitesBookDetails.objects.all().delete()
-
+        sys.stdout.write('\nDeleting old Karaites liturgy books...\n')
+        KaraitesBookDetails.objects.filter(first_level=4).delete()
+        sys.stdout.write(f'\nProcessing books:')
+        i = 1
         for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
-            sys.stdout.write(f'\33[K processing book {book}\n')
 
+            sys.stdout.write(f'\n {book.replace(".html","")}')
             book_details, _ = update_book_details(details)
 
+            if details.get('css_class', None) is not None:
+                class_name = f" {details.get('css_class')} "
+
             html = get_html(f'{PATH}{book}')
-            html = html.replace('class="a ', 'class="MsoTableGrid ')
-            html = html.replace('class="a0 ', 'class="a0 MsoTableGrid ')
-            html = html.replace('class="a1 ', 'class="a1 MsoTableGrid ')
+            html = html.replace('class="a ', f'class="MsoTableGrid ')
+            html = html.replace('class="a0 ', f'class="a0 MsoTableGrid ')
+            html = html.replace('class="a1 ', f'class="a1 MsoTableGrid ')
 
+            html = html.replace('class="MsoTableGrid', f'class="MsoTableGrid{class_name}')
+            html = html.replace('class="a0 MsoTableGrid', f'class="MsoTableGrid{class_name}')
+            html = html.replace('class="a1 MsoTableGrid', f'class="MsoTableGrid{class_name}')
             html_tree = BeautifulSoup(html, 'html5lib')
-
-            clear_terminal_line()
 
             divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
@@ -52,8 +58,9 @@ class Command(BaseCommand):
             update_karaites_array(book_details, 1, 1, table_str)
             update_book_details(details, introduction=str(divs[0]))
             update_toc(book_details, 2, details['name'].split(','))
-        # update/create bible references
-        # update_create_bible_refs(book_details)
+            # update/create bible references
+            update_create_bible_refs(book_details)
+            i += 1
 
         print()
-        print()
+        print(f'\nDone! processed: {i} books')
