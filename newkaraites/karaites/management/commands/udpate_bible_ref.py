@@ -15,7 +15,7 @@ def update_create_bible_refs(book_details):
             for ref in re.findall(rex, book_text.book_text[0]):
                 ref_text = BeautifulSoup(ref, 'html5lib').get_text().replace('\n', '').replace('\r', '')
 
-                english_ref = parse_reference(ref_text)
+                english_ref, _ = parse_reference(ref_text)
                 if english_ref == '':
                     continue
 

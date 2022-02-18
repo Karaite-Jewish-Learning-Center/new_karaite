@@ -86,32 +86,39 @@ REF = re.compile(RE_BIBLE_REF[0])
 CLEAN_HTML = re.compile('<.*?>')
 
 
-def update_bible_re(html_tree, language='HE'):
+def update_bible_re(html_tree):
     """ some books ( liturgy) have bible in English, even if the text is in Hebrew """
 
-    language_lower = language.lower()
     html_str = str(html_tree)
 
     # expand abbreviations
     for abbr, full_name in ABBREVIATIONS:
         html_str = html_str.replace(abbr, full_name)
 
+    map_ref = {}
+    i = 0
     for ref in re.findall(REF, html_str):
-        #    ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+        # ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
         # only text
         clean_ref = re.sub(CLEAN_HTML, '', ref.replace('\n', ' ').replace('\r', ' '))
 
-        valid_ref = parse_reference(clean_ref)
+        valid_ref, language = parse_reference(clean_ref)
+
         if valid_ref != '':
-            tag = ref.replace(ref,
-                              f'<span class="{language_lower}-biblical-ref" lang="{language}" data="{valid_ref}">{ref}</span>')
-            html_str = html_str.replace(ref, tag, 1)
+            i += 1
+            map_ref[i] = clean_ref
+            # print('ref', f'"{ref}"')
+            tag_ref = f'<span class="{language}-biblical-ref" lang="{language}">show-{i:04}</span>'
+            # tag = ref.replace(ref, tag_ref)
+            # print('tag', f'"{tag}"')
+            new_html = html_str.replace(ref, tag_ref)
+            # print('changed ', new_html != html_str)
+            html_str = new_html
+
+    for k, v in map_ref.items():
+        html_str = html_str.replace(f'show-{k:04}', v)
 
     return BeautifulSoup(html_str, 'html5lib')
-
-
-def update_bible_he_en(html_tree, language='EN'):
-    return update_bible_re(html_tree, language=language)
 
 
 def update_bible_adderet(html_tree):
@@ -189,8 +196,8 @@ BASIC_STYLE = """
         color: red;
     }
     
-    .en-biblical-ref {
-        color: red;
+    .he-biblical-ref {
+        color: green;
     }
     
     .en-foot-note {
@@ -371,7 +378,7 @@ HAVDALA = [
         'HTML/Liturgy/Havdala Songs/', 'Essa Bechos Yesha‘.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Essa Bechos Yesha‘,",
          'first_level': 4,
@@ -384,7 +391,7 @@ HAVDALA = [
         'HTML/Liturgy/Havdala Songs/', 'Et Kos Yeshu‘ot.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Et Kos Yeshu‘ot‘,את כוס ישועות",
          'first_level': 4,
@@ -397,7 +404,7 @@ HAVDALA = [
         'HTML/Liturgy/Havdala Songs/', 'Malé ‘Olam Kevod Yofi.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': "Malé ‘Olam Kevod Yofi,",
          'first_level': 4,
@@ -412,7 +419,7 @@ PRAYERS = [
         'HTML/Liturgy/Prayers/', 'En Kelohenu.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"En Kelohenu,",
          'first_level': 4,
@@ -425,7 +432,7 @@ PRAYERS = [
         'HTML/Liturgy/Prayers/', 'Lutski Prayer for a Time of Plague.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Lutski Prayer for a Time of Plague,",
          'first_level': 4,
@@ -441,7 +448,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshir Ḥadash.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ashir Beshir Ḥadash, אשיר בשיר חדש",
          'first_level': 4,
@@ -454,7 +461,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Le’el ‘Elyon.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ashir Le’el ‘Elyon,",
          'first_level': 4,
@@ -467,7 +474,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ekkon Lemmul Shabbat.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ekkon Lemul Shabbat, אכון למול שבת",
          'first_level': 4,
@@ -480,7 +487,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Esmaḥ Beshir Ḥadash.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Esmaḥ Beshir Ḥadash,אשמח בשיר חדש",
          'first_level': 4,
@@ -493,7 +500,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ezkor Lemitsvat Melech.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ezkor Lemitsvat Melech, אזכור למצות מלך",
          'first_level': 4,
@@ -506,7 +513,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Eḳra Le’el ‘Elyon.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Eḳra Le’el ‘Elyon,אקרא לאל עליון",
          'first_level': 4,
@@ -519,7 +526,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Mitsvat Yesod Shabbat.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Mitsvat Yesod Shabbat,מצות יסוד שבת",
          'first_level': 4,
@@ -532,7 +539,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Mizmor Leyom Shabbat.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Mizmor Leyom Shabbat,מזמור ליום שבת",
          'first_level': 4,
@@ -545,7 +552,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Odé Le’el Maḥsi.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Odé Le’el Maḥsi,",
          'first_level': 4,
@@ -558,7 +565,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ori Yeḥidati.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ori Yeḥidati,אורי יחידתי",
          'first_level': 4,
@@ -571,7 +578,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Shabbat Menuḥa.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Shabbat Menuḥa,",
          'first_level': 4,
@@ -584,7 +591,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yah Zimrati.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yah Zimrati,",
          'first_level': 4,
@@ -597,7 +604,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yatsar Ha’el.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yatsar Ha’el, יצר האל",
          'first_level': 4,
@@ -610,7 +617,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yerivai Ve’oyevai.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yerivai Ve’oyevai, יריבי ואויבי",
          'first_level': 4,
@@ -623,7 +630,7 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yeter Peletat ‘Am.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yeter Peletat ‘Am,",
          'first_level': 4,
@@ -638,7 +645,7 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Anochi Anochi.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Anochi Anochi, אנכי אנכי",
          'first_level': 4,
@@ -677,7 +684,7 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Vehahochma.html',
         'he',
         [fix_iframe],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
@@ -691,7 +698,7 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Vehoshia.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehoshiya‘, והושיע",
          'first_level': 4,
@@ -706,7 +713,7 @@ WEDDING_SONGS = [
         'HTML/Liturgy/Wedding Songs/', 'Amen Yehi Ratson.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Amen Yehi Ratson, אם יהיה ראסן",
          'first_level': 4,
@@ -719,7 +726,7 @@ WEDDING_SONGS = [
         'HTML/Liturgy/Wedding Songs/', 'Laḥatani Mivḥar Banai.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Laḥatani Mivḥar Banai,",
          'first_level': 4,
@@ -750,7 +757,7 @@ TEST_BOOKS = [
         'Vehahochma-2/', 'Vehahochma-2.html',
         'he',
         [fix_iframe],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"2 Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
