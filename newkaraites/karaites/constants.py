@@ -8,32 +8,35 @@ LANGUAGES = [
 ]
 
 BOOK_CLASSIFICATION = [
-    ('01', 'Prayers'),
-    ('02', 'Blessing'),
-    ('03', 'Karaite Jewish practice'),
-    ('04', 'Egyptian Karaite Tradition'),
-    ('05', 'Aliyyot Poems'),
-    ('06', 'Recipes'),
-    ('07', 'Biblical verses'),
-    ('08', 'Poems'),
-    ('09', 'PDFs'),
+    # ('01', 'Prayers'),
+    # ('02', 'Blessing'),
+    # ('03', 'Karaite Jewish practice'),
+    # ('04', 'Egyptian Karaite Tradition'),
+    # ('05', 'Aliyyot Poems'),
+    # ('06', 'Recipes'),
+    # ('07', 'Biblical verses'),
+    # ('08', 'Poems'),
+    # ('09', 'PDFs'),
     # liturgy
-    ('01', 'Prayers'),
     ('10', 'Havdala Songs'),
-    ('11', 'Shabbat Songs'),
-    ('12', 'Wedding Songs'),
-    ('13', 'Supplemental Readings for specific Torah portions'),
+    ('20', 'Prayers'),
+    ('30', 'Shabbat Songs'),
+    ('40', 'Supplemental Readings for specific Torah portions'),
+    ('50', 'Wedding Songs'),
+
+    # Polemic
+    ('60', 'Polemic'),
 
 ]
 
 FIRST_LEVEL = [
     (1, 'Tanakh'),
-    (2, 'Talmud'),
+   # (2, 'Talmud'),
     (3, 'Halakhah'),
     (4, 'Liturgy'),
     (5, 'Polemics'),
-    (6, 'Songs'),
-    (7, 'Prayers'),
+    # (6, 'Songs'),
+    # (7, 'Prayers'),
 ]
 
 SECOND_LEVEL = [

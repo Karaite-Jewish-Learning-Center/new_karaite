@@ -423,7 +423,7 @@ PRAYERS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"En Kelohenu,",
          'first_level': 4,
-         'book_classification': '01',
+         'book_classification': '20',
          'author': 'En Kelohenu,',
          'css_class': 'simple'},
         False
@@ -436,7 +436,7 @@ PRAYERS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Lutski Prayer for a Time of Plague,",
          'first_level': 4,
-         'book_classification': '01',
+         'book_classification': '20',
          'author': 'N/A,',
          'css_class': 'simple'},
         False
@@ -452,7 +452,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Ashir Beshir Ḥadash, אשיר בשיר חדש",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yosef ben Nisan Poziemski,',
          'css_class': 'simple-3-4'},
         False
@@ -465,7 +465,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Ashir Le’el ‘Elyon,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Ashir Le’el ‘Elyon,',
          'css_class': 'simple-3-4'},
         False
@@ -478,7 +478,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Ekkon Lemul Shabbat, אכון למול שבת",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yosef ben Yitsḥaḳ Itson,',
          'css_class': 'simple-3-4'},
         False
@@ -491,7 +491,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Esmaḥ Beshir Ḥadash,אשמח בשיר חדש",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Ezra ben Nisan Ha-rofé,',
          'css_class': 'simple-3-4'},
         False
@@ -504,7 +504,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Ezkor Lemitsvat Melech, אזכור למצות מלך",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
          'css_class': 'simple-3-4'},
         False
@@ -517,7 +517,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Eḳra Le’el ‘Elyon,אקרא לאל עליון",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'R. Abraham ben Mordochai,',
          'css_class': 'simple-3-4'},
         False
@@ -530,7 +530,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Mitsvat Yesod Shabbat,מצות יסוד שבת",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Moshe Beghi,',
          'css_class': 'simple-3-4'},
         False
@@ -543,7 +543,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Mizmor Leyom Shabbat,מזמור ליום שבת",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
          'css_class': 'simple-3-4'},
         False
@@ -556,7 +556,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Odé Le’el Maḥsi,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Odé Le’el Maḥsi,',
          'css_class': 'simple-3-4'},
         False
@@ -569,7 +569,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Ori Yeḥidati,אורי יחידתי",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Mordochai Sultansky,',
          'css_class': 'simple-3-4'},
         False
@@ -582,7 +582,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Shabbat Menuḥa,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Shabbat Menuḥa,',
          'css_class': 'simple-3-4'},
         False
@@ -595,7 +595,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Yah Zimrati,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yah Zimrati,',
          'css_class': 'simple-3-4'},
         False
@@ -608,7 +608,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Yatsar Ha’el, יצר האל",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Ya‘aḳov (otherwise unknown),',
          'css_class': 'simple-3-4'},
         False
@@ -621,7 +621,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Yerivai Ve’oyevai, יריבי ואויבי",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yisra’el ben Shemu’el Ha-ma‘aravi Ha-dayyan,',
          'css_class': 'simple-3-4'},
         False
@@ -634,7 +634,7 @@ SHABBAT_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Yeter Peletat ‘Am,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yeter Peletat ‘Am,',
          'css_class': 'simple-3-4'},
         False
@@ -649,7 +649,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Anochi Anochi, אנכי אנכי",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'N/A (Biblical Verses)',
          'css_class': 'special'},
         False
@@ -662,7 +662,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Poems, Author
         {'name': r"Atsili ḳum ḳera, Atsili ḳum ḳera",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'Abraham',
          'css_class': 'simple'},
         False
@@ -675,7 +675,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Poems, Author
         {'name': r"Evyon Asher, אביון אשר",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'Anatoli (ben Joseph?)',
          'css_class': 'simple'},
         False
@@ -688,7 +688,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'N/A (Biblical Verses)',
          'css_class': 'simple'},
         False
@@ -702,7 +702,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehoshiya‘, והושיע",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'N/A (Biblical Verses)',
          'css_class': 'special-1'},
         False
@@ -717,7 +717,7 @@ WEDDING_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Amen Yehi Ratson, אם יהיה ראסן",
          'first_level': 4,
-         'book_classification': '12',
+         'book_classification': '50',
          'author': 'Amen Yehi Ratson,',
          'css_class': 'simple-3-4'},
         False
@@ -730,7 +730,7 @@ WEDDING_SONGS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"Laḥatani Mivḥar Banai,",
          'first_level': 4,
-         'book_classification': '12',
+         'book_classification': '50',
          'author': 'Laḥatani Mivḥar Banai,',
          'css_class': 'simple-3-4'},
         False
@@ -745,13 +745,13 @@ POLEMIC = [
         # name, Polemic , , Author
         {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
-         'book_classification': '07',
+         'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
         False
     ],
 ]
 
-# must be last, order of books is important
+# should be last,
 TEST_BOOKS = [
     [
         'Vehahochma-2/', 'Vehahochma-2.html',

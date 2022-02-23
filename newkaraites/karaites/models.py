@@ -540,17 +540,23 @@ class KaraitesBookDetails(models.Model):
         return self.introduction
 
     @staticmethod
-    def get_all_books_by_first_level(level):
-        book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title')
+    def get_all_books_by_first_level(level, classification=False):
+
+        if not classification:
+            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title')
+        else:
+            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
+                                                                                          'book_classification',
+                                                                                          'book_title')
         data = []
         for details in book_details:
             data.append({
                 'book_id': details.id,
                 'book_first_level': details.first_level,
                 'book_language': details.book_language,
-                'book_classification': details.book_classification,
+                'book_classification': details.get_book_classification_display(),
                 'book_title': details.book_title,
-                'intro': details.introduction,
+                # 'intro': details.introduction,
             })
         return data
 
@@ -563,7 +569,7 @@ class KaraitesBookDetails(models.Model):
             'book_id': details.id,
             'book_first_level': details.first_level,
             'book_language': details.book_language,
-            'book_classification': details.book_classification,
+            'book_classification': details.get_book_classification_display(),
             'author': details.author.name,
             'book_title': details.book_title,
             'toc': [t.to_json() for t in toc],

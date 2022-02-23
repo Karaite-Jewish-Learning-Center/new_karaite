@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {slug} from '../../utils/utils'
-import Filler from '../general/Filler'
+import Filler from '../general/Filler.tsx'
 import {makeStyles} from "@material-ui/core/styles"
 import {languageDirection} from "../../utils/languageDirection"
 import Colors from "../../constants/colors";

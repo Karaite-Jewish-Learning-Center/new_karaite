@@ -2,7 +2,6 @@ import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Grid} from '@material-ui/core';
 import {parseBiblicalReference} from '../utils/parseBiblicalReference';
-import KaraitesBooks from './karaites/karaitesBooks'
 import {observer} from 'mobx-react-lite'
 import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
@@ -15,8 +14,12 @@ import {bookChapterUrl} from '../constants/constants'
 import {makeBookUrl} from "../utils/utils"
 import {storeContext} from "../stores/context";
 import {translateMessage} from "./messages/translateMessages";
+import KaraitesTabs from "./karaites/KaraitesTabs";
+import KaraitesBooks from "./karaites/karaitesBooks";
 
 const PARAGRAPHS = 0
+const BOOK_DETAILS = 1
+const BOOK_TOC = 2
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
@@ -67,7 +70,10 @@ const LoadBook = ({type}) => {
             const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${999999}/${0}/`)
             if (response.ok) {
                 const data = await response.json()
+                debugger
                 store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
+                store.setBookDetails(data[BOOK_DETAILS], paneNumber)
+                store.setBookTOC(data[BOOK_TOC], paneNumber)
             } else {
                 alert("HTTP-Error: " + response.status)
             }
@@ -112,11 +118,11 @@ const LoadBook = ({type}) => {
                     verse: verse,
                     paragraphs: [],
                     book_details: [],
+                    TOC: [],
                     highlight: [],
                     type: type,
                     currentItem: chapter,
                     languages: ['he', 'en'],
-
                 })
                 await fetchDataKaraites(store.panes.length - 1)
             }
@@ -131,7 +137,7 @@ const LoadBook = ({type}) => {
         }
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
-            let isOpen = store.isPaneOpen(refBook, refChapter , refVerse)
+            let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
             debugger
             if (isOpen) {
                 store.setMessage(`${book} ${chapter}:${verse} already open.`)
@@ -180,8 +186,7 @@ const LoadBook = ({type}) => {
                             refClick={refClick}
                             paragraphs={store.getParagraphs(i)}
                             type={type}
-                            onClosePane={onClosePane}
-                        />
+                            onClosePane={onClosePane}/>
                     </Grid>
 
                 ))
@@ -225,7 +230,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         height: 'calc(95vh - 70px)',
-        overflowY: 'hidden',
+        overflow: 'hidden',
         position: 'fixed',
         top: 70,
         fontSize: '21px !important',

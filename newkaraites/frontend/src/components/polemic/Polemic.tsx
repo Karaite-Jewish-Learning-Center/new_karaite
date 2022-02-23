@@ -1,9 +1,9 @@
 import React from 'react'
 import {RenderMenuSecondLevel} from '../menu/RenderMenuSecondLevel';
-import {booksIntro} from '../../types/commonTypes';
+//import {booksIntro} from '../../types/commonTypes';
 
 // should be an API call
-const books: booksIntro[] = [
+const books  = [
   {
     "book_id": 565,
     "book_first_level": 5,

@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {getFirstLevelUrl} from '../../constants/constants'
 import {booksMenu} from '../../constants/common-css'
-import Filler from "../general/Filler";
+import Filler from "../general/Filler.tsx";
 import {storeContext} from "../../stores/context";
 
 
