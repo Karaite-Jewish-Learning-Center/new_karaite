@@ -14,7 +14,6 @@ import {bookChapterUrl} from '../constants/constants'
 import {makeBookUrl} from "../utils/utils"
 import {storeContext} from "../stores/context";
 import {translateMessage} from "./messages/translateMessages";
-import KaraitesTabs from "./karaites/KaraitesTabs";
 import KaraitesBooks from "./karaites/karaitesBooks";
 
 const PARAGRAPHS = 0
@@ -70,10 +69,10 @@ const LoadBook = ({type}) => {
             const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${999999}/${0}/`)
             if (response.ok) {
                 const data = await response.json()
-                debugger
+                const details = data[BOOK_DETAILS]
                 store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
-                store.setBookDetails(data[BOOK_DETAILS], paneNumber)
-                store.setBookTOC(data[BOOK_TOC], paneNumber)
+                store.setBookDetails(details, paneNumber)
+
             } else {
                 alert("HTTP-Error: " + response.status)
             }
@@ -138,7 +137,6 @@ const LoadBook = ({type}) => {
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
             let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
-            debugger
             if (isOpen) {
                 store.setMessage(`${book} ${chapter}:${verse} already open.`)
             } else {
@@ -162,6 +160,7 @@ const LoadBook = ({type}) => {
 
 
     const bookRender = () => {
+
         const panes = store.getPanes()
         let jsx = []
 
@@ -185,6 +184,7 @@ const LoadBook = ({type}) => {
                             paneNumber={i}
                             refClick={refClick}
                             paragraphs={store.getParagraphs(i)}
+                            details = {store.getBookDetails(i)}
                             type={type}
                             onClosePane={onClosePane}/>
                     </Grid>
@@ -198,6 +198,7 @@ const LoadBook = ({type}) => {
                             paneNumber={i}
                             refClick={refClick}
                             paragraphs={store.getParagraphs(i)}
+                            details = {store.getBookDetails(i)}
                             type={type}
                             onClosePane={onClosePane}
                         />

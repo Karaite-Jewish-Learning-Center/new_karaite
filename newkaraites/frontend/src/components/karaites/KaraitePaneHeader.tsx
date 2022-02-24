@@ -44,6 +44,7 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber, onClosePane, onIntroClick, 
               justifyContent="flex-start"
               alignItems="center"
               spacing={1}>
+
             <Grid item xs={5}>
                 <CloseButton onClick={onClose}/>
                 <InfoButton onClick={onIntro}/>

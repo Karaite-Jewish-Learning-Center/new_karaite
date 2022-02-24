@@ -465,7 +465,7 @@ class BookAsArray(models.Model):
                 result += book.book_text
             return result
 
-        # if book is less then 11 chapters, read all book
+        # if book is less them 11 chapters, read all book
         if book_title.chapters <= 10:
             chapter = None
 
@@ -572,7 +572,7 @@ class KaraitesBookDetails(models.Model):
             'book_classification': details.get_book_classification_display(),
             'author': details.author.name,
             'book_title': details.book_title,
-            'toc': [t.to_json() for t in toc],
+            'toc': [t.to_list() for t in toc],
             'intro': details.introduction,
         }
 

@@ -722,3 +722,16 @@
 .ft4 {
     text-align: center;
 }
+
+.WordSection1 {
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 700px;
+    font-size: 18px;
+}
+
+.WordSection1 p {
+    margin-left: 20px;
+    margin-right: 20px;
+}

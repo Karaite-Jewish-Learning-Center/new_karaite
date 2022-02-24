@@ -119,7 +119,9 @@ class AppState {
 
     // panes
     setPanes = (pane: number): void => {
-        this.panes = [...this.panes, pane]
+        runInAction(() => {
+            this.panes = [...this.panes, pane]
+        })
     }
 
     getPanes = (): Array<any> => this.panes
@@ -141,7 +143,7 @@ class AppState {
     }
 
     isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
-        this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter -1 && pane.verse === verse)
+        this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
 
     closePane = (i: number): void => {
@@ -155,6 +157,7 @@ class AppState {
 
     // karaites books
     setParagraphs = (paragraphs: Array<any>, i: number): void => {
+        console.log('setParagraphs', paragraphs)
         this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
     }
 
@@ -163,10 +166,16 @@ class AppState {
     getKaraitesChapter = (i: number): number =>
         (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
-    setBookDetails = (details: string, i: number): void => {
-        this.panes[i].book_details = details
+    setBookDetails = (details: object, i: number): void => {
+        console.log('setBookDetails', details)
+        runInAction(() => {
+            this.panes[i].book_details = details
+        })
     }
-    getBookDetails = (i: number): Array<any> => this.panes[i].book_details
+    getBookDetails = (i: number): object => {
+        console.log('getBookDetails', this.panes[i].book_details)
+        return this.panes[i].book_details
+    }
 
     setBookTOC = (toc: string, i: number): void => {
         this.panes[i].TOC = toc

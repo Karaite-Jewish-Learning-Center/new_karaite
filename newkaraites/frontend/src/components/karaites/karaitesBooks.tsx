@@ -1,4 +1,4 @@
-import React, {useContext, useState, FC, MouseEventHandler} from 'react'
+import React, {useContext, useState, useRef, FC, MouseEventHandler} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import KaraitePaneHeader from './KaraitePaneHeader';
@@ -9,39 +9,59 @@ import Colors from '../../constants/colors'
 import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
+import {Button, Typography} from '@material-ui/core';
 
 
 const HTML = 2
 
 const BOOK = 0
-const INTRO = 1
-const TOC = 2
+const TOC = 1
+const INTRO = 2
+
+const SUBJECT = 0
+const INDEX = 1
+const START_PARAGRAPH = 2
 
 interface KaraitesBooksInterface {
     paneNumber: number,
     refClick: MouseEventHandler,
     paragraphs: Array<any>,
+    details: any,
     type: string,
     onClosePane: MouseEventHandler
 }
 
-const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragraphs, type, onClosePane}) => {
+const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragraphs, details, type, onClosePane}) => {
+    const store = useContext(storeContext)
     const [loadingMessage, setLoadingMessage] = useState<string>('Loading...')
     // book, intro, toc
     const [flags, setFlags] = useState<Array<boolean>>([true, false, false])
-    const store = useContext(storeContext)
 
+    const virtuoso = useRef(null);
     const classes = useStyles()
 
     const onIntroClick = () => {
+        setLoadingMessage('Introduction end.')
         setFlags([false, false, true])
     }
+
     const onTocClick = () => {
+        setLoadingMessage('Table of contents end.')
         setFlags([false, true, false])
     }
+
     const onBookClick = () => {
+        setLoadingMessage('Text end.')
         setFlags([true, false, false])
     }
+    const onButtonClick = (starParagraph: number) => {
+        debugger
+        setFlags([true, false, false])
+        // @ts-ignore
+        virtuoso.current.scrollTo({index: 20, align: 'auto', offset: 0})
+
+    }
+
     const selectCurrent = (item: number): boolean => {
         if (store.panes.length === 1) {
             return false
@@ -50,10 +70,8 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
     }
 
     const itemContent = (item: number, data: Array<any>) => {
-        debugger
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-
                 {parse(data[HTML][0], {
                     replace: domNode => {
                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
@@ -61,12 +79,43 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
                 })}
             </div>
         </div>)
+    }
 
+    const itemIntroduction = (item: number, data: string) => {
+        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+            <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
+                {parse(data, {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })}
+            </div>
+        </div>)
+    }
 
+    const itemToc = (item: number, data: any) => {
+        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+            <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
+                <Button onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
+                    <div className={classes.heLeft}>
+                        <Typography className={classes.he}>{data[INDEX]}</Typography>
+                    </div>
+                    <div className={classes.heRight}>
+                        <Typography className={classes.he}>{data[SUBJECT]}</Typography>
+                    </div>
+                </Button>
+            </div>
+        </div>)
     }
     // initial can't be negative
+    if (paragraphs.length === 0) {
+        return <Loading/>
+    }
     const topItem: number = store.getCurrentItem(paneNumber) - 1
     const initial: number = (topItem > 0 ? topItem : 0)
+
+    const intro = (details.intro === undefined ? [''] : [details.intro])
+    const toc = (details.toc === undefined ? [''] : details.toc)
 
     return (
         <>
@@ -80,8 +129,8 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
 
             <Virtuoso className={(flags[BOOK] ? classes.Show : classes.Hide)}
                       data={paragraphs}
+                      ref={virtuoso}
                       initialTopMostItemIndex={initial}
-                      endReached={(_) => setLoadingMessage('Text end.')}
                       itemContent={itemContent}
                       components={{
                           Footer: () => {
@@ -89,28 +138,26 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
                           }
                       }}
             />
-            <Virtuoso className={(flags[TOC] ? classes.Show : classes.Hide)}
-                      data={store.getBookTOC(paneNumber)}
-                      initialTopMostItemIndex={initial}
-                      endReached={(_) => setLoadingMessage('Text end.')}
-                      itemContent={itemContent}
+            <Virtuoso className={`${(flags[TOC] ? classes.Show : classes.Hide)} ${classes.head}`}
+                      data={toc}
+                      initialTopMostItemIndex={0}
+                      itemContent={itemToc}
                       components={{
                           Footer: () => {
                               return <Loading text={loadingMessage}/>
                           }
                       }}
             />
-            {/*<Virtuoso className={(!toc ? classes.tocShow : classes.tocHide)}*/}
-            {/*          data={store.getBookDetails(paneNumber)}*/}
-            {/*          initialTopMostItemIndex={initial}*/}
-            {/*          endReached={(_) => setLoadingMessage('Text end.')}*/}
-            {/*          itemContent={itemContent}*/}
-            {/*          components={{*/}
-            {/*              Footer: () => {*/}
-            {/*                  return <Loading text={loadingMessage}/>*/}
-            {/*              }*/}
-            {/*          }}*/}
-            {/*/>*/}
+            <Virtuoso className={`${(flags[INTRO] ? classes.Show : classes.Hide)} ${classes.head}`}
+                      data={intro}
+                      initialTopMostItemIndex={0}
+                      itemContent={itemIntroduction}
+                      components={{
+                          Footer: () => {
+                              return <Loading text={loadingMessage}/>
+                          }
+                      }}
+            />
 
         </>
     )
@@ -149,7 +196,24 @@ const useStyles = makeStyles(() => ({
     },
     Show: {
         display: 'block',
+    },
+    heLeft: {
+        float: 'left',
+        width: '300px',
+        textAlign: 'left',
+    },
+    heRight: {
+        float: 'right',
+        textAlign: 'right',
+        width: '300px',
+    },
+    he: {
+        direction: 'rtl',
+    },
+    head: {
+        marginTop: '50px',
     }
+
 }))
 
 
