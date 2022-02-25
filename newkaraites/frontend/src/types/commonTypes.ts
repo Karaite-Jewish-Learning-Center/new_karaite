@@ -1,6 +1,6 @@
 
 // liturgy
-export interface booksLiturgy {
+export interface bookDetails {
         'book_id':number,
         'book_first_level':number,
         'book_language':string,
@@ -18,7 +18,7 @@ export interface booksHalakhah {
         'Date Written':string,
         'Location': string,
         'Edition': string,
-        'introduction':string,
+
     }
 }
 

@@ -54,12 +54,14 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
         setLoadingMessage('Text end.')
         setFlags([true, false, false])
     }
-    const onButtonClick = (starParagraph: number) => {
-        debugger
-        setFlags([true, false, false])
-        // @ts-ignore
-        virtuoso.current.scrollTo({index: 20, align: 'auto', offset: 0})
 
+    const onButtonClick = (starParagraph: number) => {
+        setFlags([true, false, false])
+        // only works this way because the virtuoso is not re-rendered
+        setTimeout(() => {
+            // @ts-ignore
+            virtuoso.current.scrollToIndex(starParagraph -1)
+        }, 100)
     }
 
     const selectCurrent = (item: number): boolean => {

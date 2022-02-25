@@ -137,6 +137,9 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 BOOKS = [1, 2]
 
+# technical "in" is not a language, we use to process introduction files
+LANGUAGES = {'en': "English", 'he': "Hebrew", "in": "introduction"}
+
 
 def fix_image_gan(path, book_name):
     # specific for Gan Eden
@@ -313,6 +316,31 @@ HALAKHAH = [
         True
     ],
     [
+        "HTML/Halakhah/Aaron ben Joseph's Essay on the Obligation of Prayer/",
+        "Aaron ben Joseph's Essay on the Obligation of Prayer-{}.html",
+        'he,en,in',
+        [],
+        [],
+        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': ',',
+         'css_class': ''},
+        True
+    ],
+    [
+        'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
+        'he',
+        [fix_image_gan],
+        [],
+        {'name': r"Gan Eden,",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
+         'css_class': ''},
+        True
+    ],
+    [
         'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
         [],
@@ -354,24 +382,7 @@ HALAKHAH = [
         {},
         False
     ],
-    [
-        'HTML/Halakhah/Gan Eden/',
-        'Gan Eden Hebrew Text.html',
-        'he',
-        [fix_image_gan],
-        [update_bible_re],
-        {},
-        False
-    ],
-    [
-        'HTML/Halakhah/Gan Eden/',
-        'Gan Eden TOC.html',
-        'he',
-        [fix_image_gan],
-        [update_bible_re],
-        {},
-        False
-    ]
+
 ]
 HAVDALA = [
     [
@@ -761,7 +772,7 @@ TEST_BOOKS = [
         # name, liturgy , Biblical verses, Author
         {'name': r"2 Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
-         'book_classification': '07',
+         'book_classification': '70',
          'author': 'N/A (Biblical Verses)'},
         False
     ],
@@ -1074,15 +1085,15 @@ class Command(BaseCommand):
             for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
                 level = details.get('first_level', 'None')
                 classification = details.get('book_classification', None)
-                lang = language.capitalize()
-                book_name = book.replace('.html', '')
+                lang = language.capitalize().replace('en', 'En')
+                book_name = book.replace('.html', '').replace('-{}', '')
 
                 if level is not None and classification is not None:
                     book_level = FIRST_LEVEL[int(level) - 1][1]
-                    book_classification = BOOK_CLASSIFICATION[int(classification) - 1][1]
-                    print(f'{i:02} {lang:4} {book_level:8} {book_classification:16} {book_name}')
+                    book_classification = BOOK_CLASSIFICATION[int(classification) // 10 - 1][1]
+                    print(f'{i:02} {lang:5} {book_level:8} {book_classification[0:12]:14} {book_name}')
                 else:
-                    print(f'{i:02} {lang:4} {"Tanakh":8} {"-- ":16} {book_name}')
+                    print(f'{i:02} {lang:5} {"Tanakh":8} {"-- ":14} {book_name}')
 
                 i += 1
             print()
@@ -1108,48 +1119,53 @@ class Command(BaseCommand):
             books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
 
         for path, book, language, pre_processes, _, _, _ in books_to_process:
-            sys.stdout.write(f"\nPre-processing book: {book}")
-            for pre_process in pre_processes:
-                pre_process(path, book)
+            for lang in language.split(','):
+                book_name = book.replace('{}', LANGUAGES[lang])
+                for pre_process in pre_processes:
+                    sys.stdout.write(f"\nPre-processing book : {book_name}")
+                    pre_process(path, book_name)
 
         i = 1
         for path, book, language, _, post_processes, details, collect in books_to_process:
-            sys.stdout.write(f"\nProcessing book: {book}")
-            html = read_data(path, book, SOURCE_PATH)
 
-            if html is None:
-                sys.stdout.write(f"\nSkipping {book} no suitable codec found.")
-                continue
+            for lang in language.split(','):
+                book_name = book.replace('{}', LANGUAGES[lang])
+                sys.stdout.write(f"\nPre-processing book {lang}: {book_name}")
+                html = read_data(path, book_name, SOURCE_PATH)
 
-            html_tree = BeautifulSoup(html, 'html5lib')
+                if html is None:
+                    sys.stdout.write(f"\nSkipping {book_name} no suitable codec found.")
+                    continue
 
-            html_tree = self.replace_a_foot_notes(html_tree, language)
+                html_tree = BeautifulSoup(html, 'html5lib')
 
-            sys.stdout.write(f"\nRemoving comments for book {book}")
-            html_str = self.replace_from_open_to_close(str(html_tree))
+                html_tree = self.replace_a_foot_notes(html_tree, language)
 
-            sys.stdout.write(f"\nCollecting css for book {book}")
-            html_tree = BeautifulSoup(html_str, 'html5lib')
+                sys.stdout.write(f"\nRemoving comments for book {book_name}")
+                html_str = self.replace_from_open_to_close(str(html_tree))
 
-            html_tree = self.collect_style_map_to_class(html_tree, book, collect)
+                sys.stdout.write(f"\nCollecting css for book {book_name}")
+                html_tree = BeautifulSoup(html_str, 'html5lib')
 
-            for process in post_processes:
-                sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book}")
-                html_tree = process(html_tree)
+                html_tree = self.collect_style_map_to_class(html_tree, book_name, collect)
 
-            sys.stdout.write(f"\nRemoving empty tags for book {book}")
-            html_str = self.remove_tags(str(html_tree))
-            html_str = self.replace_class_name(html_str)
-            sys.stdout.write('\r\n')
-            sys.stdout.write(f"\nProcessed book {book}")
-            sys.stdout.write(f"\nWriting files for {book}")
-            sys.stdout.write('\n')
+                for process in post_processes:
+                    sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")
+                    html_tree = process(html_tree)
 
-            handle_out = open(f'{OUT_PATH}{book}', 'w')
-            handle_out.write(BASIC_HTML.format(BASIC_STYLE, html_str))
-            handle_out.close()
+                sys.stdout.write(f"\nRemoving empty tags for book {book_name}")
+                html_str = self.remove_tags(str(html_tree))
+                html_str = self.replace_class_name(html_str)
+                sys.stdout.write('\r\n')
+                sys.stdout.write(f"\nProcessed book {book_name}")
+                sys.stdout.write(f"\nWriting files for {book_name}")
+                sys.stdout.write('\n')
 
-            i += 1
+                handle_out = open(f'{OUT_PATH}{book_name}', 'w')
+                handle_out.write(BASIC_HTML.format(BASIC_STYLE, html_str))
+                handle_out.close()
+
+                i += 1
         self.parse_and_save_css()
         self.handle_ms_css()
         sys.stdout.write('\n\nDone!')

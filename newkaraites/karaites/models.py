@@ -602,7 +602,7 @@ class KaraitesBookAsArray(models.Model):
 
     paragraph_number = models.IntegerField(default=0)
 
-    # [paragraph, page number, page number hebrew, is_title]
+    # [paragraph English, page number, page number hebrew, is_title, paragraph Hebrew]
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)

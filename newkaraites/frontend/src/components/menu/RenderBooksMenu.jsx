@@ -10,17 +10,22 @@ import {ToText} from "../general/ToText";
 import {cleanUrl} from "../../utils/cleanUrl";
 
 
-export const RenderLiturgyMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
+export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns = 6, header = true}) => {
 
     const classes = useStyles()
 
     const populate = (obj) => {
+        debugger
         const keys = Object.keys(obj)
         let separator = ''
         let comp = []
         keys.forEach(key => {
             if (obj[key].book_classification !== separator) {
-                separator = obj[key].book_classification;
+                if (header) {
+                    separator = obj[key].book_classification;
+                } else {
+                    separator = ''
+                }
                 comp.push(
                     <Grid item xs={12}>
                         <hr className={classes.hr}/>
@@ -35,11 +40,11 @@ export const RenderLiturgyMenu = ({books, path, languages = ['en', 'en'], column
                 </Link>)
 
         })
-        comp.push(  <Grid item xs={12}>
-                        <hr className={classes.hr}/>
-                        <Typography variant="h6" className={classes.title}>
-                        </Typography>
-                    </Grid>)
+        comp.push(<Grid item xs={12}>
+            <hr className={classes.hr}/>
+            <Typography variant="h6" className={classes.title}>
+            </Typography>
+        </Grid>)
         return comp
     }
 

@@ -37,10 +37,10 @@ const LoadBook = ({type}) => {
 
         if (store.isLastPane) {
             if (type === 'bible') {
-                history.push(`/Tanakh/${book}/`)
+                history.push(`/Tanakh/`)
             }
             if (type === 'karaites') {
-                history.push(`/Halakhah/${book}/`)
+                history.push(`/Halakhah/`)
             }
             if (type === 'liturgy') {
                 history.push(`/Liturgy/`)

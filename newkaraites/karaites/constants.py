@@ -26,17 +26,20 @@ BOOK_CLASSIFICATION = [
 
     # Polemic
     ('60', 'Polemic'),
-
+    # test
+    ('70', 'Test'),
+    # other
+    ('80', 'Other'),
 ]
 
 FIRST_LEVEL = [
     (1, 'Tanakh'),
-   # (2, 'Talmud'),
+    (2, 'Talmud'),
     (3, 'Halakhah'),
     (4, 'Liturgy'),
     (5, 'Polemics'),
-    # (6, 'Songs'),
-    # (7, 'Prayers'),
+    (6, 'Songs'),
+    (7, 'Prayers'),
 ]
 
 SECOND_LEVEL = [

@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react'
-import {RenderLiturgyMenu} from '../menu/RenderLiturgyMenu'
-import {booksLiturgy} from '../../types/commonTypes';
+import {RenderBooksMenu} from '../menu/RenderBooksMenu'
+import {bookDetails} from '../../types/commonTypes';
 import {karaitesBookByLevelAndClassification, LITURGY} from '../../constants/constants';
 
 
-const fetchBooks = async ():Promise<booksLiturgy> => {
+const fetchBooks = async ():Promise<bookDetails> => {
     const response = await fetch(`${karaitesBookByLevelAndClassification}${LITURGY}/`);
-    const data:booksLiturgy = await response.json();
+    const data:bookDetails = await response.json();
     return data;
 };
 
 
 const Liturgy = () => {
     const [showBooks, setShowBooks] = useState<boolean>(false);
-    const [books, setBooks] = useState<booksLiturgy>();
+    const [books, setBooks] = useState<bookDetails>();
 
     useEffect(() => {
         fetchBooks().then(data => {
@@ -22,7 +22,7 @@ const Liturgy = () => {
         });
     }, []);
 
-    return (showBooks ? <RenderLiturgyMenu books={books} path='liturgy' languages={['en', 'he']}/> : null)
+    return (showBooks ? <RenderBooksMenu books={books} path='liturgy' languages={['en', 'he']}/> : null)
 
 }
 
