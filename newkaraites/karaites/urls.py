@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import (GetFirstLevel,
+                    GetByLevelAndByClassification,
                     BooksPresentation,
                     GetBookAsArrayJson,
                     GetComments,
@@ -37,7 +38,11 @@ urlpatterns = [
 
     path('get-karaites-books-by-level/<str:level>/',
          GetByLevel.as_view(),
-         name='get_karaites_book_by_classification'),
+         name='get_karaites_book_by_level'),
+
+    path('get-karaites-books-by-level-and-classification/<str:level>/',
+         GetByLevelAndByClassification.as_view(),
+         name='get_karaites_book_by_level_and_classification'),
 
     # comments
     path('get-comments/<str:book>/<str:chapter>/<str:verse>/', GetComments.as_view(), name='get_comments'),

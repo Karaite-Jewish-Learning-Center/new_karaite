@@ -246,7 +246,7 @@
 
 /*En Kelohenu*/
 .en-table-000 {
-    min-width: 90%;
+    min-width: 60%;
     direction: ltr;
 }
 
@@ -277,12 +277,14 @@
 
 /* Essa Bechos Yesha‘ */
 .essa-table-000 {
+    max-width: 70%;
     min-width: 70%;
     direction: rtl;
 }
 
 .essa-table-000 tr:nth-child(even) {
-    margin-left: -80%;
+     margin-left: -80%;
+    margin-right: 20%;
     text-align: left;
     direction: ltr;
 }
@@ -547,56 +549,49 @@
 /* Yeter Peletat ‘Am */
 
 /* Sefer Milḥamot Adonai */
-.sefer-table {
-    width: 70%;
+
+.sefer_milh-table-000 tr:nth-child(even) {
+
+    min-width: 400px;
+}
+.sefer_milh-table-000 tr:nth-child(even) p span span{
+    min-width: 400px;
+}
+.sefer_milh-table-000 tr:nth-child(even) {
+    margin-right: -300%;
+    min-width: 400px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-.sefer-table tr:nth-child(even) {
-    min-width: 500px;
-}
+.sefer_milh-table-000 tr:nth-child(odd) td:nth-child(1) {
 
-.sefer-table tr:nth-child(even) {
-    min-width: 500px;
-}
-
-.sefer-table tr:nth-child(even) td:nth-child(1) {
-    /*border:1px red solid;*/
-    min-width: 32px;
-}
-
-.sefer-table tr:nth-child(even) td:nth-child(2) {
-    /*border:1px black solid;*/
-}
-
-.sefer-table tr:nth-child(odd) td:nth-child(1) {
     width: 30px;
+    color:red
 }
 
-.sefer-table tr:nth-child(even) td:nth-child(2) p {
-    /*border:1px black solid;*/
+.sefer_milh-table-000 tr:nth-child(even) td:nth-child(2) p {
+    border:1px  #0070c0 solid;
     text-align: right;
     direction: rtl;
     margin-right: 5px;
 }
 
-.sefer-table tr:nth-child(odd) td:nth-child(1) {
-    /*border:1px  green solid;*/
-}
 
-.sefer-table tr td p {
+.sefer_milh-table-000 tr td p {
     margin: 0;
     font-size: 21px;
-    line-height: 1.5em;
 }
 
-.sefer-table tr:nth-child(odd) td:nth-child(2) {
-    /*border:1px  aqua solid;*/
-}
+.sefer_milh-table-000 tr:nth-child(even) td:nth-child(1)  {
+    /*background-color: #fb151e;*/
+    /*direction: rtl  ;*/
+    margin-right: -600px;
+    margin-left: 600px;
 
-.sefer-table tr:nth-child(odd) td:nth-child(2) p {
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
+}
+.sefer_milh-table-000 tr:nth-child(odd) td:nth-child(2) p {
+    /*direction: rtl;*/
     margin-right: 5px;
     margin-top: 0;
     margin-bottom: 0;
@@ -604,10 +599,7 @@
 
 
 /* right side numbers */
-.sefer-table tr td:nth-child(1) p span {
-    font-size: 19px;
-    color: red;
-}
+
 
 /* text bold */
 .span-261 {
@@ -719,4 +711,17 @@
 /* roman numerals */
 .ft4 {
     text-align: center;
+}
+
+.WordSection1 {
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 700px;
+    font-size: 18px;
+}
+
+.WordSection1 p {
+    margin-left: 20px;
+    margin-right: 20px;
 }

@@ -6,12 +6,12 @@ from .command_utils.utils import get_html
 from .update_toc import update_toc
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
-from .constants import PATH
 from .process_books import (HAVDALA,
                             PRAYERS,
                             SHABBAT_SONGS,
                             SUPPLEMENTAL,
                             WEDDING_SONGS)
+from .constants import PATH
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from ...models import KaraitesBookDetails

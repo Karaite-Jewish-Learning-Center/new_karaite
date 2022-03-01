@@ -86,32 +86,39 @@ REF = re.compile(RE_BIBLE_REF[0])
 CLEAN_HTML = re.compile('<.*?>')
 
 
-def update_bible_re(html_tree, language='HE'):
+def update_bible_re(html_tree):
     """ some books ( liturgy) have bible in English, even if the text is in Hebrew """
 
-    language_lower = language.lower()
     html_str = str(html_tree)
 
     # expand abbreviations
     for abbr, full_name in ABBREVIATIONS:
         html_str = html_str.replace(abbr, full_name)
 
+    map_ref = {}
+    i = 0
     for ref in re.findall(REF, html_str):
-        #    ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
+        # ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
         # only text
         clean_ref = re.sub(CLEAN_HTML, '', ref.replace('\n', ' ').replace('\r', ' '))
 
-        valid_ref = parse_reference(clean_ref)
+        valid_ref, language = parse_reference(clean_ref)
+
         if valid_ref != '':
-            tag = ref.replace(ref,
-                              f'<span class="{language_lower}-biblical-ref" lang="{language}" data="{valid_ref}">{ref}</span>')
-            html_str = html_str.replace(ref, tag, 1)
+            i += 1
+            map_ref[i] = clean_ref
+            # print('ref', f'"{ref}"')
+            tag_ref = f'<span class="{language}-biblical-ref" lang="{language}">show-{i:04}</span>'
+            # tag = ref.replace(ref, tag_ref)
+            # print('tag', f'"{tag}"')
+            new_html = html_str.replace(ref, tag_ref)
+            # print('changed ', new_html != html_str)
+            html_str = new_html
+
+    for k, v in map_ref.items():
+        html_str = html_str.replace(f'show-{k:04}', v)
 
     return BeautifulSoup(html_str, 'html5lib')
-
-
-def update_bible_he_en(html_tree, language='EN'):
-    return update_bible_re(html_tree, language=language)
 
 
 def update_bible_adderet(html_tree):
@@ -129,6 +136,23 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 
 BOOKS = [1, 2]
+
+# technical "in" is not a language, we use to process introduction files
+LANGUAGES = {'en': "English", 'he': "Hebrew", "in": "introduction"}
+
+
+def fix_image_gan(path, book_name):
+    # specific for Gan Eden
+    html_tree = BeautifulSoup(read_data(path, f'{book_name}', SOURCE_PATH), 'html5lib')
+    old_path = "Gan%20Eden%20Hebrew%20Text.fld/image001.jpg"
+    new_path = f"/static-django/images/Gan Eden/image001.jpg"
+
+    for child in html_tree.find_all('img'):
+        image_path = child.attrs.get('src', None)
+        if image_path is not None:
+            child.attrs['src'] = image_path.replace(old_path, new_path)
+            child.attrs['src'] = child.attrs['src'].replace('/', '\\')
+    write_data(path, f'{book_name}', str(html_tree), SOURCE_PATH)
 
 
 def fix_image_source(path, book_name, books=BOOKS):
@@ -175,8 +199,8 @@ BASIC_STYLE = """
         color: red;
     }
     
-    .en-biblical-ref {
-        color: red;
+    .he-biblical-ref {
+        color: green;
     }
     
     .en-foot-note {
@@ -292,6 +316,31 @@ HALAKHAH = [
         True
     ],
     [
+        "HTML/Halakhah/Aaron ben Joseph's Essay on the Obligation of Prayer/",
+        "Aaron ben Joseph's Essay on the Obligation of Prayer-{}.html",
+        'en,he,in',
+        [],
+        [],
+        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': ',',
+         'css_class': ''},
+        True
+    ],
+    [
+        'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
+        'he',
+        [fix_image_gan],
+        [],
+        {'name': r"Gan Eden,",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
+         'css_class': ''},
+        True
+    ],
+    [
         'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
         'en',
         [],
@@ -333,13 +382,14 @@ HALAKHAH = [
         {},
         False
     ],
+
 ]
 HAVDALA = [
     [
         'HTML/Liturgy/Havdala Songs/', 'Essa Bechos Yesha‘.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Essa Bechos Yesha‘,",
          'first_level': 4,
@@ -352,7 +402,7 @@ HAVDALA = [
         'HTML/Liturgy/Havdala Songs/', 'Et Kos Yeshu‘ot.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Et Kos Yeshu‘ot‘,את כוס ישועות",
          'first_level': 4,
@@ -365,7 +415,7 @@ HAVDALA = [
         'HTML/Liturgy/Havdala Songs/', 'Malé ‘Olam Kevod Yofi.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': "Malé ‘Olam Kevod Yofi,",
          'first_level': 4,
@@ -380,11 +430,11 @@ PRAYERS = [
         'HTML/Liturgy/Prayers/', 'En Kelohenu.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"En Kelohenu,",
          'first_level': 4,
-         'book_classification': '01',
+         'book_classification': '20',
          'author': 'En Kelohenu,',
          'css_class': 'simple'},
         False
@@ -393,11 +443,11 @@ PRAYERS = [
         'HTML/Liturgy/Prayers/', 'Lutski Prayer for a Time of Plague.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Lutski Prayer for a Time of Plague,",
          'first_level': 4,
-         'book_classification': '01',
+         'book_classification': '20',
          'author': 'N/A,',
          'css_class': 'simple'},
         False
@@ -409,11 +459,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshir Ḥadash.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ashir Beshir Ḥadash, אשיר בשיר חדש",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yosef ben Nisan Poziemski,',
          'css_class': 'simple-3-4'},
         False
@@ -422,11 +472,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Le’el ‘Elyon.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ashir Le’el ‘Elyon,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Ashir Le’el ‘Elyon,',
          'css_class': 'simple-3-4'},
         False
@@ -435,11 +485,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ekkon Lemmul Shabbat.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ekkon Lemul Shabbat, אכון למול שבת",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yosef ben Yitsḥaḳ Itson,',
          'css_class': 'simple-3-4'},
         False
@@ -448,11 +498,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Esmaḥ Beshir Ḥadash.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Esmaḥ Beshir Ḥadash,אשמח בשיר חדש",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Ezra ben Nisan Ha-rofé,',
          'css_class': 'simple-3-4'},
         False
@@ -461,11 +511,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ezkor Lemitsvat Melech.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ezkor Lemitsvat Melech, אזכור למצות מלך",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
          'css_class': 'simple-3-4'},
         False
@@ -474,11 +524,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Eḳra Le’el ‘Elyon.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Eḳra Le’el ‘Elyon,אקרא לאל עליון",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'R. Abraham ben Mordochai,',
          'css_class': 'simple-3-4'},
         False
@@ -487,11 +537,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Mitsvat Yesod Shabbat.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Mitsvat Yesod Shabbat,מצות יסוד שבת",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Moshe Beghi,',
          'css_class': 'simple-3-4'},
         False
@@ -500,11 +550,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Mizmor Leyom Shabbat.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Mizmor Leyom Shabbat,מזמור ליום שבת",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
          'css_class': 'simple-3-4'},
         False
@@ -513,11 +563,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Odé Le’el Maḥsi.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Odé Le’el Maḥsi,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Odé Le’el Maḥsi,',
          'css_class': 'simple-3-4'},
         False
@@ -526,11 +576,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Ori Yeḥidati.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Ori Yeḥidati,אורי יחידתי",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Mordochai Sultansky,',
          'css_class': 'simple-3-4'},
         False
@@ -539,11 +589,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Shabbat Menuḥa.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Shabbat Menuḥa,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Shabbat Menuḥa,',
          'css_class': 'simple-3-4'},
         False
@@ -552,11 +602,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yah Zimrati.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yah Zimrati,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yah Zimrati,',
          'css_class': 'simple-3-4'},
         False
@@ -565,11 +615,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yatsar Ha’el.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yatsar Ha’el, יצר האל",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Ya‘aḳov (otherwise unknown),',
          'css_class': 'simple-3-4'},
         False
@@ -578,11 +628,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yerivai Ve’oyevai.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yerivai Ve’oyevai, יריבי ואויבי",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yisra’el ben Shemu’el Ha-ma‘aravi Ha-dayyan,',
          'css_class': 'simple-3-4'},
         False
@@ -591,11 +641,11 @@ SHABBAT_SONGS = [
         'HTML/Liturgy/Shabbat Songs/', 'Yeter Peletat ‘Am.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Yeter Peletat ‘Am,",
          'first_level': 4,
-         'book_classification': '11',
+         'book_classification': '30',
          'author': 'Yeter Peletat ‘Am,',
          'css_class': 'simple-3-4'},
         False
@@ -606,11 +656,11 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Anochi Anochi.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Anochi Anochi, אנכי אנכי",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'N/A (Biblical Verses)',
          'css_class': 'special'},
         False
@@ -623,7 +673,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Poems, Author
         {'name': r"Atsili ḳum ḳera, Atsili ḳum ḳera",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'Abraham',
          'css_class': 'simple'},
         False
@@ -636,7 +686,7 @@ SUPPLEMENTAL = [
         # name, liturgy , Poems, Author
         {'name': r"Evyon Asher, אביון אשר",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'Anatoli (ben Joseph?)',
          'css_class': 'simple'},
         False
@@ -645,11 +695,11 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Vehahochma.html',
         'he',
         [fix_iframe],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'N/A (Biblical Verses)',
          'css_class': 'simple'},
         False
@@ -659,11 +709,11 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Vehoshia.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Vehoshiya‘, והושיע",
          'first_level': 4,
-         'book_classification': '13',
+         'book_classification': '40',
          'author': 'N/A (Biblical Verses)',
          'css_class': 'special-1'},
         False
@@ -674,11 +724,11 @@ WEDDING_SONGS = [
         'HTML/Liturgy/Wedding Songs/', 'Amen Yehi Ratson.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Amen Yehi Ratson, אם יהיה ראסן",
          'first_level': 4,
-         'book_classification': '12',
+         'book_classification': '50',
          'author': 'Amen Yehi Ratson,',
          'css_class': 'simple-3-4'},
         False
@@ -687,11 +737,11 @@ WEDDING_SONGS = [
         'HTML/Liturgy/Wedding Songs/', 'Laḥatani Mivḥar Banai.html',
         'he',
         [],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"Laḥatani Mivḥar Banai,",
          'first_level': 4,
-         'book_classification': '12',
+         'book_classification': '50',
          'author': 'Laḥatani Mivḥar Banai,',
          'css_class': 'simple-3-4'},
         False
@@ -706,23 +756,23 @@ POLEMIC = [
         # name, Polemic , , Author
         {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
-         'book_classification': '07',
+         'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
         False
     ],
 ]
 
-# must be last, order of books is important
+# should be last,
 TEST_BOOKS = [
     [
         'Vehahochma-2/', 'Vehahochma-2.html',
         'he',
         [fix_iframe],
-        [update_bible_he_en],
+        [update_bible_re],
         # name, liturgy , Biblical verses, Author
         {'name': r"2 Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
-         'book_classification': '07',
+         'book_classification': '70',
          'author': 'N/A (Biblical Verses)'},
         False
     ],
@@ -782,8 +832,12 @@ class Command(BaseCommand):
     @staticmethod
     def replace_a_foot_notes(html_tree, language):
         """ replace complicate <a></a> with a tooltip """
-
-        for child in html_tree.find_all('a'):
+        print()
+        i = 1
+        foot_notes = html_tree.find_all('a')
+        total_foot_notes = len(foot_notes)
+        for child in foot_notes:
+            sys.stdout.write(f'\rPopulating footnotes {i} of {total_foot_notes}')
             if hasattr(child, 'style'):
                 try:
                     style = child.attrs['style']
@@ -813,6 +867,7 @@ class Command(BaseCommand):
                     # these are mostly emtpy a tags so remove then
                     if len(child.text) == 0:
                         child.decompose()
+                i += 1
 
         return html_tree
 
@@ -1030,21 +1085,19 @@ class Command(BaseCommand):
             for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
                 level = details.get('first_level', 'None')
                 classification = details.get('book_classification', None)
-                lang = language.capitalize()
-                book_name = book.replace('.html', '')
+                lang = language.capitalize().replace('en', 'En')
+                book_name = book.replace('.html', '').replace('-{}', '')
 
                 if level is not None and classification is not None:
                     book_level = FIRST_LEVEL[int(level) - 1][1]
-                    book_classification = BOOK_CLASSIFICATION[int(classification) - 1][1]
-                    print(f'{i:02} {lang:4} {book_level:8} {book_classification:16} {book_name}')
+                    book_classification = BOOK_CLASSIFICATION[int(classification) // 10 - 1][1]
+                    print(f'{i:02} {lang:5} {book_level:8} {book_classification[0:12]:14} {book_name}')
                 else:
-                    print(f'{i:02} {lang:4} {"Tanakh":8} {"-- ":16} {book_name}')
+                    print(f'{i:02} {lang:5} {"Tanakh":8} {"-- ":14} {book_name}')
 
                 i += 1
             print()
             sys.exit(0)
-
-        sys.stdout.write(f"\rPre-processing book's\r")
 
         # must keep same order as LIST_OF_BOOKS defined above
         # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
@@ -1065,52 +1118,54 @@ class Command(BaseCommand):
         if options['book_id'] != 0:
             books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
 
-        sys.stdout.write(f"Preprocessing book's\r")
-
         for path, book, language, pre_processes, _, _, _ in books_to_process:
-
-            for pre_process in pre_processes:
-                pre_process(path, book)
-
-        sys.stdout.write(f"Loading book's data\r")
+            for lang in language.split(','):
+                book_name = book.replace('{}', LANGUAGES[lang])
+                for pre_process in pre_processes:
+                    sys.stdout.write(f"\nPre-processing book : {book_name}")
+                    pre_process(path, book_name)
 
         i = 1
         for path, book, language, _, post_processes, details, collect in books_to_process:
-            html = read_data(path, book, SOURCE_PATH)
 
-            if html is None:
-                sys.stdout.write(f"\rSkipping {book} no suitable codec found.\r")
-                continue
+            for lang in language.split(','):
+                book_name = book.replace('{}', LANGUAGES[lang])
+                sys.stdout.write(f"\nPre-processing book {lang}: {book_name}")
+                html = read_data(path, book_name, SOURCE_PATH)
 
-            html_tree = BeautifulSoup(html, 'html5lib')
+                if html is None:
+                    sys.stdout.write(f"\nSkipping {book_name} no suitable codec found.")
+                    continue
 
-            sys.stdout.write(f"\rProcessing foot-notes for book {book}\r")
-            html_tree = self.replace_a_foot_notes(html_tree, language)
+                html_tree = BeautifulSoup(html, 'html5lib')
 
-            sys.stdout.write(f"\rRemoving comments for book {book}\r")
-            html_str = self.replace_from_open_to_close(str(html_tree))
+                html_tree = self.replace_a_foot_notes(html_tree, language)
 
-            sys.stdout.write(f"\rCollecting css for book {book}\r")
-            html_tree = BeautifulSoup(html_str, 'html5lib')
+                sys.stdout.write(f"\nRemoving comments for book {book_name}")
+                html_str = self.replace_from_open_to_close(str(html_tree))
 
-            html_tree = self.collect_style_map_to_class(html_tree, book, collect)
+                sys.stdout.write(f"\nCollecting css for book {book_name}")
+                html_tree = BeautifulSoup(html_str, 'html5lib')
 
-            for process in post_processes:
-                sys.stdout.write(f"\r{process.__name__.replace('_', ' ').capitalize()} {book}\r")
-                html_tree = process(html_tree)
+                html_tree = self.collect_style_map_to_class(html_tree, book_name, collect)
 
-            sys.stdout.write(f"\rRemoving empty tags for book {book}             ")
-            html_str = self.remove_tags(str(html_tree))
-            html_str = self.replace_class_name(html_str)
-            sys.stdout.write('\r\n')
-            sys.stdout.write(f"\rProcessed book {book} \n")
-            sys.stdout.write(f"\rWriting files for {book} \n")
-            sys.stdout.write('\n')
+                for process in post_processes:
+                    sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")
+                    html_tree = process(html_tree)
 
-            handle_out = open(f'{OUT_PATH}{book}', 'w')
-            handle_out.write(BASIC_HTML.format(BASIC_STYLE, html_str))
-            handle_out.close()
+                sys.stdout.write(f"\nRemoving empty tags for book {book_name}")
+                html_str = self.remove_tags(str(html_tree))
+                html_str = self.replace_class_name(html_str)
+                sys.stdout.write('\r\n')
+                sys.stdout.write(f"\nProcessed book {book_name}")
+                sys.stdout.write(f"\nWriting files for {book_name}")
+                sys.stdout.write('\n')
 
-            i += 1
+                handle_out = open(f'{OUT_PATH}{book_name}', 'w')
+                handle_out.write(BASIC_HTML.format(BASIC_STYLE, html_str))
+                handle_out.close()
+
+                i += 1
         self.parse_and_save_css()
         self.handle_ms_css()
+        sys.stdout.write('\n\nDone!')

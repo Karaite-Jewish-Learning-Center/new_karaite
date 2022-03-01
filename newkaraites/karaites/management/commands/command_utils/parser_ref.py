@@ -63,6 +63,8 @@ IGNORE = ['(#default#VML)',
           """(?)""",
           """(2nd ed., 2007)""",
           """(2011)""",
+          """(שמות לג:ו-ז)""",
+          """(במדבר טז:יא-יג)"""
           ]
 REMOVE = [
     """(Anochi) """,
@@ -135,9 +137,9 @@ def parse_reference(ref):
     """
 
     if len(ref) > 30:
-        return ''
+        return '', ''
     if ref in IGNORE:
-        return ''
+        return '', ''
 
     ref = ref.replace('\n', ' ').replace('(', '').replace(')', '')
 
@@ -153,7 +155,7 @@ def parse_reference(ref):
                 else:
                     chapter, verse = candidate.strip().split(':')
 
-                return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})'
+                return f'({BIBLE_BOOKS_NAMES[hebrew_book_name]} {gematria_to_int(chapter)}:{gematria_to_int(verse)})', 'he'
             except ValueError:
                 pass
     # replace multiple spaces by one space
@@ -170,9 +172,9 @@ def parse_reference(ref):
 
     # ref is in english
     if book in english_book_names:
-        return f'({book} {parts[-1]})'
+        return f'({book} {parts[-1]})', 'en'
 
-    return ''
+    return '', ''
 
 # print(parse_reference('(Ex. 10:  26)'))
 #  print(parse_reference("""(ישעיהוסב, ה')"""))

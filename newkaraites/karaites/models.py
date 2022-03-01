@@ -465,7 +465,7 @@ class BookAsArray(models.Model):
                 result += book.book_text
             return result
 
-        # if book is less then 11 chapters, read all book
+        # if book is less them 11 chapters, read all book
         if book_title.chapters <= 10:
             chapter = None
 
@@ -508,7 +508,7 @@ class KaraitesBookDetails(models.Model):
                                       choices=FIRST_LEVEL,
                                       verbose_name=_('Law'))
 
-    book_language = models.CharField(max_length=5,
+    book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
                                      verbose_name=_('Book language'))
 
@@ -540,17 +540,23 @@ class KaraitesBookDetails(models.Model):
         return self.introduction
 
     @staticmethod
-    def get_all_books_by_first_level(level):
-        book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title')
+    def get_all_books_by_first_level(level, classification=False):
+
+        if not classification:
+            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title')
+        else:
+            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
+                                                                                          'book_classification',
+                                                                                          'book_title')
         data = []
         for details in book_details:
             data.append({
                 'book_id': details.id,
                 'book_first_level': details.first_level,
                 'book_language': details.book_language,
-                'book_classification': details.book_classification,
+                'book_classification': details.get_book_classification_display(),
                 'book_title': details.book_title,
-                'intro': details.introduction,
+                # 'intro': details.introduction,
             })
         return data
 
@@ -563,10 +569,10 @@ class KaraitesBookDetails(models.Model):
             'book_id': details.id,
             'book_first_level': details.first_level,
             'book_language': details.book_language,
-            'book_classification': details.book_classification,
+            'book_classification': details.get_book_classification_display(),
             'author': details.author.name,
             'book_title': details.book_title,
-            'toc': [t.to_json() for t in toc],
+            'toc': [t.to_list() for t in toc],
             'intro': details.introduction,
         }
 
@@ -596,7 +602,7 @@ class KaraitesBookAsArray(models.Model):
 
     paragraph_number = models.IntegerField(default=0)
 
-    # [paragraph, page number, page number hebrew, is_title]
+    # [paragraph English, page number, page number hebrew, is_title, paragraph Hebrew]
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
@@ -623,8 +629,12 @@ class KaraitesBookAsArray(models.Model):
     def text(self):
         html = '<table><tbody><tr>'
         html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[0]}</td>'
+        try:
+            html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[2]}</td>'
+        except IndexError:
+            pass
         html += '</tr></tbody></table>'
-        return html
+        return mark_safe(html)
 
     text.short_description = "Book Text"
 

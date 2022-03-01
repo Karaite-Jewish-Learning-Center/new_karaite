@@ -1,14 +1,10 @@
-import React, {FC, MouseEventHandler} from "react";
+import React, {FC} from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import {PropTypes} from '@material-ui/core';
+import ButtonProps from './types';
 
-interface CloseProps {
-    onClick: MouseEventHandler;
-    color: PropTypes.Color;
-}
 
-export const CloseButton: FC<CloseProps> = ({onClick, color = "inherit"}) =>
+export const CloseButton: FC<ButtonProps> = ({onClick, color = "inherit"}) =>
     <IconButton aria-label="Close"
                 component="span"
                 color={color}

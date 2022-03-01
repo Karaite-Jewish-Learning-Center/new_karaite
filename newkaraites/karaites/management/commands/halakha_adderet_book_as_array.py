@@ -5,8 +5,6 @@ from django.core.management.base import BaseCommand
 from ...models import (Author,
                        KaraitesBookDetails,
                        KaraitesBookAsArray)
-
-from ...utils import clear_terminal_line
 from .command_utils.utils import get_html
 from .update_toc import update_toc
 from .udpate_bible_ref import update_create_bible_refs
@@ -65,7 +63,7 @@ class Command(BaseCommand):
         author, _ = Author.objects.get_or_create(name='Eliyahu R Elijah Bashyatchi')
         author.save()
 
-        sys.stdout.write(f"\nDeleting old Halakha Adderet")
+        sys.stdout.write(f"\nDeleting old Halakha Adderet\r")
         KaraitesBookDetails.objects.filter(book_title=book_title).delete()
 
         book_details, _ = KaraitesBookDetails.objects.get_or_create(
@@ -83,12 +81,12 @@ class Command(BaseCommand):
         )
         book_details.save()
 
-        sys.stdout.write(f"\nProcessing Halakha Adderet")
+        sys.stdout.write(f"\nProcessing Halakha Adderet\r")
 
         html = get_html(f'../newkaraites/karaites/management/tmp/'
                         f'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html')
 
-        sys.stdout.write(f"\rProcessing Halakha Adderet bible references")
+        sys.stdout.write(f"\nProcessing Halakha Adderet bible references\r")
         html_tree = BeautifulSoup(html, 'html5lib')
         table_of_contents = self.parse_toc(html_tree)
         divs = html_tree.find_all('div', class_="WordSection1")
@@ -117,7 +115,7 @@ class Command(BaseCommand):
             )
 
             paragraph_number += 1
-            sys.stdout.write(f"\rProcessing Halakha Adderet paragraph {paragraph_number}\r")
+            sys.stdout.write(f"\nProcessing Halakha Adderet paragraph {paragraph_number}\r")
 
         # update/create bible references
         update_create_bible_refs(book_details)

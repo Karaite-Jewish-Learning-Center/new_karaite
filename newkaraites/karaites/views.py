@@ -14,7 +14,6 @@ from .models import (FullTextSearch, Organization,
                      AutoComplete,
                      References)
 from .constants import ENGLISH_STOP_WORDS
-import meilisearch
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -108,7 +107,6 @@ def karaites_book_as_array(request, *args, **kwargs):
 
     book = slug_back(book)
 
-    print(book)
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
     except KaraitesBookDetails.DoesNotExist:
@@ -157,6 +155,21 @@ class GetByLevel(View):
                                 status=400)
 
         return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level), safe=False)
+
+
+class GetByLevelAndByClassification(View):
+    @staticmethod
+    def get(request, *args, **kwargs):
+        level = kwargs.get('level', None)
+        classification = True
+        if level is None:
+            return JsonResponse(data={'status': 'false',
+                                      'message': _(f'Missing mandatory parameter level.')},
+                                status=400)
+
+        return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level,
+                                                                             classification=classification),
+                            safe=False)
 
 
 class BooksPresentation(View):

@@ -10,6 +10,7 @@ from .update_karaites_array import update_karaites_array
 from .command_utils.utils import get_html
 from .command_utils.clean_table import clean_tag_attr
 from .udpate_bible_ref import update_create_bible_refs
+from ...models import KaraitesBookDetails
 
 
 class Command(BaseCommand):
@@ -18,8 +19,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Sefer Milhamot Karaites book as array """
 
+        sys.stdout.write('\nDeleting old Sefer book...\n')
+        KaraitesBookDetails.objects.filter(first_level=5).delete()
+        sys.stdout.write(f'\nProcessing book:')
+
         for _, book, _, _, _, details, _ in POLEMIC:
-            sys.stdout.write(f'\33[K processing book {book}')
             book_details, _ = update_book_details(details)
             html = get_html(f'{PATH}{book}')
             html_tree = BeautifulSoup(html, 'html5lib')
@@ -39,8 +43,9 @@ class Command(BaseCommand):
                                 if text.startswith(t):
                                     children.decompose()
                                     break
-
-                    if 'p-119' in klass:
+                    if children.text.find('Text Status') >= 0:
+                        intro.append(str(children))
+                        children.decompose()
                         break
 
                 if children.name is not None:
@@ -49,7 +54,7 @@ class Command(BaseCommand):
                 children.decompose()
 
             update_book_details(details, introduction="".join([child for child in intro]))
-            table_class = 'sefer-table'
+            table_class = 'sefer_milh-table-000'
             ref_chapter = 1
             ref_paragraph = 1
             for child in divs[0].find_all('table'):
