@@ -131,8 +131,8 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 class KaraitesBookTextAsArrayAdmin(KAdmin):
     list_display = ('book', 'ref_chapter', 'paragraph_number', 'text', 'foot_notes_admin')
 
-    list_filter = ('book',
-                   'book__book_language', 'book__book_classification')
+    list_filter = ('book__first_level', 'book__book_language', 'book__book_classification',
+                   'book')
 
 
 admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)

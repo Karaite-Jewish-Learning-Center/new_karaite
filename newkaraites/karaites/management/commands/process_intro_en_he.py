@@ -14,13 +14,20 @@ from .udpate_bible_ref import update_create_bible_refs
 class Command(BaseCommand):
     help = 'Populate Database with intro, toc, and book details'
 
+    @staticmethod
+    def remove_empty(html_tree):
+        for tag in html_tree.find_all():
+            if len(tag.get_text(strip=True)) == 0:
+                tag.extract()
+        return html_tree
+
     def handle(self, *args, **options):
         """ Karaites books as array """
         i = 1
         for _, book, language, _, _, details, _ in [HALAKHAH[1]]:
             sys.stdout.write(f"\nDeleting book : {book.replace('-{}.html', '')}")
             KaraitesBookDetails.objects.filter(book_title=details['name']).delete()
-            book_details, _ = update_book_details(details)
+            book_details, _ = update_book_details(details, language='en,he')
 
             for lang in language.split(','):
                 book_name = book.replace('{}', LANGUAGES[lang])
@@ -28,22 +35,26 @@ class Command(BaseCommand):
                 sys.stdout.write(f'\n {book_name}')
 
                 html = get_html(f'{PATH}{book_name}')
-                if lang == 'in':
-                    update_book_details(details, introduction=html)
-                    continue
+                html_tree = self.remove_empty(BeautifulSoup(html, 'html5lib'))
+                divs = html_tree.find_all('div', class_='WordSection1')
 
-                html_tree = BeautifulSoup(html, 'html5lib')
-                divs = html_tree.find_all('div', {'class': 'WordSection1'})
                 c = 1
-                for div in divs[0]:
+                for div in divs[0].find_all():
+
                     if lang == 'en':
-                        update_karaites_array_language(book_details, 1, c, div, None)
+                        update_karaites_array_language(details['name'], '', c, str(div), '')
                     if lang == 'he':
-                        update_karaites_array_language(book_details, 1, c, None, div)
-                c += 1
-                # update/create bible references
-                update_create_bible_refs(book_details)
+                        update_karaites_array_language(details['name'], '', c, '', str(div))
+
+                    if lang in ['en', 'he']:
+                        c += 1
+
+                    if lang == 'in':
+                        update_book_details(details, introduction=str(div))
+
             i += 1
 
+        # update/create bible references
+        update_create_bible_refs(book_details)
         print()
         print(f'\nDone! processed: {i} books')

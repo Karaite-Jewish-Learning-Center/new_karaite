@@ -508,7 +508,7 @@ class KaraitesBookDetails(models.Model):
                                       choices=FIRST_LEVEL,
                                       verbose_name=_('Law'))
 
-    book_language = models.CharField(max_length=5,
+    book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
                                      verbose_name=_('Book language'))
 
@@ -629,8 +629,12 @@ class KaraitesBookAsArray(models.Model):
     def text(self):
         html = '<table><tbody><tr>'
         html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[0]}</td>'
+        try:
+            html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[2]}</td>'
+        except IndexError:
+            pass
         html += '</tr></tbody></table>'
-        return html
+        return mark_safe(html)
 
     text.short_description = "Book Text"
 

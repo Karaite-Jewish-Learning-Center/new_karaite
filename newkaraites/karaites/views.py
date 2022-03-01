@@ -14,7 +14,6 @@ from .models import (FullTextSearch, Organization,
                      AutoComplete,
                      References)
 from .constants import ENGLISH_STOP_WORDS
-import meilisearch
 
 
 def book_chapter_verse(request, *args, **kwargs):

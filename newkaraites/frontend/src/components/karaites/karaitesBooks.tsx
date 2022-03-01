@@ -22,23 +22,40 @@ const SUBJECT = 0
 const INDEX = 1
 const START_PARAGRAPH = 2
 
+const LANGAUGE_EN = 0
+const LANGAUGE_HE = 2
+
 interface KaraitesBooksInterface {
     paneNumber: number,
     refClick: MouseEventHandler,
     paragraphs: Array<any>,
     details: any,
     type: string,
-    onClosePane: MouseEventHandler
+    onClosePane: MouseEventHandler,
 }
 
-const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragraphs, details, type, onClosePane}) => {
+const KaraitesBooks: FC<KaraitesBooksInterface> = ({
+                                                       paneNumber,
+                                                       refClick,
+                                                       paragraphs,
+                                                       details,
+                                                       type,
+                                                       onClosePane,
+                                                   }) => {
+
+
     const store = useContext(storeContext)
     const [loadingMessage, setLoadingMessage] = useState<string>('Loading...')
     // book, intro, toc
     const [flags, setFlags] = useState<Array<boolean>>([true, false, false])
-
-    const virtuoso = useRef(null);
     const classes = useStyles()
+    const virtuoso = useRef(null);
+
+    if (paragraphs.length === 0) {
+        return <Loading/>
+    }
+
+    const lang = store.getBookDetails(paneNumber)
 
     const onIntroClick = () => {
         setLoadingMessage('Introduction end.')
@@ -60,7 +77,10 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
         // only works this way because the virtuoso is not re-rendered
         setTimeout(() => {
             // @ts-ignore
-            virtuoso.current.scrollToIndex(starParagraph -1)
+            virtuoso.current.scrollToIndex(starParagraph - 2, {
+                align: 'start',
+                behavior: 'smooth',
+            })
         }, 100)
     }
 
@@ -72,15 +92,37 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
     }
 
     const itemContent = (item: number, data: Array<any>) => {
-        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                {parse(data[HTML][0], {
-                    replace: domNode => {
-                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                    }
-                })}
-            </div>
-        </div>)
+        let t = data[HTML][0]
+        let x = data[HTML][2]
+        console.log(t, x)
+        if (lang.book_language === 'en,he') {
+            return (<div className={`${classes.paragraphContainerHeEn} ${selectCurrent(item) ? classes.selected : ''}`}>
+                <div className={`${classes.english} ${classes.paragraph}`}>
+                    {parse((!data[HTML][0] ? '<div>&nbsp;</div>' : data[HTML][0]), {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </div>
+                <div className={`${classes.hebrew} ${classes.paragraph}`}>
+                    {parse((!data[HTML][2] ? '<div>&nbsp;</div>' : data[HTML][2]), {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </div>
+            </div>)
+        } else {
+            return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+                <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
+                    {parse(data[HTML][0], {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </div>
+            </div>)
+        }
     }
 
     const itemIntroduction = (item: number, data: string) => {
@@ -109,10 +151,9 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({paneNumber, refClick, paragr
             </div>
         </div>)
     }
+
+
     // initial can't be negative
-    if (paragraphs.length === 0) {
-        return <Loading/>
-    }
     const topItem: number = store.getCurrentItem(paneNumber) - 1
     const initial: number = (topItem > 0 ? topItem : 0)
 
@@ -183,12 +224,25 @@ const useStyles = makeStyles(() => ({
         paddingLeft: 20,
         paddingRight: 20,
         maxWidth: 600,
-        lineHeight: 1.8,
         margin: 'auto',
+        border: '1px solid red'
+
     },
     liturgy: {
         maxWidth: '100%',
         margin: 'auto',
+    },
+    paragraphContainerHeEn: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        width: 'auto',
+        margin: 'auto',
+    },
+    hebrew: {
+        float: 'left',
+    },
+    english: {
+        float: 'right',
     },
     selected: {
         backgroundColor: Colors['rulerColor']

@@ -70,6 +70,7 @@ const LoadBook = ({type}) => {
             if (response.ok) {
                 const data = await response.json()
                 const details = data[BOOK_DETAILS]
+                debugger
                 store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
                 store.setBookDetails(details, paneNumber)
 
@@ -214,7 +215,9 @@ const LoadBook = ({type}) => {
     getBook(book, chapter, verse, [], type).then().catch()
 
     const books = bookRender()
-
+    if(books.length=== 0) {
+        return null
+    }
     return (
         <Grid container
               className={`${classes.root} ${book}`}

@@ -1,4 +1,5 @@
-from ...models import KaraitesBookAsArray
+from ...models import (KaraitesBookDetails,
+                       KaraitesBookAsArray)
 
 
 def update_karaites_array(book_details, ref_chapter, paragraph_number, child):
@@ -11,22 +12,34 @@ def update_karaites_array(book_details, ref_chapter, paragraph_number, child):
     )
 
 
-def update_karaites_array_language(book_details, ref_chapter, paragraph_number, child_en, child_he):
-    data, _ = KaraitesBookAsArray.objects.get_or_create(
-        book=book_details,
-        ref_chapter=ref_chapter,
-        paragraph_number=paragraph_number,
-        book_text=['', 0, ''],
-        foot_notes=[]
+def update_karaites_array_language(book_details, ref_chapter, paragraph_number, child_en='', child_he=''):
+    new = False
+    try:
+        details = KaraitesBookDetails.objects.get(book_title=book_details)
+        data = KaraitesBookAsArray.objects.get(book=details, ref_chapter=ref_chapter,
+                                               paragraph_number=paragraph_number)
+    except KaraitesBookAsArray.DoesNotExist:
+        new = True
+        data = KaraitesBookAsArray()
+        data.book = details
 
-    )
-    print(len(data.book_text))
-    if child_en is not None:
-        data.book_text[0] = str(child_en)
+    data.ref_chapter = ref_chapter
+    data.paragraph_number = paragraph_number
 
-    if child_he is not None:
-        data.book_text[1] = str(child_en)
+    if new:
+        data.book_text = [str(child_en), 0, str(child_he)]
+    else:
+        if child_en == '':
+            data.book_text = [data.book_text[0], 0, child_he]
+        if child_he == '':
+            data.book_text = [child_en, 0, data.book_text[2]]
 
-    data.save()
+    data.foot_notes = []
+    data.foot_notes = []
 
-    return data, _
+    if data.book_text != ['\n', 0, '\n'] and data.book_text != ['\n', 0, ''] and data.book_text != ['', 0, '\n']:
+        data.save()
+
+        return None, False
+
+    return data, new
