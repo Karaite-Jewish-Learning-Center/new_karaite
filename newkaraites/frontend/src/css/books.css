@@ -549,56 +549,33 @@
 /* Yeter Peletat ‘Am */
 
 /* Sefer Milḥamot Adonai */
-
-.sefer_milh-table-000 tr:nth-child(even) {
-
-    min-width: 400px;
-}
-.sefer_milh-table-000 tr:nth-child(even) p span span{
-    min-width: 400px;
-}
-.sefer_milh-table-000 tr:nth-child(even) {
-    margin-right: -300%;
-    min-width: 400px;
-    margin-top: 0;
-    margin-bottom: 0;
+.sefer_milh-table-000 {
+    width: auto;
 }
 
-.sefer_milh-table-000 tr:nth-child(odd) td:nth-child(1) {
-
-    width: 30px;
-    color:red
-}
-
-.sefer_milh-table-000 tr:nth-child(even) td:nth-child(2) p {
-    border:1px  #0070c0 solid;
-    text-align: right;
-    direction: rtl;
-    margin-right: 5px;
-}
-
-
-.sefer_milh-table-000 tr td p {
+.sefer_milh-table-000 p {
     margin: 0;
-    font-size: 21px;
+}
+.sefer_milh-table-000 tr:nth-child(5n) td:nth-child(1){
+    color:red;
+}
+/*Aaron ben Joseph's Essay on the Obligation of Prayer*/
+.aaron-table-000 {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px;
+}
+.aaron-table-000 tr td:nth-child(1) {
+    padding-right: 10px;
+    text-align: right;
+     vertical-align: top;
 }
 
-.sefer_milh-table-000 tr:nth-child(even) td:nth-child(1)  {
-    /*background-color: #fb151e;*/
-    /*direction: rtl  ;*/
-    margin-right: -600px;
-    margin-left: 600px;
-
+.aaron-table-000 tr td:nth-child(2) {
+    padding-left: 10px;
+     vertical-align: top;
 }
-.sefer_milh-table-000 tr:nth-child(odd) td:nth-child(2) p {
-    /*direction: rtl;*/
-    margin-right: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-
-/* right side numbers */
 
 
 /* text bold */

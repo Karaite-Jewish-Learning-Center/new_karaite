@@ -92,37 +92,16 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemContent = (item: number, data: Array<any>) => {
-        let t = data[HTML][0]
-        let x = data[HTML][2]
-        console.log(t, x)
-        if (lang.book_language === 'en,he') {
-            return (<div className={`${classes.paragraphContainerHeEn} ${selectCurrent(item) ? classes.selected : ''}`}>
-                <div className={`${classes.english} ${classes.paragraph}`}>
-                    {parse((!data[HTML][0] ? '<div>&nbsp;</div>' : data[HTML][0]), {
-                        replace: domNode => {
-                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                        }
-                    })}
-                </div>
-                <div className={`${classes.hebrew} ${classes.paragraph}`}>
-                    {parse((!data[HTML][2] ? '<div>&nbsp;</div>' : data[HTML][2]), {
-                        replace: domNode => {
-                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                        }
-                    })}
-                </div>
-            </div>)
-        } else {
-            return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-                <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                    {parse(data[HTML][0], {
-                        replace: domNode => {
-                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                        }
-                    })}
-                </div>
-            </div>)
-        }
+        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+            <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
+                {parse(data[HTML][0], {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })}
+            </div>
+        </div>)
+
     }
 
     const itemIntroduction = (item: number, data: string) => {
@@ -254,7 +233,7 @@ const useStyles = makeStyles(() => ({
     heLeft: {
         float: 'left',
         width: '300px',
-        textAlign: 'left',
+        textAlign: 'right',
     },
     heRight: {
         float: 'right',

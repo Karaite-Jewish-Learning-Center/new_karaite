@@ -318,7 +318,7 @@ HALAKHAH = [
     [
         "HTML/Halakhah/Aaron ben Joseph's Essay on the Obligation of Prayer/",
         "Aaron ben Joseph's Essay on the Obligation of Prayer-{}.html",
-        'en,he,in',
+        'en,in',
         [],
         [],
         {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,",
