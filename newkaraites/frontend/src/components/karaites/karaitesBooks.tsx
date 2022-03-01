@@ -225,8 +225,6 @@ const useStyles = makeStyles(() => ({
         paddingRight: 20,
         maxWidth: 600,
         margin: 'auto',
-        border: '1px solid red'
-
     },
     liturgy: {
         maxWidth: '100%',

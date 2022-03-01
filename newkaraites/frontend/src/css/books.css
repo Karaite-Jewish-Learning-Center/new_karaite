@@ -551,9 +551,12 @@
 /* Sefer Milḥamot Adonai */
 
 .sefer_milh-table-000 tr:nth-child(even) {
+
     min-width: 400px;
 }
-
+.sefer_milh-table-000 tr:nth-child(even) p span span{
+    min-width: 400px;
+}
 .sefer_milh-table-000 tr:nth-child(even) {
     margin-right: -300%;
     min-width: 400px;
@@ -562,12 +565,13 @@
 }
 
 .sefer_milh-table-000 tr:nth-child(odd) td:nth-child(1) {
+
     width: 30px;
     color:red
 }
 
 .sefer_milh-table-000 tr:nth-child(even) td:nth-child(2) p {
-    /*border:1px black solid;*/
+    border:1px  #0070c0 solid;
     text-align: right;
     direction: rtl;
     margin-right: 5px;
@@ -579,11 +583,15 @@
     font-size: 21px;
 }
 
+.sefer_milh-table-000 tr:nth-child(even) td:nth-child(1)  {
+    /*background-color: #fb151e;*/
+    /*direction: rtl  ;*/
+    margin-right: -600px;
+    margin-left: 600px;
 
+}
 .sefer_milh-table-000 tr:nth-child(odd) td:nth-child(2) p {
-    /*border:1px  #0070c0 solid;*/
-    text-align: right;
-    direction: rtl;
+    /*direction: rtl;*/
     margin-right: 5px;
     margin-top: 0;
     margin-bottom: 0;
