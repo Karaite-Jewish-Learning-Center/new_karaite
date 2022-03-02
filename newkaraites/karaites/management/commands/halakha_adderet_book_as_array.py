@@ -59,19 +59,20 @@ class Command(BaseCommand):
         """ Karaites books as array """
 
         hebrew = "אדרת אליהו"
-        book_title = f"Adderet Eliyahu, {hebrew}"
+        book_title_en, book_title_he = f"Adderet Eliyahu", hebrew
         author, _ = Author.objects.get_or_create(name='Eliyahu R Elijah Bashyatchi')
         author.save()
 
         sys.stdout.write(f"\nDeleting old Halakha Adderet\r")
-        KaraitesBookDetails.objects.filter(book_title=book_title).delete()
+        KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
 
         book_details, _ = KaraitesBookDetails.objects.get_or_create(
             first_level=3,  # Halakhah
             book_language='he',
             book_classification='03',
             author=author,
-            book_title=book_title,
+            book_title_en=book_title_en,
+            book_title_he=book_title_he,
             introduction="""<p class="MsoNormal"><b>Author: </b>R. Elijah Ben Moshe Bashyachi / ר אליהו בן משה בשיצי</p>
 <p class="MsoNormal"><b>Date Written:</b> 15th Century</p>
 <p class="MsoNormal"><b>Location: </b>Adrianople / אדריאנופול</p>
@@ -115,7 +116,7 @@ class Command(BaseCommand):
             )
 
             paragraph_number += 1
-            sys.stdout.write(f"\nProcessing Halakha Adderet paragraph {paragraph_number}\r")
+            sys.stdout.write(f"\rProcessing Halakha Adderet paragraph {paragraph_number}\r")
 
         # update/create bible references
         update_create_bible_refs(book_details)

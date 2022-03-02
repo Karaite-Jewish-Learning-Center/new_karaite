@@ -13,13 +13,14 @@ import {BookButton} from '../buttons/BookButton';
 
 interface IProps {
     paneNumber: number,
+    type:string,
     onClosePane: Function
     onIntroClick: Function,
     onTocClick: Function,
     onBookClick: Function,
 }
 
-const KaraitesPaneHeader: FC<IProps> = ({paneNumber, onClosePane, onIntroClick, onTocClick, onBookClick}) => {
+const KaraitesPaneHeader: FC<IProps> = ({paneNumber,type, onClosePane, onIntroClick, onTocClick, onBookClick}) => {
     const store = useContext(storeContext)
     const classes = resources()
 
@@ -30,7 +31,11 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber, onClosePane, onIntroClick, 
         onIntroClick(paneNumber)
     }
     const onToc = () => {
-        onTocClick(paneNumber)
+        if(type== 'liturgy'){
+            onClosePane(paneNumber)
+        }else {
+            onTocClick(paneNumber)
+        }
     }
     const onBook = () => {
         onBookClick(paneNumber)

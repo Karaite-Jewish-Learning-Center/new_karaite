@@ -523,8 +523,13 @@ class KaraitesBookDetails(models.Model):
                                verbose_name=_('Book Author')
                                )
 
-    book_title = models.CharField(max_length=100,
-                                  verbose_name=_('Karaites book title'))
+    book_title_en = models.CharField(max_length=100,
+                                     default='',
+                                     verbose_name=_('Title English'))
+
+    book_title_he = models.CharField(max_length=100,
+                                     default='',
+                                     verbose_name=_('Title Hebrew'))
 
     book_title_unslug = models.CharField(max_length=100,
                                          editable=False,
@@ -533,7 +538,7 @@ class KaraitesBookDetails(models.Model):
     introduction = models.TextField(default='')
 
     def __str__(self):
-        return self.book_title
+        return self.book_title_en
 
     @mark_safe
     def intro_to_html(self):
@@ -543,11 +548,12 @@ class KaraitesBookDetails(models.Model):
     def get_all_books_by_first_level(level, classification=False):
 
         if not classification:
-            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title')
+            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en')
         else:
             book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
                                                                                           'book_classification',
-                                                                                          'book_title')
+                                                                                          'book_title_en')
+
         data = []
         for details in book_details:
             data.append({
@@ -555,7 +561,8 @@ class KaraitesBookDetails(models.Model):
                 'book_first_level': details.first_level,
                 'book_language': details.book_language,
                 'book_classification': details.get_book_classification_display(),
-                'book_title': details.book_title,
+                'book_title_en': details.book_title_en,
+                'book_title_he': details.book_title_he,
                 # 'intro': details.introduction,
             })
         return data
@@ -571,23 +578,21 @@ class KaraitesBookDetails(models.Model):
             'book_language': details.book_language,
             'book_classification': details.get_book_classification_display(),
             'author': details.author.name,
-            'book_title': details.book_title,
+            'book_title_en': details.book_title_en,
+            'book_title_he': details.book_title_he,
             'toc': [t.to_list() for t in toc],
             'intro': details.introduction,
         }
 
     def save(self, *args, **kwargs):
 
-        if self.book_title.find(',') >= 0:
-            self.book_title_unslug = self.book_title.split(',')[0].strip()
-        else:
-            self.book_title_unslug = self.book_title
+        self.book_title_unslug = self.book_title_en
 
         super(KaraitesBookDetails, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Karaites book details'
-        unique_together = ('book_title', 'author')
+        ordering = ('book_title_en', 'author')
 
 
 class KaraitesBookAsArray(models.Model):
@@ -608,7 +613,7 @@ class KaraitesBookAsArray(models.Model):
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
 
     def __str__(self):
-        return self.book.book_title
+        return f'{self.book.book_title_en}  -   {self.book.book_title_he}'
 
     @staticmethod
     def to_list(book, paragraph_number, first):
@@ -664,7 +669,7 @@ class TableOfContents(models.Model):
     start_paragraph = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'{self.karaite_book.book_title}'
+        return f'{self.karaite_book.book_title_en}  -   {self.karaite_book.book_title_he}'
 
     @mark_safe
     def admin_subject(self):
@@ -717,7 +722,7 @@ class References(models.Model):
                              verbose_name=_('error'))
 
     def __str__(self):
-        return f'{self.karaites_book.book_title} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'
+        return f'{self.karaites_book.book_title_en} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'
 
     @mark_safe
     def paragraph_admin(self):
@@ -733,7 +738,8 @@ class References(models.Model):
         return html
 
     def to_json(self):
-        return {'book_name': self.karaites_book.book_title,
+        return {'book_name_en': self.karaites_book.book_title_en,
+                'book_name_he': self.karaites_book.book_title_he,
                 'author': self.karaites_book.author.name,
                 'language': self.karaites_book.book_language,
                 'paragraph_number': self.paragraph_number,
@@ -742,7 +748,8 @@ class References(models.Model):
                 'bible_ref_en': self.bible_ref_en,
                 }
 
-    def to_list(self, bible_ref_en):
+    @staticmethod
+    def to_list(bible_ref_en):
 
         result = []
         for ref in References.objects.filter(bible_ref_en=bible_ref_en):

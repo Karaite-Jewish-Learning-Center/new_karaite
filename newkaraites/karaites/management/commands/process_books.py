@@ -318,7 +318,7 @@ HALAKHAH = [
     [
         "HTML/Halakhah/Aaron ben Joseph's Essay on the Obligation of Prayer/",
         "Aaron ben Joseph's Essay on the Obligation of Prayer-{}.html",
-        'en,he,in',
+        'en,in',
         [],
         [],
         {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,",
@@ -391,7 +391,7 @@ HAVDALA = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Essa Bechos Yesha‘,",
+        {'name': r"Essa Bechos Yesha‘, אשא בכוס ישע",
          'first_level': 4,
          'book_classification': '10',
          'author': 'Essa Bechos Yesha‘,',
@@ -417,7 +417,7 @@ HAVDALA = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': "Malé ‘Olam Kevod Yofi,",
+        {'name': "Malé ‘Olam Kevod Yofi,מלא עולם כבוד יופי",
          'first_level': 4,
          'book_classification': '10',
          'author': 'Mordochai ben Ya‘aḳov ben Shemu’el Politi,',
@@ -432,7 +432,7 @@ PRAYERS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"En Kelohenu,",
+        {'name': r"En Kelohenu, אין כאלהינו",
          'first_level': 4,
          'book_classification': '20',
          'author': 'En Kelohenu,',
@@ -474,7 +474,7 @@ SHABBAT_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Ashir Le’el ‘Elyon,",
+        {'name': r"Ashir Le’el ‘Elyon,אשיר לאל עליון",
          'first_level': 4,
          'book_classification': '30',
          'author': 'Ashir Le’el ‘Elyon,',
@@ -565,7 +565,7 @@ SHABBAT_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Odé Le’el Maḥsi,",
+        {'name': r"Odé Le’el Maḥsi, אודה לאל מחסי",
          'first_level': 4,
          'book_classification': '30',
          'author': 'Odé Le’el Maḥsi,',
@@ -591,7 +591,7 @@ SHABBAT_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Shabbat Menuḥa,",
+        {'name': r"Shabbat Menuḥa, שבת מנוחה",
          'first_level': 4,
          'book_classification': '30',
          'author': 'Shabbat Menuḥa,',
@@ -604,7 +604,7 @@ SHABBAT_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Yah Zimrati,",
+        {'name': r"Yah Zimrati,יה זמרתי",
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yah Zimrati,',
@@ -643,7 +643,7 @@ SHABBAT_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Yeter Peletat ‘Am,",
+        {'name': r"Yeter Peletat ‘Am, יתר פליטת עם",
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yeter Peletat ‘Am,',
@@ -726,7 +726,7 @@ WEDDING_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Amen Yehi Ratson, אם יהיה ראסן",
+        {'name': r"Amen Yehi Ratson,  אמן יהי רצון",
          'first_level': 4,
          'book_classification': '50',
          'author': 'Amen Yehi Ratson,',
@@ -739,7 +739,7 @@ WEDDING_SONGS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Laḥatani Mivḥar Banai,",
+        {'name': r"Laḥatani Mivḥar Banai,לחתני מבחר בני",
          'first_level': 4,
          'book_classification': '50',
          'author': 'Laḥatani Mivḥar Banai,',
@@ -754,7 +754,7 @@ POLEMIC = [
         [],
         [],
         # name, Polemic , , Author
-        {'name': r"Sefer Milḥamot Adonai, Sefer Milḥamot Hashem, ספר מלחמות ה'",
+        {'name': r"Sefer Milḥamot Adonai Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
          'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
