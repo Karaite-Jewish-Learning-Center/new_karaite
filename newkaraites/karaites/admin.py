@@ -119,7 +119,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
     list_display = ('first_level', 'book_language',
                     'book_classification',
-                    'book_title', 'author',
+                    'book_title_en', 'book_title_he', 'author',
                     'intro_to_html')
 
     list_filter = ('first_level', 'book_language', 'book_classification')

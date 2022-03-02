@@ -143,6 +143,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         <>
 
             <KaraitePaneHeader paneNumber={paneNumber}
+                               type={type}
                                onClosePane={onClosePane}
                                onIntroClick={onIntroClick}
                                onTocClick={onTocClick}

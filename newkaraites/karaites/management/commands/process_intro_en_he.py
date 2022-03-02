@@ -27,8 +27,10 @@ class Command(BaseCommand):
         """ Karaites books as array """
         i = 1
         for _, book, language, _, _, details, _ in [HALAKHAH[1]]:
+            book_title_en, book_title_he = details['name'].split(',')
+
             sys.stdout.write(f"\nDeleting book : {book.replace('-{}.html', '')}")
-            KaraitesBookDetails.objects.filter(book_title=details['name']).delete()
+            KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
             book_details, _ = update_book_details(details, language='en,he')
 
             for lang in language.split(','):
@@ -43,7 +45,6 @@ class Command(BaseCommand):
                 divs = html_tree.find_all('div', class_='WordSection1')
 
                 if lang == 'in':
-                    print(divs[0])
                     update_book_details(details, introduction=str(divs[0]))
                     continue
 
@@ -56,9 +57,9 @@ class Command(BaseCommand):
                     table.decompose()
 
                 if lang == 'en':
-                    update_karaites_array_language(details['name'], '', c, table_str, '')
+                    update_karaites_array_language(book_title_en, '', c, table_str, '')
                 if lang == 'he':
-                    update_karaites_array_language(details['name'], '', c, '', table_str)
+                    update_karaites_array_language(book_title_en, '', c, '', table_str)
 
                 if lang in ['en', 'he']:
                     c += 1

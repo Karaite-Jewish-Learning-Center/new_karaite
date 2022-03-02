@@ -15,7 +15,7 @@ def update_karaites_array(book_details, ref_chapter, paragraph_number, child):
 def update_karaites_array_language(book_details, ref_chapter, paragraph_number, child_en='', child_he=''):
     new = False
     try:
-        details = KaraitesBookDetails.objects.get(book_title=book_details)
+        details = KaraitesBookDetails.objects.get(book_title_en=book_details)
         data = KaraitesBookAsArray.objects.get(book=details, ref_chapter=ref_chapter,
                                                paragraph_number=paragraph_number)
     except KaraitesBookAsArray.DoesNotExist:
@@ -39,7 +39,6 @@ def update_karaites_array_language(book_details, ref_chapter, paragraph_number, 
 
     if data.book_text != ['\n', 0, '\n'] and data.book_text != ['\n', 0, ''] and data.book_text != ['', 0, '\n']:
         data.save()
-
         return None, False
 
     return data, new

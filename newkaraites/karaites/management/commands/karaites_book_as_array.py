@@ -38,14 +38,13 @@ class Command(BaseCommand):
     @staticmethod
     def book_title(volume):
         hebrew = " יריעות שלמה"
-        book_title = f"Yeriot Shelomo Volume {volume}, {hebrew}"
-        return book_title
+        return f"Yeriot Shelomo Volume {volume}", hebrew
 
     def handle(self, *args, **options):
         """ Karaites books as array """
         for volume in [1, 2]:
             try:
-                book_details = KaraitesBookDetails.objects.get(book_title=self.book_title(volume))
+                book_details = KaraitesBookDetails.objects.get(book_title_en=self.book_title(volume))
                 KaraitesBookAsArray.objects.filter(book=book_details).delete()
             except KaraitesBookDetails.DoesNotExist:
                 pass
@@ -55,7 +54,7 @@ class Command(BaseCommand):
         for volume in [1, 2]:
             paragraph_number = 1
             sys.stdout.write(f'\rProcessing volume: {volume}')
-            book_title = self.book_title(volume)
+            book_title_en, book_title_he  = self.book_title(volume)
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
             author.save()
 
@@ -64,7 +63,8 @@ class Command(BaseCommand):
                 book_language='he',
                 book_classification='03',
                 author=author,
-                book_title=book_title,
+                book_title_en=book_title_en,
+                book_title_he=book_title_he,
                 introduction="""<p class="MsoNormal"><b>Author: </b>R. Shelomo Afeda Ha-Kohen / ר שלמה אפידה הכהן</p>
 <p class="MsoNormal"><b>Date Written:</b> 1860</p>
 <p class="MsoNormal"><b>Location: </b> Constantinople / קושטא</p>

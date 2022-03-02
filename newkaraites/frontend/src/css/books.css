@@ -442,6 +442,11 @@
     color: red;
 }
 
+/* Mitsvat Yesod Shabbat */
+.mitsvat-table-000 tr:nth-child(odd) td:nth-child(odd) p{
+    direction: ltr;
+}
+
 /* Shabbat Menuḥa */
 .shabbat-table-000 {
     width: 80%;
