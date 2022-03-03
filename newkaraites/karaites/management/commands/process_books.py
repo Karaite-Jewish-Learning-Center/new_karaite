@@ -138,7 +138,7 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 BOOKS = [1, 2]
 
 # technical "in" is not a language, we use to process introduction files
-LANGUAGES = {'en': "English", 'he': "Hebrew", "in": "introduction"}
+LANGUAGES = {'en': "English", 'he': "Hebrew", "in": "introduction", 'toc': "TOC"}
 
 
 def fix_image_gan(path, book_name):
@@ -308,8 +308,8 @@ def add_book_parts(path, book_name, books=BOOKS):
 HALAKHAH = [
 
     [
-        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html',
-        'he',
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
+        'en,he',
         [],
         [update_bible_references_he],
         {},
@@ -445,7 +445,7 @@ PRAYERS = [
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
-        {'name': r"Lutski Prayer for a Time of Plague,",
+        {'name': r"Lutski Prayer for a Time of Plague,בקשה לאמרו בזמן המגפה",
          'first_level': 4,
          'book_classification': '20',
          'author': 'N/A,',
@@ -671,7 +671,7 @@ SUPPLEMENTAL = [
         [],
         [],
         # name, liturgy , Poems, Author
-        {'name': r"Atsili ḳum ḳera, Atsili ḳum ḳera",
+        {'name': r"Atsili ḳum ḳera, אצילי קום קרא",
          'first_level': 4,
          'book_classification': '40',
          'author': 'Abraham',
@@ -758,6 +758,18 @@ POLEMIC = [
          'first_level': 5,
          'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
+        False
+    ],
+    [
+        '/HTML/Polemics/Hizzuḳ Emuna/', 'Hizzuḳ Emuna-{}.html',
+        'he,in,toc',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r"Ḥizzuḳ Emuna,חזוק אמונה חיזוק אמונה",
+         'first_level': 5,
+         'book_classification': '60',
+         'author': "Isaac ben Abraham"},
         False
     ],
 ]
@@ -1005,7 +1017,7 @@ class Command(BaseCommand):
         handle_ms_css.close()
 
     @staticmethod
-    def collect_style_map_to_class(html_tree, book, collect):
+    def collect_style_map_to_class(html_tree, book, collect, lang):
         style_classes = {}
         html = ''
         for section in [1, 2, 3, 4]:
@@ -1047,7 +1059,7 @@ class Command(BaseCommand):
 
                     style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
                     if style not in style_classes:
-                        class_name = f'{class_name_by_tag}-{tags[class_name_by_tag]:03}'
+                        class_name = f'{lang}-{class_name_by_tag}-{tags[class_name_by_tag]:03}'
                         style_classes.update({style: class_name})
                         tags[class_name_by_tag] += 1
                     else:
@@ -1091,9 +1103,9 @@ class Command(BaseCommand):
                 if level is not None and classification is not None:
                     book_level = FIRST_LEVEL[int(level) - 1][1]
                     book_classification = BOOK_CLASSIFICATION[int(classification) // 10 - 1][1]
-                    print(f'{i:02} {lang:5} {book_level:8} {book_classification[0:12]:14} {book_name}')
+                    print(f'{i:02} {lang:9} {book_level:8} {book_classification[0:12]:14} {book_name}')
                 else:
-                    print(f'{i:02} {lang:5} {"Tanakh":8} {"-- ":14} {book_name}')
+                    print(f'{i:02} {lang:9} {"Tanakh":8} {"-- ":14} {book_name}')
 
                 i += 1
             print()
@@ -1147,7 +1159,7 @@ class Command(BaseCommand):
                 sys.stdout.write(f"\nCollecting css for book {book_name}")
                 html_tree = BeautifulSoup(html_str, 'html5lib')
 
-                html_tree = self.collect_style_map_to_class(html_tree, book_name, collect)
+                html_tree = self.collect_style_map_to_class(html_tree, book_name, collect, lang)
 
                 for process in post_processes:
                     sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")

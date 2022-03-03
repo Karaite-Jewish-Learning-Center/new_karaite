@@ -142,6 +142,8 @@ class GetFirstLevel(View):
 
         level['Polemic'] = """Polemic texts."""
 
+        level['Comments'] = """Commentary texts."""
+
         return JsonResponse(level)
 
 

@@ -28,8 +28,10 @@ BOOK_CLASSIFICATION = [
     ('60', 'Polemic'),
     # test
     ('70', 'Test'),
+    ('80', 'Comments'),
     # other
-    ('80', 'Other'),
+    ('90', 'Other'),
+
 ]
 
 FIRST_LEVEL = [
@@ -40,6 +42,8 @@ FIRST_LEVEL = [
     (5, 'Polemics'),
     (6, 'Songs'),
     (7, 'Prayers'),
+    (8, 'Comments'),
+
 ]
 
 SECOND_LEVEL = [

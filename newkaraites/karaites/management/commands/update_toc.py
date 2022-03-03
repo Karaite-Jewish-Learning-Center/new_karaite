@@ -10,6 +10,7 @@ def update_toc(book_details, paragraph_number, toc):
         start_paragraph=paragraph_number - 1
     )
     ref_chapter = toc[0]
+
     # update previous record that's the header for chapter
     header = KaraitesBookAsArray.objects.get(book=book_details,
                                              paragraph_number=paragraph_number - 1)

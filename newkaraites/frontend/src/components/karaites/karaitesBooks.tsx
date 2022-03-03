@@ -92,9 +92,12 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemContent = (item: number, data: Array<any>) => {
+        if(data[HTML][2] ===undefined){
+            return <div>&nbsp;</div>
+        }
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                {parse(data[HTML][0], {
+                {parse(data[HTML][2] , {
                     replace: domNode => {
                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                     }
