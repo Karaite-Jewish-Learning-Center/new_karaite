@@ -44,7 +44,6 @@ class Command(BaseCommand):
 
                 c = 1
                 table_str = ''
-
                 for table in divs[0].find_all('table'):
                     table.attrs = clean_tag_attr(table)
                     table = clean_table_attr(table)

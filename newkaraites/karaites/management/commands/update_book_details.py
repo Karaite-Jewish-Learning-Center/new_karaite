@@ -4,7 +4,6 @@ from ...models import (Author,
 
 def update_book_details(data, introduction='', language='he'):
     """ update book details """
-    print(data['name'])
     book_title_en, book_title_he = data['name'].split(',')
     author, _ = Author.objects.get_or_create(name=data['name'])
     author.save()

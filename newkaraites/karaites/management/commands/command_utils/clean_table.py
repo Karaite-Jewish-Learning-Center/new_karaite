@@ -27,3 +27,13 @@ def clean_table_attr(tree):
         child.attrs = clean_tag_attr(child)
 
     return tree
+
+
+def process_table(divs):
+    table_str = ''
+    for table in divs.find_all('table'):
+        table.attrs = clean_tag_attr(table)
+        table = clean_table_attr(table)
+        table_str += str(table)
+
+    return table_str

@@ -3,13 +3,14 @@ from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from .command_utils.utils import get_html
 from .update_book_details import update_book_details
-from .update_karaites_array import update_karaites_array_language
+from .update_karaites_array import update_karaites_array_details
 from .process_books import (POLEMIC,
                             LANGUAGES)
 from .constants import PATH
 from ...models import KaraitesBookDetails
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
+from .command_utils.clean_table import process_table
 from .command_utils.html_utils import remove_empty_tags
 
 
@@ -25,12 +26,11 @@ class Command(BaseCommand):
         [':', ''],
         ['"', ''],
         ['#2.76.', '#2.76'],
-        ["#2.86'':", "#2.86"],
-        ['#2.87"":', '#2.87'],
-        ['#2.88"', '#2.88'],
-        ["#2.88'", '#2.88'],
-        ["#2.86:", "#2.86"],
-        ["#2.100'", '#2.100'],
+        ["'':", ""],
+        ['"":', ''],
+        ['"', ''],
+        [":", ""],
+        ["'", ''],
     ]
 
     @staticmethod
@@ -42,7 +42,16 @@ class Command(BaseCommand):
             key = text[0:end_pos + 1].strip().encode('ascii', errors='ignore').decode('utf-8')
             for error in Command.errors:
                 key = key.replace(error[0], error[1])
+
+            # value_end_pos = text.find('־', end_pos)
+            # # print(value_end_pos)
+            # if value_end_pos < 0:
+            #     value_end_pos = text.find(' ', end_pos + 1)
+
             value = text[end_pos + 1:].replace('\n', '').strip()
+
+            # print('key: {} value: {} end_pos:{}, value_end_pos:{}'.format(key, value, end_pos, value_end_pos))
+            # input('pause')
             if key == '':
                 return None, None
 
@@ -62,12 +71,21 @@ class Command(BaseCommand):
 
             if 'in' in language:
                 language = language.replace('in', '')
-                # process intro
+                intro_html = get_html(f"{PATH}/{book.replace('{}', 'introduction')}")
+                intro_soup = BeautifulSoup(intro_html, 'html5lib')
+                intro_soup = remove_empty_tags(intro_soup)
+                intro_soup.find('WordSection1')
+                print(intro_soup)
+                sys.exit()
+                #
+                # update_book_details(details, introduction=str(intro_soup.find('WordSection1')[0]))
+                # table_str = process_table(intro_soup).replace('MsoTableGrid ', '')
+                # update_book_details(details, introduction=table_str)
 
             if 'toc' in language:
                 language = language.replace('toc', '')
                 toc = get_html(f"{PATH}/{book.replace('{}', 'TOC')}")
-                toc_html = BeautifulSoup(toc, 'html.parser')
+                toc_html = BeautifulSoup(toc, 'html5lib')
                 toc_divs = toc_html.find_all('div', class_='WordSection1')
                 for p in toc_divs[0].find_all('p'):
                     text = p.get_text(strip=True)
@@ -87,22 +105,19 @@ class Command(BaseCommand):
                 html_tree = remove_empty_tags(BeautifulSoup(html, 'html5lib'))
                 divs = html_tree.find_all('div', class_='WordSection1')
 
-                for p in divs[0].find_all('p'):
+                for p in divs[0].find_all(recursive=False):
                     text = p.get_text(strip=True)
 
                     key, value = self.find_toc_key(text)
-                    # if key is not None:
-                    #     p = str(p).replace(key, '')
+                    if key is not None:
+                        p = str(p).replace(key, '')
 
-                    if lang == 'en':
-                        update_karaites_array_language(book_title_en, '', c, p, '')
-
-                    if lang == 'he':
-                        update_karaites_array_language(book_title_en, '', c, '', p)
+                    update_karaites_array_details(book_title_en, '', c, str(p), )
 
                     if key is not None:
                         try:
-                            update_toc(book_details, c + 1, [table_of_contents[key], value])
+                            update_toc(book_details, c + 1,
+                                       [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
                         except KeyError:
                             print()
                             print(f'{key}')

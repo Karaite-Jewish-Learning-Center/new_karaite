@@ -78,7 +78,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         setTimeout(() => {
             // @ts-ignore
             virtuoso.current.scrollToIndex(starParagraph - 2, {
-                align: 'start',
+                align: 'center',
                 behavior: 'smooth',
             })
         }, 100)
@@ -92,12 +92,10 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemContent = (item: number, data: Array<any>) => {
-        if(data[HTML][2] ===undefined){
-            return <div>&nbsp;</div>
-        }
+
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                {parse(data[HTML][2] , {
+                {parse(data[HTML][0], {
                     replace: domNode => {
                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                     }
@@ -120,11 +118,24 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemToc = (item: number, data: any) => {
+        if (data[INDEX] === '') {
+            // one column TOC
+            return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+                {/*<div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>*/}
+                    <Button className={classes.paragraphContainer} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
+
+                            <p className={classes.heRightCenter} >{data[SUBJECT]}-----</p>
+
+                    </Button>
+                {/*</div>*/}
+            </div>)
+        }
+        // 2 columns TOC
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
                 <Button onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
                     <div className={classes.heLeft}>
-                        <Typography className={classes.he}>{data[INDEX]}</Typography>
+                        <p className={classes.he}>{data[INDEX]}</p>
                     </div>
                     <div className={classes.heRight}>
                         <Typography className={classes.he}>{data[SUBJECT]}</Typography>
@@ -199,11 +210,14 @@ const useStyles = makeStyles(() => ({
         height: '100%',
     },
     paragraphContainer: {
+        fontFamily:'SBL Hebrew',
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
     },
     paragraph: {
+        fontFamily:'SBL Hebrew',
+        fontSize:'21',
         paddingLeft: 20,
         paddingRight: 20,
         maxWidth: 600,
@@ -243,6 +257,12 @@ const useStyles = makeStyles(() => ({
         float: 'right',
         textAlign: 'right',
         width: '300px',
+    },
+    heRightCenter:{
+        direction:'rtl',
+        border:'1px solid red',
+        textAlign:'right',
+        minWidth: '100%',
     },
     he: {
         direction: 'rtl',

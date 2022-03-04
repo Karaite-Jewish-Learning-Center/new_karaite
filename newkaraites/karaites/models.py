@@ -596,6 +596,7 @@ class KaraitesBookDetails(models.Model):
 
 
 class KaraitesBookAsArray(models.Model):
+
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
                              verbose_name=_('Karaite book details')
