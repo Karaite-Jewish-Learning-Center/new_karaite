@@ -76,7 +76,7 @@ class Command(BaseCommand):
                 intro_soup = remove_empty_tags(intro_soup)
                 intro_soup.find('WordSection1')
                 print(intro_soup)
-                sys.exit()
+
                 #
                 # update_book_details(details, introduction=str(intro_soup.find('WordSection1')[0]))
                 # table_str = process_table(intro_soup).replace('MsoTableGrid ', '')

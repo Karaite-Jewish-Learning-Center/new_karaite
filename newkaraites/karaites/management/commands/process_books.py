@@ -137,8 +137,10 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 BOOKS = [1, 2]
 
-# technical "in" is not a language, we use to process introduction files
-LANGUAGES = {'en': "English", 'he': "Hebrew", "in": "introduction", 'toc': "TOC"}
+LANGUAGES = {'en': "English", 'he': "Hebrew", 'ja': 'Judeo-Arabic',
+             # technical "in" , "toc" are not a language,
+             # we use to process introduction files and table of contents files
+             "in": "introduction", 'toc': "TOC"}
 
 
 def fix_image_gan(path, book_name):
@@ -305,16 +307,36 @@ def add_book_parts(path, book_name, books=BOOKS):
 # post process list of function
 # pre-process list of function
 # collect css
-HALAKHAH = [
-
+COMMENTS = [
     [
-        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
-        'en,he',
+        'HTML/Ali ben Suleiman/',
+        'Ali ben Suleiman-{}.html',
+        'ja,in',
         [],
         [update_bible_references_he],
-        {},
+        {'name': r"Ali ibn Suleiman’s Commentary on Genesis,",
+         'first_level': 8,
+         'book_classification': '80',
+         'author': 'Ali ibn Suleiman,',
+         'css_class': ''},
         True
     ],
+    [
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
+        'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
+        'en,he',
+        [],
+        [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
+        {'name': r"Deuteronomy Keter Torah Aaron ben Elijah,",
+         'first_level': 8,
+         'book_classification': '80',
+         'author': 'Aaron ben Elijah,',
+         'css_class': ''},
+        True
+    ],
+
+]
+HALAKHAH = [
     [
         "HTML/Halakhah/Aaron ben Joseph's Essay on the Obligation of Prayer/",
         "Aaron ben Joseph's Essay on the Obligation of Prayer-{}.html",
@@ -330,7 +352,7 @@ HALAKHAH = [
     ],
     [
         'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
-        'he',
+        'he,in,toc',
         [fix_image_gan],
         [],
         {'name': r"Gan Eden,",
@@ -340,16 +362,18 @@ HALAKHAH = [
          'css_class': ''},
         True
     ],
+    # [
+    #     'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
+    #     'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
+    #     'en,he',
+    #     [],
+    #     [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
+    #     {},
+    #     True
+    # ],
     [
-        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/', 'English Deuteronomy_Keter Torah_Aaron ben Elijah.html',
-        'en',
-        [],
-        [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
-        {},
-        True
-    ],
-    [
-        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
+        'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
         'he',
         [],
         [update_bible_re],
@@ -357,7 +381,8 @@ HALAKHAH = [
         True
     ],
     [
-        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/', 'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
+        'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
         'he',
         [],
         [update_bible_re],
@@ -374,8 +399,26 @@ HALAKHAH = [
         False
     ],
     [
+        'HTML/Halakhah/Kitab al-Anwar/',
+        'Kitab al-Anwar-{}.html',
+        'he,in,toc',
+        [],
+        [update_bible_re],
+        {},
+        False
+    ],
+    [
+        'HTML/Halakhah/Patshegen Ketav Hadat/',
+        'Patshegen Ketav Hadat-{}.html',
+        'he,in,toc',
+        [],
+        [update_bible_re],
+        {},
+        False
+    ],
+    [
         'HTML/Halakhah/The Remnant and the Relic/',
-        'Remnant and Relic English.html',
+        'Remnant and Relic-{}.html',
         'en',
         [],
         [update_bible_re],
@@ -747,6 +790,74 @@ WEDDING_SONGS = [
         False
     ],
 ]
+
+POETRY_NON_LITURGICAL = [
+    [
+        'HTML/Poetry (Non-Liturgical)/Ani Hayiti/',
+        'Ani Hayiti-{}.html',
+        'he,in',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r" Ani Hayiti, אני הייתי",
+         'first_level': 9,
+         'book_classification': '55',
+         'author': "Moshe ben Shemu’el, משה בן שמואל"},
+        False
+    ],
+    [
+        'HTML/Poetry (Non-Liturgical)/Malki Becha/',
+        'Malki Becha-{}.html',
+        'he,in',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r" Malki Becha, מלכי בך",
+         'first_level': 9,
+         'book_classification': '55',
+         'author': "Moshe ben Shemu’el, משה בן שמואל"},
+        False
+    ],
+    [
+        'HTML/Poetry (Non-Liturgical)/Oti Ashaq/',
+        'Oti Ashaq-{}.html',
+        'he,in',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r"Oti ‘Ashaḳ, אותי עשק",
+         'first_level': 9,
+         'book_classification': '55',
+         'author': "Moshe ben Shemu’el, משה בן שמואל"},
+        False
+    ],
+    [
+        'HTML/Poetry (Non-Liturgical)/Paga Hammelech/',
+        'Paga Hammelech-{}.html',
+        'he,in',
+        [],
+        [],
+        # name, Polemic , Author
+        {'name': r"Paḡa‘ Hammelech , פגע המלך",
+         'first_level': 9,
+         'book_classification': '55',
+         'author': "Moshe ben Shemu’el, משה בן שמואל"},
+        False
+    ],
+    [
+        'HTML/Poetry (Non-Liturgical)/Paga Hammelech/',
+        'Paga Hammelech-{}.html',
+        'he,in',
+        [],
+        [],
+        # name, Polemic , , Author
+        {'name': r"Paḡa‘ Hammelech , פגע המלך",
+         'first_level': 9,
+         'book_classification': '55',
+         'author': "Moshe ben Shemu’el, משה בן שמואל"},
+        False
+    ],
+]
 POLEMIC = [
     [
         'HTML/Polemics/Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
@@ -790,7 +901,15 @@ TEST_BOOKS = [
     ],
 ]
 
-LIST_OF_BOOKS = HALAKHAH + HAVDALA + PRAYERS + SHABBAT_SONGS + SUPPLEMENTAL + WEDDING_SONGS + POLEMIC
+LIST_OF_BOOKS = (COMMENTS +
+                 HALAKHAH +
+                 HAVDALA +
+                 PRAYERS +
+                 SHABBAT_SONGS +
+                 SUPPLEMENTAL +
+                 WEDDING_SONGS +
+                 POETRY_NON_LITURGICAL +
+                 POLEMIC)
 
 
 class Command(BaseCommand):
@@ -802,6 +921,13 @@ class Command(BaseCommand):
             default=True,
             action='store_true',
             help='Process all books',
+        )
+        parser.add_argument(
+            '--comments',
+            dest='comments',
+            action='store_true',
+            default=False,
+            help='Process comments books',
         )
         parser.add_argument(
             '--liturgy',
@@ -1124,6 +1250,10 @@ class Command(BaseCommand):
 
             if options['polemic']:
                 books_to_process += POLEMIC
+
+            if options['comments']:
+                books_to_process += COMMENTS
+
         else:
             books_to_process = LIST_OF_BOOKS
 

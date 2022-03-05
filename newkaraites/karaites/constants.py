@@ -23,9 +23,11 @@ BOOK_CLASSIFICATION = [
     ('30', 'Shabbat Songs'),
     ('40', 'Supplemental Readings for specific Torah portions'),
     ('50', 'Wedding Songs'),
-
+    # poetry
+    ('55', 'Poetry'),
     # Polemic
     ('60', 'Polemic'),
+
     # test
     ('70', 'Test'),
     ('80', 'Comments'),
@@ -43,6 +45,7 @@ FIRST_LEVEL = [
     (6, 'Songs'),
     (7, 'Prayers'),
     (8, 'Comments'),
+    (9, 'Poetry (Non-Liturgical)'),
 
 ]
 
