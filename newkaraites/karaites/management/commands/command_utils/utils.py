@@ -15,6 +15,10 @@ HTML = """html to test"""
 
 def get_html(source):
     """ Return html from source"""
+
+    # old files
+    if source.find('-{}') > 0:
+        source = source.replace('-{}', '')
     handle = open(source, 'r')
     html = f"""{handle.read()}"""
     handle.close()
@@ -44,7 +48,8 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
             if striped_bible_ref.startswith('(</span><span class="halakha_ad-span-003" lang="AR-SA">'):
                 if ref.endswith(')'):
                     html_str = html_str.replace(bible_ref,
-                                                f'</span><span lang="HE" class="he-biblical-ref" data-ref="{parsed_ref}">{ref}</span>', 1)
+                                                f'</span><span lang="HE" class="he-biblical-ref" data-ref="{parsed_ref}">{ref}</span>',
+                                                1)
                     continue
                 if ref.endswith('('):
                     html_str = html_str.replace(bible_ref,

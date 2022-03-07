@@ -45,6 +45,9 @@ const LoadBook = ({type}) => {
             if (type === 'liturgy') {
                 history.push(`/Liturgy/`)
             }
+            if (type === 'poetry') {
+                history.push(`/Poetry/`)
+            }
             if (type === 'polemic') {
                 history.push(`/Polemic/`)
             }
@@ -111,7 +114,7 @@ const LoadBook = ({type}) => {
                 await fetchDataBible(store.panes.length - 1)
             }
 
-            if (type === "karaites" || type === "liturgy" || type === "polemic") {
+            if (type === "karaites" || type === "liturgy" || type === "polemic" || type === 'poetry') {
                 store.setPanes({
                     book: book,
                     chapter: parseInt(chapter) - 1,
@@ -185,21 +188,21 @@ const LoadBook = ({type}) => {
                             paneNumber={i}
                             refClick={refClick}
                             paragraphs={store.getParagraphs(i)}
-                            details = {store.getBookDetails(i)}
+                            details={store.getBookDetails(i)}
                             type={type}
                             onClosePane={onClosePane}/>
                     </Grid>
 
                 ))
             }
-            if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic') {
+            if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic' || panes[i].type.toLowerCase() === 'poetry') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                         <KaraitesBooks
                             paneNumber={i}
                             refClick={refClick}
                             paragraphs={store.getParagraphs(i)}
-                            details = {store.getBookDetails(i)}
+                            details={store.getBookDetails(i)}
                             type={type}
                             onClosePane={onClosePane}
                         />
@@ -215,7 +218,7 @@ const LoadBook = ({type}) => {
     getBook(book, chapter, verse, [], type).then().catch()
 
     const books = bookRender()
-    if(books.length=== 0) {
+    if (books.length === 0) {
         return null
     }
     return (

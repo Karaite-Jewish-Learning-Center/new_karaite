@@ -25,6 +25,8 @@ export const TANAKH: string = '1'
 export const HALAKHAH: string = '3'
 export const LITURGY: string = '4'
 export const POLEMIC: string = '5'
+export const POETRY: string = '9'
+
 
 export const TRANSFORM_TYPE: string = 'Bible'
 

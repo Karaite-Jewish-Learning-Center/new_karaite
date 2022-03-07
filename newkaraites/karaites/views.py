@@ -110,7 +110,7 @@ def karaites_book_as_array(request, *args, **kwargs):
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
     except KaraitesBookDetails.DoesNotExist:
-        return JsonResponse(data={'status': 'false', 'message': _(f'Book:{book}, not found.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _(f'Book details:{book}, not found.')}, status=400)
 
     try:
         book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'],
@@ -140,7 +140,11 @@ class GetFirstLevel(View):
         level['Liturgy'] = ("""Prayers, poems, and ritual texts, 
         recited in daily worship or at specific occasions.""")
 
+        level['Poetry'] = """Poetry Non Liturgical texts."""
+
         level['Polemic'] = """Polemic texts."""
+
+        level['Comments'] = """Commentary texts."""
 
         return JsonResponse(level)
 

@@ -1,7 +1,6 @@
 import sys
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from ...utils import clear_terminal_line
 from .command_utils.utils import get_html
 from .update_toc import update_toc
 from .update_book_details import update_book_details
@@ -10,12 +9,20 @@ from .process_books import (HAVDALA,
                             PRAYERS,
                             SHABBAT_SONGS,
                             SUPPLEMENTAL,
-                            WEDDING_SONGS)
+                            WEDDING_SONGS,
+                            POETRY_NON_LITURGICAL)
+
 from .constants import PATH
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from ...models import KaraitesBookDetails
 from .udpate_bible_ref import update_create_bible_refs
+
+LIST_OF_BOOKS = (HAVDALA +
+                 PRAYERS +
+                 SHABBAT_SONGS +
+                 SUPPLEMENTAL +
+                 WEDDING_SONGS)
 
 
 class Command(BaseCommand):
@@ -28,7 +35,8 @@ class Command(BaseCommand):
         KaraitesBookDetails.objects.filter(first_level=4).delete()
         sys.stdout.write(f'\nProcessing books:')
         i = 1
-        for _, book, _, _, _, details, _ in HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL:
+
+        for _, book, _, _, _, details, _ in LIST_OF_BOOKS:
 
             sys.stdout.write(f'\n {book.replace(".html","")}')
             book_details, _ = update_book_details(details)

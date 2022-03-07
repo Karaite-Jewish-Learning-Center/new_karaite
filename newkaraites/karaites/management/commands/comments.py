@@ -36,15 +36,19 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Comments"""
-        source = (f'../newkaraites/karaites/management/tmp/'
-                  'English Deuteronomy_Keter Torah_Aaron ben Elijah.html')
+
+        sys.stdout.write('\r Deleting Keter Torah Comments\n')
+        OtherBooks.objects.filter(book_title_en='Keter Torah').delete()
+        source_path = '../newkaraites/karaites/management/tmp/'
+        # source_path = '../newkaraites/data_karaites/HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/'
+
+        source = source_path + 'Deuteronomy_Keter Torah_Aaron ben Elijah-English.html'
         handle = open(source, 'r')
         html = handle.read()
         handle.close()
         html_tree = BeautifulSoup(html, 'html5lib')
 
-        source_he = (f'../newkaraites/karaites/management/tmp/'
-                     'Hebrew Deuteronomy_Keter Torah_Aaron ben Elijah.html')
+        source_he = source_path + 'Deuteronomy_Keter Torah_Aaron ben Elijah-Hebrew.html'
         handle_he = open(source_he, 'r')
         html_he = handle_he.read()
         handle_he.close()
@@ -81,8 +85,7 @@ class Command(BaseCommand):
 
             same_chapter, same_verses = get_chapter_verse_en(child, chapter_number)
 
-            sys.stdout.write(
-                f"\33[K Import English comments from {book_title}, chapter:{chapter_number} verse {verse_number}\r")
+            sys.stdout.write(f"\rImport English comments from {book_title}, chapter:{chapter_number} verse {verse_number}\r")
 
             if same_chapter is not None and same_verses is not None:
 
@@ -116,8 +119,7 @@ class Command(BaseCommand):
             if child.attrs.get('align', None) == 'center':
                 continue
 
-            sys.stdout.write(
-                f"\33[K Import Hebrew comments from {book_title}, chapter:{chapter_number} verse:{verse_number}\r")
+            sys.stdout.write(f"\rImport Hebrew comments from {book_title}, chapter:{chapter_number} verse:{verse_number}\r")
 
             same_chapter, same_verses = get_chapter_verse_he(child)
 

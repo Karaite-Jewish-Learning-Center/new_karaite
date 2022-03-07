@@ -16,3 +16,4 @@ more_itertools
 spacy
 elasticsearch~=7.0.0
 regex
+langdetect

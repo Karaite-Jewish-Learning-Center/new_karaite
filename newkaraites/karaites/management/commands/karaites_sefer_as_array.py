@@ -23,7 +23,7 @@ class Command(BaseCommand):
         KaraitesBookDetails.objects.filter(first_level=5).delete()
         sys.stdout.write(f'\nProcessing book:')
 
-        for _, book, _, _, _, details, _ in POLEMIC:
+        for _, book, _, _, _, details, _ in [POLEMIC[0]]:
             book_details, _ = update_book_details(details)
             html = get_html(f'{PATH}{book}')
             # MsoTableGrid is very bad for this book

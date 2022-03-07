@@ -38,6 +38,11 @@ Polemic books
 
 >> ./manage.py karaites_sefer_as_array
 
+>> ./manage.py process_intro_en_he_table
+
+
+>> ./manage.py process_intro_en_he
+
 Update references (updates bible references)
 
 >> ./manage.py update_references
