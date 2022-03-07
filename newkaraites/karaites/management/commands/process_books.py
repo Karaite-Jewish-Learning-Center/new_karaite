@@ -310,7 +310,7 @@ def add_book_parts(path, book_name, books=BOOKS):
 COMMENTS = [
     [
         'HTML/Commentary/Ali ben Suleiman/',
-        'Ali b. Suleiman Commentary on Genesis-{}.html',
+        'Ali ben Suleiman Commentary on Genesis-{}.html',
         'ja,in',
         [],
         [update_bible_re],
