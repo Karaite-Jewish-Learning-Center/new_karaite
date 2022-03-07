@@ -81,7 +81,7 @@ class Command(BaseCommand):
 
             if 'in' in language:
                 language = language.replace('in', '')
-                html = get_html(f"{PATH}{book.replace('{}', 'introduction')}")
+                html = get_html(f"{PATH}{book.replace('{}', LANGUAGES['in'])}")
                 html_tree = BeautifulSoup(html, 'html5lib')
                 html_tree = remove_empty_tags(html_tree)
                 divs = html_tree.find_all('div', {'class': 'WordSection1'})
