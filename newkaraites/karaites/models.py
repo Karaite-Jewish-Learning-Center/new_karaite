@@ -605,7 +605,7 @@ class KaraitesBookAsArray(models.Model):
                              verbose_name=_('Karaite book details')
                              )
 
-    ref_chapter = models.CharField(max_length=250,
+    ref_chapter = models.CharField(max_length=260,
                                    default='',
                                    verbose_name=_('Reference/Chapter'))
 
