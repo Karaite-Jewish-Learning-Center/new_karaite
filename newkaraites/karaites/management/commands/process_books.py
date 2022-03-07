@@ -137,7 +137,7 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 BOOKS = [1, 2]
 
-LANGUAGES = {'en': "English", 'he': "Hebrew", 'ja': 'Judeo-Arabic',
+LANGUAGES = {'en': "English", 'he': "Hebrew", 'ja': 'Judeo_Arabic',
              # technical "in" , "toc" are not a language,
              # we use to process introduction files and table of contents files
              "in": "introduction", 'toc': "TOC"}
