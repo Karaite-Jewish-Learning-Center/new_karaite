@@ -140,7 +140,7 @@ BOOKS = [1, 2]
 LANGUAGES = {'en': "English", 'he': "Hebrew", 'ja': 'Judeo_Arabic',
              # technical "in" , "toc" are not a language,
              # we use to process introduction files and table of contents files
-             "in": "introduction", 'toc': "TOC"}
+             "in": "Introduction", 'toc': "TOC"}
 
 
 def fix_image_gan(path, book_name):
