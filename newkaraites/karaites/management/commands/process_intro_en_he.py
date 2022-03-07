@@ -4,7 +4,8 @@ from django.core.management.base import BaseCommand
 from .command_utils.utils import get_html
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array_details
-from .process_books import (POLEMIC,
+from .process_books import (COMMENTS,
+                            POLEMIC,
                             POETRY_NON_LITURGICAL,
                             HALAKHAH,
                             LANGUAGES)
@@ -16,7 +17,8 @@ from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from .command_utils.html_utils import remove_empty_tags
 
-LIST_OF_BOOKS = ([POLEMIC[1]] +
+LIST_OF_BOOKS = (COMMENTS +
+                 [POLEMIC[1]] +
                  POETRY_NON_LITURGICAL
                  + HALAKHAH)
 

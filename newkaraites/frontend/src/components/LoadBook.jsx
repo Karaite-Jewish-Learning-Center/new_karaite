@@ -5,7 +5,7 @@ import {parseBiblicalReference} from '../utils/parseBiblicalReference';
 import {observer} from 'mobx-react-lite'
 import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
-import {makeRandomKey} from '../utils/utils';
+import {capitalize, makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
 import {karaitesBookUrl, TRANSFORM_TYPE} from '../constants/constants'
 import {calculateItemNumber} from '../utils/utils';
@@ -38,19 +38,14 @@ const LoadBook = ({type}) => {
         if (store.isLastPane) {
             if (type === 'bible') {
                 history.push(`/Tanakh/`)
+                return
             }
             if (type === 'karaites') {
                 history.push(`/Halakhah/`)
+                return
             }
-            if (type === 'liturgy') {
-                history.push(`/Liturgy/`)
-            }
-            if (type === 'poetry') {
-                history.push(`/Poetry/`)
-            }
-            if (type === 'polemic') {
-                history.push(`/Polemic/`)
-            }
+
+            history.push(`/${capitalize(type)}/`)
         }
     }
 
@@ -114,7 +109,7 @@ const LoadBook = ({type}) => {
                 await fetchDataBible(store.panes.length - 1)
             }
 
-            if (type === "karaites" || type === "liturgy" || type === "polemic" || type === 'poetry') {
+            if (type === "karaites" || type === "liturgy" || type === "polemic" || type === 'poetry' || type === 'comments') {
                 store.setPanes({
                     book: book,
                     chapter: parseInt(chapter) - 1,
@@ -195,7 +190,7 @@ const LoadBook = ({type}) => {
 
                 ))
             }
-            if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic' || panes[i].type.toLowerCase() === 'poetry') {
+            if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic' || panes[i].type.toLowerCase() === 'poetry' || panes[i].type.toLowerCase() === 'comments') {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                         <KaraitesBooks

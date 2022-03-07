@@ -10,6 +10,7 @@ import Halakhah from './components/halakhah/Halakhah'
 import Liturgy from "./components/liturgy/Liturgy"
 import Poetry from "./components/poetry/poetry"
 import Polemic from "./components/polemic/Polemic"
+import Comment from "./components/comments/comment"
 import Home from "./components/pages/Home";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
@@ -61,6 +62,10 @@ function App() {
 
                         <Route exact path="/Polemic/:book/1/" children={<LoadBook type="polemic"/>}/>
                         <Route exact path="/Polemic/"><Polemic/></Route>
+
+                        <Route exact path="/Comments/:book/1/" children={<LoadBook type="comments"/>}/>
+                        <Route exact path="/Comments/"><Comment/></Route>
+
                         <Route path='*'>
                             <NotFound404/>
                         </Route>
