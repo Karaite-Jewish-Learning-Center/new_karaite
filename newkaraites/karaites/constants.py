@@ -5,9 +5,11 @@ LANGUAGES = [
     ('en', 'English'),
     ('he', 'Hebrew'),
     ('en,he', 'Hebrew/English'),
+    ('ja', 'Judeo-Arabic'),
 ]
 
 BOOK_CLASSIFICATION = [
+    ('00', 'Unknown'),
     # ('01', 'Prayers'),
     # ('02', 'Blessing'),
     # ('03', 'Karaite Jewish practice'),
@@ -46,7 +48,7 @@ FIRST_LEVEL = [
     (7, 'Prayers'),
     (8, 'Comments'),
     (9, 'Poetry (Non-Liturgical)'),
-
+    (10, 'Other'),
 ]
 
 SECOND_LEVEL = [
