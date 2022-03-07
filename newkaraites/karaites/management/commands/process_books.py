@@ -327,7 +327,7 @@ COMMENTS = [
         'en,he',
         [],
         [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
-        {'name': r"Deuteronomy Keter Torah Aaron ben Elijah,",
+        {'name': r"Deuteronomy Keter Torah Aaron ben Elijah, ",
          'first_level': 8,
          'book_classification': '80',
          'author': 'Aaron ben Elijah,',
@@ -343,25 +343,25 @@ HALAKHAH = [
         'en,in',
         [],
         [],
-        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,",
+        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer, ",
          'first_level': 3,
          'book_classification': '80',
          'author': ',',
          'css_class': ''},
         True
     ],
-    [
-        'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
-        'he,in,toc',
-        [fix_image_gan],
-        [],
-        {'name': r"Gan Eden,",
-         'first_level': 3,
-         'book_classification': '80',
-         'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
-         'css_class': ''},
-        True
-    ],
+    # [
+    #     'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
+    #     'he,in,toc',
+    #     [fix_image_gan],
+    #     [],
+    #     {'name': r"Gan Eden,",
+    #      'first_level': 3,
+    #      'book_classification': '80',
+    #      'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
+    #      'css_class': ''},
+    #     True
+    # ],
     # [
     #     'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
     #     'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
@@ -371,49 +371,53 @@ HALAKHAH = [
     #     {},
     #     True
     # ],
+    # [
+    #     'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
+    #     'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
+    #     'he',
+    #     [],
+    #     [update_bible_re],
+    #     {},
+    #     True
+    # ],
+    # [
+    #     'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
+    #     'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
+    #     'he',
+    #     [],
+    #     [update_bible_re],
+    #     {},
+    #     False
+    # ],
+    # [
+    #     'HTML/Halakhah/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/',
+    #     'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
+    #     'he',
+    #     [fix_image_source, add_book_parts],
+    #     [update_bible_adderet],
+    #     {},
+    #     False
+    # ],
+    # [
+    #     'HTML/Halakhah/Kitab al-Anwar/',
+    #     'Kitab al-Anwar-{}.html',
+    #     'he,in,toc',
+    #     [],
+    #     [update_bible_re],
+    #     {},
+    #     False
+    # ],
     [
-        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
-        'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
-        'he',
-        [],
-        [update_bible_re],
-        {},
-        True
-    ],
-    [
-        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
-        'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
-        'he',
-        [],
-        [update_bible_re],
-        {},
-        False
-    ],
-    [
-        'HTML/Halakhah/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/',
-        'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
-        'he',
-        [fix_image_source, add_book_parts],
-        [update_bible_adderet],
-        {},
-        False
-    ],
-    [
-        'HTML/Halakhah/Kitab al-Anwar/',
-        'Kitab al-Anwar-{}.html',
+        'HTML/Halakhah/Patshegen Ketav Haddat/',
+        'Patshegen Ketav Haddat-{}.html',
         'he,in,toc',
         [],
         [update_bible_re],
-        {},
-        False
-    ],
-    [
-        'HTML/Halakhah/Patshegen Ketav Hadat/',
-        'Patshegen Ketav Hadat-{}.html',
-        'he,in,toc',
-        [],
-        [update_bible_re],
-        {},
+        {'name': r"Patshegen Ketav Haddat, פתשגן כתב הדת",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Caleb Afendopolo,',
+         'css_class': ''},
         False
     ],
     [
@@ -422,7 +426,11 @@ HALAKHAH = [
         'en',
         [],
         [update_bible_re],
-        {},
+        {'name': r"The Remnant and the Relic , השריד והפליט",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Zahava Yod,',
+         'css_class': ''},
         False
     ],
 
@@ -712,7 +720,7 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Atsili Qum Qera.html',
         'he',
         [],
-        [],
+        [update_bible_re],
         # name, liturgy , Poems, Author
         {'name': r"Atsili ḳum ḳera, אצילי קום קרא",
          'first_level': 4,
@@ -725,7 +733,7 @@ SUPPLEMENTAL = [
         'HTML/Liturgy/Supplemental/', 'Evyon Asher.html',
         'he',
         [],
-        [],
+        [update_bible_re],
         # name, liturgy , Poems, Author
         {'name': r"Evyon Asher, אביון אשר",
          'first_level': 4,
@@ -797,9 +805,9 @@ POETRY_NON_LITURGICAL = [
         'Ani Hayiti-{}.html',
         'he,in',
         [],
-        [],
+        [update_bible_re],
         # name, Polemic , , Author
-        {'name': r" Ani Hayiti, אני הייתי",
+        {'name': r"Ani Hayiti, אני הייתי",
          'first_level': 9,
          'book_classification': '55',
          'author': "Moshe ben Shemu’el, משה בן שמואל"},
@@ -810,9 +818,9 @@ POETRY_NON_LITURGICAL = [
         'Malki Becha-{}.html',
         'he,in',
         [],
-        [],
+        [update_bible_re],
         # name, Polemic , , Author
-        {'name': r" Malki Becha, מלכי בך",
+        {'name': r"Malki Becha, מלכי בך",
          'first_level': 9,
          'book_classification': '55',
          'author': "Moshe ben Shemu’el, משה בן שמואל"},
@@ -823,7 +831,7 @@ POETRY_NON_LITURGICAL = [
         'Oti Ashaq-{}.html',
         'he,in',
         [],
-        [],
+        [update_bible_re],
         # name, Polemic , , Author
         {'name': r"Oti ‘Ashaḳ, אותי עשק",
          'first_level': 9,
@@ -836,21 +844,8 @@ POETRY_NON_LITURGICAL = [
         'Paga Hammelech-{}.html',
         'he,in',
         [],
-        [],
+        [update_bible_re],
         # name, Polemic , Author
-        {'name': r"Paḡa‘ Hammelech , פגע המלך",
-         'first_level': 9,
-         'book_classification': '55',
-         'author': "Moshe ben Shemu’el, משה בן שמואל"},
-        False
-    ],
-    [
-        'HTML/Poetry (Non-Liturgical)/Paga Hammelech/',
-        'Paga Hammelech-{}.html',
-        'he,in',
-        [],
-        [],
-        # name, Polemic , , Author
         {'name': r"Paḡa‘ Hammelech , פגע המלך",
          'first_level': 9,
          'book_classification': '55',
@@ -863,7 +858,7 @@ POLEMIC = [
         'HTML/Polemics/Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
         'he',
         [],
-        [],
+        [update_bible_re],
         # name, Polemic , , Author
         {'name': r"Sefer Milḥamot Adonai Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
@@ -872,12 +867,12 @@ POLEMIC = [
         False
     ],
     [
-        '/HTML/Polemics/Hizzuḳ Emuna/', 'Hizzuḳ Emuna-{}.html',
+        '/HTML/Polemics/Hizzuk Emuna/', 'Hizzuk Emuna-{}.html',
         'he,in,toc',
         [],
-        [],
+        [update_bible_re],
         # name, Polemic , , Author
-        {'name': r"Ḥizzuḳ Emuna,חזוק אמונה חיזוק אמונה",
+        {'name': r"Hizzuḳ Emuna,חזוק אמונה חיזוק אמונה",
          'first_level': 5,
          'book_classification': '60',
          'author': "Isaac ben Abraham"},
@@ -949,6 +944,13 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help="Process polemic books",
+        )
+        parser.add_argument(
+            '--poetry',
+            dest='poetry',
+            action='store_true',
+            default=False,
+            help="Process poetry books",
         )
         parser.add_argument(
             '--list',
@@ -1240,19 +1242,26 @@ class Command(BaseCommand):
         # must keep same order as LIST_OF_BOOKS defined above
         # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
 
-        if options['halakhah'] or options['liturgy'] or options['polemic']:
+        if options['comments'] or options['halakhah'] or options['liturgy'] or options['poetry'] or options['polemic']:
             books_to_process = []
+
+            if options['comments']:
+                books_to_process += COMMENTS
+
             if options['halakhah']:
                 books_to_process += HALAKHAH
 
             if options['liturgy']:
                 books_to_process += HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
 
+            if options['poetry']:
+                books_to_process += POETRY_NON_LITURGICAL
+
             if options['polemic']:
                 books_to_process += POLEMIC
 
-            if options['comments']:
-                books_to_process += COMMENTS
+
+
 
         else:
             books_to_process = LIST_OF_BOOKS

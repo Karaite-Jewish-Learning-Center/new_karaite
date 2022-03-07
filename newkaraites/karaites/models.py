@@ -550,9 +550,14 @@ class KaraitesBookDetails(models.Model):
         if not classification:
             book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en')
         else:
-            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
-                                                                                          'book_classification',
-                                                                                          'book_title_en')
+            # Halakhah, Polemic
+            if level == '3':
+                book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en',
+                                                                                              'book_classification')
+            else:
+                book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
+                                                                                              'book_classification',
+                                                                                              'book_title_en')
 
         data = []
         for details in book_details:
@@ -563,7 +568,6 @@ class KaraitesBookDetails(models.Model):
                 'book_classification': details.get_book_classification_display(),
                 'book_title_en': details.book_title_en,
                 'book_title_he': details.book_title_he,
-                # 'intro': details.introduction,
             })
         return data
 
@@ -596,7 +600,6 @@ class KaraitesBookDetails(models.Model):
 
 
 class KaraitesBookAsArray(models.Model):
-
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
                              verbose_name=_('Karaite book details')

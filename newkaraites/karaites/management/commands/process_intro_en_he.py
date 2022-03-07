@@ -5,13 +5,20 @@ from .command_utils.utils import get_html
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array_details
 from .process_books import (POLEMIC,
+                            POETRY_NON_LITURGICAL,
+                            HALAKHAH,
                             LANGUAGES)
 from .constants import PATH
 from ...models import KaraitesBookDetails
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
-from .command_utils.clean_table import process_table
+from .command_utils.clean_table import (clean_tag_attr,
+                                        clean_table_attr)
 from .command_utils.html_utils import remove_empty_tags
+
+LIST_OF_BOOKS = ([POLEMIC[1]] +
+                 POETRY_NON_LITURGICAL
+                 + HALAKHAH)
 
 
 class Command(BaseCommand):
@@ -61,7 +68,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ Karaites books as array """
         i = 1
-        for _, book, language, _, _, details, _ in [POLEMIC[1]]:
+
+        for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
             table_of_contents = {}
             book_title_en, book_title_he = details['name'].split(',')
 
@@ -71,16 +79,20 @@ class Command(BaseCommand):
 
             if 'in' in language:
                 language = language.replace('in', '')
-                intro_html = get_html(f"{PATH}/{book.replace('{}', 'introduction')}")
-                intro_soup = BeautifulSoup(intro_html, 'html5lib')
-                intro_soup = remove_empty_tags(intro_soup)
-                intro_soup.find('WordSection1')
-                print(intro_soup)
+                html = get_html(f"{PATH}{book.replace('{}', 'introduction')}")
+                html_tree = BeautifulSoup(html, 'html5lib')
+                html_tree = remove_empty_tags(html_tree)
+                divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
-                #
-                # update_book_details(details, introduction=str(intro_soup.find('WordSection1')[0]))
-                # table_str = process_table(intro_soup).replace('MsoTableGrid ', '')
-                # update_book_details(details, introduction=table_str)
+                intro = ''
+                for div in divs[0]:
+                    if div.name == 'table':
+                        div.attrs = clean_tag_attr(div)
+                        div = clean_table_attr(div)
+
+                    intro += str(div)
+                intro = intro.replace('MsoTableGrid ', '')
+                update_book_details(details, introduction=intro)
 
             if 'toc' in language:
                 language = language.replace('toc', '')
@@ -106,13 +118,21 @@ class Command(BaseCommand):
                 divs = html_tree.find_all('div', class_='WordSection1')
 
                 for p in divs[0].find_all(recursive=False):
+
+                    if p.name == 'table':
+                        p.attrs = clean_tag_attr(p)
+                        p = clean_table_attr(p)
+
                     text = p.get_text(strip=True)
 
                     key, value = self.find_toc_key(text)
-                    if key is not None:
-                        p = str(p).replace(key, '')
+                    p = str(p)
 
-                    update_karaites_array_details(book_title_en, '', c, str(p), )
+                    if key is not None:
+                        p = p.replace(key, '')
+
+                    p = p.replace('MsoTableGrid ', '')
+                    update_karaites_array_details(book_title_en, '', c, p, )
 
                     if key is not None:
                         try:

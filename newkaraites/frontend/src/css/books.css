@@ -610,6 +610,29 @@
 .page-hebrew p {
     direction: ltr;
 }
+/**/
+.in-hizzu-table-000 {
+    min-width: 100%;
+
+    font-size: 21px;
+}
+.in-hizzu-table-000 td:nth-child(odd)  {
+    direction: rtl;
+    vertical-align: top;
+
+}
+.in-hizzu-table-000 td:nth-child(even) {
+    vertical-align: top;
+}
+.in-hizzu-table-000 td:nth-child(odd) p {
+  margin-right: 10px;
+}
+.in-hizzu-table-000 td:nth-child(even) p {
+ margin-left: 10px;
+}
+
+
+/**/
 
 .ft41, .ft42, .ft43, .ft44 {
     direction: rtl;
