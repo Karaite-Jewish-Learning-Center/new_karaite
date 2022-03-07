@@ -309,7 +309,8 @@ def add_book_parts(path, book_name, books=BOOKS):
 # collect css
 COMMENTS = [
     [
-        'HTML/Commentary/Ali ben Suleiman/',
+
+        '/HTML/Commentary/Ali ben Suleiman/',
         'Ali_ben_Suleiman_Commentary_on_Genesis-{}.html',
         'ja,in',
         [],
@@ -339,7 +340,7 @@ COMMENTS = [
 ]
 HALAKHAH = [
     [
-        "HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
+        "/HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
         "Aaron ben Josephs Essay on the Obligation of Prayer-{}.html",
         'en,in',
         [],
