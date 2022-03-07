@@ -309,11 +309,11 @@ def add_book_parts(path, book_name, books=BOOKS):
 # collect css
 COMMENTS = [
     [
-        'HTML/Ali ben Suleiman/',
-        'Ali ben Suleiman-{}.html',
+        'HTML/Commentary/Ali ben Suleiman/',
+        'Ali b. Suleiman Commentary on Genesis-{}.html',
         'ja,in',
         [],
-        [update_bible_references_he],
+        [update_bible_re],
         {'name': r"Ali ibn Suleiman’s Commentary on Genesis,",
          'first_level': 8,
          'book_classification': '80',
@@ -322,7 +322,8 @@ COMMENTS = [
         True
     ],
     [
-        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
+
+        '/HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
         'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
         'en,he',
         [],
