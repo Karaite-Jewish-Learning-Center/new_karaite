@@ -14,10 +14,11 @@ def update_karaites_array(book_details, ref_chapter, paragraph_number, child):
 
 def update_karaites_array_details(book_details, ref_chapter, paragraph_number, child):
     details = KaraitesBookDetails.objects.get(book_title_en=book_details)
+
     return KaraitesBookAsArray.objects.get_or_create(
         book=details,
-        ref_chapter=ref_chapter,
+        # ref_chapter=ref_chapter,
         paragraph_number=paragraph_number,
-        book_text=[str(child), 0, ''],
+        book_text=child,
         foot_notes=[]
     )

@@ -1,5 +1,5 @@
 
-.MsoTableGrid  {
+.MsoTableGrid {
     margin-top: 50px;
     width: 50%;
     max-width: 800px;
@@ -107,15 +107,18 @@
         width: 60%;
     }
 }
+
 /* simple-3-4 */
 .simple-3-4 {
     min-width: 900px;
 }
-.simple-3-4  tr:nth-child(odd) td:nth-child(2) p {
+
+.simple-3-4 tr:nth-child(odd) td:nth-child(2) p {
     margin: 0 5px 0 0;
     text-align: right;
     vertical-align: top;
 }
+
 .simple-3-4 tr:nth-child(odd) td:nth-child(1) p {
     margin: 0 0 0 5px;
     text-align: left;
@@ -127,6 +130,7 @@
     margin: 10px 20px 10px -80%;
     direction: ltr;
 }
+
 .simple-3-4 tr:nth-child(4n+3) {
     color: red;
 }
@@ -146,16 +150,19 @@
     margin-right: -150%;
     direction: ltr;
 }
+
 .simple tr:nth-child(odd) td:nth-child(1) p {
     margin: 0 5px 0 0;
     text-align: right;
     vertical-align: top;
 }
+
 .simple tr:nth-child(odd) td:nth-child(2) p {
     margin: 0 0 0 5px;
     text-align: left;
     vertical-align: top;
 }
+
 /* Amen Yehi Ratson */
 .amen-table-000 {
     min-width: 850px;
@@ -243,7 +250,6 @@
 }
 
 
-
 /*En Kelohenu*/
 .en-table-000 {
     min-width: 60%;
@@ -283,13 +289,13 @@
 }
 
 .essa-table-000 tr:nth-child(even) {
-     margin-left: -80%;
+    margin-left: -80%;
     margin-right: 20%;
     text-align: left;
     direction: ltr;
 }
 
-.essa-table-000 tr:nth-child(odd)  td:nth-child(2) p {
+.essa-table-000 tr:nth-child(odd) td:nth-child(2) p {
     direction: rtl;
     margin: 0 5px 0 0;
     text-align: right;
@@ -305,6 +311,7 @@
 .et-table-000 {
     min-width: 70%;
 }
+
 /*Evyon Asher */
 .evyon-table-000 {
     max-width: 700px;
@@ -381,13 +388,15 @@
     /*border: 1px #0038ba solid;*/
 }
 
-.lutski-table-001 tr:nth-child(even)  {
+.lutski-table-001 tr:nth-child(even) {
     margin-left: -80%;
     /*background-color: #ffc000;*/
 }
-.lutski-table-001  {
+
+.lutski-table-001 {
     direction: rtl;
 }
+
 .lutski-table-001 tr:nth-child(odd) td:nth-child(1) p {
     direction: ltr;
     text-align: left;
@@ -443,7 +452,7 @@
 }
 
 /* Mitsvat Yesod Shabbat */
-.mitsvat-table-000 tr:nth-child(odd) td:nth-child(odd) p{
+.mitsvat-table-000 tr:nth-child(odd) td:nth-child(odd) p {
     direction: ltr;
 }
 
@@ -467,7 +476,7 @@
 
 
 .shabbat-table-000 tr:nth-child(odd) td:nth-child(1) p {
-     direction: ltr;
+    direction: ltr;
     text-align: left;
     margin: 0 0 0 5px;
 }
@@ -492,7 +501,7 @@
 
 /* Vehaḥochma Me’ayin Timmatsē */
 .vehahochma-table-000 {
-    min-width: 70% ;
+    min-width: 70%;
     direction: ltr;
 }
 
@@ -561,9 +570,11 @@
 .sefer_milh-table-000 p {
     margin: 0;
 }
-.sefer_milh-table-000 tr:nth-child(5n) td:nth-child(1){
-    color:red;
+
+.sefer_milh-table-000 tr:nth-child(5n) td:nth-child(1) {
+    color: red;
 }
+
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
 .aaron-table-000 {
     width: 700px;
@@ -571,15 +582,16 @@
     margin-right: auto;
     margin-top: 70px;
 }
+
 .aaron-table-000 tr td:nth-child(1) {
     padding-right: 10px;
     text-align: right;
-     vertical-align: top;
+    vertical-align: top;
 }
 
 .aaron-table-000 tr td:nth-child(2) {
     padding-left: 10px;
-     vertical-align: top;
+    vertical-align: top;
 }
 
 
@@ -610,29 +622,95 @@
 .page-hebrew p {
     direction: ltr;
 }
+
 /**/
 .in-hizzu-table-000 {
     min-width: 100%;
 
     font-size: 21px;
 }
-.in-hizzu-table-000 td:nth-child(odd)  {
+
+.in-hizzu-table-000 td:nth-child(odd) {
     direction: rtl;
     vertical-align: top;
 
 }
+
 .in-hizzu-table-000 td:nth-child(even) {
     vertical-align: top;
 }
+
 .in-hizzu-table-000 td:nth-child(odd) p {
-  margin-right: 10px;
+    margin-right: 10px;
 }
+
 .in-hizzu-table-000 td:nth-child(even) p {
- margin-left: 10px;
+    margin-left: 10px;
 }
 
 
-/**/
+/*Aaron ben Joseph's Essay on the Obligation of Prayer*/
+.en-aaron-table-000 {
+    margin-top: 70px;
+    min-width: 700px;
+}
+
+.en-aaron-table-000 p {
+    margin-top: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.en-aaron-table-000 td:nth-child(odd) {
+    direction: rtl;
+    margin-right: 10px;
+    /*background-color: #3498db;*/
+}
+
+.en-aaron-table-000 td:nth-child(even) {
+    direction: ltr;
+    margin-left: 10px;
+    /*background-color: #ffc000;*/
+}
+
+/* Patshegen Ketav Haddat */
+
+/* Karaites books that have english an hebrew side by side */
+.table-book {
+    max-width: 100%;
+    min-width: 100%;
+    horiz-align: center;
+    border: 1px solid red;
+}
+.table-book tbody {
+    background-color: #ffc000;
+    vertical-align: top !important;
+    horiz-align: center !important;
+
+}
+.table-book tr:hover {
+    background-color: #11c4f114;
+}
+.table-book td:nth-child(even) {
+    min-width: 350px;
+    max-width: 350px;
+}
+.table-book td:nth-child(odd) {
+    min-width: 350px;
+    max-width: 350px;
+}
+
+.table-book td:nth-child(even) p {
+    /*border: 1px solid #3498db;*/
+    vertical-align: top;
+    margin-left:5px ;
+}
+
+.table-book  td:nth-child(odd) p {
+    /*border: 1px solid chartreuse;*/
+    vertical-align: top;
+    margin-right:5px ;
+}
 
 .ft41, .ft42, .ft43, .ft44 {
     direction: rtl;
@@ -718,18 +796,20 @@
     text-align: center;
 }
 
-.WordSection1 {
+/* liturgy introduction */
+.liturgy {
     margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
     max-width: 700px;
-    font-size: 18px;
+    font-size: 21px;
 }
 
-.WordSection1 p {
+.liturgy p {
     margin-left: 20px;
     margin-right: 20px;
 }
+
 /* comments */
 .en-deuteronom-p-001 {
     margin-top: 0;
@@ -813,7 +893,8 @@
 }
 
 .en-deuteronom-span-005 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-006 {
@@ -882,7 +963,7 @@
 }
 
 .en-deuteronom-span-027 {
-    color: yellow;
+    color: black;
 }
 
 .en-deuteronom-span-029 {
@@ -896,6 +977,7 @@
 .en-deuteronom-span-031 {
     color: red;
 }
+
 .en-deuteronom-span-033 {
     color: black;
 }
@@ -909,8 +991,9 @@
     text-transform: uppercase;
 }
 
-.en-deuteronom-span-039 {
-    color: yellow;
+.en-deuteronom-span-039 .en-deuteronom-span-040 {
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-040 {
@@ -921,9 +1004,6 @@
     color: blue;
 }
 
-.en-deuteronom-span-042 {
-    background: yellow;
-}
 
 .en-deuteronom-span-043 {
     color: blue;
@@ -934,7 +1014,8 @@
 }
 
 .en-deuteronom-span-046 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-047 {

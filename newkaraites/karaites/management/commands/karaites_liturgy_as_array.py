@@ -9,8 +9,7 @@ from .process_books import (HAVDALA,
                             PRAYERS,
                             SHABBAT_SONGS,
                             SUPPLEMENTAL,
-                            WEDDING_SONGS,
-                            POETRY_NON_LITURGICAL)
+                            WEDDING_SONGS)
 
 from .constants import PATH
 from .command_utils.clean_table import (clean_tag_attr,
@@ -64,7 +63,8 @@ class Command(BaseCommand):
                 table.decompose()
 
             update_karaites_array(book_details, 1, 1, table_str)
-            update_book_details(details, introduction=str(divs[0]))
+            html = str(divs[0]).replace('WordSection1', 'liturgy')
+            update_book_details(details, introduction=html)
             update_toc(book_details, 2, details['name'].split(','))
             # update/create bible references
             update_create_bible_refs(book_details)

@@ -537,6 +537,8 @@ class KaraitesBookDetails(models.Model):
 
     introduction = models.TextField(default='')
 
+    table_book = models.BooleanField(default=False)
+
     def __str__(self):
         return self.book_title_en
 
@@ -568,6 +570,7 @@ class KaraitesBookDetails(models.Model):
                 'book_classification': details.get_book_classification_display(),
                 'book_title_en': details.book_title_en,
                 'book_title_he': details.book_title_he,
+                'table_book': details.table_book,
             })
         return data
 
@@ -584,6 +587,7 @@ class KaraitesBookDetails(models.Model):
             'author': details.author.name,
             'book_title_en': details.book_title_en,
             'book_title_he': details.book_title_he,
+            'table_book': details.table_book,
             'toc': [t.to_list() for t in toc],
             'intro': details.introduction,
         }

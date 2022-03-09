@@ -16,6 +16,8 @@ from .update_toc import update_toc
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from .command_utils.html_utils import remove_empty_tags
+from .command_utils.argments import arguments
+from .command_utils.process_arguments import process_arguments
 
 LIST_OF_BOOKS = (COMMENTS +
                  [POLEMIC[1]] +
@@ -41,6 +43,14 @@ class Command(BaseCommand):
         [":", ""],
         ["'", ''],
     ]
+
+    def add_arguments(self, parser):
+        arguments(parser)
+
+    @staticmethod
+    def get_key(text):
+        text = text.replace('\n', ' ').strip()
+        return text
 
     @staticmethod
     def find_toc_key(text):
@@ -69,13 +79,25 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Karaites books as array """
-        i = 1
+        books_to_process = process_arguments(options,
+                                             LIST_OF_BOOKS,
+                                             [],
+                                             HALAKHAH,
+                                             [],
+                                             [],
+                                             [POLEMIC[1]],
+                                             [],
+                                             [],
+                                             [],
+                                             POETRY_NON_LITURGICAL)
 
-        for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
+        i = 0
+        for _, book, language, _, _, details, _ in books_to_process:
+
             table_of_contents = {}
             book_title_en, book_title_he = details['name'].split(',')
-
-            sys.stdout.write(f"\nDeleting book : {book.replace('-{}.html', '')}")
+            table_book = details.get('table_book', False)
+            sys.stdout.write(f"\rDeleting book : {book.replace('-{}.html', '')}\n")
             KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
             book_details, _ = update_book_details(details, language='en,he')
 
@@ -112,45 +134,62 @@ class Command(BaseCommand):
                     continue
 
                 book_name = book.replace('{}', LANGUAGES[lang])
-                sys.stdout.write(f'\nProcessing books:{book_name}')
-                sys.stdout.write(f'\n {book_name}')
+                sys.stdout.write(f'\rProcessing books:{book_name}\n')
+                sys.stdout.write(f'\r {book_name}\n')
 
                 html = get_html(f'{PATH}{book_name}')
                 html_tree = remove_empty_tags(BeautifulSoup(html, 'html5lib'))
                 divs = html_tree.find_all('div', class_='WordSection1')
+                if table_book:
+                    table = divs[0].find_all('tr', recursive=True)
 
-                for p in divs[0].find_all(recursive=False):
+                    for tr in table:
+                        tr.attrs = clean_tag_attr(tr)
+                        tds = tr.find_all('td', recursive=True)
+                        for td in tds:
+                            td.attrs = clean_tag_attr(td)
+                        text_he = tds[0].get_text(strip=True)
+                        text_en = tds[1].get_text(strip=True)
+                        update_karaites_array_details(book_details, '', c, [str(tds[0]), 0, str(tds[1])])
 
-                    if p.name == 'table':
-                        p.attrs = clean_tag_attr(p)
-                        p = clean_table_attr(p)
-
-                    text = p.get_text(strip=True)
-
-                    key, value = self.find_toc_key(text)
-                    p = str(p)
-
-                    if key is not None:
-                        p = p.replace(key, '')
-
-                    p = p.replace('MsoTableGrid ', '')
-                    update_karaites_array_details(book_title_en, '', c, p, )
-
-                    if key is not None:
-                        try:
+                        if len(tds) == 3:
+                            toc_tex = tds[2].get_text(strip=True)
                             update_toc(book_details, c + 1,
-                                       [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
-                        except KeyError:
-                            print()
-                            print(f'{key}')
-                            input('press enter to continue')
-
-                    if lang in ['en', 'he']:
+                                       [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
                         c += 1
-                    sys.stdout.write(f'\r processing paragraph: {c}\r')
-            i += 1
+                else:
+                    for p in divs[0].find_all(recursive=False):
 
-        # update/create bible references
-        update_create_bible_refs(book_details)
+                        if p.name == 'table':
+                            p.attrs = clean_tag_attr(p)
+                            p = clean_table_attr(p)
+
+                        text = p.get_text(strip=True)
+
+                        key, value = self.find_toc_key(text)
+                        p = str(p)
+
+                        if key is not None:
+                            p = p.replace('#', '')
+
+                        p = p.replace('MsoTableGrid ', '')
+                        update_karaites_array_details(book_title_en, '', c, [p, ''])
+
+                        if key is not None:
+                            try:
+                                update_toc(book_details, c + 1,
+                                           [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
+                            except KeyError:
+                                print()
+                                print(f'{key}')
+                                input('press enter to continue')
+
+                        if lang in ['en', 'he']:
+                            c += 1
+                        sys.stdout.write(f'\r processing paragraph: {c}\r')
+                i += 1
+
+            # update/create bible references
+            update_create_bible_refs(book_details)
         print()
         print(f'\nDone! processed: {i} books')

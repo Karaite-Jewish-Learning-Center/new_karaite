@@ -1,4 +1,4 @@
-def clean_tag_attr(child, table_class=None):
+def clean_tag_attr(child, table_class=None, fix_colspan=True):
     """ clean all child attr except class and colspan """
     if hasattr(child, 'attrs'):
         class_ = child.attrs.get('class')
@@ -16,15 +16,15 @@ def clean_tag_attr(child, table_class=None):
         if table_class is not None and child.name == 'table':
             child.attrs['class'].append(table_class)
 
-        if colspan == '3' or colspan == '2':
+        if fix_colspan and colspan == '3' or colspan == '2':
             child.attrs.update({'colspan': '2'})
 
     return child.attrs
 
 
-def clean_table_attr(tree):
+def clean_table_attr(tree, fix_colspan=True):
     for child in tree.find_all(recursive=True):
-        child.attrs = clean_tag_attr(child)
+        child.attrs = clean_tag_attr(child, fix_colspan)
 
     return tree
 

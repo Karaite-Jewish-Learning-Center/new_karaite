@@ -1,6 +1,7 @@
 import React, {useContext, useState, useRef, FC, MouseEventHandler} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
+import {TableVirtuoso} from 'react-virtuoso'
 import KaraitePaneHeader from './KaraitePaneHeader';
 import transform from '../../utils/transform'
 import Loading from "../general/Loading";
@@ -21,9 +22,7 @@ const INTRO = 2
 const SUBJECT = 0
 const INDEX = 1
 const START_PARAGRAPH = 2
-
-const LANGAUGE_EN = 0
-const LANGAUGE_HE = 2
+const loadingMessageEnd = ['Text end.', 'Introduction end.', 'Table of contents end.']
 
 interface KaraitesBooksInterface {
     paneNumber: number,
@@ -55,20 +54,22 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         return <Loading/>
     }
 
-    const lang = store.getBookDetails(paneNumber)
+    // const lang = store.getBookDetails(paneNumber)
+
+    const setEndReached = (i: number): number => {
+        setLoadingMessage('Text end.')
+        return i
+    }
 
     const onIntroClick = () => {
-        setLoadingMessage('Introduction end.')
         setFlags([false, false, true])
     }
 
     const onTocClick = () => {
-        setLoadingMessage('Table of contents end.')
         setFlags([false, true, false])
     }
 
     const onBookClick = () => {
-        setLoadingMessage('Text end.')
         setFlags([true, false, false])
     }
 
@@ -91,6 +92,22 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         return store.getCurrentItem(paneNumber) === item
     }
 
+    const itemTable = (item: number, data: Array<any>) => {
+        return (
+            <tr>
+                {parse(data[HTML][0], {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })}
+                {parse(data[HTML][2], {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })}
+            </tr>
+        )
+    }
     const itemContent = (item: number, data: Array<any>) => {
 
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
@@ -120,32 +137,61 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     const itemToc = (item: number, data: any) => {
         if (data[INDEX] === '') {
             // one column TOC
-            return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-                {/*<div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>*/}
-                    <Button className={classes.paragraphContainer} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
-
-                            <p className={classes.heRightCenter} >{data[SUBJECT]}-----</p>
-
-                    </Button>
-                {/*</div>*/}
+            return (<div className={`${classes.tocParagraph} ${selectCurrent(item) ? classes.selected : ''}`}>
+                <p className={classes.tocItem} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
+                    {data[SUBJECT]}
+                </p>
             </div>)
         }
+
+
         // 2 columns TOC
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                <Button onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
+                <Button className={classes.tocButton} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
                     <div className={classes.heLeft}>
                         <p className={classes.he}>{data[INDEX]}</p>
                     </div>
-                    <div className={classes.heRight}>
-                        <Typography className={classes.he}>{data[SUBJECT]}</Typography>
+                    <div className={classes.enRight}>
+                        <Typography className={classes.en}>{data[SUBJECT]}</Typography>
                     </div>
                 </Button>
             </div>
         </div>)
     }
 
-
+    // todo fix tsx return type
+    const tableBook = (initial: number) => {
+        const tableBook = "table-book"
+        if (details.table_book) {
+            return (<TableVirtuoso
+                className={`${tableBook} ${(flags[BOOK] ? classes.Show : classes.Hide)}`}
+                data={paragraphs}
+                ref={virtuoso}
+                initialTopMostItemIndex={initial}
+                endReached={setEndReached}
+                itemContent={itemTable}
+                // components={{
+                //     Footer: () => {return <Loading text={loadingMessage}/>}
+                // }}
+            />)
+        } else {
+            return (
+                <Virtuoso className={(flags[BOOK] ? classes.Show : classes.Hide)}
+                          data={paragraphs}
+                          ref={virtuoso}
+                          initialTopMostItemIndex={initial}
+                          endReached={setEndReached}
+                          itemContent={itemContent}
+                          components={{
+                              Footer: () => {
+                                  return <Loading text={loadingMessage}/>
+                              }
+                          }}
+                />
+            )
+        }
+    }
     // initial can't be negative
     const topItem: number = store.getCurrentItem(paneNumber) - 1
     const initial: number = (topItem > 0 ? topItem : 0)
@@ -164,24 +210,15 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                                onBookClick={onBookClick}
             />
 
-            <Virtuoso className={(flags[BOOK] ? classes.Show : classes.Hide)}
-                      data={paragraphs}
-                      ref={virtuoso}
-                      initialTopMostItemIndex={initial}
-                      itemContent={itemContent}
-                      components={{
-                          Footer: () => {
-                              return <Loading text={loadingMessage}/>
-                          }
-                      }}
-            />
-            <Virtuoso className={`${(flags[TOC] ? classes.Show : classes.Hide)} ${classes.head}`}
+            {tableBook(initial)}
+
+            <Virtuoso className={`${(flags[TOC] ? classes.Show : classes.Hide)} ${classes.toc}`}
                       data={toc}
                       initialTopMostItemIndex={0}
                       itemContent={itemToc}
                       components={{
                           Footer: () => {
-                              return <Loading text={loadingMessage}/>
+                              return <Loading text={loadingMessageEnd[2]}/>
                           }
                       }}
             />
@@ -191,7 +228,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                       itemContent={itemIntroduction}
                       components={{
                           Footer: () => {
-                              return <Loading text={loadingMessage}/>
+                              return <Loading text={loadingMessageEnd[1]}/>
                           }
                       }}
             />
@@ -210,14 +247,14 @@ const useStyles = makeStyles(() => ({
         height: '100%',
     },
     paragraphContainer: {
-        fontFamily:'SBL Hebrew',
+        fontFamily: 'SBL Hebrew',
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
     },
     paragraph: {
-        fontFamily:'SBL Hebrew',
-        fontSize:'21',
+        fontFamily: 'SBL Hebrew',
+        fontSize: '21',
         paddingLeft: 20,
         paddingRight: 20,
         maxWidth: 600,
@@ -232,6 +269,20 @@ const useStyles = makeStyles(() => ({
         paddingRight: 20,
         width: 'auto',
         margin: 'auto',
+        direction: 'rtl',
+    },
+    tocParagraph: {
+        "&:hover": {
+            background: Colors['bibleSelectedVerse']
+        },
+        maxWidth: '100%',
+        marginLeft: '20%',
+        marginRight: '20%',
+        fontSize: '21px',
+        direction: 'rtl'
+    },
+    tocItem: {
+        cursor: 'pointer',
     },
     hebrew: {
         float: 'left',
@@ -251,24 +302,46 @@ const useStyles = makeStyles(() => ({
     heLeft: {
         float: 'left',
         width: '300px',
+        direction: 'rtl',
         textAlign: 'right',
+        fontSize: '21px',
     },
     heRight: {
         float: 'right',
         textAlign: 'right',
         width: '300px',
+        border: '1px solid red',
     },
-    heRightCenter:{
-        direction:'rtl',
-        border:'1px solid red',
-        textAlign:'right',
+    enRight: {
+        textAlign: 'left',
+        direction: 'ltr',
+        width: 350,
+        marginLeft: 10,
+        fontSize: '21px',
+        verticalAlign: 'top'
+
+    },
+    heRightCenter: {
+        direction: 'rtl',
+        border: '1px solid red',
+        textAlign: 'right',
         minWidth: '100%',
     },
     he: {
         direction: 'rtl',
     },
+    en: {
+        direction: 'ltr',
+    },
     head: {
         marginTop: '50px',
+    },
+    toc: {
+        top: 70,
+        minWith: '80%',
+    },
+    tocButton: {
+        textTransform: 'none',
     }
 
 }))

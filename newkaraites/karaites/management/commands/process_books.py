@@ -20,6 +20,8 @@ from .constants import (SOURCE_PATH,
 from .command_utils.parser_ref import (parse_reference,
                                        ABBREVIATIONS)
 from .command_utils.utils import RE_BIBLE_REF
+from .command_utils.argments import arguments
+from .command_utils.process_arguments import process_arguments
 
 style_classes_by_book = {}
 ms_classes = []
@@ -137,7 +139,11 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 BOOKS = [1, 2]
 
-LANGUAGES = {'en': "English", 'he': "Hebrew", 'ja': 'Judeo_Arabic',
+LANGUAGES = {'en': "English",
+             'he': "Hebrew",
+             'ja': 'Judeo_Arabic',
+             # this means a formatted table with hebrew and english
+             'he-en': 'Hebrew-English',
              # technical "in" , "toc" are not a language,
              # we use to process introduction files and table of contents files
              "in": "Introduction", 'toc': "TOC"}
@@ -339,31 +345,31 @@ COMMENTS = [
 
 ]
 HALAKHAH = [
-    [
-        "HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
-        "Aaron ben Josephs Essay on the Obligation of Prayer-{}.html",
-        'en,in',
-        [],
-        [],
-        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer, ",
-         'first_level': 3,
-         'book_classification': '80',
-         'author': ',',
-         'css_class': ''},
-        True
-    ],
     # [
-    #     'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
-    #     'he,in,toc',
-    #     [fix_image_gan],
+    #     "HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
+    #     "Aaron ben Josephs Essay on the Obligation of Prayer-{}.html",
+    #     'en,in',
     #     [],
-    #     {'name': r"Gan Eden,",
+    #     [],
+    #     {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer, ",
     #      'first_level': 3,
     #      'book_classification': '80',
-    #      'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
+    #      'author': ',',
     #      'css_class': ''},
     #     True
     # ],
+    [
+        'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
+        'he,in,toc',
+        [fix_image_gan],
+        [update_bible_re],
+        {'name': r"Gan Eden,",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
+         'css_class': ''},
+        True
+    ],
     # [
     #     'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
     #     'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
@@ -400,15 +406,20 @@ HALAKHAH = [
     #     {},
     #     False
     # ],
-    # [
-    #     'HTML/Halakhah/Kitab al-Anwar/',
-    #     'Kitab al-Anwar-{}.html',
-    #     'he,in,toc',
-    #     [],
-    #     [update_bible_re],
-    #     {},
-    #     False
-    # ],
+    [
+        'HTML/Halakhah/Kitab al-Anwar/',
+        'Kitab al-Anwar-{}.html',
+        'he-en,in',
+        [],
+        [update_bible_re],
+        {'name': r"The Book of Lights and Watchtowers, Kitāb Al-Anwār Wal-Marāqib",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': ',',
+         'css_class': '',
+         'table_book': True},
+        False
+    ],
     [
         'HTML/Halakhah/Patshegen Ketav Haddat/',
         'Patshegen Ketav Haddat-{}.html',
@@ -913,59 +924,7 @@ class Command(BaseCommand):
     help = 'Populate Database with Karaites books as array at this point is only for the books bellow'
 
     def add_arguments(self, parser):
-        parser.add_argument(
-            '--all',
-            default=True,
-            action='store_true',
-            help='Process all books',
-        )
-        parser.add_argument(
-            '--comments',
-            dest='comments',
-            action='store_true',
-            default=False,
-            help='Process comments books',
-        )
-        parser.add_argument(
-            '--liturgy',
-            dest='liturgy',
-            action='store_true',
-            default=False,
-            help='Process liturgy books',
-        )
-        parser.add_argument(
-            '--halakhah',
-            dest='halakhah',
-            action='store_true',
-            default=False,
-            help='Process halakhah books',
-        )
-        parser.add_argument(
-            '--polemic',
-            dest='polemic',
-            action='store_true',
-            default=False,
-            help="Process polemic books",
-        )
-        parser.add_argument(
-            '--poetry',
-            dest='poetry',
-            action='store_true',
-            default=False,
-            help="Process poetry books",
-        )
-        parser.add_argument(
-            '--list',
-            action='store_true',
-            default=False,
-            help="List all books",
-        )
-        parser.add_argument(
-            '--book_id',
-            dest='book_id',
-            default=0,
-            help='Process a single book',
-        )
+        arguments(parser)
 
     @staticmethod
     def replace_class_name(str_html):
@@ -1216,60 +1175,18 @@ class Command(BaseCommand):
             class.
             A css file is generate.
         """
-        # LIST_OF_BOOKS = SUPLEMENTAL
-        # LIST_OF_BOOKS = PDF_BOOKS
 
-        if options['list']:
-            print()
-            print('Id La   Level    Classification   Book name')
-            print('-------------------------------------------')
-            i = 1
-            for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
-                level = details.get('first_level', 'None')
-                classification = details.get('book_classification', None)
-                lang = language.capitalize().replace('en', 'En')
-                book_name = book.replace('.html', '').replace('-{}', '')
-
-                if level is not None and classification is not None:
-                    book_level = FIRST_LEVEL[int(level) - 1][1]
-                    book_classification = BOOK_CLASSIFICATION[int(classification) // 10 - 1][1]
-                    print(f'{i:02} {lang:9} {book_level:8} {book_classification[0:12]:14} {book_name}')
-                else:
-                    print(f'{i:02} {lang:9} {"Tanakh":8} {"-- ":14} {book_name}')
-
-                i += 1
-            print()
-            sys.exit(0)
-
-        # must keep same order as LIST_OF_BOOKS defined above
-        # LIST_OF_BOOKS = HALAKHAH + SUPPLEMENTAL + POLEMIC
-
-        if options['comments'] or options['halakhah'] or options['liturgy'] or options['poetry'] or options['polemic']:
-            books_to_process = []
-
-            if options['comments']:
-                books_to_process += COMMENTS
-
-            if options['halakhah']:
-                books_to_process += HALAKHAH
-
-            if options['liturgy']:
-                books_to_process += HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
-
-            if options['poetry']:
-                books_to_process += POETRY_NON_LITURGICAL
-
-            if options['polemic']:
-                books_to_process += POLEMIC
-
-
-
-
-        else:
-            books_to_process = LIST_OF_BOOKS
-
-        if options['book_id'] != 0:
-            books_to_process = [LIST_OF_BOOKS[int(options['book_id']) - 1]]
+        books_to_process = process_arguments(options,
+                                             LIST_OF_BOOKS,
+                                             COMMENTS,
+                                             HALAKHAH,
+                                             HAVDALA,
+                                             PRAYERS,
+                                             POLEMIC,
+                                             SHABBAT_SONGS,
+                                             WEDDING_SONGS,
+                                             SUPPLEMENTAL,
+                                             POETRY_NON_LITURGICAL)
 
         for path, book, language, pre_processes, _, _, _ in books_to_process:
             for lang in language.split(','):
