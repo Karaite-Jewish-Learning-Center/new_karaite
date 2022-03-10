@@ -676,40 +676,43 @@
 /* Patshegen Ketav Haddat */
 
 /* Karaites books that have english an hebrew side by side */
-.table-book {
-    max-width: 100%;
-    min-width: 100%;
-    horiz-align: center;
-    border: 1px solid red;
+
+.table-book table {
+    margin: auto;
 }
 .table-book tbody {
-    background-color: #ffc000;
+    /*background-color: #ffc000;*/
     vertical-align: top !important;
     horiz-align: center !important;
+}
 
-}
 .table-book tr:hover {
-    background-color: #11c4f114;
+    /*background-color: #11c4f114;*/
 }
+
 .table-book td:nth-child(even) {
-    min-width: 350px;
     max-width: 350px;
 }
+
 .table-book td:nth-child(odd) {
-    min-width: 350px;
+
     max-width: 350px;
 }
 
 .table-book td:nth-child(even) p {
     /*border: 1px solid #3498db;*/
     vertical-align: top;
-    margin-left:5px ;
+    direction: ltr;
+    text-align: left;
+    margin-left: 15px;
 }
 
-.table-book  td:nth-child(odd) p {
+.table-book td:nth-child(odd) p {
     /*border: 1px solid chartreuse;*/
     vertical-align: top;
-    margin-right:5px ;
+    direction: rtl;
+    text-align: right;
+    margin-right: 15px;
 }
 
 .ft41, .ft42, .ft43, .ft44 {
@@ -850,10 +853,6 @@
 }
 
 
-.en-deuteronom-p-014 {
-    margin-left: 355pt;
-}
-
 .en-deuteronom-p-015 {
     margin-bottom: 7pt;
     text-align: center;
@@ -902,7 +901,8 @@
 }
 
 .en-deuteronom-span-007 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-008 {
@@ -914,7 +914,8 @@
 }
 
 .en-deuteronom-span-010 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-011 {
@@ -930,7 +931,8 @@
 }
 
 .en-deuteronom-span-014 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-015 {
@@ -955,7 +957,8 @@
 }
 
 .en-deuteronom-span-025 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-026 {
@@ -997,7 +1000,8 @@
 }
 
 .en-deuteronom-span-040 {
-    color: yellow;
+    color: black;
+    font-style: italic;
 }
 
 .en-deuteronom-span-041 {
@@ -1028,4 +1032,83 @@
 
 .en-deuteronom-span-051 {
     color: black;
+}
+
+.he-deuteronom-span-052 {
+	 color:red;
+}
+.he-deuteronom-span-055 {
+   	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-056 {
+	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-057 {
+	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-058 {
+	 color:#0070C0;
+}
+
+.he-deuteronom-span-060 {
+   	 color:#0070C0;
+}
+.he-deuteronom-span-061 {
+   	 color:black;
+}
+.he-deuteronom-span-062 {
+   	 color:red;
+}
+
+.he-deuteronom-span-064 {
+   	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-065 {
+	 color:#0070C0;
+}
+.he-deuteronom-span-066 {
+   	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-067 {
+	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-068 {
+	 color: black;
+    font-style: italic;
+}
+
+.he-deuteronom-span-073 {
+	 color:red;
+}
+.he-deuteronom-span-074 {
+	 color: black;
+    font-style: italic;
+}
+.he-deuteronom-span-075 {
+	 color:#0070C0;
+}
+.he-deuteronom-span-076 {
+	 color:black;
+}
+.he-deuteronom-span-077 {
+	 color:red;
+}
+.he-deuteronom-span-078 {
+	 color:red;
+}
+
+.he-deuteronom-span-081 {
+	 color: black;
+    font-style: italic;
+}
+
+.he-deuteronom-span-088 .he-deuteronom-span-086 .he-deuteronom-span-081 {
+	 color:black;
+     font-style: italic;
 }

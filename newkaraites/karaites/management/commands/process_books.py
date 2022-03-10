@@ -334,7 +334,7 @@ COMMENTS = [
         'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
         'en,he',
         [],
-        [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
+        [update_bible_re, removing_no_breaking_spaces, fix_chapter_verse],
         {'name': r"Deuteronomy Keter Torah Aaron ben Elijah, ",
          'first_level': 8,
          'book_classification': '80',
@@ -868,8 +868,9 @@ POETRY_NON_LITURGICAL = [
 ]
 POLEMIC = [
     [
-        'HTML/Polemics/Sefer_Milhamot_Adonai/', 'Sefer_Milhamot_Adonai.html',
-        'he',
+        'HTML/Polemics/Sefer_Milhamot_Adonai/',
+        'Sefer Milhamot-{}.html',
+        'he,in',
         [],
         [update_bible_re],
         # name, Polemic , , Author

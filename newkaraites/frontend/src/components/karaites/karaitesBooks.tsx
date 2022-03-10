@@ -14,11 +14,9 @@ import {Button, Typography} from '@material-ui/core';
 
 
 const HTML = 2
-
 const BOOK = 0
 const TOC = 1
 const INTRO = 2
-
 const SUBJECT = 0
 const INDEX = 1
 const START_PARAGRAPH = 2
@@ -31,6 +29,10 @@ interface KaraitesBooksInterface {
     details: any,
     type: string,
     onClosePane: MouseEventHandler,
+}
+
+interface TableBook {
+    initial: number,
 }
 
 const KaraitesBooks: FC<KaraitesBooksInterface> = ({
@@ -57,7 +59,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     // const lang = store.getBookDetails(paneNumber)
 
     const setEndReached = (i: number): number => {
-        setLoadingMessage('Text end.')
+        setLoadingMessage(loadingMessageEnd[0])
         return i
     }
 
@@ -160,8 +162,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         </div>)
     }
 
-    // todo fix tsx return type
-    const tableBook = (initial: number) => {
+    const TableBook: FC<TableBook> = ({initial}) => {
         const tableBook = "table-book"
         if (details.table_book) {
             return (<TableVirtuoso
@@ -210,7 +211,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                                onBookClick={onBookClick}
             />
 
-            {tableBook(initial)}
+            <TableBook initial={initial}/>
 
             <Virtuoso className={`${(flags[TOC] ? classes.Show : classes.Hide)} ${classes.toc}`}
                       data={toc}
@@ -275,10 +276,12 @@ const useStyles = makeStyles(() => ({
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
+        fontFamily: 'SBL Hebrew',
         maxWidth: '100%',
-        marginLeft: '20%',
-        marginRight: '20%',
+        marginLeft: '10%',
+        marginRight: '10%',
         fontSize: '21px',
+        lineHeight: 'initial',
         direction: 'rtl'
     },
     tocItem: {
@@ -300,13 +303,19 @@ const useStyles = makeStyles(() => ({
         display: 'block',
     },
     heLeft: {
+        fontFamily: 'SBL Hebrew',
         float: 'left',
         width: '300px',
         direction: 'rtl',
         textAlign: 'right',
-        fontSize: '21px',
+        lineHeight: 'initial',
+        fontSize: '20.35px',
+        verticalAlign:'top',
+
     },
     heRight: {
+        fontFamily: 'SBL Hebrew',
+        lineHeight: 'initial',
         float: 'right',
         textAlign: 'right',
         width: '300px',
@@ -316,9 +325,12 @@ const useStyles = makeStyles(() => ({
         textAlign: 'left',
         direction: 'ltr',
         width: 350,
-        marginLeft: 10,
-        fontSize: '21px',
-        verticalAlign: 'top'
+        marginLeft: 15,
+        fontSize: 21,
+        verticalAlign: 'top',
+        fontFamily: 'SBL Hebrew',
+        lineHeight:'initial',
+         // border: '1px solid red',
 
     },
     heRightCenter: {

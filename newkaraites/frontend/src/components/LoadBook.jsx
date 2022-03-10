@@ -68,7 +68,6 @@ const LoadBook = ({type}) => {
             if (response.ok) {
                 const data = await response.json()
                 const details = data[BOOK_DETAILS]
-                debugger
                 store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
                 store.setBookDetails(details, paneNumber)
 
