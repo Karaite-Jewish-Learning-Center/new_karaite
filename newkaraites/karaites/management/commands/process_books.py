@@ -317,7 +317,7 @@ COMMENTS = [
     [
 
         'HTML/Comments/Ali ben Suleiman/',
-        'ali_ben_suleiman_commentary_on_genesis--{}.html',
+        'ali_ben_suleiman_commentary_on_genesis-{}.html',
         'ja,in',
         [],
         [update_bible_re],
