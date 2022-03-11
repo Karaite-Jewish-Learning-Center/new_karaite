@@ -10,7 +10,8 @@ from .process_books import (COMMENTS,
                             HALAKHAH,
                             LANGUAGES)
 from .constants import PATH
-from ...models import KaraitesBookDetails
+from ...models import (KaraitesBookDetails,
+                       FullTextSearch)
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
 from .command_utils.clean_table import (clean_tag_attr,
@@ -18,6 +19,7 @@ from .command_utils.clean_table import (clean_tag_attr,
 from .command_utils.html_utils import remove_empty_tags
 from .command_utils.argments import arguments
 from .command_utils.process_arguments import process_arguments
+from .update_full_text_search_index import update_full_text_search_index_en_he
 
 LIST_OF_BOOKS = (COMMENTS +
                  [POLEMIC[1]] +
@@ -53,24 +55,32 @@ class Command(BaseCommand):
         return text
 
     @staticmethod
-    def find_toc_key(text):
+    def break_string_on_hebrew(text):
+        text = text.replace('\n', ' ')
+        english = ''
+        for letter in text:
+            if letter in 'אבגדהוזחטיכלמנסעפצקרשת':
+                break
+            else:
+                english += letter
+        return english
+
+    def find_toc_key(self, text, debug=False):
         text = text.replace('\n', ' ')
         start = text.find('#')
+
         if start >= 0:
-            end_pos = text.find(' ')
-            key = text[0:end_pos + 1].strip().encode('ascii', errors='ignore').decode('utf-8')
+            key = self.break_string_on_hebrew(text)
+            # key = text.strip().replace(' ', '').encode('ascii', errors='ignore').decode('utf-8')
+
             for error in Command.errors:
                 key = key.replace(error[0], error[1])
 
-            # value_end_pos = text.find('־', end_pos)
-            # # print(value_end_pos)
-            # if value_end_pos < 0:
-            #     value_end_pos = text.find(' ', end_pos + 1)
+            value = text.replace('\n', '').replace(key, '').strip()
+            if debug:
+                print(f'key:{key}  value:{value}')
+                input('Press Enter to continue...')
 
-            value = text[end_pos + 1:].replace('\n', '').strip()
-
-            # print('key: {} value: {} end_pos:{}, value_end_pos:{}'.format(key, value, end_pos, value_end_pos))
-            # input('pause')
             if key == '':
                 return None, None
 
@@ -97,8 +107,12 @@ class Command(BaseCommand):
             table_of_contents = {}
             book_title_en, book_title_he = details['name'].split(',')
             table_book = details.get('table_book', False)
+
             sys.stdout.write(f"\rDeleting book : {book.replace('-{}.html', '')}\n")
+
             KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
+            FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
+
             book_details, _ = update_book_details(details, language='en,he')
 
             if 'in' in language:
@@ -150,7 +164,9 @@ class Command(BaseCommand):
                             td.attrs = clean_tag_attr(td)
                         text_he = tds[0].get_text(strip=True)
                         text_en = tds[1].get_text(strip=True)
+
                         update_karaites_array_details(book_details, '', c, [str(tds[0]), 0, str(tds[1])])
+                        update_full_text_search_index_en_he(book_title_en, book_title_he, c, text_en, text_he)
 
                         if len(tds) == 3:
                             toc_tex = tds[2].get_text(strip=True)
@@ -166,7 +182,7 @@ class Command(BaseCommand):
 
                         text = p.get_text(strip=True)
 
-                        key, value = self.find_toc_key(text)
+                        key, value = self.find_toc_key(text, debug=False)
                         p = str(p)
 
                         if key is not None:
@@ -174,15 +190,17 @@ class Command(BaseCommand):
 
                         p = p.replace('MsoTableGrid ', '')
                         update_karaites_array_details(book_title_en, '', c, [p, ''])
+                        #update_full_text_search_index_english(book_title_en, c, text)
 
                         if key is not None:
+
                             try:
                                 update_toc(book_details, c + 1,
                                            [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
                             except KeyError:
                                 print()
                                 print(f'{key}')
-                                input('press enter to continue')
+                                input('Press enter to continue, key not found')
 
                         if lang in ['en', 'he']:
                             c += 1
