@@ -316,21 +316,3 @@ class Search(View):
 
         return JsonResponse({'data': items, 'page': page}, safe=False)
 
-
-# class AutoCompleteViewMeilisearch(View):
-#     """
-#     """
-#
-#     client = meilisearch.Client('http://localhost:7700', 'karaites')
-#     english = client.get_index('karaites-english')
-#     hebrew = client.get_index('karaites-hebrew')
-#
-#     @staticmethod
-#     def get(request, *args, **kwargs):
-#         search = kwargs.get('search', None)
-#         page = kwargs.get('page', 1)
-#
-#         if search is None:
-#             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
-#
-#         return JsonResponse({}, safe=False)

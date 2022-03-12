@@ -15,7 +15,6 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
     const classes = useStyles()
 
     const populate = (obj) => {
-        debugger
         const keys = Object.keys(obj)
         let separator = ''
         let comp = []
