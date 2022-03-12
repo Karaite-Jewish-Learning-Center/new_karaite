@@ -56,7 +56,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def break_string_on_hebrew(text):
-        text = text.replace('\n', ' ')
+        text = text.replace('\n', ' ').replace('*', '')
         english = ''
         for letter in text:
             if letter in 'אבגדהוזחטיכלמנסעפצקרשת':
@@ -71,12 +71,16 @@ class Command(BaseCommand):
 
         if start >= 0:
             key = self.break_string_on_hebrew(text)
-            # key = text.strip().replace(' ', '').encode('ascii', errors='ignore').decode('utf-8')
 
             for error in Command.errors:
                 key = key.replace(error[0], error[1])
 
             value = text.replace('\n', '').replace(key, '').strip()
+            key = key.replace(' ', '')
+
+            if key.endswith('#'):
+                key = f'#{key[:-1]}'
+
             if debug:
                 print(f'key:{key}  value:{value}')
                 input('Press Enter to continue...')
@@ -136,12 +140,16 @@ class Command(BaseCommand):
                 language = language.replace('toc', '')
                 toc = get_html(f"{PATH}/{book.replace('{}', 'TOC')}")
                 toc_html = BeautifulSoup(toc, 'html5lib')
-                toc_divs = toc_html.find_all('div', class_='WordSection1')
-                for p in toc_divs[0].find_all('p'):
+                for p in toc_html.find_all(recursive=True):
                     text = p.get_text(strip=True)
+                    # print(text)
+                    # input('Press Enter to continue...')
                     key, value = self.find_toc_key(text)
                     if key is not None:
                         table_of_contents[key] = value
+                for k in table_of_contents.keys():
+                    print(k)
+                input('Press Enter to continue...')
             c = 1
             for lang in language.split(','):
                 if lang == '':
@@ -190,16 +198,15 @@ class Command(BaseCommand):
 
                         p = p.replace('MsoTableGrid ', '')
                         update_karaites_array_details(book_title_en, '', c, [p, ''])
-                        #update_full_text_search_index_english(book_title_en, c, text)
+                        # update_full_text_search_index_english(book_title_en, c, text)
 
                         if key is not None:
-
                             try:
                                 update_toc(book_details, c + 1,
                                            [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
                             except KeyError:
                                 print()
-                                print(f'{key}')
+                                print(f'={key}=')
                                 input('Press enter to continue, key not found')
 
                         if lang in ['en', 'he']:
