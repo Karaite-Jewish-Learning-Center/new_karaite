@@ -532,6 +532,19 @@ SHABBAT_SONGS = [
          'css_class': 'simple-3-4'},
         False
     ],
+[
+        'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshira El Nora Tehillot.html',
+        'he',
+        [],
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Ashir Beshira El Nora Tehillo, אשיר בשירה אל נורא תהלות",
+         'first_level': 4,
+         'book_classification': '30',
+         'author': 'Avraham ben Yoshiyahu Ha-rofé,',
+         'css_class': 'simple-3-4'},
+        False
+    ],
     [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Le’el ‘Elyon.html',
         'he',
