@@ -483,6 +483,132 @@
     margin-left: -200px;
 }
 
+/* Azkir Tehillo */
+.he-azkir-table-000 {
+    width: 60%;
+}
+.he-azkir-table-000 tr:nth-child(even) td:nth-child(odd) p{
+    /*background-color: #3198dd;*/
+    margin-left: -70%;
+    margin-right: 10%;
+}
+
+.he-azkir-table-000 td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.he-azkir-table-000 td:nth-child(odd) {
+    max-width:65%;
+}
+.he-azkir-table-000 td:nth-child(even) {
+    width:40%;
+}
+.he-azkir-table-000 tr:nth-child(odd) td:nth-child(odd) {
+    /*background-color: #dda131;*/
+    direction: ltr;
+    text-align:left;
+    vertical-align: top;
+    margin-left: 10px;
+}
+.he-azkir-table-000 tr:nth-child(odd) td:nth-child(even) {
+    /*background-color: #dfedd5;*/
+    direction: ltr;
+    text-align: right;
+    vertical-align: top;
+    margin-right: 10px;
+    min-width: 50%;
+}
+.he-azkir-tr-025 {
+    direction: ltr;
+}
+.he-azkir-tr-025  td:nth-child(even) p {
+    background-color: #ffd500;
+    direction: rtl;
+    text-align: right;
+    width: 60%;
+
+}
+.he-azkir-span-002, .he-azkir-span-006, .he-azkir-span-008, .he-azkir-span-009, .he-azkir-span-010 {
+    color:red;
+}
+
+/* Hodu Le’el De‘ot */
+.he-hodu_le_el-table-000 tr {
+    margin: 0;
+}
+.he-hodu_le_el-table-000 tr td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.he-hodu_le_el-table-000 tr td:nth-child(odd) p{
+    direction: ltr;
+    text-align: left;
+
+}
+.he-hodu_le_el-table-000 tr td:nth-child(even) p{
+    direction: rtl;
+    text-align: right;
+}
+.he-hodu_le_el-table-000 tr:nth-child(even) td p{
+    direction: ltr;
+    text-align: left;
+    margin-left: -250px;
+}
+
+.he-hodu_le_el-span-002, .he-hodu_le_el-span-004, .he-hodu_le_el-span-011, .he-hodu_le_el-span-012, .he-hodu_le_el-span-014 {
+    color:red;
+}
+/* Odecha El ‘Al Ki Nora’ot */
+
+.he-odecha_el_-table-000 tr {
+    margin: 0;
+    width: 600px;
+}
+/*.he-odecha_el_-table-000 tr td {*/
+/*    padding-left: 10px;*/
+/*    padding-right: 10px;*/
+/*}*/
+/*.he-odecha_el_-table-000 tr td:nth-child(odd) p{*/
+/*    direction: ltr;*/
+/*    text-align: left;*/
+
+/*}*/
+/*.he-odecha_el_-table-000 tr td:nth-child(even) p{*/
+/*    direction: rtl;*/
+/*    text-align: right;*/
+/*}*/
+/*.he-odecha_el_-table-000 tr:nth-child(even) td p{*/
+/*    direction: ltr;*/
+/*    text-align: left;*/
+/*    margin-left: 70px;*/
+/*    margin-right: -250px;*/
+/*}*/
+/*.he-odecha_el_-table-000 tr:nth-child(3n) {*/
+/*    color:red;*/
+/*}*/
+/*.he-odecha_el_-table-000 tr:nth-child(4n) {*/
+/*    color:red;*/
+/*}*/
+
+
+/*Yaḥid Be‘olamo */
+.he-yahid_be_o-table-000 {
+    min-width: 100%;
+}
+.he-yahid_be_o-table-000 tr:nth-child(odd) td:nth-child(even){
+    background-color: #00b2ff;
+    direction: rtl;
+    text-align: right;
+}
+.he-yahid_nbe_o-table-000 tr:nth-child(odd) td:nth-child(odd){
+    background-color: #ffd169;
+    direction: ltr;
+    text-align: left;
+}
+.he-yahid_be_o-table-000 tr:nth-child(even) {
+    background-color: #ffc000;
+
+}
 /* Odé Le’el Maḥsi */
 .he-od-table-000 {
     width: 85%;
@@ -630,16 +756,29 @@
 /* Yeter Peletat ‘Am */
 
 /* Sefer Milḥamot Adonai */
-.sefer_milh-table-000 {
-    width: auto;
+.he-sefer-table-000 {
+   width: 600px;
 }
 
-.sefer_milh-table-000 p {
-    margin: 0;
+.he-sefer-table-000 p {
+    margin: 0px;
 }
-
-.sefer_milh-table-000 tr:nth-child(5n) td:nth-child(1) {
+.he-sefer-table-000 tr  td{
+    margin-left: -10px;
+}
+.he-sefer-table-000 tr:nth-child(5n) td:nth-child(1) {
+    /*color: red;*/
+}
+.he-sefer-table-000 tr:nth-child(5n) td:nth-child(1) {
     color: red;
+    width: 20px;
+    background-color: #3198dd;
+}
+
+.he-sefer-table-000 tr:nth-child(5n) td:nth-child(2) {
+    background-color: #3FC380;
+    margin-left: 10px;
+
 }
 
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
@@ -713,8 +852,11 @@
 .in-hizzuk-table-000 td:nth-child(even) p {
     margin-left: 10px;
 }
-
-
+/*he-en-kitab-td-000  */
+.he-en-kitab-table-000 tr {
+    background-color: #ffc000;
+    display: none;
+}
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
 .en-aaron-table-000 {
     margin-top: 70px;

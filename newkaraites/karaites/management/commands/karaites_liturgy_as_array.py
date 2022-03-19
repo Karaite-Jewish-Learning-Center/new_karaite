@@ -6,6 +6,8 @@ from .update_toc import update_toc
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .process_books import (HAVDALA,
+                            # PASSOVER_SONGS,
+                            # PURIM_SONGS,
                             PRAYERS,
                             SHABBAT_SONGS,
                             SUPPLEMENTAL,
@@ -37,7 +39,7 @@ class Command(BaseCommand):
 
         for _, book, _, _, _, details, _ in LIST_OF_BOOKS:
 
-            sys.stdout.write(f'\n {book.replace(".html","")}')
+            sys.stdout.write(f'\n {book.replace(".html", "")}')
             book_details, _ = update_book_details(details)
 
             if details.get('css_class', None) is not None:

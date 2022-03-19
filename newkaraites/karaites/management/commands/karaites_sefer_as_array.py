@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
         for _, book, _, _, _, details, _ in [POLEMIC[0]]:
             book_details, _ = update_book_details(details)
-            html = get_html(f'{PATH}{book}')
+            html = get_html(f'{PATH}{book}-')
             # MsoTableGrid is very bad for this book
             html = html.replace('MsoTableGrid ', '')
             html_tree = BeautifulSoup(html, 'html5lib')

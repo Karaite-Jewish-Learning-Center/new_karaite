@@ -1,4 +1,4 @@
-def clean_tag_attr(child, table_class=None, fix_colspan=True):
+def clean_tag_attr(child, table_class=None, fix_colspan=True, remove_colspan=True):
     """ clean all child attr except class and colspan """
     if hasattr(child, 'attrs'):
         class_ = child.attrs.get('class')
@@ -18,6 +18,8 @@ def clean_tag_attr(child, table_class=None, fix_colspan=True):
 
         if fix_colspan and colspan == '3' or colspan == '2':
             child.attrs.update({'colspan': '2'})
+        if remove_colspan:
+            child.attrs.pop('colspan', None)
 
     return child.attrs
 

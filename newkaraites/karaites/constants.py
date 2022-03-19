@@ -10,17 +10,10 @@ LANGUAGES = [
 
 BOOK_CLASSIFICATION = [
     ('00', 'Unknown'),
-    # ('01', 'Prayers'),
-    # ('02', 'Blessing'),
-    # ('03', 'Karaite Jewish practice'),
-    # ('04', 'Egyptian Karaite Tradition'),
-    # ('05', 'Aliyyot Poems'),
-    # ('06', 'Recipes'),
-    # ('07', 'Biblical verses'),
-    # ('08', 'Poems'),
-    # ('09', 'PDFs'),
     # liturgy
     ('10', 'Havdala Songs'),
+    ('15', 'Passover Songs'),
+    ('18', 'Purim Songs'),
     ('20', 'Prayers'),
     ('30', 'Shabbat Songs'),
     ('40', 'Supplemental Readings for specific Torah portions'),
@@ -37,6 +30,7 @@ BOOK_CLASSIFICATION = [
     ('90', 'Other'),
 
 ]
+BOOK_CLASSIFICATION_DICT = dict(BOOK_CLASSIFICATION)
 
 FIRST_LEVEL = [
     (1, 'Tanakh'),
