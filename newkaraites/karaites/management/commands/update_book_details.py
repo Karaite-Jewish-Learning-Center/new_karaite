@@ -18,6 +18,7 @@ def update_book_details(data, introduction='', language='he'):
                                                                       'book_title_en': book_title_en,
                                                                       'book_title_he': book_title_he,
                                                                       'table_book': data.get('table_book', False),
+                                                                      'columns': data.get('columns', 2),
                                                                       'introduction': str(introduction)
                                                                       }
                                                             )

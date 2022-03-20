@@ -539,6 +539,8 @@ class KaraitesBookDetails(models.Model):
 
     table_book = models.BooleanField(default=False)
 
+    columns = models.IntegerField(default=0)
+
     def __str__(self):
         return self.book_title_en
 

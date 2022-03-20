@@ -95,20 +95,33 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemTable = (item: number, data: Array<any>) => {
-        return (
-            <tr>
-                {parse(data[HTML][0], {
-                    replace: domNode => {
-                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                    }
-                })}
-                {parse(data[HTML][2], {
-                    replace: domNode => {
-                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                    }
-                })}
-            </tr>
-        )
+        if (details.colmuns == 2) {
+            return (
+                <tr>
+                    {parse(data[HTML][0], {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+
+                    {parse(data[HTML][2], {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </tr>
+            )
+        } else {
+            return (
+                <tr>
+                    {parse(data[HTML][0], {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </tr>
+            )
+        }
     }
     const itemContent = (item: number, data: Array<any>) => {
 
@@ -166,7 +179,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         const tableBook = "table-book"
         if (details.table_book) {
             return (<TableVirtuoso
-                className={`${tableBook} ${(flags[BOOK] ? classes.Show : classes.Hide)}`}
+                className={`${tableBook}  ${(flags[BOOK] ? classes.Show : classes.Hide)}`}
                 data={paragraphs}
                 ref={virtuoso}
                 initialTopMostItemIndex={initial}
@@ -310,7 +323,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'right',
         lineHeight: 'initial',
         fontSize: '20.35px',
-        verticalAlign:'top',
+        verticalAlign: 'top',
 
     },
     heRight: {
@@ -320,6 +333,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'right',
         width: '300px',
         border: '1px solid red',
+        verticalAlign:'top'
     },
     enRight: {
         textAlign: 'left',
@@ -329,8 +343,8 @@ const useStyles = makeStyles(() => ({
         fontSize: 21,
         verticalAlign: 'top',
         fontFamily: 'SBL Hebrew',
-        lineHeight:'initial',
-         // border: '1px solid red',
+        lineHeight: 'initial',
+        // border: '1px solid red',
 
     },
     heRightCenter: {

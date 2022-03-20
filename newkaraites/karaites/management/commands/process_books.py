@@ -416,7 +416,9 @@ HALAKHAH = [
          'book_classification': '80',
          'author': ',',
          'css_class': '',
-         'table_book': True},
+         'table_book': True,
+         'columns': 1,
+         },
         False
     ],
     [
@@ -1007,7 +1009,8 @@ POLEMIC = [
          'first_level': 5,
          'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים",
-         'css_class': 'sefer'},
+         'css_class': 'sefer',
+         },
         False
     ],
     [

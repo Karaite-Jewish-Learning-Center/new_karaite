@@ -195,15 +195,17 @@ class Command(BaseCommand):
                             td.attrs = clean_tag_attr(td)
                         text_he = tds[0].get_text(strip=True)
                         text_en = tds[1].get_text(strip=True)
-
                         update_karaites_array_details(book_details, '', c, [str(tds[0]), 0, str(tds[1])])
                         update_full_text_search_index_en_he(book_title_en, book_title_he, c, text_en, text_he)
 
                         if len(tds) == 3:
                             toc_tex = tds[2].get_text(strip=True)
-                            update_toc(book_details, c + 1,
-                                       [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
+                            if toc_tex != '':
+                                update_toc(book_details,
+                                           c + 1,
+                                           [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
                         c += 1
+                        sys.stdout.write(f'\r processing paragraph: {c}\r')
                 else:
                     for p in divs[0].find_all('table', recursive=True):
                         p.attrs = clean_tag_attr(p)
