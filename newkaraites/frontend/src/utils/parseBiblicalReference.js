@@ -69,7 +69,6 @@ export const parseEnglishRef = (biblicalRef) => {
 
 
 export const parseBiblicalReference = (e) => {
-    debugger
     let language = e.target.childNodes[0].parentElement.lang
     let biblicalRef = e.target.childNodes[0].data.replace('(', '').replace(')', '').replace('cf. ', '').replace(':(', '')
     biblicalRef = biblicalRef.replace(', ', ':', 1).replace(',', ':', 1).replace('.', '').trim()

@@ -541,6 +541,12 @@ class KaraitesBookDetails(models.Model):
 
     columns = models.IntegerField(default=0)
 
+    columns_order = models.CharField(max_length=10, default='')
+
+    toc_columns = models.CharField(max_length=10, default='')
+
+    direction = models.CharField(max_length=3,default='rtl')
+
     def __str__(self):
         return self.book_title_en
 
@@ -572,7 +578,11 @@ class KaraitesBookDetails(models.Model):
                 'book_classification': details.get_book_classification_display(),
                 'book_title_en': details.book_title_en,
                 'book_title_he': details.book_title_he,
+                'columns': details.columns,
+                'columns_order': details.columns_order,
+                'toc_columns': details.toc_columns,
                 'table_book': details.table_book,
+                'direction': details.direction,
             })
         return data
 
@@ -590,8 +600,12 @@ class KaraitesBookDetails(models.Model):
             'book_title_en': details.book_title_en,
             'book_title_he': details.book_title_he,
             'table_book': details.table_book,
+            'columns': details.columns,
+            'columns_order': details.columns_order,
+            'toc_columns': details.toc_columns,
             'toc': [t.to_list() for t in toc],
             'intro': details.introduction,
+            'direction': details.direction,
         }
 
     def save(self, *args, **kwargs):

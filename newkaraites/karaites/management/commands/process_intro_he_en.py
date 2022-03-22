@@ -19,6 +19,7 @@ from .process_books import (COMMENTS,
 from .constants import PATH
 from ...models import (KaraitesBookDetails,
                        FullTextSearch)
+
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
 from .command_utils.clean_table import (clean_tag_attr,
@@ -26,7 +27,8 @@ from .command_utils.clean_table import (clean_tag_attr,
 from .command_utils.argments import arguments
 from .command_utils.process_arguments import process_arguments
 from .update_full_text_search_index import (update_full_text_search_index_en_he,
-                                            update_full_text_search_index_english)
+                                            update_full_text_search_index_english,
+                                            update_full_text_search_index_hebrew)
 
 LIST_OF_BOOKS = (COMMENTS +
                  POLEMIC +
@@ -86,20 +88,20 @@ class Command(BaseCommand):
     def find_toc_key(self, text, debug=False):
         text = text.replace('\n', ' ')
         start = text.find('#')
-
         if start >= 0:
             key = self.break_string_on_hebrew(text)
+            value = text.replace(key, ' ').replace('\n', '').strip()
 
             for error in Command.errors:
                 key = key.replace(error[0], error[1])
 
-            value = text.replace('\n', '').replace(key, '').strip()
-            key = key.replace(' ', '')
+            key = key.replace(' ', '').replace('-', '').replace('\xa0', '')
 
             if key.endswith('#'):
                 key = f'#{key[:-1]}'
 
             if debug:
+                print(f'text: {text}')
                 print(f'key:{key}  value:{value}')
                 input('Press Enter to continue...')
 
@@ -149,6 +151,7 @@ class Command(BaseCommand):
                 # html_tree = remove_empty_tags(html_tree)
                 divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
+                # todo: fix this to introduction
                 intro = '<div class="liturgy">'
                 for div in divs[0]:
                     if div.name == 'table':
@@ -164,12 +167,39 @@ class Command(BaseCommand):
                 language = language.replace('toc', '')
                 toc = get_html(f"{PATH}/{book.replace('{}', 'TOC')}")
                 toc_html = BeautifulSoup(toc, 'html5lib')
-                for p in toc_html.find_all(recursive=True):
-                    text = p.get_text(strip=True)
+                toc_columns = details.get('toc_columns', '')
 
-                    key, value = self.find_toc_key(text)
-                    if key is not None:
-                        table_of_contents[key] = value
+                if toc_columns:
+                    toc_len = len(toc_columns.split(','))
+                    for trs in toc_html.find_all('tr', recursive=True):
+                        key, value = None, []
+                        for index, td in enumerate(trs.find_all('td', recursive=True)):
+                            # two columns in toc
+                            if toc_len == 2:
+                                if index == 0:
+                                    value = [td.get_text(strip=False).replace('\xa0', '').replace('\n', ''), '']
+                                    if value == '':
+                                        break
+                                if index == 1:
+                                    key = td.get_text(strip=True).replace('\xa0', '').replace('\n', '')
+                            # tree columns in toc
+                            if toc_len == 3:
+                                if index == 0 or index == 1:
+                                    value.insert(0, td.get_text(strip=False).replace('\xa0', '').replace('\n', ''))
+                                    if value == '':
+                                        break
+                                if index == 2:
+                                    key = td.get_text(strip=False).replace('\xa0', '').replace('\n', '')
+                        if key is not None:
+                            table_of_contents[key] = value
+                else:
+                    for p in toc_html.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+                        text = p.get_text(strip=False)
+
+                        key, value = self.find_toc_key(text, debug=False)
+
+                        if key is not None:
+                            table_of_contents[key] = value
 
             c = 1
             for lang in language.split(','):
@@ -187,53 +217,72 @@ class Command(BaseCommand):
 
                 if table_book:
                     table = divs[0].find_all('tr', recursive=True)
-
+                    columns_order = list(map(int, details.get('columns_order', '0,1').split(',')))
                     for tr in table:
                         tr.attrs = clean_tag_attr(tr)
                         tds = tr.find_all('td', recursive=True)
                         for td in tds:
                             td.attrs = clean_tag_attr(td)
-                        text_he = tds[0].get_text(strip=True)
-                        text_en = tds[1].get_text(strip=True)
-                        update_karaites_array_details(book_details, '', c, [str(tds[0]), 0, str(tds[1])])
+
+                        text_he = tds[columns_order[0]].get_text(strip=False)
+                        text_en = tds[columns_order[1]].get_text(strip=False)
+                        update_karaites_array_details(book_details, '', c,
+                                                      [str(tds[columns_order[0]]), 0, str(tds[columns_order[1]])])
                         update_full_text_search_index_en_he(book_title_en, book_title_he, c, text_en, text_he)
 
                         if len(tds) == 3:
-                            toc_tex = tds[2].get_text(strip=True)
+
+                            toc_tex = tds[columns_order[2]].get_text(strip=False)
                             if toc_tex != '':
-                                update_toc(book_details,
-                                           c + 1,
-                                           [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
+                                try:
+                                    if details.get('toc_columns', False):
+                                        key, value = self.find_toc_key(toc_tex, debug=False)
+                                        if key is not None:
+                                            update_toc(book_details,
+                                                       c,
+                                                        table_of_contents[key])
+                                    else:
+                                        update_toc(book_details,
+                                                   c,
+                                                   [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
+                                except KeyError:
+                                    print(f'{key} not found in table of contents')
+
                         c += 1
                         sys.stdout.write(f'\r processing paragraph: {c}\r')
                 else:
+                    divs = html_tree.find_all('div', class_='WordSection1')
                     for p in divs[0].find_all('table', recursive=True):
                         p.attrs = clean_tag_attr(p)
                         p = clean_table_attr(p)
 
                     for p in divs[0].find_all(recursive=False):
 
-                        text = p.get_text(strip=True)
-
+                        text = p.get_text(strip=False)
                         key, value = self.find_toc_key(text, debug=False)
+
                         p = str(p)
 
                         if key is not None:
                             p = p.replace('#', '')
 
                         update_karaites_array_details(book_title_en, '', c, [p, ''])
-                        # update_full_text_search_index_english(book_title_en, c, text)
+                        if lang in ['en']:
+                            update_full_text_search_index_english(book_title_en, c, text)
+                        if lang in ['he']:
+                            update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text)
 
                         if key is not None:
                             try:
-                                update_toc(book_details, c + 1,
+                                update_toc(book_details,
+                                           c,
                                            [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
                             except KeyError:
-                                print()
-                                print(f'={key}=')
+                                print(table_of_contents.keys())
+                                print(f'{key} not found in table of contents')
                                 input('Press enter to continue, key not found')
 
-                        if lang in ['en', 'he']:
+                        if lang in ['en', 'he', 'ja', 'he-en']:
                             c += 1
                         sys.stdout.write(f'\r processing paragraph: {c}\r')
                 i += 1

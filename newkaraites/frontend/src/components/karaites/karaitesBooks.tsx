@@ -51,7 +51,6 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     const [flags, setFlags] = useState<Array<boolean>>([true, false, false])
     const classes = useStyles()
     const virtuoso = useRef(null);
-
     if (paragraphs.length === 0) {
         return <Loading/>
     }
@@ -80,8 +79,8 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         // only works this way because the virtuoso is not re-rendered
         setTimeout(() => {
             // @ts-ignore
-            virtuoso.current.scrollToIndex(starParagraph - 2, {
-                align: 'center',
+            virtuoso.current.scrollToIndex(starParagraph - 1, {
+                align: 'top',
                 behavior: 'smooth',
             })
         }, 100)
@@ -95,15 +94,15 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemTable = (item: number, data: Array<any>) => {
-        if (details.colmuns == 2) {
+        if (details.columns == 2) {
             return (
                 <tr>
+
                     {parse(data[HTML][0], {
                         replace: domNode => {
                             return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                         }
                     })}
-
                     {parse(data[HTML][2], {
                         replace: domNode => {
                             return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
@@ -153,7 +152,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         if (data[INDEX] === '') {
             // one column TOC
             return (<div className={`${classes.tocParagraph} ${selectCurrent(item) ? classes.selected : ''}`}>
-                <p className={classes.tocItem} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
+                <p className={classes.tocItem} style={{direction:details.direction}} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
                     {data[SUBJECT]}
                 </p>
             </div>)
@@ -344,7 +343,6 @@ const useStyles = makeStyles(() => ({
         verticalAlign: 'top',
         fontFamily: 'SBL Hebrew',
         lineHeight: 'initial',
-        // border: '1px solid red',
 
     },
     heRightCenter: {

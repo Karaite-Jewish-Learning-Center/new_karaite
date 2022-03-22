@@ -32,9 +32,9 @@ def process_arguments(options,
             if level is not None and classification is not None:
                 book_level = FIRST_LEVEL[int(level) - 1][1]
                 book_classification = BOOK_CLASSIFICATION_DICT[classification]
-                print(f'{i:02} {lang:9} {book_level:25} {book_classification[0:12]:14} {book_name}')
+                print(f'{i:02} {lang:12} {book_level:25} {book_classification[0:12]:14} {book_name}')
             else:
-                print(f'{i:02} {lang:9} {"Tanakh":25} {"-- ":14} {book_name}')
+                print(f'{i:02} {lang:12} {"Tanakh":25} {"-- ":14} {book_name}')
 
             i += 1
         return []

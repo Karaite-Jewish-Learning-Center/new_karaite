@@ -161,24 +161,24 @@ def fix_image_gan(path, book_name):
     write_data(path, f'{book_name}', str(html_tree), SOURCE_PATH)
 
 
-def fix_image_source(path, book_name, books=BOOKS):
+def fix_image_source(path, book_name):
     # this is specific to Halakha Adderet
-    old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
-                2: 'Adderet%20Eliyahu%20Critical%20Edition%20(2nd%20half)%20(SITE).fld'}
+    old_path = 'Adderet%20Eliyahu%20Critical%20Edition.fld/'
 
     book_name = book_name.replace('.html', '')
 
-    for book in books:
-        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html', SOURCE_PATH), 'html5lib')
+    html_tree = BeautifulSoup(read_data(path, f'{book_name}.html', SOURCE_PATH), 'html5lib')
 
-        new_path = f'/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
+    new_path = '/static-django/images/Adderet_Eliyahu_R_Elijah_Bashyatchi/'
 
-        for child in html_tree.find_all('img'):
-            image_path = child.attrs.get('src', None)
-            if image_path is not None:
-                child.attrs['src'] = image_path.replace(old_path[book], new_path)
+    for child in html_tree.find_all('img'):
+        image_path = child.attrs.get('src', None)
+        if image_path is not None:
+            child.attrs.pop('height', None)
+            child.attrs.pop('width', None)
+            child.attrs['src'] = image_path.replace(old_path, new_path)
 
-        write_data(path, f'{book_name}-{book}.html', str(html_tree), SOURCE_PATH)
+    write_data(path, f'{book_name}.html', str(html_tree), SOURCE_PATH)
 
 
 HTML = """
@@ -366,7 +366,8 @@ HALAKHAH = [
          'first_level': 3,
          'book_classification': '80',
          'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
-         'css_class': ''},
+         'css_class': '',
+         'direction': 'rtl'},
         True
     ],
     # [
@@ -400,15 +401,20 @@ HALAKHAH = [
         'HTML/Halakhah/Adderet_Eliyahu_R_Elijah_Bashyatchi/',
         'Adderet Eliyahu-{}.html',
         'he,in,toc',
-        [fix_image_source, add_book_parts],
-        [update_bible_adderet],
-        {},
+        [fix_image_source],
+        [update_bible_re],
+        {'name': r"Adderet Eliyahu, Adderet Eliyahu",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'R. Elijah ben Moshe Bashyatchi’sAdderet Eliyahu,',
+         'css_class': '',
+         },
         False
     ],
     [
         'HTML/Halakhah/Kitab al-Anwar/',
         'Kitab al-Anwar-{}.html',
-        'he-en,in',
+        'he-en,in,toc',
         [],
         [update_bible_re],
         {'name': r"The Book of Lights and Watchtowers, Kitāb Al-Anwār Wal-Marāqib",
@@ -417,7 +423,9 @@ HALAKHAH = [
          'author': ',',
          'css_class': '',
          'table_book': True,
-         'columns': 1,
+         'columns': 2,
+         'columns_order': '0,1,2',
+         'toc_columns': '0,1,2',
          },
         False
     ],
@@ -437,7 +445,7 @@ HALAKHAH = [
     [
         'HTML/Halakhah/The Remnant and the Relic/',
         'Remnant Relic-{}.html',
-        'he,in,toc',
+        'he-en,in,toc',
         [],
         [update_bible_re],
         {'name': r"The Remnant and the Relic , השריד והפליט",
@@ -445,7 +453,12 @@ HALAKHAH = [
          'book_classification': '80',
          'author': 'Zahava Yod,',
          'css_class': '',
-         'table-book': True},
+         'table_book': True,
+         'columns': 2,
+         'columns_order': '2,1,0',
+         'toc_columns': '0,1',
+         'direction': 'ltr',
+         },
         False
     ],
 

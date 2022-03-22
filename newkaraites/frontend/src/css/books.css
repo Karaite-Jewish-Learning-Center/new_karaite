@@ -983,17 +983,21 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 70px;
+    direction:ltr;
 }
 
-.aaron-table-000 tr td:nth-child(1) {
+.aaron-table-000 tr:nth-child(even) td:nth-child(even) {
+    background-color: #ffc000;
     padding-right: 10px;
     text-align: right;
     vertical-align: top;
+    width: 50%;
 }
 
-.aaron-table-000 tr td:nth-child(2) {
+.aaron-table-000 tr td:nth-child(odd) {
     padding-left: 10px;
     vertical-align: top;
+    width: 50%;
 }
 
 
@@ -1549,4 +1553,7 @@
 .he-deuteronom-span-088 .he-deuteronom-span-086 .he-deuteronom-span-081 {
     color: black;
     font-style: italic;
+}
+.he-en-remnant-p-000 {
+    text-align: center;
 }
