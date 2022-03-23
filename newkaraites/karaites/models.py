@@ -547,6 +547,10 @@ class KaraitesBookDetails(models.Model):
 
     direction = models.CharField(max_length=3,default='rtl')
 
+    remove_class = models.CharField(max_length=100, default='')
+
+    remove_tags = models.CharField(max_length=100, default='')
+
     def __str__(self):
         return self.book_title_en
 
@@ -583,6 +587,8 @@ class KaraitesBookDetails(models.Model):
                 'toc_columns': details.toc_columns,
                 'table_book': details.table_book,
                 'direction': details.direction,
+                'remove_class': details.remove_class,
+                'remove_tags': details.remove_tags,
             })
         return data
 
@@ -606,6 +612,8 @@ class KaraitesBookDetails(models.Model):
             'toc': [t.to_list() for t in toc],
             'intro': details.introduction,
             'direction': details.direction,
+            'remove_class': details.remove_class,
+            'remove_tags': details.remove_tags,
         }
 
     def save(self, *args, **kwargs):

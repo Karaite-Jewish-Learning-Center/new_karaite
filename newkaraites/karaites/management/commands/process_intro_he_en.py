@@ -211,7 +211,15 @@ class Command(BaseCommand):
                 sys.stdout.write(f'\r {book_name}\n')
 
                 html = get_html(f'{PATH}{book_name}')
-                # html = html.replace('MsoTableGrid', '')
+
+                #html = html.replace('MsoTableGrid', '')
+
+                if details.get('remove_class', False):
+                    html = html.replace(details.get('remove_class'), '')
+
+                if details.get('remove_tags', False):
+                    html = html.replace(details.get('remove_tags'), '')
+
                 html_tree = BeautifulSoup(html, 'html5lib')
                 divs = html_tree.find_all('div', class_='WordSection1')
 

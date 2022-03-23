@@ -354,7 +354,9 @@ HALAKHAH = [
          'first_level': 3,
          'book_classification': '80',
          'author': ',',
-         'css_class': ''},
+         'css_class': '',
+         'remove_class': 'MsoTableGrid',
+         'remove_tags': '<o:p>&nbsp;</o:p>'},
         True
     ],
     [

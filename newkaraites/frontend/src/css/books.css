@@ -1078,25 +1078,24 @@
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
 .en-aaron-table-000 {
     margin-top: 70px;
-    min-width: 700px;
-}
-
-.en-aaron-table-000 p {
-    margin-top: 0;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.en-aaron-table-000 td:nth-child(odd) {
-    direction: rtl;
-    margin-right: 10px;
-    vertical-align: top;
-}
-
-.en-aaron-table-000 td:nth-child(even) {
+    width: 700px;
     direction: ltr;
-    margin-left: 10px;
+}
+
+.en-aaron-table-000 tr:nth-child(odd) td:nth-child(odd) {
+    /*background-color: #00ff95;*/
+    margin-top: 0;
+    direction: rtl;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.en-aaron-table-000 tr:nth-child(even) td:nth-child(odd) {
     /*background-color: #ffc000;*/
+    margin-top: 0;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top;
 }
 
 /* Patshegen Ketav Haddat */
