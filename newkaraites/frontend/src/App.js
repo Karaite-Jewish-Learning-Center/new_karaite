@@ -11,7 +11,7 @@ import Liturgy from "./components/liturgy/Liturgy"
 import Poetry from "./components/poetry/poetry"
 import Polemic from "./components/polemic/Polemic"
 import Comment from "./components/comments/comment"
-import Home from "./components/pages/Home";
+import Display from "./components/pages/Display";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
 import SearchResults from "./components/pages/SearchResults";
@@ -19,7 +19,7 @@ import SearchResults from "./components/pages/SearchResults";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message'
-
+import Acknowledgment from "./components/pages/Acknowledgments";
 
 
 function App() {
@@ -34,13 +34,16 @@ function App() {
                     <Message/>
                     <Switch>
                         <Route exact path="/">
-                            <Home/>
+                            <Display/>
                         </Route>
 
                         <Route exact path="/texts/">
                             <FirstLevel/>
                         </Route>
 
+                        <Route exact path="/acknowledgments/">
+                            <Acknowledgment/>
+                        </Route>
                         <Route exact path="/search-result/" forceRefresh={true}>
                             <SearchResults/>
                         </Route>

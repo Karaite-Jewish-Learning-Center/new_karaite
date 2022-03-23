@@ -6,6 +6,8 @@ from .update_toc import update_toc
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .process_books import (HAVDALA,
+                            PASSOVER_SONGS,
+                            PURIM_SONGS,
                             PRAYERS,
                             SHABBAT_SONGS,
                             SUPPLEMENTAL,
@@ -19,6 +21,8 @@ from .udpate_bible_ref import update_create_bible_refs
 
 LIST_OF_BOOKS = (HAVDALA +
                  PRAYERS +
+                 PASSOVER_SONGS +
+                 PURIM_SONGS +
                  SHABBAT_SONGS +
                  SUPPLEMENTAL +
                  WEDDING_SONGS)
@@ -35,15 +39,18 @@ class Command(BaseCommand):
         sys.stdout.write(f'\nProcessing books:')
         i = 1
 
-        for _, book, _, _, _, details, _ in LIST_OF_BOOKS:
-
-            sys.stdout.write(f'\n {book.replace(".html","")}')
+        for _, book, lang, _, _, details, _ in LIST_OF_BOOKS:
+            sys.stdout.write(f'\n {book.replace(".html", "").replace("-{}", "")}')
             book_details, _ = update_book_details(details)
 
             if details.get('css_class', None) is not None:
                 class_name = f" {details.get('css_class')} "
 
-            html = get_html(f'{PATH}{book}')
+            if lang.find('he') > -1:
+                html = get_html(f"{PATH}{book.replace('{}', 'Hebrew')}")
+            else:
+                html = get_html(f'{PATH}{book}')
+
             html = html.replace('class="a ', f'class="MsoTableGrid ')
             html = html.replace('class="a0 ', f'class="a0 MsoTableGrid ')
             html = html.replace('class="a1 ', f'class="a1 MsoTableGrid ')

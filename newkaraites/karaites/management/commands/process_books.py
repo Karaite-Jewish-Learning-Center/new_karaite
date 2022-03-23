@@ -4,9 +4,7 @@ import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from ...constants import (BIBLE_BOOKS_NAMES,
-                          BOOK_CLASSIFICATION,
-                          FIRST_LEVEL)
+from ...constants import (BIBLE_BOOKS_NAMES)
 from .command_utils.utils import mark_bible_refs
 from .command_utils.read_write_data import (read_data,
                                             write_data)
@@ -163,24 +161,24 @@ def fix_image_gan(path, book_name):
     write_data(path, f'{book_name}', str(html_tree), SOURCE_PATH)
 
 
-def fix_image_source(path, book_name, books=BOOKS):
+def fix_image_source(path, book_name):
     # this is specific to Halakha Adderet
-    old_path = {1: 'Halakha_Adderet%20Eliyahu_R%20Elijah%20Bashyatchi.fld',
-                2: 'Adderet%20Eliyahu%20Critical%20Edition%20(2nd%20half)%20(SITE).fld'}
+    old_path = 'Adderet%20Eliyahu%20Critical%20Edition.fld/'
 
     book_name = book_name.replace('.html', '')
 
-    for book in books:
-        html_tree = BeautifulSoup(read_data(path, f'{book_name}-{book}.html', SOURCE_PATH), 'html5lib')
+    html_tree = BeautifulSoup(read_data(path, f'{book_name}.html', SOURCE_PATH), 'html5lib')
 
-        new_path = f'/static-django/images/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi-{book}'
+    new_path = '/static-django/images/Adderet_Eliyahu_R_Elijah_Bashyatchi/'
 
-        for child in html_tree.find_all('img'):
-            image_path = child.attrs.get('src', None)
-            if image_path is not None:
-                child.attrs['src'] = image_path.replace(old_path[book], new_path)
+    for child in html_tree.find_all('img'):
+        image_path = child.attrs.get('src', None)
+        if image_path is not None:
+            child.attrs.pop('height', None)
+            child.attrs.pop('width', None)
+            child.attrs['src'] = image_path.replace(old_path, new_path)
 
-        write_data(path, f'{book_name}-{book}.html', str(html_tree), SOURCE_PATH)
+    write_data(path, f'{book_name}.html', str(html_tree), SOURCE_PATH)
 
 
 HTML = """
@@ -313,6 +311,7 @@ def add_book_parts(path, book_name, books=BOOKS):
 # post process list of function
 # pre-process list of function
 # collect css
+# table_book
 COMMENTS = [
     [
 
@@ -345,19 +344,21 @@ COMMENTS = [
 
 ]
 HALAKHAH = [
-    # [
-    #     "HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
-    #     "Aaron ben Josephs Essay on the Obligation of Prayer-{}.html",
-    #     'en,in',
-    #     [],
-    #     [],
-    #     {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer, ",
-    #      'first_level': 3,
-    #      'book_classification': '80',
-    #      'author': ',',
-    #      'css_class': ''},
-    #     True
-    # ],
+    [
+        "HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
+        "Aaron ben Josephs Essay on the Obligation of Prayer-{}.html",
+        'en,in',
+        [],
+        [],
+        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer, ",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': ',',
+         'css_class': '',
+         'remove_class': 'MsoTableGrid',
+         'remove_tags': '<o:p>&nbsp;</o:p>'},
+        True
+    ],
     [
         'HTML/Halakhah/Gan Eden/', 'Gan Eden-{}.html',
         'he,in,toc',
@@ -367,7 +368,8 @@ HALAKHAH = [
          'first_level': 3,
          'book_classification': '80',
          'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
-         'css_class': ''},
+         'css_class': '',
+         'direction': 'rtl'},
         True
     ],
     # [
@@ -397,19 +399,24 @@ HALAKHAH = [
     #     {},
     #     False
     # ],
-    # [
-    #     'HTML/Halakhah/Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi/',
-    #     'Halakha_Adderet_Eliyahu_R_Elijah_Bashyatchi.html',
-    #     'he',
-    #     [fix_image_source, add_book_parts],
-    #     [update_bible_adderet],
-    #     {},
-    #     False
-    # ],
+    [
+        'HTML/Halakhah/Adderet_Eliyahu_R_Elijah_Bashyatchi/',
+        'Adderet Eliyahu-{}.html',
+        'he,in,toc',
+        [fix_image_source],
+        [update_bible_re],
+        {'name': r"Adderet Eliyahu, Adderet Eliyahu",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'R. Elijah ben Moshe Bashyatchi’sAdderet Eliyahu,',
+         'css_class': '',
+         },
+        False
+    ],
     [
         'HTML/Halakhah/Kitab al-Anwar/',
         'Kitab al-Anwar-{}.html',
-        'he-en,in',
+        'he-en,in,toc',
         [],
         [update_bible_re],
         {'name': r"The Book of Lights and Watchtowers, Kitāb Al-Anwār Wal-Marāqib",
@@ -417,7 +424,11 @@ HALAKHAH = [
          'book_classification': '80',
          'author': ',',
          'css_class': '',
-         'table_book': True},
+         'table_book': True,
+         'columns': 2,
+         'columns_order': '0,1,2',
+         'toc_columns': '0,1,2',
+         },
         False
     ],
     [
@@ -435,15 +446,21 @@ HALAKHAH = [
     ],
     [
         'HTML/Halakhah/The Remnant and the Relic/',
-        'Remnant and Relic-{}.html',
-        'en',
+        'Remnant Relic-{}.html',
+        'he-en,in,toc',
         [],
         [update_bible_re],
         {'name': r"The Remnant and the Relic , השריד והפליט",
          'first_level': 3,
          'book_classification': '80',
          'author': 'Zahava Yod,',
-         'css_class': ''},
+         'css_class': '',
+         'table_book': True,
+         'columns': 2,
+         'columns_order': '2,1,0',
+         'toc_columns': '0,1',
+         'direction': 'ltr',
+         },
         False
     ],
 
@@ -489,6 +506,79 @@ HAVDALA = [
         False
     ],
 ]
+PASSOVER_SONGS = [
+    [
+        'HTML/Liturgy/Passover Songs/Azkir Tehillot/',
+        'Azkir Tehillot-{}.html',
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Azkir Tehillo,אזכיר תהלות",
+         'first_level': 4,
+         'book_classification': '15',
+         'author': 'Yosef bar Yitshak,',
+         'css_class': '',
+         },
+        False
+    ],
+    [
+        "HTML/Liturgy/Passover Songs/Hodu_Le_el_De_ot/",
+        "Hodu_Le_el_Deot-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Hodu Le’el De‘ot, הודו לאל דעות",
+         'first_level': 4,
+         'book_classification': '15',
+         'author': 'Perhaps Hillel Bashyači,',
+         'css_class': '',
+         },
+        False
+    ],
+    [
+
+        "HTML/Liturgy/Passover Songs/Odecha_El_Al Ki_Noraot/",
+        "Odecha_El_Ki_Noraot-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Odecha El ‘Al Ki Nora’ot, אודך אל על כי נוראות",
+         'first_level': 4,
+         'book_classification': '15',
+         'author': 'Simha ben Shelomo,',
+         'css_class': '',
+         },
+        False
+    ],
+    [
+        "HTML/Liturgy/Passover Songs/Yahid_Be_Olamo/",
+        "Yahid_Be_olamo-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Yaḥid Be‘olamo, יחיד בעולמו",
+         'first_level': 4,
+         'book_classification': '15',
+         'author': 'Yitsḥaḳ ben Shelomo,',
+         'css_class': '',
+         },
+        False
+    ],
+    [
+        "HTML/Liturgy/Passover Songs/Yonat_Elim/",
+        "Yonat_Elem-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Yonat Elem, יונת אלם",
+         'first_level': 4,
+         'book_classification': '15',
+         'author': 'Yosef Cohen,',
+         'css_class': '',
+         },
+        False
+    ],
+]
 PRAYERS = [
     [
         'HTML/Liturgy/Prayers/', 'En Kelohenu.html',
@@ -517,7 +607,50 @@ PRAYERS = [
         False
     ],
 ]
-
+PURIM_SONGS = [
+    [
+        "HTML/Liturgy/Purim Songs/Adon_Yeshu_ot/",
+        "Adon_Yeshu_ot-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Adon Yeshu‘ot , אדון ישועות",
+         'first_level': 4,
+         'book_classification': '18',
+         'author': ' Attributed to Anan,',
+         'css_class': '',
+         },
+        False
+    ],
+    [
+        "HTML/Liturgy/Purim Songs/Shiru_Am_Zakkai/",
+        "Shiru_Am_Zakkai-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Shiru ‘Am Zakka , שירו עם זכאי",
+         'first_level': 4,
+         'book_classification': '18',
+         'author': 'Shemu’el Levi,',
+         'css_class': '',
+         },
+        False
+    ],
+    [
+        "HTML/Liturgy/Purim Songs/Simhu Bene El Ne_eman/",
+        "Simhu Bene El Ne_eman-{}.html",
+        'he,in',
+        [],
+        [update_bible_re],
+        {'name': r"Simhu Benē El Ne’eman , שירו עם זכאי",
+         'first_level': 4,
+         'book_classification': '18',
+         'author': 'Simḥa ben Shelomo,',
+         'css_class': '',
+         },
+        False
+    ],
+]
 SHABBAT_SONGS = [
     [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshir Ḥadash.html',
@@ -532,7 +665,7 @@ SHABBAT_SONGS = [
          'css_class': 'simple-3-4'},
         False
     ],
-[
+    [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshira El Nora Tehillot.html',
         'he',
         [],
@@ -885,12 +1018,14 @@ POLEMIC = [
         'Sefer Milhamot-{}.html',
         'he,in',
         [],
-        [update_bible_re],
+        [],
         # name, Polemic , , Author
         {'name': r"Sefer Milḥamot Adonai Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
          'book_classification': '60',
-         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים"},
+         'author': "Salmon ben Yeruḥim, סלמון בן ירוחים",
+         'css_class': 'sefer',
+         },
         False
     ],
     [
@@ -926,6 +1061,8 @@ TEST_BOOKS = [
 LIST_OF_BOOKS = (COMMENTS +
                  HALAKHAH +
                  HAVDALA +
+                 PASSOVER_SONGS +
+                 PURIM_SONGS +
                  PRAYERS +
                  SHABBAT_SONGS +
                  SUPPLEMENTAL +
@@ -1009,7 +1146,6 @@ class Command(BaseCommand):
                 # remove v:line class
                 if class_name.find('v:line') >= 0:
                     continue
-
                 css_elements = style.split(";")
 
                 # remove duplicates
@@ -1195,12 +1331,16 @@ class Command(BaseCommand):
                                              COMMENTS,
                                              HALAKHAH,
                                              HAVDALA,
+                                             PASSOVER_SONGS,
+                                             PURIM_SONGS,
                                              PRAYERS,
                                              POLEMIC,
                                              SHABBAT_SONGS,
                                              WEDDING_SONGS,
                                              SUPPLEMENTAL,
                                              POETRY_NON_LITURGICAL)
+        if not books_to_process:
+            return
 
         for path, book, language, pre_processes, _, _, _ in books_to_process:
             for lang in language.split(','):

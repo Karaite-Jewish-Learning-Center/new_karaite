@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import {fade, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -10,10 +10,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import {Typography} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import AutoComplete from '../components/autcomplete/autocomplete'
-
 
 
 export default function PrimarySearchAppBar() {
@@ -45,10 +44,10 @@ export default function PrimarySearchAppBar() {
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
             id={menuId}
             keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
@@ -61,10 +60,10 @@ export default function PrimarySearchAppBar() {
     const renderMobileMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            anchorOrigin={{vertical: 'top', horizontal: 'right'}}
             id={mobileMenuId}
             keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
@@ -86,7 +85,7 @@ export default function PrimarySearchAppBar() {
                     aria-controls="site-language"
                     color="inherit"
                 >
-                    <LanguageIcon /><ArrowDropDownIcon />
+                    <LanguageIcon/><ArrowDropDownIcon/>
                 </IconButton>
                 <p>Site Language</p>
             </MenuItem>
@@ -97,16 +96,21 @@ export default function PrimarySearchAppBar() {
 
         <AppBar position="fixed">
             <Toolbar>
-                <Typography className={classes.name} component="h3" >
-                    <Link className={classes.link} to="/">Karaites</Link>
+                <Typography className={classes.name} component="h3">
+                    <Link className={classes.link} to="/">KJLC</Link>
                 </Typography>
-                <Typography component="h3" >
-                    <Link className={classes.link} to="/texts/" >Texts</Link>
+                <Typography component="h3">
+                    <Link className={classes.link} to="/texts/">Texts</Link>
                 </Typography>
-
+                <Typography component="h3">
+                    <a className={classes.link} href="https://www.karaites.org/support-our-work1.html" target="_blank">Support Our Work</a>
+                </Typography>
+                <Typography component="h3">
+                    <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
+                </Typography>
                 <div className={classes.sectionDesktop}>
-                    <AutoComplete />
-                    <IconButton aria-label="Go to sign up form" color="inherit" >
+                    <AutoComplete/>
+                    <IconButton aria-label="Go to sign up form" color="inherit">
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
                     <IconButton aria-label="Go to Login form" color="inherit">
@@ -119,7 +123,7 @@ export default function PrimarySearchAppBar() {
                         onClick={handleLanguageMenuOpen}
                         color="inherit"
                     >
-                        <LanguageIcon /><ArrowDropDownIcon />
+                        <LanguageIcon/><ArrowDropDownIcon/>
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
@@ -129,7 +133,7 @@ export default function PrimarySearchAppBar() {
                         onClick={handleMobileMenuOpen}
                         color="inherit"
                     >
-                        <MoreIcon />
+                        <MoreIcon/>
                     </IconButton>
                 </div>
             </Toolbar>
@@ -197,7 +201,7 @@ const useStyles = makeStyles((theme) => ({
     sectionMobile: {
         flexGrow: 1,
         justifyContent: 'flex-end',
-         [theme.breakpoints.down('xl')]: {
+        [theme.breakpoints.down('xl')]: {
             display: 'none',
         },
         [theme.breakpoints.down('sm')]: {

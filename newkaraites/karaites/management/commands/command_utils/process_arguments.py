@@ -1,5 +1,5 @@
 from .constants import (FIRST_LEVEL,
-                        BOOK_CLASSIFICATION)
+                        BOOK_CLASSIFICATION_DICT)
 
 
 def process_arguments(options,
@@ -7,6 +7,8 @@ def process_arguments(options,
                       COMMENTS,
                       HALAKHAH,
                       HAVDALA,
+                      PASSOVER_SONGS,
+                      PURIM_SONGS,
                       PRAYERS,
                       POLEMIC,
                       SHABBAT_SONGS,
@@ -18,8 +20,8 @@ def process_arguments(options,
 
     if options['list']:
         print()
-        print('Id La   Level    Classification   Book name')
-        print('-------------------------------------------')
+        print('Id La   Level                          Classification   Book name')
+        print('-----------------------------------------------------------------')
         i = 1
         for _, book, language, _, _, details, _ in LIST_OF_BOOKS:
             level = details.get('first_level', 'None')
@@ -29,10 +31,10 @@ def process_arguments(options,
 
             if level is not None and classification is not None:
                 book_level = FIRST_LEVEL[int(level) - 1][1]
-                book_classification = BOOK_CLASSIFICATION[int(classification) // 10 - 1][1]
-                print(f'{i:02} {lang:9} {book_level:8} {book_classification[0:12]:14} {book_name}')
+                book_classification = BOOK_CLASSIFICATION_DICT[classification]
+                print(f'{i:02} {lang:12} {book_level:25} {book_classification[0:12]:14} {book_name}')
             else:
-                print(f'{i:02} {lang:9} {"Tanakh":8} {"-- ":14} {book_name}')
+                print(f'{i:02} {lang:12} {"Tanakh":25} {"-- ":14} {book_name}')
 
             i += 1
         return []
@@ -46,7 +48,7 @@ def process_arguments(options,
             books_to_process += HALAKHAH
 
         if options['liturgy']:
-            books_to_process += HAVDALA + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
+            books_to_process += HAVDALA + PASSOVER_SONGS + PURIM_SONGS + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
 
         if options['poetry']:
             books_to_process += POETRY_NON_LITURGICAL

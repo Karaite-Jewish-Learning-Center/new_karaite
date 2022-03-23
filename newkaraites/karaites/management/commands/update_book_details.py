@@ -18,6 +18,11 @@ def update_book_details(data, introduction='', language='he'):
                                                                       'book_title_en': book_title_en,
                                                                       'book_title_he': book_title_he,
                                                                       'table_book': data.get('table_book', False),
+                                                                      'columns': data.get('columns', 2),
+                                                                      'columns_order': data.get('columns_order', ''),
+                                                                      'direction': data.get('direction', 'rtl'),
+                                                                      'remove_class': data.get('remove_class', ''),
+                                                                      'remove_tags': data.get('remove_tags', ''),
                                                                       'introduction': str(introduction)
                                                                       }
                                                             )
