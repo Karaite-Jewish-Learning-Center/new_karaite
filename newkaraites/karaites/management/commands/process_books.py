@@ -345,8 +345,8 @@ COMMENTS = [
 ]
 HALAKHAH = [
     [
-        "HTML/Halakhah/Aaron ben Josephs Essay on the Obligation of Prayer/",
-        "Aaron ben Josephs Essay on the Obligation of Prayer-{}.html",
+        'HTML/Halakhah/aaron_ben_josephs_essay_on_the _obligation_of_prayer/',
+        'aaron_ben_Josephs_Essay_on_the_obligation_of_prayer-{}.html',
         'en,in',
         [],
         [],
