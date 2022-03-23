@@ -72,7 +72,7 @@ class Command(BaseCommand):
             update_karaites_array(book_details, 1, 1, table_str)
             html = str(divs[0]).replace('WordSection1', 'liturgy')
             update_book_details(details, introduction=html)
-            update_toc(book_details, 2, details['name'].split(','))
+            update_toc(book_details, 1, details['name'].split(','))
             # update/create bible references
             update_create_bible_refs(book_details)
             i += 1
