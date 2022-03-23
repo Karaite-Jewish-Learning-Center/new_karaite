@@ -263,9 +263,7 @@ class Command(BaseCommand):
                     for p in divs[0].find_all('table', recursive=True):
                         p.attrs = clean_tag_attr(p)
                         p = clean_table_attr(p)
-
                     for p in divs[0].find_all(recursive=False):
-
                         text = p.get_text(strip=False)
                         key, value = self.find_toc_key(text, debug=False)
 
@@ -275,6 +273,7 @@ class Command(BaseCommand):
                             p = p.replace('#', '')
 
                         update_karaites_array_details(book_title_en, '', c, [p, ''])
+
                         if lang in ['en']:
                             update_full_text_search_index_english(book_title_en, c, text)
                         if lang in ['he']:

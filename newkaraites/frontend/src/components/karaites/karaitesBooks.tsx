@@ -175,8 +175,9 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
-        const tableBook = "table-book"
         if (details.table_book) {
+            // const tableBook = details.book_title_en.substr(0,10).replaceAll(' ','-')
+            const tableBook='table-book'
             return (<TableVirtuoso
                 className={`${tableBook}  ${(flags[BOOK] ? classes.Show : classes.Hide)}`}
                 data={paragraphs}
