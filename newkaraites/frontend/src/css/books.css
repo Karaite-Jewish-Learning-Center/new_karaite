@@ -952,30 +952,38 @@
 .he-sefer-table-000 {
     width: 600px;
 }
-
-.he-sefer-table-000 p {
-    margin: 0px;
+.he-sefer-table-000 tr td p {
+    margin: 0;
 }
-
-.he-sefer-table-000 tr td {
-    margin-left: -10px;
+.he-sefer-table-000 tr:nth-child(5n+2) td:nth-child(2) p {
+    color:red;
 }
-
-.he-sefer-table-000 tr:nth-child(5n) td:nth-child(1) {
-    /*color: red;*/
+.he-sefer-table-000 tr:nth-child(5n+2) td:nth-child(1) {
+    color:red;
 }
+/*.he-sefer-table-000 p {*/
+/*    margin: 0px;*/
+/*}*/
 
-.he-sefer-table-000 tr:nth-child(5n) td:nth-child(1) {
-    color: red;
-    width: 20px;
-    background-color: #3198dd;
-}
+/*.he-sefer-table-000 tr td {*/
+/*    margin-left: -10px;*/
+/*}*/
 
-.he-sefer-table-000 tr:nth-child(5n) td:nth-child(2) {
-    background-color: #3FC380;
-    margin-left: 10px;
+/*.he-sefer-table-000 tr:nth-child(5n) td:nth-child(1) {*/
+/*    !*color: red;*!*/
+/*}*/
 
-}
+/*.he-sefer-table-000 tr:nth-child(5n) td:nth-child(1) {*/
+/*    color: red;*/
+/*    width: 20px;*/
+/*    background-color: #3198dd;*/
+/*}*/
+
+/*.he-sefer-table-000 tr:nth-child(5n) td:nth-child(2) {*/
+/*    background-color: #3FC380;*/
+/*    margin-left: 10px;*/
+
+/*}*/
 
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
 .aaron-table-000 {
@@ -1076,22 +1084,20 @@
 }
 
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
-.en-aaron-table-000 {
+.en-aaron_ben_-table-000 {
     margin-top: 70px;
     width: 700px;
     direction: ltr;
 }
 
-.en-aaron-table-000 tr:nth-child(odd) td:nth-child(odd) {
-    /*background-color: #00ff95;*/
+.en-aaron_ben_-table-000 tr:nth-child(odd) td:nth-child(odd) {
     margin-top: 0;
     direction: rtl;
     text-align: right;
     padding-right: 10px;
 }
 
-.en-aaron-table-000 tr:nth-child(even) td:nth-child(odd) {
-    /*background-color: #ffc000;*/
+.en-aaron_ben_-table-000 tr:nth-child(even) td:nth-child(odd) {
     margin-top: 0;
     text-align: right;
     padding-right: 10px;
@@ -1101,6 +1107,11 @@
 /* Patshegen Ketav Haddat */
 
 /* Karaites books that have english an hebrew side by side */
+.The-Remnan table {
+    background-color: #ffc000;
+    margin:auto;
+    width: 700px;
+}
 
 .table-book table {
     margin: auto;

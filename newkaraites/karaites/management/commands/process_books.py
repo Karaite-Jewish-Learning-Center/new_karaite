@@ -350,7 +350,7 @@ HALAKHAH = [
         'en,in',
         [],
         [],
-        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer, ",
+        {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,הצעה בחיוב התפלה ",
          'first_level': 3,
          'book_classification': '80',
          'author': ',',
@@ -364,7 +364,7 @@ HALAKHAH = [
         'he,in,toc',
         [fix_image_gan],
         [update_bible_re],
-        {'name': r"Gan Eden,",
+        {'name': r"Gan Eden,גן עדן",
          'first_level': 3,
          'book_classification': '80',
          'author': 'Aaron ben Elijah (“Aaron the Younger”) of Nicomedia,',
@@ -744,8 +744,9 @@ SHABBAT_SONGS = [
         False
     ],
     [
-        'HTML/Liturgy/Shabbat Songs/', 'Mitsvat Yesod Shabbat.html',
-        'he',
+        'HTML/Liturgy/Shabbat Songs/',
+        'Mitsvat Yesod Shabbat-{}.html',
+        'he,in',
         [],
         [update_bible_re],
         # name, liturgy , Biblical verses, Author
@@ -1025,6 +1026,12 @@ POLEMIC = [
          'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים",
          'css_class': 'sefer',
+         'remove_class': 'MsoTableGrid',
+         # 'table_book': True,
+         # 'columns': 2,
+         # 'columns_order': '2,1,0',
+         # 'toc_columns': '0,1',
+         # 'direction': 'ltr',
          },
         False
     ],
