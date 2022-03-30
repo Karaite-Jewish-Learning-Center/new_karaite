@@ -1381,7 +1381,7 @@ class Command(BaseCommand):
         for path, book, language, _, post_processes, details, collect in books_to_process:
             # Book,Introduction and Toc are process with same language
             # may be some exceptions
-            book_language = language = language.replace('in', '').replace('toc', '').replace(',', '')
+            book_language = language = language.replace(',in', '').replace(',toc', '')
             for lang in language.split(','):
                 book_name = book.replace('{}', LANGUAGES[lang])
                 sys.stdout.write(f"\nPre-processing book {lang}: {book_name}")
