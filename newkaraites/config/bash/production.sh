@@ -16,7 +16,7 @@ echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
 
-conda activate prod-meadowstone
+conda activate pro
 cd $DJANGODIR
 echo "Virtual environment: `pwd`"
 
