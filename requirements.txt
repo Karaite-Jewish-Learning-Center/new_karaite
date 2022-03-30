@@ -17,3 +17,4 @@ spacy
 elasticsearch~=7.0.0
 regex
 langdetect
+gunicorn==20.0.4
