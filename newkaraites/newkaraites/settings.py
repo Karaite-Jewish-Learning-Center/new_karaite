@@ -135,7 +135,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
     }
 
 # server production environment
-elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
+elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
 
     DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125']
@@ -146,7 +146,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'Karaites-prod',
             'USER': 'doadmin',
-            'PASSWORD': os.environ['PROD'],
+            'PASSWORD': os.environ['PRO'],
             'HOST': 'db-postgresql-nyc3-9557-do-user-8337676-0.b.db.ondigitalocean.com',
             'PORT': '25060',
             'OPTIONS': {'sslmode': 'require'}
