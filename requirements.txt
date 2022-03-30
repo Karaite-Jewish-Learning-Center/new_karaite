@@ -7,7 +7,6 @@ pytest
 django-extensions
 beautifulsoup4~=4.9.3
 lxml
-django-tinymce
 requests~=2.26.0
 python-hebrew-numbers
 html5lib
