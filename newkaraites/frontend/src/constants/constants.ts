@@ -14,15 +14,16 @@ interface stringNumber {
     readonly [index: string]: number
 }
 
-let apiUrl: string = 'http://kjlc.karaites.org/'
+let apiUrl: string = ''
 
-if (process.env.NODE_ENV === 'development') {
-    if( process.env.CONDA_DEFAULT_ENV==='LOCAL'){
-        apiUrl = 'http://localhost:8000/'
-    }
-    else{
-       apiUrl = 'http://dev.localhost:8000/'
-    }
+if (process.env.CONDA_DEFAULT_ENV === 'LOCAL') {
+    apiUrl = 'http://localhost:8000/'
+}
+if (process.env.CONDA_DEFAULT_ENV === 'DEV') {
+    apiUrl = 'http://localhost:8000/'
+}
+if (process.env.CONDA_DEFAULT_ENV === 'PRO') {
+    apiUrl = 'http://localhost:9000/'
 }
 
 // first level  see constants.py
