@@ -551,6 +551,9 @@ class KaraitesBookDetails(models.Model):
 
     remove_tags = models.CharField(max_length=100, default='')
 
+    # book has more than on table
+    multi_tables = models.BooleanField(default=False)
+
     def __str__(self):
         return self.book_title_en
 
@@ -589,6 +592,7 @@ class KaraitesBookDetails(models.Model):
                 'direction': details.direction,
                 'remove_class': details.remove_class,
                 'remove_tags': details.remove_tags,
+                'multi_tables': details.multi_tables
             })
         return data
 
@@ -614,6 +618,7 @@ class KaraitesBookDetails(models.Model):
             'direction': details.direction,
             'remove_class': details.remove_class,
             'remove_tags': details.remove_tags,
+            'multi_tables': details.multi_tables,
         }
 
     def save(self, *args, **kwargs):

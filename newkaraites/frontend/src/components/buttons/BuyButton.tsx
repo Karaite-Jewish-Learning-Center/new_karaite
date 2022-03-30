@@ -1,14 +1,13 @@
 import React, {FC} from "react";
-import MenuBookButton from "@material-ui/icons/MenuBook";
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import IconButton from "@material-ui/core/IconButton";
 import ButtonProps from './types';
 
 
-export const BookButton: FC<ButtonProps> = ({onClick, color}) =>
-    <IconButton aria-label="Close"
+export const BuyButton: FC<ButtonProps> = ({onClick, color}) =>
+    <IconButton aria-label="Buy" style={{color: "red"}}
                 component="span"
                 color={color}
                 onClick={onClick}>
-        <MenuBookButton/>
+        <ShoppingCart/>
     </IconButton>
-

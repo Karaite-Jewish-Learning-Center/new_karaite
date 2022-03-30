@@ -1020,13 +1020,15 @@ POLEMIC = [
         'he,in',
         [],
         [],
-        # name, Polemic , , Author
+        # name, Polemic , Author
+        # if multi_tables is True and css_class is not None then all tables will share css_class
         {'name': r"Sefer Milḥamot Adonai Sefer Milḥamot Hashem, ספר מלחמות ה'",
          'first_level': 5,
          'book_classification': '60',
          'author': "Salmon ben Yeruḥim, סלמון בן ירוחים",
-         'css_class': 'sefer',
+         'css_class': 'sefer-extra',
          'remove_class': 'MsoTableGrid',
+         'multi_tables': True,
          # 'table_book': True,
          # 'columns': 2,
          # 'columns_order': '2,1,0',
@@ -1095,6 +1097,9 @@ class Command(BaseCommand):
         i = 1
         foot_notes = html_tree.find_all('a')
         total_foot_notes = len(foot_notes)
+        # only languages
+
+
         for child in foot_notes:
             sys.stdout.write(f'\rPopulating footnotes {i} of {total_foot_notes}')
             if hasattr(child, 'style'):
@@ -1263,9 +1268,10 @@ class Command(BaseCommand):
         handle_ms_css.close()
 
     @staticmethod
-    def collect_style_map_to_class(html_tree, book, collect, lang):
+    def collect_style_map_to_class(html_tree, book, collect, lang, multi_table, css_class):
         style_classes = {}
         html = ''
+        # book has more than one section
         for section in [1, 2, 3, 4]:
             nodes = html_tree.find('div', class_=f"WordSection{section}", recursive=True)
             if nodes is not None:
@@ -1302,12 +1308,26 @@ class Command(BaseCommand):
                     class_name_by_tag = f'{book_name}-{tag.name}'
                     if class_name_by_tag not in tags:
                         tags[class_name_by_tag] = 0
+                    else:
+                        tags[class_name_by_tag] += 1
 
                     style = style.strip().replace(' ', '').replace('\n', '').replace('\r', '')
-                    if style not in style_classes:
+
+                    # multi_tables must have different class names even if style is the same
+                    # also they share the css_class defined in details.
+                    if tag.name == 'table' and multi_table:
+
+                        if css_class is not None:
+                            class_name = f'{lang}-{class_name_by_tag}-{tags[class_name_by_tag]:03} {css_class}'
+                        else:
+                            class_name = f'{lang}-{class_name_by_tag}-{tags[class_name_by_tag]:03}'
+                        style_classes.update({style: class_name})
+
+                    elif style not in style_classes:
+
                         class_name = f'{lang}-{class_name_by_tag}-{tags[class_name_by_tag]:03}'
                         style_classes.update({style: class_name})
-                        tags[class_name_by_tag] += 1
+
                     else:
                         class_name = style_classes[style]
 
@@ -1320,6 +1340,7 @@ class Command(BaseCommand):
 
             if collect:
                 style_classes_by_book[book] = style_classes
+
         return divs
 
     def handle(self, *args, **options):
@@ -1358,7 +1379,9 @@ class Command(BaseCommand):
 
         i = 1
         for path, book, language, _, post_processes, details, collect in books_to_process:
-
+            # Book,Introduction and Toc are process with same language
+            # may be some exceptions
+            book_language = language = language.replace('in', '').replace('toc', '').replace(',', '')
             for lang in language.split(','):
                 book_name = book.replace('{}', LANGUAGES[lang])
                 sys.stdout.write(f"\nPre-processing book {lang}: {book_name}")
@@ -1370,7 +1393,7 @@ class Command(BaseCommand):
 
                 html_tree = BeautifulSoup(html, 'html5lib')
 
-                html_tree = self.replace_a_foot_notes(html_tree, language)
+                html_tree = self.replace_a_foot_notes(html_tree, book_language)
 
                 sys.stdout.write(f"\nRemoving comments for book {book_name}")
                 html_str = self.replace_from_open_to_close(str(html_tree))
@@ -1378,7 +1401,12 @@ class Command(BaseCommand):
                 sys.stdout.write(f"\nCollecting css for book {book_name}")
                 html_tree = BeautifulSoup(html_str, 'html5lib')
 
-                html_tree = self.collect_style_map_to_class(html_tree, book_name, collect, lang)
+                html_tree = self.collect_style_map_to_class(html_tree,
+                                                            book_name,
+                                                            collect,
+                                                            lang,
+                                                            details.get('multi_tables', False),
+                                                            details.get('css_class', None))
 
                 for process in post_processes:
                     sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")

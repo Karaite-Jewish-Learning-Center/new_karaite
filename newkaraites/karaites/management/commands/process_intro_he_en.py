@@ -212,7 +212,7 @@ class Command(BaseCommand):
 
                 html = get_html(f'{PATH}{book_name}')
 
-                #html = html.replace('MsoTableGrid', '')
+                # html = html.replace('MsoTableGrid', '')
 
                 if details.get('remove_class', False):
                     html = html.replace(details.get('remove_class'), '')
@@ -248,7 +248,7 @@ class Command(BaseCommand):
                                         if key is not None:
                                             update_toc(book_details,
                                                        c,
-                                                        table_of_contents[key])
+                                                       table_of_contents[key])
                                     else:
                                         update_toc(book_details,
                                                    c,

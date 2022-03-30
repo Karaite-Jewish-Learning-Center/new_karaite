@@ -10,6 +10,8 @@ import {CloseButton} from "../buttons/CloseButton";
 import {InfoButton} from "../buttons/InfoButton";
 import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
+import {BuyButton} from '../buttons/BuyButton';
+
 
 interface IProps {
     paneNumber: number,
@@ -40,7 +42,9 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber,type, onClosePane, onIntroCl
     const onBook = () => {
         onBookClick(paneNumber)
     }
-
+    const onBuy = () => {
+        //
+    }
     return (
 
         <Grid container
@@ -50,11 +54,12 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber,type, onClosePane, onIntroCl
               alignItems="center"
               spacing={1}>
 
-            <Grid item xs={5}>
+            <Grid item xs={4}>
                 <CloseButton onClick={onClose}/>
                 <InfoButton onClick={onIntro}/>
                 <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
+                <BuyButton onClick={onBuy}/>
             </Grid>
 
             <Grid item xs={4}>
