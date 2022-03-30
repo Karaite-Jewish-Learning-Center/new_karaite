@@ -115,4 +115,4 @@ $ conda env config vars set CONDA_DEFAULT_ENV="DEV"
 
 ### set to PROD for production server
 
-$ conda env config vars set CONDA_DEFAULT_ENV="PROD"
+$ conda env config vars set CONDA_DEFAULT_ENV="PRO"

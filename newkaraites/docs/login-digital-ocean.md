@@ -6,4 +6,4 @@ $ ssh -i  ~/.ssh/kjlc_develop develop@161.35.130.125
 
 or
 
-$  ssh -i ~/.ssh/ production@161.35.130.125
+$  ssh -i ~/.ssh/kjlc_production production@161.35.130.125

@@ -147,7 +147,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PROD':
             'NAME': 'Karaites-prod',
             'USER': 'doadmin',
             'PASSWORD': os.environ['PROD'],
-            'HOST': '',
+            'HOST': 'db-postgresql-nyc3-9557-do-user-8337676-0.b.db.ondigitalocean.com',
             'PORT': '25060',
             'OPTIONS': {'sslmode': 'require'}
         }

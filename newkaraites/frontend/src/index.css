@@ -104,6 +104,7 @@ a:hover {
     direction: rtl;
     width: auto;
     transform: translate(-50%);
+    z-index: 1000;
 }
 
 [data-tip]:hover::after,

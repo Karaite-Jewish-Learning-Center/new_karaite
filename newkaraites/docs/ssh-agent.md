@@ -10,7 +10,7 @@ run_count=$(ps -ef | grep "ssh-agent" | grep -v "grep" | wc -l)
 if [ $run_count -eq 0 ]; then
     echo Starting SSH Agent
     eval $(ssh-agent -s)
-    ssh-add ~/.ssh/id_rsa
+    ssh-add ~/.ssh/your key
 fi
 ```
 
