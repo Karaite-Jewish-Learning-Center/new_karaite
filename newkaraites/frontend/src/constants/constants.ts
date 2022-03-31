@@ -25,10 +25,7 @@ if (process.env.NODE_ENV === 'development') {
         .then().catch(_ => {
         apiUrl = 'http://localhost:9000/'
     })
-    fetch('https://localhost:8000/api/test/')
-        .then().catch(_ => {
-        apiUrl = 'https://localhost:9000/'
-    })
+
 }
 console.log(apiUrl)
 
