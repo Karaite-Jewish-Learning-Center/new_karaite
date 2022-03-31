@@ -13,7 +13,7 @@ const FirstLevel = () => {
     const classes = booksMenu()
     const store= useContext(storeContext)
     store.resetPanes()
-
+    console.log(getFirstLevelUrl)
     useEffect(() => {
         async function fetchData() {
             const response = await fetch(getFirstLevelUrl)

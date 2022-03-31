@@ -1,3 +1,5 @@
+import {platform} from 'process'
+
 interface versesTable {
     readonly [index: string]: Array<number>
 }
@@ -16,14 +18,17 @@ interface stringNumber {
 
 let apiUrl: string = ''
 
-if (process.env.CONDA_DEFAULT_ENV === 'LOCAL') {
+if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
-}
-if (process.env.CONDA_DEFAULT_ENV === 'DEV') {
-    apiUrl = 'http://localhost:8000/'
-}
-if (process.env.CONDA_DEFAULT_ENV === 'PRO') {
-    apiUrl = 'http://localhost:9000/'
+} else {
+    fetch('http://localhost:8000/api/test/')
+        .then().catch(_ => {
+        apiUrl = 'http://localhost:9000/'
+    })
+    fetch('https://localhost:8000/api/test/')
+        .then().catch(_ => {
+        apiUrl = 'https://localhost:9000/'
+    })
 }
 console.log(apiUrl)
 
