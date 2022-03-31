@@ -21,7 +21,7 @@ let apiUrl: string = ''
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 } else {
-    apiUrl = 'http://kjlc.karaites.org/'
+    apiUrl = 'https://kjlc.karaites.org/'
 }
 
 // first level  see constants.py
