@@ -24,6 +24,7 @@ if (process.env.CONDA_DEFAULT_ENV === 'DEV') {
 }
 if (process.env.CONDA_DEFAULT_ENV === 'PRO') {
     apiUrl = 'http://localhost:9000/'
+    console.log('PRO')
 }
 
 // first level  see constants.py
