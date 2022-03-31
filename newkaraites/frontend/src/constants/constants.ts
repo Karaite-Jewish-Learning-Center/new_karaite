@@ -21,13 +21,8 @@ let apiUrl: string = ''
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 } else {
-    fetch('http://localhost:8000/api/test/')
-        .then().catch(_ => {
-        apiUrl = 'http://localhost:9000/'
-    })
-
+    apiUrl = 'http://localhost:9000/'
 }
-console.log(apiUrl)
 
 // first level  see constants.py
 export const TANAKH: string = '1'
