@@ -59,7 +59,7 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber,type, onClosePane, onIntroCl
                 <InfoButton onClick={onIntro}/>
                 <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
-                <BuyButton onClick={onBuy}/>
+                {/*<BuyButton onClick={onBuy}/>*/}
             </Grid>
 
             <Grid item xs={4}>
