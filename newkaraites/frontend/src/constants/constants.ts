@@ -24,8 +24,8 @@ if (process.env.CONDA_DEFAULT_ENV === 'DEV') {
 }
 if (process.env.CONDA_DEFAULT_ENV === 'PRO') {
     apiUrl = 'http://localhost:9000/'
-    console.log('PRO')
 }
+console.log(apiUrl)
 
 // first level  see constants.py
 export const TANAKH: string = '1'
