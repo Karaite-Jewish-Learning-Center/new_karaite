@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import MyAppBar from "./components/AppBar";
+import MyAppBar from "./components/menu/AppBar";
 import FirstLevel from "./components/menu/FirstLevel"
 import Tanakh from "./components/tanakh/Tanakh"
 import LoadBook from "./components/LoadBook";
@@ -15,12 +15,10 @@ import Display from "./components/pages/Display";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
 import SearchResults from "./components/pages/SearchResults";
-//import MainMenu from "./components/menu/MainMenu";
 import StoreProvider from "./stores/context";
 import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message'
 import Acknowledgment from "./components/pages/Acknowledgments";
-
 
 function App() {
 
@@ -29,7 +27,6 @@ function App() {
 
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
-                    {/*<MainMenu/>*/}
                     <MyAppBar/>
                     <Message/>
                     <Switch>
@@ -53,7 +50,7 @@ function App() {
                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                         <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                        <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
+                         <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
                         <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
                         <Route exact path="/Halakhah/"><Halakhah/></Route>
 
@@ -66,7 +63,8 @@ function App() {
                         <Route exact path="/Polemic/:book/1/" children={<LoadBook type="polemic"/>}/>
                         <Route exact path="/Polemic/"><Polemic/></Route>
 
-                        <Route exact path="/Comments/:book/1/" children={<LoadBook type="comments"/>}/>
+                        <Route exact path="/Comments/:book/:chapter/" children={<LoadBook type="comments"/>}/>
+                        <Route exact path="/Comments/1/" children={<LoadBook type="comments"/>}/>
                         <Route exact path="/Comments/"><Comment/></Route>
 
                         <Route path='*'>

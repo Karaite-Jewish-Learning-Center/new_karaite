@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 21,
+        paddingBottom:100,
     },
     title: {
         color: Colors.tanakh,
@@ -69,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
     ruler: {
         color: Colors.rulerColor,
         width: '100%'
-
     },
     text: {
         textAlign: 'justify',

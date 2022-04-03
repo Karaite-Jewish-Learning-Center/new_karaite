@@ -1,8 +1,10 @@
 import json
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
-                       BookAsArray)
+                       BookAsArray,
+                       FullTextSearch)
 from ...utils import search_level
+from .update_full_text_search_index import update_full_text_search_index_en_he
 
 
 class Command(BaseCommand):
@@ -57,6 +59,10 @@ class Command(BaseCommand):
                                ['Song of Songs', 'שיר השירים'])
                      }
                     ]
+
+        self.stdout.write(f'Deleting Full Text Search index')
+        FullTextSearch.objects.filter(path='Tanakh').delete()
+        Organization.objects.all().delete()
 
         file_name = 'merged.json'
         order = 0
@@ -113,7 +119,13 @@ class Command(BaseCommand):
                                               render_chapter,
                                               ])
                         render_chapter = 0
-
+                        update_full_text_search_index_en_he(title_en,
+                                                            title_he,
+                                                            chapter_number,
+                                                            verse_number,
+                                                            data_en['text'][chapter][verse],
+                                                            data_he['text'][chapter][verse],
+                                                            'Tanakh')
                     # update book as array
                     BookAsArray.objects.get_or_create(
                         book=organization,

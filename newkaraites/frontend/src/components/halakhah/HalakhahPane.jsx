@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import Button from '@material-ui/core/Button'
+//import Button from '@material-ui/core/Button'
 import {referencesUrl} from '../../constants/constants.ts'
 import {makeStyles} from '@material-ui/core/styles'
 import {makeRandomKey} from "../../utils/utils";
@@ -54,11 +54,11 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose}) => {
                                     })}
                                 </>
                             </div>
-                            <Button
-                                className={classes.button}
-                                onClick={() => {
-                                }}
-                            >Open book </Button>
+                            {/*<Button*/}
+                            {/*    className={classes.button}*/}
+                            {/*    onClick={() => {*/}
+                            {/*    }}*/}
+                            {/*>Open book </Button>*/}
                             <hr className={classes.ruler}/>
 
                         </React.Fragment>

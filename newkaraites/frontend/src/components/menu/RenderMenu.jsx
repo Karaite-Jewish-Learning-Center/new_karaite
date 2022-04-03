@@ -7,19 +7,19 @@ import Filler from '../general/Filler.tsx'
 import {makeStyles} from "@material-ui/core/styles"
 import {languageDirection} from "../../utils/languageDirection"
 import Colors from "../../constants/colors";
+import {ToText} from "../general/ToText";
 
-
-const RenderMenu = ({books, path, languages = ['en', 'en'], columns=6}) => {
+const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
     const classes = useStyles()
     const populate = (obj) => {
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={columns} key={index}>
                 <div className={classes.card}>
                     <Link to={`/${path}/${slug(key)}/`}>
-                        <Typography variant="h6" component="h2">{key}</Typography>
+                        <Typography className={classes.text} variant="h6" component="h2">{key}</Typography>
                     </Link>
                     <br/>
-                    <Typography style={{direction: languageDirection(languages[1])}} variant="body2" component="p">{obj[key]}</Typography>
+                    <Typography className={classes.text} style={{direction: languageDirection(languages[1])}} variant="body2" component="p">{obj[key]}</Typography>
                 </div>
                 <hr className={classes.ruler}/>
             </Grid>)
@@ -30,7 +30,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns=6}) => {
             <Grid item xs={12} sm={columns} key={index}>
                 <Grid item className={classes.title}>
                     <Typography className={classes.titleHalakhah} variant="h6" component="h2">{key}</Typography>
-                    <Link className={classes.link} to='/texts/'>To texts</Link>
+                    <ToText/>
                     <hr className={classes.ruler}></hr>
                 </Grid>
                 <Grid container spacing={2}>
@@ -63,14 +63,22 @@ const useStyles = makeStyles((theme) => ({
     },
     ruler: {
         marginTop: 30,
+        marginLeft:20,
+        marginRight:20,
         borderColor: Colors.rulerColor,
     },
     link: {
         marginBottom: 20,
     },
-     titleHalakhah: {
+    titleHalakhah: {
         marginBottom: 20,
+        paddingRight: 10,
+        paddingLeft: 10,
         color: 'gray',
+    },
+    text: {
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     card: {
         width: '100%',

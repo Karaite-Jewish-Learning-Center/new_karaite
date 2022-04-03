@@ -44,7 +44,9 @@ class Command(BaseCommand):
                     parts = ref.bible_ref_en.strip().replace('(', '').replace(')', '').split(' ')
                     book, chapter_verse = " ".join(parts[:-1]), parts[-1]
                     chapter, verse = chapter_verse.split(':')
+                    sys.stdout.write(f"\rProcessing {book} {chapter}:{verse}           ")
                     bible_book = Organization.objects.get(book_title_en=book)
+
                     chapter_text = BookAsArray.objects.get(book=bible_book, chapter=chapter)
                     verse = int(verse) - 1
                     chapter_text.book_text[verse][7] = f'{int(chapter_text.book_text[verse][7]) + 1}'

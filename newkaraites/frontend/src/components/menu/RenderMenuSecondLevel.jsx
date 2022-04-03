@@ -12,7 +12,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import {ToText} from "../general/ToText";
 
 const cleanUrl = (url) => {
     let result = slug(url.trim().split(',')[0])
@@ -53,7 +53,7 @@ export const RenderMenuSecondLevel = ({books, path, languages = ['en', 'en'], co
             <Grid item xs={12} sm={columns} key={1}>
                 <Grid item className={classes.title}>
                     <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
-                    <Link className={classes.link} to='/texts/'>To texts</Link>
+                    <ToText/>
                 </Grid>
                 <Grid container spacing={2}>
                     {populate(books)}

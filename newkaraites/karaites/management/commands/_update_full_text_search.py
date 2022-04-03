@@ -46,4 +46,5 @@ class Command(BaseCommand):
 
                 sys.stdout.write(f"\33[KProcessing verse: {i}\r")
                 i += 1
+
         print()

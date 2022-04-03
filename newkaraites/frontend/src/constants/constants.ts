@@ -1,5 +1,3 @@
-import {platform} from 'process'
-
 interface versesTable {
     readonly [index: string]: Array<number>
 }
@@ -16,7 +14,7 @@ interface stringNumber {
     readonly [index: string]: number
 }
 
-let apiUrl: string = ''
+let apiUrl: string
 
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'

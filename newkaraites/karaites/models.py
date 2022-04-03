@@ -545,7 +545,7 @@ class KaraitesBookDetails(models.Model):
 
     toc_columns = models.CharField(max_length=10, default='')
 
-    direction = models.CharField(max_length=3,default='rtl')
+    direction = models.CharField(max_length=3, default='rtl')
 
     remove_class = models.CharField(max_length=100, default='')
 
@@ -814,6 +814,9 @@ class AutoComplete(models.Model):
 
 
 class FullTextSearch(models.Model):
+    """ Full text search for books """
+    path = models.CharField(max_length=20, default='')
+
     reference_en = models.CharField(max_length=100, default='')
 
     text_en = models.TextField(default='')
