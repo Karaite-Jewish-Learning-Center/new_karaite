@@ -19,7 +19,7 @@ let apiUrl: string
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 } else {
-    apiUrl = 'https://dev.karaites.org/'
+    apiUrl = 'http://localhost:8000/'
 }
 
 // first level  see constants.py
