@@ -159,7 +159,7 @@ admin.site.register(References, ReferencesAdmin)
 
 
 class FullTextSearchAdmin(KAdmin):
-    list_display = ('reference_en', 'text_en', 'reference_he', 'text_he', 'delete')
+    list_display = ('path', 'reference_en', 'text_en', 'reference_he', 'text_he', 'delete')
     search_fields = ('reference_en',)
 
 

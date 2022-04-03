@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction, action, computed, observable} from "mobx"
+import {makeAutoObservable, runInAction, computed, observable} from "mobx"
 import {isABibleBook} from "../utils/utils";
 import {autocompleteUrl} from "../constants/constants";
 
@@ -147,7 +147,11 @@ class AppState {
 
 
     closePane = (i: number): void => {
-        this.panes.splice(i, 1)
+        console.log('Panes length before',this.panes.length)
+        runInAction(() => {
+            this.panes.splice(i, 1)
+        })
+        console.log('Panes length after',this.panes.length)
     }
 
     resetPanes = (): void => {

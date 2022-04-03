@@ -12,7 +12,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
-import AutoComplete from '../components/autcomplete/autocomplete'
+import AutoComplete from '../autcomplete/autocomplete'
 
 
 export default function PrimarySearchAppBar() {
@@ -103,11 +103,12 @@ export default function PrimarySearchAppBar() {
                     <Link className={classes.link} to="/texts/">Texts</Link>
                 </Typography>
                 <Typography component="h3">
-                    <a className={classes.link} href="https://www.karaites.org/support-our-work1.html" target="_blank">Support Our Work</a>
+                    <a className={classes.link} href="https://www.karaites.org/support-our-work1.html" rel="noreferrer" target="_blank">Donate</a>
                 </Typography>
                 <Typography component="h3">
                     <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
                 </Typography>
+
                 <div className={classes.sectionDesktop}>
                     <AutoComplete/>
                     <IconButton aria-label="Go to sign up form" color="inherit">
@@ -224,9 +225,10 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
     },
     link: {
-        marginLeft: 20,
-        marginRight: 20,
+        marginLeft: 10,
+        marginRight: 10,
         marginTop: 2,
         color: 'black',
     },
+
 }));

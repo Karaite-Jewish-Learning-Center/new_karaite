@@ -645,8 +645,9 @@
 
 .he-yahid_be_o-table-000 tr:nth-child(even) {
     /*background-color: #ffc000;*/
-        margin-left: -260px;
+    margin-left: -260px;
 }
+
 .he-yahid_be_o-span-002, .he-yahid_be_o-span-010, .he-yahid_be_o-span-013 {
     color: red;
 }
@@ -680,33 +681,39 @@
 }
 
 .he-yonat_elem-table-000 tr:nth-child(4n+4) {
-    color:red;
+    color: red;
 }
+
 .he-yonat_elem-table-000 tr:nth-child(4n+3) {
     color: red;
 }
+
 /*Adon Yeshu‘ot*/
 .he-adon_yeshu-table-000 {
-  width: 700px;
+    width: 700px;
 }
+
 .he-adon_yeshu-table-000 tr:nth-child(even) td:nth-child(odd) {
     margin-top: 0;
     margin-bottom: 0;
 }
+
 .he-adon_yeshu-table-000 tr:nth-child(even) td:nth-child(odd) p {
     /*background-color: #ffc000;*/
     margin-left: -300px;
     margin-top: 0;
     margin-bottom: 0;
 }
+
 .he-adon_yeshu-table-000 tr:nth-child(odd) td:nth-child(odd) {
     /*background-color: #00ffe1;*/
-     direction: ltr;
+    direction: ltr;
     text-align: left;
     width: 50%;
     padding-left: 10px;
     vertical-align: top;
 }
+
 .he-adon_yeshu-table-000 tr:nth-child(odd) td:nth-child(even) {
     /*background-color: #5979ae;*/
     direction: rtl;
@@ -716,14 +723,17 @@
     vertical-align: top;
 
 }
+
 /* Shiru ‘Am Zakka */
 .he-shiru_am_z-table-000 {
     width: 700px;
 }
+
 .he-shiru_am_z-table-000 tr td {
     width: 50%;
     margin: 0;
 }
+
 .he-shiru_am_z-table-000 tr:nth-child(even) td p {
     /*background-color: #ffc000;*/
     direction: ltr;
@@ -753,8 +763,9 @@
 }
 
 .he-shiru_am_z-table-000 tr:nth-child(4n+4) {
-    color:red;
+    color: red;
 }
+
 .he-shiru_am_z-table-000 tr:nth-child(4n+3) {
     color: red;
 }
@@ -763,10 +774,12 @@
 .he-simhu-table-000 {
     width: 800px;
 }
+
 .he-simhu-table-000 tr td {
     width: 50%;
     margin: 0;
 }
+
 .he-simhu-table-000 tr:nth-child(even) td p {
     /*background-color: #ffc000;*/
     direction: ltr;
@@ -796,8 +809,9 @@
 }
 
 .he-simhu-table-000 tr:nth-child(4n+4) {
-    color:red;
+    color: red;
 }
+
 .he-simhu-table-000 tr:nth-child(4n+3) {
     color: red;
 }
@@ -952,20 +966,23 @@
 .sefer-extra {
     width: 600px;
 }
+
 .sefer-extra tr td p {
     margin: 0;
 }
+
 .sefer-extra tr:nth-child(5n+1) td:nth-child(1) p {
     /*background-color: #ffc000;*/
-    color:red;
+    color: red;
 }
+
 .he-sefer-table-000 tr:nth-child(5n+2) td:nth-child(2) p {
-    color:red;
+    color: red;
 }
 
 .he-sefer-table-001 tr:nth-child(5n+1) td:nth-child(2) p {
     /*background-color: #3198dd;*/
-    color:red;
+    color: red;
 }
 
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
@@ -974,7 +991,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 70px;
-    direction:ltr;
+    direction: ltr;
 }
 
 .aaron-table-000 tr:nth-child(even) td:nth-child(even) {
@@ -1092,7 +1109,7 @@
 /* Karaites books that have english an hebrew side by side */
 .The-Remnan table {
     background-color: #ffc000;
-    margin:auto;
+    margin: auto;
     width: 700px;
 }
 
@@ -1110,13 +1127,9 @@
     /*background-color: #11c4f114;*/
 }
 
-.table-book td:nth-child(even) {
-    max-width: 350px;
-}
-
-.table-book td:nth-child(odd) {
-
-    max-width: 350px;
+/* book title */
+.he-en-remnant-td-002 .he-en-remnant-p-001 {
+    margin-left: -140px;
 }
 
 .table-book td:nth-child(even) p {
@@ -1125,6 +1138,7 @@
     direction: ltr;
     text-align: left;
     margin-left: 15px;
+    width: 350px;
 }
 
 .table-book td:nth-child(odd) p {
@@ -1133,6 +1147,7 @@
     direction: rtl;
     text-align: right;
     margin-right: 15px;
+    width: 350px;
 }
 
 .ft41, .ft42, .ft43, .ft44 {
@@ -1547,6 +1562,7 @@
     color: black;
     font-style: italic;
 }
+
 .he-en-remnant-p-000 {
     text-align: center;
 }

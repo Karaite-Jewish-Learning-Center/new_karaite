@@ -10,19 +10,19 @@ import {CloseButton} from "../buttons/CloseButton";
 import {InfoButton} from "../buttons/InfoButton";
 import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
-import {BuyButton} from '../buttons/BuyButton';
+//import {BuyButton} from '../buttons/BuyButton';
 
 
 interface IProps {
     paneNumber: number,
-    type:string,
+    type: string,
     onClosePane: Function
     onIntroClick: Function,
     onTocClick: Function,
     onBookClick: Function,
 }
 
-const KaraitesPaneHeader: FC<IProps> = ({paneNumber,type, onClosePane, onIntroClick, onTocClick, onBookClick}) => {
+const KaraitesPaneHeader: FC<IProps> = ({paneNumber, type, onClosePane, onIntroClick, onTocClick, onBookClick}) => {
     const store = useContext(storeContext)
     const classes = resources()
 
@@ -33,18 +33,18 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber,type, onClosePane, onIntroCl
         onIntroClick(paneNumber)
     }
     const onToc = () => {
-        if(type== 'liturgy'){
+        if (type === 'liturgy') {
             onClosePane(paneNumber)
-        }else {
+        } else {
             onTocClick(paneNumber)
         }
     }
     const onBook = () => {
         onBookClick(paneNumber)
     }
-    const onBuy = () => {
-        //
-    }
+    // const onBuy = () => {
+    //     //
+    // }
     return (
 
         <Grid container

@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {q640} from "../../constants/constants"
+import Colors from "../../constants/colors";
 
 const Display = () => {
     const classes = useStyles()
@@ -14,8 +15,11 @@ const Display = () => {
         <div className={(matches ? classes.noSpace : classes.fill)}>
             <div className={classes.container}>
                 <div className={classes.center}>
-                    <h1 className={classes.title}>The Karaite Jewish Learning Center</h1>
-                    <h1 className={classes.title}>(A Project of the Karaite Jews of America)</h1>
+                    <div>
+                        <h1 className={classes.title}>The Karaite Jewish Learning Center</h1>
+                        <h1 className={classes.title}>(A Project of the Karaite Jews of America)</h1>
+                        <hr className={classes.ruler}/>
+                    </div>
                     <p className={classes.text}>
 
                         The Karaite Jews of America welcomes you to our new platform: The Karaite Jewish Learning
@@ -24,7 +28,7 @@ const Display = () => {
                         help
                         you interact with these texts and integrate them into your learning.
 
-                        <p>In time, we plan to launch courses through the KJLC. These courses will include a wide range
+                        <p className={classes.text}>In time, we plan to launch courses through the KJLC. These courses will include a wide range
                             of
                             topics under the broad umbrella of Karaitica.</p>
 
@@ -46,7 +50,8 @@ const Display = () => {
                             help
                             unlock your voice and soul.</p>
 
-                        <p>Updates about the KJLC are distributed through the Karaite Jews of America’s weekly
+                        <p className={classes.textJoin}>Updates about the KJLC are distributed through the Karaite Jews
+                            of America’s weekly
                             emails.</p>
                         <p className={classes.join}>
                             <b><a href="https://karaites.us11.list-manage.com/subscribe?u=0de7fd38ac5f9d2e4fe132fcc&id=f8db630877">Please
@@ -63,7 +68,7 @@ const Display = () => {
 const useStyles = makeStyles((theme) => ({
     container: {
         display: "flex",
-        width: '60%',
+        width: '70%',
         height: '100%',
         margin: 'auto',
         marginTop: 100,
@@ -73,22 +78,29 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom:100
+
+    },
+    boxTitle: {
+        marginBottom: 20,
     },
     title: {
         margin: 0,
+        color: Colors.tanakh,
+        textAlign: 'center',
+    },
+     ruler: {
+        color: Colors.rulerColor,
+        width: '100%',
     },
     text: {
         fontSize: 21,
         textAlign: 'justify',
+        margin:0,
     },
     questions: {
         textAlign: 'justify',
-        marginLeft: '10%',
-        marginRight: '10%',
         fontSize: 21,
-        margin: 0,
-        marginBottom: 5,
-        padding: 0,
     },
     join: {
         textAlign: 'center',
@@ -97,11 +109,16 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 21,
         margin: 'auto'
     },
+    textJoin: {
+        textAlign: 'center',
+        fontSize: 21,
+        padding: 15,
+    },
     noSpace: {
         paddingTop: 0,
     },
     fill: {
-        paddingTop: 50,
+        paddingTop: 100,
     }
 }));
 

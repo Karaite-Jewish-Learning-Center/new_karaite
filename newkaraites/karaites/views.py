@@ -304,15 +304,16 @@ class Search(View):
 
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
-        sql = """SELECT id, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
+        sql = """SELECT id, path, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
         sql += f"""FROM karaites_fulltextsearch, to_tsquery('{search}') query """
         sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
 
         items = []
         for result in FullTextSearch.objects.raw(sql):
-            items.append({'ref': result.reference_en, 'text': result.text_en})
+            items.append({'ref': result.reference_en,
+                          'text': result.text_en,
+                          'path': result.path})
 
         print(items)
 
         return JsonResponse({'data': items, 'page': page}, safe=False)
-

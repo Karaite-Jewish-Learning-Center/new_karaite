@@ -11,6 +11,8 @@ import {Typography} from "@material-ui/core"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
 import {Please} from "../messages/Please"
+import {slug} from "../../utils/utils"
+
 
 const SearchResults = () => {
     const store = useContext(storeContext)
@@ -20,12 +22,24 @@ const SearchResults = () => {
     const [page, setPage] = useState(1)
 
     const itemContent = (item, data) => {
-        const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
-
+        if (data['path'] === 'Tanakh') {
+            const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
+            store.resetPanes()
+            return (
+                <div className={classes.card}>
+                    <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
+                        <Typography variant="h6" component="h2">{data['ref']}</Typography>
+                    </Link>
+                    {ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}
+                    <hr/>
+                </div>)
+        }
+        const [refBook, paragraph] = data['ref'].trim().split('#')
+        const url = slug(refBook)
         return (
             <div className={classes.card}>
-                <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
-                    <Typography variant="h6" component="h2">{data['ref']}</Typography>
+                <Link to={`/${data['path']}/${url}/${paragraph}/`}>
+                    <Typography variant="h6" component="h2">{refBook}</Typography>
                 </Link>
                 {ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}
                 <hr/>
@@ -42,7 +56,7 @@ const SearchResults = () => {
         const getSearchResult = async () => {
             if (search === '') return {'data': [], 'page': 1}
             const response = await fetch(searchResultsUrl + `${search}/${page}/`)
-            return  await response.json()
+            return await response.json()
         }
 
         getSearchResult()
@@ -57,7 +71,7 @@ const SearchResults = () => {
                     setMessage(() => `End of search results for "${store.getSearch().replace(' & ', ' ')}"`)
                 }
                 store.setSearchResultData(data['data'])
-                setPage(()=>parseInt(data['page']))
+                setPage(() => parseInt(data['page']))
             })
             .catch(e => store.setMessage(e.message))
 

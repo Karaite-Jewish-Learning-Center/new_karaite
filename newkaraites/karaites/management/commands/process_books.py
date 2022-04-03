@@ -1099,7 +1099,6 @@ class Command(BaseCommand):
         total_foot_notes = len(foot_notes)
         # only languages
 
-
         for child in foot_notes:
             sys.stdout.write(f'\rPopulating footnotes {i} of {total_foot_notes}')
             if hasattr(child, 'style'):

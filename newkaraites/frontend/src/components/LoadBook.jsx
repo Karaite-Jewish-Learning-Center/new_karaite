@@ -7,22 +7,17 @@ import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
 import {capitalize, makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
-import {karaitesBookUrl, TRANSFORM_TYPE} from '../constants/constants'
-import {calculateItemNumber} from '../utils/utils';
-import {chaptersByBibleBook} from '../constants/constants'
-import {bookChapterUrl} from '../constants/constants'
-import {makeBookUrl} from "../utils/utils"
+import {TRANSFORM_TYPE} from '../constants/constants'
 import {storeContext} from "../stores/context";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
+import getBook from "./getBook";
 
-const PARAGRAPHS = 0
-const BOOK_DETAILS = 1
-const BOOK_TOC = 2
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
     const {book, chapter = 1, verse = 1} = useParams()
+
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
     let history = useHistory()
@@ -49,83 +44,6 @@ const LoadBook = ({type}) => {
         }
     }
 
-    async function fetchDataBible(paneNumber) {
-        if (store.getBookData(paneNumber).length === 0) {
-            const book = store.getBook(paneNumber)
-            const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false))
-            if (response.ok) {
-                const data = await response.json()
-                store.setBookData(data.chapter, paneNumber)
-            } else {
-                alert("HTTP-Error: " + response.status)
-            }
-        }
-    }
-
-    async function fetchDataKaraites(paneNumber) {
-        if (store.getParagraphs(paneNumber).length === 0) {
-            const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${999999}/${0}/`)
-            if (response.ok) {
-                const data = await response.json()
-                const details = data[BOOK_DETAILS]
-                store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
-                store.setBookDetails(details, paneNumber)
-
-            } else {
-                alert("HTTP-Error: " + response.status)
-            }
-        }
-
-    }
-
-
-    const getBook = async (book, chapter, verse, highlight, type) => {
-        type = type.toLowerCase()
-        let isOpen = store.isPaneOpen(book, chapter, verse)
-        if (!isOpen) {
-            if (type === "bible") {
-                store.setPanes({
-                    book: book,
-                    chapter: parseInt(chapter) - 1,
-                    verse: verse,
-                    bookData: [],
-                    highlight: [],
-                    type: type,
-                    verseData: [],
-                    commentTab: 0,
-                    comments: [],
-                    commentsChapter: 0,
-                    commentsVerse: 0,
-                    isRightPaneOpen: false,
-                    references: [],
-                    distance: 0,
-                    currentItem: calculateItemNumber(book, chapter, verse),
-                    rightPaneState: [],
-                    rightPaneStateHalakhah: 1,
-                    languages: ['en_he', 'he', 'en'],
-                })
-
-                await fetchDataBible(store.panes.length - 1)
-            }
-
-            if (type === "karaites" || type === "liturgy" || type === "polemic" || type === 'poetry' || type === 'comments') {
-                store.setPanes({
-                    book: book,
-                    chapter: parseInt(chapter) - 1,
-                    verse: verse,
-                    paragraphs: [],
-                    book_details: [],
-                    TOC: [],
-                    highlight: [],
-                    type: type,
-                    currentItem: chapter,
-                    languages: ['he', 'en'],
-                })
-                await fetchDataKaraites(store.panes.length - 1)
-            }
-        }
-    }
-
 
     const refClick = (item, kind = TRANSFORM_TYPE, paneNumber, e) => {
         if (item !== undefined) {
@@ -138,7 +56,7 @@ const LoadBook = ({type}) => {
             if (isOpen) {
                 store.setMessage(`${book} ${chapter}:${verse} already open.`)
             } else {
-                getBook(refBook, refChapter, refVerse, refHighlight, kind).then().catch()
+                getBook(refBook, refChapter, refVerse, refHighlight, kind, store).then().catch()
             }
         } catch (e) {
             store.setMessage(translateMessage(e))
@@ -164,7 +82,6 @@ const LoadBook = ({type}) => {
 
         for (let i = 0; i < panes.length; i++) {
             if (panes[i].type.toLowerCase() === 'bible') {
-
                 jsx.push((
                     <React.Fragment key={makeRandomKey()}>
                         <Grid item xs={true} className={classes.item}>
@@ -186,7 +103,6 @@ const LoadBook = ({type}) => {
                             type={type}
                             onClosePane={onClosePane}/>
                     </Grid>
-
                 ))
             }
             if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic' || panes[i].type.toLowerCase() === 'poetry' || panes[i].type.toLowerCase() === 'comments') {
@@ -201,15 +117,13 @@ const LoadBook = ({type}) => {
                             onClosePane={onClosePane}
                         />
                     </Grid>
-
                 ))
             }
         }
         return jsx
     }
 
-
-    getBook(book, chapter, verse, [], type).then().catch()
+    getBook(book, chapter, verse, [], type, store).then().catch()
 
     const books = bookRender()
     if (books.length === 0) {

@@ -29,6 +29,7 @@ from .command_utils.process_arguments import process_arguments
 from .update_full_text_search_index import (update_full_text_search_index_en_he,
                                             update_full_text_search_index_english,
                                             update_full_text_search_index_hebrew)
+from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 
 LIST_OF_BOOKS = (COMMENTS +
                  POLEMIC +
@@ -68,6 +69,13 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         arguments(parser)
+
+    @staticmethod
+    def expand_book_classification(details):
+        classification = details.get('book_classification', '')
+        if classification != '':
+            return BOOK_CLASSIFICATION_DICT[classification]
+        return ''
 
     @staticmethod
     def get_key(text):
@@ -162,6 +170,7 @@ class Command(BaseCommand):
                 intro = intro.replace('MsoTableGrid ', '')
                 intro += '</div>'
                 update_book_details(details, introduction=intro)
+                # todo: update full text index
 
             if 'toc' in language:
                 language = language.replace('toc', '')
@@ -234,9 +243,18 @@ class Command(BaseCommand):
 
                         text_he = tds[columns_order[0]].get_text(strip=False)
                         text_en = tds[columns_order[1]].get_text(strip=False)
-                        update_karaites_array_details(book_details, '', c,
+                        update_karaites_array_details(book_details,
+                                                      '',
+                                                      c,
                                                       [str(tds[columns_order[0]]), 0, str(tds[columns_order[1]])])
-                        update_full_text_search_index_en_he(book_title_en, book_title_he, c, text_en, text_he)
+
+                        update_full_text_search_index_en_he(book_title_en,
+                                                            book_title_he,
+                                                            c,
+                                                            '',
+                                                            text_en,
+                                                            text_he,
+                                                            self.expand_book_classification(details))
 
                         if len(tds) == 3:
 
@@ -275,9 +293,11 @@ class Command(BaseCommand):
                         update_karaites_array_details(book_title_en, '', c, [p, ''])
 
                         if lang in ['en']:
-                            update_full_text_search_index_english(book_title_en, c, text)
+                            update_full_text_search_index_english(book_title_en, c, text,
+                                                                  self.expand_book_classification(details))
                         if lang in ['he']:
-                            update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text)
+                            update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
+                                                                 self.expand_book_classification(details))
 
                         if key is not None:
                             try:

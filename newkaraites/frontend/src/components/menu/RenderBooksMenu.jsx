@@ -57,8 +57,8 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
         return (<Grid item xs={12} sm={columns} key={1}>
             <Grid item className={classes.title}>
                 <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
-                <ToText/>
             </Grid>
+            <ToText/>
             <Grid container spacing={2}>
                 {populate(books)}
             </Grid>
@@ -80,30 +80,43 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        width: 'auto', height: '100%', fontSize: 18, fontFamily: 'SBL Hebrew',
+        width: 'auto',
+        height: '100%',
+        fontSize: 18,
+        fontFamily: 'SBL Hebrew',
     }, title: {
-        marginTop: 10, marginBottom: 10,
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 10,
     }, bookTitle: {
-        marginLeft: 30, fontSize: 18,
+        marginLeft: 30,
+        fontSize: 18,
     }, ruler: {
-        marginTop: 30, borderColor: Colors.rulerColor,
+        marginTop: 30,
+        borderColor: Colors.rulerColor,
     }, hr: {
-        marginTop: 30, marginBottom: 30,
+        marginTop: 30,
+        marginBottom: 30,
+        marginLeft: 20,
+        marginRight: 20,
     }, bodyText: {
         fontSize: '14pt',
     }, subtitle: {
-        marginBottom: 20, color: 'gray',
+        marginBottom: 20,
+        color: 'gray',
     }, bookTitleEn: {
         textAlign: 'left',
     }, bookTitleHe: {
         textAlign: 'right',
     },
     left: {
-      float: 'left',
-        margin:5,
+        float: 'left',
+        paddingLeft: 20,
+        margin: 5,
     },
     right: {
-      float: 'right',
-        margin:5,
+        float: 'right',
+        paddingRight: 20,
+        margin: 5,
     }
 }));

@@ -94,7 +94,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemTable = (item: number, data: Array<any>) => {
-        if (details.columns == 2) {
+        if (details.columns === 2) {
             return (
                 <tr>
 
