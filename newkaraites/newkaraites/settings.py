@@ -118,7 +118,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org']
+    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost', '127.0.0.1']
     THUMBNAIL_DEBUG = DEBUG
 
     DATABASES = {

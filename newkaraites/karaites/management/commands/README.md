@@ -21,7 +21,9 @@ Process all books
 Comments (Aaron ben Elijah)
 
 >> ./manage.py comments
-
+> 
+>> ./manage.py process_intro_he_en
+> 
 Karaite Books (Yeriot Shelomo volume 1 and 2 )
 
 >> ./manage.py karaites_book_as_array
@@ -37,9 +39,6 @@ Liturgy books
 
 [//]: # ()
 [//]: # (>> ./manage.py process_intro_en_he_table)
-
-
->> ./manage.py process_intro_en_he
 
 Update references (updates bible references)
 
