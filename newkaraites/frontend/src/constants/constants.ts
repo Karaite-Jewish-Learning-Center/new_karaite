@@ -19,10 +19,10 @@ let apiUrl: string
 if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://localhost:8000/'
 } else {
-    apiUrl = 'http://dev.karaites.org/'
+    apiUrl = 'https://kjlc.karaites.org/'
 }
 
-// first level  see constants.py
+// first level  see constants.pys
 export const TANAKH: string = '1'
 export const HALAKHAH: string = '3'
 export const LITURGY: string = '4'
