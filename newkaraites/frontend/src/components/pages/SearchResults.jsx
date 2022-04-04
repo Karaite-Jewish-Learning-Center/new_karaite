@@ -22,9 +22,9 @@ const SearchResults = () => {
     const [page, setPage] = useState(1)
 
     const itemContent = (item, data) => {
+        store.resetPanes()
         if (data['path'] === 'Tanakh') {
             const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
-            store.resetPanes()
             return (
                 <div className={classes.card}>
                     <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>

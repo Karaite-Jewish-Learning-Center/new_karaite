@@ -35,10 +35,10 @@ export const TRANSFORM_TYPE: string = 'Bible'
 
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
-export const bookListUrl: string = apiUrl + 'api/books-list/'
-export const bookTextUrl: string = apiUrl + 'api/get-book/'
+//export const bookListUrl: string = apiUrl + 'api/books-list/'
+//export const bookTextUrl: string = apiUrl + 'api/get-book/'
 export const bookChapterUrl: string = apiUrl + 'api/get-book-chapter/'
-export const bookFromRef: string = apiUrl + 'api/get-book-from-ref/'
+//export const bookFromRef: string = apiUrl + 'api/get-book-from-ref/'
 export const getCommentsUrl: string = apiUrl + 'api/get-comments/'
 export const getFirstLevelUrl: string = apiUrl + 'api/get-first-level/'
 export const karaitesBookUrl: string = apiUrl + 'api/get-karaites-book-chapter/'
