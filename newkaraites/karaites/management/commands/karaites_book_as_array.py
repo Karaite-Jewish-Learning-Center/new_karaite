@@ -44,17 +44,17 @@ class Command(BaseCommand):
         """ Karaites books as array """
         for volume in [1, 2]:
             try:
-                book_details = KaraitesBookDetails.objects.get(book_title_en=self.book_title(volume))
+                book_details = KaraitesBookDetails.objects.get(book_title_en=self.book_title(volume)[0])
                 KaraitesBookAsArray.objects.filter(book=book_details).delete()
             except KaraitesBookDetails.DoesNotExist:
-                pass
-
+                sys.stdout.write(f'\r{self.book_title(volume)[0]} does not exist')
+                sys.exit(1)
             sys.stdout.write(f'\rDeleting Karaites books as array for volume {volume}')
 
         for volume in [1, 2]:
             paragraph_number = 1
             sys.stdout.write(f'\rProcessing volume: {volume}')
-            book_title_en, book_title_he  = self.book_title(volume)
+            book_title_en, book_title_he = self.book_title(volume)
             author, _ = Author.objects.get_or_create(name='Shelomo Afeida HaKohen')
             author.save()
 
