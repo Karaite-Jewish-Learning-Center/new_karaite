@@ -381,24 +381,32 @@ HALAKHAH = [
     #     {},
     #     True
     # ],
-    # [
-    #     'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
-    #     'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
-    #     'he',
-    #     [],
-    #     [update_bible_re],
-    #     {},
-    #     True
-    # ],
-    # [
-    #     'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
-    #     'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
-    #     'he',
-    #     [],
-    #     [update_bible_re],
-    #     {},
-    #     False
-    # ],
+    [
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
+        'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',
+        'he',
+        [],
+        [update_bible_re],
+        {'name': r"Yeriot Shelomo Volume 1, יריעות שלמה",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Yeriot Shelomo‘,',
+         'css_class': ''},
+        True
+    ],
+    [
+        'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
+        'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 2.html',
+        'he',
+        [],
+        [update_bible_re],
+        {'name': r"Yeriot Shelomo Volume 2, יריעות שלמה",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Yeriot Shelomo‘,',
+         'css_class': ''},
+        False
+    ],
     [
         'HTML/Halakhah/Adderet_Eliyahu_R_Elijah_Bashyatchi/',
         'Adderet Eliyahu-{}.html',

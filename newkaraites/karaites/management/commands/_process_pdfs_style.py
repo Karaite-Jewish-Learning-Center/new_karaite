@@ -6,7 +6,7 @@ from .command_utils.read_write_data import (read_data,
                                             write_data)
 from .constants import (SOURCE_PATH,
                         OUT_PATH)
-from .list_pdf_books import PDF_BOOKS
+from ._list_pdf_books import PDF_BOOKS
 
 
 class Command(BaseCommand):

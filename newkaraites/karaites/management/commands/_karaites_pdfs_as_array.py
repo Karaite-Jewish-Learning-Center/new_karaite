@@ -10,7 +10,7 @@ from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .command_utils.read_write_data import read_data
 from .constants import SOURCE_PATH
-from .list_pdf_books import PDF_BOOKS
+from ._list_pdf_books import PDF_BOOKS
 
 
 class Command(BaseCommand):
