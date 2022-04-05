@@ -24,11 +24,7 @@ Comments (Aaron ben Elijah)
  
 >> ./manage.py process_intro_he_en
  
-Karaite Books (Yeriot Shelomo volume 1 and 2 )
-
->> ./manage.py karaites_book_as_array
-
-Liturgy books
+sLiturgy books
 
 >> ./manage.py karaites_liturgy_as_array
 
