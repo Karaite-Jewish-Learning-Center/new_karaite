@@ -4,7 +4,7 @@ from hebrew_numbers import int_to_gematria
 
 def update_full_text_search_index_english(book_name, paragraph, text, path):
     """
-        Update the full text search index.
+        Update the full text search index.ok
     """
     marker = "#" if path != 'Tanakh' else " "
     FullTextSearch.objects.get_or_create(

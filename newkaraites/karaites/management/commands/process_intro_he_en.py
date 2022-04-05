@@ -8,13 +8,9 @@ from .process_books import (COMMENTS,
                             POLEMIC,
                             POETRY_NON_LITURGICAL,
                             HALAKHAH,
-                            HAVDALA,
                             PASSOVER_SONGS,
                             PRAYERS,
                             PURIM_SONGS,
-                            SHABBAT_SONGS,
-                            SUPPLEMENTAL,
-                            WEDDING_SONGS,
                             LANGUAGES)
 from .constants import PATH
 from ...models import (KaraitesBookDetails,
@@ -277,6 +273,7 @@ class Command(BaseCommand):
                         c += 1
                         sys.stdout.write(f'\r processing paragraph: {c}\r')
                 else:
+
                     divs = html_tree.find_all('div', class_='WordSection1')
                     for p in divs[0].find_all('table', recursive=True):
                         p.attrs = clean_tag_attr(p)

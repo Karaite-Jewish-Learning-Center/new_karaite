@@ -11,3 +11,4 @@ newkaraites/karaites/management/book_dumps/
 newkaraites/karaites/management/tmp/
 newkaraites/static-django/
 newkaraites/frontend/cypress
+node_modules/

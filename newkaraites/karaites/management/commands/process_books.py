@@ -372,15 +372,6 @@ HALAKHAH = [
          'direction': 'rtl'},
         True
     ],
-    # [
-    #     'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
-    #     'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
-    #     'en,he',
-    #     [],
-    #     [update_bible_references_en, removing_no_breaking_spaces, fix_chapter_verse],
-    #     {},
-    #     True
-    # ],
     [
         'HTML/Halakhah/Shelomo_Afeida_HaKohen_Yeriot_Shelomo/',
         'Shelomo Afeida HaKohen_Yeriot Shelomo_Volume 1.html',

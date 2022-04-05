@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 
 from .constants import PATH
 from .process_books import POLEMIC
-from .update_toc import update_toc
+from newkaraites.karaites.management.commands.update_toc import update_toc
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array
 from .command_utils.utils import get_html

@@ -105,7 +105,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'Karaites',
+            'NAME': 'karaites-test',
             'USER': 'postgres',
             'PASSWORD': '',
             'HOST': 'localhost',
@@ -124,7 +124,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'Karaites-dev',
+            'NAME': 'dev-test',
             'USER': 'doadmin',
             'PASSWORD': os.environ['DEV'],
             'HOST': 'db-postgresql-nyc3-9557-do-user-8337676-0.b.db.ondigitalocean.com',
