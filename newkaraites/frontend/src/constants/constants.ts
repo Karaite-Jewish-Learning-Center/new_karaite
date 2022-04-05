@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
     apiUrl = 'http://dev.karaites.org/'
 }
 
-// first level  see constants.pys
+// first level  see constants.py
 export const TANAKH: string = '1'
 export const HALAKHAH: string = '3'
 export const LITURGY: string = '4'
