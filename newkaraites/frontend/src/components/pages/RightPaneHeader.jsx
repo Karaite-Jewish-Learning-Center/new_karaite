@@ -4,7 +4,7 @@ import Colors from '../../constants/colors'
 import { Grid } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import HighlightOffIcon from '@material-ui/icons/HighlightOff'
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const Header = ({ backButton, onClose }) => {
@@ -18,7 +18,17 @@ const Header = ({ backButton, onClose }) => {
             className={classes.header}>
 
             <Grid item xs={10}>
-                {(backButton !== undefined ?
+                <IconButton
+                    aria-label="Close pane"
+                    component="span"
+                    onClick={onClose}
+                >
+                    <CloseIcon className={classes.iconGrid} />
+                </IconButton>
+            </Grid>
+
+            <Grid item className={classes.icon}>
+                 {(backButton !== undefined ?
                     <IconButton
                         aria-label="Back"
                         component="span"
@@ -27,16 +37,7 @@ const Header = ({ backButton, onClose }) => {
                         <ChevronLeftIcon className={classes.iconGrid} />
                     </IconButton>
                     : null)}
-            </Grid>
 
-            <Grid item className={classes.icon}>
-                <IconButton
-                    aria-label="Close pane"
-                    component="span"
-                    onClick={onClose}
-                >
-                    <HighlightOffIcon className={classes.iconGrid} />
-                </IconButton>
             </Grid>
         </Grid>
     )

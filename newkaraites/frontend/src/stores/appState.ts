@@ -145,6 +145,8 @@ class AppState {
     isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
         this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
+    isBookOpen = (book: string): boolean =>
+        this.getPanes().some((pane) => pane.book === book)
 
     closePane = (i: number): void => {
         console.log('Panes length before',this.panes.length)

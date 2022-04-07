@@ -24,26 +24,14 @@ Comments (Aaron ben Elijah)
  
 >> ./manage.py process_intro_he_en
  
-sLiturgy books
+Liturgy books
 
 >> ./manage.py karaites_liturgy_as_array
-
-[//]: # (Polemic books)
-
-[//]: # ()
-[//]: # (>> ./manage.py karaites_sefer_as_array)
-
-[//]: # ()
-[//]: # (>> ./manage.py process_intro_en_he_table)
 
 Update references (updates bible references)
 
 >> ./manage.py update_references
  
-[//]: # (Update search)
-
-[//]: # ()
-[//]: # (>> ./manage.py update_full_text_search)
 
 
 [//]: # (Update autocomplete)

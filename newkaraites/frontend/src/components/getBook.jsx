@@ -61,9 +61,7 @@ const getBook = async (book, chapter, verse, highlight, type, store) => {
             })
 
             await fetchDataBible(store.panes.length - 1, store)
-        }
-
-        if (type === "karaites" || type === "liturgy" || type === "polemic" || type === 'poetry' || type === 'comments') {
+        }else{
             store.setPanes({
                 book: book,
                 chapter: parseInt(chapter) - 1,

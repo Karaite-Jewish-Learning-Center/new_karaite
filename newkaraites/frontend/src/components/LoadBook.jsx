@@ -63,12 +63,27 @@ const LoadBook = ({type}) => {
         }
     }
 
-    const RenderRightPane = ({isOpen, paneNumber}) => {
+    const openBook = ( paneNumber, refBook, refChapter,refVerse, refHighlight) => {
+        debugger
+        try {
+            // let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
+            // if (isOpen) {
+            //     store.setMessage(`${book} ${chapter}:${verse} already open.`)
+            // } else {
+                getBook(refBook, refChapter, refVerse, refHighlight, '', store).then().catch()
+            // }
+        } catch (e) {
+            store.setMessage(translateMessage(e))
+        }
+    }
+
+    const RenderRightPane = ({isOpen, paneNumber, openBook}) => {
         return (
             <Grid item xs={true} className={(isOpen ? classes.rightPane : classes.hiddenRightPane)}>
                 <RightPane
                     paneNumber={paneNumber}
                     refClick={refClick}
+                    openBook={openBook}
                 />
             </Grid>
         )
@@ -87,12 +102,11 @@ const LoadBook = ({type}) => {
                         <Grid item xs={true} className={classes.item}>
                             <RenderText paneNumber={i} onClosePane={onClosePane}/>
                         </Grid>
-                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i}/>
+                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} openBook={openBook}/>
                     </React.Fragment>
                 ))
 
-            }
-            if (panes[i].type.toLowerCase() === 'karaites') {
+            }else {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                         <KaraitesBooks
@@ -105,24 +119,9 @@ const LoadBook = ({type}) => {
                     </Grid>
                 ))
             }
-            if (panes[i].type.toLowerCase() === 'liturgy' || panes[i].type.toLowerCase() === 'polemic' || panes[i].type.toLowerCase() === 'poetry' || panes[i].type.toLowerCase() === 'comments') {
-                jsx.push((
-                    <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks
-                            paneNumber={i}
-                            refClick={refClick}
-                            paragraphs={store.getParagraphs(i)}
-                            details={store.getBookDetails(i)}
-                            type={type}
-                            onClosePane={onClosePane}
-                        />
-                    </Grid>
-                ))
-            }
         }
         return jsx
     }
-
     getBook(book, chapter, verse, [], type, store).then().catch()
 
     const books = bookRender()

@@ -12,6 +12,7 @@ import {ToText} from "../general/ToText";
 const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
     const classes = useStyles()
     const populate = (obj) => {
+        // links to books
         return Object.keys(obj).map((key, index) =>
             <Grid item xs={columns} key={index}>
                 <div className={classes.card}>
@@ -26,6 +27,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
     }
 
     const MakeMenu = () => {
+        // main text menu Torah...
         return Object.keys(books).map((key, index) =>
             <Grid item xs={12} sm={columns} key={index}>
                 <Grid item className={classes.title}>
@@ -38,6 +40,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
                 </Grid>
             </Grid>)
     }
+
     return (
         <div className={classes.container}>
             <Grid container
