@@ -29,6 +29,7 @@ const AutoComplete = () => {
 
             // show chapters menu
             if (refChapter === null && refVerse === null && refBook !== null) {
+                store.resetPanes()
                 history.push(`/Tanakh/${refBook}/`)
                 return
             }
@@ -39,6 +40,7 @@ const AutoComplete = () => {
                 return
             }
             // open book
+            store.resetPanes()
             history.push(`/Tanakh/${refBook}/${refChapter}/${refVerse}/`)
             return
         }

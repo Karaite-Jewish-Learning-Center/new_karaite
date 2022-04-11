@@ -22,7 +22,7 @@ const items = ['Commentary', 'Halakhah']
 const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 
-const RightPane = ({paneNumber, refClick}) => {
+const RightPane = ({paneNumber, refClick, openBook}) => {
     const store = useContext(storeContext)
 
     const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
@@ -85,7 +85,7 @@ const RightPane = ({paneNumber, refClick}) => {
                     paneNumber={paneNumber}
                     backButton={backButton}
                     onClose={onClose}
-
+                    openBook={openBook}
                 />)
             }
             default: {

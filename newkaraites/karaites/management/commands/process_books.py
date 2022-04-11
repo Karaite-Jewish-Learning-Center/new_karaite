@@ -147,37 +147,42 @@ LANGUAGES = {'en': "English",
              "in": "Introduction", 'toc': "TOC"}
 
 
-def fix_image_gan(path, book_name):
-    # specific for Gan Eden
-    html_tree = BeautifulSoup(read_data(path, f'{book_name}', SOURCE_PATH), 'html5lib')
-    old_path = "Gan%20Eden%20Hebrew%20Text.fld/image001.jpg"
-    new_path = f"/static-django/images/Gan Eden/image001.jpg"
-
+def replace_path(html_tree, old_path, new_path):
     for child in html_tree.find_all('img'):
         image_path = child.attrs.get('src', None)
         if image_path is not None:
             child.attrs['src'] = image_path.replace(old_path, new_path)
-            child.attrs['src'] = child.attrs['src'].replace('/', '\\')
+            # child.attrs['src'] = child.attrs['src'].replace('/', '\\')
+    return html_tree
+
+
+def fix_image_pats(path, book_name):
+    # specific to
+    html_tree = BeautifulSoup(read_data(path, f'{book_name}', SOURCE_PATH), 'html5lib')
+    old_path = "Patshegen%20Ketav%20Haddat%20Images.fld/"
+    new_path = "/static-django/images/Patshegen%20Ketav%20Hadat/"
+    html_tree = replace_path(html_tree, old_path, new_path)
+    write_data(path, f'{book_name}', str(html_tree), SOURCE_PATH)
+
+
+def fix_image_gan(path, book_name):
+    # specific for Gan Eden
+    html_tree = BeautifulSoup(read_data(path, f'{book_name}', SOURCE_PATH), 'html5lib')
+    old_path = "Gan%20Eden%20Hebrew%20Text.fld/image001.jpg"
+    new_path = "/static-django/images/Gan Eden/image001.jpg"
+    html_tree = replace_path(html_tree, old_path, new_path)
     write_data(path, f'{book_name}', str(html_tree), SOURCE_PATH)
 
 
 def fix_image_source(path, book_name):
     # this is specific to Halakha Adderet
-    old_path = 'Adderet%20Eliyahu%20Critical%20Edition.fld/'
-
+    # old_path = 'Adderet%20Eliyahu%20Critical%20Edition.fld/'
+    # replace for the above if book changes
+    old_path = '/static-django/images/Adderet_Eliyahu_R_Elijah_Bashyatchi/'
     book_name = book_name.replace('.html', '')
-
     html_tree = BeautifulSoup(read_data(path, f'{book_name}.html', SOURCE_PATH), 'html5lib')
-
-    new_path = '/static-django/images/Adderet_Eliyahu_R_Elijah_Bashyatchi/'
-
-    for child in html_tree.find_all('img'):
-        image_path = child.attrs.get('src', None)
-        if image_path is not None:
-            child.attrs.pop('height', None)
-            child.attrs.pop('width', None)
-            child.attrs['src'] = image_path.replace(old_path, new_path)
-
+    new_path = '/static-django/images/adderet_eliyahu_r_elijah_bashyatchi/'
+    html_tree = replace_path(html_tree, old_path, new_path)
     write_data(path, f'{book_name}.html', str(html_tree), SOURCE_PATH)
 
 
@@ -434,7 +439,7 @@ HALAKHAH = [
         'HTML/Halakhah/Patshegen Ketav Haddat/',
         'Patshegen Ketav Haddat-{}.html',
         'he,in,toc',
-        [],
+        [fix_image_pats],
         [update_bible_re],
         {'name': r"Patshegen Ketav Haddat, פתשגן כתב הדת",
          'first_level': 3,

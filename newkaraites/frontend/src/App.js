@@ -50,7 +50,7 @@ function App() {
                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                         <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                         <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
+                        <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
                         <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
                         <Route exact path="/Halakhah/"><Halakhah/></Route>
 

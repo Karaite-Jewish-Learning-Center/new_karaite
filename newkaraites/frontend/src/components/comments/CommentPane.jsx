@@ -65,10 +65,11 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         position: 'fixed',
         maxWidth: '400px !important',
+        height:1000,
 
     },
     scroll: {
-        height: '70vh',
+        height: '90vh',
         overflow: 'auto',
         paddingBottom: 20,
     },
