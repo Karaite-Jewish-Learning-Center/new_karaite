@@ -105,7 +105,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'karaites-test',
+            'NAME': 'Karaites',
             'USER': 'postgres',
             'PASSWORD': '',
             'HOST': 'localhost',
@@ -127,9 +127,8 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
             'NAME': 'dev-test',
             'USER': 'doadmin',
             'PASSWORD': os.environ['DEV'],
-            'HOST': 'db-postgresql-nyc3-9557-do-user-8337676-0.b.db.ondigitalocean.com',
-            'PORT': '25060',
-            'OPTIONS': {'sslmode': 'require'}
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 
@@ -143,12 +142,11 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'Karaites-prod',
+            'NAME': 'pro_karaites',
             'USER': 'doadmin',
             'PASSWORD': os.environ['PRO'],
-            'HOST': 'db-postgresql-nyc3-9557-do-user-8337676-0.b.db.ondigitalocean.com',
-            'PORT': '25060',
-            'OPTIONS': {'sslmode': 'require'}
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 else:
