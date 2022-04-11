@@ -124,7 +124,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'dev-test',
+            'NAME': 'dev_test',
             'USER': 'doadmin',
             'PASSWORD': os.environ['DEV'],
             'HOST': 'localhost',
