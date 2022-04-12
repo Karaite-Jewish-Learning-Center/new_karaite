@@ -449,6 +449,25 @@ HALAKHAH = [
         False
     ],
     [
+        'HTML/Halakhah/Ritual Slaughter/',
+        'Shehita-{}.html',
+        'he-en,in,toc',
+        [],
+        [update_bible_re],
+        {'name': "Shehita,",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Zahava Yod,',
+         'css_class': '',
+         'table_book': True,
+         'columns': 2,
+         'columns_order': '0,1,2',
+         'toc_columns': '0,1',
+         'direction': 'ltr',
+         },
+        False
+    ],
+    [
         'HTML/Halakhah/The Remnant and the Relic/',
         'Remnant Relic-{}.html',
         'he-en,in,toc',
@@ -1021,7 +1040,7 @@ POLEMIC = [
     [
         'HTML/Polemics/Sefer_Milhamot_Adonai/',
         'Sefer Milhamot-{}.html',
-        'he,in',
+        'he,in,toc',
         [],
         [],
         # name, Polemic , Author
@@ -1033,11 +1052,10 @@ POLEMIC = [
          'css_class': 'sefer-extra',
          'remove_class': 'MsoTableGrid',
          'multi_tables': True,
-         # 'table_book': True,
-         # 'columns': 2,
-         # 'columns_order': '2,1,0',
-         # 'toc_columns': '0,1',
-         # 'direction': 'ltr',
+         'table_book': True,
+         'columns_order': '2,1,0',
+         'toc_columns': '0,1',
+         'direction': 'ltr',
          },
         False
     ],

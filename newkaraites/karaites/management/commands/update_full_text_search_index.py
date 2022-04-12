@@ -36,10 +36,10 @@ def update_full_text_search_index_en_he(book_name_en, book_name_he, chapter, ver
 
     if path == 'Tanakh':
         en_text = f"{book_name_en} {chapter}:{verse}"
-        he_text = f"{book_name_he} {int_to_gematria(chapter)}:{int_to_gematria(verse)}"
+        he_text = f"{book_name_he} {chapter}:{verse}"
     else:
         en_text = f"{book_name_en}#{chapter}"
-        he_text = f"{book_name_he}#{int_to_gematria(chapter)}"
+        he_text = f"{book_name_he}#{chapter}"
 
     FullTextSearch.objects.get_or_create(
         path=path,

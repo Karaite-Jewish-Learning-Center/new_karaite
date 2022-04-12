@@ -545,10 +545,6 @@
 
 }
 
-.he-azkir-span-002, .he-azkir-span-006, .he-azkir-span-008, .he-azkir-span-009, .he-azkir-span-010 {
-    color: red;
-}
-
 /* Hodu Le’el De‘ot */
 .he-hodu_le_el-table-000 tr {
     margin: 0;
@@ -574,10 +570,6 @@
     direction: ltr;
     text-align: left;
     margin-left: -250px;
-}
-
-.he-hodu_le_el-span-002, .he-hodu_le_el-span-004, .he-hodu_le_el-span-011, .he-hodu_le_el-span-012, .he-hodu_le_el-span-014 {
-    color: red;
 }
 
 /* Odecha El ‘Al Ki Nora’ot */

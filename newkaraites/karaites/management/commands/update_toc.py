@@ -3,9 +3,10 @@ from ...models import (TableOfContents,
 
 
 def update_toc(book_details, paragraph_number, toc):
-    print(toc)
-    print(book_details)
-    print(paragraph_number)
+    # print('Updating toc')
+    # print(toc)
+    # print(book_details)
+    # print(paragraph_number)
     TableOfContents.objects.get_or_create(
         karaite_book=book_details,
         subject=toc,
