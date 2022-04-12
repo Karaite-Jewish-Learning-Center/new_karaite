@@ -152,10 +152,7 @@ class Command(BaseCommand):
                 language = language.replace('in', '')
                 html = get_html(f"{PATH}{book.replace('{}', LANGUAGES['in'])}")
                 html_tree = BeautifulSoup(html, 'html5lib')
-                # html_tree = remove_empty_tags(html_tree)
                 divs = html_tree.find_all('div', {'class': 'WordSection1'})
-
-                # todo: fix this to introduction
                 intro = '<div class="liturgy">'
                 for div in divs[0]:
                     if div.name == 'table':
@@ -166,19 +163,25 @@ class Command(BaseCommand):
                 intro = intro.replace('MsoTableGrid ', '')
                 intro += '</div>'
                 update_book_details(details, introduction=intro)
-                # todo: update full text index
+
+                # update full text search
+                intro_html = BeautifulSoup(intro, 'html5lib')
+                text_en = intro_html.get_text(strip=False)
+                update_full_text_search_index_english(book_title_en,
+                                                      1,
+                                                      text_en,
+                                                      self.expand_book_classification(details))
 
             if 'toc' in language:
                 language = language.replace('toc', '')
                 toc = get_html(f"{PATH}/{book.replace('{}', 'TOC')}")
                 toc_html = BeautifulSoup(toc, 'html5lib')
                 toc_columns = details.get('toc_columns', '')
-
                 if toc_columns:
                     toc_len = len(toc_columns.split(','))
                     for trs in toc_html.find_all('tr', recursive=True):
                         key, value = None, []
-                        for index, td in enumerate(trs.find_all('td', recursive=True)):
+                        for index, td in enumerate(trs.find_all('td', recursive=False)):
                             # two columns in toc
                             if toc_len == 2:
                                 if index == 0:
@@ -187,6 +190,7 @@ class Command(BaseCommand):
                                         break
                                 if index == 1:
                                     key = td.get_text(strip=True).replace('\xa0', '').replace('\n', '')
+
                             # tree columns in toc
                             if toc_len == 3:
                                 if index == 0 or index == 1:
@@ -237,20 +241,38 @@ class Command(BaseCommand):
                         for td in tds:
                             td.attrs = clean_tag_attr(td)
 
-                        text_he = tds[columns_order[0]].get_text(strip=False)
-                        text_en = tds[columns_order[1]].get_text(strip=False)
-                        update_karaites_array_details(book_details,
-                                                      '',
-                                                      c,
-                                                      [str(tds[columns_order[0]]), 0, str(tds[columns_order[1]])])
+                        text_he = ''
+                        text_en = ''
+                        html_he = ''
+                        html_en = ''
 
-                        update_full_text_search_index_en_he(book_title_en,
-                                                            book_title_he,
-                                                            c,
-                                                            '',
-                                                            text_en,
-                                                            text_he,
-                                                            self.expand_book_classification(details))
+                        if 'he' in language:
+                            try:
+                                text_he = tds[columns_order[0]].get_text(strip=False)
+                                html_he = str(tds[columns_order[0]])
+                            except IndexError:
+                                pass
+
+                        if 'en' in language:
+                            try:
+                                text_en = tds[columns_order[1]].get_text(strip=False)
+                                html_en = str(tds[columns_order[1]])
+                            except IndexError:
+                                pass
+
+                        if html_he != '' or html_en != '':
+                            update_karaites_array_details(book_details,
+                                                          '',
+                                                          c,
+                                                          [html_he, 0, html_en])
+
+                            update_full_text_search_index_en_he(book_title_en,
+                                                                book_title_he,
+                                                                c,
+                                                                '',
+                                                                text_en,
+                                                                text_he,
+                                                                self.expand_book_classification(details))
 
                         if len(tds) == 3:
 
@@ -259,6 +281,7 @@ class Command(BaseCommand):
                                 try:
                                     if details.get('toc_columns', False):
                                         key, value = self.find_toc_key(toc_tex, debug=False)
+
                                         if key is not None:
                                             update_toc(book_details,
                                                        c,
