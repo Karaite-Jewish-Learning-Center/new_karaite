@@ -1,5 +1,5 @@
-from ...models import FullTextSearch
-from hebrew_numbers import int_to_gematria
+from ...models import (FullTextSearch,
+                       FullTextSearchHebrew)
 
 
 def update_full_text_search_index_english(book_name, paragraph, text, path):
@@ -20,7 +20,7 @@ def update_full_text_search_index_hebrew(book_name, book_name_he, paragraph, tex
         Update the full text search index.
     """
     marker = "#" if path != 'Tanakh' else " "
-    FullTextSearch.objects.get_or_create(
+    FullTextSearchHebrew.objects.get_or_create(
         path=path,
         reference_en=f"{book_name}{marker}{paragraph}",
         reference_he=f"{book_name_he}{marker}{paragraph}",
@@ -35,17 +35,9 @@ def update_full_text_search_index_en_he(book_name_en, book_name_he, chapter, ver
     """
 
     if path == 'Tanakh':
-        en_text = f"{book_name_en} {chapter}:{verse}"
-        he_text = f"{book_name_he} {chapter}:{verse}"
+        paragraph = f"{chapter}:{verse}"
     else:
-        en_text = f"{book_name_en}#{chapter}"
-        he_text = f"{book_name_he}#{chapter}"
+        paragraph = chapter
 
-    FullTextSearch.objects.get_or_create(
-        path=path,
-        reference_en=en_text,
-        reference_he=he_text,
-        text_en=text_en,
-        text_he=text_he,
-        delete=True
-    )
+    update_full_text_search_index_english(book_name_en, paragraph, text_en, path)
+    update_full_text_search_index_hebrew(book_name_en, book_name_he, paragraph, text_he, path)

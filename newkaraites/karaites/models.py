@@ -814,7 +814,7 @@ class AutoComplete(models.Model):
 
 
 class FullTextSearch(models.Model):
-    """ Full text search for books """
+    """ Full text search for books in English """
     path = models.CharField(max_length=20, default='')
 
     reference_en = models.CharField(max_length=100, default='')
@@ -823,16 +823,10 @@ class FullTextSearch(models.Model):
 
     text_en_search = SearchVectorField(null=True)
 
-    reference_he = models.CharField(max_length=100, default='')
-
-    text_he = models.TextField(default='')
-
-    text_he_search = SearchVectorField(null=True)
-
     # False entry is human curated, so don't delete on rebuild database
     delete = models.BooleanField(default=False)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.reference_en
 
     def to_dict(self):
@@ -842,5 +836,81 @@ class FullTextSearch(models.Model):
                 }
 
     class Meta:
-        verbose_name_plural = 'Full text search'
+        verbose_name_plural = 'Full text search English'
         indexes = [GinIndex(fields=["text_en_search"])]
+
+
+class FullTextSearchHebrew(models.Model):
+    """ Full text search for books in Hebrew """
+    path = models.CharField(max_length=20, default='')
+
+    reference_en = models.CharField(max_length=100,
+                                    db_index=True,
+                                    db_collation='he_IL.UTF-8',
+                                    default='')
+
+    reference_he = models.CharField(max_length=100,
+                                    db_index=True,
+                                    db_collation='he_IL.UTF-8',
+                                    default='')
+
+    text_he = models.TextField(default='',
+                               db_collation='he_IL.UTF-8', )
+
+    # False entry is human curated, so don't delete on rebuild database
+    delete = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.path}  {self.reference_en}'
+
+    def to_dict(self):
+        """ Make a dictionary of the object """
+        return {'reference_he': self.reference_he,
+                'text_he': self.text_he,
+                }
+
+    class Meta:
+        verbose_name_plural = 'Full text search Hebrew'
+
+
+class InvertedIndex(models.Model):
+    """ List of unique Hebrew words, inverted index"""
+
+    # word no nikud/cantilation
+    word = models.CharField(max_length=40,
+                            db_index=True,
+                            db_collation='he_IL.UTF-8',
+                            verbose_name=_("Hebrew word"))
+
+    # list of words with nikud and/or cantilation
+    word_as_in_text = ArrayField(models.CharField(max_length=40,
+                                                  default='',
+                                                  db_collation='he_IL.UTF-8'),
+                                 default=list,
+                                 null=True,
+                                 blank=True,
+                                 verbose_name=_("Word as in text"))
+
+    # total times that word appear in all documents
+    count = models.IntegerField(default=0,
+                                verbose_name=_('Count in all documents'))
+
+    # [id of documents that contains that word]
+    documents = ArrayField(models.IntegerField(default=0),
+                           default=list,
+                           null=True,
+                           blank=True,
+                           verbose_name=_('list of documents'))
+
+    count_by_document = ArrayField(models.IntegerField(default=0),
+                                   default=list,
+                                   null=True,
+                                   blank=True,
+                                   verbose_name=_('count by document'))
+
+    def __str__(self):
+        return self.word
+
+    class Meta:
+        verbose_name_plural = _('Inverted index')
+

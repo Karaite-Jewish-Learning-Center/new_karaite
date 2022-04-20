@@ -3,6 +3,7 @@ import {fade, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import PermContactCalendarSharpIcon from '@material-ui/icons/PermContactCalendarSharp';
@@ -107,6 +108,9 @@ export default function PrimarySearchAppBar() {
                 </Typography>
                 <Typography component="h3">
                     <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
+                </Typography>
+                <Typography component="h3">
+                    <Link className={classes.link} to="/"><SearchIcon /></Link>
                 </Typography>
 
                 <div className={classes.sectionDesktop}>

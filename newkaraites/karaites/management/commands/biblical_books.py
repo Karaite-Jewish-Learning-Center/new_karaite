@@ -1,12 +1,12 @@
 import json
-import sys
 
 from django.core.management.base import BaseCommand
 from ...models import (Organization,
                        BookAsArray,
-                       FullTextSearch)
+                       FullTextSearch,
+                       FullTextSearchHebrew)
 from ...utils import search_level
-from .update_full_text_search_index import update_full_text_search_index_en_he
+from ._update_full_text_search_index import update_full_text_search_index_en_he
 
 
 class Command(BaseCommand):
@@ -64,6 +64,7 @@ class Command(BaseCommand):
 
         self.stdout.write(f'Deleting Full Text Search index')
         FullTextSearch.objects.filter(path='Tanakh').delete()
+        FullTextSearchHebrew.objects.filter(path='Tanakh').delete()
         Organization.objects.all().delete()
 
         file_name = 'merged.json'

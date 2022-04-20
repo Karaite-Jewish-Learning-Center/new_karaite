@@ -18,7 +18,7 @@ const SearchResults = () => {
     const store = useContext(storeContext)
     const classes = useStyles()
     const [message, setMessage] = useState('Loading')
-    const [search] = useState(store.getSearch().replace(' & ', ' '))
+    const [search] = useState(store.getSearch())
     const [page, setPage] = useState(1)
 
     const itemContent = (item, data) => {
@@ -30,7 +30,8 @@ const SearchResults = () => {
                     <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
                         <Typography variant="h6" component="h2">{data['ref']}</Typography>
                     </Link>
-                    {ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}
+                    {/*{ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}*/}
+                    {ReactHtmlParser(data['text'])}
                     <hr/>
                 </div>)
         }
@@ -69,7 +70,7 @@ const SearchResults = () => {
 
                 if (data['data'].length < ITEMS_PER_PAGE) {
                     store.setMoreResults(false)
-                    setMessage(() => `End of search results for "${store.getSearch().replace(' & ', ' ')}"`)
+                    setMessage(() => `End of search results for "${store.getSearch()}"`)
                 }
                 store.setSearchResultData(data['data'])
                 setPage(() => parseInt(data['page']))
@@ -102,13 +103,20 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '100%',
         marginTop: 100,
-        margin: 20
+        margin: 20,
+        overflow: "hidden",
+        fontSize:21,
     },
     card: {
-        margin: 20,
+        maxWidth: '60%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     header: {
-        marginLeft: 20,
+        maxWidth: '70%',
+        marginLeft: '20%',
+        marginRight: 'auto',
+        marginBottom:50,
     },
 }))
 
