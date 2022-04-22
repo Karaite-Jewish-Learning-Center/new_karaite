@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import {RenderBooksMenu} from '../menu/RenderBooksMenu';
 import {bookDetails} from '../../types/commonTypes';
 import {COMMENTS, karaitesBookByLevelAndClassification} from '../../constants/constants';
@@ -17,7 +17,7 @@ export const Comment = () => {
     const [showBooks, setShowBooks] = useState<boolean>(false);
     const [books, setBooks] = React.useState<bookDetails>();
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchBooks().then(data => {
             setBooks(data)
             setShowBooks(true);

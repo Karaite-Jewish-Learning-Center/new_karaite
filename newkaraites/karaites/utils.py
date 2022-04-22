@@ -57,3 +57,14 @@ def only_english_stop_word(search):
 def prep_search(search):
     """ postgres full text search expect a normalized string"""
     return re.sub(' ', ' & ', search)
+
+
+def highlight_english(text_en, search_word):
+    return f"""<p dir="ltr">{text_en.replace(search_word, f'<b><i>{search_word}</i></b>')}</p>"""
+
+
+def highlight_hebrew(text_he, search_word_list):
+    text = text_he
+    for search in search_word_list:
+        text = text.replace(search, f'<b style="color:red">{search}</b>')
+    return f"""<p class="search" dir="rtl">{text}</p>"""

@@ -6,4 +6,10 @@ interface ButtonProps {
     color?: PropTypes.Color;
 }
 
-export default ButtonProps;
+export interface KeyboardsProps {
+    onClick: MouseEventHandler;
+    color?: PropTypes.Color;
+    open:boolean;
+}
+
+export default ButtonProps

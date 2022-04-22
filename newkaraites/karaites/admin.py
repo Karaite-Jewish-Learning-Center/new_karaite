@@ -9,7 +9,9 @@ from .models import (Organization,
                      KaraitesBookAsArray,
                      TableOfContents,
                      References,
-                     FullTextSearch)
+                     FullTextSearch,
+                     FullTextSearchHebrew,
+                     InvertedIndex)
 
 from .admin_forms import AdminCommentForm
 from django.conf import settings
@@ -122,7 +124,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'book_title_en', 'book_title_he', 'author',
                     'intro_to_html')
 
-    list_filter = ('first_level', 'book_language', 'book_classification')
+    list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
 
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
@@ -149,7 +151,7 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 class ReferencesAdmin(KAdmin):
     list_display = ('karaites_book', 'error', 'bible_ref_en', 'bible_ref_he')
-                    # 'paragraph_number', 'paragraph_admin', 'foot_notes_admin')
+    # 'paragraph_number', 'paragraph_admin', 'foot_notes_admin')
 
     search_fields = ('bible_ref_en',)
     list_filter = ('karaites_book', 'bible_ref_en', 'error')
@@ -159,8 +161,24 @@ admin.site.register(References, ReferencesAdmin)
 
 
 class FullTextSearchAdmin(KAdmin):
-    list_display = ('path', 'reference_en', 'text_en', 'reference_he', 'text_he', 'delete')
-    search_fields = ('reference_en',)
+    search_fields = ('reference_en', 'path')
+    list_display = ('path', 'reference_en', 'text_en', 'text_en_search')
 
 
 admin.site.register(FullTextSearch, FullTextSearchAdmin)
+
+
+class FullTextSearchHebrewAdmin(KAdmin):
+    search_fields = ('reference_en', 'reference_en', 'path')
+    list_display = ('path', 'reference_en', 'reference_he', 'text_he',)
+
+
+admin.site.register(FullTextSearchHebrew, FullTextSearchHebrewAdmin)
+
+
+class InvertedIndexAdmin(KAdmin):
+    search_fields = ('word',)
+    list_display = ('word', 'word_as_in_text', 'count', 'documents', 'count_by_document')
+
+
+admin.site.register(InvertedIndex, InvertedIndexAdmin)

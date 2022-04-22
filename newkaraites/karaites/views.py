@@ -1,11 +1,19 @@
+from langdetect import (detect,
+                        LangDetectException)
 from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
 from .utils import (slug_back,
                     normalize_search,
-                    prep_search)
-from .models import (FullTextSearch, Organization,
+                    prep_search,
+                    highlight_hebrew,
+                    highlight_english)
+
+from .models import (FullTextSearch,
+                     FullTextSearchHebrew,
+                     InvertedIndex,
+                     Organization,
                      BookAsArray,
                      Comment,
                      TableOfContents,
@@ -13,6 +21,9 @@ from .models import (FullTextSearch, Organization,
                      KaraitesBookAsArray,
                      AutoComplete,
                      References)
+
+from hebrew import Hebrew
+import hebrew_tokenizer as tokenizer
 from .constants import ENGLISH_STOP_WORDS
 
 
@@ -298,22 +309,54 @@ class Search(View):
         if search is None:
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
-        search = normalize_search(search)
-        search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
-        search = prep_search(search)
+        # maybe tokenize for dates, numbers, before trying to detect language
+        try:
+            language = detect(search)
+        except LangDetectException:
+            language = 'en'
 
-        limit = ITEMS_PER_PAGE
-        offset = (page - 1) * ITEMS_PER_PAGE
-        sql = """SELECT id, path, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
-        sql += f"""FROM karaites_fulltextsearch, to_tsquery('{search}') query """
-        sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+        if language == 'he':
+            results = set()
+            highlight_word = []
+            tokens = tokenizer.tokenize(search)
 
-        items = []
-        for result in FullTextSearch.objects.raw(sql):
-            items.append({'ref': result.reference_en,
-                          'text': result.text_en,
-                          'path': result.path})
+            for grp, token, token_num, (_, _) in tokens:
 
-        print(items)
+                search_text = str(Hebrew(token).text_only())
+                word_query = InvertedIndex.objects.get(word=search_text)
 
-        return JsonResponse({'data': items, 'page': page}, safe=False)
+                # words to highlight
+                highlight_word += word_query.word_as_in_text
+
+                # get id of documents
+                if not results:
+                    results = set(word_query.documents)
+                else:
+                    results = results.intersection(set(word_query.documents))
+                print(f'results :{results}')
+
+            items = []
+            for k, result in FullTextSearchHebrew.objects.in_bulk(results).items():
+                items.append({'ref': result.reference_en,
+                              'text': highlight_hebrew(result.text_he, highlight_word),
+                              'path': result.path})
+
+            return JsonResponse({'data': items, 'page': page}, safe=False)
+
+        else:
+            search = normalize_search(search)
+            search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
+            search = prep_search(search)
+
+            limit = ITEMS_PER_PAGE
+            offset = (page - 1) * ITEMS_PER_PAGE
+            sql = """SELECT id, path, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
+            sql += f"""FROM karaites_fulltextsearch, to_tsquery('{search}') query """
+            sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+
+            items = []
+            for result in FullTextSearch.objects.raw(sql):
+                items.append({'ref': result.reference_en,
+                              'text': highlight_english(result.text_en, search),
+                              'path': result.path})
+            return JsonResponse({'data': items, 'page': page}, safe=False)

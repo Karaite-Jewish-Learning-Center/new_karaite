@@ -22,10 +22,11 @@ from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from .command_utils.argments import arguments
 from .command_utils.process_arguments import process_arguments
-from .update_full_text_search_index import (update_full_text_search_index_en_he,
-                                            update_full_text_search_index_english,
-                                            update_full_text_search_index_hebrew)
+from ._update_full_text_search_index import (update_full_text_search_index_en_he,
+                                             update_full_text_search_index_english,
+                                             update_full_text_search_index_hebrew)
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
+from langdetect import detect
 
 LIST_OF_BOOKS = (COMMENTS +
                  POLEMIC +
@@ -179,28 +180,43 @@ class Command(BaseCommand):
                 toc_columns = details.get('toc_columns', '')
                 if toc_columns:
                     toc_len = len(toc_columns.split(','))
+                    toc_index = list(map(int, toc_columns.split(',')))
                     for trs in toc_html.find_all('tr', recursive=True):
                         key, value = None, []
+                        hebrew = ''
+                        english = ''
                         for index, td in enumerate(trs.find_all('td', recursive=False)):
+                            text = td.get_text(strip=False).replace('\xa0', '').replace('\n', '')
                             # two columns in toc
                             if toc_len == 2:
                                 if index == 0:
-                                    value = [td.get_text(strip=False).replace('\xa0', '').replace('\n', ''), '']
+                                    value = text
                                     if value == '':
                                         break
                                 if index == 1:
-                                    key = td.get_text(strip=True).replace('\xa0', '').replace('\n', '')
+                                    key = text
 
                             # tree columns in toc
                             if toc_len == 3:
-                                if index == 0 or index == 1:
-                                    value.insert(0, td.get_text(strip=False).replace('\xa0', '').replace('\n', ''))
-                                    if value == '':
-                                        break
-                                if index == 2:
-                                    key = td.get_text(strip=False).replace('\xa0', '').replace('\n', '')
+                                # key, hebrew , English
+                                if index == toc_index[0]:
+                                    key = text
+                                    continue
+                                print(text)
+                                lang = detect(text)
+                                if lang == 'he':
+                                    hebrew = text
+                                elif lang == 'en':
+                                    english = text
+                                else:
+                                    print(f'Unknown language:{lang}')
+
                         if key is not None:
-                            table_of_contents[key] = value
+                            if toc_len == 3:
+                                table_of_contents[key] = [english, hebrew]
+                            else:
+                                table_of_contents[key] = [value, '']
+
                 else:
                     for p in toc_html.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
                         text = p.get_text(strip=False)
@@ -209,7 +225,8 @@ class Command(BaseCommand):
 
                         if key is not None:
                             table_of_contents[key] = value
-
+            print(table_of_contents)
+            input('table...')
             c = 1
             for lang in language.split(','):
                 if lang == '':
