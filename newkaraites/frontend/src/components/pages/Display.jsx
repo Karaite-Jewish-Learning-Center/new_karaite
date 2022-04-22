@@ -5,6 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {q640} from "../../constants/constants"
 import Colors from "../../constants/colors";
 
+
 const Display = () => {
     const classes = useStyles()
     const store = useContext(storeContext)

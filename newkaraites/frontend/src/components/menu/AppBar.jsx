@@ -3,7 +3,6 @@ import {fade, makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import PermContactCalendarSharpIcon from '@material-ui/icons/PermContactCalendarSharp';
@@ -14,15 +13,20 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import AutoComplete from '../autcomplete/autocomplete'
+import {Vkeybord} from "../vkeyboard/keyboard";
+import {KeyboardButton} from "../buttons/KeyboardButton";
+
 
 
 export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
+    const [keyboardOpen, setKeyboardOpen] = useState(false)
     const classes = useStyles();
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const onKeyboardButton =() => setKeyboardOpen(!keyboardOpen)
 
     const handleLanguageMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -109,12 +113,14 @@ export default function PrimarySearchAppBar() {
                 <Typography component="h3">
                     <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
                 </Typography>
-                <Typography component="h3">
-                    <Link className={classes.link} to="/"><SearchIcon /></Link>
-                </Typography>
+                {/*<Typography component="h3">*/}
+                {/*    <Link className={classes.link} to="/"><SearchIcon /></Link>*/}
+                {/*</Typography>*/}
 
                 <div className={classes.sectionDesktop}>
                     <AutoComplete/>
+                    <KeyboardButton onClick={onKeyboardButton} open={keyboardOpen} />
+                    {/*<Vkeybord />*/}
                     <IconButton aria-label="Go to sign up form" color="inherit">
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
@@ -144,7 +150,9 @@ export default function PrimarySearchAppBar() {
             </Toolbar>
             {renderMenu}
             {renderMobileMenu}
+
         </AppBar>
+
     );
 }
 

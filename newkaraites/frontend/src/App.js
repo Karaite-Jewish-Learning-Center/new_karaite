@@ -20,15 +20,15 @@ import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message'
 import Acknowledgment from "./components/pages/Acknowledgments";
 
-function App() {
 
+function App() {
     return (
         <StoreProvider>
-
             <ThemeProvider theme={theme}>
                 <BrowserRouter>
                     <MyAppBar/>
                     <Message/>
+
                     <Switch>
                         <Route exact path="/">
                             <Display/>
