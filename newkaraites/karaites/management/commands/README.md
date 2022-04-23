@@ -32,7 +32,7 @@ Update references (updates bible references)
 
 >> ./manage.py update_references
  
-
+>> ./manage.py create_hebrew_search   
 
 [//]: # (Update autocomplete)
 

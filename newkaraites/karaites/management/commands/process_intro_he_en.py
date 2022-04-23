@@ -202,7 +202,7 @@ class Command(BaseCommand):
                                 if index == toc_index[0]:
                                     key = text
                                     continue
-                                print(text)
+
                                 lang = detect(text)
                                 if lang == 'he':
                                     hebrew = text
@@ -225,8 +225,7 @@ class Command(BaseCommand):
 
                         if key is not None:
                             table_of_contents[key] = value
-            print(table_of_contents)
-            input('table...')
+
             c = 1
             for lang in language.split(','):
                 if lang == '':
@@ -342,9 +341,7 @@ class Command(BaseCommand):
                                            c,
                                            [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
                             except KeyError:
-                                print(table_of_contents.keys())
                                 print(f'{key} not found in table of contents')
-                                input('Press enter to continue, key not found')
 
                         if lang in ['en', 'he', 'ja', 'he-en']:
                             c += 1

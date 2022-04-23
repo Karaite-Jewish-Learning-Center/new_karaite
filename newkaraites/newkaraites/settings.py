@@ -105,8 +105,8 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'Karaites',
-            'USER': 'postgres',
+            'NAME': 'karaites_test',
+            'USER': 'sandro',
             'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '',
