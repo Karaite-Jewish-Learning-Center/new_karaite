@@ -10,9 +10,10 @@ Issues:
 This is based on  sefaria hebrew.py
 """
 
-import re
-import regex
 import math
+import re
+
+import regex
 
 # Change to all caps for constants
 GERESH = "\u05F3"

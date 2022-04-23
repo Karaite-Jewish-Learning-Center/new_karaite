@@ -846,16 +846,13 @@ class FullTextSearchHebrew(models.Model):
 
     reference_en = models.CharField(max_length=100,
                                     db_index=True,
-                                    db_collation='he_IL.UTF-8',
                                     default='')
 
     reference_he = models.CharField(max_length=100,
                                     db_index=True,
-                                    db_collation='he_IL.UTF-8',
                                     default='')
 
-    text_he = models.TextField(default='',
-                               db_collation='he_IL.UTF-8', )
+    text_he = models.TextField(default='')
 
     # False entry is human curated, so don't delete on rebuild database
     delete = models.BooleanField(default=False)
@@ -879,13 +876,11 @@ class InvertedIndex(models.Model):
     # word no nikud/cantilation
     word = models.CharField(max_length=40,
                             db_index=True,
-                            db_collation='he_IL.UTF-8',
                             verbose_name=_("Hebrew word"))
 
     # list of words with nikud and/or cantilation
     word_as_in_text = ArrayField(models.CharField(max_length=40,
-                                                  default='',
-                                                  db_collation='he_IL.UTF-8'),
+                                                  default=''),
                                  default=list,
                                  null=True,
                                  blank=True,
