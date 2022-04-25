@@ -5,6 +5,9 @@ https://moz.com/blog/inverse-document-frequency-and-the-importance-of-uniqueness
 
 https://nlp.stanford.edu/IR-book/html/htmledition/inverse-document-frequency-1.html
 
+https://www.onely.com/blog/what-is-tf-idf/
+
+
 collection frequency
 cf = total number of occurrences of a term in the collection
 
@@ -41,4 +44,4 @@ In our  InvertedIndex model not exactly what above equation, but should work:
 
   N = InvertedIndex.objects.aggregate(total=Sum(len('documents')))['total']
 
-  rank = sum(*count_by_document) * log(10,  N/ len(documents) )
+  rank = 1/ (sum(*count_by_document) * log(10,  N/ len(documents) ))

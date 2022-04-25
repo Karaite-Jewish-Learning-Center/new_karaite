@@ -30,7 +30,6 @@ const SearchResults = () => {
                     <Link to={`/Tanakh/${refBook}/${refChapter}/${refVerse}/`}>
                         <Typography variant="h6" component="h2">{data['ref']}</Typography>
                     </Link>
-                    {/*{ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}*/}
                     {ReactHtmlParser(data['text'])}
                     <hr/>
                 </div>)
@@ -68,6 +67,7 @@ const SearchResults = () => {
                 // an extra call is done to figure out that next page
                 // is empty, In all other cases there is no need to do an extra call.
 
+                // todo: review this code
                 if (data['data'].length < ITEMS_PER_PAGE) {
                     store.setMoreResults(false)
                     setMessage(() => `End of search results for "${store.getSearch()}"`)

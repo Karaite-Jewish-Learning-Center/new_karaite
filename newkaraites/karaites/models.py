@@ -912,5 +912,5 @@ class InvertedIndex(models.Model):
 
     class Meta:
         verbose_name_plural = _('Inverted index')
-        ordering = ('rank',)
+        ordering = ('-rank',)
 
