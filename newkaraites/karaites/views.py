@@ -315,6 +315,9 @@ class Search(View):
         except LangDetectException:
             language = 'en'
 
+        limit = ITEMS_PER_PAGE
+        offset = (page - 1) * ITEMS_PER_PAGE
+
         if language == 'he':
             results = set()
             highlight_word = []
@@ -333,7 +336,8 @@ class Search(View):
                     results = set(word_query.documents)
                 else:
                     results = results.intersection(set(word_query.documents))
-                print(f'results :{results}')
+
+            results = list(results)[offset:offset+limit]
 
             items = []
             for k, result in FullTextSearchHebrew.objects.in_bulk(results).items():
@@ -348,8 +352,6 @@ class Search(View):
             search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
             search = prep_search(search)
 
-            limit = ITEMS_PER_PAGE
-            offset = (page - 1) * ITEMS_PER_PAGE
             sql = """SELECT id, path, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
             sql += f"""FROM karaites_fulltextsearch, to_tsquery('{search}') query """
             sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
