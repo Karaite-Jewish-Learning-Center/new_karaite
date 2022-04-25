@@ -19,3 +19,4 @@ langdetect
 gunicorn==20.0.4
 hebrew
 hebrew_tokenizer
+tqdm

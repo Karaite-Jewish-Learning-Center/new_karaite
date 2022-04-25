@@ -895,17 +895,22 @@ class InvertedIndex(models.Model):
                            default=list,
                            null=True,
                            blank=True,
-                           verbose_name=_('list of documents'))
+                           verbose_name=_('List of documents'))
 
     count_by_document = ArrayField(models.IntegerField(default=0),
                                    default=list,
                                    null=True,
                                    blank=True,
-                                   verbose_name=_('count by document'))
+                                   verbose_name=_('Count by document'))
+
+    rank = models.FloatField(default=0,
+                             db_index=True,
+                             verbose_name=_('Rank'))
 
     def __str__(self):
         return self.word
 
     class Meta:
         verbose_name_plural = _('Inverted index')
+        ordering = ('-rank',)
 

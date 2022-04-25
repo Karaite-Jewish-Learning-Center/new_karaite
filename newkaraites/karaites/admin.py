@@ -178,7 +178,7 @@ admin.site.register(FullTextSearchHebrew, FullTextSearchHebrewAdmin)
 
 class InvertedIndexAdmin(KAdmin):
     search_fields = ('word',)
-    list_display = ('word', 'word_as_in_text', 'count', 'documents', 'count_by_document')
+    list_display = ('word', 'word_as_in_text', 'count', 'documents', 'count_by_document', 'rank')
 
 
 admin.site.register(InvertedIndex, InvertedIndexAdmin)

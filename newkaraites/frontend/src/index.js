@@ -4,6 +4,8 @@ import './index.css'
 import App from './App'
 import {BrowserRouter} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
+//import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
 
 ReactDOM.render(
     <React.StrictMode>
