@@ -1,4 +1,4 @@
-import React, {useContext, FC} from 'react'
+import React, {useContext, FC, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import {Grid} from '@material-ui/core'
@@ -10,41 +10,48 @@ import {CloseButton} from "../buttons/CloseButton";
 import {InfoButton} from "../buttons/InfoButton";
 import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
-//import {BuyButton} from '../buttons/BuyButton';
+import {BuyButton} from '../buttons/BuyButton';
+import {BasicAudioPlayer} from '../audio/audio-player/basic-audio-player';
 
 
 interface IProps {
     paneNumber: number,
-    type: string,
     onClosePane: Function
     onIntroClick: Function,
     onTocClick: Function,
     onBookClick: Function,
+    details:any,
 }
 
-const KaraitesPaneHeader: FC<IProps> = ({paneNumber, type, onClosePane, onIntroClick, onTocClick, onBookClick}) => {
+const KaraitesPaneHeader: FC<IProps> = ({
+                                            paneNumber,
+                                            onClosePane,
+                                            onIntroClick,
+                                            onTocClick,
+                                            onBookClick,
+                                            details
+                                        }) => {
+    const [songStop, setStopSong] = useState(false)
+
     const store = useContext(storeContext)
     const classes = resources()
 
     const onClose = () => {
+        setStopSong(true)
         onClosePane(paneNumber)
     }
     const onIntro = () => {
         onIntroClick(paneNumber)
     }
     const onToc = () => {
-        if (type === 'liturgy') {
-            onClosePane(paneNumber)
-        } else {
-            onTocClick(paneNumber)
-        }
+        onTocClick(paneNumber)
     }
     const onBook = () => {
         onBookClick(paneNumber)
     }
-    // const onBuy = () => {
-    //     //
-    // }
+    const onBuy = () => {
+        window.open(details.buy_link)
+    }
     return (
 
         <Grid container
@@ -54,12 +61,13 @@ const KaraitesPaneHeader: FC<IProps> = ({paneNumber, type, onClosePane, onIntroC
               alignItems="center"
               spacing={1}>
 
-            <Grid item xs={4}>
+            <Grid item xs={5}>
                 <CloseButton onClick={onClose}/>
                 <InfoButton onClick={onIntro}/>
-                <TocButton onClick={onToc}/>
+                 <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
-                {/*<BuyButton onClick={onBuy}/>*/}
+                {(details.song ? <BasicAudioPlayer mp3={details.book_title_en} songStop={songStop}/> : null)}
+                {(details.buy_link ===''? null :<BuyButton onClick={onBuy}/>)}
             </Grid>
 
             <Grid item xs={4}>

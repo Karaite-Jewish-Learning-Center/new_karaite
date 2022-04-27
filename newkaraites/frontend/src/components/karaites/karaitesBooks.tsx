@@ -217,11 +217,11 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         <>
 
             <KaraitePaneHeader paneNumber={paneNumber}
-                               type={type}
                                onClosePane={onClosePane}
                                onIntroClick={onIntroClick}
                                onTocClick={onTocClick}
                                onBookClick={onBookClick}
+                               details={details}
             />
 
             <TableBook initial={initial}/>
@@ -259,12 +259,14 @@ const useStyles = makeStyles(() => ({
         position: 'fixed',
         width: '100%',
         height: '100%',
+        alignContent:'center',
     },
     paragraphContainer: {
         fontFamily: 'SBL Hebrew',
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
+        display:'grid',
     },
     paragraph: {
         fontFamily: 'SBL Hebrew',
@@ -318,7 +320,7 @@ const useStyles = makeStyles(() => ({
     heLeft: {
         fontFamily: 'SBL Hebrew',
         float: 'left',
-        width: '300px',
+        width: '300',
         direction: 'rtl',
         textAlign: 'right',
         lineHeight: 'initial',
@@ -331,7 +333,7 @@ const useStyles = makeStyles(() => ({
         lineHeight: 'initial',
         float: 'right',
         textAlign: 'right',
-        width: '300px',
+        width: '600px',
         border: '1px solid red',
         verticalAlign:'top'
     },

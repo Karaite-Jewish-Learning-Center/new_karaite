@@ -1097,6 +1097,39 @@
 }
 
 /* Patshegen Ketav Haddat */
+/* Matsa-Ish-sha-Matsa-Tov */
+.he-en-matsa_ish_-table-000 {
+    direction: ltr;
+    min-width: 600px;
+    font-size: 21px;
+}
+.he-en-matsa_ish_-table-000 tr:nth-child(odd) {
+    /*direction: ltr;*/
+    /*text-align: left;*/
+}
+.he-en-matsa_ish_-table-000 tr:nth-child(odd) td:nth-child(odd) p{
+    /*background-color: #3198dd*/
+    direction:rtl;
+    text-align: right;
+    padding-right: 5px;
+}
+.he-en-matsa_ish_-table-000 tr:nth-child(odd) td:nth-child(even) p{
+    direction: ltr;
+    text-align: left;
+    margin-left: 10px;
+}
+.he-en-matsa_ish_-table-000 tr:nth-child(even) {
+    /*background-color: #83a1d3;*/
+    direction: ltr;
+    text-align: left;
+    margin-left:-100px;
+    margin-right: -280px;
+    font-size: 21px;
+}
+.he-en-matsa_ish_-h2-000 {
+    font-size: 21px;
+    font-weight: normal;
+}
 
 /* Karaites books that have english an hebrew side by side */
 .The-Remnan table {

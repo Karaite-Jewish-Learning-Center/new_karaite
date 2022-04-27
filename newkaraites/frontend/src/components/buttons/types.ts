@@ -1,8 +1,15 @@
 import {MouseEventHandler} from "react";
 import {PropTypes} from "@material-ui/core";
 
-interface ButtonProps {
+export interface ButtonProps {
     onClick: MouseEventHandler;
+    color?: PropTypes.Color;
+}
+
+export interface ButtonPlayProps {
+    onClick: MouseEventHandler;
+    onReset: MouseEventHandler;
+    playing: boolean;
     color?: PropTypes.Color;
 }
 
@@ -12,4 +19,9 @@ export interface KeyboardsProps {
     open:boolean;
 }
 
-export default ButtonProps
+export interface Audio {
+    mp3:string,
+}
+
+
+

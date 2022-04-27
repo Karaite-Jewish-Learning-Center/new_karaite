@@ -8,13 +8,18 @@ from .process_books import (COMMENTS,
                             POLEMIC,
                             POETRY_NON_LITURGICAL,
                             HALAKHAH,
+                            HAVDALA,
                             PASSOVER_SONGS,
                             PRAYERS,
                             PURIM_SONGS,
+                            SHABBAT_SONGS,
+                            SUPPLEMENTAL,
+                            WEDDING_SONGS,
                             LANGUAGES)
 from .constants import PATH
 from ...models import (KaraitesBookDetails,
-                       FullTextSearch)
+                       FullTextSearch,
+                       FullTextSearchHebrew)
 
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
@@ -26,14 +31,17 @@ from ._update_full_text_search_index import (update_full_text_search_index_en_he
                                              update_full_text_search_index_english,
                                              update_full_text_search_index_hebrew)
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
-from langdetect import detect
+from langdetect import (detect,
+                        LangDetectException)
 
 LIST_OF_BOOKS = (COMMENTS +
                  POLEMIC +
                  POETRY_NON_LITURGICAL +
-                 HALAKHAH)
+                 HALAKHAH +
+                 PASSOVER_SONGS +
+                 PRAYERS
+                 )
 
-# todo unify all liturgy books
 # LITURGY = (HAVDALA +
 #            PASSOVER_SONGS +
 #            PRAYERS +
@@ -126,7 +134,7 @@ class Command(BaseCommand):
                                              [],
                                              PASSOVER_SONGS,
                                              PURIM_SONGS,
-                                             [],
+                                             PRAYERS,
                                              POLEMIC,
                                              [],
                                              [],
@@ -141,12 +149,13 @@ class Command(BaseCommand):
             table_of_contents = {}
             book_title_en, book_title_he = details['name'].split(',')
             table_book = details.get('table_book', False)
+            index_lang = details.get('index_lang', '')
 
             sys.stdout.write(f"\rDeleting book : {book.replace('-{}.html', '')}\n")
 
             KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
             FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
-
+            FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()
             book_details, _ = update_book_details(details, language='en,he')
 
             if 'in' in language:
@@ -173,11 +182,19 @@ class Command(BaseCommand):
                                                       text_en,
                                                       self.expand_book_classification(details))
 
+                update_full_text_search_index_hebrew(book_title_en,
+                                                     book_title_he,
+                                                     1,
+                                                     '',
+                                                     self.expand_book_classification(details))
+
             if 'toc' in language:
+
                 language = language.replace('toc', '')
                 toc = get_html(f"{PATH}/{book.replace('{}', 'TOC')}")
                 toc_html = BeautifulSoup(toc, 'html5lib')
                 toc_columns = details.get('toc_columns', '')
+
                 if toc_columns:
                     toc_len = len(toc_columns.split(','))
                     toc_index = list(map(int, toc_columns.split(',')))
@@ -216,7 +233,6 @@ class Command(BaseCommand):
                                 table_of_contents[key] = [english, hebrew]
                             else:
                                 table_of_contents[key] = [value, '']
-
                 else:
                     for p in toc_html.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
                         text = p.get_text(strip=False)
@@ -311,6 +327,35 @@ class Command(BaseCommand):
 
                         c += 1
                         sys.stdout.write(f'\r processing paragraph: {c}\r')
+
+                # elif index_lang:
+                #
+                #     # index songs that are basically Hebrew, transliteration to English and English
+                #     divs = html_tree.find_all('div', class_='WordSection1')
+                #     for p in divs[0].find_all('table', recursive=True):
+                #         p.attrs = clean_tag_attr(p)
+                #         p = clean_table_attr(p)
+                #
+                #
+                #     for p in divs[0].find_all('tr', recursive=True):
+                #
+                #         print(p.get_text(strip=False))
+                #         try:
+                #
+                #             if detect(text) == 'he':
+                #                 if lang in ['he']:
+                #                     update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
+                #                                                          self.expand_book_classification(details))
+                #                 else:
+                #                     update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
+                #                                                          self.expand_book_classification(details))
+                #             p = str(p)
+                #             update_karaites_array_details(book_title_en, '', c, [p, ''])
+                #             c += 1
+                #
+                #         except LangDetectException:
+                #             pass
+
                 else:
 
                     divs = html_tree.find_all('div', class_='WordSection1')

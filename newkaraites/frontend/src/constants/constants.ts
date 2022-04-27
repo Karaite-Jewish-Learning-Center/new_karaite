@@ -14,15 +14,16 @@ interface stringNumber {
     readonly [index: string]: number
 }
 
-let apiUrl: string
+let api: string
 
 if (process.env.NODE_ENV === 'development') {
-    apiUrl = 'http://localhost:8000/'
+    api = 'http://localhost:8000/'
 } else {
-    apiUrl = 'https://kjlc.karaites.org/'
-   // apiUrl = 'http://dev.karaites.org/'
+    api = 'https://kjlc.karaites.org/'
+    // api = 'http://dev.karaites.org/'
 }
 
+export const apiUrl = api
 // first level  see constants.py
 export const TANAKH: string = '1'
 export const HALAKHAH: string = '3'

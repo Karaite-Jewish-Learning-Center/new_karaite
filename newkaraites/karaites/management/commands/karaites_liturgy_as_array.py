@@ -46,7 +46,9 @@ class Command(BaseCommand):
             if details.get('css_class', None) is not None:
                 class_name = f" {details.get('css_class')} "
 
-            if lang.find('he') > -1:
+            if lang.find('he-en') > -1:
+                html = get_html(f"{PATH}{book.replace('{}', 'Hebrew-English')}")
+            elif lang.find('he') > -1:
                 html = get_html(f"{PATH}{book.replace('{}', 'Hebrew')}")
             else:
                 html = get_html(f'{PATH}{book}')

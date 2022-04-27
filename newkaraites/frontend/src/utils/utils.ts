@@ -24,6 +24,8 @@ export const slug = (str: string): string => str.replaceAll(' ', '-')
 
 export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
+export const underLine =(str:string):string => str.replaceAll(' ','_')
+
 export const normalizeSluggedBookName = (book: string): string => {
     // english book names
     book = slug(book)

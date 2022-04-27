@@ -432,6 +432,7 @@ HALAKHAH = [
          'columns': 2,
          'columns_order': '0,1,2',
          'toc_columns': '2,1,2',
+         'lang_index': False,
          },
         False
     ],
@@ -464,6 +465,7 @@ HALAKHAH = [
          'columns_order': '0,1,2',
          'toc_columns': '1,0',
          'direction': 'ltr',
+         'lang_index': False,
          },
         False
     ],
@@ -473,7 +475,7 @@ HALAKHAH = [
         'he-en,in,toc',
         [],
         [update_bible_re],
-        {'name': "The Palaquin,Appiryon ‘Asa Lo",
+        {'name': "The Palanquin,אפריון עשה לו",
          'first_level': 3,
          'book_classification': '80',
          'author': ' Hakham Solomon ben Aaron,',
@@ -484,6 +486,7 @@ HALAKHAH = [
          # position 0 = key
          'toc_columns': '0,2,1',
          'direction': 'ltr',
+         'lang_index': False,
          },
         False
     ],
@@ -503,6 +506,7 @@ HALAKHAH = [
          'columns_order': '2,1,0',
          'toc_columns': '0,1',
          'direction': 'ltr',
+         'lang_index': False,
          },
         False
     ],
@@ -556,11 +560,13 @@ PASSOVER_SONGS = [
         'he,in',
         [],
         [update_bible_re],
-        {'name': r"Azkir Tehillo,אזכיר תהלות",
+        {'name': r"Azkir Tehillot,אזכיר תהלות",
          'first_level': 4,
          'book_classification': '15',
          'author': 'Yosef bar Yitshak,',
          'css_class': '',
+         # search index in hebrew, english and transliteration
+         'index_lang': 'True',
          },
         False
     ],
@@ -1000,6 +1006,21 @@ WEDDING_SONGS = [
          'css_class': 'simple-3-4'},
         False
     ],
+    [
+        'HTML/Liturgy/Wedding Songs/Matsa_Ish_sha_Matsa_Tov/',
+        'Matsa_Ish_sha_Matsa_Tov-{}.html',
+        'he-en,in',
+        [],
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Matsa Ish sha Matsa Tov,מצא אשה מצא טוב",
+         'first_level': 4,
+         'book_classification': '50',
+         'author': 'Laḥatani Mivḥar Banai,',
+         'css_class': 'simple-3-4',
+         'song': True},
+        False
+    ],
 ]
 
 POETRY_NON_LITURGICAL = [
@@ -1076,6 +1097,7 @@ POLEMIC = [
          'columns_order': '2,1,0',
          'toc_columns': '0,1',
          'direction': 'ltr',
+         'lang_index': False,
          },
         False
     ],
