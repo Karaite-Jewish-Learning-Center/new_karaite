@@ -93,34 +93,53 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         return store.getCurrentItem(paneNumber) === item
     }
 
+    // const itemTable = (item: number, data: Array<any>) => {
+    //     debugger
+    //     if (details.columns === 2) {
+    //         return (
+    //             <tr>
+    //
+    //                 {parse(data[HTML][0], {
+    //                     replace: domNode => {
+    //                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+    //                     }
+    //                 })}
+    //                 {parse(data[HTML][2], {
+    //                     replace: domNode => {
+    //                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+    //                     }
+    //                 })}
+    //             </tr>
+    //         )
+    //     } else {
+    //         return (
+    //             <tr>
+    //                 {parse(data[HTML][0], {
+    //                     replace: domNode => {
+    //                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+    //                     }
+    //                 })}
+    //             </tr>
+    //         )
+    //     }
+    // }
     const itemTable = (item: number, data: Array<any>) => {
-        if (details.columns === 2) {
-            return (
-                <tr>
 
-                    {parse(data[HTML][0], {
-                        replace: domNode => {
-                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                        }
-                    })}
-                    {parse(data[HTML][2], {
-                        replace: domNode => {
-                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                        }
-                    })}
-                </tr>
-            )
-        } else {
-            return (
-                <tr>
-                    {parse(data[HTML][0], {
-                        replace: domNode => {
-                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                        }
-                    })}
-                </tr>
-            )
-        }
+        return (
+            <tr>
+                {parse(data[HTML][0], {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })}
+                {parse(data[HTML][2], {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })}
+            </tr>
+        )
+
     }
     const itemContent = (item: number, data: Array<any>) => {
 
@@ -152,7 +171,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         if (data[INDEX] === '') {
             // one column TOC
             return (<div className={`${classes.tocParagraph} ${selectCurrent(item) ? classes.selected : ''}`}>
-                <p className={classes.tocItem} style={{direction:details.direction}} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
+                <p className={classes.tocItem} style={{direction: details.direction}} onClick={onButtonClick.bind(this, data[START_PARAGRAPH])}>
                     {data[SUBJECT]}
                 </p>
             </div>)
@@ -175,20 +194,23 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
+        const tableBook = (details.table_book  ? 'table-book' :'')
+
         if (details.table_book) {
             // const tableBook = details.book_title_en.substr(0,10).replaceAll(' ','-')
-            const tableBook='table-book'
-            return (<TableVirtuoso
-                className={`${tableBook}  ${(flags[BOOK] ? classes.Show : classes.Hide)}`}
-                data={paragraphs}
-                ref={virtuoso}
-                initialTopMostItemIndex={initial}
-                endReached={setEndReached}
-                itemContent={itemTable}
-                // components={{
-                //     Footer: () => {return <Loading text={loadingMessage}/>}
-                // }}
-            />)
+            const tableBook = 'table-book'
+            return (
+                <TableVirtuoso
+                    className={`${tableBook}  ${(flags[BOOK] ? classes.Show : classes.Hide)}`}
+                    data={paragraphs}
+                    ref={virtuoso}
+                    initialTopMostItemIndex={initial}
+                    endReached={setEndReached}
+                    itemContent={itemTable}
+                    // components={{
+                    //     Footer: () => {return <Loading text={loadingMessage}/>}
+                    // }}
+                />)
         } else {
             return (
                 <Virtuoso className={(flags[BOOK] ? classes.Show : classes.Hide)}
@@ -215,7 +237,6 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
     return (
         <>
-
             <KaraitePaneHeader paneNumber={paneNumber}
                                onClosePane={onClosePane}
                                onIntroClick={onIntroClick}
@@ -223,8 +244,9 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                                onBookClick={onBookClick}
                                details={details}
             />
-
+            {/*<table className={'estaClasse'}>*/}
             <TableBook initial={initial}/>
+            {/*</table>*/}
 
             <Virtuoso className={`${(flags[TOC] ? classes.Show : classes.Hide)} ${classes.toc}`}
                       data={toc}
@@ -259,14 +281,14 @@ const useStyles = makeStyles(() => ({
         position: 'fixed',
         width: '100%',
         height: '100%',
-        alignContent:'center',
+        alignContent: 'center',
     },
     paragraphContainer: {
         fontFamily: 'SBL Hebrew',
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
-        display:'grid',
+        display: 'grid',
     },
     paragraph: {
         fontFamily: 'SBL Hebrew',
@@ -335,7 +357,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'right',
         width: '600px',
         border: '1px solid red',
-        verticalAlign:'top'
+        verticalAlign: 'top'
     },
     enRight: {
         textAlign: 'left',

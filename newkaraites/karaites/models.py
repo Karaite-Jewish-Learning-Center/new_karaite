@@ -684,9 +684,9 @@ class KaraitesBookAsArray(models.Model):
     @mark_safe
     def text(self):
         html = '<table><tbody><tr>'
-        html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[0]}</td>'
+        html += f'<td class="he-verse">{self.book_text[0]}</td>'
         try:
-            html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[2]}</td>'
+            html += f'<td class="en-verse" dir="ltr">{self.book_text[2]}</td>'
         except IndexError:
             pass
         html += '</tr></tbody></table>'

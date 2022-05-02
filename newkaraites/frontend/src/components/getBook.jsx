@@ -23,7 +23,6 @@ async function fetchDataKaraites(paneNumber, store) {
         const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${999999}/${0}/`)
         if (response.ok) {
             const data = await response.json()
-            debugger
             const details = data[BOOK_DETAILS]
             store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
             store.setBookDetails(details, paneNumber)
