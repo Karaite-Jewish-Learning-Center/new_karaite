@@ -8,7 +8,7 @@ import Colors from "../../constants/colors";
 import {capitalize} from "../../utils/utils";
 import {ToText} from "../general/ToText";
 import {cleanUrl} from "../../utils/cleanUrl";
-
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
 
 export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns = 6, header = true}) => {
 
@@ -35,7 +35,10 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
             comp.push(<Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`}>
                 <div>
                     <div className={classes.left}>
-                        <Typography className={classes.bookTitleEn}>{obj[key].book_title_en}</Typography>
+                        <Typography className={classes.bookTitleEn}>
+                            {obj[key].book_title_en}
+                            {(obj[key].song ? <MusicNoteIcon fontSize="small" color="secondary" /> : null)}
+                        </Typography>
                     </div>
                     <div className={classes.right}>
                         <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>

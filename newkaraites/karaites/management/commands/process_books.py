@@ -450,6 +450,23 @@ HALAKHAH = [
         False
     ],
     [
+        'HTML/Halakhah/Royal Attire/',
+        'Royal Attire-{}.html',
+        'he-en,in,toc',
+        [],
+        [update_bible_re],
+        {'name': r"Royal Attire,סֵֽפֶר לְבוּשׁ מַלְכוּת",
+         'first_level': 3,
+         'book_classification': '80',
+         'author': 'Hakham Mordecai ben Nisan,',
+         'css_class': '',
+         'table_book': True,
+         'columns': 2,
+         'columns_order': '0,1,2',
+         'toc_columns': '0,1,2', },
+        False
+    ],
+    [
         'HTML/Halakhah/Ritual Slaughter/',
         'Shehita-{}.html',
         'he-en,in,toc',
@@ -523,7 +540,8 @@ HAVDALA = [
          'first_level': 4,
          'book_classification': '10',
          'author': 'Essa Bechos Yesha‘,',
-         'css_class': 'simple'},
+         'css_class': 'simple',
+         'song': True},
         False
     ],
     [
@@ -536,7 +554,8 @@ HAVDALA = [
          'first_level': 4,
          'book_classification': '10',
          'author': 'Yosef ben Shemu’el Rodi,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -711,7 +730,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yosef ben Nisan Poziemski,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -724,7 +744,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Avraham ben Yoshiyahu Ha-rofé,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -737,7 +758,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Ashir Le’el ‘Elyon,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -750,7 +772,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yosef ben Yitsḥaḳ Itson,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -763,7 +786,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Ezra ben Nisan Ha-rofé,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -776,7 +800,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -816,7 +841,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -829,7 +855,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Odé Le’el Maḥsi,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -842,7 +869,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Mordochai Sultansky,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -855,7 +883,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Shabbat Menuḥa,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -868,7 +897,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yah Zimrati,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -894,7 +924,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yisra’el ben Shemu’el Ha-ma‘aravi Ha-dayyan,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -907,7 +938,8 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yeter Peletat ‘Am,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
 ]
@@ -990,7 +1022,8 @@ WEDDING_SONGS = [
          'first_level': 4,
          'book_classification': '50',
          'author': 'Amen Yehi Ratson,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
@@ -1003,12 +1036,13 @@ WEDDING_SONGS = [
          'first_level': 4,
          'book_classification': '50',
          'author': 'Laḥatani Mivḥar Banai,',
-         'css_class': 'simple-3-4'},
+         'css_class': 'simple-3-4',
+         'song': True},
         False
     ],
     [
         'HTML/Liturgy/Wedding Songs/Matsa_Ish_sha_Matsa_Tov/',
-        'Matsa_Ish_sha_Matsa_Tov-{}.html',
+        'Matsa Ish sha Matsa Tov-{}.html',
         'he-en,in',
         [],
         [update_bible_re],
