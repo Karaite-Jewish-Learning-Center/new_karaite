@@ -188,7 +188,11 @@ class Command(BaseCommand):
                             key = text
                             continue
 
-                        lang = detect(text)
+                        try:
+                            lang = detect(text)
+                        except LangDetectException:
+                            continue
+
                         if lang == 'he':
                             hebrew = text
                         elif lang == 'en':

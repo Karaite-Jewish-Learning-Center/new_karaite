@@ -66,7 +66,7 @@ const KaraitesPaneHeader: FC<IProps> = ({
                 <InfoButton onClick={onIntro}/>
                  <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
-                {(details.song ? <BasicAudioPlayer mp3={details.book_title_en} songStop={songStop}/> : null)}
+                {(details.song ? <BasicAudioPlayer song={details.book_title_en} songStop={songStop}/> : null)}
                 {(details.buy_link ===''? null :<BuyButton onClick={onBuy}/>)}
             </Grid>
 
