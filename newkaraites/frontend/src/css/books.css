@@ -493,57 +493,52 @@
 }
 
 /* Azkir Tehillo */
-.he-azkir-table-000 {
-    width: 60%;
-}
+/*.he-azkir-table-000 {*/
+/*}*/
 
-.he-azkir-table-000 tr:nth-child(even) td:nth-child(odd) p {
-    /*background-color: #3198dd;*/
-    margin-left: -70%;
-    margin-right: 10%;
-}
+/*.he-azkir-table-000 td:nth-child(odd) {*/
+/*    max-width: 65%;*/
+/*}*/
 
-.he-azkir-table-000 td {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.he-azkir-table-000 td:nth-child(odd) {
-    max-width: 65%;
-}
-
-.he-azkir-table-000 td:nth-child(even) {
-    width: 40%;
-}
-
-.he-azkir-table-000 tr:nth-child(odd) td:nth-child(odd) {
-    /*background-color: #dda131;*/
-    direction: ltr;
+.he-azkir-table-000 tr:nth-child(even) td:nth-child(odd) p{
     text-align: left;
     vertical-align: top;
-    margin-left: 10px;
+    margin-left: -270px !important;
 }
 
-.he-azkir-table-000 tr:nth-child(odd) td:nth-child(even) {
-    /*background-color: #dfedd5;*/
-    direction: ltr;
-    text-align: right;
+/*.Azkir-Tehillot tr:nth-child(even) td:nth-child(odd) {*/
+/*    direction: ltr;*/
+/*    text-align: right;*/
+/*   */
+/*}*/
+
+.he-azkir-table-000 tr:nth-child(odd) td:nth-child(odd)  {
+    direction:ltr;
+    text-align: left;
     vertical-align: top;
-    margin-right: 10px;
-    min-width: 50%;
+    padding-left: 15px;
+    width: 300px !important;
 }
 
-.he-azkir-tr-025 {
-    direction: ltr;
-}
 
-.he-azkir-tr-025 td:nth-child(even) p {
-    background-color: #ffd500;
+.he-azkir-table-000 tr:nth-child(odd) td:nth-child(even)  {
     direction: rtl;
     text-align: right;
-    width: 60%;
-
+    vertical-align: top;
+    padding-right: 15px;
+    width: 300px !important;
 }
+
+/*.he-azkir-tr-025 {*/
+/*    direction: ltr;*/
+/*}*/
+
+/*.he-azkir-tr-025 td:nth-child(even) p {*/
+/*    background-color: #ffd500;*/
+/*    direction: rtl;*/
+/*    text-align: right;*/
+/*    width: 60%;*/
+/*}*/
 
 /* Hodu Le’el De‘ot */
 .he-hodu_le_el-table-000 tr {
@@ -1097,6 +1092,44 @@
 }
 
 /* Patshegen Ketav Haddat */
+/* Matsa-Ish-sha-Matsa-Tov */
+.he-en-matsa_ish_-table-000 {
+    direction: ltr;
+    min-width: 600px;
+    font-size: 21px;
+}
+
+.he-en-matsa_ish_-table-000 tr:nth-child(odd) {
+    /*direction: ltr;*/
+    /*text-align: left;*/
+}
+
+.he-en-matsa_ish_-table-000 tr:nth-child(odd) td:nth-child(odd) p {
+    /*background-color: #3198dd*/
+    direction: rtl;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.he-en-matsa_ish_-table-000 tr:nth-child(odd) td:nth-child(even) p {
+    direction: ltr;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.he-en-matsa_ish_-table-000 tr:nth-child(even) {
+    /*background-color: #83a1d3;*/
+    direction: ltr;
+    text-align: left;
+    margin-left: -100px;
+    margin-right: -280px;
+    font-size: 21px;
+}
+
+.he-en-matsa_ish_-h2-000 {
+    font-size: 21px;
+    font-weight: normal;
+}
 
 /* Karaites books that have english an hebrew side by side */
 .The-Remnan table {

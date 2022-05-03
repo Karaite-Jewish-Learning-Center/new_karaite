@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import IconButton from "@material-ui/core/IconButton";
-import ButtonProps from './types';
+import {ButtonProps} from './types';
 
 
 export const BuyButton: FC<ButtonProps> = ({onClick, color}) =>

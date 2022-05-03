@@ -554,6 +554,14 @@ class KaraitesBookDetails(models.Model):
     # book has more than on table
     multi_tables = models.BooleanField(default=False)
 
+    # book has a song
+    song = models.BooleanField(default=False)
+
+    # buy link
+    buy_link = models.CharField(max_length=255, default='')
+    # search index hebrew , english, transliteration
+    index_lang = models.BooleanField(default=True)
+
     def __str__(self):
         return self.book_title_en
 
@@ -592,7 +600,10 @@ class KaraitesBookDetails(models.Model):
                 'direction': details.direction,
                 'remove_class': details.remove_class,
                 'remove_tags': details.remove_tags,
-                'multi_tables': details.multi_tables
+                'multi_tables': details.multi_tables,
+                'song': details.song,
+                'buy_link': details.buy_link,
+                'index_lag': details.index_lang,
             })
         return data
 
@@ -619,6 +630,9 @@ class KaraitesBookDetails(models.Model):
             'remove_class': details.remove_class,
             'remove_tags': details.remove_tags,
             'multi_tables': details.multi_tables,
+            'song': details.song,
+            'buy_link': details.buy_link,
+            'index_lag': details.index_lang,
         }
 
     def save(self, *args, **kwargs):
@@ -670,9 +684,9 @@ class KaraitesBookAsArray(models.Model):
     @mark_safe
     def text(self):
         html = '<table><tbody><tr>'
-        html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[0]}</td>'
+        html += f'<td class="he-verse">{self.book_text[0]}</td>'
         try:
-            html += f'<td class="he-verse" dir=\'rtl\'>{self.book_text[2]}</td>'
+            html += f'<td class="en-verse" dir="ltr">{self.book_text[2]}</td>'
         except IndexError:
             pass
         html += '</tr></tbody></table>'
@@ -913,4 +927,3 @@ class InvertedIndex(models.Model):
     class Meta:
         verbose_name_plural = _('Inverted index')
         ordering = ('-rank',)
-

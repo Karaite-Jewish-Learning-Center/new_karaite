@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from .command_utils.utils import get_html
 from .update_toc import update_toc
 from .update_book_details import update_book_details
-from .update_karaites_array import update_karaites_array
+from .update_karaites_array import update_karaites_array_array
 from .process_books import (HAVDALA,
                             PASSOVER_SONGS,
                             PURIM_SONGS,
@@ -46,7 +46,9 @@ class Command(BaseCommand):
             if details.get('css_class', None) is not None:
                 class_name = f" {details.get('css_class')} "
 
-            if lang.find('he') > -1:
+            if lang.find('he-en') > -1:
+                html = get_html(f"{PATH}{book.replace('{}', 'Hebrew-English')}")
+            elif lang.find('he') > -1:
                 html = get_html(f"{PATH}{book.replace('{}', 'Hebrew')}")
             else:
                 html = get_html(f'{PATH}{book}')
@@ -69,7 +71,7 @@ class Command(BaseCommand):
                 table_str += str(table)
                 table.decompose()
 
-            update_karaites_array(book_details, 1, 1, table_str)
+            update_karaites_array_array(book_details, 1, 1, table_str)
             html = str(divs[0]).replace('WordSection1', 'liturgy')
             update_book_details(details, introduction=html)
             update_toc(book_details, 1, details['name'].split(','))

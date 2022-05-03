@@ -63,15 +63,9 @@ const LoadBook = ({type}) => {
         }
     }
 
-    const openBook = ( paneNumber, refBook, refChapter,refVerse, refHighlight) => {
-        debugger
+    const openBook = (paneNumber, refBook, refChapter, refVerse, refHighlight) => {
         try {
-            // let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
-            // if (isOpen) {
-            //     store.setMessage(`${book} ${chapter}:${verse} already open.`)
-            // } else {
-                getBook(refBook, refChapter, refVerse, refHighlight, '', store).then().catch()
-            // }
+            getBook(refBook, refChapter, refVerse, refHighlight, '', store).then().catch()
         } catch (e) {
             store.setMessage(translateMessage(e))
         }
@@ -106,7 +100,7 @@ const LoadBook = ({type}) => {
                     </React.Fragment>
                 ))
 
-            }else {
+            } else {
                 jsx.push((
                     <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                         <KaraitesBooks
@@ -115,7 +109,8 @@ const LoadBook = ({type}) => {
                             paragraphs={store.getParagraphs(i)}
                             details={store.getBookDetails(i)}
                             type={type}
-                            onClosePane={onClosePane}/>
+                            onClosePane={onClosePane}
+                        />
                     </Grid>
                 ))
             }
