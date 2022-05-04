@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
     api = 'http://localhost:8000/'
 } else {
     api = 'https://kjlc.karaites.org/'
-    api = 'http://dev.karaites.org/'
+   // api = 'http://dev.karaites.org/'
 }
 
 export const apiUrl = api
