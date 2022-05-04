@@ -314,6 +314,7 @@ class Search(View):
             language = detect(search)
         except LangDetectException:
             language = 'en'
+        print(language, search)
 
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
@@ -322,15 +323,16 @@ class Search(View):
             results = set()
             highlight_word = []
             tokens = tokenizer.tokenize(search)
-
             for grp, token, token_num, (_, _) in tokens:
 
                 search_text = str(Hebrew(token).text_only())
+                print('search text')
+                print(search_text)
                 word_query = InvertedIndex.objects.get(word=search_text)
-
+                print(word_query)
                 # words to highlight
                 highlight_word += word_query.word_as_in_text
-
+                print(highlight_word)
                 # get id of documents
                 if not results:
                     results = set(word_query.documents)
@@ -338,7 +340,8 @@ class Search(View):
                     results = results.intersection(set(word_query.documents))
 
             results = list(results)[offset:offset+limit]
-
+            print('results')
+            print(results)
             items = []
             for k, result in FullTextSearchHebrew.objects.in_bulk(results).items():
                 items.append({'ref': result.reference_en,

@@ -415,5 +415,5 @@ class Command(BaseCommand):
 
             self.process_book(book, language, details, book_details, book_title_en, book_title_he, table_of_contents)
 
-        # update/create bible references
-        update_create_bible_refs(book_details)
+            # update/create bible references
+            update_create_bible_refs(book_details)

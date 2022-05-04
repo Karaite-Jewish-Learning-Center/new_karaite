@@ -20,7 +20,7 @@ interface IProps {
     onIntroClick: Function,
     onTocClick: Function,
     onBookClick: Function,
-    details:any,
+    details: any,
 }
 
 const KaraitesPaneHeader: FC<IProps> = ({
@@ -31,13 +31,12 @@ const KaraitesPaneHeader: FC<IProps> = ({
                                             onBookClick,
                                             details
                                         }) => {
-    const [songStop, setStopSong] = useState(false)
+
 
     const store = useContext(storeContext)
     const classes = resources()
 
     const onClose = () => {
-        setStopSong(true)
         onClosePane(paneNumber)
     }
     const onIntro = () => {
@@ -64,10 +63,10 @@ const KaraitesPaneHeader: FC<IProps> = ({
             <Grid item xs={5}>
                 <CloseButton onClick={onClose}/>
                 <InfoButton onClick={onIntro}/>
-                 <TocButton onClick={onToc}/>
+                <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
-                {(details.song ? <BasicAudioPlayer song={details.book_title_en} songStop={songStop}/> : null)}
-                {(details.buy_link ===''? null :<BuyButton onClick={onBuy}/>)}
+                {(details.song ? <BasicAudioPlayer song={details.book_title_en}/> : null)}
+                {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
             </Grid>
 
             <Grid item xs={4}>
