@@ -34,6 +34,10 @@ Update references (updates bible references)
  
 >> ./manage.py create_hebrew_search   
 
+>> ./manage.py create_hebrew_rank_search
+
+ 
+
 [//]: # (Update autocomplete)
 
 [//]: # ()

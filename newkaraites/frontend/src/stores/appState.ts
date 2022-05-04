@@ -149,11 +149,11 @@ class AppState {
         this.getPanes().some((pane) => pane.book === book)
 
     closePane = (i: number): void => {
-        console.log('Panes length before',this.panes.length)
+        console.log('Panes length before', this.panes.length)
         runInAction(() => {
             this.panes.splice(i, 1)
         })
-        console.log('Panes length after',this.panes.length)
+        console.log('Panes length after', this.panes.length)
     }
 
     resetPanes = (): void => {
@@ -248,6 +248,7 @@ class AppState {
     getLanguage = (i: number): string => this.panes[i].languages[0]
 
     nextLanguage = (i: number): Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
+
 }
 
 const appStore = () => {
