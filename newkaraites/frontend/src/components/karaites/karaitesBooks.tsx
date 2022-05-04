@@ -93,36 +93,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
         return store.getCurrentItem(paneNumber) === item
     }
 
-    // const itemTable = (item: number, data: Array<any>) => {
-    //     debugger
-    //     if (details.columns === 2) {
-    //         return (
-    //             <tr>
-    //
-    //                 {parse(data[HTML][0], {
-    //                     replace: domNode => {
-    //                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-    //                     }
-    //                 })}
-    //                 {parse(data[HTML][2], {
-    //                     replace: domNode => {
-    //                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-    //                     }
-    //                 })}
-    //             </tr>
-    //         )
-    //     } else {
-    //         return (
-    //             <tr>
-    //                 {parse(data[HTML][0], {
-    //                     replace: domNode => {
-    //                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-    //                     }
-    //                 })}
-    //             </tr>
-    //         )
-    //     }
-    // }
+
     const itemTable = (item: number, data: Array<any>) => {
 
         return (
@@ -194,7 +165,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
-        const tableBook = (details.table_book  ? 'table-book' :'')
+        const tableBook = (details.table_book ? 'table-book' : '')
 
         if (details.table_book) {
             // const tableBook = details.book_title_en.substr(0,10).replaceAll(' ','-')
@@ -228,6 +199,8 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
             )
         }
     }
+    if (details.book_title_en === undefined) return null
+
     // initial can't be negative
     const topItem: number = store.getCurrentItem(paneNumber) - 1
     const initial: number = (topItem > 0 ? topItem : 0)
@@ -244,9 +217,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                                onBookClick={onBookClick}
                                details={details}
             />
-            {/*<table className={'estaClasse'}>*/}
             <TableBook initial={initial}/>
-            {/*</table>*/}
 
             <Virtuoso className={`${(flags[TOC] ? classes.Show : classes.Hide)} ${classes.toc}`}
                       data={toc}

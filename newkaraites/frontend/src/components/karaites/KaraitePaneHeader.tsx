@@ -1,4 +1,4 @@
-import React, {useContext, FC, useState} from 'react'
+import React, {useContext, FC, memo} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import {Grid} from '@material-ui/core'
@@ -31,7 +31,6 @@ const KaraitesPaneHeader: FC<IProps> = ({
                                             onBookClick,
                                             details
                                         }) => {
-
 
     const store = useContext(storeContext)
     const classes = resources()
