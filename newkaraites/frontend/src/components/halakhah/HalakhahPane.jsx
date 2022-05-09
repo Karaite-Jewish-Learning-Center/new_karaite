@@ -21,7 +21,6 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose, openBook}) => 
     const classes = useStyles()
 
     const callOpenBook = (index) => {
-        debugger
         openBook( paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
     }
 
