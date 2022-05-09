@@ -1099,11 +1099,6 @@
     font-size: 21px;
 }
 
-.he-en-matsa-table-000 tr:nth-child(odd) {
-    /*direction: ltr;*/
-    /*text-align: left;*/
-}
-
 .he-en-matsa-table-000 tr:nth-child(odd) td:nth-child(odd) p {
     /*background-color: #3198dd*/
     direction: rtl;
