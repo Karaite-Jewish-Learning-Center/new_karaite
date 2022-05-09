@@ -1,6 +1,7 @@
-import React from "react";
+import React, {FC} from "react";
 import {useAudio} from "../../hooks/useAudio";
 import {PlayPauseReset} from '../../buttons/playPauseReset'
+import {Song, AudioTypeArray, ButtonPlayProps} from "../../buttons/types";
 
 
 export const BasicAudioPlayer = ({song}) => {

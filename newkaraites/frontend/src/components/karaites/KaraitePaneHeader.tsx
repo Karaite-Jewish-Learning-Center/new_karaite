@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import {Grid} from '@material-ui/core'
 import {unslug} from '../../utils/utils'
 import Colors from '../../constants/colors'
-import {observer} from 'mobx-react-lite'
+// import {observer} from 'mobx-react-lite'
 import {storeContext} from '../../stores/context'
 import {CloseButton} from "../buttons/CloseButton";
 import {InfoButton} from "../buttons/InfoButton";
@@ -93,4 +93,4 @@ const resources = makeStyles({
 
 })
 
-export default observer(KaraitesPaneHeader)
+export default KaraitesPaneHeader

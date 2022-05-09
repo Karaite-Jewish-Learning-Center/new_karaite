@@ -95,7 +95,13 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
 
     const itemTable = (item: number, data: Array<any>) => {
-
+        const x = data[HTML][0]
+        const td = parse(data[HTML][0], {
+                    replace: domNode => {
+                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                    }
+                })
+        debugger
         return (
             <tr>
                 {parse(data[HTML][0], {

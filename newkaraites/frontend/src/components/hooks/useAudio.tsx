@@ -1,7 +1,9 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {apiUrl} from "../../constants/constants";
+import {AudioTypeArray} from '../buttons/types';
 
-export const useAudio = (song) => {
+
+export const useAudio= (song:string) => {
     song = song.replace(/‘/g, '').replace(/e’/g, '').replace(/é/g, '').replace(/e’/g, '')
 
     const [audio] = useState(new Audio(`${apiUrl}static-django/audio/${song}.wav`));
