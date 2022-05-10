@@ -348,6 +348,41 @@ COMMENTS = [
     ],
 
 ]
+EXHORTATORY = [
+    [
+        'HTML/Exhortatory Literature/Qumisis_Epistle_To_Dispersion/',
+        'Qumisis Epistle to the Dispersion-{}.html',
+        'he,in',
+        [],
+        [],
+        {'name': r"Qumisi's Epistle to Dispersion, ",
+         'first_level': 11,
+         'book_classification': '65',
+         'author': 'Daniel al-Qumisi,',
+         'css_class': ''},
+        True
+    ],
+    [
+
+        'HTML/Exhortatory Literature/The Sayings of Moshe/',
+        'The Sayings of Moshe-{}.html',
+        'he-en,in',
+        [],
+        [],
+        {'name': r"The Sayings of Moshe, ",
+         'first_level': 11,
+         'book_classification': '65',
+         'author': 'Unknown,',
+         'css_class': '',
+         'columns': 2,
+         'columns_order': '0,1,2',
+         'toc_columns': '0,0,0',
+         },
+        True
+    ],
+
+]
+
 HALAKHAH = [
     [
         'HTML/Halakhah/aaron_ben_josephs_essay_on_the _obligation_of_prayer/',
@@ -1175,6 +1210,7 @@ LIST_OF_BOOKS = (COMMENTS +
                  SUPPLEMENTAL +
                  WEDDING_SONGS +
                  POETRY_NON_LITURGICAL +
+                 EXHORTATORY +
                  POLEMIC)
 
 
@@ -1463,6 +1499,7 @@ class Command(BaseCommand):
                                              SHABBAT_SONGS,
                                              WEDDING_SONGS,
                                              SUPPLEMENTAL,
+                                             EXHORTATORY,
                                              POETRY_NON_LITURGICAL)
         if not books_to_process:
             return

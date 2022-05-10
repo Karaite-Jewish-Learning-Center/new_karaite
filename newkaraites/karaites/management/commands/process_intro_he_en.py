@@ -8,6 +8,7 @@ from .update_karaites_array import (update_karaites_array,
                                     update_karaites_array_details)
 
 from .process_books import (COMMENTS,
+                            EXHORTATORY,
                             POLEMIC,
                             POETRY_NON_LITURGICAL,
                             HALAKHAH,
@@ -42,7 +43,8 @@ LIST_OF_BOOKS = (COMMENTS +
                  POETRY_NON_LITURGICAL +
                  HALAKHAH +
                  PASSOVER_SONGS +
-                 PRAYERS
+                 PRAYERS +
+                 EXHORTATORY
                  )
 
 # LITURGY = (HAVDALA +
@@ -346,8 +348,13 @@ class Command(BaseCommand):
                 for p in divs[0].find_all(recursive=False):
                     text = p.get_text(strip=False)
                     key, value = self.find_toc_key(text, debug=False)
-
-                    p = str(p)
+                    try:
+                        p = str(p)
+                        print(p)
+                        input('....')
+                    except TypeError:
+                        print('error')
+                        continue
 
                     if key is not None:
                         p = p.replace('#', '')
@@ -388,6 +395,7 @@ class Command(BaseCommand):
                                              [],
                                              [],
                                              [],
+                                             EXHORTATORY,
                                              POETRY_NON_LITURGICAL)
 
         if not books_to_process:

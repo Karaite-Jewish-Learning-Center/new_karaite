@@ -55,4 +55,11 @@ def arguments(parser):
         default=0,
         help='Process a single book',
     )
+    parser.add_argument(
+        '--exhortatory',
+        dest='exhortatory',
+        action='store_true',
+        default=False,
+        help='Process exhortatory books',
+    )
     return parser

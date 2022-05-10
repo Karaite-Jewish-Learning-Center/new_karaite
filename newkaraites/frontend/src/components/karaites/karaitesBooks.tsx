@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef, FC, MouseEventHandler} from 'react'
+import React, {useContext, useState, useRef, FC, MouseEventHandler, memo} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import {TableVirtuoso} from 'react-virtuoso'
@@ -213,6 +213,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
     const intro = (details.intro === undefined ? [''] : [details.intro])
     const toc = (details.toc === undefined ? [''] : details.toc)
+
 
     return (
         <>

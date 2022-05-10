@@ -18,12 +18,12 @@ export interface Song {
 }
 
 interface AudioType {
-    onClick: MouseEvent,
-    onReset: MouseEvent,
+    onClick: MouseEvent<HTMLButtonElement>,
+    onReset: MouseEvent<HTMLButtonElement>,
     playing: boolean,
 }
 
-export type AudioTypeArray = AudioType[]
+export type AudioTypeArray = AudioType[];
 
 
 export interface KeyboardsProps {

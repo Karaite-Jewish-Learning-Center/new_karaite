@@ -87,23 +87,26 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 50,
         width: '100%',
         backgroundColor: Colors['rightPaneBackGround'],
-        textAlign: 'center'
+        textAlign: 'center',
     },
     hebrewBook: {
         textAlign: ((props) => props.lang === 'he' ? 'center' : 'right'),
         verticalAlign: 'middle',
         direction: 'rtl',
         fontFamily: 'SBL Hebrew',
+        paddingTop:10,
     },
 
     chapterView: {
         textAlign: 'center',
         verticalAlign: 'middle',
         paddingRight: 23,
+        paddingTop:10,
     },
     englishBook: {
         verticalAlign: 'middle',
         textAlign: ((props) => props.lang === 'en' ? 'center' : 'left'),
+        paddingTop:10,
     },
 
 }));

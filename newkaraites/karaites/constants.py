@@ -22,7 +22,7 @@ BOOK_CLASSIFICATION = [
     ('55', 'Poetry'),
     # Polemic
     ('60', 'Polemic'),
-
+    ('65', 'Exhortatory'),
     # test
     ('70', 'Test'),
     ('80', 'Comments'),
@@ -43,6 +43,7 @@ FIRST_LEVEL = [
     (8, 'Comments'),
     (9, 'Poetry (Non-Liturgical)'),
     (10, 'Other'),
+    (11, 'Exhortatory'),
 ]
 
 SECOND_LEVEL = [

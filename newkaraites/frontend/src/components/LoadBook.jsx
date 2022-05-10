@@ -138,10 +138,10 @@ const LoadBook = ({type}) => {
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        height: 'calc(95vh - 70px)',
+        height: 'calc(95vh - 67px)',
         overflow: 'hidden',
         position: 'fixed',
-        top: 70,
+        top: 67,
         fontSize: '21px !important',
     },
     item: {
