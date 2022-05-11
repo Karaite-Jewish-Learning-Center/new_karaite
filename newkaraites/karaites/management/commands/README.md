@@ -24,10 +24,6 @@ Comments (Aaron ben Elijah)
  
 >> ./manage.py process_intro_he_en
  
-Liturgy books
-
->> ./manage.py karaites_liturgy_as_array
-
 Update references (updates bible references)
 
 >> ./manage.py update_references

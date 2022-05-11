@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {getFirstLevelUrl} from '../../constants/constants'
-import Filler from "../general/Filler.tsx";
 import {storeContext} from "../../stores/context";
 import {makeStyles} from '@material-ui/core/styles'
 import Colors from "../../constants/colors";
@@ -90,11 +89,7 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.up('xl')]: {
             // backgroundColor: 'pink',
-
         },
-
-
-        // border: '1px solid blue',
     },
 
     ruler: {

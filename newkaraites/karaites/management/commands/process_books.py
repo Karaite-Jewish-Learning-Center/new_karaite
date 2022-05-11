@@ -319,7 +319,6 @@ def add_book_parts(path, book_name, books=BOOKS):
 # table_book
 COMMENTS = [
     [
-
         'HTML/Comments/Ali ben Suleiman/',
         'ali_ben_suleiman_commentary_on_genesis-{}.html',
         'ja,in',
