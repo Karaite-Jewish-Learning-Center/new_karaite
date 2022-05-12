@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('xs')]: {
             //backgroundColor: 'red',
-            marginBottom: 80,
+            marginBottom: 130,
         },
     },
 }));

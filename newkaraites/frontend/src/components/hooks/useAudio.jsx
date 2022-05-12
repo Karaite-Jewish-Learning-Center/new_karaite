@@ -1,10 +1,16 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import {apiUrl} from "../../constants/constants";
 
 export const useAudio = (song) => {
     song = song.replace(/‘/g, '').replace(/e’/g, '').replace(/é/g, '').replace(/e’/g, '')
 
-    const [audio] = useState(new Audio(`${apiUrl}static-django/audio/${song}.wav`));
+    const url = `${apiUrl}static-django/audio/${song}.wav`
+
+    const [audio] = useState(useMemo(() => {
+        return new Audio(url)
+    }, [url]))
+
+
     const [playing, setPlaying] = useState(false);
 
     const toggle = () => setPlaying(!playing);

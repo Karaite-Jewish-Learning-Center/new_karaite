@@ -829,7 +829,7 @@ class AutoComplete(models.Model):
 
 class FullTextSearch(models.Model):
     """ Full text search for books in English """
-    path = models.CharField(max_length=20, default='')
+    path = models.CharField(max_length=50, default='')
 
     reference_en = models.CharField(max_length=100, default='')
 
@@ -856,7 +856,7 @@ class FullTextSearch(models.Model):
 
 class FullTextSearchHebrew(models.Model):
     """ Full text search for books in Hebrew """
-    path = models.CharField(max_length=20, default='')
+    path = models.CharField(max_length=50, default='')
 
     reference_en = models.CharField(max_length=100,
                                     db_index=True,

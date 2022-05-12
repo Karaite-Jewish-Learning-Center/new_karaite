@@ -5,9 +5,11 @@ from django.core.management.base import BaseCommand
 from .command_utils.utils import get_html
 from .update_book_details import update_book_details
 from .update_karaites_array import (update_karaites_array,
-                                    update_karaites_array_details)
+                                    update_karaites_array_details,
+                                    update_karaites_array_array)
 
 from .process_books import (COMMENTS,
+                            EXHORTATORY,
                             POLEMIC,
                             POETRY_NON_LITURGICAL,
                             HALAKHAH,
@@ -37,23 +39,35 @@ from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 from langdetect import (detect,
                         LangDetectException)
 
+# LIST_OF_BOOKS = (COMMENTS +
+#                  POLEMIC +
+#                  POETRY_NON_LITURGICAL +
+#                  HALAKHAH +
+#                  PASSOVER_SONGS +
+#                  PRAYERS +
+#                  EXHORTATORY
+#                  )
+
 LIST_OF_BOOKS = (COMMENTS +
-                 POLEMIC +
-                 POETRY_NON_LITURGICAL +
                  HALAKHAH +
+                 HAVDALA +
                  PASSOVER_SONGS +
-                 PRAYERS
-                 )
+                 PURIM_SONGS +
+                 PRAYERS +
+                 SHABBAT_SONGS +
+                 SUPPLEMENTAL +
+                 WEDDING_SONGS +
+                 POETRY_NON_LITURGICAL +
+                 EXHORTATORY +
+                 POLEMIC)
 
-# LITURGY = (HAVDALA +
-#            PASSOVER_SONGS +
-#            PRAYERS +
-#            PURIM_SONGS +
-#            SHABBAT_SONGS +
-#            SUPPLEMENTAL +
-#            WEDDING_SONGS)
-
-LITURGY = PASSOVER_SONGS + PRAYERS
+LITURGY = (HAVDALA +
+           PASSOVER_SONGS +
+           PRAYERS +
+           PURIM_SONGS +
+           SHABBAT_SONGS +
+           SUPPLEMENTAL +
+           WEDDING_SONGS)
 
 
 class Command(BaseCommand):
@@ -215,7 +229,95 @@ class Command(BaseCommand):
                     table_of_contents[key] = value
         return table_of_contents
 
+    @staticmethod
+    def check_is_a_liturgy_book(book_title_en):
+
+        for _, _, _, _, _, details, _ in LITURGY:
+            if book_title_en in details['name']:
+                return True
+
+        return False
+
+    def process_liturgy_books(self, details, lang, book, book_details, book_title_en, book_title_he):
+
+        if details.get('css_class', None) is not None:
+            class_name = f" {details.get('css_class')} "
+
+        if lang.find('he-en') > -1:
+            html = get_html(f"{PATH}{book.replace('{}', 'Hebrew-English')}")
+        elif lang.find('he') > -1:
+            html = get_html(f"{PATH}{book.replace('{}', 'Hebrew')}")
+        else:
+            html = get_html(f'{PATH}{book}')
+
+        html = html.replace('class="a ', f'class="MsoTableGrid ')
+        html = html.replace('class="a0 ', f'class="a0 MsoTableGrid ')
+        html = html.replace('class="a1 ', f'class="a1 MsoTableGrid ')
+
+        html = html.replace('class="MsoTableGrid', f'class="MsoTableGrid{class_name}')
+        html = html.replace('class="a0 MsoTableGrid', f'class="MsoTableGrid{class_name}')
+        html = html.replace('class="a1 MsoTableGrid', f'class="MsoTableGrid{class_name}')
+        html_tree = BeautifulSoup(html, 'html5lib')
+
+        divs = html_tree.find_all('div', {'class': 'WordSection1'})
+
+        # parse text to pass to full text index search
+        text_en = ''
+        text_he = ''
+        for div in divs[0].find_all('table'):
+            trs = div.find_all('tr')
+            for tr in trs:
+                for td in tr.find_all('td'):
+                    text = td.get_text(strip=False)
+                    try:
+                        if detect(text) == 'he':
+                            text_he = f'{text_he} {text}'
+                        else:
+                            text_en = f'{text_en} {text}'
+                    except LangDetectException:
+                        pass
+
+        table_str = ''
+        for table in divs[0].find_all('table'):
+            table.attrs = clean_tag_attr(table)
+            table = clean_table_attr(table)
+            table_str += str(table)
+            table.decompose()
+
+        update_karaites_array_array(book_details, 1, 1, table_str)
+        html = str(divs[0]).replace('WordSection1', 'liturgy')
+        update_book_details(details, introduction=html)
+        update_toc(book_details, 1, details['name'].split(','))
+
+        # make book title searchable
+        update_full_text_search_index_en_he(book_title_en,
+                                            book_title_he,
+                                            1,
+                                            '',
+                                            divs[0].get_text(strip=False),
+                                            '',
+                                            'Liturgy')
+        # make book title searchable
+        update_full_text_search_index_en_he(book_title_en,
+                                            book_title_he,
+                                            1,
+                                            '',
+                                            book_title_en,
+                                            book_title_he,
+                                            'Liturgy')
+        # book text
+        update_full_text_search_index_en_he(book_title_en,
+                                            book_title_he,
+                                            1,
+                                            '',
+                                            text_en,
+                                            text_he,
+                                            'Liturgy')
+        # update/create bible references
+        update_create_bible_refs(book_details)
+
     def process_book(self, book, language, details, book_details, book_title_en, book_title_he, table_of_contents):
+
         table_book = details.get('table_book', False)
         index_lang = details.get('index_lang', '')
         language.split(',')
@@ -346,8 +448,11 @@ class Command(BaseCommand):
                 for p in divs[0].find_all(recursive=False):
                     text = p.get_text(strip=False)
                     key, value = self.find_toc_key(text, debug=False)
-
-                    p = str(p)
+                    try:
+                        p = str(p)
+                    except TypeError:
+                        print('error')
+                        continue
 
                     if key is not None:
                         p = p.replace('#', '')
@@ -380,14 +485,15 @@ class Command(BaseCommand):
                                              LIST_OF_BOOKS,
                                              COMMENTS,
                                              HALAKHAH,
-                                             [],
+                                             HAVDALA,
                                              PASSOVER_SONGS,
                                              PURIM_SONGS,
                                              PRAYERS,
                                              POLEMIC,
-                                             [],
-                                             [],
-                                             [],
+                                             SHABBAT_SONGS,
+                                             WEDDING_SONGS,
+                                             SUPPLEMENTAL,
+                                             EXHORTATORY,
                                              POETRY_NON_LITURGICAL)
 
         if not books_to_process:
@@ -405,15 +511,30 @@ class Command(BaseCommand):
             FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()
             book_details, _ = update_book_details(details, language='en,he')
 
-            if 'in' in language:
-                language = language.replace('in', '')
-                self.process_intro(book, details, book_title_en, book_title_he)
+            if self.check_is_a_liturgy_book(book_title_en):
 
-            if 'toc' in language:
-                language = language.replace('toc', '')
-                table_of_contents = self.process_toc(book, details, table_of_contents)
+                self.process_liturgy_books(details, language, book, book_details, book_title_en, book_title_he)
 
-            self.process_book(book, language, details, book_details, book_title_en, book_title_he, table_of_contents)
+            else:
 
-            # update/create bible references
-            update_create_bible_refs(book_details)
+                if 'in' in language:
+                    language = language.replace('in', '')
+                    self.process_intro(book, details, book_title_en, book_title_he)
+
+                if 'toc' in language:
+                    language = language.replace('toc', '')
+                    table_of_contents = self.process_toc(book, details, table_of_contents)
+
+                self.process_book(book, language, details, book_details, book_title_en, book_title_he,
+                                  table_of_contents)
+
+                # make book title searchable
+                update_full_text_search_index_en_he(book_title_en,
+                                                    book_title_he,
+                                                    1,
+                                                    '',
+                                                    book_title_en,
+                                                    book_title_he,
+                                                    self.expand_book_classification(details))
+                # update/create bible references
+                update_create_bible_refs(book_details)

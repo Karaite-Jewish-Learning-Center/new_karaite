@@ -19,8 +19,8 @@ let api: string
 if (process.env.NODE_ENV === 'development') {
     api = 'http://localhost:8000/'
 } else {
-    api = 'https://kjlc.karaites.org/'
-   // api = 'http://dev.karaites.org/'
+   // api = 'https://kjlc.karaites.org/'
+    api = 'http://dev.karaites.org/'
 }
 
 export const apiUrl = api
@@ -31,6 +31,7 @@ export const LITURGY: string = '4'
 export const POLEMIC: string = '5'
 export const COMMENTS: string = '8'
 export const POETRY: string = '9'
+export const EXHORTATORY:string ='11'
 
 
 export const TRANSFORM_TYPE: string = 'Bible'

@@ -14,6 +14,7 @@ def process_arguments(options,
                       SHABBAT_SONGS,
                       WEDDING_SONGS,
                       SUPPLEMENTAL,
+                      EXHORTATORY,
                       POETRY_NON_LITURGICAL):
 
     books_to_process = []
@@ -39,7 +40,8 @@ def process_arguments(options,
             i += 1
         return []
 
-    if options['comments'] or options['halakhah'] or options['liturgy'] or options['poetry'] or options['polemic']:
+    if options['comments'] or options['halakhah'] or options['liturgy']\
+            or options['poetry'] or options['polemic'] or options['exhortatory']:
 
         if options['comments']:
             books_to_process += COMMENTS
@@ -55,6 +57,10 @@ def process_arguments(options,
 
         if options['polemic']:
             books_to_process += POLEMIC
+
+        if options['exhortatory']:
+            books_to_process += EXHORTATORY
+
     else:
         books_to_process = LIST_OF_BOOKS
 

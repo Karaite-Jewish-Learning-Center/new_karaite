@@ -11,6 +11,7 @@ import Liturgy from "./components/liturgy/Liturgy"
 import Poetry from "./components/poetry/poetry"
 import Polemic from "./components/polemic/Polemic"
 import Comment from "./components/comments/comment"
+import Exhortatory from "./components/Exhortatory/Exhortatory";
 import Display from "./components/pages/Display";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
@@ -62,6 +63,9 @@ function App() {
 
                         <Route exact path="/Polemic/:book/1/" children={<LoadBook type="polemic"/>}/>
                         <Route exact path="/Polemic/"><Polemic/></Route>
+
+                         <Route exact path="/Exhortatory/:book/1/" children={<LoadBook type="Exhortatory"/>}/>
+                        <Route exact path="/Exhortatory/"><Exhortatory/></Route>
 
                         <Route exact path="/Comments/:book/:chapter/" children={<LoadBook type="comments"/>}/>
                         <Route exact path="/Comments/1/" children={<LoadBook type="comments"/>}/>
