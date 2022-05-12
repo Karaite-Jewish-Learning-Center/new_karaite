@@ -358,7 +358,8 @@ EXHORTATORY = [
          'first_level': 11,
          'book_classification': '65',
          'author': 'Daniel al-Qumisi,',
-         'css_class': ''},
+         'css_class': '',
+         'buy_link':'https://thekaraitepress.com/products/the-chief-cornerstone'},
         True
     ],
     [
