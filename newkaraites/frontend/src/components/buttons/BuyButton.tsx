@@ -5,7 +5,7 @@ import {ButtonProps} from './types';
 
 
 export const BuyButton: FC<ButtonProps> = ({onClick, color}) =>
-    <IconButton aria-label="Buy" style={{color: "red"}}
+    <IconButton aria-label="Buy" style={{color: "indianred"}}
                 component="span"
                 color={color}
                 onClick={onClick}>

@@ -10,12 +10,9 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import {Typography} from '@material-ui/core';
+import {Hidden, Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import AutoComplete from '../autcomplete/autocomplete'
-import {Vkeybord} from "../vkeyboard/keyboard";
-import {KeyboardButton} from "../buttons/KeyboardButton";
-
 
 
 export default function PrimarySearchAppBar() {
@@ -26,7 +23,7 @@ export default function PrimarySearchAppBar() {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const onKeyboardButton =() => setKeyboardOpen(!keyboardOpen)
+    const onKeyboardButton = () => setKeyboardOpen(!keyboardOpen)
 
     const handleLanguageMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -107,20 +104,21 @@ export default function PrimarySearchAppBar() {
                 <Typography component="h3">
                     <Link className={classes.link} to="/texts/">Texts</Link>
                 </Typography>
-                <Typography component="h3">
-                    <a className={classes.link} href="https://www.karaites.org/support-our-work1.html" rel="noreferrer" target="_blank">Donate</a>
-                </Typography>
-                <Typography component="h3">
-                    <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
-                </Typography>
+                <Hidden smDown>
+                    <Typography component="h3">
+                        <a className={classes.link} href="https://www.karaites.org/support-our-work1.html" rel="noreferrer" target="_blank">Donate</a>
+                    </Typography>
+                    <Typography component="h3">
+                        <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
+                    </Typography>
+                </Hidden>
+                 <AutoComplete/>
                 {/*<Typography component="h3">*/}
                 {/*    <Link className={classes.link} to="/"><SearchIcon /></Link>*/}
                 {/*</Typography>*/}
 
                 <div className={classes.sectionDesktop}>
-                    <AutoComplete/>
-                    <KeyboardButton onClick={onKeyboardButton} open={keyboardOpen} />
-                    {/*<Vkeybord />*/}
+
                     <IconButton aria-label="Go to sign up form" color="inherit">
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
