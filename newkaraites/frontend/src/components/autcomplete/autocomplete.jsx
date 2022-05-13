@@ -99,40 +99,39 @@ const AutoComplete = () => {
     }, [search, store]);
 
     return (
-        <div className={classes.container}>
-            <Autocomplete
-                freeSolo
-                value={search}
-                open={isOpen}
-                classes={{
-                    root: classes.root,
-                    inputRoot: classes.inputRoot,
-                    fullWidth: classes.fullWidth,
-                }}
-                // works around i, will be used has index to access other properties
-                // of options like in renderOption and onChange
-                options={options.map((option, i) => `${i}`)}
-                onKeyUp={onKeyUp}
-                onChange={onChange}
-                getOptionLabel={(option) => option}
-                style={{width: 350, marginRight: 40}}
-                inputValue={search}
-                onInputChange={onInputChange}
-                renderOption={(i) =>
-                    <>
-                        {(options[i].c === 'V' ? <ImportContactsIcon/> : <MenuBookIcon/>)}
-                        <span>{' '}{options[i].w}</span>
-                    </>
-                }
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        label="Search"
-                        variant="standard"
-                    />
-                )}
-            />
-        </div>
+
+        <Autocomplete
+            freeSolo
+            value={search}
+            open={isOpen}
+            classes={{
+                root: classes.root,
+                inputRoot: classes.inputRoot,
+                fullWidth: classes.fullWidth,
+            }}
+            // works around i, will be used has index to access other properties
+            // of options like in renderOption and onChange
+            options={options.map((option, i) => `${i}`)}
+            onKeyUp={onKeyUp}
+            onChange={onChange}
+            getOptionLabel={(option) => option}
+            style={{width: 350, marginRight: 40}}
+            inputValue={search}
+            onInputChange={onInputChange}
+            renderOption={(i) =>
+                <>
+                    {(options[i].c === 'V' ? <ImportContactsIcon/> : <MenuBookIcon/>)}
+                    <span>{' '}{options[i].w}</span>
+                </>
+            }
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    label="Search"
+                    variant="standard"
+                />
+            )}
+        />
     );
 }
 
@@ -141,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: Colors['white'],
         margin: 0,
-        padding:0,
+        padding: 0,
         width: '300px !important',
         [theme.breakpoints.down('xs')]: {
             width: '100px !important',

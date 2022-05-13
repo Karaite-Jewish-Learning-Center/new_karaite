@@ -266,7 +266,7 @@ const useStyles = makeStyles(() => ({
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
-        display: 'grid',
+        width:'100%',
     },
     paragraph: {
         fontFamily: 'SBL Hebrew',

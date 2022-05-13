@@ -109,12 +109,18 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         maxWidth: '60%',
+         [theme.breakpoints.down('md')]: {
+            maxWidth: '85%',
+        },
         marginLeft: 'auto',
         marginRight: 'auto',
     },
     header: {
-        maxWidth: '70%',
-        marginLeft: '20%',
+        maxWidth: '60%',
+         [theme.breakpoints.down('md')]: {
+            maxWidth: '85%',
+        },
+        marginLeft: 'auto',
         marginRight: 'auto',
         marginBottom:50,
     },
