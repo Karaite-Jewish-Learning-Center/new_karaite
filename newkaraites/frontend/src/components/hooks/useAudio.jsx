@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from "react";
+import {useEffect, useState, useMemo, useCallback} from "react";
 import {apiUrl} from "../../constants/constants";
 
 export const useAudio = (song) => {
@@ -15,25 +15,25 @@ export const useAudio = (song) => {
 
     const toggle = () => setPlaying(!playing);
 
-    const reset = () => {
+    const reset = useCallback(() => {
         setPlaying(false)
         audio.pause()
         audio.currentTime = 0
-    }
+    },[audio])
 
     useEffect(() => {
             playing ? audio.play() : audio.pause();
         },
-        [playing]
+        [playing,audio]
     );
 
     useEffect(() => {
         audio.addEventListener('ended', () => setPlaying(false));
         return () => {
             audio.removeEventListener('ended', () => setPlaying(false));
-            reset()
+            //reset()
         };
-    }, []);
+    } );
 
     return [playing, toggle, reset];
 };

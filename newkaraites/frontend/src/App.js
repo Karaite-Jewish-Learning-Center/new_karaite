@@ -4,7 +4,7 @@ import MyAppBar from "./components/menu/AppBar";
 import FirstLevel from "./components/menu/FirstLevel"
 import Tanakh from "./components/tanakh/Tanakh"
 import LoadBook from "./components/LoadBook";
-import {createMuiTheme} from '@material-ui/core/styles'
+import {createTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/core/styles'
 import Halakhah from './components/halakhah/Halakhah'
 import Liturgy from "./components/liturgy/Liturgy"
@@ -83,7 +83,7 @@ function App() {
 
 export default App;
 
-const theme = createMuiTheme({
+const theme = createTheme({
         palette: {
             primary: {
                 main: '#ffffff',

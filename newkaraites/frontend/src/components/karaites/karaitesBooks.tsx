@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef, FC, MouseEventHandler, memo} from 'react'
+import React, {useContext, useState, useRef, FC, MouseEventHandler} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import {TableVirtuoso} from 'react-virtuoso'
@@ -95,13 +95,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
 
     const itemTable = (item: number, data: Array<any>) => {
-        const x = data[HTML][0]
-        const td = parse(data[HTML][0], {
-                    replace: domNode => {
-                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                    }
-                })
-        debugger
+
         return (
             <tr>
                 {parse(data[HTML][0], {
@@ -171,7 +165,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
-        const tableBook = (details.table_book ? 'table-book' : '')
+        // const tableBook = (details.table_book ? 'table-book' : '')
 
         if (details.table_book) {
             // const tableBook = details.book_title_en.substr(0,10).replaceAll(' ','-')

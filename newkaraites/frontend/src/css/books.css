@@ -141,9 +141,6 @@
 }
 
 /* simple-3-4 */
-{
-
-}
 .simple-3-4 {
     margin-top: 50px;
 }
@@ -182,49 +179,36 @@
 
 /* Anochi */
 
-/*.he-anochi-table-000 {*/
-/*    max-width: 800px;*/
-/*    direction: ltr;*/
-/*}*/
+.he-anochi-table-000 {
+    max-width: 800px;
+    direction: ltr;
+    word-break: break-all;
+}
 
-/*.he-anochi-table-000 tr:nth-child(odd) td:nth-child(2) {*/
-/*    margin: 0;*/
-/*    padding-left: 10px;*/
-/*}*/
-
-
-/*.he-anochi-table-000 tr:nth-child(odd) td:first-child {*/
-/*    padding-right: 10px;*/
-/*}*/
-
-/*.he-anochi-table-000 tr:nth-child(even) {*/
-/*    margin-left: 20%;*/
-/*    margin-right: -100%;*/
-/*}*/
-
-/*.he-anochi-span-002, .he-anochi-span-004, .he-anochi-span-007, .he-anochi-span-008 {*/
-/*    color: red;*/
-/*}*/
-
-/*.he-anochi-tr-016 {*/
-/*    direction: ltr;*/
-/*}*/
-
-/*.he-anochi-p-005 {*/
-/*    text-align: right;*/
-/*    direction: ltr;*/
-/*}*/
+.he-anochi-span-002, .he-anochi-span-004, .he-anochi-span-007, .he-anochi-span-008 {
+    color: red;
+}
 
 /* Ashir Beshir Ḥadash*/
-
 
 /* Ashir Le’el ‘Elyon */
 
 .he-ashir-table-003 {
-    background-color: #ef98c9;
-    max-width: 80%;
+    max-width: none;
+     word-break: break-all;
+    /*background-color: #ef98c9;*/
+}
+.he-ashir-table-003  tr  {
+    margin: 0;
+    /*background-color: #ffc000;*/
+}
+.he-ashir-table-003  tr:nth-child(even){
+    margin: 0;
+    padding-bottom: 10px;
+    /*background-color: #ffc000;*/
 }
 
+/* Ekkon */
 .he-ekkon-table-000 tr:nth-child(odd) td:nth-child(odd) {
     direction: ltr;
 }
@@ -257,10 +241,9 @@
 
 /* Essa Bechos Yesha‘ */
 .he-essa-table-000 {
-    max-width: 70%;
-    min-width: 70%;
     direction: rtl;
-    text-align: left;
+    padding: 5px;
+    /*background-color: #F9690E;*/
 }
 
 /* Essa Bechos Yesha‘ */
@@ -619,6 +602,10 @@
     direction: ltr;
     text-align: left;
     margin-left: 10px;
+}
+.he-en-matsa-table-000 h2 {
+    font-size: 21px;
+    font-weight: normal;
 }
 
 /* Karaites books that have english an hebrew side by side */

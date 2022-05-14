@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {fade, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,15 +18,17 @@ import AutoComplete from '../autcomplete/autocomplete'
 export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const [keyboardOpen, setKeyboardOpen] = useState(false)
     const classes = useStyles();
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const onKeyboardButton = () => setKeyboardOpen(!keyboardOpen)
-
     const handleLanguageMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+         event.preventDefault()
+        if (anchorEl === null) {
+            setAnchorEl(event.currentTarget)
+        } else {
+            setAnchorEl(null)
+        }
     };
 
     const handleMobileMenuClose = () => {
@@ -117,7 +119,7 @@ export default function PrimarySearchAppBar() {
                 {/*</Typography>*/}
 
                 <div className={classes.sectionDesktop}>
-                        <AutoComplete/>
+                    <AutoComplete/>
                     <IconButton aria-label="Go to sign up form" color="inherit">
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
@@ -135,7 +137,7 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
-                     <AutoComplete/>
+                    <AutoComplete/>
                     <IconButton
                         aria-label="show more"
                         aria-controls={mobileMenuId}
@@ -158,7 +160,7 @@ const useStyles = makeStyles((theme) => ({
 
 
     sectionDesktop: {
-        flexGrow:1,
+        flexGrow: 1,
         justifyContent: 'flex-end',
         [theme.breakpoints.down('xl')]: {
             display: 'flex',
@@ -167,7 +169,7 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         }
     },
-    sectionMobile:{
+    sectionMobile: {
         flexGrow: 1,
         justifyContent: 'flex-end',
         [theme.breakpoints.down('xl')]: {
