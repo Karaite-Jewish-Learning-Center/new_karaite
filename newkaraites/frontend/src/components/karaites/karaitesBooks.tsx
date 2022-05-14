@@ -11,6 +11,7 @@ import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
 import {Button, Typography} from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 const HTML = 2
@@ -51,6 +52,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     const [flags, setFlags] = useState<Array<boolean>>([true, false, false])
     const classes = useStyles()
     const virtuoso = useRef(null);
+
     if (paragraphs.length === 0) {
         return <Loading/>
     }
@@ -363,8 +365,7 @@ const useStyles = makeStyles(() => ({
     },
     tocButton: {
         textTransform: 'none',
-    }
-
+    },
 }))
 
 

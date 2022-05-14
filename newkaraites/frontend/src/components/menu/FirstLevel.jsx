@@ -59,7 +59,7 @@ const FirstLevel = () => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // border: '1px solid red',
+        border: '1px solid red',
         paddingTop: theme.spacing(15),
         width: '100%',
     },
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
         height: 100,
         [theme.breakpoints.up('xs')]: {
             // backgroundColor: 'red',
-            height: 120,
+            height: 200,
         },
         [theme.breakpoints.up('sm')]: {
             // backgroundColor: 'yellow',

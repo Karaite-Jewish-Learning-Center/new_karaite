@@ -170,15 +170,85 @@
     color: red;
 }
 
+.stacked {
+    margin-top: 70px;
+    max-width: 700px;
+    direction: ltr;
+}
 
+.stacked tr td:nth-child(odd) {
+    margin-top: 0;
+    direction: rtl;
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top;
+    background-color: #98ccef;
+}
+
+.stacked tr td:nth-child(even) {
+    margin-top: 0;
+    text-align: left;
+    padding-left: 10px;
+    vertical-align: top;
+    background-color: #ffc000;
+}
+
+.table-book table {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 700px;
+    direction: ltr;
+}
+
+.table-book tr {
+    /*background-color: blue;*/
+    width: 100% !important;
+}
+
+.table-book tr {
+    /*background-color: #3FC380;*/
+    vertical-align: top;
+}
+
+.table-book tr tr td {
+    background-color: #3FC380;
+    width: 50%;
+}
+.table-book td:nth-child(even) p {
+    /*border: 1px solid #3498db;*/
+    direction: ltr;
+    text-align: left;
+    padding: 5px;
+}
+
+.table-book td:nth-child(odd) p {
+    /*border: 1px solid chartreuse;*/
+    direction: rtl;
+    text-align: right;
+    padding: 5px;
+}
+
+/* liturgy introduction */
+.liturgy {
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 700px;
+    font-size: 21px;
+}
+
+.liturgy p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* specifics for each book when need
 /* Amen Yehi Ratson */
 .he-amen-table-000 {
     max-width: 900px;
-
 }
 
 /* Anochi */
-
 .he-anochi-table-000 {
     max-width: 800px;
     direction: ltr;
@@ -190,19 +260,19 @@
 }
 
 /* Ashir Beshir Ḥadash*/
-
 /* Ashir Le’el ‘Elyon */
-
 .he-ashir-table-003 {
     max-width: none;
-     word-break: break-all;
+    word-break: break-all;
     /*background-color: #ef98c9;*/
 }
-.he-ashir-table-003  tr  {
+
+.he-ashir-table-003 tr {
     margin: 0;
     /*background-color: #ffc000;*/
 }
-.he-ashir-table-003  tr:nth-child(even){
+
+.he-ashir-table-003 tr:nth-child(even) {
     margin: 0;
     padding-bottom: 10px;
     /*background-color: #ffc000;*/
@@ -248,30 +318,24 @@
 
 /* Essa Bechos Yesha‘ */
 /* Et Kos Yeshu‘ot‘ */
-/*.he-et-table-000 {*/
-/*    max-width: 70%;*/
-/*}*/
-/*.he-et-table-000 tr:nth-child(odd) td:nth-child(1) {*/
-/*    direction: ltr;*/
-/*}*/
 /*Evyon Asher */
 .he-evyon-table-000 {
-   direction: ltr;
+    direction: ltr;
 }
 
-.he-evyon-table-000 tr:nth-child(odd) td:nth-child(odd){
+.he-evyon-table-000 tr:nth-child(odd) td:nth-child(odd) {
     /*border: 1px solid black;*/
     direction: rtl;
     text-align: right;
     padding-right: 10px;
 }
-.he-evyon-table-000 tr:nth-child(odd) td:nth-child(even){
+
+.he-evyon-table-000 tr:nth-child(odd) td:nth-child(even) {
     /*border: 1px solid black;*/
     text-align: left;
 }
 
 /* Laḥatani Mivḥar Banai*/
-
 /* Lutski Prayer for a Time of Plague */
 .he-lutski-table-000 {
     max-width: 1100px;
@@ -310,7 +374,7 @@
     /*border: 1px #0038ba solid;*/
 }
 
-/*Malé ‘Olam Kevod Yofi */
+/* Malé ‘Olam Kevod Yofi */
 /* Azkir Tehillo */
 /* Hodu Le’el De‘ot */
 /* Odecha El ‘Al Ki Nora’ot */
@@ -324,28 +388,6 @@
 
 /*Yaḥid Be‘olamo */
 /* Yonat Elem */
-/*.he-yonat_elem-table-000 {*/
-/*    max-width: 800px;*/
-/*}*/
-/*.he-yonat_elem-table-000 tr:nth-child(even) td p {*/
-/*    !*background-color: #ffc000;*!*/
-/*    direction: ltr;*/
-/*    text-align: left;*/
-/*    margin-left: -150px;*/
-/*    margin-right: -10px;*/
-/*}*/
-/*.he-yonat_elem-table-000 tr:nth-child(odd) td:nth-child(odd) p {*/
-/*    !*background-color: #83a1d3;*!*/
-/*    direction: ltr;*/
-/*    text-align: left;*/
-/*    margin-left: 10px;*/
-/*}*/
-/*.he-yonat_elem-table-000 tr:nth-child(odd) td:nth-child(even) p {*/
-/*    !*background-color: #f9e0d2;*!*/
-/*    direction: rtl;*/
-/*    text-align: right;*/
-/*    margin-right: 10px;*/
-/*}*/
 .he-yonat_elem-table-000 tr:nth-child(4n+4) {
     color: red;
 }
@@ -353,13 +395,11 @@
 .he-yonat_elem-table-000 tr:nth-child(4n+3) {
     color: red;
 }
-
 /*Adon Yeshu‘ot*/
 /* Shiru ‘Am Zakka */
 .he-shiru_am_z-table-000 {
     max-width: 400px;
 }
-
 
 .he-shiru_am_z-table-000 tr:nth-child(4n+4) {
     color: red;
@@ -403,14 +443,17 @@
 .he-vehahochma-table-000 {
     direction: ltr;
 }
+
 .he-vehahochma-table-000 tr:nth-child(even) {
     /*background-color: #F9690E;*/
 }
+
 .he-vehahochma-table-000 tr:nth-child(odd) td:nth-child(odd) {
     /*background-color: #F9690E;*/
     text-align: right;
     margin-right: 10px;
 }
+
 .he-vehahochma-table-000 tr:nth-child(odd) td:nth-child(even) {
     /*background-color: #F9690E;*/
     direction: ltr;
@@ -421,13 +464,15 @@
 .he-vehoshia-table-000 {
     direction: ltr;
 }
-.he-vehoshia-table-000 tr:nth-child(odd) td:nth-child(odd){
+
+.he-vehoshia-table-000 tr:nth-child(odd) td:nth-child(odd) {
     /*background-color: #98ccef;*/
     direction: rtl;
     text-align: right;
     margin-right: 10px;
 }
-.he-vehoshia-table-000 tr:nth-child(odd) td:nth-child(even){
+
+.he-vehoshia-table-000 tr:nth-child(odd) td:nth-child(even) {
     /*background-color: #98ccef;*/
     text-align: left;
 }
@@ -466,36 +511,13 @@
 }
 
 /*Aaron ben Joseph's Essay on the Obligation of Prayer*/
-.aaron-table-000 {
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
-    direction: ltr;
-}
-
-.aaron-table-000 tr:nth-child(even) td:nth-child(even) {
-    background-color: #ffc000;
-    padding-right: 10px;
-    text-align: right;
-    vertical-align: top;
-    width: 50%;
-}
-
-.aaron-table-000 tr td:nth-child(odd) {
-    padding-left: 10px;
-    vertical-align: top;
-    width: 50%;
-}
-
 
 /* text bold */
 .span-261 {
     font-weight: bold;
 }
 
-.
-    /* shelomo part 1 */
+/* shelomo part 1 */
 .tabel-00 {
     text-align: center;
 }
@@ -504,19 +526,6 @@
     color: red;
 }
 
-/* The Palanquin */
-.page-hebrew {
-    background-color: lightgray;
-    line-height: 1.4em;
-    text-align: justify;
-    direction: ltr;
-}
-
-.page-hebrew p {
-    direction: ltr;
-}
-
-/**/
 .in-hizzuk-table-000 {
     min-width: 100%;
     font-size: 21px;
@@ -562,29 +571,6 @@
     display: none
 }
 
-/*Aaron ben Joseph's Essay on the Obligation of Prayer*/
-.en-aaron_ben_-table-000 {
-    margin-top: 70px;
-    width: 700px;
-    direction: ltr;
-}
-
-.en-aaron_ben_-table-000 tr:nth-child(odd) td:nth-child(odd) {
-    margin-top: 0;
-    direction: rtl;
-    text-align: right;
-    padding-right: 10px;
-}
-
-.en-aaron_ben_-table-000 tr:nth-child(even) td:nth-child(odd) {
-    margin-top: 0;
-    text-align: right;
-    padding-right: 10px;
-    vertical-align: top;
-}
-
-/* Patshegen Ketav Haddat */
-
 /* Matsa-Ish-sha-Matsa-Tov */
 .he-en-matsa-table-000 {
     direction: ltr;
@@ -603,54 +589,16 @@
     text-align: left;
     margin-left: 10px;
 }
+
 .he-en-matsa-table-000 h2 {
     font-size: 21px;
     font-weight: normal;
 }
 
+/* Patshegen Ketav Haddat */
+
 /* Karaites books that have english an hebrew side by side */
-.The-Remnan table {
-    background-color: #ffc000;
-    margin: auto;
-    width: 700px;
-}
-
-.table-book table {
-    margin: auto;
-}
-
-.table-book tbody {
-    /*background-color: #ffc000;*/
-    vertical-align: top !important;
-    horiz-align: center !important;
-}
-
-.table-book tr:hover {
-    /*background-color: #11c4f114;*/
-}
-
-/* book title */
-.he-en-remnant-td-002 .he-en-remnant-p-001 {
-    margin-left: -140px;
-}
-
-.table-book td:nth-child(even) p {
-    /*border: 1px solid #3498db;*/
-    vertical-align: top;
-    direction: ltr;
-    text-align: left;
-    margin-left: 15px;
-    width: 350px;
-}
-
-.table-book td:nth-child(odd) p {
-    /*border: 1px solid chartreuse;*/
-    vertical-align: top;
-    direction: rtl;
-    text-align: right;
-    margin-right: 15px;
-    width: 350px;
-}
+/*Aaron ben Joseph's Essay on the Obligation of Prayer*/
 
 .ft41, .ft42, .ft43, .ft44 {
     direction: rtl;
@@ -735,20 +683,6 @@
     text-align: center;
 }
 
-/* liturgy introduction */
-.liturgy {
-    margin-top: 50px;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 700px;
-    font-size: 21px;
-}
-
-.liturgy p {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
 /* comments */
 .en-deuteronom-p-001 {
     margin-top: 0;
@@ -788,11 +722,9 @@
     margin-bottom: 7pt;
 }
 
-
 .en-deuteronom-p-015 {
     margin-bottom: 7pt;
     text-align: center;
-
 }
 
 .en-deuteronom-p-016 {
@@ -801,7 +733,6 @@
     margin-bottom: 7pt;
 }
 
-
 .en-deuteronom-p-019 {
     margin-left: 24pt;
 }
@@ -809,7 +740,6 @@
 .en-deuteronom-p-020 {
     text-indent: 24pt;
 }
-
 
 .en-deuteronom-span-000 {
     color: red;
@@ -974,28 +904,28 @@
     color: red;
 }
 
-.he-deuteronom-span-055 {
+.he-deuteronom-span-055 .he-deuteronom-span-056 .he-deuteronom-span-057 {
     color: black;
     font-style: italic;
 }
 
-.he-deuteronom-span-056 {
-    color: black;
-    font-style: italic;
-}
+/*.he-deuteronom-span-056 {*/
+/*    color: black;*/
+/*    font-style: italic;*/
+/*}*/
 
-.he-deuteronom-span-057 {
-    color: black;
-    font-style: italic;
-}
+/*.he-deuteronom-span-057 {*/
+/*    color: black;*/
+/*    font-style: italic;*/
+/*}*/
 
-.he-deuteronom-span-058 {
+.he-deuteronom-span-058 .he-deuteronom-span-060  {
     color: #0070C0;
 }
 
-.he-deuteronom-span-060 {
-    color: #0070C0;
-}
+/*.he-deuteronom-span-060 {*/
+/*    color: #0070C0;*/
+/*}*/
 
 .he-deuteronom-span-061 {
     color: black;
@@ -1014,20 +944,20 @@
     color: #0070C0;
 }
 
-.he-deuteronom-span-066 {
+.he-deuteronom-span-066 .he-deuteronom-span-067 .he-deuteronom-span-068 {
     color: black;
     font-style: italic;
 }
 
-.he-deuteronom-span-067 {
-    color: black;
-    font-style: italic;
-}
+/*.he-deuteronom-span-067 {*/
+/*    color: black;*/
+/*    font-style: italic;*/
+/*}*/
 
-.he-deuteronom-span-068 {
-    color: black;
-    font-style: italic;
-}
+/*.he-deuteronom-span-068 {*/
+/*    color: black;*/
+/*    font-style: italic;*/
+/*}*/
 
 .he-deuteronom-span-073 {
     color: red;
@@ -1042,17 +972,17 @@
     color: #0070C0;
 }
 
-.he-deuteronom-span-076 {
+.he-deuteronom-span-076 .he-deuteronom-span-077 .he-deuteronom-span-078 {
     color: black;
 }
 
-.he-deuteronom-span-077 {
-    color: red;
-}
+/*.he-deuteronom-span-077 {*/
+/*    color: red;*/
+/*}*/
 
-.he-deuteronom-span-078 {
-    color: red;
-}
+/*.he-deuteronom-span-078 {*/
+/*    color: red;*/
+/*}*/
 
 .he-deuteronom-span-081 {
     color: black;
@@ -1063,8 +993,3 @@
     color: black;
     font-style: italic;
 }
-
-.he-en-remnant-p-000 {
-    text-align: center;
-}
-

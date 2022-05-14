@@ -394,7 +394,7 @@ HALAKHAH = [
          'first_level': 3,
          'book_classification': '80',
          'author': ',',
-         'css_class': '',
+         'css_class': 'stacked',
          'remove_class': 'MsoTableGrid',
          'remove_tags': '<o:p>&nbsp;</o:p>'},
         True
@@ -511,7 +511,7 @@ HALAKHAH = [
          'first_level': 3,
          'book_classification': '80',
          'author': 'Zahava Yod,',
-         'css_class': '',
+         'css_class': 'stacked',
          'table_book': True,
          'columns': 2,
          'columns_order': '0,1,2',
@@ -1448,7 +1448,7 @@ class Command(BaseCommand):
 
                     # multi_tables must have different class names even if style is the same
                     # also they share the css_class defined in details.
-                    if tag.name == 'table' and multi_table:
+                    if tag.name == 'table' or multi_table:
 
                         if css_class is not None:
                             class_name = f'{lang}-{class_name_by_tag}-{tags[class_name_by_tag]:03} {css_class}'
