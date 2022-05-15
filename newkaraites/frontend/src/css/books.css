@@ -169,7 +169,8 @@
 .simple-3-4 tr:nth-child(4n+4) {
     color: red;
 }
-
+/* books that use stacked */
+/* Aaron ben Joseph's Essay on the Obligation of Prayer */
 .stacked {
     margin-top: 70px;
     max-width: 700px;
@@ -182,7 +183,7 @@
     text-align: right;
     padding-right: 10px;
     vertical-align: top;
-    background-color: #98ccef;
+    /*background-color: #98ccef;*/
 }
 
 .stacked tr td:nth-child(even) {
@@ -190,7 +191,7 @@
     text-align: left;
     padding-left: 10px;
     vertical-align: top;
-    background-color: #ffc000;
+    /*background-color: #ffc000;*/
 }
 
 .table-book table {
@@ -198,6 +199,7 @@
     margin-left: auto;
     max-width: 700px;
     direction: ltr;
+    display: block;
 }
 
 .table-book tr {
@@ -208,10 +210,11 @@
 .table-book tr {
     /*background-color: #3FC380;*/
     vertical-align: top;
+
 }
 
 .table-book tr tr td {
-    background-color: #3FC380;
+    /*background-color: #3FC380;*/
     width: 50%;
 }
 .table-book td:nth-child(even) p {
@@ -227,6 +230,8 @@
     text-align: right;
     padding: 5px;
 }
+/* some table book exception */
+/* end exceptions */
 
 /* liturgy introduction */
 .liturgy {
@@ -597,8 +602,6 @@
 
 /* Patshegen Ketav Haddat */
 
-/* Karaites books that have english an hebrew side by side */
-/*Aaron ben Joseph's Essay on the Obligation of Prayer*/
 
 .ft41, .ft42, .ft43, .ft44 {
     direction: rtl;
@@ -900,96 +903,33 @@
     color: black;
 }
 
-.he-deuteronom-span-052 {
-    color: red;
-}
-
 .he-deuteronom-span-055 .he-deuteronom-span-056 .he-deuteronom-span-057 {
     color: black;
     font-style: italic;
 }
 
-/*.he-deuteronom-span-056 {*/
-/*    color: black;*/
-/*    font-style: italic;*/
-/*}*/
-
-/*.he-deuteronom-span-057 {*/
-/*    color: black;*/
-/*    font-style: italic;*/
-/*}*/
-
 .he-deuteronom-span-058 .he-deuteronom-span-060  {
     color: #0070C0;
 }
 
-/*.he-deuteronom-span-060 {*/
-/*    color: #0070C0;*/
-/*}*/
-
-.he-deuteronom-span-061 {
+ .he-deuteronom-span-064 .he-deuteronom-span-066 .he-deuteronom-span-067 .he-deuteronom-span-068 {
     color: black;
+    font-style: italic;
 }
 
-.he-deuteronom-span-062 {
+.he-deuteronom-span-052  .he-deuteronom-span-062  .he-deuteronom-span-073 {
     color: red;
 }
 
-.he-deuteronom-span-064 {
-    color: black;
-    font-style: italic;
-}
-
-.he-deuteronom-span-065 {
+.he-deuteronom-span-065 .he-deuteronom-span-075 {
     color: #0070C0;
 }
 
-.he-deuteronom-span-066 .he-deuteronom-span-067 .he-deuteronom-span-068 {
-    color: black;
-    font-style: italic;
-}
-
-/*.he-deuteronom-span-067 {*/
-/*    color: black;*/
-/*    font-style: italic;*/
-/*}*/
-
-/*.he-deuteronom-span-068 {*/
-/*    color: black;*/
-/*    font-style: italic;*/
-/*}*/
-
-.he-deuteronom-span-073 {
-    color: red;
-}
-
-.he-deuteronom-span-074 {
-    color: black;
-    font-style: italic;
-}
-
-.he-deuteronom-span-075 {
-    color: #0070C0;
-}
-
-.he-deuteronom-span-076 .he-deuteronom-span-077 .he-deuteronom-span-078 {
+.he-deuteronom-span-061 .he-deuteronom-span-076 .he-deuteronom-span-077 .he-deuteronom-span-078 {
     color: black;
 }
 
-/*.he-deuteronom-span-077 {*/
-/*    color: red;*/
-/*}*/
-
-/*.he-deuteronom-span-078 {*/
-/*    color: red;*/
-/*}*/
-
-.he-deuteronom-span-081 {
-    color: black;
-    font-style: italic;
-}
-
-.he-deuteronom-span-088 .he-deuteronom-span-086 .he-deuteronom-span-081 {
+.he-deuteronom-span-074 .he-deuteronom-span-088 .he-deuteronom-span-086 .he-deuteronom-span-081 {
     color: black;
     font-style: italic;
 }

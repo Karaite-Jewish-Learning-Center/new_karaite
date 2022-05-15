@@ -11,8 +11,7 @@ import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
 import {Button, Typography} from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
+import {slug} from '../../utils/utils';
 
 const HTML = 2
 const BOOK = 0
@@ -167,10 +166,8 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
-        // const tableBook = (details.table_book ? 'table-book' : '')
 
         if (details.table_book) {
-            // const tableBook = details.book_title_en.substr(0,10).replaceAll(' ','-')
             const tableBook = 'table-book'
             return (
                 <TableVirtuoso
