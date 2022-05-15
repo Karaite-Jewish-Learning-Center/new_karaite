@@ -10,6 +10,8 @@ import ImportContactsIcon from '@material-ui/icons/ImportContacts'
 import {parseEnglishRef} from '../../utils/parseBiblicalReference'
 import {validateBiblicalReference} from "../../utils/validateBiblicalReference";
 import {isABibleBook} from "../../utils/utils";
+import {makeStyles} from "@material-ui/core/styles";
+import Colors from "../../constants/colors";
 
 
 const AutoComplete = () => {
@@ -19,6 +21,8 @@ const AutoComplete = () => {
     const [isOpen, setIsOpen] = useState(true)
     const [search, setSearch] = useState('')
     const [options, setOptions] = useState([])
+    const classes = useStyles()
+
     let history = useHistory()
 
     const showResults = () => {
@@ -95,10 +99,16 @@ const AutoComplete = () => {
     }, [search, store]);
 
     return (
+
         <Autocomplete
             freeSolo
             value={search}
             open={isOpen}
+            classes={{
+                root: classes.root,
+                inputRoot: classes.inputRoot,
+                fullWidth: classes.fullWidth,
+            }}
             // works around i, will be used has index to access other properties
             // of options like in renderOption and onChange
             options={options.map((option, i) => `${i}`)}
@@ -124,5 +134,22 @@ const AutoComplete = () => {
         />
     );
 }
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: Colors['white'],
+        margin: 0,
+        padding: 0,
+        width: '300px !important',
+        [theme.breakpoints.down('xs')]: {
+            width: '100px !important',
+        },
+    },
+    inputRoot: {
+        marginBottom: 15,
+    },
+
+}))
 
 export default observer(AutoComplete)

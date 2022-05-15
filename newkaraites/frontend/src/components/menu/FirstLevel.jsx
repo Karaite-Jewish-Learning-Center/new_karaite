@@ -45,8 +45,7 @@ const FirstLevel = () => {
 
     return (
         <div className={classes.root}>
-            <Grid container xl={6} lg={6} md={6} sm={6} xs={12}
-                  direction="columns"
+            <Grid container item xl={6} lg={6} md={6} sm={6} xs={12}
                   justifycontent="center"
                   alignItems="center"
                   spacing={1}
@@ -60,7 +59,7 @@ const FirstLevel = () => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // border: '1px solid red',
+        border: '1px solid red',
         paddingTop: theme.spacing(15),
         width: '100%',
     },
@@ -73,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
         height: 100,
         [theme.breakpoints.up('xs')]: {
             // backgroundColor: 'red',
-            height: 120,
+            height: 200,
         },
         [theme.breakpoints.up('sm')]: {
             // backgroundColor: 'yellow',

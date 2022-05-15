@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {fade, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,15 +18,17 @@ import AutoComplete from '../autcomplete/autocomplete'
 export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const [keyboardOpen, setKeyboardOpen] = useState(false)
     const classes = useStyles();
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const onKeyboardButton = () => setKeyboardOpen(!keyboardOpen)
-
     const handleLanguageMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+         event.preventDefault()
+        if (anchorEl === null) {
+            setAnchorEl(event.currentTarget)
+        } else {
+            setAnchorEl(null)
+        }
     };
 
     const handleMobileMenuClose = () => {
@@ -112,13 +114,12 @@ export default function PrimarySearchAppBar() {
                         <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
                     </Typography>
                 </Hidden>
-                 <AutoComplete/>
                 {/*<Typography component="h3">*/}
                 {/*    <Link className={classes.link} to="/"><SearchIcon /></Link>*/}
                 {/*</Typography>*/}
 
                 <div className={classes.sectionDesktop}>
-
+                    <AutoComplete/>
                     <IconButton aria-label="Go to sign up form" color="inherit">
                         <PermContactCalendarSharpIcon data-for="en" data-tip="Sign up"></PermContactCalendarSharpIcon>
                     </IconButton>
@@ -136,6 +137,7 @@ export default function PrimarySearchAppBar() {
                     </IconButton>
                 </div>
                 <div className={classes.sectionMobile}>
+                    <AutoComplete/>
                     <IconButton
                         aria-label="show more"
                         aria-controls={mobileMenuId}
@@ -155,50 +157,8 @@ export default function PrimarySearchAppBar() {
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        backgroundColor: 'lightgray',
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
-    },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-    },
 
-    inputRoot: {
-        color: 'inherit',
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-    },
+
     sectionDesktop: {
         flexGrow: 1,
         justifyContent: 'flex-end',
@@ -219,17 +179,8 @@ const useStyles = makeStyles((theme) => ({
             display: 'flex',
         },
     },
-    fab: {
-        margin: theme.spacing(2),
-    },
-    absolute: {
-        position: 'absolute',
-        bottom: theme.spacing(2),
-        right: theme.spacing(3),
-    },
-    toolBar: {
-        marginBottom: theme.spacing(20)
-    },
+
+
     name: {
         fontSize: 24,
         color: 'black',
