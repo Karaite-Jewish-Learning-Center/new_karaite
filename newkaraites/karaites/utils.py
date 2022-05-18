@@ -59,8 +59,22 @@ def prep_search(search):
     return re.sub(' ', ' & ', search)
 
 
-def highlight_english(text_en, search_word):
-    return f"""<p dir="ltr">{text_en.replace(search_word, f'<b><i>{search_word}</i></b>')}</p>"""
+def highlight_english(text_en, search_word, text_en_search):
+    # account for Capitalized words
+    search_words = search_word.lower().split(' ')
+    print(search_words)
+    text = text_en.lower()
+    original_text = []
+    for word in search_words:
+        pos = text.find(word)
+        original_text.append(text_en[pos:pos + len(word)])
+    print('original_text',original_text)
+    for word in original_text:
+        if word == '':
+            continue
+        text_en = text_en.replace(word, f'<b><i>{word}</i></b>')
+
+    return f"""<p dir="ltr">{text_en}</p>"""
 
 
 def highlight_hebrew(text_he, search_word_list):

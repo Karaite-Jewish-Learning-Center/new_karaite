@@ -42,7 +42,7 @@ const SearchResults = () => {
                 <Link to={`/${data['path']}/${url}/${paragraph}/`}>
                     <Typography variant="h6" component="h2">{refBook}</Typography>
                 </Link>
-                {ReactHtmlParser(`<p>${addTagToString(data['text'], store.getSearch(), 'b')}</p>`)}
+                {ReactHtmlParser(`<p>${data['text']}</p>`)}
                 <hr/>
             </div>)
     }

@@ -39,15 +39,6 @@ from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 from langdetect import (detect,
                         LangDetectException)
 
-# LIST_OF_BOOKS = (COMMENTS +
-#                  POLEMIC +
-#                  POETRY_NON_LITURGICAL +
-#                  HALAKHAH +
-#                  PASSOVER_SONGS +
-#                  PRAYERS +
-#                  EXHORTATORY
-#                  )
-
 LIST_OF_BOOKS = (COMMENTS +
                  HALAKHAH +
                  HAVDALA +
@@ -160,6 +151,7 @@ class Command(BaseCommand):
         # update full text search
         intro_html = BeautifulSoup(intro, 'html5lib')
         text_en = intro_html.get_text(strip=False)
+        # todo break this in paragraphs pointing to entry 1
         update_full_text_search_index_english(book_title_en,
                                               1,
                                               text_en,
@@ -261,6 +253,14 @@ class Command(BaseCommand):
 
         divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
+        # make book title searchable
+        update_full_text_search_index_en_he(book_title_en,
+                                            book_title_he,
+                                            1,
+                                            '',
+                                            book_title_en,
+                                            book_title_he,
+                                            'Liturgy')
         # parse text to pass to full text index search
         text_en = ''
         text_he = ''
@@ -272,8 +272,19 @@ class Command(BaseCommand):
                     try:
                         if detect(text) == 'he':
                             text_he = f'{text_he} {text}'
+                            # book text
+                            update_full_text_search_index_hebrew(book_title_en,
+                                                                 book_title_he,
+                                                                 1,
+                                                                 text,
+                                                                 'Liturgy')
                         else:
                             text_en = f'{text_en} {text}'
+                            # book text
+                            update_full_text_search_index_english(book_title_en,
+                                                                  1,
+                                                                  text,
+                                                                  'Liturgy')
                     except LangDetectException:
                         pass
 
@@ -289,30 +300,6 @@ class Command(BaseCommand):
         update_book_details(details, introduction=html)
         update_toc(book_details, 1, details['name'].split(','))
 
-        # make book title searchable
-        update_full_text_search_index_en_he(book_title_en,
-                                            book_title_he,
-                                            1,
-                                            '',
-                                            divs[0].get_text(strip=False),
-                                            '',
-                                            'Liturgy')
-        # make book title searchable
-        update_full_text_search_index_en_he(book_title_en,
-                                            book_title_he,
-                                            1,
-                                            '',
-                                            book_title_en,
-                                            book_title_he,
-                                            'Liturgy')
-        # book text
-        update_full_text_search_index_en_he(book_title_en,
-                                            book_title_he,
-                                            1,
-                                            '',
-                                            text_en,
-                                            text_he,
-                                            'Liturgy')
         # update/create bible references
         update_create_bible_refs(book_details)
 
@@ -440,16 +427,17 @@ class Command(BaseCommand):
                     c += 1
 
             else:
-
                 divs = html_tree.find_all('div', class_='WordSection1')
                 for p in divs[0].find_all('table', recursive=True):
                     p.attrs = clean_tag_attr(p)
                     p = clean_table_attr(p)
-                for p in divs[0].find_all(recursive=False):
+
+                for p in divs[0].find_all('table', recursive=True):
                     text = p.get_text(strip=False)
                     key, value = self.find_toc_key(text, debug=False)
                     try:
                         p = str(p)
+                        print(p)
                     except TypeError:
                         print('error')
                         continue
@@ -500,12 +488,11 @@ class Command(BaseCommand):
             return
 
         pbar = tqdm(books_to_process)
+        sys.stdout.write(f"\rProcessing books\n")
+
         for _, book, language, _, _, details, _ in pbar:
             table_of_contents = {}
             book_title_en, book_title_he = details['name'].split(',')
-
-            sys.stdout.write(f"\rDeleting book : {book.replace('-{}.html', '')}\n")
-
             KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
             FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
             FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()

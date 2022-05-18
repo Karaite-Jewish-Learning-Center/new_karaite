@@ -359,7 +359,7 @@ EXHORTATORY = [
          'book_classification': '65',
          'author': 'Daniel al-Qumisi,',
          'css_class': '',
-         'buy_link':'https://thekaraitepress.com/products/the-chief-cornerstone'},
+         'buy_link': 'https://thekaraitepress.com/products/the-chief-cornerstone'},
         True
     ],
     [
@@ -373,10 +373,12 @@ EXHORTATORY = [
          'first_level': 11,
          'book_classification': '65',
          'author': 'Unknown,',
-         'css_class': '',
+         'table_book': True,
          'columns': 2,
          'columns_order': '0,1,2',
-         'toc_columns': '0,0,0',
+         'toc_columns': '0',
+         'direction': 'ltr',
+         'lang_index': False,
          },
         True
     ],
@@ -527,7 +529,7 @@ HALAKHAH = [
         'he-en,in,toc',
         [],
         [update_bible_re],
-        {'name': "The Palanquin,אפריון עשה לו",
+        {'name': "The Palanquim,אפריון עשה לו",
          'first_level': 3,
          'book_classification': '80',
          'author': ' Hakham Solomon ben Aaron,',

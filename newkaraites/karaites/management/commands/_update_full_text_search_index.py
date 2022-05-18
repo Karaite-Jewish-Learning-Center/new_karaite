@@ -4,7 +4,7 @@ from ...models import (FullTextSearch,
 
 def update_full_text_search_index_english(book_name, paragraph, text, path):
     """
-        Update the full text search index.ok
+        Update the full text search index.
     """
     marker = "#" if path != 'Tanakh' else " "
     FullTextSearch.objects.get_or_create(
@@ -19,6 +19,7 @@ def update_full_text_search_index_hebrew(book_name, book_name_he, paragraph, tex
     """
         Update the full text search index.
     """
+
     marker = "#" if path != 'Tanakh' else " "
     FullTextSearchHebrew.objects.get_or_create(
         path=path,
