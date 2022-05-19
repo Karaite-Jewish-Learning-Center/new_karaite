@@ -1,5 +1,6 @@
 import sys
 import re
+from django.db import connection
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         ENGLISH_STOP_WORDS)
@@ -68,7 +69,7 @@ def highlight_english(text_en, search_word, text_en_search):
     for word in search_words:
         pos = text.find(word)
         original_text.append(text_en[pos:pos + len(word)])
-    print('original_text',original_text)
+    print('original_text', original_text)
     for word in original_text:
         if word == '':
             continue
@@ -82,3 +83,13 @@ def highlight_hebrew(text_he, search_word_list):
     for search in search_word_list:
         text = text.replace(search, f'<b style="color:red">{search}</b>')
     return f"""<p class="search" dir="rtl">{text}</p>"""
+
+
+def custom_sql(text, search):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"Select ts_headline('english', '{text}', to_tsquery('english', '{search}'),'MaxFragments=3,ShortWord=0')")
+            return cursor.fetchone()
+    except Exception:
+        return text

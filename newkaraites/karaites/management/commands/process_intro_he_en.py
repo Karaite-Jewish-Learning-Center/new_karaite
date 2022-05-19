@@ -32,9 +32,9 @@ from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from .command_utils.argments import arguments
 from .command_utils.process_arguments import process_arguments
-from ._update_full_text_search_index import (update_full_text_search_index_en_he,
-                                             update_full_text_search_index_english,
-                                             update_full_text_search_index_hebrew)
+from .update_full_text_search_index import (update_full_text_search_index_en_he,
+                                            update_full_text_search_index_english,
+                                            update_full_text_search_index_hebrew)
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 from langdetect import (detect,
                         LangDetectException)

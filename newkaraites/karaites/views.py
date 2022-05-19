@@ -8,12 +8,12 @@ from django.contrib.postgres.search import (SearchVector,
                                             SearchRank,
                                             SearchQuery,
                                             SearchHeadline)
-
 from .utils import (slug_back,
                     normalize_search,
                     prep_search,
                     highlight_hebrew,
-                    highlight_english)
+                    highlight_english,
+                    custom_sql)
 
 from .models import (FullTextSearch,
                      FullTextSearchHebrew,
@@ -351,20 +351,19 @@ class Search(View):
             return JsonResponse({'data': items, 'page': page}, safe=False)
 
         else:
-            print('language english')
-            original = search
             search = normalize_search(search)
-            search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
             search = prep_search(search)
             print(search)
-            sql = """SELECT id, path, reference_en, ts_rank_cd(text_en_search, query) AS rank """
-            sql += f"""FROM karaites_fulltextsearch, phraseto_tsquery('{search}') query """
-            sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+            sql = """SELECT id, path, reference_en,text_en_search, ts_rank_cd(text_en_search, query) AS rank """
+            sql += f"""FROM karaites_fulltextsearch, phraseto_tsquery('{search}') AS query, """
+            sql += f""" SIMILARITY('{search}',text_en) AS similarity """
+            sql += f"""WHERE query @@ text_en_search  OR similarity > 0 """
+            sql += f"""ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
 
             items = []
             for result in FullTextSearch.objects.raw(sql):
                 items.append({'ref': result.reference_en,
-                              'text': highlight_english(result.text_en, original, result.text_en_search),
+                              'text': custom_sql(result.text_en, search),
                               'path': result.path})
             return JsonResponse({'data': items, 'page': page}, safe=False)
 

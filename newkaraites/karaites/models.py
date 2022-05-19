@@ -837,9 +837,6 @@ class FullTextSearch(models.Model):
 
     text_en_search = SearchVectorField(null=True)
 
-    # False entry is human curated, so don't delete on rebuild database
-    delete = models.BooleanField(default=False)
-
     def __str__(self):
         return self.reference_en
 
@@ -868,8 +865,6 @@ class FullTextSearchHebrew(models.Model):
 
     text_he = models.TextField(default='')
 
-    # False entry is human curated, so don't delete on rebuild database
-    delete = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.path}  {self.reference_en}'
@@ -927,3 +922,19 @@ class InvertedIndex(models.Model):
     class Meta:
         verbose_name_plural = _('Inverted index')
         ordering = ('-rank',)
+
+
+class EnglishWord(models.Model):
+
+    word = models.CharField(max_length=40,
+                            db_index=True,
+                            verbose_name=_("English word"))
+
+    word_count = models.IntegerField(default=1,
+                                     verbose_name=_('Word Count in all documents'))
+
+    def __str__(self):
+        return self.word
+
+    class Meta:
+        verbose_name_plural = _('English words')
