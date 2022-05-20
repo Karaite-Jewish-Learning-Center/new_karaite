@@ -5,6 +5,7 @@ from django.core.management.base import BaseCommand
 from ...models import (EnglishWord,
                        FullTextSearch, )
 from .command_utils.utils import remove_punctuation
+from ftlangdetect import detect
 
 
 class Command(BaseCommand):
@@ -23,9 +24,15 @@ class Command(BaseCommand):
         for paragraph in pbar:
             for token in tokenizer(paragraph.text_en):
                 text = remove_punctuation(token.text.lower())
-                obj, created = EnglishWord.objects.get_or_create(
-                    word=text,
-                )
-                if not created:
-                    obj.word_count += 1
-                    obj.save()
+
+                if text == '':
+                    continue
+
+                result = detect(text=text, low_memory=False)
+                if result['lang'] == 'en':
+                    obj, created = EnglishWord.objects.get_or_create(
+                        word=text,
+                    )
+                    if not created:
+                        obj.word_count += 1
+                        obj.save()

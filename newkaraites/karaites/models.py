@@ -865,7 +865,6 @@ class FullTextSearchHebrew(models.Model):
 
     text_he = models.TextField(default='')
 
-
     def __str__(self):
         return f'{self.path}  {self.reference_en}'
 
@@ -925,7 +924,6 @@ class InvertedIndex(models.Model):
 
 
 class EnglishWord(models.Model):
-
     word = models.CharField(max_length=40,
                             db_index=True,
                             verbose_name=_("English word"))
@@ -938,3 +936,21 @@ class EnglishWord(models.Model):
 
     class Meta:
         verbose_name_plural = _('English words')
+        ordering = ('word',)
+
+
+class MisspelledWord(models.Model):
+    misspelled_word = models.CharField(max_length=40,
+                                       db_index=True,
+                                       verbose_name=_("Misspelled word"))
+
+    correct_word = models.CharField(max_length=100,
+                                    db_index=True,
+                                    verbose_name=_("Correct word"))
+
+    def __str__(self):
+        return self.misspelled_word
+
+    class Meta:
+        verbose_name_plural = _('Misspelled words')
+        ordering = ('misspelled_word',)

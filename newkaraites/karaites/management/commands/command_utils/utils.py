@@ -73,4 +73,5 @@ def remove_punctuation(text):
     text = text.translate(str.maketrans('', '', string.punctuation))
     text = text.replace('’', '').replace('’', '').replace('—', '').replace('“', '')
     text = text.replace('‘', '').replace('…', '').replace('‘', '').replace('‘', '')
+    text = text.replace('§', ' ').replace('”', '')
     return text

@@ -4,16 +4,13 @@ from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
-from django.contrib.postgres.search import (SearchVector,
-                                            SearchRank,
-                                            SearchQuery,
-                                            SearchHeadline)
+
 from .utils import (slug_back,
                     normalize_search,
                     prep_search,
                     highlight_hebrew,
-                    highlight_english,
-                    custom_sql)
+                    custom_sql,
+                    find_similar_words)
 
 from .models import (FullTextSearch,
                      FullTextSearchHebrew,
@@ -25,11 +22,11 @@ from .models import (FullTextSearch,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      AutoComplete,
-                     References)
+                     References,
+                     EnglishWord)
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
-from .constants import ENGLISH_STOP_WORDS
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -352,12 +349,23 @@ class Search(View):
 
         else:
             search = normalize_search(search)
+            # only one word
+            if len(search.split()) == 1:
+                try:
+                    EnglishWord.objects.get(word=search)
+                except EnglishWord.DoesNotExist:
+                    find_similar_words(search)
+
             search = prep_search(search)
-            print(search)
+
             sql = """SELECT id, path, reference_en,text_en_search, ts_rank_cd(text_en_search, query) AS rank """
-            sql += f"""FROM karaites_fulltextsearch, phraseto_tsquery('{search}') AS query, """
-            sql += f""" SIMILARITY('{search}',text_en) AS similarity """
-            sql += f"""WHERE query @@ text_en_search  OR similarity > 0 """
+            sql += f"""FROM karaites_fulltextsearch, phraseto_tsquery('{search}') AS query """
+
+            # sql += f""", SIMILARITY('{search}',text_en) AS similarity """
+            # sql += f"""WHERE query @@ text_en_search  OR similarity > 0 """
+            # sql += f"""ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+
+            sql += f"""WHERE query @@ text_en_search  """
             sql += f"""ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
 
             items = []
