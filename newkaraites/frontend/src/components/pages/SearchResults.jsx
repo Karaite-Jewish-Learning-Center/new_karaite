@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/core/styles"
 import {searchResultsUrl, ITEMS_PER_PAGE} from "../../constants/constants"
 import {Link} from "react-router-dom"
 import ReactHtmlParser from "react-html-parser"
-import {addTagToString} from "../../utils/addTagToString"
+//import {addTagToString} from "../../utils/addTagToString"
 import {Typography} from "@material-ui/core"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
@@ -19,6 +19,8 @@ const SearchResults = () => {
     const classes = useStyles()
     const [message, setMessage] = useState('Loading')
     const [search] = useState(store.getSearch())
+    const [didYouMean, setDidYouMean] = useState(false)
+    const [searchTerm, setSearchTerm] = useState(store.getSearch())
     const [page, setPage] = useState(1)
 
     const itemContent = (item, data) => {
@@ -74,6 +76,10 @@ const SearchResults = () => {
                 }
                 store.setSearchResultData(data['data'])
                 setPage(() => parseInt(data['page']))
+                // this means that search term was not found and a similarity search was done
+                setDidYouMean(data['did_you_mean'])
+                setSearchTerm(() => data['search_term'])
+
             })
             .catch(e => store.setMessage(e.message))
 
@@ -84,7 +90,7 @@ const SearchResults = () => {
     return (
         <div className={classes.container}>
             <Typography className={classes.header} variant="h5">
-                Results for "{search}"
+                {didYouMean ? `Did you mean "${searchTerm}" ?` : `Search results for "${store.getSearch()}"`}
             </Typography>
             <Virtuoso
                 data={store.getSearchResultData()}

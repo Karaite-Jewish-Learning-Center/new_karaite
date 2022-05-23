@@ -10,7 +10,7 @@ from .utils import (slug_back,
                     prep_search,
                     highlight_hebrew,
                     custom_sql,
-                    find_similar_words)
+                    similar_search_en)
 
 from .models import (FullTextSearch,
                      FullTextSearchHebrew,
@@ -22,8 +22,7 @@ from .models import (FullTextSearch,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      AutoComplete,
-                     References,
-                     EnglishWord)
+                     References)
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
@@ -298,6 +297,18 @@ class AutoCompleteView(View):
 
 ITEMS_PER_PAGE = 15
 
+# try phrase search
+SQL_PHRASE = """SELECT id, path, reference_en, ts_rank_cd(text_en_search, query) AS rank """
+SQL_PHRASE += """FROM karaites_fulltextsearch, phraseto_tsquery('{}') AS query """
+SQL_PHRASE += """WHERE query @@ text_en_search  """
+SQL_PHRASE += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
+
+# try word search
+SQL_PLAIN = """SELECT id, path, reference_en, ts_rank_cd(text_en_search, query) AS rank """
+SQL_PLAIN += """FROM karaites_fulltextsearch, plainto_tsquery('{}') AS query """
+SQL_PLAIN += """WHERE query @@ text_en_search  """
+SQL_PLAIN += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
+
 
 class Search(View):
     """
@@ -349,29 +360,28 @@ class Search(View):
 
         else:
             search = normalize_search(search)
-            # only one word
-            if len(search.split()) == 1:
-                try:
-                    EnglishWord.objects.get(word=search)
-                except EnglishWord.DoesNotExist:
-                    find_similar_words(search)
+            did_you_mean, similar_search = similar_search_en(search)
+            search = prep_search(similar_search)
 
-            search = prep_search(search)
+            # try phrase search
+            results = FullTextSearch.objects.raw(SQL_PHRASE.format(search, limit, offset))
+            print("1 Results ",len(results))
 
-            sql = """SELECT id, path, reference_en,text_en_search, ts_rank_cd(text_en_search, query) AS rank """
-            sql += f"""FROM karaites_fulltextsearch, phraseto_tsquery('{search}') AS query """
-
-            # sql += f""", SIMILARITY('{search}',text_en) AS similarity """
-            # sql += f"""WHERE query @@ text_en_search  OR similarity > 0 """
-            # sql += f"""ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
-
-            sql += f"""WHERE query @@ text_en_search  """
-            sql += f"""ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+            if len(results) == 0:
+                # try word search
+                results = FullTextSearch.objects.raw(SQL_PLAIN.format(search, limit, offset))
+                print("2 Results ", len(results))
+            # avoid search by similar words since the cost of the query is high
+            # from 0.012 ms to 0.600 ms on my machine
+            # see similar_search_en for more details
 
             items = []
-            for result in FullTextSearch.objects.raw(sql):
+            for result in results:
                 items.append({'ref': result.reference_en,
                               'text': custom_sql(result.text_en, search),
                               'path': result.path})
-            return JsonResponse({'data': items, 'page': page}, safe=False)
 
+            return JsonResponse({'data': items,
+                                 'page': page,
+                                 'did_you_mean': did_you_mean,
+                                 'search_term': similar_search}, safe=False)

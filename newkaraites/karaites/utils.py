@@ -4,7 +4,10 @@ from django.db import connection
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         ENGLISH_STOP_WORDS)
-from jellyfish import levenshtein_distance
+from .models import EnglishWord
+
+
+ENGLISH_DICTIONARY = dict.fromkeys(EnglishWord.objects.all().values_list('word', flat=True), None)
 
 
 def search_level(search_string):
@@ -40,7 +43,7 @@ def normalize_search(search):
     """ only one space, remove ' """
     search = search.replace("'", '').replace('[', '').replace(']', '')
     search = replace_punctuation_marks(search)
-    return re.sub(' +', ' ', search.strip())
+    return re.sub(' +', ' ', search.strip().lower())
 
 
 def only_english_stop_word(search):
@@ -61,24 +64,6 @@ def prep_search(search):
     return re.sub(' ', ' & ', search)
 
 
-def highlight_english(text_en, search_word, text_en_search):
-    # account for Capitalized words
-    search_words = search_word.lower().split(' ')
-    print(search_words)
-    text = text_en.lower()
-    original_text = []
-    for word in search_words:
-        pos = text.find(word)
-        original_text.append(text_en[pos:pos + len(word)])
-    print('original_text', original_text)
-    for word in original_text:
-        if word == '':
-            continue
-        text_en = text_en.replace(word, f'<b><i>{word}</i></b>')
-
-    return f"""<p dir="ltr">{text_en}</p>"""
-
-
 def highlight_hebrew(text_he, search_word_list):
     text = text_he
     for search in search_word_list:
@@ -90,20 +75,44 @@ def custom_sql(text, search):
     try:
         with connection.cursor() as cursor:
             cursor.execute(
-                f"Select ts_headline('english', '{text}', to_tsquery('english', '{search}'),'MaxFragments=3,ShortWord=0')")
+                f"""Select ts_headline('english', '{text}', to_tsquery('english', '{search}'),'MaxFragments=3,ShortWord=0')""")
             return cursor.fetchone()
     except Exception:
         return text
 
 
-def find_similar_words(search, english_word):
+def find_similar_words(search):
     """
         return a list of similar words
     """
     with connection.cursor() as cursor:
-        sql = f"""select word ,word_count, SIMILARITY('{search}', word)"""
-        sql += """ as similarity from karaites_englishword order by similarity DESC, word_count DESC limit 10"""
+        search = search.replace("'", "''")
+        sql = f"""select word ,word_count, SIMILARITY('{search}', word) as similarity, """
+        sql += f""" levenshtein('{search}', word) as distance  """
+        sql += """From karaites_englishword  order by distance ASC, similarity DESC,  word_count  DESC limit 5"""
         cursor.execute(sql)
-        print('english_word', english_word, ' search', search)
-        for c in cursor.fetchall():
-            print(f"{c[0]:20}{c[2]:3.5f}{c[1]:10}{levenshtein_distance(c[0],search):20.2f}")
+        # some other metrics that might be useful to play around with if time permits
+        # sql += f""" levenshtein('{search}', word) as distance,  """
+        # sql += f""" difference('{search}', word) as difference  """
+        # sql += """From karaites_englishword order by  difference DESC,  similarity DESC,  distance ASC,  word_count DESC limit 10"""
+
+        return cursor.fetchall()
+
+
+def similar_search_en(search):
+    """ replace the search string with similar words if word is misspelled """
+    did_you_mean = False
+
+    for word in search.split(' '):
+        print("Similar Search", word)
+        # is word misspelled?
+        if word in ENGLISH_DICTIONARY:
+            continue
+        if word.isnumeric():
+            continue
+
+        for similar in find_similar_words(word):
+            search = search.replace(word, similar[0])
+            did_you_mean = True
+    print("Similar Search final ", search)
+    return did_you_mean, search
