@@ -6,7 +6,7 @@ from ...models import (Organization,
                        FullTextSearch,
                        FullTextSearchHebrew)
 from ...utils import search_level
-from ._update_full_text_search_index import update_full_text_search_index_en_he
+from .update_full_text_search_index import update_full_text_search_index_en_he
 
 
 class Command(BaseCommand):

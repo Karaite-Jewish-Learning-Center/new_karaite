@@ -29,7 +29,7 @@ const ChapterHeaderVerse = (props) => {
     let chapter = data[BIBLE_CHAPTER]
     let renderChapter = data[BIBLE_RENDER_CHAPTER]
     let refs_comment = parseInt(data[BIBLE_EN_CM])
-    let ref_halakha =  parseInt(data[BIBLE_REFS])
+    let ref_halakha = parseInt(data[BIBLE_REFS])
 
 
     const onClick = (i) => {
@@ -61,7 +61,7 @@ const ChapterHeaderVerse = (props) => {
     const found = item === current
 
     useEffect(() => {
-        if(allBookData[current] !==undefined) {
+        if (allBookData[current] !== undefined) {
             store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
             store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
             store.setVerseData(allBookData[current], paneNumber)
@@ -80,7 +80,7 @@ const ChapterHeaderVerse = (props) => {
                             <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                         </div>
                         <div className={classes.verseEn}>
-                            <Typography variant="body1">{data[BIBLE_ENGLISH]}</Typography>
+                            <Typography variant="body1" className={classes.englishFont}>{data[BIBLE_ENGLISH]}</Typography>
                         </div>
                         <div className={classes.references}>
                             <RefsBadge refsCount={refs_comment}/>
@@ -112,7 +112,7 @@ const ChapterHeaderVerse = (props) => {
                             <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                         </div>
                         <div className={classes.verseEn}>
-                            <Typography>{data[BIBLE_ENGLISH]}</Typography>
+                            <Typography className={classes.englishFont}>{data[BIBLE_ENGLISH]}</Typography>
                         </div>
                         <div className={classes.references}>
                             <RefsBadge refsCount={refs_comment}/>
@@ -139,9 +139,7 @@ const ChapterHeaderVerse = (props) => {
 
 
 const useStyles = makeStyles(() => ({
-  body1 :{
-        fontSize:'21px',
-    },
+
     textContainer: {
         width: '100%',
         height: '100%',
@@ -160,7 +158,7 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
-        cursor:'default',
+        cursor: 'default',
     },
     chapterTitle_he: {
         maxWidth: '35%',
@@ -204,7 +202,7 @@ const useStyles = makeStyles(() => ({
         verticalAlign: 'center',
         margin: 10,
         fontFamily: 'SBL Hebrew',
-        fontSize:'21px',
+        fontSize: '21px',
     },
     verseNumber: {
         margin: 10,
@@ -227,11 +225,17 @@ const useStyles = makeStyles(() => ({
         textAlign: 'left',
         verticalAlign: 'text-top',
         margin: 10,
-        fontSize:'21px',
+        fontSize: '21px',
     },
     hebrewFont: {
         direction: 'RTL',
         fontFamily: 'SBL Hebrew',
+        fontSize:21,
+    },
+    englishFont: {
+        direction: 'LTR',
+        fontFamily: 'SBL Hebrew',
+        fontSize:21,
     },
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']

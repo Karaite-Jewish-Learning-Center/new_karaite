@@ -1,5 +1,5 @@
 # python=3.8
-Django==3.2
+Django==4.0.0
 psycopg2-binary
 django-cors-headers
 pytest-django
@@ -12,11 +12,13 @@ python-hebrew-numbers
 html5lib
 gensim~=4.1.2
 more_itertools
-spacy
-elasticsearch~=7.0.0
-regex
-langdetect
+spacy~=3.1.4
+regex~=2022.1.18
 gunicorn==20.0.4
-hebrew
+hebrew~=0.5.5
 hebrew_tokenizer
-tqdm
+tqdm~=4.62.3
+fasttext-langdetect
+jellyfish
+txtai~=4.3.1
+elasticsearch~=7.17.0

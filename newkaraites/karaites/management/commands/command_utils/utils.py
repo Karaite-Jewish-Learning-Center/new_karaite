@@ -1,4 +1,5 @@
 import re
+import string
 from .parser_ref import parse_reference
 
 IGNORE = ['(#default#VML)',
@@ -58,3 +59,19 @@ def mark_bible_refs(html_str, regular_expression=RE_BIBLE_REF):
                     continue
 
     return html_str
+
+
+def remove_none_ascii(text):
+    """ Removes any non ascii characters from text"""
+    return re.sub(r'[^\w\s]', '', text)
+
+
+def remove_punctuation(text):
+    """ Removes any punctuation from text"""
+    # re remove digits
+    text = re.sub('[0-9]', '', text)
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    text = text.replace('’', '').replace('’', '').replace('—', '').replace('“', '')
+    text = text.replace('‘', '').replace('…', '').replace('‘', '').replace('‘', '')
+    text = text.replace('§', ' ').replace('”', '')
+    return text

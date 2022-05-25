@@ -1,14 +1,15 @@
-from langdetect import (detect,
-                        LangDetectException)
+from ftlangdetect import detect
 from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
+
 from .utils import (slug_back,
                     normalize_search,
                     prep_search,
                     highlight_hebrew,
-                    highlight_english)
+                    custom_sql,
+                    similar_search_en)
 
 from .models import (FullTextSearch,
                      FullTextSearchHebrew,
@@ -24,7 +25,6 @@ from .models import (FullTextSearch,
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
-from .constants import ENGLISH_STOP_WORDS
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -142,22 +142,20 @@ class GetFirstLevel(View):
     def get(request):
         """ for the time being just fake the database query"""
         level = OrderedDict()
-        level['Tanakh'] = ("""Torah, Prophets, and Writings, which together make up 
-        the Hebrew Bible, Judaism's foundational text.""")
 
-        level['Halakhah'] = ("""Legal works providing guidance on all aspects of Jewish life. 
-        Rooted in past sources and growing to address changing realities""")
+        level['Tanakh'] = ""
 
-        level['Liturgy'] = ("""Prayers, poems, and ritual texts, 
-        recited in daily worship or at specific occasions.""")
+        level['Halakhah'] = ""
 
-        level['Poetry'] = """Poetry Non Liturgical texts."""
+        level['Liturgy'] = ""
 
-        level['Polemic'] = """Polemic texts."""
+        level['Poetry'] = ""
 
-        level['Exhortatory'] = """Exhortatory texts"""
+        level['Polemic'] = ""
 
-        level['Comments'] = """Commentary texts."""
+        level['Exhortatory'] = ""
+
+        level['Comments'] = ""
 
         return JsonResponse(level)
 
@@ -296,6 +294,18 @@ class AutoCompleteView(View):
 
 ITEMS_PER_PAGE = 15
 
+# try phrase search
+SQL_PHRASE = """SELECT id, path, reference_en, ts_rank_cd(text_en_search, query) AS rank """
+SQL_PHRASE += """FROM karaites_fulltextsearch, phraseto_tsquery('{}') AS query """
+SQL_PHRASE += """WHERE query @@ text_en_search  """
+SQL_PHRASE += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
+
+# try word search
+SQL_PLAIN = """SELECT id, path, reference_en, ts_rank_cd(text_en_search, query) AS rank """
+SQL_PLAIN += """FROM karaites_fulltextsearch, plainto_tsquery('{}') AS query """
+SQL_PLAIN += """WHERE query @@ text_en_search  """
+SQL_PLAIN += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
+
 
 class Search(View):
     """
@@ -312,11 +322,8 @@ class Search(View):
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
         # maybe tokenize for dates, numbers, before trying to detect language
-        try:
-            language = detect(search)
-        except LangDetectException:
-            language = 'en'
-        print(language, search)
+        guess = detect(search)
+        language = guess['lang']
 
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE
@@ -328,22 +335,16 @@ class Search(View):
             for grp, token, token_num, (_, _) in tokens:
 
                 search_text = str(Hebrew(token).text_only())
-                print('search text')
-                print(search_text)
                 word_query = InvertedIndex.objects.get(word=search_text)
-                print(word_query)
                 # words to highlight
                 highlight_word += word_query.word_as_in_text
-                print(highlight_word)
                 # get id of documents
                 if not results:
                     results = set(word_query.documents)
                 else:
                     results = results.intersection(set(word_query.documents))
 
-            results = list(results)[offset:offset+limit]
-            print('results')
-            print(results)
+            results = list(results)[offset:offset + limit]
             items = []
             for k, result in FullTextSearchHebrew.objects.in_bulk(results).items():
                 items.append({'ref': result.reference_en,
@@ -354,16 +355,28 @@ class Search(View):
 
         else:
             search = normalize_search(search)
-            search = ' '.join(filter(lambda w: w.lower() not in ENGLISH_STOP_WORDS, search.split()))
-            search = prep_search(search)
+            did_you_mean, similar_search = similar_search_en(search)
+            search = prep_search(similar_search)
 
-            sql = """SELECT id, path, reference_en, text_en, ts_rank_cd(text_en_search, query) AS rank """
-            sql += f"""FROM karaites_fulltextsearch, to_tsquery('{search}') query """
-            sql += f"""WHERE query @@ text_en_search ORDER BY rank DESC LIMIT {limit} OFFSET {offset}"""
+            # try phrase search
+            results = FullTextSearch.objects.raw(SQL_PHRASE.format(search, limit, offset))
+            print("1 Results ",len(results))
+
+            if len(results) == 0:
+                # try word search
+                results = FullTextSearch.objects.raw(SQL_PLAIN.format(search, limit, offset))
+                print("2 Results ", len(results))
+            # avoid search by similar words since the cost of the query is high
+            # from 0.012 ms to 0.600 ms on my machine
+            # see similar_search_en for more details
 
             items = []
-            for result in FullTextSearch.objects.raw(sql):
+            for result in results:
                 items.append({'ref': result.reference_en,
-                              'text': highlight_english(result.text_en, search),
+                              'text': custom_sql(result.text_en, search),
                               'path': result.path})
-            return JsonResponse({'data': items, 'page': page}, safe=False)
+
+            return JsonResponse({'data': items,
+                                 'page': page,
+                                 'did_you_mean': did_you_mean,
+                                 'search_term': similar_search}, safe=False)

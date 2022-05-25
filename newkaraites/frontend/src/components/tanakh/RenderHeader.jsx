@@ -9,6 +9,8 @@ import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
+import TextToSpeech from "../player/TextToSpeech";
+import {BIBLE_ENGLISH} from "../../constants/constants";
 
 
 const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
@@ -36,6 +38,7 @@ const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
                         <Grid item xs={3} key={3}>
                             <Typography className={classes.englishBook}>{book} </Typography>
                         </Grid>
+
                     </>
                 )
             case 'he':
@@ -70,7 +73,8 @@ const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
                 <CloseButton onClick={onClose}/>
             </Grid>
             <HeaderBody chapter={chapter}/>
-            <Grid item xs={1} key={4}>
+            <Grid item xs={1} key={4} >
+                {/*<TextToSpeech text={'the english test'} language='en'/>*/}
                 <LanguageButton paneNumber={paneNumber}/>
             </Grid>
         </Grid>
@@ -94,19 +98,19 @@ const useStyles = makeStyles((theme) => ({
         verticalAlign: 'middle',
         direction: 'rtl',
         fontFamily: 'SBL Hebrew',
-        paddingTop:10,
+        paddingTop: 10,
     },
 
     chapterView: {
         textAlign: 'center',
         verticalAlign: 'middle',
         paddingRight: 23,
-        paddingTop:10,
+        paddingTop: 10,
     },
     englishBook: {
         verticalAlign: 'middle',
         textAlign: ((props) => props.lang === 'en' ? 'center' : 'left'),
-        paddingTop:10,
+        paddingTop: 10,
     },
 
 }));

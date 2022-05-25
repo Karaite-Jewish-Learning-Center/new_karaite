@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         LANGUAGES,
@@ -837,9 +837,6 @@ class FullTextSearch(models.Model):
 
     text_en_search = SearchVectorField(null=True)
 
-    # False entry is human curated, so don't delete on rebuild database
-    delete = models.BooleanField(default=False)
-
     def __str__(self):
         return self.reference_en
 
@@ -867,9 +864,6 @@ class FullTextSearchHebrew(models.Model):
                                     default='')
 
     text_he = models.TextField(default='')
-
-    # False entry is human curated, so don't delete on rebuild database
-    delete = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.path}  {self.reference_en}'
@@ -927,3 +921,36 @@ class InvertedIndex(models.Model):
     class Meta:
         verbose_name_plural = _('Inverted index')
         ordering = ('-rank',)
+
+
+class EnglishWord(models.Model):
+    word = models.CharField(max_length=40,
+                            db_index=True,
+                            verbose_name=_("English word"))
+
+    word_count = models.IntegerField(default=1,
+                                     verbose_name=_('Word Count in all documents'))
+
+    def __str__(self):
+        return self.word
+
+    class Meta:
+        verbose_name_plural = _('English words')
+        ordering = ('word',)
+
+
+class MisspelledWord(models.Model):
+    misspelled_word = models.CharField(max_length=40,
+                                       db_index=True,
+                                       verbose_name=_("Misspelled word"))
+
+    correct_word = models.CharField(max_length=100,
+                                    db_index=True,
+                                    verbose_name=_("Correct word"))
+
+    def __str__(self):
+        return self.misspelled_word
+
+    class Meta:
+        verbose_name_plural = _('Misspelled words')
+        ordering = ('misspelled_word',)

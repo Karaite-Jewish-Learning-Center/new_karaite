@@ -13,7 +13,7 @@ import {
     BIBLE_ENGLISH,
     BIBLE_HEBREW,
 } from '../../constants/constants'
-import Player from '../player/Player'
+import TextToSpeech from '../player/TextToSpeech'
 import {observer} from 'mobx-react-lite'
 import Header from '../pages/RightPaneHeader'
 import {storeContext} from "../../stores/context";
@@ -97,8 +97,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                             <hr className={classes.ruler}/>
                             <Item/>
                             <hr className={classes.ruler}/>
-                            <Player text={verseData[BIBLE_ENGLISH]} language={"English"}/>
-                            <Player text={verseData[BIBLE_HEBREW]} language={"Hebrew"}/>
+
                         </div>
                     </>
                 )

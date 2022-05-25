@@ -5,8 +5,8 @@ from ...models import (BookAsArray,
                        KaraitesBookDetails,
                        KaraitesBookAsArray,
                        FullTextSearch)
-from ._update_full_text_search_index import (update_full_text_search_index_en_he,
-                                             update_full_text_search_index_english)
+from .update_full_text_search_index import (update_full_text_search_index_en_he,
+                                            update_full_text_search_index_english)
 from .process_books import HALAKHAH
 from langdetect import detect
 

@@ -11,7 +11,6 @@ import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
 import {Button, Typography} from '@material-ui/core';
-import {slug} from '../../utils/utils';
 
 const HTML = 2
 const BOOK = 0
@@ -157,8 +156,10 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                     <div className={classes.heLeft}>
                         <p className={classes.he}>{data[INDEX]}</p>
                     </div>
+                    <div className={classes.filler}>
+                    </div>
                     <div className={classes.enRight}>
-                        <Typography className={classes.en}>{data[SUBJECT]}</Typography>
+                        <p className={classes.en}>{data[SUBJECT]}</p>
                     </div>
                 </Button>
             </div>
@@ -259,7 +260,7 @@ const useStyles = makeStyles(() => ({
         "&:hover": {
             background: Colors['bibleSelectedVerse']
         },
-        width:'100%',
+        width: '100%',
     },
     paragraph: {
         fontFamily: 'SBL Hebrew',
@@ -270,8 +271,9 @@ const useStyles = makeStyles(() => ({
         margin: 'auto',
     },
     liturgy: {
-        maxWidth: '100%',
-        margin: 'auto',
+        display: 'flex',
+        alignContent: 'center',
+        justifyContent: 'center',
     },
     paragraphContainerHeEn: {
         paddingLeft: 20,
@@ -286,7 +288,7 @@ const useStyles = makeStyles(() => ({
         },
         fontFamily: 'SBL Hebrew',
         maxWidth: '100%',
-        marginLeft: '10%',
+        marginLeft: '%',
         marginRight: '10%',
         fontSize: '21px',
         lineHeight: 'initial',
@@ -313,33 +315,34 @@ const useStyles = makeStyles(() => ({
     heLeft: {
         fontFamily: 'SBL Hebrew',
         float: 'left',
-        width: '300',
         direction: 'rtl',
         textAlign: 'right',
         lineHeight: 'initial',
         fontSize: '20.35px',
         verticalAlign: 'top',
-
+        width: '100%',
+         // border: '1px solid red',
+    },
+    filler:{
+        width: '0',
     },
     heRight: {
         fontFamily: 'SBL Hebrew',
         lineHeight: 'initial',
         float: 'right',
         textAlign: 'right',
-        width: '600px',
-        border: '1px solid red',
         verticalAlign: 'top'
     },
     enRight: {
         textAlign: 'left',
         direction: 'ltr',
-        width: 350,
         marginLeft: 15,
         fontSize: 21,
+        width:'100%',
         verticalAlign: 'top',
         fontFamily: 'SBL Hebrew',
         lineHeight: 'initial',
-
+        // border: '1px solid blue',
     },
     heRightCenter: {
         direction: 'rtl',
@@ -362,6 +365,7 @@ const useStyles = makeStyles(() => ({
     },
     tocButton: {
         textTransform: 'none',
+        width: '100%',
     },
 }))
 

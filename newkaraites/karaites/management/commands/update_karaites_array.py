@@ -1,6 +1,7 @@
 from ...models import (KaraitesBookDetails,
                        KaraitesBookAsArray)
 
+
 def update_karaites_array_array(book_details, ref_chapter, paragraph_number, child):
     return KaraitesBookAsArray.objects.get_or_create(
         book=book_details,
