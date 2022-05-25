@@ -36,8 +36,7 @@ from .update_full_text_search_index import (update_full_text_search_index_en_he,
                                             update_full_text_search_index_english,
                                             update_full_text_search_index_hebrew)
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
-from langdetect import (detect,
-                        LangDetectException)
+from ftlangdetect import detect
 
 LIST_OF_BOOKS = (COMMENTS +
                  HALAKHAH +
@@ -194,17 +193,14 @@ class Command(BaseCommand):
                             key = text
                             continue
 
-                        try:
-                            lang = detect(text)
-                        except LangDetectException:
-                            continue
+                        guess = detect(text.replace('\n', ''), low_memory=False)
 
-                        if lang == 'he':
+                        if guess['lang'] == 'he':
                             hebrew = text
-                        elif lang == 'en':
+                        elif guess['lang'] == 'en':
                             english = text
                         else:
-                            print(f'Unknown language:{lang}')
+                            print(f"Unknown language:{guess['lang']}")
 
                 if key is not None:
                     if toc_len == 3:
@@ -219,6 +215,7 @@ class Command(BaseCommand):
 
                 if key is not None:
                     table_of_contents[key] = value
+
         return table_of_contents
 
     @staticmethod
@@ -269,24 +266,25 @@ class Command(BaseCommand):
             for tr in trs:
                 for td in tr.find_all('td'):
                     text = td.get_text(strip=False)
-                    try:
-                        if detect(text) == 'he':
-                            text_he = f'{text_he} {text}'
-                            # book text
-                            update_full_text_search_index_hebrew(book_title_en,
-                                                                 book_title_he,
-                                                                 1,
-                                                                 text,
-                                                                 'Liturgy')
-                        else:
-                            text_en = f'{text_en} {text}'
-                            # book text
-                            update_full_text_search_index_english(book_title_en,
-                                                                  1,
-                                                                  text,
-                                                                  'Liturgy')
-                    except LangDetectException:
-                        pass
+                    guess = detect(text.replace('\n', ''), low_memory=False)
+
+                    if guess['lang'] == 'he':
+                        text_he = f'{text_he} {text}'
+                        # book text
+                        update_full_text_search_index_hebrew(book_title_en,
+                                                             book_title_he,
+                                                             1,
+                                                             text,
+                                                             'Liturgy')
+                    elif guess['lang'] == 'en':
+                        text_en = f'{text_en} {text}'
+                        # book text
+                        update_full_text_search_index_english(book_title_en,
+                                                              1,
+                                                              text,
+                                                              'Liturgy')
+                    else:
+                        print(f'Unknown language:{guess["lang"]}')
 
         table_str = ''
         for table in divs[0].find_all('table'):
@@ -375,6 +373,7 @@ class Command(BaseCommand):
                     if len(tds) == 3:
 
                         toc_tex = tds[columns_order[2]].get_text(strip=False)
+
                         if toc_tex != '':
                             try:
                                 if details.get('toc_columns', False):
@@ -410,18 +409,18 @@ class Command(BaseCommand):
 
                         text = td.get_text(strip=False)
 
-                        try:
+                        guess = detect(text.replace('\n', ''), low_memory=False)
 
-                            if detect(text) == 'he':
-                                child_he = str(td)
-                                update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
-                                                                     self.expand_book_classification(details))
-                            else:
-                                child_en = str(td)
-                                update_full_text_search_index_english(book_title_en, c, text,
-                                                                      self.expand_book_classification(details))
-                        except LangDetectException:
-                            pass
+                        if guess['lang'] == 'he':
+                            child_he = str(td)
+                            update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
+                                                                 self.expand_book_classification(details))
+                        elif guess['lang'] == 'en':
+                            child_en = str(td)
+                            update_full_text_search_index_english(book_title_en, c, text,
+                                                                  self.expand_book_classification(details))
+                        else:
+                            print(f'Unknown language:{guess["lang"]} ')
 
                     update_karaites_array(book_details, '', c, child_he, child_en)
                     c += 1
@@ -432,15 +431,11 @@ class Command(BaseCommand):
                     p.attrs = clean_tag_attr(p)
                     p = clean_table_attr(p)
 
-                for p in divs[0].find_all('table', recursive=True):
+                for p in divs[0].find_all(recursive=False):
                     text = p.get_text(strip=False)
                     key, value = self.find_toc_key(text, debug=False)
-                    try:
-                        p = str(p)
-                        print(p)
-                    except TypeError:
-                        print('error')
-                        continue
+
+                    p = str(p)
 
                     if key is not None:
                         p = p.replace('#', '')

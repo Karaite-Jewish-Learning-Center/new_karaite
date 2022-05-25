@@ -1,5 +1,4 @@
-from langdetect import (detect,
-                        LangDetectException)
+from ftlangdetect import detect
 from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
@@ -143,22 +142,20 @@ class GetFirstLevel(View):
     def get(request):
         """ for the time being just fake the database query"""
         level = OrderedDict()
-        level['Tanakh'] = ("""Torah, Prophets, and Writings, which together make up 
-        the Hebrew Bible, Judaism's foundational text.""")
 
-        level['Halakhah'] = ("""Legal works providing guidance on all aspects of Jewish life. 
-        Rooted in past sources and growing to address changing realities""")
+        level['Tanakh'] = ""
 
-        level['Liturgy'] = ("""Prayers, poems, and ritual texts, 
-        recited in daily worship or at specific occasions.""")
+        level['Halakhah'] = ""
 
-        level['Poetry'] = """Poetry Non Liturgical texts."""
+        level['Liturgy'] = ""
 
-        level['Polemic'] = """Polemic texts."""
+        level['Poetry'] = ""
 
-        level['Exhortatory'] = """Exhortatory texts"""
+        level['Polemic'] = ""
 
-        level['Comments'] = """Commentary texts."""
+        level['Exhortatory'] = ""
+
+        level['Comments'] = ""
 
         return JsonResponse(level)
 
@@ -325,10 +322,8 @@ class Search(View):
             JsonResponse(data={'status': 'false', 'message': _('Need a search string.')}, status=400)
 
         # maybe tokenize for dates, numbers, before trying to detect language
-        try:
-            language = detect(search)
-        except LangDetectException:
-            language = 'en'
+        guess = detect(search)
+        language = guess['lang']
 
         limit = ITEMS_PER_PAGE
         offset = (page - 1) * ITEMS_PER_PAGE

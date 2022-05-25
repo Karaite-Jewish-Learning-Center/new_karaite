@@ -321,7 +321,7 @@ const useStyles = makeStyles(() => ({
         fontSize: '20.35px',
         verticalAlign: 'top',
         width: '100%',
-         border: '1px solid red',
+         // border: '1px solid red',
     },
     filler:{
         width: '0',
@@ -342,7 +342,7 @@ const useStyles = makeStyles(() => ({
         verticalAlign: 'top',
         fontFamily: 'SBL Hebrew',
         lineHeight: 'initial',
-        border: '1px solid blue',
+        // border: '1px solid blue',
     },
     heRightCenter: {
         direction: 'rtl',

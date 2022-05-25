@@ -101,13 +101,13 @@ def update_bible_re(html_tree):
         # ref = ref.replace('<span class="span-99">\xa0 </span>', '').replace('<span class="span-136">\xa0 </span>', '')
         # only text
         clean_ref = re.sub(CLEAN_HTML, '', ref.replace('\n', ' ').replace('\r', ' '))
-
+        # print('clean_ref', clean_ref)
         valid_ref, language = parse_reference(clean_ref)
-
+        # print('valid_ref, language', valid_ref, language)
         if valid_ref != '':
             i += 1
             map_ref[i] = clean_ref
-            # print('ref', f'"{ref}"')
+            #  print('ref', f'"{ref}"')
             tag_ref = f'<span class="{language}-biblical-ref" lang="{language}">show-{i:04}</span>'
             # tag = ref.replace(ref, tag_ref)
             # print('tag', f'"{tag}"')
@@ -500,7 +500,8 @@ HALAKHAH = [
          'table_book': True,
          'columns': 2,
          'columns_order': '0,1,2',
-         'toc_columns': '0,1,2', },
+         'direction': 'rtl',
+         'toc_columns': '2,1,0', },
         False
     ],
     [
@@ -1249,17 +1250,17 @@ class Command(BaseCommand):
                     if foot_note_id is None:
                         continue
 
-                    note_ref = re.match('\\[[0-9]*.\\]', child.text)
+                    note_ref = child.get_text(strip=False)
                     node = html_tree.find(id=foot_note_id)
 
-                    if note_ref and node is not None:
-                        # text = escape(node.text.replace('\xa0', '').strip())
-                        text = escape(node.text)
-
-                        ref = note_ref.group()
-                        child.replace_with(BeautifulSoup(
-                            f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}"><sup class="{language}-foot-index">{ref}</sup></span>""",
-                            'html5lib'))
+                    if node is not None:
+                        text = escape(node.text).replace('"', "'")
+                        if note_ref.find('[') == -1:
+                            text = text.replace(note_ref, f'[{note_ref}]', 1)
+                            note_ref = f'[{note_ref}]'
+                        html = f"""<span class="{language}-foot-note" data-for="{language}" data-tip="{text}">"""
+                        html += f"""<sup class="{language}-foot-index">{note_ref}</sup></span>"""
+                        child.replaceWith(BeautifulSoup(html, 'html.parser'))
 
                 except KeyError:
                     # this seems a bug , hasattr, returns True for style, in fact no style attr
@@ -1529,6 +1530,10 @@ class Command(BaseCommand):
 
                 html_tree = BeautifulSoup(html, 'html5lib')
 
+                for process in post_processes:
+                    sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")
+                    html_tree = process(html_tree)
+
                 html_tree = self.replace_a_foot_notes(html_tree, book_language)
 
                 sys.stdout.write(f"\nRemoving comments for book {book_name}")
@@ -1543,10 +1548,6 @@ class Command(BaseCommand):
                                                             lang,
                                                             details.get('multi_tables', False),
                                                             details.get('css_class', None))
-
-                for process in post_processes:
-                    sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")
-                    html_tree = process(html_tree)
 
                 sys.stdout.write(f"\nRemoving empty tags for book {book_name}")
                 html_str = self.remove_tags(str(html_tree))
