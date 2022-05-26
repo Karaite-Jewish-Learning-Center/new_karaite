@@ -4,9 +4,14 @@ from django.db import connection
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         ENGLISH_STOP_WORDS)
+
 from .models import EnglishWord
 
-ENGLISH_DICTIONARY = dict.fromkeys(EnglishWord.objects.all().values_list('word', flat=True), None)
+# migrations fallback
+try:
+    ENGLISH_DICTIONARY = dict.fromkeys(EnglishWord.objects.all().values_list('word', flat=True), None)
+except:
+    ENGLISH_DICTIONARY = {}
 
 
 def search_level(search_string):
