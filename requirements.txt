@@ -1,5 +1,5 @@
 # python=3.8
-Django==4.0.0
+Django==4.0.4
 psycopg2-binary
 django-cors-headers
 pytest-django
@@ -21,4 +21,4 @@ tqdm~=4.62.3
 fasttext-langdetect
 jellyfish
 txtai~=4.3.1
-elasticsearch~=7.17.0
+wget
