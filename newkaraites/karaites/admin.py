@@ -120,7 +120,7 @@ admin.site.register(BookAsArray, BookAsArrayAdmin)
 
 class BookFootNotesAdmin(KAdmin):
     list_display = ('book', 'language', 'footnote_ref', 'footnote')
-    list_filter = ('book', 'footnote_ref')
+    search_fields = ('book', 'footnote_ref')
 
 
 admin.site.register(BooksFootNotes, BookFootNotesAdmin)

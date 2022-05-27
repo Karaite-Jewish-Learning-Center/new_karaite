@@ -4,9 +4,20 @@
 LANGUAGES = [
     ('en', 'English'),
     ('he', 'Hebrew'),
-    ('en,he', 'Hebrew/English'),
+    ('he-en', 'Hebrew-English'),
     ('ja', 'Judeo-Arabic'),
 ]
+
+LANGUAGES_DICT = {'en': "English",
+                  'he': "Hebrew",
+                  'ja': 'Judeo-Arabic',
+                  # this means a formatted table with hebrew and english
+                  'he-en': 'Hebrew-English',
+                  # technical "in" , "toc" are not a language,
+                  # we use to process introduction files and table of contents files
+                  "in": "Introduction", 'toc': "TOC"}
+
+
 
 BOOK_CLASSIFICATION = [
     ('00', 'Unknown'),

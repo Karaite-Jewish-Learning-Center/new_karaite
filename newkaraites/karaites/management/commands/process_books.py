@@ -4,7 +4,8 @@ import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from ...constants import (BIBLE_BOOKS_NAMES)
+from ...constants import (BIBLE_BOOKS_NAMES,
+                          LANGUAGES_DICT)
 from .command_utils.utils import mark_bible_refs
 from .command_utils.read_write_data import (read_data,
                                             write_data)
@@ -15,6 +16,7 @@ from .constants import (SOURCE_PATH,
                         CSS_SOURCE,
                         CSS_OUT,
                         REMOVE_CSS_CLASS)
+
 from .command_utils.parser_ref import (parse_reference,
                                        ABBREVIATIONS)
 from .command_utils.utils import RE_BIBLE_REF
@@ -136,15 +138,6 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 
 BOOKS = [1, 2]
-
-LANGUAGES = {'en': "English",
-             'he': "Hebrew",
-             'ja': 'Judeo_Arabic',
-             # this means a formatted table with hebrew and english
-             'he-en': 'Hebrew-English',
-             # technical "in" , "toc" are not a language,
-             # we use to process introduction files and table of contents files
-             "in": "Introduction", 'toc': "TOC"}
 
 
 def replace_path(html_tree, old_path, new_path):
@@ -1509,7 +1502,7 @@ class Command(BaseCommand):
 
         for path, book, language, pre_processes, _, _, _ in books_to_process:
             for lang in language.split(','):
-                book_name = book.replace('{}', LANGUAGES[lang])
+                book_name = book.replace('{}', LANGUAGES_DICT[lang])
                 for pre_process in pre_processes:
                     sys.stdout.write(f"\nPre-processing book : {book_name}")
                     pre_process(path, book_name)
@@ -1520,7 +1513,7 @@ class Command(BaseCommand):
             # may be some exceptions
             book_language = language.replace(',in', '').replace(',toc', '')
             for lang in language.split(','):
-                book_name = book.replace('{}', LANGUAGES[lang])
+                book_name = book.replace('{}', LANGUAGES_DICT[lang])
                 sys.stdout.write(f"\nPre-processing book {lang}: {book_name}")
                 html = read_data(path, book_name, SOURCE_PATH)
 

@@ -654,9 +654,12 @@ class BooksFootNotes(models.Model):
                              on_delete=models.CASCADE,
                              verbose_name=_('Book'))
 
-    footnote_ref = models.CharField(max_length=6,
+    footnote_ref = models.CharField(max_length=20,
                                     default='',
-                                    verbose_name=_('Footnote number'))
+                                    verbose_name=_('Footnote ref.'))
+
+    footnote_number = models.IntegerField(default=0,
+                                          verbose_name=_('Footnote number'))
 
     footnote = models.TextField(default='',
                                 verbose_name=_('Footnotes'))
@@ -670,7 +673,7 @@ class BooksFootNotes(models.Model):
 
     def to_json(self):
         return {
-            'footnote_number': self.footnote_number,
+            'footnote_ref': self.footnote_ref,
             'footnote': self.footnote,
         }
 
@@ -686,7 +689,7 @@ class BooksFootNotes(models.Model):
 
     class Meta:
         verbose_name_plural = 'Books footnotes'
-        ordering = ('book', 'footnote_ref')
+        ordering = ('book', 'footnote_number')
 
 
 class KaraitesBookAsArray(models.Model):

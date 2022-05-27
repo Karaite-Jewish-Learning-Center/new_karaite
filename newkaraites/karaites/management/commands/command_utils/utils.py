@@ -75,3 +75,20 @@ def remove_punctuation(text):
     text = text.replace('‘', '').replace('…', '').replace('‘', '').replace('‘', '')
     text = text.replace('§', ' ').replace('”', '')
     return text
+
+
+def roman_to_int(roman_number):
+    """ Convert roman number to int"""
+    roman_number = roman_number.upper()
+    roman_table = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    integer = 0
+
+    for i in range(len(roman_number) - 1):
+        if roman_table[roman_number[i]] < roman_table[roman_number[i + 1]]:
+            integer += roman_table[roman_number[i]] * -1
+            continue
+        integer += roman_table[roman_number[i]]
+
+    integer += roman_table[roman_number[-1]]
+
+    return integer

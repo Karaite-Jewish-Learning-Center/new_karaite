@@ -5,7 +5,7 @@ from .command_utils.utils import get_html
 from .update_book_details import update_book_details
 from .update_karaites_array import update_karaites_array_language
 from .process_books import (HALAKHAH,
-                            LANGUAGES)
+                            LANGUAGES_DICT)
 from .constants import PATH
 from ...models import KaraitesBookDetails
 from .udpate_bible_ref import update_create_bible_refs
@@ -28,7 +28,7 @@ class Command(BaseCommand):
             book_details, _ = update_book_details(details, language='en,he')
 
             for lang in language.split(','):
-                book_name = book.replace('{}', LANGUAGES[lang])
+                book_name = book.replace('{}', LANGUAGES_DICT[lang])
                 sys.stdout.write(f'\nProcessing books:')
                 sys.stdout.write(f'\n {book_name}')
 

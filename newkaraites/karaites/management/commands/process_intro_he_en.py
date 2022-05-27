@@ -8,6 +8,8 @@ from .update_karaites_array import (update_karaites_array,
                                     update_karaites_array_details,
                                     update_karaites_array_array)
 
+from .update_footnotes import update_footnotes
+
 from .process_books import (COMMENTS,
                             EXHORTATORY,
                             POLEMIC,
@@ -20,11 +22,12 @@ from .process_books import (COMMENTS,
                             SHABBAT_SONGS,
                             SUPPLEMENTAL,
                             WEDDING_SONGS,
-                            LANGUAGES)
+                            LANGUAGES_DICT)
 from .constants import PATH
 from ...models import (KaraitesBookDetails,
                        FullTextSearch,
-                       FullTextSearchHebrew)
+                       FullTextSearchHebrew,
+                       BooksFootNotes)
 
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
@@ -133,7 +136,7 @@ class Command(BaseCommand):
 
     def process_intro(self, book, details, book_title_en, book_title_he):
 
-        html = get_html(f"{PATH}{book.replace('{}', LANGUAGES['in'])}")
+        html = get_html(f"{PATH}{book.replace('{}', LANGUAGES_DICT['in'])}")
         html_tree = BeautifulSoup(html, 'html5lib')
         divs = html_tree.find_all('div', {'class': 'WordSection1'})
         intro = '<div class="liturgy">'
@@ -228,6 +231,15 @@ class Command(BaseCommand):
         return False
 
     @staticmethod
+    def process_footnotes(html, details, lang):
+        html_tree = BeautifulSoup(html, 'html5lib')
+        # find all footnotes by class
+        for footnote in html_tree.find_all('span', {'class': f'{lang}-foot-note'}):
+            footnote_text = footnote.get('data-tip')
+            footnote_ref = footnote.find_all('sup')[0].get_text(strip=True)
+            update_footnotes(details, footnote_ref, footnote_text, lang)
+
+    @staticmethod
     def process_liturgy_books(details, lang, book, book_details, book_title_en, book_title_he):
 
         if details.get('css_class', None) is not None:
@@ -312,14 +324,13 @@ class Command(BaseCommand):
             if lang == '':
                 continue
 
-            book_name = book.replace('{}', LANGUAGES[lang])
+            book_name = book.replace('{}', LANGUAGES_DICT[lang])
             sys.stdout.write(f'\rProcessing books:{book_name}\n')
             sys.stdout.write(f'\r {book_name}\n')
 
             html = get_html(f'{PATH}{book_name}')
 
-            ############
-            # self.footnotes(html, book_details, book_title_en, book_title_he, details, c, lang)
+            self.process_footnotes(html, book_details, lang)
 
             if details.get('remove_class', False):
                 html = html.replace(details.get('remove_class'), '')
@@ -494,6 +505,7 @@ class Command(BaseCommand):
             FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
             FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()
             book_details, _ = update_book_details(details, language='en,he')
+            BooksFootNotes.objects.filter(book=book_details).delete()
 
             if self.check_is_a_liturgy_book(book_title_en):
 
@@ -522,5 +534,3 @@ class Command(BaseCommand):
                                                     self.expand_book_classification(details))
             # update/create bible references
             update_create_bible_refs(book_details)
-
-            # update_footnotes(book_details)
