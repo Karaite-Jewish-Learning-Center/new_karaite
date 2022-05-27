@@ -3,7 +3,7 @@
     margin-top: 50px;
     padding-left: 5%;
     padding-right: 5%;
-    max-width: 800px;
+    max-width: 750px;
     /*max-width: 70%;*/
     margin-left: auto;
     margin-right: auto;
@@ -25,6 +25,7 @@
     direction: ltr;
     font-style: italic;
     padding-top: 15px;
+    padding-left: 10%;
 
 }
 
@@ -56,6 +57,7 @@
 }
 
 .MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
+    /*background-color: #ffd169;*/
     padding-right: 10px;
     vertical-align: top;
     width: auto !important;
@@ -63,6 +65,7 @@
 }
 
 .MsoTableGrid tr:nth-child(odd) {
+    /*background-color: #ffd169;*/
     margin-top: 0;
     vertical-align: top;
 }
@@ -116,6 +119,7 @@
 
 /* simple  in case need to override something*/
 .simple {
+    max-width: 500px;
     margin-top: 50px;
     /*background-color: #cacaca;*/
 }
@@ -169,6 +173,7 @@
 .simple-3-4 tr:nth-child(4n+4) {
     color: red;
 }
+
 /* books that use stacked */
 /* Aaron ben Joseph's Essay on the Obligation of Prayer */
 .stacked {
@@ -217,6 +222,7 @@
     /*background-color: #3FC380;*/
     width: 50%;
 }
+
 .table-book td:nth-child(even) p {
     /*border: 1px solid #3498db;*/
     direction: ltr;
@@ -230,6 +236,7 @@
     text-align: right;
     padding: 5px;
 }
+
 /* some table book exception */
 /* end exceptions */
 
@@ -343,7 +350,6 @@
 /* Laḥatani Mivḥar Banai*/
 /* Lutski Prayer for a Time of Plague */
 .he-lutski-table-000 {
-    max-width: 1100px;
     direction: ltr;
 }
 
@@ -362,6 +368,7 @@
 }
 
 .he-lutski-table-001 {
+    /*background-color: #3FC380;*/
     direction: rtl;
 }
 
@@ -383,6 +390,11 @@
 /* Azkir Tehillo */
 /* Hodu Le’el De‘ot */
 /* Odecha El ‘Al Ki Nora’ot */
+.he-odecha_el_-table-000 tr:first-child td:nth-child(3) {
+ /*background-color: #3FC380;*/
+  width :0;
+}
+
 .he-odecha_el_-table-000 tr:nth-child(3n) {
     color: red;
 }
@@ -393,6 +405,9 @@
 
 /*Yaḥid Be‘olamo */
 /* Yonat Elem */
+.he-yonat_elem-table-000 {
+   max-width: 550px;
+}
 .he-yonat_elem-table-000 tr:nth-child(4n+4) {
     color: red;
 }
@@ -400,6 +415,7 @@
 .he-yonat_elem-table-000 tr:nth-child(4n+3) {
     color: red;
 }
+
 /*Adon Yeshu‘ot*/
 /* Shiru ‘Am Zakka */
 .he-shiru_am_z-table-000 {
@@ -416,7 +432,7 @@
 
 /* Simhu Benē El Ne’eman*/
 .he-simhu-table-000 {
-    max-width: 550px;
+    max-width: 500px;
 }
 
 .he-simhu-table-000 tr:nth-child(4n+4) {
@@ -426,7 +442,10 @@
 .he-simhu-table-000 tr:nth-child(4n+3) {
     color: red;
 }
-
+/*En Kelohenu */
+.he-en-table-000 {
+    max-width: 400px;
+}
 /* Odé Le’el Maḥsi */
 .he-od-table-000 {
     max-width: 800px;
@@ -908,16 +927,16 @@
     font-style: italic;
 }
 
-.he-deuteronom-span-058 .he-deuteronom-span-060  {
+.he-deuteronom-span-058 .he-deuteronom-span-060 {
     color: #0070C0;
 }
 
- .he-deuteronom-span-064 .he-deuteronom-span-066 .he-deuteronom-span-067 .he-deuteronom-span-068 {
+.he-deuteronom-span-064 .he-deuteronom-span-066 .he-deuteronom-span-067 .he-deuteronom-span-068 {
     color: black;
     font-style: italic;
 }
 
-.he-deuteronom-span-052  .he-deuteronom-span-062  .he-deuteronom-span-073 {
+.he-deuteronom-span-052 .he-deuteronom-span-062 .he-deuteronom-span-073 {
     color: red;
 }
 

@@ -5,6 +5,7 @@ from .models import (Organization,
                      CommentTmp,
                      OtherBooks,
                      BookAsArray,
+                     BooksFootNotes,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      TableOfContents,
@@ -115,6 +116,14 @@ class BookAsArrayAdmin(KAdmin):
 
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
+
+
+class BookFootNotesAdmin(KAdmin):
+    list_display = ('book', 'language', 'footnote_ref', 'footnote')
+    list_filter = ('book', 'footnote_ref')
+
+
+admin.site.register(BooksFootNotes, BookFootNotesAdmin)
 
 
 class KaraitesBookDetailsAdmin(KAdmin):

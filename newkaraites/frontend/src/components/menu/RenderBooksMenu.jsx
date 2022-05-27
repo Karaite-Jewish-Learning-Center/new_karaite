@@ -34,18 +34,18 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
                 </Grid>)
             }
             comp.push(<Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`}>
-                <div>
-                    <div className={classes.right}>
+                <div className={classes.item}>
+                    <span className={classes.left}>
+                        <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
+                    </span>
+                    <span className={classes.note}>
+                         {(obj[key].song ? <MusicNoteIcon fontSize="small" color="secondary"/> : null)}
+                    </span>
+                    <span className={classes.right}>
                         <Typography className={classes.bookTitleEn}>
                             {obj[key].book_title_en}
                         </Typography>
-                    </div>
-                    <div className={classes.right}>
-                        {(obj[key].song ? <MusicNoteIcon fontSize="small" color="secondary"/> : null)}
-                    </div>
-                    <div className={classes.left}>
-                        <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
-                    </div>
+                    </span>
                 </div>
             </Link>)
 
@@ -112,17 +112,28 @@ const useStyles = makeStyles((theme) => ({
         color: 'gray',
     }, bookTitleEn: {
         textAlign: 'left',
+
     }, bookTitleHe: {
         textAlign: 'right',
     },
     left: {
-        float: 'left',
+        width:'50%',
         paddingLeft: 20,
         margin: 5,
+         justifyItems: 'right',
     },
     right: {
-        float: 'right',
+        width:'50%',
         paddingRight: 20,
         margin: 5,
+        justifyItems: 'left',
+    },
+    item:{
+      display: 'flex',
+    },
+    note:{
+      marginLeft:20,
+      marginRight:20,
+      minWidth:20,
     }
 }));

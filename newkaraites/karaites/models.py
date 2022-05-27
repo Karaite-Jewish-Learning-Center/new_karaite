@@ -559,6 +559,7 @@ class KaraitesBookDetails(models.Model):
 
     # buy link
     buy_link = models.CharField(max_length=255, default='')
+
     # search index hebrew , english, transliteration
     index_lang = models.BooleanField(default=True)
 
@@ -644,6 +645,48 @@ class KaraitesBookDetails(models.Model):
     class Meta:
         verbose_name_plural = 'Karaites book details'
         ordering = ('book_title_en', 'author')
+
+
+class BooksFootNotes(models.Model):
+    """ Book footnotes """
+
+    book = models.ForeignKey(KaraitesBookDetails,
+                             on_delete=models.CASCADE,
+                             verbose_name=_('Book'))
+
+    footnote_ref = models.CharField(max_length=6,
+                                    default='',
+                                    verbose_name=_('Footnote number'))
+
+    footnote = models.TextField(default='',
+                                verbose_name=_('Footnotes'))
+
+    language = models.CharField(max_length=8,
+                                choices=LANGUAGES,
+                                verbose_name=_('Book language'))
+
+    def __str__(self):
+        return '{} - {}'.format(self.book, self.footnote_number)
+
+    def to_json(self):
+        return {
+            'footnote_number': self.footnote_number,
+            'footnote': self.footnote,
+        }
+
+    @staticmethod
+    def all_foot_notes(book_id):
+
+        try:
+            foot_notes = [f.to_json() for f in BooksFootNotes.objects.filter(book_id=book_id)]
+        except BooksFootNotes.DoesNotExist:
+            foot_notes = []
+
+        return foot_notes
+
+    class Meta:
+        verbose_name_plural = 'Books footnotes'
+        ordering = ('book', 'footnote_ref')
 
 
 class KaraitesBookAsArray(models.Model):

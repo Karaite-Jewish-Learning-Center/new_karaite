@@ -272,6 +272,7 @@ const useStyles = makeStyles(() => ({
     },
     liturgy: {
         display: 'flex',
+        flexDirection: 'column',
         alignContent: 'center',
         justifyContent: 'center',
     },
@@ -288,7 +289,7 @@ const useStyles = makeStyles(() => ({
         },
         fontFamily: 'SBL Hebrew',
         maxWidth: '100%',
-        marginLeft: '%',
+        marginLeft: '10%',
         marginRight: '10%',
         fontSize: '21px',
         lineHeight: 'initial',
