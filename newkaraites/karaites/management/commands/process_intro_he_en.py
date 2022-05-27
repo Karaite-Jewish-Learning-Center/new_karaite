@@ -227,7 +227,8 @@ class Command(BaseCommand):
 
         return False
 
-    def process_liturgy_books(self, details, lang, book, book_details, book_title_en, book_title_he):
+    @staticmethod
+    def process_liturgy_books(details, lang, book, book_details, book_title_en, book_title_he):
 
         if details.get('css_class', None) is not None:
             class_name = f" {details.get('css_class')} "
@@ -317,7 +318,8 @@ class Command(BaseCommand):
 
             html = get_html(f'{PATH}{book_name}')
 
-            # html = html.replace('MsoTableGrid', '')
+            ############
+            # self.footnotes(html, book_details, book_title_en, book_title_he, details, c, lang)
 
             if details.get('remove_class', False):
                 html = html.replace(details.get('remove_class'), '')
@@ -518,5 +520,7 @@ class Command(BaseCommand):
                                                     book_title_en,
                                                     book_title_he,
                                                     self.expand_book_classification(details))
-                # update/create bible references
-                update_create_bible_refs(book_details)
+            # update/create bible references
+            update_create_bible_refs(book_details)
+
+            # update_footnotes(book_details)

@@ -1228,7 +1228,7 @@ class Command(BaseCommand):
         return str_html.replace('class="MsoNormalTable', 'class="MsoTableGrid')
 
     @staticmethod
-    def replace_a_foot_notes(html_tree, language):
+    def replace_a_foot_notes(html_tree, language, details):
         """ replace complicate <a></a> with a tooltip """
         print()
         i = 1
@@ -1534,7 +1534,7 @@ class Command(BaseCommand):
                     sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")
                     html_tree = process(html_tree)
 
-                html_tree = self.replace_a_foot_notes(html_tree, book_language)
+                html_tree = self.replace_a_foot_notes(html_tree, book_language, details)
 
                 sys.stdout.write(f"\nRemoving comments for book {book_name}")
                 html_str = self.replace_from_open_to_close(str(html_tree))
