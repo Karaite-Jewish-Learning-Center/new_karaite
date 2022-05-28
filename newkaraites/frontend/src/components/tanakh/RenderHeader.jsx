@@ -9,11 +9,10 @@ import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
-import TextToSpeech from "../player/TextToSpeech";
-import {BIBLE_ENGLISH} from "../../constants/constants";
+import {TextToSpeechButton} from "../buttons/textToSpeechButton";
 
 
-const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
+const RenderHeader = ({book, paneNumber, chapter, onClosePane, speaking, speak}) => {
     const store = useContext(storeContext)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -73,8 +72,8 @@ const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
                 <CloseButton onClick={onClose}/>
             </Grid>
             <HeaderBody chapter={chapter}/>
-            <Grid item xs={1} key={4} >
-                {/*<TextToSpeech text={'the english test'} language='en'/>*/}
+            <Grid item xs={1} key={4}>
+                <TextToSpeechButton onClick={speak} onOff={speaking}/>
                 <LanguageButton paneNumber={paneNumber}/>
             </Grid>
         </Grid>

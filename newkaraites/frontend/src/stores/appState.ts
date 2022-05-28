@@ -109,6 +109,12 @@ class AppState {
 
     getCurrentItem = (i: number): number => this.panes[i].currentItem
 
+    incCurrentItem = (i: number): number => {
+        let current = parseInt(this.panes[i].currentItem)
+        this.setCurrentItem(++current, i)
+        return current
+    }
+
     // right pane
     // comments
     setRightPaneState = (state: boolean, i: number): void => {

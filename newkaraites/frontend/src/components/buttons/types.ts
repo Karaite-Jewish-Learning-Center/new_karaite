@@ -6,6 +6,12 @@ export interface ButtonProps {
     color?: PropTypes.Color;
 }
 
+export interface ButtonPropsTTS {
+    onClick: MouseEventHandler;
+    color?: PropTypes.Color;
+    onOff: boolean;
+}
+
 export interface ButtonPlayProps {
     onClick: MouseEventHandler;
     playing: boolean;

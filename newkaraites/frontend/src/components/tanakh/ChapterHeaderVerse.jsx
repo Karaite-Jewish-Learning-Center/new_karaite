@@ -31,7 +31,6 @@ const ChapterHeaderVerse = (props) => {
     let refs_comment = parseInt(data[BIBLE_EN_CM])
     let ref_halakha = parseInt(data[BIBLE_REFS])
 
-
     const onClick = (i) => {
         if (!store.getIsRightPaneOpen(paneNumber)) {
             store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
@@ -59,6 +58,7 @@ const ChapterHeaderVerse = (props) => {
     }
     const current = gridVisibleRange.startIndex + store.getDistance(paneNumber)
     const found = item === current
+
 
     useEffect(() => {
         if (allBookData[current] !== undefined) {
@@ -230,12 +230,12 @@ const useStyles = makeStyles(() => ({
     hebrewFont: {
         direction: 'RTL',
         fontFamily: 'SBL Hebrew',
-        fontSize:21,
+        fontSize: 21,
     },
     englishFont: {
         direction: 'LTR',
         fontFamily: 'SBL Hebrew',
-        fontSize:21,
+        fontSize: 21,
     },
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']

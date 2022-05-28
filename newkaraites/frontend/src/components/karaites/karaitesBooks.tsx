@@ -113,17 +113,17 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
     }
     const itemContent = (item: number, data: Array<any>) => {
-
-        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                {parse(data[HTML][0], {
-                    replace: domNode => {
-                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                    }
-                })}
+        return (
+            <div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+                <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
+                    {parse(data[HTML][0], {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </div>
             </div>
-        </div>)
-
+        )
     }
 
     const itemIntroduction = (item: number, data: string) => {
@@ -322,9 +322,9 @@ const useStyles = makeStyles(() => ({
         fontSize: '20.35px',
         verticalAlign: 'top',
         width: '100%',
-         // border: '1px solid red',
+        // border: '1px solid red',
     },
-    filler:{
+    filler: {
         width: '0',
     },
     heRight: {
@@ -339,7 +339,7 @@ const useStyles = makeStyles(() => ({
         direction: 'ltr',
         marginLeft: 15,
         fontSize: 21,
-        width:'100%',
+        width: '100%',
         verticalAlign: 'top',
         fontFamily: 'SBL Hebrew',
         lineHeight: 'initial',
