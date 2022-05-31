@@ -6,6 +6,7 @@ import {getFirstLevelUrl} from '../../constants/constants'
 import {storeContext} from "../../stores/context";
 import {makeStyles} from '@material-ui/core/styles'
 import Colors from "../../constants/colors";
+import {fetchData} from "../api/dataFetch";
 
 
 const FirstLevel = () => {
@@ -13,18 +14,14 @@ const FirstLevel = () => {
     const classes = useStyles()
     const store = useContext(storeContext)
     store.resetPanes()
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch(getFirstLevelUrl)
-            if (response.ok) {
-                const data = await response.json()
-                setClassification(data)
-            } else {
-                alert("HTTP-Error: " + response.status)
-            }
-        }
 
-        fetchData()
+
+    useEffect(() => {
+
+        fetchData(getFirstLevelUrl)
+            .then(data => setClassification(data))
+            .catch((e) => store.setMessage(e.message))
+
     }, [])
 
     if (classification === null) return null;

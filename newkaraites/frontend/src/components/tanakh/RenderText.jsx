@@ -1,59 +1,66 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
-import Loading from '../general/Loading'
 import {Virtuoso} from 'react-virtuoso'
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
 import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
+import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
+    const speech = useContext(speechContext)
     const book = store.getBook(paneNumber)
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    const [loadingMessage, setLoadingMessage] = useState(null)
     const [speakingOnOff, setSpeakingOnOff] = useState(false)
-    const virtuoso = useRef(null);
+    const [index, setIndex] = useState(store.getCurrentItem(paneNumber))
+    const virtuoso = useRef(null)
 
     const onSpeakOnOff = () => {
-        setSpeakingOnOff(!speakingOnOff)
-    }
-
-    console.log(store.getVerseData(paneNumber)[0])
-    let utter = new SpeechSynthesisUtterance(store.getVerseData(paneNumber)[0])
-    let voices = speechSynthesis.getVoices()
-    for (let i = 0; i < voices.length; i++) {
-        if (voices[i].name === 'Daniel') {
-            utter.voice = voices[i]
+        if(!speech.getPlaying()) {
+            speech.play(store.getBookData(paneNumber)[index][0])
+        }
+        if(speech.paused) {
+            speech.resume()
+        }
+        if(speech.getResumed()) {
+            speech.pause()
         }
     }
 
-    utter.volume = 10
-    utter.pitch = 1
-    utter.rate = 0.7
-    utter.lang = 'en'
-
-    utter.onend = function (event) {
-        if (speakingOnOff) {
-            console.log('Speech has finished')
-            setTimeout(() => {
-                // @ts-ignore
-                virtuoso.current.scrollToIndex({
-                    index:store.getCurrentItem(paneNumber)+1,
-                    align: 'top',
-                    behavior: 'smooth',
-                })
-            }, 100)
-        }
-    }
-
-    useEffect(() => {
-        if (speakingOnOff && !speechSynthesis.speaking) {
-            speechSynthesis.speak(utter)
-        }
-    }, [speakingOnOff])
-
+    // useEffect(() => {
+    //
+    //     if (speakingOnOff) {
+    //         const utter = new SpeechSynthesisUtterance(store.getBookData(paneNumber)[index][0])
+    //         const voices = speechSynthesis.getVoices()
+    //         console.log(voices)
+    //         for (let i = 0; i < voices.length; i++) {
+    //             if (voices[i].name === 'Daniel') {
+    //                 utter.voice = voices[i]
+    //             }
+    //         }
+    //         utter.volume = 10
+    //         utter.pitch = 1
+    //         utter.rate = 0.7
+    //         utter.lang = 'en'
+    //
+    //         utter.onend = function (event) {
+    //             setTimeout(() => {
+    //                 // @ts-ignore
+    //                 virtuoso.current.scrollToIndex({
+    //                     index: index +1,
+    //                     align: 'top',
+    //                     behavior: 'smooth',
+    //                 })
+    //             }, 300)
+    //             setIndex(index+1)
+    //         }
+    //         speechSynthesis.speak(utter)
+    //     }
+    //
+    //
+    // }, [index,speakingOnOff, paneNumber])
 
     const calculateCurrentChapter = () => {
         let book = store.getBook(paneNumber)
@@ -70,13 +77,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     const itemContent = (item, data) => {
-
         return (
             <ChapterHeaderVerse
                 data={data}
                 item={item}
                 gridVisibleRange={gridVisibleRange}
                 paneNumber={paneNumber}
+                speaking={speakingOnOff}
             />
         )
     }
@@ -94,20 +101,20 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 ref={virtuoso}
-                endReached={(_) => setLoadingMessage(() => 'Book end.')}
-                initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber))}
+                initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{
-                    Footer: () => {
-                        return <Loading text={loadingMessage}/>
-                    }
-                }}
+                          Footer: () => {
+                              return (
+                                  <div style={{padding: '1rem', textAlign: 'center'}}>
+                                      Book end.
+                                  </div>
+                              )
+                          }
+                      }}
             />
         </>
     )
 }
-
-
 export default observer(RenderTextGrid)
-

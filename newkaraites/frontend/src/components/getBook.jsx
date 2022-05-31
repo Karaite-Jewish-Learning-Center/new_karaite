@@ -5,39 +5,32 @@ const PARAGRAPHS = 0
 const BOOK_DETAILS = 1
 
 
-async function fetchDataBible(paneNumber, store) {
-    if (store.getBookData(paneNumber).length === 0) {
-        const book = store.getBook(paneNumber)
-        const response = await fetch(makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false))
+const fetchData = async (paneNumber, store, url, type) => {
+    try {
+        store.setLoading(true)
+        const response = await fetch(url)
+
         if (response.ok) {
             const data = await response.json()
-            store.setBookData(data.chapter, paneNumber)
-        } else {
-            alert("HTTP-Error: " + response.status)
+            if (type === 'bible') {
+                store.setBookData(data.chapter, paneNumber)
+            } else {
+                store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
+                store.setBookDetails(data[BOOK_DETAILS], paneNumber)
+            }
+            store.setLoading(false)
         }
+    } catch (e) {
+        store.setMessage("Error: " + e.message)
+    } finally {
+        store.setLoading(false)
     }
-}
-
-async function fetchDataKaraites(paneNumber, store) {
-    if (store.getParagraphs(paneNumber).length === 0) {
-        const response = await fetch(`${karaitesBookUrl}${store.getBook(paneNumber)}/${999999}/${0}/`)
-        if (response.ok) {
-            const data = await response.json()
-            const details = data[BOOK_DETAILS]
-            store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
-            store.setBookDetails(details, paneNumber)
-
-        } else {
-            alert("HTTP-Error: " + response.status)
-        }
-    }
-
 }
 
 const getBook = async (book, chapter, verse, highlight, type, store) => {
     type = type.toLowerCase()
-    let isOpen = store.isPaneOpen(book, chapter, verse)
-    if (!isOpen) {
+    let url = ''
+    if (!store.isPaneOpen(book, chapter, verse)) {
         if (type === "bible") {
             store.setPanes({
                 book: book,
@@ -59,9 +52,9 @@ const getBook = async (book, chapter, verse, highlight, type, store) => {
                 rightPaneStateHalakhah: 1,
                 languages: ['en_he', 'he', 'en'],
             })
+            url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
 
-            await fetchDataBible(store.panes.length - 1, store)
-        }else{
+        } else {
             store.setPanes({
                 book: book,
                 chapter: parseInt(chapter) - 1,
@@ -74,8 +67,9 @@ const getBook = async (book, chapter, verse, highlight, type, store) => {
                 currentItem: chapter,
                 languages: ['he', 'en'],
             })
-            await fetchDataKaraites(store.panes.length - 1, store)
+            url = `${karaitesBookUrl}${store.getBook(store.panes.length - 1)}/${999999}/${0}/`
         }
+        await fetchData(store.panes.length - 1, store, url, type)
     }
 }
 

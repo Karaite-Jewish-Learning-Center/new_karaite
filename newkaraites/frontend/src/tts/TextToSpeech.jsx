@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {TextToSpeechButton} from "../buttons/textToSpeechButton";
+import {TextToSpeechButton} from "../components/buttons/textToSpeechButton";
 
 
 const TextToSpeech = ({text, language}) => {

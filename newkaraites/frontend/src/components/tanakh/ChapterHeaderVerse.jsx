@@ -20,7 +20,7 @@ import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 const ChapterHeaderVerse = (props) => {
     const store = useContext(storeContext)
-    const {data, item, gridVisibleRange, paneNumber} = props
+    const {data, item, gridVisibleRange, paneNumber,  speaking} = props
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -56,9 +56,10 @@ const ChapterHeaderVerse = (props) => {
                 </div>
             </div>)
     }
-    const current = gridVisibleRange.startIndex + store.getDistance(paneNumber)
-    const found = item === current
 
+    const startIndex = gridVisibleRange.startIndex
+    const current = startIndex  + store.getDistance(paneNumber) +(startIndex ===0 ? 0 :(!speaking ? 2 : 1))
+    const found = item === current
 
     useEffect(() => {
         if (allBookData[current] !== undefined) {

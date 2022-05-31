@@ -17,7 +17,6 @@ import getBook from "./getBook";
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
     const {book, chapter = 1, verse = 1} = useParams()
-
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
     let history = useHistory()
@@ -140,8 +139,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         top: 66,
         height: 'calc(95vh - 66px)',
-        overflow: 'hidden',
-        position: 'fixed',
+        position: 'sticky',
         fontSize: '21px !important',
         [theme.breakpoints.down('xs')]: {
             top: 59,

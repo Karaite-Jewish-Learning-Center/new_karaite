@@ -38,6 +38,7 @@ from .command_utils.process_arguments import process_arguments
 from .update_full_text_search_index import (update_full_text_search_index_en_he,
                                             update_full_text_search_index_english,
                                             update_full_text_search_index_hebrew)
+from .book_intro_toc_end import generate_book_intro_toc_end
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 from ftlangdetect import detect
 
@@ -148,6 +149,7 @@ class Command(BaseCommand):
             intro += str(div)
         intro = intro.replace('MsoTableGrid ', '')
         intro += '</div>'
+        intro += generate_book_intro_toc_end(1)
         update_book_details(details, introduction=intro)
 
         # update full text search
@@ -306,8 +308,11 @@ class Command(BaseCommand):
             table_str += str(table)
             table.decompose()
 
+        table_str += generate_book_intro_toc_end(0)
         update_karaites_array_array(book_details, 1, 1, table_str)
+
         html = str(divs[0]).replace('WordSection1', 'liturgy')
+        html += generate_book_intro_toc_end(1)
         update_book_details(details, introduction=html)
         update_toc(book_details, 1, details['name'].split(','))
 
@@ -406,6 +411,13 @@ class Command(BaseCommand):
                     c += 1
                     sys.stdout.write(f'\r processing paragraph: {c}\r')
 
+                update_karaites_array_details(book_details,
+                                              '',
+                                              c,
+                                              [generate_book_intro_toc_end(0),
+                                               0,
+                                               generate_book_intro_toc_end(0)])
+
             elif index_lang:
 
                 # index songs that are basically Hebrew, transliteration to English and English
@@ -438,6 +450,11 @@ class Command(BaseCommand):
                     update_karaites_array(book_details, '', c, child_he, child_en)
                     c += 1
 
+                update_karaites_array(book_details,
+                                      '',
+                                      c,
+                                      [generate_book_intro_toc_end(0),
+                                       generate_book_intro_toc_end(0)])
             else:
                 divs = html_tree.find_all('div', class_='WordSection1')
                 for p in divs[0].find_all('table', recursive=True):
@@ -473,6 +490,12 @@ class Command(BaseCommand):
                     if lang in ['en', 'he', 'ja', 'he-en']:
                         c += 1
                     sys.stdout.write(f'\r processing paragraph: {c}\r')
+
+                update_karaites_array_details(book_title_en,
+                                              '',
+                                              c,
+                                              [generate_book_intro_toc_end(0),
+                                               ''])
 
     def handle(self, *args, **options):
         """ Karaites books as array """

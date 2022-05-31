@@ -77,6 +77,7 @@ export const BOOK_DATA: number = 1
 // this value is define in the views.py if changed there must be changed here too.
 export const ITEMS_PER_PAGE: number = 15
 
+export const LOADING_TEXT: string = 'Loading...'
 
 export const chaptersByBibleBook: chapterTable = {
     'Genesis': 50,

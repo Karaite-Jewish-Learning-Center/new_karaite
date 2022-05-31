@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 import {storeContext} from "../../stores/context";
 import Colors from "../../constants/colors";
 import {makeStyles} from "@material-ui/core/styles";
+import {fetchData} from "../api/dataFetch";
 
 
 const HalakhahMenu = ({book}) => {
@@ -31,12 +32,8 @@ const HalakhahMenu = ({book}) => {
         )
     }
     useEffect(() => {
-        const getTOC = async (book) => {
-            const response = await fetch(`${karaitesBookToc}${book}/`)
-            return await response.json()
-        }
 
-        getTOC(book)
+        fetchData(`${karaitesBookToc}${book}/`)
             .then((data) => setToc((data)))
             .catch((e) => store.setMessage(e.message))
 

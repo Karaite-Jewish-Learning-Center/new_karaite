@@ -30,9 +30,8 @@ const Message = ({hide = 4000}) => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
         '& > * + *': {
-            marginTop: theme.spacing(2),
+            marginTop: theme.spacing(20),
         },
     },
     close: {

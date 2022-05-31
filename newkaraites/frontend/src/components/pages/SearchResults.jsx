@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react"
 import {observer} from 'mobx-react-lite'
 import {Virtuoso} from "react-virtuoso"
-import Loading from "../general/Loading"
 import {makeStyles} from "@material-ui/core/styles"
 import {searchResultsUrl, ITEMS_PER_PAGE} from "../../constants/constants"
 import {Link} from "react-router-dom"
@@ -12,12 +11,12 @@ import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
 import {Please} from "../messages/Please"
 import {slug} from "../../utils/utils"
+import {fetchData} from "../api/dataFetch";
 
 
 const SearchResults = () => {
     const store = useContext(storeContext)
     const classes = useStyles()
-    const [message, setMessage] = useState('Loading')
     const [search] = useState(store.getSearch())
     const [didYouMean, setDidYouMean] = useState(false)
     const [searchTerm, setSearchTerm] = useState(store.getSearch())
@@ -39,6 +38,7 @@ const SearchResults = () => {
         const [refBook, paragraph] = data['ref'].trim().split('#')
         const url = slug(refBook)
         store.resetPanes()
+
         return (
             <div className={classes.card}>
                 <Link to={`/${data['path']}/${url}/${paragraph}/`}>
@@ -56,37 +56,39 @@ const SearchResults = () => {
     }
 
     useEffect(() => {
-        const getSearchResult = async () => {
-            if (search === '') return {'data': [], 'page': 1}
-            const response = await fetch(searchResultsUrl + `${search}/${page}/`)
-            return await response.json()
-        }
 
-        getSearchResult()
+        if (search === '') return {'data': [], 'page': 1}
+
+        store.setLoading(true)
+        fetchData(searchResultsUrl + `${search}/${page}/`)
             .then((data) => {
-
                 // if search result length is an exact multiple of ITEMS_PER_PAGE
                 // an extra call is done to figure out that next page
                 // is empty, In all other cases there is no need to do an extra call.
-
                 // todo: review this code
+                debugger
+                console.log(data['data'])
                 if (data['data'].length < ITEMS_PER_PAGE) {
+                    console.log('less than ITEMS_PER_PAGE')
                     store.setMoreResults(false)
-                    setMessage(() => `End of search results for "${store.getSearch()}"`)
                 }
                 store.setSearchResultData(data['data'])
                 setPage(() => parseInt(data['page']))
                 // this means that search term was not found and a similarity search was done
                 setDidYouMean(data['did_you_mean'])
                 setSearchTerm(() => data['search_term'])
-
+                store.setLoading(false)
             })
-            .catch(e => store.setMessage(e.message))
+            .catch(e => {
+                store.setMessage(e.message)
+                store.setLoading(false)
+            })
+
 
     }, [search, page, store])
 
     if (store.getSearch() === '') return <Please reason="search"/>
-
+    console.log(store.getSearchResultData().length)
     return (
         <div className={classes.container}>
             <Typography className={classes.header} variant="h5">
@@ -97,8 +99,15 @@ const SearchResults = () => {
                 endReached={nextPage}
                 itemContent={itemContent}
                 components={{
-                    Footer: () => <Loading text={message}/>
-                }}
+                          Footer: () => {
+                              console.log('footer')
+                              return (
+                                  <div style={{padding: '1rem', textAlign: 'center'}}>
+                                     End of search results for "{store.getSearch()}"
+                                  </div>
+                              )
+                          }
+                      }}
             />
         </div>
     )
@@ -106,16 +115,15 @@ const SearchResults = () => {
 
 const useStyles = makeStyles((theme) => ({
     container: {
+        position:'sticky',
+        top:100,
         width: '100%',
-        height: '100%',
-        marginTop: 100,
-        margin: 20,
-        overflow: "hidden",
-        fontSize:21,
+        height: 'calc(80% - 110px)',
+        fontSize: 21,
     },
     card: {
         maxWidth: '60%',
-         [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('md')]: {
             maxWidth: '85%',
         },
         marginLeft: 'auto',
@@ -123,12 +131,12 @@ const useStyles = makeStyles((theme) => ({
     },
     header: {
         maxWidth: '60%',
-         [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('md')]: {
             maxWidth: '85%',
         },
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginBottom:50,
+        marginBottom: 50,
     },
 }))
 

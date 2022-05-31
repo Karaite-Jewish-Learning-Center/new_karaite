@@ -24,7 +24,7 @@ export const slug = (str: string): string => str.replaceAll(' ', '-')
 
 export const unslug = (str: string): string => str.replaceAll('-', ' ')
 
-export const underLine =(str:string):string => str.replaceAll(' ','_')
+export const underLine = (str: string): string => str.replaceAll(' ', '_')
 
 export const normalizeSluggedBookName = (book: string): string => {
     // english book names
@@ -150,7 +150,7 @@ export const isABibleBook = (book: string): boolean =>
     // expects an English book name
     capitalize(book.trim().split(' ')[0]) in englishBookNames
 
-// return a english title even if bookName is in Hebrew
+// return an english title even if bookName is in Hebrew
 export const toEnglish = (bookName: string): string => {
     const title = hebrewBookNameToEnglish(bookName)
     if (title === undefined) {
@@ -158,3 +158,4 @@ export const toEnglish = (bookName: string): string => {
     }
     return title
 }
+

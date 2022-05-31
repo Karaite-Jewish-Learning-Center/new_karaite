@@ -13,7 +13,7 @@ import {
     BIBLE_ENGLISH,
     BIBLE_HEBREW,
 } from '../../constants/constants'
-import TextToSpeech from '../player/TextToSpeech'
+import TextToSpeech from '../../tts/TextToSpeech'
 import {observer} from 'mobx-react-lite'
 import Header from '../pages/RightPaneHeader'
 import {storeContext} from "../../stores/context";
