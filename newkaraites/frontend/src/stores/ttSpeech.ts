@@ -1,60 +1,76 @@
 import {makeAutoObservable, observable} from "mobx"
 
+
 class TextToSpeech {
 
-    voices: Array<any> = []
     synthesise: any = null
-    playing: boolean = false
     paused: boolean = false
     resumed: boolean = false
     error: boolean = false
     started: boolean = false
     ended: boolean = false
+    voice: any[] = []
+    language: string = "en"
+    // should call callback
+    canceled: boolean = false
 
     constructor() {
         makeAutoObservable(this, {
             synthesise: observable,
-            playing: observable,
             paused: observable,
             resumed: observable,
             error: observable,
             started: observable,
             ended: observable,
+            voice: observable,
+            canceled:observable
         })
 
-        this.voices = speechSynthesis.getVoices()
+        new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
+            .then(() => {
+                // this is really stupid
+                let voices = window.speechSynthesis.getVoices()
+                let voice: string = 'Daniel'
+                if (this.language === 'he') {
+                    voice = 'Carmit'
+                }
+                for (let i = 0; i < voices.length; i++) {
+                    if (voices[i].name === voice) {
+                        // must be the index otherwise it does not
+                        // work
+                        this.setVoice(i)
+                    }
+                }
+            })
+            .catch((e) => console.log(e.message))
+
     }
 
-    setVoice = (language: string): any => {
-        let voice: string = 'Daniel'
-        if (language === 'he') {
-            voice = 'Carmit'
-        }
+    setVoice = (voice: any): any => this.voice = voice
+    getVoice = (): any => this.voice
 
-        for (let i = 0; i < this.voices.length; i++) {
-            if (this.voices[i].name === voice) {
-                return this.voices[i]
-            }
-        }
-    }
-
-
-    play = (text: string): void => {
+    play = (text: string, callback: Function): void => {
         this.synthesise = new SpeechSynthesisUtterance(text);
-        this.synthesise.voice = this.setVoice("en");
+        this.synthesise.voice = window.speechSynthesis.getVoices()[this.getVoice()]
         this.synthesise.volume = 10
         this.synthesise.pitch = 1
         this.synthesise.rate = 0.7
 
-        this.synthesise.onend = () =>{
+        this.synthesise.onend = () => {
             this.started = false
-            this.playing = false
             this.error = false
             this.resumed = false
             this.paused = false
+            this.ended = true
+            console.log('Value of canceled onend', this.canceled)
+            if (!this.canceled) {
+                console.log('callback called')
+                callback()
+            }
         }
 
-        this.synthesise.onpause = () => {}
+        this.synthesise.onpause = () => {
+        }
 
         this.synthesise.onresume = () => {
             this.resumed = true
@@ -65,15 +81,34 @@ class TextToSpeech {
 
         this.synthesise.onstart = () => {
             this.started = true
-            this.playing = true
             this.error = false
             this.resumed = false
-            this.paused = false
+            this.paused = this.synthesise.paused
+            this.canceled = false
         }
-
         speechSynthesis.speak(this.synthesise)
     }
-    getPlaying = (): boolean => this.playing
+
+    pause = (): void => {
+        this.resumed = false
+        this.paused = true
+        speechSynthesis.pause()
+    }
+
+    cancel = (): void => {
+        console.log('before canceled', this.canceled)
+        this.canceled = true
+        console.log('After canceled', this.canceled)
+        speechSynthesis.cancel()
+    }
+
+    resume = (): void => {
+        this.resumed = true
+        this.paused = false
+        speechSynthesis.resume()
+    }
+
+    getPlaying = (): boolean => window.speechSynthesis.speaking
 
     getPaused = (): boolean => this.paused
 
@@ -83,18 +118,6 @@ class TextToSpeech {
 
     getEnded = (): boolean => this.ended
 
-    pause = (): void => {
-        this.paused = true
-        this.playing = false
-        speechSynthesis.pause()
-    }
-
-    resume = (): void => {
-        this.resumed = true
-        this.paused = false
-        this.playing = true
-        speechSynthesis.resume()
-    }
 }
 
 const ttSpeechStore = () => {

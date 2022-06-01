@@ -12,55 +12,41 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
     const speech = useContext(speechContext)
     const book = store.getBook(paneNumber)
+    const [speaking, setSpeaking] = useState(false)
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    const [speakingOnOff, setSpeakingOnOff] = useState(false)
     const [index, setIndex] = useState(store.getCurrentItem(paneNumber))
     const virtuoso = useRef(null)
 
+    const callFromEnded = () => {
+        setTimeout(() => {
+            //     @ts-ignore
+            setIndex(index + 1)
+            virtuoso.current.scrollToIndex({
+                index: index + 1,
+                align: 'top',
+                behavior: 'smooth',
+            })
+            setSpeaking(() => true)
+        }, 300)
+
+    }
     const onSpeakOnOff = () => {
-        if(!speech.getPlaying()) {
-            speech.play(store.getBookData(paneNumber)[index][0])
-        }
-        if(speech.paused) {
-            speech.resume()
-        }
-        if(speech.getResumed()) {
-            speech.pause()
+        if (speaking) {
+            setSpeaking(false)
+            speech.cancel()
+        } else {
+            setSpeaking(true)
         }
     }
 
-    // useEffect(() => {
-    //
-    //     if (speakingOnOff) {
-    //         const utter = new SpeechSynthesisUtterance(store.getBookData(paneNumber)[index][0])
-    //         const voices = speechSynthesis.getVoices()
-    //         console.log(voices)
-    //         for (let i = 0; i < voices.length; i++) {
-    //             if (voices[i].name === 'Daniel') {
-    //                 utter.voice = voices[i]
-    //             }
-    //         }
-    //         utter.volume = 10
-    //         utter.pitch = 1
-    //         utter.rate = 0.7
-    //         utter.lang = 'en'
-    //
-    //         utter.onend = function (event) {
-    //             setTimeout(() => {
-    //                 // @ts-ignore
-    //                 virtuoso.current.scrollToIndex({
-    //                     index: index +1,
-    //                     align: 'top',
-    //                     behavior: 'smooth',
-    //                 })
-    //             }, 300)
-    //             setIndex(index+1)
-    //         }
-    //         speechSynthesis.speak(utter)
-    //     }
-    //
-    //
-    // }, [index,speakingOnOff, paneNumber])
+    useEffect(() => {
+        console.log('speaking', speaking)
+        if (speaking) speech.play(store.getBookData(paneNumber)[index][0], callFromEnded)
+
+        return ()=>{
+            speech.cancel()
+        }
+    }, [index, speaking])
 
     const calculateCurrentChapter = () => {
         let book = store.getBook(paneNumber)
@@ -83,7 +69,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                 item={item}
                 gridVisibleRange={gridVisibleRange}
                 paneNumber={paneNumber}
-                speaking={speakingOnOff}
+                speaking={speaking}
             />
         )
     }
@@ -94,7 +80,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           paneNumber={paneNumber}
                           chapter={calculateCurrentChapter()}
                           onClosePane={onClosePane}
-                          speaking={speakingOnOff}
+                          speaking={speaking}
                           speak={onSpeakOnOff}
             />
 
@@ -105,14 +91,14 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{
-                          Footer: () => {
-                              return (
-                                  <div style={{padding: '1rem', textAlign: 'center'}}>
-                                      Book end.
-                                  </div>
-                              )
-                          }
-                      }}
+                    Footer: () => {
+                        return (
+                            <div style={{padding: '1rem', textAlign: 'center'}}>
+                                Book end.
+                            </div>
+                        )
+                    }
+                }}
             />
         </>
     )

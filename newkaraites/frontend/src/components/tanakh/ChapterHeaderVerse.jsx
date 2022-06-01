@@ -58,10 +58,11 @@ const ChapterHeaderVerse = (props) => {
     }
 
     const startIndex = gridVisibleRange.startIndex
-    const current = startIndex  + store.getDistance(paneNumber) +(startIndex ===0 ? 0 :(!speaking ? 2 : 1))
-    const found = item === current
-
+    const current = startIndex  + store.getDistance(paneNumber) //+(startIndex ===0 ? 0 :(!speaking ? 2 : 1))
+    const found = item === current //+ (speaking ? 1: 0)
+    console.log('verse', data[BIBLE_VERSE] ,'item', item,'current', current,'start', startIndex)
     useEffect(() => {
+          console.log('------------------------------')
         if (allBookData[current] !== undefined) {
             store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
             store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
@@ -129,7 +130,7 @@ const ChapterHeaderVerse = (props) => {
     return (
         <div className={classes.verse}>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
+            <div className={`${classes.textContainer} ${(found? classes.selectVerse : '')}`}
                  onClick={onClick.bind(this, item)}>
                 <ChapterBody/>
             </div>
