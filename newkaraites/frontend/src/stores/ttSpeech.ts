@@ -23,34 +23,38 @@ class TextToSpeech {
             started: observable,
             ended: observable,
             voice: observable,
-            canceled:observable
+            language: observable,
+            canceled: observable
         })
 
         new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
             .then(() => {
-                // this is really stupid
                 let voices = window.speechSynthesis.getVoices()
-                let voice: string = 'Daniel'
-                if (this.language === 'he') {
-                    voice = 'Carmit'
-                }
-                for (let i = 0; i < voices.length; i++) {
-                    if (voices[i].name === voice) {
-                        // must be the index otherwise it does not
-                        // work
-                        this.setVoice(i)
-                    }
-                }
+                this.setVoice([
+                    voices.findIndex(v => v.name === 'Daniel'),
+                    voices.findIndex(v => v.name === 'Carmit')
+                ])
             })
             .catch((e) => console.log(e.message))
 
     }
 
-    setVoice = (voice: any): any => this.voice = voice
-    getVoice = (): any => this.voice
+    setLanguage = (language: string): void => {
+        this.language = language
+    }
 
-    play = (text: string, callback: Function): void => {
-        this.synthesise = new SpeechSynthesisUtterance(text);
+    setVoice = (voice: any[]): void => {
+        this.voice = voice
+    }
+
+    getVoice = (): number => this.voice[this.getIndex()]
+
+    getLanguage = (): string => this.language
+
+    getIndex = (): number => (this.language === 'en' ? 0 : 1)
+
+    play = (data: Array<any>, callback: Function): void => {
+        this.synthesise = new SpeechSynthesisUtterance(data[this.getIndex()])
         this.synthesise.voice = window.speechSynthesis.getVoices()[this.getVoice()]
         this.synthesise.volume = 10
         this.synthesise.pitch = 1
@@ -62,9 +66,7 @@ class TextToSpeech {
             this.resumed = false
             this.paused = false
             this.ended = true
-            console.log('Value of canceled onend', this.canceled)
             if (!this.canceled) {
-                console.log('callback called')
                 callback()
             }
         }
@@ -96,9 +98,7 @@ class TextToSpeech {
     }
 
     cancel = (): void => {
-        console.log('before canceled', this.canceled)
         this.canceled = true
-        console.log('After canceled', this.canceled)
         speechSynthesis.cancel()
     }
 

@@ -13,14 +13,19 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const speech = useContext(speechContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
+    const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
     const [index, setIndex] = useState(store.getCurrentItem(paneNumber))
     const virtuoso = useRef(null)
 
     const callFromEnded = () => {
+        setIndex(index + 1)
+        store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
         setTimeout(() => {
             //     @ts-ignore
-            setIndex(index + 1)
+            // store.setCurrentItem(index+1, paneNumber)
+            // setIndex(index + 1)
+            // store.setCurrentItem(index, paneNumber)
             virtuoso.current.scrollToIndex({
                 index: index + 1,
                 align: 'top',
@@ -30,20 +35,37 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }, 300)
 
     }
-    const onSpeakOnOff = () => {
+    const onSpeakOnOffEn = () => {
         if (speaking) {
             setSpeaking(false)
+            setFlip([false, false])
             speech.cancel()
         } else {
+            setFlip([false, true])
+            speech.setLanguage('en')
+            setSpeaking(true)
+        }
+    }
+
+    const onSpeakOnOffHe = () => {
+        if (speaking) {
+            setSpeaking(false)
+            setFlip([false, false])
+            speech.cancel()
+        } else {
+            setFlip([true, false])
+            speech.setLanguage('he')
             setSpeaking(true)
         }
     }
 
     useEffect(() => {
-        console.log('speaking', speaking)
-        if (speaking) speech.play(store.getBookData(paneNumber)[index][0], callFromEnded)
 
-        return ()=>{
+        if (speaking) {
+            speech.play(store.getBookData(paneNumber)[index], callFromEnded)
+        }
+
+        return () => {
             speech.cancel()
         }
     }, [index, speaking])
@@ -80,8 +102,9 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           paneNumber={paneNumber}
                           chapter={calculateCurrentChapter()}
                           onClosePane={onClosePane}
-                          speaking={speaking}
-                          speak={onSpeakOnOff}
+                          onSpeakOnOffHe={onSpeakOnOffHe}
+                          onSpeakOnOffEn={onSpeakOnOffEn}
+                          flip={flip}
             />
 
             <Virtuoso

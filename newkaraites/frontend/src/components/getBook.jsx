@@ -52,6 +52,7 @@ const getBook = async (book, chapter, verse, highlight, type, store) => {
                 rightPaneStateHalakhah: 1,
                 languages: ['en_he', 'he', 'en'],
             })
+            console.log('Item', calculateItemNumber(book, chapter, verse))
             url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
 
         } else {

@@ -32,15 +32,15 @@ const ChapterHeaderVerse = (props) => {
     let ref_halakha = parseInt(data[BIBLE_REFS])
 
     const onClick = (i) => {
-        if (!store.getIsRightPaneOpen(paneNumber)) {
-            store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
-            store.setDistance(0, paneNumber)
-            store.setCurrentItem(i, paneNumber)
-            return
-        }
-
-        store.setCurrentItem(i, paneNumber)
-        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+        // if (!store.getIsRightPaneOpen(paneNumber)) {
+        //     store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
+        //     store.setDistance(0, paneNumber)
+        //     store.setCurrentItem(i, paneNumber)
+        //     return
+        // }
+        //
+        // store.setCurrentItem(i, paneNumber)
+        // store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
 
     if (renderChapter === "1") {
@@ -58,17 +58,17 @@ const ChapterHeaderVerse = (props) => {
     }
 
     const startIndex = gridVisibleRange.startIndex
-    const current = startIndex  + store.getDistance(paneNumber) //+(startIndex ===0 ? 0 :(!speaking ? 2 : 1))
-    const found = item === current //+ (speaking ? 1: 0)
-    console.log('verse', data[BIBLE_VERSE] ,'item', item,'current', current,'start', startIndex)
+    const current = startIndex  + store.getDistance(paneNumber)
+    // const found = item === current
+    const found = item === store.getCurrentItem(paneNumber)
+    console.log('verse', data[BIBLE_VERSE] ,'item', item,'current', current,'start', startIndex,'found', found)
     useEffect(() => {
-          console.log('------------------------------')
-        if (allBookData[current] !== undefined) {
+        // if (allBookData[current] !== undefined) {
             store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
             store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
             store.setVerseData(allBookData[current], paneNumber)
-        }
-    }, [allBookData, current, paneNumber, store])
+        // }
+    }, [allBookData, paneNumber, store.getCurrentItem(paneNumber)])
 
     const ChapterBody = () => {
         switch (lang) {
@@ -86,7 +86,7 @@ const ChapterHeaderVerse = (props) => {
                         </div>
                         <div className={classes.references}>
                             <RefsBadge refsCount={refs_comment}/>
-                            <RefsBadge refsCount={ref_halakha} color="secondary"/>
+                            <RefsBadge refsCount={ref_halakha} color="action"/>
 
                         </div>
                     </>

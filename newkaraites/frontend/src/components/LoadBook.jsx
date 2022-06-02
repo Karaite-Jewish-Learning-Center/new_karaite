@@ -46,8 +46,8 @@ const LoadBook = ({type}) => {
 
     const refClick = (item, kind = TRANSFORM_TYPE, paneNumber, e) => {
         if (item !== undefined) {
-            store.setCurrentItem(item, paneNumber)
-            store.setDistance(0, paneNumber)
+            //store.setCurrentItem(item, paneNumber)
+            //store.setDistance(0, paneNumber)
         }
         try {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
