@@ -554,8 +554,10 @@ class KaraitesBookDetails(models.Model):
     # book has more than on table
     multi_tables = models.BooleanField(default=False)
 
-    # book has a song
-    song = models.BooleanField(default=False)
+    # book has songs
+    songs_list = ArrayField(models.CharField(max_length=100),
+                            blank=True,
+                            default=list)
 
     # buy link
     buy_link = models.CharField(max_length=255, default='')
@@ -602,7 +604,7 @@ class KaraitesBookDetails(models.Model):
                 'remove_class': details.remove_class,
                 'remove_tags': details.remove_tags,
                 'multi_tables': details.multi_tables,
-                'song': details.song,
+                'songs_list': details.songs_list,
                 'buy_link': details.buy_link,
                 'index_lag': details.index_lang,
             })
@@ -631,7 +633,7 @@ class KaraitesBookDetails(models.Model):
             'remove_class': details.remove_class,
             'remove_tags': details.remove_tags,
             'multi_tables': details.multi_tables,
-            'song': details.song,
+            'songs_list': details.songs_list,
             'buy_link': details.buy_link,
             'index_lag': details.index_lang,
         }

@@ -15,20 +15,15 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const [speaking, setSpeaking] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    const [index, setIndex] = useState(store.getCurrentItem(paneNumber))
     const virtuoso = useRef(null)
 
     const callFromEnded = () => {
-        setIndex(index + 1)
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
         setTimeout(() => {
             //     @ts-ignore
-            // store.setCurrentItem(index+1, paneNumber)
-            // setIndex(index + 1)
-            // store.setCurrentItem(index, paneNumber)
             virtuoso.current.scrollToIndex({
-                index: index + 1,
-                align: 'top',
+                index: store.getCurrentItem(paneNumber) ,
+                align: (store.getDistance(paneNumber) <=1 ? 'top': 'center'),
                 behavior: 'smooth',
             })
             setSpeaking(() => true)
@@ -62,13 +57,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     useEffect(() => {
 
         if (speaking) {
-            speech.play(store.getBookData(paneNumber)[index], callFromEnded)
+            speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
 
         return () => {
             speech.cancel()
         }
-    }, [index, speaking])
+    }, [store.getCurrentItem(paneNumber), speaking])
 
     const calculateCurrentChapter = () => {
         let book = store.getBook(paneNumber)

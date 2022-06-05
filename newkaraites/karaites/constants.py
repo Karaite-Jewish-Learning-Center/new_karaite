@@ -28,6 +28,7 @@ BOOK_CLASSIFICATION = [
     ('20', 'Prayers'),
     ('30', 'Shabbat Songs'),
     ('40', 'Supplemental Readings for specific Torah portions'),
+    ('45', 'Tammuz/Av/Echa'),
     ('50', 'Wedding Songs'),
     # poetry
     ('55', 'Poetry'),

@@ -32,15 +32,14 @@ const ChapterHeaderVerse = (props) => {
     let ref_halakha = parseInt(data[BIBLE_REFS])
 
     const onClick = (i) => {
-        // if (!store.getIsRightPaneOpen(paneNumber)) {
-        //     store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
-        //     store.setDistance(0, paneNumber)
-        //     store.setCurrentItem(i, paneNumber)
-        //     return
-        // }
-        //
-        // store.setCurrentItem(i, paneNumber)
-        // store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+        if (!store.getIsRightPaneOpen(paneNumber)) {
+            store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
+            store.setDistance(0, paneNumber)
+            store.setCurrentItem(i, paneNumber)
+            return
+        }
+        store.setCurrentItem(i, paneNumber)
+        store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
 
     if (renderChapter === "1") {
@@ -59,9 +58,8 @@ const ChapterHeaderVerse = (props) => {
 
     const startIndex = gridVisibleRange.startIndex
     const current = startIndex  + store.getDistance(paneNumber)
-    // const found = item === current
     const found = item === store.getCurrentItem(paneNumber)
-    console.log('verse', data[BIBLE_VERSE] ,'item', item,'current', current,'start', startIndex,'found', found)
+
     useEffect(() => {
         // if (allBookData[current] !== undefined) {
             store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
@@ -253,6 +251,5 @@ const useStyles = makeStyles(() => ({
         minWidth: '50',
     },
 }))
-
 
 export default observer(ChapterHeaderVerse)

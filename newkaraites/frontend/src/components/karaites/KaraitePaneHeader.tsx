@@ -12,8 +12,7 @@ import {InfoButton} from "../buttons/InfoButton";
 import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
 import {BuyButton} from '../buttons/BuyButton';
-import {BasicAudioPlayer} from '../audio/audio-player/basic-audio-player';
-import {TextToSpeechButton} from '../buttons/textToSpeechButton';
+import {MusicSelect} from '../buttons/music-select';
 
 interface IProps {
     paneNumber: number,
@@ -30,7 +29,6 @@ const KaraitesPaneHeader: FC<IProps> = ({
                                             onIntroClick,
                                             onTocClick,
                                             onBookClick,
-
                                             details
                                         }) => {
 
@@ -70,7 +68,7 @@ const KaraitesPaneHeader: FC<IProps> = ({
                 <InfoButton onClick={onIntro}/>
                 <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
-                {(details.song ? <BasicAudioPlayer song={details.book_title_en}/> : null)}
+                <MusicSelect songs={details.songs_list}/>
                 {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
 
             </Grid>

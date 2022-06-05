@@ -11,18 +11,23 @@ from .update_karaites_array import (update_karaites_array,
 from .update_footnotes import update_footnotes
 
 from .process_books import (COMMENTS,
-                            EXHORTATORY,
-                            POLEMIC,
-                            POETRY_NON_LITURGICAL,
                             HALAKHAH,
                             HAVDALA,
                             PASSOVER_SONGS,
-                            PRAYERS,
                             PURIM_SONGS,
+                            PRAYERS,
+                            POLEMIC,
                             SHABBAT_SONGS,
-                            SUPPLEMENTAL,
                             WEDDING_SONGS,
+                            SUPPLEMENTAL,
+                            TAMMUZ_AV_ECHA,
+                            EXHORTATORY,
+                            POETRY_NON_LITURGICAL,
                             LANGUAGES_DICT)
+
+from .process_books import (LIST_OF_BOOKS,
+                            LITURGY)
+
 from .constants import PATH
 from ...models import (KaraitesBookDetails,
                        FullTextSearch,
@@ -41,27 +46,7 @@ from .update_full_text_search_index import (update_full_text_search_index_en_he,
 from .book_intro_toc_end import generate_book_intro_toc_end
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 from ftlangdetect import detect
-
-LIST_OF_BOOKS = (COMMENTS +
-                 HALAKHAH +
-                 HAVDALA +
-                 PASSOVER_SONGS +
-                 PURIM_SONGS +
-                 PRAYERS +
-                 SHABBAT_SONGS +
-                 SUPPLEMENTAL +
-                 WEDDING_SONGS +
-                 POETRY_NON_LITURGICAL +
-                 EXHORTATORY +
-                 POLEMIC)
-
-LITURGY = (HAVDALA +
-           PASSOVER_SONGS +
-           PRAYERS +
-           PURIM_SONGS +
-           SHABBAT_SONGS +
-           SUPPLEMENTAL +
-           WEDDING_SONGS)
+from .command_utils.utils import roman_to_int
 
 
 class Command(BaseCommand):
@@ -233,13 +218,30 @@ class Command(BaseCommand):
         return False
 
     @staticmethod
+    def foot_notes_numbers(footnote_ref, last_number):
+        # some references are Roman numerals, some are Arabic numerals,
+        # so we need to convert them to Arabic numerals
+        footnote_ref_strip_square_brackets = footnote_ref.replace('[', '').replace(']', '')
+
+        if footnote_ref_strip_square_brackets.isnumeric():
+            footnote_number = int(footnote_ref_strip_square_brackets)
+        elif footnote_ref_strip_square_brackets.isalpha():
+            footnote_number = roman_to_int(footnote_ref_strip_square_brackets)
+        else:
+            footnote_number = last_number + 1
+
+        return footnote_number
+
+    @staticmethod
     def process_footnotes(html, details, lang):
         html_tree = BeautifulSoup(html, 'html5lib')
         # find all footnotes by class
+        last_number = 0
         for footnote in html_tree.find_all('span', {'class': f'{lang}-foot-note'}):
             footnote_text = footnote.get('data-tip')
             footnote_ref = footnote.find_all('sup')[0].get_text(strip=True)
-            update_footnotes(details, footnote_ref, footnote_text, lang)
+            last_number = Command.foot_notes_numbers(footnote_ref, last_number)
+            update_footnotes(details, footnote_ref, footnote_text, last_number, lang)
 
     @staticmethod
     def process_liturgy_books(details, lang, book, book_details, book_title_en, book_title_he):
@@ -512,6 +514,7 @@ class Command(BaseCommand):
                                              SHABBAT_SONGS,
                                              WEDDING_SONGS,
                                              SUPPLEMENTAL,
+                                             TAMMUZ_AV_ECHA,
                                              EXHORTATORY,
                                              POETRY_NON_LITURGICAL)
 

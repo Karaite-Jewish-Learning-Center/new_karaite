@@ -21,7 +21,7 @@ def update_book_details(data, introduction='', language='he'):
                                                                       'direction': data.get('direction', 'rtl'),
                                                                       'remove_class': data.get('remove_class', ''),
                                                                       'remove_tags': data.get('remove_tags', ''),
-                                                                      'song': data.get('song', False),
+                                                                      'songs_list': data.get('song', []),
                                                                       'buy_link': data.get('buy_link', ''),
                                                                       'index_lang': data.get('index_lang', True),
                                                                       'introduction': str(introduction)

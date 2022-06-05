@@ -5,7 +5,11 @@ export interface ButtonProps {
     onClick: MouseEventHandler;
     color?: PropTypes.Color;
 }
-
+export interface MusicBadgeProps {
+    length: number;
+    fontSize?: 'default' | 'inherit' | 'large' | 'medium' | 'small';
+    color?: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
+}
 export interface ButtonPropsTTS {
     onClick: MouseEventHandler;
     color?: PropTypes.Color;
@@ -23,6 +27,9 @@ export interface Song {
     song: string
 }
 
+export interface SongList {
+    songs: Song[]
+}
 interface AudioType {
     onClick: MouseEvent<HTMLButtonElement>,
     onReset: MouseEvent<HTMLButtonElement>,

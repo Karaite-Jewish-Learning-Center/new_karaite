@@ -8,6 +8,8 @@ export const capitalize = (string: string): string =>
     // respect all others cases
     string === "" ? "" : string[0].toUpperCase() + string.slice(1)
 
+export const removeExtension = (string: string): string => string.replace(/\.[^/.]+$/, "")
+
 export const range = (l: number): Array<number> =>
     Array(l).fill(1).map((_, i) => i + 1)
 
