@@ -761,7 +761,7 @@ SHABBAT_SONGS = [
          'first_level': 4,
          'book_classification': '30',
          'author': 'Yehuda Ha-levy,',
-         'css_class': 'simple-3-4',
+         'css_class': '',
          'song': ['Al Ahavatecha (Complete Acapella).mp3',
                   'Al Ahavatecha (for Learning and Rhythm).mp3',
                   'Al Ahavatecha (with Acoustic Guitar).mp3',
@@ -1086,8 +1086,8 @@ TAMMUZ_AV_ECHA = [
          'first_level': 4,
          'book_classification': '45',
          'author': 'Yosef ben Moshe,',
-         'css_class': '',
-         'song': ['Afas Aron.mp3']},
+         'css_class': 'simple-3-4',
+         'song': []},
         False
     ],
 ]

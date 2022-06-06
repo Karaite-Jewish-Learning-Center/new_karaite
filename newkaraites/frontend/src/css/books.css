@@ -620,8 +620,88 @@
 }
 
 /* Patshegen Ketav Haddat */
+/* ‘Al ahavatecha */
 
+.he-ahavatecha-table-000 tr:nth-child(5) {
+   color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(6) {
+    color:red;
+}
 
+.he-ahavatecha-table-000 tr:nth-child(9) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(10) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(13) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(14) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(17) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(18) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(21) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(22) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(25) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(26) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(29) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(30) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(33) {
+    color:red;
+}
+.he-ahavatecha-table-000 tr:nth-child(34) {
+    color:red;
+}
+.he-afas-table-000 {
+    direction: ltr;
+    width: 900px;
+}
+.he-afas-table-000 tr:nth-child(odd) td:nth-child(odd) {
+    direction: rtl;
+    text-align: right;
+    padding-right: 5px;
+}
+.he-afas-table-000 tr:nth-child(odd) td:nth-child(even) {
+    direction: ltr;
+    text-align: left;
+    margin-left: 10px;
+}
+.he-afas-span-003 {
+    color: red;
+}
+/* Yona Le’edech Re’i*/
+.he-yona-table-000 {
+    direction: ltr;
+}
+.he-yona-table-000 tr:nth-child(odd) td:nth-child(odd) {
+    direction: rtl;
+    text-align: right;
+    padding-right: 5px;
+}
+.he-yona-table-000 tr:nth-child(odd) td:nth-child(even) {
+    direction: ltr;
+    text-align: left;
+    margin-left: 10px;
+}
 .ft41, .ft42, .ft43, .ft44 {
     direction: rtl;
     background-color: red;
