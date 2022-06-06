@@ -30,6 +30,10 @@ class Command(BaseCommand):
                     line.append('0')
                 else:
                     line[7] = '0'
+                if len(line) == 8:
+                    line.append('0')
+                else:
+                    line[8] = '0'
             sys.stdout.write(f"\rUpdating array size: {i}")
             i += 1
             chapter.save()

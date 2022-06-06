@@ -14,6 +14,7 @@ def process_arguments(options,
                       SHABBAT_SONGS,
                       WEDDING_SONGS,
                       SUPPLEMENTAL,
+                      TAMMUZ_AV_ECHA,
                       EXHORTATORY,
                       POETRY_NON_LITURGICAL):
 
@@ -50,7 +51,7 @@ def process_arguments(options,
             books_to_process += HALAKHAH
 
         if options['liturgy']:
-            books_to_process += HAVDALA + PASSOVER_SONGS + PURIM_SONGS + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL
+            books_to_process += HAVDALA + PASSOVER_SONGS + PURIM_SONGS + PRAYERS + SHABBAT_SONGS + WEDDING_SONGS + SUPPLEMENTAL + TAMMUZ_AV_ECHA
 
         if options['poetry']:
             books_to_process += POETRY_NON_LITURGICAL

@@ -8,7 +8,7 @@ import Colors from "../../constants/colors";
 import {capitalize} from "../../utils/utils";
 import {ToText} from "../general/ToText";
 import {cleanUrl} from "../../utils/cleanUrl";
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import {MusicBadge} from "../bages/musicBadge";
 
 
 export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns = 6, header = true}) => {
@@ -39,7 +39,7 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
                         <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
                     </span>
                     <span className={classes.note}>
-                         {(obj[key].song ? <MusicNoteIcon fontSize="small" color="secondary"/> : null)}
+                         <MusicBadge length={obj[key].songs_list.length}/>
                     </span>
                     <span className={classes.right}>
                         <Typography className={classes.bookTitleEn}>

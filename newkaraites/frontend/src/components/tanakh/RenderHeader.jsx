@@ -9,11 +9,19 @@ import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
-import TextToSpeech from "../player/TextToSpeech";
-import {BIBLE_ENGLISH} from "../../constants/constants";
+import {TextToSpeechButton} from "../buttons/textToSpeechButton";
 
 
-const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
+const RenderHeader = ({
+                          book,
+                          paneNumber,
+                          chapter,
+                          onClosePane,
+                          flip,
+                          onSpeakOnOffHe,
+                          onSpeakOnOffEn
+                      }) => {
+
     const store = useContext(storeContext)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -29,13 +37,25 @@ const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
             case 'en_he':
                 return (
                     <>
-                        <Grid item xs={3} key={1}>
+                        <Grid item xs={3} key={2}>
                             <Typography className={classes.hebrewBook}>{englishBookNameToHebrew(book)}</Typography>
                         </Grid>
-                        <Grid item xs={4} key={2}>
+                        <Grid item xs={1} key={3}>
+                            <TextToSpeechButton
+                                onClick={onSpeakOnOffHe}
+                                onOff={flip[0]}
+                                />
+                        </Grid>
+                        <Grid item xs={2} key={4}>
                             <Typography className={classes.chapterView}>{chapter}</Typography>
                         </Grid>
-                        <Grid item xs={3} key={3}>
+                        <Grid className={classes.adjust} item xs={1} key={5}>
+                            <TextToSpeechButton
+                                onClick={onSpeakOnOffEn}
+                                onOff={flip[1]}
+                            />
+                        </Grid>
+                        <Grid item xs={3} key={6}>
                             <Typography className={classes.englishBook}>{book} </Typography>
                         </Grid>
 
@@ -43,23 +63,39 @@ const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
                 )
             case 'he':
                 return (
-                    <Grid item xs={10} key={1}>
-                        <Typography className={classes.hebrewBook}>
-                            {englishBookNameToHebrew(book)}
-                            {' '}
-                            {indoArabicToHebrewCardinal(chapter)}
-                        </Typography>
-                    </Grid>
+                    <>
+                        <Grid item xs={9} key={7}>
+                            <Typography className={classes.hebrewBook}>
+                                {englishBookNameToHebrew(book)}
+                                {' '}
+                                {indoArabicToHebrewCardinal(chapter)}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={1} key={8}>
+                            <TextToSpeechButton
+                                onClick={onSpeakOnOffHe}
+                                onOff={flip[0]}
+                            />
+                        </Grid>
+                    </>
                 )
             case 'en':
                 return (
-                    <Grid item xs={10} key={4}>
-                        <Typography className={classes.englishBook}>
-                            {book}
-                            {' '}
-                            {chapter}
-                        </Typography>
-                    </Grid>
+                    <>
+                        <Grid item xs={9} key={9}>
+                            <Typography className={classes.englishBook}>
+                                {book}
+                                {' '}
+                                {chapter}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={1} key={10}>
+                            <TextToSpeechButton
+                                onClick={onSpeakOnOffEn}
+                                onOff={flip[1]}
+                                />
+                        </Grid>
+                    </>
                 )
             default: {
                 devLog(`Unknown language: ${lang}`)
@@ -73,8 +109,7 @@ const RenderHeader = ({book, paneNumber, chapter, onClosePane}) => {
                 <CloseButton onClick={onClose}/>
             </Grid>
             <HeaderBody chapter={chapter}/>
-            <Grid item xs={1} key={4} >
-                {/*<TextToSpeech text={'the english test'} language='en'/>*/}
+            <Grid item xs={1} key={1}>
                 <LanguageButton paneNumber={paneNumber}/>
             </Grid>
         </Grid>
@@ -99,18 +134,38 @@ const useStyles = makeStyles((theme) => ({
         direction: 'rtl',
         fontFamily: 'SBL Hebrew',
         paddingTop: 10,
-    },
+        [theme.breakpoints.down('sm')]: {
+            marginRight: -5,
+        },
 
+    },
+    center: {
+        maxWidth: '31.5%',
+    },
+    adjust: {
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '-23px',
+            marginRight: 8,
+        },
+    },
     chapterView: {
         textAlign: 'center',
         verticalAlign: 'middle',
         paddingRight: 23,
         paddingTop: 10,
+        [theme.breakpoints.down('sm')]: {
+            paddingRight: 10,
+        },
     },
     englishBook: {
         verticalAlign: 'middle',
         textAlign: ((props) => props.lang === 'en' ? 'center' : 'left'),
         paddingTop: 10,
+        paddingLeft: 30,
+        [theme.breakpoints.down('sm')]: {
+            paddingLeft: ((props) => props.lang === 'en' ? 33 : 0),
+        },
+
     },
 
 }));

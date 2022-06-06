@@ -554,8 +554,10 @@ class KaraitesBookDetails(models.Model):
     # book has more than on table
     multi_tables = models.BooleanField(default=False)
 
-    # book has a song
-    song = models.BooleanField(default=False)
+    # book has songs
+    songs_list = ArrayField(models.CharField(max_length=100),
+                            blank=True,
+                            default=list)
 
     # buy link
     buy_link = models.CharField(max_length=255, default='')
@@ -602,7 +604,7 @@ class KaraitesBookDetails(models.Model):
                 'remove_class': details.remove_class,
                 'remove_tags': details.remove_tags,
                 'multi_tables': details.multi_tables,
-                'song': details.song,
+                'songs_list': details.songs_list,
                 'buy_link': details.buy_link,
                 'index_lag': details.index_lang,
             })
@@ -631,7 +633,7 @@ class KaraitesBookDetails(models.Model):
             'remove_class': details.remove_class,
             'remove_tags': details.remove_tags,
             'multi_tables': details.multi_tables,
-            'song': details.song,
+            'songs_list': details.songs_list,
             'buy_link': details.buy_link,
             'index_lag': details.index_lang,
         }
@@ -654,9 +656,12 @@ class BooksFootNotes(models.Model):
                              on_delete=models.CASCADE,
                              verbose_name=_('Book'))
 
-    footnote_ref = models.CharField(max_length=6,
+    footnote_ref = models.CharField(max_length=20,
                                     default='',
-                                    verbose_name=_('Footnote number'))
+                                    verbose_name=_('Footnote ref.'))
+
+    footnote_number = models.IntegerField(default=0,
+                                          verbose_name=_('Footnote number'))
 
     footnote = models.TextField(default='',
                                 verbose_name=_('Footnotes'))
@@ -670,7 +675,7 @@ class BooksFootNotes(models.Model):
 
     def to_json(self):
         return {
-            'footnote_number': self.footnote_number,
+            'footnote_ref': self.footnote_ref,
             'footnote': self.footnote,
         }
 
@@ -686,7 +691,7 @@ class BooksFootNotes(models.Model):
 
     class Meta:
         verbose_name_plural = 'Books footnotes'
-        ordering = ('book', 'footnote_ref')
+        ordering = ('book', 'footnote_number')
 
 
 class KaraitesBookAsArray(models.Model):

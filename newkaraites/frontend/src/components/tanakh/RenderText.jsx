@@ -1,18 +1,69 @@
-import React, {useContext, useState} from 'react'
-import Loading from '../general/Loading'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import {Virtuoso} from 'react-virtuoso'
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
 import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
+import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
+    const speech = useContext(speechContext)
     const book = store.getBook(paneNumber)
+    const [speaking, setSpeaking] = useState(false)
+    const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    const [loadingMessage, setLoadingMessage] = useState(null)
+    const virtuoso = useRef(null)
+
+    const callFromEnded = () => {
+        store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
+        setTimeout(() => {
+            //     @ts-ignore
+            virtuoso.current.scrollToIndex({
+                index: store.getCurrentItem(paneNumber) ,
+                align: (store.getDistance(paneNumber) <=1 ? 'top': 'center'),
+                behavior: 'smooth',
+            })
+            setSpeaking(() => true)
+        }, 300)
+
+    }
+    const onSpeakOnOffEn = () => {
+        if (speaking) {
+            setSpeaking(false)
+            setFlip([false, false])
+            speech.cancel()
+        } else {
+            setFlip([false, true])
+            speech.setLanguage('en')
+            setSpeaking(true)
+        }
+    }
+
+    const onSpeakOnOffHe = () => {
+        if (speaking) {
+            setSpeaking(false)
+            setFlip([false, false])
+            speech.cancel()
+        } else {
+            setFlip([true, false])
+            speech.setLanguage('he')
+            setSpeaking(true)
+        }
+    }
+
+    useEffect(() => {
+
+        if (speaking) {
+            speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
+        }
+
+        return () => {
+            speech.cancel()
+        }
+    }, [store.getCurrentItem(paneNumber), speaking])
 
     const calculateCurrentChapter = () => {
         let book = store.getBook(paneNumber)
@@ -29,36 +80,45 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     const itemContent = (item, data) => {
-
         return (
             <ChapterHeaderVerse
                 data={data}
                 item={item}
                 gridVisibleRange={gridVisibleRange}
                 paneNumber={paneNumber}
+                speaking={speaking}
             />
         )
     }
 
     return (
         <>
-            <RenderHeader book={book} paneNumber={paneNumber} chapter={calculateCurrentChapter()} onClosePane={onClosePane}/>
+            <RenderHeader book={book}
+                          paneNumber={paneNumber}
+                          chapter={calculateCurrentChapter()}
+                          onClosePane={onClosePane}
+                          onSpeakOnOffHe={onSpeakOnOffHe}
+                          onSpeakOnOffEn={onSpeakOnOffEn}
+                          flip={flip}
+            />
+
             <Virtuoso
                 data={store.getBookData(paneNumber)}
-                endReached={(_)=>setLoadingMessage(()=>'Book end.')}
-                initialTopMostItemIndex={parseInt(store.getCurrentItem(paneNumber))}
+                ref={virtuoso}
+                initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{
                     Footer: () => {
-                        return <Loading text={loadingMessage}/>
+                        return (
+                            <div style={{padding: '1rem', textAlign: 'center'}}>
+                                Book end.
+                            </div>
+                        )
                     }
                 }}
             />
         </>
     )
 }
-
-
 export default observer(RenderTextGrid)
-

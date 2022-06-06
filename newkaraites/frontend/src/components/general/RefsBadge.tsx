@@ -8,7 +8,7 @@ interface RefsBadgeProps {
     color?: any
 }
 
-const RefsBadge: FC<RefsBadgeProps> = ({refsCount, color = '#fff'}) => {
+const RefsBadge: FC<RefsBadgeProps> = ({refsCount, color = 'secondary'}) => {
     const classes = useStyles()
     return (
         <span style={{'visibility': (refsCount !== 0 ? 'visible' : 'hidden')}}>

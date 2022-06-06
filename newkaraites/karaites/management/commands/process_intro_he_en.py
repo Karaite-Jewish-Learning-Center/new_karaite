@@ -8,23 +8,31 @@ from .update_karaites_array import (update_karaites_array,
                                     update_karaites_array_details,
                                     update_karaites_array_array)
 
+from .update_footnotes import update_footnotes
+
 from .process_books import (COMMENTS,
-                            EXHORTATORY,
-                            POLEMIC,
-                            POETRY_NON_LITURGICAL,
                             HALAKHAH,
                             HAVDALA,
                             PASSOVER_SONGS,
-                            PRAYERS,
                             PURIM_SONGS,
+                            PRAYERS,
+                            POLEMIC,
                             SHABBAT_SONGS,
-                            SUPPLEMENTAL,
                             WEDDING_SONGS,
-                            LANGUAGES)
+                            SUPPLEMENTAL,
+                            TAMMUZ_AV_ECHA,
+                            EXHORTATORY,
+                            POETRY_NON_LITURGICAL,
+                            LANGUAGES_DICT)
+
+from .process_books import (LIST_OF_BOOKS,
+                            LITURGY)
+
 from .constants import PATH
 from ...models import (KaraitesBookDetails,
                        FullTextSearch,
-                       FullTextSearchHebrew)
+                       FullTextSearchHebrew,
+                       BooksFootNotes)
 
 from .udpate_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
@@ -35,29 +43,10 @@ from .command_utils.process_arguments import process_arguments
 from .update_full_text_search_index import (update_full_text_search_index_en_he,
                                             update_full_text_search_index_english,
                                             update_full_text_search_index_hebrew)
+from .book_intro_toc_end import generate_book_intro_toc_end
 from .command_utils.constants import BOOK_CLASSIFICATION_DICT
 from ftlangdetect import detect
-
-LIST_OF_BOOKS = (COMMENTS +
-                 HALAKHAH +
-                 HAVDALA +
-                 PASSOVER_SONGS +
-                 PURIM_SONGS +
-                 PRAYERS +
-                 SHABBAT_SONGS +
-                 SUPPLEMENTAL +
-                 WEDDING_SONGS +
-                 POETRY_NON_LITURGICAL +
-                 EXHORTATORY +
-                 POLEMIC)
-
-LITURGY = (HAVDALA +
-           PASSOVER_SONGS +
-           PRAYERS +
-           PURIM_SONGS +
-           SHABBAT_SONGS +
-           SUPPLEMENTAL +
-           WEDDING_SONGS)
+from .command_utils.utils import roman_to_int
 
 
 class Command(BaseCommand):
@@ -133,7 +122,7 @@ class Command(BaseCommand):
 
     def process_intro(self, book, details, book_title_en, book_title_he):
 
-        html = get_html(f"{PATH}{book.replace('{}', LANGUAGES['in'])}")
+        html = get_html(f"{PATH}{book.replace('{}', LANGUAGES_DICT['in'])}")
         html_tree = BeautifulSoup(html, 'html5lib')
         divs = html_tree.find_all('div', {'class': 'WordSection1'})
         intro = '<div class="liturgy">'
@@ -145,6 +134,7 @@ class Command(BaseCommand):
             intro += str(div)
         intro = intro.replace('MsoTableGrid ', '')
         intro += '</div>'
+        intro += generate_book_intro_toc_end(1)
         update_book_details(details, introduction=intro)
 
         # update full text search
@@ -228,6 +218,32 @@ class Command(BaseCommand):
         return False
 
     @staticmethod
+    def foot_notes_numbers(footnote_ref, last_number):
+        # some references are Roman numerals, some are Arabic numerals,
+        # so we need to convert them to Arabic numerals
+        footnote_ref_strip_square_brackets = footnote_ref.replace('[', '').replace(']', '')
+
+        if footnote_ref_strip_square_brackets.isnumeric():
+            footnote_number = int(footnote_ref_strip_square_brackets)
+        elif footnote_ref_strip_square_brackets.isalpha():
+            footnote_number = roman_to_int(footnote_ref_strip_square_brackets)
+        else:
+            footnote_number = last_number + 1
+
+        return footnote_number
+
+    @staticmethod
+    def process_footnotes(html, details, lang):
+        html_tree = BeautifulSoup(html, 'html5lib')
+        # find all footnotes by class
+        last_number = 0
+        for footnote in html_tree.find_all('span', {'class': f'{lang}-foot-note'}):
+            footnote_text = footnote.get('data-tip')
+            footnote_ref = footnote.find_all('sup')[0].get_text(strip=True)
+            last_number = Command.foot_notes_numbers(footnote_ref, last_number)
+            update_footnotes(details, footnote_ref, footnote_text, last_number, lang)
+
+    @staticmethod
     def process_liturgy_books(details, lang, book, book_details, book_title_en, book_title_he):
 
         if details.get('css_class', None) is not None:
@@ -294,8 +310,11 @@ class Command(BaseCommand):
             table_str += str(table)
             table.decompose()
 
+        table_str += generate_book_intro_toc_end(0)
         update_karaites_array_array(book_details, 1, 1, table_str)
+
         html = str(divs[0]).replace('WordSection1', 'liturgy')
+        html += generate_book_intro_toc_end(1)
         update_book_details(details, introduction=html)
         update_toc(book_details, 1, details['name'].split(','))
 
@@ -312,14 +331,13 @@ class Command(BaseCommand):
             if lang == '':
                 continue
 
-            book_name = book.replace('{}', LANGUAGES[lang])
+            book_name = book.replace('{}', LANGUAGES_DICT[lang])
             sys.stdout.write(f'\rProcessing books:{book_name}\n')
             sys.stdout.write(f'\r {book_name}\n')
 
             html = get_html(f'{PATH}{book_name}')
 
-            ############
-            # self.footnotes(html, book_details, book_title_en, book_title_he, details, c, lang)
+            self.process_footnotes(html, book_details, lang)
 
             if details.get('remove_class', False):
                 html = html.replace(details.get('remove_class'), '')
@@ -395,6 +413,13 @@ class Command(BaseCommand):
                     c += 1
                     sys.stdout.write(f'\r processing paragraph: {c}\r')
 
+                update_karaites_array_details(book_details,
+                                              '',
+                                              c,
+                                              [generate_book_intro_toc_end(0),
+                                               0,
+                                               generate_book_intro_toc_end(0)])
+
             elif index_lang:
 
                 # index songs that are basically Hebrew, transliteration to English and English
@@ -427,6 +452,11 @@ class Command(BaseCommand):
                     update_karaites_array(book_details, '', c, child_he, child_en)
                     c += 1
 
+                update_karaites_array(book_details,
+                                      '',
+                                      c,
+                                      [generate_book_intro_toc_end(0),
+                                       generate_book_intro_toc_end(0)])
             else:
                 divs = html_tree.find_all('div', class_='WordSection1')
                 for p in divs[0].find_all('table', recursive=True):
@@ -463,6 +493,12 @@ class Command(BaseCommand):
                         c += 1
                     sys.stdout.write(f'\r processing paragraph: {c}\r')
 
+                update_karaites_array_details(book_title_en,
+                                              '',
+                                              c,
+                                              [generate_book_intro_toc_end(0),
+                                               ''])
+
     def handle(self, *args, **options):
         """ Karaites books as array """
 
@@ -478,6 +514,7 @@ class Command(BaseCommand):
                                              SHABBAT_SONGS,
                                              WEDDING_SONGS,
                                              SUPPLEMENTAL,
+                                             TAMMUZ_AV_ECHA,
                                              EXHORTATORY,
                                              POETRY_NON_LITURGICAL)
 
@@ -494,6 +531,7 @@ class Command(BaseCommand):
             FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
             FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()
             book_details, _ = update_book_details(details, language='en,he')
+            BooksFootNotes.objects.filter(book=book_details).delete()
 
             if self.check_is_a_liturgy_book(book_title_en):
 
@@ -522,5 +560,3 @@ class Command(BaseCommand):
                                                     self.expand_book_classification(details))
             # update/create bible references
             update_create_bible_refs(book_details)
-
-            # update_footnotes(book_details)

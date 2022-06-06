@@ -14,6 +14,8 @@ import '../../css/books.css'
 import Header from '../pages/RightPaneHeader.jsx';
 import {storeContext} from "../../stores/context";
 import {slug} from "../../utils/utils";
+import {fetchData} from "../api/dataFetch";
+
 
 const HalakhahPane = ({refClick, paneNumber, backButton, onClose, openBook}) => {
     const store = useContext(storeContext)
@@ -25,12 +27,8 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose, openBook}) => 
     }
 
     useEffect(() => {
-        const getHalakhah = async (book, chapter, verse) => {
-            const response = await fetch(referencesUrl + `${book}/${chapter}/${verse}/`)
-                return  await response.json()
-        }
-
-        getHalakhah(store.getBook(paneNumber), store.getCommentsChapter(paneNumber), store.getCommentsVerse(paneNumber))
+        const url = referencesUrl + `${store.getBook(paneNumber)}/${store.getCommentsChapter(paneNumber)}/${store.getCommentsVerse(paneNumber)}/`
+        fetchData(url)
             .then((data)=> {
                 setReferences(data.references)
             })

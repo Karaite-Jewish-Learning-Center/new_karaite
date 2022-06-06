@@ -4,7 +4,7 @@ import {apiUrl} from "../../constants/constants";
 export const useAudio = (song) => {
     song = song.replace(/‘/g, '').replace(/e’/g, '').replace(/é/g, '').replace(/e’/g, '')
 
-    const url = `${apiUrl}static-django/audio/${song}.wav`
+    const url = `${apiUrl}static-django/audio/${song}`
 
     const [audio] = useState(useMemo(() => {
         return new Audio(url)

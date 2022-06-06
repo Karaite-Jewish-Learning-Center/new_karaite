@@ -4,13 +4,12 @@ import {Virtuoso} from 'react-virtuoso'
 import {TableVirtuoso} from 'react-virtuoso'
 import KaraitePaneHeader from './KaraitePaneHeader';
 import transform from '../../utils/transform'
-import Loading from "../general/Loading";
 import '../../css/_comments.css'
 import Colors from '../../constants/colors'
 import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
-import {Button, Typography} from '@material-ui/core';
+import {Button} from '@material-ui/core';
 
 const HTML = 2
 const BOOK = 0
@@ -19,7 +18,6 @@ const INTRO = 2
 const SUBJECT = 0
 const INDEX = 1
 const START_PARAGRAPH = 2
-const loadingMessageEnd = ['Text end.', 'Introduction end.', 'Table of contents end.']
 
 interface KaraitesBooksInterface {
     paneNumber: number,
@@ -43,24 +41,11 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                                                        onClosePane,
                                                    }) => {
 
-
     const store = useContext(storeContext)
-    const [loadingMessage, setLoadingMessage] = useState<string>('Loading...')
     // book, intro, toc
     const [flags, setFlags] = useState<Array<boolean>>([true, false, false])
     const classes = useStyles()
     const virtuoso = useRef(null);
-
-    if (paragraphs.length === 0) {
-        return <Loading/>
-    }
-
-    // const lang = store.getBookDetails(paneNumber)
-
-    const setEndReached = (i: number): number => {
-        setLoadingMessage(loadingMessageEnd[0])
-        return i
-    }
 
     const onIntroClick = () => {
         setFlags([false, false, true])
@@ -113,17 +98,17 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
     }
     const itemContent = (item: number, data: Array<any>) => {
-
-        return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
-            <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
-                {parse(data[HTML][0], {
-                    replace: domNode => {
-                        return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
-                    }
-                })}
+        return (
+            <div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
+                <div className={(type !== 'liturgy' ? classes.paragraph : classes.liturgy)}>
+                    {parse(data[HTML][0], {
+                        replace: domNode => {
+                            return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
+                        }
+                    })}
+                </div>
             </div>
-        </div>)
-
+        )
     }
 
     const itemIntroduction = (item: number, data: string) => {
@@ -176,25 +161,16 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                     data={paragraphs}
                     ref={virtuoso}
                     initialTopMostItemIndex={initial}
-                    endReached={setEndReached}
                     itemContent={itemTable}
-                    // components={{
-                    //     Footer: () => {return <Loading text={loadingMessage}/>}
-                    // }}
-                />)
+                />
+            )
         } else {
             return (
                 <Virtuoso className={(flags[BOOK] ? classes.Show : classes.Hide)}
                           data={paragraphs}
                           ref={virtuoso}
                           initialTopMostItemIndex={initial}
-                          endReached={setEndReached}
                           itemContent={itemContent}
-                          components={{
-                              Footer: () => {
-                                  return <Loading text={loadingMessage}/>
-                              }
-                          }}
                 />
             )
         }
@@ -226,149 +202,141 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                       itemContent={itemToc}
                       components={{
                           Footer: () => {
-                              return <Loading text={loadingMessageEnd[2]}/>
+                              return (
+                                  <div style={{padding: '1rem', textAlign: 'center'}}>
+                                      Table of Contents end.
+                                  </div>
+                              )
                           }
-                      }}
-            />
+                      }}/>
             <Virtuoso className={`${(flags[INTRO] ? classes.Show : classes.Hide)} ${classes.head}`}
                       data={intro}
                       initialTopMostItemIndex={0}
-                      itemContent={itemIntroduction}
-                      components={{
-                          Footer: () => {
-                              return <Loading text={loadingMessageEnd[1]}/>
-                          }
-                      }}
-            />
-
+                      itemContent={itemIntroduction}/>
         </>
     )
-
 }
 
-
 const useStyles = makeStyles(() => ({
-    virtuoso: {
-        top: 70,
-        position: 'fixed',
-        width: '100%',
-        height: '100%',
-        alignContent: 'center',
-    },
-    paragraphContainer: {
-        fontFamily: 'SBL Hebrew',
-        "&:hover": {
-            background: Colors['bibleSelectedVerse']
+        virtuoso: {
+            top: 70,
+            position: 'fixed',
+            width: '100%',
+            height: '200%',
+            alignContent: 'center',
         },
-        width: '100%',
-    },
-    paragraph: {
-        fontFamily: 'SBL Hebrew',
-        fontSize: '21',
-        paddingLeft: 20,
-        paddingRight: 20,
-        maxWidth: 600,
-        margin: 'auto',
-    },
-    liturgy: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignContent: 'center',
-        justifyContent: 'center',
-    },
-    paragraphContainerHeEn: {
-        paddingLeft: 20,
-        paddingRight: 20,
-        width: 'auto',
-        margin: 'auto',
-        direction: 'rtl',
-    },
-    tocParagraph: {
-        "&:hover": {
-            background: Colors['bibleSelectedVerse']
+        paragraphContainer: {
+            fontFamily: 'SBL Hebrew',
+            "&:hover": {
+                background: Colors['bibleSelectedVerse']
+            },
+            width: '100%',
         },
-        fontFamily: 'SBL Hebrew',
-        maxWidth: '100%',
-        marginLeft: '10%',
-        marginRight: '10%',
-        fontSize: '21px',
-        lineHeight: 'initial',
-        direction: 'rtl'
-    },
-    tocItem: {
-        cursor: 'pointer',
-    },
-    hebrew: {
-        float: 'left',
-    },
-    english: {
-        float: 'right',
-    },
-    selected: {
-        backgroundColor: Colors['rulerColor']
-    },
-    Hide: {
-        display: 'none',
-    },
-    Show: {
-        display: 'block',
-    },
-    heLeft: {
-        fontFamily: 'SBL Hebrew',
-        float: 'left',
-        direction: 'rtl',
-        textAlign: 'right',
-        lineHeight: 'initial',
-        fontSize: '20.35px',
-        verticalAlign: 'top',
-        width: '100%',
-         // border: '1px solid red',
-    },
-    filler:{
-        width: '0',
-    },
-    heRight: {
-        fontFamily: 'SBL Hebrew',
-        lineHeight: 'initial',
-        float: 'right',
-        textAlign: 'right',
-        verticalAlign: 'top'
-    },
-    enRight: {
-        textAlign: 'left',
-        direction: 'ltr',
-        marginLeft: 15,
-        fontSize: 21,
-        width:'100%',
-        verticalAlign: 'top',
-        fontFamily: 'SBL Hebrew',
-        lineHeight: 'initial',
-        // border: '1px solid blue',
-    },
-    heRightCenter: {
-        direction: 'rtl',
-        border: '1px solid red',
-        textAlign: 'right',
-        minWidth: '100%',
-    },
-    he: {
-        direction: 'rtl',
-    },
-    en: {
-        direction: 'ltr',
-    },
-    head: {
-        marginTop: '50px',
-    },
-    toc: {
-        top: 70,
-        minWith: '80%',
-    },
-    tocButton: {
-        textTransform: 'none',
-        width: '100%',
-    },
-}))
+        paragraph: {
+            fontFamily: 'SBL Hebrew',
+            fontSize: '21',
+            paddingLeft: 20,
+            paddingRight: 20,
+            maxWidth: 600,
+            margin: 'auto',
+        },
+        liturgy: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignContent: 'center',
+            justifyContent: 'center',
+        },
+        paragraphContainerHeEn: {
+            paddingLeft: 20,
+            paddingRight: 20,
+            width: 'auto',
+            margin: 'auto',
+            direction: 'rtl',
+        },
+        tocParagraph: {
+            "&:hover": {
+                background: Colors['bibleSelectedVerse']
+            },
+            fontFamily: 'SBL Hebrew',
+            maxWidth: '100%',
+            marginLeft: '10%',
+            marginRight: '10%',
+            fontSize: '21px',
+            lineHeight: 'initial',
+            direction: 'rtl'
+        },
+        tocItem: {
+            cursor: 'pointer',
+        },
+        hebrew: {
+            float: 'left',
+        },
+        english: {
+            float: 'right',
+        },
+        selected: {
+            backgroundColor: Colors['rulerColor']
+        },
+        Hide: {
+            display: 'none',
+        },
+        Show: {
+            display: 'block',
+        },
+        heLeft: {
+            fontFamily: 'SBL Hebrew',
+            float: 'left',
+            direction: 'rtl',
+            textAlign: 'right',
+            lineHeight: 'initial',
+            fontSize: '20.35px',
+            verticalAlign: 'top',
+            width: '100%',
+            // border: '1px solid red',
+        },
+        filler: {
+            width: '0',
+        },
+        heRight: {
+            fontFamily: 'SBL Hebrew',
+            lineHeight: 'initial',
+            float: 'right',
+            textAlign: 'right',
+            verticalAlign: 'top'
+        },
+        enRight: {
+            textAlign: 'left',
+            direction: 'ltr',
+            marginLeft: 15,
+            fontSize: 21,
+            width: '100%',
+            verticalAlign: 'top',
+            fontFamily: 'SBL Hebrew',
+            lineHeight: 'initial',
+            // border: '1px solid blue',
+        },
+        heRightCenter: {
+            direction: 'rtl',
+            border: '1px solid red',
+            textAlign: 'right',
+            minWidth: '100%',
+        },
+        he: {
+            direction: 'rtl',
+        },
+        en: {
+            direction: 'ltr',
+        },
+        head: {},
+        toc: {
+            top: 70,
+            minWith: '80%',
+        },
+        tocButton: {
+            textTransform: 'none',
+            width: '100%',
+        },
+    }))
 
 
-export default KaraitesBooks
+    export default KaraitesBooks

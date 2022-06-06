@@ -4,7 +4,8 @@ import shutil
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from ...constants import (BIBLE_BOOKS_NAMES)
+from ...constants import (BIBLE_BOOKS_NAMES,
+                          LANGUAGES_DICT)
 from .command_utils.utils import mark_bible_refs
 from .command_utils.read_write_data import (read_data,
                                             write_data)
@@ -15,6 +16,7 @@ from .constants import (SOURCE_PATH,
                         CSS_SOURCE,
                         CSS_OUT,
                         REMOVE_CSS_CLASS)
+
 from .command_utils.parser_ref import (parse_reference,
                                        ABBREVIATIONS)
 from .command_utils.utils import RE_BIBLE_REF
@@ -136,15 +138,6 @@ This </span>""", '<span class="span-50">11:30 This </span>')
 
 
 BOOKS = [1, 2]
-
-LANGUAGES = {'en': "English",
-             'he': "Hebrew",
-             'ja': 'Judeo_Arabic',
-             # this means a formatted table with hebrew and english
-             'he-en': 'Hebrew-English',
-             # technical "in" , "toc" are not a language,
-             # we use to process introduction files and table of contents files
-             "in": "Introduction", 'toc': "TOC"}
 
 
 def replace_path(html_tree, old_path, new_path):
@@ -530,7 +523,7 @@ HALAKHAH = [
         'he-en,in,toc',
         [],
         [update_bible_re],
-        {'name': "The Palanquim,אפריון עשה לו",
+        {'name': "The Palanquin,אפריון עשה לו",
          'first_level': 3,
          'book_classification': '80',
          'author': ' Hakham Solomon ben Aaron,',
@@ -579,7 +572,7 @@ HAVDALA = [
          'book_classification': '10',
          'author': 'Essa Bechos Yesha‘,',
          'css_class': 'simple',
-         'song': True},
+         'songs': ['Essa Bechos Yesha.wav']},
         False
     ],
     [
@@ -593,7 +586,7 @@ HAVDALA = [
          'book_classification': '10',
          'author': 'Yosef ben Shemu’el Rodi,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Et Kos Yeshuot.wav']},
         False
     ],
     [
@@ -642,9 +635,8 @@ PASSOVER_SONGS = [
         False
     ],
     [
-
-        "HTML/Liturgy/Passover Songs/Odecha_El_Al Ki_Noraot/",
-        "Odecha_El_Ki_Noraot-{}.html",
+        "HTML/Liturgy/Passover Songs/Odecha/",
+        "Odecha-{}.html",
         'he,in',
         [],
         [update_bible_re],
@@ -759,6 +751,24 @@ PURIM_SONGS = [
 ]
 SHABBAT_SONGS = [
     [
+        'HTML/Liturgy/Shabbat Songs/',
+        'Ahavatecha-{}.html',
+        'he,in',
+        [],
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"‘Al ahavatecha, אהבתך על",
+         'first_level': 4,
+         'book_classification': '30',
+         'author': 'Yehuda Ha-levy,',
+         'css_class': 'simple-3-4',
+         'song': ['Al Ahavatecha (Complete Acapella).mp3',
+                  'Al Ahavatecha (for Learning and Rhythm).mp3',
+                  'Al Ahavatecha (with Acoustic Guitar).mp3',
+                  ]},
+        False
+    ],
+    [
         'HTML/Liturgy/Shabbat Songs/', 'Ashir Beshir Ḥadash.html',
         'he',
         [],
@@ -769,7 +779,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Yosef ben Nisan Poziemski,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Ashir Beshir Ḥadash.wav']},
         False
     ],
     [
@@ -783,7 +793,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Avraham ben Yoshiyahu Ha-rofé,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Ashir Beshira El Nora Tehillot.wav']},
         False
     ],
     [
@@ -797,7 +807,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Ashir Le’el ‘Elyon,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Ashir Lel Elyon.wav']},
         False
     ],
     [
@@ -811,7 +821,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Yosef ben Yitsḥaḳ Itson,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Ekkon Lemul Shabbat.wav']},
         False
     ],
     [
@@ -825,7 +835,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Ezra ben Nisan Ha-rofé,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Esmaḥ Beshir Ḥadash.wav']},
         False
     ],
     [
@@ -839,7 +849,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Ezkor Lemitsvat Melech.wav']},
         False
     ],
     [
@@ -880,7 +890,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Shelomo ben Aharon,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Mizmor Leyom Shabbat.wav']},
         False
     ],
     [
@@ -894,7 +904,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Odé Le’el Maḥsi,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Od Lel Maḥsi.wav']},
         False
     ],
     [
@@ -908,7 +918,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Mordochai Sultansky,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Ori Yeḥidati.wav']},
         False
     ],
     [
@@ -922,7 +932,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Shabbat Menuḥa,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['']},
         False
     ],
     [
@@ -936,7 +946,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Yah Zimrati,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['']},
         False
     ],
     [
@@ -963,7 +973,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Yisra’el ben Shemu’el Ha-ma‘aravi Ha-dayyan,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Yerivai Voyevai.wav']},
         False
     ],
     [
@@ -977,7 +987,7 @@ SHABBAT_SONGS = [
          'book_classification': '30',
          'author': 'Yeter Peletat ‘Am,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Yeter Peletat Am.wav']},
         False
     ],
 ]
@@ -1049,9 +1059,42 @@ SUPPLEMENTAL = [
         False
     ],
 ]
+TAMMUZ_AV_ECHA = [
+    [
+        '/HTML/Liturgy/Tammuz Av Echa/',
+        'Afas Aron-{}.html',
+        'he,in',
+        [],
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Afas Aron , אפס ארון",
+         'first_level': 4,
+         'book_classification': '45',
+         'author': 'unknow,',
+         'css_class': '',
+         'song': ['Afas Aron.mp3']},
+        False
+    ],
+    [
+        '/HTML/Liturgy/Tammuz Av Echa/',
+        'Yona Leedech Rei-{}.html',
+        'he,in',
+        [],
+        [update_bible_re],
+        # name, liturgy , Biblical verses, Author
+        {'name': r"Yona Le’edech Re’i,יונה לאידך ראי",
+         'first_level': 4,
+         'book_classification': '45',
+         'author': 'Yosef ben Moshe,',
+         'css_class': '',
+         'song': ['Afas Aron.mp3']},
+        False
+    ],
+]
 WEDDING_SONGS = [
     [
-        'HTML/Liturgy/Wedding Songs/', 'Amen Yehi Ratson.html',
+        'HTML/Liturgy/Wedding Songs/',
+        'Amen Yehi Ratson.html',
         'he',
         [],
         [update_bible_re],
@@ -1061,7 +1104,7 @@ WEDDING_SONGS = [
          'book_classification': '50',
          'author': 'Amen Yehi Ratson,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Amen Yehi Ratson.wav']},
         False
     ],
     [
@@ -1075,7 +1118,7 @@ WEDDING_SONGS = [
          'book_classification': '50',
          'author': 'Laḥatani Mivḥar Banai,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Laḥatani Mivḥar Banai.wav']},
         False
     ],
     [
@@ -1090,7 +1133,7 @@ WEDDING_SONGS = [
          'book_classification': '50',
          'author': 'Laḥatani Mivḥar Banai,',
          'css_class': 'simple-3-4',
-         'song': True},
+         'song': ['Matsa Ish sha Matsa Tov.wav']},
         False
     ],
 ]
@@ -1211,10 +1254,20 @@ LIST_OF_BOOKS = (COMMENTS +
                  PRAYERS +
                  SHABBAT_SONGS +
                  SUPPLEMENTAL +
+                 TAMMUZ_AV_ECHA +
                  WEDDING_SONGS +
                  POETRY_NON_LITURGICAL +
                  EXHORTATORY +
                  POLEMIC)
+
+LITURGY = (HAVDALA +
+           PASSOVER_SONGS +
+           PRAYERS +
+           PURIM_SONGS +
+           SHABBAT_SONGS +
+           SUPPLEMENTAL +
+           TAMMUZ_AV_ECHA +
+           WEDDING_SONGS)
 
 
 class Command(BaseCommand):
@@ -1502,6 +1555,7 @@ class Command(BaseCommand):
                                              SHABBAT_SONGS,
                                              WEDDING_SONGS,
                                              SUPPLEMENTAL,
+                                             TAMMUZ_AV_ECHA,
                                              EXHORTATORY,
                                              POETRY_NON_LITURGICAL)
         if not books_to_process:
@@ -1509,7 +1563,7 @@ class Command(BaseCommand):
 
         for path, book, language, pre_processes, _, _, _ in books_to_process:
             for lang in language.split(','):
-                book_name = book.replace('{}', LANGUAGES[lang])
+                book_name = book.replace('{}', LANGUAGES_DICT[lang])
                 for pre_process in pre_processes:
                     sys.stdout.write(f"\nPre-processing book : {book_name}")
                     pre_process(path, book_name)
@@ -1520,7 +1574,7 @@ class Command(BaseCommand):
             # may be some exceptions
             book_language = language.replace(',in', '').replace(',toc', '')
             for lang in language.split(','):
-                book_name = book.replace('{}', LANGUAGES[lang])
+                book_name = book.replace('{}', LANGUAGES_DICT[lang])
                 sys.stdout.write(f"\nPre-processing book {lang}: {book_name}")
                 html = read_data(path, book_name, SOURCE_PATH)
 

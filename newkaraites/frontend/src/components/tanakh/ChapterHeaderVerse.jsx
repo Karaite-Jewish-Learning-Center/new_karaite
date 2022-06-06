@@ -20,7 +20,7 @@ import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 const ChapterHeaderVerse = (props) => {
     const store = useContext(storeContext)
-    const {data, item, gridVisibleRange, paneNumber} = props
+    const {data, item, gridVisibleRange, paneNumber,  speaking} = props
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -31,7 +31,6 @@ const ChapterHeaderVerse = (props) => {
     let refs_comment = parseInt(data[BIBLE_EN_CM])
     let ref_halakha = parseInt(data[BIBLE_REFS])
 
-
     const onClick = (i) => {
         if (!store.getIsRightPaneOpen(paneNumber)) {
             store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
@@ -39,7 +38,6 @@ const ChapterHeaderVerse = (props) => {
             store.setCurrentItem(i, paneNumber)
             return
         }
-
         store.setCurrentItem(i, paneNumber)
         store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
     }
@@ -57,16 +55,18 @@ const ChapterHeaderVerse = (props) => {
                 </div>
             </div>)
     }
-    const current = gridVisibleRange.startIndex + store.getDistance(paneNumber)
-    const found = item === current
+
+    const startIndex = gridVisibleRange.startIndex
+    const current = startIndex  + store.getDistance(paneNumber)
+    const found = item === store.getCurrentItem(paneNumber)
 
     useEffect(() => {
-        if (allBookData[current] !== undefined) {
+        // if (allBookData[current] !== undefined) {
             store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
             store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
             store.setVerseData(allBookData[current], paneNumber)
-        }
-    }, [allBookData, current, paneNumber, store])
+        // }
+    }, [allBookData, paneNumber, store.getCurrentItem(paneNumber)])
 
     const ChapterBody = () => {
         switch (lang) {
@@ -84,7 +84,7 @@ const ChapterHeaderVerse = (props) => {
                         </div>
                         <div className={classes.references}>
                             <RefsBadge refsCount={refs_comment}/>
-                            <RefsBadge refsCount={ref_halakha} color="secondary"/>
+                            <RefsBadge refsCount={ref_halakha} color="action"/>
 
                         </div>
                     </>
@@ -128,7 +128,7 @@ const ChapterHeaderVerse = (props) => {
     return (
         <div className={classes.verse}>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
+            <div className={`${classes.textContainer} ${(found? classes.selectVerse : '')}`}
                  onClick={onClick.bind(this, item)}>
                 <ChapterBody/>
             </div>
@@ -230,12 +230,12 @@ const useStyles = makeStyles(() => ({
     hebrewFont: {
         direction: 'RTL',
         fontFamily: 'SBL Hebrew',
-        fontSize:21,
+        fontSize: 21,
     },
     englishFont: {
         direction: 'LTR',
         fontFamily: 'SBL Hebrew',
-        fontSize:21,
+        fontSize: 21,
     },
     selectVerse: {
         backgroundColor: Colors['bibleSelectedVerse']
@@ -251,6 +251,5 @@ const useStyles = makeStyles(() => ({
         minWidth: '50',
     },
 }))
-
 
 export default observer(ChapterHeaderVerse)

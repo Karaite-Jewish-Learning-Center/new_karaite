@@ -1,4 +1,4 @@
-import React, {useContext, FC} from 'react'
+import React, {useContext, FC, useState, MouseEventHandler} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import {Grid} from '@material-ui/core'
@@ -12,8 +12,7 @@ import {InfoButton} from "../buttons/InfoButton";
 import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
 import {BuyButton} from '../buttons/BuyButton';
-import {BasicAudioPlayer} from '../audio/audio-player/basic-audio-player';
-
+import {MusicSelect} from '../buttons/music-select';
 
 interface IProps {
     paneNumber: number,
@@ -37,8 +36,9 @@ const KaraitesPaneHeader: FC<IProps> = ({
     const classes = resources()
     const matches = useMediaQuery('(min-width:600px)');
     const direction = (matches ? 'row' : 'column')
-    const xsColumns1 = (matches ? 5 : 12 )
+    const xsColumns1 = (matches ? 5 : 12)
     const xsColumns2 = (matches ? 4 : 12)
+
 
     const onClose = () => {
         onClosePane(paneNumber)
@@ -68,8 +68,9 @@ const KaraitesPaneHeader: FC<IProps> = ({
                 <InfoButton onClick={onIntro}/>
                 <TocButton onClick={onToc}/>
                 <BookButton onClick={onBook}/>
-                {(details.song ? <BasicAudioPlayer song={details.book_title_en}/> : null)}
+                <MusicSelect songs={details.songs_list}/>
                 {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
+
             </Grid>
 
             <Grid item xs={xsColumns2}>

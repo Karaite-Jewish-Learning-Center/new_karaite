@@ -6,7 +6,8 @@ import {autocompleteUrl} from "../constants/constants";
 class AppState {
     // mains panes bible book , comment, karaites books etc
     panes: Array<any> = []
-
+    // loading state
+    loading = false
     // messages
     message: string = ''
     // search
@@ -20,6 +21,7 @@ class AppState {
     constructor() {
         makeAutoObservable(this, {
             panes: observable,
+            loading: observable,
             message: observable,
             search: observable,
             searchResultData: observable,
@@ -50,8 +52,6 @@ class AppState {
 
     getComments = (paneNumber: number): Array<any> => this.panes[paneNumber].comments
 
-    //hasNoComments = (paneNumber: number): boolean => this.panes[paneNumber].comments.length === 0
-
     setCommentsChapter = (chapter: number, paneNumber: number): void => {
         this.panes[paneNumber].commentsChapter = chapter
     }
@@ -62,16 +62,11 @@ class AppState {
     }
     getCommentsVerse = (paneNumber: number): void => this.panes[paneNumber].commentsVerse
 
-    // book , chapter , verse
-    //setBook = (book: string, i: number): void => {
-    //    this.panes[i].book = book
-    //}
     getBook = (i: number): string => this.panes[i].book
 
     setChapter = (chapter: string, i: number): void => {
         this.panes[i].chapter = parseInt(chapter)
     }
-    //getChapter = (i: number): void => this.panes[i].chapter
 
     setVerse = (verse: number, i: number): void => {
         runInAction(() => {
@@ -101,10 +96,11 @@ class AppState {
     }
     getDistance = (i: number): number => this.panes[i].distance
 
-    setCurrentItem = (item: number, i: number): void => {
+    setCurrentItem = (item: number, i: number): number => {
         runInAction(() => {
             this.panes[i].currentItem = item
         })
+        return item
     }
 
     getCurrentItem = (i: number): number => this.panes[i].currentItem
@@ -116,7 +112,6 @@ class AppState {
     }
     getRightPaneState = (i: number): Array<number> => this.panes[i].rightPaneState || [1]
 
-
     // panes
     setPanes = (pane: number): void => {
         runInAction(() => {
@@ -125,18 +120,6 @@ class AppState {
     }
 
     getPanes = (): Array<any> => this.panes
-
-    //getPaneNumber = (book: string): number => this.panes.findIndex(pane => pane.book === book)
-
-    // getPaneByNumber = (i: number): Array<any> => this.panes[i]
-
-
-    // setIsLastPane = (state: boolean): void => {
-    //     runInAction(() => {
-    //         this.isLastPane = state
-    //     })
-    // }
-    // getIsLastPane = (): boolean => this.isLastPane
 
     get isLastPane() {
         return this.panes.length === 0
@@ -159,7 +142,12 @@ class AppState {
     resetPanes = (): void => {
         this.panes = []
     }
+    // loading
 
+    setLoading = (loading: boolean): void => {
+        this.loading = loading
+    }
+    getLoading = (): boolean => this.loading
 
     // karaites books
     setParagraphs = (paragraphs: Array<any>, i: number): void => {
