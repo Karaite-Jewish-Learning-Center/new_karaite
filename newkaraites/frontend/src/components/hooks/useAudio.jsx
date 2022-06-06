@@ -7,7 +7,11 @@ export const useAudio = (song) => {
     const url = `${apiUrl}static-django/audio/${song}`
 
     const [audio] = useState(useMemo(() => {
-        return new Audio(url)
+        try {
+            return new Audio(url)
+        } catch (e) {
+            alert('Audio error')
+        }
     }, [url]))
 
 
