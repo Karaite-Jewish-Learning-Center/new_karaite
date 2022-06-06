@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import {autocompleteUrl} from '../../constants/constants'
 import {storeContext} from '../../stores/context'
+import {messageContext} from "../../stores/messages/messageContext";
 import {useHistory} from 'react-router-dom'
 import {observer} from 'mobx-react-lite'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
@@ -18,6 +19,7 @@ const AutoComplete = () => {
     // The material-ui Autocomplete component has serious flaws
     // the documented  is not accurate or even helpful
     const store = useContext(storeContext)
+    const message = useContext(messageContext)
     const [isOpen, setIsOpen] = useState(true)
     const [search, setSearch] = useState('')
     const [options, setOptions] = useState([])
@@ -40,7 +42,7 @@ const AutoComplete = () => {
             // invalid  Biblical ref
             const validMessage = validateBiblicalReference(refBook, refChapter, refVerse)
             if (validMessage !== '') {
-                store.setMessage(validMessage)
+                message.setMessage(validMessage)
                 return
             }
             // open book
@@ -94,7 +96,7 @@ const AutoComplete = () => {
             .then((data) => {
                 setOptions(data)
             })
-            .catch(e => store.setMessage(e.message))
+            .catch(e => message.setMessage(e.message))
 
     }, [search, store]);
 

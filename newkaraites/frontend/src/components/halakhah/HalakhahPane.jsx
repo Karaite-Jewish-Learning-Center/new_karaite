@@ -13,12 +13,14 @@ import '../../css/_comments.css'
 import '../../css/books.css'
 import Header from '../pages/RightPaneHeader.jsx';
 import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
 import {slug} from "../../utils/utils";
 import {fetchData} from "../api/dataFetch";
 
 
 const HalakhahPane = ({refClick, paneNumber, backButton, onClose, openBook}) => {
     const store = useContext(storeContext)
+    const message = useContext(messageContext)
     const [references, setReferences] = useState([])
     const classes = useStyles()
 
@@ -32,7 +34,7 @@ const HalakhahPane = ({refClick, paneNumber, backButton, onClose, openBook}) => 
             .then((data)=> {
                 setReferences(data.references)
             })
-            .catch((e)=> store.setMessage(e.message))
+            .catch((e)=> message.setMessage(e.message))
 
 
     }, [paneNumber, store])

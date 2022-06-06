@@ -9,12 +9,14 @@ import {observer} from 'mobx-react-lite'
 import '../../css/books.css'
 import Header from "../pages/RightPaneHeader"
 import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
 import {makeRandomKey} from "../../utils/utils";
 import {fetchData} from "../api/dataFetch";
 
 
 const CommentsPane = ({refClick, paneNumber, backButton, onClose}) => {
     const store = useContext(storeContext)
+    const message = useContext(messageContext)
     const url = getCommentsUrl + `${store.getBook(paneNumber)}/${store.getCommentsChapter(paneNumber)}/${store.getCommentsVerse(paneNumber)}/`
     const classes = useStyles()
 
@@ -22,7 +24,7 @@ const CommentsPane = ({refClick, paneNumber, backButton, onClose}) => {
 
         fetchData(url)
             .then(data => store.setComments(data.comments, paneNumber))
-            .catch((e) => store.setMessage(e.message))
+            .catch((e) => message.setMessage(e.message))
 
     }, [store, paneNumber])
 

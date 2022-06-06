@@ -21,6 +21,7 @@ export interface ButtonPlayProps {
     playing: boolean;
     onReset: MouseEventHandler;
     color?: PropTypes.Color;
+    song: string;
 }
 
 export interface Song {

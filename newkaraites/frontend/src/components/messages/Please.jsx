@@ -1,12 +1,12 @@
 import React,{useContext} from "react"
-import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
 
 
 export const Please =({reason})=> {
-    const store = useContext(storeContext)
+    const message = useContext(messageContext)
     switch (reason) {
         case "search":
-            store.setMessage('Please fill the search box')
+            message.setMessage('Please fill the search box')
             break
         default:
             break

@@ -12,7 +12,7 @@ export const MusicSelect: FC<SongList> = ({songs}) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
     const [song, setSong] = useState<string>('');
     if (songs.length === 0) return null
-    if (songs.length === 1) return <BasicAudioPlayer song={songs[0]}/>
+    if (songs.length === 1) return <BasicAudioPlayer song={songs[0]} onResetPlayer={()=>{}} autoplay={false}/>
 
     const selectSong = (index:number) => {
         setAnchorEl(null)
@@ -21,15 +21,18 @@ export const MusicSelect: FC<SongList> = ({songs}) => {
     const onClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     }
+    const onResetPlayer = ():void => {
+        setSong('')
+    }
 
-    if(song !='') {
-        return <BasicAudioPlayer song={song}/>
+    if(song !='' && song != undefined) {
+        return <BasicAudioPlayer song={song} onResetPlayer={onResetPlayer} autoplay={true}/>
     }
 
     return (
         <span>
-            <IconButton aria-label="Open music selector" aria-controls="select-music" onClick={onClick}>
-                <PlaylistPlayIcon aria-controls="Select music from list"/>
+            <IconButton aria-label="Open music selector" aria-controls="select-music" onClick={onClick} color={"inherit"}>
+                <PlaylistPlayIcon aria-controls="Select music from list" />
             </IconButton>
             <Menu
                 id="select-music"
@@ -37,6 +40,7 @@ export const MusicSelect: FC<SongList> = ({songs}) => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={selectSong}>
+
                 {songs.map((song, index) => <MenuItem key={index} onClick={()=>{selectSong(index)}}>{removeExtension(song as unknown as string)}</MenuItem>)}
             </Menu>
         </span>

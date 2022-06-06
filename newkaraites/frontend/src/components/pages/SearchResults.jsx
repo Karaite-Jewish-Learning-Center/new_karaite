@@ -9,6 +9,7 @@ import ReactHtmlParser from "react-html-parser"
 import {Typography} from "@material-ui/core"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
+import {messageContext} from "../../stores/messages/messageContext";
 import {Please} from "../messages/Please"
 import {slug} from "../../utils/utils"
 import {fetchData} from "../api/dataFetch";
@@ -16,6 +17,7 @@ import {fetchData} from "../api/dataFetch";
 
 const SearchResults = () => {
     const store = useContext(storeContext)
+    const message = useContext(messageContext)
     const classes = useStyles()
     const [search] = useState(store.getSearch())
     const [didYouMean, setDidYouMean] = useState(false)
@@ -80,7 +82,7 @@ const SearchResults = () => {
                 store.setLoading(false)
             })
             .catch(e => {
-                store.setMessage(e.message)
+                message.setMessage(e.message)
                 store.setLoading(false)
             })
 

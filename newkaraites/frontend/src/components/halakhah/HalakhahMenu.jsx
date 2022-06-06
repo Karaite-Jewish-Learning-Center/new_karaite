@@ -4,6 +4,7 @@ import {Typography} from '@material-ui/core'
 import {unslug} from '../../utils/utils'
 import {Link} from 'react-router-dom'
 import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
 import Colors from "../../constants/colors";
 import {makeStyles} from "@material-ui/core/styles";
 import {fetchData} from "../api/dataFetch";
@@ -11,6 +12,7 @@ import {fetchData} from "../api/dataFetch";
 
 const HalakhahMenu = ({book}) => {
     const store = useContext(storeContext)
+    const message = useContext(messageContext)
     const [toc, setToc] = useState([])
     const classes = useStyles()
 
@@ -35,7 +37,7 @@ const HalakhahMenu = ({book}) => {
 
         fetchData(`${karaitesBookToc}${book}/`)
             .then((data) => setToc((data)))
-            .catch((e) => store.setMessage(e.message))
+            .catch((e) => message.setMessage(e.message))
 
     }, [book, store])
     window.scrollTo(0, 0)
