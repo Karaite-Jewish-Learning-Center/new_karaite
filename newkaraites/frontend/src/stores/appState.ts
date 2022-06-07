@@ -8,8 +8,6 @@ class AppState {
     panes: Array<any> = []
     // loading state
     loading = false
-    // messages
-    message: string = ''
     // search
     search: string = ''
     searchResultData: Array<string> = []
@@ -22,7 +20,6 @@ class AppState {
         makeAutoObservable(this, {
             panes: observable,
             loading: observable,
-            message: observable,
             search: observable,
             searchResultData: observable,
             moreResults: observable,
@@ -175,13 +172,6 @@ class AppState {
         this.panes[i].TOC = toc
     }
     getBookTOC = (i: number): Array<any> => this.panes[i].TOC
-
-
-    // messages
-    setMessage = (message: string): void => {
-        this.message = message
-    }
-    getMessage = (): string => this.message
 
     // header chapters
     setHeaderChapter = (chapter: number, i: number): void => {

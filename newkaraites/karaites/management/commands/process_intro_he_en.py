@@ -134,11 +134,12 @@ class Command(BaseCommand):
             intro += str(div)
         intro = intro.replace('MsoTableGrid ', '')
         intro += '</div>'
-        intro += generate_book_intro_toc_end(1)
+        # intro += generate_book_intro_toc_end(1)
         update_book_details(details, introduction=intro)
 
         # update full text search
         intro_html = BeautifulSoup(intro, 'html5lib')
+
         text_en = intro_html.get_text(strip=False)
         # todo break this in paragraphs pointing to entry 1
         update_full_text_search_index_english(book_title_en,
@@ -533,19 +534,19 @@ class Command(BaseCommand):
             book_details, _ = update_book_details(details, language='en,he')
             BooksFootNotes.objects.filter(book=book_details).delete()
 
+            if 'in' in language:
+                language = language.replace('in', '')
+                self.process_intro(book, details, book_title_en, book_title_he)
+
+            if 'toc' in language:
+                language = language.replace('toc', '')
+                table_of_contents = self.process_toc(book, details, table_of_contents)
+
             if self.check_is_a_liturgy_book(book_title_en):
 
                 self.process_liturgy_books(details, language, book, book_details, book_title_en, book_title_he)
 
             else:
-
-                if 'in' in language:
-                    language = language.replace('in', '')
-                    self.process_intro(book, details, book_title_en, book_title_he)
-
-                if 'toc' in language:
-                    language = language.replace('toc', '')
-                    table_of_contents = self.process_toc(book, details, table_of_contents)
 
                 self.process_book(book, language, details, book_details, book_title_en, book_title_he,
                                   table_of_contents)

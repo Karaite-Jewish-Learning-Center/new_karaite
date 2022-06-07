@@ -9,6 +9,7 @@ import {capitalize, makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
 import {TRANSFORM_TYPE} from '../constants/constants'
 import {storeContext} from "../stores/context";
+import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
 import getBook from "./getBook";
@@ -16,6 +17,7 @@ import getBook from "./getBook";
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
+    const message = useContext(messageContext)
     const {book, chapter = 1, verse = 1} = useParams()
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
@@ -53,20 +55,20 @@ const LoadBook = ({type}) => {
             const {refBook, refChapter, refVerse, refHighlight} = parseBiblicalReference(e)
             let isOpen = store.isPaneOpen(refBook, refChapter, refVerse)
             if (isOpen) {
-                store.setMessage(`${book} ${chapter}:${verse} already open.`)
+                message.setMessage(`${book} ${chapter}:${verse} already open.`)
             } else {
-                getBook(refBook, refChapter, refVerse, refHighlight, kind, store).then().catch()
+                getBook(refBook, refChapter, refVerse, refHighlight, kind, store, message).then().catch()
             }
         } catch (e) {
-            store.setMessage(translateMessage(e))
+            message.setMessage(translateMessage(e))
         }
     }
 
     const openBook = (paneNumber, refBook, refChapter, refVerse, refHighlight) => {
         try {
-            getBook(refBook, refChapter, refVerse, refHighlight, '', store).then().catch()
+            getBook(refBook, refChapter, refVerse, refHighlight, '', store, message ).then().catch()
         } catch (e) {
-            store.setMessage(translateMessage(e))
+            message.setMessage(translateMessage(e))
         }
     }
 

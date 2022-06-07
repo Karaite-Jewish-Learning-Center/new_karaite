@@ -1,3 +1,7 @@
+Out dated, for reference only.
+
+[]: # Language: markdown
+[]: # Path: newkaraites/docs/deploy.md
 # Deploy
 2) the usual stuff git pull, ./manager migrate, collect .....
 3) pip requirements

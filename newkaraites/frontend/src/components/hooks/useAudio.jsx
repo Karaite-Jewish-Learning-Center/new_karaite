@@ -1,7 +1,8 @@
 import {useEffect, useState, useMemo} from "react";
 import {apiUrl} from "../../constants/constants";
 
-export const useAudio = (song) => {
+export const useAudio = (song, onResetPlayer, autoplay) => {
+
     song = song.replace(/‘/g, '').replace(/e’/g, '').replace(/é/g, '').replace(/e’/g, '')
 
     const url = `${apiUrl}static-django/audio/${song}`
@@ -15,7 +16,7 @@ export const useAudio = (song) => {
     }, [url]))
 
 
-    const [playing, setPlaying] = useState(false);
+    const [playing, setPlaying] = useState(autoplay);
 
     const toggle = () => setPlaying(!playing);
 
@@ -23,6 +24,8 @@ export const useAudio = (song) => {
         setPlaying(false)
         audio.pause()
         audio.currentTime = 0
+
+        if(onResetPlayer!==null) onResetPlayer()
     }
 
     useEffect(() => {

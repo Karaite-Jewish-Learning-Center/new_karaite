@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {getFirstLevelUrl} from '../../constants/constants'
 import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
 import {makeStyles} from '@material-ui/core/styles'
 import Colors from "../../constants/colors";
 import {fetchData} from "../api/dataFetch";
@@ -13,14 +14,15 @@ const FirstLevel = () => {
     const [classification, setClassification] = useState(null)
     const classes = useStyles()
     const store = useContext(storeContext)
-    store.resetPanes()
+    const message = useContext(messageContext)
 
+    store.resetPanes()
 
     useEffect(() => {
 
         fetchData(getFirstLevelUrl)
             .then(data => setClassification(data))
-            .catch((e) => store.setMessage(e.message))
+            .catch((e) => message.setMessage(e.message))
 
     }, [])
 

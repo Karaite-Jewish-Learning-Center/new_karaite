@@ -1,3 +1,4 @@
+import React, {useContext} from "react"
 import {calculateItemNumber, makeBookUrl} from '../utils/utils';
 import {bookChapterUrl, chaptersByBibleBook, karaitesBookUrl} from '../constants/constants';
 
@@ -5,7 +6,7 @@ const PARAGRAPHS = 0
 const BOOK_DETAILS = 1
 
 
-const fetchData = async (paneNumber, store, url, type) => {
+const fetchData = async (paneNumber, store,message,  url, type) => {
     try {
         store.setLoading(true)
         const response = await fetch(url)
@@ -21,13 +22,13 @@ const fetchData = async (paneNumber, store, url, type) => {
             store.setLoading(false)
         }
     } catch (e) {
-        store.setMessage("Error: " + e.message)
+        message.setMessage("Error: " + e.message)
     } finally {
         store.setLoading(false)
     }
 }
 
-const getBook = async (book, chapter, verse, highlight, type, store) => {
+const getBook = async (book, chapter, verse, highlight, type, store, message) => {
     type = type.toLowerCase()
     let url = ''
     if (!store.isPaneOpen(book, chapter, verse)) {
@@ -70,7 +71,7 @@ const getBook = async (book, chapter, verse, highlight, type, store) => {
             })
             url = `${karaitesBookUrl}${store.getBook(store.panes.length - 1)}/${999999}/${0}/`
         }
-        await fetchData(store.panes.length - 1, store, url, type)
+        await fetchData(store.panes.length - 1, store, message, url, type)
     }
 }
 

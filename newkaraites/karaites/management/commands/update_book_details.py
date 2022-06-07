@@ -29,7 +29,7 @@ def update_book_details(data, introduction='', language='he'):
                                                             )
 
     if not create:
-        obj.introduction = str(introduction)
+        obj.introduction += str(introduction)
         obj.save()
 
     return obj, create

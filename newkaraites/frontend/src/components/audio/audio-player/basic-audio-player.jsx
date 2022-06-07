@@ -3,7 +3,7 @@ import {useAudio} from "../../hooks/useAudio";
 import {PlayPauseReset} from '../../buttons/playPauseReset'
 
 
-export const BasicAudioPlayer = ({song}) => {
-    const [playing, toggle, reset] = useAudio(song);
-    return <PlayPauseReset onClick={toggle} playing={playing} onReset={reset}/>
+export const BasicAudioPlayer = ({song, onResetPlayer , autoplay}) => {
+    const [playing, toggle, reset] = useAudio(song, onResetPlayer, autoplay);
+    return <PlayPauseReset onClick={toggle} playing={playing} onReset={reset}  song={song} />
 }
