@@ -6,13 +6,16 @@ from .models import (Organization,
                      OtherBooks,
                      BookAsArray,
                      BooksFootNotes,
+                     Songs,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      TableOfContents,
                      References,
                      FullTextSearch,
                      FullTextSearchHebrew,
-                     InvertedIndex)
+                     InvertedIndex,
+                     BookClassificationFirst,
+                     BookClassificationSecond)
 
 from .admin_forms import AdminCommentForm
 from django.conf import settings
@@ -127,11 +130,32 @@ class BookFootNotesAdmin(KAdmin):
 admin.site.register(BooksFootNotes, BookFootNotesAdmin)
 
 
+class SongsAdmin(KAdmin):
+    list_display = ('song_title', 'song_file')
+
+
+admin.site.register(Songs, SongsAdmin)
+
+
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
-    list_display = ('first_level', 'book_language',
+    list_display = ('book_title_en',
+                    'book_title_he',
+                    'author',
+                    'first_level',
                     'book_classification',
-                    'book_title_en', 'book_title_he', 'author',
+                    'book_language',
+                    'table_book',
+                    'multi_tables',
+                    'columns',
+                    'columns_order',
+                    'toc_columns',
+                    'direction',
+                    'remove_class',
+                    'remove_tags',
+                    'css_class',
+                    'buy_link',
+                    'index_lang',
                     'intro_to_html')
 
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
@@ -192,3 +216,19 @@ class InvertedIndexAdmin(KAdmin):
 
 
 admin.site.register(InvertedIndex, InvertedIndexAdmin)
+
+
+class BookClassificationFirstAdmin(KAdmin):
+    list_display = ('first_level', 'order')
+    list_editable = ('order',)
+
+
+admin.site.register(BookClassificationFirst, BookClassificationFirstAdmin)
+
+
+class BookClassificationSecondAdmin(KAdmin):
+    list_display = ('second_level', 'order')
+    list_editable = ('order',)
+
+
+admin.site.register(BookClassificationSecond, BookClassificationSecondAdmin)

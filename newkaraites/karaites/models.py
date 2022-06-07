@@ -501,6 +501,35 @@ class BookAsArray(models.Model):
         verbose_name_plural = _('Biblical books as array')
 
 
+class Songs(models.Model):
+    """ Songs """
+
+    song_title = models.CharField(max_length=100,
+                                  verbose_name=_("Song Title"))
+
+    song_file = models.FileField(upload_to='songs/',
+                                 verbose_name=_("Song File"))
+
+    def __str__(self):
+        return f"{self.book} - {self.song_file}"
+
+    @staticmethod
+    def get_book_songs(book):
+        result = []
+        for song in Songs.objects.filter(book=book):
+            result.append(song.to_json())
+        return result
+
+    def to_json(self):
+        return {
+            'song_title': self.song_title,
+            'song_file': self.song_file.url,
+        }
+
+    class Meta:
+        verbose_name_plural = _('Songs')
+
+
 class KaraitesBookDetails(models.Model):
     """  Karaites books """
 
@@ -508,13 +537,21 @@ class KaraitesBookDetails(models.Model):
                                       choices=FIRST_LEVEL,
                                       verbose_name=_('Law'))
 
+    book_classification = models.CharField(max_length=2,
+                                           choices=BOOK_CLASSIFICATION,
+                                           verbose_name=_('Classification'))
+
     book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
                                      verbose_name=_('Book language'))
 
-    book_classification = models.CharField(max_length=2,
-                                           choices=BOOK_CLASSIFICATION,
-                                           verbose_name=_('Classification'))
+    intro = models.BooleanField(default=False,
+                                verbose_name=_('Book has Introduction'),
+                                )
+
+    toc = models.BooleanField(default=False,
+                              verbose_name=_('Book has TOC'),
+                              )
 
     author = models.ForeignKey(Author,
                                blank=True,
@@ -535,35 +572,76 @@ class KaraitesBookDetails(models.Model):
                                          editable=False,
                                          default='')
 
-    introduction = models.TextField(default='')
+    introduction = models.TextField(default='',
+                                    verbose_name=_('Introduction'),
+                                    editable=False,
+                                    help_text=_('This field is used to store the introduction of the book'))
 
-    table_book = models.BooleanField(default=False)
+    table_book = models.BooleanField(default=False,
+                                     verbose_name=_('Table Book'),
+                                     help_text=_('This field is used to inform that book is a html table'))
 
-    columns = models.IntegerField(default=0)
+    columns = models.IntegerField(default=0,
+                                  verbose_name=_('Columns'),
+                                  help_text=_('This field is used to inform the number of columns in the book'))
 
-    columns_order = models.CharField(max_length=10, default='')
+    columns_order = models.CharField(max_length=10,
+                                     default='',
+                                     verbose_name=_('Columns order'),
+                                     help_text=_('This field is used to inform the order of columns in the book'))
 
-    toc_columns = models.CharField(max_length=10, default='')
+    toc_columns = models.CharField(max_length=10,
+                                   default='',
+                                   verbose_name=_('TOC Columns'),
+                                   help_text=_(
+                                       'This field is used to inform the order of columns in the table of contents'))
 
-    direction = models.CharField(max_length=3, default='rtl')
+    direction = models.CharField(max_length=3,
+                                 default='rtl',
+                                 choices=[('rtl', 'rtl'),
+                                          ('ltr', 'ltr')],
+                                 verbose_name=_('Text Direction'),
+                                 help_text=_('This field is used to inform the direction of the text in the book'))
 
-    remove_class = models.CharField(max_length=100, default='')
+    remove_class = models.CharField(max_length=100,
+                                    default='',
+                                    verbose_name=_('Remove class'),
+                                    help_text=_('This field is used to inform the class to remove from the book'))
 
-    remove_tags = models.CharField(max_length=100, default='')
+    css_class = models.CharField(max_length=100,
+                                 choices=[
+                                     ('', 'None'),
+                                     ('simple', 'Simple'),
+                                     ('simple-3-4', 'Simple 3 4'),
+                                     ('special', 'Special'),
+                                     ('special-1', 'Special 1'),
+                                     ('sefer-extra', 'Sefer Extra'),
+                                 ],
+                                 verbose_name=_('CSS class'),
+                                 help_text=_('This field is used to inform the class to add to the book'))
+
+    remove_tags = models.CharField(max_length=100,
+                                   default='',
+                                   verbose_name=_('Remove tags'),
+                                   help_text=_('This field is used to inform the tags to remove from the book'))
 
     # book has more than on table
-    multi_tables = models.BooleanField(default=False)
+    multi_tables = models.BooleanField(default=False,
+                                       verbose_name=_('Multi tables'),
+                                       help_text=_('This field is used to inform that book has more than one table'))
 
-    # book has songs
-    songs_list = ArrayField(models.CharField(max_length=100),
-                            blank=True,
-                            default=list)
+    # book may have one or more songs
+    songs = models.ManyToManyField(Songs)
 
     # buy link
-    buy_link = models.CharField(max_length=255, default='')
+    buy_link = models.CharField(max_length=255,
+                                default='',
+                                verbose_name=_('Buy link'),
+                                help_text='This field is used to inform the buy link of the book')
 
     # search index hebrew , english, transliteration
-    index_lang = models.BooleanField(default=True)
+    index_lang = models.BooleanField(default=True,
+                                     verbose_name=_('Index transliteration'))
 
     def __str__(self):
         return self.book_title_en
@@ -572,9 +650,17 @@ class KaraitesBookDetails(models.Model):
     def intro_to_html(self):
         return self.introduction
 
+    def get_language(self):
+        """ process_intro_he_en  recognizes language intro and toc
+            examples : he,en,in | he,in,toc | en,he,in | he | en ...
+        """
+        lang = self.book_language
+        lang += ',in' if self.intro else ''
+        lang += ',toc' if self.toc else ''
+        return lang
+
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
-
         if not classification:
             book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en')
         else:
@@ -589,10 +675,11 @@ class KaraitesBookDetails(models.Model):
 
         data = []
         for details in book_details:
+            # todo refactor this
             data.append({
                 'book_id': details.id,
                 'book_first_level': details.first_level,
-                'book_language': details.book_language,
+                'book_language': details.book_language(),
                 'book_classification': details.get_book_classification_display(),
                 'book_title_en': details.book_title_en,
                 'book_title_he': details.book_title_he,
@@ -604,17 +691,19 @@ class KaraitesBookDetails(models.Model):
                 'remove_class': details.remove_class,
                 'remove_tags': details.remove_tags,
                 'multi_tables': details.multi_tables,
+                # todo
                 'songs_list': details.songs_list,
                 'buy_link': details.buy_link,
                 'index_lag': details.index_lang,
             })
         return data
 
+
     @staticmethod
     def to_json(book_title_unslug):
         details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
         toc = TableOfContents.objects.filter(karaite_book=details)
-
+        # todo refactor this
         return {
             'book_id': details.id,
             'book_first_level': details.first_level,
@@ -638,11 +727,12 @@ class KaraitesBookDetails(models.Model):
             'index_lag': details.index_lang,
         }
 
-    def save(self, *args, **kwargs):
 
+    def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
 
         super(KaraitesBookDetails, self).save(*args, **kwargs)
+
 
     class Meta:
         verbose_name_plural = 'Karaites book details'
@@ -1002,3 +1092,62 @@ class MisspelledWord(models.Model):
     class Meta:
         verbose_name_plural = _('Misspelled words')
         ordering = ('misspelled_word',)
+
+
+class BookClassificationFirst(models.Model):
+    first_level = models.CharField(max_length=50,
+                                   verbose_name=_('First level'))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'))
+
+    def __str__(self):
+        return self.first_level
+
+    class Meta:
+        verbose_name_plural = _('Book Classification First')
+        ordering = ('order',)
+
+
+class BookClassificationSecond(models.Model):
+    second_level = models.CharField(max_length=50,
+                                    verbose_name=_('Second level'))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'))
+
+    def __str__(self):
+        return self.second_level
+
+    class Meta:
+        verbose_name_plural = _('Book Classification Second')
+        ordering = ('order',)
+
+# class AdminBooks(models.Model):
+#     """Site books admin"""
+#
+#     book_title_en = models.CharField(max_length=100,
+#                                      db_index=True,
+#                                      verbose_name=_("Book title in English"))
+#
+#     book_title_he = models.CharField(max_length=100,
+#                                      db_index=True,
+#                                      verbose_name=_("Book title in Hebrew"))
+#
+#
+#     book_language = models.CharField(max_length=1,
+#                                      choices=BOOK_LANGUAGE,
+#                                      default='E',
+#                                      verbose_name=_("Language"))
+#
+#     book_type = models.CharField(max_length=1,
+#                                  choices=BOOK_TYPE,
+#                                  default='B',
+#                                  verbose_name=_("Book type"))
+#
+#     def __str__(self):
+#         return self.book_title_en
+#
+#     class Meta:
+#         verbose_name_plural = _('Books admin')
+#         ordering = ('book_title_en',)

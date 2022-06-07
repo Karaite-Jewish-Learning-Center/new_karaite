@@ -15,8 +15,8 @@ LANGUAGES_DICT = {'en': "English",
                   'he-en': 'Hebrew-English',
                   # technical "in" , "toc" are not a language,
                   # we use to process introduction files and table of contents files
-                  "in": "Introduction", 'toc': "TOC"}
-
+                  "in": "Introduction",
+                  'toc': "TOC"}
 
 
 BOOK_CLASSIFICATION = [
