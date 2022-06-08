@@ -511,7 +511,7 @@ class Songs(models.Model):
                                  verbose_name=_("Song File"))
 
     def __str__(self):
-        return f"{self.book} - {self.song_file}"
+        return self.song_title
 
     @staticmethod
     def get_book_songs(book):
@@ -577,6 +577,29 @@ class KaraitesBookDetails(models.Model):
                                     editable=False,
                                     help_text=_('This field is used to store the introduction of the book'))
 
+    book_source_en = models.FileField(upload_to='books/',
+                                      default='',
+                                      verbose_name=_('Book Source English'),
+                                      help_text=_('This field is used to store the English source of the book'))
+
+    book_source_he = models.FileField(upload_to='books/',
+                                      default='',
+                                      verbose_name=_('Book Source Hebrew'),
+                                      help_text=_('This field is used to store the Hebrew source of the book'))
+
+    book_intro_source = models.FileField(upload_to='books/',
+                                            default='',
+                                            blank=True,
+                                            verbose_name=_('Book Intro Source'),
+                                            help_text=_(
+                                                'This field is used to store the source of the book introduction'))
+
+    book_toc_source = models.FileField(upload_to='books/',
+                                       default='',
+                                       blank=True,
+                                       verbose_name=_('Book TOC Source'),
+                                       help_text=_('This field is used to store the source of the book TOC'))
+
     table_book = models.BooleanField(default=False,
                                      verbose_name=_('Table Book'),
                                      help_text=_('This field is used to inform that book is a html table'))
@@ -587,14 +610,16 @@ class KaraitesBookDetails(models.Model):
 
     columns_order = models.CharField(max_length=10,
                                      default='',
+                                     blank=True,
                                      verbose_name=_('Columns order'),
                                      help_text=_('This field is used to inform the order of columns in the book'))
 
     toc_columns = models.CharField(max_length=10,
                                    default='',
+                                   blank=True,
                                    verbose_name=_('TOC Columns'),
-                                   help_text=_(
-                                       'This field is used to inform the order of columns in the table of contents'))
+                                   help_text=_('This field is used to inform the order \
+                                       of columns in the table of contents'))
 
     direction = models.CharField(max_length=3,
                                  default='rtl',
@@ -604,7 +629,11 @@ class KaraitesBookDetails(models.Model):
                                  help_text=_('This field is used to inform the direction of the text in the book'))
 
     remove_class = models.CharField(max_length=100,
+                                    choices=[('', 'None'),
+                                             ('MsoTableGrid', 'MsoTableGrid'),
+                                             ],
                                     default='',
+                                    blank=True,
                                     verbose_name=_('Remove class'),
                                     help_text=_('This field is used to inform the class to remove from the book'))
 
@@ -617,11 +646,14 @@ class KaraitesBookDetails(models.Model):
                                      ('special-1', 'Special 1'),
                                      ('sefer-extra', 'Sefer Extra'),
                                  ],
+                                 default='',
+                                 blank=True,
                                  verbose_name=_('CSS class'),
                                  help_text=_('This field is used to inform the class to add to the book'))
 
     remove_tags = models.CharField(max_length=100,
                                    default='',
+                                   blank=True,
                                    verbose_name=_('Remove tags'),
                                    help_text=_('This field is used to inform the tags to remove from the book'))
 
@@ -636,6 +668,7 @@ class KaraitesBookDetails(models.Model):
     # buy link
     buy_link = models.CharField(max_length=255,
                                 default='',
+                                blank=True,
                                 verbose_name=_('Buy link'),
                                 help_text='This field is used to inform the buy link of the book')
 
@@ -650,6 +683,13 @@ class KaraitesBookDetails(models.Model):
     def intro_to_html(self):
         return self.introduction
 
+    @mark_safe
+    def song_list(self):
+        html = ''
+        for song in self.songs.all():
+            html += f'<p>{song.song_title}</p>'
+        return html
+
     def get_language(self):
         """ process_intro_he_en  recognizes language intro and toc
             examples : he,en,in | he,in,toc | en,he,in | he | en ...
@@ -658,6 +698,34 @@ class KaraitesBookDetails(models.Model):
         lang += ',in' if self.intro else ''
         lang += ',toc' if self.toc else ''
         return lang
+
+    def get_song_list(self):
+        return [song.to_json() for song in self.songs.all()]
+
+    @staticmethod
+    def to_dic(details, toc):
+        return {
+            'book_id': details.id,
+            'book_first_level': details.first_level,
+            'book_language': details.get_language(),
+            'book_classification': details.get_book_classification_display(),
+            'author': details.author.name,
+            'book_title_en': details.book_title_en,
+            'book_title_he': details.book_title_he,
+            'table_book': details.table_book,
+            'columns': details.columns,
+            'columns_order': details.columns_order,
+            'toc_columns': details.toc_columns,
+            'toc': [t.to_list() for t in toc],
+            'intro': details.introduction,
+            'direction': details.direction,
+            'remove_class': details.remove_class,
+            'remove_tags': details.remove_tags,
+            'multi_tables': details.multi_tables,
+            'songs_list': details.get_song_list(),
+            'buy_link': details.buy_link,
+            'index_lag': details.index_lang,
+        }
 
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
@@ -675,64 +743,19 @@ class KaraitesBookDetails(models.Model):
 
         data = []
         for details in book_details:
-            # todo refactor this
-            data.append({
-                'book_id': details.id,
-                'book_first_level': details.first_level,
-                'book_language': details.book_language(),
-                'book_classification': details.get_book_classification_display(),
-                'book_title_en': details.book_title_en,
-                'book_title_he': details.book_title_he,
-                'columns': details.columns,
-                'columns_order': details.columns_order,
-                'toc_columns': details.toc_columns,
-                'table_book': details.table_book,
-                'direction': details.direction,
-                'remove_class': details.remove_class,
-                'remove_tags': details.remove_tags,
-                'multi_tables': details.multi_tables,
-                # todo
-                'songs_list': details.songs_list,
-                'buy_link': details.buy_link,
-                'index_lag': details.index_lang,
-            })
+            data.append(details.to_dic(details, []))
         return data
-
 
     @staticmethod
     def to_json(book_title_unslug):
         details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
         toc = TableOfContents.objects.filter(karaite_book=details)
-        # todo refactor this
-        return {
-            'book_id': details.id,
-            'book_first_level': details.first_level,
-            'book_language': details.book_language,
-            'book_classification': details.get_book_classification_display(),
-            'author': details.author.name,
-            'book_title_en': details.book_title_en,
-            'book_title_he': details.book_title_he,
-            'table_book': details.table_book,
-            'columns': details.columns,
-            'columns_order': details.columns_order,
-            'toc_columns': details.toc_columns,
-            'toc': [t.to_list() for t in toc],
-            'intro': details.introduction,
-            'direction': details.direction,
-            'remove_class': details.remove_class,
-            'remove_tags': details.remove_tags,
-            'multi_tables': details.multi_tables,
-            'songs_list': details.songs_list,
-            'buy_link': details.buy_link,
-            'index_lag': details.index_lang,
-        }
-
+        return details.to_dic(details, toc)
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
 
         super(KaraitesBookDetails, self).save(*args, **kwargs)
-
 
     class Meta:
         verbose_name_plural = 'Karaites book details'

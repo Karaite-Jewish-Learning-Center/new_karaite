@@ -145,6 +145,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'first_level',
                     'book_classification',
                     'book_language',
+                    'song_list',
                     'table_book',
                     'multi_tables',
                     'columns',

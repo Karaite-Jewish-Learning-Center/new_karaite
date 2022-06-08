@@ -572,7 +572,7 @@ HAVDALA = [
          'book_classification': '10',
          'author': 'Essa Bechos Yesha‘,',
          'css_class': 'simple',
-         'songs': ['Essa Bechos Yesha.wav']},
+         'song': ['Essa Bechos Yesha.wav']},
         False
     ],
     [
@@ -1001,7 +1001,7 @@ SUPPLEMENTAL = [
         {'name': r"Anochi Anochi, אנכי אנכי",
          'first_level': 4,
          'book_classification': '40',
-         'author': 'N/A (Biblical Verses)',
+         'author': 'N/A (Biblical Verses),',
          'css_class': 'special'},
         False
     ],
@@ -1014,7 +1014,7 @@ SUPPLEMENTAL = [
         {'name': r"Atsili ḳum ḳera, אצילי קום קרא",
          'first_level': 4,
          'book_classification': '40',
-         'author': 'Abraham',
+         'author': 'Abraham,',
          'css_class': 'simple'},
         False
     ],
@@ -1027,7 +1027,7 @@ SUPPLEMENTAL = [
         {'name': r"Evyon Asher, אביון אשר",
          'first_level': 4,
          'book_classification': '40',
-         'author': 'Anatoli (ben Joseph?)',
+         'author': 'Anatoli (ben Joseph?),',
          'css_class': 'simple'},
         False
     ],
@@ -1040,7 +1040,7 @@ SUPPLEMENTAL = [
         {'name': r"Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
          'book_classification': '40',
-         'author': 'N/A (Biblical Verses)',
+         'author': 'N/A (Biblical Verses),',
          'css_class': 'simple'},
         False
     ],
@@ -1054,7 +1054,7 @@ SUPPLEMENTAL = [
         {'name': r"Vehoshiya‘, והושיע",
          'first_level': 4,
          'book_classification': '40',
-         'author': 'N/A (Biblical Verses)',
+         'author': 'N/A (Biblical Verses),',
          'css_class': 'special-1'},
         False
     ],
@@ -1225,7 +1225,7 @@ POLEMIC = [
         {'name': r"Hizzuḳ Emuna,חזוק אמונה חיזוק אמונה",
          'first_level': 5,
          'book_classification': '60',
-         'author': "Isaac ben Abraham"},
+         'author': "Isaac ben Abraham,"},
         False
     ],
 ]
@@ -1241,7 +1241,7 @@ TEST_BOOKS = [
         {'name': r"2 Vehaḥochma Me’ayin Timmatsē, והחכמה מאין תמצא",
          'first_level': 4,
          'book_classification': '70',
-         'author': 'N/A (Biblical Verses)'},
+         'author': 'N/A (Biblical Verses),'},
         False
     ],
 ]

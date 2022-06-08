@@ -58,6 +58,8 @@ FIRST_LEVEL = [
     (11, 'Exhortatory'),
 ]
 
+FIRST_LEVEL_DICT = dict(FIRST_LEVEL)
+
 SECOND_LEVEL = [
     (1, 'Torah'),
     (2, 'Prophets'),
