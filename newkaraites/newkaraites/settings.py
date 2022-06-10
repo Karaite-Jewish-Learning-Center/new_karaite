@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'newkaraites.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Karaites',
+        'NAME': 'karaites',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -106,7 +106,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'karaites_test',
-            'USER': 'sandro',
+            'USER': '',
             'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '',

@@ -528,6 +528,27 @@ class Songs(models.Model):
 
     class Meta:
         verbose_name_plural = _('Songs')
+        ordering = ('song_title',)
+
+
+class Method(models.Model):
+    """ Methods to be used in pre-process and pro-process"""
+
+    method_name = models.CharField(max_length=30,
+                                   verbose_name=_("Method Name"))
+
+    pre_process = models.BooleanField(default=False,
+                                      verbose_name=_("Pre-process"))
+
+    pro_process = models.BooleanField(default=False,
+                                      verbose_name=_("Pro-process"))
+
+    def __str__(self):
+        return self.method_name
+
+    class Meta:
+        verbose_name_plural = _('Method')
+        ordering = ('method_name',)
 
 
 class KaraitesBookDetails(models.Model):
@@ -577,28 +598,43 @@ class KaraitesBookDetails(models.Model):
                                     editable=False,
                                     help_text=_('This field is used to store the introduction of the book'))
 
-    book_source_en = models.FileField(upload_to='books/',
+    book_source = models.FileField(upload_to='books/',
                                       default='',
-                                      verbose_name=_('Book Source English'),
-                                      help_text=_('This field is used to store the English source of the book'))
-
-    book_source_he = models.FileField(upload_to='books/',
-                                      default='',
-                                      verbose_name=_('Book Source Hebrew'),
-                                      help_text=_('This field is used to store the Hebrew source of the book'))
+                                      verbose_name=_('Book Source '),
+                                      help_text=_('This field is used to store the source of the book'))
 
     book_intro_source = models.FileField(upload_to='books/',
-                                            default='',
-                                            blank=True,
-                                            verbose_name=_('Book Intro Source'),
-                                            help_text=_(
-                                                'This field is used to store the source of the book introduction'))
+                                         default='',
+                                         blank=True,
+                                         verbose_name=_('Book Intro Source'),
+                                         help_text=_(
+                                             'This field is used to store the source of the book introduction'))
 
-    book_toc_source = models.FileField(upload_to='books/',
+    book_toc_source = models.FileField(upload_to='processed/',
                                        default='',
                                        blank=True,
-                                       verbose_name=_('Book TOC Source'),
-                                       help_text=_('This field is used to store the source of the book TOC'))
+                                       verbose_name=_('Book TOC  Source'),
+                                       help_text=_('This field is used to store the processed source of the book TOC'))
+
+    processed_book_source = models.FileField(upload_to='processed/',
+                                                default='',
+                                                verbose_name=_('Book processed Source'),
+                                                help_text=_(
+                                                    'This field is used to store the processed  source of the book'))
+
+    processed_book_intro_source = models.FileField(upload_to='processed/',
+                                                   default='',
+                                                   blank=True,
+                                                   verbose_name=_('Book processed Intro Source'),
+                                                   help_text=_(
+                                                       'This field is used to store the processed source of the book introduction'))
+
+    processed_book_toc_source = models.FileField(upload_to='processed/',
+                                                 default='',
+                                                 blank=True,
+                                                 verbose_name=_('Book processed TOC Source'),
+                                                 help_text=_(
+                                                     'This field is used to store the source of the processed book TOC'))
 
     table_book = models.BooleanField(default=False,
                                      verbose_name=_('Table Book'),
@@ -618,8 +654,8 @@ class KaraitesBookDetails(models.Model):
                                    default='',
                                    blank=True,
                                    verbose_name=_('TOC Columns'),
-                                   help_text=_('This field is used to inform the order \
-                                       of columns in the table of contents'))
+                                   help_text=_('This field is used to inform the order '
+                                               'of columns in the table of contents'))
 
     direction = models.CharField(max_length=3,
                                  default='rtl',
@@ -660,7 +696,8 @@ class KaraitesBookDetails(models.Model):
     # book has more than on table
     multi_tables = models.BooleanField(default=False,
                                        verbose_name=_('Multi tables'),
-                                       help_text=_('This field is used to inform that book has more than one table'))
+                                       help_text=_('This field is used to inform'
+                                                   ' that book has more than one table'))
 
     # book may have one or more songs
     songs = models.ManyToManyField(Songs)
@@ -675,6 +712,12 @@ class KaraitesBookDetails(models.Model):
     # search index hebrew , english, transliteration
     index_lang = models.BooleanField(default=True,
                                      verbose_name=_('Index transliteration'))
+
+    method = models.ManyToManyField(Method,
+                                    blank=True,
+                                    verbose_name=_('Methods'),
+                                    help_text=_('This field is used to inform the'
+                                                ' pre/pro process methods to apply on book'))
 
     def __str__(self):
         return self.book_title_en
@@ -754,7 +797,6 @@ class KaraitesBookDetails(models.Model):
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
-
         super(KaraitesBookDetails, self).save(*args, **kwargs)
 
     class Meta:

@@ -13,3 +13,4 @@ newkaraites/static-django/
 newkaraites/frontend/cypress
 node_modules/
 /newkaraites/node_modules/
+!/newkaraites/media/

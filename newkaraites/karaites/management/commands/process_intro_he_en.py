@@ -39,7 +39,7 @@ from .update_toc import update_toc
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from .command_utils.argments import arguments
-from .command_utils.process_arguments import process_arguments
+from newkaraites.karaites.management.commands.process_arguments import process_arguments
 from .update_full_text_search_index import (update_full_text_search_index_en_he,
                                             update_full_text_search_index_english,
                                             update_full_text_search_index_hebrew)
