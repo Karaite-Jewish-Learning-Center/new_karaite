@@ -15,7 +15,7 @@ import {Link} from 'react-router-dom';
 import AutoComplete from '../autcomplete/autocomplete'
 
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({theme}) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
     const classes = useStyles();
@@ -98,7 +98,7 @@ export default function PrimarySearchAppBar() {
 
     return (
 
-        <AppBar position="fixed">
+        <AppBar position="fixed" theme={theme}>
             <Toolbar>
                 <Typography className={classes.name} component="h3">
                     <Link className={classes.link} to="/">KJLC</Link>

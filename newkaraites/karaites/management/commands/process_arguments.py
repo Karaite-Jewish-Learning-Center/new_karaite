@@ -44,4 +44,12 @@ def process_arguments(options):
     if options['book_id'] != 0:
         books_to_process = [options['book_id']]
 
-    return books_to_process
+    if len(books_to_process) == 1:
+        if books_to_process[0] == 'All':
+            query = KaraitesBookDetails.objects.all()
+        if books_to_process[0].isnumeric():
+            query = KaraitesBookDetails.objects.filter(pk=books_to_process[0])
+    else:
+        query = KaraitesBookDetails.objects.filter(first_leve__in=books_to_process)
+
+    return query

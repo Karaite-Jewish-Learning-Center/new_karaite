@@ -23,16 +23,41 @@ import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message';
 import Acknowledgment from "./components/pages/Acknowledgments";
 import LoadingSpin from "./components/general/LoadingSpin";
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 function App() {
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#ffffff',
+            },
+            secondary: {
+                main: '#11c4f1',
+            },
+
+        },
+    });
+    // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: light)');
+    //
+    // const theme = React.useMemo(
+    //     () =>
+    //         createTheme({
+    //             palette: {
+    //                 type: prefersDarkMode ? 'dark' : 'light',
+    //             },
+    //         }),
+    //     [prefersDarkMode],
+    // );
     return (
-        <StoreProvider>
-            <SpeechProvider>
-                <MessageProvider>
-                    <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
+            <StoreProvider>
+                <SpeechProvider>
+                    <MessageProvider>
                         <BrowserRouter>
-                            <MyAppBar/>
+                            <MyAppBar theme={theme}/>
                             <Message/>
                             <LoadingSpin/>
                             <Switch>
@@ -83,24 +108,12 @@ function App() {
                                 </Route>
                             </Switch>
                         </BrowserRouter>
-                    </ThemeProvider>
-                </MessageProvider>
-            </SpeechProvider>
-        </StoreProvider>
+                    </MessageProvider>
+                </SpeechProvider>
+            </StoreProvider>
+        </ThemeProvider>
     );
 }
 
 export default App;
 
-const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#ffffff',
-            },
-            secondary: {
-                main: '#11c4f1',
-            },
-
-        },
-    }
-);

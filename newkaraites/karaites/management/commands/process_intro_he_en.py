@@ -2,33 +2,11 @@ import sys
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from .command_utils.utils import get_html
-from .update_book_details import update_book_details
 from .update_karaites_array import (update_karaites_array,
                                     update_karaites_array_details,
                                     update_karaites_array_array)
 
 from .update_footnotes import update_footnotes
-
-from .process_books import (COMMENTS,
-                            HALAKHAH,
-                            HAVDALA,
-                            PASSOVER_SONGS,
-                            PURIM_SONGS,
-                            PRAYERS,
-                            POLEMIC,
-                            SHABBAT_SONGS,
-                            WEDDING_SONGS,
-                            SUPPLEMENTAL,
-                            TAMMUZ_AV_ECHA,
-                            EXHORTATORY,
-                            POETRY_NON_LITURGICAL,
-                            LANGUAGES_DICT)
-
-from .process_books import (LIST_OF_BOOKS,
-                            LITURGY)
-
-from .constants import PATH
 from ...models import (KaraitesBookDetails,
                        FullTextSearch,
                        FullTextSearchHebrew,
@@ -39,7 +17,7 @@ from .update_toc import update_toc
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
 from .command_utils.argments import arguments
-from newkaraites.karaites.management.commands.process_arguments import process_arguments
+from .process_arguments import process_arguments
 from .update_full_text_search_index import (update_full_text_search_index_en_he,
                                             update_full_text_search_index_english,
                                             update_full_text_search_index_hebrew)
@@ -120,9 +98,10 @@ class Command(BaseCommand):
             return key, value
         return None, None
 
-    def process_intro(self, book, details, book_title_en, book_title_he):
+    @staticmethod
+    def process_intro(book, book_title_en, book_title_he):
 
-        html = get_html(f"{PATH}{book.replace('{}', LANGUAGES_DICT['in'])}")
+        html = book.book_intro_source
         html_tree = BeautifulSoup(html, 'html5lib')
         divs = html_tree.find_all('div', {'class': 'WordSection1'})
         intro = '<div class="liturgy">'
@@ -135,7 +114,8 @@ class Command(BaseCommand):
         intro = intro.replace('MsoTableGrid ', '')
         intro += '</div>'
         # intro += generate_book_intro_toc_end(1)
-        update_book_details(details, introduction=intro)
+        book.introduction = intro
+        book.save()
 
         # update full text search
         intro_html = BeautifulSoup(intro, 'html5lib')
@@ -145,23 +125,22 @@ class Command(BaseCommand):
         update_full_text_search_index_english(book_title_en,
                                               1,
                                               text_en,
-                                              self.expand_book_classification(details))
+                                              book.get_book_classification_display())
 
         update_full_text_search_index_hebrew(book_title_en,
                                              book_title_he,
                                              1,
                                              '',
-                                             self.expand_book_classification(details))
+                                             book.get_book_classification_display())
 
-    def process_toc(self, book, details, table_of_contents):
+    def process_toc(self, book, table_of_contents):
 
-        toc = get_html(f"{PATH}/{book.replace('{}', 'TOC')}")
+        toc = book.book_toc_source
         toc_html = BeautifulSoup(toc, 'html5lib')
-        toc_columns = details.get('toc_columns', '')
 
-        if toc_columns:
-            toc_len = len(toc_columns.split(','))
-            toc_index = list(map(int, toc_columns.split(',')))
+        if book.toc_columns:
+            toc_len = len(book.toc_columns.split(','))
+            toc_index = list(map(int, book.toc_columns.split(',')))
             for trs in toc_html.find_all('tr', recursive=True):
                 key, value = None, []
                 hebrew = ''
@@ -206,17 +185,13 @@ class Command(BaseCommand):
 
                 if key is not None:
                     table_of_contents[key] = value
-
+        print(f'{book.book_title_en} toc: {table_of_contents}')
+        input('Press Enter to continue...')
         return table_of_contents
 
     @staticmethod
     def check_is_a_liturgy_book(book_title_en):
-
-        for _, _, _, _, _, details, _ in LITURGY:
-            if book_title_en in details['name']:
-                return True
-
-        return False
+        return KaraitesBookDetails.objects.filter(book_title_en=book_title_en, first_level=4).exists()
 
     @staticmethod
     def foot_notes_numbers(footnote_ref, last_number):
@@ -245,18 +220,19 @@ class Command(BaseCommand):
             update_footnotes(details, footnote_ref, footnote_text, last_number, lang)
 
     @staticmethod
-    def process_liturgy_books(details, lang, book, book_details, book_title_en, book_title_he):
+    def process_liturgy_books(book):
+        class_name = ''
+        if book.css_class != '':
+            class_name = f" {book.css_class} "
 
-        if details.get('css_class', None) is not None:
-            class_name = f" {details.get('css_class')} "
-
-        if lang.find('he-en') > -1:
-            html = get_html(f"{PATH}{book.replace('{}', 'Hebrew-English')}")
-        elif lang.find('he') > -1:
-            html = get_html(f"{PATH}{book.replace('{}', 'Hebrew')}")
-        else:
-            html = get_html(f'{PATH}{book}')
-
+        # if lang.find('he-en') > -1:
+        #     html = get_html(f"{PATH}{book.replace('{}', 'Hebrew-English')}")
+        # elif lang.find('he') > -1:
+        #     html = get_html(f"{PATH}{book.replace('{}', 'Hebrew')}")
+        # else:
+        #     html = get_html(f'{PATH}{book}')
+        html_tree = BeautifulSoup(book.book_source, 'html5lib')
+        html = str(html_tree)
         html = html.replace('class="a ', f'class="MsoTableGrid ')
         html = html.replace('class="a0 ', f'class="a0 MsoTableGrid ')
         html = html.replace('class="a1 ', f'class="a1 MsoTableGrid ')
@@ -269,12 +245,12 @@ class Command(BaseCommand):
         divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
         # make book title searchable
-        update_full_text_search_index_en_he(book_title_en,
-                                            book_title_he,
+        update_full_text_search_index_en_he(book.book_title_en,
+                                            book.book_title_he,
                                             1,
                                             '',
-                                            book_title_en,
-                                            book_title_he,
+                                            book.book_title_en,
+                                            book.book_title_he,
                                             'Liturgy')
         # parse text to pass to full text index search
         text_en = ''
@@ -289,15 +265,15 @@ class Command(BaseCommand):
                     if guess['lang'] == 'he':
                         text_he = f'{text_he} {text}'
                         # book text
-                        update_full_text_search_index_hebrew(book_title_en,
-                                                             book_title_he,
+                        update_full_text_search_index_hebrew(book.book_title_en,
+                                                             book.book_title_he,
                                                              1,
                                                              text,
                                                              'Liturgy')
                     elif guess['lang'] == 'en':
                         text_en = f'{text_en} {text}'
                         # book text
-                        update_full_text_search_index_english(book_title_en,
+                        update_full_text_search_index_english(book.book_title_en,
                                                               1,
                                                               text,
                                                               'Liturgy')
@@ -312,46 +288,48 @@ class Command(BaseCommand):
             table.decompose()
 
         table_str += generate_book_intro_toc_end(0)
-        update_karaites_array_array(book_details, 1, 1, table_str)
+        update_karaites_array_array(book, 1, 1, table_str)
 
         html = str(divs[0]).replace('WordSection1', 'liturgy')
         html += generate_book_intro_toc_end(1)
-        update_book_details(details, introduction=html)
-        update_toc(book_details, 1, details['name'].split(','))
+        book.introduction = html
+        book.save()
+
+        # update_book_details(details, introduction=html)
+        update_toc(book, 1, [book.book_title_en, book.book_title_he])
 
         # update/create bible references
-        update_create_bible_refs(book_details)
+        # update_create_bible_refs(book)
 
-    def process_book(self, book, language, details, book_details, book_title_en, book_title_he, table_of_contents):
+    def process_book(self, book, table_of_contents):
+        table_book = book.table_book
+        index_lang = book.index_lang
 
-        table_book = details.get('table_book', False)
-        index_lang = details.get('index_lang', '')
-        language.split(',')
         c = 1
-        for lang in language.split(','):
+        for lang in book.book_language.split(','):
             if lang == '':
                 continue
 
-            book_name = book.replace('{}', LANGUAGES_DICT[lang])
-            sys.stdout.write(f'\rProcessing books:{book_name}\n')
-            sys.stdout.write(f'\r {book_name}\n')
+            # book_name = book.replace('{}', LANGUAGES_DICT[lang])
+            # sys.stdout.write(f'\rProcessing books:{book_name}\n')
+            # sys.stdout.write(f'\r {book_name}\n')
 
-            html = get_html(f'{PATH}{book_name}')
+            html = book.book_source
 
-            self.process_footnotes(html, book_details, lang)
+            html_tree = BeautifulSoup(html, 'html5lib')
+            html = str(html_tree)
 
-            if details.get('remove_class', False):
-                html = html.replace(details.get('remove_class'), '')
+            # self.process_footnotes(html, book_details, lang)
 
-            if details.get('remove_tags', False):
-                html = html.replace(details.get('remove_tags'), '')
+            html = html.replace(book.remove_class, '')
+            html = html.replace(book.remove_tags, '')
 
             html_tree = BeautifulSoup(html, 'html5lib')
             divs = html_tree.find_all('div', class_='WordSection1')
 
             if table_book:
                 table = divs[0].find_all('tr', recursive=True)
-                columns_order = list(map(int, details.get('columns_order', '0,1').split(',')))
+                columns_order = list(map(int, book.columns_order.split(',')))
                 for tr in table:
                     tr.attrs = clean_tag_attr(tr)
                     tds = tr.find_all('td', recursive=True)
@@ -363,14 +341,14 @@ class Command(BaseCommand):
                     html_he = ''
                     html_en = ''
 
-                    if 'he' in language:
+                    if 'he' in book.book_language:
                         try:
                             text_he = tds[columns_order[0]].get_text(strip=False)
                             html_he = str(tds[columns_order[0]])
                         except IndexError:
                             pass
 
-                    if 'en' in language:
+                    if 'en' in book.book_language:
                         try:
                             text_en = tds[columns_order[1]].get_text(strip=False)
                             html_en = str(tds[columns_order[1]])
@@ -378,18 +356,18 @@ class Command(BaseCommand):
                             pass
 
                     if html_he != '' or html_en != '':
-                        update_karaites_array_details(book_details,
+                        update_karaites_array_details(book,
                                                       '',
                                                       c,
                                                       [html_he, 0, html_en])
 
-                        update_full_text_search_index_en_he(book_title_en,
-                                                            book_title_he,
+                        update_full_text_search_index_en_he(book.book_title_en,
+                                                            book.book_title_he,
                                                             c,
                                                             '',
                                                             text_en,
                                                             text_he,
-                                                            self.expand_book_classification(details))
+                                                            book.get_book_classification_display())
 
                     if len(tds) == 3:
 
@@ -397,24 +375,23 @@ class Command(BaseCommand):
 
                         if toc_tex != '':
                             try:
-                                if details.get('toc_columns', False):
+                                if book.toc_columns != '':
                                     key, value = self.find_toc_key(toc_tex, debug=False)
 
                                     if key is not None:
-                                        update_toc(book_details,
+                                        update_toc(book,
                                                    c,
                                                    table_of_contents[key])
                                 else:
-                                    update_toc(book_details,
+                                    update_toc(book,
                                                c,
                                                [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
                             except KeyError:
                                 print(f'{key} not found in table of contents')
 
                     c += 1
-                    sys.stdout.write(f'\r processing paragraph: {c}\r')
 
-                update_karaites_array_details(book_details,
+                update_karaites_array_details(book,
                                               '',
                                               c,
                                               [generate_book_intro_toc_end(0),
@@ -441,115 +418,100 @@ class Command(BaseCommand):
 
                         if guess['lang'] == 'he':
                             child_he = str(td)
-                            update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
-                                                                 self.expand_book_classification(details))
+                            update_full_text_search_index_hebrew(book.book_title_en, book.book_title_he, c, text,
+                                                                 book.get_book_classification_display())
                         elif guess['lang'] == 'en':
                             child_en = str(td)
-                            update_full_text_search_index_english(book_title_en, c, text,
-                                                                  self.expand_book_classification(details))
+                            update_full_text_search_index_english(book.book_title_en, c, text,
+                                                                  book.get_book_classification_display())
                         else:
                             print(f'Unknown language:{guess["lang"]} ')
 
-                    update_karaites_array(book_details, '', c, child_he, child_en)
+                    update_karaites_array(book, '', c, child_he, child_en)
                     c += 1
 
-                update_karaites_array(book_details,
+                update_karaites_array(book,
                                       '',
                                       c,
                                       [generate_book_intro_toc_end(0),
                                        generate_book_intro_toc_end(0)])
             else:
-                divs = html_tree.find_all('div', class_='WordSection1')
-                for p in divs[0].find_all('table', recursive=True):
-                    p.attrs = clean_tag_attr(p)
-                    p = clean_table_attr(p)
+                try:
+                    divs = html_tree.find_all('div', class_='WordSection1')
+                    for p in divs[0].find_all('table', recursive=True):
+                        p.attrs = clean_tag_attr(p)
+                        p = clean_table_attr(p)
 
-                for p in divs[0].find_all(recursive=False):
-                    text = p.get_text(strip=False)
-                    key, value = self.find_toc_key(text, debug=False)
+                    for p in divs[0].find_all(recursive=False):
+                        text = p.get_text(strip=False)
+                        key, value = self.find_toc_key(text, debug=False)
 
-                    p = str(p)
+                        p = str(p)
 
-                    if key is not None:
-                        p = p.replace('#', '')
+                        if key is not None:
+                            p = p.replace('#', '')
 
-                    update_karaites_array_details(book_title_en, '', c, [p, ''])
+                        update_karaites_array_details(book.book_title_en, '', c, [p, ''])
 
-                    if lang in ['en']:
-                        update_full_text_search_index_english(book_title_en, c, text,
-                                                              self.expand_book_classification(details))
-                    if lang in ['he']:
-                        update_full_text_search_index_hebrew(book_title_en, book_title_he, c, text,
-                                                             self.expand_book_classification(details))
+                        if lang in ['en']:
+                            update_full_text_search_index_english(book.book_title_en, c, text,
+                                                                  book.get_book_classification_display())
+                        if lang in ['he']:
+                            update_full_text_search_index_hebrew(book.book_title_en, book.book_title_he, c, text,
+                                                                 book.get_book_classification_display())
 
-                    if key is not None:
-                        try:
-                            update_toc(book_details,
-                                       c,
-                                       [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
-                        except KeyError:
-                            print(f'{key} not found in table of contents')
+                        if key is not None:
+                            try:
+                                update_toc(book,
+                                           c,
+                                           [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
+                            except KeyError:
+                                print(f'{key} not found in table of contents')
 
-                    if lang in ['en', 'he', 'ja', 'he-en']:
-                        c += 1
-                    sys.stdout.write(f'\r processing paragraph: {c}\r')
+                        if lang in ['en', 'he', 'ja', 'he-en']:
+                            c += 1
+                        sys.stdout.write(f'\r processing paragraph: {c}\r')
 
-                update_karaites_array_details(book_title_en,
-                                              '',
-                                              c,
-                                              [generate_book_intro_toc_end(0),
-                                               ''])
+                    update_karaites_array_details(book.book_title_en,
+                                                  '',
+                                                  c,
+                                                  [generate_book_intro_toc_end(0),
+                                                   ''])
+                except Exception as e:
+                    print(e)
+                    print(f'{book.book_title_en}')
 
     def handle(self, *args, **options):
         """ Karaites books as array """
 
-        books_to_process = process_arguments(options,
-                                             LIST_OF_BOOKS,
-                                             COMMENTS,
-                                             HALAKHAH,
-                                             HAVDALA,
-                                             PASSOVER_SONGS,
-                                             PURIM_SONGS,
-                                             PRAYERS,
-                                             POLEMIC,
-                                             SHABBAT_SONGS,
-                                             WEDDING_SONGS,
-                                             SUPPLEMENTAL,
-                                             TAMMUZ_AV_ECHA,
-                                             EXHORTATORY,
-                                             POETRY_NON_LITURGICAL)
+        query = process_arguments(options)
 
-        if not books_to_process:
+        if not query:
             return
 
-        pbar = tqdm(books_to_process)
-        sys.stdout.write(f"\rProcessing books\n")
+        pbar = tqdm(query, desc='Processing books')
 
-        for _, book, language, _, _, details, _ in pbar:
+        for book in pbar:
             table_of_contents = {}
-            book_title_en, book_title_he = details['name'].split(',')
-            KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
+            book_title_en = book.book_title_en
+            book_title_he = book.book_title_he
             FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
             FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()
-            book_details, _ = update_book_details(details, language='en,he')
-            BooksFootNotes.objects.filter(book=book_details).delete()
+            BooksFootNotes.objects.filter(book=book).delete()
 
-            if 'in' in language:
-                language = language.replace('in', '')
-                self.process_intro(book, details, book_title_en, book_title_he)
+            if book.intro:
+                self.process_intro(book, book_title_en, book_title_he)
 
-            if 'toc' in language:
-                language = language.replace('toc', '')
-                table_of_contents = self.process_toc(book, details, table_of_contents)
+            if book.toc:
+                table_of_contents = self.process_toc(book, table_of_contents)
 
             if self.check_is_a_liturgy_book(book_title_en):
 
-                self.process_liturgy_books(details, language, book, book_details, book_title_en, book_title_he)
+                self.process_liturgy_books(book)
 
             else:
 
-                self.process_book(book, language, details, book_details, book_title_en, book_title_he,
-                                  table_of_contents)
+                self.process_book(book, table_of_contents)
 
                 # make book title searchable
                 update_full_text_search_index_en_he(book_title_en,
@@ -558,6 +520,6 @@ class Command(BaseCommand):
                                                     '',
                                                     book_title_en,
                                                     book_title_he,
-                                                    self.expand_book_classification(details))
+                                                    book.get_book_classification_display())
             # update/create bible references
-            update_create_bible_refs(book_details)
+            update_create_bible_refs(book)

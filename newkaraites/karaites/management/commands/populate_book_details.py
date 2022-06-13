@@ -998,8 +998,8 @@ class Command(BaseCommand):
             for book in globals()[process]:
                 path, filename, lang, pre, pro, book_details, _ = book
                 book_title_en, book_title_he = book_details['name'].split(',')
-                intro = ''
-                toc = ''
+                intro = r''
+                toc = r''
                 lang_in = False
                 lang_toc = False
 
@@ -1007,6 +1007,7 @@ class Command(BaseCommand):
                     intro_filename = SOURCE_PATH + path + filename.replace('{}', 'Introduction')
                     intro = File(open(intro_filename, 'rb'), book_title_en)
                     lang_in = True
+
                 if 'toc' in lang:
                     toc_filename = SOURCE_PATH + path + filename.replace('{}', 'TOC')
                     toc = File(open(toc_filename, 'rb'), book_title_en)

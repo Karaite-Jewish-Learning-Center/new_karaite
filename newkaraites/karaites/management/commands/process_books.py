@@ -24,7 +24,6 @@ from .command_utils.parser_ref import (parse_reference,
 from .command_utils.utils import RE_BIBLE_REF
 from .command_utils.argments import arguments
 from .process_arguments import process_arguments
-from ...models import KaraitesBookDetails
 from ftlangdetect import detect
 
 style_classes_by_book = {}
@@ -319,6 +318,7 @@ class Command(BaseCommand):
 
     @staticmethod
     def replace_a_foot_notes(html_tree):
+        return html_tree
         """ replace complicate <a></a> with a tooltip """
         i = 1
         foot_notes = html_tree.find_all('a')
@@ -574,51 +574,38 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """
-            Books are pre-process and writen to original
-            directory
-
-            Books are post-processed and writen to tmp directory
+            Books are pre-process and writen to karaitesBookDetails
+            Books are post-processed and writen karaitesBookDetails
             tags are rewritten and styles mapped to a css
             class.
-            A css file is generate.
+            A css file is generate that is not in use at this time.
         """
 
-        books_to_process = process_arguments(options)
+        query = process_arguments(options)
 
-        if not books_to_process:
+        if not query:
             return
 
-        if len(books_to_process) == 1:
-            if books_to_process[0] == 'All':
-                query = KaraitesBookDetails.objects.all()
-            if books_to_process[0].isnumeric():
-                query = KaraitesBookDetails.objects.filter(pk=books_to_process[0])
-        else:
-            query = KaraitesBookDetails.objects.filter(first_leve__in=books_to_process)
+        # qbar = tqdm(query, desc=f'Pre-processing books :{query.count()}', leave=None)
+        # for book in qbar:
+        #     for pre_process in book.method.filter(pre_process=True):
+        #         # eval is not safe, but this is just to be used by the developer
+        #         # and not by the user.
+        #         # print('Pre process', pre_process.method_name)
+        #         f = eval(pre_process.method_name)
+        #         f(book.book_source_en, book.book_title_en)
 
-        # for book in query:
-        # for pre_process in book.method.filter(pre_process=True):
-        #     sys.stdout.write(f"\nPre-processing book : {book.book_title_en}")
-        #     f = eval(pre_process.method_name)
-        #     f(book.book_source_en, book.book_title_en)
-        #     f(book.book_source_he, book.book_title_en)
         qbar = tqdm(query, desc=f'Processing books :{query.count()}', leave=None)
-
         for book in qbar:
-            # Book,Introduction and Toc are process in english maybe there are some exceptions
             try:
                 html = book.book_source
 
-                if html is None:
-                    continue
-
                 html_tree = BeautifulSoup(html, 'html5lib')
+                # for pro_process in book.method.filter(pro_process=True):
+                #     f = eval(pro_process.method_name)
+                #     html_tree = f(html_tree)
 
-                # for process in post_processes:
-                #     sys.stdout.write(f"\n{process.__name__.replace('_', ' ').capitalize()} {book_name}")
-                #     html_tree = process(html_tree)
                 language = book.get_book_language_display()
-
                 html_tree = self.replace_a_foot_notes(html_tree)
                 html_str = self.replace_from_open_to_close(str(html_tree))
                 html_tree = BeautifulSoup(html_str, 'html5lib')
@@ -632,15 +619,10 @@ class Command(BaseCommand):
 
                 html_str = self.remove_tags(str(html_tree))
                 html_str = self.replace_class_name(html_str)
-
-                book.processed_book_source = File(io.StringIO(html_str))
+                html_str = BASIC_HTML.format("", html_str)
+                open('/tmp/html.html', 'w', encoding='utf8').write(html_str)
+                book.processed_book_source = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
                 book.save()
             except Exception as e:
                 print(e)
                 print(book.book_title_en)
-                input('Press Enter to continue...')
-
-
-        # don't need this any more
-        # self.parse_and_save_css()
-        # self.handle_ms_css()

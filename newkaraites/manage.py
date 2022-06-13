@@ -2,6 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import warnings
+IGNORE_MODULES = 'hebrew_tokenizer|fasttext'
+warnings.filterwarnings("ignore", module=IGNORE_MODULES)
+
 
 def main():
     """Run administrative tasks."""

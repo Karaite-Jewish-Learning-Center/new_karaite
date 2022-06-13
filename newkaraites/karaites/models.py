@@ -599,37 +599,37 @@ class KaraitesBookDetails(models.Model):
                                     help_text=_('This field is used to store the introduction of the book'))
 
     book_source = models.FileField(upload_to='books/',
-                                      default='',
-                                      verbose_name=_('Book Source '),
-                                      help_text=_('This field is used to store the source of the book'))
+                                   default='',
+                                   verbose_name=_('Book Source '),
+                                   help_text=_('This field is used to store the source of the book'))
 
-    book_intro_source = models.FileField(upload_to='books/',
+    book_intro_source = models.FileField(upload_to='intro/',
                                          default='',
                                          blank=True,
                                          verbose_name=_('Book Intro Source'),
                                          help_text=_(
                                              'This field is used to store the source of the book introduction'))
 
-    book_toc_source = models.FileField(upload_to='processed/',
+    book_toc_source = models.FileField(upload_to='toc/',
                                        default='',
                                        blank=True,
                                        verbose_name=_('Book TOC  Source'),
                                        help_text=_('This field is used to store the processed source of the book TOC'))
 
-    processed_book_source = models.FileField(upload_to='processed/',
-                                                default='',
-                                                verbose_name=_('Book processed Source'),
-                                                help_text=_(
-                                                    'This field is used to store the processed  source of the book'))
+    processed_book_source = models.FileField(upload_to='processed_source/',
+                                             default='',
+                                             verbose_name=_('Book processed Source'),
+                                             help_text=_(
+                                                 'This field is used to store the processed  source of the book'))
 
-    processed_book_intro_source = models.FileField(upload_to='processed/',
+    processed_book_intro_source = models.FileField(upload_to='processed_intro/',
                                                    default='',
                                                    blank=True,
                                                    verbose_name=_('Book processed Intro Source'),
                                                    help_text=_(
                                                        'This field is used to store the processed source of the book introduction'))
 
-    processed_book_toc_source = models.FileField(upload_to='processed/',
+    processed_book_toc_source = models.FileField(upload_to='processed_toc/',
                                                  default='',
                                                  blank=True,
                                                  verbose_name=_('Book processed TOC Source'),
@@ -645,7 +645,7 @@ class KaraitesBookDetails(models.Model):
                                   help_text=_('This field is used to inform the number of columns in the book'))
 
     columns_order = models.CharField(max_length=10,
-                                     default='',
+                                     default='0,1',
                                      blank=True,
                                      verbose_name=_('Columns order'),
                                      help_text=_('This field is used to inform the order of columns in the book'))
