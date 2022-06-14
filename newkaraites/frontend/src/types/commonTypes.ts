@@ -18,7 +18,6 @@ export interface booksHalakhah {
         'Date Written':string,
         'Location': string,
         'Edition': string,
-
     }
 }
 

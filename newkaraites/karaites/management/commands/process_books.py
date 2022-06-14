@@ -1,7 +1,6 @@
 import sys
 import re
 import shutil
-import io
 from django.core.files import File
 from tqdm import tqdm
 from html import escape
@@ -318,7 +317,6 @@ class Command(BaseCommand):
 
     @staticmethod
     def replace_a_foot_notes(html_tree):
-        return html_tree
         """ replace complicate <a></a> with a tooltip """
         i = 1
         foot_notes = html_tree.find_all('a')
@@ -572,6 +570,73 @@ class Command(BaseCommand):
 
         return divs
 
+    def remove_replace_css_name(self, html_tree):
+        html_str = self.remove_tags(str(html_tree))
+        html_str = self.replace_class_name(html_str)
+        return BASIC_HTML.format(BASIC_STYLE, html_str)
+
+    def process_html(self, query):
+        """
+            Process html file.
+        """
+        qbar = tqdm(query, desc=f'Pre-processing books :{query.count()}', leave=None)
+        for book in qbar:
+            for pre_process in book.method.filter(pre_process=True):
+                # eval is not safe, but this is just to be used by the developer
+                # and not by the user.
+                # print('Pre process', pre_process.method_name)
+                f = eval(pre_process.method_name)
+                f(book.book_source_en, book.book_title_en)
+
+        qbar = tqdm(query, desc=f'Processing books :{query.count()}', leave=None)
+        for book in qbar:
+
+            html = book.book_source
+            html_tree = BeautifulSoup(html, 'html5lib')
+            html_tree = update_bible_re(html_tree)
+            language = book.get_book_language_display()
+            html_tree = self.replace_a_foot_notes(html_tree)
+            html_str = self.replace_from_open_to_close(str(html_tree))
+            html_tree = BeautifulSoup(html_str, 'html5lib')
+
+            html_tree = self.collect_style_map_to_class(html_tree,
+                                                        book.book_title_en,
+                                                        True,
+                                                        language,
+                                                        book.multi_tables,
+                                                        book.css_class)
+
+            html_str = self.remove_replace_css_name(html_tree)
+
+            open('/tmp/html.html', 'w', encoding='utf8').write(html_str)
+            book.processed_book_source = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
+            book.save()
+
+    def process_intro(self, query):
+        """
+            Process intro file.
+        """
+
+        for book in query:
+            if book.intro:
+                html = book.book_source_intro
+                html_tree = BeautifulSoup(html, 'html5lib')
+                # book intros are in English with some words sentences in Hebrew
+                html_str = self.replace_from_open_to_close(str(html_tree))
+                html_tree = BeautifulSoup(html_str, 'html5lib')
+                html_tree = self.collect_style_map_to_class(html_tree,
+                                                            book.book_title_en,
+                                                            True,
+                                                            'en',
+                                                            book.multi_tables,
+                                                            book.css_class)
+
+                html_str = self.remove_replace_css_name(html_tree)
+
+                open('/tmp/html.html', 'w', encoding='utf8').write(html_str)
+                book.processed_book_source_intro = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
+                book.save()
+
     def handle(self, *args, **options):
         """
             Books are pre-process and writen to karaitesBookDetails
@@ -586,43 +651,6 @@ class Command(BaseCommand):
         if not query:
             return
 
-        # qbar = tqdm(query, desc=f'Pre-processing books :{query.count()}', leave=None)
-        # for book in qbar:
-        #     for pre_process in book.method.filter(pre_process=True):
-        #         # eval is not safe, but this is just to be used by the developer
-        #         # and not by the user.
-        #         # print('Pre process', pre_process.method_name)
-        #         f = eval(pre_process.method_name)
-        #         f(book.book_source_en, book.book_title_en)
+        self.process_intro(query)
+        self.process_html(query)
 
-        qbar = tqdm(query, desc=f'Processing books :{query.count()}', leave=None)
-        for book in qbar:
-            try:
-                html = book.book_source
-
-                html_tree = BeautifulSoup(html, 'html5lib')
-                # for pro_process in book.method.filter(pro_process=True):
-                #     f = eval(pro_process.method_name)
-                #     html_tree = f(html_tree)
-
-                language = book.get_book_language_display()
-                html_tree = self.replace_a_foot_notes(html_tree)
-                html_str = self.replace_from_open_to_close(str(html_tree))
-                html_tree = BeautifulSoup(html_str, 'html5lib')
-
-                html_tree = self.collect_style_map_to_class(html_tree,
-                                                            book.book_title_en,
-                                                            True,
-                                                            language,
-                                                            book.multi_tables,
-                                                            book.css_class)
-
-                html_str = self.remove_tags(str(html_tree))
-                html_str = self.replace_class_name(html_str)
-                html_str = BASIC_HTML.format("", html_str)
-                open('/tmp/html.html', 'w', encoding='utf8').write(html_str)
-                book.processed_book_source = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
-                book.save()
-            except Exception as e:
-                print(e)
-                print(book.book_title_en)

@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const apiUrl = api
+export const apiUrlNoSlash = api.substr(0, api.length-1)
 // first level  see constants.py
 export const TANAKH: string = '1'
 export const HALAKHAH: string = '3'

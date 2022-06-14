@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.files import File
 from ...constants import LANGUAGES_DICT
@@ -33,17 +35,30 @@ COMMENTS = [
 
         'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
         'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
-        'en,he',
+        'en',
         [],
         ['update_bible_re', 'removing_no_breaking_spaces', 'fix_chapter_verse'],
-        {'name': r"Deuteronomy Keter Torah Aaron ben Elijah, ",
+        {'name': r"Deuteronomy Keter Torah Aaron ben Elijah English, ",
          'first_level': 8,
          'book_classification': '80',
          'author': 'Aaron ben Elijah,',
          'css_class': ''},
         True
     ],
+    [
 
+        'HTML/Deuteronomy_Keter_Torah_Aaron_ben_Elijah/',
+        'Deuteronomy_Keter Torah_Aaron ben Elijah-{}.html',
+        'he',
+        [],
+        ['update_bible_re', 'removing_no_breaking_spaces', 'fix_chapter_verse'],
+        {'name': r"Deuteronomy Keter Torah Aaron ben Elijah Hebrew, ",
+         'first_level': 8,
+         'book_classification': '80',
+         'author': 'Aaron ben Elijah,',
+         'css_class': ''},
+        True
+    ],
 ]
 EXHORTATORY = [
     [
@@ -64,7 +79,7 @@ EXHORTATORY = [
 
         'HTML/Exhortatory Literature/The Sayings of Moshe/',
         'The Sayings of Moshe-{}.html',
-        'he-en,in',
+        'he-en,in,toc',
         [],
         [],
         {'name': r"The Sayings of Moshe, ",
@@ -994,6 +1009,11 @@ class Command(BaseCommand):
             'EXHORTATORY',
             'POETRY_NON_LITURGICAL',
         ]
+        user, _ = User.objects.get_or_create(username='System',
+                                             defaults={'is_superuser': True,
+                                                       'is_staff': True,
+                                                       'is_active': True,
+                                                       'email': settings.ADMINS_EMAILS[0]})
         for process in lists_to_process:
             for book in globals()[process]:
                 path, filename, lang, pre, pro, book_details, _ = book
@@ -1029,6 +1049,9 @@ class Command(BaseCommand):
                     name_he=name_he,
                 )
 
+                # only delete if in populate list
+                KaraitesBookDetails.objects.filter(book_title_en=book_title_en).delete()
+
                 karaites_details, _ = KaraitesBookDetails.objects.get_or_create(
                     book_title_en=book_title_en,
                     defaults={
@@ -1054,6 +1077,8 @@ class Command(BaseCommand):
                         'multi_tables': book_details.get('multi_tables', False),
                         'buy_link': book_details.get('buy_link', ''),
                         'index_lang': book_details.get('index_lang', False),
+                        'skip_process': book_details.get('skip_process', False),
+                        'user': user,
                     }
                 )
                 # add pre/pro process Methods

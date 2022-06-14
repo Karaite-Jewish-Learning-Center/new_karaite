@@ -140,7 +140,8 @@ admin.site.register(Songs, SongsAdmin)
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
     search_fields = ('book_title_en', 'book_title_he')
-    list_display = ('book_title_en',
+    list_display = ('user',
+                    'book_title_en',
                     'book_title_he',
                     'author',
                     'first_level',

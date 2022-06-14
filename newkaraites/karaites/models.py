@@ -12,6 +12,7 @@ from .constants import (FIRST_LEVEL,
 from tinymce.models import HTMLField
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
+from django.contrib.auth.models import User
 
 
 class Organization(models.Model):
@@ -517,7 +518,7 @@ class Songs(models.Model):
     def get_book_songs(book):
         result = []
         for song in Songs.objects.filter(book=book):
-            result.append(song.to_json())
+            result.append([song.song_title, song.song_file])
         return result
 
     def to_json(self):
@@ -603,7 +604,7 @@ class KaraitesBookDetails(models.Model):
                                    verbose_name=_('Book Source '),
                                    help_text=_('This field is used to store the source of the book'))
 
-    book_intro_source = models.FileField(upload_to='intro/',
+    book_source_intro = models.FileField(upload_to='intro/',
                                          default='',
                                          blank=True,
                                          verbose_name=_('Book Intro Source'),
@@ -622,7 +623,7 @@ class KaraitesBookDetails(models.Model):
                                              help_text=_(
                                                  'This field is used to store the processed  source of the book'))
 
-    processed_book_intro_source = models.FileField(upload_to='processed_intro/',
+    processed_book_source_intro = models.FileField(upload_to='processed_intro/',
                                                    default='',
                                                    blank=True,
                                                    verbose_name=_('Book processed Intro Source'),
@@ -718,6 +719,20 @@ class KaraitesBookDetails(models.Model):
                                     verbose_name=_('Methods'),
                                     help_text=_('This field is used to inform the'
                                                 ' pre/pro process methods to apply on book'))
+
+    skip_process = models.BooleanField(default=False,
+                                       verbose_name=_('Skip process'),
+                                       help_text=_('This field is used to inform'
+                                                   ' that book should not be processed'))
+
+    user = models.ForeignKey(User,
+                             blank=True,
+                             null=True,
+                             default=None,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name=_('User'),
+                             help_text=_('This field is used to inform the user'
+                                         ' who added the book'))
 
     def __str__(self):
         return self.book_title_en

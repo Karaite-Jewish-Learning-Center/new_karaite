@@ -8,7 +8,7 @@ import {messageContext} from '../../stores/messages/messageContext';
 import {removeExtension} from '../../utils/utils';
 
 
-export const PlayPauseReset: FC<ButtonPlayProps> = ({onClick, onReset, playing, color, song}) => {
+export const  PlayPauseReset: FC<ButtonPlayProps> = ({onClick, onReset, playing, color, song}) => {
     const [mouseEnter, setMouseEnter] = React.useState(false);
     const message = useContext(messageContext);
     const onMouseEnter = () => {
