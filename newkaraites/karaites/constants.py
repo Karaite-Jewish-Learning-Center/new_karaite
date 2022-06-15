@@ -66,6 +66,8 @@ SECOND_LEVEL = [
     (3, 'Writings')
 ]
 
+SECOND_LEVEL_DICT = dict(SECOND_LEVEL)
+
 ENGLISH_STOP_WORDS = {
     'i': '',
     'me': '',

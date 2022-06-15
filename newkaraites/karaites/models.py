@@ -1,3 +1,6 @@
+import os
+import threading
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
 from django.db import models
@@ -15,18 +18,48 @@ from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
 
 
+class FirstLevel(models.Model):
+    first_level = models.CharField(max_length=50,
+                                   unique=True)
+
+    def __str__(self):
+        return self.first_level
+
+    class Meta:
+        verbose_name = _('     First Level')
+        verbose_name_plural = _('     First Level')
+        ordering = ['first_level']
+
+
+class SecondLevel(models.Model):
+    second_level = models.CharField(max_length=50,
+                                    unique=True)
+
+    def __str__(self):
+        return self.second_level
+
+    class Meta:
+        verbose_name = _('      Second Level')
+        verbose_name_plural = _('     Second Level')
+        ordering = ['second_level']
+
+
 class Organization(models.Model):
     """
         Books order
     """
 
-    first_level = models.IntegerField(default=0,
-                                      choices=FIRST_LEVEL,
-                                      verbose_name=_('Law'))
+    first_level = models.ForeignKey(FirstLevel,
+                                    blank=False,
+                                    null=False,
+                                    on_delete=models.DO_NOTHING,
+                                    verbose_name=_('Law'))
 
-    second_level = models.IntegerField(default=0,
-                                       choices=SECOND_LEVEL,
-                                       verbose_name=_("Second level"))
+    second_level = models.ForeignKey(SecondLevel,
+                                     blank=False,
+                                     null=False,
+                                     on_delete=models.DO_NOTHING,
+                                     verbose_name=_("Second level"))
 
     book_title_en = models.CharField(max_length=100,
                                      null=True,
@@ -527,6 +560,15 @@ class Songs(models.Model):
             'song_file': self.song_file.url,
         }
 
+    def delete(self, using=None, keep_parents=False):
+        print(self, self.song_file.name)
+        if self.song_file.name != '':
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, self.song_file.name))
+            except FileNotFoundError:
+                pass
+            super(Songs, self).delete(using, keep_parents)
+
     class Meta:
         verbose_name_plural = _('Songs')
         ordering = ('song_title',)
@@ -552,16 +594,33 @@ class Method(models.Model):
         ordering = ('method_name',)
 
 
+class Classification(models.Model):
+    """ Books Classification """
+    classification_name = models.CharField(max_length=50,
+                                           unique=True,
+                                           verbose_name=_("Classification Name"),
+                                           help_text=_("Classification Name"))
+
+    def __str__(self):
+        return self.classification_name
+
+    class Meta:
+        verbose_name_plural = _('Classification')
+        ordering = ('classification_name',)
+
+
 class KaraitesBookDetails(models.Model):
     """  Karaites books """
 
-    first_level = models.IntegerField(default=0,
-                                      choices=FIRST_LEVEL,
-                                      verbose_name=_('Law'))
+    first_level = models.ForeignKey(FirstLevel,
+                                    on_delete=models.DO_NOTHING,
+                                    verbose_name=_('Law'))
 
-    book_classification = models.CharField(max_length=2,
-                                           choices=BOOK_CLASSIFICATION,
-                                           verbose_name=_('Classification'))
+    book_classification = models.ForeignKey(Classification,
+                                            null=False,
+                                            blank=False,
+                                            on_delete=models.DO_NOTHING,
+                                            verbose_name=_('Classification'))
 
     book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
@@ -619,6 +678,8 @@ class KaraitesBookDetails(models.Model):
 
     processed_book_source = models.FileField(upload_to='processed_source/',
                                              default='',
+                                             blank=True,
+                                             editable=False,
                                              verbose_name=_('Book processed Source'),
                                              help_text=_(
                                                  'This field is used to store the processed  source of the book'))
@@ -626,6 +687,7 @@ class KaraitesBookDetails(models.Model):
     processed_book_source_intro = models.FileField(upload_to='processed_intro/',
                                                    default='',
                                                    blank=True,
+                                                   editable=False,
                                                    verbose_name=_('Book processed Intro Source'),
                                                    help_text=_(
                                                        'This field is used to store the processed source of the book introduction'))
@@ -633,6 +695,7 @@ class KaraitesBookDetails(models.Model):
     processed_book_toc_source = models.FileField(upload_to='processed_toc/',
                                                  default='',
                                                  blank=True,
+                                                 editable=False,
                                                  verbose_name=_('Book processed TOC Source'),
                                                  help_text=_(
                                                      'This field is used to store the source of the processed book TOC'))
@@ -701,7 +764,8 @@ class KaraitesBookDetails(models.Model):
                                                    ' that book has more than one table'))
 
     # book may have one or more songs
-    songs = models.ManyToManyField(Songs)
+    songs = models.ManyToManyField(Songs,
+                                   blank=True)
 
     # buy link
     buy_link = models.CharField(max_length=255,
@@ -812,7 +876,52 @@ class KaraitesBookDetails(models.Model):
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
+        need_to_process = False
+        if self.pk is not None:
+            # editing a book, check need to process book intro, toc
+            obj = KaraitesBookDetails.objects.get(pk=self.pk)
+            if obj.table_book != self.table_book or \
+                    obj.columns != self.columns or \
+                    obj.columns_order != self.columns_order or \
+                    obj.toc_columns != self.toc_columns or \
+                    obj.direction != self.direction or \
+                    obj.remove_class != self.remove_class or \
+                    obj.css_class != self.css_class or \
+                    obj.remove_tags != self.remove_tags or \
+                    obj.multi_tables != self.multi_tables or \
+                    obj.index_lang != self.index_lang or \
+                    obj.book_source != self.book_source or \
+                    obj.book_source_intro != self.book_source_intro or \
+                    obj.book_toc_source != self.book_toc_source:
+                need_to_process = True
+
         super(KaraitesBookDetails, self).save(*args, **kwargs)
+
+        # Thread or subprocess ?
+
+        if need_to_process:
+            pass
+
+    def delete(self, using=None, keep_parents=False):
+        source_files = [self.book_source.name,
+                        self.book_source_intro.name,
+                        self.book_toc_source.name,
+                        self.processed_book_source.name,
+                        self.processed_book_source_intro.name,
+                        self.processed_book_toc_source.name]
+
+        for source in source_files:
+            if source == '':
+                continue
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, source))
+            except FileNotFoundError:
+                pass
+        # remove songs
+        for song in self.songs.all():
+            song.delete()
+        # delete record
+        super(KaraitesBookDetails, self).delete(using, keep_parents)
 
     class Meta:
         verbose_name_plural = 'Karaites book details'

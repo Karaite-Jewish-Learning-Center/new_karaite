@@ -127,13 +127,13 @@ class Command(BaseCommand):
         update_full_text_search_index_english(book_title_en,
                                               1,
                                               text_en,
-                                              book.get_book_classification_display())
+                                              book.book_classification.classification_name)
 
         update_full_text_search_index_hebrew(book_title_en,
                                              book_title_he,
                                              1,
                                              '',
-                                             book.get_book_classification_display())
+                                             book.book_classification.classification_name)
 
     def process_toc(self, book, table_of_contents):
 
@@ -171,8 +171,8 @@ class Command(BaseCommand):
                             hebrew = text
                         elif guess['lang'] == 'en':
                             english = text
-                        else:
-                            print(f"Unknown language:{guess['lang']}")
+                        # else:
+                        #     print(f"Unknown language:{guess['lang']}")
 
                 if key is not None:
                     if toc_len == 3:
@@ -272,8 +272,8 @@ class Command(BaseCommand):
                                                               1,
                                                               text,
                                                               'Liturgy')
-                    else:
-                        print(f'Unknown language:{guess["lang"]}')
+                    # else:
+                    #     print(f'Unknown language:{guess["lang"]}')
 
         table_str = ''
         for table in divs[0].find_all('table'):
@@ -362,7 +362,7 @@ class Command(BaseCommand):
                                                             '',
                                                             text_en,
                                                             text_he,
-                                                            book.get_book_classification_display())
+                                                            book.classification.classification_name)
 
                     if len(tds) == 3:
 
@@ -382,7 +382,7 @@ class Command(BaseCommand):
                                                c,
                                                [self.get_key(toc_tex).replace('#', ' ') + ' - ' + text_en, text_he])
                             except KeyError:
-                                print(f'{key} not found in table of contents')
+                                print(f'{key} not found in table of contents, book {book.book_title_en}')
 
                     c += 1
 
@@ -413,13 +413,13 @@ class Command(BaseCommand):
                         if guess['lang'] == 'he':
                             child_he = str(td)
                             update_full_text_search_index_hebrew(book.book_title_en, book.book_title_he, c, text,
-                                                                 book.get_book_classification_display())
+                                                                 book.book_classification.classification_name)
                         elif guess['lang'] == 'en':
                             child_en = str(td)
                             update_full_text_search_index_english(book.book_title_en, c, text,
-                                                                  book.get_book_classification_display())
-                        else:
-                            print(f'Unknown language:{guess["lang"]} ')
+                                                                  book.book_classification.classification_name)
+                        # else:
+                        #     print(f'Unknown language:{guess["lang"]} ')
 
                     update_karaites_array(book, '', c, child_he, child_en)
                     c += 1
@@ -427,8 +427,8 @@ class Command(BaseCommand):
                 update_karaites_array(book,
                                       '',
                                       c,
-                                      [generate_book_intro_toc_end(0),
-                                       generate_book_intro_toc_end(0)])
+                                      '',
+                                      generate_book_intro_toc_end(0))
             else:
 
                 divs = html_tree.find_all('div', class_='WordSection1')
@@ -449,10 +449,10 @@ class Command(BaseCommand):
 
                     if lang in ['en']:
                         update_full_text_search_index_english(book.book_title_en, c, text,
-                                                              book.get_book_classification_display())
+                                                              book.book_classification.classification_name)
                     if lang in ['he']:
                         update_full_text_search_index_hebrew(book.book_title_en, book.book_title_he, c, text,
-                                                             book.get_book_classification_display())
+                                                             book.book_classification.classification_name)
 
                     if key is not None:
                         try:
@@ -460,7 +460,7 @@ class Command(BaseCommand):
                                        c,
                                        [key.replace('#', ' ') + ' - ' + table_of_contents[key], ''])
                         except KeyError:
-                            print(f'{key} not found in table of contents')
+                            print(f'{key} not found in table of contents, book {book.book_title_en}')
 
                     if lang in ['en', 'he', 'ja', 'he-en']:
                         c += 1
@@ -479,9 +479,9 @@ class Command(BaseCommand):
         if not query:
             return
 
-        pbar = tqdm(query, desc='Processing books')
+        # pbar = tqdm(query, desc='Processing books')
 
-        for book in pbar:
+        for book in query:
             table_of_contents = {}
             book_title_en = book.book_title_en
             book_title_he = book.book_title_he
@@ -511,6 +511,6 @@ class Command(BaseCommand):
                                                     '',
                                                     book_title_en,
                                                     book_title_he,
-                                                    book.get_book_classification_display())
+                                                    book.book_classification.classification_name)
             # update/create bible references
             update_create_bible_refs(book)

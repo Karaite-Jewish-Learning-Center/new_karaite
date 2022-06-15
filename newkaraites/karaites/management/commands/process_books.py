@@ -321,8 +321,8 @@ class Command(BaseCommand):
         i = 1
         foot_notes = html_tree.find_all('a')
         # only languages
-        qbar = tqdm(foot_notes, desc='Replacing foot-notes', unit='foot-notes', leave=False)
-        for child in qbar:
+        # qbar = tqdm(foot_notes, desc='Replacing foot-notes', unit='foot-notes', leave=False)
+        for child in foot_notes:
             if hasattr(child, 'style'):
                 try:
                     style = child.attrs['style']
@@ -579,8 +579,8 @@ class Command(BaseCommand):
         """
             Process html file.
         """
-        qbar = tqdm(query, desc=f'Pre-processing books :{query.count()}', leave=None)
-        for book in qbar:
+
+        for book in query:
             for pre_process in book.method.filter(pre_process=True):
                 # eval is not safe, but this is just to be used by the developer
                 # and not by the user.
@@ -588,8 +588,7 @@ class Command(BaseCommand):
                 f = eval(pre_process.method_name)
                 f(book.book_source_en, book.book_title_en)
 
-        qbar = tqdm(query, desc=f'Processing books :{query.count()}', leave=None)
-        for book in qbar:
+        for book in query:
 
             html = book.book_source
             html_tree = BeautifulSoup(html, 'html5lib')

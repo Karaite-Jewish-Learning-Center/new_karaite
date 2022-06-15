@@ -5,7 +5,7 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow"
 import FastRewindIcon from '@material-ui/icons/FastRewind';
 import {ButtonPlayProps} from './types';
 import {messageContext} from '../../stores/messages/messageContext';
-import {removeExtension} from '../../utils/utils';
+
 
 
 export const  PlayPauseReset: FC<ButtonPlayProps> = ({onClick, onReset, playing, color, song}) => {
@@ -14,7 +14,7 @@ export const  PlayPauseReset: FC<ButtonPlayProps> = ({onClick, onReset, playing,
     const onMouseEnter = () => {
         if (!mouseEnter) {
             setMouseEnter(true);
-            message.setMessage(`Playing ${removeExtension(song)}`, 'info');
+            message.setMessage(`Playing ${song}`, 'info');
         }
     }
     const onMouseLeave = () => {

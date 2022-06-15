@@ -2,10 +2,16 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.files import File
-from ...constants import LANGUAGES_DICT
+from ...constants import (LANGUAGES_DICT,
+                          BOOK_CLASSIFICATION_DICT,
+                          FIRST_LEVEL_DICT
+                          )
+
 from .constants import SOURCE_PATH
 
-from ...models import (KaraitesBookDetails,
+from ...models import (FirstLevel,
+                       Classification,
+                       KaraitesBookDetails,
                        Author,
                        Songs,
                        Method)
@@ -1042,8 +1048,17 @@ class Command(BaseCommand):
                     source_filename = SOURCE_PATH + path + filename.replace('{}', LANGUAGES_DICT[lang_code])
                     source = File(open(source_filename, 'rb'), book_title_en)
 
-                name, name_he = book_details['author'].split(',')
+                first = FIRST_LEVEL_DICT[book_details['first_level']]
+                first_level, _ = FirstLevel.objects.get_or_create(
+                    first_level=first
+                )
 
+                classification = BOOK_CLASSIFICATION_DICT[book_details['book_classification']]
+                classify, _ = Classification.objects.get_or_create(
+                    classification_name=classification
+                )
+
+                name, name_he = book_details['author'].split(',')
                 author, _ = Author.objects.get_or_create(
                     name=name,
                     name_he=name_he,
@@ -1055,8 +1070,8 @@ class Command(BaseCommand):
                 karaites_details, _ = KaraitesBookDetails.objects.get_or_create(
                     book_title_en=book_title_en,
                     defaults={
-                        'first_level': book_details['first_level'],
-                        'book_classification': book_details['book_classification'],
+                        'first_level': first_level,
+                        'book_classification': classify,
                         'book_language': language,
                         'intro': lang_in,
                         'toc': lang_toc,
@@ -1064,7 +1079,7 @@ class Command(BaseCommand):
                         'book_title_en': book_title_en,
                         'book_title_he': book_title_he,
                         'book_source': source,
-                        'book_intro_source': intro,
+                        'book_source_intro': intro,
                         'book_toc_source': toc,
                         'table_book': book_details.get('table_book', False),
                         'columns': book_details.get('columns', 0),
@@ -1102,16 +1117,20 @@ class Command(BaseCommand):
                 song_path = '../newkaraites/karaites/static/audio/'
 
                 for song in book_details.get('song', []):
-                    if song == '':
+                    # remove extension
+                    song_title = song.split('.')[0]
+                    if song_title == '':
                         continue
 
-                    if karaites_details.songs.filter(song_title=song).exists():
+                    if karaites_details.songs.filter(song_title=song_title).exists():
                         continue
 
                     song_filename = (song_path + song)
                     song_obj, _ = Songs.objects.get_or_create(
-                        song_title=song,
-                        song_file=File(open(song_filename, 'rb'), name=song),
+                        song_title=song_title,
+                        defaults={
+                            'song_file': File(open(song_filename, 'rb'), name=song)
+                        }
                     )
                     karaites_details.songs.add(song_obj.id)
                     karaites_details.save()

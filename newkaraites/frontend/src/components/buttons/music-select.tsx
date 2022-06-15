@@ -6,29 +6,29 @@ import {BasicAudioPlayer} from '../audio/audio-player/basic-audio-player';
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 import IconButton from "@material-ui/core/IconButton";
 import {toJS} from 'mobx';
-import {removeExtension} from '../../utils/utils';
+
 
 
 export const MusicSelect: FC<SongList> = ({songs}) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
-    const [song, setSong] = useState<string>('');
+    const [index, setIndex] = useState(-1);
 
     if (songs.length === 0) return null
-    if (songs.length === 1) return <BasicAudioPlayer song={songs} onResetPlayer={()=>{}} autoplay={false}/>
+    if (songs.length === 1) return <BasicAudioPlayer song={songs} onResetPlayer={()=>{}} autoplay={false} index={0}/>
 
-    const selectSong = (song:string) => {
+    const selectSong = (i:number) => {
         setAnchorEl(null)
-        setSong(song)
+        setIndex(i)
     }
     const onClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     }
     const onResetPlayer = ():void => {
-        setSong('')
+        setIndex(-1)
     }
 
-    if(song !='' && song != undefined) {
-        return <BasicAudioPlayer song={song} onResetPlayer={onResetPlayer} autoplay={true}/>
+    if(index  != -1) {
+        return <BasicAudioPlayer song={songs} onResetPlayer={onResetPlayer} autoplay={true} index={index}/>
     }
 
     return (
@@ -42,8 +42,7 @@ export const MusicSelect: FC<SongList> = ({songs}) => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={selectSong}>
-
-                {songs.map((song, index) => <MenuItem key={index} onClick={()=>{selectSong(song['song_file'])}}>{removeExtension(song['song_title'])}</MenuItem>)}
+                {songs.map((song, index) => <MenuItem key={index} onClick={()=>{selectSong(index)}}>{song['song_title']}</MenuItem>)}
             </Menu>
         </span>
     )

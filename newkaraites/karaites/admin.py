@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import (Organization,
+from .models import (FirstLevel,
+                     SecondLevel,
+                     Organization,
                      Author,
                      Comment,
                      CommentTmp,
@@ -7,6 +9,7 @@ from .models import (Organization,
                      BookAsArray,
                      BooksFootNotes,
                      Songs,
+                     Classification,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
                      TableOfContents,
@@ -32,6 +35,22 @@ class KAdmin(admin.ModelAdmin):
                     f'../{STATIC}/css/tooltip.css',)
         }
         js = (f'../{STATIC}/js/toggleFilterPanel.js',)
+
+
+class FirstLevelAdmin(KAdmin):
+    list_display = ('first_level',)
+    list_display_links = ('first_level',)
+
+
+admin.site.register(FirstLevel, FirstLevelAdmin)
+
+
+class SecondLevelAdmin(KAdmin):
+    list_display = ('second_level',)
+    list_display_links = ('second_level',)
+
+
+admin.site.register(SecondLevel, SecondLevelAdmin)
 
 
 class OrganizationAdmin(KAdmin):
@@ -132,9 +151,29 @@ admin.site.register(BooksFootNotes, BookFootNotesAdmin)
 
 class SongsAdmin(KAdmin):
     list_display = ('song_title', 'song_file')
+    actions = ['delete_selected']
+
+    def delete_selected(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
+
+        if queryset.count() == 1:
+            message = "1 song was deleted"
+        else:
+            message = "%s songs were deleted" % queryset.count()
+        self.message_user(request, "%s successfully deleted." % message)
+
+    delete_selected.short_description = "Delete selected songs"
 
 
 admin.site.register(Songs, SongsAdmin)
+
+
+class ClassificationAdmin(KAdmin):
+    list_display = ('classification_name',)
+
+
+admin.site.register(Classification, ClassificationAdmin)
 
 
 class KaraitesBookDetailsAdmin(KAdmin):
@@ -162,6 +201,19 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'intro_to_html')
 
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
+    actions = ['delete_selected']
+
+    def delete_selected(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
+
+        if queryset.count() == 1:
+            message = "1 Karaites book detail "
+        else:
+            message = "%s Karaites book details " % queryset.count()
+        self.message_user(request, "%s successfully deleted." % message)
+
+    delete_selected.short_description = "Delete selected Karaites book details"
 
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)

@@ -1,14 +1,11 @@
 import sys
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from ...models import (BookAsArray,
-                       KaraitesBookDetails,
+from ...models import (KaraitesBookDetails,
                        KaraitesBookAsArray,
                        FullTextSearch)
-from .update_full_text_search_index import (update_full_text_search_index_en_he,
-                                            update_full_text_search_index_english)
-from .process_books import HALAKHAH
-from langdetect import detect
+from .update_full_text_search_index import update_full_text_search_index_english
+
 
 ENGLISH = 0
 HEBREW = 1
