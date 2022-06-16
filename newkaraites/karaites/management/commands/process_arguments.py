@@ -1,4 +1,5 @@
-from ...models import KaraitesBookDetails
+from ...models import (Classification,
+                       KaraitesBookDetails)
 
 
 def process_arguments(options):
@@ -9,15 +10,15 @@ def process_arguments(options):
         print('Id       Language        Level                     Classification   Book name')
         print('-----------------------------------------------------------------------------')
         for book in KaraitesBookDetails.objects.all():
-            book_classification = book.get_book_classification_display()
-            lang = book.get_book_language_display()
+            book_classification = book.book_classification.classification_name
+            lang = book.get_language()
             book_name = book.book_title_en
-            book_level = book.get_first_level_display()
+            book_level = book.first_level.first_level
             print(f'{book.id:8} {lang:15} {book_level:25} {book_classification[0:14]:16} {book_name}')
 
         return []
 
-    if options['comments'] or options['halakhah'] or options['liturgy']\
+    if options['comments'] or options['halakhah'] or options['liturgy'] \
             or options['poetry'] or options['polemic'] or options['exhortatory']:
 
         if options['comments']:
@@ -46,10 +47,8 @@ def process_arguments(options):
 
     if len(books_to_process) == 1:
         if books_to_process[0] == 'All':
-            query = KaraitesBookDetails.objects.all()
+            return KaraitesBookDetails.objects.all()
         if books_to_process[0].isnumeric():
-            query = KaraitesBookDetails.objects.filter(pk=books_to_process[0])
-    else:
-        query = KaraitesBookDetails.objects.filter(first_leve__in=books_to_process)
+            return KaraitesBookDetails.objects.filter(pk=books_to_process[0])
 
-    return query
+    return KaraitesBookDetails.objects.filter(first_level__first_level__in=books_to_process)

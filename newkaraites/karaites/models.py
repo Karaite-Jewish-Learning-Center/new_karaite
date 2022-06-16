@@ -1,5 +1,4 @@
 import os
-import threading
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -21,6 +20,7 @@ from django.contrib.auth.models import User
 class FirstLevel(models.Model):
     first_level = models.CharField(max_length=50,
                                    unique=True)
+    order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.first_level
@@ -28,12 +28,14 @@ class FirstLevel(models.Model):
     class Meta:
         verbose_name = _('     First Level')
         verbose_name_plural = _('     First Level')
-        ordering = ['first_level']
+        ordering = ['order', 'first_level']
 
 
 class SecondLevel(models.Model):
     second_level = models.CharField(max_length=50,
                                     unique=True)
+
+    order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.second_level
@@ -41,7 +43,7 @@ class SecondLevel(models.Model):
     class Meta:
         verbose_name = _('      Second Level')
         verbose_name_plural = _('     Second Level')
-        ordering = ['second_level']
+        ordering = ('order', 'second_level')
 
 
 class Organization(models.Model):
@@ -675,7 +677,7 @@ class KaraitesBookDetails(models.Model):
                                        blank=True,
                                        verbose_name=_('Book TOC  Source'),
                                        help_text=_('This field is used to store the processed source of the book TOC'))
-
+    # check if still need this field
     processed_book_source = models.FileField(upload_to='processed_source/',
                                              default='',
                                              blank=True,
@@ -787,7 +789,7 @@ class KaraitesBookDetails(models.Model):
     skip_process = models.BooleanField(default=False,
                                        verbose_name=_('Skip process'),
                                        help_text=_('This field is used to inform'
-                                                   ' that book should not be processed'))
+                                                   ' that this book should not be processed'))
 
     user = models.ForeignKey(User,
                              blank=True,
@@ -828,9 +830,9 @@ class KaraitesBookDetails(models.Model):
     def to_dic(details, toc):
         return {
             'book_id': details.id,
-            'book_first_level': details.first_level,
+            'book_first_level': details.first_level.first_level,
             'book_language': details.get_language(),
-            'book_classification': details.get_book_classification_display(),
+            'book_classification': details.book_classification.classification_name,
             'author': details.author.name,
             'book_title_en': details.book_title_en,
             'book_title_he': details.book_title_he,
@@ -852,16 +854,18 @@ class KaraitesBookDetails(models.Model):
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
         if not classification:
-            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en')
+            book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by('book_title_en')
         else:
             # Halakhah, Polemic
-            if level == '3':
-                book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en',
-                                                                                              'book_classification')
+            if level != 'Liturgy':
+                book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by(
+                    'book_title_en',
+                    'book_classification')
             else:
-                book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
-                                                                                              'book_classification',
-                                                                                              'book_title_en')
+                book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by(
+                    'first_level',
+                    'book_classification',
+                    'book_title_en')
 
         data = []
         for details in book_details:
@@ -1282,61 +1286,3 @@ class MisspelledWord(models.Model):
         verbose_name_plural = _('Misspelled words')
         ordering = ('misspelled_word',)
 
-
-class BookClassificationFirst(models.Model):
-    first_level = models.CharField(max_length=50,
-                                   verbose_name=_('First level'))
-
-    order = models.IntegerField(default=0,
-                                verbose_name=_('Order'))
-
-    def __str__(self):
-        return self.first_level
-
-    class Meta:
-        verbose_name_plural = _('Book Classification First')
-        ordering = ('order',)
-
-
-class BookClassificationSecond(models.Model):
-    second_level = models.CharField(max_length=50,
-                                    verbose_name=_('Second level'))
-
-    order = models.IntegerField(default=0,
-                                verbose_name=_('Order'))
-
-    def __str__(self):
-        return self.second_level
-
-    class Meta:
-        verbose_name_plural = _('Book Classification Second')
-        ordering = ('order',)
-
-# class AdminBooks(models.Model):
-#     """Site books admin"""
-#
-#     book_title_en = models.CharField(max_length=100,
-#                                      db_index=True,
-#                                      verbose_name=_("Book title in English"))
-#
-#     book_title_he = models.CharField(max_length=100,
-#                                      db_index=True,
-#                                      verbose_name=_("Book title in Hebrew"))
-#
-#
-#     book_language = models.CharField(max_length=1,
-#                                      choices=BOOK_LANGUAGE,
-#                                      default='E',
-#                                      verbose_name=_("Language"))
-#
-#     book_type = models.CharField(max_length=1,
-#                                  choices=BOOK_TYPE,
-#                                  default='B',
-#                                  verbose_name=_("Book type"))
-#
-#     def __str__(self):
-#         return self.book_title_en
-#
-#     class Meta:
-#         verbose_name_plural = _('Books admin')
-#         ordering = ('book_title_en',)

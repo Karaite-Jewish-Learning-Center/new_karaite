@@ -3,6 +3,8 @@ import {RenderBooksMenu} from '../menu/RenderBooksMenu';
 import { useLocation } from "react-router-dom"
 import {bookDetails} from '../../types/commonTypes';
 import {karaitesBookByLevelAndClassification} from '../../constants/constants';
+import {removeSlash} from '../../utils/utils';
+
 
 const fetchBooks = async (path:string): Promise<bookDetails> => {
     const response = await fetch(`${karaitesBookByLevelAndClassification}${path}/`);
@@ -11,10 +13,10 @@ const fetchBooks = async (path:string): Promise<bookDetails> => {
 };
 
 
-export const Halakhah = () => {
+export const Second = () => {
     const [showBooks, setShowBooks] = useState<boolean>(false);
     const [books, setBooks] = React.useState<bookDetails>();
-    const path = useLocation().pathname
+    const path = removeSlash(useLocation().pathname)
 
     React.useEffect(() => {
         fetchBooks(path).then(data => {
@@ -23,7 +25,7 @@ export const Halakhah = () => {
         });
     }, []);
 
-    return (showBooks ? <RenderBooksMenu books={books} path='halakhah' languages={['en', 'he']} header={false}/> : null)
+    return (showBooks ? <RenderBooksMenu books={books} path={path} languages={['en', 'he']} header={path ==='Liturgy'}/> : null)
 };
 
-export default Halakhah
+export default Second

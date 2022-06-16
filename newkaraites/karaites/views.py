@@ -11,7 +11,10 @@ from .utils import (slug_back,
                     custom_sql,
                     similar_search_en)
 
-from .models import (FullTextSearch,
+from .models import (FirstLevel,
+                     SecondLevel,
+                     Classification,
+                     FullTextSearch,
                      FullTextSearchHebrew,
                      InvertedIndex,
                      Organization,
@@ -140,23 +143,10 @@ class GetFirstLevel(View):
 
     @staticmethod
     def get(request):
-        """ for the time being just fake the database query"""
+        """ Get first level Law"""
         level = OrderedDict()
-
-        level['Tanakh'] = ""
-
-        level['Halakhah'] = ""
-
-        level['Liturgy'] = ""
-
-        level['Poetry'] = ""
-
-        level['Polemic'] = ""
-
-        level['Exhortatory'] = ""
-
-        level['Comments'] = ""
-
+        for first_level in FirstLevel.objects.all():
+            level[first_level.first_level] = ""
         return JsonResponse(level)
 
 
@@ -176,15 +166,13 @@ class GetByLevelAndByClassification(View):
     @staticmethod
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
-        classification = True
         if level is None:
             return JsonResponse(data={'status': 'false',
                                       'message': _(f'Missing mandatory parameter level.')},
                                 status=400)
 
         return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level,
-                                                                             classification=classification),
-                            safe=False)
+                                                                             classification=True), safe=False)
 
 
 class BooksPresentation(View):
@@ -360,7 +348,7 @@ class Search(View):
 
             # try phrase search
             results = FullTextSearch.objects.raw(SQL_PHRASE.format(search, limit, offset))
-            print("1 Results ",len(results))
+            print("1 Results ", len(results))
 
             if len(results) == 0:
                 # try word search

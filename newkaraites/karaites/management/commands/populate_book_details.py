@@ -1,3 +1,6 @@
+import io
+
+from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -1034,6 +1037,19 @@ class Command(BaseCommand):
                     intro = File(open(intro_filename, 'rb'), book_title_en)
                     lang_in = True
 
+                # # liturgy (4) may have toc together with intro
+                # if book_details.get('first_level') == 4 and 'in' not in lang:
+                #     intro_filename = SOURCE_PATH + path + filename
+                #     handle = open(intro_filename, 'rb')
+                #     html = handle.read()
+                #     handle.close()
+                #     html_tree = BeautifulSoup(html, 'html.parser')
+                #     table = html_tree.find('table')
+                #     table.decompose()
+                #     intro = File(io.StringIO(str(html_tree)), book_title_en)
+                #     lang_in = True
+
+                # should be mutually exclusive
                 if 'toc' in lang:
                     toc_filename = SOURCE_PATH + path + filename.replace('{}', 'TOC')
                     toc = File(open(toc_filename, 'rb'), book_title_en)

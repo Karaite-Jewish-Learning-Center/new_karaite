@@ -1,4 +1,5 @@
 from tqdm import tqdm
+from django.conf import settings
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from .update_karaites_array import (update_karaites_array,
@@ -101,7 +102,7 @@ class Command(BaseCommand):
     @staticmethod
     def process_intro(book, book_title_en, book_title_he):
 
-        html = book.processed_book_source_intro
+        html = book.book_source_intro
         html_tree = BeautifulSoup(html, 'html5lib')
         divs = html_tree.find_all('div', {'class': 'WordSection1'})
 
@@ -176,17 +177,22 @@ class Command(BaseCommand):
 
                 if key is not None:
                     if toc_len == 3:
-                        table_of_contents[key] = [english, hebrew]
+                        table_of_contents[key.strip()] = [english, hebrew]
                     else:
-                        table_of_contents[key] = [value, '']
+                        table_of_contents[key.strip()] = [value, '']
         else:
             for p in toc_html.find_all(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
                 text = p.get_text(strip=False)
 
                 key, value = self.find_toc_key(text, debug=False)
-
+                print(f'key:{key}  value:"{value}"')
                 if key is not None:
                     table_of_contents[key] = value
+
+        # if settings.DEBUG:
+        #     print('Table of Contents:')
+        #     print(table_of_contents)
+        #     input('Press Enter to continue...')
 
         return table_of_contents
 
@@ -306,10 +312,6 @@ class Command(BaseCommand):
             if lang == '':
                 continue
 
-            # book_name = book.replace('{}', LANGUAGES_DICT[lang])
-            # sys.stdout.write(f'\rProcessing books:{book_name}\n')
-            # sys.stdout.write(f'\r {book_name}\n')
-
             html = book.processed_book_source
 
             html_tree = BeautifulSoup(html, 'html5lib')
@@ -362,7 +364,7 @@ class Command(BaseCommand):
                                                             '',
                                                             text_en,
                                                             text_he,
-                                                            book.classification.classification_name)
+                                                            book.book_classification.classification_name)
 
                     if len(tds) == 3:
 

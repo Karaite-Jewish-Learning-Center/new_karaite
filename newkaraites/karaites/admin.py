@@ -16,9 +16,7 @@ from .models import (FirstLevel,
                      References,
                      FullTextSearch,
                      FullTextSearchHebrew,
-                     InvertedIndex,
-                     BookClassificationFirst,
-                     BookClassificationSecond)
+                     InvertedIndex)
 
 from .admin_forms import AdminCommentForm
 from django.conf import settings
@@ -38,16 +36,18 @@ class KAdmin(admin.ModelAdmin):
 
 
 class FirstLevelAdmin(KAdmin):
-    list_display = ('first_level',)
+    list_display = ('first_level', 'order')
     list_display_links = ('first_level',)
+    list_editable = ('order',)
 
 
 admin.site.register(FirstLevel, FirstLevelAdmin)
 
 
 class SecondLevelAdmin(KAdmin):
-    list_display = ('second_level',)
+    list_display = ('second_level', 'order')
     list_display_links = ('second_level',)
+    list_editable = ('order',)
 
 
 admin.site.register(SecondLevel, SecondLevelAdmin)
@@ -272,18 +272,3 @@ class InvertedIndexAdmin(KAdmin):
 
 admin.site.register(InvertedIndex, InvertedIndexAdmin)
 
-
-class BookClassificationFirstAdmin(KAdmin):
-    list_display = ('first_level', 'order')
-    list_editable = ('order',)
-
-
-admin.site.register(BookClassificationFirst, BookClassificationFirstAdmin)
-
-
-class BookClassificationSecondAdmin(KAdmin):
-    list_display = ('second_level', 'order')
-    list_editable = ('order',)
-
-
-admin.site.register(BookClassificationSecond, BookClassificationSecondAdmin)

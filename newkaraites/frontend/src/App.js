@@ -6,15 +6,8 @@ import Tanakh from "./components/tanakh/Tanakh"
 import LoadBook from "./components/LoadBook";
 import {createTheme} from '@material-ui/core/styles'
 import {ThemeProvider} from '@material-ui/core/styles'
-import Halakhah from './components/halakhah/Halakhah'
-import Liturgy from "./components/liturgy/Liturgy"
-import Poetry from "./components/poetry/poetry"
-import Polemic from "./components/polemic/Polemic"
-import Comment from "./components/comments/comment"
-import Exhortatory from "./components/Exhortatory/Exhortatory";
 import Display from "./components/pages/Display";
 import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
-import {HalakhahBookLink} from "./components/halakhah/HalakhahBookList";
 import SearchResults from "./components/pages/SearchResults";
 import StoreProvider from "./stores/context";
 import SpeechProvider from "./stores/ttspeechContext";
@@ -25,7 +18,7 @@ import Acknowledgment from "./components/pages/Acknowledgments";
 import LoadingSpin from "./components/general/LoadingSpin";
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import Second from "./components/menu/getMenuSecond";
 
 function App() {
     const theme = createTheme({
@@ -50,6 +43,7 @@ function App() {
     //         }),
     //     [prefersDarkMode],
     // );
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
@@ -72,6 +66,7 @@ function App() {
                                 <Route exact path="/acknowledgments/">
                                     <Acknowledgment/>
                                 </Route>
+
                                 <Route exact path="/search-result/" forceRefresh={true}>
                                     <SearchResults/>
                                 </Route>
@@ -82,27 +77,9 @@ function App() {
                                 <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                 <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                                <Route exact path="/Halakhah/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
-                                <Route exact path="/Halakhah/:book/" children={<HalakhahBookLink/>}/>
-                                <Route exact path="/Halakhah/"><Halakhah/></Route>
+                                <Route path="/*/:book/1/" children={<LoadBook type={""}/>}/>
+                                <Route path="/*/"><Second/></Route>
 
-                                <Route exact path="/Liturgy/:book/1/" children={<LoadBook type="liturgy"/>}/>
-                                <Route exact path="/Liturgy/"><Liturgy/></Route>
-
-                                <Route exact path="/Poetry/:book/1/" children={<LoadBook type="poetry"/>}/>
-                                <Route exact path="/Poetry/"><Poetry/></Route>
-
-                                <Route exact path="/Polemic/:book/1/" children={<LoadBook type="polemic"/>}/>
-                                <Route exact path="/Polemic/"><Polemic/></Route>
-
-                                <Route exact path="/Exhortatory/:book/1/" children={<LoadBook type="Exhortatory"/>}/>
-                                <Route exact path="/Exhortatory/"><Exhortatory/></Route>
-
-                                <Route exact path="/Comments/:book/:chapter/" children={<LoadBook type="comments"/>}/>
-                                <Route exact path="/Comments/1/" children={<LoadBook type="comments"/>}/>
-                                <Route exact path="/Comments/"><Comment/></Route>
-
-                                {/* sometimes not found is rendered even if the url is valid */}
                                 <Route path='*'>
                                     <NotFound404/>
                                 </Route>

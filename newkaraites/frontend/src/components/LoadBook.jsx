@@ -12,13 +12,18 @@ import {storeContext} from "../stores/context";
 import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
+import { useLocation } from "react-router-dom"
 import getBook from "./getBook";
+import {getFirstPart} from "../utils/utils";
 
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
-    const message = useContext(messageContext)
+    const message = useContext(messageContext )
     const {book, chapter = 1, verse = 1} = useParams()
+    const path = getFirstPart(useLocation().pathname)
+    console.log('path' , path)
+
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
     let history = useHistory()
@@ -34,14 +39,18 @@ const LoadBook = ({type}) => {
         if (store.isLastPane) {
             if (type === 'bible') {
                 history.push(`/Tanakh/`)
-                return
+            }else {
+                history.push(`/${path}/`)
             }
-            if (type === 'karaites') {
-                history.push(`/Halakhah/`)
-                return
-            }
+            return
 
-            history.push(`/${capitalize(type)}/`)
+            // }
+            // if (type !== 'bible' && path==='') {
+            //     history.push(`/Halakhah/`)
+            //     return
+            // }
+            //
+            // history.push(`/${capitalize(type)}/`)
         }
     }
 

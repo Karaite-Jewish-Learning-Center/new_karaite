@@ -20,7 +20,9 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
         let separator = ''
         let comp = []
         keys.forEach(key => {
+            debugger
             if (obj[key].book_classification !== separator) {
+
                 if (header) {
                     separator = obj[key].book_classification;
                 } else {

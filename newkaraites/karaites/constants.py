@@ -53,7 +53,7 @@ FIRST_LEVEL = [
     (6, 'Songs'),
     (7, 'Prayers'),
     (8, 'Comments'),
-    (9, 'Poetry (Non-Liturgical)'),
+    (9, 'Poetry'),
     (10, 'Other'),
     (11, 'Exhortatory'),
 ]

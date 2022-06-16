@@ -650,6 +650,6 @@ class Command(BaseCommand):
         if not query:
             return
 
-        self.process_intro(query)
+        # self.process_intro(query)
         self.process_html(query)
 
