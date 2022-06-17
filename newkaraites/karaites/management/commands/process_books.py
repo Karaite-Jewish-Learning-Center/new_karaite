@@ -498,6 +498,8 @@ class Command(BaseCommand):
     def collect_style_map_to_class(html_tree, book, collect, lang, multi_table, css_class):
         style_classes = {}
         html = ''
+        lang = lang.lower()[0:2]
+
         # book has more than one section
         for section in [1, 2, 3, 4]:
             nodes = html_tree.find('div', class_=f"WordSection{section}", recursive=True)

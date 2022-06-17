@@ -239,8 +239,9 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 
 class ReferencesAdmin(KAdmin):
-    list_display = ('karaites_book', 'error', 'bible_ref_en', 'bible_ref_he')
-    # 'paragraph_number', 'paragraph_admin', 'foot_notes_admin')
+    list_display = ('karaites_book', 'paragraph_number',
+                    'paragraph_admin', 'foot_notes_admin',
+                    'error', 'bible_ref_en', 'bible_ref_he')
 
     search_fields = ('bible_ref_en',)
     list_filter = ('karaites_book', 'bible_ref_en', 'error')
@@ -271,4 +272,3 @@ class InvertedIndexAdmin(KAdmin):
 
 
 admin.site.register(InvertedIndex, InvertedIndexAdmin)
-

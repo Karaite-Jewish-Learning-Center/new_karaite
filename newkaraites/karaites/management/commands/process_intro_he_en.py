@@ -11,9 +11,10 @@ from ...models import (KaraitesBookDetails,
                        KaraitesBookAsArray,
                        FullTextSearch,
                        FullTextSearchHebrew,
+                       References,
                        BooksFootNotes)
 
-from .udpate_bible_ref import update_create_bible_refs
+from .update_bible_ref import update_create_bible_refs
 from .update_toc import update_toc
 from .command_utils.clean_table import (clean_tag_attr,
                                         clean_table_attr)
@@ -126,13 +127,13 @@ class Command(BaseCommand):
         text_en = intro_html.get_text(strip=False)
         # todo break this in paragraphs pointing to entry 1
         update_full_text_search_index_english(book_title_en,
-                                              1,
+                                              '1/1/intro',
                                               text_en,
                                               book.book_classification.classification_name)
 
         update_full_text_search_index_hebrew(book_title_en,
                                              book_title_he,
-                                             1,
+                                             '1/1/intro',
                                              '',
                                              book.book_classification.classification_name)
 
@@ -198,7 +199,8 @@ class Command(BaseCommand):
 
     @staticmethod
     def check_is_a_liturgy_book(book_title_en):
-        return KaraitesBookDetails.objects.filter(book_title_en=book_title_en, first_level=4).exists()
+        return KaraitesBookDetails.objects.filter(book_title_en=book_title_en,
+                                                  first_level__first_level='Liturgy').exists()
 
     @staticmethod
     def foot_notes_numbers(footnote_ref, last_number):
@@ -490,6 +492,7 @@ class Command(BaseCommand):
             FullTextSearch.objects.filter(reference_en__startswith=book_title_en).delete()
             FullTextSearchHebrew.objects.filter(reference_en__startswith=book_title_en).delete()
             BooksFootNotes.objects.filter(book=book).delete()
+            References.objects.filter(karaites_book=book).delete()
             KaraitesBookAsArray.objects.filter(book=book).delete()
 
             if book.intro:

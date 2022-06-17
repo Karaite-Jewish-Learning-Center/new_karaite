@@ -12,11 +12,10 @@ import SearchResults from "./components/pages/SearchResults";
 import StoreProvider from "./stores/context";
 import SpeechProvider from "./stores/ttspeechContext";
 import MessageProvider from "./stores/messages/messageContext";
-import {NotFound404} from "./components/pages/NotFound404";
 import Message from './components/messages/Message';
 import Acknowledgment from "./components/pages/Acknowledgments";
 import LoadingSpin from "./components/general/LoadingSpin";
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
+//import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Second from "./components/menu/getMenuSecond";
 
@@ -32,7 +31,7 @@ function App() {
 
         },
     });
-    // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: light)');
+    // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
     //
     // const theme = React.useMemo(
     //     () =>
@@ -77,12 +76,12 @@ function App() {
                                 <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                 <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                                <Route path="/*/:book/1/" children={<LoadBook type={""}/>}/>
+                                <Route path="/*/:book/:chapter/:verse/:intro/" children={<LoadBook type={""}/>}/>
+                                <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type={""}/>}/>
+                                <Route path="/*/:book/:chapter/" children={<LoadBook type={""}/>}/>
                                 <Route path="/*/"><Second/></Route>
 
-                                <Route path='*'>
-                                    <NotFound404/>
-                                </Route>
+
                             </Switch>
                         </BrowserRouter>
                     </MessageProvider>

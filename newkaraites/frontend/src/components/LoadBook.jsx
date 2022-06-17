@@ -5,7 +5,7 @@ import {parseBiblicalReference} from '../utils/parseBiblicalReference';
 import {observer} from 'mobx-react-lite'
 import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
-import {capitalize, makeRandomKey} from '../utils/utils';
+import {makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
 import {TRANSFORM_TYPE} from '../constants/constants'
 import {storeContext} from "../stores/context";
@@ -20,9 +20,10 @@ import {getFirstPart} from "../utils/utils";
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
     const message = useContext(messageContext )
-    const {book, chapter = 1, verse = 1} = useParams()
+    const {book, chapter = 1, verse = 1, intro=''} = useParams()
+    console.log('LoadBook', book, chapter, verse, intro)
+    // path is used as type for the KaraitesBooks component
     const path = getFirstPart(useLocation().pathname)
-    console.log('path' , path)
 
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
@@ -44,13 +45,7 @@ const LoadBook = ({type}) => {
             }
             return
 
-            // }
-            // if (type !== 'bible' && path==='') {
-            //     history.push(`/Halakhah/`)
-            //     return
-            // }
-            //
-            // history.push(`/${capitalize(type)}/`)
+
         }
     }
 
@@ -118,8 +113,9 @@ const LoadBook = ({type}) => {
                             refClick={refClick}
                             paragraphs={store.getParagraphs(i)}
                             details={store.getBookDetails(i)}
-                            type={type}
+                            type={path}
                             onClosePane={onClosePane}
+                            jumpToIntro={intro === 'intro'}
                         />
                     </Grid>
                 ))

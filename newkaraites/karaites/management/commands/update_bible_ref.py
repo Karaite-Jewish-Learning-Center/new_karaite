@@ -23,7 +23,7 @@ def update_create_bible_refs(book):
                     karaites_book=book,
                     paragraph_number=book_text.paragraph_number,
                     paragraph_text=book_text.book_text,
-                    foot_notes=book_text.foot_notes,
+                    foot_notes=[],
                     bible_ref_he=ref_text,
                     bible_ref_en=english_ref,
                 )

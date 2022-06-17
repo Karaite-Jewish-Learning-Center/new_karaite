@@ -105,8 +105,8 @@ class Organization(models.Model):
                 }
 
     def to_book_list(self):
-        return [self.get_first_level_display(),
-                self.get_second_level_display(),
+        return [self.first_level.first_level,
+                self.second_level.second_level,
                 self.book_title_en,
                 self.book_title_he,
                 self.chapters,
@@ -1021,7 +1021,7 @@ class KaraitesBookAsArray(models.Model):
         except IndexError:
             pass
         html += '</tr></tbody></table>'
-        return mark_safe(html)
+        return html
 
     text.short_description = "Book Text"
 
@@ -1081,22 +1081,34 @@ class References(models.Model):
 
     karaites_book = models.ForeignKey(KaraitesBookDetails,
                                       on_delete=models.CASCADE,
-                                      verbose_name=_('Karaites book'))
+                                      verbose_name=_('Karaites book'),
+                                      help_text=_('Karaites book'))
 
     paragraph_number = models.IntegerField(default=0,
-                                           verbose_name=_('Karaites paragraph that references Bible book'))
-
-    paragraph_text = ArrayField(ArrayField(models.TextField()), default=list)
-
-    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    bible_ref_he = models.CharField(max_length=40,
-                                    default='',
-                                    verbose_name=_('ref. Hebrew'))
+                                           verbose_name=_('Karaites paragraph that references Bible book'),
+                                           help_text=_('Karaites paragraph that references Bible book'))
 
     bible_ref_en = models.CharField(max_length=40,
                                     default='',
-                                    verbose_name=_('ref. English'))
+                                    verbose_name=_('ref. English'),
+                                    help_text=_('ref. English'))
+
+    bible_ref_he = models.CharField(max_length=40,
+                                    default='',
+                                    verbose_name=_('ref. Hebrew'),
+                                    help_text=_('ref. Hebrew'))
+
+    paragraph_text = ArrayField(ArrayField(models.TextField()),
+                                default=list,
+                                verbose_name=_('Paragraph text Hebrew/English'),
+                                help_text=_('Paragraph text Hebrew/English'))
+
+    foot_notes = ArrayField(models.TextField(),
+                            default=list,
+                            null=True,
+                            blank=True,
+                            verbose_name=_('Foot notes Hebrew/English'),
+                            help_text=_('Foot notes Hebrew/English'))
 
     error = models.CharField(max_length=2,
                              choices=REF_ERROR_CODE,
@@ -1108,9 +1120,16 @@ class References(models.Model):
 
     @mark_safe
     def paragraph_admin(self):
-        return self.paragraph_text[0]
+        html = '<table><tbody><tr>'
+        html += f'<td class="he-verse">{self.paragraph_text[0]}</td>'
+        try:
+            html += f'<td class="en-verse" dir="ltr">{self.paragraph_text[2]}</td>'
+        except IndexError:
+            pass
+        html += '</tr></tbody></table>'
+        return html
 
-    paragraph_admin.short_description = 'Reference text'
+    paragraph_admin.short_description = 'Text Hebrew/English'
 
     @mark_safe
     def foot_notes_admin(self):
@@ -1285,4 +1304,3 @@ class MisspelledWord(models.Model):
     class Meta:
         verbose_name_plural = _('Misspelled words')
         ordering = ('misspelled_word',)
-
