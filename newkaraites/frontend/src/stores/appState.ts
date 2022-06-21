@@ -142,7 +142,10 @@ class AppState {
     // loading
 
     setLoading = (loading: boolean): void => {
-        this.loading = loading
+        runInAction(() => {
+            this.loading = loading
+        })
+
     }
     getLoading = (): boolean => this.loading
 

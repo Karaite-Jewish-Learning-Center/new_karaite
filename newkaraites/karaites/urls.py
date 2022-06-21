@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (GetFirstLevel,
                     GetByLevelAndByClassification,
+                    GetFirstLevelExcludeTanakh,
                     BooksPresentation,
                     GetBookAsArrayJson,
                     GetComments,
@@ -11,13 +12,15 @@ from .views import (GetFirstLevel,
                     getHalakhah,
                     Test,
                     AutoCompleteView,
-                    Search)
+                    Search,
+                    GetBiBleReferences)
 
 app_name = 'karaites'
 
 urlpatterns = [
 
     path('get-first-level/', GetFirstLevel.as_view(), name='first_level'),
+    path('get-first-level-exclude-tanakh/', GetFirstLevelExcludeTanakh.as_view(), name='first_level_exclude_tanakh'),
 
     # book list
     path('books-list/', BooksPresentation.as_view(), name='books_list'),
@@ -44,6 +47,8 @@ urlpatterns = [
          GetByLevelAndByClassification.as_view(),
          name='get_karaites_book_by_level_and_classification'),
 
+    # bible references
+    path('get-bible-references/<str:reference>/', GetBiBleReferences.as_view(), name='get_bible_references'),
     # comments
     path('get-comments/<str:book>/<str:chapter>/<str:verse>/', GetComments.as_view(), name='get_comments'),
     path('get-comments/<str:book>/<str:chapter>/', GetComments.as_view(), name='get_comments'),

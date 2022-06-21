@@ -98,7 +98,7 @@ export default function PrimarySearchAppBar({theme}) {
 
     return (
 
-        <AppBar position="fixed" theme={theme}>
+        <AppBar position="fixed" color="colorDefault">
             <Toolbar>
                 <Typography className={classes.name} component="h3">
                     <Link className={classes.link} to="/">KJLC</Link>
@@ -183,13 +183,13 @@ const useStyles = makeStyles((theme) => ({
 
     name: {
         fontSize: 24,
-        color: 'black',
+        // color: 'black',
     },
     link: {
         marginLeft: 10,
         marginRight: 10,
         marginTop: 2,
-        color: 'black',
+        // color: 'black',
     },
 
 }));

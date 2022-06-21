@@ -2,32 +2,27 @@ import React, {useContext, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Colors from '../../constants/colors'
 import Button from '@material-ui/core/Button'
-import {Typography} from '@material-ui/core'
+import {Paper, Typography} from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
 import {makeRandomKey} from '../../utils/utils'
 import CommentsPane from '../comments/CommentPane'
 import HalakhahPane from '../halakhah/HalakhahPane'
-import {
-    BIBLE_EN_CM,
-    BIBLE_REFS,
-    BIBLE_ENGLISH,
-    BIBLE_HEBREW,
-} from '../../constants/constants'
-import TextToSpeech from '../../tts/TextToSpeech'
 import {observer} from 'mobx-react-lite'
-import Header from '../pages/RightPaneHeader'
+import Header from './header'
 import {storeContext} from "../../stores/context";
+import {referenceContext} from '../../stores/references/referenceContext'
+import Container from "@material-ui/core/Container";
+import {toJS} from "mobx";
 
-const items = ['Commentary', 'Halakhah']
-const references = [BIBLE_EN_CM, BIBLE_REFS]
 
 
 const RightPane = ({paneNumber, refClick, openBook}) => {
     const store = useContext(storeContext)
+    const reference = useContext(referenceContext)
 
     const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
-    const verseData = (store.getVerseData(paneNumber).length === 0 ? ['',''] : store.getVerseData(paneNumber))
-
+    const verseData = (store.getVerseData(paneNumber).length === 0 ? ['', ''] : store.getVerseData(paneNumber))
+    console.log(toJS(verseData))
     const classes = useStyles()
 
     const clickToOpen = (item, type, panNumber, e) => {
@@ -47,21 +42,24 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     }
 
     const Item = () => {
-        return items.map((item, i) => {
-            
+        const lang = 'en'
+        let index = 7
+        if(lang === 'en') index = 8
+        return reference.getLevels(lang).map(item => {
+            index = index + 2
             return (
                 <Button
                     variant="text"
                     className={classes.button}
                     fullWidth={true}
-                    disabled={verseData[references[i]] === '0'}
+                    disabled={verseData[index] === '0'}
                     startIcon={<MenuBookIcon className={classes.icon}/>}
                     onClick={() => {
-                        setShowState([...showState, i])
+                        // setShowState([...showState, ])
                     }}
                     key={makeRandomKey()}
                 >
-                    {item} ({verseData[references[i]]})
+                    {item} ({verseData[index]})
                 </Button>
             )
         })
@@ -90,16 +88,15 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             }
             default: {
                 return (
-                    <>
+                    <Container className={classes.container}>
                         <Header onClose={onClose}/>
-                        <div className={classes.body}>
+                        <Paper className={classes.paper}>
                             <Typography className={classes.headerColor}>Related texts</Typography>
                             <hr className={classes.ruler}/>
                             <Item/>
                             <hr className={classes.ruler}/>
-
-                        </div>
-                    </>
+                        </Paper>
+                    </Container>
                 )
             }
         }
@@ -107,9 +104,9 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
 
 
     return (
-        <div className={classes.container}>
+        <Container className={classes.container}>
             <PaneBody/>
-        </div>
+        </Container>
     )
 }
 
@@ -118,30 +115,28 @@ export default observer(RightPane)
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        maxWidth: 400,
         height: '100%',
         top: 70,
-        backgroundColor: Colors['rightPaneBackGround']
+        // backgroundColor: Colors['rightPaneBackGround']
+        padding: 0,
     },
-
+    paper: {
+        height: '100%',
+    },
     header: {
         minHeight: 50,
-        backgroundColor: Colors['headerBackgroundColor'],
+        // backgroundColor: Colors['headerBackgroundColor'],
     },
-    body: {
-        marginTop: 40,
-        marginLeft: 30,
-        marginRight: 30,
-    },
+    body: {},
     ruler: {
         borderColor: Colors.rulerColor,
     },
     headerColor: {
-        color: Colors.leftPaneHeader,
-        marginTop: 20,
+        // color: Colors.leftPaneHeader,
+        // marginTop: 20,
     },
     icon: {
-        color: Colors.leftPaneHeader,
+        // color: Colors.leftPaneHeader,
         fontSize: 20,
     },
     text: {

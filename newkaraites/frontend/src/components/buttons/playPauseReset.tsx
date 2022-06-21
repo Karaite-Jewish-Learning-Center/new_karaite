@@ -24,14 +24,12 @@ export const  PlayPauseReset: FC<ButtonPlayProps> = ({onClick, onReset, playing,
         <span>
             <IconButton saria-label="Play pause song"
                         component="span"
-                        color={color}
                         onClick={onClick}>
 
                 {(playing ? <PauseIcon onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}/> : <PlayArrowIcon/>)}
             </IconButton>
             <IconButton aria-label="Restart song "
                         component="span"
-                        color={color}
                         onClick={onReset}>
                 {(playing ? <FastRewindIcon/> : null)}
             </IconButton>

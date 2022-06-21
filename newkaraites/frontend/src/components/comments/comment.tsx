@@ -3,9 +3,6 @@ import {RenderBooksMenu} from '../menu/RenderBooksMenu';
 import {bookDetails} from '../../types/commonTypes';
 import {COMMENTS, karaitesBookByLevelAndClassification} from '../../constants/constants';
 
-
-// todo: merge liturgy, halakhah and polemic in on component
-
 const fetchBooks = async (): Promise<bookDetails> => {
     const response = await fetch(`${karaitesBookByLevelAndClassification}${COMMENTS}/`);
     const data: bookDetails = await response.json();

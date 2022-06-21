@@ -53,7 +53,7 @@ export const karaitesBookToc: string = apiUrl + 'api/get-karaites-book-toc/'
 export const referencesUrl: string = apiUrl + 'api/get-references/'
 export const autocompleteUrl: string = apiUrl + 'api/autocomplete/'
 export const searchResultsUrl: string = apiUrl + 'api/search/'
-
+export const getLevels: string = apiUrl + 'api/get-first-level-exclude-tanakh'
 // there will be more languages as project evolves
 export const LANGUAGE: numberString = {0: 'en', 1: 'he', 2: 'en_he'}
 export const LANGUAGE_KEY: stringNumber = {'en': 0, 'he': 1, 'en_he': 2}
@@ -69,7 +69,6 @@ export const BIBLE_HE_CM: number = 3
 export const BIBLE_VERSE: number = 4
 export const BIBLE_CHAPTER: number = 5
 export const BIBLE_RENDER_CHAPTER: number = 6
-
 export const BIBLE_REFS: number = 7
 
 export const BOOK_CHAPTERS: number = 0

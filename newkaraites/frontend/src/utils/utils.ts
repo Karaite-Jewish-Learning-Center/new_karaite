@@ -4,6 +4,7 @@ interface booksTable {
     [index: string]: string
 }
 
+
 export const capitalize = (string: string): string =>
     // respect all others cases
     string === "" ? "" : string[0].toUpperCase() + string.slice(1)

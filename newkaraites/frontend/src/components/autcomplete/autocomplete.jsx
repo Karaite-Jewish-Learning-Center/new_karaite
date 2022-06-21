@@ -140,7 +140,7 @@ const AutoComplete = () => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: Colors['white'],
+        // backgroundColor: Colors['white'],
         margin: 0,
         padding: 0,
         width: '300px !important',

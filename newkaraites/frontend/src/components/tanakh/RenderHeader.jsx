@@ -125,7 +125,6 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 50,
         maxHeight: 50,
         width: '100%',
-        backgroundColor: Colors['rightPaneBackGround'],
         textAlign: 'center',
     },
     hebrewBook: {

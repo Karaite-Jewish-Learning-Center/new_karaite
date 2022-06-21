@@ -2,7 +2,6 @@ import sys
 import re
 import shutil
 from django.core.files import File
-from tqdm import tqdm
 from html import escape
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
@@ -613,31 +612,6 @@ class Command(BaseCommand):
             book.processed_book_source = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
             book.save()
 
-    def process_intro(self, query):
-        """
-            Process intro file.
-        """
-
-        for book in query:
-            if book.intro:
-                html = book.book_source_intro
-                html_tree = BeautifulSoup(html, 'html5lib')
-                # book intros are in English with some words sentences in Hebrew
-                html_str = self.replace_from_open_to_close(str(html_tree))
-                html_tree = BeautifulSoup(html_str, 'html5lib')
-                html_tree = self.collect_style_map_to_class(html_tree,
-                                                            book.book_title_en,
-                                                            True,
-                                                            'en',
-                                                            book.multi_tables,
-                                                            book.css_class)
-
-                html_str = self.remove_replace_css_name(html_tree)
-
-                open('/tmp/html.html', 'w', encoding='utf8').write(html_str)
-                book.processed_book_source_intro = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
-                book.save()
-
     def handle(self, *args, **options):
         """
             Books are pre-process and writen to karaitesBookDetails
@@ -652,6 +626,5 @@ class Command(BaseCommand):
         if not query:
             return
 
-        # self.process_intro(query)
         self.process_html(query)
 

@@ -1,23 +1,18 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Colors from '../../constants/colors'
-import { Grid } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import CloseIcon from '@material-ui/icons/Close';
-
+import Container from "@material-ui/core/Container";
+import LanguageButton from "../buttons/LanguageButton";
 
 const Header = ({ backButton, onClose }) => {
     const classes = useStyles()
 
     return (
-        <Grid container
-            direction="row"
-            justifycontent="flex-end"
-            alignItems="center"
-            className={classes.header}>
+        <Container className={classes.container}>
 
-            <Grid item xs={10}>
                 <IconButton
                     aria-label="Close pane"
                     component="span"
@@ -25,21 +20,18 @@ const Header = ({ backButton, onClose }) => {
                 >
                     <CloseIcon className={classes.iconGrid} />
                 </IconButton>
-            </Grid>
 
-            <Grid item className={classes.icon}>
-                 {(backButton !== undefined ?
-                    <IconButton
-                        aria-label="Back"
-                        component="span"
-                        onClick={backButton}
-                    >
-                        <ChevronLeftIcon className={classes.iconGrid} />
-                    </IconButton>
-                    : null)}
 
-            </Grid>
-        </Grid>
+                <IconButton
+                    aria-label="Back"
+                    component="span"
+                    onClick={()=>{}}
+                >
+                    <ChevronLeftIcon className={classes.iconGrid} />
+                </IconButton>
+
+                <LanguageButton paneNumber={0} />
+        </Container>
     )
 
 }
@@ -48,10 +40,14 @@ export default Header
 
 
 const useStyles = makeStyles((theme) => ({
+    container: {
+        border: '1px solid red',
+        padding: 0,
+    },
     icon:{},
     iconGrid:{},
     header: {
         minHeight: 50,
-        // backgroundColor: Colors['headerBackgroundColor'],
+        backgroundColor: Colors['headerBackgroundColor'],
     },
 }));

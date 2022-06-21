@@ -1,11 +1,9 @@
-import React, {useContext, FC, useState, MouseEventHandler} from 'react'
+import React, {useContext, FC} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import {Grid} from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {unslug} from '../../utils/utils'
-import Colors from '../../constants/colors'
-// import {observer} from 'mobx-react-lite'
 import {storeContext} from '../../stores/context'
 import {CloseButton} from "../buttons/CloseButton";
 import {InfoButton} from "../buttons/InfoButton";
@@ -83,7 +81,6 @@ const KaraitesPaneHeader: FC<IProps> = ({
 const resources = makeStyles({
     resources: {
         minHeight: 50,
-        backgroundColor: Colors['headerBackgroundColor'],
         padding: 0,
         marginRight: 0,
     },

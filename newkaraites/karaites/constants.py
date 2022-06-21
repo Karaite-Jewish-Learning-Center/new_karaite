@@ -259,4 +259,6 @@ REF_ERROR_CODE = [
     ('00', 'Verse number to big.'),
     ('01', 'Chapter number to big.'),
     ('02', 'Bible book does not exist!'),
+    ('03', 'Invalid int for verse.'),
+    ('04', 'Missing Chapter or verse.'),
 ]

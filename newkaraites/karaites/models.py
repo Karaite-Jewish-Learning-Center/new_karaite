@@ -7,7 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         LANGUAGES,
-                        BOOK_CLASSIFICATION,
                         AUTOCOMPLETE_TYPE,
                         REF_ERROR_CODE)
 
@@ -16,14 +15,27 @@ from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
 
+VERSE = 4
+HEBREW = 0
+ENGLISH = 1
+
 
 class FirstLevel(models.Model):
     first_level = models.CharField(max_length=50,
                                    unique=True)
+
+    first_level_he = models.CharField(max_length=50,
+                                      default='',
+                                      blank=True)
+
     order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.first_level
+
+    @mark_safe
+    def first_level_he_html(self):
+        return f'<p dir="rtl">{self.first_level_he}</p>'
 
     class Meta:
         verbose_name = _('     First Level')
@@ -35,10 +47,18 @@ class SecondLevel(models.Model):
     second_level = models.CharField(max_length=50,
                                     unique=True)
 
+    second_level_he = models.CharField(max_length=50,
+                                       default='',
+                                       blank=True)
+
     order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.second_level
+
+    @mark_safe
+    def second_level_he_html(self):
+        return f'<p dir="rtl">{self.second_level_he}</p>'
 
     class Meta:
         verbose_name = _('      Second Level')
@@ -470,19 +490,45 @@ class BookAsArray(models.Model):
 
     chapter = models.IntegerField(default=0)
 
-    # [text english, text hebrew, comment count En, comment count He,
+    # [text english, text hebrew, _, _,
     # Verse number , Chapter, need render chapter title,
-    # number of  Halakhah references]
-    book_text = ArrayField(ArrayField(models.TextField(), size=8), default=list)
+    # two positions for each first level reference
+    # example Halakhah 1 reference English, 3 references in Hebrew for this book chapter and verse
+    # Liturgy  0 reference English, 10 references in Hebrew for this book chapter and verse
+    # Poetry   2 reference English, 0 references in Hebrew for this book chapter and verse
+    # and so on for each first level
+    # 0 text english,
+    # 1 text hebrew,
+    # 2 reserved,
+    # 3 reserved,
+    # 4 Verse number,
+    # 5 Chapter,
+    # 6 need render chapter title,
+    # 7 Total bible references in Hebrew,
+    # 8 Total bible references in English,
+    # 9 Halakhah Hebrew
+    # 10 Halakhah English
+    # 11 Liturgy Hebrew
+    # 12 Liturgy English
+    # 13 Poetry Hebrew
+    # 14 Poetry English
+    # 15 Polemics Hebrew
+    # 16 Polemics English
+    # 17 Exhortatory Hebrew
+    # 18 Exhortatory English
+    # 19 Comments Hebrew
+    # 20 Comments English
+    # ...]
+
+    book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     @mark_safe
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
             html += '<tr>'
-            html += f'<td>{text[2]}</td><td class="en-verse">{text[0]}</td>'
-            html += f'<td>{text[4]}</td>'
-            html += f'<td class="he-verse" dir=\'rtl\'>{text[1]}</td><td>{text[3]}</td></tr>'
+            html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
+            html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -603,8 +649,18 @@ class Classification(models.Model):
                                            verbose_name=_("Classification Name"),
                                            help_text=_("Classification Name"))
 
+    classification_name_he = models.CharField(max_length=50,
+                                              default='',
+                                              blank=True,
+                                              verbose_name=_("Classification Name Hebrew"),
+                                              help_text=_("Classification Name Hebrew"))
+
     def __str__(self):
         return self.classification_name
+
+    @mark_safe
+    def classification_name_he_html(self):
+        return f'<p dir="rtl">{self.classification_name_he}</p>'
 
     class Meta:
         verbose_name_plural = _('Classification')
@@ -1120,6 +1176,7 @@ class References(models.Model):
 
     @mark_safe
     def paragraph_admin(self):
+        # text[0] is hebrew, text[2] is english
         html = '<table><tbody><tr>'
         html += f'<td class="he-verse">{self.paragraph_text[0]}</td>'
         try:
@@ -1147,13 +1204,17 @@ class References(models.Model):
                 'paragraph_html': self.paragraph_text[0],
                 'bible_ref_he': self.bible_ref_he,
                 'bible_ref_en': self.bible_ref_en,
+                'book_classification': self.karaites_book.book_classification.classification_name,
+                'book_first_level': self.karaites_book.first_level.first_level,
                 }
 
     @staticmethod
     def to_list(bible_ref_en):
 
         result = []
-        for ref in References.objects.filter(bible_ref_en=bible_ref_en):
+        for ref in References.objects.filter(bible_ref_en=bible_ref_en).order_by('karaites_book__first_level',
+                                                                                 'karaites_book__book_classification',
+                                                                                 'karaites_book__book_language'):
             result.append(ref.to_json())
 
         return result

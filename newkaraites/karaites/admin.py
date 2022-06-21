@@ -36,7 +36,7 @@ class KAdmin(admin.ModelAdmin):
 
 
 class FirstLevelAdmin(KAdmin):
-    list_display = ('first_level', 'order')
+    list_display = ('first_level', 'first_level_he_html', 'order')
     list_display_links = ('first_level',)
     list_editable = ('order',)
 
@@ -45,7 +45,7 @@ admin.site.register(FirstLevel, FirstLevelAdmin)
 
 
 class SecondLevelAdmin(KAdmin):
-    list_display = ('second_level', 'order')
+    list_display = ('second_level', 'second_level_he_html', 'order')
     list_display_links = ('second_level',)
     list_editable = ('order',)
 
@@ -135,6 +135,7 @@ class CommentTmpAdmin(CommentAdmin):
 class BookAsArrayAdmin(KAdmin):
     list_display = ('book', 'chapter', 'text')
     list_filter = ('book', 'chapter')
+    search_fields = ('book__book_title_en', 'chapter')
 
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
@@ -170,7 +171,8 @@ admin.site.register(Songs, SongsAdmin)
 
 
 class ClassificationAdmin(KAdmin):
-    list_display = ('classification_name',)
+    list_display = ('classification_name',
+                    'classification_name_he_html',)
 
 
 admin.site.register(Classification, ClassificationAdmin)
@@ -241,10 +243,14 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 class ReferencesAdmin(KAdmin):
     list_display = ('karaites_book', 'paragraph_number',
                     'paragraph_admin', 'foot_notes_admin',
-                    'error', 'bible_ref_en', 'bible_ref_he')
+                    'error', 'bible_ref_en', 'bible_ref_he',
+                    )
 
     search_fields = ('bible_ref_en',)
-    list_filter = ('karaites_book', 'bible_ref_en', 'error')
+    list_filter = ('karaites_book',
+                   'karaites_book__first_level',
+                   'karaites_book__book_classification',
+                   'error')
 
 
 admin.site.register(References, ReferencesAdmin)

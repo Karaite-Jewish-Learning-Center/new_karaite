@@ -150,6 +150,17 @@ class GetFirstLevel(View):
         return JsonResponse(level)
 
 
+class GetFirstLevelExcludeTanakh(View):
+    """ Get first level classification without Tanakh"""
+
+    @staticmethod
+    def get(request):
+        """ Get first level Law"""
+
+        level = list(FirstLevel.objects.all().values_list('first_level', 'first_level_he').exclude(first_level='Tanakh'))
+        return JsonResponse(level, safe=False)
+
+
 class GetByLevel(View):
     @staticmethod
     def get(request, *args, **kwargs):
@@ -368,3 +379,21 @@ class Search(View):
                                  'page': page,
                                  'did_you_mean': did_you_mean,
                                  'search_term': similar_search}, safe=False)
+
+
+class GetBiBleReferences(View):
+    """
+        search by bible reference
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        reference = kwargs.get('reference', None)
+        if reference is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a reference.')}, status=400)
+
+        references = References.to_list(reference)
+
+        print(references)
+
+        return JsonResponse(references, safe=False)
