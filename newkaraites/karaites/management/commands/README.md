@@ -11,28 +11,19 @@ $ cd anaconda3/envs/dev/newkaraites/newkaraites/
 
 biblical_books, has no dependencies
 
-
 >> ./manage.py biblical_books
 
 Process all books
 
+>> ./manage.py populate_book_details
+
 >>./manage.py process_books
-  
-Comments (Aaron ben Elijah)
-
->> ./manage.py comments
- 
+   
 >> ./manage.py process_intro_he_en
- 
-Update references (updates bible references)
-
->> ./manage.py update_references
  
 >> ./manage.py create_hebrew_search   
 
 >> ./manage.py create_hebrew_rank_search
-
- 
 
 [//]: # (Update autocomplete)
 

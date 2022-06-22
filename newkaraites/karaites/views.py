@@ -142,22 +142,11 @@ class GetFirstLevel(View):
     """ Get first level classification"""
 
     @staticmethod
-    def get(request):
+    def get(request, *args, **kwargs):
         """ Get first level Law"""
         level = OrderedDict()
-        for first_level in FirstLevel.objects.all():
-            level[first_level.first_level] = ""
-        return JsonResponse(level)
-
-
-class GetFirstLevelExcludeTanakh(View):
-    """ Get first level classification without Tanakh"""
-
-    @staticmethod
-    def get(request):
-        """ Get first level Law"""
-
-        level = list(FirstLevel.objects.all().values_list('first_level', 'first_level_he').exclude(first_level='Tanakh'))
+        for first_level in FirstLevel.objects.all().values_list('first_level', 'first_level_he').order_by('order'):
+            level[first_level[0]] = first_level
         return JsonResponse(level, safe=False)
 
 

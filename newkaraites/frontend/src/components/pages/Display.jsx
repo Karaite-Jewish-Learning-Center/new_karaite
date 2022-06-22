@@ -87,11 +87,11 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         margin: 0,
-        color: Colors.tanakh,
+        // color: Colors.tanakh,
         textAlign: 'center',
     },
      ruler: {
-        color: Colors.rulerColor,
+        // color: Colors.rulerColor,
         width: '100%',
     },
     text: {

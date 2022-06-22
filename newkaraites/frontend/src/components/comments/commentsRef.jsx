@@ -5,7 +5,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { indoArabicToHebrew, englishBookNameToHebrew } from "../../utils/utils";
 import { LANGUAGE, HEBREW } from "../../constants/constants";
 import { makeStyles } from '@material-ui/core/styles'
-import Colors from '../../constants/colors'
+
 
 
 const CommentRef = ({ book, chapter, verse, language, closeCommentTabHandler, refClick }) => {
@@ -46,10 +46,8 @@ const useStyles = makeStyles((theme) => ({
     },
     header: {
         minHeight: 50,
-        backgroundColor: Colors['headerBackgroundColor'],
     },
     icon: {
-        backgroundColor: Colors['headerBackgroundColor'],
     }
 }));
 

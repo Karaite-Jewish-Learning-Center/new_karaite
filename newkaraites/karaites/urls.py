@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import (GetFirstLevel,
                     GetByLevelAndByClassification,
-                    GetFirstLevelExcludeTanakh,
                     BooksPresentation,
                     GetBookAsArrayJson,
                     GetComments,
@@ -20,7 +19,6 @@ app_name = 'karaites'
 urlpatterns = [
 
     path('get-first-level/', GetFirstLevel.as_view(), name='first_level'),
-    path('get-first-level-exclude-tanakh/', GetFirstLevelExcludeTanakh.as_view(), name='first_level_exclude_tanakh'),
 
     # book list
     path('books-list/', BooksPresentation.as_view(), name='books_list'),

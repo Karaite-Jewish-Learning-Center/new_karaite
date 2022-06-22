@@ -7,7 +7,8 @@ from django.core.management.base import BaseCommand
 from django.core.files import File
 from ...constants import (LANGUAGES_DICT,
                           BOOK_CLASSIFICATION_DICT,
-                          FIRST_LEVEL_DICT
+                          FIRST_LEVEL_DICT,
+                          FIRST_LEVEL_HE_DICT
                           )
 
 from .constants import SOURCE_PATH
@@ -1066,7 +1067,9 @@ class Command(BaseCommand):
 
                 first = FIRST_LEVEL_DICT[book_details['first_level']]
                 first_level, _ = FirstLevel.objects.get_or_create(
-                    first_level=first
+                    first_level=first,
+                    first_level_he=FIRST_LEVEL_HE_DICT[book_details['first_level']][0],
+                    order=FIRST_LEVEL_HE_DICT[book_details['first_level']][1],
                 )
 
                 classification = BOOK_CLASSIFICATION_DICT[book_details['book_classification']]

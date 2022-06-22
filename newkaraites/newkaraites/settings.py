@@ -113,7 +113,6 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
         }
     }
 
-
 # server dev environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 

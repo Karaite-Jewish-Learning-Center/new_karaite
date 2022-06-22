@@ -19,7 +19,7 @@ const LoadingSpin = ({color, type}: { color: any, type: any }) => {
 }
 
 LoadingSpin.defaultProps = {
-    color: Colors.loading,
+    //color: Colors.loading,
     type: 'spin'
 }
 

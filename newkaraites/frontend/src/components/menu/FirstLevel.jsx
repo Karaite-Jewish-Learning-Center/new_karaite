@@ -1,30 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {getFirstLevelUrl} from '../../constants/constants'
 import {storeContext} from "../../stores/context";
-import {messageContext} from "../../stores/messages/messageContext";
+import {referenceContext} from "../../stores/references/referenceContext";
 import {makeStyles} from '@material-ui/core/styles'
-import Colors from "../../constants/colors";
-import {fetchData} from "../api/dataFetch";
+import {observer} from 'mobx-react-lite';
 
 
 const FirstLevel = () => {
-    const [classification, setClassification] = useState(null)
-    const classes = useStyles()
     const store = useContext(storeContext)
-    const message = useContext(messageContext)
+    const reference = useContext(referenceContext)
+    const classification = reference.getLevelsAll()
+    const classes = useStyles()
 
     store.resetPanes()
-
-    useEffect(() => {
-
-        fetchData(getFirstLevelUrl)
-            .then(data => setClassification(data))
-            .catch((e) => message.setMessage(e.message))
-
-    }, [])
 
     if (classification === null) return null;
 
@@ -39,7 +29,7 @@ const FirstLevel = () => {
                     variante="body3" component="p">{classification[key]}
                 </Typography>
             </div>
-            <hr className={classes.ruler}/>
+            <hr/>
         </Grid>)
 
     return (
@@ -58,7 +48,6 @@ const FirstLevel = () => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        border: '1px solid red',
         paddingTop: theme.spacing(15),
         width: '100%',
     },
@@ -70,31 +59,21 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: 100,
         [theme.breakpoints.up('xs')]: {
-            // backgroundColor: 'red',
             height: 200,
         },
         [theme.breakpoints.up('sm')]: {
-            // backgroundColor: 'yellow',
             height: 150,
         },
         [theme.breakpoints.up('md')]: {
-            // backgroundColor: 'blue',
             height: 140,
         },
         [theme.breakpoints.up('lg')]: {
-            // backgroundColor: 'green',
             height: 160,
         },
         [theme.breakpoints.up('xl')]: {
-            // backgroundColor: 'pink',
         },
     },
-
-    ruler: {
-        borderColor: Colors.rulerColor,
-    },
-
 }));
 
 
-export default FirstLevel
+export default observer(FirstLevel)

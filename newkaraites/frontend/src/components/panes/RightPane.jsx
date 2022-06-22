@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import Colors from '../../constants/colors'
 import Button from '@material-ui/core/Button'
 import {Paper, Typography} from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
@@ -117,7 +116,6 @@ const useStyles = makeStyles((theme) => ({
     container: {
         height: '100%',
         top: 70,
-        // backgroundColor: Colors['rightPaneBackGround']
         padding: 0,
     },
     paper: {
@@ -125,18 +123,14 @@ const useStyles = makeStyles((theme) => ({
     },
     header: {
         minHeight: 50,
-        // backgroundColor: Colors['headerBackgroundColor'],
     },
     body: {},
     ruler: {
-        borderColor: Colors.rulerColor,
+        // borderColor: Colors.rulerColor,
     },
     headerColor: {
-        // color: Colors.leftPaneHeader,
-        // marginTop: 20,
     },
     icon: {
-        // color: Colors.leftPaneHeader,
         fontSize: 20,
     },
     text: {

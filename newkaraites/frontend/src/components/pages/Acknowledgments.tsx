@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
-import Colors from "../../constants/colors";
+//import Colors from "../../constants/colors";
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {q640} from "../../constants/constants"
 
@@ -64,11 +64,11 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom:100,
     },
     title: {
-        color: Colors.tanakh,
+        // color: Colors.tanakh,
         margin: 0,
     },
     ruler: {
-        color: Colors.rulerColor,
+        // color: Colors.rulerColor,
         width: '100%'
     },
     text: {
