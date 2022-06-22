@@ -13,4 +13,8 @@ newkaraites/static-django/
 newkaraites/frontend/cypress
 node_modules/
 /newkaraites/node_modules/
-!/newkaraites/media/
+/newkaraites/media/*
+/newkaraites/media/processed_intro/
+/newkaraites/media/processed_source/
+/newkaraites/media/songs/
+/newkaraites/media/toc/
