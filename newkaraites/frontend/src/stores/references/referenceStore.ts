@@ -25,7 +25,7 @@ class ReferenceStore {
     }
 
     getLevelsAll = (): Array<String> => {
-        console.log('getLevelsAll', this.levels_all)
+        console.log('getLevelsAll', toJS(this.levels_all))
         return this.levels_all
     }
 

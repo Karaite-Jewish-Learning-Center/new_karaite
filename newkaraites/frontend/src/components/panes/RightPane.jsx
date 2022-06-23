@@ -42,9 +42,10 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
 
     const Item = () => {
         const lang = 'en'
-        let index = 7
-        if(lang === 'en') index = 8
-        return reference.getLevels(lang).map(item => {
+        let index = 4
+        if(lang === 'en') index = 5
+
+        return Object.keys(reference.getLevelsAll()).map(item => {
             index = index + 2
             return (
                 <Button
@@ -56,9 +57,8 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                     onClick={() => {
                         // setShowState([...showState, ])
                     }}
-                    key={makeRandomKey()}
-                >
-                    {item} ({verseData[index]})
+                    key={makeRandomKey()}>
+                    <Typography variant="h6" component="h6"  className={classes.items}>{item} ({verseData[index]})</Typography>
                 </Button>
             )
         })
@@ -90,7 +90,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                     <Container className={classes.container}>
                         <Header onClose={onClose}/>
                         <Paper className={classes.paper}>
-                            <Typography className={classes.headerColor}>Related texts</Typography>
+                            <Typography variant="h6" component="h2"  className={classes.related}>Related texts</Typography>
                             <hr className={classes.ruler}/>
                             <Item/>
                             <hr className={classes.ruler}/>
@@ -124,11 +124,13 @@ const useStyles = makeStyles((theme) => ({
     header: {
         minHeight: 50,
     },
-    body: {},
-    ruler: {
-        // borderColor: Colors.rulerColor,
+    related: {
+        paddingTop:theme.spacing(1),
+        paddingLeft:theme.spacing(3),
     },
-    headerColor: {
+    ruler: {
+        marginLeft:theme.spacing(3),
+        marginRight:theme.spacing(3),
     },
     icon: {
         fontSize: 20,
@@ -139,5 +141,11 @@ const useStyles = makeStyles((theme) => ({
     button: {
         textTransform: 'none',
         justifyContent: 'left',
+        paddingLeft: theme.spacing(4),
     },
+    items: {
+        paddingLeft: 2,
+        fontSize:18,
+    }
+
 }));

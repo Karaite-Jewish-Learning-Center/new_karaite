@@ -98,7 +98,7 @@ export default function PrimarySearchAppBar({theme}) {
 
     return (
 
-        <AppBar position="fixed" color="colorDefault">
+        <AppBar position="fixed" color="default">
             <Toolbar>
                 <Typography className={classes.name} component="h3">
                     <Link className={classes.link} to="/">KJLC</Link>

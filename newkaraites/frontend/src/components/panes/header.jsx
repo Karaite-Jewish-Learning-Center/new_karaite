@@ -41,13 +41,12 @@ export default Header
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        border: '1px solid red',
         padding: 0,
+        backgroundColor: (theme.palette.type === 'dark' ? theme.palette.action.selected : theme.palette.background.paper),
     },
     icon:{},
     iconGrid:{},
     header: {
         minHeight: 50,
-        backgroundColor: Colors['headerBackgroundColor'],
     },
 }));

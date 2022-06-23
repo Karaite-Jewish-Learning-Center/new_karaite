@@ -2,6 +2,7 @@ import React from 'react'
 import RenderMenu from '../menu/RenderMenu'
 import {booksObj, booksMenu} from '../../types/commonTypes'
 
+
 const torah:booksObj = {
     'Genesis': 'Creation, the beginning of mankind, and stories of the patriarchs and matriarchs.',
     'Exodus': 'The Israelites’ enslavement in Egypt, miraculous redemption, the giving of the Torah, and building of the Mishkan (Tabernacle).',
