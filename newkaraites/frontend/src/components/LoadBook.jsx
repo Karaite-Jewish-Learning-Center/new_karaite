@@ -44,8 +44,6 @@ const LoadBook = ({type}) => {
                 history.push(`/${path}/`)
             }
             return
-
-
         }
     }
 

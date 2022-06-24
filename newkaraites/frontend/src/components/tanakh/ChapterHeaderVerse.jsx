@@ -20,7 +20,7 @@ import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 const ChapterHeaderVerse = (props) => {
     const store = useContext(storeContext)
-    const {data, item, gridVisibleRange, paneNumber,  speaking} = props
+    const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})

@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import Colors from '../../constants/colors';
 import {Typography} from '@material-ui/core';
 import {englishBookNameToHebrew, unslug} from '../../utils/utils'
 import {indoArabicToHebrewCardinal} from '../../utils/english-hebrew/numberConvertion'
@@ -110,7 +109,7 @@ const RenderHeader = ({
             </Grid>
             <HeaderBody chapter={chapter}/>
             <Grid item xs={1} key={1}>
-                <LanguageButton paneNumber={paneNumber}/>
+                <LanguageButton paneNumber={paneNumber} onClick={()=>{}}/>
             </Grid>
         </Grid>
     )

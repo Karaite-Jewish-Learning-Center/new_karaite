@@ -1,4 +1,4 @@
-import React, {FC, useContext} from "react"
+import React, {FC, useContext, useState} from "react"
 import IconButton from "@material-ui/core/IconButton"
 import {observer} from "mobx-react-lite"
 import {makeStyles} from '@material-ui/core/styles'
@@ -6,16 +6,20 @@ import {LANGUAGE_KEY, LANGUAGE_SYMBOL} from "../../constants/constants"
 import {storeContext} from "../../stores/context"
 
 interface langButton {
-    paneNumber:number
+    paneNumber: number,
+    lang: string[]
 }
 
-const LanguageButton:FC<langButton> = ({paneNumber}) => {
+const LanguageButton: FC<langButton> = ({paneNumber, lang}) => {
+    const [language, setLanguage] = useState<string[]>(lang)
     const store = useContext(storeContext)
     const classes = useStyles()
 
-    const onClick =()=>{
-        store.nextLanguage(paneNumber)
+    const onClick = () => {
+
+        // setLanguage((language)=>language.push(language.shift()))
     }
+
 
     return <IconButton
         aria-label="select language"

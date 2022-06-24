@@ -20,6 +20,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Second from "./components/menu/getMenuSecond";
 
+
 function App() {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme:dark)');
     const theme = React.useMemo(
@@ -44,6 +45,7 @@ function App() {
                                 <Message/>
                                 <LoadingSpin/>
                                 <Switch>
+
                                     <Route exact path="/">
                                         <Display/>
                                     </Route>
@@ -70,7 +72,6 @@ function App() {
                                     <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type={""}/>}/>
                                     <Route path="/*/:book/:chapter/" children={<LoadBook type={""}/>}/>
                                     <Route path="/*/"><Second/></Route>
-
 
                                 </Switch>
                             </BrowserRouter>

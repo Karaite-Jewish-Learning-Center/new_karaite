@@ -21,6 +21,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
                     <br/>
                     <Typography className={classes.text} style={{direction: languageDirection(languages[1])}} variant="body2" component="p">{obj[key]}</Typography>
                 </div>
+                <br/>
                 <hr/>
             </Grid>)
     }
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         marginTop: 50,
     },
-    
+
     link: {
         marginBottom: 20,
     },

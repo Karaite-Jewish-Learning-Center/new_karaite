@@ -169,10 +169,15 @@ class GetByLevelAndByClassification(View):
         if level is None:
             return JsonResponse(data={'status': 'false',
                                       'message': _(f'Missing mandatory parameter level.')},
-                                status=400)
+                                status=404)
+        books = KaraitesBookDetails.get_all_books_by_first_level(level, classification=True)
 
-        return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level,
-                                                                             classification=True), safe=False)
+        if len(books) == 0:
+            return JsonResponse(data={'status': 'false',
+                                      'message': _(f'No books found for level:{level}.')},
+                                status=404)
+
+        return JsonResponse(books, safe=False)
 
 
 class BooksPresentation(View):
