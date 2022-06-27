@@ -58,4 +58,13 @@ export interface Audio {
 }
 
 
+export interface langButton {
+    paneNumber: number
+}
+
+export interface langButtonReference {
+    language: string,
+    onClick: MouseEventHandler,
+}
+
 

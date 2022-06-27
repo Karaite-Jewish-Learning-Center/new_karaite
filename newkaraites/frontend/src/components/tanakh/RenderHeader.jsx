@@ -18,7 +18,7 @@ const RenderHeader = ({
                           onClosePane,
                           flip,
                           onSpeakOnOffHe,
-                          onSpeakOnOffEn
+                          onSpeakOnOffEn,
                       }) => {
 
     const store = useContext(storeContext)
@@ -43,7 +43,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffHe}
                                 onOff={flip[0]}
-                                />
+                            />
                         </Grid>
                         <Grid item xs={2} key={4}>
                             <Typography className={classes.chapterView}>{chapter}</Typography>
@@ -92,7 +92,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
-                                />
+                            />
                         </Grid>
                     </>
                 )
@@ -109,7 +109,7 @@ const RenderHeader = ({
             </Grid>
             <HeaderBody chapter={chapter}/>
             <Grid item xs={1} key={1}>
-                <LanguageButton paneNumber={paneNumber} onClick={()=>{}}/>
+                <LanguageButton paneNumber={paneNumber} />
             </Grid>
         </Grid>
     )

@@ -12,8 +12,6 @@ from .utils import (slug_back,
                     similar_search_en)
 
 from .models import (FirstLevel,
-                     SecondLevel,
-                     Classification,
                      FullTextSearch,
                      FullTextSearchHebrew,
                      InvertedIndex,
@@ -237,7 +235,7 @@ class GetTOC(View):
         return JsonResponse(result, safe=False)
 
 
-class getHalakhah(View):
+class GetHalakhah(View):
     """
     """
 
@@ -325,7 +323,7 @@ class Search(View):
             results = set()
             highlight_word = []
             tokens = tokenizer.tokenize(search)
-            for grp, token, token_num, (_, _) in tokens:
+            for grp, token, token_num, _, _ in tokens:
 
                 search_text = str(Hebrew(token).text_only())
                 word_query = InvertedIndex.objects.get(word=search_text)
@@ -389,5 +387,24 @@ class GetBiBleReferences(View):
         references = References.to_list(reference)
 
         print(references)
+
+        return JsonResponse(references, safe=False)
+
+
+class GetBiBleReferencesByLaw(View):
+    """
+        search by bible reference and classification
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        reference = kwargs.get('reference', None)
+        law = kwargs.get('law', None)
+
+        if reference is None or law is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a reference and a classification.')},
+                                status=400)
+
+        references = References.to_list(reference, law)
 
         return JsonResponse(references, safe=False)

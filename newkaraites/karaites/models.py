@@ -4,9 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .constants import (FIRST_LEVEL,
-                        SECOND_LEVEL,
-                        LANGUAGES,
+from .constants import (LANGUAGES,
                         AUTOCOMPLETE_TYPE,
                         REF_ERROR_CODE)
 
@@ -368,7 +366,7 @@ class Comment(models.Model):
 
 
 class CommentTmp(models.Model):
-    """ This can safely be delete after all comment are
+    """ This can safely be deleted after all comment are
         load.
     """
     book = models.ForeignKey(Organization,
@@ -541,6 +539,7 @@ class BookAsArray(models.Model):
 
     @staticmethod
     def to_list(book, chapter=None, book_title=None, first=None):
+
         def flat(query):
             result = []
             for book in query:
@@ -1033,6 +1032,9 @@ class BooksFootNotes(models.Model):
         ordering = ('book', 'footnote_number')
 
 
+LIMIT = 100
+
+
 class KaraitesBookAsArray(models.Model):
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
@@ -1056,7 +1058,7 @@ class KaraitesBookAsArray(models.Model):
     @staticmethod
     def to_list(book, paragraph_number, first):
         # chapters don't exist so we read paragraphs
-        LIMIT = 100
+
         if first == 0:
             query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=0,
                                                        paragraph_number__lte=paragraph_number)
@@ -1195,6 +1197,10 @@ class References(models.Model):
             html += f'<p dir="RTL">{foot_note}</p>'
         return html
 
+    @mark_safe
+    def law(self):
+        return self.karaites_book.first_level.first_level
+
     def to_json(self):
         return {'book_name_en': self.karaites_book.book_title_en,
                 'book_name_he': self.karaites_book.book_title_he,
@@ -1209,12 +1215,21 @@ class References(models.Model):
                 }
 
     @staticmethod
-    def to_list(bible_ref_en):
+    def to_list(bible_ref_en, law=None):
+        ro = References.objects
 
+        if law is None:
+            query = ro.filter(bible_ref_en=bible_ref_en).order_by('karaites_book__first_level',
+                                                                  'karaites_book__book_classification',
+                                                                  'karaites_book__book_language')
+        else:
+
+            query = ro.filter(bible_ref_en=bible_ref_en,
+                              karaites_book__first_level__first_level=law).order_by('karaites_book__first_level',
+                                                                                    'karaites_book__book_classification',
+                                                                                    'karaites_book__book_language')
         result = []
-        for ref in References.objects.filter(bible_ref_en=bible_ref_en).order_by('karaites_book__first_level',
-                                                                                 'karaites_book__book_classification',
-                                                                                 'karaites_book__book_language'):
+        for ref in query:
             result.append(ref.to_json())
 
         return result

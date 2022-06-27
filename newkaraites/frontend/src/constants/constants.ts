@@ -54,6 +54,8 @@ export const referencesUrl: string = apiUrl + 'api/get-references/'
 export const autocompleteUrl: string = apiUrl + 'api/autocomplete/'
 export const searchResultsUrl: string = apiUrl + 'api/search/'
 export const getLevels: string = apiUrl + 'api/get-first-level/'
+export const getBiblereferencesUrl: string = apiUrl + 'api/get-bible-references/'
+
 // there will be more languages as project evolves
 export const LANGUAGE: numberString = {0: 'en', 1: 'he', 2: 'en_he'}
 export const LANGUAGE_KEY: stringNumber = {'en': 0, 'he': 1, 'en_he': 2}

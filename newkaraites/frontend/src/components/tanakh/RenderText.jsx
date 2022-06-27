@@ -15,7 +15,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const [speaking, setSpeaking] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    const [bookLang, setBookLang] = useState('')
+
     const virtuoso = useRef(null)
 
     const callFromEnded = () => {
@@ -56,11 +56,9 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
-
         if (speaking) {
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
-
         return () => {
             speech.cancel()
         }

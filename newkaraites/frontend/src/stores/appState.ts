@@ -88,6 +88,8 @@ class AppState {
 
     getBookData = (i: number): Array<any> => this.panes[i].bookData
 
+    getBookChapterVerse =(i:number) => `(${this.panes[i].book} ${this.panes[i].chapter+1}:${this.panes[i].verse})`
+
     setDistance = (distance: number, i: number): void => {
         this.panes[i].distance = distance
     }
@@ -102,8 +104,7 @@ class AppState {
 
     getCurrentItem = (i: number): number => this.panes[i].currentItem
 
-    // right pane
-    // comments
+    // right pane bible references
     setRightPaneState = (state: boolean, i: number): void => {
         this.panes[i].rightPaneState = state
     }
@@ -227,7 +228,6 @@ class AppState {
         this.panes[i].languages = language
     }
     getLanguage = (i: number): string => this.panes[i].languages[0]
-
     nextLanguage = (i: number): Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
 
 }

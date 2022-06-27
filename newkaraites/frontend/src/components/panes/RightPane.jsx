@@ -9,20 +9,29 @@ import HalakhahPane from '../halakhah/HalakhahPane'
 import {observer} from 'mobx-react-lite'
 import Header from './header'
 import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
 import {referenceContext} from '../../stores/references/referenceContext'
 import Container from "@material-ui/core/Container";
 import {toJS} from "mobx";
-
+import {fetchData} from "../api/dataFetch";
+import {getBiblereferencesUrl} from "../../constants/constants";
 
 
 const RightPane = ({paneNumber, refClick, openBook}) => {
-    const store = useContext(storeContext)
-    const reference = useContext(referenceContext)
 
+    const store = useContext(storeContext)
+    const message = useContext(messageContext)
+    const reference = useContext(referenceContext)
     const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
     const verseData = (store.getVerseData(paneNumber).length === 0 ? ['', ''] : store.getVerseData(paneNumber))
-    console.log(toJS(verseData))
+    const [languages, setLanguages] = useState(['en', 'he'])
+    const [references, setReferences] = useState([])
+
     const classes = useStyles()
+
+    const onClick = () => {
+        setLanguages([languages[1], languages[0]])
+    }
 
     const clickToOpen = (item, type, panNumber, e) => {
         store.setRightPaneState(showState, paneNumber)
@@ -40,27 +49,55 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
         setShowState([...showState])
     }
 
-    const Item = () => {
-        const lang = 'en'
-        let index = 4
-        if(lang === 'en') index = 5
+    const onClickReference = (key, _) => {
+        fetchData(`${getBiblereferencesUrl}${store.getBookChapterVerse(paneNumber)}/${key}`)
+            .then(data => setReferences(data))
+            .catch(message.setMessage('Error fetching references'))
+    }
 
-        return Object.keys(reference.getLevelsAll()).map(item => {
+    const Item = () => {
+        let index = 4
+        let langIndex = 1
+        if (languages[0] === 'en') {
+            index = 5
+            langIndex = 0
+        }
+        const levels = reference.getLevelsNoTanakh()
+
+        return Object.keys(levels).map(key => {
             index = index + 2
-            return (
-                <Button
-                    variant="text"
-                    className={classes.button}
-                    fullWidth={true}
-                    disabled={verseData[index] === '0'}
-                    startIcon={<MenuBookIcon className={classes.icon}/>}
-                    onClick={() => {
-                        // setShowState([...showState, ])
-                    }}
-                    key={makeRandomKey()}>
-                    <Typography variant="h6" component="h6"  className={classes.items}>{item} ({verseData[index]})</Typography>
-                </Button>
-            )
+            if (langIndex === 0) {
+                return (
+                    <Button
+                        variant="text"
+                        className={classes.button}
+                        fullWidth={true}
+                        disabled={verseData[index] === '0'}
+                        startIcon={<MenuBookIcon className={classes.icon}/>}
+                        onClick={onClickReference.bind(this, key)}
+                        key={makeRandomKey()}>
+                        <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][langIndex]} ({verseData[index]})</Typography>
+
+                    </Button>
+                )
+            } else {
+                return (
+                    <Button
+                        variant="text"
+                        className={classes.buttonHe}
+                        fullWidth={true}
+                        disabled={verseData[index] === '0'}
+                        endIcon={<MenuBookIcon className={classes.icon}/>}
+                        onClick={() => {
+                            // setShowState([...showState, ])
+                        }}
+                        key={makeRandomKey()}>
+                        <Typography variant="h6" component="h6" className={classes.itemsHe}>({verseData[index]}){' '}{levels[key][langIndex]} </Typography>
+
+                    </Button>
+
+                )
+            }
         })
     }
 
@@ -88,9 +125,10 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             default: {
                 return (
                     <Container className={classes.container}>
-                        <Header onClose={onClose}/>
+                        <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
                         <Paper className={classes.paper}>
-                            <Typography variant="h6" component="h2"  className={classes.related}>Related texts</Typography>
+                            <Typography variant="h6" component="h2" className={classes.related}>Related
+                                texts</Typography>
                             <hr className={classes.ruler}/>
                             <Item/>
                             <hr className={classes.ruler}/>
@@ -125,12 +163,12 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 50,
     },
     related: {
-        paddingTop:theme.spacing(1),
-        paddingLeft:theme.spacing(3),
+        paddingTop: theme.spacing(1),
+        paddingLeft: theme.spacing(3),
     },
     ruler: {
-        marginLeft:theme.spacing(3),
-        marginRight:theme.spacing(3),
+        marginLeft: theme.spacing(3),
+        marginRight: theme.spacing(3),
     },
     icon: {
         fontSize: 20,
@@ -143,9 +181,21 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'left',
         paddingLeft: theme.spacing(4),
     },
-    items: {
+    buttonHe: {
+        textTransform: 'none',
+        justifyContent: 'right',
+        paddingRight: theme.spacing(4),
+        direction: 'ltr',
+    },
+    itemsEn: {
         paddingLeft: 2,
-        fontSize:18,
+        fontSize: 18,
+        direction: 'rtl',
+    },
+    itemsHe: {
+        paddingLeft: 2,
+        fontSize: 18,
+        direction: "ltr"
     }
 
 }));
