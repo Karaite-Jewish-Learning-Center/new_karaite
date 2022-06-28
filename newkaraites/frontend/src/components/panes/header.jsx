@@ -21,14 +21,15 @@ const Header = ({backButton, onClose, onClick, language}) => {
                     <CloseIcon className={classes.iconGrid}/>
                 </IconButton>
 
-
+                {backButton &&
                 <IconButton
                     aria-label="resources"
                     component="span"
                     onClick={backButton}
                 >
                     <ChevronLeftIcon className={classes.iconGrid}/>
-                </IconButton>
+                </IconButton>}
+
             </span>
             <LanguageButtonReferences language={language} onClick={onClick}/>
         </Container>)

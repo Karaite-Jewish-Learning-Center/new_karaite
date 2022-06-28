@@ -59,7 +59,7 @@ class Command(BaseCommand):
         # 20 Comments English
         # ...]
 
-        size = (array_len + 1) * 2
+        size = (array_len + 2) * 2
         r = 1
         for chapter in BookAsArray.objects.all():
             for index in range(0, len(chapter.book_text)):

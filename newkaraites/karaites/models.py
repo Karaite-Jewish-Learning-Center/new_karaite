@@ -1074,10 +1074,7 @@ class KaraitesBookAsArray(models.Model):
     def text(self):
         html = '<table><tbody><tr>'
         html += f'<td class="he-verse">{self.book_text[0]}</td>'
-        try:
-            html += f'<td class="en-verse" dir="ltr">{self.book_text[2]}</td>'
-        except IndexError:
-            pass
+        html += f'<td class="en-verse" dir="ltr">{self.book_text[2]}</td>'
         html += '</tr></tbody></table>'
         return html
 
@@ -1181,10 +1178,7 @@ class References(models.Model):
         # text[0] is hebrew, text[2] is english
         html = '<table><tbody><tr>'
         html += f'<td class="he-verse">{self.paragraph_text[0]}</td>'
-        try:
-            html += f'<td class="en-verse" dir="ltr">{self.paragraph_text[2]}</td>'
-        except IndexError:
-            pass
+        html += f'<td class="en-verse" dir="ltr">{self.paragraph_text[2]}</td>'
         html += '</tr></tbody></table>'
         return html
 
@@ -1207,7 +1201,7 @@ class References(models.Model):
                 'author': self.karaites_book.author.name,
                 'language': self.karaites_book.book_language,
                 'paragraph_number': self.paragraph_number,
-                'paragraph_html': self.paragraph_text[0],
+                'paragraph_html': self.paragraph_text,
                 'bible_ref_he': self.bible_ref_he,
                 'bible_ref_en': self.bible_ref_en,
                 'book_classification': self.karaites_book.book_classification.classification_name,

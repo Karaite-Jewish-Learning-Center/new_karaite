@@ -449,7 +449,7 @@ class Command(BaseCommand):
                     if key is not None:
                         p = p.replace('#', '')
 
-                    update_karaites_array_details(book.book_title_en, '', c, [p, ''])
+                    update_karaites_array_details(book.book_title_en, '', c, [p, 0, ''])
 
                     if lang in ['en']:
                         update_full_text_search_index_english(book.book_title_en, c, text,
@@ -472,8 +472,7 @@ class Command(BaseCommand):
                 update_karaites_array_details(book.book_title_en,
                                               '',
                                               c,
-                                              [generate_book_intro_toc_end(0),
-                                               ''])
+                                              [generate_book_intro_toc_end(0), 0, ''])
 
     def handle(self, *args, **options):
         """ Karaites books as array """
