@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import ReactLoading from 'react-loading';
 import {makeStyles} from '@material-ui/core/styles';
-import Colors from '../../constants/colors'
 import {storeContext} from '../../stores/context'
 import {observer} from 'mobx-react-lite';
 

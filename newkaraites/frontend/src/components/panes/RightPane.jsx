@@ -3,9 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import {Paper, Typography} from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
-import {calculateItemNumber, makeRandomKey} from '../../utils/utils'
-import CommentsPane from '../comments/CommentPane'
-import HalakhahPane from '../halakhah/HalakhahPane'
+import {makeRandomKey, slug} from '../../utils/utils'
 import {observer} from 'mobx-react-lite'
 import Header from './header'
 import {storeContext} from "../../stores/context";
@@ -17,6 +15,7 @@ import {fetchData} from "../api/dataFetch";
 import {getBiblereferencesUrl, TRANSFORM_TYPE} from "../../constants/constants";
 import parse from "html-react-parser";
 import transform from "../../utils/transform";
+import Loading from "../general/loading";
 
 
 const RightPane = ({paneNumber, refClick, openBook}) => {
@@ -24,8 +23,9 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     const store = useContext(storeContext)
     const message = useContext(messageContext)
     const reference = useContext(referenceContext)
-    const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
-
+    // const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
+    const [loading, setLoading] = useState(false)
+    const [loadedBookChapterVerse, setLoadedBookChapterVerse] = useState('')
     const verseData = (store.getVerseData(paneNumber).length === 0 ? ['', ''] : store.getVerseData(paneNumber))
     const [languages, setLanguages] = useState(['en', 'he'])
     const [references, setReferences] = useState([])
@@ -37,9 +37,13 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
         setLanguages([languages[1], languages[0]])
     }
 
-    const clickToOpen = (item, type, panNumber, e) => {
-        store.setRightPaneState(showState, paneNumber)
-        refClick(item, 'bible', paneNumber, e)
+    // const clickToOpen = (item, type, panNumber, e) => {
+    //     store.setRightPaneState(showState, paneNumber)
+    //     refClick(item, 'bible', paneNumber, e)
+    // }
+
+    const callOpenBook = (index) => {
+        openBook(paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
     }
 
     const onClose = () => {
@@ -53,16 +57,41 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     }
 
     const onClickReference = (key, _) => {
-        fetchData(`${getBiblereferencesUrl}${store.getBookChapterVerse(paneNumber)}/${key}`)
+        const bookChapterVerse = store.getBookChapterVerse(paneNumber)
+        // already loaded do nothing
+        if(bookChapterVerse === loadedBookChapterVerse && key === referenceKey) {
+            setReferenceKey(key)
+            return
+        }
+
+        setLoading(true)
+        setLoadedBookChapterVerse(bookChapterVerse)
+
+        // todo: try to fetch all references for this book chapter verse
+        // maybe it's faster than fetching each reference separately
+        // and easier to cache.
+
+        fetchData(`${getBiblereferencesUrl}${bookChapterVerse}/${key}`)
             .then(data => {
                 setReferences(data)
-                debugger
                 setReferenceKey(key)
+                setLoading(false)
             })
-            .catch(e => message.setMessage('Error fetching references', e))
+            .catch(e =>{
+                message.setMessage('Error fetching references', e)
+                setLoading(false)
+            })
+
     }
 
     const ReferencesMenu = () => {
+        if(loading) {
+            return (
+                <Container className={classes.container}>
+                    <Loading />
+                </Container>
+            )
+        }
         let index = 7
         if (languages[0] === 'en') index = 8
         const levels = reference.getLevelsNoTanakh()
@@ -71,29 +100,33 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             index = index + 2
             if (languages[0] === 'en') {
                 return (
-                    <Button
-                        variant="text"
-                        className={classes.button}
-                        fullWidth={true}
-                        disabled={verseData[index] === '0'}
-                        startIcon={<MenuBookIcon className={classes.icon}/>}
-                        onClick={onClickReference.bind(this, key)}
-                        key={makeRandomKey()}>
-                        <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({verseData[index]})</Typography>
-                    </Button>
+                    <Container>
+                        <Button
+                            variant="text"
+                            className={classes.button}
+                            fullWidth={true}
+                            disabled={verseData[index] === '0'}
+                            startIcon={<MenuBookIcon className={classes.icon}/>}
+                            onClick={onClickReference.bind(this, key)}
+                            key={makeRandomKey()}>
+                            <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({verseData[index]})</Typography>
+                        </Button>
+                    </Container>
                 )
             } else {
                 return (
-                    <Button
-                        variant="text"
-                        className={classes.buttonHe}
-                        fullWidth={true}
-                        disabled={verseData[index] === '0'}
-                        endIcon={<MenuBookIcon className={classes.icon}/>}
-                        onClick={onClickReference.bind(this, key)}
-                        key={makeRandomKey()}>
-                        <Typography variant="h6" component="h6" className={classes.itemsHe}>({verseData[index]}){' '}{levels[key][1]} </Typography>
-                    </Button>
+                    <Container>
+                        <Button
+                            variant="text"
+                            className={classes.buttonHe}
+                            fullWidth={true}
+                            disabled={verseData[index] === '0'}
+                            endIcon={<MenuBookIcon className={classes.icon}/>}
+                            onClick={onClickReference.bind(this, key)}
+                            key={makeRandomKey()}>
+                            <Typography variant="h6" component="h6" className={classes.itemsHe}>({verseData[index]}){' '}{levels[key][1]} </Typography>
+                        </Button>
+                    </Container>
                 )
             }
         })
@@ -115,12 +148,28 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                 </Container>
             )
         }
-
+        if (references.length === 0) {
+            const message = (languages[0] === 'en' ? 'No references found' : 'לא נמצאו טקסטים')
+            return (
+                <Container className={classes.container}>
+                    <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
+                    <Paper className={classes.paper}>
+                        <Typography variant="h6"
+                                    component="h2"
+                                    className={(languages[0] === 'en' ? classes.messageEn : classes.messageHe)}>
+                            {message}
+                        </Typography>
+                        <hr className={classes.ruler}/>
+                    </Paper>
+                </Container>
+            )
+        }
         return (
             <Container className={classes.container}>
                 <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
                 <Paper className={classes.paperRefs}>
                     {references.map(refs => {
+                        // English
                         if (languages[0] === 'en' && refs.paragraph_html[2] !== '') {
                             return (
                                 <>
@@ -139,9 +188,15 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                                             }
                                         })}
                                     </span>
+                                    <Button
+                                        className={classes.openBookButton}
+                                        onClick={callOpenBook.bind(this, 0)}>
+                                        Open book
+                                    </Button>
                                 </>
                             )
                         }
+                        // Hebrew
                         if (languages[0] === 'he' && refs.paragraph_html[1] !== '') {
                             return (
                                 <>
@@ -160,6 +215,11 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                                             }
                                         })}
                                     </span>
+                                    <Button
+                                        className={classes.openBookButton}
+                                        onClick={callOpenBook.bind(this, 0)}>
+                                        Open book
+                                    </Button>
                                 </>
                             )
                         }
@@ -167,6 +227,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                     })}
 
                 </Paper>
+
             </Container>
         )
     }
@@ -215,15 +276,17 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 14,
     },
     button: {
-        paddingLeft: theme.spacing(5),
         textTransform: 'none',
         justifyContent: 'left',
     },
     buttonHe: {
-        paddingRight: theme.spacing(5),
         textTransform: 'none',
         justifyContent: 'right',
         direction: 'ltr',
+    },
+    openBookButton: {
+        textTransform: 'none',
+        marginBottom: theme.spacing(3),
     },
     itemsEn: {
         fontSize: 18,
@@ -251,5 +314,15 @@ const useStyles = makeStyles((theme) => ({
     },
     refs: {
         fontSize: 18,
+    },
+    messageEn: {
+        paddingTop: theme.spacing(3),
+        paddingLeft: theme.spacing(3),
+        direction: "ltr"
+    },
+    messageHe: {
+        paddingTop: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+        direction: "rtl"
     }
 }));
