@@ -5,6 +5,7 @@ import {TableVirtuoso} from 'react-virtuoso'
 import KaraitePaneHeader from './KaraitePaneHeader';
 import transform from '../../utils/transform'
 import '../../css/_comments.css'
+import '../../css/books.css'
 import Colors from '../../constants/colors'
 import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'

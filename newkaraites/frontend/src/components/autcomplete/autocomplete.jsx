@@ -12,7 +12,6 @@ import {parseEnglishRef} from '../../utils/parseBiblicalReference'
 import {validateBiblicalReference} from "../../utils/validateBiblicalReference";
 import {isABibleBook} from "../../utils/utils";
 import {makeStyles} from "@material-ui/core/styles";
-import Colors from "../../constants/colors";
 
 
 const AutoComplete = () => {

@@ -31,7 +31,7 @@ const KaraitesPaneHeader: FC<IProps> = ({
                                         }) => {
 
     const store = useContext(storeContext)
-    const classes = resources()
+    const classes = useStyles()
     const matches = useMediaQuery('(min-width:600px)');
     const direction = (matches ? 'row' : 'column')
     const xsColumns1 = (matches ? 5 : 12)
@@ -78,7 +78,7 @@ const KaraitesPaneHeader: FC<IProps> = ({
     )
 }
 
-const resources = makeStyles({
+const useStyles = makeStyles({
     resources: {
         minHeight: 50,
         padding: 0,

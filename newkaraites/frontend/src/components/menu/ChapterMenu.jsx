@@ -2,7 +2,6 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import {range} from '../../utils/utils'
 import {makeStyles} from '@material-ui/core/styles'
-import Colors from '../../constants/colors'
 import {Link} from 'react-router-dom'
 import {Typography} from '@material-ui/core'
 import {unslug} from '../../utils/utils'
@@ -10,7 +9,7 @@ import {unslug} from '../../utils/utils'
 
 const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
     const chapters = range(numberOfChapters)
-    const classes = container()
+    const classes = useStyles()
 
     const createMenu = () => {
         return chapters.map(chapter =>
@@ -42,7 +41,7 @@ const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
 }
 
 
-const container = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         width: '50%',
         marginLeft: 'auto',
@@ -53,21 +52,18 @@ const container = makeStyles((theme) => ({
     item: {
         width: 50,
         height: 50,
-        backgroundColor: Colors.chapterMenu,
         margin: 2,
     },
     link: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontSize:20,
     },
     title: {
         marginTop: 100,
         marginBottom: 15,
-        color: 'gray',
-    },
-    ruler: {
-        borderColor: Colors.rulerColor,
+
     },
     filler: {
         marginTop: 100,
@@ -76,7 +72,7 @@ const container = makeStyles((theme) => ({
     },
     subtitle: {
         marginBottom: 25,
-        color: Colors.tanakh,
+
     },
     chapters: {
         marginBottom: 15,
