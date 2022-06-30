@@ -152,8 +152,8 @@ class AppState {
 
     // karaites books
     setParagraphs = (paragraphs: Array<any>, i: number): void => {
-        console.log('setParagraphs', paragraphs)
-        this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
+        // this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
+        this.panes[i].paragraphs = paragraphs
     }
 
     getParagraphs = (i: number): Array<any> => this.panes[i].paragraphs
@@ -162,13 +162,11 @@ class AppState {
         (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
     setBookDetails = (details: object, i: number): void => {
-        console.log('setBookDetails', details)
         runInAction(() => {
             this.panes[i].book_details = details
         })
     }
     getBookDetails = (i: number): object => {
-        console.log('getBookDetails', this.panes[i].book_details)
         return this.panes[i].book_details
     }
 

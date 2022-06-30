@@ -280,8 +280,6 @@ class Command(BaseCommand):
                                                               1,
                                                               text,
                                                               'Liturgy')
-                    # else:
-                    #     print(f'Unknown language:{guess["lang"]}')
 
         table_str = ''
         for table in divs[0].find_all('table'):
@@ -318,6 +316,7 @@ class Command(BaseCommand):
 
             html_tree = BeautifulSoup(html, 'html5lib')
             html = str(html_tree)
+
             # self.process_footnotes(html, book_details, lang)
 
             html = html.replace(book.remove_class, '')
@@ -358,7 +357,7 @@ class Command(BaseCommand):
                         update_karaites_array_details(book,
                                                       '',
                                                       c,
-                                                      [html_he, 0, html_en])
+                                                      [html_en, 0, html_he])
 
                         update_full_text_search_index_en_he(book.book_title_en,
                                                             book.book_title_he,
@@ -449,12 +448,14 @@ class Command(BaseCommand):
                     if key is not None:
                         p = p.replace('#', '')
 
-                    update_karaites_array_details(book.book_title_en, '', c, [p, 0, ''])
-
                     if lang in ['en']:
+                        update_karaites_array_details(book.book_title_en, '', c, [p, 0, ''])
+
                         update_full_text_search_index_english(book.book_title_en, c, text,
                                                               book.book_classification.classification_name)
                     if lang in ['he']:
+                        update_karaites_array_details(book.book_title_en, '', c, ['', 0, p])
+
                         update_full_text_search_index_hebrew(book.book_title_en, book.book_title_he, c, text,
                                                              book.book_classification.classification_name)
 

@@ -3,7 +3,6 @@ from .views import (GetFirstLevel,
                     GetByLevelAndByClassification,
                     BooksPresentation,
                     GetBookAsArrayJson,
-                    GetComments,
                     GetKaraitesAllBookDetails,
                     GetByLevel,
                     GetKaraitesBookAsArray,
@@ -52,12 +51,6 @@ urlpatterns = [
          name='get_bible_references'),
 
     path('get-bible-references/<str:reference>/', GetBiBleReferences.as_view(), name='get_bible_references'),
-
-    # comments
-    path('get-comments/<str:book>/<str:chapter>/<str:verse>/', GetComments.as_view(), name='get_comments'),
-    path('get-comments/<str:book>/<str:chapter>/', GetComments.as_view(), name='get_comments'),
-    path('get-comments/<str:book>/', GetComments.as_view(), name='get_comments'),
-    path('get-comments/', GetComments.as_view(), name='get_comments'),
 
     # references Halakhah
     path('get-references/<str:book>/<str:chapter>/<str:verse>/', GetHalakhah.as_view(), name='get_references'),

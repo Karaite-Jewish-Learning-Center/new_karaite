@@ -14,7 +14,7 @@ def update_create_bible_refs(book):
     i = 1
     for rex in RE_BIBLE_REF:
         query = KaraitesBookAsArray.objects.filter(book=book).filter(book_text__iregex=rex)
-        # print('Query:{}'.format(query.count()))
+
         for book_text in query:
             for lang in [0, 2]:
 
@@ -25,6 +25,10 @@ def update_create_bible_refs(book):
                         english_ref, _ = parse_reference(ref_text)
                         if english_ref == '':
                             continue
+
+                        # print('book:', book_text.book_text)
+                        # print('Length:', len(book_text.book_text))
+                        # input('Press Enter to continue...')
 
                         References.objects.get_or_create(
                             karaites_book=book,

@@ -12,13 +12,15 @@ import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
 import {Button} from '@material-ui/core';
 
-const HTML = 2
 const BOOK = 0
 const TOC = 1
 const INTRO = 2
 const SUBJECT = 0
 const INDEX = 1
 const START_PARAGRAPH = 2
+const ENGLISH = 0
+const HEBREW = 2
+
 
 interface KaraitesBooksInterface {
     paneNumber: number,
@@ -83,28 +85,31 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
 
     const itemTable = (item: number, data: Array<any>) => {
-
         return (
             <tr>
-                {parse(data[HTML][0], {
+                {parse(data[HEBREW], {
                     replace: domNode => {
                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                     }
                 })}
-                {parse(data[HTML][2], {
+                {parse(data[ENGLISH], {
                     replace: domNode => {
                         return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                     }
                 })}
+
             </tr>
         )
 
     }
     const itemContent = (item: number, data: Array<any>) => {
+        debugger
+        let index = 2
+        if(type==='Liturgy' || (type==='Comments' && details.book_language.indexOf('en')>=0)) index = 0
         return (
             <div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
                 <div className={(type !== 'Liturgy' ? classes.paragraph : classes.liturgy)}>
-                    {parse(data[HTML][0], {
+                    {parse(data[index], {
                         replace: domNode => {
                             return transform(refClick, item, TRANSFORM_TYPE, paneNumber, domNode)
                         }
@@ -115,6 +120,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemIntroduction = (item: number, data: string) => {
+        debugger
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'Liturgy' ? classes.paragraph : classes.liturgy)}>
                 {parse(data, {
@@ -155,7 +161,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
-
+        debugger
         if (details.table_book) {
             const tableBook = 'table-book'
             return (

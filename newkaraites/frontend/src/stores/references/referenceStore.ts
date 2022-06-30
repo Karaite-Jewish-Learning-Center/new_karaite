@@ -1,7 +1,6 @@
 import {makeAutoObservable, observable, toJS} from "mobx"
 import {fetchData} from '../../components/api/dataFetch';
 import {getLevels} from '../../constants/constants';
-import {getBiblereferencesUrl} from '../../constants/constants';
 
 
 class ReferenceStore {

@@ -185,15 +185,6 @@ class BooksPresentation(View):
         return JsonResponse(Organization.get_list_of_books(), safe=False)
 
 
-class GetComments(View):
-    """"""
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        kwargs.update({'model': 'comments'})
-        return book_chapter_verse(request, *args, **kwargs)
-
-
 class GetBookAsArrayJson(View):
 
     @staticmethod
@@ -385,8 +376,6 @@ class GetBiBleReferences(View):
             return JsonResponse(data={'status': 'false', 'message': _('Need a reference.')}, status=400)
 
         references = References.to_list(reference)
-
-        print(references)
 
         return JsonResponse(references, safe=False)
 

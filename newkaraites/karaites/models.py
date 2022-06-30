@@ -1047,7 +1047,7 @@ class KaraitesBookAsArray(models.Model):
 
     paragraph_number = models.IntegerField(default=0)
 
-    # [paragraph English, page number, page number hebrew, is_title, paragraph Hebrew]
+    # [paragraph English, 0, hebrew, is_title, paragraph Hebrew]
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
@@ -1067,18 +1067,26 @@ class KaraitesBookAsArray(models.Model):
 
         result = []
         for book in query:
-            result.append([book.ref_chapter, book.paragraph_number, book.book_text])
-        return [result, query.count()]
+            result.append(book.book_text)
+        return result
 
     @mark_safe
-    def text(self):
+    def text_en(self):
         html = '<table><tbody><tr>'
-        html += f'<td class="he-verse">{self.book_text[0]}</td>'
-        html += f'<td class="en-verse" dir="ltr">{self.book_text[2]}</td>'
+        html += f'<td class="en-verse" dir="ltr">{self.book_text[0]}</td>'
         html += '</tr></tbody></table>'
         return html
 
-    text.short_description = "Book Text"
+    text_en.short_description = "English"
+
+    @mark_safe
+    def text_he(self):
+        html = '<table><tbody><tr>'
+        html += f'<td class="he-verse">{self.book_text[2]}</td>'
+        html += '</tr></tbody></table>'
+        return html
+
+    text_he.short_description = "Hebrew"
 
     @mark_safe
     def foot_notes_admin(self):
@@ -1174,15 +1182,25 @@ class References(models.Model):
         return f'{self.karaites_book.book_title_en} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'
 
     @mark_safe
-    def paragraph_admin(self):
-        # text[0] is hebrew, text[2] is english
+    def paragraph_admin_he(self):
+        # text[2] is hebrew, text[0] is english
         html = '<table><tbody><tr>'
-        html += f'<td class="he-verse">{self.paragraph_text[0]}</td>'
-        html += f'<td class="en-verse" dir="ltr">{self.paragraph_text[2]}</td>'
+        html += f'<td class="he-verse">{self.paragraph_text[2]}</td>'
+
         html += '</tr></tbody></table>'
         return html
 
-    paragraph_admin.short_description = 'Text Hebrew/English'
+    paragraph_admin_he.short_description = 'Hebrew'
+
+    @mark_safe
+    def paragraph_admin_en(self):
+        # text[2] is hebrew, text[0] is english
+        html = '<table><tbody><tr>'
+        html += f'<td class="en-verse" dir="ltr">{self.paragraph_text[0]}</td>'
+        html += '</tr></tbody></table>'
+        return html
+
+    paragraph_admin_en.short_description = 'English'
 
     @mark_safe
     def foot_notes_admin(self):
@@ -1206,6 +1224,7 @@ class References(models.Model):
                 'bible_ref_en': self.bible_ref_en,
                 'book_classification': self.karaites_book.book_classification.classification_name,
                 'book_first_level': self.karaites_book.first_level.first_level,
+                'book_first_level_he': self.karaites_book.first_level.first_level_he,
                 }
 
     @staticmethod

@@ -13,10 +13,12 @@ const fetchData = async (paneNumber, store,message,  url, type) => {
 
         if (response.ok) {
             const data = await response.json()
+            debugger
             if (type === 'bible') {
                 store.setBookData(data.chapter, paneNumber)
             } else {
-                store.setParagraphs(data[PARAGRAPHS][0], paneNumber)
+                debugger
+                store.setParagraphs(data[PARAGRAPHS], paneNumber)
                 store.setBookDetails(data[BOOK_DETAILS], paneNumber)
             }
             store.setLoading(false)

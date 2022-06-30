@@ -12,7 +12,7 @@ import {referenceContext} from '../../stores/references/referenceContext'
 import Container from "@material-ui/core/Container";
 import {toJS} from "mobx";
 import {fetchData} from "../api/dataFetch";
-import {getBiblereferencesUrl, TRANSFORM_TYPE} from "../../constants/constants";
+import {getBibleReferencesUrl, TRANSFORM_TYPE} from "../../constants/constants";
 import parse from "html-react-parser";
 import transform from "../../utils/transform";
 import Loading from "../general/loading";
@@ -59,7 +59,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     const onClickReference = (key, _) => {
         const bookChapterVerse = store.getBookChapterVerse(paneNumber)
         // already loaded do nothing
-        if(bookChapterVerse === loadedBookChapterVerse && key === referenceKey) {
+        if(bookChapterVerse === loadedBookChapterVerse ) {
             setReferenceKey(key)
             return
         }
@@ -67,15 +67,12 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
         setLoading(true)
         setLoadedBookChapterVerse(bookChapterVerse)
 
-        // todo: try to fetch all references for this book chapter verse
-        // maybe it's faster than fetching each reference separately
-        // and easier to cache.
-
-        fetchData(`${getBiblereferencesUrl}${bookChapterVerse}/${key}`)
+        fetchData(`${getBibleReferencesUrl}${bookChapterVerse}/`)
             .then(data => {
                 setReferences(data)
                 setReferenceKey(key)
                 setLoading(false)
+                debugger
             })
             .catch(e =>{
                 message.setMessage('Error fetching references', e)
@@ -100,12 +97,12 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             index = index + 2
             if (languages[0] === 'en') {
                 return (
-                    <Container>
+                    <Container  key={makeRandomKey()}>
                         <Button
                             variant="text"
                             className={classes.button}
                             fullWidth={true}
-                            disabled={verseData[index] === '0'}
+                            // disabled={verseData[index] === '0'}
                             startIcon={<MenuBookIcon className={classes.icon}/>}
                             onClick={onClickReference.bind(this, key)}
                             key={makeRandomKey()}>
@@ -115,12 +112,12 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                 )
             } else {
                 return (
-                    <Container>
+                    <Container  key={makeRandomKey()}>
                         <Button
                             variant="text"
                             className={classes.buttonHe}
                             fullWidth={true}
-                            disabled={verseData[index] === '0'}
+                            // disabled={verseData[index] === '0'}
                             endIcon={<MenuBookIcon className={classes.icon}/>}
                             onClick={onClickReference.bind(this, key)}
                             key={makeRandomKey()}>
@@ -170,7 +167,8 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                 <Paper className={classes.paperRefs}>
                     {references.map(refs => {
                         // English
-                        if (languages[0] === 'en' && refs.paragraph_html[2] !== '') {
+                        console.log(refs.book_first_level, referenceKey,  refs.paragraph_html[2] ==='')
+                        if ( refs.language.indexOf(languages[0])>0 && refs.book_first_level === referenceKey && refs.paragraph_html[2] !== '') {
                             return (
                                 <>
                                     <hr/>
@@ -197,11 +195,14 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                             )
                         }
                         // Hebrew
-                        if (languages[0] === 'he' && refs.paragraph_html[1] !== '') {
+                         console.log('Hebrew',refs.book_first_level, referenceKey,  refs.paragraph_html[2] ==='')
+                        if (refs.language.indexOf(languages[0])> 0 && refs.book_first_level === referenceKey  && refs.paragraph_html[1] !== '') {
                             return (
                                 <>
                                     <hr/>
-                                    <Typography className={classes.title_he}>{refs.book_name_he}</Typography>
+                                    <Typography className={classes.title_he}>
+                                        {(refs.book_name_he.length>1 ? refs.book_name_he : refs.book_name_en)}
+                                    </Typography>
                                     <hr/>
                                     <Typography className={classes.author_he}>{refs.author}</Typography>
                                     <span className={classes.refs}>

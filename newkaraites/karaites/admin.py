@@ -222,10 +222,11 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 
 class KaraitesBookTextAsArrayAdmin(KAdmin):
-    list_display = ('book', 'ref_chapter', 'paragraph_number', 'text', 'foot_notes_admin')
+    list_display = ('book', 'ref_chapter', 'paragraph_number',
+                    'text_he', 'text_en', 'foot_notes_admin')
 
-    list_filter = ('book__first_level', 'book__book_language', 'book__book_classification',
-                   'book')
+    list_filter = ('book__first_level', 'book__book_language',
+                   'book__book_classification', 'book')
 
 
 admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)
@@ -242,9 +243,9 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 class ReferencesAdmin(KAdmin):
     list_display = ('karaites_book', 'paragraph_number',
-                    'paragraph_admin', 'foot_notes_admin',
-                    'error', 'bible_ref_en', 'bible_ref_he',
-                    'law')
+                    'paragraph_admin_he', 'paragraph_admin_en',
+                    'foot_notes_admin', 'error', 'bible_ref_en',
+                    'bible_ref_he', 'law')
 
     search_fields = ('bible_ref_en',)
     list_filter = ('karaites_book',
