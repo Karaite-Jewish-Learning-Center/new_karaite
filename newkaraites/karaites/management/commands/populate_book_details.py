@@ -1,6 +1,3 @@
-import io
-
-from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -112,7 +109,7 @@ HALAKHAH = [
     [
         'HTML/Halakhah/aaron_ben_josephs_essay_on_the _obligation_of_prayer/',
         'aaron_ben_Josephs_Essay_on_the_obligation_of_prayer-{}.html',
-        'en,in',
+        'he-en,in',
         [],
         [],
         {'name': r"Aaron ben Joseph's Essay on the Obligation of Prayer,הצעה בחיוב התפלה ",
@@ -121,7 +118,9 @@ HALAKHAH = [
          'author': ',',
          'css_class': 'stacked',
          'remove_class': 'MsoTableGrid',
-         'remove_tags': '<o:p>&nbsp;</o:p>'},
+         'remove_tags': '<o:p>&nbsp;</o:p>',
+         'table_book': True,
+         'columns_order': '0,1,2'},
         True
     ],
     [
@@ -1066,6 +1065,7 @@ class Command(BaseCommand):
                     source = File(open(source_filename, 'rb'), book_title_en)
 
                 first = FIRST_LEVEL_DICT[book_details['first_level']]
+
                 first_level, _ = FirstLevel.objects.get_or_create(
                     first_level=first,
                     first_level_he=FIRST_LEVEL_HE_DICT[book_details['first_level']][0],

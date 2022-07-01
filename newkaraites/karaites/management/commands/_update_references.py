@@ -28,6 +28,8 @@ class Command(BaseCommand):
         first_levels = FirstLevel.objects.all().exclude(first_level='Tanakh').values_list('first_level',
                                                                                           flat=True).order_by('order')
         first_levels = list(first_levels)
+        print(first_levels)
+        ppp
         array_len = len(first_levels)
         # [text english, text hebrew, _, _,
         # Verse number , Chapter, need render chapter title,

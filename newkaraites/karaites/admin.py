@@ -3,18 +3,19 @@ from .models import (FirstLevel,
                      SecondLevel,
                      Organization,
                      Author,
-
                      BookAsArray,
                      BooksFootNotes,
                      Songs,
                      Classification,
                      KaraitesBookDetails,
+                     DetailsProxy,
                      KaraitesBookAsArray,
                      TableOfContents,
                      References,
                      FullTextSearch,
                      FullTextSearchHebrew,
                      InvertedIndex)
+
 
 from django.conf import settings
 
@@ -162,6 +163,36 @@ class KaraitesBookDetailsAdmin(KAdmin):
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 
+class DetailsProxyAdmin(KAdmin):
+    save_on_top = True
+    search_fields = ('book_title_en', 'book_title_he')
+    list_display = ('user',
+                    'book_title_en',
+                    'book_title_he',
+                    'author',
+                    'first_level',
+                    'book_classification',
+                    'book_language',
+                    'song_list',
+                    'table_book',
+                    'multi_tables',
+                    'columns',
+                    'columns_order',
+                    'toc_columns',
+                    'direction',
+                    'remove_class',
+                    'remove_tags',
+                    'css_class',
+                    'buy_link',
+                    'index_lang',
+                    )
+
+    list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
+
+
+admin.site.register(DetailsProxy, DetailsProxyAdmin)
+
+
 class KaraitesBookTextAsArrayAdmin(KAdmin):
     list_display = ('book', 'ref_chapter', 'paragraph_number',
                     'text_he', 'text_en', 'foot_notes_admin')
@@ -183,10 +214,10 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 
 class ReferencesAdmin(KAdmin):
-    list_display = ('karaites_book', 'paragraph_number',
+    list_display = ('karaites_book','law', 'paragraph_number',
                     'paragraph_admin_he', 'paragraph_admin_en',
                     'foot_notes_admin', 'error', 'bible_ref_en',
-                    'bible_ref_he', 'law')
+                    'bible_ref_he')
 
     search_fields = ('bible_ref_en',)
     list_filter = ('karaites_book',

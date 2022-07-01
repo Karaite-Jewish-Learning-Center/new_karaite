@@ -26,10 +26,6 @@ def update_create_bible_refs(book):
                         if english_ref == '':
                             continue
 
-                        # print('book:', book_text.book_text)
-                        # print('Length:', len(book_text.book_text))
-                        # input('Press Enter to continue...')
-
                         References.objects.get_or_create(
                             karaites_book=book,
                             paragraph_number=book_text.paragraph_number,

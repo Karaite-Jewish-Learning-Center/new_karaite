@@ -11,19 +11,24 @@ $ cd anaconda3/envs/dev/newkaraites/newkaraites/
 
 biblical_books, has no dependencies
 
->> ./manage.py biblical_books
+# Never run this commands again, unless you know what you are doing
+# this command will delete all data in the database
+# and will recreate it from the bible books
+# all manual editions will be lost
+# you have been warned !!
 
-Process all books
+>>./manage.py populate_book_details
 
->> ./manage.py populate_book_details
+>>./manage.py biblical_books
 
+# Those can be run on a book basis
 >>./manage.py process_books
-   
->> ./manage.py process_intro_he_en
+>>./manage.py process_intro_he_en
  
->> ./manage.py create_hebrew_search   
-
->> ./manage.py create_hebrew_rank_search
+# Those can run as many times as you like
+>>./manage.py update_references
+>>./manage.py create_hebrew_search   
+>>./manage.py create_hebrew_rank_search
 
 [//]: # (Update autocomplete)
 

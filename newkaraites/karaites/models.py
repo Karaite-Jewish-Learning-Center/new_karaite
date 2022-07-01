@@ -681,6 +681,13 @@ class KaraitesBookDetails(models.Model):
         ordering = ('book_title_en', 'author')
 
 
+class DetailsProxy(KaraitesBookDetails):
+
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Karaites book details no Html'
+
+
 class BooksFootNotes(models.Model):
     """ Book footnotes """
 

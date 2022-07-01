@@ -17,6 +17,9 @@ import parse from "html-react-parser";
 import transform from "../../utils/transform";
 import Loading from "../general/loading";
 
+const COUNT_HE = 8
+const COUNT_EN = 9
+
 
 const RightPane = ({paneNumber, refClick, openBook}) => {
 
@@ -72,7 +75,6 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                 setReferences(data)
                 setReferenceKey(key)
                 setLoading(false)
-                debugger
             })
             .catch(e =>{
                 message.setMessage('Error fetching references', e)
@@ -82,19 +84,22 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     }
 
     const ReferencesMenu = () => {
-        if(loading) {
+        const c = toJS(verseData)
+        debugger
+        if(loading || verseData.length===2 || verseData[COUNT_HE] === undefined) {
             return (
                 <Container className={classes.container}>
                     <Loading />
                 </Container>
             )
         }
-        let index = 7
-        if (languages[0] === 'en') index = 8
+        debugger
+        let index = -1
         const levels = reference.getLevelsNoTanakh()
-
+        const count_he = JSON.parse(verseData[COUNT_HE])
+        const count_en = JSON.parse(verseData[COUNT_EN])
         return Object.keys(levels).map(key => {
-            index = index + 2
+            index++
             if (languages[0] === 'en') {
                 return (
                     <Container  key={makeRandomKey()}>
@@ -106,7 +111,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                             startIcon={<MenuBookIcon className={classes.icon}/>}
                             onClick={onClickReference.bind(this, key)}
                             key={makeRandomKey()}>
-                            <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({verseData[index]})</Typography>
+                            <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({count_en[index]})</Typography>
                         </Button>
                     </Container>
                 )
@@ -121,11 +126,12 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                             endIcon={<MenuBookIcon className={classes.icon}/>}
                             onClick={onClickReference.bind(this, key)}
                             key={makeRandomKey()}>
-                            <Typography variant="h6" component="h6" className={classes.itemsHe}>({verseData[index]}){' '}{levels[key][1]} </Typography>
+                            <Typography variant="h6" component="h6" className={classes.itemsHe}>({count_he[index]}){' '}{levels[key][1]} </Typography>
                         </Button>
                     </Container>
                 )
             }
+
         })
     }
 
@@ -161,14 +167,14 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                 </Container>
             )
         }
+        // Judeo-Arabic is also 2
+        let index = (languages[0] === 'en' ? 0 : 2)
         return (
             <Container className={classes.container}>
                 <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
                 <Paper className={classes.paperRefs}>
                     {references.map(refs => {
-                        // English
-                        console.log(refs.book_first_level, referenceKey,  refs.paragraph_html[2] ==='')
-                        if ( refs.language.indexOf(languages[0])>0 && refs.book_first_level === referenceKey && refs.paragraph_html[2] !== '') {
+                        if (refs.book_first_level === referenceKey && refs.paragraph_html[index] !== '') {
                             return (
                                 <>
                                     <hr/>
@@ -176,7 +182,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                                     <hr/>
                                     <Typography className={classes.author}>{refs.author}</Typography>
                                     <span className={classes.refs}>
-                                        {parse(refs.paragraph_html[2], {
+                                        {parse(refs.paragraph_html[index], {
                                             replace: domNode => {
                                                 return transform(refClick,
                                                     '',
@@ -195,35 +201,35 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                             )
                         }
                         // Hebrew
-                         console.log('Hebrew',refs.book_first_level, referenceKey,  refs.paragraph_html[2] ==='')
-                        if (refs.language.indexOf(languages[0])> 0 && refs.book_first_level === referenceKey  && refs.paragraph_html[1] !== '') {
-                            return (
-                                <>
-                                    <hr/>
-                                    <Typography className={classes.title_he}>
-                                        {(refs.book_name_he.length>1 ? refs.book_name_he : refs.book_name_en)}
-                                    </Typography>
-                                    <hr/>
-                                    <Typography className={classes.author_he}>{refs.author}</Typography>
-                                    <span className={classes.refs}>
-                                        {parse(refs.paragraph_html[0], {
-                                            replace: domNode => {
-                                                return transform(refClick,
-                                                    '',
-                                                    TRANSFORM_TYPE,
-                                                    paneNumber,
-                                                    domNode)
-                                            }
-                                        })}
-                                    </span>
-                                    <Button
-                                        className={classes.openBookButton}
-                                        onClick={callOpenBook.bind(this, 0)}>
-                                        Open book
-                                    </Button>
-                                </>
-                            )
-                        }
+
+                        // if (refs.language.indexOf(languages[0])>=0 && refs.book_first_level === referenceKey  && refs.paragraph_html[2] !== '') {
+                        //     return (
+                        //         <>
+                        //             <hr/>
+                        //             <Typography className={classes.title_he}>
+                        //                 {(refs.book_name_he.length>1 ? refs.book_name_he : refs.book_name_en)}
+                        //             </Typography>
+                        //             <hr/>
+                        //             <Typography className={classes.author_he}>{refs.author}</Typography>
+                        //             <span className={classes.refs}>
+                        //                 {parse(refs.paragraph_html[2], {
+                        //                     replace: domNode => {
+                        //                         return transform(refClick,
+                        //                             '',
+                        //                             TRANSFORM_TYPE,
+                        //                             paneNumber,
+                        //                             domNode)
+                        //                     }
+                        //                 })}
+                        //             </span>
+                        //             <Button
+                        //                 className={classes.openBookButton}
+                        //                 onClick={callOpenBook.bind(this, 0)}>
+                        //                 Open book
+                        //             </Button>
+                        //         </>
+                        //     )
+                        // }
 
                     })}
 

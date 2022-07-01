@@ -1,5 +1,3 @@
-from tqdm import tqdm
-from django.conf import settings
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from .update_karaites_array import (update_karaites_array,
@@ -495,6 +493,8 @@ class Command(BaseCommand):
             References.objects.filter(karaites_book=book).delete()
             KaraitesBookAsArray.objects.filter(book=book).delete()
 
+            print(f'processing {book_title_en}')
+
             if book.intro:
                 self.process_intro(book, book_title_en, book_title_he)
 
@@ -502,7 +502,7 @@ class Command(BaseCommand):
                 table_of_contents = self.process_toc(book, table_of_contents)
 
             if self.check_is_a_liturgy_book(book_title_en):
-
+                print(f'{book_title_en} ')
                 self.process_liturgy_books(book)
 
             else:

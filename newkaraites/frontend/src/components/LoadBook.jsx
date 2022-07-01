@@ -121,7 +121,7 @@ const LoadBook = ({type}) => {
         }
         return jsx
     }
-    getBook(book, chapter, verse, [], type, store).then().catch()
+    getBook(book, chapter, verse, [], type, store, message).then().catch()
 
     const books = bookRender()
     if (books.length === 0) {
