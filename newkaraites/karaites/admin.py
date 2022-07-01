@@ -3,9 +3,7 @@ from .models import (FirstLevel,
                      SecondLevel,
                      Organization,
                      Author,
-                     Comment,
-                     CommentTmp,
-                     OtherBooks,
+
                      BookAsArray,
                      BooksFootNotes,
                      Songs,
@@ -18,7 +16,6 @@ from .models import (FirstLevel,
                      FullTextSearchHebrew,
                      InvertedIndex)
 
-from .admin_forms import AdminCommentForm
 from django.conf import settings
 
 STATIC = settings.STATIC_URL
@@ -66,15 +63,6 @@ class OrganizationAdmin(KAdmin):
 admin.site.register(Organization, OrganizationAdmin)
 
 
-class OtherBooksAdmin(KAdmin):
-    list_display = ('book_title_en', 'book_title_he', 'author', 'classification')
-    search_fields = ('book_title_en', 'book_title_he', 'author')
-    list_filter = ('classification',)
-
-
-admin.site.register(OtherBooks, OtherBooksAdmin)
-
-
 class AuthorAdmin(KAdmin):
     list_display = ('name', 'name_he', 'comments_count_en',
                     'comments_count_he', 'history')
@@ -83,53 +71,6 @@ class AuthorAdmin(KAdmin):
 
 
 admin.site.register(Author, AuthorAdmin)
-
-
-class CommentAdmin(KAdmin):
-    form = AdminCommentForm
-    list_display = ('book', 'chapter', 'verse', 'english',
-                    'foot_note_en_admin', 'hebrew',
-                    'foot_note_he_admin', 'comment_author',
-                    'source_book')
-
-    list_filter = ('comment_author', 'book', 'chapter')
-    actions = ['delete_model']
-
-    def get_actions(self, request):
-        """ remove default delete"""
-        actions = super().get_actions(request)
-        if 'delete_selected' in actions:
-            del actions['delete_selected']
-        return actions
-
-    def delete_model(self, request, obj):
-        """need to call model delete to keep comment_count up to date"""
-        for instance in obj.all():
-            Comment.objects.get(pk=instance.pk).delete()
-
-    delete_model.short_description = 'Delete selected'
-
-
-admin.site.register(Comment, CommentAdmin)
-
-
-class CommentTmpAdmin(CommentAdmin):
-    def get_actions(self, request):
-        """ remove default delete"""
-        actions = super().get_actions(request)
-        if 'delete_selected' in actions:
-            del actions['delete_selected']
-        return actions
-
-    def delete_model(self, request, obj):
-        """need to call model delete to keep comment_count up to date"""
-        for instance in obj.all():
-            CommentTmp.objects.get(pk=instance.pk).delete()
-
-    delete_model.short_description = 'Delete selected'
-
-
-# admin.site.register(CommentTmp, CommentTmpAdmin)
 
 
 class BookAsArrayAdmin(KAdmin):

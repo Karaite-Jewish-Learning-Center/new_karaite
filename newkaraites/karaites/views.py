@@ -17,7 +17,7 @@ from .models import (FirstLevel,
                      InvertedIndex,
                      Organization,
                      BookAsArray,
-                     Comment,
+                     # Comment,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
@@ -72,10 +72,6 @@ def book_chapter_verse(request, *args, **kwargs):
             message = _(f"Invalid verse for the book:{book} ")
             message += _(f"chapter:{chapter} must be between 1 and {verses_on_this_chapter}")
             return JsonResponse(data={'status': 'false', 'message': message}, status=400)
-
-    if model == 'comments':
-        comments = Comment().to_json_comments(book=book_title, chapter=chapter, verse=verse)
-        return JsonResponse({'comments': comments})
 
     if model == 'bookAsArray':
         if first is None:

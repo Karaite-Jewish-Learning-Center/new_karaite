@@ -324,7 +324,7 @@ class Command(BaseCommand):
 
             html_tree = BeautifulSoup(html, 'html5lib')
             divs = html_tree.find_all('div', class_='WordSection1')
-
+            print('table_book', table_book)
             if table_book:
                 table = divs[0].find_all('tr', recursive=True)
                 columns_order = list(map(int, book.columns_order.split(',')))
@@ -338,8 +338,8 @@ class Command(BaseCommand):
                     text_en = ''
                     html_he = ''
                     html_en = ''
-
-                    if 'he' in book.book_language:
+                    print('book: ', book.book_language)
+                    if 'he' in book.book_language or 'ja' in book.book_language:
                         try:
                             text_he = tds[columns_order[0]].get_text(strip=False)
                             html_he = str(tds[columns_order[0]])
@@ -453,7 +453,7 @@ class Command(BaseCommand):
 
                         update_full_text_search_index_english(book.book_title_en, c, text,
                                                               book.book_classification.classification_name)
-                    if lang in ['he']:
+                    if lang in ['he', 'ja']:
                         update_karaites_array_details(book.book_title_en, '', c, ['', 0, p])
 
                         update_full_text_search_index_hebrew(book.book_title_en, book.book_title_he, c, text,
