@@ -17,8 +17,8 @@ import parse from "html-react-parser";
 import transform from "../../utils/transform";
 import Loading from "../general/loading";
 
-const COUNT_HE = 8
-const COUNT_EN = 9
+const COUNT_HE = 9
+const COUNT_EN = 10
 
 
 const RightPane = ({paneNumber, refClick, openBook}) => {
@@ -26,9 +26,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     const store = useContext(storeContext)
     const message = useContext(messageContext)
     const reference = useContext(referenceContext)
-    // const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
     const [loading, setLoading] = useState(false)
-    const [loadedBookChapterVerse, setLoadedBookChapterVerse] = useState('')
     const verseData = (store.getVerseData(paneNumber).length === 0 ? ['', ''] : store.getVerseData(paneNumber))
     const [languages, setLanguages] = useState(['en', 'he'])
     const [references, setReferences] = useState([])
@@ -61,14 +59,8 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
 
     const onClickReference = (key, _) => {
         const bookChapterVerse = store.getBookChapterVerse(paneNumber)
-        // already loaded do nothing
-        if(bookChapterVerse === loadedBookChapterVerse ) {
-            setReferenceKey(key)
-            return
-        }
-
+        // todo: cache the references
         setLoading(true)
-        setLoadedBookChapterVerse(bookChapterVerse)
 
         fetchData(`${getBibleReferencesUrl}${bookChapterVerse}/`)
             .then(data => {
@@ -76,7 +68,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                 setReferenceKey(key)
                 setLoading(false)
             })
-            .catch(e =>{
+            .catch(e => {
                 message.setMessage('Error fetching references', e)
                 setLoading(false)
             })
@@ -84,54 +76,37 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     }
 
     const ReferencesMenu = () => {
-        const c = toJS(verseData)
-        debugger
-        if(loading || verseData.length===2 || verseData[COUNT_HE] === undefined) {
+
+        if (loading || verseData.length === 2 || verseData[COUNT_HE] === undefined) {
             return (
                 <Container className={classes.container}>
-                    <Loading />
+                    <Loading/>
                 </Container>
             )
         }
-        debugger
-        let index = -1
-        const levels = reference.getLevelsNoTanakh()
-        const count_he = JSON.parse(verseData[COUNT_HE])
-        const count_en = JSON.parse(verseData[COUNT_EN])
-        return Object.keys(levels).map(key => {
-            index++
-            if (languages[0] === 'en') {
-                return (
-                    <Container  key={makeRandomKey()}>
-                        <Button
-                            variant="text"
-                            className={classes.button}
-                            fullWidth={true}
-                            // disabled={verseData[index] === '0'}
-                            startIcon={<MenuBookIcon className={classes.icon}/>}
-                            onClick={onClickReference.bind(this, key)}
-                            key={makeRandomKey()}>
-                            <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({count_en[index]})</Typography>
-                        </Button>
-                    </Container>
-                )
-            } else {
-                return (
-                    <Container  key={makeRandomKey()}>
-                        <Button
-                            variant="text"
-                            className={classes.buttonHe}
-                            fullWidth={true}
-                            // disabled={verseData[index] === '0'}
-                            endIcon={<MenuBookIcon className={classes.icon}/>}
-                            onClick={onClickReference.bind(this, key)}
-                            key={makeRandomKey()}>
-                            <Typography variant="h6" component="h6" className={classes.itemsHe}>({count_he[index]}){' '}{levels[key][1]} </Typography>
-                        </Button>
-                    </Container>
-                )
-            }
 
+        const levels = reference.getLevelsNoTanakh()
+        const langIndex = (languages[0] === 'en' ? 0 : 1)
+        let counts = [JSON.parse(verseData[COUNT_EN]), JSON.parse(verseData[COUNT_HE])]
+        return Object.keys(levels).map((key, index) => {
+            return (
+                <Container key={makeRandomKey()}>
+                    <Button
+                        variant="text"
+                        className={(langIndex === 0 ? classes.button : classes.buttonHe)}
+                        fullWidth={true}
+                        disabled={counts[langIndex][index] === 0}
+                        startIcon={<MenuBookIcon className={classes.icon}/>}
+                        onClick={onClickReference.bind(this, key)}
+                        key={makeRandomKey()}>
+                        {langIndex === 0 ?
+                            <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({counts[langIndex][index]})</Typography>
+                            :
+                            <Typography variant="h6" component="h6" className={classes.itemsHe}>({counts[langIndex][index]}){' '}{levels[key][1]} </Typography>
+                        }
+                    </Button>
+                </Container>
+            )
         })
     }
 
@@ -168,7 +143,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             )
         }
         // Judeo-Arabic is also 2
-        let index = (languages[0] === 'en' ? 0 : 2)
+        const index = (languages[0] === 'en' ? 0 : 2)
         return (
             <Container className={classes.container}>
                 <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
@@ -200,36 +175,6 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                                 </>
                             )
                         }
-                        // Hebrew
-
-                        // if (refs.language.indexOf(languages[0])>=0 && refs.book_first_level === referenceKey  && refs.paragraph_html[2] !== '') {
-                        //     return (
-                        //         <>
-                        //             <hr/>
-                        //             <Typography className={classes.title_he}>
-                        //                 {(refs.book_name_he.length>1 ? refs.book_name_he : refs.book_name_en)}
-                        //             </Typography>
-                        //             <hr/>
-                        //             <Typography className={classes.author_he}>{refs.author}</Typography>
-                        //             <span className={classes.refs}>
-                        //                 {parse(refs.paragraph_html[2], {
-                        //                     replace: domNode => {
-                        //                         return transform(refClick,
-                        //                             '',
-                        //                             TRANSFORM_TYPE,
-                        //                             paneNumber,
-                        //                             domNode)
-                        //                     }
-                        //                 })}
-                        //             </span>
-                        //             <Button
-                        //                 className={classes.openBookButton}
-                        //                 onClick={callOpenBook.bind(this, 0)}>
-                        //                 Open book
-                        //             </Button>
-                        //         </>
-                        //     )
-                        // }
 
                     })}
 

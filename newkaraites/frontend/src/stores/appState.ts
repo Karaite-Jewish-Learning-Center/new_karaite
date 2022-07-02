@@ -37,27 +37,16 @@ class AppState {
         return this.panes[paneNumber].isRightPaneOpen
     }
 
-    // comment Tab
-    setCommentTab = (tab: string, paneNumber: number): void => {
-        this.panes[paneNumber].commentTab = tab
-    }
-    getCommentTab = (paneNumber: number): string => this.panes[paneNumber].commentTab
-
-    setComments = (comments: Array<string>, paneNumber: number): void => {
-        this.panes[paneNumber].comments = comments
+    setRefsChapterVerse = (chapter: number, verse: number, paneNumber: number): void => {
+        this.panes[paneNumber].refsChapterVerse = [chapter, verse]
     }
 
-    getComments = (paneNumber: number): Array<any> => this.panes[paneNumber].comments
+    getBookChapterVerse = (i: number) => `(${this.panes[i].book} ${this.panes[i].refsChapterVerse[0]}:${this.panes[i].refsChapterVerse[1]})`
 
-    setCommentsChapter = (chapter: number, paneNumber: number): void => {
-        this.panes[paneNumber].commentsChapter = chapter
-    }
-    getCommentsChapter = (paneNumber: number): void => this.panes[paneNumber].commentsChapter
-
-    setCommentsVerse = (verse: number, paneNumber: number): void => {
-        this.panes[paneNumber].commentsVerse = verse
-    }
-    getCommentsVerse = (paneNumber: number): void => this.panes[paneNumber].commentsVerse
+    // getRefsChapterVerse = (paneNumber: number): void => this.panes[paneNumber].refsChapterVerse
+    //
+    // getRefsChapter = (paneNumber: number): number => this.panes[paneNumber].refsChapterVerse[0]
+    // getRefsVerse = (paneNumber: number): number => this.panes[paneNumber].refsChapterVerse[1]
 
     getBook = (i: number): string => this.panes[i].book
 
@@ -87,8 +76,6 @@ class AppState {
     }
 
     getBookData = (i: number): Array<any> => this.panes[i].bookData
-
-    getBookChapterVerse =(i:number) => `(${this.panes[i].book} ${this.panes[i].chapter+1}:${this.panes[i].verse})`
 
     setDistance = (distance: number, i: number): void => {
         this.panes[i].distance = distance

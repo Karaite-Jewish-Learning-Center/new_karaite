@@ -149,7 +149,6 @@ const useStyles = makeStyles((theme) => ({
     chapterView: {
         textAlign: 'center',
         verticalAlign: 'middle',
-        paddingRight: 23,
         paddingTop: 10,
         [theme.breakpoints.down('sm')]: {
             paddingRight: 10,
