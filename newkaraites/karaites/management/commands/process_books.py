@@ -587,7 +587,7 @@ class Command(BaseCommand):
                 # and not by the user.
                 # print('Pre process', pre_process.method_name)
                 f = eval(pre_process.method_name)
-                f(book.book_source_en, book.book_title_en)
+                f(book.book_source, book.book_title_en)
 
         for book in query:
 
