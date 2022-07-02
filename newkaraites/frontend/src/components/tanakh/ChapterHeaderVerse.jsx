@@ -8,8 +8,8 @@ import {
     BIBLE_VERSE,
     BIBLE_CHAPTER,
     BIBLE_RENDER_CHAPTER,
-    BIBLE_EN_CM,
-    BIBLE_REFS
+    REFS_HE,
+    REFS_EN,
 } from "../../constants/constants";
 import RefsBadge from "../general/RefsBadge";
 import {observer} from 'mobx-react-lite';
@@ -20,16 +20,16 @@ import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 const ChapterHeaderVerse = (props) => {
     const store = useContext(storeContext)
-    const {data, item, gridVisibleRange, paneNumber,  speaking} = props
+    const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
+    const chapter = data[BIBLE_CHAPTER]
+    const renderChapter = data[BIBLE_RENDER_CHAPTER]
+    const refsHe = parseInt(data[REFS_HE])
+    const refsEn = parseInt(data[REFS_EN])
 
     let chapterHtml = null
-    let chapter = data[BIBLE_CHAPTER]
-    let renderChapter = data[BIBLE_RENDER_CHAPTER]
-    let refs_comment = parseInt(data[BIBLE_EN_CM])
-    let ref_halakha = parseInt(data[BIBLE_REFS])
 
     const onClick = (i) => {
         if (!store.getIsRightPaneOpen(paneNumber)) {
@@ -50,21 +50,17 @@ const ChapterHeaderVerse = (props) => {
                     <Typography className={classes.ch}>{lang === 'he' ? indoArabicToHebrew(chapter) : chapter}</Typography>
                     <hr/>
                 </div>
-                <div className={classes.references}>
-                    <RefsBadge refsCount={0}/>
-                </div>
             </div>)
     }
 
     const startIndex = gridVisibleRange.startIndex
-    const current = startIndex  + store.getDistance(paneNumber)
+    const current = startIndex + store.getDistance(paneNumber)
     const found = item === store.getCurrentItem(paneNumber)
 
     useEffect(() => {
         // if (allBookData[current] !== undefined) {
-            store.setCommentsChapter(allBookData[current][BIBLE_CHAPTER], paneNumber)
-            store.setCommentsVerse(allBookData[current][BIBLE_VERSE], paneNumber)
-            store.setVerseData(allBookData[current], paneNumber)
+        store.setRefsChapterVerse(allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber)
+        store.setVerseData(allBookData[current], paneNumber)
         // }
     }, [allBookData, paneNumber, store.getCurrentItem(paneNumber)])
 
@@ -73,6 +69,9 @@ const ChapterHeaderVerse = (props) => {
             case 'en_he':
                 return (
                     <>
+                        <div className={classes.references}>
+                            <RefsBadge refsCount={refsHe} color="primary"/>
+                        </div>
                         <div className={classes.verseHe}>
                             <Typography variant="body1" className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                         </div>
@@ -83,9 +82,7 @@ const ChapterHeaderVerse = (props) => {
                             <Typography variant="body1" className={classes.englishFont}>{data[BIBLE_ENGLISH]}</Typography>
                         </div>
                         <div className={classes.references}>
-                            <RefsBadge refsCount={refs_comment}/>
-                            <RefsBadge refsCount={ref_halakha} color="action"/>
-
+                            <RefsBadge refsCount={refsEn} color="primary"/>
                         </div>
                     </>
                 )
@@ -93,8 +90,7 @@ const ChapterHeaderVerse = (props) => {
                 return (
                     <>
                         <div className={classes.references}>
-                            <RefsBadge refsCount={refs_comment} color="primary"/>
-                            <RefsBadge refsCount={ref_halakha} color="secondary"/>
+                            <RefsBadge refsCount={refsHe} color="primary"/>
                         </div>
                         <div className={classes.verseHe}>
                             <Typography className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
@@ -115,8 +111,7 @@ const ChapterHeaderVerse = (props) => {
                             <Typography className={classes.englishFont}>{data[BIBLE_ENGLISH]}</Typography>
                         </div>
                         <div className={classes.references}>
-                            <RefsBadge refsCount={refs_comment}/>
-                            <RefsBadge refsCount={ref_halakha} color="secondary"/>
+                            <RefsBadge refsCount={refsEn} color="primary"/>
                         </div>
                     </>
                 )
@@ -128,7 +123,7 @@ const ChapterHeaderVerse = (props) => {
     return (
         <div className={classes.verse}>
             {chapterHtml}
-            <div className={`${classes.textContainer} ${(found? classes.selectVerse : '')}`}
+            <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
                  onClick={onClick.bind(this, item)}>
                 <ChapterBody/>
             </div>
@@ -180,7 +175,7 @@ const useStyles = makeStyles(() => ({
         fontSize: 18,
         color: Colors['gray'],
         direction: 'RTL',
-        fontFamily: 'SBL Hebrew'
+        fontFamily: 'SBL Hebrew',
     },
     chapterTitle_en: {
         maxWidth: '35%',

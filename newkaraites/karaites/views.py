@@ -11,12 +11,13 @@ from .utils import (slug_back,
                     custom_sql,
                     similar_search_en)
 
-from .models import (FullTextSearch,
+from .models import (FirstLevel,
+                     FullTextSearch,
                      FullTextSearchHebrew,
                      InvertedIndex,
                      Organization,
                      BookAsArray,
-                     Comment,
+                     # Comment,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
@@ -71,10 +72,6 @@ def book_chapter_verse(request, *args, **kwargs):
             message = _(f"Invalid verse for the book:{book} ")
             message += _(f"chapter:{chapter} must be between 1 and {verses_on_this_chapter}")
             return JsonResponse(data={'status': 'false', 'message': message}, status=400)
-
-    if model == 'comments':
-        comments = Comment().to_json_comments(book=book_title, chapter=chapter, verse=verse)
-        return JsonResponse({'comments': comments})
 
     if model == 'bookAsArray':
         if first is None:
@@ -139,25 +136,12 @@ class GetFirstLevel(View):
     """ Get first level classification"""
 
     @staticmethod
-    def get(request):
-        """ for the time being just fake the database query"""
+    def get(request, *args, **kwargs):
+        """ Get first level Law"""
         level = OrderedDict()
-
-        level['Tanakh'] = ""
-
-        level['Halakhah'] = ""
-
-        level['Liturgy'] = ""
-
-        level['Poetry'] = ""
-
-        level['Polemic'] = ""
-
-        level['Exhortatory'] = ""
-
-        level['Comments'] = ""
-
-        return JsonResponse(level)
+        for first_level in FirstLevel.objects.all().values_list('first_level', 'first_level_he').order_by('order'):
+            level[first_level[0]] = first_level
+        return JsonResponse(level, safe=False)
 
 
 class GetByLevel(View):
@@ -176,15 +160,18 @@ class GetByLevelAndByClassification(View):
     @staticmethod
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
-        classification = True
         if level is None:
             return JsonResponse(data={'status': 'false',
                                       'message': _(f'Missing mandatory parameter level.')},
-                                status=400)
+                                status=404)
+        books = KaraitesBookDetails.get_all_books_by_first_level(level, classification=True)
 
-        return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level,
-                                                                             classification=classification),
-                            safe=False)
+        if len(books) == 0:
+            return JsonResponse(data={'status': 'false',
+                                      'message': _(f'No books found for level:{level}.')},
+                                status=404)
+
+        return JsonResponse(books, safe=False)
 
 
 class BooksPresentation(View):
@@ -192,15 +179,6 @@ class BooksPresentation(View):
     @staticmethod
     def get(request):
         return JsonResponse(Organization.get_list_of_books(), safe=False)
-
-
-class GetComments(View):
-    """"""
-
-    @staticmethod
-    def get(request, *args, **kwargs):
-        kwargs.update({'model': 'comments'})
-        return book_chapter_verse(request, *args, **kwargs)
 
 
 class GetBookAsArrayJson(View):
@@ -244,7 +222,7 @@ class GetTOC(View):
         return JsonResponse(result, safe=False)
 
 
-class getHalakhah(View):
+class GetHalakhah(View):
     """
     """
 
@@ -332,7 +310,7 @@ class Search(View):
             results = set()
             highlight_word = []
             tokens = tokenizer.tokenize(search)
-            for grp, token, token_num, (_, _) in tokens:
+            for grp, token, token_num, _, _ in tokens:
 
                 search_text = str(Hebrew(token).text_only())
                 word_query = InvertedIndex.objects.get(word=search_text)
@@ -360,7 +338,7 @@ class Search(View):
 
             # try phrase search
             results = FullTextSearch.objects.raw(SQL_PHRASE.format(search, limit, offset))
-            print("1 Results ",len(results))
+            print("1 Results ", len(results))
 
             if len(results) == 0:
                 # try word search
@@ -380,3 +358,38 @@ class Search(View):
                                  'page': page,
                                  'did_you_mean': did_you_mean,
                                  'search_term': similar_search}, safe=False)
+
+
+class GetBiBleReferences(View):
+    """
+        search by bible reference
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        reference = kwargs.get('reference', None)
+        if reference is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a reference.')}, status=400)
+
+        references = References.to_list(reference)
+
+        return JsonResponse(references, safe=False)
+
+
+class GetBiBleReferencesByLaw(View):
+    """
+        search by bible reference and classification
+    """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        reference = kwargs.get('reference', None)
+        law = kwargs.get('law', None)
+
+        if reference is None or law is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a reference and a classification.')},
+                                status=400)
+
+        references = References.to_list(reference, law)
+
+        return JsonResponse(references, safe=False)

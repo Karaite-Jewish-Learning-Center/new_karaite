@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'newkaraites.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Karaites',
+        'NAME': 'karaites',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -106,13 +106,12 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'karaites_test',
-            'USER': 'sandro',
+            'USER': '',
             'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '',
         }
     }
-
 
 # server dev environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
@@ -199,4 +198,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_URL = '/static-django/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static-django')
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# config the admin site email
+if DEBUG:
+    ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
+else:
+    ADMINS_EMAILS = ['sandro.fernandes@toptal.com']

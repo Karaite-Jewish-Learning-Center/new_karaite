@@ -3,7 +3,7 @@
     margin-top: 50px;
     padding-left: 5%;
     padding-right: 5%;
-    max-width: 750px;
+    max-width: 900px;
     /*max-width: 70%;*/
     margin-left: auto;
     margin-right: auto;
@@ -38,6 +38,7 @@
     /*border:2px solid blue;*/
     display: flex;
     flex-direction: row;
+
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(even) {
@@ -54,6 +55,15 @@
     direction: ltr;
     text-align: left;
     padding-left: 10px;
+}
+.MsoTableGrid tr:nth-child(even) td {
+    /*background-color: #ffd169;*/
+    text-align: left;
+}
+.MsoTableGrid tr:nth-child(even) {
+    /*background-color: #ffd169;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
 }
 
 .MsoTableGrid tr:nth-child(odd) td:first-child .segmenttext {
@@ -76,6 +86,7 @@
 }
 
 .MsoTableGrid tr:nth-child(odd) td:nth-child(2) .segmenttext {
+     /*background-color: #ffd169;*/
     margin-top: 0;
     vertical-align: top;
 }
@@ -119,7 +130,6 @@
 
 /* simple  in case need to override something*/
 .simple {
-    max-width: 500px;
     margin-top: 50px;
     /*background-color: #cacaca;*/
 }
@@ -274,7 +284,7 @@
 /* Ashir Beshir Ḥadash*/
 /* Ashir Le’el ‘Elyon */
 .he-ashir-table-003 {
-    max-width: none;
+    width: 1000px;
     word-break: break-all;
     /*background-color: #ef98c9;*/
 }
@@ -418,15 +428,15 @@
 
 /*Adon Yeshu‘ot*/
 /* Shiru ‘Am Zakka */
-.he-shiru_am_z-table-000 {
+he-shiru-table-000 {
     max-width: 400px;
 }
 
-.he-shiru_am_z-table-000 tr:nth-child(4n+4) {
+.he-shiru-table-000 tr:nth-child(4n+4) {
     color: red;
 }
 
-.he-shiru_am_z-table-000 tr:nth-child(4n+3) {
+.he-shiru-table-000 tr:nth-child(4n+3) {
     color: red;
 }
 

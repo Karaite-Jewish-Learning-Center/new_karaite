@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 import Filler from "../general/Filler.tsx";
 import {makeStyles} from "@material-ui/core/styles";
-import Colors from "../../constants/colors";
 import {capitalize} from "../../utils/utils";
 import {ToText} from "../general/ToText";
 import {cleanUrl} from "../../utils/cleanUrl";
@@ -21,6 +20,7 @@ export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns 
         let comp = []
         keys.forEach(key => {
             if (obj[key].book_classification !== separator) {
+
                 if (header) {
                     separator = obj[key].book_classification;
                 } else {
@@ -90,30 +90,33 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         fontSize: 18,
         fontFamily: 'SBL Hebrew',
-    }, title: {
+    },
+    title: {
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 10,
-    }, bookTitle: {
+    },
+    bookTitle: {
         marginLeft: 30,
         fontSize: 18,
-    }, ruler: {
-        marginTop: 30,
-        borderColor: Colors.rulerColor,
-    }, hr: {
+    },
+    hr: {
         marginTop: 30,
         marginBottom: 30,
         marginLeft: 20,
         marginRight: 20,
-    }, bodyText: {
+    },
+    bodyText: {
         fontSize: '14pt',
-    }, subtitle: {
+    },
+    subtitle: {
         marginBottom: 20,
         color: 'gray',
-    }, bookTitleEn: {
+    },
+    bookTitleEn: {
         textAlign: 'left',
-
-    }, bookTitleHe: {
+    },
+    bookTitleHe: {
         textAlign: 'right',
     },
     left: {

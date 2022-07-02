@@ -1,30 +1,22 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {getFirstLevelUrl} from '../../constants/constants'
 import {storeContext} from "../../stores/context";
-import {messageContext} from "../../stores/messages/messageContext";
+import {referenceContext} from "../../stores/references/referenceContext";
 import {makeStyles} from '@material-ui/core/styles'
-import Colors from "../../constants/colors";
-import {fetchData} from "../api/dataFetch";
+import {observer} from 'mobx-react-lite';
 
+const HEBREW = 1
+const ENGLISH = 0
 
 const FirstLevel = () => {
-    const [classification, setClassification] = useState(null)
-    const classes = useStyles()
     const store = useContext(storeContext)
-    const message = useContext(messageContext)
+    const reference = useContext(referenceContext)
+    const classification = reference.getLevelsAll()
+    const classes = useStyles()
 
     store.resetPanes()
-
-    useEffect(() => {
-
-        fetchData(getFirstLevelUrl)
-            .then(data => setClassification(data))
-            .catch((e) => message.setMessage(e.message))
-
-    }, [])
 
     if (classification === null) return null;
 
@@ -32,14 +24,15 @@ const FirstLevel = () => {
         <Grid item xl={6} lg={6} md={12} sm={12} xs={12} key={key}>
             <div className={classes.card}>
                 <Link to={'/' + key + '/'}>
-                    <Typography variant="h6" component="h2">{key}</Typography>
+                    <span className={classes.left}>
+                        <Typography className={classes.hebrew} variant="h6" component="h2">{classification[key][HEBREW]}</Typography>
+                    </span>
+                    <span className={classes.right}>
+                         <Typography className={classes.english} variant="h6" component="h2">{classification[key][ENGLISH]}</Typography>
+                    </span>
                 </Link>
-                <br/>
-                <Typography
-                    variante="body3" component="p">{classification[key]}
-                </Typography>
             </div>
-            <hr className={classes.ruler}/>
+            <hr/>
         </Grid>)
 
     return (
@@ -58,7 +51,6 @@ const FirstLevel = () => {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        border: '1px solid red',
         paddingTop: theme.spacing(15),
         width: '100%',
     },
@@ -69,32 +61,26 @@ const useStyles = makeStyles((theme) => ({
     card: {
         width: '100%',
         height: 100,
-        [theme.breakpoints.up('xs')]: {
-            // backgroundColor: 'red',
-            height: 200,
-        },
-        [theme.breakpoints.up('sm')]: {
-            // backgroundColor: 'yellow',
-            height: 150,
-        },
-        [theme.breakpoints.up('md')]: {
-            // backgroundColor: 'blue',
-            height: 140,
-        },
-        [theme.breakpoints.up('lg')]: {
-            // backgroundColor: 'green',
-            height: 160,
-        },
-        [theme.breakpoints.up('xl')]: {
-            // backgroundColor: 'pink',
-        },
     },
-
-    ruler: {
-        borderColor: Colors.rulerColor,
+    left: {
+        width: '50%',
+        float: 'left',
     },
-
+    right: {
+        width: '50%',
+        float: 'right',
+    },
+    hebrew: {
+        marginRight: theme.spacing(3),
+        direction: 'rtl',
+        textAlign: 'right',
+    },
+    english: {
+        marginLeft: theme.spacing(3),
+        direction: 'ltr',
+        textAlign: 'left',
+    }
 }));
 
 
-export default FirstLevel
+export default observer(FirstLevel)

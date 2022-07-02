@@ -1,32 +1,34 @@
-import React, {FC, MouseEvent, MouseEventHandler, useState} from 'react'
+import React, {FC, MouseEvent, useState} from 'react'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {SongList} from './types';
 import {BasicAudioPlayer} from '../audio/audio-player/basic-audio-player';
 import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 import IconButton from "@material-ui/core/IconButton";
-import {removeExtension} from '../../utils/utils';
+import {toJS} from 'mobx';
+
 
 
 export const MusicSelect: FC<SongList> = ({songs}) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
-    const [song, setSong] = useState<string>('');
-    if (songs.length === 0) return null
-    if (songs.length === 1) return <BasicAudioPlayer song={songs[0]} onResetPlayer={()=>{}} autoplay={false}/>
+    const [index, setIndex] = useState(-1);
 
-    const selectSong = (index:number) => {
+    if (songs.length === 0) return null
+    if (songs.length === 1) return <BasicAudioPlayer song={songs} onResetPlayer={()=>{}} autoplay={false} index={0}/>
+
+    const selectSong = (i:number) => {
         setAnchorEl(null)
-        setSong(songs[index] as unknown as string)
+        setIndex(i)
     }
     const onClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     }
     const onResetPlayer = ():void => {
-        setSong('')
+        setIndex(-1)
     }
 
-    if(song !='' && song != undefined) {
-        return <BasicAudioPlayer song={song} onResetPlayer={onResetPlayer} autoplay={true}/>
+    if(index  != -1) {
+        return <BasicAudioPlayer song={songs} onResetPlayer={onResetPlayer} autoplay={true} index={index}/>
     }
 
     return (
@@ -40,8 +42,7 @@ export const MusicSelect: FC<SongList> = ({songs}) => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={selectSong}>
-
-                {songs.map((song, index) => <MenuItem key={index} onClick={()=>{selectSong(index)}}>{removeExtension(song as unknown as string)}</MenuItem>)}
+                {songs.map((song, index) => <MenuItem key={index} onClick={()=>{selectSong(index)}}>{song['song_title']}</MenuItem>)}
             </Menu>
         </span>
     )

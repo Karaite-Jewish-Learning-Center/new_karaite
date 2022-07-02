@@ -1,17 +1,66 @@
+import os
+from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .constants import (FIRST_LEVEL,
-                        SECOND_LEVEL,
-                        LANGUAGES,
-                        BOOK_CLASSIFICATION,
+from .constants import (LANGUAGES,
                         AUTOCOMPLETE_TYPE,
                         REF_ERROR_CODE)
 
-from tinymce.models import HTMLField
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
+from django.contrib.auth.models import User
+
+VERSE = 4
+HEBREW = 0
+ENGLISH = 1
+
+
+class FirstLevel(models.Model):
+    first_level = models.CharField(max_length=50,
+                                   unique=True)
+
+    first_level_he = models.CharField(max_length=50,
+                                      default='',
+                                      blank=True)
+
+    order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.first_level
+
+    @mark_safe
+    def first_level_he_html(self):
+        return f'<p dir="rtl">{self.first_level_he}</p>'
+
+    class Meta:
+        verbose_name = _('     First Level')
+        verbose_name_plural = _('     First Level')
+        ordering = ['order', 'first_level']
+
+
+class SecondLevel(models.Model):
+    second_level = models.CharField(max_length=50,
+                                    unique=True)
+
+    second_level_he = models.CharField(max_length=50,
+                                       default='',
+                                       blank=True)
+
+    order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.second_level
+
+    @mark_safe
+    def second_level_he_html(self):
+        return f'<p dir="rtl">{self.second_level_he}</p>'
+
+    class Meta:
+        verbose_name = _('      Second Level')
+        verbose_name_plural = _('     Second Level')
+        ordering = ('order', 'second_level')
 
 
 class Organization(models.Model):
@@ -19,13 +68,17 @@ class Organization(models.Model):
         Books order
     """
 
-    first_level = models.IntegerField(default=0,
-                                      choices=FIRST_LEVEL,
-                                      verbose_name=_('Law'))
+    first_level = models.ForeignKey(FirstLevel,
+                                    blank=False,
+                                    null=False,
+                                    on_delete=models.DO_NOTHING,
+                                    verbose_name=_('Law'))
 
-    second_level = models.IntegerField(default=0,
-                                       choices=SECOND_LEVEL,
-                                       verbose_name=_("Second level"))
+    second_level = models.ForeignKey(SecondLevel,
+                                     blank=False,
+                                     null=False,
+                                     on_delete=models.DO_NOTHING,
+                                     verbose_name=_("Second level"))
 
     book_title_en = models.CharField(max_length=100,
                                      null=True,
@@ -69,8 +122,8 @@ class Organization(models.Model):
                 }
 
     def to_book_list(self):
-        return [self.get_first_level_display(),
-                self.get_second_level_display(),
+        return [self.first_level.first_level,
+                self.second_level.second_level,
                 self.book_title_en,
                 self.book_title_he,
                 self.chapters,
@@ -117,313 +170,6 @@ class Author(models.Model):
         verbose_name_plural = "Author's"
 
 
-class OtherBooks(models.Model):
-    """ Other books relate do bible but no biblical text"""
-
-    class BookClassification(models.IntegerChoices):
-        COMMENTARIES = 1
-        OTHER = 100
-
-    book_title_en = models.CharField(max_length=100,
-                                     null=True,
-                                     verbose_name=_("Book title English"))
-
-    book_title_he = models.CharField(max_length=100,
-                                     null=True,
-                                     blank=True,
-                                     verbose_name=_("Book title Hebrew"))
-
-    author = models.ForeignKey(Author,
-                               on_delete=models.CASCADE,
-                               verbose_name=_('Author')
-                               )
-
-    classification = models.SmallIntegerField(choices=BookClassification.choices,
-                                              verbose_name=_('Book classification'))
-
-    def __str__(self):
-        return self.book_title_en
-
-    class Meta:
-        verbose_name_plural = _("  Other books")
-
-
-class Comment(models.Model):
-    """
-       Comments on chapter / verse
-    """
-    book = models.ForeignKey(Organization,
-                             null=True,
-                             blank=True,
-                             on_delete=models.CASCADE,
-                             verbose_name=_('Comments on Book'))
-
-    chapter = models.IntegerField(default=1,
-                                  verbose_name=_("Chapter"))
-
-    verse = models.IntegerField(default=1,
-                                verbose_name=_("Verse"))
-
-    comment_en = HTMLField(null=True,
-                           blank=True,
-                           verbose_name=_("Comment English"))
-
-    comment_he = HTMLField(null=True,
-                           blank=True,
-                           verbose_name=_("Comment Hebrew"))
-
-    comment_author = models.ForeignKey(Author,
-                                       null=True,
-                                       blank=True,
-                                       on_delete=models.DO_NOTHING,
-                                       verbose_name=_('Author'))
-
-    source_book = models.ForeignKey(OtherBooks,
-                                    null=True,
-                                    blank=True,
-                                    on_delete=models.CASCADE,
-                                    verbose_name=_('Source book'))
-
-    foot_notes_en = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    foot_notes_he = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.comment_author} - {self.book}"
-
-    def to_json_book_details(self):
-        """ We don't need to send book details with every comment"""
-        return {'id': self.book.id,
-                'book_title_en': self.book.book_title_en,
-                'book_title_he': self.book.book_title_he,
-                'author': self.comment_author.name,
-                'comment_count_en': self.comment_author.comments_count_en,
-                'comment_count_he': self.comment_author.comments_count_he
-                }
-
-    def to_json(self):
-        """ Serialize instance to json"""
-        return {'id': self.book.id,
-                'comment_en': self.comment_en,
-                'comment_he': self.comment_he,
-                'book': self.book.book_title_en,
-                'chapter': self.chapter,
-                'verse': self.verse,
-                }
-
-    @staticmethod
-    def to_json_comments(book=None, chapter=None, verse=None):
-        """ Serialize several instance to json """
-        result = []
-        if chapter is None and verse is None:
-            query = Comment.objects.filter(book=book)
-        elif verse is None:
-            query = Comment.objects.filter(book=book, chapter=chapter)
-        else:
-            query = Comment.objects.filter(book=book,
-                                           chapter=chapter,
-                                           verse=verse)
-
-        for comment in query:
-            result.append(comment.to_json())
-        return result
-
-    @mark_safe
-    def english(self):
-        return self.comment_en
-
-    english.short_description = "English Comment"
-
-    @mark_safe
-    def hebrew(self):
-        return self.comment_he
-
-    hebrew.short_description = "Hebrew Comment"
-
-    @mark_safe
-    def foot_note_en_admin(self):
-        html = ''
-        for foot_note in self.foot_notes_en:
-            html += f'<p>{foot_note}</p>'
-        return html
-
-    foot_note_en_admin.short_description = "Foot notes EN"
-
-    @mark_safe
-    def foot_note_he_admin(self):
-        html = ''
-        for foot_note in self.foot_notes_he:
-            html += f'<p dir="RTL">{foot_note}</p>'
-        return html
-
-    foot_note_he_admin.short_description = "Foot notes HE"
-
-    def save(self, *args, **kwargs):
-        """ Update books comment count if new comment"""
-
-        update_count_en = 0
-        update_count_he = 0
-
-        if self.pk is None:
-            if self.comment_en != '':
-                update_count_en = 1
-            if self.comment_he != '':
-                update_count_he = 1
-        else:
-            # editing a record
-            previous_state = Comment.objects.get(pk=self.pk)
-            if previous_state.comment_en == '' and self.comment_en != '':
-                update_count_en = 1
-            if previous_state.comment_en != '' and self.comment_en == '':
-                update_count_en = -1
-            if previous_state.comment_he == '' and self.comment_he != '':
-                update_count_he = 1
-            if previous_state.comment_he != '' and self.comment_he == '':
-                update_count_he = -1
-
-        book_as_array = BookAsArray.objects.get(book=self.book, chapter=self.chapter)
-        verse = self.verse - 1
-        book_as_array.book_text[verse][2] = int(book_as_array.book_text[verse][2]) + update_count_en
-        book_as_array.book_text[verse][3] = int(book_as_array.book_text[verse][3]) + update_count_he
-        book_as_array.save()
-
-        self.comment_author.comments_count_en += update_count_en
-        self.comment_author.comments_count_he += update_count_he
-        self.comment_author.save()
-
-        super(Comment, self).save(*args, **kwargs)
-
-    def delete(self, using=None, keep_parents=False):
-        """ Update books comment count and Author comment count """
-
-        if self.comment_en != '':
-            self.comment_author.comments_count_en -= 1
-
-        if self.comment_he != '':
-            self.comment_author.comments_count_he -= 1
-
-        self.comment_author.save()
-
-        super(Comment, self).delete(using=using, keep_parents=keep_parents)
-
-    class Meta:
-        verbose_name_plural = "Commentaries"
-        ordering = ('book', 'chapter', 'verse', 'pk')
-
-
-class CommentTmp(models.Model):
-    """ This can safely be delete after all comment are
-        load.
-    """
-    book = models.ForeignKey(Organization,
-                             null=True,
-                             blank=True,
-                             on_delete=models.CASCADE,
-                             verbose_name=_('Comments on Book'))
-
-    chapter = models.IntegerField(default=1,
-                                  verbose_name=_("Chapter"))
-
-    verse = models.IntegerField(default=1,
-                                verbose_name=_("Verse"))
-
-    comment_number = models.SmallIntegerField(default=0,
-                                              verbose_name=_("Comment Number"))
-
-    comment_en = HTMLField(null=True,
-                           blank=True,
-                           verbose_name=_("Comment English"))
-
-    comment_he = HTMLField(null=True,
-                           blank=True,
-                           verbose_name=_("Comment Hebrew"))
-
-    comment_author = models.ForeignKey(Author,
-                                       null=True,
-                                       blank=True,
-                                       on_delete=models.DO_NOTHING,
-                                       verbose_name=_('Author'))
-
-    source_book = models.ForeignKey(OtherBooks,
-                                    null=True,
-                                    blank=True,
-                                    on_delete=models.CASCADE,
-                                    verbose_name=_('Source book'))
-
-    foot_notes_en = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    foot_notes_he = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.comment_author} - {self.book}"
-
-    def to_json_book_details(self):
-        """ We don't need to send book details with every comment"""
-        return {'id': self.book.id,
-                'book_title_en': self.book.book_title_en,
-                'book_title_he': self.book.book_title_he,
-                'author': self.comment_author.name,
-                'comment_count_en': self.comment_author.comments_count_en,
-                'comment_count_he': self.comment_author.comments_count_he
-                }
-
-    def to_json(self):
-        """ Serialize instance to json"""
-        return {'id': self.book.id,
-                'comment_en': self.comment_en,
-                'comment_he': self.comment_he,
-                }
-
-    @staticmethod
-    def to_json_comments(book=None, chapter=None, verse=None):
-        """ Serialize several instance to json """
-        result = []
-        if chapter is None and verse is None:
-            query = Comment.objects.filter(book=book)
-        elif verse is None:
-            query = Comment.objects.filter(book=book, chapter=chapter)
-        else:
-            query = Comment.objects.filter(book=book, chapter=chapter, verse=verse)
-
-        for comment in query:
-            result.append(comment.to_json())
-        return result
-
-    @mark_safe
-    def english(self):
-        return self.comment_en
-
-    english.short_description = "English Comment"
-
-    @mark_safe
-    def hebrew(self):
-        return self.comment_he
-
-    hebrew.short_description = "Hebrew Comment"
-
-    @mark_safe
-    def foot_note_en_admin(self):
-        html = ''
-        for foot_note in self.foot_notes_en:
-            html += f'<p>{foot_note}</p>'
-        return html
-
-    foot_note_en_admin.short_description = "Foot notes EN"
-
-    @mark_safe
-    def foot_note_he_admin(self):
-        html = ''
-        for foot_note in self.foot_notes_he:
-            html += f'<p>{foot_note}</p>'
-        return html
-
-    foot_note_he_admin.short_description = "Foot notes HE"
-
-    class Meta:
-        verbose_name_plural = 'Comments Tmp'
-        ordering = ('book', 'chapter', 'verse', 'comment_number')
-
-
 class BookAsArray(models.Model):
     """ Map Biblical book to postgresql array field """
 
@@ -434,19 +180,45 @@ class BookAsArray(models.Model):
 
     chapter = models.IntegerField(default=0)
 
-    # [text english, text hebrew, comment count En, comment count He,
+    # [text english, text hebrew, _, _,
     # Verse number , Chapter, need render chapter title,
-    # number of  Halakhah references]
-    book_text = ArrayField(ArrayField(models.TextField(), size=8), default=list)
+    # two positions for each first level reference
+    # example Halakhah 1 reference English, 3 references in Hebrew for this book chapter and verse
+    # Liturgy  0 reference English, 10 references in Hebrew for this book chapter and verse
+    # Poetry   2 reference English, 0 references in Hebrew for this book chapter and verse
+    # and so on for each first level
+    # 0 text english,
+    # 1 text hebrew,
+    # 2 reserved,
+    # 3 reserved,
+    # 4 Verse number,
+    # 5 Chapter,
+    # 6 need render chapter title,
+    # 7 Total bible references in Hebrew,
+    # 8 Total bible references in English,
+    # 9 Halakhah Hebrew
+    # 10 Halakhah English
+    # 11 Liturgy Hebrew
+    # 12 Liturgy English
+    # 13 Poetry Hebrew
+    # 14 Poetry English
+    # 15 Polemics Hebrew
+    # 16 Polemics English
+    # 17 Exhortatory Hebrew
+    # 18 Exhortatory English
+    # 19 Comments Hebrew
+    # 20 Comments English
+    # ...]
+
+    book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     @mark_safe
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
             html += '<tr>'
-            html += f'<td>{text[2]}</td><td class="en-verse">{text[0]}</td>'
-            html += f'<td>{text[4]}</td>'
-            html += f'<td class="he-verse" dir=\'rtl\'>{text[1]}</td><td>{text[3]}</td></tr>'
+            html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
+            html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -459,6 +231,7 @@ class BookAsArray(models.Model):
 
     @staticmethod
     def to_list(book, chapter=None, book_title=None, first=None):
+
         def flat(query):
             result = []
             for book in query:
@@ -479,6 +252,7 @@ class BookAsArray(models.Model):
 
         return flat(query)
 
+    # todo: remove this method
     @staticmethod
     def to_json_book_array(book, chapter=None):
         """ deprecated """
@@ -501,20 +275,114 @@ class BookAsArray(models.Model):
         verbose_name_plural = _('Biblical books as array')
 
 
+class Songs(models.Model):
+    """ Songs """
+
+    song_title = models.CharField(max_length=100,
+                                  verbose_name=_("Song Title"))
+
+    song_file = models.FileField(upload_to='songs/',
+                                 verbose_name=_("Song File"))
+
+    def __str__(self):
+        return self.song_title
+
+    @staticmethod
+    def get_book_songs(book):
+        result = []
+        for song in Songs.objects.filter(book=book):
+            result.append([song.song_title, song.song_file])
+        return result
+
+    def to_json(self):
+        return {
+            'song_title': self.song_title,
+            'song_file': self.song_file.url,
+        }
+
+    def delete(self, using=None, keep_parents=False):
+        print(self, self.song_file.name)
+        if self.song_file.name != '':
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, self.song_file.name))
+            except FileNotFoundError:
+                pass
+            super(Songs, self).delete(using, keep_parents)
+
+    class Meta:
+        verbose_name_plural = _('Songs')
+        ordering = ('song_title',)
+
+
+class Method(models.Model):
+    """ Methods to be used in pre-process and pro-process"""
+
+    method_name = models.CharField(max_length=30,
+                                   verbose_name=_("Method Name"))
+
+    pre_process = models.BooleanField(default=False,
+                                      verbose_name=_("Pre-process"))
+
+    pro_process = models.BooleanField(default=False,
+                                      verbose_name=_("Pro-process"))
+
+    def __str__(self):
+        return self.method_name
+
+    class Meta:
+        verbose_name_plural = _('Method')
+        ordering = ('method_name',)
+
+
+class Classification(models.Model):
+    """ Books Classification """
+    classification_name = models.CharField(max_length=50,
+                                           unique=True,
+                                           verbose_name=_("Classification Name"),
+                                           help_text=_("Classification Name"))
+
+    classification_name_he = models.CharField(max_length=50,
+                                              default='',
+                                              blank=True,
+                                              verbose_name=_("Classification Name Hebrew"),
+                                              help_text=_("Classification Name Hebrew"))
+
+    def __str__(self):
+        return self.classification_name
+
+    @mark_safe
+    def classification_name_he_html(self):
+        return f'<p dir="rtl">{self.classification_name_he}</p>'
+
+    class Meta:
+        verbose_name_plural = _('Classification')
+        ordering = ('classification_name',)
+
+
 class KaraitesBookDetails(models.Model):
     """  Karaites books """
 
-    first_level = models.IntegerField(default=0,
-                                      choices=FIRST_LEVEL,
-                                      verbose_name=_('Law'))
+    first_level = models.ForeignKey(FirstLevel,
+                                    on_delete=models.DO_NOTHING,
+                                    verbose_name=_('Law'))
+
+    book_classification = models.ForeignKey(Classification,
+                                            null=False,
+                                            blank=False,
+                                            on_delete=models.DO_NOTHING,
+                                            verbose_name=_('Classification'))
 
     book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
                                      verbose_name=_('Book language'))
 
-    book_classification = models.CharField(max_length=2,
-                                           choices=BOOK_CLASSIFICATION,
-                                           verbose_name=_('Classification'))
+    intro = models.BooleanField(default=False,
+                                verbose_name=_('Book has Introduction'),
+                                )
+
+    toc = models.BooleanField(default=False,
+                              verbose_name=_('Book has TOC'),
+                              )
 
     author = models.ForeignKey(Author,
                                blank=True,
@@ -529,41 +397,157 @@ class KaraitesBookDetails(models.Model):
 
     book_title_he = models.CharField(max_length=100,
                                      default='',
+                                     blank=True,
                                      verbose_name=_('Title Hebrew'))
 
     book_title_unslug = models.CharField(max_length=100,
                                          editable=False,
                                          default='')
 
-    introduction = models.TextField(default='')
+    introduction = models.TextField(default='',
+                                    verbose_name=_('Introduction'),
+                                    editable=False,
+                                    help_text=_('This field is used to store the introduction of the book'))
 
-    table_book = models.BooleanField(default=False)
+    book_source = models.FileField(upload_to='books/',
+                                   default='',
+                                   verbose_name=_('Book Source '),
+                                   help_text=_('This field is used to store the source of the book'))
 
-    columns = models.IntegerField(default=0)
+    book_source_intro = models.FileField(upload_to='intro/',
+                                         default='',
+                                         blank=True,
+                                         verbose_name=_('Book Intro Source'),
+                                         help_text=_(
+                                             'This field is used to store the source of the book introduction'))
 
-    columns_order = models.CharField(max_length=10, default='')
+    book_toc_source = models.FileField(upload_to='toc/',
+                                       default='',
+                                       blank=True,
+                                       verbose_name=_('Book TOC  Source'),
+                                       help_text=_('This field is used to store the processed source of the book TOC'))
+    # check if still need this field
+    processed_book_source = models.FileField(upload_to='processed_source/',
+                                             default='',
+                                             blank=True,
+                                             editable=False,
+                                             verbose_name=_('Book processed Source'),
+                                             help_text=_(
+                                                 'This field is used to store the processed  source of the book'))
 
-    toc_columns = models.CharField(max_length=10, default='')
+    processed_book_source_intro = models.FileField(upload_to='processed_intro/',
+                                                   default='',
+                                                   blank=True,
+                                                   editable=False,
+                                                   verbose_name=_('Book processed Intro Source'),
+                                                   help_text=_(
+                                                       'This field is used to store the processed source of the book introduction'))
 
-    direction = models.CharField(max_length=3, default='rtl')
+    processed_book_toc_source = models.FileField(upload_to='processed_toc/',
+                                                 default='',
+                                                 blank=True,
+                                                 editable=False,
+                                                 verbose_name=_('Book processed TOC Source'),
+                                                 help_text=_(
+                                                     'This field is used to store the source of the processed book TOC'))
 
-    remove_class = models.CharField(max_length=100, default='')
+    table_book = models.BooleanField(default=False,
+                                     verbose_name=_('Table Book'),
+                                     help_text=_('This field is used to inform that book is a html table'))
 
-    remove_tags = models.CharField(max_length=100, default='')
+    columns = models.IntegerField(default=0,
+                                  verbose_name=_('Columns'),
+                                  help_text=_('This field is used to inform the number of columns in the book'))
+
+    columns_order = models.CharField(max_length=10,
+                                     default='0,1',
+                                     blank=True,
+                                     verbose_name=_('Columns order'),
+                                     help_text=_('This field is used to inform the order of columns in the book'))
+
+    toc_columns = models.CharField(max_length=10,
+                                   default='',
+                                   blank=True,
+                                   verbose_name=_('TOC Columns'),
+                                   help_text=_('This field is used to inform the order '
+                                               'of columns in the table of contents'))
+
+    direction = models.CharField(max_length=3,
+                                 default='rtl',
+                                 choices=[('rtl', 'rtl'),
+                                          ('ltr', 'ltr')],
+                                 verbose_name=_('Text Direction'),
+                                 help_text=_('This field is used to inform the direction of the text in the book'))
+
+    remove_class = models.CharField(max_length=100,
+                                    choices=[('', 'None'),
+                                             ('MsoTableGrid', 'MsoTableGrid'),
+                                             ],
+                                    default='',
+                                    blank=True,
+                                    verbose_name=_('Remove class'),
+                                    help_text=_('This field is used to inform the class to remove from the book'))
+
+    css_class = models.CharField(max_length=100,
+                                 choices=[
+                                     ('', 'None'),
+                                     ('simple', 'Simple'),
+                                     ('simple-3-4', 'Simple 3 4'),
+                                     ('special', 'Special'),
+                                     ('special-1', 'Special 1'),
+                                     ('sefer-extra', 'Sefer Extra'),
+                                 ],
+                                 default='',
+                                 blank=True,
+                                 verbose_name=_('CSS class'),
+                                 help_text=_('This field is used to inform the class to add to the book'))
+
+    remove_tags = models.CharField(max_length=100,
+                                   default='',
+                                   blank=True,
+                                   verbose_name=_('Remove tags'),
+                                   help_text=_('This field is used to inform the tags to remove from the book'))
 
     # book has more than on table
-    multi_tables = models.BooleanField(default=False)
+    multi_tables = models.BooleanField(default=False,
+                                       verbose_name=_('Multi tables'),
+                                       help_text=_('This field is used to inform'
+                                                   ' that book has more than one table'))
 
-    # book has songs
-    songs_list = ArrayField(models.CharField(max_length=100),
-                            blank=True,
-                            default=list)
+    # book may have one or more songs
+    songs = models.ManyToManyField(Songs,
+                                   blank=True)
 
     # buy link
-    buy_link = models.CharField(max_length=255, default='')
+    buy_link = models.CharField(max_length=255,
+                                default='',
+                                blank=True,
+                                verbose_name=_('Buy link'),
+                                help_text='This field is used to inform the buy link of the book')
 
     # search index hebrew , english, transliteration
-    index_lang = models.BooleanField(default=True)
+    index_lang = models.BooleanField(default=True,
+                                     verbose_name=_('Index transliteration'))
+
+    method = models.ManyToManyField(Method,
+                                    blank=True,
+                                    verbose_name=_('Methods'),
+                                    help_text=_('This field is used to inform the'
+                                                ' pre/pro process methods to apply on book'))
+
+    skip_process = models.BooleanField(default=False,
+                                       verbose_name=_('Skip process'),
+                                       help_text=_('This field is used to inform'
+                                                   ' that this book should not be processed'))
+
+    user = models.ForeignKey(User,
+                             blank=True,
+                             null=True,
+                             default=None,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name=_('User'),
+                             help_text=_('This field is used to inform the user'
+                                         ' who added the book'))
 
     def __str__(self):
         return self.book_title_en
@@ -572,54 +556,32 @@ class KaraitesBookDetails(models.Model):
     def intro_to_html(self):
         return self.introduction
 
-    @staticmethod
-    def get_all_books_by_first_level(level, classification=False):
+    @mark_safe
+    def song_list(self):
+        html = ''
+        for song in self.songs.all():
+            html += f'<p>{song.song_title}</p>'
+        return html
 
-        if not classification:
-            book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en')
-        else:
-            # Halakhah, Polemic
-            if level == '3':
-                book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('book_title_en',
-                                                                                              'book_classification')
-            else:
-                book_details = KaraitesBookDetails.objects.filter(first_level=level).order_by('first_level',
-                                                                                              'book_classification',
-                                                                                              'book_title_en')
+    def get_language(self):
+        """ process_intro_he_en  recognizes language intro and toc
+            examples : he,en,in | he,in,toc | en,he,in | he | en ...
+        """
+        lang = self.book_language
+        lang += ',in' if self.intro else ''
+        lang += ',toc' if self.toc else ''
+        return lang
 
-        data = []
-        for details in book_details:
-            data.append({
-                'book_id': details.id,
-                'book_first_level': details.first_level,
-                'book_language': details.book_language,
-                'book_classification': details.get_book_classification_display(),
-                'book_title_en': details.book_title_en,
-                'book_title_he': details.book_title_he,
-                'columns': details.columns,
-                'columns_order': details.columns_order,
-                'toc_columns': details.toc_columns,
-                'table_book': details.table_book,
-                'direction': details.direction,
-                'remove_class': details.remove_class,
-                'remove_tags': details.remove_tags,
-                'multi_tables': details.multi_tables,
-                'songs_list': details.songs_list,
-                'buy_link': details.buy_link,
-                'index_lag': details.index_lang,
-            })
-        return data
+    def get_song_list(self):
+        return [song.to_json() for song in self.songs.all()]
 
     @staticmethod
-    def to_json(book_title_unslug):
-        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
-        toc = TableOfContents.objects.filter(karaite_book=details)
-
+    def to_dic(details, toc):
         return {
             'book_id': details.id,
-            'book_first_level': details.first_level,
-            'book_language': details.book_language,
-            'book_classification': details.get_book_classification_display(),
+            'book_first_level': details.first_level.first_level,
+            'book_language': details.get_language(),
+            'book_classification': details.book_classification.classification_name,
             'author': details.author.name,
             'book_title_en': details.book_title_en,
             'book_title_he': details.book_title_he,
@@ -633,20 +595,97 @@ class KaraitesBookDetails(models.Model):
             'remove_class': details.remove_class,
             'remove_tags': details.remove_tags,
             'multi_tables': details.multi_tables,
-            'songs_list': details.songs_list,
+            'songs_list': details.get_song_list(),
             'buy_link': details.buy_link,
             'index_lag': details.index_lang,
         }
 
-    def save(self, *args, **kwargs):
+    @staticmethod
+    def get_all_books_by_first_level(level, classification=False):
+        if not classification:
+            book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by('book_title_en')
+        else:
+            # Halakhah, Polemic
+            if level != 'Liturgy':
+                book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by(
+                    'book_title_en',
+                    'book_classification')
+            else:
+                book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by(
+                    'first_level',
+                    'book_classification',
+                    'book_title_en')
 
+        data = []
+        for details in book_details:
+            data.append(details.to_dic(details, []))
+        return data
+
+    @staticmethod
+    def to_json(book_title_unslug):
+        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
+        toc = TableOfContents.objects.filter(karaite_book=details)
+        return details.to_dic(details, toc)
+
+    def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
+        need_to_process = False
+        if self.pk is not None:
+            # editing a book, check need to process book intro, toc
+            obj = KaraitesBookDetails.objects.get(pk=self.pk)
+            if obj.table_book != self.table_book or \
+                    obj.columns != self.columns or \
+                    obj.columns_order != self.columns_order or \
+                    obj.toc_columns != self.toc_columns or \
+                    obj.direction != self.direction or \
+                    obj.remove_class != self.remove_class or \
+                    obj.css_class != self.css_class or \
+                    obj.remove_tags != self.remove_tags or \
+                    obj.multi_tables != self.multi_tables or \
+                    obj.index_lang != self.index_lang or \
+                    obj.book_source != self.book_source or \
+                    obj.book_source_intro != self.book_source_intro or \
+                    obj.book_toc_source != self.book_toc_source:
+                need_to_process = True
 
         super(KaraitesBookDetails, self).save(*args, **kwargs)
+
+        # Thread or subprocess ?
+
+        if need_to_process:
+            pass
+
+    def delete(self, using=None, keep_parents=False):
+        source_files = [self.book_source.name,
+                        self.book_source_intro.name,
+                        self.book_toc_source.name,
+                        self.processed_book_source.name,
+                        self.processed_book_source_intro.name,
+                        self.processed_book_toc_source.name]
+
+        for source in source_files:
+            if source == '':
+                continue
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, source))
+            except FileNotFoundError:
+                pass
+        # remove songs
+        for song in self.songs.all():
+            song.delete()
+        # delete record
+        super(KaraitesBookDetails, self).delete(using, keep_parents)
 
     class Meta:
         verbose_name_plural = 'Karaites book details'
         ordering = ('book_title_en', 'author')
+
+
+class DetailsProxy(KaraitesBookDetails):
+
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Karaites book details no Html'
 
 
 class BooksFootNotes(models.Model):
@@ -694,6 +733,9 @@ class BooksFootNotes(models.Model):
         ordering = ('book', 'footnote_number')
 
 
+LIMIT = 100
+
+
 class KaraitesBookAsArray(models.Model):
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
@@ -706,7 +748,7 @@ class KaraitesBookAsArray(models.Model):
 
     paragraph_number = models.IntegerField(default=0)
 
-    # [paragraph English, page number, page number hebrew, is_title, paragraph Hebrew]
+    # [paragraph English, 0, hebrew, is_title, paragraph Hebrew]
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
@@ -717,7 +759,7 @@ class KaraitesBookAsArray(models.Model):
     @staticmethod
     def to_list(book, paragraph_number, first):
         # chapters don't exist so we read paragraphs
-        LIMIT = 100
+
         if first == 0:
             query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=0,
                                                        paragraph_number__lte=paragraph_number)
@@ -726,21 +768,26 @@ class KaraitesBookAsArray(models.Model):
 
         result = []
         for book in query:
-            result.append([book.ref_chapter, book.paragraph_number, book.book_text])
-        return [result, query.count()]
+            result.append(book.book_text)
+        return result
 
     @mark_safe
-    def text(self):
+    def text_en(self):
         html = '<table><tbody><tr>'
-        html += f'<td class="he-verse">{self.book_text[0]}</td>'
-        try:
-            html += f'<td class="en-verse" dir="ltr">{self.book_text[2]}</td>'
-        except IndexError:
-            pass
+        html += f'<td class="en-verse" dir="ltr">{self.book_text[0]}</td>'
         html += '</tr></tbody></table>'
-        return mark_safe(html)
+        return html
 
-    text.short_description = "Book Text"
+    text_en.short_description = "English"
+
+    @mark_safe
+    def text_he(self):
+        html = '<table><tbody><tr>'
+        html += f'<td class="he-verse">{self.book_text[2]}</td>'
+        html += '</tr></tbody></table>'
+        return html
+
+    text_he.short_description = "Hebrew"
 
     @mark_safe
     def foot_notes_admin(self):
@@ -798,22 +845,34 @@ class References(models.Model):
 
     karaites_book = models.ForeignKey(KaraitesBookDetails,
                                       on_delete=models.CASCADE,
-                                      verbose_name=_('Karaites book'))
+                                      verbose_name=_('Karaites book'),
+                                      help_text=_('Karaites book'))
 
     paragraph_number = models.IntegerField(default=0,
-                                           verbose_name=_('Karaites paragraph that references Bible book'))
-
-    paragraph_text = ArrayField(ArrayField(models.TextField()), default=list)
-
-    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
-
-    bible_ref_he = models.CharField(max_length=40,
-                                    default='',
-                                    verbose_name=_('ref. Hebrew'))
+                                           verbose_name=_('Karaites paragraph that references Bible book'),
+                                           help_text=_('Karaites paragraph that references Bible book'))
 
     bible_ref_en = models.CharField(max_length=40,
                                     default='',
-                                    verbose_name=_('ref. English'))
+                                    verbose_name=_('ref. English'),
+                                    help_text=_('ref. English'))
+
+    bible_ref_he = models.CharField(max_length=40,
+                                    default='',
+                                    verbose_name=_('ref. Hebrew'),
+                                    help_text=_('ref. Hebrew'))
+
+    paragraph_text = ArrayField(ArrayField(models.TextField()),
+                                default=list,
+                                verbose_name=_('Paragraph text Hebrew/English'),
+                                help_text=_('Paragraph text Hebrew/English'))
+
+    foot_notes = ArrayField(models.TextField(),
+                            default=list,
+                            null=True,
+                            blank=True,
+                            verbose_name=_('Foot notes Hebrew/English'),
+                            help_text=_('Foot notes Hebrew/English'))
 
     error = models.CharField(max_length=2,
                              choices=REF_ERROR_CODE,
@@ -824,10 +883,25 @@ class References(models.Model):
         return f'{self.karaites_book.book_title_en} on paragraph {self.paragraph_number} references to: {self.bible_ref_en}'
 
     @mark_safe
-    def paragraph_admin(self):
-        return self.paragraph_text[0]
+    def paragraph_admin_he(self):
+        # text[2] is hebrew, text[0] is english
+        html = '<table><tbody><tr>'
+        html += f'<td class="he-verse">{self.paragraph_text[2]}</td>'
 
-    paragraph_admin.short_description = 'Reference text'
+        html += '</tr></tbody></table>'
+        return html
+
+    paragraph_admin_he.short_description = 'Hebrew'
+
+    @mark_safe
+    def paragraph_admin_en(self):
+        # text[2] is hebrew, text[0] is english
+        html = '<table><tbody><tr>'
+        html += f'<td class="en-verse" dir="ltr">{self.paragraph_text[0]}</td>'
+        html += '</tr></tbody></table>'
+        return html
+
+    paragraph_admin_en.short_description = 'English'
 
     @mark_safe
     def foot_notes_admin(self):
@@ -836,22 +910,40 @@ class References(models.Model):
             html += f'<p dir="RTL">{foot_note}</p>'
         return html
 
+    @mark_safe
+    def law(self):
+        return self.karaites_book.first_level.first_level
+
     def to_json(self):
         return {'book_name_en': self.karaites_book.book_title_en,
                 'book_name_he': self.karaites_book.book_title_he,
                 'author': self.karaites_book.author.name,
                 'language': self.karaites_book.book_language,
                 'paragraph_number': self.paragraph_number,
-                'paragraph_html': self.paragraph_text[0],
+                'paragraph_html': self.paragraph_text,
                 'bible_ref_he': self.bible_ref_he,
                 'bible_ref_en': self.bible_ref_en,
+                'book_classification': self.karaites_book.book_classification.classification_name,
+                'book_first_level': self.karaites_book.first_level.first_level,
+                'book_first_level_he': self.karaites_book.first_level.first_level_he,
                 }
 
     @staticmethod
-    def to_list(bible_ref_en):
+    def to_list(bible_ref_en, law=None):
+        ro = References.objects
 
+        if law is None:
+            query = ro.filter(bible_ref_en=bible_ref_en).order_by('karaites_book__first_level',
+                                                                  'karaites_book__book_classification',
+                                                                  'karaites_book__book_language')
+        else:
+
+            query = ro.filter(bible_ref_en=bible_ref_en,
+                              karaites_book__first_level__first_level=law).order_by('karaites_book__first_level',
+                                                                                    'karaites_book__book_classification',
+                                                                                    'karaites_book__book_language')
         result = []
-        for ref in References.objects.filter(bible_ref_en=bible_ref_en):
+        for ref in query:
             result.append(ref.to_json())
 
         return result

@@ -1,38 +1,50 @@
 import React, {useContext, useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
-import Colors from '../../constants/colors'
 import Button from '@material-ui/core/Button'
-import {Typography} from '@material-ui/core'
+import {Paper, Typography} from '@material-ui/core'
 import MenuBookIcon from '@material-ui/icons/MenuBook'
-import {makeRandomKey} from '../../utils/utils'
-import CommentsPane from '../comments/CommentPane'
-import HalakhahPane from '../halakhah/HalakhahPane'
-import {
-    BIBLE_EN_CM,
-    BIBLE_REFS,
-    BIBLE_ENGLISH,
-    BIBLE_HEBREW,
-} from '../../constants/constants'
-import TextToSpeech from '../../tts/TextToSpeech'
+import {makeRandomKey, slug} from '../../utils/utils'
 import {observer} from 'mobx-react-lite'
-import Header from '../pages/RightPaneHeader'
+import Header from './header'
 import {storeContext} from "../../stores/context";
+import {messageContext} from "../../stores/messages/messageContext";
+import {referenceContext} from '../../stores/references/referenceContext'
+import Container from "@material-ui/core/Container";
+import {toJS} from "mobx";
+import {fetchData} from "../api/dataFetch";
+import {getBibleReferencesUrl, TRANSFORM_TYPE} from "../../constants/constants";
+import parse from "html-react-parser";
+import transform from "../../utils/transform";
+import Loading from "../general/loading";
 
-const items = ['Commentary', 'Halakhah']
-const references = [BIBLE_EN_CM, BIBLE_REFS]
+const COUNT_HE = 9
+const COUNT_EN = 10
 
 
 const RightPane = ({paneNumber, refClick, openBook}) => {
-    const store = useContext(storeContext)
 
-    const [showState, setShowState] = useState(store.getRightPaneState(paneNumber))
-    const verseData = (store.getVerseData(paneNumber).length === 0 ? ['',''] : store.getVerseData(paneNumber))
+    const store = useContext(storeContext)
+    const message = useContext(messageContext)
+    const reference = useContext(referenceContext)
+    const [loading, setLoading] = useState(false)
+    const verseData = (store.getVerseData(paneNumber).length === 0 ? ['', ''] : store.getVerseData(paneNumber))
+    const [languages, setLanguages] = useState(['en', 'he'])
+    const [references, setReferences] = useState([])
+    const [referenceKey, setReferenceKey] = useState('')
 
     const classes = useStyles()
 
-    const clickToOpen = (item, type, panNumber, e) => {
-        store.setRightPaneState(showState, paneNumber)
-        refClick(item, 'bible', paneNumber, e)
+    const onClick = () => {
+        setLanguages([languages[1], languages[0]])
+    }
+
+    // const clickToOpen = (item, type, panNumber, e) => {
+    //     store.setRightPaneState(showState, paneNumber)
+    //     refClick(item, 'bible', paneNumber, e)
+    // }
+
+    const callOpenBook = (index) => {
+        openBook(paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
     }
 
     const onClose = () => {
@@ -42,74 +54,141 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     }
 
     const backButton = () => {
-        showState.pop()
-        setShowState([...showState])
+        setReferenceKey('')
     }
 
-    const Item = () => {
-        return items.map((item, i) => {
-            
+    const onClickReference = (key, _) => {
+        const bookChapterVerse = store.getBookChapterVerse(paneNumber)
+        // todo: cache the references
+        setLoading(true)
+
+        fetchData(`${getBibleReferencesUrl}${bookChapterVerse}/`)
+            .then(data => {
+                setReferences(data)
+                setReferenceKey(key)
+                setLoading(false)
+            })
+            .catch(e => {
+                message.setMessage('Error fetching references', e)
+                setLoading(false)
+            })
+
+    }
+
+    const ReferencesMenu = () => {
+
+        if (loading || verseData.length === 2 || verseData[COUNT_HE] === undefined) {
             return (
-                <Button
-                    variant="text"
-                    className={classes.button}
-                    fullWidth={true}
-                    disabled={verseData[references[i]] === '0'}
-                    startIcon={<MenuBookIcon className={classes.icon}/>}
-                    onClick={() => {
-                        setShowState([...showState, i])
-                    }}
-                    key={makeRandomKey()}
-                >
-                    {item} ({verseData[references[i]]})
-                </Button>
+                <Container className={classes.container}>
+                    <Loading/>
+                </Container>
+            )
+        }
+
+        const levels = reference.getLevelsNoTanakh()
+        const langIndex = (languages[0] === 'en' ? 0 : 1)
+        let counts = [JSON.parse(verseData[COUNT_EN]), JSON.parse(verseData[COUNT_HE])]
+        return Object.keys(levels).map((key, index) => {
+            return (
+                <Container key={makeRandomKey()}>
+                    <Button
+                        variant="text"
+                        className={(langIndex === 0 ? classes.button : classes.buttonHe)}
+                        fullWidth={true}
+                        disabled={counts[langIndex][index] === 0}
+                        startIcon={<MenuBookIcon className={classes.icon}/>}
+                        onClick={onClickReference.bind(this, key)}
+                        key={makeRandomKey()}>
+                        {langIndex === 0 ?
+                            <Typography variant="h6" component="h6" className={classes.itemsEn}>{levels[key][0]} ({counts[langIndex][index]})</Typography>
+                            :
+                            <Typography variant="h6" component="h6" className={classes.itemsHe}>({counts[langIndex][index]}){' '}{levels[key][1]} </Typography>
+                        }
+                    </Button>
+                </Container>
             )
         })
     }
 
-    const PaneBody = () => {
-        const show = showState.slice(-1)[0]
-        switch (show) {
-            case 0: {
-                return (
-                    <CommentsPane
-                        refClick={clickToOpen}
-                        paneNumber={paneNumber}
-                        backButton={backButton}
-                        onClose={onClose}
-                    />)
-            }
-            case 1: {
-                return (<HalakhahPane
-                    refClick={clickToOpen}
-                    paneNumber={paneNumber}
-                    backButton={backButton}
-                    onClose={onClose}
-                    openBook={openBook}
-                />)
-            }
-            default: {
-                return (
-                    <>
-                        <Header onClose={onClose}/>
-                        <div className={classes.body}>
-                            <Typography className={classes.headerColor}>Related texts</Typography>
-                            <hr className={classes.ruler}/>
-                            <Item/>
-                            <hr className={classes.ruler}/>
 
-                        </div>
-                    </>
-                )
-            }
+    const PaneBody = () => {
+        if (referenceKey === '') {
+            return (
+                <Container className={classes.container}>
+                    <Header backButton={null} onClose={onClose} onClick={onClick} language={languages[0]}/>
+                    <Paper className={classes.paper}>
+                        <Typography variant="h6" component="h2" className={classes.related}>Related
+                            texts</Typography>
+                        <hr className={classes.ruler}/>
+                        <ReferencesMenu/>
+                        <hr className={classes.ruler}/>
+                    </Paper>
+                </Container>
+            )
         }
+        if (references.length === 0) {
+            const message = (languages[0] === 'en' ? 'No references found' : 'לא נמצאו טקסטים')
+            return (
+                <Container className={classes.container}>
+                    <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
+                    <Paper className={classes.paper}>
+                        <Typography variant="h6"
+                                    component="h2"
+                                    className={(languages[0] === 'en' ? classes.messageEn : classes.messageHe)}>
+                            {message}
+                        </Typography>
+                        <hr className={classes.ruler}/>
+                    </Paper>
+                </Container>
+            )
+        }
+        // Judeo-Arabic is also 2
+        const index = (languages[0] === 'en' ? 0 : 2)
+        return (
+            <Container className={classes.container}>
+                <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
+                <Paper className={classes.paperRefs}>
+                    {references.map(refs => {
+                        if (refs.book_first_level === referenceKey && refs.paragraph_html[index] !== '') {
+                            return (
+                                <>
+                                    <hr/>
+                                    <Typography className={classes.title}>{refs.book_name_en}</Typography>
+                                    <hr/>
+                                    <Typography className={classes.author}>{refs.author}</Typography>
+                                    <span className={classes.refs}>
+                                        {parse(refs.paragraph_html[index], {
+                                            replace: domNode => {
+                                                return transform(refClick,
+                                                    '',
+                                                    TRANSFORM_TYPE,
+                                                    paneNumber,
+                                                    domNode)
+                                            }
+                                        })}
+                                    </span>
+                                    <Button
+                                        className={classes.openBookButton}
+                                        onClick={callOpenBook.bind(this, 0)}>
+                                        Open book
+                                    </Button>
+                                </>
+                            )
+                        }
+
+                    })}
+
+                </Paper>
+
+            </Container>
+        )
     }
 
 
     return (
-        <div className={classes.container}>
+        <Container className={classes.container}>
             <PaneBody/>
-        </div>
+        </Container>
     )
 }
 
@@ -118,30 +197,31 @@ export default observer(RightPane)
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        maxWidth: 400,
-        height: '100%',
         top: 70,
-        backgroundColor: Colors['rightPaneBackGround']
+        padding: 0,
+        height: '100%',
     },
-
+    paper: {
+        height: '100%',
+    },
+    paperRefs: {
+        padding: theme.spacing(2),
+        overflow: 'auto',
+        minHeight: '100%',
+        maxHeight: '80vh',
+    },
     header: {
         minHeight: 50,
-        backgroundColor: Colors['headerBackgroundColor'],
     },
-    body: {
-        marginTop: 40,
-        marginLeft: 30,
-        marginRight: 30,
+    related: {
+        paddingTop: theme.spacing(1),
+        paddingLeft: theme.spacing(3),
     },
     ruler: {
-        borderColor: Colors.rulerColor,
-    },
-    headerColor: {
-        color: Colors.leftPaneHeader,
-        marginTop: 20,
+        marginLeft: theme.spacing(3),
+        marginRight: theme.spacing(3),
     },
     icon: {
-        color: Colors.leftPaneHeader,
         fontSize: 20,
     },
     text: {
@@ -151,4 +231,50 @@ const useStyles = makeStyles((theme) => ({
         textTransform: 'none',
         justifyContent: 'left',
     },
+    buttonHe: {
+        textTransform: 'none',
+        justifyContent: 'right',
+        direction: 'ltr',
+    },
+    openBookButton: {
+        textTransform: 'none',
+        marginBottom: theme.spacing(3),
+    },
+    itemsEn: {
+        fontSize: 18,
+        direction: 'rtl',
+    },
+    itemsHe: {
+        fontSize: 18,
+        direction: "ltr"
+    },
+    title: {
+        fontSize: 16,
+    },
+    author: {
+        fontSize: 14,
+    },
+    title_he: {
+        fontSize: 16,
+        direction: 'rtl',
+        textAlign: 'right',
+    },
+    author_he: {
+        fontSize: 14,
+        direction: 'rtl',
+        textAlign: 'right',
+    },
+    refs: {
+        fontSize: 18,
+    },
+    messageEn: {
+        paddingTop: theme.spacing(3),
+        paddingLeft: theme.spacing(3),
+        direction: "ltr"
+    },
+    messageHe: {
+        paddingTop: theme.spacing(3),
+        paddingRight: theme.spacing(3),
+        direction: "rtl"
+    }
 }));

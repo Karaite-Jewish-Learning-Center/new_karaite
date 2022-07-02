@@ -4,11 +4,16 @@ interface booksTable {
     [index: string]: string
 }
 
+
 export const capitalize = (string: string): string =>
     // respect all others cases
     string === "" ? "" : string[0].toUpperCase() + string.slice(1)
 
 export const removeExtension = (string: string): string => string.replace(/\.[^/.]+$/, "")
+
+export const removeSlash = (string: string): string => string.replace(/\//g, '')
+
+export const getFirstPart = (string: string): string => string.split('/')[1]
 
 export const range = (l: number): Array<number> =>
     Array(l).fill(1).map((_, i) => i + 1)

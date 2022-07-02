@@ -6,7 +6,6 @@ import {slug} from '../../utils/utils'
 import Filler from '../general/Filler.tsx'
 import {makeStyles} from "@material-ui/core/styles"
 import {languageDirection} from "../../utils/languageDirection"
-import Colors from "../../constants/colors";
 import {ToText} from "../general/ToText";
 
 const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
@@ -22,7 +21,8 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
                     <br/>
                     <Typography className={classes.text} style={{direction: languageDirection(languages[1])}} variant="body2" component="p">{obj[key]}</Typography>
                 </div>
-                <hr className={classes.ruler}/>
+                <br/>
+                <hr/>
             </Grid>)
     }
 
@@ -33,7 +33,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
                 <Grid item className={classes.title}>
                     <Typography className={classes.titleHalakhah} variant="h6" component="h2">{key}</Typography>
                     <ToText/>
-                    <hr className={classes.ruler}></hr>
+                    <hr/>
                 </Grid>
                 <Grid container spacing={2}>
                     {populate(books[key])}
@@ -64,12 +64,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         marginTop: 50,
     },
-    ruler: {
-        marginTop: 30,
-        marginLeft:20,
-        marginRight:20,
-        borderColor: Colors.rulerColor,
-    },
+
     link: {
         marginBottom: 20,
     },
@@ -77,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 20,
         paddingRight: 10,
         paddingLeft: 10,
-        color: 'gray',
     },
     text: {
         paddingLeft: 20,

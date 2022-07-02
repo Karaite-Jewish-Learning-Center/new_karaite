@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import Colors from '../../constants/colors';
 import {Typography} from '@material-ui/core';
 import {englishBookNameToHebrew, unslug} from '../../utils/utils'
 import {indoArabicToHebrewCardinal} from '../../utils/english-hebrew/numberConvertion'
@@ -19,7 +18,7 @@ const RenderHeader = ({
                           onClosePane,
                           flip,
                           onSpeakOnOffHe,
-                          onSpeakOnOffEn
+                          onSpeakOnOffEn,
                       }) => {
 
     const store = useContext(storeContext)
@@ -44,7 +43,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffHe}
                                 onOff={flip[0]}
-                                />
+                            />
                         </Grid>
                         <Grid item xs={2} key={4}>
                             <Typography className={classes.chapterView}>{chapter}</Typography>
@@ -93,7 +92,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
-                                />
+                            />
                         </Grid>
                     </>
                 )
@@ -110,7 +109,7 @@ const RenderHeader = ({
             </Grid>
             <HeaderBody chapter={chapter}/>
             <Grid item xs={1} key={1}>
-                <LanguageButton paneNumber={paneNumber}/>
+                <LanguageButton paneNumber={paneNumber} />
             </Grid>
         </Grid>
     )
@@ -125,7 +124,6 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 50,
         maxHeight: 50,
         width: '100%',
-        backgroundColor: Colors['rightPaneBackGround'],
         textAlign: 'center',
     },
     hebrewBook: {
@@ -151,7 +149,6 @@ const useStyles = makeStyles((theme) => ({
     chapterView: {
         textAlign: 'center',
         verticalAlign: 'middle',
-        paddingRight: 23,
         paddingTop: 10,
         [theme.breakpoints.down('sm')]: {
             paddingRight: 10,

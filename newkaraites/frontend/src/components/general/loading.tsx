@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import {makeStyles} from '@material-ui/core/styles';
-import Colors from '../../constants/colors'
 
 const Loading = ({color, type, text}:{color:any,type:any, text?:string  }) => {
     const classes = useStyles()
@@ -13,7 +12,7 @@ const Loading = ({color, type, text}:{color:any,type:any, text?:string  }) => {
 }
 
 Loading.defaultProps = {
-    color:Colors.loading,
+    // color:Colors.loading,
     type:'spin'
 }
 

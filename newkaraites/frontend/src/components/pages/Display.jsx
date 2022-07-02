@@ -3,7 +3,6 @@ import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {q640} from "../../constants/constants"
-import Colors from "../../constants/colors";
 
 
 const Display = () => {
@@ -87,11 +86,9 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         margin: 0,
-        color: Colors.tanakh,
         textAlign: 'center',
     },
      ruler: {
-        color: Colors.rulerColor,
         width: '100%',
     },
     text: {

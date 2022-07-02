@@ -3,15 +3,16 @@ from .views import (GetFirstLevel,
                     GetByLevelAndByClassification,
                     BooksPresentation,
                     GetBookAsArrayJson,
-                    GetComments,
                     GetKaraitesAllBookDetails,
                     GetByLevel,
                     GetKaraitesBookAsArray,
                     GetTOC,
-                    getHalakhah,
+                    GetHalakhah,
                     Test,
                     AutoCompleteView,
-                    Search)
+                    Search,
+                    GetBiBleReferences,
+                    GetBiBleReferencesByLaw)
 
 app_name = 'karaites'
 
@@ -44,14 +45,15 @@ urlpatterns = [
          GetByLevelAndByClassification.as_view(),
          name='get_karaites_book_by_level_and_classification'),
 
-    # comments
-    path('get-comments/<str:book>/<str:chapter>/<str:verse>/', GetComments.as_view(), name='get_comments'),
-    path('get-comments/<str:book>/<str:chapter>/', GetComments.as_view(), name='get_comments'),
-    path('get-comments/<str:book>/', GetComments.as_view(), name='get_comments'),
-    path('get-comments/', GetComments.as_view(), name='get_comments'),
+    # bible references
+    path('get-bible-references/<str:reference>/<str:law>/',
+         GetBiBleReferencesByLaw.as_view(),
+         name='get_bible_references'),
+
+    path('get-bible-references/<str:reference>/', GetBiBleReferences.as_view(), name='get_bible_references'),
 
     # references Halakhah
-    path('get-references/<str:book>/<str:chapter>/<str:verse>/', getHalakhah.as_view(), name='get_references'),
+    path('get-references/<str:book>/<str:chapter>/<str:verse>/', GetHalakhah.as_view(), name='get_references'),
 
     # very simple test
     path('test/', Test.as_view(), name='test'),

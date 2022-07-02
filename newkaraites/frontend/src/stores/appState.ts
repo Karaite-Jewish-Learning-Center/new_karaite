@@ -37,27 +37,16 @@ class AppState {
         return this.panes[paneNumber].isRightPaneOpen
     }
 
-    // comment Tab
-    setCommentTab = (tab: string, paneNumber: number): void => {
-        this.panes[paneNumber].commentTab = tab
-    }
-    getCommentTab = (paneNumber: number): string => this.panes[paneNumber].commentTab
-
-    setComments = (comments: Array<string>, paneNumber: number): void => {
-        this.panes[paneNumber].comments = comments
+    setRefsChapterVerse = (chapter: number, verse: number, paneNumber: number): void => {
+        this.panes[paneNumber].refsChapterVerse = [chapter, verse]
     }
 
-    getComments = (paneNumber: number): Array<any> => this.panes[paneNumber].comments
+    getBookChapterVerse = (i: number) => `(${this.panes[i].book} ${this.panes[i].refsChapterVerse[0]}:${this.panes[i].refsChapterVerse[1]})`
 
-    setCommentsChapter = (chapter: number, paneNumber: number): void => {
-        this.panes[paneNumber].commentsChapter = chapter
-    }
-    getCommentsChapter = (paneNumber: number): void => this.panes[paneNumber].commentsChapter
-
-    setCommentsVerse = (verse: number, paneNumber: number): void => {
-        this.panes[paneNumber].commentsVerse = verse
-    }
-    getCommentsVerse = (paneNumber: number): void => this.panes[paneNumber].commentsVerse
+    // getRefsChapterVerse = (paneNumber: number): void => this.panes[paneNumber].refsChapterVerse
+    //
+    // getRefsChapter = (paneNumber: number): number => this.panes[paneNumber].refsChapterVerse[0]
+    // getRefsVerse = (paneNumber: number): number => this.panes[paneNumber].refsChapterVerse[1]
 
     getBook = (i: number): string => this.panes[i].book
 
@@ -102,8 +91,7 @@ class AppState {
 
     getCurrentItem = (i: number): number => this.panes[i].currentItem
 
-    // right pane
-    // comments
+    // right pane bible references
     setRightPaneState = (state: boolean, i: number): void => {
         this.panes[i].rightPaneState = state
     }
@@ -142,14 +130,17 @@ class AppState {
     // loading
 
     setLoading = (loading: boolean): void => {
-        this.loading = loading
+        runInAction(() => {
+            this.loading = loading
+        })
+
     }
     getLoading = (): boolean => this.loading
 
     // karaites books
     setParagraphs = (paragraphs: Array<any>, i: number): void => {
-        console.log('setParagraphs', paragraphs)
-        this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
+        // this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
+        this.panes[i].paragraphs = paragraphs
     }
 
     getParagraphs = (i: number): Array<any> => this.panes[i].paragraphs
@@ -158,13 +149,11 @@ class AppState {
         (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
     setBookDetails = (details: object, i: number): void => {
-        console.log('setBookDetails', details)
         runInAction(() => {
             this.panes[i].book_details = details
         })
     }
     getBookDetails = (i: number): object => {
-        console.log('getBookDetails', this.panes[i].book_details)
         return this.panes[i].book_details
     }
 
@@ -224,7 +213,6 @@ class AppState {
         this.panes[i].languages = language
     }
     getLanguage = (i: number): string => this.panes[i].languages[0]
-
     nextLanguage = (i: number): Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
 
 }

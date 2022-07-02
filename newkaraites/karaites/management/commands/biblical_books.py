@@ -1,12 +1,17 @@
 import json
 
 from django.core.management.base import BaseCommand
-from ...models import (Organization,
+from ...models import (FirstLevel,
+                       SecondLevel,
+                       Organization,
                        BookAsArray,
                        FullTextSearch,
                        FullTextSearchHebrew)
+
 from ...utils import search_level
 from .update_full_text_search_index import update_full_text_search_index_en_he
+from ...constants import (FIRST_LEVEL_DICT,
+                          SECOND_LEVEL_DICT)
 
 
 class Command(BaseCommand):
@@ -74,13 +79,16 @@ class Command(BaseCommand):
             source = data['source']
             books = data['books']
             first_level = search_level(source.split('/')[3])
+            first, _ = FirstLevel.objects.get_or_create(first_level=FIRST_LEVEL_DICT[first_level])
+
             second_level = search_level(source.split('/')[4])
+            second, _ = SecondLevel.objects.get_or_create(second_level=SECOND_LEVEL_DICT[second_level])
 
             for title_en, title_he in books:
 
                 organization, created = Organization.objects.get_or_create(
-                    first_level=first_level,
-                    second_level=second_level,
+                    first_level=first,
+                    second_level=second,
                     book_title_en=title_en,
                     book_title_he=title_he,
                     order=order

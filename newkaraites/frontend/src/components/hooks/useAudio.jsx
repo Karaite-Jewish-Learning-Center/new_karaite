@@ -1,11 +1,9 @@
 import {useEffect, useState, useMemo} from "react";
-import {apiUrl} from "../../constants/constants";
+import {apiUrlNoSlash} from "../../constants/constants";
 
 export const useAudio = (song, onResetPlayer, autoplay) => {
 
-    song = song.replace(/‘/g, '').replace(/e’/g, '').replace(/é/g, '').replace(/e’/g, '')
-
-    const url = `${apiUrl}static-django/audio/${song}`
+    const url = `${apiUrlNoSlash}${song}`;
 
     const [audio] = useState(useMemo(() => {
         try {

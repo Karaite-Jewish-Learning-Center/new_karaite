@@ -313,3 +313,25 @@ a:hover {
 a[data-tip] {
     cursor: pointer;
 }
+
+.en-biblical-ref {
+    color: -webkit-link;
+    cursor: pointer;
+}
+
+.he-biblical-ref {
+    color: -webkit-link;
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    .en-biblical-ref {
+        color: yellow;
+        cursor: pointer;
+    }
+    .he-biblical-ref {
+        color: yellow;
+        cursor: pointer;
+    }
+}
+

@@ -24,13 +24,20 @@ export interface ButtonPlayProps {
     song: string;
 }
 
-export interface Song {
-    song: string
+interface song {
+    song_title: string,
+    song_file: string,
 }
 
+// interface SongType {
+//      readonly [index:number]:song
+// }
+
 export interface SongList {
-    songs: Song[]
+      songs: song[]
 }
+
+
 interface AudioType {
     onClick: MouseEvent<HTMLButtonElement>,
     onReset: MouseEvent<HTMLButtonElement>,
@@ -50,5 +57,14 @@ export interface Audio {
     mp3: string,
 }
 
+
+export interface langButton {
+    paneNumber: number
+}
+
+export interface langButtonReference {
+    language: string,
+    onClick: MouseEventHandler,
+}
 
 
