@@ -14,7 +14,9 @@
     direction: rtl;
 }
 
-
+scroll {
+    
+}
 /* English*/
 
 .MsoTableGrid tr:nth-child(even) {
