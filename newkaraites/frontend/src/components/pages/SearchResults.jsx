@@ -12,6 +12,7 @@ import {messageContext} from "../../stores/messages/messageContext";
 import {Please} from "../messages/Please"
 import {slug} from "../../utils/utils"
 import {fetchData} from "../api/dataFetch";
+//import './bold.css'
 
 
 const SearchResults = () => {
@@ -67,10 +68,9 @@ const SearchResults = () => {
                 // an extra call is done to figure out that next page
                 // is empty, In all other cases there is no need to do an extra call.
                 // todo: review this code
-                debugger
-                console.log(data['data'])
+
                 if (data['data'].length < ITEMS_PER_PAGE) {
-                    console.log('less than ITEMS_PER_PAGE')
+
                     store.setMoreResults(false)
                 }
                 store.setSearchResultData(data['data'])
@@ -89,7 +89,6 @@ const SearchResults = () => {
     }, [search, page, store])
 
     if (store.getSearch() === '') return <Please reason="search"/>
-    console.log(store.getSearchResultData().length)
     return (
         <div className={classes.container}>
             <Typography className={classes.header} variant="h5">
@@ -101,7 +100,6 @@ const SearchResults = () => {
                 itemContent={itemContent}
                 components={{
                           Footer: () => {
-                              console.log('footer')
                               return (
                                   <div style={{padding: '1rem', textAlign: 'center'}}>
                                      End of search results for "{store.getSearch()}"
@@ -139,6 +137,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
         marginBottom: 50,
     },
+
 }))
 
 export default observer(SearchResults)
