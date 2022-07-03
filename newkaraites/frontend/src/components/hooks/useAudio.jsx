@@ -7,7 +7,9 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
 
     const [audio] = useState(useMemo(() => {
         try {
-            return new Audio(url)
+            let audio = new Audio(url)
+            audio.crossOrigin = 'anonymous'
+            return audio
         } catch (e) {
             alert('Audio error')
         }

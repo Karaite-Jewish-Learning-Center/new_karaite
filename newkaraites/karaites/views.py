@@ -310,7 +310,7 @@ class Search(View):
             results = set()
             highlight_word = []
             tokens = tokenizer.tokenize(search)
-            for grp, token, token_num, _, _ in tokens:
+            for grp, token, token_num, _ in tokens:
 
                 search_text = str(Hebrew(token).text_only())
                 word_query = InvertedIndex.objects.get(word=search_text)
