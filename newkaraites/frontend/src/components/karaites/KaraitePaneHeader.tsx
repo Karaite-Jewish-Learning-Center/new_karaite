@@ -39,7 +39,6 @@ const KaraitesPaneHeader: FC<IProps> = ({
     const xsColumns1 = (matches ? 5 : 12)
     const xsColumns2 = (matches ? 4 : 12)
 
-
     const onClose = () => {
         onClosePane(paneNumber)
     }
@@ -83,7 +82,7 @@ const useStyles = makeStyles({
     resources: {
         minHeight: 50,
         padding:0,
-        paddingTop: (iOS() ? 0 : 40),
+        paddingTop: (iOS() ? 50 : 0),
         marginRight: 0,
     },
     iconGrid: {
