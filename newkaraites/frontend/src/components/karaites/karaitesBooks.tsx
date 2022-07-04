@@ -103,7 +103,6 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
 
     }
     const itemContent = (item: number, data: Array<any>) => {
-        debugger
         let index = 2
         if(type==='Liturgy' || (type==='Comments' && details.book_language.indexOf('en')>=0)) index = 0
         return (
@@ -120,7 +119,6 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const itemIntroduction = (item: number, data: string) => {
-        debugger
         return (<div className={`${classes.paragraphContainer} ${selectCurrent(item) ? classes.selected : ''}`}>
             <div className={(type !== 'Liturgy' ? classes.paragraph : classes.liturgy)}>
                 {parse(data, {
@@ -161,7 +159,6 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     }
 
     const TableBook: FC<TableBook> = ({initial}) => {
-        debugger
         if (details.table_book) {
             const tableBook = 'table-book'
             return (
