@@ -11,6 +11,17 @@ export const capitalize = (string: string): string =>
 
 export const removeExtension = (string: string): string => string.replace(/\.[^/.]+$/, "")
 
+export const iOS = () => [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ].includes(navigator.platform)
+  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+
+
 export const removeSlash = (string: string): string => string.replace(/\//g, '')
 
 export const getFirstPart = (string: string): string => string.split('/')[1]

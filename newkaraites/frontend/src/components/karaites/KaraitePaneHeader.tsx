@@ -11,6 +11,8 @@ import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
 import {BuyButton} from '../buttons/BuyButton';
 import {MusicSelect} from '../buttons/music-select';
+import {iOS} from '../../utils/utils';
+
 
 interface IProps {
     paneNumber: number,
@@ -36,7 +38,6 @@ const KaraitesPaneHeader: FC<IProps> = ({
     const direction = (matches ? 'row' : 'column')
     const xsColumns1 = (matches ? 5 : 12)
     const xsColumns2 = (matches ? 4 : 12)
-
 
     const onClose = () => {
         onClosePane(paneNumber)
@@ -68,7 +69,6 @@ const KaraitesPaneHeader: FC<IProps> = ({
                 <BookButton onClick={onBook}/>
                 <MusicSelect songs={details.songs_list}/>
                 {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
-
             </Grid>
 
             <Grid item xs={xsColumns2}>
@@ -81,7 +81,8 @@ const KaraitesPaneHeader: FC<IProps> = ({
 const useStyles = makeStyles({
     resources: {
         minHeight: 50,
-        padding: 0,
+        padding:0,
+        paddingTop: (iOS() ? 50 : 0),
         marginRight: 0,
     },
     iconGrid: {
