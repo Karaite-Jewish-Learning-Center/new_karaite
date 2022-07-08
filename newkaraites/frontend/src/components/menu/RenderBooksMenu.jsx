@@ -10,7 +10,7 @@ import {cleanUrl} from "../../utils/cleanUrl";
 import {MusicBadge} from "../bages/musicBadge";
 
 
-export const RenderBooksMenu = ({books, path, languages = ['en', 'en'], columns = 6, header = true}) => {
+export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
     const classes = useStyles()
 
