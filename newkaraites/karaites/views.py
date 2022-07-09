@@ -139,8 +139,11 @@ class GetFirstLevel(View):
     def get(request, *args, **kwargs):
         """ Get first level Law"""
         level = OrderedDict()
-        for first_level in FirstLevel.objects.all().values_list('first_level', 'first_level_he').order_by('order'):
-            level[first_level[0]] = first_level
+        for first_level in FirstLevel.objects.all().values_list('first_level',
+                                                                'first_level_he',
+                                                                'break_on_classification',
+                                                                'url').order_by('order'):
+            level[first_level[3]] = first_level
         return JsonResponse(level, safe=False)
 
 

@@ -2,18 +2,31 @@ import {makeAutoObservable, observable, toJS} from "mobx"
 import {fetchData} from '../../components/api/dataFetch';
 import {getLevels} from '../../constants/constants';
 
+const BREAK_ON =2
+
+
+interface Levels {
+    english: string ,
+    hebrew: string,
+    breakOnClassification: boolean,
+    url: string
+}
+
+interface LevelsObject {
+    [key: string]: Levels[]
+}
 
 class ReferenceStore {
 
-    levels_all: string[] = []
-    levels_no_tanakh: string[] = []
-    references :any[] = []
+    levels_all: LevelsObject = {}
+    levels_no_tanakh: LevelsObject = {}
+    // references: any[] = []
 
     constructor() {
         makeAutoObservable(this, {
             levels_all: observable,
             levels_no_tanakh: observable,
-            references: observable,
+            // references: observable,
         })
 
         // get levels this is Law, Liturgy, Poetry, etc
@@ -22,23 +35,27 @@ class ReferenceStore {
                 this.levels_all = data
                 delete data['Tanakh']
                 this.levels_no_tanakh = data
+
             })
             .catch((e) => console.log(e))
     }
 
-    getLevelsAll = (): Array<String> => {
+    getLevelsAll = () => {
         return this.levels_all
     }
 
-    getLevelsNoTanakh = (): Array<String> => {
+    getLevelsNoTanakh = () => {
         return this.levels_no_tanakh
     }
 
+    getBreakOnClassification = (level: string) => {
+        try {
+            return this.levels_no_tanakh[level][BREAK_ON]
+        }catch (_) {
+            return false
+        }
+    }
 
-
-    // getReferences = (): any[] => {
-    //     return this.references
-    // }
 }
 
 const referenceStore = () => {

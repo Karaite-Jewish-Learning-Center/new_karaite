@@ -1,4 +1,5 @@
 import sys
+import os
 import re
 import shutil
 from django.core.files import File
@@ -611,6 +612,7 @@ class Command(BaseCommand):
             open('/tmp/html.html', 'w', encoding='utf8').write(html_str)
             book.processed_book_source = File(open('/tmp/html.html', 'r', encoding='utf8'), book.book_title_en)
             book.save()
+            os.remove('/tmp/html.html')
 
     def handle(self, *args, **options):
         """

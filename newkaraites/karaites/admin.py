@@ -34,7 +34,8 @@ class KAdmin(admin.ModelAdmin):
 
 
 class FirstLevelAdmin(KAdmin):
-    list_display = ('first_level', 'first_level_he_html', 'order')
+    list_display = ('first_level', 'first_level_he_html',
+                    'break_on_classification', 'url', 'order')
     list_display_links = ('first_level',)
     list_editable = ('order',)
 

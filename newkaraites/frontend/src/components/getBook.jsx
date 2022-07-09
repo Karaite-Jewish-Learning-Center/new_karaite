@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React from "react"
 import {calculateItemNumber, makeBookUrl} from '../utils/utils';
 import {bookChapterUrl, chaptersByBibleBook, karaitesBookUrl} from '../constants/constants';
 
@@ -13,11 +13,9 @@ const fetchData = async (paneNumber, store,message,  url, type) => {
 
         if (response.ok) {
             const data = await response.json()
-            debugger
             if (type === 'bible') {
                 store.setBookData(data.chapter, paneNumber)
             } else {
-                debugger
                 store.setParagraphs(data[PARAGRAPHS], paneNumber)
                 store.setBookDetails(data[BOOK_DETAILS], paneNumber)
             }

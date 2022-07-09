@@ -19,13 +19,29 @@ ENGLISH = 1
 
 class FirstLevel(models.Model):
     first_level = models.CharField(max_length=50,
-                                   unique=True)
+                                   unique=True,
+                                   verbose_name=_('First level English'),
+                                   help_text=_('First level in English'))
 
     first_level_he = models.CharField(max_length=50,
                                       default='',
-                                      blank=True)
+                                      blank=True,
+                                      verbose_name=_('First level in Hebrew'),
+                                      help_text=_('First level in Hebrew'))
 
-    order = models.IntegerField(default=0)
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Display order'))
+
+    break_on_classification = models.BooleanField(default=False,
+                                                  verbose_name=_('Break on classification'),
+                                                  help_text=_('Break on classification ex.:Liturgy'))
+
+    url = models.CharField(max_length=20,
+                           default='',
+                           verbose_name=_('URL'),
+                           help_text=_('URL should be only one word without spaces'
+                                       'don\'t change the older ones. Keep then in English'))
+
 
     def __str__(self):
         return self.first_level
@@ -603,15 +619,15 @@ class KaraitesBookDetails(models.Model):
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
         if not classification:
-            book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by('book_title_en')
+            book_details = KaraitesBookDetails.objects.filter(first_level__url=level).order_by('book_title_en')
         else:
             # Halakhah, Polemic
             if level != 'Liturgy':
-                book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by(
+                book_details = KaraitesBookDetails.objects.filter(first_level__url=level).order_by(
                     'book_title_en',
                     'book_classification')
             else:
-                book_details = KaraitesBookDetails.objects.filter(first_level__first_level=level).order_by(
+                book_details = KaraitesBookDetails.objects.filter(first_level__url=level).order_by(
                     'first_level',
                     'book_classification',
                     'book_title_en')
@@ -682,7 +698,6 @@ class KaraitesBookDetails(models.Model):
 
 
 class DetailsProxy(KaraitesBookDetails):
-
     class Meta:
         proxy = True
         verbose_name_plural = 'Karaites book details no Html'
