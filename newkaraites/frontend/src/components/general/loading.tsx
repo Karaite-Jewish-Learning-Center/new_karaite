@@ -12,7 +12,6 @@ const Loading = ({color, type, text}:{color:any,type:any, text?:string  }) => {
 }
 
 Loading.defaultProps = {
-    // color:Colors.loading,
     type:'spin'
 }
 

@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from 'react'
 import {makeStyles} from '@material-ui/core/styles';
-import Colors from "../../constants/colors";
 import Typography from '@material-ui/core/Typography';
 import {
     BIBLE_ENGLISH,
@@ -142,9 +141,7 @@ const useStyles = makeStyles(() => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'top',
-        // "&:hover": {
-        //     background: Colors['verseOnMouseOver']
-        // },
+
     },
     chapter: {
         width: '100%',
@@ -164,16 +161,16 @@ const useStyles = makeStyles(() => ({
         fontSize: 22,
         direction: ((props) => props.lang === 'he' ? 'RTL' : 'LTR'),
         textDecoration: 'underline',
-        textDecorationColor: Colors['underline'],
+        textDecorationColor:'#c6c6c6',
     },
     en: {
         fontSize: 22,
         textDecoration: 'underline',
-        textDecorationColor: Colors['underline'],
+        textDecorationColor:'#c6c6c6',
     },
     ch: {
         fontSize: 18,
-        color: Colors['gray'],
+        color:'gray',
         direction: 'RTL',
         fontFamily: 'SBL Hebrew',
     },
@@ -188,7 +185,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center',
         verticalAlign: 'text-top',
         fontSize: 20,
-        color: Colors['gray']
+        color:'gray'
     },
     verseHe: {
         maxWidth: ((props) => props.lang === 'he' ? '45%' : '35%'),
@@ -208,7 +205,7 @@ const useStyles = makeStyles(() => ({
     },
     vn: {
         fontSize: 12,
-        color: Colors['gray'],
+        color: 'gray',
         direction: ((props) => props.lang === 'he' ? 'RTL' : 'LTR')
     },
     verse: {
@@ -233,7 +230,7 @@ const useStyles = makeStyles(() => ({
         fontSize: 21,
     },
     selectVerse: {
-        backgroundColor: Colors['bibleSelectedVerse']
+        backgroundColor:  '#11c4f114',
     },
     references: {
         cursor: 'pointer',
