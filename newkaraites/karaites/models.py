@@ -40,8 +40,7 @@ class FirstLevel(models.Model):
                            default='',
                            verbose_name=_('URL'),
                            help_text=_('URL should be only one word without spaces'
-                                       'don\'t change the older ones. Keep then in English'))
-
+                                       ' don\'t change the older ones. Keep then in English'))
 
     def __str__(self):
         return self.first_level
