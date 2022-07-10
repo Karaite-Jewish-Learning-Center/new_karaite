@@ -25,8 +25,6 @@ const Message = () => {
                 autoHideDuration={duration}
                 onClose={handleClose}
                 anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
-                {/*// message={<span id="message-id">{message}</span>}>*/}
-                {/*// action={<CloseButton onClick={handleClose} color="inherit"/>}>*/}
                 <Alert onClose={handleClose} severity={level}>
                     {message}
                 </Alert>

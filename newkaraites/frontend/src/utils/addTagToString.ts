@@ -6,9 +6,6 @@ import pluralize from 'pluralize'
 // this is the text that <b>I</b> want to tag, so <b>I</b> that said
 // Make last word plural if is singular, singular if is plural
 
-
-// Todo: write tests for this functions and see how they perform
-
 // export default function addTagToString1(text: string, tag: string, arg: string) {
 //   const lastWord = text.split(' ').pop()
 //   const lastWordPlural = pluralize(lastWord)

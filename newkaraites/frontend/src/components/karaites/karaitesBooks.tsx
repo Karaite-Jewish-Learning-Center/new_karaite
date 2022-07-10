@@ -6,7 +6,6 @@ import KaraitePaneHeader from './KaraitePaneHeader';
 import transform from '../../utils/transform'
 import '../../css/_comments.css'
 import '../../css/books.css'
-import Colors from '../../constants/colors'
 import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
@@ -234,7 +233,7 @@ const useStyles = makeStyles(() => ({
     paragraphContainer: {
         fontFamily: 'SBL Hebrew',
         "&:hover": {
-            background: Colors['bibleSelectedVerse']
+            background: '#11c4f114',
         },
         width: '100%',
     },
@@ -262,7 +261,7 @@ const useStyles = makeStyles(() => ({
     },
     tocParagraph: {
         "&:hover": {
-            background: Colors['bibleSelectedVerse']
+            background: '#11c4f114',
         },
         fontFamily: 'SBL Hebrew',
         maxWidth: '100%',
@@ -282,7 +281,7 @@ const useStyles = makeStyles(() => ({
         float: 'right',
     },
     selected: {
-        backgroundColor: Colors['rulerColor']
+        backgroundColor:'#36363614',
     },
     Hide: {
         display: 'none',

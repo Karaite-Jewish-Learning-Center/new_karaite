@@ -9,7 +9,8 @@ DJANGODIR=/home/production/anaconda3/envs/pro/new_karaite/newkaraites
 SOCKFILE=/home/production/sock/gunicorn.sock
 USER=production
 GROUP=production
-NUM_WORKERS=3
+NUM_WORKERS=1
+
 DJANGO_SETTINGS_MODULE=newkaraites.settings
 DJANGO_WSGI_MODULE=newkaraites.wsgi
 echo "Starting $NAME as `whoami`"
