@@ -123,6 +123,7 @@ admin.site.register(Classification, ClassificationAdmin)
 
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
+    list_editable = ('published',)
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
                     'book_title_en',
@@ -143,7 +144,8 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'css_class',
                     'buy_link',
                     'index_lang',
-                    'intro_to_html')
+                    'intro_to_html',
+                    'published')
 
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
     actions = ['delete_selected']
@@ -166,6 +168,7 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 class DetailsProxyAdmin(KAdmin):
     save_on_top = True
+    list_editable = ('published',)
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
                     'book_title_en',
@@ -186,7 +189,7 @@ class DetailsProxyAdmin(KAdmin):
                     'css_class',
                     'buy_link',
                     'index_lang',
-                    )
+                    'published')
 
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
 

@@ -283,6 +283,9 @@ scroll {
     color: red;
 }
 
+.he-anochi-table-000 tr:nth-child(odd) td:nth-child(even){
+    direction: ltr;
+}
 /* Ashir Beshir Ḥadash*/
 /* Ashir Le’el ‘Elyon */
 .he-ashir-table-003 {

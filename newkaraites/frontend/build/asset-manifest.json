@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.8e43a771.chunk.css",
-    "main.js": "/static/js/main.106f257e.chunk.js",
-    "main.js.map": "/static/js/main.106f257e.chunk.js.map",
+    "main.css": "/static/css/main.6301034c.chunk.css",
+    "main.js": "/static/js/main.3a7a85fb.chunk.js",
+    "main.js.map": "/static/js/main.3a7a85fb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ff5b8ea4.js",
     "runtime-main.js.map": "/static/js/runtime-main.ff5b8ea4.js.map",
     "static/js/2.48dcf898.chunk.js": "/static/js/2.48dcf898.chunk.js",
     "static/js/2.48dcf898.chunk.js.map": "/static/js/2.48dcf898.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.8e43a771.chunk.css.map": "/static/css/main.8e43a771.chunk.css.map",
+    "static/css/main.6301034c.chunk.css.map": "/static/css/main.6301034c.chunk.css.map",
     "static/js/2.48dcf898.chunk.js.LICENSE.txt": "/static/js/2.48dcf898.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/SBL_BLit.258e43f1.ttf",
     "static/media/record_voice_over_black_24dp.7097292f.svg": "/static/media/record_voice_over_black_24dp.7097292f.svg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.ff5b8ea4.js",
     "static/js/2.48dcf898.chunk.js",
-    "static/css/main.8e43a771.chunk.css",
-    "static/js/main.106f257e.chunk.js"
+    "static/css/main.6301034c.chunk.css",
+    "static/js/main.3a7a85fb.chunk.js"
   ]
 }
