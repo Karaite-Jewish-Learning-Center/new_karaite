@@ -193,7 +193,6 @@ if DEBUG:
     DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
 CORS_ORIGIN_ALLOW_ALL = True
 
 STATIC_URL = '/static-django/'
