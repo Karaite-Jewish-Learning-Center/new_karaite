@@ -1,24 +1,20 @@
 import React, {useContext} from 'react';
-import ReactLoading from 'react-loading';
 import {makeStyles} from '@material-ui/core/styles';
 import {storeContext} from '../../stores/context'
 import {observer} from 'mobx-react-lite';
+import './spin.css'
 
-const LoadingSpin = ({color, type}: { color: any, type: any }) => {
+const LoadingSpin = () => {
     const store = useContext(storeContext)
     const classes = useStyles()
     if (store.getLoading()) {
         return (
             <div className={classes.container}>
-                <ReactLoading type={type} color={color} height={30} width={30}/>
+                <div className={'spin'}></div>
             </div>
         )
     }
     return null
-}
-
-LoadingSpin.defaultProps = {
-    type: 'spin'
 }
 
 const useStyles = makeStyles(() => ({

@@ -147,7 +147,9 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'intro_to_html',
                     'published')
 
-    list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
+    list_filter = ('published', 'first_level',
+                   'book_language', 'book_classification', 'book_title_en')
+
     actions = ['delete_selected']
 
     def delete_selected(self, request, queryset):

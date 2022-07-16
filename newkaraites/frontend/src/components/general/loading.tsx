@@ -1,23 +1,23 @@
 import React from 'react';
-import ReactLoading from 'react-loading';
+import './spin.css'
 import {makeStyles} from '@material-ui/core/styles';
 
-const Loading = ({color, type, text}:{color:any,type:any, text?:string  }) => {
+const Loading = ({text}: { text?: string }) => {
     const classes = useStyles()
     return (
         <div className={classes.loading}>
-            {(text ? <p>{text}</p>:<ReactLoading type={type} color={color} height={30} width={30}/>)}
+            {(text ? <p>{text}</p> : <div className={'spin'}></div>)}
         </div>
     )
 }
 
 Loading.defaultProps = {
-    type:'spin'
+    type: 'spin'
 }
 
 const useStyles = makeStyles(() => ({
     loading: {
-        padding: '2rem',
+
         display: 'flex',
         justifyContent: 'center',
     }

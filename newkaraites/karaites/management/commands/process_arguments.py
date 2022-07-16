@@ -1,5 +1,4 @@
-from ...models import (Classification,
-                       KaraitesBookDetails)
+from ...models import KaraitesBookDetails
 
 
 def process_arguments(options):
@@ -39,8 +38,8 @@ def process_arguments(options):
         if options['exhortatory']:
             books_to_process.append('Exhortatory')
 
-    else:
-        books_to_process = ['All']
+        if options['all']:
+            books_to_process = ['All']
 
     if options['book_id'] != 0:
         books_to_process = [options['book_id']]
@@ -51,4 +50,7 @@ def process_arguments(options):
         if books_to_process[0].isnumeric():
             return KaraitesBookDetails.objects.filter(pk=books_to_process[0])
 
-    return KaraitesBookDetails.objects.filter(first_level__first_level__in=books_to_process)
+        return KaraitesBookDetails.objects.filter(first_level__first_level__in=books_to_process)
+
+    else:
+        return KaraitesBookDetails.objects.filter(cron_schedule=True)
