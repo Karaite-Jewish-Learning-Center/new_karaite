@@ -574,6 +574,12 @@ class KaraitesBookDetails(models.Model):
                                     help_text=_('This field is used to inform if the books is published '
                                                 'this way is possible to upload a book and process it later'))
 
+    cron_schedule = models.BooleanField(default=True,
+                                        verbose_name=_('Cron schedule'),
+                                        editable = False,
+                                        help_text=_('This field is used to inform if '
+                                                    'the books is scheduled to be processed'))
+
     def __str__(self):
         return self.book_title_en
 
@@ -655,31 +661,8 @@ class KaraitesBookDetails(models.Model):
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
-        need_to_process = False
-        if self.pk is not None:
-            # editing a book, check need to process book intro, toc
-            obj = KaraitesBookDetails.objects.get(pk=self.pk)
-            if obj.table_book != self.table_book or \
-                    obj.columns != self.columns or \
-                    obj.columns_order != self.columns_order or \
-                    obj.toc_columns != self.toc_columns or \
-                    obj.direction != self.direction or \
-                    obj.remove_class != self.remove_class or \
-                    obj.css_class != self.css_class or \
-                    obj.remove_tags != self.remove_tags or \
-                    obj.multi_tables != self.multi_tables or \
-                    obj.index_lang != self.index_lang or \
-                    obj.book_source != self.book_source or \
-                    obj.book_source_intro != self.book_source_intro or \
-                    obj.book_toc_source != self.book_toc_source:
-                need_to_process = True
-
+        self.cron_schedule = True
         super(KaraitesBookDetails, self).save(*args, **kwargs)
-
-        # Thread or subprocess ?
-
-        if need_to_process:
-            pass
 
     def delete(self, using=None, keep_parents=False):
         source_files = [self.book_source.name,

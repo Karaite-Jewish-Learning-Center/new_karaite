@@ -167,8 +167,6 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
 
 class DetailsProxyAdmin(KAdmin):
-    save_on_top = True
-    list_editable = ('published',)
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
                     'book_title_en',
@@ -192,6 +190,19 @@ class DetailsProxyAdmin(KAdmin):
                     'published')
 
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
+
+    # don't allow changes on proxy model, is just here to simplify data visualization
+    @staticmethod
+    def has_add_permission(request, obj=None):
+        return False
+
+    @staticmethod
+    def has_change_permission( request, obj=None):
+        return False
+
+    @staticmethod
+    def has_delete_permission( request, obj=None):
+        return False
 
 
 admin.site.register(DetailsProxy, DetailsProxyAdmin)
