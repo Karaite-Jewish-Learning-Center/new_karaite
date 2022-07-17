@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "html-react-parser": "^1.4.5",
-    "react-player": "^2.9.0"
+    "html-react-parser": "^1.4.5"
   }
 }

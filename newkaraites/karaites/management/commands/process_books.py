@@ -584,11 +584,12 @@ class Command(BaseCommand):
 
         for book in query:
             for pre_process in book.method.filter(pre_process=True):
+                pass
                 # eval is not safe, but this is just to be used by the developer
                 # and not by the user.
                 # print('Pre process', pre_process.method_name)
-                f = eval(pre_process.method_name)
-                f(book.book_source, book.book_title_en)
+                #f = eval(pre_process.method_name)
+                #f(book.book_source, book.book_title_en)
 
         for book in query:
 

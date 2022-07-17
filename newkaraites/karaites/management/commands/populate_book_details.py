@@ -1112,6 +1112,7 @@ class Command(BaseCommand):
                         'buy_link': book_details.get('buy_link', ''),
                         'index_lang': book_details.get('index_lang', False),
                         'skip_process': book_details.get('skip_process', False),
+                        'published': True,
                         'user': user,
                     }
                 )

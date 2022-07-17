@@ -198,7 +198,7 @@ class Command(BaseCommand):
     @staticmethod
     def check_is_a_liturgy_book(book_title_en):
         return KaraitesBookDetails.objects.filter(book_title_en=book_title_en,
-                                                  first_level__first_level='Liturgy').exists()
+                                                  first_level__url='Liturgy').exists()
 
     @staticmethod
     def foot_notes_numbers(footnote_ref, last_number):
@@ -519,3 +519,6 @@ class Command(BaseCommand):
                                                     book.book_classification.classification_name)
             # update/create bible references
             update_create_bible_refs(book)
+            # remove from schedule
+            kwargs = {'cron_schedule': False}
+            book.save(**kwargs)

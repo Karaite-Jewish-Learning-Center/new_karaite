@@ -1,4 +1,5 @@
 import os
+import subprocess
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -513,6 +514,7 @@ class KaraitesBookDetails(models.Model):
                                      ('', 'None'),
                                      ('simple', 'Simple'),
                                      ('simple-3-4', 'Simple 3 4'),
+                                     ('invert-odd', 'Invert Odd'),
                                      ('special', 'Special'),
                                      ('special-1', 'Special 1'),
                                      ('sefer-extra', 'Sefer Extra'),
@@ -573,6 +575,11 @@ class KaraitesBookDetails(models.Model):
                                     verbose_name=_('Published'),
                                     help_text=_('This field is used to inform if the books is published '
                                                 'this way is possible to upload a book and process it later'))
+
+    cron_schedule = models.BooleanField(default=False,
+                                        editable=False,
+                                        help_text='This field is used to inform if the books is scheduled to be processed',
+                                        verbose_name='Cron schedule')
 
     def __str__(self):
         return self.book_title_en
@@ -653,33 +660,20 @@ class KaraitesBookDetails(models.Model):
         toc = TableOfContents.objects.filter(karaite_book=details)
         return details.to_dic(details, toc)
 
+    @mark_safe
+    def processed(self):
+        if self.cron_schedule:
+            return '<span class="badge badge-danger">To be processed</span>'
+        return '<span class="badge badge-successs">Processed</span>'
+
+
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
-        need_to_process = False
-        if self.pk is not None:
-            # editing a book, check need to process book intro, toc
-            obj = KaraitesBookDetails.objects.get(pk=self.pk)
-            if obj.table_book != self.table_book or \
-                    obj.columns != self.columns or \
-                    obj.columns_order != self.columns_order or \
-                    obj.toc_columns != self.toc_columns or \
-                    obj.direction != self.direction or \
-                    obj.remove_class != self.remove_class or \
-                    obj.css_class != self.css_class or \
-                    obj.remove_tags != self.remove_tags or \
-                    obj.multi_tables != self.multi_tables or \
-                    obj.index_lang != self.index_lang or \
-                    obj.book_source != self.book_source or \
-                    obj.book_source_intro != self.book_source_intro or \
-                    obj.book_toc_source != self.book_toc_source:
-                need_to_process = True
-
+        # if cron_schedule is passed as a kwarg, then set it to the value of cron_schedule
+        # else True
+        self.cron_schedule = kwargs.get('cron_schedule', True)
+        kwargs = {}
         super(KaraitesBookDetails, self).save(*args, **kwargs)
-
-        # Thread or subprocess ?
-
-        if need_to_process:
-            pass
 
     def delete(self, using=None, keep_parents=False):
         source_files = [self.book_source.name,
