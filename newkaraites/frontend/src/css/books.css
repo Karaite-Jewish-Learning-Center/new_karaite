@@ -461,6 +461,23 @@ he-shiru-table-000 {
 .he-en-table-000 {
     max-width: 400px;
 }
+
+
+.invert-odd tr:nth-child(odd)  {
+    direction: ltr
+}
+.invert-odd tr:nth-child(odd) td:nth-child(odd) {
+    direction: rtl;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.invert-odd tr:nth-child(odd) td:nth-child(even) {
+    direction: ltr;
+    text-align: left;
+    margin-left: 10px;
+}
+
 /* Odé Le’el Maḥsi */
 .he-od-table-000 {
     max-width: 800px;

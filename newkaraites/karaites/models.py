@@ -514,6 +514,7 @@ class KaraitesBookDetails(models.Model):
                                      ('', 'None'),
                                      ('simple', 'Simple'),
                                      ('simple-3-4', 'Simple 3 4'),
+                                     ('invert-odd', 'Invert Odd'),
                                      ('special', 'Special'),
                                      ('special-1', 'Special 1'),
                                      ('sefer-extra', 'Sefer Extra'),
