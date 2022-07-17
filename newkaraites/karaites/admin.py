@@ -126,6 +126,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
     list_editable = ('published',)
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
+                    'processed',
                     'book_title_en',
                     'book_title_he',
                     'author',
@@ -171,6 +172,7 @@ admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 class DetailsProxyAdmin(KAdmin):
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
+                    'processed',
                     'book_title_en',
                     'book_title_he',
                     'author',

@@ -659,6 +659,13 @@ class KaraitesBookDetails(models.Model):
         toc = TableOfContents.objects.filter(karaite_book=details)
         return details.to_dic(details, toc)
 
+    @mark_safe
+    def processed(self):
+        if self.cron_schedule:
+            return '<span class="badge badge-danger">To be processed</span>'
+        return '<span class="badge badge-successs">Processed</span>'
+
+
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
         # if cron_schedule is passed as a kwarg, then set it to the value of cron_schedule
