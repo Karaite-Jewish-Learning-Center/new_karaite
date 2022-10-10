@@ -1,5 +1,5 @@
 import os
-import subprocess
+from django.core.management import call_command
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -665,7 +665,6 @@ class KaraitesBookDetails(models.Model):
         if self.cron_schedule:
             return '<span class="badge badge-danger">To be processed</span>'
         return '<span class="badge badge-successs">Processed</span>'
-
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
