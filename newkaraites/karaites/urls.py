@@ -21,7 +21,9 @@ urlpatterns = [
     path('get-first-level/', GetFirstLevel.as_view(), name='first_level'),
 
     # book list
-    path('books-list/', BooksPresentation.as_view(), name='books_list'),
+
+    # deprecated
+    # path('books-list/', BooksPresentation.as_view(), name='books_list'),
 
     path('get-book-chapter/<str:book>/<str:chapter>/<int:first>/',
          GetBookAsArrayJson.as_view(), name='get_book_chapter'),

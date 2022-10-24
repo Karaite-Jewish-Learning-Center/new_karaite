@@ -17,10 +17,10 @@ interface stringNumber {
 let api: string
 
 if (process.env.NODE_ENV === 'development') {
-    api = 'http://localhost:8000/'
+    api = 'http://localhost:8000/v1/'
 } else {
-    api = 'https://kjlc.karaites.org/'
-    //api = 'http://dev.karaites.org/'
+    api = 'https://kjlc.karaites.org/v1/'
+    //api = 'http://dev.karaites.org/v1/'
 }
 
 export const apiUrl = api
@@ -39,22 +39,22 @@ export const TRANSFORM_TYPE: string = 'Bible'
 
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
-//export const bookListUrl: string = apiUrl + 'api/books-list/'
-//export const bookTextUrl: string = apiUrl + 'api/get-book/'
-export const bookChapterUrl: string = apiUrl + 'api/get-book-chapter/'
-//export const bookFromRef: string = apiUrl + 'api/get-book-from-ref/'
-export const getCommentsUrl: string = apiUrl + 'api/get-comments/'
-export const getFirstLevelUrl: string = apiUrl + 'api/get-first-level/'
-export const karaitesBookUrl: string = apiUrl + 'api/get-karaites-book-chapter/'
-export const karaitesBookDetailsUrl: string = apiUrl + 'api/get-karaites-book-details/'
-export const karaitesBookByLevel: string = apiUrl + 'api/get-karaites-books-by-level/'
-export const karaitesBookByLevelAndClassification: string = apiUrl + 'api/get-karaites-books-by-level-and-classification/'
-export const karaitesBookToc: string = apiUrl + 'api/get-karaites-book-toc/'
-export const referencesUrl: string = apiUrl + 'api/get-references/'
-export const autocompleteUrl: string = apiUrl + 'api/autocomplete/'
-export const searchResultsUrl: string = apiUrl + 'api/search/'
-export const getLevels: string = apiUrl + 'api/get-first-level/'
-export const getBibleReferencesUrl: string = apiUrl + 'api/get-bible-references/'
+//export const bookListUrl: string = apiUrl + 'books-list/'
+//export const bookTextUrl: string = apiUrl + 'get-book/'
+export const bookChapterUrl: string = apiUrl + 'get-book-chapter/'
+//export const bookFromRef: string = apiUrl + 'get-book-from-ref/'
+export const getCommentsUrl: string = apiUrl + 'get-comments/'
+export const getFirstLevelUrl: string = apiUrl + 'get-first-level/'
+export const karaitesBookUrl: string = apiUrl + 'get-karaites-book-chapter/'
+export const karaitesBookDetailsUrl: string = apiUrl + 'get-karaites-book-details/'
+export const karaitesBookByLevel: string = apiUrl + 'get-karaites-books-by-level/'
+export const karaitesBookByLevelAndClassification: string = apiUrl + 'get-karaites-books-by-level-and-classification/'
+export const karaitesBookToc: string = apiUrl + 'get-karaites-book-toc/'
+export const referencesUrl: string = apiUrl + 'get-references/'
+export const autocompleteUrl: string = apiUrl + 'autocomplete/'
+export const searchResultsUrl: string = apiUrl + 'search/'
+export const getLevels: string = apiUrl + 'get-first-level/'
+export const getBibleReferencesUrl: string = apiUrl + 'get-bible-references/'
 
 // there will be more languages as project evolves
 export const LANGUAGE: numberString = {0: 'en', 1: 'he', 2: 'en_he'}

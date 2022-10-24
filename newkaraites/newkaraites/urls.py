@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('karaites.urls')),
+    path('api/v1/', include('karaites.urls')),
 
 ]
 # server static in development only

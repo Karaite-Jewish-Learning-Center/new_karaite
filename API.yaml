@@ -1,0 +1,176 @@
+openapi: "3.0.2"
+info:
+  title: Karaites API
+  termsOfService: https://karaites.org/terms
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local server
+paths:
+  /test:
+    get:
+      summary: Test endpoint
+      description: Test server is responding
+      tags:
+        - Test
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example: { "ok": true }
+
+  /get-first-level:
+    get:
+      summary: Get classification first level
+      description: List of first level classification ordered by order
+      tags:
+        - Books
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FirstLevel'
+
+  /books-list:
+    get:
+      summary: Get books organization
+      description: List of books ordered by order
+      tags:
+        - Books
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+
+  /get-book-chapter/{book}/{chapter}/{first}/:
+    get:
+      summary: Get book chapter
+      description: Get book chapter if book is less then 11 chapter get all book
+      tags:
+        - Books
+      parameters:
+        - name: book
+          in: path
+          description: Book name in English
+          example: "genesis"
+          required: true
+
+          schema:
+            type: string
+        - name: chapter
+          in: path
+          description: Chapter number
+          required: true
+          example: 1
+
+          schema:
+            type: integer
+        - name: first
+          in: path
+          description: 0 - get all chapter from 1 to chapter, 1 - just get chapter
+          required: true
+          example: 1
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/GetBooksChapterError'
+
+components:
+  schemas:
+    FirstLevel:
+      description: First level classification
+      type: object
+      properties:
+        first_level:
+          type: string
+          description: First level classification Name
+          example: "Halakhah"
+        first_level_he:
+          type: string
+          description: First level classification Name in Hebrew
+          example: "הלכה"
+        break_on_classifications:
+          type: boolean
+          description: Break on classifications
+          example: true
+        order:
+          type: integer
+          description: First level order to display classification
+          example: 100
+        url:
+          type: string
+          description: First level classification URL, may be different from first_level
+          example: "halakhah"
+
+    Book:
+      type: object
+      properties:
+        first_level:
+          type: string
+          description: First level classification Name
+          example: "Tanakh"
+        second_level:
+          type: string
+          description: Second level classification Name
+          example: "Torah"
+        book_title_en:
+          type: string
+          description: Book title in English
+          example: "Genesis"
+        book_title_he:
+          type: string
+          description: Book title in Hebrew
+          example: "בראשית"
+        chapter:
+          type: integer
+          description: Chapter number
+          example: 1
+        verse:
+          type: array
+          description: How many verses in each chapter
+          example: [ 31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26 ]
+
+    GetBooksChapterError:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Error status
+          example: false
+        message:
+          type: string
+          description: Error message
+          enum:
+            - Need a book name.
+            - Can't find book {name}
+            - Invalid chapter:{chapter} doesn't seams an int
+            - Invalid chapter for the book:{book} chapter must be between 1 and {book_title.chapters}
+            - Invalid verse:{verse} doesn't seams an int
