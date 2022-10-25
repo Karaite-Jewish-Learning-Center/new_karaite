@@ -17,10 +17,10 @@ interface stringNumber {
 let api: string
 
 if (process.env.NODE_ENV === 'development') {
-    api = 'http://localhost:8000/v1/'
+    api = 'http://localhost:8000/api/v1/'
 } else {
-    api = 'https://kjlc.karaites.org/v1/'
-    //api = 'http://dev.karaites.org/v1/'
+    api = 'https://kjlc.karaites.org/api/v1/'
+    //api = 'http://dev.karaites.org/api/v1/'
 }
 
 export const apiUrl = api

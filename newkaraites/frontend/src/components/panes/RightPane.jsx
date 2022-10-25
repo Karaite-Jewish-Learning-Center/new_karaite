@@ -10,7 +10,6 @@ import {storeContext} from "../../stores/context";
 import {messageContext} from "../../stores/messages/messageContext";
 import {referenceContext} from '../../stores/references/referenceContext'
 import Container from "@material-ui/core/Container";
-import {toJS} from "mobx";
 import {fetchData} from "../api/dataFetch";
 import {getBibleReferencesUrl, TRANSFORM_TYPE} from "../../constants/constants";
 import parse from "html-react-parser";

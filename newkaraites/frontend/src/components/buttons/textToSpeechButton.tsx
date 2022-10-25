@@ -15,8 +15,8 @@ export const TextToSpeechButton: FC<ButtonPropsTTS> = ({onClick, color, onOff}) 
             <IconButton aria-label="Close"
                         component="span"
                         onClick={onClick}>
-                {(onOff ? <img src={textToSpeechOnWhite} width={24} height={24}/> :
-                    <img src={textToSpeechOffWhite} width={24} height={24}/>)}
+                {(onOff ? <img src={textToSpeechOnWhite} width={24} height={24} alt="Speech on"/> :
+                    <img src={textToSpeechOffWhite} width={24} height={24} alt="Speech off"/>)}
             </IconButton>
         )
     }
@@ -24,8 +24,8 @@ export const TextToSpeechButton: FC<ButtonPropsTTS> = ({onClick, color, onOff}) 
         <IconButton aria-label="Close"
                     component="span"
                     onClick={onClick}>
-            {(onOff ? <img src={textToSpeechOnBlack} width={24} height={24}/> :
-                <img src={textToSpeechOffBlack} width={24} height={24}/>)}
+            {(onOff ? <img src={textToSpeechOnBlack} width={24} height={24} alt="Speech on"/> :
+                <img src={textToSpeechOffBlack} width={24} height={24} alt="Speech off"/>)}
         </IconButton>
     )
 }

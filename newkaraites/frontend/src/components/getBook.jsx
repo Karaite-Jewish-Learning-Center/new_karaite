@@ -1,4 +1,3 @@
-import React from "react"
 import {calculateItemNumber, makeBookUrl} from '../utils/utils';
 import {bookChapterUrl, chaptersByBibleBook, karaitesBookUrl} from '../constants/constants';
 

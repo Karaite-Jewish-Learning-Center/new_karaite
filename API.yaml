@@ -67,41 +67,45 @@ paths:
         - name: book
           in: path
           description: Book name in English
-          example: "genesis"
+          example: "Genesis"
           required: true
-
           schema:
             type: string
+
         - name: chapter
           in: path
           description: Chapter number
           required: true
-          example: 1
-
+          example: "1"
           schema:
-            type: integer
+            type: string
+
         - name: first
           in: path
           description: 0 - get all chapter from 1 to chapter, 1 - just get chapter
           required: true
           example: 1
-
+          schema:
+            type: integer
       responses:
         '200':
-          description: OK
+          description: Array of verses
+          content:
+            application/json:
+              schema:
+                type: array
+
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+        '400':
+          description: Bad request
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Chapter'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-            schema:
-              type: object
-              $ref: '#/components/schemas/GetBooksChapterError'
+                  $ref: '#/components/schemas/GetBooksChapterError'
 
 components:
   schemas:
@@ -157,6 +161,69 @@ components:
           type: array
           description: How many verses in each chapter
           example: [ 31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26 ]
+
+    Chapter:
+      type: object
+      properties:
+        text_en:
+          type: string
+          description: Chapter text in English
+          example: "In the beginning God created the heaven and the earth."
+        text_he:
+          type: string
+          description: Chapter text in Hebrew
+          example: "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ"
+        reserved1:
+          type: string
+          description: Reserved for future use
+          example: "0"
+        reserved2:
+          type: string
+          description: Reserved for future use
+          example: "0"
+        verse_number:
+          type: string
+          description: Verse number
+          example: "1"
+        chapter_number:
+          type: string
+          description: Chapter number for this verse
+          example: "1"
+        need_render_chapter_title:
+          type: boolean
+          description: Need to render chapter title
+          example: true
+        total_biblical_references_in_hebrew:
+          type: integer
+          description: Total biblical references in Hebrew
+          example: 0
+        total_biblical_references_in_english:
+          type: integer
+          description: Total biblical references in English
+          example: 0
+        references_in_hebrew:
+          type: array
+          description: List of references in Hebrew
+          enum:
+            - Halakhah
+            - Liturgy
+            - Poetry
+            - Polemics
+            - Exhortatory
+            - Comments
+          example: [ 3, 0, 2, 3, 0, 2 ]
+
+        references_in_english:
+          type: array
+          description: List of references in English
+          enum:
+            - Halakhah
+            - Liturgy
+            - Poetry
+            - Polemics
+            - Exhortatory
+            - Comments
+          example: [ 3, 0, 2, 3, 0, 2 ]
 
     GetBooksChapterError:
       type: object

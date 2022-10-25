@@ -1,4 +1,4 @@
-import {makeAutoObservable, observable, toJS} from "mobx"
+import {makeAutoObservable, observable} from "mobx"
 import {fetchData} from '../../components/api/dataFetch';
 import {getLevels} from '../../constants/constants';
 
