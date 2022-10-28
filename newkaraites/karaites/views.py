@@ -91,7 +91,7 @@ def karaites_book_details(request, *args, **kwargs):
     """ get all books details"""
     response = []
     for details in KaraitesBookDetails.objects.all():
-        response.append(details.to_json(details.book_title))
+        response.append(details.to_json(details.book_title_en))
 
     return JsonResponse({'details': response}, safe=False)
 

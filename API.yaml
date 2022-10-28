@@ -124,13 +124,13 @@ paths:
 
       responses:
         '200':
-            description: Array of verses
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                  $ref: '#/components/schemas/Chapter'
+          description: Array of verses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/Chapter'
 
         '400':
           description: Bad request
@@ -190,6 +190,22 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GetBooksChapterError'
+
+  /get-karaites-book-details/:
+    get:
+      summary: get all karaites books details
+      description: get all karaites books details
+      tags:
+        - Books
+      responses:
+        200:
+          description: Array of books details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
 
 components:
   schemas:
@@ -326,3 +342,95 @@ components:
             - Invalid chapter for the book:{book} chapter must be between 1 and {book_title.chapters}
             - Invalid verse:{verse} doesn't seams an int
 
+    TOC:
+      description: BookTable of contents
+      type: object
+      properties:
+        chapterContents:
+          type: string
+          description: Chapter contents
+          example: " A - שירי המחבר"
+        chapterNumber:
+          type: integer
+          description: Chapter number
+          example: 1
+
+    BookDetails:
+      type: object
+      properties:
+        book_id:
+          type: integer
+          description: Book ID
+          example: 1
+        book_first_level:
+          type: string
+          description: Book first level classification
+          example: "Tanakh"
+        book_language:
+          type: string
+          description: Book language
+          example: "Hebrew"
+        book_classification:
+          type: string
+          description: Book classification
+          example: "Comments"
+        book_title_en:
+          type: string
+          description: Book title in English
+          example: "Adderet Eliyahu"
+        book_title_he:
+          type: string
+          description: Book title in Hebrew
+          example: "עדרת אליהו"
+        table_book:
+          type: boolean
+          description: Is book a table book
+          example: false
+        columns:
+          type: integer
+          description: Number of columns
+          example: 1
+        columns_order:
+          type: string
+          description: Column order
+          example: "2,1,0"
+        toc_columns:
+          type: string
+          description: Table of contents columns
+          example: "2,1,3"
+        toc:
+          type: array
+          description: Book table of contents
+          items:
+            $ref: '#/components/schemas/TOC'
+        intro:
+          type: string
+          description: Html book Introduction
+          example: "<p>Introduction</p>"
+        direction:
+          type: string
+          description: text direction, right to left or left to right
+          example: "rtl"
+        remove_class:
+          type: string
+          description: Css class to remove
+          example: "remove"
+        multi_tables:
+            type: boolean
+            description: Is book a multi table book
+            example: false
+        song_list:
+            type: Object
+            description: Songs for this book
+            example: {
+                    "song_title": "Afas Aron",
+                    "song_file": "/media/songs/Afas_Aron.mp3"
+                }
+        buy_link:
+            type: string
+            description: Buy link for this book
+            example: "https://www.amazon.com/Commentary-Book-Exodus-English-Hebrew/dp/9652291003"
+        index_lag:
+          type: boolean
+          description: Possible deprecated
+          example: false
