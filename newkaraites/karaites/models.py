@@ -664,7 +664,7 @@ class KaraitesBookDetails(models.Model):
     def processed(self):
         if self.cron_schedule:
             return '<span class="badge badge-danger">To be processed</span>'
-        return '<span class="badge badge-successs">Processed</span>'
+        return '<span class="badge badge-success">Processed</span>'
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en

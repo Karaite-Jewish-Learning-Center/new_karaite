@@ -1,4 +1,4 @@
-### Github changed is policy, now it does not allow login with passwords, so a ssh certificate must be used
+### GitHub changed is policy, now it does not allow login with passwords, so an ssh certificate must be used
 
 #### config the ssh-agent to run on ssh login
 

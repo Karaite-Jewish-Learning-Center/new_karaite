@@ -107,6 +107,90 @@ paths:
                 items:
                   $ref: '#/components/schemas/GetBooksChapterError'
 
+  /get-book-chapter/{book}/:
+    get:
+      summary: Get book chapter
+      description: Get book chapter if book is less then 11 chapter get all book
+      tags:
+        - Books
+      parameters:
+        - name: book
+          in: path
+          description: Book name in English
+          example: "Genesis"
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+            description: Array of verses
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                  $ref: '#/components/schemas/Chapter'
+
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetBooksChapterError'
+
+  /get-karaites-book-chapter/{book}/{chapter}/{first}/:
+    get:
+      summary: Get karaites book chapter
+      description: Get karaites book chapter if book is less then 11 chapter get all book
+      tags:
+        - Books
+      parameters:
+        - name: book
+          in: path
+          description: Book name in English
+          example: "Genesis"
+          required: true
+          schema:
+            type: string
+
+        - name: chapter
+          in: path
+          description: Chapter number
+          required: true
+          example: "1"
+          schema:
+            type: string
+
+        - name: first
+          in: path
+          description: 0 - get all chapter from 1 to chapter, 1 - just get chapter
+          required: true
+          example: 1
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Array of paragraphs
+          content:
+            application/json:
+              schema:
+                type: array
+
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetBooksChapterError'
+
 components:
   schemas:
     FirstLevel:
@@ -241,3 +325,4 @@ components:
             - Invalid chapter:{chapter} doesn't seams an int
             - Invalid chapter for the book:{book} chapter must be between 1 and {book_title.chapters}
             - Invalid verse:{verse} doesn't seams an int
+

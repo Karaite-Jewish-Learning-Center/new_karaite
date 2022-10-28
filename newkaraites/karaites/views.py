@@ -108,7 +108,7 @@ def karaites_book_as_array(request, *args, **kwargs):
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
     if first is None:
-        return JsonResponse(data={'status': 'false', 'message': _('Need an  or 1 for "first" parameter.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _('Need an 0 or 1 for "first" parameter.')}, status=400)
 
     if paragraph_number is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a int for paragraph number')}, status=400)
