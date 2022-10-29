@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {q640} from "../../constants/constants"
+import {Player} from 'webvtt-player'
 
 
 const Display = () => {
@@ -20,6 +21,13 @@ const Display = () => {
                         <h1 className={classes.title}>(A Project of the Karaite Jews of America)</h1>
                         <hr className={classes.ruler}/>
                     </div>
+                    <div className={classes.player}>
+                    <Player
+                        audio='http://localhost:8000/media/audio/parashat.mp3'
+                        transcript='http://localhost:8000/media/audio/parashat.vtt'
+                        />
+                    </div>
+
                     <p className={classes.text}>
 
                         The Karaite Jews of America welcomes you to our new platform: The Karaite Jewish Learning
@@ -80,6 +88,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         paddingBottom:100
 
+    },
+    player: {
+        width: 400,
+        height: 400,
     },
     boxTitle: {
         marginBottom: 20,
