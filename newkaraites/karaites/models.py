@@ -1,5 +1,4 @@
 import os
-from django.core.management import call_command
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -8,10 +7,11 @@ from django.utils.translation import gettext_lazy as _
 from .constants import (LANGUAGES,
                         AUTOCOMPLETE_TYPE,
                         REF_ERROR_CODE)
-
+from math import modf
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
+
 
 VERSE = 4
 HEBREW = 0
@@ -188,7 +188,7 @@ class Author(models.Model):
         return f"{self.name}"
 
     class Meta:
-        verbose_name_plural = "Author's"
+        verbose_name_plural = " Author's"
 
 
 class BookAsArray(models.Model):
@@ -289,11 +289,51 @@ class BookAsArray(models.Model):
         return result
 
     def __str__(self):
-        return self.book.book_title_en
+        return f"{self.book.book_title_en} {self.chapter}"
 
     class Meta:
         ordering = ('book', 'chapter')
-        verbose_name_plural = _('Biblical books as array')
+        verbose_name_plural = _(' Biblical books')
+
+
+class BookAsArrayAudio(models.Model):
+    """ maps audio to text"""
+    book = models.ForeignKey(BookAsArray,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name="Book"
+                             )
+
+    verse = models.IntegerField(default=0)
+
+    start = models.CharField(max_length=12,
+                             default='00:00:00.000')
+    start_ms = models.IntegerField(default=0)
+
+    end = models.CharField(max_length=12,
+                           default='00:00:00.000')
+
+    end_ms = models.IntegerField(default=0)
+
+    char_per_second = models.FloatField(default=0,
+                                        verbose_name='Characters per second')
+
+    def __str__(self):
+        return self.book.book.book_title_en
+
+    def convert_time_to_ms(self, time):
+        """ convert time to milliseconds """
+        time_parts = list(map(float, time.split(':')))
+        seconds, ms = modf(time_parts[2])
+        return time_parts[0] * 3600000 + time_parts[1] * 60000 + seconds * 1000 + ms
+
+    def save(self, *args, **kwargs):
+        self.start_ms = self.convert_time_to_ms(self.start)
+        self.end_ms = self.convert_time_to_ms(self.end)
+        super(BookAsArrayAudio, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ('book', 'verse', 'start')
+        verbose_name_plural = _('Biblical books audio')
 
 
 class Songs(models.Model):

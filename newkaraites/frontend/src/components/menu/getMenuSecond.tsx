@@ -26,7 +26,7 @@ export const Second = () => {
             setError(() => true)
             console.log('error in catch',e)
         })
-    }, [error, showBooks])
+    }, [error, showBooks,path])
 
     if (error) return <NotFound404/>
     return (showBooks ? <RenderBooksMenu books={books} path={path}  header={header}/> : null)

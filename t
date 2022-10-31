@@ -1,1 +1,0 @@
-https://join.skype.com/npjKIWn1uBd9

@@ -4,6 +4,7 @@ from .models import (FirstLevel,
                      Organization,
                      Author,
                      BookAsArray,
+                     BookAsArrayAudio,
                      BooksFootNotes,
                      Songs,
                      Classification,
@@ -15,7 +16,6 @@ from .models import (FirstLevel,
                      FullTextSearch,
                      FullTextSearchHebrew,
                      InvertedIndex)
-
 
 from django.conf import settings
 
@@ -82,6 +82,14 @@ class BookAsArrayAdmin(KAdmin):
 
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
+
+
+class BookAsArrayAudioAdmin(KAdmin):
+    list_display = ('book', 'verse', 'start', 'end')
+    search_fields = ('book__book_title_en',)
+
+
+admin.site.register(BookAsArrayAudio, BookAsArrayAudioAdmin)
 
 
 class BookFootNotesAdmin(KAdmin):
@@ -201,11 +209,11 @@ class DetailsProxyAdmin(KAdmin):
         return False
 
     @staticmethod
-    def has_change_permission( request, obj=None):
+    def has_change_permission(request, obj=None):
         return False
 
     @staticmethod
-    def has_delete_permission( request, obj=None):
+    def has_delete_permission(request, obj=None):
         return False
 
 
@@ -233,7 +241,7 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 
 class ReferencesAdmin(KAdmin):
-    list_display = ('karaites_book','law', 'paragraph_number',
+    list_display = ('karaites_book', 'law', 'paragraph_number',
                     'paragraph_admin_he', 'paragraph_admin_en',
                     'foot_notes_admin', 'error', 'bible_ref_en',
                     'bible_ref_he')

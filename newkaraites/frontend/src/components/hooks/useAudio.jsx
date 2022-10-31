@@ -9,12 +9,15 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
         try {
             let audio = new Audio(url)
             audio.crossOrigin = 'anonymous'
+            audio.ontimeupdate = (e) => {
+
+                console.log('time update' ,audio.currentTime)
+            }
             return audio
         } catch (e) {
             alert('Audio error')
         }
     }, [url]))
-
 
     const [playing, setPlaying] = useState(autoplay);
 
@@ -43,12 +46,6 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
         };
     } );
 
-    useEffect(() => {
-        audio.addEventListener('ontimeupdate', () =>console.log('track' + audio.currentTime.toString()));
-        return () => {
-            audio.removeEventListener('ontimeupdate',() =>console.log(autoplay.currentTime.toString()));
-        };
-    } );
 
     return [playing, toggle, reset];
 };

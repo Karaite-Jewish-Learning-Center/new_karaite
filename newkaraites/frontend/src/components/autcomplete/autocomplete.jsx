@@ -97,7 +97,7 @@ const AutoComplete = () => {
             })
             .catch(e => message.setMessage(e.message))
 
-    }, [search, store]);
+    }, [search, store, message]);
 
     return (
 
