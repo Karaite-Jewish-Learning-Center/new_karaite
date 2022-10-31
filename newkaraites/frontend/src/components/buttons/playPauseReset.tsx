@@ -20,6 +20,7 @@ export const  PlayPauseReset: FC<ButtonPlayProps> = ({onClick, onReset, playing,
     const onMouseLeave = () => {
         setMouseEnter(false);
     }
+
     return (
         <span>
             <IconButton saria-label="Play pause song"

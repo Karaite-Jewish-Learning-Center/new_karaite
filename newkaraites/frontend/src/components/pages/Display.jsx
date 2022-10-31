@@ -25,6 +25,7 @@ const Display = () => {
                     <Player
                         audio='http://localhost:8000/media/audio/parashat.mp3'
                         transcript='http://localhost:8000/media/audio/parashat.vtt'
+                        preload={true}
                         />
                     </div>
 

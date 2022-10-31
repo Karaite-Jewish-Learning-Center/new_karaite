@@ -43,6 +43,13 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
         };
     } );
 
+    useEffect(() => {
+        audio.addEventListener('ontimeupdate', () =>console.log('track' + audio.currentTime.toString()));
+        return () => {
+            audio.removeEventListener('ontimeupdate',() =>console.log(autoplay.currentTime.toString()));
+        };
+    } );
+
     return [playing, toggle, reset];
 };
 
