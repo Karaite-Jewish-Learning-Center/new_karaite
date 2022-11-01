@@ -123,3 +123,12 @@ td.field-hebrew {
   font-family: "SBL Hebrew";
   direction: rtl;
 }
+
+
+.field-start_ms {
+  text-align: right;
+}
+
+.field-end_ms {
+  text-align: right;
+}

@@ -1,5 +1,6 @@
 import {calculateItemNumber, makeBookUrl} from '../utils/utils';
 import {bookChapterUrl, chaptersByBibleBook, karaitesBookUrl} from '../constants/constants';
+import {devLog} from "./messages/devLog";
 
 const PARAGRAPHS = 0
 const BOOK_DETAILS = 1
@@ -49,7 +50,7 @@ const getBook = async (book, chapter, verse, highlight, type, store, message) =>
                 rightPaneStateHalakhah: 1,
                 languages: ['en_he', 'he', 'en'],
             })
-            console.log('Item', calculateItemNumber(book, chapter, verse))
+           devLog('Item '+calculateItemNumber(book, chapter, verse))
             url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
 
         } else {

@@ -1,7 +1,5 @@
-import sys
 from django.core.management.base import BaseCommand
 from ...models import (FirstLevel,
-                       Organization,
                        BookAsArray,
                        References)
 

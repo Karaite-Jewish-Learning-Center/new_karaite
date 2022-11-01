@@ -12,7 +12,6 @@ from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
 
-
 VERSE = 4
 HEBREW = 0
 ENGLISH = 1
@@ -230,6 +229,7 @@ class BookAsArray(models.Model):
     # 19 Comments Hebrew
     # 20 Comments English
     # ...]
+    # [start_ms, end_ms]  hebrew audio start and end time in milliseconds
 
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
@@ -237,9 +237,10 @@ class BookAsArray(models.Model):
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
-            html += '<tr>'
-            html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
-            html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
+            # html += '<tr>'
+            # html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
+            # html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
+            html += f'<tr><td>{text}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -253,10 +254,10 @@ class BookAsArray(models.Model):
     @staticmethod
     def to_list(book, chapter=None, book_title=None, first=None):
 
-        def flat(query):
+        def flat(query_set):
             result = []
-            for book in query:
-                result += book.book_text
+            for text in query_set:
+                result += text.book_text
             return result
 
         # if book is less them 11 chapters, read all book
@@ -320,11 +321,12 @@ class BookAsArrayAudio(models.Model):
     def __str__(self):
         return self.book.book.book_title_en
 
-    def convert_time_to_ms(self, time):
+    @staticmethod
+    def convert_time_to_ms(time):
         """ convert time to milliseconds """
         time_parts = list(map(float, time.split(':')))
-        seconds, ms = modf(time_parts[2])
-        return time_parts[0] * 3600000 + time_parts[1] * 60000 + seconds * 1000 + ms
+        ms, seconds = modf(time_parts[2])
+        return int(time_parts[0] * 3600000 + time_parts[1] * 60000 + seconds * 1000 + ms * 1000)
 
     def save(self, *args, **kwargs):
         self.start_ms = self.convert_time_to_ms(self.start)

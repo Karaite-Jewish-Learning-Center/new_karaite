@@ -85,7 +85,7 @@ admin.site.register(BookAsArray, BookAsArrayAdmin)
 
 
 class BookAsArrayAudioAdmin(KAdmin):
-    list_display = ('book', 'verse', 'start', 'end')
+    list_display = ('book', 'verse', 'start', 'end', 'start_ms', 'end_ms')
     search_fields = ('book__book_title_en',)
 
 
