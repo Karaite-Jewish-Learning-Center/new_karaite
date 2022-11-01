@@ -17,7 +17,7 @@ from .models import (FirstLevel,
                      InvertedIndex,
                      Organization,
                      BookAsArray,
-                     # Comment,
+                     BookAsArrayAudio,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
@@ -26,6 +26,19 @@ from .models import (FirstLevel,
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
+
+
+def get_book_id(book):
+    """ get book id from book title"""
+    try:
+        book_title = Organization.objects.get(book_title_en=book)
+    except Organization.DoesNotExist:
+        try:
+            book_title = Organization.objects.get(book_title_he=book)
+        except Organization.DoesNotExist:
+            return None
+
+    return book_title
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -41,13 +54,9 @@ def book_chapter_verse(request, *args, **kwargs):
 
     book = slug_back(book)
 
-    try:
-        book_title = Organization.objects.get(book_title_en=book)
-    except Organization.DoesNotExist:
-        try:
-            book_title = Organization.objects.get(book_title_he=book)
-        except Organization.DoesNotExist:
-            return JsonResponse(data={'status': 'false', 'message': _(f"Can't find book: {book}")}, status=400)
+    book_title = get_book_id(book)
+    if book_title is None:
+        return JsonResponse(data={'status': 'false', 'message': _(f"Can't find book: {book}")}, status=400)
 
     if chapter is not None:
         try:
@@ -190,6 +199,20 @@ class GetBookAsArrayJson(View):
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
         return book_chapter_verse(request, *args, **kwargs)
+
+
+class AudioBook(View):
+    """ get audiobook start end times """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        book_id = kwargs.get('book', None)
+        if book_id is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a book id.')}, status=400)
+
+        audio = list(BookAsArrayAudio.objects.filter(book_id=book_id).values_list('start_ms', 'end_ms'))
+
+        return JsonResponse(audio, safe=False)
 
 
 class GetKaraitesAllBookDetails(View):

@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import (GetFirstLevel,
                     GetByLevelAndByClassification,
-                    BooksPresentation,
                     GetBookAsArrayJson,
                     GetKaraitesAllBookDetails,
                     GetByLevel,
@@ -12,7 +11,8 @@ from .views import (GetFirstLevel,
                     AutoCompleteView,
                     Search,
                     GetBiBleReferences,
-                    GetBiBleReferencesByLaw)
+                    GetBiBleReferencesByLaw,
+                    AudioBook)
 
 app_name = 'karaites'
 
@@ -27,6 +27,9 @@ urlpatterns = [
 
     path('get-book-chapter/<str:book>/<str:chapter>/<int:first>/',
          GetBookAsArrayJson.as_view(), name='get_book_chapter'),
+
+    # audiobooks
+    path('audio-book/<str:book>/', AudioBook.as_view(), name='audio_book'),
 
     # path('get-book-chapter/<str:book>/', GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 

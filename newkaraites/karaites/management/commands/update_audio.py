@@ -18,7 +18,7 @@ class Command(BaseCommand):
         """ Update audio bible books start and stop times """
 
         for book_chapter in BookAsArray.objects.all().order_by('book', 'chapter'):
-            i = 0
+            i = 1
             chapter = []
             for verse in book_chapter.book_text:
 
@@ -30,11 +30,12 @@ class Command(BaseCommand):
 
                 print(len(verse))
                 if len(verse) > 11:
-                    verse[11] = audio[0]
-                    verse[12] = audio[1]
-                    chapter.append(verse)
+                    tmp = list(verse)
+                    tmp[11] = audio
+                    chapter.append(tmp)
                 else:
-                    chapter.append([verse, audio[0], audio[1]])
+                    verse.append(audio)
+                    chapter.append(verse)
                 i += 1
 
             book_chapter.book_text = chapter

@@ -207,6 +207,40 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
 
+ /audio-book/{book_id}/:
+   get:
+     summary:  start and end time for each verse
+     description: get Audiobook, start and end time for each verse
+     tags:
+       - books
+     responses:
+       200:
+         description: Array of audiobook
+         content:
+           application/json:
+             schema:
+               type: array
+               items:
+                  $ref: '#/components/schemas/Audiobook'
+
+       400:
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  description: status code
+                  type: integer
+                  example: 400
+                message:
+                  description: error message
+                  type: string
+                  example: "Need a book id"
+
+
+
 components:
   schemas:
     FirstLevel:
@@ -434,3 +468,15 @@ components:
           type: boolean
           description: Possible deprecated
           example: false
+
+    AudioBookResponse:
+      type: object
+      properties:
+        start_ms:
+          description: verse audio start time in ms
+          type: integer
+          example: 0
+        end_ms:
+          description: verse audio end time in ms
+          type: integer
+          example: 1000

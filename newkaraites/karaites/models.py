@@ -290,7 +290,7 @@ class BookAsArray(models.Model):
         return result
 
     def __str__(self):
-        return f"{self.book.book_title_en} {self.chapter}"
+        return self.book.book_title_en
 
     class Meta:
         ordering = ('book', 'chapter')
@@ -303,6 +303,8 @@ class BookAsArrayAudio(models.Model):
                              on_delete=models.DO_NOTHING,
                              verbose_name="Book"
                              )
+
+    chapter = models.IntegerField(default=0)
 
     verse = models.IntegerField(default=0)
 
@@ -334,7 +336,7 @@ class BookAsArrayAudio(models.Model):
         super(BookAsArrayAudio, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ('book', 'verse', 'start')
+        ordering = ('book', 'chapter', 'verse', 'start')
         verbose_name_plural = _('Biblical books audio')
 
 
