@@ -5,12 +5,13 @@ export interface ButtonProps {
     onClick: MouseEventHandler;
     color?: PropTypes.Color;
 }
+
 export interface MusicBadgeProps {
     length: number;
     fontSize?: 'default' | 'inherit' | 'large' | 'medium' | 'small';
     color?: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
 }
-export interface ButtonPropsTTS {
+export interface ButtonPropsOnOff {
     onClick: MouseEventHandler;
     color?: PropTypes.Color;
     onOff: boolean;

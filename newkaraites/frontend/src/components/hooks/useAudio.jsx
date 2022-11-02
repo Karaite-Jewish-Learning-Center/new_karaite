@@ -8,11 +8,9 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
     const [audio] = useState(useMemo(() => {
         try {
             let audio = new Audio(url)
-            audio.crossOrigin = 'anonymous'
-            audio.ontimeupdate = (e) => {
 
-                console.log('time update' ,audio.currentTime)
-            }
+            audio.crossOrigin = 'anonymous'
+
             return audio
         } catch (e) {
             alert('Audio error')
@@ -23,18 +21,18 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
 
     const toggle = () => setPlaying(!playing);
 
-    const reset =()=> {
+    const reset = () => {
         setPlaying(false)
         audio.pause()
         audio.currentTime = 0
 
-        if(onResetPlayer!==null) onResetPlayer()
+        if (onResetPlayer !== null) onResetPlayer()
     }
 
     useEffect(() => {
             playing ? audio.play() : audio.pause();
         },
-        [playing,audio]
+        [playing, audio]
     );
 
     useEffect(() => {
@@ -44,7 +42,7 @@ export const useAudio = (song, onResetPlayer, autoplay) => {
             audio.pause()
             audio.currentTime = 0
         };
-    } );
+    });
 
 
     return [playing, toggle, reset];

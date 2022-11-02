@@ -1,14 +1,16 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {Typography} from '@material-ui/core';
 import {englishBookNameToHebrew, unslug} from '../../utils/utils'
 import {indoArabicToHebrewCardinal} from '../../utils/english-hebrew/numberConvertion'
 import {Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
+import {AudioBookContext} from "../../stores/audioBookContext";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
 import {TextToSpeechButton} from "../buttons/textToSpeechButton";
+import {AudiobookBottom} from "../buttons/audiobookBottom";
 
 
 const RenderHeader = ({
@@ -19,16 +21,23 @@ const RenderHeader = ({
                           flip,
                           onSpeakOnOffHe,
                           onSpeakOnOffEn,
+                          onAudioBookOnOff,
+                          audioBookPlaying,
                       }) => {
 
     const store = useContext(storeContext)
+    const audioBookStore = useContext(AudioBookContext)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
-
+    const [isAudioBookPlaying, setIsAudioBookPlaying] = useState(audioBookStore.isPlaying())
     const onClose = () => {
         onClosePane(paneNumber)
     }
 
+    const onAudioBookClick = () => {
+        setIsAudioBookPlaying(!isAudioBookPlaying)
+        audioBookStore.click()
+    }
     book = unslug(book)
 
     const HeaderBody = ({chapter}) => {
@@ -44,6 +53,10 @@ const RenderHeader = ({
                                 onClick={onSpeakOnOffHe}
                                 onOff={flip[0]}
                             />
+                            <AudiobookBottom
+                                onClick={onAudioBookClick}
+                                onOff={isAudioBookPlaying}
+                            />
                         </Grid>
                         <Grid item xs={2} key={4}>
                             <Typography className={classes.chapterView}>{chapter}</Typography>
@@ -53,6 +66,7 @@ const RenderHeader = ({
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
                             />
+
                         </Grid>
                         <Grid item xs={3} key={6}>
                             <Typography className={classes.englishBook}>{book} </Typography>
@@ -74,6 +88,10 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffHe}
                                 onOff={flip[0]}
+                            />
+                            <AudiobookBottom
+                                onClick={onAudioBookOnOff}
+                                onOff={audioBookPlaying}
                             />
                         </Grid>
                     </>
@@ -109,7 +127,7 @@ const RenderHeader = ({
             </Grid>
             <HeaderBody chapter={chapter}/>
             <Grid item xs={1} key={1}>
-                <LanguageButton paneNumber={paneNumber} />
+                <LanguageButton paneNumber={paneNumber}/>
             </Grid>
         </Grid>
     )

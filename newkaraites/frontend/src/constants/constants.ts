@@ -24,7 +24,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const apiUrl = api
-export const apiUrlNoSlash = api.replace('/api/v1/','')
+export const apiUrlNoSlash = api.replace('/api/v1/', '')
+export const apiUrlNoSlashMedia = `${apiUrlNoSlash}/media/audio-books/`
+
 // first level  see constants.py
 export const TANAKH: string = '1'
 export const HALAKHAH: string = '3'
@@ -32,8 +34,10 @@ export const LITURGY: string = '4'
 export const POLEMIC: string = '5'
 export const COMMENTS: string = '8'
 export const POETRY: string = '9'
-export const EXHORTATORY:string ='11'
+export const EXHORTATORY: string = '11'
 
+//  position in book data, see models.py
+export const AUDIO = 11
 
 export const TRANSFORM_TYPE: string = 'Bible'
 

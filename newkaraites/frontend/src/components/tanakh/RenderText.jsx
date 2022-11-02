@@ -6,6 +6,8 @@ import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
 import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
+import {toJS} from "mobx";
+
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
@@ -13,10 +15,11 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const speech = useContext(speechContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
+    const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-
     const virtuoso = useRef(null)
+
 
     const callFromEnded = () => {
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
@@ -31,6 +34,17 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }, 300)
 
     }
+    const onAudioBookOnOff = () => {
+        console.log(toJS(store.getCurrentItem(paneNumber)), store.getAudioBookStarAndStop(paneNumber))
+        if(!audioBookPlaying){
+            setAudioBookPlaying(true)
+
+        }else
+        {
+            setAudioBookPlaying(false)
+        }
+    }
+
     const onSpeakOnOffEn = () => {
         if (speaking) {
             setSpeaking(false)
@@ -99,6 +113,8 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           onSpeakOnOffHe={onSpeakOnOffHe}
                           onSpeakOnOffEn={onSpeakOnOffEn}
                           flip={flip}
+                          onAudioBookOnOff={onAudioBookOnOff}
+                          audioBookPlaying={audioBookPlaying}
             />
 
             <Virtuoso

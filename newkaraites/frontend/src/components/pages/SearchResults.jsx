@@ -12,7 +12,6 @@ import {messageContext} from "../../stores/messages/messageContext";
 import {Please} from "../messages/Please"
 import {slug} from "../../utils/utils"
 import {fetchData} from "../api/dataFetch";
-//import './bold.css'
 
 
 const SearchResults = () => {

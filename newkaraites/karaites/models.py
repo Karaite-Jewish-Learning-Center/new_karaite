@@ -216,20 +216,11 @@ class BookAsArray(models.Model):
     # 6 need render chapter title,
     # 7 Total bible references in Hebrew,
     # 8 Total bible references in English,
-    # 9 Halakhah Hebrew
+    # 9 [Halakhah Hebrew, Liturgy Hebrew, Poetry Hebrew, Exhortatory Hebrew Comments Hebrew],
+    # 10 [Halakhah English, Liturgy English, Poetry English, Exhortatory English Comments English],
     # 10 Halakhah English
-    # 11 Liturgy Hebrew
-    # 12 Liturgy English
-    # 13 Poetry Hebrew
-    # 14 Poetry English
-    # 15 Polemics Hebrew
-    # 16 Polemics English
-    # 17 Exhortatory Hebrew
-    # 18 Exhortatory English
-    # 19 Comments Hebrew
-    # 20 Comments English
+    # 11 [start_ms, end_ms]  hebrew audio start and end time in milliseconds, [0,0] means no audio book
     # ...]
-    # [start_ms, end_ms]  hebrew audio start and end time in milliseconds
 
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 

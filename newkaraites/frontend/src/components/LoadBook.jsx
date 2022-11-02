@@ -9,6 +9,7 @@ import {makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
 import {TRANSFORM_TYPE} from '../constants/constants'
 import {storeContext} from "../stores/context";
+import {AudioBookContext} from "../stores/audioBookContext";
 import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
@@ -16,9 +17,9 @@ import { useLocation } from "react-router-dom"
 import getBook from "./getBook";
 import {getFirstPart} from "../utils/utils";
 
-
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
+    const audioBookStore = useContext(AudioBookContext)
     const message = useContext(messageContext )
     const {book, chapter = 1, verse = 1, intro=''} = useParams()
     console.log('LoadBook', book, chapter, verse, intro)
@@ -27,8 +28,10 @@ const LoadBook = ({type}) => {
 
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
-    let history = useHistory()
 
+    audioBookStore.load(book)
+
+    let history = useHistory()
     const onClosePane = (paneNumber) => {
         store.closePane(paneNumber)
 
@@ -43,7 +46,6 @@ const LoadBook = ({type}) => {
             }else {
                 history.push(`/${path}/`)
             }
-            return
         }
     }
 

@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import IconButton from "@material-ui/core/IconButton";
-import {ButtonPropsTTS} from './types';
+import {ButtonPropsOnOff} from './types';
 import {useTheme} from '@material-ui/core/styles';
 import textToSpeechOnBlack from '../../img/record_voice_over_black_24dp.svg'
 import textToSpeechOffBlack from '../../img/voice_over_off_black_24dp.svg'
@@ -8,7 +8,7 @@ import textToSpeechOnWhite from '../../img/record_voice_over_white_24dp.svg'
 import textToSpeechOffWhite from '../../img/voice_over_off_white_24dp.svg'
 
 
-export const TextToSpeechButton: FC<ButtonPropsTTS> = ({onClick, color, onOff}) => {
+export const TextToSpeechButton: FC<ButtonPropsOnOff> = ({onClick, color, onOff}) => {
     const theme = useTheme()
     if (theme.palette.type === 'dark') {
         return (
