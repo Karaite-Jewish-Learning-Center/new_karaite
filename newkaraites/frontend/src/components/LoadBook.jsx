@@ -22,13 +22,13 @@ const LoadBook = ({type}) => {
     const audioBookStore = useContext(AudioBookContext)
     const message = useContext(messageContext )
     const {book, chapter = 1, verse = 1, intro=''} = useParams()
-    console.log('LoadBook', book, chapter, verse, intro)
+
     // path is used as type for the KaraitesBooks component
     const path = getFirstPart(useLocation().pathname)
 
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
-
+    // load audiobook
     audioBookStore.load(book)
 
     let history = useHistory()

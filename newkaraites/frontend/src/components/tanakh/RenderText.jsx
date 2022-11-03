@@ -4,18 +4,19 @@ import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
 import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
+import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
 import {toJS} from "mobx";
 
 
-
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
     const speech = useContext(speechContext)
+    const audioBookStore = useContext(AudioBookContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
-    const [audioBookPlaying, setAudioBookPlaying] = useState(false)
+    const [audioBookPlaying, setAudioBookPlaying] = useState(audioBookStore.isPlaying())
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
     const virtuoso = useRef(null)
@@ -26,23 +27,18 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         setTimeout(() => {
             //     @ts-ignore
             virtuoso.current.scrollToIndex({
-                index: store.getCurrentItem(paneNumber) ,
-                align: (store.getDistance(paneNumber) <=1 ? 'top': 'center'),
+                index: store.getCurrentItem(paneNumber),
+                align: (store.getDistance(paneNumber) <= 1 ? 'top' : 'center'),
                 behavior: 'smooth',
             })
             setSpeaking(() => true)
         }, 300)
 
     }
-    const onAudioBookOnOff = () => {
-        console.log(toJS(store.getCurrentItem(paneNumber)), store.getAudioBookStarAndStop(paneNumber))
-        if(!audioBookPlaying){
-            setAudioBookPlaying(true)
 
-        }else
-        {
-            setAudioBookPlaying(false)
-        }
+    const onAudioBookOnOff = () => {
+        audioBookStore.click()
+        setAudioBookPlaying(audioBookStore.isPlaying())
     }
 
     const onSpeakOnOffEn = () => {

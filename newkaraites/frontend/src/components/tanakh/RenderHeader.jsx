@@ -1,11 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {Typography} from '@material-ui/core';
 import {englishBookNameToHebrew, unslug} from '../../utils/utils'
 import {indoArabicToHebrewCardinal} from '../../utils/english-hebrew/numberConvertion'
 import {Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
-import {AudioBookContext} from "../../stores/audioBookContext";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
@@ -26,18 +25,13 @@ const RenderHeader = ({
                       }) => {
 
     const store = useContext(storeContext)
-    const audioBookStore = useContext(AudioBookContext)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
-    const [isAudioBookPlaying, setIsAudioBookPlaying] = useState(audioBookStore.isPlaying())
+
     const onClose = () => {
         onClosePane(paneNumber)
     }
 
-    const onAudioBookClick = () => {
-        setIsAudioBookPlaying(!isAudioBookPlaying)
-        audioBookStore.click()
-    }
     book = unslug(book)
 
     const HeaderBody = ({chapter}) => {
@@ -54,8 +48,8 @@ const RenderHeader = ({
                                 onOff={flip[0]}
                             />
                             <AudiobookBottom
-                                onClick={onAudioBookClick}
-                                onOff={isAudioBookPlaying}
+                                onClick={onAudioBookOnOff}
+                                onOff={audioBookPlaying}
                             />
                         </Grid>
                         <Grid item xs={2} key={4}>
