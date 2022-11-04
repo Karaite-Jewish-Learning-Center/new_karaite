@@ -174,7 +174,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                                 </>
                             )
                         }
-
+                        return null
                     })}
 
                 </Paper>

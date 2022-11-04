@@ -2,7 +2,7 @@ import {makeAutoObservable, runInAction, computed, observable} from "mobx"
 import {isABibleBook} from "../utils/utils";
 import {autocompleteUrl} from "../constants/constants";
 import {AUDIO} from "../constants/constants";
-import {toJS} from 'mobx';
+
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -47,25 +47,9 @@ class AppState {
     getAudioBookStarAndStop = (i: number) => {
         return JSON.parse(this.panes[i].bookData[this.getCurrentItem(i)][AUDIO])
     }
-    // getRefsChapterVerse = (paneNumber: number): void => this.panes[paneNumber].refsChapterVerse
-    //
-    // getRefsChapter = (paneNumber: number): number => this.panes[paneNumber].refsChapterVerse[0]
-    // getRefsVerse = (paneNumber: number): number => this.panes[paneNumber].refsChapterVerse[1]
 
     getBook = (i: number): string => this.panes[i].book
 
-    // setChapter = (chapter: string, i: number): void => {
-    //     this.panes[i].chapter = parseInt(chapter)
-    // }
-    //
-    // setVerse = (verse: number, i: number): void => {
-    //     runInAction(() => {
-    //         this.panes[i].verse = verse
-    //     })
-    // }
-    // getVerse = (i: number): number => this.panes[i].verse
-    //
-    // getVerses = (i: number): Array<string> => this.panes[i].verses
 
     setVerseData = (data: Array<any>, i: number): void => {
         runInAction(() => {
@@ -99,7 +83,6 @@ class AppState {
     setRightPaneState = (state: boolean, i: number): void => {
         this.panes[i].rightPaneState = state
     }
-    // getRightPaneState = (i: number): Array<number> => this.panes[i].rightPaneState || [1]
 
     // panes
     setPanes = (pane: number): void => {
@@ -117,8 +100,6 @@ class AppState {
     isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
         this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
-    // isBookOpen = (book: string): boolean =>
-    //     this.getPanes().some((pane) => pane.book === book)
 
     closePane = (i: number): void => {
         console.log('Panes length before', this.panes.length)
@@ -149,8 +130,6 @@ class AppState {
 
     getParagraphs = (i: number): Array<any> => this.panes[i].paragraphs
 
-    // getKaraitesChapter = (i: number): number =>
-    //     (this.panes[i].paragraphs.length === 0 ? this.panes[i].chapter : this.panes[i].paragraphs.length)
 
     setBookDetails = (details: object, i: number): void => {
         runInAction(() => {
@@ -160,19 +139,6 @@ class AppState {
     getBookDetails = (i: number): object => {
         return this.panes[i].book_details
     }
-
-    // setBookTOC = (toc: string, i: number): void => {
-    //     this.panes[i].TOC = toc
-    // }
-    // getBookTOC = (i: number): Array<any> => this.panes[i].TOC
-    //
-    // // header chapters
-    // setHeaderChapter = (chapter: number, i: number): void => {
-    //     runInAction(() => {
-    //         this.panes[i].headerChapter = chapter
-    //     })
-    // }
-    // getHeaderChapter = (i: number): string => this.panes[i].headerChapter
 
     // search arg
     setSearch = (searchArg: string): void => {

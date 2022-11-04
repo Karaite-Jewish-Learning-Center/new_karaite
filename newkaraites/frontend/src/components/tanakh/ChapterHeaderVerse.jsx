@@ -27,7 +27,6 @@ const ChapterHeaderVerse = (props) => {
     const renderChapter = data[BIBLE_RENDER_CHAPTER]
     const refsHe = parseInt(data[REFS_HE])
     const refsEn = parseInt(data[REFS_EN])
-
     let chapterHtml = null
 
     const onClick = (i) => {
@@ -61,7 +60,7 @@ const ChapterHeaderVerse = (props) => {
         store.setRefsChapterVerse(allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)
         // }
-    }, [allBookData, paneNumber, store.getCurrentItem(paneNumber)])
+    }, [allBookData, paneNumber, store.getCurrentItem(paneNumber), current, store])
 
     const ChapterBody = () => {
         switch (lang) {

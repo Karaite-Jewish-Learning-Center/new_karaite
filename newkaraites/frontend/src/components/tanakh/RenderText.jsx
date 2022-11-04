@@ -91,7 +91,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         return () => {
             speech.cancel()
         }
-    }, [store.getCurrentItem(paneNumber), speaking])
+    }, [store.getCurrentItem(paneNumber), speaking, paneNumber,speech,store])
 
 
     const calculateCurrentChapter = () => {

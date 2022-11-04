@@ -137,7 +137,7 @@ export default function PrimarySearchAppBar({theme}) {
                     {/*</IconButton>*/}
                 </div>
                 <div className={classes.sectionMobile}>
-                    <AutoComplete/>
+                    {/*<AutoComplete/>*/}
                     {/*<IconButton*/}
                     {/*    aria-label="show more"*/}
                     {/*    aria-controls={mobileMenuId}*/}
