@@ -7,7 +7,7 @@ import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
-import {toJS} from "mobx";
+
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
@@ -16,13 +16,14 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const audioBookStore = useContext(AudioBookContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
-    const [audioBookPlaying, setAudioBookPlaying] = useState(audioBookStore.isPlaying())
+    const [audioBookPlaying, setAudioBookPlaying] = useState(false)
+    const [audioStartStop, setAudioStartStop] = useState([0, 0])
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
     const virtuoso = useRef(null)
 
 
-    const callFromEnded = () => {
+    const callFromEnded = (set = true) => {
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
         setTimeout(() => {
             //     @ts-ignore
@@ -31,14 +32,32 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                 align: (store.getDistance(paneNumber) <= 1 ? 'top' : 'center'),
                 behavior: 'smooth',
             })
-            setSpeaking(() => true)
+            // speech synthesis only!
+            if(set) setSpeaking(() => true)
         }, 300)
 
     }
 
+    const onTimeUpdate = (e) => {
+
+        if (e.target.currentTime > audioStartStop[1]) {
+            callFromEnded(false)
+            setAudioStartStop(store.getAudioBookStarAndStop(paneNumber))
+        }
+    }
+
+    audioBookStore.audio.ontimeupdate = onTimeUpdate
+
     const onAudioBookOnOff = () => {
-        audioBookStore.click()
-        setAudioBookPlaying(audioBookStore.isPlaying())
+        if (! audioBookPlaying) {
+            setAudioStartStop(()=>{store.getAudioBookStarAndStop(paneNumber)})
+            setAudioBookPlaying(() => true)
+            audioBookStore.play(audioStartStop[0])
+        }else{
+            setAudioBookPlaying(() => false)
+            audioBookStore.pause()
+        }
+
     }
 
     const onSpeakOnOffEn = () => {
@@ -73,6 +92,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             speech.cancel()
         }
     }, [store.getCurrentItem(paneNumber), speaking])
+
 
     const calculateCurrentChapter = () => {
         let book = store.getBook(paneNumber)

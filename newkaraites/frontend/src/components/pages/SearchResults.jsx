@@ -85,7 +85,7 @@ const SearchResults = () => {
             })
 
 
-    }, [search, page, store])
+    }, [search, page, store,message])
 
     if (store.getSearch() === '') return <Please reason="search"/>
     return (

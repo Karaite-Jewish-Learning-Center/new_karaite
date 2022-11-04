@@ -315,15 +315,15 @@ class BookAsArrayAudio(models.Model):
         return self.book.book.book_title_en
 
     @staticmethod
-    def convert_time_to_ms(time):
-        """ convert time to milliseconds """
+    def convert_time_to_seconds(time):
+        """ convert time to seconds """
         time_parts = list(map(float, time.split(':')))
         ms, seconds = modf(time_parts[2])
-        return int(time_parts[0] * 3600000 + time_parts[1] * 60000 + seconds * 1000 + ms * 1000)
+        return int(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms)
 
     def save(self, *args, **kwargs):
-        self.start_ms = self.convert_time_to_ms(self.start)
-        self.end_ms = self.convert_time_to_ms(self.end)
+        self.start_ms = self.convert_time_to_seconds(self.start)
+        self.end_ms = self.convert_time_to_seconds(self.end)
         super(BookAsArrayAudio, self).save(*args, **kwargs)
 
     class Meta:

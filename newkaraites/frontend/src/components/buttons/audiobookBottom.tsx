@@ -10,6 +10,6 @@ export const AudiobookBottom: FC<ButtonPropsOnOff> = ({onClick, color="inherit",
                 component="span"
                 color={color}
                 onClick={onClick}>
-        {( onOff ? <PlayArrowIcon/>: <PauseIcon/>)}
+        {( ! onOff ? <PlayArrowIcon/>: <PauseIcon/>)}
     </IconButton>
 

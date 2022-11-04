@@ -12,8 +12,6 @@ class AudioBook {
             audio: observable,
             title: observable,
             ready: observable,
-
-
         })
 
         this.audio = new Audio()
@@ -33,7 +31,6 @@ class AudioBook {
         this.title = url
         this.audio.src = `${audioBooksUrl}${url}.mp3`
         this.audio.preload = 'auto'
-        this.audio.play()
     }
 
     play = (start: number): void => {
@@ -53,16 +50,6 @@ class AudioBook {
     forward = (time: number): void => {
         this.audio.currentTime = time
     }
-
-    click = (start: number = 0) => {
-        if (this.audio.paused) {
-            this.play(start)
-        } else {
-            this.pause()
-        }
-    }
-
-    isPlaying = (): boolean => this.audio.paused
 
 }
 
