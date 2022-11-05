@@ -36,7 +36,7 @@ const Message = () => {
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > * + *': {
-            marginTop: theme.spacing(20),
+             marginTop: theme.spacing(20),
         },
     },
     close: {

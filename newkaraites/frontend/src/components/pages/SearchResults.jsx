@@ -9,9 +9,9 @@ import {Typography} from "@material-ui/core"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
 import {messageContext} from "../../stores/messages/messageContext";
-import {Please} from "../messages/Please"
 import {slug} from "../../utils/utils"
 import {fetchData} from "../api/dataFetch";
+import '../../css/search.css'
 
 
 const SearchResults = () => {
@@ -87,7 +87,8 @@ const SearchResults = () => {
 
     }, [search, page, store,message])
 
-    if (store.getSearch() === '') return <Please reason="search"/>
+    if (store.getSearch() === '') return null
+
     return (
         <div className={classes.container}>
             <Typography className={classes.header} variant="h5">

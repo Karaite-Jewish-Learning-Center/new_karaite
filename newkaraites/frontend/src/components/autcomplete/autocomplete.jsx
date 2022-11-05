@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import {autocompleteUrl} from '../../constants/constants'
+//import {autocompleteUrl} from '../../constants/constants'
 import {storeContext} from '../../stores/context'
 import {messageContext} from "../../stores/messages/messageContext";
 import {useHistory} from 'react-router-dom'
@@ -53,11 +53,13 @@ const AutoComplete = () => {
         store.setSearch(search)
         if (window.location.pathname === '/search-result/') {
             // hack or page wont reload !!!
-            history.push('/empty')
+            // see router in app.js
+            history.push('/empty/')
             history.goBack()
         } else {
             history.push('/search-result/')
         }
+
     }
 
 
@@ -67,6 +69,9 @@ const AutoComplete = () => {
     }
 
     const onKeyUp = (event) => {
+        if (event.key === 'Enter' && search.length ===0) {
+           message.setMessage('Please enter a search term')
+        }
         if (event.code === "Enter") {
             setIsOpen(() => false)
             showResults()
@@ -80,24 +85,24 @@ const AutoComplete = () => {
             setSearch(() => options[value].w)
         }
     }
-
-    useEffect(() => {
-        const getAutoComplete = async () => {
-
-            if (search.length < 2) return []
-            if (isABibleBook(search)) return []
-
-            const response = await fetch(`${autocompleteUrl}${search}/`)
-            return await response.json()
-        }
-
-        getAutoComplete()
-            .then((data) => {
-                setOptions(data)
-            })
-            .catch(e => message.setMessage(e.message))
-
-    }, [search, store, message]);
+    // to use autocomplete uncomment, prepare database too
+    // useEffect(() => {
+    //     const getAutoComplete = async () => {
+    //
+    //         if (search.length < 2) return []
+    //         if (isABibleBook(search)) return []
+    //
+    //         const response = await fetch(`${autocompleteUrl}${search}/`)
+    //         return await response.json()
+    //     }
+    //
+    //     getAutoComplete()
+    //         .then((data) => {
+    //             setOptions(data)
+    //         })
+    //         .catch(e => message.setMessage(e.message))
+    //
+    // }, [search, store.getSearch(), message]);
 
     return (
 

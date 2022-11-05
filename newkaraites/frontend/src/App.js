@@ -21,6 +21,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Second from "./components/menu/getMenuSecond";
 
+const NullComponent = () => null;
 
 function App() {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme:dark)');
@@ -71,10 +72,15 @@ function App() {
                                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                         <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                                        <Route path="/*/:book/:chapter/:verse/:intro/" children={
-                                            <LoadBook type={""}/>}/>
+
+
+                                        <Route path="/*/:book/:chapter/:verse/:intro/" children={<LoadBook type={""}/>}/>
+
                                         <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type={""}/>}/>
                                         <Route path="/*/:book/:chapter/" children={<LoadBook type={""}/>}/>
+                                          {/* hack to avoid 404 in autocomplete */}
+                                        <Route exact path="/empty/"><NullComponent/></Route>
+
                                         <Route path="/*/"><Second/></Route>
 
                                     </Switch>
