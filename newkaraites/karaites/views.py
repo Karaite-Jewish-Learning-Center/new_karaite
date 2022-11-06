@@ -377,7 +377,7 @@ class Search(View):
             items = []
             for result in results:
                 items.append({'ref': result.reference_en,
-                              'text': custom_sql(result.text_en, search),
+                              'text': (custom_sql(result.text_en, search)[0].replace('<b>', '<b style="color:#F00">'),),
                               'path': result.path})
 
             return JsonResponse({'data': items,

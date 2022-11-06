@@ -1,7 +1,8 @@
-import { makeRandomKey } from "./utils"
+import {makeRandomKey} from "./utils"
 
 
 const transform = (refClick, item, kind, paneNumber, node) => {
+    debugger
     if (node.type === 'tag') {
         // rewrite the span with a onClick event handler
         if (node.name === 'span') {
@@ -16,3 +17,4 @@ const transform = (refClick, item, kind, paneNumber, node) => {
 }
 
 export default transform
+
