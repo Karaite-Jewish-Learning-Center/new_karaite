@@ -288,6 +288,96 @@ class BookAsArray(models.Model):
         verbose_name_plural = _(' Biblical books')
 
 
+class Parsha(models.Model):
+    """ Parsha """
+
+    book = models.ForeignKey(Organization,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name=_('Book'),
+                             help_text=_('Book'))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'),
+                                help_text=_('Order'))
+
+    parsha_he = models.CharField(max_length=50,
+                                 default='',
+                                 blank=True,
+                                 verbose_name=_('Parsha'),
+                                 help_text=_('Parsha'))
+
+    parsha_en = models.CharField(max_length=50,
+                                 verbose_name=_('Parsha in English'),
+                                 help_text=_('Parsha in English'))
+
+    parsha_portion = models.CharField(max_length=20,
+                                      verbose_name=_('Parsha portion'),
+                                      help_text=_('Parsha portion'))
+
+    first_reading = models.CharField(max_length=30,
+                                     verbose_name=_('First reading'),
+                                     help_text=_('First reading'))
+
+    first_description = models.TextField(null=True,
+                                         verbose_name=_('First reading description'),
+                                         help_text=_('First reading description'))
+
+    second_reading = models.CharField(max_length=30,
+                                      verbose_name=_('Second reading'),
+                                      help_text=_('Second reading'))
+
+    second_description = models.TextField(null=True,
+                                          verbose_name=_('Second reading description'),
+                                          help_text=_('Second reading description'))
+
+    third_reading = models.CharField(max_length=30,
+                                     verbose_name=_('Third reading'),
+                                     help_text=_('Third reading'))
+
+    third_description = models.TextField(null=True,
+                                         verbose_name=_('Third reading description'),
+                                         help_text=_('Third reading description'))
+
+    fourth_reading = models.CharField(max_length=30,
+                                      verbose_name=_('Fourth reading'),
+                                      help_text=_('Fourth reading'))
+
+    fourth_description = models.TextField(null=True,
+                                          verbose_name=_('Fourth reading description'),
+                                          help_text=_('Fourth reading description'))
+
+    fifth_reading = models.CharField(max_length=30,
+                                     verbose_name=_('Fifth reading'),
+                                     help_text=_('Fifth reading'))
+
+    fifth_description = models.TextField(null=True,
+                                         verbose_name=_('Fifth reading description'),
+                                         help_text=_('Fifth reading description'))
+
+    sixth_reading = models.CharField(max_length=30,
+                                     verbose_name=_('Sixth reading'),
+                                     help_text=_('Sixth reading'))
+
+    sixth_description = models.TextField(null=True,
+                                         verbose_name=_('Sixth reading description'),
+                                         help_text=_('Sixth reading description'))
+
+    seventh_reading = models.CharField(max_length=30,
+                                       verbose_name=_('Seventh reading'),
+                                       help_text=_('Seventh reading'))
+
+    seventh_description = models.TextField(null=True,
+                                           verbose_name=_('Seventh reading description'),
+                                           help_text=_('Seventh reading description'))
+
+    def __str__(self):
+        return f"{self.parsha_en}"
+
+    class Meta:
+        verbose_name_plural = "Parsha's"
+        ordering = ('order',)
+
+
 class BookAsArrayAudio(models.Model):
     """ maps audio to text"""
     book = models.ForeignKey(BookAsArray,
@@ -301,15 +391,13 @@ class BookAsArrayAudio(models.Model):
 
     start = models.CharField(max_length=12,
                              default='00:00:00.000')
-    start_ms = models.IntegerField(default=0)
 
     end = models.CharField(max_length=12,
                            default='00:00:00.000')
 
-    end_ms = models.IntegerField(default=0)
+    start_ms = models.IntegerField(default=0)
 
-    char_per_second = models.FloatField(default=0,
-                                        verbose_name='Characters per second')
+    end_ms = models.IntegerField(default=0)
 
     def __str__(self):
         return self.book.book.book_title_en
