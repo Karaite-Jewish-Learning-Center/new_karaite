@@ -94,7 +94,7 @@ admin.site.register(Parsha, ParshaAdmin)
 
 
 class BookAsArrayAudioAdmin(KAdmin):
-    list_display = ('book', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
+    list_display = ('book', 'chapter', 'verse', 'start', 'end', 'start_format', 'end_format')
     list_editable = ('start', 'end')
     search_fields = ('book__book_title_en',)
 

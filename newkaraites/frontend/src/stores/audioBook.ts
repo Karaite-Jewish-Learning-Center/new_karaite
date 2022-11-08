@@ -6,7 +6,8 @@ class AudioBook {
     audio: any = null
     title: string = ''
     ready: boolean = false
-    callback : Function = () => {}
+    callback: Function = () => {
+    }
 
     constructor() {
         makeAutoObservable(this, {
@@ -17,7 +18,10 @@ class AudioBook {
 
         this.audio = new Audio()
 
-        this.audio.ontimeupdate = () => this.callback(this.audio.currentTime)
+        this.audio.ontimeupdate = (e:Event) => {
+            console.log(this.audio.currentTime)
+            this.callback(this.audio.currentTime)
+        }
 
         this.audio.onended = () => {
             this.cancel()
@@ -33,7 +37,7 @@ class AudioBook {
         this.audio.preload = 'auto'
     }
 
-    play = (start: number, callback:Function): void => {
+    play = (start: number, callback: Function): void => {
         this.callback = callback
         this.audio.currentTime = start
         this.audio.play()
@@ -44,7 +48,8 @@ class AudioBook {
     }
 
     stop = (): void => {
-        this.callback = () => {}
+        this.callback = () => {
+        }
         this.audio.pause()
         this.ready = false
         this.audio.currentTime = 0

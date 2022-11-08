@@ -11,6 +11,7 @@ from math import modf
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
+from .validatores.validators import validate_time
 
 VERSE = 4
 HEBREW = 0
@@ -390,24 +391,42 @@ class BookAsArrayAudio(models.Model):
     verse = models.IntegerField(default=0)
 
     start = models.CharField(max_length=12,
-                             default='00:00:00.000')
+                             default='00:00:00.000',
+                             validators=[validate_time],
+                             verbose_name="Start time",
+                             help_text="Start time")
 
     end = models.CharField(max_length=12,
-                           default='00:00:00.000')
+                           default='00:00:00.000',
+                           validators=[validate_time],
+                           verbose_name="End",
+                           help_text="End time")
 
-    start_ms = models.IntegerField(default=0)
+    start_ms = models.FloatField(default=0.000)
 
-    end_ms = models.IntegerField(default=0)
+    end_ms = models.FloatField(default=0.000)
 
     def __str__(self):
         return self.book.book.book_title_en
 
     @staticmethod
     def convert_time_to_seconds(time):
-        """ convert time to seconds """
+        """ convert time to a float, before decimal point are seconds, after are milliseconds """
         time_parts = list(map(float, time.split(':')))
         ms, seconds = modf(time_parts[2])
-        return int(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms)
+        return time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms
+
+    @mark_safe
+    def start_format(self):
+        return '{0:10.3f}'.format(self.start_ms)
+
+    start_format.short_description = 'Start'
+
+    @mark_safe
+    def end_format(self):
+        return '{0:10.3f}'.format(self.end_ms)
+
+    end_format.short_description = 'End'
 
     def save(self, *args, **kwargs):
         self.start_ms = self.convert_time_to_seconds(self.start)
