@@ -302,8 +302,6 @@ class Parsha(models.Model):
                                 help_text=_('Order'))
 
     parsha_he = models.CharField(max_length=50,
-                                 default='',
-                                 blank=True,
                                  verbose_name=_('Parsha'),
                                  help_text=_('Parsha'))
 
@@ -316,58 +314,79 @@ class Parsha(models.Model):
                                       help_text=_('Parsha portion'))
 
     first_reading = models.CharField(max_length=30,
+                                     blank=True,
+                                     null=True,
                                      verbose_name=_('First reading'),
                                      help_text=_('First reading'))
 
-    first_description = models.TextField(null=True,
+    first_description = models.TextField(blank=True,
+                                         null=True,
                                          verbose_name=_('First reading description'),
                                          help_text=_('First reading description'))
 
     second_reading = models.CharField(max_length=30,
+                                      blank=True,
+                                      null=True,
                                       verbose_name=_('Second reading'),
                                       help_text=_('Second reading'))
 
-    second_description = models.TextField(null=True,
+    second_description = models.TextField(blank=True,
+                                          null=True,
                                           verbose_name=_('Second reading description'),
                                           help_text=_('Second reading description'))
 
     third_reading = models.CharField(max_length=30,
+                                     blank=True,
+                                     null=True,
                                      verbose_name=_('Third reading'),
                                      help_text=_('Third reading'))
 
-    third_description = models.TextField(null=True,
+    third_description = models.TextField(blank=True,
+                                         null=True,
                                          verbose_name=_('Third reading description'),
                                          help_text=_('Third reading description'))
 
     fourth_reading = models.CharField(max_length=30,
+                                      blank=True,
+                                      null=True,
                                       verbose_name=_('Fourth reading'),
                                       help_text=_('Fourth reading'))
 
-    fourth_description = models.TextField(null=True,
+    fourth_description = models.TextField(blank=True,
+                                          null=True,
                                           verbose_name=_('Fourth reading description'),
                                           help_text=_('Fourth reading description'))
 
     fifth_reading = models.CharField(max_length=30,
+                                     blank=True,
+                                     null=True,
                                      verbose_name=_('Fifth reading'),
                                      help_text=_('Fifth reading'))
 
-    fifth_description = models.TextField(null=True,
+    fifth_description = models.TextField(blank=True,
+                                         null=True,
                                          verbose_name=_('Fifth reading description'),
                                          help_text=_('Fifth reading description'))
 
     sixth_reading = models.CharField(max_length=30,
+                                     blank=True,
+                                     null=True,
                                      verbose_name=_('Sixth reading'),
                                      help_text=_('Sixth reading'))
 
-    sixth_description = models.TextField(null=True,
+    sixth_description = models.TextField(blank=True,
+                                         null=True,
                                          verbose_name=_('Sixth reading description'),
                                          help_text=_('Sixth reading description'))
 
     seventh_reading = models.CharField(max_length=30,
+                                       blank=True,
+                                       null=True,
                                        verbose_name=_('Seventh reading'),
                                        help_text=_('Seventh reading'))
 
-    seventh_description = models.TextField(null=True,
+    seventh_description = models.TextField(blank=True,
+                                           null=True,
                                            verbose_name=_('Seventh reading description'),
                                            help_text=_('Seventh reading description'))
 
