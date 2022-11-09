@@ -34,6 +34,12 @@ class KAdmin(admin.ModelAdmin):
         js = (f'../{STATIC}/js/toggleFilterPanel.js',)
 
 
+# actions
+@admin.action(description='Change select to default values.')
+def change_to_default(modeladmin, request, queryset):
+    queryset.update(start='00:00:00.000', end='00:00:00.000', start_ms=0, end_ms=0)
+
+
 class FirstLevelAdmin(KAdmin):
     list_display = ('first_level', 'first_level_he_html',
                     'break_on_classification', 'url', 'order')
@@ -97,6 +103,7 @@ class BookAsArrayAudioAdmin(KAdmin):
     list_display = ('book', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
     list_editable = ('start', 'end', 'start_ms', 'end_ms')
     search_fields = ('book__book_title_en',)
+    actions = [change_to_default]
 
 
 admin.site.register(BookAsArrayAudio, BookAsArrayAudioAdmin)
