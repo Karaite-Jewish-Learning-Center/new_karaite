@@ -435,6 +435,15 @@ class BookAsArrayAudio(models.Model):
         ms, seconds = modf(time_parts[2])
         return time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms
 
+    @staticmethod
+    def convert_seconds_to_time(time):
+        """ convert seconds and milliseconds to start and end time"""
+        hours_fraction, hours = modf(time / 3600)
+        minutes_fraction, minutes = modf(hours_fraction * 3600 / 60)
+        seconds_fraction, seconds = modf(minutes_fraction * 60)
+        milliseconds = int(round(seconds_fraction * 1000, 1))
+        return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
+
     @mark_safe
     def start_format(self):
         return '{0:10.3f}'.format(self.start_ms)
@@ -448,8 +457,15 @@ class BookAsArrayAudio(models.Model):
     end_format.short_description = 'End'
 
     def save(self, *args, **kwargs):
-        self.start_ms = self.convert_time_to_seconds(self.start)
-        self.end_ms = self.convert_time_to_seconds(self.end)
+
+        if self.start != '00:00:00.000' and self.end != '00:00:00.000':
+            self.start_ms = self.convert_time_to_seconds(self.start)
+            self.end_ms = self.convert_time_to_seconds(self.end)
+
+        if self.start_ms != 0 and self.end_ms != 0:
+            self.start = self.convert_seconds_to_time(self.start_ms)
+            self.end = self.convert_seconds_to_time(self.end_ms)
+
         super(BookAsArrayAudio, self).save(*args, **kwargs)
 
     class Meta:
