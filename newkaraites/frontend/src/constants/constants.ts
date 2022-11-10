@@ -16,14 +16,17 @@ interface stringNumber {
 
 let api: string
 let audioBook: string
+let songs: string
 
 if (process.env.NODE_ENV === 'development') {
     api = 'http://localhost:8000/api/v1/'
     audioBook = 'http://localhost:8100/audio-books/'
+    songs = 'http://localhost:8100/songs/'
 
 } else {
     api = 'https://kjlc.karaites.org/api/v1/'
     audioBook = 'http://localhost:8100/audio-books/'
+    songs = 'http://localhost:8100/songs/'
     //api = 'http://dev.karaites.org/api/v1/'
 }
 
@@ -31,7 +34,7 @@ export const apiUrl = api
 export const apiUrlNoSlash = api.replace('/api/v1/', '')
 
 export const audioBooksUrl = audioBook
-
+export const songsUrl = songs
 
 // first level  see constants.py
 export const TANAKH: string = '1'

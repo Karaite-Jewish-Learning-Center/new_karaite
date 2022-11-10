@@ -314,8 +314,7 @@ class Parsha(models.Model):
                                       help_text=_('Parsha portion'))
 
     first_reading = models.CharField(max_length=30,
-                                     blank=True,
-                                     null=True,
+                                     default='',
                                      verbose_name=_('First reading'),
                                      help_text=_('First reading'))
 
@@ -325,8 +324,7 @@ class Parsha(models.Model):
                                          help_text=_('First reading description'))
 
     second_reading = models.CharField(max_length=30,
-                                      blank=True,
-                                      null=True,
+                                      default='',
                                       verbose_name=_('Second reading'),
                                       help_text=_('Second reading'))
 
@@ -336,8 +334,6 @@ class Parsha(models.Model):
                                           help_text=_('Second reading description'))
 
     third_reading = models.CharField(max_length=30,
-                                     blank=True,
-                                     null=True,
                                      verbose_name=_('Third reading'),
                                      help_text=_('Third reading'))
 
@@ -347,8 +343,6 @@ class Parsha(models.Model):
                                          help_text=_('Third reading description'))
 
     fourth_reading = models.CharField(max_length=30,
-                                      blank=True,
-                                      null=True,
                                       verbose_name=_('Fourth reading'),
                                       help_text=_('Fourth reading'))
 
@@ -358,8 +352,6 @@ class Parsha(models.Model):
                                           help_text=_('Fourth reading description'))
 
     fifth_reading = models.CharField(max_length=30,
-                                     blank=True,
-                                     null=True,
                                      verbose_name=_('Fifth reading'),
                                      help_text=_('Fifth reading'))
 
@@ -369,8 +361,6 @@ class Parsha(models.Model):
                                          help_text=_('Fifth reading description'))
 
     sixth_reading = models.CharField(max_length=30,
-                                     blank=True,
-                                     null=True,
                                      verbose_name=_('Sixth reading'),
                                      help_text=_('Sixth reading'))
 
@@ -380,8 +370,6 @@ class Parsha(models.Model):
                                          help_text=_('Sixth reading description'))
 
     seventh_reading = models.CharField(max_length=30,
-                                       blank=True,
-                                       null=True,
                                        verbose_name=_('Seventh reading'),
                                        help_text=_('Seventh reading'))
 
@@ -493,9 +481,10 @@ class Songs(models.Model):
         return result
 
     def to_json(self):
+        #  file should be in django-statics/audio
         return {
             'song_title': self.song_title,
-            'song_file': self.song_file.url,
+            'song_file': self.song_file.url.replace('/media/songs/', ''),
         }
 
     def delete(self, using=None, keep_parents=False):

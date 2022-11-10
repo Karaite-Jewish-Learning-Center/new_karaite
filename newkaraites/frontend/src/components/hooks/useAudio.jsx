@@ -1,10 +1,10 @@
 import {useEffect, useState, useMemo} from "react";
-import {apiUrlNoSlash} from "../../constants/constants";
+import {songsUrl} from "../../constants/constants";
 
 export const useAudio = (song, onResetPlayer, autoplay) => {
 
-    const url = `${apiUrlNoSlash}${song}`;
-
+    const url = `${songsUrl}${song}`;
+    debugger
     const [audio] = useState(useMemo(() => {
         try {
             let audio = new Audio(url)
