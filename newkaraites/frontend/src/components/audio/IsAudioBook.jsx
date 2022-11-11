@@ -4,7 +4,6 @@ import {TextToSpeechButton} from '../buttons/textToSpeechButton';
 
 
 export const IsAudioBook = ({isAudioBook, flip, onAudioBookOnOff, audioBookPlaying, onSpeakOnOffHe}) => {
-    debugger
     if (isAudioBook) {
         return (
             <AudiobookBottom

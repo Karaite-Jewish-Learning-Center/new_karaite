@@ -45,18 +45,14 @@ class AppState {
     getBookChapterVerse = (i: number) => `(${this.panes[i].book} ${this.panes[i].refsChapterVerse[0]}:${this.panes[i].refsChapterVerse[1]})`
 
     getAudioBookStarAndStop = (i: number) => {
-        try {
-            return JSON.parse(this.panes[i].bookData[this.getCurrentItem(i)][AUDIO])
-        }
-        catch (_) {
+        if (this.panes[i].bookData === undefined || this.panes[i].bookData.length === 0) {
             return [0, 0]
         }
+        return JSON.parse(this.panes[i].bookData[this.getCurrentItem(i)][AUDIO])
     }
 
-    isAudioBook = (i: number) => {
-        console.log('isAudio', this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0)
-     return this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0
-    }
+    isAudioBook = (i: number) => this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0
+
     getBook = (i: number): string => this.panes[i].book
 
 
@@ -111,11 +107,9 @@ class AppState {
 
 
     closePane = (i: number): void => {
-        console.log('Panes length before', this.panes.length)
         runInAction(() => {
             this.panes.splice(i, 1)
         })
-        console.log('Panes length after', this.panes.length)
     }
 
     resetPanes = (): void => {
