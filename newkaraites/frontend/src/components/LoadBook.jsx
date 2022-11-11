@@ -31,7 +31,9 @@ const LoadBook = ({type}) => {
     const classes = useStyles()
 
     // load audiobook
-    audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)
+    if(type === 'bible') {
+         audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)
+    }
 
     let history = useHistory()
     const onClosePane = (paneNumber) => {

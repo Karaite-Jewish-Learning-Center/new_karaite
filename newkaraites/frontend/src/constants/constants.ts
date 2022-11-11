@@ -45,8 +45,11 @@ export const COMMENTS: string = '8'
 export const POETRY: string = '9'
 export const EXHORTATORY: string = '11'
 
-//  position in book data, see models.py
+// audio position in book data, see models.py
 export const AUDIO = 11
+export const START_AUDIO_BOOK = 0
+export const END_AUDIO_BOOK = 1
+
 
 export const TRANSFORM_TYPE: string = 'Bible'
 

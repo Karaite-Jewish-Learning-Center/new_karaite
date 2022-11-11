@@ -9,8 +9,7 @@ import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
 import {TextToSpeechButton} from "../buttons/textToSpeechButton";
-import {AudiobookBottom} from "../buttons/audiobookBottom";
-
+import {IsAudioBook} from "../audio/IsAudioBook";
 
 const RenderHeader = ({
                           book,
@@ -22,6 +21,7 @@ const RenderHeader = ({
                           onSpeakOnOffEn,
                           onAudioBookOnOff,
                           audioBookPlaying,
+                          isAudioBook
                       }) => {
 
     const store = useContext(storeContext)
@@ -43,14 +43,10 @@ const RenderHeader = ({
                             <Typography className={classes.hebrewBook}>{englishBookNameToHebrew(book)}</Typography>
                         </Grid>
                         <Grid item xs={1} key={3}>
-                            <TextToSpeechButton
-                                onClick={onSpeakOnOffHe}
-                                onOff={flip[0]}
-                            />
-                            <AudiobookBottom
-                                onClick={onAudioBookOnOff}
-                                onOff={audioBookPlaying}
-                            />
+
+                            <IsAudioBook isAudioBook={isAudioBook} flip={flip[0]} onAudioBookOnOff={onAudioBookOnOff}
+                                            audioBookPlaying={audioBookPlaying} onSpeakOnOffHe={onSpeakOnOffHe}/>
+
                         </Grid>
                         <Grid item xs={2} key={4}>
                             <Typography className={classes.chapterView}>{chapter}</Typography>
@@ -79,14 +75,9 @@ const RenderHeader = ({
                             </Typography>
                         </Grid>
                         <Grid item xs={1} key={8}>
-                            <TextToSpeechButton
-                                onClick={onSpeakOnOffHe}
-                                onOff={flip[0]}
-                            />
-                            <AudiobookBottom
-                                onClick={onAudioBookOnOff}
-                                onOff={audioBookPlaying}
-                            />
+                             <IsAudioBook isAudioBook={isAudioBook} flip={flip[0]} onAudioBookOnOff={onAudioBookOnOff}
+                                            audioBookPlaying={audioBookPlaying} onSpeakOnOffHe={onSpeakOnOffHe}/>
+
                         </Grid>
                     </>
                 )

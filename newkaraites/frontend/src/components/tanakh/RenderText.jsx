@@ -7,9 +7,7 @@ import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
-
-const START_AUDIO_BOOK = 0
-const END_AUDIO_BOOK = 1
+import {START_AUDIO_BOOK, END_AUDIO_BOOK} from "../../constants/constants";
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
@@ -77,6 +75,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             setSpeaking(true)
         }
     }
+
     useEffect(() => {
         return () => {
             if (audioBookPlaying) {
@@ -132,6 +131,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           flip={flip}
                           onAudioBookOnOff={onAudioBookOnOff}
                           audioBookPlaying={audioBookPlaying}
+                          isAudioBook={ store.isAudioBook(paneNumber) }
             />
 
             <Virtuoso

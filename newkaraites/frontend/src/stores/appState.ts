@@ -1,7 +1,7 @@
 import {makeAutoObservable, runInAction, computed, observable} from "mobx"
 import {isABibleBook} from "../utils/utils";
 import {autocompleteUrl} from "../constants/constants";
-import {AUDIO} from "../constants/constants";
+import {AUDIO, END_AUDIO_BOOK} from "../constants/constants";
 
 
 class AppState {
@@ -45,9 +45,18 @@ class AppState {
     getBookChapterVerse = (i: number) => `(${this.panes[i].book} ${this.panes[i].refsChapterVerse[0]}:${this.panes[i].refsChapterVerse[1]})`
 
     getAudioBookStarAndStop = (i: number) => {
-        return JSON.parse(this.panes[i].bookData[this.getCurrentItem(i)][AUDIO])
+        try {
+            return JSON.parse(this.panes[i].bookData[this.getCurrentItem(i)][AUDIO])
+        }
+        catch (_) {
+            return [0, 0]
+        }
     }
 
+    isAudioBook = (i: number) => {
+        console.log('isAudio', this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0)
+     return this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0
+    }
     getBook = (i: number): string => this.panes[i].book
 
 
