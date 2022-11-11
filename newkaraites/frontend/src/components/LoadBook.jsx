@@ -7,29 +7,31 @@ import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
-import {TRANSFORM_TYPE} from '../constants/constants'
+import {audioBooksUrl, TRANSFORM_TYPE} from '../constants/constants'
 import {storeContext} from "../stores/context";
 import {AudioBookContext} from "../stores/audioBookContext";
 import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
-import { useLocation } from "react-router-dom"
+import {useLocation} from "react-router-dom"
 import getBook from "./getBook";
 import {getFirstPart} from "../utils/utils";
+
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
     const audioBookStore = useContext(AudioBookContext)
-    const message = useContext(messageContext )
-    const {book, chapter = 1, verse = 1, intro=''} = useParams()
+    const message = useContext(messageContext)
+    const {book, chapter = 1, verse = 1, intro = ''} = useParams()
 
     // path is used as type for the KaraitesBooks component
     const path = getFirstPart(useLocation().pathname)
 
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
+
     // load audiobook
-    audioBookStore.load(book)
+    audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)
 
     let history = useHistory()
     const onClosePane = (paneNumber) => {
@@ -43,7 +45,7 @@ const LoadBook = ({type}) => {
         if (store.isLastPane) {
             if (type === 'bible') {
                 history.push(`/Tanakh/`)
-            }else {
+            } else {
                 history.push(`/${path}/`)
             }
         }
@@ -70,7 +72,7 @@ const LoadBook = ({type}) => {
 
     const openBook = (paneNumber, refBook, refChapter, refVerse, refHighlight) => {
         try {
-            getBook(refBook, refChapter, refVerse, refHighlight, '', store, message ).then().catch()
+            getBook(refBook, refChapter, refVerse, refHighlight, '', store, message).then().catch()
         } catch (e) {
             message.setMessage(translateMessage(e))
         }

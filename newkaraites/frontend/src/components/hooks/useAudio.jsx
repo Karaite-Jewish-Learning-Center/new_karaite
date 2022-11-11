@@ -4,12 +4,11 @@ import {songsUrl} from "../../constants/constants";
 export const useAudio = (song, onResetPlayer, autoplay) => {
 
     const url = `${songsUrl}${song}`;
-    debugger
     const [audio] = useState(useMemo(() => {
         try {
-            let audio = new Audio(url)
-
-            audio.crossOrigin = 'anonymous'
+            let audio = new Audio()
+            audio.src = url
+            audio.crossOrigin = '*'
 
             return audio
         } catch (e) {

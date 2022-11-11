@@ -1,5 +1,5 @@
 import {makeAutoObservable, observable} from "mobx"
-import {audioBooksUrl} from "../constants/constants";
+
 
 class AudioBook {
 
@@ -8,12 +8,14 @@ class AudioBook {
     ready: boolean = false
     callback: Function = () => {
     }
+    loading: boolean = false
 
     constructor() {
         makeAutoObservable(this, {
             audio: observable,
             title: observable,
             ready: observable,
+
         })
 
         this.audio = new Audio()
@@ -27,17 +29,20 @@ class AudioBook {
             this.cancel()
         }
         this.audio.loadeddata = () => {
-            if (this.audio.readyState === 4) this.ready = true
+            if (this.audio.readyState === 4) {
+                this.ready = true
+                this.loading = false
+            }
         }
     }
 
-    load = (url: string): void => {
-        this.title = url
-        this.audio.src = `${audioBooksUrl}${url}.mp3`
+    load = (url: string, title: string = ''): void => {
+        this.title = (title === '' ? url : title)
+        this.audio.src = url
         this.audio.preload = 'auto'
     }
 
-    play = (start: number, callback: Function): void => {
+    play = (start: number = 0, callback: Function = () => {}): void => {
         this.callback = callback
         this.audio.currentTime = start
         this.audio.play()
@@ -61,6 +66,15 @@ class AudioBook {
 
     cancel = (): void => {
         this.stop()
+    }
+
+    reset = (): void => {
+        this.stop()
+        this.audio.currentTime = 0
+    }
+
+    resume = (): void => {
+        this.audio.play()
     }
 }
 

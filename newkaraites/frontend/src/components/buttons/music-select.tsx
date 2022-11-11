@@ -12,22 +12,23 @@ export const MusicSelect: FC<SongList> = ({songs}) => {
     const [index, setIndex] = useState(-1);
 
     if (songs.length === 0) return null
-    if (songs.length === 1) return <BasicAudioPlayer song={songs} onResetPlayer={() => {
-    }} autoplay={false} index={0}/>
+    if (songs.length === 1) return <BasicAudioPlayer song={songs} index={0}/>
 
     const selectSong = (i: number) => {
         setAnchorEl(null)
         setIndex(i)
     }
+
     const onClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     }
-    const onResetPlayer = (): void => {
-        setIndex(-1)
-    }
+
+    // const onResetPlayer = (): void => {
+    //     setIndex(-1)
+    // }
 
     if (index !== -1) {
-        return <BasicAudioPlayer song={songs} onResetPlayer={onResetPlayer} autoplay={true} index={index}/>
+        return <BasicAudioPlayer song={songs}  index={index}/>
     }
 
     return (
