@@ -21,7 +21,6 @@ class AudioBook {
         this.audio = new Audio()
 
         this.audio.ontimeupdate = (e:Event) => {
-            console.log(this.audio.currentTime)
             this.callback(this.audio.currentTime)
         }
 

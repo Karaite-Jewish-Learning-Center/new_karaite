@@ -37,7 +37,15 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     const onTimeUpdate = (currentTime) => {
-        if (currentTime > store.getAudioBookStarAndStop(paneNumber)[END_AUDIO_BOOK]) {
+        const [start, end] = store.getAudioBookStarAndStop(paneNumber)
+
+        if (start === 0 && end === 0) {
+            setAudioBookPlaying(false)
+            audioBookStore.stop()
+            return
+        }
+
+        if (currentTime > end) {
             callFromEnded(false)
         }
     }
@@ -131,7 +139,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           flip={flip}
                           onAudioBookOnOff={onAudioBookOnOff}
                           audioBookPlaying={audioBookPlaying}
-                          isAudioBook={ store.isAudioBook(paneNumber) }
+                          isAudioBook={store.isAudioBook(paneNumber)}
             />
 
             <Virtuoso
