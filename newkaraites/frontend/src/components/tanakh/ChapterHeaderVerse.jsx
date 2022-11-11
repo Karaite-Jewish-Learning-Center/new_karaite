@@ -17,9 +17,8 @@ import {devLog} from "../messages/devLog";
 import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 
-const ChapterHeaderVerse = (props) => {
+const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber}) => {
     const store = useContext(storeContext)
-    const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -51,15 +50,23 @@ const ChapterHeaderVerse = (props) => {
             </div>)
     }
 
+
     const startIndex = gridVisibleRange.startIndex
     const current = startIndex + store.getDistance(paneNumber)
-    const found = item === store.getCurrentItem(paneNumber)
+    // ???
+
+    let found = item === current
+    if(current >0) {
+         found = item === current + 1
+    }
+
 
     useEffect(() => {
-        // if (allBookData[current] !== undefined) {
+
         store.setRefsChapterVerse(allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)
-        // }
+
+        console.log('found', found, item, store.getCurrentItem(paneNumber), startIndex)
     }, [allBookData, paneNumber, store.getCurrentItem(paneNumber), current, store])
 
     const ChapterBody = () => {

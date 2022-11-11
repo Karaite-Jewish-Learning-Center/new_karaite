@@ -7,7 +7,7 @@ import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {versesByBibleBook} from "../../constants/constants";
-import {START_AUDIO_BOOK, END_AUDIO_BOOK} from "../../constants/constants";
+import {START_AUDIO_BOOK} from "../../constants/constants";
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
@@ -117,13 +117,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     const itemContent = (item, data) => {
+
         return (
             <ChapterHeaderVerse
                 data={data}
                 item={item}
                 gridVisibleRange={gridVisibleRange}
                 paneNumber={paneNumber}
-                speaking={speaking}
             />
         )
     }
@@ -145,7 +145,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 ref={virtuoso}
-                initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
+                // initialTopMostItemIndex={3}
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{
