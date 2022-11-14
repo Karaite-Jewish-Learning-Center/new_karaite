@@ -101,7 +101,7 @@ admin.site.register(Parsha, ParshaAdmin)
 
 
 class AudioBookAdmin(KAdmin):
-    list_display = ('audio_name', 'audio_file')
+    list_display = ('audio_name', 'audiofile')
 
 
 admin.site.register(AudioBook, AudioBookAdmin)

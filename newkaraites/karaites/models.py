@@ -406,12 +406,16 @@ class AudioBook(models.Model):
     audio_name = models.CharField(max_length=100,
                                   verbose_name=_('Audiobook name'),
                                   help_text=_('Audio name'))
-    audio_file = models.FileField(upload_to='audiobooks/',
+    audio_file = models.FileField(upload_to='audio-books/',
                                   verbose_name=_('Audiobook file'),
                                   help_text=_('Audiobook file'))
 
     def __str__(self):
         return self.audio_name
+
+    @mark_safe
+    def audiofile(self):
+        return f'<audio controls><source src="{self.audio_file.url}" type="audio/mpeg"></audio>'
 
     class Meta:
         verbose_name_plural = "Audiobooks"
