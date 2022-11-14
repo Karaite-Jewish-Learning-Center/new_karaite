@@ -381,9 +381,41 @@ class Parsha(models.Model):
     def __str__(self):
         return f"{self.parsha_en}"
 
+    @mark_safe
+    def readings(self):
+        html = '<table>'
+        html += '<thead><tr><th>Reading</th><th>Parsha Portion</th></tr></thead>'
+        html += f'<tr><td>1 st</td><td>{self.first_reading}</td></tr>'
+        html += f'<tr><td>2 nd</td><td>{self.second_reading}</td></tr>'
+        html += f'<tr><td>3 rd</td><td>{self.third_reading}</td></tr>'
+        html += f'<tr><td>4 th</td><td>{self.fourth_reading}</td></tr>'
+        html += f'<tr><td>5 th</td><td>{self.fifth_reading}</td></tr>'
+        html += f'<tr><td>6 th</td><td>{self.sixth_reading}</td></tr>'
+        html += f'<tr><td>7 th</td><td>{self.seventh_reading}</td></tr>'
+        html += '</table>'
+        return html
+
     class Meta:
         verbose_name_plural = "Parsha's"
         ordering = ('order',)
+
+
+class AudioBook(models.Model):
+    """ Audiobooks typically parsha, but not limited to"""
+
+    audio_name = models.CharField(max_length=100,
+                                  verbose_name=_('Audiobook name'),
+                                  help_text=_('Audio name'))
+    audio_file = models.FileField(upload_to='audiobooks/',
+                                  verbose_name=_('Audiobook file'),
+                                  help_text=_('Audiobook file'))
+
+    def __str__(self):
+        return self.audio_name
+
+    class Meta:
+        verbose_name_plural = "Audiobooks"
+        ordering = ('audio_name',)
 
 
 class BookAsArrayAudio(models.Model):
@@ -392,6 +424,14 @@ class BookAsArrayAudio(models.Model):
                              on_delete=models.DO_NOTHING,
                              verbose_name="Book"
                              )
+
+    audio = models.ForeignKey(AudioBook,
+                              null=True,
+                              blank=True,
+                              on_delete=models.DO_NOTHING,
+                              verbose_name="Audio",
+                              help_text="Audio"
+                              )
 
     chapter = models.IntegerField(default=0)
 

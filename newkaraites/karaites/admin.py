@@ -5,6 +5,7 @@ from .models import (FirstLevel,
                      Author,
                      BookAsArray,
                      Parsha,
+                     AudioBook,
                      BookAsArrayAudio,
                      BooksFootNotes,
                      Songs,
@@ -92,16 +93,24 @@ admin.site.register(BookAsArray, BookAsArrayAdmin)
 
 
 class ParshaAdmin(KAdmin):
-    list_display = ('book', 'order', 'parsha_en', 'parsha_he', 'parsha_portion', 'first_reading')
+    list_display = ('book', 'order', 'parsha_en', 'parsha_he', 'parsha_portion', 'readings')
     list_editable = ('order',)
 
 
 admin.site.register(Parsha, ParshaAdmin)
 
 
+class AudioBookAdmin(KAdmin):
+    list_display = ('audio_name', 'audio_file')
+
+
+admin.site.register(AudioBook, AudioBookAdmin)
+
+
 class BookAsArrayAudioAdmin(KAdmin):
-    list_display = ('book', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
-    list_editable = ('start', 'end', 'start_ms', 'end_ms')
+    save_on_top = True
+    list_display = ('book', 'audio', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
+    list_editable = ('audio', 'start', 'end', 'start_ms', 'end_ms')
     search_fields = ('book__book_title_en',)
     actions = [change_to_default]
 
