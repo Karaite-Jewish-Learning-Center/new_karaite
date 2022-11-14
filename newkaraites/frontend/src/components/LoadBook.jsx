@@ -7,9 +7,8 @@ import RightPane from './panes/RightPane';
 import RenderText from './tanakh/RenderText'
 import {makeRandomKey} from '../utils/utils';
 import {useHistory, useParams} from 'react-router-dom';
-import {audioBooksUrl, TRANSFORM_TYPE} from '../constants/constants'
+import {TRANSFORM_TYPE} from '../constants/constants'
 import {storeContext} from "../stores/context";
-import {AudioBookContext} from "../stores/audioBookContext";
 import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
@@ -20,7 +19,6 @@ import {getFirstPart} from "../utils/utils";
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
-    const audioBookStore = useContext(AudioBookContext)
     const message = useContext(messageContext)
     const {book, chapter = 1, verse = 1, intro = ''} = useParams()
 
@@ -29,11 +27,6 @@ const LoadBook = ({type}) => {
 
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
-
-    // load audiobook
-    if(type === 'bible') {
-         audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)
-    }
 
     let history = useHistory()
     const onClosePane = (paneNumber) => {
