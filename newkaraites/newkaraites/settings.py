@@ -205,6 +205,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static-django')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100/'
+
 # config the admin site email
 if DEBUG:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']

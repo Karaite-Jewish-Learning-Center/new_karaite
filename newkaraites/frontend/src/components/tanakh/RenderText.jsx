@@ -6,9 +6,12 @@ import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
-import {versesByBibleBook} from "../../constants/constants";
+import {audioBooksUrl, songsUrl, versesByBibleBook} from "../../constants/constants";
 import {START_AUDIO_BOOK} from "../../constants/constants";
 
+
+const SCROLL_LATENCY_MS = 300
+const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
@@ -33,7 +36,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             })
             // speech synthesis only!
             if (set) setSpeaking(() => true)
-        }, 300)
+        }, SCROLL_LATENCY_MS)
     }
 
     const onTimeUpdate = (currentTime) => {
@@ -45,8 +48,10 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             return
         }
 
-        if (currentTime > end) {
+        if (currentTime + SCROLL_LATENCY_SECONDS > end) {
+            console.log('currentTime', currentTime)
             callFromEnded(false)
+
         }
     }
 
@@ -85,6 +90,9 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
+        if (!audioBookPlaying) {
+            audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)
+        }
         return () => {
             if (audioBookPlaying) {
                 audioBookStore.cancel()
@@ -93,6 +101,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }, [audioBookPlaying])
 
     useEffect(() => {
+
         if (speaking) {
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }

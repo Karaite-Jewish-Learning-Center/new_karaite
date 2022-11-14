@@ -415,7 +415,7 @@ class AudioBook(models.Model):
 
     @mark_safe
     def audiofile(self):
-        return f'<audio controls><source src="{self.audio_file.url}" type="audio/mpeg"></audio>'
+        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audio_file.url}" type="audio/mpeg"></audio>'
 
     class Meta:
         verbose_name_plural = "Audiobooks"
