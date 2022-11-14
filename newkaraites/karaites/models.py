@@ -470,6 +470,11 @@ class BookAsArrayAudio(models.Model):
         minutes_fraction, minutes = modf(hours_fraction * 3600 / 60)
         seconds_fraction, seconds = modf(minutes_fraction * 60)
         milliseconds = int(round(seconds_fraction * 1000, 1))
+
+        if milliseconds == 1000:
+            seconds += 1
+            milliseconds = 0
+
         return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
 
     @mark_safe

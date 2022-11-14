@@ -109,9 +109,10 @@ admin.site.register(AudioBook, AudioBookAdmin)
 
 class BookAsArrayAudioAdmin(KAdmin):
     save_on_top = True
+    list_per_page = 15
     list_display = ('book', 'audio', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
     list_editable = ('audio', 'start', 'end', 'start_ms', 'end_ms')
-    search_fields = ('book__book_title_en',)
+    search_fields = ('book__book__book_title_en',)
     actions = [change_to_default]
 
 
