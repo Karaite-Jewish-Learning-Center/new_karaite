@@ -15,18 +15,18 @@ class AudioBook {
             audio: observable,
             title: observable,
             ready: observable,
-
         })
 
         this.audio = new Audio()
 
-        this.audio.ontimeupdate = (e:Event) => {
+        this.audio.ontimeupdate = () => {
             this.callback(this.audio.currentTime)
         }
 
         this.audio.onended = () => {
             this.cancel()
         }
+
         this.audio.loadeddata = () => {
             if (this.audio.readyState === 4) {
                 this.ready = true
@@ -41,7 +41,8 @@ class AudioBook {
         this.audio.preload = 'auto'
     }
 
-    play = (start: number = 0, callback: Function = () => {}): void => {
+    play = (start: number = 0, callback: Function = () => {
+    }): void => {
         this.callback = callback
         this.audio.currentTime = start
         this.audio.play()

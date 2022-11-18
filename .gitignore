@@ -19,3 +19,5 @@ node_modules/
 /newkaraites/media/songs/
 /newkaraites/media/toc/
 /newkaraites/media/audio-books/
+/newkaraites/config/nginx/local_static_files-1.conf
+/newkaraites/config/nginx/local_static_files.conf

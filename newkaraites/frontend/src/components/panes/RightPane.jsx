@@ -37,11 +37,6 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
         setLanguages([languages[1], languages[0]])
     }
 
-    // const clickToOpen = (item, type, panNumber, e) => {
-    //     store.setRightPaneState(showState, paneNumber)
-    //     refClick(item, 'bible', paneNumber, e)
-    // }
-
     const callOpenBook = (index) => {
         openBook(paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
     }
@@ -182,13 +177,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             </Container>
         )
     }
-
-
-    return (
-        <Container className={classes.container}>
-            <PaneBody/>
-        </Container>
-    )
+    return <PaneBody/>
 }
 
 export default observer(RightPane)

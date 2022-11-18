@@ -6,12 +6,16 @@ import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
-import {audioBooksUrl, songsUrl, versesByBibleBook} from "../../constants/constants";
+import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
 import {START_AUDIO_BOOK} from "../../constants/constants";
-
+import {ErrorBoundary} from 'react-error-boundary'
 
 const SCROLL_LATENCY_MS = 300
 const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
+
+const falBack = (error) => {
+    alert(error.message)
+}
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
@@ -19,6 +23,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const audioBookStore = useContext(AudioBookContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
+    const [audioBookAvailable, setAudioBookAvailable] = useState(false)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
@@ -90,8 +95,14 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
+
         if (!audioBookPlaying) {
-            audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)
+            return (
+                <ErrorBoundary FallbackComponent={falBack}>
+                    {audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)}
+                    {setAudioBookAvailable(true)}
+                </ErrorBoundary>
+            )
         }
         return () => {
             if (audioBookPlaying) {
@@ -125,17 +136,12 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }
     }
 
-    const itemContent = (item, data) => {
-
-        return (
-            <ChapterHeaderVerse
-                data={data}
-                item={item}
-                gridVisibleRange={gridVisibleRange}
-                paneNumber={paneNumber}
-            />
-        )
-    }
+    const itemContent = (item, data) => <ChapterHeaderVerse
+        data={data}
+        item={item}
+        gridVisibleRange={gridVisibleRange}
+        paneNumber={paneNumber}
+    />
 
     return (
         <>
@@ -149,12 +155,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           onAudioBookOnOff={onAudioBookOnOff}
                           audioBookPlaying={audioBookPlaying}
                           isAudioBook={store.isAudioBook(paneNumber)}
+                          audioBookAvailable={audioBookAvailable}
             />
 
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 ref={virtuoso}
-                // initialTopMostItemIndex={3}
+                initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{

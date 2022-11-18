@@ -3,12 +3,13 @@ import {AudiobookBottom} from '../buttons/audiobookBottom';
 import {TextToSpeechButton} from '../buttons/textToSpeechButton';
 
 
-export const IsAudioBook = ({isAudioBook, flip, onAudioBookOnOff, audioBookPlaying, onSpeakOnOffHe}) => {
+export const IsAudioBook = ({isAudioBook, flip, onAudioBookOnOff, audioBookPlaying, onSpeakOnOffHe, audioBookAvailable}) => {
     if (isAudioBook) {
         return (
             <AudiobookBottom
                 onClick={onAudioBookOnOff}
                 onOff={audioBookPlaying}
+                disabled={audioBookAvailable}
             />
         )
     } else {

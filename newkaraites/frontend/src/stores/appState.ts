@@ -2,7 +2,7 @@ import {makeAutoObservable, runInAction, computed, observable} from "mobx"
 import {isABibleBook} from "../utils/utils";
 import {autocompleteUrl} from "../constants/constants";
 import {AUDIO, END_AUDIO_BOOK} from "../constants/constants";
-
+import {toJS} from 'mobx';
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -45,10 +45,12 @@ class AppState {
     getBookChapterVerse = (i: number) => `(${this.panes[i].book} ${this.panes[i].refsChapterVerse[0]}:${this.panes[i].refsChapterVerse[1]})`
 
     getAudioBookStarAndStop = (i: number) => {
-        if (this.panes[i].bookData === undefined || this.panes[i].bookData.length === 0) {
-            return [0, 0]
-        }
-        return JSON.parse(this.panes[i].bookData[this.getCurrentItem(i)][AUDIO])
+        const item = this.getCurrentItem(i)
+        if (this.panes[i].bookData === undefined) return [0, 0]
+        if (this.panes[i].bookData[item] === undefined) return [0, 0]
+        if (this.panes[i].bookData[item].length < 12) return [0, 0]
+
+        return JSON.parse(this.panes[i].bookData[item][AUDIO])
     }
 
     isAudioBook = (i: number) => this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0

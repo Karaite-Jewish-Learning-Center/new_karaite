@@ -21,7 +21,8 @@ const RenderHeader = ({
                           onSpeakOnOffEn,
                           onAudioBookOnOff,
                           audioBookPlaying,
-                          isAudioBook
+                          isAudioBook,
+                          audioBookAvailable
                       }) => {
 
     const store = useContext(storeContext)
@@ -44,8 +45,13 @@ const RenderHeader = ({
                         </Grid>
                         <Grid item xs={1} key={3}>
 
-                            <IsAudioBook isAudioBook={isAudioBook} flip={flip[0]} onAudioBookOnOff={onAudioBookOnOff}
-                                            audioBookPlaying={audioBookPlaying} onSpeakOnOffHe={onSpeakOnOffHe}/>
+                            <IsAudioBook isAudioBook={isAudioBook}
+                                         flip={flip[0]}
+                                         onAudioBookOnOff={onAudioBookOnOff}
+                                         audioBookPlaying={audioBookPlaying}
+                                         onSpeakOnOffHe={onSpeakOnOffHe}
+                                         audioBookAvailable={audioBookAvailable}
+                            />
 
                         </Grid>
                         <Grid item xs={2} key={4}>
@@ -75,9 +81,13 @@ const RenderHeader = ({
                             </Typography>
                         </Grid>
                         <Grid item xs={1} key={8}>
-                             <IsAudioBook isAudioBook={isAudioBook} flip={flip[0]} onAudioBookOnOff={onAudioBookOnOff}
-                                            audioBookPlaying={audioBookPlaying} onSpeakOnOffHe={onSpeakOnOffHe}/>
-
+                            <IsAudioBook isAudioBook={isAudioBook}
+                                         flip={flip[0]}
+                                         onAudioBookOnOff={onAudioBookOnOff}
+                                         audioBookPlaying={audioBookPlaying}
+                                         onSpeakOnOffHe={onSpeakOnOffHe}
+                                         audioBookAvailable={audioBookAvailable}
+                            />
                         </Grid>
                     </>
                 )
