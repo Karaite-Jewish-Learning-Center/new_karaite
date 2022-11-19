@@ -35,8 +35,9 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber}) => {
     }
 
     const onDoubleClick = (i) => {
+        store.setCurrentItem(i, paneNumber)
+        store.setDistance(0, paneNumber)
         store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
-        updateItemDistance(i)
     }
 
     const onClick = (i) => {
@@ -64,7 +65,7 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber}) => {
     useEffect(() => {
         store.setRefsChapterVerse(allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)
-    }, [])
+    }, [allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber])
 
     const ChapterBody = () => {
         switch (lang) {

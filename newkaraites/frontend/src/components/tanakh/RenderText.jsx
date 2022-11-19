@@ -13,7 +13,7 @@ import {ErrorBoundary} from 'react-error-boundary'
 const SCROLL_LATENCY_MS = 300
 const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 
-const falBack = (error) => {
+const fallBack = (error) => {
     alert(error.message)
 }
 
@@ -54,7 +54,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }
 
         if (currentTime + SCROLL_LATENCY_SECONDS > end) {
-            console.log('currentTime', currentTime)
             callFromEnded(false)
 
         }
@@ -98,9 +97,11 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
         if (!audioBookPlaying) {
             return (
-                <ErrorBoundary FallbackComponent={falBack}>
+                <ErrorBoundary FallbackComponent={fallBack}>
                     {audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)}
-                    {setAudioBookAvailable(true)}
+                    <>
+                        {setAudioBookAvailable(true)}
+                    </>
                 </ErrorBoundary>
             )
         }
@@ -119,7 +120,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         return () => {
             speech.cancel()
         }
-    }, [store.getCurrentItem(paneNumber), speaking, paneNumber, speech, store])
+    }, [store.getCurrentItem(paneNumber), speaking, paneNumber, speech])
 
 
     const calculateCurrentChapter = () => {

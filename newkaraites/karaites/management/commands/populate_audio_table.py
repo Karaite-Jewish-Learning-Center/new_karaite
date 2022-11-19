@@ -21,9 +21,9 @@ class Command(BaseCommand):
             i = 1
             for _ in book.book_text:
                 try:
-                    BookAsArrayAudio.objects.get(book=book, chapter=book.chapter, verse=i)
+                    BookAsArrayAudio.objects.get(book=book.book, chapter=book.chapter, verse=i)
                 except BookAsArrayAudio.DoesNotExist:
-                    BookAsArrayAudio.objects.create(book=book,
+                    BookAsArrayAudio.objects.create(book=book.book,
                                                     chapter=book.chapter,
                                                     verse=i
                                                     )

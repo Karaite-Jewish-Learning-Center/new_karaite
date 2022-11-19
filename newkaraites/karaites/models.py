@@ -6,7 +6,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .constants import (LANGUAGES,
                         AUTOCOMPLETE_TYPE,
-                        REF_ERROR_CODE)
+                        REF_ERROR_CODE,
+                        VERSE_TABLE)
 from math import modf
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
@@ -424,7 +425,7 @@ class AudioBook(models.Model):
 
 class BookAsArrayAudio(models.Model):
     """ maps audio to text"""
-    book = models.ForeignKey(BookAsArray,
+    book = models.ForeignKey(Organization,
                              on_delete=models.DO_NOTHING,
                              verbose_name="Book"
                              )
@@ -458,7 +459,7 @@ class BookAsArrayAudio(models.Model):
     end_ms = models.FloatField(default=0.000)
 
     def __str__(self):
-        return self.book.book.book_title_en
+        return self.book.book_title_en
 
     @staticmethod
     def convert_time_to_seconds(time):
@@ -493,8 +494,31 @@ class BookAsArrayAudio(models.Model):
 
     end_format.short_description = 'End'
 
-    def save(self, *args, **kwargs):
+    def get_previous(self, book, chapter, verse):
+        """ get previous record """
+        if verse - 1 > 0:
+            return BookAsArrayAudio.objects.filter(book=book, chapter=chapter, verse=verse - 1).first()
+        else:
+            last_verse = VERSE_TABLE[self.book.book_title_en][chapter - 2]
+            if chapter - 1 > 0:
+                return BookAsArrayAudio.objects.filter(book=book, chapter=previous_chapter, verse=last_verse).first()
+        return self
 
+    def save(self, *args, **kwargs):
+        # fill in the start based on end of previous record
+        if self.start == '00:00:00.000' and self.end != '00:00:00.000':
+            previous = self.get_previous(self.book, self.chapter, self.verse)
+            if previous != self:
+                self.start = previous.end
+                self.audio = previous.audio
+
+        if self.start_ms == 0 and self.end_ms != 0:
+            previous = self.get_previous(self.book, self.chapter, self.verse)
+            if previous != self:
+                self.start_ms = previous.end_ms
+                self.audio = previous.audio
+
+        # fill in the start based on end of previous record
         if self.start != '00:00:00.000' and self.end != '00:00:00.000':
             self.start_ms = self.convert_time_to_seconds(self.start)
             self.end_ms = self.convert_time_to_seconds(self.end)
