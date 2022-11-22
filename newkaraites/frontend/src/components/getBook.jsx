@@ -6,22 +6,24 @@ const PARAGRAPHS = 0
 const BOOK_DETAILS = 1
 
 
-const fetchData = async (paneNumber, store,message,  url, type) => {
+const fetchData = async (paneNumber, store, message, url, type) => {
     try {
         store.setLoading(true)
         const response = await fetch(url)
-
         if (response.ok) {
             const data = await response.json()
             if (type === 'bible') {
                 store.setBookData(data.chapter, paneNumber)
+                store.setBookDetails(data.book, paneNumber)
             } else {
                 store.setParagraphs(data[PARAGRAPHS], paneNumber)
+                // todo:check this code - is it working ?
                 store.setBookDetails(data[BOOK_DETAILS], paneNumber)
             }
             store.setLoading(false)
         }
-    } catch (e) {
+    } catch
+        (e) {
         message.setMessage("Error: " + e.message)
     } finally {
         store.setLoading(false)
@@ -38,10 +40,11 @@ const getBook = async (book, chapter, verse, highlight, type, store, message) =>
                 chapter: parseInt(chapter) - 1,
                 verse: verse,
                 bookData: [],
+                book_details: [],
                 highlight: [],
                 type: type,
                 verseData: [],
-                refsChapterVerse: [0,0],
+                refsChapterVerse: [0, 0],
                 isRightPaneOpen: false,
                 references: [],
                 distance: 0,
@@ -50,7 +53,7 @@ const getBook = async (book, chapter, verse, highlight, type, store, message) =>
                 rightPaneStateHalakhah: 1,
                 languages: ['en_he', 'he', 'en'],
             })
-           devLog('Item '+calculateItemNumber(book, chapter, verse))
+            devLog('Item ' + calculateItemNumber(book, chapter, verse))
             url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
 
         } else {

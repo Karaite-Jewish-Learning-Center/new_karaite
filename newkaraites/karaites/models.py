@@ -136,6 +136,7 @@ class Organization(models.Model):
                 'chapters': self.chapters,
                 'verses': self.verses,
                 'total_verses': self.total_verses,
+                'audio_books': BookAsArrayAudio.get_audio_list(self.id),
                 }
 
     def to_book_list(self):
@@ -221,7 +222,8 @@ class BookAsArray(models.Model):
     # 9 [Halakhah Hebrew, Liturgy Hebrew, Poetry Hebrew, Exhortatory Hebrew Comments Hebrew],
     # 10 [Halakhah English, Liturgy English, Poetry English, Exhortatory English Comments English],
     # 10 Halakhah English
-    # 11 [start_ms, end_ms]  hebrew audio start and end time in milliseconds, [0,0] means no audio book
+    # 11 [start_ms, end_ms, id]  hebrew audio start and end time in milliseconds, [0,0,0] means no audio book
+    #     id is audio file id in AudioBooks table
     # ...]
 
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
@@ -493,6 +495,17 @@ class BookAsArrayAudio(models.Model):
         return '{0:10.3f}'.format(self.end_ms)
 
     end_format.short_description = 'End'
+
+    @staticmethod
+    def get_audio_list(book):
+        """ get the audio list for a book"""
+        distinct = {}
+        for query in BookAsArrayAudio.objects.filter(book=book):
+            if query.audio is None:
+                continue
+            distinct[query.audio.id] = query.audio.audio_file.name
+        print(distinct)
+        return distinct
 
     def get_previous(self, book, chapter, verse):
         """ get previous record """

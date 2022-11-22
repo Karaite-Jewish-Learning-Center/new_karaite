@@ -18,17 +18,24 @@ class Command(BaseCommand):
         """ Update audio bible books start and stop times """
 
         for book_chapter in BookAsArray.objects.all().order_by('book', 'chapter'):
+            # print feed back in same line
+            print(f' Processing book:{book_chapter.book.book_title_en}  chapter:{book_chapter.chapter}            ', end='\r')
+
             i = 1
             chapter = []
             for verse in book_chapter.book_text:
 
                 try:
-                    query = BookAsArrayAudio.objects.get(book=book_chapter, verse=i)
-                    audio = [query.start_ms, query.end_ms]
+                    query = BookAsArrayAudio.objects.get(book=book_chapter.book,
+                                                         chapter=book_chapter.chapter,
+                                                         verse=i)
+                    if query.start_ms == 0 and query.end_ms == 0:
+                        audio = [0, 0, 0]
+                    else:
+                        audio = [query.start_ms, query.end_ms, query.audio.id]
                 except BookAsArrayAudio.DoesNotExist:
-                    audio = [0, 0]
+                    audio = [0, 0, 0]
 
-                print(len(verse))
                 if len(verse) > 11:
                     tmp = list(verse)
                     tmp[11] = audio

@@ -6,8 +6,7 @@ class AudioBook {
     audio: any = null
     title: string = ''
     ready: boolean = false
-    callback: Function = () => {
-    }
+    callback: Function = () => {}
     loading: boolean = false
 
     constructor() {
@@ -41,8 +40,7 @@ class AudioBook {
         this.audio.preload = 'auto'
     }
 
-    play = (start: number = 0, callback: Function = () => {
-    }): void => {
+    play = (start: number = 0, callback: Function = () => {}): void => {
         this.callback = callback
         this.audio.currentTime = start
         this.audio.play()

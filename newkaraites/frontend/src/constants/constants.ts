@@ -20,12 +20,12 @@ let songs: string
 
 if (process.env.NODE_ENV === 'development') {
     api = 'http://localhost:8000/api/v1/'
-    audioBook = 'http://localhost:8100/audio-books/'
+    audioBook = 'http://localhost:8100/'
     songs = 'http://localhost:8100/songs/'
 
 } else {
     api = 'https://kjlc.karaites.org/api/v1/'
-    audioBook = 'http://localhost:8100/audio-books/'
+    audioBook = 'http://localhost:8100/'
     songs = 'http://localhost:8100/songs/'
     //api = 'http://dev.karaites.org/api/v1/'
 }
@@ -49,7 +49,7 @@ export const EXHORTATORY: string = '11'
 export const AUDIO = 11
 export const START_AUDIO_BOOK = 0
 export const END_AUDIO_BOOK = 1
-
+export const AUDIO_BOOK_ID = 2
 
 export const TRANSFORM_TYPE: string = 'Bible'
 

@@ -8,14 +8,14 @@ import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
 import {START_AUDIO_BOOK} from "../../constants/constants";
-import {ErrorBoundary} from 'react-error-boundary'
+//import {ErrorBoundary} from 'react-error-boundary'
 
 const SCROLL_LATENCY_MS = 300
 const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 
-const fallBack = (error) => {
-    alert(error.message)
-}
+// const fallBack = (error) => {
+//     alert(error.message)
+//}
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
@@ -27,8 +27,8 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    const virtuoso = useRef(null)
 
+    const virtuoso = useRef(null)
 
     const callFromEnded = (set = true) => {
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
@@ -55,12 +55,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
         if (currentTime + SCROLL_LATENCY_SECONDS > end) {
             callFromEnded(false)
-
         }
     }
 
     const onAudioBookOnOff = () => {
         if (!audioBookPlaying) {
+            const audioFile = store.getBookAudioFile(paneNumber)
+            audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
             setAudioBookPlaying(() => true)
             audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate)
         } else {
@@ -95,16 +96,16 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     useEffect(() => {
 
-        if (!audioBookPlaying) {
-            return (
-                <ErrorBoundary FallbackComponent={fallBack}>
-                    {audioBookStore.load(`${audioBooksUrl}${book}.mp3`, book)}
-                    <>
-                        {setAudioBookAvailable(true)}
-                    </>
-                </ErrorBoundary>
-            )
-        }
+        // if (!audioBookPlaying) {
+        //     return (
+        //         <ErrorBoundary FallbackComponent={fallBack}>
+        //             {audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)}
+        //             <>
+        //                 {setAudioBookAvailable(true)}
+        //             </>
+        //         </ErrorBoundary>
+        //     )
+        // }
         return () => {
             if (audioBookPlaying) {
                 audioBookStore.cancel()
@@ -143,6 +144,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         gridVisibleRange={gridVisibleRange}
         paneNumber={paneNumber}
     />
+
 
     return (
         <>

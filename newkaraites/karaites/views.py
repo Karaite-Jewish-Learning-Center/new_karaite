@@ -206,7 +206,7 @@ class AudioBook(View):
 
     @staticmethod
     def get(request, *args, **kwargs):
-        book_id = kwargs.get('book', None)
+        book_id = kwargs.get(' ', None)
         if book_id is None:
             return JsonResponse(data={'status': 'false', 'message': _('Need a book id.')}, status=400)
 
