@@ -501,6 +501,7 @@ class BookAsArrayAudio(models.Model):
         else:
             last_verse = VERSE_TABLE[self.book.book_title_en][chapter - 2]
             if chapter - 1 > 0:
+                previous_chapter = chapter - 1
                 return BookAsArrayAudio.objects.filter(book=book, chapter=previous_chapter, verse=last_verse).first()
         return self
 
@@ -510,13 +511,15 @@ class BookAsArrayAudio(models.Model):
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start = previous.end
-                self.audio = previous.audio
+                if previous.audio is not None:
+                    self.audio = previous.audio
 
         if self.start_ms == 0 and self.end_ms != 0:
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start_ms = previous.end_ms
-                self.audio = previous.audio
+                if previous.audio is not None:
+                    self.audio = previous.audio
 
         # fill in the start based on end of previous record
         if self.start != '00:00:00.000' and self.end != '00:00:00.000':

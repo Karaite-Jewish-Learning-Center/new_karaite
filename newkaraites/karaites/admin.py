@@ -38,7 +38,7 @@ class KAdmin(admin.ModelAdmin):
 # actions
 @admin.action(description='Change selected to default values.')
 def change_to_default(modeladmin, request, queryset):
-    queryset.update(start='00:00:00.000', end='00:00:00.000', start_ms=0, end_ms=0)
+    queryset.update(audio=None, start='00:00:00.000', end='00:00:00.000', start_ms=0, end_ms=0)
 
 
 class FirstLevelAdmin(KAdmin):
