@@ -31,19 +31,19 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const apiUrl = api
-export const apiUrlNoSlash = api.replace('/api/v1/', '')
+//export const apiUrlNoSlash = api.replace('/api/v1/', '')
 
 export const audioBooksUrl = audioBook
 export const songsUrl = songs
 
 // first level  see constants.py
-export const TANAKH: string = '1'
-export const HALAKHAH: string = '3'
-export const LITURGY: string = '4'
-export const POLEMIC: string = '5'
-export const COMMENTS: string = '8'
-export const POETRY: string = '9'
-export const EXHORTATORY: string = '11'
+// export const TANAKH = '1'
+// export const HALAKHAH = '3'
+// export const LITURGY = '4'
+// export const POLEMIC = '5'
+// export const COMMENTS = '8'
+// export const POETRY = '9'
+// export const EXHORTATORY = '11'
 
 // audio position in book data, see models.py
 export const AUDIO = 11
@@ -55,44 +55,36 @@ export const TRANSFORM_TYPE: string = 'Bible'
 
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 
-//export const bookListUrl: string = apiUrl + 'books-list/'
-//export const bookTextUrl: string = apiUrl + 'get-book/'
-export const bookChapterUrl: string = apiUrl + 'get-book-chapter/'
-//export const bookFromRef: string = apiUrl + 'get-book-from-ref/'
-//export const getCommentsUrl: string = apiUrl + 'get-comments/'
-//export const getFirstLevelUrl: string = apiUrl + 'get-first-level/'
-export const karaitesBookUrl: string = apiUrl + 'get-karaites-book-chapter/'
-//export const karaitesBookDetailsUrl: string = apiUrl + 'get-karaites-book-details/'
-//export const karaitesBookByLevel: string = apiUrl + 'get-karaites-books-by-level/'
-export const karaitesBookByLevelAndClassification: string = apiUrl + 'get-karaites-books-by-level-and-classification/'
-//export const karaitesBookToc: string = apiUrl + 'get-karaites-book-toc/'
-//export const referencesUrl: string = apiUrl + 'get-references/'
-export const autocompleteUrl: string = apiUrl + 'autocomplete/'
-export const searchResultsUrl: string = apiUrl + 'search/'
-export const getLevels: string = apiUrl + 'get-first-level/'
-export const getBibleReferencesUrl: string = apiUrl + 'get-bible-references/'
+export const bookChapterUrl = apiUrl + 'get-book-chapter/'
+export const getFirstLevelUrl: string = apiUrl + 'get-first-level/'
+export const karaitesBookUrl = apiUrl + 'get-karaites-book-chapter/'
+export const karaitesBookDetailsUrl: string = apiUrl + 'get-karaites-book-details/'
+export const karaitesBookByLevel: string = apiUrl + 'get-karaites-books-by-level/'
+export const karaitesBookByLevelAndClassification = apiUrl + 'get-karaites-books-by-level-and-classification/'
+export const karaitesBookToc: string = apiUrl + 'get-karaites-book-toc/'
+/export const referencesUrl: string = apiUrl + 'get-references/'
+export const autocompleteUrl = apiUrl + 'autocomplete/'
+export const searchResultsUrl = apiUrl + 'search/'
+export const getLevels = apiUrl + 'get-first-level/'
+export const getBibleReferencesUrl = apiUrl + 'get-bible-references/'
 
 // there will be more languages as project evolves
-export const LANGUAGE: numberString = {0: 'en', 1: 'he', 2: 'en_he'}
 export const LANGUAGE_KEY: stringNumber = {'en': 0, 'he': 1, 'en_he': 2}
 export const LANGUAGE_SYMBOL: numberString = {0: 'A', 1: '\u2135', 2: 'A\u2135'}
 
 // export const ENGLISH: number = 0
-export const HEBREW: number = 1
+// export const HEBREW = 1
 
-export const BIBLE_ENGLISH: number = 0
-export const BIBLE_HEBREW: number = 1
-export const BIBLE_VERSE: number = 4
-export const BIBLE_CHAPTER: number = 5
-export const BIBLE_RENDER_CHAPTER: number = 6
-//export const BIBLE_REFS: number = 7
-export const REFS_HE: number = 7
-export const REFS_EN: number = 8
-// export const BOOK_CHAPTERS: number = 0
-// export const BOOK_DATA: number = 1
+export const BIBLE_ENGLISH = 0
+export const BIBLE_HEBREW = 1
+export const BIBLE_VERSE = 4
+export const BIBLE_CHAPTER = 5
+export const BIBLE_RENDER_CHAPTER = 6
+export const REFS_HE = 7
+export const REFS_EN = 8
 
 // this value is define in the views.py if changed there must be changed here too.
-export const ITEMS_PER_PAGE: number = 15
+export const ITEMS_PER_PAGE = 15
 
 // export const LOADING_TEXT: string = 'Loading...'
 
