@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef, FC, MouseEventHandler} from 'react'
+import React, {useContext, useState, useRef, FC} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import {Virtuoso} from 'react-virtuoso'
 import {TableVirtuoso} from 'react-virtuoso'
@@ -23,11 +23,11 @@ const HEBREW = 2
 
 interface KaraitesBooksInterface {
     paneNumber: number,
-    refClick: MouseEventHandler,
+    refClick: Function,
     paragraphs: Array<any>,
     details: any,
     type: string,
-    onClosePane: MouseEventHandler,
+    onClosePane: Function,
     jumpToIntro: boolean,
 }
 
@@ -51,17 +51,11 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
     const classes = useStyles()
     const virtuoso = useRef(null);
 
-    const onIntroClick = () => {
-        setFlags([false, false, true])
-    }
+    const onIntroClick = () => setFlags([false, false, true])
 
-    const onTocClick = () => {
-        setFlags([false, true, false])
-    }
+    const onTocClick = () => setFlags([false, true, false])
 
-    const onBookClick = () => {
-        setFlags([true, false, false])
-    }
+    const onBookClick = () => setFlags([true, false, false])
 
     const onButtonClick = (starParagraph: number) => {
         setFlags([true, false, false])

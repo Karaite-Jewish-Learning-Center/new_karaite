@@ -29,3 +29,11 @@ export interface booksMenu {
     readonly [index: string]: booksObj
 }
 
+export type BookType = 'bible' | 'karaites'
+
+export interface BibleReference {
+    refBook: string,
+    refChapter: number,
+    refVerse: number,
+    refHighlight: number[]
+}

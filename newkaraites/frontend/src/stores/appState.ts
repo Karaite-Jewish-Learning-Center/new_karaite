@@ -92,7 +92,7 @@ class AppState {
     }
 
     // panes
-    setPanes = (pane: number): void => {
+    setPanes = (pane: object): void => {
         runInAction(() => {
             this.panes = [...this.panes, pane]
         })
@@ -146,10 +146,10 @@ class AppState {
     }
 
     getBookAudioFile = (i: number): string => {
-        if(this.panes[i].book_details === undefined || this.panes[i].book_details.length === 0  ) return ''
+        if (this.panes[i].book_details === undefined || this.panes[i].book_details.length === 0) return ''
         const id = this.getAudioBookStarAndStop(i)[AUDIO_BOOK_ID]
-        if(id === 0) return ''
-        console.log('audi name', toJS( this.panes[i].book_details.audio_books[id]))
+        if (id === 0) return ''
+        console.log('audi name', toJS(this.panes[i].book_details.audio_books[id]))
         return this.panes[i].book_details.audio_books[id]
     }
 
