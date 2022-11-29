@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState, FC} from "react";
 import {AudioBookContext} from "../../../stores/audioBookContext";
 import {messageContext} from "../../../stores/messages/messageContext";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,8 +7,12 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 import {songsUrl} from "../../../constants/constants";
 
+interface SongProps {
+    song: {'song_file':string, song_title:string}[];
+    index: number;
+}
 
-export const BasicAudioPlayer = ({song, index}) => {
+export const BasicAudioPlayer:FC<SongProps> = ({song, index}) => {
 
     const message = useContext(messageContext);
     const audioBookStore = useContext(AudioBookContext)
@@ -58,7 +62,7 @@ export const BasicAudioPlayer = ({song, index}) => {
         return () => {
             audioBookStore.stop()
         }
-    }, [index])
+    }, [index, song, audioBookStore])
 
     return (
         <span>

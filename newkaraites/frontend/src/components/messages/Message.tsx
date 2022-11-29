@@ -5,10 +5,6 @@ import {observer} from 'mobx-react-lite';
 import {messageContext} from "../../stores/messages/messageContext";
 import MuiAlert from '@material-ui/lab/Alert';
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 const Message = () => {
     const messageStore = useContext(messageContext);
     const classes = useStyles();
@@ -25,9 +21,9 @@ const Message = () => {
                 autoHideDuration={duration}
                 onClose={handleClose}
                 anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
-                <Alert onClose={handleClose} severity={level}>
+                <MuiAlert elevation={6} variant="filled" onClose={handleClose} severity={level}>
                     {message}
-                </Alert>
+                </MuiAlert>
             </Snackbar>
         </div>
     );

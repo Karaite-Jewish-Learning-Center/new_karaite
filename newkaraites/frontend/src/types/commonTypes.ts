@@ -37,3 +37,5 @@ export interface BibleReference {
     refVerse: number,
     refHighlight: number[]
 }
+
+export type  MessageReason = 'error' | 'warning' | 'info' | 'success' | 'search'

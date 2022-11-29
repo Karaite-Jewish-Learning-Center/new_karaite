@@ -40,7 +40,7 @@ test('Compare 2 arrays returns false if values are !==', () => {
     expect(equals([1, 2, 4], [1, 2, 3])).toBeFalsy()
 })
 
-test('Compare 2 arrays may not be nested, always return false ', () => {
+test('Compare 2 arrays may not be nested, always return false', () => {
     expect(equals([1, 2, [3]], [1, 2, 3])).toBeFalsy()
 })
 
@@ -48,7 +48,7 @@ test('slug replaces spaces with -', () => {
     expect(slug('1 2 3')).toEqual('1-2-3')
 })
 
-test('unslug replaces - with spaces ', () => {
+test('unslug replaces - with spaces', () => {
     expect(unslug('1-2-3')).toEqual('1 2 3')
 })
 
@@ -69,8 +69,8 @@ test('Normalize bible books name', () => {
 })
 
 test('Calculate item number for a biblical book', () => {
-    expect(calculateItemNumber('genesis', '2', '1')).toBe(31)
-    expect(calculateItemNumber('I-kings','10','10')).toBe(371)
+    expect(calculateItemNumber('genesis', 2, 1)).toBe(31)
+    expect(calculateItemNumber('I-kings',10,10)).toBe(371)
     // expect(calculateItemNumber('unknown','10','10')).toBe(371)
 })
 

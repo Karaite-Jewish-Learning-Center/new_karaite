@@ -38,7 +38,7 @@ const FirstLevel = () => {
     return (
         <div className={classes.root}>
             <Grid container item xl={6} lg={6} md={6} sm={6} xs={12}
-                  justifycontent="center"
+                  justifyContent="center"
                   alignItems="center"
                   spacing={1}
                   className={classes.grid}

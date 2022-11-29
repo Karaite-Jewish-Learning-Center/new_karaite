@@ -17,7 +17,6 @@ Loading.defaultProps = {
 
 const useStyles = makeStyles(() => ({
     loading: {
-
         display: 'flex',
         justifyContent: 'center',
     }

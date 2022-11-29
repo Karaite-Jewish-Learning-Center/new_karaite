@@ -1,12 +1,13 @@
 import {calculateItemNumber, makeBookUrl} from '../utils/utils';
 import {bookChapterUrl, chaptersByBibleBook, karaitesBookUrl} from '../constants/constants';
+import {BookType} from '../types/commonTypes';
 import {devLog} from "./messages/devLog";
 
 const PARAGRAPHS = 0
 const BOOK_DETAILS = 1
 
 
-const fetchData = async (paneNumber: number, store: any, message: any, url: string, type: 'bible' | 'karaites') => {
+const fetchData = async (paneNumber: number, store: any, message: any, url: string, type:BookType) => {
     try {
         store.setLoading(true)
         const response = await fetch(url)
@@ -30,7 +31,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
     }
 }
 
-const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: 'bible' | 'karaites', store: any, message: any) => {
+const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: BookType, store: any, message: any) => {
     debugger
     let url = ''
     if (!store.isPaneOpen(book, chapter, verse)) {
