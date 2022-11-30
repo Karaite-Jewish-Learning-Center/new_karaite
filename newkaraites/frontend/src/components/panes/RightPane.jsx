@@ -37,7 +37,6 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
 
     const callOpenBook = (index) => openBook(paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
 
-
     const onClose = () => {
         store.setDistance(0, paneNumber)
         store.setRightPaneState([], paneNumber)

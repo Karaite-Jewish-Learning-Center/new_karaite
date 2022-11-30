@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC, MouseEventHandler} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
@@ -6,10 +6,15 @@ import CloseIcon from '@material-ui/icons/Close';
 import Container from "@material-ui/core/Container";
 import LanguageButtonReferences from "../buttons/LanguageButtonReferences";
 
+interface HeaderProps {
+    backButton: MouseEventHandler,
+    onClose: MouseEventHandler,
+    onClick:MouseEventHandler,
+    language: string
+}
 
-const Header = ({backButton, onClose, onClick, language}) => {
+const Header:FC<HeaderProps> = ({backButton, onClose, onClick, language}) => {
     const classes = useStyles()
-
 
     return (<Container className={classes.container}>
             <span>

@@ -12,14 +12,14 @@ import {BookButton} from '../buttons/BookButton';
 import {BuyButton} from '../buttons/BuyButton';
 import {MusicSelect} from '../buttons/music-select';
 import {iOS} from '../../utils/utils';
-
+import {ClosePanes, PaneNumber} from '../../types/commonTypes';
 
 interface IProps {
     paneNumber: number,
-    onClosePane: Function
-    onIntroClick: Function,
-    onTocClick: Function,
-    onBookClick: Function,
+    onClosePane: ClosePanes,
+    onIntroClick: PaneNumber
+    onTocClick: PaneNumber,
+    onBookClick: PaneNumber,
     details: any,
 }
 
@@ -81,7 +81,7 @@ const KaraitesPaneHeader: FC<IProps> = ({
 const useStyles = makeStyles({
     resources: {
         minHeight: 50,
-        padding:0,
+        padding: 0,
         paddingTop: (iOS() ? 50 : 0),
         marginRight: 0,
     },

@@ -39,7 +39,7 @@ class AudioBook {
         this.audio.src = url
         this.audio.preload = 'auto'
     }
-
+    // better this Function=() => void
     play = (start: number = 0, callback: Function = () => {}): void => {
         this.callback = callback
         this.audio.currentTime = start

@@ -23,7 +23,7 @@ interface BooksProps {
 interface RenderRight {
     isOpen: boolean,
     paneNumber: number,
-    openBook: Function
+    openBook: (paneNumber: number, refBook: string, refChapter: number, refVerse: number, refHighlight: number[]) => void,
 }
 
 interface Params {
@@ -78,7 +78,7 @@ const LoadBook: FC<BooksProps> = ({type}) => {
         }
     }
 
-    const openBook = (paneNumber: number, refBook: string, refChapter: number, refVerse: number, refHighlight: any[]) => {
+    const openBook = (paneNumber: number, refBook: string, refChapter: number, refVerse: number, refHighlight: number[]) => {
         try {
             getBook(refBook, refChapter, refVerse, refHighlight, 'karaites', store, message).then().catch()
         } catch (e) {

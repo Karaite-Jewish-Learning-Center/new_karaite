@@ -10,6 +10,7 @@ import {TRANSFORM_TYPE} from '../../constants/constants'
 import parse from 'html-react-parser'
 import {storeContext} from "../../stores/context";
 import {Button} from '@material-ui/core';
+import {ClosePanes, RefClick} from '../../types/commonTypes';
 
 const BOOK = 0
 const TOC = 1
@@ -23,11 +24,11 @@ const HEBREW = 2
 
 interface KaraitesBooksInterface {
     paneNumber: number,
-    refClick: Function,
+    refClick: RefClick,
     paragraphs: Array<any>,
     details: any,
     type: string,
-    onClosePane: Function,
+    onClosePane: ClosePanes,
     jumpToIntro: boolean,
 }
 

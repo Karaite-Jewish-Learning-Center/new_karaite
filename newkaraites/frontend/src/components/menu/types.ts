@@ -25,3 +25,4 @@ export type bookDetails = {
     'buy_link': string,
     'index_lag': boolean,
 }
+
