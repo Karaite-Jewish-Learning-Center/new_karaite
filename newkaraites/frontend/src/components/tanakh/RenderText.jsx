@@ -8,14 +8,10 @@ import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
 import {START_AUDIO_BOOK} from "../../constants/constants";
-//import {ErrorBoundary} from 'react-error-boundary'
 
 const SCROLL_LATENCY_MS = 300
 const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 
-// const fallBack = (error) => {
-//     alert(error.message)
-//}
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
@@ -23,7 +19,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const audioBookStore = useContext(AudioBookContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
-    const [audioBookAvailable, setAudioBookAvailable] = useState(false)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
@@ -95,17 +90,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
-
-        // if (!audioBookPlaying) {
-        //     return (
-        //         <ErrorBoundary FallbackComponent={fallBack}>
-        //             {audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)}
-        //             <>
-        //                 {setAudioBookAvailable(true)}
-        //             </>
-        //         </ErrorBoundary>
-        //     )
-        // }
         return () => {
             if (audioBookPlaying) {
                 audioBookStore.cancel()
@@ -158,7 +142,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           onAudioBookOnOff={onAudioBookOnOff}
                           audioBookPlaying={audioBookPlaying}
                           isAudioBook={store.isAudioBook(paneNumber)}
-                          audioBookAvailable={audioBookAvailable}
             />
 
             <Virtuoso

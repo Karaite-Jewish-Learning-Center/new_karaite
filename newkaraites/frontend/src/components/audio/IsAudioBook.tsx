@@ -8,11 +8,7 @@ interface AudioBookProps {
     onAudioBookOnOff: MouseEventHandler;
     audioBookPlaying: boolean;
     onSpeakOnOffHe: MouseEventHandler;
-    audioBookAvailable: boolean;
 }
-
-
-// todo: audioBookAvailable is needed ?
 
 export const IsAudioBook: FC<AudioBookProps> = ({
                                                     isAudioBook,
@@ -20,7 +16,6 @@ export const IsAudioBook: FC<AudioBookProps> = ({
                                                     onAudioBookOnOff,
                                                     audioBookPlaying,
                                                     onSpeakOnOffHe,
-                                                    audioBookAvailable
                                                 }) =>
     (isAudioBook ?
             <AudiobookBottom onClick={onAudioBookOnOff} onOff={audioBookPlaying} />

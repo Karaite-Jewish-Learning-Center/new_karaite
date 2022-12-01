@@ -22,7 +22,6 @@ const RenderHeader = ({
                           onAudioBookOnOff,
                           audioBookPlaying,
                           isAudioBook,
-                          audioBookAvailable
                       }) => {
 
     const store = useContext(storeContext)
@@ -50,7 +49,6 @@ const RenderHeader = ({
                                          onAudioBookOnOff={onAudioBookOnOff}
                                          audioBookPlaying={audioBookPlaying}
                                          onSpeakOnOffHe={onSpeakOnOffHe}
-                                         audioBookAvailable={audioBookAvailable}
                             />
 
                         </Grid>
@@ -86,7 +84,6 @@ const RenderHeader = ({
                                          onAudioBookOnOff={onAudioBookOnOff}
                                          audioBookPlaying={audioBookPlaying}
                                          onSpeakOnOffHe={onSpeakOnOffHe}
-                                         audioBookAvailable={audioBookAvailable}
                             />
                         </Grid>
                     </>

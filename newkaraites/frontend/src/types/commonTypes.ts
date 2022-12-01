@@ -41,8 +41,11 @@ export interface BibleReference {
 
 export type ClosePanes = (paneNumber: number) => void
 
+
 export type RefClick = (item: any, kind: BookType, paneNumber: number, e: Event) => void
 
 export type PaneNumber = (paneNumber: number) => void
 
 export type  MessageReason = 'error' | 'warning' | 'info' | 'success' | 'search'
+
+export type CallBack = (() => void) | ((n:number) => void)
