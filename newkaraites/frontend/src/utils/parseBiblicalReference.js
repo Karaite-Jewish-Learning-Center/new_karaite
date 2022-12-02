@@ -7,10 +7,10 @@ export const parseHebrewRef = (biblicalRef) => {
     let chapterVerseBook = matchHebrewBookName(biblicalRef)
     if (chapterVerseBook.length < 2) {
         return {
-            refBook: null,
-            refChapter: null,
-            refVerse: null,
-            refHighlight: null
+            refBook: '',
+            refChapter: 0,
+            refVerse: 0,
+            refHighlight: []
         }
     }
 

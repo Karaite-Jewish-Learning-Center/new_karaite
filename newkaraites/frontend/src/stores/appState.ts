@@ -30,7 +30,7 @@ class AppState {
 
     }
 
-    setIsRightPaneOpen = (state: boolean, paneNumber: number): void => {
+    setIsRightPaneOpen = (state: boolean, paneNumber: number) => {
         this.panes[paneNumber].isRightPaneOpen = state
     }
 
@@ -38,7 +38,7 @@ class AppState {
         return this.panes[paneNumber].isRightPaneOpen
     }
 
-    setRefsChapterVerse = (chapter: number, verse: number, paneNumber: number): void => {
+    setRefsChapterVerse = (chapter: number, verse: number, paneNumber: number) => {
         this.panes[paneNumber].refsChapterVerse = [chapter, verse]
     }
 
@@ -57,7 +57,7 @@ class AppState {
 
     getBook = (i: number): string => this.panes[i].book
 
-    setVerseData = (data: Array<any>, i: number): void => {
+    setVerseData = (data: Array<any>, i: number) => {
         runInAction(() => {
             this.panes[i].verseData = data
         })
@@ -65,13 +65,13 @@ class AppState {
 
     getVerseData = (i: number): Array<any> => this.panes[i].verseData
 
-    setBookData = (data: Array<any>, i: number): void => {
+    setBookData = (data: Array<any>, i: number) => {
         this.panes[i].bookData = [...this.panes[i].bookData, ...data]
     }
 
     getBookData = (i: number): Array<any> => this.panes[i].bookData
 
-    setDistance = (distance: number, i: number): void => {
+    setDistance = (distance: number, i: number) => {
         this.panes[i].distance = distance
     }
 
@@ -87,12 +87,12 @@ class AppState {
     getCurrentItem = (i: number): number => this.panes[i].currentItem
 
     // right pane bible references
-    setRightPaneState = (state: boolean, i: number): void => {
+    setRightPaneState = (state: boolean, i: number) => {
         this.panes[i].rightPaneState = state
     }
 
     // panes
-    setPanes = (pane: number): void => {
+    setPanes = (pane: object) => {
         runInAction(() => {
             this.panes = [...this.panes, pane]
         })
@@ -105,37 +105,36 @@ class AppState {
         return this.panes.length === 0
     }
 
-    isPaneOpen = (book: string, chapter: number, verse: number): boolean =>
+    isPaneOpen = (book: string, chapter: number, verse: number) =>
         this.getPanes().some((pane) => pane.book === book && pane.chapter === chapter - 1 && pane.verse === verse)
 
-    closePane = (i: number): void => {
+    closePane = (i: number) => {
         runInAction(() => {
             this.panes.splice(i, 1)
         })
     }
 
-    resetPanes = (): void => {
+    resetPanes = () => {
         this.panes = []
     }
     // loading
-
-    setLoading = (loading: boolean): void => {
+    setLoading = (loading: boolean) => {
         runInAction(() => {
             this.loading = loading
         })
-
     }
-    getLoading = (): boolean => this.loading
+
+    getLoading = () => this.loading
 
     // karaites books
-    setParagraphs = (paragraphs: Array<any>, i: number): void => {
+    setParagraphs = (paragraphs: Array<any>, i: number) => {
         // this.panes[i].paragraphs = [...this.panes[i].paragraphs, ...paragraphs]
         this.panes[i].paragraphs = paragraphs
     }
 
     getParagraphs = (i: number): Array<any> => this.panes[i].paragraphs
 
-    setBookDetails = (details: object, i: number): void => {
+    setBookDetails = (details: object, i: number) => {
         runInAction(() => {
             this.panes[i].book_details = details
         })
@@ -146,21 +145,21 @@ class AppState {
     }
 
     getBookAudioFile = (i: number): string => {
-        if(this.panes[i].book_details === undefined || this.panes[i].book_details.length === 0  ) return ''
+        if (this.panes[i].book_details === undefined || this.panes[i].book_details.length === 0) return ''
         const id = this.getAudioBookStarAndStop(i)[AUDIO_BOOK_ID]
-        if(id === 0) return ''
-        console.log('audi name', toJS( this.panes[i].book_details.audio_books[id]))
+        if (id === 0) return ''
+        console.log('audi name', toJS(this.panes[i].book_details.audio_books[id]))
         return this.panes[i].book_details.audio_books[id]
     }
 
     // search arg
-    setSearch = (searchArg: string): void => {
+    setSearch = (searchArg: string) => {
         this.search = searchArg
         this.searchResultData = []
         this.moreResults = true
     }
 
-    getSearch = (): string => this.search
+    getSearch = () => this.search
 
     // search result
     setSearchResultData = (result: Array<string>): Array<string> =>
@@ -170,14 +169,13 @@ class AppState {
 
     // search page
     // autocomplete communicates with searchResult
-    setMoreResults = (more: boolean): void => {
+    setMoreResults = (more: boolean) => {
         this.moreResults = more
     }
-    getMoreResults = (): boolean => this.moreResults
-
+    getMoreResults = () => this.moreResults
 
     // autocomplete
-    setOptions = (options: Array<string>): void => {
+    setOptions = (options: Array<string>) => {
         this.options = options
     }
 
@@ -190,12 +188,13 @@ class AppState {
         this.setOptions(await response.json())
     }
 
-
     // language
-    setLanguage = (language: string, i: number): void => {
+    setLanguage = (language: string, i: number) => {
         this.panes[i].languages = language
     }
+
     getLanguage = (i: number): string => this.panes[i].languages[0]
+    
     nextLanguage = (i: number): Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
 
 }
@@ -203,6 +202,5 @@ class AppState {
 const appStore = () => {
     return new AppState()
 }
-
 
 export default appStore

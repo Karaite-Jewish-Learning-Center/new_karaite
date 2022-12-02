@@ -911,7 +911,8 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def to_json(book_title_unslug):
-        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
+        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug,
+                                                  published=True)
         toc = TableOfContents.objects.filter(karaite_book=details)
         return details.to_dic(details, toc)
 

@@ -1,8 +1,12 @@
-import React,{useContext} from "react"
+import React,{useContext, FC} from "react"
 import {messageContext} from "../../stores/messages/messageContext";
+import {MessageReason} from "../../types/commonTypes";
 
+interface Props {
+    reason: MessageReason
+}
 
-export const Please =({reason})=> {
+export const Please:FC<Props> =({reason})=> {
     const message = useContext(messageContext)
     switch (reason) {
         case "search":

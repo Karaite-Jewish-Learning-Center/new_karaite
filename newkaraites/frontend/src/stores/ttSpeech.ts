@@ -53,6 +53,7 @@ class TextToSpeech {
 
     getIndex = (): number => (this.language === 'en' ? 0 : 1)
 
+    // better this callback: Function
     play = (data: Array<any>, callback: Function): void => {
         this.synthesise = new SpeechSynthesisUtterance(data[this.getIndex()])
         this.synthesise.voice = window.speechSynthesis.getVoices()[this.getVoice()]

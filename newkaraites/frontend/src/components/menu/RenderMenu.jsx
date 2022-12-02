@@ -8,6 +8,7 @@ import {makeStyles} from "@material-ui/core/styles"
 import {languageDirection} from "../../utils/languageDirection"
 import {ToText} from "../general/ToText";
 
+
 const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
     const classes = useStyles()
     const populate = (obj) => {

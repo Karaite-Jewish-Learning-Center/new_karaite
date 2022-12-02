@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {RenderBooksMenu} from '../menu/RenderBooksMenu';
+import {RenderBooksMenu} from './RenderBooksMenu';
 import {useLocation} from "react-router-dom"
 import {bookDetails} from '../../types/commonTypes';
 import {karaitesBookByLevelAndClassification} from '../../constants/constants';
@@ -19,6 +19,7 @@ export const Second = () => {
 
     useEffect(() => {
         fetchData(`${karaitesBookByLevelAndClassification}${path}/`).then(data => {
+            debugger
             setBooks(data)
             // @ts-ignore
             setShowBooks(data.length > 0)

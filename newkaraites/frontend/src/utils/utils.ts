@@ -33,7 +33,7 @@ export const range = (l: number): Array<number> =>
 export const equals = (a: Array<any>, b: Array<any>): boolean =>
     a.length === b.length && a.every((v, i) => v === b[i]);
 
-export const makeBookUrl = (url: string, book: string, chapter: string, first: string, full: boolean): string =>
+export const makeBookUrl = (url: string, book: string, chapter: number, first: string, full: boolean): string =>
     (full ? `${url}${book}/` : `${url}${book}/${chapter}/${first}/`)
 
 export const makeRandomKey = (): string => `k-${Math.random() * 10000000000}`
@@ -54,8 +54,8 @@ export const normalizeSluggedBookName = (book: string): string => {
     return capitalize(book)
 }
 
-export const calculateItemNumber = (book: string, chapter: string, verse: string): number => {
-    return versesByBibleBook[normalizeSluggedBookName(book)].slice(0, parseInt(chapter) - 1).reduce((x, y) => x + y, 0) + parseInt(verse) - 1
+export const calculateItemNumber = (book: string, chapter: number, verse: number): number => {
+    return versesByBibleBook[normalizeSluggedBookName(book)].slice(0,chapter- 1).reduce((x, y) => x + y, 0) + verse - 1
 }
 
 export const englishBookNames: booksTable = {
