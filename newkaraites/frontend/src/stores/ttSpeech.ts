@@ -4,15 +4,15 @@ import {makeAutoObservable, observable} from "mobx"
 class TextToSpeech {
 
     synthesise: any = null
-    paused: boolean = false
-    resumed: boolean = false
-    error: boolean = false
-    started: boolean = false
-    ended: boolean = false
-    voice: any[] = []
-    language: string = "en"
+    paused = false
+    resumed = false
+    error = false
+    started = false
+    ended = false
+    voice:any[] =[]
+    language = "en"
     // should call callback
-    canceled: boolean = false
+    canceled = false
 
     constructor() {
         makeAutoObservable(this, {
@@ -27,6 +27,7 @@ class TextToSpeech {
             canceled: observable
         })
 
+        // in future make voices configurable
         new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
             .then(() => {
                 let voices = window.speechSynthesis.getVoices()
@@ -39,22 +40,22 @@ class TextToSpeech {
 
     }
 
-    setLanguage = (language: string): void => {
+    setLanguage = (language: string) => {
         this.language = language
     }
 
-    setVoice = (voice: any[]): void => {
+    setVoice = (voice: any[]) => {
         this.voice = voice
     }
 
-    getVoice = (): number => this.voice[this.getIndex()]
+    getVoice = () => this.voice[this.getIndex()]
 
-    getLanguage = (): string => this.language
+    getLanguage = () => this.language
 
     getIndex = (): number => (this.language === 'en' ? 0 : 1)
 
     // better this callback: Function
-    play = (data: Array<any>, callback: Function): void => {
+    play = (data: Array<any>, callback: Function) => {
         this.synthesise = new SpeechSynthesisUtterance(data[this.getIndex()])
         this.synthesise.voice = window.speechSynthesis.getVoices()[this.getVoice()]
         this.synthesise.volume = 10
@@ -92,32 +93,32 @@ class TextToSpeech {
         speechSynthesis.speak(this.synthesise)
     }
 
-    pause = (): void => {
+    pause = () => {
         this.resumed = false
         this.paused = true
         speechSynthesis.pause()
     }
 
-    cancel = (): void => {
+    cancel = () => {
         this.canceled = true
         speechSynthesis.cancel()
     }
 
-    resume = (): void => {
+    resume = () => {
         this.resumed = true
         this.paused = false
         speechSynthesis.resume()
     }
 
-    getPlaying = (): boolean => window.speechSynthesis.speaking
-
-    getPaused = (): boolean => this.paused
-
-    getResumed = (): boolean => this.resumed
-
-    getStarted = (): boolean => this.started
-
-    getEnded = (): boolean => this.ended
+    // getPlaying = () => window.speechSynthesis.speaking
+    //
+    // getPaused = () => this.paused
+    //
+    // getResumed = () => this.resumed
+    //
+    // getStarted = () => this.started
+    //
+    // getEnded = () => this.ended
 
 }
 
