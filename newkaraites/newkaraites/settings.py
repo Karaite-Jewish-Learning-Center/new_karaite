@@ -212,4 +212,3 @@ if DEBUG:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
 else:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
-

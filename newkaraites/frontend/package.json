@@ -46,7 +46,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "HOST=localhost react-scripts start",
+    "startlocal": "HOST=localhost react-scripts start",
+    "startPublic": "HOST=192.168.1.58 react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },

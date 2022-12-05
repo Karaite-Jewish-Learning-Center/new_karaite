@@ -1,11 +1,12 @@
 import React, {createContext} from 'react';
 import {useLocalObservable} from 'mobx-react-lite';
-import ttSpeechStore from './audioBook';
+import {audioBookStore} from "./audioBook";
+
 
 export const AudioBookContext = createContext();
 
 const AudioBookProvider = ({children}) => {
-    const data = useLocalObservable(ttSpeechStore);
+    const data = useLocalObservable(audioBookStore);
     return (
         <AudioBookContext.Provider value={data}>
             {children}

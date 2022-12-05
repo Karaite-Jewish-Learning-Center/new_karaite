@@ -2,13 +2,13 @@ import {makeAutoObservable, observable} from "mobx"
 import {CallBack} from '../types/commonTypes';
 
 
-
 class AudioBook {
 
     audio: any = null
     title: string = ''
     ready: boolean = false
-    callback: CallBack = () => {}
+    callback: CallBack = () => {
+    }
     loading: boolean = false
 
     constructor() {
@@ -42,7 +42,8 @@ class AudioBook {
         this.audio.preload = 'auto'
     }
     // better this Function=() => void
-    play = (start: number = 0, callback = () => {}): void => {
+    play = (start: number = 0, callback = () => {
+    }): void => {
         this.callback = callback
         this.audio.currentTime = start
         this.audio.play()
@@ -60,26 +61,12 @@ class AudioBook {
         this.audio.currentTime = 0
     }
 
-    forward = (time: number): void => {
-        this.audio.currentTime = time
-    }
-
     cancel = (): void => {
         this.stop()
     }
 
-    reset = (): void => {
-        this.stop()
-        this.audio.currentTime = 0
-    }
-
-    resume = (): void => {
-        this.audio.play()
-    }
 }
 
-const audioBookStore = () => {
+export const audioBookStore = () => {
     return new AudioBook()
 }
-
-export default audioBookStore
