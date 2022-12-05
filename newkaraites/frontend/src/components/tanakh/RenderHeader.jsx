@@ -135,6 +135,10 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 50,
         width: '100%',
         textAlign: 'center',
+        marginTop: 0,
+        [theme.breakpoints.down('sm')] : {
+            marginTop: 26,
+        }
     },
     hebrewBook: {
         textAlign: ((props) => props.lang === 'he' ? 'center' : 'right'),
@@ -145,6 +149,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             marginRight: -5,
         },
+
 
     },
     center: {
@@ -163,6 +168,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             paddingRight: 10,
         },
+
     },
     englishBook: {
         verticalAlign: 'middle',
