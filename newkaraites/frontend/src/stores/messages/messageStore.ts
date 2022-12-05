@@ -25,8 +25,6 @@ class MessageStore {
 
 }
 
-const messageStore =()=> {
-    return new MessageStore()
-}
+const messageStore =()=> new MessageStore()
 
 export default messageStore

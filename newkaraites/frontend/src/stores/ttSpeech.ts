@@ -104,11 +104,11 @@ class TextToSpeech {
         speechSynthesis.cancel()
     }
 
-    resume = () => {
-        this.resumed = true
-        this.paused = false
-        speechSynthesis.resume()
-    }
+    // resume = () => {
+    //     this.resumed = true
+    //     this.paused = false
+    //     speechSynthesis.resume()
+    // }
 
     // getPlaying = () => window.speechSynthesis.speaking
     //
@@ -122,8 +122,6 @@ class TextToSpeech {
 
 }
 
-const ttSpeechStore = () => {
-    return new TextToSpeech()
-}
+const ttSpeechStore = () => new TextToSpeech()
 
-export default ttSpeechStore
+export default ttSpeechStore;

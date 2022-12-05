@@ -67,6 +67,6 @@ class AudioBook {
 
 }
 
-export const audioBookStore = () => {
-    return new AudioBook()
-}
+const audioBookStore = () => new AudioBook()
+
+export default audioBookStore;

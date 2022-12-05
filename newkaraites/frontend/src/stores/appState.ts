@@ -199,8 +199,6 @@ class AppState {
 
 }
 
-const appStore = () => {
-    return new AppState()
-}
+const appStore = () => new AppState()
 
 export default appStore

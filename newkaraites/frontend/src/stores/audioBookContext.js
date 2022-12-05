@@ -1,6 +1,6 @@
 import React, {createContext} from 'react';
 import {useLocalObservable} from 'mobx-react-lite';
-import {audioBookStore} from "./audioBook";
+import audioBookStore from "./audioBook";
 
 
 export const AudioBookContext = createContext();

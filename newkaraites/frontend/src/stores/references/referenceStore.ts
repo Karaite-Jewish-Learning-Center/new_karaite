@@ -58,8 +58,6 @@ class ReferenceStore {
 
 }
 
-const referenceStore = () => {
-    return new ReferenceStore()
-}
+const referenceStore = () => new ReferenceStore()
 
 export default referenceStore
