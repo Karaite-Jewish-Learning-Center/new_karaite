@@ -136,6 +136,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           paneNumber={paneNumber}
                           chapter={calculateCurrentChapter()}
                           onClosePane={onClosePane}
+                          isSpeechEnabled={speech.getErrorStatus()}
                           onSpeakOnOffHe={onSpeakOnOffHe}
                           onSpeakOnOffEn={onSpeakOnOffEn}
                           flip={flip}

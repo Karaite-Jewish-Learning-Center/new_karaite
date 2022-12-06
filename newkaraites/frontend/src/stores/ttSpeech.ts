@@ -1,15 +1,17 @@
 import {makeAutoObservable, observable} from "mobx"
 
+const ENGLISH = 0
+const HEBREW = 1
 
 class TextToSpeech {
 
     synthesise: any = null
     paused = false
     resumed = false
-    error = false
+    error = 0
     started = false
     ended = false
-    voice:any[] =[]
+    voice :  any[] = []
     language = "en"
     // should call callback
     canceled = false
@@ -27,18 +29,35 @@ class TextToSpeech {
             canceled: observable
         })
 
-        // in future make voices configurable
-        new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
-            .then(() => {
-                let voices = window.speechSynthesis.getVoices()
-                this.setVoice([
-                    voices.findIndex(v => v.name === 'Daniel'),
-                    voices.findIndex(v => v.name === 'Carmit')
-                ])
-            })
-            .catch((e) => console.log(e.message))
-
+        // check if browser supports speech synthesis
+        if ('speechSynthesis' in window) {
+            // in future make voices configurable
+            new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
+                .then(() => {
+                    let voices = window.speechSynthesis.getVoices()
+                    this.setVoice([
+                        voices.findIndex(v => v.name === 'Daniel'),
+                        voices.findIndex(v => v.name === 'Carmit')
+                    ])
+                    console.log("voices", voices)
+                    // if (voices[ENGLISH] === -1) {
+                    //     this.error = 2
+                    // }
+                    // if (voices[HEBREW] === -1) {
+                    //     this.error = 3
+                    // }
+                })
+                .catch((e) => {
+                    alert(e.message)
+                    console.log(e.message)
+                })
+        } else {
+            // Speech Synthesis Not Supported 😣
+            this.error = 1
+        }
     }
+
+    getErrorStatus = () => this.error
 
     setLanguage = (language: string) => {
         this.language = language
@@ -50,11 +69,12 @@ class TextToSpeech {
 
     getVoice = () => this.voice[this.getIndex()]
 
+    getVoices = () => this.voice
+
     getLanguage = () => this.language
 
     getIndex = (): number => (this.language === 'en' ? 0 : 1)
 
-    // better this callback: Function
     play = (data: Array<any>, callback: Function) => {
         this.synthesise = new SpeechSynthesisUtterance(data[this.getIndex()])
         this.synthesise.voice = window.speechSynthesis.getVoices()[this.getVoice()]
@@ -64,7 +84,7 @@ class TextToSpeech {
 
         this.synthesise.onend = () => {
             this.started = false
-            this.error = false
+            this.error = 0
             this.resumed = false
             this.paused = false
             this.ended = true
@@ -81,11 +101,11 @@ class TextToSpeech {
             this.paused = false
         }
 
-        this.synthesise.onerror = () => this.error = true
+        this.synthesise.onerror = () => this.error = 1
 
         this.synthesise.onstart = () => {
             this.started = true
-            this.error = false
+            this.error = 0
             this.resumed = false
             this.paused = this.synthesise.paused
             this.canceled = false

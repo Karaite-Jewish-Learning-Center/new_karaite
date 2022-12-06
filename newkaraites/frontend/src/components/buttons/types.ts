@@ -16,6 +16,7 @@ export interface ButtonPropsOnOff {
     onClick: MouseEventHandler;
     color?: PropTypes.Color;
     onOff: boolean;
+    isSpeechError: boolean;
 }
 
 interface song {

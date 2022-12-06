@@ -16,6 +16,7 @@ const RenderHeader = ({
                           paneNumber,
                           chapter,
                           onClosePane,
+                          isSpeechError,
                           flip,
                           onSpeakOnOffHe,
                           onSpeakOnOffEn,
@@ -46,6 +47,7 @@ const RenderHeader = ({
 
                             <IsAudioBook isAudioBook={isAudioBook}
                                          flip={flip[0]}
+                                         isSpeechError={isSpeechError}
                                          onAudioBookOnOff={onAudioBookOnOff}
                                          audioBookPlaying={audioBookPlaying}
                                          onSpeakOnOffHe={onSpeakOnOffHe}
@@ -81,6 +83,7 @@ const RenderHeader = ({
                         <Grid item xs={1} key={8}>
                             <IsAudioBook isAudioBook={isAudioBook}
                                          flip={flip[0]}
+                                         isSpeechError={isSpeechError}
                                          onAudioBookOnOff={onAudioBookOnOff}
                                          audioBookPlaying={audioBookPlaying}
                                          onSpeakOnOffHe={onSpeakOnOffHe}
@@ -136,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         textAlign: 'center',
         marginTop: 0,
-        [theme.breakpoints.down('sm')] : {
+        [theme.breakpoints.down('sm')]: {
             marginTop: 26,
         }
     },

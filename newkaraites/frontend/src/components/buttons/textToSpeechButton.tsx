@@ -8,8 +8,12 @@ import textToSpeechOnWhite from '../../img/record_voice_over_white_24dp.svg'
 import textToSpeechOffWhite from '../../img/voice_over_off_white_24dp.svg'
 
 
-export const TextToSpeechButton: FC<ButtonPropsOnOff> = ({onClick, color, onOff}) => {
+export const TextToSpeechButton: FC<ButtonPropsOnOff> = ({onClick, color, onOff, isSpeechError}) => {
+
     const theme = useTheme()
+
+    if (isSpeechError) return null;
+
     if (theme.palette.type === 'dark') {
         return (
             <IconButton aria-label="Close"

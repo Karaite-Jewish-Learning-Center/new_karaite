@@ -5,6 +5,7 @@ import {TextToSpeechButton} from '../buttons/textToSpeechButton';
 interface AudioBookProps {
     isAudioBook: boolean;
     flip: boolean[];
+    isSpeechError: boolean;
     onAudioBookOnOff: MouseEventHandler;
     audioBookPlaying: boolean;
     onSpeakOnOffHe: MouseEventHandler;
@@ -13,12 +14,13 @@ interface AudioBookProps {
 export const IsAudioBook: FC<AudioBookProps> = ({
                                                     isAudioBook,
                                                     flip,
+                                                    isSpeechError,
                                                     onAudioBookOnOff,
                                                     audioBookPlaying,
                                                     onSpeakOnOffHe,
                                                 }) =>
     (isAudioBook ?
-            <AudiobookBottom onClick={onAudioBookOnOff} onOff={audioBookPlaying} />
+            <AudiobookBottom onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={isSpeechError}/>
             :
-            <TextToSpeechButton onClick={onSpeakOnOffHe} onOff={flip[0]}/>
+            <TextToSpeechButton onClick={onSpeakOnOffHe} onOff={flip[0]} isSpeechError={isSpeechError}/>
     );
