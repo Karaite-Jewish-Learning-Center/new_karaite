@@ -1,4 +1,5 @@
 import {makeAutoObservable, observable} from "mobx"
+import {toJS} from 'mobx';
 
 const ENGLISH = 0
 const HEBREW = 1
@@ -37,15 +38,15 @@ class TextToSpeech {
                     let voices = window.speechSynthesis.getVoices()
                     this.setVoice([
                         voices.findIndex(v => v.name === 'Daniel'),
-                        voices.findIndex(v => v.name === 'Carmit')
+                        voices.findIndex(v => v.name === 'Carvxcvxcvmit')
                     ])
-                    console.log("voices", voices)
-                    // if (voices[ENGLISH] === -1) {
-                    //     this.error = 2
-                    // }
-                    // if (voices[HEBREW] === -1) {
-                    //     this.error = 3
-                    // }
+                    console.log("voices", toJS(this.voice))
+                    if (this.voice[ENGLISH] === -1) {
+                        this.error = 2
+                    }
+                    if (this.voice[HEBREW] === -1) {
+                        this.error = 3
+                    }
                 })
                 .catch((e) => {
                     alert(e.message)

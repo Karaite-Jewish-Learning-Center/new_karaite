@@ -8,6 +8,7 @@ import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
 import {START_AUDIO_BOOK} from "../../constants/constants";
+import {messageContext} from "../../stores/messages/messageContext";
 
 const SCROLL_LATENCY_MS = 300
 const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
@@ -17,12 +18,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
     const speech = useContext(speechContext)
     const audioBookStore = useContext(AudioBookContext)
+    const message = useContext(messageContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-
+    // const [speechError, setSpeechError] = useState(speech.getErrorStatus())
     const virtuoso = useRef(null)
 
     const callFromEnded = (set = true) => {
@@ -90,6 +92,11 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
+        if (speech.getErrorStatus() === 2) message.setMessage('English voice not found!')
+        if (speech.getErrorStatus() === 3) message.setMessage('Hebrew voice not found!')
+    }, [speech.getErrorStatus()])
+
+    useEffect(() => {
         return () => {
             if (audioBookPlaying) {
                 audioBookStore.cancel()
@@ -129,14 +136,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         paneNumber={paneNumber}
     />
 
-
     return (
         <>
             <RenderHeader book={book}
                           paneNumber={paneNumber}
                           chapter={calculateCurrentChapter()}
                           onClosePane={onClosePane}
-                          isSpeechEnabled={speech.getErrorStatus()}
+                          isSpeechError={speech.getErrorStatus()}
                           onSpeakOnOffHe={onSpeakOnOffHe}
                           onSpeakOnOffEn={onSpeakOnOffEn}
                           flip={flip}

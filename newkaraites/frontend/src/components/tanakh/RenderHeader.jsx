@@ -26,6 +26,7 @@ const RenderHeader = ({
                       }) => {
 
     const store = useContext(storeContext)
+
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
 

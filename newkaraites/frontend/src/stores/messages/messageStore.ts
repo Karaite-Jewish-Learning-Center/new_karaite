@@ -2,9 +2,9 @@ import {makeAutoObservable, observable} from "mobx"
 
 class MessageStore {
     // give user feed back on the app
-    message: string = ''
-    level: string = 'error'
-    duration: number = 4000
+    message = ''
+    level = 'error'
+    duration = 4000
 
     constructor() {
         makeAutoObservable(this, {
@@ -14,17 +14,17 @@ class MessageStore {
         })
     }
 
-    setMessage = (message: string, level: string = "error", duration: number = 4000): void => {
+    setMessage = (message: string, level: string = "error", duration: number = 4000) => {
         this.message = message
         this.level = level
         this.duration = duration
     }
-    getMessage = (): Object => ({message:this.message,level: this.level, duration: this.duration})
+    getMessage = () => ({message: this.message, level: this.level, duration: this.duration})
 
-    resetMessage = (): string => this.message = ''
+    resetMessage = () => this.message = ''
 
 }
 
-const messageStore =()=> new MessageStore()
+const messageStore = () => new MessageStore()
 
 export default messageStore
