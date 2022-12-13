@@ -24,7 +24,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-    // const [speechError, setSpeechError] = useState(speech.getErrorStatus())
     const virtuoso = useRef(null)
 
     const callFromEnded = (set = true) => {
@@ -92,8 +91,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
-        if (speech.getErrorStatus() === 2) message.setMessage('English voice not found!')
-        if (speech.getErrorStatus() === 3) message.setMessage('Hebrew voice not found!')
+        const error = speech.getErrorStatus()
+        if(speech.errorAlreadyReported()) return
+        if (error === 1) message.setMessage('Hebrew voice not found!')
+        if (error === 2) message.setMessage('English voice not found!')
+        if (error === 3) message.setMessage('Hebrew and  English voice not found!')
+        if(error) speech.setErrorReported(true)
+
     }, [speech.getErrorStatus()])
 
     useEffect(() => {
@@ -105,7 +109,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }, [audioBookPlaying])
 
     useEffect(() => {
-
         if (speaking) {
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
@@ -135,7 +138,8 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         gridVisibleRange={gridVisibleRange}
         paneNumber={paneNumber}
     />
-
+    const error = speech.getErrorStatus()
+    debugger
     return (
         <>
             <RenderHeader book={book}

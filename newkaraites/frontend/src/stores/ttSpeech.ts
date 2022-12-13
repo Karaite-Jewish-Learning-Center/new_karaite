@@ -1,5 +1,4 @@
 import {makeAutoObservable, observable} from "mobx"
-import {toJS} from 'mobx';
 
 const ENGLISH = 0
 const HEBREW = 1
@@ -12,10 +11,11 @@ class TextToSpeech {
     error = 0
     started = false
     ended = false
-    voice :  any[] = []
+    voice = [-1, -1]
     language = "en"
     // should call callback
     canceled = false
+    errorReported = false
 
     constructor() {
         makeAutoObservable(this, {
@@ -38,18 +38,18 @@ class TextToSpeech {
                     let voices = window.speechSynthesis.getVoices()
                     this.setVoice([
                         voices.findIndex(v => v.name === 'Daniel'),
-                        voices.findIndex(v => v.name === 'Carvxcvxcvmit')
+                        voices.findIndex(v => v.name === 'Cagrmit')
                     ])
-                    console.log("voices", toJS(this.voice))
-                    if (this.voice[ENGLISH] === -1) {
-                        this.error = 2
-                    }
+
                     if (this.voice[HEBREW] === -1) {
-                        this.error = 3
+                        this.error += 1
                     }
+                    if (this.voice[ENGLISH] === -1) {
+                        this.error += 2
+                    }
+                    // error = 3 no Hebrew or English voices
                 })
                 .catch((e) => {
-                    alert(e.message)
                     console.log(e.message)
                 })
         } else {
@@ -69,8 +69,6 @@ class TextToSpeech {
     }
 
     getVoice = () => this.voice[this.getIndex()]
-
-    getVoices = () => this.voice
 
     getLanguage = () => this.language
 
@@ -124,22 +122,11 @@ class TextToSpeech {
         this.canceled = true
         speechSynthesis.cancel()
     }
+    errorAlreadyReported = () => this.errorReported
 
-    // resume = () => {
-    //     this.resumed = true
-    //     this.paused = false
-    //     speechSynthesis.resume()
-    // }
-
-    // getPlaying = () => window.speechSynthesis.speaking
-    //
-    // getPaused = () => this.paused
-    //
-    // getResumed = () => this.resumed
-    //
-    // getStarted = () => this.started
-    //
-    // getEnded = () => this.ended
+    setErrorReported = (errorReported: boolean) => {
+        this.errorReported = errorReported
+    }
 
 }
 

@@ -37,6 +37,7 @@ const RenderHeader = ({
     book = unslug(book)
 
     const HeaderBody = ({chapter}) => {
+
         switch (lang) {
             case 'en_he':
                 return (
@@ -48,7 +49,7 @@ const RenderHeader = ({
 
                             <IsAudioBook isAudioBook={isAudioBook}
                                          flip={flip[0]}
-                                         isSpeechError={isSpeechError}
+                                         isSpeechError={isSpeechError ===1 || isSpeechError === 3}
                                          onAudioBookOnOff={onAudioBookOnOff}
                                          audioBookPlaying={audioBookPlaying}
                                          onSpeakOnOffHe={onSpeakOnOffHe}
@@ -62,6 +63,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
+                                isSpeechError={isSpeechError >=2}
                             />
 
                         </Grid>
@@ -84,7 +86,7 @@ const RenderHeader = ({
                         <Grid item xs={1} key={8}>
                             <IsAudioBook isAudioBook={isAudioBook}
                                          flip={flip[0]}
-                                         isSpeechError={isSpeechError}
+                                         isSpeechError={isSpeechError ===1 || isSpeechError === 3}
                                          onAudioBookOnOff={onAudioBookOnOff}
                                          audioBookPlaying={audioBookPlaying}
                                          onSpeakOnOffHe={onSpeakOnOffHe}
@@ -106,6 +108,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
+                                isSpeechError={isSpeechError >=2}
                             />
                         </Grid>
                     </>
