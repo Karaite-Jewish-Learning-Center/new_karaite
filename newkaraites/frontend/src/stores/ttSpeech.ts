@@ -1,14 +1,20 @@
 import {makeAutoObservable, observable} from "mobx"
 
+
 const ENGLISH = 0
 const HEBREW = 1
+const NO_ERROR = 0
+const HEBREW_VOICE = 1
+const ENGLISH_VOICE = 2
+const NOT_SUPPORTED = 4
 
 class TextToSpeech {
 
     synthesise: any = null
     paused = false
     resumed = false
-    error = 0
+    error = NO_ERROR
+    onError = ''
     started = false
     ended = false
     voice = [-1, -1]
@@ -38,14 +44,14 @@ class TextToSpeech {
                     let voices = window.speechSynthesis.getVoices()
                     this.setVoice([
                         voices.findIndex(v => v.name === 'Daniel'),
-                        voices.findIndex(v => v.name === 'Cagrmit')
+                        voices.findIndex(v => v.name === 'Carmit')
                     ])
 
                     if (this.voice[HEBREW] === -1) {
-                        this.error += 1
+                        this.error += HEBREW_VOICE
                     }
                     if (this.voice[ENGLISH] === -1) {
-                        this.error += 2
+                        this.error += ENGLISH_VOICE
                     }
                     // error = 3 no Hebrew or English voices
                 })
@@ -54,11 +60,9 @@ class TextToSpeech {
                 })
         } else {
             // Speech Synthesis Not Supported 😣
-            this.error = 1
+            this.error = NOT_SUPPORTED
         }
     }
-
-    getErrorStatus = () => this.error
 
     setLanguage = (language: string) => {
         this.language = language
@@ -83,7 +87,6 @@ class TextToSpeech {
 
         this.synthesise.onend = () => {
             this.started = false
-            this.error = 0
             this.resumed = false
             this.paused = false
             this.ended = true
@@ -100,11 +103,10 @@ class TextToSpeech {
             this.paused = false
         }
 
-        this.synthesise.onerror = () => this.error = 1
+        this.synthesise.onerror = (e:SpeechSynthesisErrorEvent) => this.onError = e.error
 
         this.synthesise.onstart = () => {
             this.started = true
-            this.error = 0
             this.resumed = false
             this.paused = this.synthesise.paused
             this.canceled = false
@@ -122,11 +124,15 @@ class TextToSpeech {
         this.canceled = true
         speechSynthesis.cancel()
     }
+    getVoicesStatusError = () => this.error
+
     errorAlreadyReported = () => this.errorReported
 
     setErrorReported = (errorReported: boolean) => {
         this.errorReported = errorReported
     }
+
+    // getOnErrorMessage = () => this.onError
 
 }
 

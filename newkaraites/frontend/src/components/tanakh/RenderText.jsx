@@ -91,14 +91,15 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
-        const error = speech.getErrorStatus()
+        // todo:Move this to the store
+        const error = speech.getVoicesStatusError()
         if(speech.errorAlreadyReported()) return
         if (error === 1) message.setMessage('Hebrew voice not found!')
         if (error === 2) message.setMessage('English voice not found!')
         if (error === 3) message.setMessage('Hebrew and  English voice not found!')
         if(error) speech.setErrorReported(true)
 
-    }, [speech.getErrorStatus()])
+    })
 
     useEffect(() => {
         return () => {
@@ -138,15 +139,14 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         gridVisibleRange={gridVisibleRange}
         paneNumber={paneNumber}
     />
-    const error = speech.getErrorStatus()
-    debugger
+
     return (
         <>
             <RenderHeader book={book}
                           paneNumber={paneNumber}
                           chapter={calculateCurrentChapter()}
                           onClosePane={onClosePane}
-                          isSpeechError={speech.getErrorStatus()}
+                          isSpeechError={speech.getVoicesStatusError()}
                           onSpeakOnOffHe={onSpeakOnOffHe}
                           onSpeakOnOffEn={onSpeakOnOffEn}
                           flip={flip}
