@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {RenderBooksMenu} from './RenderBooksMenu';
 import {useLocation} from "react-router-dom"
-import {bookDetails} from '../../types/commonTypes';
+import {BookDetails} from '../../types/commonTypes';
 import {karaitesBookByLevelAndClassification} from '../../constants/constants';
 import {removeSlash} from '../../utils/utils';
 import {NotFound404} from '../pages/NotFound404';
@@ -11,7 +11,7 @@ import {referenceContext} from '../../stores/references/referenceContext';
 export const Second = () => {
 
     const [showBooks, setShowBooks] = useState<boolean>(false);
-    const [books, setBooks] = useState<bookDetails>();
+    const [books, setBooks] = useState<BookDetails>();
     const [error, setError] = useState<boolean>(false);
     const path = removeSlash(useLocation().pathname)
     const reference = useContext(referenceContext);
@@ -19,9 +19,7 @@ export const Second = () => {
 
     useEffect(() => {
         fetchData(`${karaitesBookByLevelAndClassification}${path}/`).then(data => {
-            debugger
             setBooks(data)
-            // @ts-ignore
             setShowBooks(data.length > 0)
         }).catch((e) => {
             setError(() => true)
