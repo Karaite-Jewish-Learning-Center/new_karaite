@@ -123,6 +123,7 @@ def karaites_book_as_array(request, *args, **kwargs):
         return JsonResponse(data={'status': 'false', 'message': _('Need a int for paragraph number')}, status=400)
 
     book = slug_back(book)
+    print('slug', book)
 
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)

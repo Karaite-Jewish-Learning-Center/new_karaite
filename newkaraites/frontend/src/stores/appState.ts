@@ -1,8 +1,9 @@
 import {makeAutoObservable, runInAction, computed, observable} from "mobx"
-import {isABibleBook} from "../utils/utils";
-import {autocompleteUrl} from "../constants/constants";
+//import {isABibleBook} from "../utils/utils";
+//import {autocompleteUrl} from "../constants/constants";
 import {AUDIO, END_AUDIO_BOOK, AUDIO_BOOK_ID} from "../constants/constants";
 import {toJS} from 'mobx';
+import {VirtuosoProps} from 'react-virtuoso/dist/index.d';
 
 class AppState {
     // mains panes bible book , comment, karaites books etc
@@ -10,9 +11,9 @@ class AppState {
     // loading state
     loading = false
     // search
-    search: string = ''
-    searchResultData: Array<string> = []
-    moreResults: boolean = true
+    search = ''
+    searchResultData: VirtuosoProps<any, any>[] =  []
+    moreResults = true
 
     // autocomplete
     options: Array<any> = []
@@ -162,10 +163,11 @@ class AppState {
     getSearch = () => this.search
 
     // search result
-    setSearchResultData = (result: Array<string>): Array<string> =>
+    setSearchResultData = (result: Array<any>) => {
         this.searchResultData = [...this.searchResultData, ...result]
+    }
 
-    getSearchResultData = (): Array<string> => this.searchResultData
+    getSearchResultData = () => this.searchResultData
 
     // search page
     // autocomplete communicates with searchResult
@@ -175,18 +177,18 @@ class AppState {
     getMoreResults = () => this.moreResults
 
     // autocomplete
-    setOptions = (options: Array<string>) => {
-        this.options = options
-    }
+    // setOptions = (options: Array<string>) => {
+    //     this.options = options
+    // }
 
-    getOptions = (): Array<string> => this.options
+    // getOptions = (): Array<string> => this.options
 
-    getAutoComplete = async (search: string) => {
-        if (search.length < 2) return []
-        if (isABibleBook(search)) return []
-        const response = await fetch(`${autocompleteUrl}${search}/`)
-        this.setOptions(await response.json())
-    }
+    // getAutoComplete = async (search: string) => {
+    //     if (search.length < 2) return []
+    //     if (isABibleBook(search)) return []
+    //     const response = await fetch(`${autocompleteUrl}${search}/`)
+    //     this.setOptions(await response.json())
+    // }
 
     // language
     setLanguage = (language: string, i: number) => {
@@ -194,7 +196,7 @@ class AppState {
     }
 
     getLanguage = (i: number): string => this.panes[i].languages[0]
-    
+
     nextLanguage = (i: number): Array<string> => this.panes[i].languages.push(this.panes[i].languages.shift())
 
 }

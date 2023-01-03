@@ -4,15 +4,19 @@ import {Virtuoso} from "react-virtuoso"
 import {makeStyles} from "@material-ui/core/styles"
 import {searchResultsUrl, ITEMS_PER_PAGE} from "../../constants/constants"
 import {Link} from "react-router-dom"
+// @ts-ignore
 import ReactHtmlParser from "react-html-parser"
 import {Typography} from "@material-ui/core"
 import {parseEnglishRef} from "../../utils/parseBiblicalReference"
 import {storeContext} from "../../stores/context"
 import {messageContext} from "../../stores/messages/messageContext";
 import {slug} from "../../utils/utils"
-import {fetchData} from "../api/dataFetch";
+import {dataFetch} from "../api/dataFetch";
 
 
+interface Data {
+    [x: string]: any
+}
 
 const SearchResults = () => {
     const store = useContext(storeContext)
@@ -23,7 +27,8 @@ const SearchResults = () => {
     const [searchTerm, setSearchTerm] = useState(store.getSearch())
     const [page, setPage] = useState(1)
 
-    const itemContent = (item, data) => {
+    const itemContent = (_: number, data: Data) => {
+        debugger
         if (data['path'] === 'Tanakh') {
             const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
             store.resetPanes()
@@ -56,20 +61,19 @@ const SearchResults = () => {
         }
     }
 
+
     useEffect(() => {
 
-        if (search === '') return {'data': [], 'page': 1}
-
         store.setLoading(true)
-        fetchData(searchResultsUrl + `${search}/${page}/`)
+        dataFetch<Data>(searchResultsUrl + `${search}/${page}/`)
             .then((data) => {
+                debugger
                 // if search result length is an exact multiple of ITEMS_PER_PAGE
                 // an extra call is done to figure out that next page
                 // is empty, In all other cases there is no need to do an extra call.
                 // todo: review this code
 
                 if (data['data'].length < ITEMS_PER_PAGE) {
-
                     store.setMoreResults(false)
                 }
                 store.setSearchResultData(data['data'])
@@ -85,7 +89,7 @@ const SearchResults = () => {
             })
 
 
-    }, [search, page, store,message])
+    }, [search, page, store, message])
 
     if (store.getSearch() === '') return null
 
@@ -99,14 +103,14 @@ const SearchResults = () => {
                 endReached={nextPage}
                 itemContent={itemContent}
                 components={{
-                          Footer: () => {
-                              return (
-                                  <div style={{padding: '1rem', textAlign: 'center'}}>
-                                     End of search results for "{store.getSearch()}"
-                                  </div>
-                              )
-                          }
-                      }}
+                    Footer: () => {
+                        return (
+                            <div style={{padding: '1rem', textAlign: 'center'}}>
+                                End of search results for "{store.getSearch()}"
+                            </div>
+                        )
+                    }
+                }}
             />
         </div>
     )
@@ -114,8 +118,8 @@ const SearchResults = () => {
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        position:'sticky',
-        top:100,
+        position: 'sticky',
+        top: 100,
         width: '100%',
         height: 'calc(80% - 110px)',
         fontSize: 21,

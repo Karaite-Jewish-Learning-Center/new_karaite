@@ -30,7 +30,6 @@ class ReferenceStore {
             this.levels_all = data
             delete data['Tanakh']
             this.levels_no_tanakh = data
-
         }).catch((e) => console.log(e))
     }
 

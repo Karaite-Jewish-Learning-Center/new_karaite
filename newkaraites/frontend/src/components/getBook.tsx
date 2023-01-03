@@ -13,7 +13,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
         const response = await fetch(url)
         if (response.ok) {
             const data = await response.json()
-            if (type === 'bible') {
+            if (type.toLowerCase() === 'bible') {
                 store.setBookData(data.chapter, paneNumber)
                 store.setBookDetails(data.book, paneNumber)
             } else {
@@ -32,9 +32,10 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
 }
 
 const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: BookType, store: any, message: any) => {
+
     let url = ''
     if (!store.isPaneOpen(book, chapter, verse)) {
-        if (type === "bible") {
+        if (type.toLowerCase() === "bible") {
             store.setPanes({
                 book: book,
                 chapter: chapter - 1,
