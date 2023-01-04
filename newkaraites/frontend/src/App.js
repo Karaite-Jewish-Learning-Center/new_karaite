@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import MyAppBar from "./components/menu/AppBar";
 import FirstLevel from "./components/menu/FirstLevel"
@@ -11,6 +11,7 @@ import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
 import SearchResults from "./components/pages/SearchResults";
 import StoreProvider from "./stores/context";
 import SpeechProvider from "./stores/ttspeechContext";
+import AudioBookProvider from "./stores/audioBookContext";
 import ReferenceProvider from "./stores/references/referenceContext";
 import MessageProvider from "./stores/messages/messageContext";
 import Message from './components/messages/Message';
@@ -20,6 +21,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Second from "./components/menu/getMenuSecond";
 
+const NullComponent = () => null;
 
 function App() {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme:dark)');
@@ -37,47 +39,56 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline/>
             <StoreProvider>
-                <SpeechProvider>
-                    <MessageProvider>
-                        <ReferenceProvider>
-                            <BrowserRouter>
-                                <MyAppBar/>
-                                <Message/>
-                                <LoadingSpin/>
-                                <Switch>
+                <AudioBookProvider>
+                    <SpeechProvider>
+                        <MessageProvider>
+                            <ReferenceProvider>
+                                <BrowserRouter>
+                                    <MyAppBar/>
+                                    <Message/>
+                                    <LoadingSpin/>
+                                    <Switch>
 
-                                    <Route exact path="/">
-                                        <Display/>
-                                    </Route>
+                                        <Route exact path="/">
+                                            <Display/>
+                                        </Route>
 
-                                    <Route exact path="/texts/">
-                                        <FirstLevel/>
-                                    </Route>
+                                        <Route exact path="/texts/">
+                                            <FirstLevel/>
+                                        </Route>
 
-                                    <Route exact path="/acknowledgments/">
-                                        <Acknowledgment/>
-                                    </Route>
+                                        <Route exact path="/acknowledgments/">
+                                            <Acknowledgment/>
+                                        </Route>
 
-                                    <Route exact path="/search-result/" forceRefresh={true}>
-                                        <SearchResults/>
-                                    </Route>
+                                        <Route exact path="/search-result/" forceRefresh={true}>
+                                            <SearchResults/>
+                                        </Route>
 
-                                    <Route exact path="/Tanakh/:book/:chapter/:verse/" children={
-                                        <LoadBook type={'bible'}/>}/>
-                                    <Route exact path="/Tanakh/:book/:chapter/" children={<LoadBook type={'bible'}/>}/>
-                                    <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
-                                    <Route exact path="/Tanakh/"><Tanakh/></Route>
+                                        <Route exact path="/Tanakh/:book/:chapter/:verse/" children={
+                                            <LoadBook type={'bible'}/>}/>
+                                        <Route exact path="/Tanakh/:book/:chapter/" children={
+                                            <LoadBook type={'bible'}/>}/>
+                                        <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
+                                        <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                                    <Route path="/*/:book/:chapter/:verse/:intro/" children={<LoadBook type={""}/>}/>
-                                    <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type={""}/>}/>
-                                    <Route path="/*/:book/:chapter/" children={<LoadBook type={""}/>}/>
-                                    <Route path="/*/"><Second/></Route>
 
-                                </Switch>
-                            </BrowserRouter>
-                        </ReferenceProvider>
-                    </MessageProvider>
-                </SpeechProvider>
+
+                                        <Route path="/*/:book/:chapter/:verse/:intro/" children={<LoadBook type={""}/>}/>
+
+                                        <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type={""}/>}/>
+                                        <Route path="/*/:book/:chapter/" children={<LoadBook type={""}/>}/>
+                                          {/* hack to avoid 404 in autocomplete */}
+                                        <Route exact path="/empty/"><NullComponent/></Route>
+
+                                        <Route path="/*/"><Second/></Route>
+
+                                    </Switch>
+                                </BrowserRouter>
+                            </ReferenceProvider>
+                        </MessageProvider>
+                    </SpeechProvider>
+                </AudioBookProvider>
             </StoreProvider>
         </ThemeProvider>
     );

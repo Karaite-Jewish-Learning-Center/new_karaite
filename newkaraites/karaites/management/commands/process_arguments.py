@@ -17,8 +17,8 @@ def process_arguments(options):
 
         return []
 
-    if options['comments'] or options['halakhah'] or options['liturgy'] \
-            or options['poetry'] or options['polemic'] or options['exhortatory']:
+    if options['comments'] or options['halakhah'] or options['liturgy'] or options['poetry']\
+            or options['polemic'] or options['exhortatory'] or options['all']:
 
         if options['comments']:
             books_to_process.append('Comments')

@@ -9,19 +9,24 @@ import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {devLog} from "../messages/devLog";
 import {TextToSpeechButton} from "../buttons/textToSpeechButton";
-
+import {IsAudioBook} from "../audio/IsAudioBook";
 
 const RenderHeader = ({
                           book,
                           paneNumber,
                           chapter,
                           onClosePane,
+                          isSpeechError,
                           flip,
                           onSpeakOnOffHe,
                           onSpeakOnOffEn,
+                          onAudioBookOnOff,
+                          audioBookPlaying,
+                          isAudioBook,
                       }) => {
 
     const store = useContext(storeContext)
+
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
 
@@ -32,6 +37,7 @@ const RenderHeader = ({
     book = unslug(book)
 
     const HeaderBody = ({chapter}) => {
+
         switch (lang) {
             case 'en_he':
                 return (
@@ -40,10 +46,15 @@ const RenderHeader = ({
                             <Typography className={classes.hebrewBook}>{englishBookNameToHebrew(book)}</Typography>
                         </Grid>
                         <Grid item xs={1} key={3}>
-                            <TextToSpeechButton
-                                onClick={onSpeakOnOffHe}
-                                onOff={flip[0]}
+
+                            <IsAudioBook isAudioBook={isAudioBook}
+                                         flip={flip[0]}
+                                         isSpeechError={isSpeechError ===1 || isSpeechError === 3}
+                                         onAudioBookOnOff={onAudioBookOnOff}
+                                         audioBookPlaying={audioBookPlaying}
+                                         onSpeakOnOffHe={onSpeakOnOffHe}
                             />
+
                         </Grid>
                         <Grid item xs={2} key={4}>
                             <Typography className={classes.chapterView}>{chapter}</Typography>
@@ -52,7 +63,9 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
+                                isSpeechError={isSpeechError >=2}
                             />
+
                         </Grid>
                         <Grid item xs={3} key={6}>
                             <Typography className={classes.englishBook}>{book} </Typography>
@@ -71,9 +84,12 @@ const RenderHeader = ({
                             </Typography>
                         </Grid>
                         <Grid item xs={1} key={8}>
-                            <TextToSpeechButton
-                                onClick={onSpeakOnOffHe}
-                                onOff={flip[0]}
+                            <IsAudioBook isAudioBook={isAudioBook}
+                                         flip={flip[0]}
+                                         isSpeechError={isSpeechError ===1 || isSpeechError === 3}
+                                         onAudioBookOnOff={onAudioBookOnOff}
+                                         audioBookPlaying={audioBookPlaying}
+                                         onSpeakOnOffHe={onSpeakOnOffHe}
                             />
                         </Grid>
                     </>
@@ -92,6 +108,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
+                                isSpeechError={isSpeechError >=2}
                             />
                         </Grid>
                     </>
@@ -109,7 +126,7 @@ const RenderHeader = ({
             </Grid>
             <HeaderBody chapter={chapter}/>
             <Grid item xs={1} key={1}>
-                <LanguageButton paneNumber={paneNumber} />
+                <LanguageButton paneNumber={paneNumber}/>
             </Grid>
         </Grid>
     )
@@ -125,6 +142,10 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 50,
         width: '100%',
         textAlign: 'center',
+        marginTop: 0,
+        [theme.breakpoints.down('sm')]: {
+            marginTop: 26,
+        }
     },
     hebrewBook: {
         textAlign: ((props) => props.lang === 'he' ? 'center' : 'right'),
@@ -135,6 +156,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             marginRight: -5,
         },
+
 
     },
     center: {
@@ -153,6 +175,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             paddingRight: 10,
         },
+
     },
     englishBook: {
         verticalAlign: 'middle',

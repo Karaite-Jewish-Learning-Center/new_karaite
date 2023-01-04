@@ -10,6 +10,7 @@ import {
     REFS_HE,
     REFS_EN,
 } from "../../constants/constants";
+import Tooltip from '@material-ui/core/Tooltip';
 import RefsBadge from "../general/RefsBadge";
 import {observer} from 'mobx-react-lite';
 import {storeContext} from '../../stores/context'
@@ -17,9 +18,8 @@ import {devLog} from "../messages/devLog";
 import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 
-const ChapterHeaderVerse = (props) => {
+const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber}) => {
     const store = useContext(storeContext)
-    const {data, item, gridVisibleRange, paneNumber} = props
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
     const classes = useStyles({lang})
@@ -27,18 +27,21 @@ const ChapterHeaderVerse = (props) => {
     const renderChapter = data[BIBLE_RENDER_CHAPTER]
     const refsHe = parseInt(data[REFS_HE])
     const refsEn = parseInt(data[REFS_EN])
-
     let chapterHtml = null
 
-    const onClick = (i) => {
-        if (!store.getIsRightPaneOpen(paneNumber)) {
-            store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
-            store.setDistance(0, paneNumber)
-            store.setCurrentItem(i, paneNumber)
-            return
-        }
+    const updateItemDistance = (i) => {
         store.setCurrentItem(i, paneNumber)
         store.setDistance(i - gridVisibleRange.startIndex, paneNumber)
+    }
+
+    const onDoubleClick = (i) => {
+        store.setCurrentItem(i, paneNumber)
+        store.setDistance(0, paneNumber)
+        store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
+    }
+
+    const onClick = (i) => {
+        updateItemDistance(i)
     }
 
     if (renderChapter === "1") {
@@ -52,16 +55,17 @@ const ChapterHeaderVerse = (props) => {
             </div>)
     }
 
+
     const startIndex = gridVisibleRange.startIndex
     const current = startIndex + store.getDistance(paneNumber)
-    const found = item === store.getCurrentItem(paneNumber)
+
+    let found = item === current
+
 
     useEffect(() => {
-        // if (allBookData[current] !== undefined) {
         store.setRefsChapterVerse(allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)
-        // }
-    }, [allBookData, paneNumber, store.getCurrentItem(paneNumber)])
+    }, [allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber])
 
     const ChapterBody = () => {
         switch (lang) {
@@ -96,7 +100,9 @@ const ChapterHeaderVerse = (props) => {
                         </div>
 
                         <div className={classes.verseNumber}>
-                            <Typography className={classes.vn}>{indoArabicToHebrew(data[BIBLE_VERSE])}</Typography>
+                            <Tooltip title={data[BIBLE_VERSE]} placement="top">
+                                <Typography className={classes.vn}>{indoArabicToHebrew(data[BIBLE_VERSE])}</Typography>
+                            </Tooltip>
                         </div>
                     </>
                 )
@@ -104,7 +110,9 @@ const ChapterHeaderVerse = (props) => {
                 return (
                     <>
                         <div className={classes.verseNumber}>
-                            <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
+                            <Tooltip title={indoArabicToHebrew(data[BIBLE_VERSE])} placement="top">
+                                <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
+                            </Tooltip>
                         </div>
                         <div className={classes.verseEn}>
                             <Typography className={classes.englishFont}>{data[BIBLE_ENGLISH]}</Typography>
@@ -123,7 +131,8 @@ const ChapterHeaderVerse = (props) => {
         <div className={classes.verse}>
             {chapterHtml}
             <div className={`${classes.textContainer} ${(found ? classes.selectVerse : '')}`}
-                 onClick={onClick.bind(this, item)}>
+                 onClick={onClick.bind(this, item)}
+                 onDoubleClick={onDoubleClick.bind(this, item)}>
                 <ChapterBody/>
             </div>
 
@@ -161,16 +170,16 @@ const useStyles = makeStyles(() => ({
         fontSize: 22,
         direction: ((props) => props.lang === 'he' ? 'RTL' : 'LTR'),
         textDecoration: 'underline',
-        textDecorationColor:'#c6c6c6',
+        textDecorationColor: '#c6c6c6',
     },
     en: {
         fontSize: 22,
         textDecoration: 'underline',
-        textDecorationColor:'#c6c6c6',
+        textDecorationColor: '#c6c6c6',
     },
     ch: {
         fontSize: 18,
-        color:'gray',
+        color: 'gray',
         direction: 'RTL',
         fontFamily: 'SBL Hebrew',
     },
@@ -185,7 +194,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center',
         verticalAlign: 'text-top',
         fontSize: 20,
-        color:'gray'
+        color: 'gray'
     },
     verseHe: {
         maxWidth: ((props) => props.lang === 'he' ? '45%' : '35%'),
@@ -230,7 +239,7 @@ const useStyles = makeStyles(() => ({
         fontSize: 21,
     },
     selectVerse: {
-        backgroundColor:  '#11c4f114',
+        backgroundColor: '#11c4f114',
     },
     references: {
         cursor: 'pointer',

@@ -2,7 +2,7 @@
 
 Karaites Project
 
-## Just a Django project with postgresql and react
+## A Django project with Postgresql and React
 
 Docs for recreating database :karaites/management/commands
 

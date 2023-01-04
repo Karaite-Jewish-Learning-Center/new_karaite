@@ -1,18 +1,27 @@
 import {makeAutoObservable, observable} from "mobx"
 
 
+const ENGLISH = 0
+const HEBREW = 1
+const NO_ERROR = 0
+const HEBREW_VOICE = 1
+const ENGLISH_VOICE = 2
+const NOT_SUPPORTED = 4
+
 class TextToSpeech {
 
     synthesise: any = null
-    paused: boolean = false
-    resumed: boolean = false
-    error: boolean = false
-    started: boolean = false
-    ended: boolean = false
-    voice: any[] = []
-    language: string = "en"
+    paused = false
+    resumed = false
+    error = NO_ERROR
+    onError = ''
+    started = false
+    ended = false
+    voice = [-1, -1]
+    language = "en"
     // should call callback
-    canceled: boolean = false
+    canceled = false
+    errorReported = false
 
     constructor() {
         makeAutoObservable(this, {
@@ -27,33 +36,49 @@ class TextToSpeech {
             canceled: observable
         })
 
-        new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
-            .then(() => {
-                let voices = window.speechSynthesis.getVoices()
-                this.setVoice([
-                    voices.findIndex(v => v.name === 'Daniel'),
-                    voices.findIndex(v => v.name === 'Carmit')
-                ])
-            })
-            .catch((e) => console.log(e.message))
+        // check if browser supports speech synthesis
+        if ('speechSynthesis' in window) {
+            // in future make voices configurable
+            new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
+                .then(() => {
+                    let voices = window.speechSynthesis.getVoices()
+                    this.setVoice([
+                        voices.findIndex(v => v.name === 'Daniel'),
+                        voices.findIndex(v => v.name === 'Carmit')
+                    ])
 
+                    if (this.voice[HEBREW] === -1) {
+                        this.error += HEBREW_VOICE
+                    }
+                    if (this.voice[ENGLISH] === -1) {
+                        this.error += ENGLISH_VOICE
+                    }
+                    // error = 3 no Hebrew or English voices
+                })
+                .catch((e) => {
+                    console.log(e.message)
+                })
+        } else {
+            // Speech Synthesis Not Supported 😣
+            this.error = NOT_SUPPORTED
+        }
     }
 
-    setLanguage = (language: string): void => {
+    setLanguage = (language: string) => {
         this.language = language
     }
 
-    setVoice = (voice: any[]): void => {
+    setVoice = (voice: any[]) => {
         this.voice = voice
     }
 
-    getVoice = (): number => this.voice[this.getIndex()]
+    getVoice = () => this.voice[this.getIndex()]
 
-    getLanguage = (): string => this.language
+    getLanguage = () => this.language
 
     getIndex = (): number => (this.language === 'en' ? 0 : 1)
 
-    play = (data: Array<any>, callback: Function): void => {
+    play = (data: Array<any>, callback: Function) => {
         this.synthesise = new SpeechSynthesisUtterance(data[this.getIndex()])
         this.synthesise.voice = window.speechSynthesis.getVoices()[this.getVoice()]
         this.synthesise.volume = 10
@@ -62,7 +87,6 @@ class TextToSpeech {
 
         this.synthesise.onend = () => {
             this.started = false
-            this.error = false
             this.resumed = false
             this.paused = false
             this.ended = true
@@ -79,11 +103,10 @@ class TextToSpeech {
             this.paused = false
         }
 
-        this.synthesise.onerror = () => this.error = true
+        this.synthesise.onerror = (e:SpeechSynthesisErrorEvent) => this.onError = e.error
 
         this.synthesise.onstart = () => {
             this.started = true
-            this.error = false
             this.resumed = false
             this.paused = this.synthesise.paused
             this.canceled = false
@@ -91,37 +114,28 @@ class TextToSpeech {
         speechSynthesis.speak(this.synthesise)
     }
 
-    pause = (): void => {
+    pause = () => {
         this.resumed = false
         this.paused = true
         speechSynthesis.pause()
     }
 
-    cancel = (): void => {
+    cancel = () => {
         this.canceled = true
         speechSynthesis.cancel()
     }
+    getVoicesStatusError = () => this.error
 
-    resume = (): void => {
-        this.resumed = true
-        this.paused = false
-        speechSynthesis.resume()
+    errorAlreadyReported = () => this.errorReported
+
+    setErrorReported = (errorReported: boolean) => {
+        this.errorReported = errorReported
     }
 
-    getPlaying = (): boolean => window.speechSynthesis.speaking
-
-    getPaused = (): boolean => this.paused
-
-    getResumed = (): boolean => this.resumed
-
-    getStarted = (): boolean => this.started
-
-    getEnded = (): boolean => this.ended
+    // getOnErrorMessage = () => this.onError
 
 }
 
-const ttSpeechStore = () => {
-    return new TextToSpeech()
-}
+const ttSpeechStore = () => new TextToSpeech()
 
-export default ttSpeechStore
+export default ttSpeechStore;

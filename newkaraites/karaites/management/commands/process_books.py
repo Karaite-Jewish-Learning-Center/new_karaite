@@ -625,7 +625,7 @@ class Command(BaseCommand):
         """
 
         query = process_arguments(options)
-
+        print(query)
         if not query:
             return
 

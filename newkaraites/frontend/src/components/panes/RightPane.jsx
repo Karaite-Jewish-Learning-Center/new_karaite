@@ -10,7 +10,6 @@ import {storeContext} from "../../stores/context";
 import {messageContext} from "../../stores/messages/messageContext";
 import {referenceContext} from '../../stores/references/referenceContext'
 import Container from "@material-ui/core/Container";
-import {toJS} from "mobx";
 import {fetchData} from "../api/dataFetch";
 import {getBibleReferencesUrl, TRANSFORM_TYPE} from "../../constants/constants";
 import parse from "html-react-parser";
@@ -27,25 +26,16 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     const message = useContext(messageContext)
     const reference = useContext(referenceContext)
     const [loading, setLoading] = useState(false)
-    const verseData = (store.getVerseData(paneNumber).length === 0 ? ['', ''] : store.getVerseData(paneNumber))
+    const verseData =  store.getVerseData(paneNumber)
     const [languages, setLanguages] = useState(['en', 'he'])
     const [references, setReferences] = useState([])
     const [referenceKey, setReferenceKey] = useState('')
 
     const classes = useStyles()
 
-    const onClick = () => {
-        setLanguages([languages[1], languages[0]])
-    }
+    const onClick = () => setLanguages([languages[1], languages[0]])
 
-    // const clickToOpen = (item, type, panNumber, e) => {
-    //     store.setRightPaneState(showState, paneNumber)
-    //     refClick(item, 'bible', paneNumber, e)
-    // }
-
-    const callOpenBook = (index) => {
-        openBook(paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
-    }
+    const callOpenBook = (index) => openBook(paneNumber, slug(references[index]['book_name_en']), references[index]['paragraph_number'])
 
     const onClose = () => {
         store.setDistance(0, paneNumber)
@@ -53,17 +43,18 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
         store.setIsRightPaneOpen(false, paneNumber)
     }
 
-    const backButton = () => {
-        setReferenceKey('')
-    }
+    const backButton = () => setReferenceKey('')
+
 
     const onClickReference = (key, _) => {
+
         const bookChapterVerse = store.getBookChapterVerse(paneNumber)
         // todo: cache the references
         setLoading(true)
 
         fetchData(`${getBibleReferencesUrl}${bookChapterVerse}/`)
             .then(data => {
+                debugger
                 setReferences(data)
                 setReferenceKey(key)
                 setLoading(false)
@@ -77,7 +68,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
 
     const ReferencesMenu = () => {
 
-        if (loading || verseData.length === 2 || verseData[COUNT_HE] === undefined) {
+        if (loading || verseData === undefined || verseData.length === 0) {
             return (
                 <Container className={classes.container}>
                     <Loading/>
@@ -114,7 +105,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
     const PaneBody = () => {
         if (referenceKey === '') {
             return (
-                <Container className={classes.container}>
+                <Container className={classes.container} key={makeRandomKey()}>
                     <Header backButton={null} onClose={onClose} onClick={onClick} language={languages[0]}/>
                     <Paper className={classes.paper}>
                         <Typography variant="h6" component="h2" className={classes.related}>Related
@@ -129,7 +120,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
         if (references.length === 0) {
             const message = (languages[0] === 'en' ? 'No references found' : 'לא נמצאו טקסטים')
             return (
-                <Container className={classes.container}>
+                <Container className={classes.container} key={makeRandomKey()}>
                     <Header backButton={backButton} onClose={onClose} onClick={onClick} language={languages[0]}/>
                     <Paper className={classes.paper}>
                         <Typography variant="h6"
@@ -151,7 +142,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                     {references.map(refs => {
                         if (refs.book_first_level === referenceKey && refs.paragraph_html[index] !== '') {
                             return (
-                                <>
+                                <div key={makeRandomKey()}>
                                     <hr/>
                                     <Typography className={classes.title}>{refs.book_name_en}</Typography>
                                     <hr/>
@@ -172,10 +163,10 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
                                         onClick={callOpenBook.bind(this, 0)}>
                                         Open book
                                     </Button>
-                                </>
+                                </div>
                             )
                         }
-
+                        return null
                     })}
 
                 </Paper>
@@ -183,13 +174,7 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
             </Container>
         )
     }
-
-
-    return (
-        <Container className={classes.container}>
-            <PaneBody/>
-        </Container>
-    )
+    return <PaneBody/>
 }
 
 export default observer(RightPane)

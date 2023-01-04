@@ -186,6 +186,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+USE_THOUSAND_SEPARATOR = True
+THOUSAND_SEPARATOR = ','
+NUMBER_GROUPING = 3
+DECIMAL_SEPARATOR = '.'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -200,9 +205,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static-django')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100/'
+
 # config the admin site email
 if DEBUG:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
 else:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
-

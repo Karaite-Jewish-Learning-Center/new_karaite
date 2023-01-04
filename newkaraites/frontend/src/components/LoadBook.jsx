@@ -12,23 +12,23 @@ import {storeContext} from "../stores/context";
 import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
-import { useLocation } from "react-router-dom"
+import {useLocation} from "react-router-dom"
 import getBook from "./getBook";
 import {getFirstPart} from "../utils/utils";
 
 
 const LoadBook = ({type}) => {
     const store = useContext(storeContext)
-    const message = useContext(messageContext )
-    const {book, chapter = 1, verse = 1, intro=''} = useParams()
-    console.log('LoadBook', book, chapter, verse, intro)
+    const message = useContext(messageContext)
+    const {book, chapter = 1, verse = 1, intro = ''} = useParams()
+
     // path is used as type for the KaraitesBooks component
     const path = getFirstPart(useLocation().pathname)
 
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
-    let history = useHistory()
 
+    let history = useHistory()
     const onClosePane = (paneNumber) => {
         store.closePane(paneNumber)
 
@@ -40,10 +40,9 @@ const LoadBook = ({type}) => {
         if (store.isLastPane) {
             if (type === 'bible') {
                 history.push(`/Tanakh/`)
-            }else {
+            } else {
                 history.push(`/${path}/`)
             }
-            return
         }
     }
 
@@ -68,7 +67,7 @@ const LoadBook = ({type}) => {
 
     const openBook = (paneNumber, refBook, refChapter, refVerse, refHighlight) => {
         try {
-            getBook(refBook, refChapter, refVerse, refHighlight, '', store, message ).then().catch()
+            getBook(refBook, refChapter, refVerse, refHighlight, '', store, message).then().catch()
         } catch (e) {
             message.setMessage(translateMessage(e))
         }

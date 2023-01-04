@@ -4,33 +4,68 @@ import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
 import {observer} from 'mobx-react-lite'
 import {storeContext} from "../../stores/context";
+import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
-import {versesByBibleBook} from "../../constants/constants";
+import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
+import {START_AUDIO_BOOK} from "../../constants/constants";
+import {messageContext} from "../../stores/messages/messageContext";
+
+const SCROLL_LATENCY_MS = 300
+const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const store = useContext(storeContext)
     const speech = useContext(speechContext)
+    const audioBookStore = useContext(AudioBookContext)
+    const message = useContext(messageContext)
     const book = store.getBook(paneNumber)
     const [speaking, setSpeaking] = useState(false)
+    const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
     const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
-
     const virtuoso = useRef(null)
 
-    const callFromEnded = () => {
+    const callFromEnded = (set = true) => {
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
         setTimeout(() => {
             //     @ts-ignore
             virtuoso.current.scrollToIndex({
-                index: store.getCurrentItem(paneNumber) ,
-                align: (store.getDistance(paneNumber) <=1 ? 'top': 'center'),
+                index: store.getCurrentItem(paneNumber),
+                align: (store.getDistance(paneNumber) <= 1 ? 'top' : 'center'),
                 behavior: 'smooth',
             })
-            setSpeaking(() => true)
-        }, 300)
-
+            // speech synthesis only!
+            if (set) setSpeaking(() => true)
+        }, SCROLL_LATENCY_MS)
     }
+
+    const onTimeUpdate = (currentTime) => {
+        const [start, end] = store.getAudioBookStarAndStop(paneNumber)
+
+        if (start === 0 && end === 0) {
+            setAudioBookPlaying(false)
+            audioBookStore.stop()
+            return
+        }
+
+        if (currentTime + SCROLL_LATENCY_SECONDS > end) {
+            callFromEnded(false)
+        }
+    }
+
+    const onAudioBookOnOff = () => {
+        if (!audioBookPlaying) {
+            const audioFile = store.getBookAudioFile(paneNumber)
+            audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
+            setAudioBookPlaying(() => true)
+            audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate)
+        } else {
+            setAudioBookPlaying(() => false)
+            audioBookStore.pause()
+        }
+    }
+
     const onSpeakOnOffEn = () => {
         if (speaking) {
             setSpeaking(false)
@@ -56,13 +91,33 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     useEffect(() => {
+        // todo:Move this to the store
+        const error = speech.getVoicesStatusError()
+        if(speech.errorAlreadyReported()) return
+        if (error === 1) message.setMessage('Hebrew voice not found!')
+        if (error === 2) message.setMessage('English voice not found!')
+        if (error === 3) message.setMessage('Hebrew and  English voice not found!')
+        if(error) speech.setErrorReported(true)
+
+    })
+
+    useEffect(() => {
+        return () => {
+            if (audioBookPlaying) {
+                audioBookStore.cancel()
+            }
+        }
+    }, [audioBookPlaying])
+
+    useEffect(() => {
         if (speaking) {
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
         return () => {
             speech.cancel()
         }
-    }, [store.getCurrentItem(paneNumber), speaking])
+    }, [store.getCurrentItem(paneNumber), speaking, paneNumber, speech])
+
 
     const calculateCurrentChapter = () => {
         let book = store.getBook(paneNumber)
@@ -78,17 +133,12 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }
     }
 
-    const itemContent = (item, data) => {
-        return (
-            <ChapterHeaderVerse
-                data={data}
-                item={item}
-                gridVisibleRange={gridVisibleRange}
-                paneNumber={paneNumber}
-                speaking={speaking}
-            />
-        )
-    }
+    const itemContent = (item, data) => <ChapterHeaderVerse
+        data={data}
+        item={item}
+        gridVisibleRange={gridVisibleRange}
+        paneNumber={paneNumber}
+    />
 
     return (
         <>
@@ -96,9 +146,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           paneNumber={paneNumber}
                           chapter={calculateCurrentChapter()}
                           onClosePane={onClosePane}
+                          isSpeechError={speech.getVoicesStatusError()}
                           onSpeakOnOffHe={onSpeakOnOffHe}
                           onSpeakOnOffEn={onSpeakOnOffEn}
                           flip={flip}
+                          onAudioBookOnOff={onAudioBookOnOff}
+                          audioBookPlaying={audioBookPlaying}
+                          isAudioBook={store.isAudioBook(paneNumber)}
             />
 
             <Virtuoso

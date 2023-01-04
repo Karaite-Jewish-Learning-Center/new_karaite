@@ -89,6 +89,7 @@ SQL_SIMILARITY = """select word ,word_count, SIMILARITY('{}', word) as similarit
 SQL_SIMILARITY += """ levenshtein('{}', word) as distance  """
 SQL_SIMILARITY += """From karaites_englishword  order by distance ASC, similarity DESC,  word_count  DESC limit 5"""
 
+
 # some other metrics that might be useful to play around with if time permits
 # sql += f""" levenshtein('{search}', word) as distance,  """
 # sql += f""" difference('{search}', word) as difference  """
@@ -124,3 +125,5 @@ def similar_search_en(search):
             did_you_mean = True
 
     return did_you_mean, search
+
+

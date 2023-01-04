@@ -17,7 +17,7 @@ from .models import (FirstLevel,
                      InvertedIndex,
                      Organization,
                      BookAsArray,
-                     # Comment,
+                     BookAsArrayAudio,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
@@ -26,6 +26,19 @@ from .models import (FirstLevel,
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
+
+
+def get_book_id(book):
+    """ get book id from book title"""
+    try:
+        book_title = Organization.objects.get(book_title_en=book)
+    except Organization.DoesNotExist:
+        try:
+            book_title = Organization.objects.get(book_title_he=book)
+        except Organization.DoesNotExist:
+            return None
+
+    return book_title
 
 
 def book_chapter_verse(request, *args, **kwargs):
@@ -41,13 +54,9 @@ def book_chapter_verse(request, *args, **kwargs):
 
     book = slug_back(book)
 
-    try:
-        book_title = Organization.objects.get(book_title_en=book)
-    except Organization.DoesNotExist:
-        try:
-            book_title = Organization.objects.get(book_title_he=book)
-        except Organization.DoesNotExist:
-            return JsonResponse(data={'status': 'false', 'message': _(f"Can't find book: {book}")}, status=400)
+    book_title = get_book_id(book)
+    if book_title is None:
+        return JsonResponse(data={'status': 'false', 'message': _(f"Can't find book: {book}")}, status=400)
 
     if chapter is not None:
         try:
@@ -91,7 +100,7 @@ def karaites_book_details(request, *args, **kwargs):
     """ get all books details"""
     response = []
     for details in KaraitesBookDetails.objects.all():
-        response.append(details.to_json(details.book_title))
+        response.append(details.to_json(details.book_title_en))
 
     return JsonResponse({'details': response}, safe=False)
 
@@ -108,12 +117,13 @@ def karaites_book_as_array(request, *args, **kwargs):
         return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
     if first is None:
-        return JsonResponse(data={'status': 'false', 'message': _('Need an  or 1 for "first" parameter.')}, status=400)
+        return JsonResponse(data={'status': 'false', 'message': _('Need an 0 or 1 for "first" parameter.')}, status=400)
 
     if paragraph_number is None:
         return JsonResponse(data={'status': 'false', 'message': _('Need a int for paragraph number')}, status=400)
 
     book = slug_back(book)
+    print('slug', book)
 
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
@@ -190,6 +200,20 @@ class GetBookAsArrayJson(View):
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
         return book_chapter_verse(request, *args, **kwargs)
+
+
+class AudioBook(View):
+    """ get audiobook start end times """
+
+    @staticmethod
+    def get(request, *args, **kwargs):
+        book_id = kwargs.get(' ', None)
+        if book_id is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a book id.')}, status=400)
+
+        audio = list(BookAsArrayAudio.objects.filter(book_id=book_id).values_list('start_ms', 'end_ms'))
+
+        return JsonResponse(audio, safe=False)
 
 
 class GetKaraitesAllBookDetails(View):
@@ -354,7 +378,7 @@ class Search(View):
             items = []
             for result in results:
                 items.append({'ref': result.reference_en,
-                              'text': custom_sql(result.text_en, search),
+                              'text': (custom_sql(result.text_en, search)[0].replace('<b>', '<b style="color:#F00">'),),
                               'path': result.path})
 
             return JsonResponse({'data': items,

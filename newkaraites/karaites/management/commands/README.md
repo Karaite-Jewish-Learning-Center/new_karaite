@@ -23,11 +23,14 @@ biblical_books, has no dependencies
 
 # Those can be run on a book basis
 >>./manage.py process_books
+
 >>./manage.py process_intro_he_en
  
 # Those can run as many times as you like
 >>./manage.py update_refs
->>./manage.py create_hebrew_search   
+ 
+>>./manage.py create_hebrew_search  
+
 >>./manage.py create_hebrew_rank_search
 
 [//]: # (Update autocomplete)

@@ -199,8 +199,8 @@ a:hover {
     /* Default 'dark' theme */
     background-color: #222;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#222), to(#000));
-    background-image: -moz-linear-gradient(top, #222, #000);
-    background-image: linear-gradient(top, #222, #000);
+    background-image: -moz-linear-gradient(to top, #222, #000);
+    background-image: linear-gradient(to top, #222, #000);
     -webkit-border-radius: 0.2em;
     -moz-border-radius: 0.2em;
     border-radius: 0.2em;
@@ -257,8 +257,8 @@ a:hover {
 [data-tip-theme~="blue"] *[data-tip]::after {
     background-color: #3498db;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#3498db), to(#3198dd));
-    background-image: -moz-linear-gradient(top, #3498db, #3198dd);
-    background-image: linear-gradient(top, #3498db, #3198dd);
+    background-image: -moz-linear-gradient(to top, #3498db, #3198dd);
+    background-image: linear-gradient(to top, #3498db, #3198dd);
 }
 
 *[data-tip][data-tip-theme~="blue"]::before,
@@ -271,8 +271,8 @@ a:hover {
 [data-tip-theme~="red"] *[data-tip]::after {
     background-color: #c0392b;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#c0392b), to(#e74c3c));
-    background-image: -moz-linear-gradient(top, #c0392b, #e74c3c);
-    background-image: linear-gradient(top, #c0392b, #e74c3c);
+    background-image: -moz-linear-gradient(to top, #c0392b, #e74c3c);
+    background-image: linear-gradient(to top, #c0392b, #e74c3c);
 }
 
 *[data-tip][data-tip-theme~="red"]::before,
@@ -285,8 +285,8 @@ a:hover {
 [data-tip-theme~="green"] *[data-tip]::after {
     background-color: #3FC380;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#3FC380), to(#2ECC71));
-    background-image: -moz-linear-gradient(top, #3FC380, #2ECC71);
-    background-image: linear-gradient(top, #3FC380, #2ECC71);
+    background-image: -moz-linear-gradient(to top, #3FC380, #2ECC71);
+    background-image: linear-gradient(to top, #3FC380, #2ECC71);
 }
 
 *[data-tip][data-tip-theme~="green"]::before,
@@ -299,8 +299,8 @@ a:hover {
 [data-tip-theme~="orange"] *[data-tip]::after {
     background-color: #F9690E;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#F9690E), to(#D35400));
-    background-image: -moz-linear-gradient(top, #F9690E, #D35400);
-    background-image: linear-gradient(top, #F9690E, #D35400);
+    background-image: -moz-linear-gradient(to top, #F9690E, #D35400);
+    background-image: linear-gradient(to top, #F9690E, #D35400);
 }
 
 *[data-tip][data-tip-theme~="orange"]::before,

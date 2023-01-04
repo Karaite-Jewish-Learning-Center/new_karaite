@@ -4,6 +4,9 @@ from .models import (FirstLevel,
                      Organization,
                      Author,
                      BookAsArray,
+                     Parsha,
+                     AudioBook,
+                     BookAsArrayAudio,
                      BooksFootNotes,
                      Songs,
                      Classification,
@@ -15,7 +18,6 @@ from .models import (FirstLevel,
                      FullTextSearch,
                      FullTextSearchHebrew,
                      InvertedIndex)
-
 
 from django.conf import settings
 
@@ -31,6 +33,12 @@ class KAdmin(admin.ModelAdmin):
                     f'../{STATIC}/css/tooltip.css',)
         }
         js = (f'../{STATIC}/js/toggleFilterPanel.js',)
+
+
+# actions
+@admin.action(description='Change selected to default values.')
+def change_to_default(modeladmin, request, queryset):
+    queryset.update(audio=None, start='00:00:00.000', end='00:00:00.000', start_ms=0, end_ms=0)
 
 
 class FirstLevelAdmin(KAdmin):
@@ -82,6 +90,37 @@ class BookAsArrayAdmin(KAdmin):
 
 
 admin.site.register(BookAsArray, BookAsArrayAdmin)
+
+
+class ParshaAdmin(KAdmin):
+    list_display = ('book', 'order', 'parsha_en', 'parsha_he', 'parsha_portion', 'readings')
+    list_editable = ('order',)
+
+
+admin.site.register(Parsha, ParshaAdmin)
+
+
+class AudioBookAdmin(KAdmin):
+    list_display = ('audio_name', 'audiofile')
+
+
+admin.site.register(AudioBook, AudioBookAdmin)
+
+
+@admin.action(permissions=['change'])
+class BookAsArrayAudioAdmin(KAdmin):
+    save_on_top = True
+    list_per_page = 15
+    list_display = ('book', 'audio', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
+    list_editable = ('audio', 'start', 'end', 'start_ms', 'end_ms')
+    search_fields = ('book__book_title_en',)
+    actions = [change_to_default]
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(BookAsArrayAudio, BookAsArrayAudioAdmin)
 
 
 class BookFootNotesAdmin(KAdmin):
@@ -201,11 +240,11 @@ class DetailsProxyAdmin(KAdmin):
         return False
 
     @staticmethod
-    def has_change_permission( request, obj=None):
+    def has_change_permission(request, obj=None):
         return False
 
     @staticmethod
-    def has_delete_permission( request, obj=None):
+    def has_delete_permission(request, obj=None):
         return False
 
 
@@ -233,7 +272,7 @@ admin.site.register(TableOfContents, TableOfContentsAdmin)
 
 
 class ReferencesAdmin(KAdmin):
-    list_display = ('karaites_book','law', 'paragraph_number',
+    list_display = ('karaites_book', 'law', 'paragraph_number',
                     'paragraph_admin_he', 'paragraph_admin_en',
                     'foot_notes_admin', 'error', 'bible_ref_en',
                     'bible_ref_he')

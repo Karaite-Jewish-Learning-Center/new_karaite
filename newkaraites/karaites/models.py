@@ -1,5 +1,4 @@
 import os
-import subprocess
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -7,11 +6,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .constants import (LANGUAGES,
                         AUTOCOMPLETE_TYPE,
-                        REF_ERROR_CODE)
-
+                        REF_ERROR_CODE,
+                        VERSE_TABLE)
+from math import modf
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
+from .validatores.validators import validate_time
 
 VERSE = 4
 HEBREW = 0
@@ -135,6 +136,7 @@ class Organization(models.Model):
                 'chapters': self.chapters,
                 'verses': self.verses,
                 'total_verses': self.total_verses,
+                'audio_books': BookAsArrayAudio.get_audio_list(self.id),
                 }
 
     def to_book_list(self):
@@ -188,7 +190,7 @@ class Author(models.Model):
         return f"{self.name}"
 
     class Meta:
-        verbose_name_plural = "Author's"
+        verbose_name_plural = " Author's"
 
 
 class BookAsArray(models.Model):
@@ -217,18 +219,11 @@ class BookAsArray(models.Model):
     # 6 need render chapter title,
     # 7 Total bible references in Hebrew,
     # 8 Total bible references in English,
-    # 9 Halakhah Hebrew
+    # 9 [Halakhah Hebrew, Liturgy Hebrew, Poetry Hebrew, Exhortatory Hebrew Comments Hebrew],
+    # 10 [Halakhah English, Liturgy English, Poetry English, Exhortatory English Comments English],
     # 10 Halakhah English
-    # 11 Liturgy Hebrew
-    # 12 Liturgy English
-    # 13 Poetry Hebrew
-    # 14 Poetry English
-    # 15 Polemics Hebrew
-    # 16 Polemics English
-    # 17 Exhortatory Hebrew
-    # 18 Exhortatory English
-    # 19 Comments Hebrew
-    # 20 Comments English
+    # 11 [start_ms, end_ms, id]  hebrew audio start and end time in milliseconds, [0,0,0] means no audio book
+    #     id is audio file id in AudioBooks table
     # ...]
 
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
@@ -237,9 +232,10 @@ class BookAsArray(models.Model):
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
-            html += '<tr>'
-            html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
-            html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
+            # html += '<tr>'
+            # html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
+            # html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
+            html += f'<tr><td>{text}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -253,10 +249,10 @@ class BookAsArray(models.Model):
     @staticmethod
     def to_list(book, chapter=None, book_title=None, first=None):
 
-        def flat(query):
+        def flat(query_set):
             result = []
-            for book in query:
-                result += book.book_text
+            for text in query_set:
+                result += text.book_text
             return result
 
         # if book is less them 11 chapters, read all book
@@ -293,7 +289,265 @@ class BookAsArray(models.Model):
 
     class Meta:
         ordering = ('book', 'chapter')
-        verbose_name_plural = _('Biblical books as array')
+        verbose_name_plural = _(' Biblical books')
+
+
+class Parsha(models.Model):
+    """ Parsha """
+
+    book = models.ForeignKey(Organization,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name=_('Book'),
+                             help_text=_('Book'))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'),
+                                help_text=_('Order'))
+
+    parsha_he = models.CharField(max_length=50,
+                                 verbose_name=_('Parsha'),
+                                 help_text=_('Parsha'))
+
+    parsha_en = models.CharField(max_length=50,
+                                 verbose_name=_('Parsha in English'),
+                                 help_text=_('Parsha in English'))
+
+    parsha_portion = models.CharField(max_length=20,
+                                      verbose_name=_('Parsha portion'),
+                                      help_text=_('Parsha portion'))
+
+    first_reading = models.CharField(max_length=30,
+                                     default='',
+                                     verbose_name=_('First reading'),
+                                     help_text=_('First reading'))
+
+    first_description = models.TextField(blank=True,
+                                         null=True,
+                                         verbose_name=_('First reading description'),
+                                         help_text=_('First reading description'))
+
+    second_reading = models.CharField(max_length=30,
+                                      default='',
+                                      verbose_name=_('Second reading'),
+                                      help_text=_('Second reading'))
+
+    second_description = models.TextField(blank=True,
+                                          null=True,
+                                          verbose_name=_('Second reading description'),
+                                          help_text=_('Second reading description'))
+
+    third_reading = models.CharField(max_length=30,
+                                     verbose_name=_('Third reading'),
+                                     help_text=_('Third reading'))
+
+    third_description = models.TextField(blank=True,
+                                         null=True,
+                                         verbose_name=_('Third reading description'),
+                                         help_text=_('Third reading description'))
+
+    fourth_reading = models.CharField(max_length=30,
+                                      verbose_name=_('Fourth reading'),
+                                      help_text=_('Fourth reading'))
+
+    fourth_description = models.TextField(blank=True,
+                                          null=True,
+                                          verbose_name=_('Fourth reading description'),
+                                          help_text=_('Fourth reading description'))
+
+    fifth_reading = models.CharField(max_length=30,
+                                     verbose_name=_('Fifth reading'),
+                                     help_text=_('Fifth reading'))
+
+    fifth_description = models.TextField(blank=True,
+                                         null=True,
+                                         verbose_name=_('Fifth reading description'),
+                                         help_text=_('Fifth reading description'))
+
+    sixth_reading = models.CharField(max_length=30,
+                                     verbose_name=_('Sixth reading'),
+                                     help_text=_('Sixth reading'))
+
+    sixth_description = models.TextField(blank=True,
+                                         null=True,
+                                         verbose_name=_('Sixth reading description'),
+                                         help_text=_('Sixth reading description'))
+
+    seventh_reading = models.CharField(max_length=30,
+                                       verbose_name=_('Seventh reading'),
+                                       help_text=_('Seventh reading'))
+
+    seventh_description = models.TextField(blank=True,
+                                           null=True,
+                                           verbose_name=_('Seventh reading description'),
+                                           help_text=_('Seventh reading description'))
+
+    def __str__(self):
+        return f"{self.parsha_en}"
+
+    @mark_safe
+    def readings(self):
+        html = '<table>'
+        html += '<thead><tr><th>Reading</th><th>Parsha Portion</th></tr></thead>'
+        html += f'<tr><td>1 st</td><td>{self.first_reading}</td></tr>'
+        html += f'<tr><td>2 nd</td><td>{self.second_reading}</td></tr>'
+        html += f'<tr><td>3 rd</td><td>{self.third_reading}</td></tr>'
+        html += f'<tr><td>4 th</td><td>{self.fourth_reading}</td></tr>'
+        html += f'<tr><td>5 th</td><td>{self.fifth_reading}</td></tr>'
+        html += f'<tr><td>6 th</td><td>{self.sixth_reading}</td></tr>'
+        html += f'<tr><td>7 th</td><td>{self.seventh_reading}</td></tr>'
+        html += '</table>'
+        return html
+
+    class Meta:
+        verbose_name_plural = "Parsha's"
+        ordering = ('order',)
+
+
+class AudioBook(models.Model):
+    """ Audiobooks typically parsha, but not limited to"""
+
+    audio_name = models.CharField(max_length=100,
+                                  verbose_name=_('Audiobook name'),
+                                  help_text=_('Audio name'))
+    audio_file = models.FileField(upload_to='audio-books/',
+                                  verbose_name=_('Audiobook file'),
+                                  help_text=_('Audiobook file'))
+
+    def __str__(self):
+        return self.audio_name
+
+    @mark_safe
+    def audiofile(self):
+        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audio_file.url}" type="audio/mpeg"></audio>'
+
+    class Meta:
+        verbose_name_plural = "Audiobooks"
+        ordering = ('audio_name',)
+
+
+class BookAsArrayAudio(models.Model):
+    """ maps audio to text"""
+    book = models.ForeignKey(Organization,
+                             on_delete=models.DO_NOTHING,
+                             verbose_name="Book"
+                             )
+
+    audio = models.ForeignKey(AudioBook,
+                              null=True,
+                              blank=True,
+                              on_delete=models.DO_NOTHING,
+                              verbose_name="Audio",
+                              help_text="Audio"
+                              )
+
+    chapter = models.IntegerField(default=0)
+
+    verse = models.IntegerField(default=0)
+
+    start = models.CharField(max_length=12,
+                             default='00:00:00.000',
+                             validators=[validate_time],
+                             verbose_name="Start time",
+                             help_text="Start time")
+
+    end = models.CharField(max_length=12,
+                           default='00:00:00.000',
+                           validators=[validate_time],
+                           verbose_name="End",
+                           help_text="End time")
+
+    start_ms = models.FloatField(default=0.000)
+
+    end_ms = models.FloatField(default=0.000)
+
+    def __str__(self):
+        return self.book.book_title_en
+
+    @staticmethod
+    def convert_time_to_seconds(time):
+        """ convert time to a float, before decimal point are seconds, after are milliseconds """
+        time_parts = list(map(float, time.split(':')))
+        ms, seconds = modf(time_parts[2])
+        return time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms
+
+    @staticmethod
+    def convert_seconds_to_time(time):
+        """ convert seconds and milliseconds to start and end time"""
+        hours_fraction, hours = modf(time / 3600)
+        minutes_fraction, minutes = modf(hours_fraction * 3600 / 60)
+        seconds_fraction, seconds = modf(minutes_fraction * 60)
+        milliseconds = int(round(seconds_fraction * 1000, 1))
+
+        if milliseconds == 1000:
+            seconds += 1
+            milliseconds = 0
+
+        return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
+
+    @mark_safe
+    def start_format(self):
+        return '{0:10.3f}'.format(self.start_ms)
+
+    start_format.short_description = 'Start'
+
+    @mark_safe
+    def end_format(self):
+        return '{0:10.3f}'.format(self.end_ms)
+
+    end_format.short_description = 'End'
+
+    @staticmethod
+    def get_audio_list(book):
+        """ get the audio list for a book"""
+        distinct = {}
+        for query in BookAsArrayAudio.objects.filter(book=book):
+            if query.audio is None:
+                continue
+            distinct[query.audio.id] = query.audio.audio_file.name
+        print(distinct)
+        return distinct
+
+    def get_previous(self, book, chapter, verse):
+        """ get previous record """
+        if verse - 1 > 0:
+            return BookAsArrayAudio.objects.filter(book=book, chapter=chapter, verse=verse - 1).first()
+        else:
+            last_verse = VERSE_TABLE[self.book.book_title_en][chapter - 2]
+            if chapter - 1 > 0:
+                previous_chapter = chapter - 1
+                return BookAsArrayAudio.objects.filter(book=book, chapter=previous_chapter, verse=last_verse).first()
+        return self
+
+    def save(self, *args, **kwargs):
+        # fill in the start based on end of previous record
+        if self.start == '00:00:00.000' and self.end != '00:00:00.000':
+            previous = self.get_previous(self.book, self.chapter, self.verse)
+            if previous != self:
+                self.start = previous.end
+                if previous.audio is not None:
+                    self.audio = previous.audio
+
+        if self.start_ms == 0 and self.end_ms != 0:
+            previous = self.get_previous(self.book, self.chapter, self.verse)
+            if previous != self:
+                self.start_ms = previous.end_ms
+                if previous.audio is not None:
+                    self.audio = previous.audio
+
+        # fill in the start based on end of previous record
+        if self.start != '00:00:00.000' and self.end != '00:00:00.000':
+            self.start_ms = self.convert_time_to_seconds(self.start)
+            self.end_ms = self.convert_time_to_seconds(self.end)
+
+        if self.start_ms != 0 and self.end_ms != 0:
+            self.start = self.convert_seconds_to_time(self.start_ms)
+            self.end = self.convert_seconds_to_time(self.end_ms)
+
+        super(BookAsArrayAudio, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ('book', 'chapter', 'verse', 'start')
+        verbose_name_plural = _('Biblical books audio')
 
 
 class Songs(models.Model):
@@ -316,9 +570,10 @@ class Songs(models.Model):
         return result
 
     def to_json(self):
+        #  file should be in django-statics/audio
         return {
             'song_title': self.song_title,
-            'song_file': self.song_file.url,
+            'song_file': self.song_file.url.replace('/media/songs/', ''),
         }
 
     def delete(self, using=None, keep_parents=False):
@@ -656,7 +911,8 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def to_json(book_title_unslug):
-        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug)
+        details = KaraitesBookDetails.objects.get(book_title_unslug__startswith=book_title_unslug,
+                                                  published=True)
         toc = TableOfContents.objects.filter(karaite_book=details)
         return details.to_dic(details, toc)
 
@@ -664,8 +920,7 @@ class KaraitesBookDetails(models.Model):
     def processed(self):
         if self.cron_schedule:
             return '<span class="badge badge-danger">To be processed</span>'
-        return '<span class="badge badge-successs">Processed</span>'
-
+        return '<span class="badge badge-success">Processed</span>'
 
     def save(self, *args, **kwargs):
         self.book_title_unslug = self.book_title_en
