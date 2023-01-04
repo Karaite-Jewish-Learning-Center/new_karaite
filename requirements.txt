@@ -1,4 +1,4 @@
-python==3.8
+#python==3.8
 Django==4.1
 psycopg2-binary
 django-cors-headers
@@ -21,3 +21,4 @@ fasttext-langdetect
 jellyfish
 txtai~=4.3.1
 wget
+django-tinymce
