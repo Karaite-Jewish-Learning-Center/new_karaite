@@ -41,7 +41,7 @@ def get_book_id(book):
     return book_title
 
 
-def book_chapter_verse(request, *args, **kwargs):
+def book_chapter_verse(**kwargs):
     """ Do Book chapter and verse check"""
     book = kwargs.get('book', None)
     chapter = kwargs.get('chapter', None)

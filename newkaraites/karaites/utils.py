@@ -55,12 +55,12 @@ def only_english_stop_word(search):
         return True if all words are English stop words
         return false if at list one is not a stop word
     """
-    for word in search.split(''):
-        if word in ENGLISH_STOP_WORDS:
+    for word in search.split(' '):
+        if word not in ENGLISH_STOP_WORDS:
             break
     else:
-        return False
-    return True
+        return True
+    return False
 
 
 def prep_search(search):
