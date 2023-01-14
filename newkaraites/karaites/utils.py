@@ -1,17 +1,8 @@
 import sys
 import re
-from django.db import connection
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         ENGLISH_STOP_WORDS)
-
-from .models import EnglishWord
-
-# migrations fallback
-try:
-    ENGLISH_DICTIONARY = dict.fromkeys(EnglishWord.objects.all().values_list('word', flat=True), None)
-except:
-    ENGLISH_DICTIONARY = {}
 
 
 def search_level(search_string):
@@ -64,7 +55,10 @@ def only_english_stop_word(search):
 
 
 def prep_search(search):
-    """ postgres full text search expect a normalized string"""
+    """ postgres full text search expect a normalized string
+        all space are replaced by space&space
+    """
+    search = normalize_search(search)
     return re.sub(' ', ' & ', search)
 
 
@@ -73,57 +67,3 @@ def highlight_hebrew(text_he, search_word_list):
     for search in search_word_list:
         text = text.replace(search, f'<b style="color:red">{search}</b>')
     return f"""<p class="search" dir="rtl">{text}</p>"""
-
-
-def custom_sql(text, search):
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute(
-                f"""Select ts_headline('english', '{text}', to_tsquery('english', '{search}'),'MaxFragments=3,ShortWord=0')""")
-            return cursor.fetchone()
-    except Exception:
-        return text
-
-
-SQL_SIMILARITY = """select word ,word_count, SIMILARITY('{}', word) as similarity, """
-SQL_SIMILARITY += """ levenshtein('{}', word) as distance  """
-SQL_SIMILARITY += """From karaites_englishword  order by distance ASC, similarity DESC,  word_count  DESC limit 5"""
-
-
-# some other metrics that might be useful to play around with if time permits
-# sql += f""" levenshtein('{search}', word) as distance,  """
-# sql += f""" difference('{search}', word) as difference  """
-# sql += """From karaites_englishword order by  difference DESC,  similarity DESC,  distance ASC,  word_count DESC limit 10"""
-
-
-def find_similar_words(search):
-    """
-        return a list of similar words
-    """
-    with connection.cursor() as cursor:
-        search = search.replace("'", "''")
-        cursor.execute(SQL_SIMILARITY.format(search, search))
-        return cursor.fetchall()
-
-
-def similar_search_en(search):
-    """ replace the search string with similar words if word is misspelled """
-    did_you_mean = False
-
-    for word in search.split(' '):
-        print("Similar Search", word)
-        # is word misspelled?
-        if word in ENGLISH_DICTIONARY:
-            continue
-
-        # keep numbers as they are
-        if word.isnumeric():
-            continue
-
-        for similar in find_similar_words(word):
-            search = search.replace(word, similar[0])
-            did_you_mean = True
-
-    return did_you_mean, search
-
-

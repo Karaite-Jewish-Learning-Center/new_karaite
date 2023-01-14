@@ -7,9 +7,10 @@ from django.views.generic import View
 from .utils import (slug_back,
                     normalize_search,
                     prep_search,
-                    highlight_hebrew,
-                    custom_sql,
-                    similar_search_en)
+                    highlight_hebrew)
+
+from .utils_sql import (custom_sql,
+                        similar_search_en)
 
 from .models import (FirstLevel,
                      FullTextSearch,
@@ -41,7 +42,7 @@ def get_book_id(book):
     return book_title
 
 
-def book_chapter_verse(**kwargs):
+def book_chapter_verse(request, *args, **kwargs):
     """ Do Book chapter and verse check"""
     book = kwargs.get('book', None)
     chapter = kwargs.get('chapter', None)
