@@ -19,8 +19,7 @@ let audioBook: string
 let songs: string
 
 if (process.env.NODE_ENV === 'development') {
-    //let server='192.168.1.58'
-    let server='localhost'
+    let server = 'localhost'
     api = `http://${server}:8000/api/v1/`
     audioBook = `http://${server}:8100/`
     songs = `http://${server}:8100/songs/`
@@ -30,7 +29,9 @@ if (process.env.NODE_ENV === 'development') {
     audioBook = 'http://localhost:8100/'
     songs = 'http://localhost:8100/songs/'
 }
-
+api = 'https://dev.karaites.org/api/v1/'
+audioBook = 'http://localhost:8100/'
+songs = 'http://localhost:8100/songs/'
 export const apiUrl = api
 export const audioBooksUrl = audioBook
 export const songsUrl = songs
