@@ -29,9 +29,9 @@ if (process.env.NODE_ENV === 'development') {
     audioBook = 'http://localhost:8100/'
     songs = 'http://localhost:8100/songs/'
 }
-api = 'http://dev.karaites.org/api/v1/'
-audioBook = 'http://localhost:8100/'
-songs = 'http://localhost:8100/songs/'
+// api = 'http://dev.karaites.org/api/v1/'
+// audioBook = 'http://localhost:8100/'
+// songs = 'http://localhost:8100/songs/'
 export const apiUrl = api
 export const audioBooksUrl = audioBook
 export const songsUrl = songs

@@ -133,7 +133,7 @@ admin.site.register(BooksFootNotes, BookFootNotesAdmin)
 
 
 class SongsAdmin(KAdmin):
-    list_display = ('song_title', 'song_file')
+    list_display = ('song_title', 'audi_song')
     actions = ['delete_selected']
 
     def delete_selected(self, request, queryset):
