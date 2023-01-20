@@ -190,7 +190,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
     list_filter = ('published', 'first_level',
                    'book_language', 'book_classification', 'book_title_en')
 
-    actions = ['delete_selected']
+    actions = ['delete_selected', 'publish_selected']
 
     def delete_selected(self, request, queryset):
         for obj in queryset:
@@ -203,6 +203,19 @@ class KaraitesBookDetailsAdmin(KAdmin):
         self.message_user(request, "%s successfully deleted." % message)
 
     delete_selected.short_description = "Delete selected Karaites book details"
+
+    def publish_selected(self, request, queryset):
+        for obj in queryset:
+            obj.published = True
+            obj.save()
+
+        if queryset.count() == 1:
+            message = "1 Karaites book detail published"
+        else:
+            message = "%s Karaites book details published" % queryset.count()
+        self.message_user(request, message)
+
+    publish_selected.short_description = "Publish selected Karaites book details"
 
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
