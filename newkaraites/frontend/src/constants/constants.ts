@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
     songs = `http://${server}:8100/media/songs/`
 
 } else {
-    api = 'http://localhost:8000/api/v1/'
+    api = 'http://dev.karaites.org/api/v1/'
     audioBook = 'http://localhost:8100/media/'
     songs = 'http://localhost:8100/media/songs/'
 }
