@@ -570,7 +570,7 @@ class Songs(models.Model):
         return result
 
     def to_json(self):
-        #  file should be in django-statics/audio
+
         return {
             'song_title': self.song_title,
             'song_file': self.song_file.url.replace('/media/songs/', ''),
