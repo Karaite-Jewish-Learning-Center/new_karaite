@@ -117,8 +117,12 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost:8100', '127.0.0.1']
     THUMBNAIL_DEBUG = DEBUG
+
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:8100",
+    ]
 
     DATABASES = {
         'default': {
