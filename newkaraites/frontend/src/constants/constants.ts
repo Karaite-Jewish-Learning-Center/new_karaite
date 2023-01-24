@@ -27,8 +27,8 @@ if (process.env.NODE_ENV === 'development') {
 
 } else {
     api = 'http://dev.karaites.org/api/v1/'
-    audioBook = 'http://localhost:8100/media/'
-    songs = 'http://localhost:8100/media/songs/'
+    audioBook = 'http://dev.karaites.org/media/'
+    songs = 'http://dev.karaites.org/media/songs/'
 }
 // api = 'http://dev.karaites.org/api/v1/'
 // audioBook = 'http://localhost:8100/media'
