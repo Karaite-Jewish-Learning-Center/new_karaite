@@ -1,9 +1,12 @@
+tbody {
+    display: block;
+}
 
 .MsoTableGrid {
     margin-top: 50px;
     padding-left: 5%;
     padding-right: 5%;
-    max-width: 900px;
+    /*max-width: 900px;*/
     /*max-width: 70%;*/
     margin-left: auto;
     margin-right: auto;
@@ -266,10 +269,12 @@ scroll {
     margin-right: 20px;
 }
 
-/* specifics for each book when need
+/* specifics for each book when need */
+
+
 /* Amen Yehi Ratson */
-.he-amen-table-000 {
-    max-width: 900px;
+.he-amen-table-000 > tbody{
+    max-width: 1950px !important;
 }
 
 /* Anochi */
@@ -306,15 +311,24 @@ scroll {
 }
 
 /* Ekkon */
+.he-ekkon-table-000 > tbody {
+    max-width: 760px;
+}
 .he-ekkon-table-000 tr:nth-child(odd) td:nth-child(odd) {
     direction: ltr;
 }
-
+/*Esmaḥ Beshir Ḥadash*/
+.he-esma-table-000 > tbody {
+    max-width: 750px;
+}
 .he-esma-table-000 tr:nth-child(odd) td:nth-child(odd) {
     direction: ltr;
 }
 
 /* Ezkor Lemitsvat Melech */
+.he-ezkor-table-000 > tboby {
+    max-width: 600px;
+}
 .he-ezkor-table-000 tr:nth-child(odd) td:nth-child(odd) {
     direction: ltr;
 }
@@ -345,6 +359,9 @@ scroll {
 
 /* Essa Bechos Yesha‘ */
 /* Et Kos Yeshu‘ot‘ */
+.he-et-table-000 > tbody {
+    max-width: 700px;
+}
 /*Evyon Asher */
 .he-evyon-table-000 {
     direction: ltr;
@@ -364,7 +381,10 @@ scroll {
 
 /* Laḥatani Mivḥar Banai*/
 /* Lutski Prayer for a Time of Plague */
-.he-lutski-table-000 {
+.he-lutski-table-000 > tbody {
+    max-width: 1300px;
+}
+.he-lutski-table-000  {
     direction: ltr;
 }
 
@@ -402,25 +422,44 @@ scroll {
 }
 
 /* Malé ‘Olam Kevod Yofi */
+.he-mal-table-000 {
+    max-width: 550px;
+}
 /* Azkir Tehillo */
+
+.he-azkir-table-000 > tbody {
+    max-width: 905px;
+}
+
 /* Hodu Le’el De‘ot */
 /* Odecha El ‘Al Ki Nora’ot */
-.he-odecha_el_-table-000 tr:first-child td:nth-child(3) {
+.he-odecha-table-000 > tbody {
+    max-width: 600px;
+}
+/*Yonat Elem*/
+.he-yonat-table-000 > tbody{
+    max-width: 600px;
+}
+
+.he-odecha-table-000 tr:first-child td:nth-child(3) {
  /*background-color: #3FC380;*/
   width :0;
 }
 
-.he-odecha_el_-table-000 tr:nth-child(3n) {
+.he-odecha-table-000 tr:nth-child(3n) {
     color: red;
 }
 
-.he-odecha_el_-table-000 tr:nth-child(4n) {
+.he-odecha-table-000 tr:nth-child(4n) {
     color: red;
 }
 
 /*Yaḥid Be‘olamo */
+.he-yaid-table-000 > tbody {
+    max-width: 800px;
+}
 /* Yonat Elem */
-.he-yonat_elem-table-000 {
+.he-yonat_elem-table-000 > tbody {
    max-width: 550px;
 }
 .he-yonat_elem-table-000 tr:nth-child(4n+4) {
@@ -433,8 +472,8 @@ scroll {
 
 /*Adon Yeshu‘ot*/
 /* Shiru ‘Am Zakka */
-he-shiru-table-000 {
-    max-width: 400px;
+.he-shiru-table-000 > tbody {
+    max-width: 350px;
 }
 
 .he-shiru-table-000 tr:nth-child(4n+4) {
@@ -538,10 +577,13 @@ he-shiru-table-000 {
 }
 
 /* Yah Zimrati */
-.he-yah-table-000 {
-    max-width: 800px;
+.he-yah-table-000 > tbody {
+    max-width: 665px;
 }
-
+/*Yatsar Ha’el*/
+.he-yatsar-table-000 > tbody {
+    max-width: 600px;
+}
 /* Yeter Peletat ‘Am */
 /* Sefer Milḥamot Adonai */
 .sefer-extra {
