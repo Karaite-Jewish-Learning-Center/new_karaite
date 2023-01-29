@@ -512,12 +512,14 @@ class Command(BaseCommand):
 
         book_name = book.replace('.html', '').lower()
         if book_name.find(' ') > 0:
+
             # we have 3 books starting with ashir
             if book_name.startswith('ashir'):
                 book_name = book_name.replace(' ', '_')
                 print(book_name)
             else:
                 book_name = book_name.split(' ')[0]
+
             # remove any non-ascii character
             book_name = book_name.encode('ascii', errors='ignore').decode()
 

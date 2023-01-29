@@ -17,9 +17,6 @@ tbody {
     direction: rtl;
 }
 
-scroll {
-
-}
 
 /* English*/
 
@@ -108,11 +105,13 @@ scroll {
     }
 
 }
+
 @media screen and (min-width: 700px) {
     .MsoTableGrid tr:nth-child(even) {
         margin-left: 100px;
     }
 }
+
 .special {
     max-width: 800px;
     direction: ltr;
@@ -285,8 +284,9 @@ scroll {
 }
 
 /* Anochi */
-.he-anochi-table-000 {
-    max-width: 800px;
+.he-anochi-table-000 > tbody {
+    width: 1100px;
+    max-width: 1100px;
     direction: ltr;
     word-break: break-all;
 }
@@ -299,7 +299,34 @@ scroll {
     direction: ltr;
 }
 
+/* Atsili ḳum ḳeraḥ */
+.he-atsili-table-000 > tbody {
+    width: 800px;
+    max-width: 800px;
+    direction: ltr;
+}
+
+.he-atsili-table-000 tr:nth-child(odd) {
+    background-color: #00B050;
+
+}
+
 /* Ashir Beshir Ḥadash*/
+.he-ashir_beshir_adash-table-000, .he-ashir_beshir_adash-table-001 > tbody {
+    max-width: 900px;
+}
+
+.he-ashir_beshir_adash-table-000, .he-ashir_beshir_adash-table-001 > p {
+    width: 100%;
+}
+
+/* Ashir Beshira El Nora*/
+
+.he-ashir_beshira_el_nora_tehillo-table-000 > tbody {
+    /*background-color: #00B050;*/
+    max-width: 1000px;
+}
+
 /* Ashir Le’el ‘Elyon */
 .he-ashir-table-003 {
     width: 1000px;
@@ -329,16 +356,22 @@ scroll {
 
 /*Esmaḥ Beshir Ḥadash*/
 .he-esma-table-000 > tbody {
-    max-width: 750px;
+    max-width: 850px;
 }
 
 .he-esma-table-000 tr:nth-child(odd) td:nth-child(odd) {
+    /*background-color: #00B050;*/
     direction: ltr;
 }
 
+.he-esma-table-000 tr:nth-child(even) td:nth-child(odd) {
+    margin-left: 10px;
+}
+
+
 /* Ezkor Lemitsvat Melech */
 .he-ezkor-table-000 > tboby {
-    max-width: 600px;
+    max-width: 100px;
 }
 
 .he-ezkor-table-000 tr:nth-child(odd) td:nth-child(odd) {
@@ -457,11 +490,13 @@ scroll {
 .he-azkir-table-000 > tbody {
     max-width: 905px;
 }
+
 @media screen and (min-width: 700px) {
     .he-azkir-table-000 tr:nth-child(even) {
         margin-left: 100px;
     }
 }
+
 /* Hodu Le’el De‘ot */
 
 /* Odecha El ‘Al Ki Nora’ot */
@@ -542,6 +577,7 @@ scroll {
 .he-en-table-000 {
     max-width: 400px;
 }
+
 @media screen and (min-width: 700px) {
     .he-en-table-000 tr:nth-child(even) {
         margin-left: 40px;
@@ -565,20 +601,54 @@ scroll {
 }
 
 /* Odé Le’el Maḥsi */
-.he-od-table-000 {
-    max-width: 800px;
+
+.he-od-table-000 > tbody {
+    max-width: 1000px;
     direction: rtl;
 }
 
+/* Ori Yeḥidati */
+.he-ori-table-000, .he-ori-table-001, .he-ori-table-002 > tbody {
+    width: 800px;
+    max-width: 800px;
+}
+
+
 /* Mitsvat Yesod Shabbat */
+.he-mitsvat-table-000 > tbody {
+    /* hack to make max-width work ?? */
+    width: 1000px;
+    max-width: 1000px;
+}
+
 .he-mitsvat-table-000 tr:nth-child(odd) td:nth-child(odd) p {
     direction: ltr;
 }
 
+/* Mizmor Leyom Shabbat */
+
+.he-mizmor-table-000, .he-mizmor-table-001, .he-mizmor-table-002 > tbody {
+    width: 1000px;
+    max-width: 1000px;
+}
+
 /* Shabbat Menuha */
-.he-shabbat-table-000 {
-    max-width: 800px;
+.he-shabbat-table-000, .he-shabbat-table-001 > tbody {
+    width: 1000px;
+    max-width: 700px;
     direction: rtl;
+}
+
+/* Yah Zimrati */
+.he-yah-table-000 > tbody {
+    width: 1000px;
+    max-width: 1000px;
+}
+
+/* Yerivai Ve’oyevai */
+.he-yerivai-table-000, .he-yerivai-table-001 > tbody {
+    width: 800px;
+    max-width: 800px;
 }
 
 /* Vehaḥochma Me’ayin Timmatsē */
@@ -634,6 +704,12 @@ scroll {
 }
 
 /* Yeter Peletat ‘Am */
+.he-yeter-table-000, .he-yeter-table-001 > tbody {
+    width: 1000px;
+    max-width: 1000px;
+}
+
+
 /* Sefer Milḥamot Adonai */
 .sefer-extra {
     width: 600px;
@@ -744,68 +820,72 @@ scroll {
 
 /* Patshegen Ketav Haddat */
 /* ‘Al ahavatecha */
+.he-al-table-000 > tbody {
+    width: 900px;
+    max-width: 900px;
+}
 
-.he-ahavatecha-table-000 tr:nth-child(5) {
+.he-al-table-000 tr:nth-child(5) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(6) {
+.he-al-table-000 tr:nth-child(6) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(9) {
+.he-al-table-000 tr:nth-child(9) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(10) {
+.he-al-table-000 tr:nth-child(10) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(13) {
+.he-al-table-000 tr:nth-child(13) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(14) {
+.he-al-table-0000 tr:nth-child(14) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(17) {
+.he-al-table-000 tr:nth-child(17) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(18) {
+.he-al-table-000 tr:nth-child(18) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(21) {
+.he-al-table-000 tr:nth-child(21) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(22) {
+.he-al-table-000 tr:nth-child(22) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(25) {
+.he-al-table-000 tr:nth-child(25) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(26) {
+.he-al-table-000 tr:nth-child(26) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(29) {
+.he-al-table-000 tr:nth-child(29) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(30) {
+.he-al-table-000 tr:nth-child(30) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(33) {
+.he-al-table-000 tr:nth-child(33) {
     color: red;
 }
 
-.he-ahavatecha-table-000 tr:nth-child(34) {
+.he-al-table-000 tr:nth-child(34) {
     color: red;
 }
 
