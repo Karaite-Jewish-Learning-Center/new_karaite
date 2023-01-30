@@ -112,8 +112,8 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
             'PORT': '',
         }
     }
-    AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100/'
-    SONGS_STATIC_SERVER = 'http://localhost:8100/'
+    AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100'
+    SONGS_STATIC_SERVER = 'http://localhost:8100'
 
 # server dev environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
@@ -136,8 +136,8 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
             'PORT': '5432',
         }
     }
-    AUDIO_BOOKS_STATIC_SERVER = 'http://dev.karaites.org/'
-    SONGS_STATIC_SERVER = 'http://dev.karaites.org/'
+    AUDIO_BOOKS_STATIC_SERVER = 'http://dev.karaites.org'
+    SONGS_STATIC_SERVER = 'http://dev.karaites.org'
 
 
 # server production environment
@@ -157,8 +157,8 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
             'PORT': '5432',
         }
     }
-    AUDIO_BOOKS_STATIC_SERVER = 'https://kjlc.karaites.org/'
-    SONGS_STATIC_SERVER = 'https://kjlc.karaites.org/'
+    AUDIO_BOOKS_STATIC_SERVER = 'https://kjlc.karaites.org'
+    SONGS_STATIC_SERVER = 'https://kjlc.karaites.org'
 
 else:
     raise Exception("Invalid environment")
