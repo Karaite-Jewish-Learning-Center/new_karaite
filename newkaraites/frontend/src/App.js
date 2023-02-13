@@ -20,6 +20,18 @@ import LoadingSpin from "./components/general/LoadingSpin";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Second from "./components/menu/getMenuSecond";
+import ReactGA from 'react-ga';
+import Track from "./components/analytics/track";
+
+
+ReactGA.initialize("G-1JBZBTTCSV",{
+    // debug: true,
+    titleCase: false,
+    siteSpeedSampleRate: 100,
+    gaOptions: {
+        userId: 100
+    }
+});
 
 const NullComponent = () => null;
 
@@ -47,6 +59,7 @@ function App() {
                                     <MyAppBar/>
                                     <Message/>
                                     <LoadingSpin/>
+                                    <Track />
                                     <Switch>
 
                                         <Route exact path="/">
@@ -71,8 +84,6 @@ function App() {
                                             <LoadBook type={'bible'}/>}/>
                                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                         <Route exact path="/Tanakh/"><Tanakh/></Route>
-
-
 
                                         <Route path="/*/:book/:chapter/:verse/:intro/" children={<LoadBook type={""}/>}/>
 
