@@ -22,3 +22,5 @@ jellyfish
 txtai~=4.3.1
 wget
 django-tinymce
+openpyxl==3.1.1
+
