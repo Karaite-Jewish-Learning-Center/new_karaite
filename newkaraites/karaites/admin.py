@@ -114,6 +114,7 @@ class BookAsArrayAudioAdmin(KAdmin):
     list_display = ('book', 'audio', 'chapter', 'verse', 'start', 'end', 'start_ms', 'end_ms')
     list_editable = ('audio', 'start', 'end', 'start_ms', 'end_ms')
     search_fields = ('book__book_title_en',)
+    list_filter = ('book__book_title_en',)
     actions = [change_to_default]
 
     def has_delete_permission(self, request, obj=None):
