@@ -26,13 +26,13 @@ if (process.env.NODE_ENV === 'development') {
     songs = `http://${server}:8100/media/songs/`
 
 } else {
-    api = 'http://dev.karaites.org/api/v1/'
-    audioBook = 'http://dev.karaites.org/media/'
-    songs = 'http://dev.karaites.org/media/songs/'
+    api = 'https://kjlc.karaites.org/api/v1/'
+    audioBook = 'http://localhost:8100/'
+    songs = 'http://localhost:8100/songs/'
 }
-api = 'http://dev.karaites.org/api/v1/'
-audioBook = 'http://localhost:8100/media'
-songs = 'http://localhost:8100/media/songs/'
+// api = 'http://dev.karaites.org/api/v1/'
+// audioBook = 'http://localhost:8100/media'
+// songs = 'http://localhost:8100/media/songs/'
 export const apiUrl = api
 export const audioBooksUrl = audioBook
 export const songsUrl = songs
@@ -175,6 +175,6 @@ export const versesByBibleBook: versesTable = {
 export const q640: string = '(min-width:640px)'
 
 
-const variables =()=> console.log('process.env',process.env)
+const variables = () => console.log('process.env', process.env)
 
 variables()
