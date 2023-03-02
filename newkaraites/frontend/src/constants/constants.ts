@@ -27,11 +27,11 @@ if (process.env.NODE_ENV === 'development') {
 
 } else {
     api = 'https://kjlc.karaites.org/api/v1/'
-    audioBook = 'http://localhost:8100/'
-    songs = 'http://localhost:8100/songs/'
+    audioBook = 'http://localhost:8100/media/'
+    songs = 'http://localhost:8100/media/songs/'
 }
 // api = 'http://dev.karaites.org/api/v1/'
-// audioBook = 'http://localhost:8100/media'
+// audioBook = 'http://localhost:8100/media/'
 // songs = 'http://localhost:8100/media/songs/'
 export const apiUrl = api
 export const audioBooksUrl = audioBook
