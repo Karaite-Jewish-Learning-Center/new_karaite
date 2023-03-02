@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/v1/', include('karaites.urls')),
 
 ]
+
 # server static in development only
 # if settings.DEBUG:
 #     urlpatterns += staticfiles_urlpatterns()

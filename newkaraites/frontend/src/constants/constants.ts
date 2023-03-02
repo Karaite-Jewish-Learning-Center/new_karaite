@@ -18,20 +18,21 @@ let api: string
 let audioBook: string
 let songs: string
 
+
 if (process.env.NODE_ENV === 'development') {
     let server = 'localhost'
     api = `http://${server}:8000/api/v1/`
-    audioBook = `http://${server}:8100/`
-    songs = `http://${server}:8100/songs/`
+    audioBook = `http://${server}:8100/media/`
+    songs = `http://${server}:8100/media/songs/`
 
 } else {
-    api = 'https://kjlc.karaites.org/api/v1/'
-    audioBook = 'http://localhost:8100/'
-    songs = 'http://localhost:8100/songs/'
+    api = 'http://dev.karaites.org/api/v1/'
+    audioBook = 'http://dev.karaites.org/media/'
+    songs = 'http://dev.karaites.org/media/songs/'
 }
-api = 'https://dev.karaites.org/api/v1/'
-audioBook = 'http://localhost:8100/'
-songs = 'http://localhost:8100/songs/'
+api = 'http://dev.karaites.org/api/v1/'
+audioBook = 'http://localhost:8100/media'
+songs = 'http://localhost:8100/media/songs/'
 export const apiUrl = api
 export const audioBooksUrl = audioBook
 export const songsUrl = songs
@@ -172,3 +173,8 @@ export const versesByBibleBook: versesTable = {
 
 // this is experimental and probably removed in the near future.
 export const q640: string = '(min-width:640px)'
+
+
+const variables =()=> console.log('process.env',process.env)
+
+variables()

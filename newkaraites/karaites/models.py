@@ -468,7 +468,7 @@ class BookAsArrayAudio(models.Model):
         """ convert time to a float, before decimal point are seconds, after are milliseconds """
         time_parts = list(map(float, time.split(':')))
         ms, seconds = modf(time_parts[2])
-        return time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms
+        return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)
 
     @staticmethod
     def convert_seconds_to_time(time):
@@ -570,11 +570,15 @@ class Songs(models.Model):
         return result
 
     def to_json(self):
-        #  file should be in django-statics/audio
+
         return {
             'song_title': self.song_title,
             'song_file': self.song_file.url.replace('/media/songs/', ''),
         }
+
+    @mark_safe
+    def audi_song(self):
+        return f'<audio controls><source src="{settings.SONGS_STATIC_SERVER}{self.song_file.url}" type="audio/mpeg"></audio>'
 
     def delete(self, using=None, keep_parents=False):
         print(self, self.song_file.name)

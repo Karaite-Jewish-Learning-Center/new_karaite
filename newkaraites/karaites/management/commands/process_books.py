@@ -512,12 +512,20 @@ class Command(BaseCommand):
 
         book_name = book.replace('.html', '').lower()
         if book_name.find(' ') > 0:
-            book_name = book_name.split(' ')[0]
+
+            # we have 3 books starting with ashir
+            if book_name.startswith('ashir'):
+                book_name = book_name.replace(' ', '_')
+                print(book_name)
+            else:
+                book_name = book_name.split(' ')[0]
+
             # remove any non-ascii character
             book_name = book_name.encode('ascii', errors='ignore').decode()
 
         # shorten book name
-        book_name = book_name[0:10]
+        if not book_name.startswith('ashir'):
+            book_name = book_name[0:10]
 
         for tag in divs.findAll(True, recursive=True):
 
@@ -588,8 +596,8 @@ class Command(BaseCommand):
                 # eval is not safe, but this is just to be used by the developer
                 # and not by the user.
                 # print('Pre process', pre_process.method_name)
-                #f = eval(pre_process.method_name)
-                #f(book.book_source, book.book_title_en)
+                # f = eval(pre_process.method_name)
+                # f(book.book_source, book.book_title_en)
 
         for book in query:
 

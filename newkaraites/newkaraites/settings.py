@@ -112,13 +112,19 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
             'PORT': '',
         }
     }
+    AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100'
+    SONGS_STATIC_SERVER = 'http://localhost:8100'
 
 # server dev environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost:8100', '127.0.0.1']
     THUMBNAIL_DEBUG = DEBUG
+
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:8100",
+    ]
 
     DATABASES = {
         'default': {
@@ -130,6 +136,9 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
             'PORT': '5432',
         }
     }
+    AUDIO_BOOKS_STATIC_SERVER = 'http://dev.karaites.org'
+    SONGS_STATIC_SERVER = 'http://dev.karaites.org'
+
 
 # server production environment
 elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
@@ -148,6 +157,9 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
             'PORT': '5432',
         }
     }
+    AUDIO_BOOKS_STATIC_SERVER = 'https://kjlc.karaites.org'
+    SONGS_STATIC_SERVER = 'https://kjlc.karaites.org'
+
 else:
     raise Exception("Invalid environment")
 
@@ -204,8 +216,6 @@ STATIC_URL = '/static-django/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static-django')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100/'
 
 # config the admin site email
 if DEBUG:
