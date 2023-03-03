@@ -27,12 +27,16 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const virtuoso = useRef(null)
 
     const callFromEnded = (set = true) => {
+        console.log('callFromEnded', store.getCurrentItem(paneNumber), store.getDistance(paneNumber))
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
+        store.setDistance(1, paneNumber)
+        console.log('callFromEnded', store.getCurrentItem(paneNumber), store.getDistance(paneNumber))
         setTimeout(() => {
             //     @ts-ignore
             virtuoso.current.scrollToIndex({
                 index: store.getCurrentItem(paneNumber),
-                align: (store.getDistance(paneNumber) <= 1 ? 'top' : 'center'),
+                // align: (store.getDistance(paneNumber) <= 1 ? 'start' : 'center'),
+                align: 'start',
                 behavior: 'smooth',
             })
             // speech synthesis only!
