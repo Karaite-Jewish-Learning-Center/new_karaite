@@ -29,7 +29,9 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const callFromEnded = (set = true) => {
         console.log('callFromEnded', store.getCurrentItem(paneNumber), store.getDistance(paneNumber))
         store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
-        store.setDistance(1, paneNumber)
+        if(store.getDistance(paneNumber) != 1 ) {
+            store.setDistance(1, paneNumber)
+        }
         console.log('callFromEnded', store.getCurrentItem(paneNumber), store.getDistance(paneNumber))
         setTimeout(() => {
             //     @ts-ignore
@@ -59,6 +61,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     const onAudioBookOnOff = () => {
+
         if (!audioBookPlaying) {
             const audioFile = store.getBookAudioFile(paneNumber)
             audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
