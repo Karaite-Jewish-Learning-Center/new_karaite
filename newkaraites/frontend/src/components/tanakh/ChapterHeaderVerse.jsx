@@ -35,17 +35,16 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBook
     }
 
     const onDoubleClick = (i) => {
-        if(audioBookPlaying || speaking) {
-            return
+        if (audioBookPlaying || speaking) {
+           return
         }
-
         store.setCurrentItem(i, paneNumber)
         store.setDistance(0, paneNumber)
         store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
     }
 
     const onClick = (i) => {
-        if(audioBookPlaying || speaking) {
+        if (audioBookPlaying || speaking) {
             return
         }
 
@@ -64,9 +63,13 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBook
     }
 
 
+    let current = null
     const startIndex = gridVisibleRange.startIndex
-    const current = startIndex + store.getDistance(paneNumber)
-
+    if (audioBookPlaying || speaking) {
+        current = store.getCurrentItem(paneNumber)
+    } else {
+        current = startIndex + store.getDistance(paneNumber)
+    }
     let found = item === current
 
 

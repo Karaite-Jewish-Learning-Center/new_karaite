@@ -27,19 +27,20 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const virtuoso = useRef(null)
 
     const callFromEnded = (set = true) => {
-        console.log('callFromEnded', store.getCurrentItem(paneNumber), store.getDistance(paneNumber))
-        store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
-        if(store.getDistance(paneNumber) != 1 ) {
-            store.setDistance(1, paneNumber)
+
+        if (audioBookStore.getIsPlaying()) {
+            store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
+            if (store.getDistance(paneNumber) != 1) {
+                store.setDistance(1, paneNumber)
+            }
         }
-        console.log('callFromEnded', store.getCurrentItem(paneNumber), store.getDistance(paneNumber))
+
         setTimeout(() => {
             //     @ts-ignore
             virtuoso.current.scrollToIndex({
                 index: store.getCurrentItem(paneNumber),
-                // align: (store.getDistance(paneNumber) <= 1 ? 'start' : 'center'),
                 align: 'start',
-                behavior: 'smooth',
+                behavior: 'smooth'
             })
             // speech synthesis only!
             if (set) setSpeaking(() => true)
@@ -65,12 +66,15 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         if (!audioBookPlaying) {
             const audioFile = store.getBookAudioFile(paneNumber)
             audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
+            callFromEnded(false)
             setAudioBookPlaying(() => true)
             audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate)
+
         } else {
             setAudioBookPlaying(() => false)
             audioBookStore.pause()
         }
+
     }
 
     const onSpeakOnOffEn = () => {
@@ -100,11 +104,11 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     useEffect(() => {
         // todo:Move this to the store
         const error = speech.getVoicesStatusError()
-        if(speech.errorAlreadyReported()) return
+        if (speech.errorAlreadyReported()) return
         if (error === 1) message.setMessage('Hebrew voice not found!')
         if (error === 2) message.setMessage('English voice not found!')
         if (error === 3) message.setMessage('Hebrew and  English voice not found!')
-        if(error) speech.setErrorReported(true)
+        if (error) speech.setErrorReported(true)
 
     })
 
@@ -147,6 +151,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         paneNumber={paneNumber}
         audioBookPlaying={audioBookPlaying}
         speaking={speaking}
+
     />
 
     return (
@@ -162,12 +167,13 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           onAudioBookOnOff={onAudioBookOnOff}
                           audioBookPlaying={audioBookPlaying}
                           isAudioBook={store.isAudioBook(paneNumber)}
+
             />
 
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 ref={virtuoso}
-                initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
+                // initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{
