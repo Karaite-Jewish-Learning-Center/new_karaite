@@ -18,7 +18,7 @@ import {devLog} from "../messages/devLog";
 import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 
-const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber}) => {
+const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBookPlaying, speaking}) => {
     const store = useContext(storeContext)
     const allBookData = store.getBookData(paneNumber)
     const lang = store.getLanguage(paneNumber)
@@ -35,12 +35,20 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber}) => {
     }
 
     const onDoubleClick = (i) => {
+        if(audioBookPlaying || speaking) {
+            return
+        }
+
         store.setCurrentItem(i, paneNumber)
         store.setDistance(0, paneNumber)
         store.setIsRightPaneOpen(!store.getIsRightPaneOpen(paneNumber), paneNumber)
     }
 
     const onClick = (i) => {
+        if(audioBookPlaying || speaking) {
+            return
+        }
+
         updateItemDistance(i)
     }
 

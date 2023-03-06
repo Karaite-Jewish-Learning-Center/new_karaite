@@ -145,6 +145,8 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         item={item}
         gridVisibleRange={gridVisibleRange}
         paneNumber={paneNumber}
+        audioBookPlaying={audioBookPlaying}
+        speaking={speaking}
     />
 
     return (
