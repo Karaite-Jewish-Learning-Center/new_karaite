@@ -213,6 +213,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
                       data={intro}
                       initialTopMostItemIndex={0}
                       itemContent={itemIntroduction}/>
+
         </>
     )
 }

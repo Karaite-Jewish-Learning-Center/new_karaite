@@ -967,7 +967,7 @@ class DetailsProxy(KaraitesBookDetails):
 
 
 class BooksFootNotes(models.Model):
-    """ Book footnotes """
+    """ deprecated Book footnotes """
 
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
