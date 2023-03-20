@@ -32,7 +32,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
 }
 
 const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: BookType, store: any, message: any) => {
-
+    debugger
     let url = ''
     if (!store.isPaneOpen(book, chapter, verse)) {
         if (type.toLowerCase() === "bible") {

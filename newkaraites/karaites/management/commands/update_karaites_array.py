@@ -2,25 +2,25 @@ from ...models import (KaraitesBookDetails,
                        KaraitesBookAsArray)
 
 
-def update_karaites_array_array(book, ref_chapter, paragraph_number, child):
+def update_karaites_array_array(book, ref_chapter, paragraph_number, child, footnotes=[]):
 
     return KaraitesBookAsArray.objects.get_or_create(
         book=book,
         ref_chapter=ref_chapter,
         paragraph_number=paragraph_number,
         book_text=[str(child), 0, ''],
-        foot_notes=[]
+        foot_notes=footnotes
     )
 
 
-def update_karaites_array(book, ref_chapter, paragraph_number, child_he, child_en):
+def update_karaites_array(book, ref_chapter, paragraph_number, child_he, child_en, footnotes=[]):
 
     obj, created = KaraitesBookAsArray.objects.get_or_create(
         book=book,
         ref_chapter=ref_chapter,
         paragraph_number=paragraph_number,
         book_text=[str(child_he), 0, child_en],
-        foot_notes=[]
+        foot_notes=footnotes
     )
 
     if not created:
@@ -32,7 +32,7 @@ def update_karaites_array(book, ref_chapter, paragraph_number, child_he, child_e
     return obj, created
 
 
-def update_karaites_array_details(book, ref_chapter, paragraph_number, child):
+def update_karaites_array_details(book, ref_chapter, paragraph_number, child, footnotes=[]):
 
     details = KaraitesBookDetails.objects.get(book_title_en=book)
     obj, created = KaraitesBookAsArray.objects.get_or_create(
@@ -40,7 +40,7 @@ def update_karaites_array_details(book, ref_chapter, paragraph_number, child):
         # ref_chapter=ref_chapter,
         paragraph_number=paragraph_number,
         book_text=child,
-        foot_notes=[]
+        foot_notes=footnotes
     )
 
     if not created:

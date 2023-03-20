@@ -1026,9 +1026,11 @@ class KaraitesBookAsArray(models.Model):
 
     paragraph_number = models.IntegerField(default=0)
 
-    # [paragraph English, 0, hebrew, is_title, paragraph Hebrew]
+    # [paragraph English, 0,  paragraph Hebrew]
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
+    # [[footnote English ], [footnote Hebrew]]
+    # [footnote number, footnote text]
     foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
 
     def __str__(self):

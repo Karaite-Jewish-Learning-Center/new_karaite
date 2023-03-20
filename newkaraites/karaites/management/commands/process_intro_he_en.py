@@ -216,15 +216,19 @@ class Command(BaseCommand):
         return footnote_number
 
     @staticmethod
-    def process_footnotes(html, details, lang):
+    def process_footnotes(html):
         html_tree = BeautifulSoup(html, 'html5lib')
         # find all footnotes by class
         last_number = 0
-        for footnote in html_tree.find_all('span', {'class': f'{lang}-foot-note'}):
+        footnotes = []
+        for footnote in html_tree.find_all('span', {'class': "en-foot-note"}):
             footnote_text = footnote.get('data-tip')
             footnote_ref = footnote.find_all('sup')[0].get_text(strip=True)
             last_number = Command.foot_notes_numbers(footnote_ref, last_number)
-            update_footnotes(details, footnote_ref, footnote_text, last_number, lang)
+            footnotes.append([footnote_text.replace(footnote_ref, "").strip(), last_number])
+            # print(f'footnote:{footnotes}')
+            # input('Press Enter to continue...')
+        return footnotes
 
     @staticmethod
     def process_liturgy_books(book):
@@ -315,14 +319,14 @@ class Command(BaseCommand):
             html_tree = BeautifulSoup(html, 'html5lib')
             html = str(html_tree)
 
-            # self.process_footnotes(html, book_details, lang)
-
             html = html.replace(book.remove_class, '')
             html = html.replace(book.remove_tags, '')
 
             html_tree = BeautifulSoup(html, 'html5lib')
             divs = html_tree.find_all('div', class_='WordSection1')
+
             print('table_book', table_book)
+
             if table_book:
                 table = divs[0].find_all('tr', recursive=True)
                 columns_order = list(map(int, book.columns_order.split(',')))
@@ -336,7 +340,10 @@ class Command(BaseCommand):
                     text_en = ''
                     html_he = ''
                     html_en = ''
-                    print('book: ', book.book_language)
+                    footnotes_he = []
+                    footnotes_en = []
+                    # print('book: ', book.book_language)
+
                     if 'he' in book.book_language or 'ja' in book.book_language:
                         try:
                             text_he = tds[columns_order[0]].get_text(strip=False)
@@ -352,10 +359,14 @@ class Command(BaseCommand):
                             pass
 
                     if html_he != '' or html_en != '':
+                        footnotes_en = self.process_footnotes(html_en)
+                        footnotes_he = self.process_footnotes(html_he)
+
                         update_karaites_array_details(book,
                                                       '',
                                                       c,
-                                                      [html_en, 0, html_he])
+                                                      [html_en, 0, html_he],
+                                                      [footnotes_en, footnotes_he])
 
                         update_full_text_search_index_en_he(book.book_title_en,
                                                             book.book_title_he,
