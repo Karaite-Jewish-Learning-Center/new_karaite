@@ -466,8 +466,11 @@ class BookAsArrayAudio(models.Model):
     @staticmethod
     def convert_time_to_seconds(time):
         """ convert time to a float, before decimal point are seconds, after are milliseconds """
+        print(f"time: {time}")
         time_parts = list(map(float, time.split(':')))
+        print(f"time_parts: {time_parts}")
         ms, seconds = modf(time_parts[2])
+        print(f"ms: {ms}, seconds: {seconds}")
         return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)
 
     @staticmethod
