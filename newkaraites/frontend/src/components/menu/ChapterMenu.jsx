@@ -5,6 +5,7 @@ import {makeStyles} from '@material-ui/core/styles'
 import {Link} from 'react-router-dom'
 import {Typography} from '@material-ui/core'
 import {unslug} from '../../utils/utils'
+import TorahPortions from "./ToraPortions";
 
 
 const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
@@ -35,7 +36,9 @@ const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
                   alignItems="center"
             >
                 {createMenu()}
+
             </Grid>
+            <TorahPortions book={bibleBook}/>
         </div>
     )
 }
@@ -58,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize:20,
+        fontSize: 20,
     },
     title: {
         marginTop: 100,

@@ -171,6 +171,37 @@ export const versesByBibleBook: versesTable = {
     'II-Chronicles': [18, 17, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 23, 14, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23],
 }
 
+const COHEN = 'Cohen'
+const LEVI = 'Levi'
+const YESRE = "Yisre'eli"
+
+export const torahPortions = {
+    'Genesis':
+        {
+            'Bereshit':
+                [
+                    {1: [1, 1, 2, 3, COHEN]},
+                    {2: [2, 4, 2, 7, LEVI]},
+                    {3: [2, 8, 2, 15, YESRE]},
+                    {4: [2, 16, 3, 21, YESRE]},
+                    {5: [3, 22, 4.16, YESRE]},
+                    {6: [4, 17, 5, 25, YESRE]},
+                    {7: [5, 26, 6, 8, YESRE]},
+                ],
+            'Noah':
+                [
+                    {1: [6, 9, 6, 22, COHEN]},
+                    {2: [7, 1, 7, 5, LEVI]},
+                    {3: [7, 6, 7, 16, YESRE]},
+                    {4: [7, 17, 9, 7, YESRE]},
+                    {5: [9, 8, 9, 17, YESRE]},
+                    {6: [9, 18, 10, 32, YESRE]},
+                    {7: [10, 1, 11, 32, YESRE]},
+                ]
+        }
+}
+
+
 // this is experimental and probably removed in the near future.
 export const q640: string = '(min-width:640px)'
 
