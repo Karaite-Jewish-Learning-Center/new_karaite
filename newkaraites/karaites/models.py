@@ -8,11 +8,13 @@ from .constants import (LANGUAGES,
                         AUTOCOMPLETE_TYPE,
                         REF_ERROR_CODE,
                         VERSE_TABLE)
-from math import modf
+
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
 from .validatores.validators import validate_time
+from .utils import (convert_seconds_to_time,
+                    convert_time_to_seconds)
 
 VERSE = 4
 HEBREW = 0
@@ -463,30 +465,6 @@ class BookAsArrayAudio(models.Model):
     def __str__(self):
         return self.book.book_title_en
 
-    @staticmethod
-    def convert_time_to_seconds(time):
-        """ convert time to a float, before decimal point are seconds, after are milliseconds """
-        print(f"time: {time}")
-        time_parts = list(map(float, time.split(':')))
-        print(f"time_parts: {time_parts}")
-        ms, seconds = modf(time_parts[2])
-        print(f"ms: {ms}, seconds: {seconds}")
-        return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)
-
-    @staticmethod
-    def convert_seconds_to_time(time):
-        """ convert seconds and milliseconds to start and end time"""
-        hours_fraction, hours = modf(time / 3600)
-        minutes_fraction, minutes = modf(hours_fraction * 3600 / 60)
-        seconds_fraction, seconds = modf(minutes_fraction * 60)
-        milliseconds = int(round(seconds_fraction * 1000, 1))
-
-        if milliseconds == 1000:
-            seconds += 1
-            milliseconds = 0
-
-        return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
-
     @mark_safe
     def start_format(self):
         return '{0:10.3f}'.format(self.start_ms)
@@ -539,16 +517,17 @@ class BookAsArrayAudio(models.Model):
 
         # fill in the start based on end of previous record
         if self.start != '00:00:00.000' and self.end != '00:00:00.000':
-            self.start_ms = self.convert_time_to_seconds(self.start)
-            self.end_ms = self.convert_time_to_seconds(self.end)
+            self.start_ms = convert_time_to_seconds(self.start)
+            self.end_ms = convert_time_to_seconds(self.end)
 
         if self.start_ms != 0 and self.end_ms != 0:
-            self.start = self.convert_seconds_to_time(self.start_ms)
-            self.end = self.convert_seconds_to_time(self.end_ms)
+            self.start = convert_seconds_to_time(self.start_ms)
+            self.end = convert_seconds_to_time(self.end_ms)
 
         super(BookAsArrayAudio, self).save(*args, **kwargs)
 
     class Meta:
+        app_label = 'karaites'
         ordering = ('book', 'chapter', 'verse', 'start')
         verbose_name_plural = _('Biblical books audio')
 

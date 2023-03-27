@@ -1,9 +1,9 @@
-from .utils import (search_level,
-                    slug,
-                    slug_back,
-                    replace_punctuation_marks,
-                    normalize_search,
-                    only_english_stop_word)
+from newkaraites.karaites.utils import (search_level,
+                                        slug,
+                                        slug_back,
+                                        replace_punctuation_marks,
+                                        normalize_search,
+                                        only_english_stop_word)
 
 
 def test_search_level():
