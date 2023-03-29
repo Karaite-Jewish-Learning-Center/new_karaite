@@ -153,12 +153,14 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         speaking={speaking}
 
     />
+    let currentChapter = calculateCurrentChapter()
+    console.log('currentChapter', currentChapter)
 
     return (
         <>
             <RenderHeader book={book}
                           paneNumber={paneNumber}
-                          chapter={calculateCurrentChapter()}
+                          chapter={currentChapter}
                           onClosePane={onClosePane}
                           isSpeechError={speech.getVoicesStatusError()}
                           onSpeakOnOffHe={onSpeakOnOffHe}
@@ -170,10 +172,14 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
             />
 
+            // ************************************
+            // must update current item when click on torah Portions
+            // ************************************
+
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 ref={virtuoso}
-                // initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
+                initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
                 rangeChanged={setGridVisibleRange}
                 itemContent={itemContent}
                 components={{
