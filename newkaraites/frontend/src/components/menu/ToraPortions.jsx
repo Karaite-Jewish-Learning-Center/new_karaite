@@ -1,5 +1,5 @@
 import React from 'react'
-import {torahPortions} from '../../constants/constants'
+import {torahPortions} from '../../constants/torahPortionsConstants'
 import {Link} from 'react-router-dom';
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";

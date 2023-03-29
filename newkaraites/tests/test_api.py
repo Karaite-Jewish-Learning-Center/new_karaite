@@ -1,6 +1,9 @@
 import requests
-
+from django.urls import reverse
+from django.test import Client
 base_url = 'http://localhost:8000/api/v1/'
+
+client = Client()
 
 
 def test_api():
@@ -13,7 +16,9 @@ def test_api():
     assert response.status_code == 200
 
     # Test AudioBook view
-    response = requests.get(base_url + 'audio-book/Genesis/')
+    value = '5575'
+    url = reverse('wild-card-word', kwargs={'book_id': value})
+    response = client.get(url)
     assert response.status_code == 200
 
     # Test GetKaraitesBookAsArray view
