@@ -54,6 +54,7 @@ class Command(BaseCommand):
         ws = wb.active
 
         audio_file = ws['A2'].value
+        print(f'Processing file {audio_file}')
         audio_name = audio_file.replace('.mp3', '').replace('.wav', '').replace('.ogg', '')
         book_title = ws['B2'].value
         try:
