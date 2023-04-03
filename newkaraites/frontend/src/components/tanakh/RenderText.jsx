@@ -171,11 +171,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                           isAudioBook={store.isAudioBook(paneNumber)}
 
             />
-
-            // ************************************
-            // must update current item when click on torah Portions
-            // ************************************
-
+            {/* must update current item when click on torah Portions */}
             <Virtuoso
                 data={store.getBookData(paneNumber)}
                 ref={virtuoso}

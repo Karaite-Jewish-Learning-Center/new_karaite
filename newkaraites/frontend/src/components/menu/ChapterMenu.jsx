@@ -38,7 +38,7 @@ const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
                 {createMenu()}
 
             </Grid>
-            <TorahPortions book={bibleBook}/>
+            {/*<TorahPortions book={bibleBook}/>*/}
         </div>
     )
 }
