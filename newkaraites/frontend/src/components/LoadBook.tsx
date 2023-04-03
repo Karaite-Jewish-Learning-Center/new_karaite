@@ -38,7 +38,7 @@ const LoadBook: FC<BooksProps> = ({type}) => {
     const store = useContext(storeContext)
     const message = useContext(messageContext)
     const {book, chapter, verse = '1', intro = ''}: Params = useParams()
-
+    debugger
     // path is used as type for the KaraitesBooks component
     const path = getFirstPart(useLocation().pathname)
 

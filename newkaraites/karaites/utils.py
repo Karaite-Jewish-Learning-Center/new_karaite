@@ -1,5 +1,6 @@
 import sys
 import re
+from math import modf
 from .constants import (FIRST_LEVEL,
                         SECOND_LEVEL,
                         ENGLISH_STOP_WORDS)
@@ -67,3 +68,25 @@ def highlight_hebrew(text_he, search_word_list):
     for search in search_word_list:
         text = text.replace(search, f'<b style="color:red">{search}</b>')
     return f"""<p class="search" dir="rtl">{text}</p>"""
+
+
+def convert_time_to_seconds(time):
+    """ convert time to a float, before decimal point are seconds, after are milliseconds """
+    time_parts = list(map(float, time.split(':')))
+    ms, seconds = modf(time_parts[2])
+    return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)
+
+
+def convert_seconds_to_time(time):
+    """ convert seconds and milliseconds to start and end time"""
+    hours_fraction, hours = modf(time / 3600)
+    minutes_fraction, minutes = modf(hours_fraction * 3600 / 60)
+    seconds_fraction, seconds = modf(minutes_fraction * 60)
+    milliseconds = int(round(seconds_fraction * 1000, 1))
+
+    if milliseconds == 1000:
+        seconds += 1
+        milliseconds = 0
+
+    return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
+

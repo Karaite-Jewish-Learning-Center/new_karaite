@@ -1,5 +1,5 @@
 db.sqlite3
-newkaraites/newkaraites/__pycache__/*
+newkaraites/newKaraites/__pycache__/*
 .idea/
 .pyc
 __pycache__
