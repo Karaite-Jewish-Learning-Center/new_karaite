@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore", module=IGNORE_MODULES)
 def main():
     """Run administrative tasks."""
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'newKaraites.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'newkaraites.settings')
 
     try:
 
