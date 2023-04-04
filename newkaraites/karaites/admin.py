@@ -9,6 +9,8 @@ from .models import (FirstLevel,
                      BookAsArrayAudio,
                      BooksFootNotes,
                      Songs,
+                     LiturgyDetails,
+                     LiturgyBook,
                      Classification,
                      KaraitesBookDetails,
                      DetailsProxy,
@@ -152,6 +154,22 @@ class SongsAdmin(KAdmin):
 
 
 admin.site.register(Songs, SongsAdmin)
+
+
+class LiturgyDetailsAdmin(KAdmin):
+    list_display = ('occasion', 'hebrew_name', 'english_name', 'order', 'intro')
+    list_editable = ('order',)
+    search_fields = ('occasion', 'hebrew_name', 'english_name')
+
+
+admin.site.register(LiturgyDetails, LiturgyDetailsAdmin)
+
+
+class LiturgyBookAdmin(KAdmin):
+    list_display = ('book', 'song', 'book_text')
+
+
+admin.site.register(LiturgyBook, LiturgyBookAdmin)
 
 
 class ClassificationAdmin(KAdmin):
