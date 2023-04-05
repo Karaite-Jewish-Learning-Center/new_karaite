@@ -595,16 +595,27 @@ class LiturgyDetails(models.Model):
                                     verbose_name=_("English Name"),
                                     help_text=_("English Name"))
 
-    order = models.IntegerField(default=0,
-                                verbose_name=_("Order"),
-                                help_text=_("Order"))
-
     intro = models.TextField(blank=True,
                              verbose_name=_("Intro"),
                              help_text=_("Intro"))
 
+    display = models.CharField(default="1",
+                               verbose_name=_("Display"),
+                               max_length=1,
+                               help_text=_("1) Hebrew on Left. Transliteration on right. \
+                                   Each verse has its translation below it. "))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_("Order"),
+                                help_text=_("Order"))
+
     def __str__(self):
         return self.english_name
+
+    def save(self, *args, **kwargs):
+        if self.order == 0:
+            self.order = LiturgyDetails.objects.all().count() * 1000
+        super(LiturgyDetails, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = _('Liturgy')
