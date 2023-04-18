@@ -90,3 +90,28 @@ def convert_seconds_to_time(time):
 
     return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
 
+
+# implement a stack class
+class Stack():
+
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return self.items == []
+
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+
+    def get_stack(self):
+        return self.items
+
+    def size(self):
+        return len(self.items)

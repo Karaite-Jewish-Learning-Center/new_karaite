@@ -584,6 +584,8 @@ class LiturgyDetails(models.Model):
      """
 
     occasion = models.CharField(max_length=100,
+                                null=True,
+                                blank=True,
                                 verbose_name=_("Occasion"),
                                 help_text=_("Occasion"))
 
@@ -636,19 +638,44 @@ class LiturgyBook(models.Model):
                              on_delete=models.CASCADE,
                              related_name='LiturgySong')
 
-    # [[hebrew, transliteration, english], audio_start, audio_end, reciter]
+    # [[hebrew, transliteration, english], audio_start, audio_end, reciter, censored, line_number]
     # these are group according to the song and xls file
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
+
+    line_number = models.IntegerField(default=0,
+                                      verbose_name=_("Line Number"),
+                                      help_text=_("Line Number"))
 
     # comments for each verse
 
     def __str__(self):
         return self.book.english_name
 
+    @mark_safe
+    def show_book_data(self):
+        hebrew = self.book_text[0]
+        transliteration = self.book_text[1]
+        english = self.book_text[2]
+        audio_start = self.book_text[3]
+        audio_end = self.book_text[4]
+        reciter = self.book_text[5]
+        censored = self.book_text[6]
+        line_number = self.book_text[7]
+
+        html = '<div style="display:flex">'
+        html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
+        html += f'<span dir="ltr" style="width:50%;inline:block;margin:5px; text-align:left">{transliteration}</span>'
+        html += f'</div>'
+        html += f'<span dir="ltr" style="text-align:center">{english}</span>'
+
+        return html
+
+    show_book_data.short_description = 'Book Data'
+
     class Meta:
         verbose_name_plural = _('Liturgy Books')
-        ordering = ('book__english_name',)
-        unique_together = ('book', 'song')
+        ordering = ('book__english_name', 'song__song_title', 'line_number')
+        unique_together = ('book', 'song', 'line_number')
 
 
 class Method(models.Model):
