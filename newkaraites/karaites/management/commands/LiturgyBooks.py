@@ -5,7 +5,7 @@ from ...models import (Songs,
                        LiturgyDetails)
 from django.core.files import File
 from pathlib import Path
-from ...utils import Stack
+
 
 path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/'
 
