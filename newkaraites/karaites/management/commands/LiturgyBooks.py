@@ -12,7 +12,8 @@ path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot an
 
 class Command(BaseCommand):
 
-    def save_data(self, liturgy_details, songs, line, line_number):
+    @staticmethod
+    def save_data(liturgy_details, songs, line, line_number):
         # save liturgyBook
         try:
             liturgy_book = LiturgyBook.objects.get(book=liturgy_details, song=songs, line_number=line_number)
