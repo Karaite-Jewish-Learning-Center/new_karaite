@@ -166,7 +166,7 @@ admin.site.register(LiturgyDetails, LiturgyDetailsAdmin)
 
 
 class LiturgyBookAdmin(KAdmin):
-    list_display = ('book', 'song','line_number', 'show_book_data')
+    list_display = ('book', 'song', 'line_number', 'show_line_data', 'show_book_data')
     list_filter = ('book', 'song')
     search_fields = ('book', 'song')
 

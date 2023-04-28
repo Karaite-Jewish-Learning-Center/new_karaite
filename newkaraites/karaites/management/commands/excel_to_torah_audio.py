@@ -1,10 +1,12 @@
+import os
+import re
 from datetime import datetime
 from django.core.files import File
 from django.core.management.base import BaseCommand
 from ...models import (BookAsArrayAudio,
                        AudioBook)
 from openpyxl import load_workbook
-import os
+
 
 FILE_NAME = f'{os.getcwd()}/audioProject/torah_audio.xlsx'
 AUDIO_DIR = f'{os.getcwd()}/audioProject/Parashat_bereshit-aliyot-mp3_2023-03-19_1724/'
@@ -45,13 +47,26 @@ class Command(BaseCommand):
         while True:
             if ws[f'A{row}'].value is None:
                 break
+
             file_name = ws[f'A{row}'].value
+            # check if file as a dot in the name
+            if '.' not in file_name:
+                # find one digit between spaces
+                result = re.search(r'\s\d\s', file_name).group(0)
+                if result is not None:
+                    file_name = file_name.replace(result, f' {result.strip()}. ')
+
+            # check if file name has .mp3
+            if not file_name.endswith('.mp3'):
+                file_name = f'{file_name}.mp3'
+
             chapter = ws[f'F{row}'].value
             verse = ws[f'G{row}'].value
             start_time = ws[f'J{row}'].value
             end_time = ws[f'K{row}'].value
             print(f'chapter:{chapter} verse:{verse} start_time:{start_time} end_time:{end_time}')
-
+            print('-' * 50)
+            print(file_name)
             try:
                 audio_book = AudioBook.objects.get(audio_name=file_name)
             except AudioBook.DoesNotExist:

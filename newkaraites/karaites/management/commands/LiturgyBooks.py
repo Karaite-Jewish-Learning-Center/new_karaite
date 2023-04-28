@@ -3,9 +3,11 @@ from openpyxl import load_workbook
 from ...models import (Songs,
                        LiturgyBook,
                        LiturgyDetails)
+from ...utils import (Stack,
+                      convert_time_string)
+
 from django.core.files import File
 from pathlib import Path
-
 
 path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/'
 
@@ -36,11 +38,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """ Read excel import songs , book text and audio, markers """
-        books = ['Atta Qadosh']  # , 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu']
+        books = ['Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu']
         file_name = path / options['xls_file']
 
         wb = load_workbook(file_name)
-
+        stack = Stack()
+        # audio start is 0 for the first line first book
+        stack.push(0)
         for book in books:
             ws = wb[book]
 
@@ -75,17 +79,20 @@ class Command(BaseCommand):
                 if ws[f'I{row}'].value is None:
                     break
 
+                audio_start = stack.pop()
+                stack.push(convert_time_string(ws[f'P{row}'].value))
+
                 # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments]
                 hebrew_text.append([
-                    ws[f'J{row}'].value,
-                    ws[f'K{row}'].value,
+                    ws[f'J{row}'].value,  # hebrew
+                    ws[f'K{row}'].value,  # transliteration
                     '',
-                    ws[f'O{row}'].value,
-                    ws[f'P{row}'].value,
-                    ws[f'H{row}'].value,
-                    ws[f'G{row}'].value,
-                    ws[f'I{row}'].value,
-                    ws[f'M{row}'].value
+                    audio_start,
+                    stack.peek(),  # audio_end
+                    ws[f'H{row}'].value,  # reciter
+                    ws[f'G{row}'].value,  # censored
+                    ws[f'I{row}'].value,  # line_number
+                    ws[f'M{row}'].value  # comments
                 ])
 
                 english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', ''])
@@ -114,4 +121,3 @@ class Command(BaseCommand):
                     hebrew_text = []
 
                 row += 1
-

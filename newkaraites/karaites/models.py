@@ -639,7 +639,7 @@ class LiturgyBook(models.Model):
                              related_name='LiturgySong')
 
     # [[hebrew, transliteration, english], audio_start, audio_end, reciter, censored, line_number]
-    # these are group according to the song and xls file
+    # these are grouped according to the song and xls file
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
     line_number = models.IntegerField(default=0,
@@ -671,6 +671,33 @@ class LiturgyBook(models.Model):
         return html
 
     show_book_data.short_description = 'Book Data'
+
+    @mark_safe
+    def show_line_data(self):
+        audio_start = self.book_text[3] if self.book_text[3] else '-'
+        audio_end = self.book_text[4] if self.book_text[4] else '-'
+        reciter = self.book_text[5] if self.book_text[5] else '-'
+        censored = self.book_text[6] if self.book_text[6] else '-'
+
+        if audio_start == '-' and audio_end == '-' and reciter == '-' and censored == '-':
+            return ''
+
+        html = '<table>'
+        html += '<th>Audio Start</th>'
+        html += '<th>Audio End</th>'
+        html += '<th>Reciter</th>'
+        html += '<th>Censored</th>'
+        html += '<tr>'
+        html += f'<td>{audio_start}</td>'
+        html += f'<td>{audio_end}</td>'
+        html += f'<td>{reciter}</td>'
+        html += f'<td>{censored}</td>'
+        html += f'<tr>'
+        html += '</table>'
+
+        return html
+
+    show_line_data.short_description = 'Line Data'
 
     class Meta:
         verbose_name_plural = _('Liturgy Books')
