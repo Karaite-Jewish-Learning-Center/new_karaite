@@ -8,7 +8,7 @@ from ...models import (BookAsArrayAudio,
 from openpyxl import load_workbook
 
 
-FILE_NAME = f'{os.getcwd()}/audioProject/torah_audio.xlsx'
+FILE_NAME = f'{os.getcwd()}/audioProject/Torah_audio.xlsx'
 AUDIO_DIR = f'{os.getcwd()}/audioProject/Parashat_bereshit-aliyot-mp3_2023-03-19_1724/'
 OUT_CONST = f'{os.getcwd()}/frontend/src/constants/torahPortions.ts'
 
@@ -34,9 +34,12 @@ class Command(BaseCommand):
     def fix_audio_length(time):
         if time is None:
             return None
+        time = time.strip()
         if len(time) == 11:
             time = datetime.strptime(time, '%H:%M:%S:%f')
             return time.strftime('%H:%M:%S.%f')[:-3]
+        else:
+            raise ValueError(f'Invalid time format: {time}')
 
     def handle(self, *args, **options):
         book = 'Genesis'

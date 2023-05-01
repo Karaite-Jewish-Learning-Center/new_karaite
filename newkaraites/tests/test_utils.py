@@ -1,12 +1,12 @@
 import pytest
-from newkaraites.karaites.utils import (search_level,
+from ..karaites.utils import (search_level,
                                         slug,
                                         slug_back,
                                         replace_punctuation_marks,
                                         normalize_search,
                                         only_english_stop_word)
 
-from newkaraites.karaites.utils import (convert_time_to_seconds,
+from ..karaites.utils import (convert_time_to_seconds,
                                         convert_seconds_to_time,
                                         convert_time_string)
 
@@ -64,6 +64,8 @@ def test_convert_time_to_seconds():
 
 def test_convert_time_string():
     assert abs(convert_time_string('01.9.8') - 69.8) < 0.001
+    assert abs(convert_time_string('01.9.899') - 69.899) < 0.001
+    assert abs(convert_time_string('03.6.0') - 186.0) < 0.001
 
 
 def test_convert_seconds_to_time():

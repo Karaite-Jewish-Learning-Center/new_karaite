@@ -93,7 +93,8 @@ def convert_seconds_to_time(time):
 
 def convert_time_string(time_str):
     minutes, seconds, milliseconds = map(float, time_str.split('.'))
-    return minutes * 60 + seconds + milliseconds / 100
+    print(minutes, seconds, milliseconds)
+    return minutes * 60 + seconds + (float(f'0.{int(milliseconds)}'))
 
 
 # implement a stack class
