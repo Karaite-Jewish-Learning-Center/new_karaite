@@ -50,9 +50,10 @@ class AppState {
         if (this.panes[i].bookData === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item] === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item].length < 12) return [0, 0, 0]
-
-        return JSON.parse(this.panes[i].bookData[item][AUDIO])
-    }
+        console.log(this.panes[i].bookData[item][AUDIO])
+        return this.panes[i].bookData[item][AUDIO]
+        // return JSON.parse(this.panes[i].bookData[item][AUDIO])
+     }
 
     isAudioBook = (i: number) => this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0
 

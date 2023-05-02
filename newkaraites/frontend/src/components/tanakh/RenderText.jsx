@@ -49,12 +49,22 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     const onTimeUpdate = (currentTime) => {
         const [start, end] = store.getAudioBookStarAndStop(paneNumber)
+        console.log('onTimeUpdate', start, end)
+        if (start === 0 && end !== 0) {
+            // begging of new audio file
+            // stop the previous one
+            // start the new one
+            setAudioBookPlaying(false)
+            audioBookStore.stop()
+            return
+        }
 
         if (start === 0 && end === 0) {
             setAudioBookPlaying(false)
             audioBookStore.stop()
             return
         }
+
 
         if (currentTime + SCROLL_LATENCY_SECONDS > end) {
             callFromEnded(false)
@@ -64,6 +74,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const onAudioBookOnOff = () => {
 
         if (!audioBookPlaying) {
+            debugger
             const audioFile = store.getBookAudioFile(paneNumber)
             audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
             callFromEnded(false)

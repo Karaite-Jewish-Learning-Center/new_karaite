@@ -45,7 +45,9 @@ export const torahPortions = {
                 {1: [23, 1, 23, 16, 'Cohen']},
                 {2: [23, 17, 24, 12, 'Levi']},
                 {3: [24, 13, 24, 26, "Yisre'eli"]},
+
                 {4: [24, 27, 24, 52, "Yisre'eli"]},
+
                 {5: [24, 53, 24, 67, "Yisre'eli"]},
                 {6: [25, 1, 25, 11, "Yisre'eli"]},
                 {7: [25, 12, 25, 18, "Yisre'eli"]},

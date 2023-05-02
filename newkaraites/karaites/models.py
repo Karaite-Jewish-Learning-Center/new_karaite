@@ -235,8 +235,7 @@ class BookAsArray(models.Model):
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
-            start, end, id = literal_eval(text[11])
-            file = AudioBook.objects.filter(id=id).first()
+            start, end, file = literal_eval(text[11])
             html += '<tr>'
             html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
             html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td>'
@@ -425,9 +424,12 @@ class AudioBook(models.Model):
     def __str__(self):
         return self.audio_name
 
+    def audiofile_name(self):
+        return self.audio_file.url
+
     @mark_safe
     def audiofile(self):
-        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audio_file.url}" type="audio/mpeg"></audio>'
+        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audiofile_name()}" type="audio/mpeg"></audio>'
 
     class Meta:
         verbose_name_plural = "Audiobooks"
@@ -484,6 +486,9 @@ class BookAsArrayAudio(models.Model):
 
     end_format.short_description = 'End'
 
+    def audi_file_name(self):
+        return self.audio.audio_file.url
+
     @staticmethod
     def get_audio_list(book):
         """ get the audio list for a book"""
@@ -492,7 +497,6 @@ class BookAsArrayAudio(models.Model):
             if query.audio is None:
                 continue
             distinct[query.audio.id] = query.audio.audio_file.name
-        print(distinct)
         return distinct
 
     def get_previous(self, book, chapter, verse):
