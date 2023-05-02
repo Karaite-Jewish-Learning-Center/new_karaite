@@ -501,7 +501,7 @@ class BookAsArrayAudio(models.Model):
 
     def save(self, *args, **kwargs):
         # fill in the start based on end of previous record
-        if self.start == '00:00:00.000' and self.end != '00:00:00.000':
+        if self.start is None and self.end != '00:00:00.000':
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start = previous.end
@@ -515,8 +515,8 @@ class BookAsArrayAudio(models.Model):
                 if previous.audio is not None:
                     self.audio = previous.audio
 
-        # fill in the start based on end of previous record
-        if self.start != '00:00:00.000' and self.end != '00:00:00.000':
+        # fill in the start_ms and end_ms based on start and end
+        if self.start == '00:00:00.000' and self.end != '00:00:00.000':
             self.start_ms = convert_time_to_seconds(self.start)
             self.end_ms = convert_time_to_seconds(self.end)
 
