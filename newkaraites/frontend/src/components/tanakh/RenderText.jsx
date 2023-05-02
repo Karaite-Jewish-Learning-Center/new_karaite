@@ -30,7 +30,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
         if (audioBookStore.getIsPlaying()) {
             store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
-            if (store.getDistance(paneNumber) != 1) {
+            if (store.getDistance(paneNumber) !== 1) {
                 store.setDistance(1, paneNumber)
             }
         }

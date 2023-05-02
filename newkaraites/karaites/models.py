@@ -1,4 +1,5 @@
 import os
+from ast import literal_eval
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -234,10 +235,16 @@ class BookAsArray(models.Model):
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
-            # html += '<tr>'
-            # html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
-            # html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
-            html += f'<tr><td>{text}</td></tr>'
+            start, end, id = literal_eval(text[11])
+            file = AudioBook.objects.filter(id=id).first()
+            html += '<tr>'
+            html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
+            html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td>'
+            html += f'<td>{start}</td>'
+            html += f'<td>{end}</td>'
+            html += f'<td>{file}</td>'
+            html += '</tr>'
+            # html += f'<tr><td>{text}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -505,14 +512,15 @@ class BookAsArrayAudio(models.Model):
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start = previous.end
-                if previous.audio is not None:
+                if self.audio is None and previous.audio is not None:
                     self.audio = previous.audio
 
         if self.start_ms == 0 and self.end_ms != 0:
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start_ms = previous.end_ms
-                if previous.audio is not None:
+
+                if self.audio is None and previous.audio is not None:
                     self.audio = previous.audio
 
         # fill in the start_ms and end_ms based on start and end
