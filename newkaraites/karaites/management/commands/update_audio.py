@@ -30,11 +30,11 @@ class Command(BaseCommand):
                                                          chapter=book_chapter.chapter,
                                                          verse=i)
                     if query.start_ms == 0 and query.end_ms == 0:
-                        audio = [0, 0, ""]
+                        audio = [0, 0, 0]
                     else:
-                        audio = [query.start_ms, query.end_ms, f"{query.audio.audio_file.url.replace('/media/audio-books/', '')}"]
+                        audio = [query.start_ms, query.end_ms, query.audio.id]
                 except BookAsArrayAudio.DoesNotExist:
-                    audio = [0, 0, ""]
+                    audio = [0, 0, 0]
 
                 if len(verse) > 11:
                     tmp = list(verse)

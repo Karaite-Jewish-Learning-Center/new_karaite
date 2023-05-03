@@ -49,41 +49,39 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     const onTimeUpdate = (currentTime) => {
         const [start, end] = store.getAudioBookStarAndStop(paneNumber)
-        console.log('onTimeUpdate', start, end)
-        if (start === 0 && end !== 0) {
-            // begging of new audio file
-            // stop the previous one
-            // start the new one
-            setAudioBookPlaying(false)
-            audioBookStore.stop()
-            return
-        }
+        console.log('onTimeUpdate', start, end, store.getCurrentItem(paneNumber),audioBookStore.getIsPlaying())
 
-        if (start === 0 && end === 0) {
-            setAudioBookPlaying(false)
-            audioBookStore.stop()
-            return
-        }
+        // if (start === 0 && end === 0) {
+        //     setAudioBookPlaying(false)
+        //     audioBookStore.stop()
+        //     return
+        // }
 
-
-        if (currentTime + SCROLL_LATENCY_SECONDS > end) {
+        if ( currentTime + SCROLL_LATENCY_SECONDS > end) {
+            console.log('onTimeUpdate callFromEnded', store.getCurrentItem(paneNumber))
             callFromEnded(false)
         }
     }
 
+    const onAudioBookEnded = () => {
+        console.log('onAudioBookEnded', store.getCurrentItem(paneNumber))
+        setAudioBookPlaying(() => false)
+        // onAudioBookOnOff()
+
+        // const audioFile = store.getBookAudioFile(paneNumber)
+        // audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
+        // audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate, onAudioBookEnded)
+    }
     const onAudioBookOnOff = () => {
 
         if (!audioBookPlaying) {
-            debugger
             const audioFile = store.getBookAudioFile(paneNumber)
             audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
-            callFromEnded(false)
+            // callFromEnded(false)
+            audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate, onAudioBookEnded)
             setAudioBookPlaying(() => true)
-            audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate)
-
         } else {
             setAudioBookPlaying(() => false)
-            audioBookStore.pause()
         }
 
     }
@@ -133,6 +131,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     useEffect(() => {
         if (speaking) {
+            debugger
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
         return () => {

@@ -7,8 +7,8 @@ class AudioBook {
     audio: any = null
     title: string = ''
     ready: boolean = false
-    callback: CallBack = () => {
-    }
+    callback: CallBack = () => {}
+    ended = () => {}
     loading: boolean = false
     playing: boolean = false
 
@@ -27,7 +27,8 @@ class AudioBook {
         }
 
         this.audio.onended = () => {
-            this.cancel()
+            this.ended()
+            console.log('Audio ended')
         }
 
         this.audio.loadeddata = () => {
@@ -45,8 +46,10 @@ class AudioBook {
     }
     // better this Function=() => void
     play = (start: number = 0,
-            callback = () => {}): void => {
-        this.callback = callback
+            onUpdate = () => {},
+            ended =()=>{}): void => {
+        this.callback = onUpdate
+        this.ended = ended
         this.audio.currentTime = start
         this.audio.play()
         this.playing = true

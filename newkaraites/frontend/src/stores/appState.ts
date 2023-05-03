@@ -51,8 +51,7 @@ class AppState {
         if (this.panes[i].bookData[item] === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item].length < 12) return [0, 0, 0]
         console.log(this.panes[i].bookData[item][AUDIO])
-        return this.panes[i].bookData[item][AUDIO]
-        // return JSON.parse(this.panes[i].bookData[item][AUDIO])
+        return JSON.parse(this.panes[i].bookData[item][AUDIO])
      }
 
     isAudioBook = (i: number) => this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0
@@ -151,6 +150,7 @@ class AppState {
         const id = this.getAudioBookStarAndStop(i)[AUDIO_BOOK_ID]
         if (id === 0) return ''
         console.log('audi name', toJS(this.panes[i].book_details.audio_books[id]))
+
         return this.panes[i].book_details.audio_books[id]
     }
 
