@@ -71,7 +71,7 @@ def highlight_hebrew(text_he, search_word_list):
 
 
 def convert_time_to_seconds(time):
-    """ convert time to a float, before decimal point are seconds, after are milliseconds """
+    """ convert time to a float, values before decimal point are seconds, values after are milliseconds """
     time_parts = list(map(float, time.split(':')))
     ms, seconds = modf(time_parts[2])
     return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)

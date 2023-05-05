@@ -48,7 +48,6 @@ export const Second = () => {
             setShowBooks(data.length > 0)
         }).catch((e) => {
             setError(() => true)
-            console.log('error in catch', e)
         })
     }, [error, showBooks, path])
 

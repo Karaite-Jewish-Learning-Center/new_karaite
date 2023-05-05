@@ -50,8 +50,8 @@ class AppState {
         if (this.panes[i].bookData === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item] === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item].length < 12) return [0, 0, 0]
-        console.log('Audio book data')
-        console.log(JSON.parse(this.panes[i].bookData[item][AUDIO]))
+        // console.log('Audio book data')
+        // console.log(JSON.parse(this.panes[i].bookData[item][AUDIO]))
         return JSON.parse(this.panes[i].bookData[item][AUDIO])
      }
     setLastId = (id: number, i: number) => {

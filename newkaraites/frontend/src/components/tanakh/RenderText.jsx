@@ -50,8 +50,8 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const onTimeUpdate = (currentTime) => {
         const [start, end, id] =store.getAudioBookData(paneNumber)
         const lastId = store.getLastId(paneNumber)
-        console.log('onTimeUpdate start',start,'end', end,'current time', currentTime)
-        console.log('onTimeUpdate id', id ,'last id', lastId, 'current item', store.getCurrentItem(paneNumber))
+        // console.log('onTimeUpdate start',start,'end', end,'current time', currentTime)
+        // console.log('onTimeUpdate id', id ,'last id', lastId, 'current item', store.getCurrentItem(paneNumber))
 
 
         if (start === 0 && end === 0) {
@@ -61,26 +61,22 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }
 
         if ( currentTime + SCROLL_LATENCY_SECONDS > end && lastId === id) {
-            console.log('onTimeUpdate callFromEnded', store.getCurrentItem(paneNumber))
+            // console.log('onTimeUpdate callFromEnded', store.getCurrentItem(paneNumber))
             callFromEnded(false)
         }
     }
 
     const onAudioBookEnded = () => {
-        console.log('onAudioBookEnded', store.getCurrentItem(paneNumber))
+        // console.log('onAudioBookEnded', store.getCurrentItem(paneNumber))
         setAudioBookPlaying(() => false)
         onAudioBookOnOff()
-
-        // const audioFile = store.getBookAudioFile(paneNumber)
-        // audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
-        // audioBookStore.play(store.getAudioBookData(paneNumber)[START_AUDIO_BOOK], onTimeUpdate, onAudioBookEnded)
     }
     const onAudioBookOnOff = () => {
 
         if (!audioBookPlaying) {
             let audioData  = store.getAudioBookData(paneNumber)
             store.setLastId(audioData[AUDIO_BOOK_ID], paneNumber)
-            console.log('onAudioBookOnOff', audioData[AUDIO_BOOK_ID])
+            // console.log('onAudioBookOnOff', audioData[AUDIO_BOOK_ID])
             const audioFile = store.getBookAudioFile(paneNumber)
             audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
             // callFromEnded(false)
@@ -170,7 +166,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     />
     let currentChapter = calculateCurrentChapter()
-    console.log('currentChapter', currentChapter)
 
     return (
         <>

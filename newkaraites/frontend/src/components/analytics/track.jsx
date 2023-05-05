@@ -3,7 +3,6 @@ import { withRouter, useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga';
 const Track = () => {
     let location = useLocation();
-    console.log('location', location.pathname)
     useEffect(() => {
         ReactGA.set({page: location.pathname});
         ReactGA.pageview(location.pathname);

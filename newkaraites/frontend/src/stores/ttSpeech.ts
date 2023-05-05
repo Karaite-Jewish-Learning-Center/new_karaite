@@ -56,7 +56,7 @@ class TextToSpeech {
                     // error = 3 no Hebrew or English voices
                 })
                 .catch((e) => {
-                    console.log(e.message)
+                    // console.log(e.message)
                 })
         } else {
             // Speech Synthesis Not Supported 😣

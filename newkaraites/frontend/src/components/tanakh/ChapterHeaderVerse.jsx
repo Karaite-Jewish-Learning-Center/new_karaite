@@ -90,7 +90,7 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBook
                             <Typography variant="body1" className={classes.hebrewFont}>{data[BIBLE_HEBREW]}</Typography>
                         </div>
                         <div className={classes.verseNumber}>
-                            <Typography className={classes.vn}>{data[BIBLE_VERSE]} - {current}</Typography>
+                            <Typography className={classes.vn}>{data[BIBLE_VERSE]}</Typography>
                         </div>
                         <div className={classes.verseEn}>
                             <Typography variant="body1" className={classes.englishFont}>{data[BIBLE_ENGLISH]}</Typography>

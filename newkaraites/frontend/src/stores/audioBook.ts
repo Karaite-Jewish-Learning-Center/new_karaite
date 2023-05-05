@@ -28,7 +28,7 @@ class AudioBook {
 
         this.audio.onended = () => {
             this.ended()
-            console.log('Audio ended')
+            // console.log('Audio ended')
         }
 
         this.audio.loadeddata = () => {
