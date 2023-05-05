@@ -71,7 +71,7 @@ def highlight_hebrew(text_he, search_word_list):
 
 
 def convert_time_to_seconds(time):
-    """ convert time to a float, before decimal point are seconds, after are milliseconds """
+    """ convert time to a float, values before decimal point are seconds, values after are milliseconds """
     time_parts = list(map(float, time.split(':')))
     ms, seconds = modf(time_parts[2])
     return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)
@@ -90,3 +90,34 @@ def convert_seconds_to_time(time):
 
     return f"{int(hours):02}:{int(minutes):02}:{int(seconds):02}.{milliseconds:03}"
 
+
+def convert_time_string(time_str):
+    minutes, seconds, milliseconds = map(float, time_str.split('.'))
+    print(minutes, seconds, milliseconds)
+    return minutes * 60 + seconds + (float(f'0.{int(milliseconds)}'))
+
+
+# implement a stack class
+class Stack():
+
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop()
+
+    def is_empty(self):
+        return self.items == []
+
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+
+    def get_stack(self):
+        return self.items
+
+    def size(self):
+        return len(self.items)

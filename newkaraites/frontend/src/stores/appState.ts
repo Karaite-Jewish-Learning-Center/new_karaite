@@ -45,16 +45,21 @@ class AppState {
 
     getBookChapterVerse = (i: number) => `(${this.panes[i].book} ${this.panes[i].refsChapterVerse[0]}:${this.panes[i].refsChapterVerse[1]})`
 
-    getAudioBookStarAndStop = (i: number) => {
+    getAudioBookData = (i: number) => {
         const item = this.getCurrentItem(i)
         if (this.panes[i].bookData === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item] === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item].length < 12) return [0, 0, 0]
-
+        // console.log('Audio book data')
+        // console.log(JSON.parse(this.panes[i].bookData[item][AUDIO]))
         return JSON.parse(this.panes[i].bookData[item][AUDIO])
+     }
+    setLastId = (id: number, i: number) => {
+        this.panes[i].lastId = id
     }
+    getLastId = (i: number): number => this.panes[i].lastId
 
-    isAudioBook = (i: number) => this.getAudioBookStarAndStop(i)[END_AUDIO_BOOK] !== 0
+    isAudioBook = (i: number) => this.getAudioBookData(i)[END_AUDIO_BOOK] !== 0
 
     getBook = (i: number): string => this.panes[i].book
 
@@ -147,9 +152,8 @@ class AppState {
 
     getBookAudioFile = (i: number): string => {
         if (this.panes[i].book_details === undefined || this.panes[i].book_details.length === 0) return ''
-        const id = this.getAudioBookStarAndStop(i)[AUDIO_BOOK_ID]
+        const id = this.getAudioBookData(i)[AUDIO_BOOK_ID]
         if (id === 0) return ''
-        console.log('audi name', toJS(this.panes[i].book_details.audio_books[id]))
         return this.panes[i].book_details.audio_books[id]
     }
 

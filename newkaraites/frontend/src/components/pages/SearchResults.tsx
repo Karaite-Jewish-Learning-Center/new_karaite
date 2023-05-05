@@ -28,7 +28,6 @@ const SearchResults = () => {
     const [page, setPage] = useState(1)
 
     const itemContent = (_: number, data: Data) => {
-        debugger
         if (data['path'] === 'Tanakh') {
             const {refBook, refChapter, refVerse} = parseEnglishRef(data['ref'])
             store.resetPanes()
@@ -67,7 +66,6 @@ const SearchResults = () => {
         store.setLoading(true)
         dataFetch<Data>(searchResultsUrl + `${search}/${page}/`)
             .then((data) => {
-                debugger
                 // if search result length is an exact multiple of ITEMS_PER_PAGE
                 // an extra call is done to figure out that next page
                 // is empty, In all other cases there is no need to do an extra call.

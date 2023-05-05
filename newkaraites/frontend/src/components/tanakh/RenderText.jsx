@@ -7,7 +7,7 @@ import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
-import {START_AUDIO_BOOK} from "../../constants/constants";
+import {START_AUDIO_BOOK, AUDIO_BOOK_ID} from "../../constants/constants";
 import {messageContext} from "../../stores/messages/messageContext";
 
 const SCROLL_LATENCY_MS = 300
@@ -30,7 +30,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
         if (audioBookStore.getIsPlaying()) {
             store.setCurrentItem(store.getCurrentItem(paneNumber) + 1, paneNumber)
-            if (store.getDistance(paneNumber) != 1) {
+            if (store.getDistance(paneNumber) !== 1) {
                 store.setDistance(1, paneNumber)
             }
         }
@@ -48,7 +48,11 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     }
 
     const onTimeUpdate = (currentTime) => {
-        const [start, end] = store.getAudioBookStarAndStop(paneNumber)
+        const [start, end, id] =store.getAudioBookData(paneNumber)
+        const lastId = store.getLastId(paneNumber)
+        // console.log('onTimeUpdate start',start,'end', end,'current time', currentTime)
+        // console.log('onTimeUpdate id', id ,'last id', lastId, 'current item', store.getCurrentItem(paneNumber))
+
 
         if (start === 0 && end === 0) {
             setAudioBookPlaying(false)
@@ -56,23 +60,30 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             return
         }
 
-        if (currentTime + SCROLL_LATENCY_SECONDS > end) {
+        if ( currentTime + SCROLL_LATENCY_SECONDS > end && lastId === id) {
+            // console.log('onTimeUpdate callFromEnded', store.getCurrentItem(paneNumber))
             callFromEnded(false)
         }
     }
 
+    const onAudioBookEnded = () => {
+        // console.log('onAudioBookEnded', store.getCurrentItem(paneNumber))
+        setAudioBookPlaying(() => false)
+        onAudioBookOnOff()
+    }
     const onAudioBookOnOff = () => {
 
         if (!audioBookPlaying) {
+            let audioData  = store.getAudioBookData(paneNumber)
+            store.setLastId(audioData[AUDIO_BOOK_ID], paneNumber)
+            // console.log('onAudioBookOnOff', audioData[AUDIO_BOOK_ID])
             const audioFile = store.getBookAudioFile(paneNumber)
             audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
-            callFromEnded(false)
+            // callFromEnded(false)
+            audioBookStore.play(audioData[START_AUDIO_BOOK], onTimeUpdate, onAudioBookEnded)
             setAudioBookPlaying(() => true)
-            audioBookStore.play(store.getAudioBookStarAndStop(paneNumber)[START_AUDIO_BOOK], onTimeUpdate)
-
         } else {
             setAudioBookPlaying(() => false)
-            audioBookStore.pause()
         }
 
     }
@@ -122,6 +133,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     useEffect(() => {
         if (speaking) {
+            debugger
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
         return () => {
@@ -154,7 +166,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     />
     let currentChapter = calculateCurrentChapter()
-    console.log('currentChapter', currentChapter)
 
     return (
         <>

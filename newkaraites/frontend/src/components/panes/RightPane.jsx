@@ -54,7 +54,6 @@ const RightPane = ({paneNumber, refClick, openBook}) => {
 
         fetchData(`${getBibleReferencesUrl}${bookChapterVerse}/`)
             .then(data => {
-                debugger
                 setReferences(data)
                 setReferenceKey(key)
                 setLoading(false)

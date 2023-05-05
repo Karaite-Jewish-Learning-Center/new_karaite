@@ -1,13 +1,14 @@
 import pytest
-from newkaraites.karaites.utils import (search_level,
+from ..karaites.utils import (search_level,
                                         slug,
                                         slug_back,
                                         replace_punctuation_marks,
                                         normalize_search,
                                         only_english_stop_word)
 
-from newkaraites.karaites.utils import (convert_time_to_seconds,
-                                        convert_seconds_to_time)
+from ..karaites.utils import (convert_time_to_seconds,
+                                        convert_seconds_to_time,
+                                        convert_time_string)
 
 
 def test_search_level():
@@ -59,6 +60,12 @@ def test_convert_time_to_seconds():
         actual_output = convert_time_to_seconds(input_time)
         assert actual_output == pytest.approx(expected_output,
                                               abs=0.01), f"Failed for input {input_time}. Expected output: {expected_output}. Actual output: {actual_output}"
+
+
+def test_convert_time_string():
+    assert abs(convert_time_string('01.9.8') - 69.8) < 0.001
+    assert abs(convert_time_string('01.9.899') - 69.899) < 0.001
+    assert abs(convert_time_string('03.6.0') - 186.0) < 0.001
 
 
 def test_convert_seconds_to_time():

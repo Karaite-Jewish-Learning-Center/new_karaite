@@ -175,7 +175,6 @@ export const versesByBibleBook: versesTable = {
 // this is experimental and probably removed in the near future.
 export const q640: string = '(min-width:640px)'
 
-
 const variables = () => console.log('process.env', process.env)
 
 variables()

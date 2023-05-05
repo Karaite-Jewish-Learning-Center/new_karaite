@@ -1,4 +1,5 @@
 import os
+from ast import literal_eval
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
@@ -234,10 +235,15 @@ class BookAsArray(models.Model):
     def text(self):
         html = '<table><tbody>'
         for text in self.book_text:
-            # html += '<tr>'
-            # html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
-            # html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td><td>{text[7:]}</td></tr>'
-            html += f'<tr><td>{text}</td></tr>'
+            start, end, file = literal_eval(text[11])
+            html += '<tr>'
+            html += f'<td>{text[VERSE]}</td><td class="en-verse">{text[HEBREW]}</td>'
+            html += f'<td class="he-verse" dir=\'rtl\'>{text[ENGLISH]}</td>'
+            html += f'<td>{start}</td>'
+            html += f'<td>{end}</td>'
+            html += f'<td>{file}</td>'
+            html += '</tr>'
+            # html += f'<tr><td>{text}</td></tr>'
         html += '</tbody></table>'
         return html
 
@@ -418,9 +424,12 @@ class AudioBook(models.Model):
     def __str__(self):
         return self.audio_name
 
+    def audiofile_name(self):
+        return self.audio_file.url
+
     @mark_safe
     def audiofile(self):
-        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audio_file.url}" type="audio/mpeg"></audio>'
+        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audiofile_name()}" type="audio/mpeg"></audio>'
 
     class Meta:
         verbose_name_plural = "Audiobooks"
@@ -477,6 +486,9 @@ class BookAsArrayAudio(models.Model):
 
     end_format.short_description = 'End'
 
+    def audi_file_name(self):
+        return self.audio.audio_file.url
+
     @staticmethod
     def get_audio_list(book):
         """ get the audio list for a book"""
@@ -485,7 +497,6 @@ class BookAsArrayAudio(models.Model):
             if query.audio is None:
                 continue
             distinct[query.audio.id] = query.audio.audio_file.name
-        print(distinct)
         return distinct
 
     def get_previous(self, book, chapter, verse):
@@ -501,22 +512,23 @@ class BookAsArrayAudio(models.Model):
 
     def save(self, *args, **kwargs):
         # fill in the start based on end of previous record
-        if self.start == '00:00:00.000' and self.end != '00:00:00.000':
+        if self.start is None and self.end != '00:00:00.000':
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start = previous.end
-                if previous.audio is not None:
+                if self.audio is None and previous.audio is not None:
                     self.audio = previous.audio
 
         if self.start_ms == 0 and self.end_ms != 0:
             previous = self.get_previous(self.book, self.chapter, self.verse)
             if previous != self:
                 self.start_ms = previous.end_ms
-                if previous.audio is not None:
+
+                if self.audio is None and previous.audio is not None:
                     self.audio = previous.audio
 
-        # fill in the start based on end of previous record
-        if self.start != '00:00:00.000' and self.end != '00:00:00.000':
+        # fill in the start_ms and end_ms based on start and end
+        if self.start == '00:00:00.000' and self.end != '00:00:00.000':
             self.start_ms = convert_time_to_seconds(self.start)
             self.end_ms = convert_time_to_seconds(self.end)
 
@@ -533,7 +545,7 @@ class BookAsArrayAudio(models.Model):
 
 
 class Songs(models.Model):
-    """ Songs """
+    """ Liturgy Songs """
 
     song_title = models.CharField(max_length=100,
                                   verbose_name=_("Song Title"))
@@ -576,6 +588,135 @@ class Songs(models.Model):
         ordering = ('song_title',)
 
 
+class LiturgyDetails(models.Model):
+    """ Liturgy book have a new format easier to read and understand
+        also have a new format for the audio files
+        In time all Liturgy books now in KaraitesBookAsArray will
+        be moved to this model
+     """
+
+    occasion = models.CharField(max_length=100,
+                                null=True,
+                                blank=True,
+                                verbose_name=_("Occasion"),
+                                help_text=_("Occasion"))
+
+    hebrew_name = models.CharField(max_length=100,
+                                   verbose_name=_("Hebrew Name"),
+                                   help_text=_("Hebrew Name"))
+
+    english_name = models.CharField(max_length=100,
+                                    verbose_name=_("English Name"),
+                                    help_text=_("English Name"))
+
+    intro = models.TextField(blank=True,
+                             verbose_name=_("Intro"),
+                             help_text=_("Intro"))
+
+    display = models.CharField(default="1",
+                               verbose_name=_("Display"),
+                               max_length=1,
+                               help_text=_("1) Hebrew on Left. Transliteration on right. \
+                                   Each verse has its translation below it. "))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_("Order"),
+                                help_text=_("Order"))
+
+    def __str__(self):
+        return self.english_name
+
+    def save(self, *args, **kwargs):
+        if self.order == 0:
+            self.order = LiturgyDetails.objects.all().count() * 1000
+        super(LiturgyDetails, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = _('Liturgy')
+        ordering = ('english_name',)
+
+
+class LiturgyBook(models.Model):
+    """ Liturgy Books
+        contain the Book data audio time markers, highlight info
+        when playing the audio
+    """
+
+    book = models.ForeignKey(LiturgyDetails,
+                             on_delete=models.CASCADE,
+                             related_name='LiturgyBook')
+
+    song = models.ForeignKey(Songs,
+                             on_delete=models.CASCADE,
+                             related_name='LiturgySong')
+
+    # [[hebrew, transliteration, english], audio_start, audio_end, reciter, censored, line_number]
+    # these are grouped according to the song and xls file
+    book_text = ArrayField(ArrayField(models.TextField()), default=list)
+
+    line_number = models.IntegerField(default=0,
+                                      verbose_name=_("Line Number"),
+                                      help_text=_("Line Number"))
+
+    # comments for each verse
+
+    def __str__(self):
+        return self.book.english_name
+
+    @mark_safe
+    def show_book_data(self):
+        hebrew = self.book_text[0]
+        transliteration = self.book_text[1]
+        english = self.book_text[2]
+        audio_start = self.book_text[3]
+        audio_end = self.book_text[4]
+        reciter = self.book_text[5]
+        censored = self.book_text[6]
+        line_number = self.book_text[7]
+
+        html = '<div style="display:flex">'
+        html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
+        html += f'<span dir="ltr" style="width:50%;inline:block;margin:5px; text-align:left">{transliteration}</span>'
+        html += f'</div>'
+        html += f'<span dir="ltr" style="text-align:center">{english}</span>'
+
+        return html
+
+    show_book_data.short_description = 'Book Data'
+
+    @mark_safe
+    def show_line_data(self):
+        audio_start = self.book_text[3] if self.book_text[3] else '-'
+        audio_end = self.book_text[4] if self.book_text[4] else '-'
+        reciter = self.book_text[5] if self.book_text[5] else '-'
+        censored = self.book_text[6] if self.book_text[6] else '-'
+
+        if audio_start == '-' and audio_end == '-' and reciter == '-' and censored == '-':
+            return ''
+
+        html = '<table>'
+        html += '<th>Audio Start</th>'
+        html += '<th>Audio End</th>'
+        html += '<th>Reciter</th>'
+        html += '<th>Censored</th>'
+        html += '<tr>'
+        html += f'<td>{audio_start}</td>'
+        html += f'<td>{audio_end}</td>'
+        html += f'<td>{reciter}</td>'
+        html += f'<td>{censored}</td>'
+        html += f'<tr>'
+        html += '</table>'
+
+        return html
+
+    show_line_data.short_description = 'Line Data'
+
+    class Meta:
+        verbose_name_plural = _('Liturgy Books')
+        ordering = ('book__english_name', 'song__song_title', 'line_number')
+        unique_together = ('book', 'song', 'line_number')
+
+
 class Method(models.Model):
     """ Methods to be used in pre-process and pro-process"""
 
@@ -588,12 +729,14 @@ class Method(models.Model):
     pro_process = models.BooleanField(default=False,
                                       verbose_name=_("Pro-process"))
 
-    def __str__(self):
-        return self.method_name
 
-    class Meta:
-        verbose_name_plural = _('Method')
-        ordering = ('method_name',)
+def __str__(self):
+    return self.method_name
+
+
+class Meta:
+    verbose_name_plural = _('Method')
+    ordering = ('method_name',)
 
 
 class Classification(models.Model):
