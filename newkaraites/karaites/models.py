@@ -556,19 +556,11 @@ class Songs(models.Model):
     def __str__(self):
         return self.song_title
 
-    @staticmethod
-    def get_book_songs(book):
-        result = []
-        for song in Songs.objects.filter(book=book):
-            result.append([song.song_title, song.song_file])
-        return result
-
     def to_json(self):
-
-        return {
-            'song_title': self.song_title,
-            'song_file': self.song_file.url.replace('/media/songs/', ''),
-        }
+        return {'id': self.pk,
+                'song_title': self.song_title,
+                'song_file': self.song_file.url.replace('/media/songs/', ''),
+                }
 
     @mark_safe
     def audi_song(self):
@@ -626,6 +618,16 @@ class LiturgyDetails(models.Model):
     def __str__(self):
         return self.english_name
 
+    def to_json(self):
+        return {
+            'occasion': self.occasion,
+            'hebrew_name': self.hebrew_name,
+            'english_name': self.english_name,
+            'intro': self.intro,
+            'display': self.display,
+            'order': self.order,
+        }
+
     def save(self, *args, **kwargs):
         if self.order == 0:
             self.order = LiturgyDetails.objects.all().count() * 1000
@@ -650,7 +652,7 @@ class LiturgyBook(models.Model):
                              on_delete=models.CASCADE,
                              related_name='LiturgySong')
 
-    # [[hebrew, transliteration, english], audio_start, audio_end, reciter, censored, line_number]
+    # [[hebrew, transliteration, english], audio_start, audio_end, song_id, reciter, censored, line_number]
     # these are grouped according to the song and xls file
     book_text = ArrayField(ArrayField(models.TextField()), default=list)
 
@@ -668,11 +670,11 @@ class LiturgyBook(models.Model):
         hebrew = self.book_text[0]
         transliteration = self.book_text[1]
         english = self.book_text[2]
-        audio_start = self.book_text[3]
-        audio_end = self.book_text[4]
-        reciter = self.book_text[5]
-        censored = self.book_text[6]
-        line_number = self.book_text[7]
+        # audio_start = self.book_text[3]
+        # audio_end = self.book_text[4]
+        # reciter = self.book_text[5]
+        # censored = self.book_text[6]
+        # line_number = self.book_text[7]
 
         html = '<div style="display:flex">'
         html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
@@ -688,8 +690,9 @@ class LiturgyBook(models.Model):
     def show_line_data(self):
         audio_start = self.book_text[3] if self.book_text[3] else '-'
         audio_end = self.book_text[4] if self.book_text[4] else '-'
-        reciter = self.book_text[5] if self.book_text[5] else '-'
-        censored = self.book_text[6] if self.book_text[6] else '-'
+        id = self.book_text[5] if self.book_text[5] else '-'
+        reciter = self.book_text[6] if self.book_text[6] else '-'
+        censored = self.book_text[7] if self.book_text[7] else '-'
 
         if audio_start == '-' and audio_end == '-' and reciter == '-' and censored == '-':
             return ''
@@ -697,11 +700,13 @@ class LiturgyBook(models.Model):
         html = '<table>'
         html += '<th>Audio Start</th>'
         html += '<th>Audio End</th>'
+        html += '<th>Id</th>'
         html += '<th>Reciter</th>'
         html += '<th>Censored</th>'
         html += '<tr>'
         html += f'<td>{audio_start}</td>'
         html += f'<td>{audio_end}</td>'
+        html += f'<td>{id}</td>'
         html += f'<td>{reciter}</td>'
         html += f'<td>{censored}</td>'
         html += f'<tr>'
@@ -710,6 +715,25 @@ class LiturgyBook(models.Model):
         return html
 
     show_line_data.short_description = 'Line Data'
+
+    def to_json(self):
+
+        return {
+            'book_text': self.book_text,
+        }
+
+    @staticmethod
+    def get_book(book_name):
+        details = LiturgyDetails.objects.get(english_name=book_name).to_json()
+        songs = []
+        for song in Songs.objects.filter(LiturgySong__book__english_name=book_name):
+            songs.append(song.to_json())
+
+        book_data = []
+        for book in LiturgyBook.objects.filter(book__english_name=book_name):
+            book_data.append(book.to_json())
+
+        return {'details': details, 'songs': songs, 'book_data': book_data}
 
     class Meta:
         verbose_name_plural = _('Liturgy Books')

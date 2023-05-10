@@ -28,6 +28,19 @@ class Command(BaseCommand):
         liturgy_book.line_number = line_number
         liturgy_book.save()
 
+    @staticmethod
+    def save_song(english_name, song_file):
+        try:
+            songs = Songs.objects.get(song_title=english_name)
+        except Songs.DoesNotExist:
+            songs = Songs()
+        song_file_name = path / song_file
+        songs.song_title = english_name
+        songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
+        songs.save()
+
+        return songs
+
     def add_arguments(self, parser):
         parser.add_argument(
             '--xls_file',
@@ -60,14 +73,7 @@ class Command(BaseCommand):
 
             song_file = ws['A2'].value
 
-            try:
-                songs = Songs.objects.get(song_title=english_name)
-            except Songs.DoesNotExist:
-                songs = Songs()
-            song_file_name = path / song_file
-            songs.song_title = english_name
-            songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
-            songs.save()
+            songs = self.save_song(english_name, song_file)
 
             row = 2
             line_number = 1
@@ -83,6 +89,10 @@ class Command(BaseCommand):
                 # line number
                 if ws[f'I{row}'].value is None:
                     break
+                # maybe more than one file song per book
+                if ws[f'A{row}'].value is not None:
+                    song_file = ws[f'A{row}'].value
+                    songs = self.save_song(english_name, song_file)
 
                 audio_start = stack.pop()
                 stack.push(convert_time_string(ws[f'P{row}'].value))
@@ -94,6 +104,7 @@ class Command(BaseCommand):
                     '',
                     audio_start,
                     stack.peek(),  # audio_end
+                    songs.id,  # song_id
                     ws[f'H{row}'].value,  # reciter
                     ws[f'G{row}'].value,  # censored
                     ws[f'I{row}'].value,  # line_number
