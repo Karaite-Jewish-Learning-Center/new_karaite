@@ -43,15 +43,14 @@ class Command(BaseCommand):
 
         wb = load_workbook(file_name)
         stack = Stack()
-        # audio start is 0 for the first line first book
-        stack.push(0)
+
         for book in books:
             ws = wb[book]
 
             # song details
             hebrew_name = ws['C2'].value
             english_name = ws['D2'].value
-            LiturgyDetails.objects.filter(hebrew_name=book).delete()
+            LiturgyDetails.objects.filter(english_name=english_name).delete()
             liturgy_details = LiturgyDetails()
             liturgy_details.occasion = ws['B2'].value
             liturgy_details.hebrew_name = hebrew_name
@@ -72,8 +71,14 @@ class Command(BaseCommand):
 
             row = 2
             line_number = 1
+            spreadsheet_line = 1
             english_translation = []
             hebrew_text = []
+            # audio_start
+            stack.push(convert_time_string(ws[f'O{row}'].value))
+            print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
+            input('Press Enter to continue...')
+
             while True:
                 # line number
                 if ws[f'I{row}'].value is None:
@@ -81,7 +86,7 @@ class Command(BaseCommand):
 
                 audio_start = stack.pop()
                 stack.push(convert_time_string(ws[f'P{row}'].value))
-
+                print('audio_start: ', audio_start, ' audio_end: ', stack.peek())
                 # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments]
                 hebrew_text.append([
                     ws[f'J{row}'].value,  # hebrew
@@ -97,8 +102,9 @@ class Command(BaseCommand):
 
                 english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', ''])
 
-                # end of verse
-                if ws[f'F{row}'].value == '<end verse>':
+                # end of verse, section or subtext
+                end = ws[f'F{row}'].value
+                if end is not None and ws[f'F{row}'].value.find('end') >= 0:
                     # save hebrew text
                     for hebrew in hebrew_text:
                         self.save_data(liturgy_details, songs, hebrew, line_number)
@@ -119,5 +125,6 @@ class Command(BaseCommand):
                     line_number += 1
                     english_translation = []
                     hebrew_text = []
-
+                print('Processing  book: ', book, ' song: ', english_name, ' line_number: ', spreadsheet_line, )
+                spreadsheet_line += 1
                 row += 1
