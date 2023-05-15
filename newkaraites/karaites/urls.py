@@ -7,7 +7,7 @@ from .views import (GetFirstLevel,
                     GetKaraitesBookAsArray,
                     GetTOC,
                     GetHalakhah,
-                    GetLiturgyBook,
+                    Book,
                     Test,
                     AutoCompleteView,
                     Search,
@@ -59,9 +59,8 @@ urlpatterns = [
     # very simple test
     path('test/', Test.as_view(), name='test'),
 
-    # new liturgy books with audio
-
-    path('get-liturgy-book/<str:book>/', GetLiturgyBook.as_view(), name='get_liturgy_book'),
+    # Better format should replace all the other formats  in the long run
+    path('book/<str:book>/', Book.as_view(), name='book'),
 
     # autocomplete / searching english/hebrew
     path('autocomplete/<str:search>/', AutoCompleteView.as_view(), name='autocomplete'),

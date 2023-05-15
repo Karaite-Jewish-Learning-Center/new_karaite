@@ -1,13 +1,17 @@
 import {calculateItemNumber, makeBookUrl} from '../utils/utils';
-import {bookChapterUrl, chaptersByBibleBook, karaitesBookUrl} from '../constants/constants';
+import {
+    bookChapterUrl,
+    chaptersByBibleBook,
+    karaitesBookUrl,
+    BetterBookUrl
+} from '../constants/constants';
 import {BookType} from '../types/commonTypes';
 import {devLog} from "./messages/devLog";
 
 const PARAGRAPHS = 0
 const BOOK_DETAILS = 1
 
-
-const fetchData = async (paneNumber: number, store: any, message: any, url: string, type:BookType) => {
+const fetchData = async (paneNumber: number, store: any, message: any, url: string, type: BookType) => {
     try {
         store.setLoading(true)
         const response = await fetch(url)
@@ -16,15 +20,23 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
             if (type.toLowerCase() === 'bible') {
                 store.setBookData(data.chapter, paneNumber)
                 store.setBookDetails(data.book, paneNumber)
-            } else {
+            }
+            if (type.toLowerCase() === 'karaites') {
                 store.setParagraphs(data[PARAGRAPHS], paneNumber)
                 // todo:check this code - is it working ?
                 store.setBookDetails(data[BOOK_DETAILS], paneNumber)
+            } else {
+                // better type
+                debugger
+                store.setSongsBetter(data['songs'], paneNumber)
+                store.setBookDetailsBetter(data['details'], paneNumber)
+                store.setBookBetter(data['book'], paneNumber)
             }
+
             store.setLoading(false)
         }
     } catch
-        (e:any) {
+        (e: any) {
         message.setMessage("Error: " + e.message)
     } finally {
         store.setLoading(false)
@@ -33,6 +45,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
 
 const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: BookType, store: any, message: any) => {
     let url = ''
+    debugger
     if (!store.isPaneOpen(book, chapter, verse)) {
         if (type.toLowerCase() === "bible") {
             store.setPanes({
@@ -55,8 +68,8 @@ const getBook = async (book: string, chapter: number, verse: number, highlight: 
             })
             devLog('Item ' + calculateItemNumber(book, chapter, verse))
             url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
-
-        } else {
+        }
+        if (type.toLowerCase() === "karaites") {
             store.setPanes({
                 book: book,
                 chapter: chapter - 1,
@@ -70,7 +83,25 @@ const getBook = async (book: string, chapter: number, verse: number, highlight: 
                 languages: ['he', 'en'],
             })
             url = `${karaitesBookUrl}${store.getBook(store.panes.length - 1)}/${999999}/${0}/`
+        } else {
+            // better type
+            store.setPanes({
+                book: book,
+                chapter: chapter - 1,
+                verse: verse,
+                bookDetails: [],
+                bookText: [],
+                songs: [],
+                TOC: [],
+                highlight: [],
+                type: type,
+                currentItem: chapter,
+                languages: ['he', 'en'],
+            })
+
+            url = `${BetterBookUrl}${store.getBook(store.panes.length - 1)}/`
         }
+
         await fetchData(store.panes.length - 1, store, message, url, type)
     }
 }

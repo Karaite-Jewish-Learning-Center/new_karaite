@@ -28,7 +28,9 @@ export interface BooksMenu {
     readonly [index: string]: BooksObj
 }
 
-export type BookType = 'bible' | 'karaites'
+// Bible was the first , karaites second, better should be the format for all
+// books in the long run
+export type BookType = 'bible' | 'karaites' | 'better'
 
 export interface BibleReference {
     refBook: string,

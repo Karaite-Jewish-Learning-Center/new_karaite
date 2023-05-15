@@ -50,6 +50,7 @@ export const bookChapterUrl = apiUrl + 'get-book-chapter/'
 
 export const karaitesBookUrl = apiUrl + 'get-karaites-book-chapter/'
 export const karaitesBookByLevelAndClassification = apiUrl + 'get-karaites-books-by-level-and-classification/'
+export const BetterBookUrl = apiUrl + 'book/'
 
 export const autocompleteUrl = apiUrl + 'autocomplete/'
 export const searchResultsUrl = apiUrl + 'search/'

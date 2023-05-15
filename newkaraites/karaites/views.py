@@ -271,7 +271,7 @@ class Test(View):
         return JsonResponse({"ok": True})
 
 
-class GetLiturgyBook(View):
+class Book(View):
     """
        Get the liturgy book
     """

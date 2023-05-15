@@ -75,6 +75,17 @@ class AppState {
         this.panes[i].bookData = [...this.panes[i].bookData, ...data]
     }
 
+    // better format in the long run replace all formats
+    setBookBetter = (data: Array<any>, i: number) => {
+        this.panes[i].bookText = data
+    }
+
+    setBookDetailsBetter =(data: Array<any>, i: number) => {
+        this.panes[i].bookDetails = data
+    }
+    setSongsBetter = (data: Array<any>, i: number) => {
+        this.panes[i].songs = data
+    }
     getBookData = (i: number): Array<any> => this.panes[i].bookData
 
     setDistance = (distance: number, i: number) => {
