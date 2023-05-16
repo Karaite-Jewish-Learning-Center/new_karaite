@@ -22,7 +22,6 @@ urlpatterns = [
     path('get-first-level/', GetFirstLevel.as_view(), name='first_level'),
 
     # book list
-
     path('get-book-chapter/<str:book>/<str:chapter>/<int:first>/',
          GetBookAsArrayJson.as_view(), name='get_book_chapter'),
 
@@ -56,9 +55,6 @@ urlpatterns = [
     # references Halakhah
     path('get-references/<str:book>/<str:chapter>/<str:verse>/', GetHalakhah.as_view(), name='get_references'),
 
-    # very simple test
-    path('test/', Test.as_view(), name='test'),
-
     # Better format should replace all the other formats  in the long run
     path('book/<str:book>/', Book.as_view(), name='book'),
 
@@ -67,4 +63,6 @@ urlpatterns = [
     path('search/<str:search>/<int:page>/', Search.as_view(), name='autocomplete'),
     path('search/<str:search>/', Search.as_view(), name='autocomplete'),
 
+    # very simple test
+    path('test/', Test.as_view(), name='test'),
 ]

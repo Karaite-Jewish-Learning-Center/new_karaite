@@ -12,6 +12,7 @@ import {storeContext} from "../stores/context";
 import {messageContext} from "../stores/messages/messageContext";
 import {translateMessage} from "./messages/translateMessages";
 import KaraitesBooks from "./karaites/karaitesBooks";
+import BooksGrid from "./karaites/BookGrid";
 import {useLocation} from "react-router-dom"
 import getBook from "./getBook";
 import {getFirstPart} from "../utils/utils";
@@ -90,32 +91,58 @@ const LoadBook = ({type}) => {
 
         const panes = store.getPanes()
         let jsx = []
-
+        debugger
         for (let i = 0; i < panes.length; i++) {
-            if (panes[i].type.toLowerCase() === 'bible') {
-                jsx.push((
-                    <React.Fragment key={makeRandomKey()}>
-                        <Grid item xs={true} className={classes.item}>
-                            <RenderText paneNumber={i} onClosePane={onClosePane}/>
-                        </Grid>
-                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} openBook={openBook}/>
-                    </React.Fragment>
-                ))
+            let bookType = panes[i].type.toLowerCase()
+            debugger
 
-            } else {
-                jsx.push((
-                    <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks
-                            paneNumber={i}
-                            refClick={refClick}
-                            paragraphs={store.getParagraphs(i)}
-                            details={store.getBookDetails(i)}
-                            type={path}
-                            onClosePane={onClosePane}
-                            jumpToIntro={intro === 'intro'}
-                        />
-                    </Grid>
-                ))
+            switch (bookType) {
+
+                case 'bible':
+                    jsx.push((
+                        <React.Fragment key={makeRandomKey()}>
+                            <Grid item xs={true} className={classes.item}>
+                                <RenderText paneNumber={i} onClosePane={onClosePane}/>
+                            </Grid>
+                            <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} openBook={openBook}/>
+                        </React.Fragment>
+                    ))
+                    break;
+
+                case 'karaites':
+                    jsx.push((
+                        <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
+                            <KaraitesBooks
+                                paneNumber={i}
+                                refClick={refClick}
+                                paragraphs={store.getParagraphs(i)}
+                                details={store.getBookDetails(i)}
+                                type={path}
+                                onClosePane={onClosePane}
+                                jumpToIntro={intro === 'intro'}
+                            />
+                        </Grid>
+                    ))
+                    break;
+
+                case 'better':
+                    jsx.push((
+                        <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
+                            <BooksGrid
+                                paneNumber={i}
+                                // refClick={refClick}
+                                // paragraphs={store.getParagraphs(i)}
+                                // details={store.getBookDetails(i)}
+                                // type={path}
+                                // onClosePane={onClosePane}
+                                // jumpToIntro={intro === 'intro'}
+                            />
+                        </Grid>
+                    ))
+                    break;
+
+                default:
+                    console.log(`Unknown book type: ${bookType}`)
             }
         }
         return jsx
@@ -123,6 +150,7 @@ const LoadBook = ({type}) => {
     getBook(book, chapter, verse, [], type, store, message).then().catch()
 
     const books = bookRender()
+    debugger
     if (books.length === 0) {
         return null
     }

@@ -17,20 +17,23 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
         const response = await fetch(url)
         if (response.ok) {
             const data = await response.json()
-            if (type.toLowerCase() === 'bible') {
-                store.setBookData(data.chapter, paneNumber)
-                store.setBookDetails(data.book, paneNumber)
-            }
-            if (type.toLowerCase() === 'karaites') {
-                store.setParagraphs(data[PARAGRAPHS], paneNumber)
-                // todo:check this code - is it working ?
-                store.setBookDetails(data[BOOK_DETAILS], paneNumber)
-            } else {
-                // better type
-                debugger
-                store.setSongsBetter(data['songs'], paneNumber)
-                store.setBookDetailsBetter(data['details'], paneNumber)
-                store.setBookBetter(data['book'], paneNumber)
+            switch (type.toLowerCase()) {
+                case 'bible':
+                    store.setBookData(data.chapter, paneNumber)
+                    store.setBookDetails(data.book, paneNumber)
+                    break;
+                case 'karaites':
+                    store.setParagraphs(data[PARAGRAPHS], paneNumber)
+                    // todo:check this code - is it working ?
+                    store.setBookDetails(data[BOOK_DETAILS], paneNumber)
+                    break;
+                case 'better':
+                    store.setSongsBetter(data['songs'], paneNumber)
+                    store.setBookDetailsBetter(data['details'], paneNumber)
+                    store.setBookBetter(data['book'], paneNumber)
+                    break;
+                default:
+                    console.log('Error: unknown type: ' + type)
             }
 
             store.setLoading(false)
@@ -45,61 +48,69 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
 
 const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: BookType, store: any, message: any) => {
     let url = ''
+    let bookType = type.toLowerCase()
     debugger
     if (!store.isPaneOpen(book, chapter, verse)) {
-        if (type.toLowerCase() === "bible") {
-            store.setPanes({
-                book: book,
-                chapter: chapter - 1,
-                verse: verse,
-                bookData: [],
-                book_details: [],
-                highlight: [],
-                type: type,
-                verseData: [],
-                refsChapterVerse: [0, 0],
-                isRightPaneOpen: false,
-                references: [],
-                distance: 0,
-                currentItem: calculateItemNumber(book, chapter, verse),
-                rightPaneState: [],
-                rightPaneStateHalakhah: 1,
-                languages: ['en_he', 'he', 'en'],
-            })
-            devLog('Item ' + calculateItemNumber(book, chapter, verse))
-            url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
-        }
-        if (type.toLowerCase() === "karaites") {
-            store.setPanes({
-                book: book,
-                chapter: chapter - 1,
-                verse: verse,
-                paragraphs: [],
-                book_details: [],
-                TOC: [],
-                highlight: [],
-                type: type,
-                currentItem: chapter,
-                languages: ['he', 'en'],
-            })
-            url = `${karaitesBookUrl}${store.getBook(store.panes.length - 1)}/${999999}/${0}/`
-        } else {
-            // better type
-            store.setPanes({
-                book: book,
-                chapter: chapter - 1,
-                verse: verse,
-                bookDetails: [],
-                bookText: [],
-                songs: [],
-                TOC: [],
-                highlight: [],
-                type: type,
-                currentItem: chapter,
-                languages: ['he', 'en'],
-            })
+        switch (bookType) {
+            case "bible":
+                store.setPanes({
+                    book: book,
+                    chapter: chapter - 1,
+                    verse: verse,
+                    bookData: [],
+                    book_details: [],
+                    highlight: [],
+                    type: 'bible',
+                    verseData: [],
+                    refsChapterVerse: [0, 0],
+                    isRightPaneOpen: false,
+                    references: [],
+                    distance: 0,
+                    currentItem: calculateItemNumber(book, chapter, verse),
+                    rightPaneState: [],
+                    rightPaneStateHalakhah: 1,
+                    languages: ['en_he', 'he', 'en'],
+                })
+                devLog('Item ' + calculateItemNumber(book, chapter, verse))
+                url = makeBookUrl(bookChapterUrl, book, chaptersByBibleBook[book], '0', false)
+                break;
 
-            url = `${BetterBookUrl}${store.getBook(store.panes.length - 1)}/`
+            case "karaites":
+                store.setPanes({
+                    book: book,
+                    chapter: chapter - 1,
+                    verse: verse,
+                    paragraphs: [],
+                    book_details: [],
+                    TOC: [],
+                    highlight: [],
+                    type: 'karaites',
+                    currentItem: chapter,
+                    languages: ['he', 'en'],
+                })
+                url = `${karaitesBookUrl}${store.getBook(store.panes.length - 1)}/${999999}/${0}/`
+                break;
+
+            case "better":
+                store.setPanes({
+                    book: book,
+                    chapter: chapter - 1,
+                    verse: verse,
+                    bookDetails: [],
+                    bookText: [],
+                    songs: [],
+                    TOC: [],
+                    highlight: [],
+                    type: 'better',
+                    currentItem: chapter,
+                    languages: ['he', 'en'],
+                })
+
+                url = `${BetterBookUrl}${store.getBook(store.panes.length - 1)}/`
+                break;
+
+            default:
+                console.log('Error: unknown type: ' + type)
         }
 
         await fetchData(store.panes.length - 1, store, message, url, type)

@@ -79,6 +79,7 @@ class AppState {
     setBookBetter = (data: Array<any>, i: number) => {
         this.panes[i].bookText = data
     }
+    getBookBetter = (i: number): Array<any> => this.panes[i].bookText
 
     setBookDetailsBetter =(data: Array<any>, i: number) => {
         this.panes[i].bookDetails = data

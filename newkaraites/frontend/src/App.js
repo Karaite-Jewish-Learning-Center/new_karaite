@@ -24,7 +24,7 @@ import ReactGA from 'react-ga';
 import Track from "./components/analytics/track";
 
 
-ReactGA.initialize("G-1JBZBTTCSV",{
+ReactGA.initialize("G-1JBZBTTCSV", {
     // debug: true,
     titleCase: false,
     siteSpeedSampleRate: 100,
@@ -59,7 +59,7 @@ function App() {
                                     <MyAppBar/>
                                     <Message/>
                                     <LoadingSpin/>
-                                    <Track />
+                                    <Track/>
                                     <Switch>
 
                                         <Route exact path="/">
@@ -78,20 +78,23 @@ function App() {
                                             <SearchResults/>
                                         </Route>
 
-                                        <Route exact path="/book/:book/" children={ <LoadBook type={'better'}/>}/>
 
                                         <Route exact path="/Tanakh/:book/:chapter/:verse/" children={
-                                            <LoadBook type={'bible'}/>}/>
+                                            <LoadBook type='bible'/>}/>
                                         <Route exact path="/Tanakh/:book/:chapter/" children={
-                                            <LoadBook type={'bible'}/>}/>
+                                            <LoadBook type='bible'/>}/>
                                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                         <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                                        <Route path="/*/:book/:chapter/:verse/:intro/" children={<LoadBook type={"karaites"}/>}/>
+                                        <Route path="/*/:book/:chapter/:verse/:intro/" children={
+                                            <LoadBook type="karaites"/>}/>
 
-                                        <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type={"karaites"}/>}/>
-                                        <Route path="/*/:book/:chapter/" children={<LoadBook type={"karaites"}/>}/>
-                                          {/* hack to avoid 404 in autocomplete */}
+                                        <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type="karaites"/>}/>
+                                        <Route path="/*/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
+                                        // better format should replace all other format on the long run
+                                        <Route exact path="/book/:book/" children={<LoadBook type='better'/>}/>
+
+                                        {/* hack to avoid 404 in autocomplete */}
                                         <Route exact path="/empty/"><NullComponent/></Route>
 
                                         <Route path="/*/"><Second/></Route>
