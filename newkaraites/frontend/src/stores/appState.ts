@@ -77,12 +77,9 @@ class AppState {
 
     // better format in the long run replace all formats
     setBookBetter = (data: Array<any>, i: number) => {
-        debugger
-        runInAction(() => {
-            this.panes[i].paragraphs = data
-        })
-
+        this.panes[i].paragraphs = data
     }
+
     getBookBetter = (i: number): Array<any> => this.panes[i].paragraphs
 
     setBookDetailsBetter = (data: Array<any>, i: number) => {

@@ -16,6 +16,7 @@ import getBook from "./getBook";
 import {getFirstPart} from "../utils/utils";
 import {BookType, BibleReference} from "../types/commonTypes";
 import BookGrid from './Books/booksGrid';
+import {toJS} from 'mobx'
 
 interface BooksProps {
     type: BookType
@@ -130,6 +131,8 @@ const LoadBook: FC<BooksProps> = ({type}) => {
                     ))
                     break
                 case 'better':
+                    console.log('better')
+                    console.log(toJS(store.getBookBetter(i)))
                     jsx.push((
                         <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                             <BookGrid
@@ -154,7 +157,7 @@ const LoadBook: FC<BooksProps> = ({type}) => {
 
 
 
-    getBook(book || '', +chapter, +verse, [], type, store, message).then().catch()
+    getBook(book || '', +chapter, +verse, [], type, store, message)
 
     if (store.getPanes().length === 0) return null
 

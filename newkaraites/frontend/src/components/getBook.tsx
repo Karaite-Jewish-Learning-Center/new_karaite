@@ -33,6 +33,8 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
             }
 
             if (lowerType === 'better') {
+                let d = (data['book_data'])
+                debugger
                 store.setSongsBetter(data['songs'], paneNumber)
                 store.setBookDetailsBetter(data['details'], paneNumber)
                 store.setBookBetter(data['book_data'], paneNumber)
@@ -50,7 +52,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
 
 const getBook = async (book: string, chapter: number, verse: number, highlight: number[], type: BookType, store: any, message: any) => {
     debugger
-    if(isNaN(chapter)){
+    if (isNaN(chapter)) {
         chapter = 1
     }
     let x = store.isPaneOpen(book, chapter, verse)
@@ -100,7 +102,7 @@ const getBook = async (book: string, chapter: number, verse: number, highlight: 
         if (lowerType === 'better') {
             store.setPanes({
                 book: book,
-                chapter: chapter,
+                chapter: chapter - 1,
                 verse: verse,
                 book_details: [],
                 paragraphs: [],
