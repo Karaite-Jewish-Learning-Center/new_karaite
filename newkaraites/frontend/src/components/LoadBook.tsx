@@ -15,6 +15,7 @@ import {useLocation} from "react-router-dom"
 import getBook from "./getBook";
 import {getFirstPart} from "../utils/utils";
 import {BookType, BibleReference} from "../types/commonTypes";
+import BookGrid from './Books/booksGrid';
 
 interface BooksProps {
     type: BookType
@@ -101,41 +102,66 @@ const LoadBook: FC<BooksProps> = ({type}) => {
         let jsx = []
 
         for (let i = 0; i < panes.length; i++) {
-            if (panes[i].type.toLowerCase() === 'bible') {
-                jsx.push((
-                    <React.Fragment key={makeRandomKey()}>
-                        <Grid item xs={true} className={classes.item}>
-                            <RenderText paneNumber={i} onClosePane={onClosePane}/>
+            switch (panes[i].type.toLowerCase()) {
+                case 'bible':
+                    jsx.push((
+                        <React.Fragment key={makeRandomKey()}>
+                            <Grid item xs={true} className={classes.item}>
+                                <RenderText paneNumber={i} onClosePane={onClosePane}/>
+                            </Grid>
+                            <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} openBook={openBook}/>
+                        </React.Fragment>
+                    ))
+                    break
+                case 'karaites':
+                    debugger
+                    jsx.push((
+                        <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
+                            <KaraitesBooks
+                                paneNumber={i}
+                                refClick={refClick}
+                                paragraphs={store.getParagraphs(i)}
+                                details={store.getBookDetails(i)}
+                                type={path}
+                                onClosePane={onClosePane}
+                                jumpToIntro={intro === 'intro'}
+                            />
                         </Grid>
-                        <RenderRightPane isOpen={store.getIsRightPaneOpen(i)} paneNumber={i} openBook={openBook}/>
-                    </React.Fragment>
-                ))
-
-            } else {
-                jsx.push((
-                    <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
-                        <KaraitesBooks
-                            paneNumber={i}
-                            refClick={refClick}
-                            paragraphs={store.getParagraphs(i)}
-                            details={store.getBookDetails(i)}
-                            type={path}
-                            onClosePane={onClosePane}
-                            jumpToIntro={intro === 'intro'}
-                        />
-                    </Grid>
-                ))
+                    ))
+                    break
+                case 'better':
+                    jsx.push((
+                        <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
+                            <BookGrid
+                                paneNumber={i}
+                                bookData={store.getBookBetter(i)}
+                                // refClick={refClick}
+                                // paragraphs={store.getParagraphs(i)}
+                                // details={store.getBookDetails(i)}
+                                // type={path}
+                                // onClosePane={onClosePane}
+                                // jumpToIntro={intro === 'intro'}
+                            />
+                        </Grid>
+                    ))
+                    break;
+                default:
+                    console.log('Invalid type', panes[i].type)
             }
         }
         return jsx
     }
 
+
+
     getBook(book || '', +chapter, +verse, [], type, store, message).then().catch()
 
+    if (store.getPanes().length === 0) return null
+
     const books = bookRender()
-    if (books.length === 0) {
-        return null
-    }
+
+    if (books.length === 0) return null
+
     return (
         <Grid container
               className={`${classes.root} ${book}`}

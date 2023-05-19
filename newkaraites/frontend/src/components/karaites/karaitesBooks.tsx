@@ -175,7 +175,7 @@ const KaraitesBooks: FC<KaraitesBooksInterface> = ({
             )
         }
     }
-    if (details.book_title_en === undefined) return null
+    if (details === undefined  || details.book_title_en === undefined) return null
 
     // initial can't be negative
     const topItem: number = store.getCurrentItem(paneNumber) - 1

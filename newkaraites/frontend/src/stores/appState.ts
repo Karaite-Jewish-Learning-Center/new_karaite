@@ -1,8 +1,5 @@
 import {makeAutoObservable, runInAction, computed, observable} from "mobx"
-//import {isABibleBook} from "../utils/utils";
-//import {autocompleteUrl} from "../constants/constants";
 import {AUDIO, END_AUDIO_BOOK, AUDIO_BOOK_ID} from "../constants/constants";
-import {toJS} from 'mobx';
 import {VirtuosoProps} from 'react-virtuoso/dist/index.d';
 
 class AppState {
@@ -12,7 +9,7 @@ class AppState {
     loading = false
     // search
     search = ''
-    searchResultData: VirtuosoProps<any, any>[] =  []
+    searchResultData: VirtuosoProps<any, any>[] = []
     moreResults = true
 
     // autocomplete
@@ -53,7 +50,7 @@ class AppState {
         // console.log('Audio book data')
         // console.log(JSON.parse(this.panes[i].bookData[item][AUDIO]))
         return JSON.parse(this.panes[i].bookData[item][AUDIO])
-     }
+    }
     setLastId = (id: number, i: number) => {
         this.panes[i].lastId = id
     }
@@ -72,21 +69,37 @@ class AppState {
     getVerseData = (i: number): Array<any> => this.panes[i].verseData
 
     setBookData = (data: Array<any>, i: number) => {
-        this.panes[i].bookData = [...this.panes[i].bookData, ...data]
+        runInAction(() => {
+            this.panes[i].bookData = [...this.panes[i].bookData, ...data]
+        })
+
     }
 
     // better format in the long run replace all formats
     setBookBetter = (data: Array<any>, i: number) => {
-        this.panes[i].bookText = data
-    }
-    getBookBetter = (i: number): Array<any> => this.panes[i].bookText
+        debugger
+        runInAction(() => {
+            this.panes[i].paragraphs = data
+        })
 
-    setBookDetailsBetter =(data: Array<any>, i: number) => {
-        this.panes[i].bookDetails = data
     }
+    getBookBetter = (i: number): Array<any> => this.panes[i].paragraphs
+
+    setBookDetailsBetter = (data: Array<any>, i: number) => {
+        runInAction(() => {
+            this.panes[i].book_details = data
+        })
+
+    }
+    getBookDetailsBetter = (i: number) => this.panes[i].book_details
+
     setSongsBetter = (data: Array<any>, i: number) => {
-        this.panes[i].songs = data
+        runInAction(() => {
+            this.panes[i].songs = data
+        })
     }
+    getSongsBetter = (i: number) => this.panes[i].songs
+
     getBookData = (i: number): Array<any> => this.panes[i].bookData
 
     setDistance = (distance: number, i: number) => {
@@ -133,7 +146,9 @@ class AppState {
     }
 
     resetPanes = () => {
-        this.panes = []
+        runInAction(() => {
+            this.panes = []
+        })
     }
     // loading
     setLoading = (loading: boolean) => {

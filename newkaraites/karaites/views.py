@@ -280,8 +280,6 @@ class Book(View):
         book_name = kwargs.get('book', None)
         if book_name is None:
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
-        x = LiturgyBook.get_book(book_name)
-        print(x)
 
         return JsonResponse(LiturgyBook.get_book(book_name), safe=False)
 

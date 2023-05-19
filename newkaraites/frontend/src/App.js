@@ -78,7 +78,6 @@ function App() {
                                             <SearchResults/>
                                         </Route>
 
-
                                         <Route exact path="/Tanakh/:book/:chapter/:verse/" children={
                                             <LoadBook type='bible'/>}/>
                                         <Route exact path="/Tanakh/:book/:chapter/" children={
@@ -86,13 +85,14 @@ function App() {
                                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                         <Route exact path="/Tanakh/"><Tanakh/></Route>
 
+                                        {/*better format should replace all other format on the long run*/}
+                                        <Route exact path="/book/:book/" children={<LoadBook type='better'/>}/>
+
                                         <Route path="/*/:book/:chapter/:verse/:intro/" children={
                                             <LoadBook type="karaites"/>}/>
 
                                         <Route path="/*/:book/:chapter/:verse/" children={<LoadBook type="karaites"/>}/>
                                         <Route path="/*/:book/:chapter/" children={<LoadBook type="karaites"/>}/>
-                                        // better format should replace all other format on the long run
-                                        <Route exact path="/book/:book/" children={<LoadBook type='better'/>}/>
 
                                         {/* hack to avoid 404 in autocomplete */}
                                         <Route exact path="/empty/"><NullComponent/></Route>

@@ -14,7 +14,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import RefsBadge from "../general/RefsBadge";
 import {observer} from 'mobx-react-lite';
 import {storeContext} from '../../stores/context'
-import {devLog} from "../messages/devLog";
 import {indoArabicToHebrew} from "../../utils/english-hebrew/numberConvertion";
 
 
@@ -134,7 +133,7 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBook
                     </>
                 )
             default: {
-                devLog(`Unknown language: ${lang}`)
+                console.log(`Unknown language: ${lang}`)
             }
         }
     }

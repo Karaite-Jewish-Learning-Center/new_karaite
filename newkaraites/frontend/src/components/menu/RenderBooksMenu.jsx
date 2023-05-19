@@ -4,11 +4,10 @@ import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 import Filler from "../general/Filler.tsx";
 import {makeStyles} from "@material-ui/core/styles";
-import {capitalize} from "../../utils/utils";
+import {capitalize, makeRandomKey} from "../../utils/utils";
 import {ToText} from "../general/ToText";
-import {cleanUrl} from "../../utils/cleanUrl";
+import {cleanUrl,} from "../../utils/cleanUrl";
 import {MusicBadge} from "../bages/musicBadge";
-
 
 export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
@@ -60,7 +59,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
 
     const MainMenu = () => {
-        return (<Grid item xs={12} sm={columns} key={1}>
+        return (<Grid item xs={12} sm={columns} key={makeRandomKey()}>
             <Grid item className={classes.title}>
                 <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
             </Grid>

@@ -24,4 +24,4 @@ wget
 django-tinymce
 openpyxl==3.1.2
 python-bidi
-
+transformers==4.21.1
