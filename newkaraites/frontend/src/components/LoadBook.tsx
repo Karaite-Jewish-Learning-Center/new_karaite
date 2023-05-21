@@ -104,6 +104,7 @@ const LoadBook: FC<BooksProps> = ({type}) => {
 
         for (let i = 0; i < panes.length; i++) {
             switch (panes[i].type.toLowerCase()) {
+
                 case 'bible':
                     jsx.push((
                         <React.Fragment key={makeRandomKey()}>
@@ -114,8 +115,8 @@ const LoadBook: FC<BooksProps> = ({type}) => {
                         </React.Fragment>
                     ))
                     break
+
                 case 'karaites':
-                    debugger
                     jsx.push((
                         <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                             <KaraitesBooks
@@ -130,9 +131,9 @@ const LoadBook: FC<BooksProps> = ({type}) => {
                         </Grid>
                     ))
                     break
+
                 case 'better':
-                    console.log('better')
-                    console.log(toJS(store.getBookBetter(i)))
+
                     jsx.push((
                         <Grid item xs={true} className={classes.item} key={makeRandomKey()}>
                             <BookGrid
@@ -148,14 +149,13 @@ const LoadBook: FC<BooksProps> = ({type}) => {
                         </Grid>
                     ))
                     break;
+
                 default:
                     console.log('Invalid type', panes[i].type)
             }
         }
         return jsx
     }
-
-
 
     getBook(book || '', +chapter, +verse, [], type, store, message)
 

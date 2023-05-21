@@ -82,8 +82,8 @@ class Command(BaseCommand):
             hebrew_text = []
             # audio_start
             stack.push(convert_time_string(ws[f'O{row}'].value))
-            print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
-            input('Press Enter to continue...')
+            # print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
+            # input('Press Enter to continue...')
 
             while True:
                 # line number
@@ -108,34 +108,43 @@ class Command(BaseCommand):
                     ws[f'H{row}'].value,  # reciter
                     ws[f'G{row}'].value,  # censored
                     ws[f'I{row}'].value,  # line_number
-                    ws[f'M{row}'].value  # comments
+                    ws[f'M{row}'].value,  # comments
+                    0  # end of verse, section or subtext? No
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', ''])
+                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', '', '', 0])
 
                 # end of verse, section or subtext
                 end = ws[f'F{row}'].value
                 if end is not None and ws[f'F{row}'].value.find('end') >= 0:
                     # save hebrew text
+                    hebrew_text[-1][10] = 1  # end of verse, section or subtext? Yes
                     for hebrew in hebrew_text:
                         self.save_data(liturgy_details, songs, hebrew, line_number)
                         line_number += 1
 
-                    # one empty line between verses
-                    separator = ['', '', '', '', '', '', '', '', '']
-                    self.save_data(liturgy_details, songs, separator, line_number)
+                    # # one empty line between verses
+                    # separator = ['', '', '', '', '', '', '', '', '']
+                    # self.save_data(liturgy_details, songs, separator, line_number)
 
                     # save english translation
                     line_number += 1
+                    english_translation[-1][10] = 1  # end of verse, section or subtext? Yes
                     for english in english_translation:
                         self.save_data(liturgy_details, songs, english, line_number)
                         line_number += 1
 
-                    # one empty line between verses
-                    self.save_data(liturgy_details, songs, separator, line_number)
+                    # # one empty line between verses
+                    # self.save_data(liturgy_details, songs, separator, line_number)
                     line_number += 1
                     english_translation = []
                     hebrew_text = []
                 print('Processing  book: ', book, ' song: ', english_name, ' line_number: ', spreadsheet_line, )
                 spreadsheet_line += 1
                 row += 1
+
+            # end of book add some empty lines
+            # for i in range(1, 20):
+            #     separator = ['', '', '', '', '', '', '', '', '']
+            #     line_number += 1
+            #     self.save_data(liturgy_details, songs, separator, line_number)
