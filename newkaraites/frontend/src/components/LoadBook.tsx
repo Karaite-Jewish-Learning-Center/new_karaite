@@ -139,11 +139,11 @@ const LoadBook: FC<BooksProps> = ({type}) => {
                             <BookGrid
                                 paneNumber={i}
                                 bookData={store.getBookBetter(i)}
-                                // refClick={refClick}
+                                refClick={refClick}
                                 // paragraphs={store.getParagraphs(i)}
-                                // details={store.getBookDetails(i)}
+                                details={store.getBookDetails(i)}
                                 // type={path}
-                                // onClosePane={onClosePane}
+                                onClosePane={onClosePane}
                                 // jumpToIntro={intro === 'intro'}
                             />
                         </Grid>
