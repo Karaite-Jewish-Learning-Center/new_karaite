@@ -601,9 +601,22 @@ class LiturgyDetails(models.Model):
                                     verbose_name=_("English Name"),
                                     help_text=_("English Name"))
 
-    intro = models.TextField(blank=True,
-                             verbose_name=_("Intro"),
-                             help_text=_("Intro"))
+    author = models.ForeignKey('Author',
+                               on_delete=models.CASCADE,
+                               null=True,
+                               blank=True,
+                               verbose_name=_("Author"))
+
+    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
+    intro = ArrayField(ArrayField(models.TextField()), default=list)
+
+    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
+    toc = ArrayField(ArrayField(models.TextField()), default=list)
+
+    book_language = models.CharField(max_length=8,
+                                     default='he',
+                                     choices=LANGUAGES,
+                                     verbose_name=_('Book language'))
 
     display = models.CharField(default="1",
                                verbose_name=_("Display"),

@@ -189,7 +189,7 @@ const useStyles = makeStyles((theme) => ({
     spacer: {},
     header: {
         minWidth: '100%',
-        minHeight: 200,
+        minHeight: 50,
         border: '1px solid blue',
         backgroundColor: 'lightgrey',
     },
@@ -211,11 +211,11 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: 5,
     },
     resources: {
-        padding: 0,
-        paddingTop: (iOS() ? 50 : 0),
-        marginRight: 0,
-        minWidth: '100%',
-        minHeight: 60,
-        backgroundColor: 'lightgrey',
+        // padding: 0,
+        // paddingTop: (iOS() ? 50 : 0),
+        // marginRight: 0,
+        // minWidth: '100%',
+        // minHeight: 60,
+        // backgroundColor: 'lightgrey',
     },
 }))

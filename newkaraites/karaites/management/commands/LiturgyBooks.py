@@ -69,6 +69,10 @@ class Command(BaseCommand):
             liturgy_details.hebrew_name = hebrew_name
             liturgy_details.english_name = english_name
             liturgy_details.intro = ''
+            liturgy_details.toc = ''
+            liturgy_details.language = 'he'
+            liturgy_details.author = ''
+
             liturgy_details.save()
 
             song_file = ws['A2'].value
@@ -123,10 +127,6 @@ class Command(BaseCommand):
                         self.save_data(liturgy_details, songs, hebrew, line_number)
                         line_number += 1
 
-                    # # one empty line between verses
-                    # separator = ['', '', '', '', '', '', '', '', '']
-                    # self.save_data(liturgy_details, songs, separator, line_number)
-
                     # save english translation
                     line_number += 1
                     english_translation[-1][10] = 1  # end of verse, section or subtext? Yes
@@ -134,8 +134,6 @@ class Command(BaseCommand):
                         self.save_data(liturgy_details, songs, english, line_number)
                         line_number += 1
 
-                    # # one empty line between verses
-                    # self.save_data(liturgy_details, songs, separator, line_number)
                     line_number += 1
                     english_translation = []
                     hebrew_text = []
@@ -143,8 +141,3 @@ class Command(BaseCommand):
                 spreadsheet_line += 1
                 row += 1
 
-            # end of book add some empty lines
-            # for i in range(1, 20):
-            #     separator = ['', '', '', '', '', '', '', '', '']
-            #     line_number += 1
-            #     self.save_data(liturgy_details, songs, separator, line_number)
