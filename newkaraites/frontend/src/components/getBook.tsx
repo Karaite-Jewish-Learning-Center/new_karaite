@@ -116,6 +116,7 @@ const getBook = async (book: string, chapter: number, verse: number, highlight: 
                     TOC: [],
                     highlight: [],
                     type: 'better',
+                    currentItem: 0,
                     languages: ['he', 'en'],
                 })
 

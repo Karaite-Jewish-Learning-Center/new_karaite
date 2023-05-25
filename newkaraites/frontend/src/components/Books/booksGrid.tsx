@@ -1,5 +1,5 @@
-import React, {FC, useContext, useRef} from 'react'
-import {Virtuoso, TableVirtuoso} from 'react-virtuoso'
+import React, {FC, useContext, useRef, useState} from 'react'
+import {TableVirtuoso} from 'react-virtuoso'
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {storeContext} from "../../stores/context";
@@ -23,6 +23,13 @@ import {MusicSelect} from '../buttons/music-select';
 import {BuyButton} from '../buttons/BuyButton';
 import {iOS, unslug} from '../../utils/utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {
+    START_AUDIO_BOOK,
+    AUDIO_BOOK_ID,
+    SCROLL_LATENCY_MS,
+    SCROLL_LATENCY_SECONDS, audioBooksUrl,
+} from "../../constants/constants";
+import {AudioBookContext} from '../../stores/audioBookContext';
 
 const HEBREW = 0
 const TRANSLITERATION = 1
@@ -40,12 +47,67 @@ interface BooksInterface {
 const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, onClosePane}) => {
     const classes = useStyles()
     const store = useContext(storeContext)
+    const audioBookStore = useContext(AudioBookContext)
     const matches = useMediaQuery('(min-width:600px)');
     const direction = (matches ? 'row' : 'column')
     const xsColumns1 = (matches ? 5 : 12)
     const xsColumns2 = (matches ? 2 : 12)
+    const book = store.getBook(paneNumber)
+    const [currentItem, setCurrentItem] = useState(0)
+    const [audioBookPlaying, setAudioBookPlaying] = useState(false)
+    const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
+    const [distanceFromTop, setDistanceFromTop] = useState(0)
+    const virtuoso = useRef(null)
 
     if (bookData === undefined || bookData.length === 0) return null;
+
+    const callFromEnded = (set = true) => {
+
+        if (audioBookStore.getIsPlaying()) {
+            setCurrentItem(currentItem + 1)
+        }
+        setTimeout(() => {
+            //     @ts-ignore
+            virtuoso.current.scrollToIndex({
+                index: currentItem,
+                align: 'start',
+                behavior: 'smooth'
+            })
+
+        }, SCROLL_LATENCY_MS)
+    }
+    const onTimeUpdate = (currentTime: number) => {
+        const [start, end, id] = store.getAudioBookData(paneNumber)
+        const lastId = store.getLastId(paneNumber)
+
+        if (start === 0 && end === 0) {
+            setAudioBookPlaying(false)
+            audioBookStore.stop()
+            return
+        }
+
+        if (currentTime + SCROLL_LATENCY_SECONDS > end && lastId === id) {
+            callFromEnded(false)
+        }
+    }
+    const onAudioBookEnded = () => {
+        setAudioBookPlaying(() => false)
+        onAudioBookOnOff()
+    }
+    const onAudioBookOnOff = () => {
+
+        if (!audioBookPlaying) {
+            let audioData = store.getAudioBookData(paneNumber)
+            store.setLastId(audioData[AUDIO_BOOK_ID], paneNumber)
+            const audioFile = store.getBookAudioFile(paneNumber)
+            audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
+            audioBookStore.play(audioData[START_AUDIO_BOOK], onTimeUpdate, onAudioBookEnded)
+            setAudioBookPlaying(() => true)
+        } else {
+            setAudioBookPlaying(() => false)
+        }
+
+    }
     const onClose = () => {
         onClosePane(paneNumber)
     }
@@ -61,48 +123,63 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const onBuy = () => {
         // window.open(details.buy_link)
     }
+    const updateItemDistance = (i: number) => {
+        setCurrentItem(i)
+        setDistanceFromTop(i - gridVisibleRange.startIndex,)
+    }
+    const onClick = (index: number) => {
+        updateItemDistance(index)
+
+    }
     const ItemContent = (index: number, data: any) => {
+        const startIndex = gridVisibleRange.startIndex
+        const found = index === startIndex + distanceFromTop
+
         return (
             <>
-                <TableCell className={classes.tableCell}>
+
+                <TableCell className={`${classes.tableCell} 
+                                       ${found ? classes.highlight : ''}`}
+                           onClick={onClick.bind(this, index)}>
+
                     <Typography className={classes.hebrew}>{data.book_text[HEBREW]}</Typography>
                     <Typography className={classes.transliteration}>{data.book_text[TRANSLITERATION]}</Typography>
                     <Typography variant="body1" className={classes.english}>
                         {data.book_text[ENGLISH]}
                     </Typography>
-                    {(data.book_text[BREAK] === "1" && <div>&nbsp;</div>)}
                 </TableCell>
+                {data.book_text[BREAK] === "1" ? <TableCell>&nbsp;6</TableCell> : null}
             </>
         )
     }
     const fixedHeaderContent = () => (
         <TableRow>
             <TableCell className={classes.header}>
-            <Grid container
-                  direction={direction}
-                  className={classes.resources}
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  spacing={1}>
+                <Grid container
+                      direction={direction}
+                      className={classes.resources}
+                      justifyContent="flex-start"
+                      alignItems="center"
+                      spacing={1}>
 
-                <Grid item xs={xsColumns1}>
-                    <CloseButton onClick={onClose}/>
-                    <InfoButton onClick={onIntro}/>
-                    <TocButton onClick={onToc}/>
-                    <BookButton onClick={onBook}/>
-                    {/*<MusicSelect songs={details.songs_list}/>*/}
-                    {/*{(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}*/}
-                </Grid>
+                    <Grid item xs={xsColumns1}>
+                        <CloseButton onClick={onClose}/>
+                        <InfoButton onClick={onIntro}/>
+                        <TocButton onClick={onToc}/>
+                        <BookButton onClick={onBook}/>
+                        {/*<MusicSelect songs={details.songs_list}/>*/}
+                        {/*{(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}*/}
+                    </Grid>
 
-                <Grid item xs={xsColumns2}>
-                    <Typography variant="h6" className={classes.hebrewTitle}>
-                        {details.hebrew_name}
-                    </Typography>
-                    <Typography variant="h6" className={classes.englishTitle}>
-                        {details.english_name}
-                    </Typography>
+                    <Grid item xs={xsColumns2}>
+                        <Typography variant="h6" className={classes.hebrewTitle}>
+                            {details.hebrew_name}
+                        </Typography>
+                        <Typography variant="h6" className={classes.englishTitle}>
+                            {details.english_name}
+                        </Typography>
+                    </Grid>
                 </Grid>
-            </Grid>
 
 
             </TableCell>
@@ -119,15 +196,18 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         // @ts-ignore
         TableBody: React.forwardRef((props, ref) => <TableBody {...props} ref={ref} className={classes.tBody}/>),
     }
+
     // @ts-ignore
     return (
         <TableVirtuoso
             className={classes.table}
             data={bookData}
+            ref={virtuoso}
             // @ts-ignore
             components={TableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={ItemContent}
+            //rangeChanged={setGridVisibleRange}
         />
     )
 }
@@ -153,6 +233,9 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         padding: 0,
         border: 'none',
+    },
+    highlight: {
+        backgroundColor: (theme.palette.type === 'light' ? 'lightblue' : '#303030'),
     },
     paragraph: {
         width: '100%',
@@ -184,14 +267,13 @@ const useStyles = makeStyles((theme) => ({
         color: 'red',
         direction: 'ltr',
         margin: 0,
-        padding: 0,
+        padding: 1,
     },
     spacer: {},
     header: {
         minWidth: '100%',
         minHeight: 50,
-        border: '1px solid blue',
-        backgroundColor: 'lightgrey',
+        backgroundColor: (theme.palette.type === 'light' ? 'lightgrey' : '#444040'),
     },
     hebrewTitle: {
         width: '50%',
@@ -218,4 +300,7 @@ const useStyles = makeStyles((theme) => ({
         // minHeight: 60,
         // backgroundColor: 'lightgrey',
     },
+    break: {
+        marginBottom: 15
+    }
 }))

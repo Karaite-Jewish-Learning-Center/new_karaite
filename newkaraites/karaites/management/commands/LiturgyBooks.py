@@ -64,14 +64,15 @@ class Command(BaseCommand):
             hebrew_name = ws['C2'].value
             english_name = ws['D2'].value
             LiturgyDetails.objects.filter(english_name=english_name).delete()
+
             liturgy_details = LiturgyDetails()
             liturgy_details.occasion = ws['B2'].value
             liturgy_details.hebrew_name = hebrew_name
             liturgy_details.english_name = english_name
-            liturgy_details.intro = ''
-            liturgy_details.toc = ''
+            liturgy_details.intro = []
+            liturgy_details.toc = []
             liturgy_details.language = 'he'
-            liturgy_details.author = ''
+            liturgy_details.author = None
 
             liturgy_details.save()
 
