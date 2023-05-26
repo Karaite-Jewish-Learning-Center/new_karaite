@@ -1,5 +1,5 @@
 import React, {FC, useContext, useRef, useState} from 'react'
-import {TableVirtuoso} from 'react-virtuoso'
+import {ListRange, TableVirtuoso, Virtuoso} from 'react-virtuoso'
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {storeContext} from "../../stores/context";
@@ -53,18 +53,17 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const xsColumns1 = (matches ? 5 : 12)
     const xsColumns2 = (matches ? 2 : 12)
     const book = store.getBook(paneNumber)
-    const [currentItem, setCurrentItem] = useState(0)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
-    const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
     const [distanceFromTop, setDistanceFromTop] = useState(0)
     const virtuoso = useRef(null)
 
     if (bookData === undefined || bookData.length === 0) return null;
 
-    const callFromEnded = (set = true) => {
 
+    const callFromEnded = (set = true) => {
+        let currentItem = store.getCurrentItem(paneNumber)
         if (audioBookStore.getIsPlaying()) {
-            setCurrentItem(currentItem + 1)
+            store.setCurrentItem(currentItem + 1, paneNumber)
         }
         setTimeout(() => {
             //     @ts-ignore
@@ -108,6 +107,15 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         }
 
     }
+    const endReached = (index: number) => {
+        // setDistanceFromTop(distanceFromTop + 1)
+        console.log('endReached', index, distanceFromTop)
+    }
+    let visibilityChanged = (range: ListRange) => {
+        // store.setCurrentItem(range.startIndex, paneNumber)
+        console.log('visibilityChanged', range.startIndex, range.endIndex)
+        store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
+    }
     const onClose = () => {
         onClosePane(paneNumber)
     }
@@ -124,15 +132,29 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         // window.open(details.buy_link)
     }
     const updateItemDistance = (i: number) => {
-        setCurrentItem(i)
-        setDistanceFromTop(i - gridVisibleRange.startIndex,)
+        console.log('updateItemDistance', store.getGridVisibleRangeStart(paneNumber))
+        setDistanceFromTop(i - store.getGridVisibleRangeStart(paneNumber))
     }
     const onClick = (index: number) => {
         updateItemDistance(index)
+        let x = visibilityChanged
+        visibilityChanged = () => {
 
+        }
+
+        //store.setCurrentItem(index, paneNumber)
+        let c = store.getGridVisibleRangeStart(paneNumber)
+        console.log('top item before scroll',c)
+        //@ts-ignore
+        virtuoso.current.scrollToIndex({
+            index: 10,
+            align: 'start',
+            behavior: 'smooth'
+        })
+        visibilityChanged = x
     }
     const ItemContent = (index: number, data: any) => {
-        const startIndex = gridVisibleRange.startIndex
+        const startIndex = store.getGridVisibleRangeStart(paneNumber)
         const found = index === startIndex + distanceFromTop
 
         return (
@@ -141,14 +163,14 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
                 <TableCell className={`${classes.tableCell} 
                                        ${found ? classes.highlight : ''}`}
                            onClick={onClick.bind(this, index)}>
-
+                    <Typography>{index}</Typography>
                     <Typography className={classes.hebrew}>{data.book_text[HEBREW]}</Typography>
                     <Typography className={classes.transliteration}>{data.book_text[TRANSLITERATION]}</Typography>
                     <Typography variant="body1" className={classes.english}>
                         {data.book_text[ENGLISH]}
                     </Typography>
                 </TableCell>
-                {data.book_text[BREAK] === "1" ? <TableCell>&nbsp;6</TableCell> : null}
+                {/*{data.book_text[BREAK] === "1" ? <TableCell>&nbsp;</TableCell> : null}*/}
             </>
         )
     }
@@ -186,9 +208,8 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         </TableRow>
     )
 
-    // @ts-ignore
     const TableComponents = {
-        Scroller: React.forwardRef((props, ref) => <TableContainer component={Paper} {...props} ref={ref}/>),
+        // Scroller: React.forwardRef((props, ref) => <TableContainer component={Paper}  {...props} ref={ref}/>),
         // @ts-ignore
         Table: (props) => <Table {...props} className={classes.table}/>,
         TableHead: TableHead,
@@ -203,11 +224,14 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
             className={classes.table}
             data={bookData}
             ref={virtuoso}
+            // initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
             // @ts-ignore
             components={TableComponents}
             fixedHeaderContent={fixedHeaderContent}
             itemContent={ItemContent}
-            //rangeChanged={setGridVisibleRange}
+            rangeChanged={visibilityChanged}
+            endReached={endReached}
+
         />
     )
 }
@@ -228,6 +252,10 @@ const useStyles = makeStyles((theme) => ({
     },
     tBody: {
         border: 'none',
+    },
+    paper: {
+        height: '100%',
+        backgroundColor: 'green'
     },
     tableCell: {
         width: '100%',

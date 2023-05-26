@@ -106,17 +106,26 @@ class AppState {
     getDistance = (i: number): number => this.panes[i].distance
 
     setCurrentItem = (item: number, i: number): number => {
+        console.log('set current item', item)
         runInAction(() => {
             this.panes[i].currentItem = item
         })
         return item
     }
 
+    setGridVisibleRange = (i:number, startIndex:number, endIndex: number) => {
+        this.panes[i].range = [startIndex, endIndex]
+    }
+
+    getGridVisibleRangeStart = (i: number): Array<number> => this.panes[i].range[0]
+
     getCurrentItem = (i: number): number => this.panes[i].currentItem
 
     // right pane bible references
     setRightPaneState = (state: boolean, i: number) => {
-        this.panes[i].rightPaneState = state
+        runInAction(() => {
+            this.panes[i].rightPaneState = state
+        })
     }
 
     // panes
