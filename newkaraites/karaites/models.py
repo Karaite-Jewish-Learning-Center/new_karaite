@@ -802,7 +802,9 @@ class Classification(models.Model):
 
 
 class KaraitesBookDetails(models.Model):
-    """  Karaites books """
+    """  Karaites books many of them are not in the bible """
+
+    # many of the fields are to be remove when all book are moved to better format
 
     first_level = models.ForeignKey(FirstLevel,
                                     on_delete=models.DO_NOTHING,
@@ -1002,6 +1004,34 @@ class KaraitesBookDetails(models.Model):
                                         help_text='This field is used to inform if the books is scheduled to be processed',
                                         verbose_name='Cron schedule')
 
+    # book generated using excel, a better and more accurate book
+    better_book = models.BooleanField(default=False,
+                                      verbose_name=_('Better book'),
+                                      help_text=_('This field is used to inform if the books is better book'))
+
+    occasion = models.CharField(max_length=100,
+                                null=True,
+                                blank=True,
+                                verbose_name=_("Occasion"),
+                                help_text=_("Occasion"))
+
+    # this field is used to inform if the book is a better book
+    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
+    better_intro = ArrayField(ArrayField(models.TextField()), default=list)
+
+    # this field is used to inform if the book is a better book
+    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
+    better_toc = ArrayField(ArrayField(models.TextField()), default=list)
+
+    display = models.CharField(default="1",
+                               verbose_name=_("Display"),
+                               max_length=1,
+                               help_text=_("1) Hebrew on Left. Transliteration on right. \
+                                      Each verse has its translation below it. "))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_("Order"),
+                                help_text=_("Order"))
     def __str__(self):
         return self.book_title_en
 
@@ -1182,18 +1212,43 @@ class KaraitesBookAsArray(models.Model):
                              verbose_name=_('Karaite book details')
                              )
 
+    # this should go away when all books are better books
     ref_chapter = models.CharField(max_length=260,
                                    default='',
                                    verbose_name=_('Reference/Chapter'))
 
+    # this should go away when all books are better books
     paragraph_number = models.IntegerField(default=0)
 
+    # although the field is called song, it is used for the audiobook
+    song = models.ForeignKey(Songs,
+                             null=True,
+                             blank=True,
+                             on_delete=models.CASCADE,
+                             related_name='audiobook')
+
+    # book details better_book is false
     # [paragraph English, 0,  paragraph Hebrew]
-    book_text = ArrayField(ArrayField(models.TextField()), default=list)
+
+    # book details better_book is true
+    # [[hebrew, transliteration, english], audio_start, audio_end, song_id, reciter, censored, line_number]
+    # these are grouped according to the song and xls file
+    book_text = ArrayField(ArrayField(models.TextField()),
+                           default=list,
+                           null=True,
+                           blank=True)
+
+    # this should replace  paragraph_number when book details better_book is true
+    line_number = models.IntegerField(default=0,
+                                      verbose_name=_("Line Number"),
+                                      help_text=_("Line Number"))
 
     # [[footnote English ], [footnote Hebrew]]
     # [footnote number, footnote text]
-    foot_notes = ArrayField(models.TextField(), default=list, null=True, blank=True)
+    foot_notes = ArrayField(models.TextField(),
+                            default=list,
+                            null=True,
+                            blank=True)
 
     def __str__(self):
         return f'{self.book.book_title_en}  -   {self.book.book_title_he}'
@@ -1240,10 +1295,71 @@ class KaraitesBookAsArray(models.Model):
 
     foot_notes_admin.short_description = 'Foot notes'
 
+    # for better books
+    @mark_safe
+    def show_book_data(self):
+        hebrew = self.book_text[0]
+        transliteration = self.book_text[1]
+        english = self.book_text[2]
+        # audio_start = self.book_text[3]
+        # audio_end = self.book_text[4]
+        # reciter = self.book_text[5]
+        # censored = self.book_text[6]
+        # line_number = self.book_text[7]
+
+        html = '<div style="display:flex">'
+        html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
+        html += f'<span dir="ltr" style="width:50%;inline:block;margin:5px; text-align:left">{transliteration}</span>'
+        html += f'</div>'
+        html += f'<span dir="ltr" style="text-align:center">{english}</span>'
+
+        return html
+
+    show_book_data.short_description = 'Book Data'
+
+    @mark_safe
+    def show_line_data(self):
+        if not self.book.better_book:
+            return ''
+
+        audio_start = self.book_text[3] if self.book_text[3] else '-'
+        audio_end = self.book_text[4] if self.book_text[4] else '-'
+        id = self.book_text[5] if self.book_text[5] else '-'
+        reciter = self.book_text[6] if self.book_text[6] else '-'
+        censored = self.book_text[7] if self.book_text[7] else '-'
+
+        if audio_start == '-' and audio_end == '-' and reciter == '-' and censored == '-':
+            return ''
+
+        html = '<table>'
+        html += '<th>Audio Start</th>'
+        html += '<th>Audio End</th>'
+        html += '<th>Id</th>'
+        html += '<th>Reciter</th>'
+        html += '<th>Censored</th>'
+        html += '<tr>'
+        html += f'<td>{audio_start}</td>'
+        html += f'<td>{audio_end}</td>'
+        html += f'<td>{id}</td>'
+        html += f'<td>{reciter}</td>'
+        html += f'<td>{censored}</td>'
+        html += f'<tr>'
+        html += '</table>'
+
+        return html
+
+    show_line_data.short_description = 'Line Data'
+
     class Meta:
         ordering = ('paragraph_number', 'book', 'ref_chapter')
         verbose_name_plural = 'Karaites book text as array'
 
+
+class KaraitesBetterBooksProxy(KaraitesBookAsArray):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Karaites better books'
+        ordering = ('book', 'line_number')
 
 class TableOfContents(models.Model):
     """ Karaites Books table of contents"""
