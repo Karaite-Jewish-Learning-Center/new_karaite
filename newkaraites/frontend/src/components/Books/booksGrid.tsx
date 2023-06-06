@@ -1,5 +1,5 @@
 import React, {FC, useContext, useRef, useState} from 'react'
-import {ListRange, TableVirtuoso, Virtuoso} from 'react-virtuoso'
+import {ListRange, TableVirtuoso} from 'react-virtuoso'
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {storeContext} from "../../stores/context";
@@ -9,10 +9,8 @@ import {toJS} from 'mobx'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import {ClosePanes, RefClick} from '../../types/commonTypes';
 import {CloseButton} from "../buttons/CloseButton";
 import {Grid} from '@material-ui/core';
@@ -59,6 +57,8 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
 
     if (bookData === undefined || bookData.length === 0) return null;
 
+    let x = toJS(bookData)
+    let y = toJS(details)
 
     const callFromEnded = (set = true) => {
         let currentItem = store.getCurrentItem(paneNumber)
@@ -114,7 +114,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     let visibilityChanged = (range: ListRange) => {
         // store.setCurrentItem(range.startIndex, paneNumber)
         console.log('visibilityChanged', range.startIndex, range.endIndex)
-        store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
+        // store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
     }
     const onClose = () => {
         onClosePane(paneNumber)
@@ -154,21 +154,21 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         visibilityChanged = x
     }
     const ItemContent = (index: number, data: any) => {
+        debugger
         const startIndex = store.getGridVisibleRangeStart(paneNumber)
         const found = index === startIndex + distanceFromTop
-
+        // let d = toJS(data)
+        // console.log(d)
+        // console.log(data.book_text[HEBREW])
         return (
             <>
-
-                <TableCell className={`${classes.tableCell} 
-                                       ${found ? classes.highlight : ''}`}
-                           onClick={onClick.bind(this, index)}>
-                    <Typography>{index}</Typography>
+                <TableCell className={`${classes.tableCell}${found ? classes.highlight : ''}`}
+                           onClick={onClick.bind(this, index)}
+                >
                     <Typography className={classes.hebrew}>{data.book_text[HEBREW]}</Typography>
                     <Typography className={classes.transliteration}>{data.book_text[TRANSLITERATION]}</Typography>
-                    <Typography variant="body1" className={classes.english}>
-                        {data.book_text[ENGLISH]}
-                    </Typography>
+                    <Typography variant="body1" className={classes.english}>{data.book_text[ENGLISH]}</Typography>
+
                 </TableCell>
                 {/*{data.book_text[BREAK] === "1" ? <TableCell>&nbsp;</TableCell> : null}*/}
             </>
@@ -195,10 +195,10 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
 
                     <Grid item xs={xsColumns2}>
                         <Typography variant="h6" className={classes.hebrewTitle}>
-                            {details.hebrew_name}
+                            {details.book_title_he}
                         </Typography>
                         <Typography variant="h6" className={classes.englishTitle}>
-                            {details.english_name}
+                            {details.book_title_en}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -248,7 +248,7 @@ const useStyles = makeStyles((theme) => ({
     table: {
         margin: 'auto',
         width: '100%',
-        height: '100%',
+
     },
     tBody: {
         border: 'none',
@@ -300,7 +300,7 @@ const useStyles = makeStyles((theme) => ({
     spacer: {},
     header: {
         minWidth: '100%',
-        minHeight: 50,
+        height: 50,
         backgroundColor: (theme.palette.type === 'light' ? 'lightgrey' : '#444040'),
     },
     hebrewTitle: {

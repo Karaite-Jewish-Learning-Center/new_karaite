@@ -281,7 +281,7 @@ class Book(View):
         if book_name is None:
             return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
 
-        return JsonResponse(LiturgyBook.get_book(book_name), safe=False)
+        return JsonResponse(KaraitesBookAsArray.get_book(book_name), safe=False)
 
 
 class AutoCompleteView(View):

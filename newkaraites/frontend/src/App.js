@@ -88,6 +88,7 @@ function App() {
                                         {/*better format should replace all other format on the long run*/}
                                         <Route exact path="/book/:book/" children={<LoadBook type='better'/>}/>
 
+
                                         <Route path="/*/:book/:chapter/:verse/:intro/" children={
                                             <LoadBook type="karaites"/>}/>
 

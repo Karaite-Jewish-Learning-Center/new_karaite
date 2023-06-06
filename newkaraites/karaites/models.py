@@ -15,7 +15,8 @@ from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
 from .validatores.validators import validate_time
 from .utils import (convert_seconds_to_time,
-                    convert_time_to_seconds)
+                    convert_time_to_seconds,
+                    slug_back)
 
 VERSE = 4
 HEBREW = 0
@@ -1065,7 +1066,7 @@ class KaraitesBookDetails(models.Model):
             'book_first_level': details.first_level.first_level,
             'book_language': details.get_language(),
             'book_classification': details.book_classification.classification_name,
-            'author': details.author.name,
+            'author':  details.author.name if details.author else '',
             'book_title_en': details.book_title_en,
             'book_title_he': details.book_title_he,
             'table_book': details.table_book,
@@ -1081,6 +1082,9 @@ class KaraitesBookDetails(models.Model):
             'songs_list': details.get_song_list(),
             'buy_link': details.buy_link,
             'index_lag': details.index_lang,
+            'better_book': details.better_book,
+            'occasion': details.occasion,
+            'display': details.display,
         }
 
     @staticmethod
@@ -1349,6 +1353,30 @@ class KaraitesBookAsArray(models.Model):
         return html
 
     show_line_data.short_description = 'Line Data'
+
+    def to_json(self):
+        return {
+            'book_text': self.book_text,
+        }
+
+    # better books
+    @staticmethod
+    def get_book(book_name):
+
+        query_book_details = KaraitesBookDetails.objects.get(book_title_en=slug_back(book_name))
+        query_book = KaraitesBookAsArray.objects.filter(book=query_book_details)
+
+        songs = []
+        for song in query_book_details.songs.all():
+            songs.append(song.to_json())
+
+        book_data = []
+        for book in query_book:
+            book_data.append(book.to_json())
+
+        return {'details': KaraitesBookDetails.to_dic(query_book_details, []),
+                'songs': songs,
+                'book_data': book_data}
 
     class Meta:
         ordering = ('paragraph_number', 'book', 'ref_chapter')

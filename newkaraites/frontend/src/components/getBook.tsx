@@ -20,7 +20,6 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
         if (response.ok) {
 
             const data = await response.json()
-
             switch (type.toLowerCase()) {
 
                 case 'bible':
@@ -29,11 +28,13 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
                     break
 
                 case 'karaites':
+
                     store.setParagraphs(data[PARAGRAPHS], paneNumber)
                     store.setBookDetails(data[BOOK_DETAILS], paneNumber)
                     break
 
                 case 'better':
+
                     store.setSongsBetter(data['songs'], paneNumber)
                     store.setBookDetailsBetter(data['details'], paneNumber)
                     store.setBookBetter(data['book_data'], paneNumber)

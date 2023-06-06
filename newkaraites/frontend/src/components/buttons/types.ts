@@ -8,6 +8,7 @@ export interface ButtonProps {
 
 export interface MusicBadgeProps {
     length: number;
+    audio: boolean;
     fontSize?: 'default' | 'inherit' | 'large' | 'medium' | 'small';
     color?: 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
 }

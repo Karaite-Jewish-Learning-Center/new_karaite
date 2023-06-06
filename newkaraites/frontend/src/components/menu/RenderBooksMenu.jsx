@@ -9,6 +9,7 @@ import {ToText} from "../general/ToText";
 import {cleanUrl,} from "../../utils/cleanUrl";
 import {MusicBadge} from "../bages/musicBadge";
 
+
 export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
     const classes = useStyles()
@@ -17,6 +18,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
         const keys = Object.keys(obj)
         let separator = ''
         let comp = []
+
         keys.forEach(key => {
             if (obj[key].book_classification !== separator) {
 
@@ -32,13 +34,22 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
                     </Typography>
                 </Grid>)
             }
-            comp.push(<Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`}>
+
+            // this should be removed when all Karaites books turn to better books
+            let  url =''
+            if(obj[key].better_book) {
+                url = `/book/${cleanUrl(obj[key].book_title_en)}/`
+            }else{
+                url = `/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`
+            }
+
+            comp.push(<Link to={url}>
                 <div className={classes.item}>
                     <span className={classes.left}>
                         <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
                     </span>
                     <span className={classes.note}>
-                         <MusicBadge length={obj[key].songs_list.length}/>
+                         <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book}/>
                     </span>
                     <span className={classes.right}>
                         <Typography className={classes.bookTitleEn}>
