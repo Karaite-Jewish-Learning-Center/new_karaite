@@ -1372,7 +1372,7 @@ class KaraitesBookAsArray(models.Model):
 
         book_data = []
         for book in query_book:
-            book_data.append(book.to_json())
+            book_data.append(book.book_text)
 
         return {'details': KaraitesBookDetails.to_dic(query_book_details, []),
                 'songs': songs,

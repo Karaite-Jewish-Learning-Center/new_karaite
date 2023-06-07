@@ -48,7 +48,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const audioBookStore = useContext(AudioBookContext)
     const matches = useMediaQuery('(min-width:600px)');
     const direction = (matches ? 'row' : 'column')
-    const xsColumns1 = (matches ? 5 : 12)
+    const xsColumns1 = (matches ? 4 : 12)
     const xsColumns2 = (matches ? 2 : 12)
     const book = store.getBook(paneNumber)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
@@ -144,7 +144,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
 
         //store.setCurrentItem(index, paneNumber)
         let c = store.getGridVisibleRangeStart(paneNumber)
-        console.log('top item before scroll',c)
+        console.log('top item before scroll', c)
         //@ts-ignore
         virtuoso.current.scrollToIndex({
             index: 10,
@@ -154,25 +154,29 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         visibilityChanged = x
     }
     const ItemContent = (index: number, data: any) => {
-        debugger
         const startIndex = store.getGridVisibleRangeStart(paneNumber)
-        const found = index === startIndex + distanceFromTop
+        const found = false //index === startIndex + distanceFromTop
         // let d = toJS(data)
         // console.log(d)
         // console.log(data.book_text[HEBREW])
-        return (
-            <>
+        if (data[HEBREW].length !== 0 && data[TRANSLITERATION].length !== 0) {
+            return (
                 <TableCell className={`${classes.tableCell}${found ? classes.highlight : ''}`}
                            onClick={onClick.bind(this, index)}
                 >
-                    <Typography className={classes.hebrew}>{data.book_text[HEBREW]}</Typography>
-                    <Typography className={classes.transliteration}>{data.book_text[TRANSLITERATION]}</Typography>
-                    <Typography variant="body1" className={classes.english}>{data.book_text[ENGLISH]}</Typography>
-
+                    <Typography className={`${classes.hebrew} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[HEBREW]}</Typography>
+                    <Typography className={`${classes.transliteration} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[TRANSLITERATION]}</Typography>
                 </TableCell>
-                {/*{data.book_text[BREAK] === "1" ? <TableCell>&nbsp;</TableCell> : null}*/}
-            </>
-        )
+            )
+        } else {
+            return (
+                <TableCell className={`${classes.tableCell}${found ? classes.highlight : ''}`}
+                           onClick={onClick.bind(this, index)}
+                >
+                    <Typography variant="body1" className={`${classes.english} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[ENGLISH]}</Typography>
+                </TableCell>
+            )
+        }
     }
     const fixedHeaderContent = () => (
         <TableRow>
@@ -185,15 +189,17 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
                       spacing={1}>
 
                     <Grid item xs={xsColumns1}>
-                        <CloseButton onClick={onClose}/>
-                        <InfoButton onClick={onIntro}/>
-                        <TocButton onClick={onToc}/>
-                        <BookButton onClick={onBook}/>
-                        {/*<MusicSelect songs={details.songs_list}/>*/}
-                        {/*{(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}*/}
+                        <p className={classes.pButtons}>
+                            <CloseButton onClick={onClose}/>
+                            <InfoButton onClick={onIntro}/>
+                            <TocButton onClick={onToc}/>
+                            <BookButton onClick={onBook}/>
+                            {/*<MusicSelect songs={details.songs_list}/>*/}
+                            {/*{(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}*/}
+                        </p>
                     </Grid>
 
-                    <Grid item xs={xsColumns2}>
+                    <Grid item xs={xsColumns1}>
                         <Typography variant="h6" className={classes.hebrewTitle}>
                             {details.book_title_he}
                         </Typography>
@@ -201,9 +207,9 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
                             {details.book_title_en}
                         </Typography>
                     </Grid>
+                    <Grid item xs={xsColumns1}>
+                    </Grid>
                 </Grid>
-
-
             </TableCell>
         </TableRow>
     )
@@ -297,7 +303,9 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
         padding: 1,
     },
-    spacer: {},
+    break: {
+        marginBottom: 15,
+    },
     header: {
         minWidth: '100%',
         height: 50,
@@ -311,6 +319,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'SBL Hebrew',
         fontSize: 20,
         paddingRight: 5,
+        whiteSpace: 'nowrap',
     },
     englishTitle: {
         width: '50%',
@@ -319,16 +328,19 @@ const useStyles = makeStyles((theme) => ({
         direction: 'ltr',
         fontSize: 20,
         paddingLeft: 5,
+        whiteSpace: 'nowrap',
     },
     resources: {
-        // padding: 0,
-        // paddingTop: (iOS() ? 50 : 0),
-        // marginRight: 0,
-        // minWidth: '100%',
-        // minHeight: 60,
-        // backgroundColor: 'lightgrey',
+        padding: 0,
+        paddingTop: (iOS() ? 50 : 0),
+        marginRight: 0,
+        minWidth: '100%',
+        minHeight: 60,
+        margin: -12,
     },
-    break: {
-        marginBottom: 15
-    }
+    pButtons: {
+        margin: 0,
+        padding: 0,
+        whiteSpace: 'nowrap',
+    },
 }))

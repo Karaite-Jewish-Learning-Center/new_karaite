@@ -135,13 +135,11 @@ class Command(BaseCommand):
                         line_number += 1
 
                     # save english translation
-                    line_number += 1
                     english_translation[-1][10] = 1  # end of verse, section or subtext? Yes
                     for english in english_translation:
                         self.save_data(liturgy_details, songs, english, line_number)
                         line_number += 1
 
-                    line_number += 1
                     english_translation = []
                     hebrew_text = []
                 print('Processing  book: ', book, ' song: ', english_name, ' line_number: ', spreadsheet_line, )

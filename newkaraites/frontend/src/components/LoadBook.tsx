@@ -46,8 +46,6 @@ const LoadBook: FC<BooksProps> = ({type}) => {
     // if type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
 
-    console.log('LoadBook', type, book, chapter, verse, intro, path)
-
     let history = useHistory()
     const onClosePane = (paneNumber: number) => {
         store.closePane(paneNumber)
@@ -60,6 +58,8 @@ const LoadBook: FC<BooksProps> = ({type}) => {
         if (store.isLastPane) {
             if (type === 'bible') {
                 history.push(`/Tanakh/`)
+            }else if (type === 'better') {
+                history.push(`/Liturgy/`)
             } else {
                 history.push(`/${path}/`)
             }
