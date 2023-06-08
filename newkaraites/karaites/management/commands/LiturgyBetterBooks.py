@@ -39,7 +39,6 @@ class Command(BaseCommand):
             songs = Songs()
         song_file_name = path / song_file
         songs.song_title = english_name
-        songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
         songs.save()
 
         return songs
@@ -66,11 +65,14 @@ class Command(BaseCommand):
             # song details
             hebrew_name = ws['C2'].value
             english_name = ws['D2'].value
+            song_file = ws['A2'].value
+
             KaraitesBookDetails.objects.filter(book_title_en=english_name).delete()
 
             liturgy_details = KaraitesBookDetails()
             liturgy_details.first_level = FirstLevel.objects.get(first_level='Liturgy')
-            liturgy_details.book_classification = Classification.objects.get(classification_name='Shabbat Morning Services')
+            liturgy_details.book_classification = Classification.objects.get(
+                classification_name='Shabbat Morning Services')
             liturgy_details.occasion = ws['B2'].value
             liturgy_details.book_title_he = hebrew_name
             liturgy_details.book_title_en = english_name
@@ -79,18 +81,18 @@ class Command(BaseCommand):
             liturgy_details.better_toc = []
             liturgy_details.language = 'he'
             liturgy_details.author = None
-
             liturgy_details.save()
 
-            song_file = ws['A2'].value
+            liturgy_details.songs.add(self.save_song(english_name, song_file))
 
-            songs = self.save_song(english_name, song_file)
 
             row = 2
-            line_number = 1
+            line_number = 0
             spreadsheet_line = 1
             english_translation = []
-            hebrew_text = []
+            # use some empty lines on top to better display the text on the grid
+            filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1]
+            hebrew_text = [filler, filler, filler, filler]
             # audio_start
             stack.push(convert_time_string(ws[f'O{row}'].value))
             # print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
@@ -108,7 +110,7 @@ class Command(BaseCommand):
                 audio_start = stack.pop()
                 stack.push(convert_time_string(ws[f'P{row}'].value))
                 print('audio_start: ', audio_start, ' audio_end: ', stack.peek())
-                # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments]
+                # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments,filler]
                 hebrew_text.append([
                     ws[f'J{row}'].value,  # hebrew
                     ws[f'K{row}'].value,  # transliteration
@@ -120,10 +122,11 @@ class Command(BaseCommand):
                     ws[f'G{row}'].value,  # censored
                     ws[f'I{row}'].value,  # line_number
                     ws[f'M{row}'].value,  # comments
-                    0  # end of verse, section or subtext? No
+                    0,  # end of verse, section or subtext? No
+                    0  # filler
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', '', '', 0])
+                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', '', '', 0, 0])
 
                 # end of verse, section or subtext
                 end = ws[f'F{row}'].value
@@ -142,6 +145,12 @@ class Command(BaseCommand):
 
                     english_translation = []
                     hebrew_text = []
+
                 print('Processing  book: ', book, ' song: ', english_name, ' line_number: ', spreadsheet_line, )
                 spreadsheet_line += 1
                 row += 1
+
+            # append some empty lines at bottom to better display the text on the grid
+            for _ in range(4):
+                self.save_data(liturgy_details, songs, filler, line_number)
+                line_number += 1

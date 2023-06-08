@@ -1,6 +1,7 @@
 import React, {FC, MouseEventHandler} from 'react';
-import {AudiobookBottom} from '../buttons/audiobookBottom';
 import {TextToSpeechButton} from '../buttons/textToSpeechButton';
+import {AudioBookButton} from '../buttons/AudioBookButton';
+
 
 interface AudioBookProps {
     isAudioBook: boolean;
@@ -20,7 +21,7 @@ export const IsAudioBook: FC<AudioBookProps> = ({
                                                     onSpeakOnOffHe,
                                                 }) =>
     (isAudioBook ?
-            <AudiobookBottom onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={isSpeechError}/>
+            <AudioBookButton onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={isSpeechError}/>
             :
             <TextToSpeechButton onClick={onSpeakOnOffHe} onOff={flip[0]} isSpeechError={isSpeechError}/>
     );

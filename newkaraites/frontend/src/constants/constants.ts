@@ -45,7 +45,9 @@ export const AUDIO_BOOK_ID = 2
 export const SCROLL_LATENCY_MS = 300
 export const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 export const TRANSFORM_TYPE = 'Bible'
-
+export const BETTER_START_AUDIO = 3
+export const BETTER_END_AUDIO = 4
+export const BETTER_AUDIO_BOOK_ID = 5
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 export const bookChapterUrl = apiUrl + 'get-book-chapter/'
 

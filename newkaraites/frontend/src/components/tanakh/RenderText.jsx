@@ -135,7 +135,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     useEffect(() => {
         if (speaking) {
-            debugger
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
         return () => {

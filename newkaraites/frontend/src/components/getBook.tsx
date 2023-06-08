@@ -6,6 +6,7 @@ import {
     betterBookUrl
 } from '../constants/constants';
 import {BookType} from '../types/commonTypes';
+import {toJS} from 'mobx';
 
 
 const PARAGRAPHS = 0

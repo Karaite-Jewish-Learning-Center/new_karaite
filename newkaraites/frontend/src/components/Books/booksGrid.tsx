@@ -19,13 +19,16 @@ import {TocButton} from '../buttons/TocButton';
 import {BookButton} from '../buttons/BookButton';
 import {MusicSelect} from '../buttons/music-select';
 import {BuyButton} from '../buttons/BuyButton';
+import {AudioBookButton} from '../buttons/AudioBookButton';
 import {iOS, unslug} from '../../utils/utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
-    START_AUDIO_BOOK,
-    AUDIO_BOOK_ID,
+    BETTER_START_AUDIO,
+    BETTER_END_AUDIO,
+    BETTER_AUDIO_BOOK_ID,
     SCROLL_LATENCY_MS,
-    SCROLL_LATENCY_SECONDS, audioBooksUrl,
+    SCROLL_LATENCY_SECONDS,
+    songsUrl,
 } from "../../constants/constants";
 import {AudioBookContext} from '../../stores/audioBookContext';
 
@@ -33,6 +36,8 @@ const HEBREW = 0
 const TRANSLITERATION = 1
 const ENGLISH = 2
 const BREAK = 10
+const FILER = 11
+const TOP_LINES = 4
 
 interface BooksInterface {
     paneNumber: number,
@@ -49,17 +54,15 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const matches = useMediaQuery('(min-width:600px)');
     const direction = (matches ? 'row' : 'column')
     const xsColumns1 = (matches ? 4 : 12)
-    const xsColumns2 = (matches ? 2 : 12)
+     // const xsColumns2 = (matches ? 2 : 12)
     const book = store.getBook(paneNumber)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
-    const [distanceFromTop, setDistanceFromTop] = useState(0)
+    const [distanceFromTop, setDistanceFromTop] = useState(TOP_LINES)
     const virtuoso = useRef(null)
 
     if (bookData === undefined || bookData.length === 0) return null;
 
-    let x = toJS(bookData)
-    let y = toJS(details)
-
+    store.setCurrentItem(distanceFromTop, paneNumber)
     const callFromEnded = (set = true) => {
         let currentItem = store.getCurrentItem(paneNumber)
         if (audioBookStore.getIsPlaying()) {
@@ -76,7 +79,8 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         }, SCROLL_LATENCY_MS)
     }
     const onTimeUpdate = (currentTime: number) => {
-        const [start, end, id] = store.getAudioBookData(paneNumber)
+        const [start, end, id] = store.getBetterAudioBookData(paneNumber)
+        console.log('onTimeUpdate', currentTime, start, end, id)
         const lastId = store.getLastId(paneNumber)
 
         if (start === 0 && end === 0) {
@@ -94,27 +98,28 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         onAudioBookOnOff()
     }
     const onAudioBookOnOff = () => {
-
+        debugger
         if (!audioBookPlaying) {
-            let audioData = store.getAudioBookData(paneNumber)
-            store.setLastId(audioData[AUDIO_BOOK_ID], paneNumber)
-            const audioFile = store.getBookAudioFile(paneNumber)
-            audioBookStore.load(`${audioBooksUrl}${audioFile}`, book)
-            audioBookStore.play(audioData[START_AUDIO_BOOK], onTimeUpdate, onAudioBookEnded)
+            let audioData = toJS(store.getSongsBetter(paneNumber))
+            let u = `${songsUrl}${audioData.song_file}`
+            debugger
+            store.setLastId(audioData.id, paneNumber)
+            audioBookStore.load(`${songsUrl}${audioData.song_file}`, book)
+            audioBookStore.play(store.getBetterAudioDataStart(paneNumber), onTimeUpdate, onAudioBookEnded)
             setAudioBookPlaying(() => true)
         } else {
             setAudioBookPlaying(() => false)
         }
 
     }
-    const endReached = (index: number) => {
-        // setDistanceFromTop(distanceFromTop + 1)
-        console.log('endReached', index, distanceFromTop)
-    }
+    // const endReached = (index: number) => {
+    //     // setDistanceFromTop(distanceFromTop + 1)
+    //     console.log('endReached', index, distanceFromTop)
+    // }
     let visibilityChanged = (range: ListRange) => {
         // store.setCurrentItem(range.startIndex, paneNumber)
         console.log('visibilityChanged', range.startIndex, range.endIndex)
-        // store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
+        store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
     }
     const onClose = () => {
         onClosePane(paneNumber)
@@ -132,36 +137,42 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         // window.open(details.buy_link)
     }
     const updateItemDistance = (i: number) => {
-        console.log('updateItemDistance', store.getGridVisibleRangeStart(paneNumber))
+        // console.log('updateItemDistance', store.getGridVisibleRangeStart(paneNumber))
         setDistanceFromTop(i - store.getGridVisibleRangeStart(paneNumber))
     }
     const onClick = (index: number) => {
         updateItemDistance(index)
-        let x = visibilityChanged
-        visibilityChanged = () => {
-
-        }
+        // let x = visibilityChanged
+        // visibilityChanged = () => {
+        //
+        // }
 
         //store.setCurrentItem(index, paneNumber)
-        let c = store.getGridVisibleRangeStart(paneNumber)
-        console.log('top item before scroll', c)
-        //@ts-ignore
-        virtuoso.current.scrollToIndex({
-            index: 10,
-            align: 'start',
-            behavior: 'smooth'
-        })
-        visibilityChanged = x
+        // let c = store.getGridVisibleRangeStart(paneNumber)
+        // console.log('top item before scroll', c)
+        // //@ts-ignore
+        // virtuoso.current.scrollToIndex({
+        //     index: 10,
+        //     align: 'start',
+        //     behavior: 'smooth'
+        // })
+        // visibilityChanged = x
     }
     const ItemContent = (index: number, data: any) => {
         const startIndex = store.getGridVisibleRangeStart(paneNumber)
-        const found = false //index === startIndex + distanceFromTop
-        // let d = toJS(data)
-        // console.log(d)
-        // console.log(data.book_text[HEBREW])
+        let found = index === startIndex + distanceFromTop
+
+        // empty lines at top / bottom to get a better display on the grid
+        if (data[FILER] === '1') {
+            return (
+                <TableCell className={classes.tableCell}>
+                    <Typography variant="body1" className={classes.english}>&nbsp;</Typography>
+                </TableCell>
+            )
+        }
         if (data[HEBREW].length !== 0 && data[TRANSLITERATION].length !== 0) {
             return (
-                <TableCell className={`${classes.tableCell}${found ? classes.highlight : ''}`}
+                <TableCell className={`${classes.tableCell} ${found ? classes.highlight : ''}`}
                            onClick={onClick.bind(this, index)}
                 >
                     <Typography className={`${classes.hebrew} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[HEBREW]}</Typography>
@@ -170,7 +181,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
             )
         } else {
             return (
-                <TableCell className={`${classes.tableCell}${found ? classes.highlight : ''}`}
+                <TableCell className={`${classes.tableCell} ${found ? classes.highlight : ''}`}
                            onClick={onClick.bind(this, index)}
                 >
                     <Typography variant="body1" className={`${classes.english} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[ENGLISH]}</Typography>
@@ -178,6 +189,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
             )
         }
     }
+    // @ts-ignore
     const fixedHeaderContent = () => (
         <TableRow>
             <TableCell className={classes.header}>
@@ -194,8 +206,9 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
                             <InfoButton onClick={onIntro}/>
                             <TocButton onClick={onToc}/>
                             <BookButton onClick={onBook}/>
-                            {/*<MusicSelect songs={details.songs_list}/>*/}
-                            {/*{(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}*/}
+                            <BuyButton onClick={onBuy}/>
+                            <AudioBookButton onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={false}/>
+                            {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
                         </p>
                     </Grid>
 
@@ -215,7 +228,6 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     )
 
     const TableComponents = {
-        // Scroller: React.forwardRef((props, ref) => <TableContainer component={Paper}  {...props} ref={ref}/>),
         // @ts-ignore
         Table: (props) => <Table {...props} className={classes.table}/>,
         TableHead: TableHead,
@@ -236,7 +248,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
             fixedHeaderContent={fixedHeaderContent}
             itemContent={ItemContent}
             rangeChanged={visibilityChanged}
-            endReached={endReached}
+            // endReached={endReached}
 
         />
     )
@@ -254,9 +266,9 @@ const useStyles = makeStyles((theme) => ({
     table: {
         margin: 'auto',
         width: '100%',
-
     },
     tBody: {
+        marginTop: 100,
         border: 'none',
     },
     paper: {
@@ -304,7 +316,7 @@ const useStyles = makeStyles((theme) => ({
         padding: 1,
     },
     break: {
-        marginBottom: 15,
+        paddingBottom: 15,
     },
     header: {
         minWidth: '100%',
