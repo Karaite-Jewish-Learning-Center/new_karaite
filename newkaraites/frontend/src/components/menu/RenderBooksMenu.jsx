@@ -27,44 +27,50 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
                 } else {
                     separator = ''
                 }
-                comp.push(<Grid item xs={12}>
-                    <hr className={classes.hr}/>
-                    <Typography variant="h6" className={classes.title}>
-                        {capitalize(separator)}
-                    </Typography>
-                </Grid>)
+                comp.push(
+                    <Grid item xs={12} key={makeRandomKey()}>
+                        <hr className={classes.hr}/>
+                        <Typography variant="h6" className={classes.title}>
+                            {capitalize(separator)}
+                        </Typography>
+                    </Grid>
+                )
             }
 
             // this should be removed when all Karaites books turn to better books
-            let  url =''
-            if(obj[key].better_book) {
+            let url = ''
+            if (obj[key].better_book) {
                 url = `/book/${cleanUrl(obj[key].book_title_en)}/`
-            }else{
+            } else {
                 url = `/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`
             }
 
-            comp.push(<Link to={url}>
-                <div className={classes.item}>
+            comp.push(
+                <Link to={url} key={makeRandomKey()}>
+                    <div className={classes.item}>
                     <span className={classes.left}>
                         <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
                     </span>
-                    <span className={classes.note}>
+                        <span className={classes.note}>
                          <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book}/>
                     </span>
-                    <span className={classes.right}>
+                        <span className={classes.right}>
                         <Typography className={classes.bookTitleEn}>
                             {obj[key].book_title_en}
                         </Typography>
                     </span>
-                </div>
-            </Link>)
+                    </div>
+                </Link>
+            )
 
         })
-        comp.push(<Grid item xs={12}>
-            <hr className={classes.hr}/>
-            <Typography variant="h6" className={classes.title}>
-            </Typography>
-        </Grid>)
+        comp.push(
+            <Grid item xs={12} key={makeRandomKey()}>
+                <hr className={classes.hr}/>
+                <Typography variant="h6" className={classes.title}>
+                </Typography>
+            </Grid>
+        )
         return comp
     }
 
@@ -130,23 +136,23 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right',
     },
     left: {
-        width:'50%',
+        width: '50%',
         paddingLeft: 20,
         margin: 5,
-         justifyItems: 'right',
+        justifyItems: 'right',
     },
     right: {
-        width:'50%',
+        width: '50%',
         paddingRight: 20,
         margin: 5,
         justifyItems: 'left',
     },
-    item:{
-      display: 'flex',
+    item: {
+        display: 'flex',
     },
-    note:{
-      marginLeft:20,
-      marginRight:20,
-      minWidth:20,
+    note: {
+        marginLeft: 20,
+        marginRight: 20,
+        minWidth: 20,
     }
 }));

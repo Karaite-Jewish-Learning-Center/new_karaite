@@ -6,6 +6,7 @@ import {
     BETTER_START_AUDIO,
     BETTER_END_AUDIO,
     BETTER_AUDIO_BOOK_ID,
+    BETTER_END_AUDIO_TRACK
 } from "../constants/constants";
 import {VirtuosoProps} from 'react-virtuoso/dist/index.d';
 
@@ -108,9 +109,9 @@ class AppState {
         const data = this.panes[i].paragraphs[item]
         const start = parseFloat(data[BETTER_START_AUDIO])
         const end = parseFloat(data[BETTER_END_AUDIO])
-        const id:string = data[BETTER_AUDIO_BOOK_ID]
-        debugger
-        return [start, end, id]
+        const id = parseInt(data[BETTER_AUDIO_BOOK_ID])
+        const audioTrackEnd = data[BETTER_END_AUDIO_TRACK] === '1'
+        return [start, end, id, audioTrackEnd]
 
     }
     getBetterAudioDataStart = (i: number) => this.getBetterAudioData(i)[0]

@@ -317,7 +317,7 @@ class BetterBookFilter(admin.SimpleListFilter):
 
 
 class KaraitesBetterBooksAdmin(KAdmin):
-    list_display = ('book', 'song', 'line_number', 'show_line_data', 'show_book_data')
+    list_display = ('book', 'song', 'book_text', 'line_number', 'show_line_data', 'show_book_data')
     list_filter = (BetterBookFilter,)
     search_fields = ('book', 'song')
 

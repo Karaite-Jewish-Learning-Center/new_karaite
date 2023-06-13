@@ -48,6 +48,7 @@ export const TRANSFORM_TYPE = 'Bible'
 export const BETTER_START_AUDIO = 3
 export const BETTER_END_AUDIO = 4
 export const BETTER_AUDIO_BOOK_ID = 5
+export const BETTER_END_AUDIO_TRACK = 12
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 export const bookChapterUrl = apiUrl + 'get-book-chapter/'
 

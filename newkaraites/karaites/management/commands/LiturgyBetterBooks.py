@@ -85,14 +85,14 @@ class Command(BaseCommand):
 
             liturgy_details.songs.add(self.save_song(english_name, song_file))
 
-
             row = 2
             line_number = 0
             spreadsheet_line = 1
             english_translation = []
             # use some empty lines on top to better display the text on the grid
-            filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1]
-            hebrew_text = [filler, filler, filler, filler]
+            filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0]
+            # hebrew_text = [filler, filler, filler, filler]
+            hebrew_text = []
             # audio_start
             stack.push(convert_time_string(ws[f'O{row}'].value))
             # print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
@@ -123,22 +123,27 @@ class Command(BaseCommand):
                     ws[f'I{row}'].value,  # line_number
                     ws[f'M{row}'].value,  # comments
                     0,  # end of verse, section or subtext? No
-                    0  # filler
+                    0,  # filler
+                    0  # song end
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', '', '', 0, 0])
+                english_translation.append(['', '', ws[f'L{row}'].value, '', '', songs.id, '', '', '', '', 0, 1, 0])
 
                 # end of verse, section or subtext
                 end = ws[f'F{row}'].value
                 if end is not None and ws[f'F{row}'].value.find('end') >= 0:
                     # save hebrew text
-                    hebrew_text[-1][10] = 1  # end of verse, section or subtext? Yes
+                    hebrew_text[-1][10] = 1  # end of verse, subtext
+                    if end.find('<end subtext>') >= 0:
+                        hebrew_text[-1][12] = 1  # end of song
+
                     for hebrew in hebrew_text:
                         self.save_data(liturgy_details, songs, hebrew, line_number)
                         line_number += 1
 
                     # save english translation
                     english_translation[-1][10] = 1  # end of verse, section or subtext? Yes
+
                     for english in english_translation:
                         self.save_data(liturgy_details, songs, english, line_number)
                         line_number += 1
@@ -151,6 +156,6 @@ class Command(BaseCommand):
                 row += 1
 
             # append some empty lines at bottom to better display the text on the grid
-            for _ in range(4):
+            for _ in range(10):
                 self.save_data(liturgy_details, songs, filler, line_number)
                 line_number += 1

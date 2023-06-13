@@ -35,9 +35,10 @@ import {AudioBookContext} from '../../stores/audioBookContext';
 const HEBREW = 0
 const TRANSLITERATION = 1
 const ENGLISH = 2
+const QUAHAL = 6
 const BREAK = 10
-const FILER = 11
-const TOP_LINES = 4
+const FILLER = 11
+const TOP_LINES = 0
 
 interface BooksInterface {
     paneNumber: number,
@@ -54,7 +55,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const matches = useMediaQuery('(min-width:600px)');
     const direction = (matches ? 'row' : 'column')
     const xsColumns1 = (matches ? 4 : 12)
-     // const xsColumns2 = (matches ? 2 : 12)
+    // const xsColumns2 = (matches ? 2 : 12)
     const book = store.getBook(paneNumber)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [distanceFromTop, setDistanceFromTop] = useState(TOP_LINES)
@@ -62,12 +63,16 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
 
     if (bookData === undefined || bookData.length === 0) return null;
 
-    store.setCurrentItem(distanceFromTop, paneNumber)
-    const callFromEnded = (set = true) => {
+    const callFromEnded = () => {
+
         let currentItem = store.getCurrentItem(paneNumber)
-        if (audioBookStore.getIsPlaying()) {
-            store.setCurrentItem(currentItem + 1, paneNumber)
-        }
+        const len = bookData.length
+        // skip english translation or any other that has filer = 1
+        do
+            currentItem++
+        while (currentItem < len && bookData[currentItem][FILLER] === "1")
+
+        store.setCurrentItem(currentItem, paneNumber)
         setTimeout(() => {
             //     @ts-ignore
             virtuoso.current.scrollToIndex({
@@ -78,19 +83,18 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
 
         }, SCROLL_LATENCY_MS)
     }
+
     const onTimeUpdate = (currentTime: number) => {
-        const [start, end, id] = store.getBetterAudioBookData(paneNumber)
-        console.log('onTimeUpdate', currentTime, start, end, id)
+        const [start, end, id, audioTrackEnd] = store.getBetterAudioData(paneNumber)
         const lastId = store.getLastId(paneNumber)
 
-        if (start === 0 && end === 0) {
-            setAudioBookPlaying(false)
-            audioBookStore.stop()
-            return
-        }
-
-        if (currentTime + SCROLL_LATENCY_SECONDS > end && lastId === id) {
-            callFromEnded(false)
+        if (currentTime + SCROLL_LATENCY_SECONDS >= end && lastId === id) {
+            if (audioTrackEnd) {
+                setAudioBookPlaying(false)
+                audioBookStore.stop()
+                return
+            }
+            callFromEnded()
         }
     }
     const onAudioBookEnded = () => {
@@ -98,30 +102,24 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         onAudioBookOnOff()
     }
     const onAudioBookOnOff = () => {
-        debugger
         if (!audioBookPlaying) {
             let audioData = toJS(store.getSongsBetter(paneNumber))
-            let u = `${songsUrl}${audioData.song_file}`
-            debugger
             store.setLastId(audioData.id, paneNumber)
             audioBookStore.load(`${songsUrl}${audioData.song_file}`, book)
             audioBookStore.play(store.getBetterAudioDataStart(paneNumber), onTimeUpdate, onAudioBookEnded)
             setAudioBookPlaying(() => true)
         } else {
+            audioBookStore.stop()
             setAudioBookPlaying(() => false)
         }
 
     }
-    // const endReached = (index: number) => {
-    //     // setDistanceFromTop(distanceFromTop + 1)
-    //     console.log('endReached', index, distanceFromTop)
-    // }
+
     let visibilityChanged = (range: ListRange) => {
-        // store.setCurrentItem(range.startIndex, paneNumber)
-        console.log('visibilityChanged', range.startIndex, range.endIndex)
         store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
     }
     const onClose = () => {
+        audioBookStore.stop()
         onClosePane(paneNumber)
     }
     const onIntro = () => {
@@ -137,54 +135,48 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         // window.open(details.buy_link)
     }
     const updateItemDistance = (i: number) => {
-        // console.log('updateItemDistance', store.getGridVisibleRangeStart(paneNumber))
-        setDistanceFromTop(i - store.getGridVisibleRangeStart(paneNumber))
+        store.setCurrentItem(i, paneNumber)
     }
     const onClick = (index: number) => {
         updateItemDistance(index)
-        // let x = visibilityChanged
-        // visibilityChanged = () => {
-        //
-        // }
-
-        //store.setCurrentItem(index, paneNumber)
-        // let c = store.getGridVisibleRangeStart(paneNumber)
-        // console.log('top item before scroll', c)
-        // //@ts-ignore
-        // virtuoso.current.scrollToIndex({
-        //     index: 10,
-        //     align: 'start',
-        //     behavior: 'smooth'
-        // })
-        // visibilityChanged = x
     }
     const ItemContent = (index: number, data: any) => {
+        const currentIndex = store.getCurrentItem(paneNumber)
         const startIndex = store.getGridVisibleRangeStart(paneNumber)
-        let found = index === startIndex + distanceFromTop
+        let found = index === currentIndex
+        const hebrewLen = data[HEBREW].length > 0
+        const transliterationLen = data[TRANSLITERATION].length > 0
+        const englishLen = data[ENGLISH].length > 0
 
-        // empty lines at top / bottom to get a better display on the grid
-        if (data[FILER] === '1') {
+        if (hebrewLen || transliterationLen || englishLen) {
+            const breakLine = (data[BREAK] === "1" ? classes.break : '')
+            const highlight = (found ? classes.highlight : '')
+
+            if (hebrewLen && transliterationLen) {
+                console.log(data[QUAHAL],data[QUAHAL] === "Qahal"  )
+                const qahal = (data[QUAHAL] === "Qahal" ? classes.qahal : '')
+
+                return (
+                    <TableCell className={`${classes.tableCell} ${highlight}`}
+                               onClick={onClick.bind(this, index)}
+                    >
+                        <Typography className={`${classes.hebrew} ${breakLine} ${qahal}`}>{data[HEBREW]}</Typography>
+                        <Typography className={`${classes.transliteration} ${breakLine}  ${qahal}`}>{data[TRANSLITERATION]}</Typography>
+                    </TableCell>
+                )
+            } else {
+                return (
+                    <TableCell className={`${classes.tableCell} ${highlight}`}
+                               onClick={onClick.bind(this, index)}
+                    >
+                        <Typography variant="body1" className={`${classes.english} ${breakLine}`}>{data[ENGLISH]}</Typography>
+                    </TableCell>
+                )
+            }
+        } else {
             return (
                 <TableCell className={classes.tableCell}>
                     <Typography variant="body1" className={classes.english}>&nbsp;</Typography>
-                </TableCell>
-            )
-        }
-        if (data[HEBREW].length !== 0 && data[TRANSLITERATION].length !== 0) {
-            return (
-                <TableCell className={`${classes.tableCell} ${found ? classes.highlight : ''}`}
-                           onClick={onClick.bind(this, index)}
-                >
-                    <Typography className={`${classes.hebrew} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[HEBREW]}</Typography>
-                    <Typography className={`${classes.transliteration} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[TRANSLITERATION]}</Typography>
-                </TableCell>
-            )
-        } else {
-            return (
-                <TableCell className={`${classes.tableCell} ${found ? classes.highlight : ''}`}
-                           onClick={onClick.bind(this, index)}
-                >
-                    <Typography variant="body1" className={`${classes.english} ${(data[BREAK] === "1" ? classes.break : '')}`}>{data[ENGLISH]}</Typography>
                 </TableCell>
             )
         }
@@ -248,8 +240,6 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
             fixedHeaderContent={fixedHeaderContent}
             itemContent={ItemContent}
             rangeChanged={visibilityChanged}
-            // endReached={endReached}
-
         />
     )
 }
@@ -281,7 +271,7 @@ const useStyles = makeStyles((theme) => ({
         border: 'none',
     },
     highlight: {
-        backgroundColor: (theme.palette.type === 'light' ? 'lightblue' : '#303030'),
+        backgroundColor: (theme.palette.type === 'light' ? '#11c4f114' : 'darkgrey'),
     },
     paragraph: {
         width: '100%',
@@ -310,7 +300,7 @@ const useStyles = makeStyles((theme) => ({
     english: {
         textAlign: 'center',
         fontSize: 19,
-        color: 'red',
+        color:  (theme.palette.type === 'light' ? '#575656FF' : '#C5C4C4FF'),
         direction: 'ltr',
         margin: 0,
         padding: 1,
@@ -354,5 +344,9 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
         padding: 0,
         whiteSpace: 'nowrap',
+    },
+    qahal: {
+        fontStyle: 'italic',
+        fontWeight: 'bold',
     },
 }))
