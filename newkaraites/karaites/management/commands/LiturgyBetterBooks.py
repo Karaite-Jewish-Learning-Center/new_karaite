@@ -70,7 +70,7 @@ class Command(BaseCommand):
             KaraitesBookDetails.objects.filter(book_title_en=english_name).delete()
 
             liturgy_details = KaraitesBookDetails()
-            liturgy_details.first_level = FirstLevel.objects.get(first_level='Liturgy')
+            liturgy_details.first_level = FirstLevel.objects.get(first_level='Prayers & Songs')
             liturgy_details.book_classification = Classification.objects.get(
                 classification_name='Shabbat Morning Services')
             liturgy_details.occasion = ws['B2'].value
