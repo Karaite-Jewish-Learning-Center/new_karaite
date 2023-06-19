@@ -39,6 +39,7 @@ class Command(BaseCommand):
             songs = Songs()
         song_file_name = path / song_file
         songs.song_title = english_name
+        songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
         songs.save()
 
         return songs
