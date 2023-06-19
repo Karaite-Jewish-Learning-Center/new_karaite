@@ -103,9 +103,15 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     }
     const onAudioBookOnOff = () => {
         if (!audioBookPlaying) {
+            const [start, end, id, audioTrackEnd] = store.getBetterAudioData(paneNumber)
+            if( isNaN(start) || isNaN(end)){
+                callFromEnded()
+            }
             let audioData = toJS(store.getSongsBetter(paneNumber))
+            debugger
             store.setLastId(audioData.id, paneNumber)
             audioBookStore.load(`${songsUrl}${audioData.song_file}`, book)
+            store.getBetterAudioDataStart(paneNumber)
             audioBookStore.play(store.getBetterAudioDataStart(paneNumber), onTimeUpdate, onAudioBookEnded)
             setAudioBookPlaying(() => true)
         } else {
@@ -195,10 +201,10 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
                     <Grid item xs={xsColumns1}>
                         <p className={classes.pButtons}>
                             <CloseButton onClick={onClose}/>
-                            <InfoButton onClick={onIntro}/>
-                            <TocButton onClick={onToc}/>
-                            <BookButton onClick={onBook}/>
-                            <BuyButton onClick={onBuy}/>
+                            {/*<InfoButton onClick={onIntro}/>*/}
+                            {/*<TocButton onClick={onToc}/>*/}
+                            {/*<BookButton onClick={onBook}/>*/}
+                            {/*<BuyButton onClick={onBuy}/>*/}
                             <AudioBookButton onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={false}/>
                             {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
                         </p>
