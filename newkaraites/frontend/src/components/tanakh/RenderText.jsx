@@ -7,11 +7,13 @@ import {storeContext} from "../../stores/context";
 import {AudioBookContext} from "../../stores/audioBookContext";
 import {speechContext} from "../../stores/ttspeechContext";
 import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
-import {START_AUDIO_BOOK, AUDIO_BOOK_ID} from "../../constants/constants";
+import {
+    START_AUDIO_BOOK,
+    AUDIO_BOOK_ID,
+    SCROLL_LATENCY_MS,
+    SCROLL_LATENCY_SECONDS,
+} from "../../constants/constants";
 import {messageContext} from "../../stores/messages/messageContext";
-
-const SCROLL_LATENCY_MS = 300
-const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 
 
 const RenderTextGrid = ({paneNumber, onClosePane}) => {
@@ -133,7 +135,6 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
 
     useEffect(() => {
         if (speaking) {
-            debugger
             speech.play(store.getBookData(paneNumber)[store.getCurrentItem(paneNumber)], callFromEnded)
         }
         return () => {

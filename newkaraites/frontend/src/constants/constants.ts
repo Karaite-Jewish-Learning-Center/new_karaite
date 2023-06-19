@@ -42,14 +42,19 @@ export const AUDIO = 11
 export const START_AUDIO_BOOK = 0
 export const END_AUDIO_BOOK = 1
 export const AUDIO_BOOK_ID = 2
-
+export const SCROLL_LATENCY_MS = 300
+export const SCROLL_LATENCY_SECONDS = SCROLL_LATENCY_MS / 1000
 export const TRANSFORM_TYPE = 'Bible'
-
+export const BETTER_START_AUDIO = 3
+export const BETTER_END_AUDIO = 4
+export const BETTER_AUDIO_BOOK_ID = 5
+export const BETTER_END_AUDIO_TRACK = 12
 export const organization: numberString = {1: 'Torah', 2: 'Prophets', 3: 'Writings'}
 export const bookChapterUrl = apiUrl + 'get-book-chapter/'
 
 export const karaitesBookUrl = apiUrl + 'get-karaites-book-chapter/'
 export const karaitesBookByLevelAndClassification = apiUrl + 'get-karaites-books-by-level-and-classification/'
+export const betterBookUrl = apiUrl + 'book/'
 
 export const autocompleteUrl = apiUrl + 'autocomplete/'
 export const searchResultsUrl = apiUrl + 'search/'

@@ -92,6 +92,8 @@ def convert_seconds_to_time(time):
 
 
 def convert_time_string(time_str):
+    if not time_str:
+        return 0
     minutes, seconds, milliseconds = map(float, time_str.split('.'))
     print(minutes, seconds, milliseconds)
     return minutes * 60 + seconds + (float(f'0.{int(milliseconds)}'))

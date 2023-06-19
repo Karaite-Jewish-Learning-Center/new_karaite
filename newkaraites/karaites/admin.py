@@ -15,6 +15,7 @@ from .models import (FirstLevel,
                      KaraitesBookDetails,
                      DetailsProxy,
                      KaraitesBookAsArray,
+                     KaraitesBetterBooksProxy,
                      TableOfContents,
                      References,
                      FullTextSearch,
@@ -207,7 +208,8 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'buy_link',
                     'index_lang',
                     'intro_to_html',
-                    'published')
+                    'published',
+                    'better_book')
 
     list_filter = ('published', 'first_level',
                    'book_language', 'book_classification', 'book_title_en')
@@ -293,8 +295,38 @@ class KaraitesBookTextAsArrayAdmin(KAdmin):
     list_filter = ('book__first_level', 'book__book_language',
                    'book__book_classification', 'book')
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(book__better_book=False)
+
 
 admin.site.register(KaraitesBookAsArray, KaraitesBookTextAsArrayAdmin)
+
+
+class BetterBookFilter(admin.SimpleListFilter):
+    title = 'book'
+    parameter_name = 'book'
+
+    def lookups(self, request, model_admin):
+        better_books = KaraitesBookDetails.objects.filter(better_book=True)
+        return [(book.id, book.book_title_en) for book in better_books]
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(book__id=self.value())
+
+
+class KaraitesBetterBooksAdmin(KAdmin):
+    list_display = ('book', 'song', 'book_text', 'line_number', 'show_line_data', 'show_book_data')
+    list_filter = (BetterBookFilter,)
+    search_fields = ('book', 'song')
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(book__better_book=True)
+
+
+admin.site.register(KaraitesBetterBooksProxy, KaraitesBetterBooksAdmin)
 
 
 class TableOfContentsAdmin(KAdmin):

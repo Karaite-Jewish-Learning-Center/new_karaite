@@ -4,9 +4,9 @@ import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 import Filler from "../general/Filler.tsx";
 import {makeStyles} from "@material-ui/core/styles";
-import {capitalize} from "../../utils/utils";
+import {capitalize, makeRandomKey} from "../../utils/utils";
 import {ToText} from "../general/ToText";
-import {cleanUrl} from "../../utils/cleanUrl";
+import {cleanUrl,} from "../../utils/cleanUrl";
 import {MusicBadge} from "../bages/musicBadge";
 
 
@@ -18,6 +18,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
         const keys = Object.keys(obj)
         let separator = ''
         let comp = []
+
         keys.forEach(key => {
             if (obj[key].book_classification !== separator) {
 
@@ -26,41 +27,56 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
                 } else {
                     separator = ''
                 }
-                comp.push(<Grid item xs={12}>
-                    <hr className={classes.hr}/>
-                    <Typography variant="h6" className={classes.title}>
-                        {capitalize(separator)}
-                    </Typography>
-                </Grid>)
+                comp.push(
+                    <Grid item xs={12} key={makeRandomKey()}>
+                        <hr className={classes.hr}/>
+                        <Typography variant="h6" className={classes.title}>
+                            {capitalize(separator)}
+                        </Typography>
+                    </Grid>
+                )
             }
-            comp.push(<Link to={`/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`}>
-                <div className={classes.item}>
+
+            // this should be removed when all Karaites books turn to better books
+            let url = ''
+            if (obj[key].better_book) {
+                url = `/book/${cleanUrl(obj[key].book_title_en)}/`
+            } else {
+                url = `/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`
+            }
+
+            comp.push(
+                <Link to={url} key={makeRandomKey()}>
+                    <div className={classes.item}>
                     <span className={classes.left}>
                         <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
                     </span>
-                    <span className={classes.note}>
-                         <MusicBadge length={obj[key].songs_list.length}/>
+                        <span className={classes.note}>
+                         <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book}/>
                     </span>
-                    <span className={classes.right}>
+                        <span className={classes.right}>
                         <Typography className={classes.bookTitleEn}>
                             {obj[key].book_title_en}
                         </Typography>
                     </span>
-                </div>
-            </Link>)
+                    </div>
+                </Link>
+            )
 
         })
-        comp.push(<Grid item xs={12}>
-            <hr className={classes.hr}/>
-            <Typography variant="h6" className={classes.title}>
-            </Typography>
-        </Grid>)
+        comp.push(
+            <Grid item xs={12} key={makeRandomKey()}>
+                <hr className={classes.hr}/>
+                <Typography variant="h6" className={classes.title}>
+                </Typography>
+            </Grid>
+        )
         return comp
     }
 
 
     const MainMenu = () => {
-        return (<Grid item xs={12} sm={columns} key={1}>
+        return (<Grid item xs={12} sm={columns} key={makeRandomKey()}>
             <Grid item className={classes.title}>
                 <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
             </Grid>
@@ -120,23 +136,23 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right',
     },
     left: {
-        width:'50%',
+        width: '50%',
         paddingLeft: 20,
         margin: 5,
-         justifyItems: 'right',
+        justifyItems: 'right',
     },
     right: {
-        width:'50%',
+        width: '50%',
         paddingRight: 20,
         margin: 5,
         justifyItems: 'left',
     },
-    item:{
-      display: 'flex',
+    item: {
+        display: 'flex',
     },
-    note:{
-      marginLeft:20,
-      marginRight:20,
-      minWidth:20,
+    note: {
+        marginLeft: 20,
+        marginRight: 20,
+        minWidth: 20,
     }
 }));

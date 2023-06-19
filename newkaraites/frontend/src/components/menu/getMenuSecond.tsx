@@ -29,6 +29,7 @@ interface BookLevelClassification {
     songs_list: string[],
     buy_link: string,
     index_lag: boolean,
+    better_book: boolean,
 }
 
 type DataDetails = BookLevelClassification[]

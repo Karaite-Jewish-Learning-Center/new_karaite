@@ -22,6 +22,7 @@ from .models import (FirstLevel,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
+                     LiturgyBook,
                      AutoComplete,
                      References)
 
@@ -268,6 +269,19 @@ class Test(View):
     @staticmethod
     def get(request, *args, **kwargs):
         return JsonResponse({"ok": True})
+
+
+class Book(View):
+    """
+       Get the liturgy book
+    """
+    @staticmethod
+    def get(request, *args, **kwargs):
+        book_name = kwargs.get('book', None)
+        if book_name is None:
+            return JsonResponse(data={'status': 'false', 'message': _('Need a book name.')}, status=400)
+
+        return JsonResponse(KaraitesBookAsArray.get_book(book_name), safe=False)
 
 
 class AutoCompleteView(View):

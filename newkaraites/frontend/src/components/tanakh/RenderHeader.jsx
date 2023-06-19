@@ -7,7 +7,6 @@ import {makeStyles} from '@material-ui/core/styles'
 import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
-import {devLog} from "../messages/devLog";
 import {TextToSpeechButton} from "../buttons/textToSpeechButton";
 import {IsAudioBook} from "../audio/IsAudioBook";
 
@@ -114,7 +113,7 @@ const RenderHeader = ({
                     </>
                 )
             default: {
-                devLog(`Unknown language: ${lang}`)
+                console.log(`Unknown language: ${lang}`)
             }
         }
     }

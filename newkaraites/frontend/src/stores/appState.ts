@@ -1,8 +1,13 @@
 import {makeAutoObservable, runInAction, computed, observable} from "mobx"
-//import {isABibleBook} from "../utils/utils";
-//import {autocompleteUrl} from "../constants/constants";
-import {AUDIO, END_AUDIO_BOOK, AUDIO_BOOK_ID} from "../constants/constants";
-import {toJS} from 'mobx';
+import {
+    AUDIO,
+    END_AUDIO_BOOK,
+    AUDIO_BOOK_ID,
+    BETTER_START_AUDIO,
+    BETTER_END_AUDIO,
+    BETTER_AUDIO_BOOK_ID,
+    BETTER_END_AUDIO_TRACK
+} from "../constants/constants";
 import {VirtuosoProps} from 'react-virtuoso/dist/index.d';
 
 class AppState {
@@ -12,7 +17,7 @@ class AppState {
     loading = false
     // search
     search = ''
-    searchResultData: VirtuosoProps<any, any>[] =  []
+    searchResultData: VirtuosoProps<any, any>[] = []
     moreResults = true
 
     // autocomplete
@@ -50,10 +55,8 @@ class AppState {
         if (this.panes[i].bookData === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item] === undefined) return [0, 0, 0]
         if (this.panes[i].bookData[item].length < 12) return [0, 0, 0]
-        // console.log('Audio book data')
-        // console.log(JSON.parse(this.panes[i].bookData[item][AUDIO]))
         return JSON.parse(this.panes[i].bookData[item][AUDIO])
-     }
+    }
     setLastId = (id: number, i: number) => {
         this.panes[i].lastId = id
     }
@@ -72,8 +75,46 @@ class AppState {
     getVerseData = (i: number): Array<any> => this.panes[i].verseData
 
     setBookData = (data: Array<any>, i: number) => {
-        this.panes[i].bookData = [...this.panes[i].bookData, ...data]
+        runInAction(() => {
+            this.panes[i].bookData = [...this.panes[i].bookData, ...data]
+        })
+
     }
+
+    // better format in the long run replace all formats
+    setBookBetter = (data: Array<any>, i: number) => {
+        this.panes[i].paragraphs = data
+    }
+
+    getBookBetter = (i: number): Array<any> => this.panes[i].paragraphs
+
+    setBookDetailsBetter = (data: Array<any>, i: number) => {
+        runInAction(() => {
+            this.panes[i].book_details = data
+        })
+
+    }
+    getBookDetailsBetter = (i: number) => this.panes[i].book_details
+
+    setSongsBetter = (data: Array<any>, i: number) => {
+        // this is song_title, url, song_id
+        runInAction(() => {
+            this.panes[i].songs = data
+        })
+    }
+    getSongsBetter = (i: number) => this.panes[i].songs[0]
+
+    getBetterAudioData = (i: number) => {
+        const item = this.getCurrentItem(i)
+        const data = this.panes[i].paragraphs[item]
+        const start = parseFloat(data[BETTER_START_AUDIO])
+        const end = parseFloat(data[BETTER_END_AUDIO])
+        const id = parseInt(data[BETTER_AUDIO_BOOK_ID])
+        const audioTrackEnd = data[BETTER_END_AUDIO_TRACK] === '1'
+        return [start, end, id, audioTrackEnd]
+
+    }
+    getBetterAudioDataStart = (i: number) => this.getBetterAudioData(i)[0]
 
     getBookData = (i: number): Array<any> => this.panes[i].bookData
 
@@ -84,17 +125,26 @@ class AppState {
     getDistance = (i: number): number => this.panes[i].distance
 
     setCurrentItem = (item: number, i: number): number => {
+        console.log('set current item', item)
         runInAction(() => {
             this.panes[i].currentItem = item
         })
         return item
     }
 
+    setGridVisibleRange = (i: number, startIndex: number, endIndex: number) => {
+        this.panes[i].range = [startIndex, endIndex]
+    }
+
+    getGridVisibleRangeStart = (i: number): Array<number> => this.panes[i].range[0]
+
     getCurrentItem = (i: number): number => this.panes[i].currentItem
 
     // right pane bible references
     setRightPaneState = (state: boolean, i: number) => {
-        this.panes[i].rightPaneState = state
+        runInAction(() => {
+            this.panes[i].rightPaneState = state
+        })
     }
 
     // panes
@@ -121,7 +171,9 @@ class AppState {
     }
 
     resetPanes = () => {
-        this.panes = []
+        runInAction(() => {
+            this.panes = []
+        })
     }
     // loading
     setLoading = (loading: boolean) => {

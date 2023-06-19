@@ -63,6 +63,7 @@ def test_convert_time_to_seconds():
 
 
 def test_convert_time_string():
+    assert convert_time_string(None) == 0
     assert abs(convert_time_string('01.9.8') - 69.8) < 0.001
     assert abs(convert_time_string('01.9.899') - 69.899) < 0.001
     assert abs(convert_time_string('03.6.0') - 186.0) < 0.001

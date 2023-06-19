@@ -28,6 +28,19 @@ class Command(BaseCommand):
         liturgy_book.line_number = line_number
         liturgy_book.save()
 
+    @staticmethod
+    def save_song(english_name, song_file):
+        try:
+            songs = Songs.objects.get(song_title=english_name)
+        except Songs.DoesNotExist:
+            songs = Songs()
+        song_file_name = path / song_file
+        songs.song_title = english_name
+        songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
+        songs.save()
+
+        return songs
+
     def add_arguments(self, parser):
         parser.add_argument(
             '--xls_file',
@@ -43,45 +56,52 @@ class Command(BaseCommand):
 
         wb = load_workbook(file_name)
         stack = Stack()
-        # audio start is 0 for the first line first book
-        stack.push(0)
+
         for book in books:
             ws = wb[book]
 
             # song details
             hebrew_name = ws['C2'].value
             english_name = ws['D2'].value
-            LiturgyDetails.objects.filter(hebrew_name=book).delete()
+            LiturgyDetails.objects.filter(english_name=english_name).delete()
+
             liturgy_details = LiturgyDetails()
             liturgy_details.occasion = ws['B2'].value
             liturgy_details.hebrew_name = hebrew_name
             liturgy_details.english_name = english_name
-            liturgy_details.intro = ''
+            liturgy_details.intro = []
+            liturgy_details.toc = []
+            liturgy_details.language = 'he'
+            liturgy_details.author = None
+
             liturgy_details.save()
 
             song_file = ws['A2'].value
 
-            try:
-                songs = Songs.objects.get(song_title=english_name)
-            except Songs.DoesNotExist:
-                songs = Songs()
-            song_file_name = path / song_file
-            songs.song_title = english_name
-            songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
-            songs.save()
+            songs = self.save_song(english_name, song_file)
 
             row = 2
             line_number = 1
+            spreadsheet_line = 1
             english_translation = []
             hebrew_text = []
+            # audio_start
+            stack.push(convert_time_string(ws[f'O{row}'].value))
+            # print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
+            # input('Press Enter to continue...')
+
             while True:
                 # line number
                 if ws[f'I{row}'].value is None:
                     break
+                # maybe more than one file song per book
+                if ws[f'A{row}'].value is not None:
+                    song_file = ws[f'A{row}'].value
+                    songs = self.save_song(english_name, song_file)
 
                 audio_start = stack.pop()
                 stack.push(convert_time_string(ws[f'P{row}'].value))
-
+                print('audio_start: ', audio_start, ' audio_end: ', stack.peek())
                 # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments]
                 hebrew_text.append([
                     ws[f'J{row}'].value,  # hebrew
@@ -89,35 +109,36 @@ class Command(BaseCommand):
                     '',
                     audio_start,
                     stack.peek(),  # audio_end
+                    songs.id,  # song_id
                     ws[f'H{row}'].value,  # reciter
                     ws[f'G{row}'].value,  # censored
                     ws[f'I{row}'].value,  # line_number
-                    ws[f'M{row}'].value  # comments
+                    ws[f'M{row}'].value,  # comments
+                    0  # end of verse, section or subtext? No
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', ''])
+                english_translation.append(['', '', ws[f'L{row}'].value, '', '', '', '', '', '', '', 0])
 
-                # end of verse
-                if ws[f'F{row}'].value == '<end verse>':
+                # end of verse, section or subtext
+                end = ws[f'F{row}'].value
+                if end is not None and ws[f'F{row}'].value.find('end') >= 0:
                     # save hebrew text
+                    hebrew_text[-1][10] = 1  # end of verse, section or subtext? Yes
                     for hebrew in hebrew_text:
                         self.save_data(liturgy_details, songs, hebrew, line_number)
                         line_number += 1
 
-                    # one empty line between verses
-                    separator = ['', '', '', '', '', '', '', '', '']
-                    self.save_data(liturgy_details, songs, separator, line_number)
-
                     # save english translation
                     line_number += 1
+                    english_translation[-1][10] = 1  # end of verse, section or subtext? Yes
                     for english in english_translation:
                         self.save_data(liturgy_details, songs, english, line_number)
                         line_number += 1
 
-                    # one empty line between verses
-                    self.save_data(liturgy_details, songs, separator, line_number)
                     line_number += 1
                     english_translation = []
                     hebrew_text = []
-
+                print('Processing  book: ', book, ' song: ', english_name, ' line_number: ', spreadsheet_line, )
+                spreadsheet_line += 1
                 row += 1
+
