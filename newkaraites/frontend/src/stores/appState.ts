@@ -81,7 +81,7 @@ class AppState {
 
     }
 
-    // better format in the long run replace all formats
+    // better format in the long run replaces all formats
     setBookBetter = (data: Array<any>, i: number) => {
         this.panes[i].paragraphs = data
     }
@@ -102,6 +102,10 @@ class AppState {
             this.panes[i].songs = data
         })
     }
+
+    // book has song/songs
+    hasSongsBetter = (i: number) => this.panes[i].songs.length > 0
+
     getSongsBetter = (i: number) => this.panes[i].songs[0]
 
     getBetterAudioData = (i: number) => {

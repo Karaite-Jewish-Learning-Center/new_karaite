@@ -856,6 +856,7 @@ class KaraitesBookDetails(models.Model):
 
     book_source = models.FileField(upload_to='books/',
                                    default='',
+                                   blank=True,
                                    verbose_name=_('Book Source '),
                                    help_text=_('This field is used to store the source of the book'))
 
@@ -1007,6 +1008,7 @@ class KaraitesBookDetails(models.Model):
 
     # book generated using excel, a better and more accurate book
     better_book = models.BooleanField(default=False,
+
                                       verbose_name=_('Better book'),
                                       help_text=_('This field is used to inform if the books is better book'))
 
@@ -1018,11 +1020,11 @@ class KaraitesBookDetails(models.Model):
 
     # this field is used to inform if the book is a better book
     # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
-    better_intro = ArrayField(ArrayField(models.TextField()), default=list)
+    better_intro = ArrayField(ArrayField(models.TextField()), default=list, blank=True)
 
     # this field is used to inform if the book is a better book
     # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
-    better_toc = ArrayField(ArrayField(models.TextField()), default=list)
+    better_toc = ArrayField(ArrayField(models.TextField()), default=list, blank=True)
 
     display = models.CharField(default="1",
                                verbose_name=_("Display"),
