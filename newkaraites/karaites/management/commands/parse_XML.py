@@ -25,3 +25,47 @@ class Command(BaseCommand):
         """ parse XML file """
 
         open('data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/Qedushot and Piyyut Parasha.xml', 'r')
+        import xml.etree.ElementTree as ET
+
+        tree = ET.parse('input.xml')
+        root = tree.getroot()
+
+        for child in root:
+            if child.tag == 'p':
+                print('Paragraph:', child.text)
+
+            if child.tag == 'margin':
+                print('Marginal Note:', child.text)
+
+            if child.tag == 'i':
+                print('Italics:', child.text)
+
+            if child.tag == 'b':
+                print('Bold:', child.text)
+
+            if child.tag == 'sc':
+                print('Small Caps:', child.text)
+
+            if child.tag == 'h1':
+                print('Chapter Title:', child.text)
+
+            if child.tag == 'sup':
+                print('Superscript:', child.text)
+
+            if child.tag == 'u':
+                print('Underlined:', child.text)
+
+            if child.tag == 'quotation':
+                print('Quotation:', child.text)
+
+            if child.tag == 'footnote':
+                print('Footnote:', child.text)
+
+            if child.tag == 'url':
+                print('URL:', child.text)
+
+            if child.tag == 'green':
+                print('Green Text:', child.text)
+
+            if child.tag == 'quran':
+                print('Quranic Text:', child.text)
