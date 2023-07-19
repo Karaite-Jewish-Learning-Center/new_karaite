@@ -60,6 +60,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [distanceFromTop, setDistanceFromTop] = useState(TOP_LINES)
     const virtuoso = useRef(null)
+    const  hasSongs = store.hasSongsBetter(paneNumber)
 
     if (bookData === undefined || bookData.length === 0) return null;
 
@@ -205,7 +206,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
                             {/*<TocButton onClick={onToc}/>*/}
                             {/*<BookButton onClick={onBook}/>*/}
                             {/*<BuyButton onClick={onBuy}/>*/}
-                            <AudioBookButton onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={false}/>
+                            {(hasSongs ? <AudioBookButton onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={false}/> : null)}
                             {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
                         </p>
                     </Grid>

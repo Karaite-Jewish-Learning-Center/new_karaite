@@ -17,7 +17,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
 
         store.setLoading(true)
         const response = await fetch(url)
-
+        debugger
         if (response.ok) {
 
             const data = await response.json()

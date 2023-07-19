@@ -11,8 +11,6 @@ from ...utils import (Stack,
 from django.core.files import File
 from pathlib import Path
 
-path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/'
-
 
 class Command(BaseCommand):
 
@@ -32,15 +30,19 @@ class Command(BaseCommand):
         liturgy_book.save()
 
     @staticmethod
-    def save_song(english_name, song_file):
+    def save_song(english_name, song_file, path):
         try:
             songs = Songs.objects.get(song_title=english_name)
         except Songs.DoesNotExist:
             songs = Songs()
-        song_file_name = path / song_file
-        songs.song_title = english_name
-        songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
-        songs.save()
+
+        try:
+            song_file_name = path / song_file
+            songs.song_title = english_name
+            songs.song_file.save(song_file, File(open(song_file_name, 'rb')))
+            songs.save()
+        except FileNotFoundError:
+            return None
 
         return songs
 
@@ -48,13 +50,26 @@ class Command(BaseCommand):
         parser.add_argument(
             '--xls_file',
             default='Kedushot and Piyyut Parasha.xlsx',
-            action='store_true',
             help='Update LiturgyBooks table with with excel data file.',
         )
 
     def handle(self, *args, **options):
-        """ Read excel import songs , book text and audio, markers """
-        books = ['Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu']
+        """ Read excel import songs, book text and audio, markers """
+        books = []
+        path = None
+
+        if options['xls_file'] == 'Kedushot and Piyyut Parasha.xlsx':
+            books = ['Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu']
+            path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/'
+
+        elif options['xls_file'] == 'Efratim_Yeqarim.xlsx':
+            books = ['Efratim Yeqarim Text']
+            path = Path() / 'data_karaites/HTML/Liturgy/Tammuz Av Echa/Efratim Yekarim/'
+
+        else:
+            print('Book not found.')
+            return
+
         file_name = path / options['xls_file']
 
         wb = load_workbook(file_name)
@@ -84,7 +99,9 @@ class Command(BaseCommand):
             liturgy_details.author = None
             liturgy_details.save()
 
-            liturgy_details.songs.add(self.save_song(english_name, song_file))
+            song = self.save_song(english_name, song_file, path)
+            if song is not None:
+                liturgy_details.songs.add(song)
 
             row = 2
             line_number = 0
@@ -100,16 +117,26 @@ class Command(BaseCommand):
             # input('Press Enter to continue...')
 
             while True:
+                songs_id = -1
                 # line number
                 if ws[f'I{row}'].value is None:
                     break
                 # maybe more than one file song per book
                 if ws[f'A{row}'].value is not None:
                     song_file = ws[f'A{row}'].value
-                    songs = self.save_song(english_name, song_file)
+                    songs = self.save_song(english_name, song_file, path)
+
+                    if songs is not None:
+                        songs_id = songs.id
 
                 audio_start = stack.pop()
-                stack.push(convert_time_string(ws[f'P{row}'].value))
+
+                # may be None, a string or a float
+                value = ws[f'P{row}'].value
+                if value is not None:
+                    value = str(ws[f'P{row}'].value)
+                print(value)
+                stack.push(convert_time_string(value))
                 print('audio_start: ', audio_start, ' audio_end: ', stack.peek())
                 # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments,filler]
                 hebrew_text.append([
@@ -118,7 +145,7 @@ class Command(BaseCommand):
                     '',
                     audio_start,
                     stack.peek(),  # audio_end
-                    songs.id,  # song_id
+                    songs_id,  # song_id
                     ws[f'H{row}'].value,  # reciter
                     ws[f'G{row}'].value,  # censored
                     ws[f'I{row}'].value,  # line_number
@@ -128,7 +155,7 @@ class Command(BaseCommand):
                     0  # song end
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', songs.id, '', '', '', '', 0, 1, 0])
+                english_translation.append(['', '', ws[f'L{row}'].value, '', '', songs_id, '', '', '', '', 0, 1, 0])
 
                 # end of verse, section or subtext
                 end = ws[f'F{row}'].value

@@ -94,7 +94,16 @@ def convert_seconds_to_time(time):
 def convert_time_string(time_str):
     if not time_str:
         return 0
-    minutes, seconds, milliseconds = map(float, time_str.split('.'))
+
+    parts = time_str.split('.')
+    milliseconds = 0
+    if len(parts) == 2:
+        minutes, seconds = map(float, parts)
+    elif len(parts) == 3:
+        minutes, seconds, milliseconds = map(float, time_str.split('.'))
+    else:
+        raise ValueError(f'Invalid time string: {time_str}')
+
     print(minutes, seconds, milliseconds)
     return minutes * 60 + seconds + (float(f'0.{int(milliseconds)}'))
 
