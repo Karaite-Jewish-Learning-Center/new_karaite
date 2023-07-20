@@ -9,8 +9,6 @@ from .models import (FirstLevel,
                      BookAsArrayAudio,
                      BooksFootNotes,
                      Songs,
-                     LiturgyDetails,
-                     LiturgyBook,
                      Classification,
                      KaraitesBookDetails,
                      DetailsProxy,
@@ -40,7 +38,7 @@ class KAdmin(admin.ModelAdmin):
 
 # actions
 @admin.action(description='Change selected to default values.')
-def change_to_default(modeladmin, request, queryset):
+def change_to_default(_, __, queryset):
     queryset.update(audio=None, start='00:00:00.000', end='00:00:00.000', start_ms=0, end_ms=0)
 
 
@@ -157,22 +155,22 @@ class SongsAdmin(KAdmin):
 admin.site.register(Songs, SongsAdmin)
 
 
-class LiturgyDetailsAdmin(KAdmin):
-    list_display = ('occasion', 'hebrew_name', 'english_name', 'order', 'intro')
-    list_editable = ('order',)
-    search_fields = ('occasion', 'hebrew_name', 'english_name')
+# class LiturgyDetailsAdmin(KAdmin):
+#     list_display = ('occasion', 'hebrew_name', 'english_name', 'order', 'intro')
+#     list_editable = ('order',)
+#     search_fields = ('occasion', 'hebrew_name', 'english_name')
+#
+#
+# admin.site.register(LiturgyDetails, LiturgyDetailsAdmin)
 
 
-admin.site.register(LiturgyDetails, LiturgyDetailsAdmin)
-
-
-class LiturgyBookAdmin(KAdmin):
-    list_display = ('book', 'song', 'line_number', 'show_line_data', 'show_book_data')
-    list_filter = ('book', 'song')
-    search_fields = ('book', 'song')
-
-
-admin.site.register(LiturgyBook, LiturgyBookAdmin)
+# class LiturgyBookAdmin(KAdmin):
+#     list_display = ('book', 'song', 'line_number', 'show_line_data', 'show_book_data')
+#     list_filter = ('book', 'song')
+#     search_fields = ('book', 'song')
+#
+#
+# admin.site.register(LiturgyBook, LiturgyBookAdmin)
 
 
 class ClassificationAdmin(KAdmin):
@@ -271,17 +269,17 @@ class DetailsProxyAdmin(KAdmin):
 
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
 
-    # don't allow changes on proxy model, is just here to simplify data visualization
+    # don't allow changes on a proxy model, is just here to simplify data visualization
     @staticmethod
     def has_add_permission(request, obj=None):
         return False
 
     @staticmethod
-    def has_change_permission(request, obj=None):
+    def has_change_permission(request, obj=None, **kwargs):
         return False
 
     @staticmethod
-    def has_delete_permission(request, obj=None):
+    def has_delete_permission(request, obj=None, **kwargs):
         return False
 
 

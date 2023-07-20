@@ -24,7 +24,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """ parse XML file """
 
-        open('data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/Qedushot and Piyyut Parasha.xml', 'r')
+        open('data_karaites/XML/', 'r')
         import xml.etree.ElementTree as ET
 
         tree = ET.parse('input.xml')

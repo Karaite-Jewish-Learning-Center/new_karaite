@@ -226,7 +226,7 @@ class BookAsArray(models.Model):
     # 9 [Halakhah Hebrew, Liturgy Hebrew, Poetry Hebrew, Exhortatory Hebrew Comments Hebrew],
     # 10 [Halakhah English, Liturgy English, Poetry English, Exhortatory English Comments English],
     # 10 Halakhah English
-    # 11 [start_ms, end_ms, id]  hebrew audio start and end time in milliseconds, [0,0,0] means no audio book
+    # 11 [start_ms, end_ms, id]  hebrew audio start and end time in milliseconds, [0,0,0] means no audiobook
     #     id is audio file id in AudioBooks table
     # ...]
 
@@ -264,7 +264,7 @@ class BookAsArray(models.Model):
                 result += text.book_text
             return result
 
-        # if book is less them 11 chapters, read all book
+        # if a book is less them 11 chapters, read all books
         if book_title.chapters <= 10:
             chapter = None
 
@@ -581,178 +581,178 @@ class Songs(models.Model):
         ordering = ('song_title',)
 
 
-class LiturgyDetails(models.Model):
-    """ Liturgy book have a new format easier to read and understand
-        also have a new format for the audio files
-        In time all Liturgy books now in KaraitesBookAsArray will
-        be moved to this model
-     """
+# class LiturgyDetails(models.Model):
+#    """ Liturgy books have a new format easier to read and understand
+#        also have a new format for the audio files
+#        In time all Liturgy books now in KaraitesBookAsArray will
+#        be moved to this model
+#     """
+#
+#    occasion = models.CharField(max_length=100,
+#                                null=True,
+#                                blank=True,
+#                                verbose_name=_("Occasion"),
+#                                help_text=_("Occasion"))
+#
+#    hebrew_name = models.CharField(max_length=100,
+#                                   verbose_name=_("Hebrew Name"),
+#                                   help_text=_("Hebrew Name"))
+#
+#    english_name = models.CharField(max_length=100,
+#                                    verbose_name=_("English Name"),
+#                                    help_text=_("English Name"))
+#
+#    author = models.ForeignKey('Author',
+#                               on_delete=models.CASCADE,
+#                               null=True,
+#                               blank=True,
+#                               verbose_name=_("Author"))
+#
+#    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
+#    intro = ArrayField(ArrayField(models.TextField()), default=list)
+#
+#    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
+#    toc = ArrayField(ArrayField(models.TextField()), default=list)
+#
+#    book_language = models.CharField(max_length=8,
+#                                     default='he',
+#                                     choices=LANGUAGES,
+#                                     verbose_name=_('Book language'))
+#
+#    display = models.CharField(default="1",
+#                               verbose_name=_("Display"),
+#                               max_length=1,
+#                               help_text=_("1) Hebrew on Left. Transliteration on right. \
+#                                   Each verse has its translation below it. "))
+#
+#    order = models.IntegerField(default=0,
+#                                verbose_name=_("Order"),
+#                                help_text=_("Order"))
+#
+#    def __str__(self):
+#        return self.english_name
+#
+#    def to_json(self):
+#        return {
+#            'occasion': self.occasion,
+#            'hebrew_name': self.hebrew_name,
+#            'english_name': self.english_name,
+#            'intro': self.intro,
+#            'display': self.display,
+#            'order': self.order,
+#        }
+#
+#    def save(self, *args, **kwargs):
+#        if self.order == 0:
+#            self.order = LiturgyDetails.objects.all().count() * 1000
+#        super(LiturgyDetails, self).save(*args, **kwargs)
+#
+#    class Meta:
+#        verbose_name_plural = _('Liturgy')
+#        ordering = ('english_name',)
 
-    occasion = models.CharField(max_length=100,
-                                null=True,
-                                blank=True,
-                                verbose_name=_("Occasion"),
-                                help_text=_("Occasion"))
 
-    hebrew_name = models.CharField(max_length=100,
-                                   verbose_name=_("Hebrew Name"),
-                                   help_text=_("Hebrew Name"))
-
-    english_name = models.CharField(max_length=100,
-                                    verbose_name=_("English Name"),
-                                    help_text=_("English Name"))
-
-    author = models.ForeignKey('Author',
-                               on_delete=models.CASCADE,
-                               null=True,
-                               blank=True,
-                               verbose_name=_("Author"))
-
-    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
-    intro = ArrayField(ArrayField(models.TextField()), default=list)
-
-    # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
-    toc = ArrayField(ArrayField(models.TextField()), default=list)
-
-    book_language = models.CharField(max_length=8,
-                                     default='he',
-                                     choices=LANGUAGES,
-                                     verbose_name=_('Book language'))
-
-    display = models.CharField(default="1",
-                               verbose_name=_("Display"),
-                               max_length=1,
-                               help_text=_("1) Hebrew on Left. Transliteration on right. \
-                                   Each verse has its translation below it. "))
-
-    order = models.IntegerField(default=0,
-                                verbose_name=_("Order"),
-                                help_text=_("Order"))
-
-    def __str__(self):
-        return self.english_name
-
-    def to_json(self):
-        return {
-            'occasion': self.occasion,
-            'hebrew_name': self.hebrew_name,
-            'english_name': self.english_name,
-            'intro': self.intro,
-            'display': self.display,
-            'order': self.order,
-        }
-
-    def save(self, *args, **kwargs):
-        if self.order == 0:
-            self.order = LiturgyDetails.objects.all().count() * 1000
-        super(LiturgyDetails, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name_plural = _('Liturgy')
-        ordering = ('english_name',)
-
-
-class LiturgyBook(models.Model):
-    """ Liturgy Books
-        contain the Book data audio time markers, highlight info
-        when playing the audio
-    """
-
-    book = models.ForeignKey(LiturgyDetails,
-                             on_delete=models.CASCADE,
-                             related_name='LiturgyBook')
-
-    song = models.ForeignKey(Songs,
-                             on_delete=models.CASCADE,
-                             related_name='LiturgySong')
-
-    # [[hebrew, transliteration, english], audio_start, audio_end, song_id, reciter, censored, line_number]
-    # these are grouped according to the song and xls file
-    book_text = ArrayField(ArrayField(models.TextField()), default=list)
-
-    line_number = models.IntegerField(default=0,
-                                      verbose_name=_("Line Number"),
-                                      help_text=_("Line Number"))
-
-    # comments for each verse
-
-    def __str__(self):
-        return self.book.english_name
-
-    @mark_safe
-    def show_book_data(self):
-        hebrew = self.book_text[0]
-        transliteration = self.book_text[1]
-        english = self.book_text[2]
-        # audio_start = self.book_text[3]
-        # audio_end = self.book_text[4]
-        # reciter = self.book_text[5]
-        # censored = self.book_text[6]
-        # line_number = self.book_text[7]
-
-        html = '<div style="display:flex">'
-        html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
-        html += f'<span dir="ltr" style="width:50%;inline:block;margin:5px; text-align:left">{transliteration}</span>'
-        html += f'</div>'
-        html += f'<span dir="ltr" style="text-align:center">{english}</span>'
-
-        return html
-
-    show_book_data.short_description = 'Book Data'
-
-    @mark_safe
-    def show_line_data(self):
-        audio_start = self.book_text[3] if self.book_text[3] else '-'
-        audio_end = self.book_text[4] if self.book_text[4] else '-'
-        id = self.book_text[5] if self.book_text[5] else '-'
-        reciter = self.book_text[6] if self.book_text[6] else '-'
-        censored = self.book_text[7] if self.book_text[7] else '-'
-
-        if audio_start == '-' and audio_end == '-' and reciter == '-' and censored == '-':
-            return ''
-
-        html = '<table>'
-        html += '<th>Audio Start</th>'
-        html += '<th>Audio End</th>'
-        html += '<th>Id</th>'
-        html += '<th>Reciter</th>'
-        html += '<th>Censored</th>'
-        html += '<tr>'
-        html += f'<td>{audio_start}</td>'
-        html += f'<td>{audio_end}</td>'
-        html += f'<td>{id}</td>'
-        html += f'<td>{reciter}</td>'
-        html += f'<td>{censored}</td>'
-        html += f'<tr>'
-        html += '</table>'
-
-        return html
-
-    show_line_data.short_description = 'Line Data'
-
-    def to_json(self):
-
-        return {
-            'book_text': self.book_text,
-        }
-
-    @staticmethod
-    def get_book(book_name):
-        details = LiturgyDetails.objects.get(english_name=book_name).to_json()
-        songs = []
-        for song in Songs.objects.filter(LiturgySong__book__english_name=book_name):
-            songs.append(song.to_json())
-
-        book_data = []
-        for book in LiturgyBook.objects.filter(book__english_name=book_name):
-            book_data.append(book.to_json())
-
-        return {'details': details, 'songs': songs, 'book_data': book_data}
-
-    class Meta:
-        verbose_name_plural = _('Liturgy Books')
-        ordering = ('book__english_name', 'song__song_title', 'line_number')
-        unique_together = ('book', 'song', 'line_number')
+# class LiturgyBook(models.Model):
+#     """ Liturgy Books
+#         contain the Book data audio time markers, highlight info
+#         when playing the audio
+#     """
+#
+#     book = models.ForeignKey(LiturgyDetails,
+#                              on_delete=models.CASCADE,
+#                              related_name='LiturgyBook')
+#
+#     song = models.ForeignKey(Songs,
+#                              on_delete=models.CASCADE,
+#                              related_name='LiturgySong')
+#
+#     # [[hebrew, transliteration, english], audio_start, audio_end, song_id, reciter, censored, line_number]
+#     # these are grouped according to the song and xls file
+#     book_text = ArrayField(ArrayField(models.TextField()), default=list)
+#
+#     line_number = models.IntegerField(default=0,
+#                                       verbose_name=_("Line Number"),
+#                                       help_text=_("Line Number"))
+#
+#     # comments for each verse
+#
+#     def __str__(self):
+#         return self.book.english_name
+#
+#     @mark_safe
+#     def show_book_data(self):
+#         hebrew = self.book_text[0]
+#         transliteration = self.book_text[1]
+#         english = self.book_text[2]
+#         # audio_start = self.book_text[3]
+#         # audio_end = self.book_text[4]
+#         # reciter = self.book_text[5]
+#         # censored = self.book_text[6]
+#         # line_number = self.book_text[7]
+#
+#         html = '<div style="display:flex">'
+#         html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
+#         html += f'<span dir="ltr" style="width:50%;inline:block;margin:5px; text-align:left">{transliteration}</span>'
+#         html += f'</div>'
+#         html += f'<span dir="ltr" style="text-align:center">{english}</span>'
+#
+#         return html
+#
+#     show_book_data.short_description = 'Book Data'
+#
+#     @mark_safe
+#     def show_line_data(self):
+#         audio_start = self.book_text[3] if self.book_text[3] else '-'
+#         audio_end = self.book_text[4] if self.book_text[4] else '-'
+#         id = self.book_text[5] if self.book_text[5] else '-'
+#         reciter = self.book_text[6] if self.book_text[6] else '-'
+#         censored = self.book_text[7] if self.book_text[7] else '-'
+#
+#         if audio_start == '-' and audio_end == '-' and reciter == '-' and censored == '-':
+#             return ''
+#
+#         html = '<table>'
+#         html += '<th>Audio Start</th>'
+#         html += '<th>Audio End</th>'
+#         html += '<th>Id</th>'
+#         html += '<th>Reciter</th>'
+#         html += '<th>Censored</th>'
+#         html += '<tr>'
+#         html += f'<td>{audio_start}</td>'
+#         html += f'<td>{audio_end}</td>'
+#         html += f'<td>{id}</td>'
+#         html += f'<td>{reciter}</td>'
+#         html += f'<td>{censored}</td>'
+#         html += f'<tr>'
+#         html += '</table>'
+#
+#         return html
+#
+#     show_line_data.short_description = 'Line Data'
+#
+#     def to_json(self):
+#
+#         return {
+#             'book_text': self.book_text,
+#         }
+#
+#     @staticmethod
+#     def get_book(book_name):
+#         details = LiturgyDetails.objects.get(english_name=book_name).to_json()
+#         songs = []
+#         for song in Songs.objects.filter(LiturgySong__book__english_name=book_name):
+#             songs.append(song.to_json())
+#
+#         book_data = []
+#         for book in LiturgyBook.objects.filter(book__english_name=book_name):
+#             book_data.append(book.to_json())
+#
+#         return {'details': details, 'songs': songs, 'book_data': book_data}
+#
+#     class Meta:
+#         verbose_name_plural = _('Liturgy Books')
+#         ordering = ('book__english_name', 'song__song_title', 'line_number')
+#         unique_together = ('book', 'song', 'line_number')
 
 
 class Method(models.Model):
@@ -803,9 +803,9 @@ class Classification(models.Model):
 
 
 class KaraitesBookDetails(models.Model):
-    """  Karaites books many of them are not in the bible """
+    """  Karaites books, many of them are not in the bible """
 
-    # many of the fields are to be remove when all book are moved to better format
+    # many of the fields are to be removed when all books are moved to better format
 
     first_level = models.ForeignKey(FirstLevel,
                                     on_delete=models.DO_NOTHING,
@@ -972,7 +972,7 @@ class KaraitesBookDetails(models.Model):
                                 verbose_name=_('Buy link'),
                                 help_text='This field is used to inform the buy link of the book')
 
-    # search index hebrew , english, transliteration
+    # search index hebrew, english, transliteration
     index_lang = models.BooleanField(default=True,
                                      verbose_name=_('Index transliteration'))
 
@@ -1006,7 +1006,7 @@ class KaraitesBookDetails(models.Model):
                                         help_text='This field is used to inform if the books is scheduled to be processed',
                                         verbose_name='Cron schedule')
 
-    # book generated using excel, a better and more accurate book
+    # book generated using Excel, a better and more accurate book
     better_book = models.BooleanField(default=False,
 
                                       verbose_name=_('Better book'),
@@ -1035,6 +1035,7 @@ class KaraitesBookDetails(models.Model):
     order = models.IntegerField(default=0,
                                 verbose_name=_("Order"),
                                 help_text=_("Order"))
+
     def __str__(self):
         return self.book_title_en
 
@@ -1050,7 +1051,7 @@ class KaraitesBookDetails(models.Model):
         return html
 
     def get_language(self):
-        """ process_intro_he_en  recognizes language intro and toc
+        """ process_intro_he_en recognizes language intro and toc
             examples : he,en,in | he,in,toc | en,he,in | he | en ...
         """
         lang = self.book_language
@@ -1068,7 +1069,7 @@ class KaraitesBookDetails(models.Model):
             'book_first_level': details.first_level.first_level,
             'book_language': details.get_language(),
             'book_classification': details.book_classification.classification_name,
-            'author':  details.author.name if details.author else '',
+            'author': details.author.name if details.author else '',
             'book_title_en': details.book_title_en,
             'book_title_he': details.book_title_he,
             'table_book': details.table_book,
@@ -1237,19 +1238,19 @@ class KaraitesBookAsArray(models.Model):
     # [paragraph English, 0,  paragraph Hebrew]
 
     # book details better_book is true
-    # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end]
+    # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, arabic]
     # these are grouped according to the song and xls file
     book_text = ArrayField(ArrayField(models.TextField()),
                            default=list,
                            null=True,
                            blank=True)
 
-    # this should replace  paragraph_number when book details better_book is true
+    # this should replace paragraph_number when book details better_book is true
     line_number = models.IntegerField(default=0,
                                       verbose_name=_("Line Number"),
                                       help_text=_("Line Number"))
 
-    # [[footnote English ], [footnote Hebrew]]
+    # [[footnote English ], [footnote Hebrew],[footnote arabic]
     # [footnote number, footnote text]
     foot_notes = ArrayField(models.TextField(),
                             default=list,
@@ -1261,7 +1262,7 @@ class KaraitesBookAsArray(models.Model):
 
     @staticmethod
     def to_list(book, paragraph_number, first):
-        # chapters don't exist so we read paragraphs
+        # chapters don't exist, so we read paragraphs
 
         if first == 0:
             query = KaraitesBookAsArray.objects.filter(book=book, paragraph_number__gte=0,
@@ -1390,6 +1391,7 @@ class KaraitesBetterBooksProxy(KaraitesBookAsArray):
         proxy = True
         verbose_name_plural = 'Karaites better books'
         ordering = ('book', 'line_number')
+
 
 class TableOfContents(models.Model):
     """ Karaites Books table of contents"""
@@ -1556,7 +1558,7 @@ class AutoComplete(models.Model):
 
 
 class FullTextSearch(models.Model):
-    """ Full text search for books in English """
+    """ Full-text search for books in English """
     path = models.CharField(max_length=50, default='')
 
     reference_en = models.CharField(max_length=100, default='')
@@ -1580,7 +1582,7 @@ class FullTextSearch(models.Model):
 
 
 class FullTextSearchHebrew(models.Model):
-    """ Full text search for books in Hebrew """
+    """ Full-text search for books in Hebrew """
     path = models.CharField(max_length=50, default='')
 
     reference_en = models.CharField(max_length=100,
@@ -1622,11 +1624,11 @@ class InvertedIndex(models.Model):
                                  blank=True,
                                  verbose_name=_("Word as in text"))
 
-    # total times that word appear in all documents
+    # total times that word appears in all documents
     count = models.IntegerField(default=0,
                                 verbose_name=_('Count in all documents'))
 
-    # [id of documents that contains that word]
+    # [id of documents that contain that word]
     documents = ArrayField(models.IntegerField(default=0),
                            default=list,
                            null=True,
