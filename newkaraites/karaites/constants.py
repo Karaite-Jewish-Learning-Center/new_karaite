@@ -6,14 +6,17 @@ LANGUAGES = [
     ('he', 'Hebrew'),
     ('he-en', 'Hebrew-English'),
     ('ja', 'Judeo-Arabic'),
+    ('he-en-ar', 'Hebrew-English-Arabic'),
 ]
 
 LANGUAGES_DICT = {'en': "English",
                   'he': "Hebrew",
                   'ja': 'Judeo-Arabic',
+                  'he-en-ar': 'Hebrew-English-Arabic',
                   # this means a formatted table with hebrew and english
                   'he-en': 'Hebrew-English',
-                  # technical "in" , "toc" are not a language,
+
+                  # technical "in," "toc" are not languages;
                   # we use to process introduction files and table of contents files
                   "in": "Introduction",
                   'toc': "TOC"}

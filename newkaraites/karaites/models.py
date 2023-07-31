@@ -1240,6 +1240,7 @@ class KaraitesBookAsArray(models.Model):
     # book details better_book is true
     # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, arabic]
     # these are grouped according to the song and xls file
+    #  filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '']
     book_text = ArrayField(ArrayField(models.TextField()),
                            default=list,
                            null=True,

@@ -85,10 +85,10 @@ function App() {
                                         <Route exact path="/Tanakh/:book/" children={<TanakhBooksLink/>}/>
                                         <Route exact path="/Tanakh/"><Tanakh/></Route>
 
-                                        {/*better format should replace all other format on the long run*/}
+                                        {/* better format should replace all other formats on the long run */}
                                         <Route exact path="/book/:book/" children={<LoadBook type='better'/>}/>
 
-
+                                        {/* classification, Liturgy, commentary, etc. */}
                                         <Route path="/*/:book/:chapter/:verse/:intro/" children={
                                             <LoadBook type="karaites"/>}/>
 
