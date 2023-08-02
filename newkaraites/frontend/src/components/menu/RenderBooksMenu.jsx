@@ -38,7 +38,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
             }
 
             // this should be removed when all Karaites books turn to better books
-            let url = ''
+            let url
             if (obj[key].better_book) {
                 url = `/book/${cleanUrl(obj[key].book_title_en)}/`
             } else {
