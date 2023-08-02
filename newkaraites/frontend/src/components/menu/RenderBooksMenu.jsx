@@ -77,8 +77,8 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
     const MainMenu = () => {
         return (<Grid item xs={12} sm={columns} key={makeRandomKey()}>
-            <Grid item className={classes.title}>
-                <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
+            <Grid item>
+                <Typography className={classes.title} variant="h6" component="h2">{capitalize(path)}</Typography>
             </Grid>
             <ToText/>
             <Grid container spacing={2}>
@@ -108,9 +108,9 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'SBL Hebrew',
     },
     title: {
+        marginLeft: 20,
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 10,
     },
     bookTitle: {
         marginLeft: 30,
