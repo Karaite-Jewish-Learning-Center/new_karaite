@@ -128,8 +128,8 @@ class Command(BaseCommand):
             # print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
             # input('Press Enter to continue...')
 
+            songs_id = -1
             while True:
-                songs_id = -1
                 # line number
                 if ws[f'I{row}'].value is None:
                     break

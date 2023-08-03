@@ -7,6 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {capitalize, makeRandomKey} from "../../utils/utils";
 import {ToText} from "../general/ToText";
 import {MusicBadge} from "../bages/musicBadge";
+import {liturgyUrl} from "../../utils/utils";
 
 
 export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => {
@@ -22,8 +23,8 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
 
     const ToTextLocal = () => {
         return (
-            <div className={classes.textLocal}>
-                <Link to={''} onClick={onLinkClick}>
+            <div>
+                <Link to={''} onClick={onLinkClick} className={classes.textLocal}>
                     {'\u2190'}{' '}To Text
                 </Link>
             </div>
@@ -61,12 +62,15 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
 
     const liturgyItems = (obj) => {
         const keys = Object.keys(obj)
+
         let comp = []
+
 
         keys.forEach(key => {
             if (classifications.data === obj[key].book_classification) {
+                const url = liturgyUrl(obj[key].book_title_en, obj[key].better_book, path)
                 comp.push(
-                    <Link to={''} key={makeRandomKey()}>
+                    <Link to={url} key={makeRandomKey()}>
                         <div className={classes.item}>
                             <span className={classes.left}>
                                 <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
@@ -121,11 +125,15 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                       justifycontent="space-evenly"
                       alignItems="center"
                 >
-                    <Filler xs={12}/>
-                    <Typography className={classes.title} variant="h6" component="h2">{classifications.data}</Typography>
-                    <ToTextLocal onClick={onLinkClick}/>
-                    <hr />
-                    {liturgyItems(books)}
+                    <Grid item xs={6} sm={columns}>
+                        <div className={classes.container}>
+                            <Filler xs={12}/>
+                            <Typography className={classes.subtitle} variant="h6" component="h2">{classifications.data}</Typography>
+                            <ToTextLocal onClick={onLinkClick}/>
+                            <hr className={classes.hr}/>
+                            {liturgyItems(books)}
+                        </div>
+                    </Grid>
                 </Grid>
             </div>
             }
@@ -143,7 +151,6 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         marginLeft: 10,
-        marginRight: 30,
         minHeight: 70,
     },
     bookTitle: {
@@ -157,8 +164,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '14pt',
     },
     subtitle: {
+        minWidth: 600,
+        marginTop: 20,
         marginBottom: 20,
-        color: 'gray',
     },
     bookTitleEn: {
         textAlign: 'left',
@@ -191,7 +199,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: 30,
         marginBottom: 10,
         fontSize: 20,
-        paddingLeft: 20
+        paddingLeft: 20,
     }
 
 }));
