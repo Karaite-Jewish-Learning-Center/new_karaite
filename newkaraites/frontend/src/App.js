@@ -22,7 +22,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Second from "./components/menu/getMenuSecond";
 import ReactGA from 'react-ga';
 import Track from "./components/analytics/track";
-import LiturgyDetails from "./components/menu/LiturgyDetails";
 
 
 
@@ -89,10 +88,6 @@ function App() {
 
                                         {/* better format should replace all other formats on the long run */}
                                         <Route exact path="/book/:book/" children={<LoadBook type='better'/>}/>
-
-                                        {/* Liturgy, details pages */}
-                                        {/*<Route exact path="/liturgy/:classification/" children={*/}
-                                        {/*    <LiturgyDetails/>}/>*/}
 
                                         {/* classification, Liturgy, commentary, etc. */}
                                         <Route path="/*/:book/:chapter/:verse/:intro/" children={

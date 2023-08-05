@@ -6,8 +6,7 @@ import Filler from "../general/Filler.tsx";
 import {makeStyles} from "@material-ui/core/styles";
 import {capitalize, makeRandomKey} from "../../utils/utils";
 import {ToText} from "../general/ToText";
-import {MusicBadge} from "../bages/musicBadge";
-import {liturgyUrl} from "../../utils/utils";
+import liturgyMenuItems from "./LiturgyItems";
 
 
 export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => {
@@ -61,34 +60,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
     }
 
     const liturgyItems = (obj) => {
-        const keys = Object.keys(obj)
-
-        let comp = []
-
-
-        keys.forEach(key => {
-            if (classifications.data === obj[key].book_classification) {
-                const url = liturgyUrl(obj[key].book_title_en, obj[key].better_book, path)
-                comp.push(
-                    <Link to={url} key={makeRandomKey()}>
-                        <div className={classes.item}>
-                            <span className={classes.left}>
-                                <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
-                            </span>
-                            <span className={classes.note}>
-                            <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book}/>
-                            </span>
-                            <span className={classes.right}>
-                                <Typography className={classes.bookTitleEn}>
-                                    {obj[key].book_title_en}
-                                </Typography>
-                            </span>
-                        </div>
-                    </Link>
-                )
-            }
-        })
-        return comp
+        return liturgyMenuItems(obj, classes, path, classifications)
     }
 
     const LiturgyMenu = () => {

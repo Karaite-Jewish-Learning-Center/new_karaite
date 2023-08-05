@@ -5,7 +5,6 @@ import {makeStyles} from '@material-ui/core/styles'
 import {Link} from 'react-router-dom'
 import {Typography} from '@material-ui/core'
 import {unslug} from '../../utils/utils'
-import TorahPortions from "./ToraPortions";
 
 
 const ChapterMenu = ({bibleBook, numberOfChapters, level}) => {
