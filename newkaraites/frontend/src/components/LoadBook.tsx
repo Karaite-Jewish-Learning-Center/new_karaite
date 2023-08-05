@@ -43,7 +43,7 @@ const LoadBook: FC<BooksProps> = ({type}) => {
     // path is used as type for the KaraitesBooks component
     const path = getFirstPart(useLocation().pathname)
 
-    // if type is karaites, chapter is used as start  and verse is ignored
+    // if the type is karaites, chapter is used as start  and verse is ignored
     const classes = useStyles()
 
     let history = useHistory()

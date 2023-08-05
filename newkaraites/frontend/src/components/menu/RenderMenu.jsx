@@ -34,7 +34,7 @@ const RenderMenu = ({books, path, languages = ['en', 'en'], columns = 6}) => {
                 <Grid item className={classes.title}>
                     <Typography className={classes.titleHalakhah} variant="h6" component="h2">{key}</Typography>
                     <ToText/>
-                    <hr/>
+                    <hr />
                 </Grid>
                 <Grid container spacing={2}>
                     {populate(books[key])}

@@ -6,9 +6,8 @@ import Filler from "../general/Filler.tsx";
 import {makeStyles} from "@material-ui/core/styles";
 import {capitalize, makeRandomKey} from "../../utils/utils";
 import {ToText} from "../general/ToText";
-import {cleanUrl,} from "../../utils/cleanUrl";
 import {MusicBadge} from "../bages/musicBadge";
-
+import {liturgyUrl} from "../../utils/utils";
 
 export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
@@ -38,12 +37,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
             }
 
             // this should be removed when all Karaites books turn to better books
-            let url = ''
-            if (obj[key].better_book) {
-                url = `/book/${cleanUrl(obj[key].book_title_en)}/`
-            } else {
-                url = `/${capitalize(path)}/${cleanUrl(obj[key].book_title_en)}/1/`
-            }
+            const url = liturgyUrl(obj[key].book_title_en, obj[key].better_book, path)
 
             comp.push(
                 <Link to={url} key={makeRandomKey()}>
@@ -77,8 +71,8 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
     const MainMenu = () => {
         return (<Grid item xs={12} sm={columns} key={makeRandomKey()}>
-            <Grid item className={classes.title}>
-                <Typography className={classes.subtitle} variant="h6" component="h2">{capitalize(path)}</Typography>
+            <Grid item>
+                <Typography className={classes.title} variant="h6" component="h2">{capitalize(path)}</Typography>
             </Grid>
             <ToText/>
             <Grid container spacing={2}>
@@ -108,9 +102,9 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'SBL Hebrew',
     },
     title: {
+        marginLeft: 20,
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 10,
     },
     bookTitle: {
         marginLeft: 30,

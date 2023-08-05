@@ -1,3 +1,4 @@
+import sys
 from django.core.management.base import BaseCommand
 from openpyxl import load_workbook
 from ...models import (Songs,
@@ -59,6 +60,17 @@ class Command(BaseCommand):
         path = None
 
         if options['xls_file'] == 'Kedushot and Piyyut Parasha.xlsx':
+            print()
+            print("This will add the default books:'Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu'")
+
+            while True:
+                answer = input("Is this what you want? Type 'yes' or 'no' to continue: ")
+                if answer == 'yes':
+                    break
+                else:
+                    sys.exit()
+
+        if options['xls_file'] == 'Kedushot and Piyyut Parasha.xlsx':
             books = ['Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu']
             path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/'
 
@@ -108,7 +120,7 @@ class Command(BaseCommand):
             spreadsheet_line = 1
             english_translation = []
             # use some empty lines on top to better display the text on the grid
-            filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0]
+            filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '']
             # hebrew_text = [filler, filler, filler, filler]
             hebrew_text = []
             # audio_start
@@ -116,8 +128,8 @@ class Command(BaseCommand):
             # print('audio_start: ', ws[f'O{row}'].value, ' audio_end: ', ws[f'P{row}'].value)
             # input('Press Enter to continue...')
 
+            songs_id = -1
             while True:
-                songs_id = -1
                 # line number
                 if ws[f'I{row}'].value is None:
                     break
@@ -138,7 +150,7 @@ class Command(BaseCommand):
                 print(value)
                 stack.push(convert_time_string(value))
                 print('audio_start: ', audio_start, ' audio_end: ', stack.peek())
-                # [hebrew, transliteration, english audio_start, audio_end, reciter, censored, line_number, comments,filler]
+                # [hebrew, transliteration, english audio_start, audio_end, song_id, reciter, censored, line_number, comments, end of verse, section or subtext, filler, song end, Arabic]
                 hebrew_text.append([
                     ws[f'J{row}'].value,  # hebrew
                     ws[f'K{row}'].value,  # transliteration
@@ -152,10 +164,11 @@ class Command(BaseCommand):
                     ws[f'M{row}'].value,  # comments
                     0,  # end of verse, section or subtext? No
                     0,  # filler
-                    0  # song end
+                    0,  # song end
+                    ""  # Arabic
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', songs_id, '', '', '', '', 0, 1, 0])
+                english_translation.append(['', '', ws[f'L{row}'].value, '', '', songs_id, '', '', '', '', 0, 1, 0, ''])
 
                 # end of verse, section or subtext
                 end = ws[f'F{row}'].value

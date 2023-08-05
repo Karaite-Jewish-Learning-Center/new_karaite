@@ -1,4 +1,5 @@
 import {versesByBibleBook} from '../constants/constants'
+import {cleanUrl} from './cleanUrl';
 
 interface booksTable {
     [index: string]: string
@@ -12,14 +13,14 @@ export const capitalize = (string: string): string =>
 export const removeExtension = (string: string): string => string.replace(/\.[^/.]+$/, "")
 
 export const iOS = () => [
-    'iPad Simulator',
-    'iPhone Simulator',
-    'iPod Simulator',
-    'iPad',
-    'iPhone',
-    'iPod'
-  ].includes(navigator.platform)
-  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+    ].includes(navigator.platform)
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 
 
 export const removeSlash = (string: string): string => string.replace(/\//g, '')
@@ -55,7 +56,7 @@ export const normalizeSluggedBookName = (book: string): string => {
 }
 
 export const calculateItemNumber = (book: string, chapter: number, verse: number): number => {
-    return versesByBibleBook[normalizeSluggedBookName(book)].slice(0,chapter- 1).reduce((x, y) => x + y, 0) + verse - 1
+    return versesByBibleBook[normalizeSluggedBookName(book)].slice(0, chapter - 1).reduce((x, y) => x + y, 0) + verse - 1
 }
 
 export const englishBookNames: booksTable = {
@@ -177,3 +178,10 @@ export const toEnglish = (bookName: string): string => {
     return title
 }
 
+export const liturgyUrl = (bookTitle: string, better_book: boolean, path: string): string => {
+ // this should be removed when all Karaites books turn to better books
+    if (better_book) {
+        return `/book/${cleanUrl(bookTitle)}/`
+    }
+    return `/${capitalize(path)}/${cleanUrl(bookTitle)}/1/`
+}

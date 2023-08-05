@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from ftlangdetect import detect
 from collections import OrderedDict
 from django.utils.translation import gettext as _
@@ -22,7 +23,7 @@ from .models import (FirstLevel,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
-                     LiturgyBook,
+                    # LiturgyBook,
                      AutoComplete,
                      References)
 
@@ -34,10 +35,10 @@ def get_book_id(book):
     """ get book id from book title"""
     try:
         book_title = Organization.objects.get(book_title_en=book)
-    except Organization.DoesNotExist:
+    except ObjectDoesNotExist:
         try:
             book_title = Organization.objects.get(book_title_he=book)
-        except Organization.DoesNotExist:
+        except ObjectDoesNotExist:
             return None
 
     return book_title
@@ -129,14 +130,14 @@ def karaites_book_as_array(request, *args, **kwargs):
 
     try:
         book_details = KaraitesBookDetails().to_json(book_title_unslug=book)
-    except KaraitesBookDetails.DoesNotExist:
+    except ObjectDoesNotExist:
         return JsonResponse(data={'status': 'false', 'message': _(f'Book details:{book}, not found.')}, status=400)
 
     try:
         book_paragraphs = KaraitesBookAsArray().to_list(book=book_details['book_id'],
                                                         paragraph_number=int(paragraph_number),
                                                         first=first)
-    except KaraitesBookAsArray.DoesNotExist:
+    except ObjectDoesNotExist:
         return JsonResponse(data={'status': 'false',
                                   'message': _(f'Paragraph_number {paragraph_number} not found.')},
                             status=400)
