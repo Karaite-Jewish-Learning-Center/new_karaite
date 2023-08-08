@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
@@ -7,17 +7,26 @@ import {makeStyles} from "@material-ui/core/styles";
 import {capitalize, makeRandomKey} from "../../utils/utils";
 import {ToText} from "../general/ToText";
 import liturgyMenuItems from "./LiturgyItems";
+import ArrowButton from "./ArrowButton";
 
 
 export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => {
     const [visible, setVisible] = React.useState(true);
-    const [classifications, setClassifications] = React.useState([]);
+    const [classifications, setClassifications] = useState([]);
+    const [open, setOpen] = useState(Array.from({length: books.length}, i => i = false));
 
     const classes = useStyles()
     const onLinkClick = (e) => {
         e.preventDefault()
         setClassifications(e.target.firstChild)
         setVisible(!visible)
+    }
+
+    const onClickArrow = key => {
+        let tmp = {...open}
+        tmp[key] = !tmp[key]
+        setOpen(tmp)
+
     }
 
     const ToTextLocal = () => {
@@ -45,11 +54,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                 }
                 comp.push(
                     <Grid item xs={6} key={makeRandomKey()}>
-                        <Link to={'#'} onClick={onLinkClick}>
-                            <Typography variant="h6" className={classes.title}>
-                                {capitalize(separator)}
-                            </Typography>
-                        </Link>
+                        <ArrowButton direction={open[key]} onClick={() => onClickArrow(key)} saying={capitalize(separator)} style={classes.title}/>
                         <hr className={classes.hr}/>
                     </Grid>
                 )

@@ -5,8 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import {MusicBadge} from "../bages/musicBadge";
 
 
-
-const liturgyMenuItems = (obj,classes, path, classifications) => {
+const liturgyMenuItems = (obj, classes, path, classifications) => {
     let comp = []
     let keys = Object.keys(obj)
 
