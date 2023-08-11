@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {RenderBooksMenu} from './RenderBooksMenu';
-import {RenderLiturgyMenu} from './RenderLiturgyMenu';
 import {useLocation} from "react-router-dom"
 import {karaitesBookByLevelAndClassification} from '../../constants/constants';
 import {removeSlash} from '../../utils/utils';
 import {NotFound404} from '../pages/NotFound404';
 import {dataFetch} from '../api/dataFetch';
 import {referenceContext} from '../../stores/references/referenceContext';
+import LiturgyAccordion from './LiturgyMenuAccordion';
 
 
 interface BookLevelClassification {
@@ -55,7 +55,7 @@ export const Second = () => {
 
     if (error) return <NotFound404/>
 
-    if(path === 'Liturgy') return (showBooks ? <RenderLiturgyMenu books={books} path={path} header={header}/> : null)
+    if(path === 'Liturgy') return (showBooks ? <LiturgyAccordion books={books} path={path} header={header}/> : null)
 
     return (showBooks ? <RenderBooksMenu books={books} path={path} header={header}/> : null)
 };
