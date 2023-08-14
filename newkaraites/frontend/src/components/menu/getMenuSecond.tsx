@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {RenderBooksMenu} from './RenderBooksMenu';
-import {RenderLiturgyMenu} from './RenderLiturgyMenu';
 import {useLocation} from "react-router-dom"
 import {karaitesBookByLevelAndClassification} from '../../constants/constants';
 import {removeSlash} from '../../utils/utils';
 import {NotFound404} from '../pages/NotFound404';
 import {dataFetch} from '../api/dataFetch';
 import {referenceContext} from '../../stores/references/referenceContext';
+import {RenderLiturgyMenu} from './RenderLiturgyMenu';
 
 
 interface BookLevelClassification {
