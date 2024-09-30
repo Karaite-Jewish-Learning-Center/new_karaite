@@ -4,7 +4,7 @@ ME="production"
 NAME="prod"
 
 # django app dir
-DJANGODIR=/home/production/anaconda3/envs/pro/new_karaite/newkaraites
+DJANGODIR=/home/production/miniconda3/envs/pro/new_karaite/newkaraites
 # your sock file - do not create it manually
 SOCKFILE=/home/production/sock/gunicorn.sock
 USER=production

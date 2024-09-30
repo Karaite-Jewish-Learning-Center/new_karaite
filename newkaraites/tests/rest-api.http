@@ -1,0 +1,125 @@
+# @name get first level of bible books
+GET http://localhost:8000/api/v1/get-first-level/
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("Tanakh"), "Response body does not contain 'Tanakh'");
+        client.assert(responseBody.hasOwnProperty("Halakhah"), "Response body does not contain 'Halakhah'");
+        client.assert(responseBody.hasOwnProperty("Liturgy"), "Response body does not contain 'Liturgy'");
+        // test if values are the right types
+        client.assert(Array.isArray(responseBody['Tanakh']), "Tanakh is not an array");
+        client.assert(Array.isArray(responseBody['Halakhah']), "Halakhah is not an array");
+        client.assert(Array.isArray(responseBody['Liturgy']), "Liturgy is not an array");
+    });
+%}
+
+<> 2024-09-30T191253.200.json
+
+###
+
+//
+###
+
+# @name get book chapter
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/0/
+
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("chapter"), "Response body does not contain 'chapter'");
+        client.assert(responseBody.hasOwnProperty("book"), "Response body does not contain 'book'");
+        client.assert(responseBody['book'].hasOwnProperty("book_title_en"), "Response body does not contain 'book_title_en");
+        client.assert(responseBody['book'].hasOwnProperty("book_title_he"), "Response body does not contain 'book_title_he");
+        client.assert(responseBody['book'].hasOwnProperty("chapters"), "Response body does not contain 'chapter'");
+        client.assert(responseBody['book'].hasOwnProperty("verses"), "Response body does not contain 'verses'");
+        client.assert(responseBody['book'].hasOwnProperty("total_verses"), "Response body does not contain 'total_verses'");
+        client.assert(responseBody['book'].hasOwnProperty("audio_books"), "Response body does not contain 'audio_books'");
+        // test if values are the right types
+        client.assert(typeof responseBody['book']['book_title_en'] === "string", "book_title_en is not a string");
+        client.assert(typeof responseBody['book']['book_title_he'] === "string", "book_title_he is not a string");
+        client.assert(typeof responseBody['book']['chapters'] === "number", "chapters is not a number");
+        client.assert(Array.isArray(responseBody['book']['verses']), "chapters is not an array");
+        client.assert(typeof responseBody['book']['total_verses'] === "number", "total_verses is not a number");
+        client.assert(typeof responseBody['book']['audio_books'] === "object", "audio_books is not an object");
+
+
+    });
+
+%}
+
+<> 2024-09-30T191253-1.200.json
+
+###
+# @search no page is define should return the same as page 1
+GET http://localhost:8000/api/v1/search/god/
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("data"), "Response body does not contain 'data'");
+        client.assert(responseBody.hasOwnProperty("page"), "Response body does not contain 'page'");
+        client.assert(responseBody.hasOwnProperty("did_you_mean"), "Response body does not contain 'did_you_mean'");
+        client.assert(responseBody.hasOwnProperty("search_term"), "Response body does not contain 'search_term'");
+        // test if values are the right types
+        client.assert(Array.isArray(responseBody['data']) , "data is not an array");
+        client.assert(typeof responseBody['page'] === "number", "page is not a number");
+        client.assert(typeof responseBody['did_you_mean'] === "boolean", "did_you_mean is not a boolean");
+        client.assert(typeof responseBody['search_term'] === "string", "search_term is not a string");
+    });
+
+%}
+
+<> 2024-09-30T191253-2.200.json
+
+
+
+###
+# @search
+GET http://localhost:8000/api/v1/search/god/1/
+accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("data"), "Response body does not contain 'data'");
+        client.assert(responseBody.hasOwnProperty("page"), "Response body does not contain 'page'");
+        client.assert(responseBody.hasOwnProperty("did_you_mean"), "Response body does not contain 'did_you_mean'");
+        client.assert(responseBody.hasOwnProperty("search_term"), "Response body does not contain 'search_term'");
+        // test if values are the right types
+        client.assert(Array.isArray(responseBody['data']) , "data is not an array");
+        client.assert(typeof responseBody['page'] === "number", "page is not a number");
+        client.assert(typeof responseBody['did_you_mean'] === "boolean", "did_you_mean is not a boolean");
+        client.assert(typeof responseBody['search_term'] === "string", "search_term is not a string");
+    });
+
+%}
+
+<> 2024-09-30T191253-3.200.json
+
+###
+
+# @name test
+GET http://localhost:8000/api/v1/test/
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("ok"), "Response body does not contain 'ok'");
+        client.assert(responseBody['ok'], "ok is not true");
+    });
+
+%}
+
+<> 2024-09-30T191253-4.200.json
+
+

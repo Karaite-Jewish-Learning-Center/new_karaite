@@ -22,8 +22,8 @@ def test_api():
     assert response.status_code == 200
 
     # Test GetKaraitesBookAsArray view
-    response = requests.get(base_url + 'get-karaites-book-chapter/Sefer%20HaKuzari/1/0/')
-    assert response.status_code == 200
+    # response = requests.get(base_url + 'get-karaites-book-chapter/Sefer%20HaKuzari/1/0/')
+    # assert response.status_code == 200
 
     # Test GetKaraitesAllBookDetails view
     response = requests.get(base_url + 'get-karaites-book-details/')

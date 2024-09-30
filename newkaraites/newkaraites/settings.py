@@ -44,8 +44,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.gzip.GZipMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -150,8 +150,11 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'pro_karaites',
-            'USER': 'doadmin',
+            'OPTIONS': {
+                'options': '-c search_path=production'
+            },
+            'NAME': 'karaites_test',
+            'USER': 'production',
             'PASSWORD': os.environ['PRO'],
             'HOST': 'localhost',
             'PORT': '5432',
@@ -222,3 +225,5 @@ if DEBUG:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
 else:
     ADMINS_EMAILS = ['sandro.fernandes@toptal.com']
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

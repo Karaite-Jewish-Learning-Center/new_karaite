@@ -68,7 +68,7 @@ urlpatterns = [
          GetHalakhah.as_view(),
          name='get_references'),
 
-    # Better format should replace all the other formats  in the long run
+    # Better format should replace all the other formats in the long run
     path('book/<str:book>/',
          Book.as_view(),
          name='book'),

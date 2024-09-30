@@ -7,7 +7,7 @@ pytest
 django-extensions
 beautifulsoup4~=4.9.3
 lxml
-requests~=2.26.0
+requests~=2.31.0
 python-hebrew-numbers
 html5lib
 gensim~=4.1.2
@@ -24,4 +24,4 @@ wget
 django-tinymce
 openpyxl==3.1.2
 python-bidi
-transformers==4.21.1
+transformers==4.38.0
