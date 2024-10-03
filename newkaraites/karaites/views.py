@@ -252,7 +252,7 @@ class GetTOC(View):
         return JsonResponse(result, safe=False)
 
 
-class GetHalakhah(View):
+class  GetHalakhah(View):
     """
     """
 
