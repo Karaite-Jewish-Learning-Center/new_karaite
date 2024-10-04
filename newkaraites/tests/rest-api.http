@@ -88,6 +88,45 @@ GET http://localhost:8000/api/v1/get-karaites-book-chapter/Adderet Eliyahu/1/0/
 // get karaites book details
 // GET http://localhost:8000/api/v1/get-karaites-book-details/
 
+###
+# @name TOC valid book name
+GET http://localhost:8000/api/v1/get-karaites-book-toc/Adderet%20Eliyahu/
+Accept: application/json
+
+> {%
+    client.test("Valid book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+    });
+%}
+
+###
+# @name TOC missing book name
+GET http://localhost:8000/api/v1/get-karaites-book-toc/
+Accept: application/json
+
+> {%
+    client.test("Missing book name", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message === "Need a book name.", "Expected message 'Need a book name.', but got " + responseBody.message);
+    });
+%}
+
+###
+# @name TOC non-existent book name
+GET http://localhost:8000/api/v1/get-karaites-book-toc/NonExistentBook/
+Accept: application/json
+
+> {%
+    client.test("Non-existent book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody) && responseBody.length === 0, "Expected an empty array, but got " + JSON.stringify(responseBody));
+    });
+%}
+
+###
 # @name get karaites book TOC
 GET http://localhost:8000/api/v1/get-karaites-book-toc/Adderet Eliyahu/
 
@@ -230,6 +269,96 @@ GET http://localhost:8000/api/v1/get-karaites-books-by-level-and-classification/
     });
 %}
 
+###
+# @name ValidBookName
+GET http://localhost:8000/api/v1/get-karaites-book-toc/Adderet%20Eliyahu/
+Accept: application/json
+
+> {%
+    client.test("Valid book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+    });
+%}
+
+###
+# @name MissingBookName
+GET http://localhost:8000/api/v1/get-karaites-book-toc/
+Accept: application/json
+
+> {%
+    client.test("Missing book name", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message === "Need a book name.", "Expected message 'Need a book name.', but got " + responseBody.message);
+    });
+%}
+
+###
+# @name NonExistentBookName
+GET http://localhost:8000/api/v1/get-karaites-book-toc/NonExistentBook/
+Accept: application/json
+
+> {%
+    client.test("Non-existent book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody) && responseBody.length === 0, "Expected an empty array, but got " + JSON.stringify(responseBody));
+    });
+%}
+
+###
+# @name ValidBookChapterVerse
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/0/
+Accept: application/json
+
+> {%
+    client.test("Valid book chapter verse", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+    });
+%}
+
+###
+# @name Missing Book Name Chapter Verse
+GET http://localhost:8000/api/v1/get-book-chapter/Nn/1/0/
+Accept: application/json
+
+> {%
+    client.test("Missing book name for chapter and verse", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message === "Can't find book: Nn", "Expected message 'Can\'t find book: Nn', but got " + responseBody.message);
+    });
+%}
+
+###
+# @name Invalid Book Chapter
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/999/0/
+Accept: application/json
+
+> {%
+    client.test("Invalid book chapter", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message.includes("Invalid chapter for the book"), "Expected invalid chapter message, but got " + responseBody.message);
+    });
+%}
+
+###
+# @name Invalid Book Verse
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/999/
+Accept: application/json
+
+#> {%
+#    client.test("Invalid book verse", function () {
+#        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+#        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+#        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+#        client.assert(responseBody.message.includes("Invalid verse for the book"), "Expected invalid verse message, but got " + responseBody.message);
+#    });
+#%}
 ###
 # @name get book chapter
 GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/0/

@@ -46,6 +46,10 @@ urlpatterns = [
          GetTOC.as_view(),
          name='get_karaites_book_toc'),
 
+    path('get-karaites-book-toc/',
+         GetTOC.as_view(),
+         name='get_karaites_book_toc'),
+
     path('get-karaites-books-by-level/<str:level>/',
          GetByLevel.as_view(),
          name='get_karaites_book_by_level'),
