@@ -47,7 +47,10 @@ Relevante commands:
 
 
 # Some song files are missing.
-    Check the songs folder and the database.
+  Check the songs folder and the database.
+  Probably the domain is wrong. All url should be from the same domain.
+
+
 
 
 # Future work
@@ -55,3 +58,8 @@ Relevante commands:
 
 # Fix the comments 
 
+# images not show in some books
+
+# sometimes a pane the last closed pane opens together with the new one
+
+# CSS on comments are wrong
