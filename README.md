@@ -40,7 +40,7 @@
 
 # Future
     
-    - Convert all books to better format. (right now the database has two formats an old and the beter format)
+    - Convert all books to better format. (right now the database has two formats an old and the better format)
     - Add more books.
     - Add more features.
     - Improve the search engine.
