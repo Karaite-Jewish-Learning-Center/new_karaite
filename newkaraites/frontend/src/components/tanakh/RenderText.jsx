@@ -157,15 +157,15 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
         }
     }
 
-    const itemContent = (item, data) => <ChapterHeaderVerse
+    const itemContent = (item, data) =>
+        <ChapterHeaderVerse
         data={data}
         item={item}
         gridVisibleRange={gridVisibleRange}
         paneNumber={paneNumber}
         audioBookPlaying={audioBookPlaying}
-        speaking={speaking}
+        speaking={speaking}/>
 
-    />
     let currentChapter = calculateCurrentChapter()
 
     return (

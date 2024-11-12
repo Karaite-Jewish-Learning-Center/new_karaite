@@ -1,14 +1,14 @@
 import pytest
 from ..karaites.utils import (search_level,
-                                        slug,
-                                        slug_back,
-                                        replace_punctuation_marks,
-                                        normalize_search,
-                                        only_english_stop_word)
+                              slug,
+                              slug_back,
+                              replace_punctuation_marks,
+                              normalize_search,
+                              only_english_stop_word)
 
 from ..karaites.utils import (convert_time_to_seconds,
-                                        convert_seconds_to_time,
-                                        convert_time_string)
+                              convert_seconds_to_time,
+                              convert_time_string)
 
 
 def test_search_level():

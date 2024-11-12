@@ -23,7 +23,7 @@ from .models import (FirstLevel,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
-                    # LiturgyBook,
+    # LiturgyBook,
                      AutoComplete,
                      References)
 
@@ -276,6 +276,7 @@ class Book(View):
     """
        Get the liturgy book
     """
+
     @staticmethod
     def get(request, *args, **kwargs):
         book_name = kwargs.get('book', None)

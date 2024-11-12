@@ -43,7 +43,7 @@ class TextToSpeech {
                 .then(() => {
                     let voices = window.speechSynthesis.getVoices()
                     this.setVoice([
-                        voices.findIndex(v => v.name === 'Daniel'),
+                        voices.findIndex(v => v.name === 'Samantha'),
                         voices.findIndex(v => v.name === 'Carmit')
                     ])
 
