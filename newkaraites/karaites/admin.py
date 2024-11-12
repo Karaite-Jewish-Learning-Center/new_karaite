@@ -356,6 +356,7 @@ admin.site.register(References, ReferencesAdmin)
 
 
 class FullTextSearchAdmin(KAdmin):
+    list_filter = ('path',)
     search_fields = ('reference_en', 'path')
     list_display = ('path', 'reference_en', 'text_en', 'text_en_search')
 
@@ -364,6 +365,7 @@ admin.site.register(FullTextSearch, FullTextSearchAdmin)
 
 
 class FullTextSearchHebrewAdmin(KAdmin):
+    list_filter = ('path',)
     search_fields = ('reference_en', 'reference_en', 'path')
     list_display = ('path', 'reference_en', 'reference_he', 'text_he',)
 

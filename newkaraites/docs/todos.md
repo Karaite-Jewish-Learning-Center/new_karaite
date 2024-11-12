@@ -65,6 +65,39 @@ Relevante commands:
 # CSS on comments are wrong
 
 # fix hebrew voice not found
+   First confusion: 
+    Genesis's first verses have their own audio file.
+   (audio file not found!)
+    For now, all others use the browser text to speech API.
+   The name of the Hebrew voice changed from Carmit to Carmit (Hebrew (Israel)).
+   (fixed)
+
+   Speech stop at the first verse of any bible book.
+
+   In case that the voice is not found.
+   Add instructions to install the voice. (need to be tested)
+
+   Windows:
+    Go to the control panel
+    Go to the language settings
+    Add the Hebrew language
+    Add the Carmit voice
+   Mac:
+    Go to the system preferences
+    Go to the language settings
+    Add the Hebrew language
+    Add the Carmit voice
+   Android:
+    Go to the settings
+    Go to the language settings
+    Add the Hebrew language
+    Add the Carmit voice
+   iOS:
+    Go to the settings
+    Go to the language settings
+    Add the Hebrew language
+    Add the Carmit voice
+
 
 # fix text end showing twice 
    Ex:An Essay on the Obligation of Prayer

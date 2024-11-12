@@ -5,7 +5,7 @@ from ...models import (KaraitesBookDetails,
                        KaraitesBookAsArray,
                        FullTextSearch)
 from .update_full_text_search_index import update_full_text_search_index_english
-
+from .populate_book_details import HALAKHAH
 
 ENGLISH = 0
 HEBREW = 1

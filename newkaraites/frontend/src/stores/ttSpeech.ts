@@ -1,4 +1,4 @@
-import {makeAutoObservable, observable} from "mobx"
+import {makeAutoObservable, observable, toJS} from "mobx"
 
 
 const ENGLISH = 0
@@ -42,9 +42,10 @@ class TextToSpeech {
             new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
                 .then(() => {
                     let voices = window.speechSynthesis.getVoices()
+                    debugger
                     this.setVoice([
-                        voices.findIndex(v => v.name === 'Samantha'),
-                        voices.findIndex(v => v.name === 'Carmit')
+                        voices.findIndex(v => v.lang === "en-US"  && v.name === 'Samantha'),
+                        voices.findIndex(v => v.lang === "he-IL"  && v.name === 'Carmit (Hebrew (Israel))')
                     ])
 
                     if (this.voice[HEBREW] === -1) {
