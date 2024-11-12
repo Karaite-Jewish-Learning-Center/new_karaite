@@ -817,6 +817,9 @@ class KaraitesBookDetails(models.Model):
                                             on_delete=models.DO_NOTHING,
                                             verbose_name=_('Classification'))
 
+    order = models.IntegerField(default=0,
+                                help_text=_('Order liturgy books'))
+
     book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
                                      verbose_name=_('Book language'))
@@ -1099,7 +1102,8 @@ class KaraitesBookDetails(models.Model):
             # Halakhah, Polemic
             if level != 'Liturgy':
                 book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('book_title_en',
+                                                                  published=True).order_by('order',
+                                                                                           'book_title_en',
                                                                                            'book_classification')
             else:
                 book_details = KaraitesBookDetails.objects.filter(first_level__url=level,

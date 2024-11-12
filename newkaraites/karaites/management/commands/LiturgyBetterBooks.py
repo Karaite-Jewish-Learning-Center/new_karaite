@@ -32,6 +32,9 @@ class Command(BaseCommand):
 
     @staticmethod
     def save_song(english_name, song_file, path):
+        if song_file is None:
+            return None
+
         try:
             songs = Songs.objects.get(song_title=english_name)
         except Songs.DoesNotExist:
@@ -71,7 +74,7 @@ class Command(BaseCommand):
                     sys.exit()
 
         if options['xls_file'] == 'Kedushot and Piyyut Parasha.xlsx':
-            books = ['Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu']
+            books = ['Atta Qadosh', 'Essa Lamerahoq', 'El Mistatter', 'Adir Venora', 'Ehad Elohenu', 'Bereshit', 'Noah']
             path = Path() / 'data_karaites/HTML/Liturgy/Shabbat Morning Services/Qedushot and Piyyut Parasha/'
 
         elif options['xls_file'] == 'Efratim_Yeqarim.xlsx':

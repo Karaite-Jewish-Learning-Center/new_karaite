@@ -249,9 +249,10 @@ class DetailsProxyAdmin(KAdmin):
                     'processed',
                     'book_title_en',
                     'book_title_he',
-                    'author',
+                    'order',
                     'first_level',
                     'book_classification',
+                    'author',
                     'book_language',
                     'song_list',
                     'table_book',
@@ -267,20 +268,22 @@ class DetailsProxyAdmin(KAdmin):
                     'index_lang',
                     'published')
 
+    list_editable = ('order',)
+
     list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
 
-    # don't allow changes on a proxy model, is just here to simplify data visualization
-    @staticmethod
-    def has_add_permission(request, obj=None):
-        return False
-
-    @staticmethod
-    def has_change_permission(request, obj=None, **kwargs):
-        return False
-
-    @staticmethod
-    def has_delete_permission(request, obj=None, **kwargs):
-        return False
+    # # don't allow changes on a proxy model, is just here to simplify data visualization
+    # @staticmethod
+    # def has_add_permission(request, obj=None):
+    #     return False
+    #
+    # @staticmethod
+    # def has_change_permission(request, obj=None, **kwargs):
+    #     return False
+    #
+    # @staticmethod
+    # def has_delete_permission(request, obj=None, **kwargs):
+    #     return False
 
 
 admin.site.register(DetailsProxy, DetailsProxyAdmin)

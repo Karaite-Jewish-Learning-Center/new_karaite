@@ -1,6 +1,24 @@
 # Tell git that you are using ssh
 [://] # ( Source: https://help.github.com/articles/generating-ssh-keys/ 
 
+# Generate a new ssh key
+```zsh
+$ ssh-keygen -t rsa -b 4096 -C "
+
+```
+
+
+# add config file to .ssh directory
+
+```txt
+Host *
+  AddKeysToAgent yes
+  User sandro.fernandes@softrent.com.br
+  IdentityFile ~/.ssh/key for the site
+
+ServerAliveInterval 50
+```
+
 # check if ssh key is already in place
 ```bash
 $ ssh -T git@github.com
@@ -14,6 +32,9 @@ git@github.com:repo/repo.git
 $ git remote set-url origin git@github.com:repo/repo.git
 
 ```
+
+
+
 
 
  
