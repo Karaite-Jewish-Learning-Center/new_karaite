@@ -63,3 +63,12 @@ Relevante commands:
 # sometimes a pane the last closed pane opens together with the new one
 
 # CSS on comments are wrong
+
+# fix hebrew voice not found
+
+# fix text end showing twice 
+   Ex:An Essay on the Obligation of Prayer
+   
+# fix css on the text
+  Ex:Rosh pinna
+  
