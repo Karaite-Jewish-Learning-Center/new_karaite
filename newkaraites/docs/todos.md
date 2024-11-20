@@ -98,6 +98,7 @@ Relevante commands:
     Add the Hebrew language
     Add the Carmit voice
 
+# Add voices to the karaites books.
 
 # fix text end showing twice 
    Ex:An Essay on the Obligation of Prayer
