@@ -10,26 +10,21 @@ import textToSpeechOffWhite from '../../img/voice_over_off_white_24dp.svg'
 
 export const TextToSpeechButton: FC<ButtonPropsOnOff> = ({onClick, color, onOff, isSpeechError}) => {
 
+
     const theme = useTheme()
 
     if (isSpeechError) return null;
 
-    if (theme.palette.type === 'dark') {
-        return (
-            <IconButton aria-label="Close"
-                        component="span"
-                        onClick={onClick}>
-                {(onOff ? <img src={textToSpeechOnWhite} width={24} height={24} alt="Speech on"/> :
-                    <img src={textToSpeechOffWhite} width={24} height={24} alt="Speech off"/>)}
-            </IconButton>
-        )
-    }
+    const themeType = theme.palette.type === 'light'
+    const onBlack = (themeType ? textToSpeechOnBlack : textToSpeechOnWhite)
+    const offBlack = (themeType ? textToSpeechOffBlack : textToSpeechOffWhite)
+
     return (
         <IconButton aria-label="Close"
                     component="span"
                     onClick={onClick}>
-            {(onOff ? <img src={textToSpeechOnBlack} width={24} height={24} alt="Speech on"/> :
-                <img src={textToSpeechOffBlack} width={24} height={24} alt="Speech off"/>)}
+            {(onOff ? <img src={onBlack} width={24} height={24} alt="Speech on"/> :
+                <img src={offBlack} width={24} height={24} alt="Speech off"/>)}
         </IconButton>
     )
 }

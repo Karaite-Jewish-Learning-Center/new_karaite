@@ -46,7 +46,6 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBook
         if (audioBookPlaying || speaking) {
             return
         }
-
         updateItemDistance(i)
     }
 
@@ -75,7 +74,7 @@ const ChapterHeaderVerse = ({data, item, gridVisibleRange, paneNumber, audioBook
     useEffect(() => {
         store.setRefsChapterVerse(allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber)
         store.setVerseData(allBookData[current], paneNumber)
-    }, [allBookData[current][BIBLE_CHAPTER], allBookData[current][BIBLE_VERSE], paneNumber])
+    }, [current, allBookData, paneNumber, store])
 
     const ChapterBody = () => {
         switch (lang) {

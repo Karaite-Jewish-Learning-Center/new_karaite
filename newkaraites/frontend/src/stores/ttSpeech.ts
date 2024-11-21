@@ -42,10 +42,9 @@ class TextToSpeech {
             new Promise(resolve => window.speechSynthesis.onvoiceschanged = resolve)
                 .then(() => {
                     let voices = window.speechSynthesis.getVoices()
-                    debugger
                     this.setVoice([
-                        voices.findIndex(v => v.lang === "en-US"  && v.name === 'Samantha'),
-                        voices.findIndex(v => v.lang === "he-IL"  && v.name === 'Carmit (Hebrew (Israel))')
+                        voices.findIndex(v => v.lang === "en-US" && v.name === 'Samantha'),
+                        voices.findIndex(v => v.lang === "he-IL" && v.name === 'Carmit (Hebrew (Israel))')
                     ])
 
                     if (this.voice[HEBREW] === -1) {
@@ -60,18 +59,14 @@ class TextToSpeech {
                     // console.log(e.message)
                 })
         } else {
-            // Speech Synthesis Not Supported 😣
+            // Speech Synthesis Isn't Supported 😣
             this.error = NOT_SUPPORTED
         }
     }
 
-    setLanguage = (language: string) => {
-        this.language = language
-    }
+    setLanguage = (language: string) => this.language = language
 
-    setVoice = (voice: any[]) => {
-        this.voice = voice
-    }
+    setVoice = (voice: any[]) => this.voice = voice
 
     getVoice = () => this.voice[this.getIndex()]
 
@@ -87,6 +82,7 @@ class TextToSpeech {
         this.synthesise.rate = 0.7
 
         this.synthesise.onend = () => {
+            console.log('ttSpeak ended')
             this.started = false
             this.resumed = false
             this.paused = false
@@ -97,6 +93,8 @@ class TextToSpeech {
         }
 
         this.synthesise.onpause = () => {
+            this.paused = true
+            this.resumed = false
         }
 
         this.synthesise.onresume = () => {
@@ -104,7 +102,7 @@ class TextToSpeech {
             this.paused = false
         }
 
-        this.synthesise.onerror = (e:SpeechSynthesisErrorEvent) => this.onError = e.error
+        this.synthesise.onerror = (e: SpeechSynthesisErrorEvent) => this.onError = e.error
 
         this.synthesise.onstart = () => {
             this.started = true
@@ -125,6 +123,7 @@ class TextToSpeech {
         this.canceled = true
         speechSynthesis.cancel()
     }
+
     getVoicesStatusError = () => this.error
 
     errorAlreadyReported = () => this.errorReported
@@ -132,9 +131,6 @@ class TextToSpeech {
     setErrorReported = (errorReported: boolean) => {
         this.errorReported = errorReported
     }
-
-    // getOnErrorMessage = () => this.onError
-
 }
 
 const ttSpeechStore = () => new TextToSpeech()

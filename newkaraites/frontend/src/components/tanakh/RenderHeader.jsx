@@ -8,7 +8,7 @@ import {storeContext} from "../../stores/context";
 import LanguageButton from "../buttons/LanguageButton";
 import {CloseButton} from "../buttons/CloseButton";
 import {TextToSpeechButton} from "../buttons/textToSpeechButton";
-import {IsAudioBook} from "../audio/IsAudioBook";
+// import {IsAudioBook} from "../audio/IsAudioBook";
 
 const RenderHeader = ({
                           book,
@@ -19,9 +19,9 @@ const RenderHeader = ({
                           flip,
                           onSpeakOnOffHe,
                           onSpeakOnOffEn,
-                          onAudioBookOnOff,
-                          audioBookPlaying,
-                          isAudioBook,
+                          // onAudioBookOnOff,
+                          // audioBookPlaying,
+                          // isAudioBook,
                       }) => {
 
     const store = useContext(storeContext)
@@ -46,12 +46,17 @@ const RenderHeader = ({
                         </Grid>
                         <Grid item xs={1} key={3}>
 
-                            <IsAudioBook isAudioBook={isAudioBook}
-                                         flip={flip[0]}
-                                         isSpeechError={isSpeechError ===1 || isSpeechError === 3}
-                                         onAudioBookOnOff={onAudioBookOnOff}
-                                         audioBookPlaying={audioBookPlaying}
-                                         onSpeakOnOffHe={onSpeakOnOffHe}
+                            {/*<IsAudioBook isAudioBook={isAudioBook}*/}
+                            {/*             flip={flip[0]}*/}
+                            {/*             isSpeechError={isSpeechError ===1 || isSpeechError === 3}*/}
+                            {/*             onAudioBookOnOff={onAudioBookOnOff}*/}
+                            {/*             audioBookPlaying={audioBookPlaying}*/}
+                            {/*             onSpeakOnOffHe={onSpeakOnOffHe}*/}
+                            {/*/>*/}
+                            <TextToSpeechButton
+                                onClick={onSpeakOnOffHe}
+                                onOff={flip[0]}
+                                isSpeechError={isSpeechError >= 2}
                             />
 
                         </Grid>
@@ -62,7 +67,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
-                                isSpeechError={isSpeechError >=2}
+                                isSpeechError={isSpeechError >= 2}
                             />
 
                         </Grid>
@@ -83,13 +88,13 @@ const RenderHeader = ({
                             </Typography>
                         </Grid>
                         <Grid item xs={1} key={8}>
-                            <IsAudioBook isAudioBook={isAudioBook}
-                                         flip={flip[0]}
-                                         isSpeechError={isSpeechError ===1 || isSpeechError === 3}
-                                         onAudioBookOnOff={onAudioBookOnOff}
-                                         audioBookPlaying={audioBookPlaying}
-                                         onSpeakOnOffHe={onSpeakOnOffHe}
-                            />
+                            {/*<IsAudioBook isAudioBook={isAudioBook}*/}
+                            {/*             flip={flip[0]}*/}
+                            {/*             isSpeechError={isSpeechError === 1 || isSpeechError === 3}*/}
+                            {/*             onAudioBookOnOff={onAudioBookOnOff}*/}
+                            {/*             audioBookPlaying={audioBookPlaying}*/}
+                            {/*             onSpeakOnOffHe={onSpeakOnOffHe}*/}
+                            {/*/>*/}
                         </Grid>
                     </>
                 )
@@ -107,7 +112,7 @@ const RenderHeader = ({
                             <TextToSpeechButton
                                 onClick={onSpeakOnOffEn}
                                 onOff={flip[1]}
-                                isSpeechError={isSpeechError >=2}
+                                isSpeechError={isSpeechError >= 2}
                             />
                         </Grid>
                     </>
