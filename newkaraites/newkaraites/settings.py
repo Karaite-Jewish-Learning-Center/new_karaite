@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_random_secret_key()
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,16 +85,6 @@ WSGI_APPLICATION = 'newkaraites.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'karaites',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
 
 # local dev environment
 if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
@@ -105,7 +95,7 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'karaites_test',
+            'NAME': os.environ.get('karaites_test'),
             'USER': '',
             'PASSWORD': '',
             'HOST': 'localhost',
@@ -131,7 +121,7 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'dev_test',
             'USER': 'doadmin',
-            'PASSWORD': os.environ['DEV'],
+            'PASSWORD': os.environ.get('DEV'),
             'HOST': 'localhost',
             'PORT': '5432',
         }
