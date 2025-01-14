@@ -15,11 +15,11 @@ RUN apt-get update && apt-get install -y \
     liblapack-dev gfortran libopenblas-dev libomp-dev \
     gcc \
     pkg-config \
-    rustc cargo \
-    && rm -rf /var/lib/apt/lists/*
+    rustc cargo     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt /app
+RUN pip install pip --upgrade
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project

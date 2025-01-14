@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 from django.core.management.utils import get_random_secret_key
@@ -87,7 +88,7 @@ WSGI_APPLICATION = 'newkaraites.wsgi.application'
 
 
 # local dev environment
-if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
+if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
 
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
@@ -95,18 +96,18 @@ if os.environ['CONDA_DEFAULT_ENV'] == 'LOCAL':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('karaites_test'),
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '',
+            'NAME': 'karaites',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'postgres',
+            'PORT': '5432',
         }
     }
     AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100'
     SONGS_STATIC_SERVER = 'http://localhost:8100'
 
 # server dev environment
-elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
+elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 
     DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost:8100', '127.0.0.1']
@@ -129,9 +130,9 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'DEV':
     AUDIO_BOOKS_STATIC_SERVER = 'http://dev.karaites.org'
     SONGS_STATIC_SERVER = 'http://dev.karaites.org'
 
-
+    sys.stdout.write('DEV ENVIRONMENT')
 # server production environment
-elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
+elif os.environ.get('CONDA_DEFAULT_ENV') == 'PRO':
 
     DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125', 'kjlc.karaites.org', 'localhost', '127.0.0.1']
@@ -152,9 +153,9 @@ elif os.environ['CONDA_DEFAULT_ENV'] == 'PRO':
     }
     AUDIO_BOOKS_STATIC_SERVER = 'https://kjlc.karaites.org'
     SONGS_STATIC_SERVER = 'https://kjlc.karaites.org'
-
+    sys.stdout.write('PRODUCTION ENVIRONMENT')
 else:
-    raise Exception("Invalid environment")
+    sys.stdout.write('NO ENVIRONMENT FOUND')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

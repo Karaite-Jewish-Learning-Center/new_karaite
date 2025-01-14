@@ -1,5 +1,5 @@
 #python==3.8
-Ipython==8.31.0
+Ipython
 Django==4.1
 psycopg2-binary
 django-cors-headers
