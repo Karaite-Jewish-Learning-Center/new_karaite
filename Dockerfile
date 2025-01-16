@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     build-essential python3-dev libffi-dev libssl-dev \
     libxml2-dev libxslt1-dev zlib1g-dev libsqlite3-dev libblas-dev \
     liblapack-dev gfortran libopenblas-dev libomp-dev \
+    postgresql-client \
     gcc \
     pkg-config \
     rustc cargo     && rm -rf /var/lib/apt/lists/*

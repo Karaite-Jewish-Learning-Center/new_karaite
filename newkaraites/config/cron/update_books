@@ -1,2 +1,0 @@
-# */1 * * * * sandro ~/anaconda3/bin/conda run -n  kjoa  python ~/anaconda3/envs/kjoa/new_karaite/newkaraites/manage.py update_books  >> ~/log.log 2>&1
-*/1 * * * * production ~/anaconda3/bin/conda run -n  pro  python ~/anaconda3/envs/pro/new_karaite/newkaraites/manage.py update_books  >> ~/logs/cron/log.log 2>&1
