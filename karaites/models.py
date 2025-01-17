@@ -430,7 +430,15 @@ class AudioBook(models.Model):
 
     @mark_safe
     def audiofile(self):
-        return f'<audio controls><source src="{settings.AUDIO_BOOKS_STATIC_SERVER}{self.audiofile_name()}" type="audio/mpeg"></audio>'
+        return f'<audio controls><source src="{self.audiofile_name()}" type="audio/mpeg"></audio>'
+
+    def delete(self, using=None, keep_parents=False):
+        if self.audio_file.name != '':
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, self.audio_file.name))
+            except FileNotFoundError:
+                pass
+            super(AudioBook, self).delete(using, keep_parents)
 
     class Meta:
         verbose_name_plural = "Audiobooks"

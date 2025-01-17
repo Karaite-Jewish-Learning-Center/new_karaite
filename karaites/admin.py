@@ -85,6 +85,7 @@ admin.site.register(Author, AuthorAdmin)
 
 
 class BookAsArrayAdmin(KAdmin):
+    list_per_page = 10
     list_display = ('book', 'chapter', 'text')
     list_filter = ('book', 'chapter')
     search_fields = ('book__book_title_en', 'chapter')
