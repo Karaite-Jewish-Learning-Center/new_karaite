@@ -13,16 +13,10 @@ data_karaites/*
 
 exported
 
-
-
 database_upgrade
 db
 
 var-17
-
-media
-
-static
 
 static-django
 

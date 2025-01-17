@@ -563,9 +563,13 @@ class Songs(models.Model):
                 'song_file': self.song_file.url.replace('/media/songs/', ''),
                 }
 
+    # @mark_safe
+    # def audi_song(self):
+    #     return f'<audio controls><source src="{settings.SONGS_STATIC_SERVER}{self.song_file.url}" type="audio/mpeg"></audio>'
+
     @mark_safe
     def audi_song(self):
-        return f'<audio controls><source src="{settings.SONGS_STATIC_SERVER}{self.song_file.url}" type="audio/mpeg"></audio>'
+        return f'<audio controls><source src="{self.song_file.url}" type="audio/mpeg"></audio>'
 
     def delete(self, using=None, keep_parents=False):
         print(self, self.song_file.name)
