@@ -418,6 +418,7 @@ class AudioBook(models.Model):
     audio_name = models.CharField(max_length=100,
                                   verbose_name=_('Audiobook name'),
                                   help_text=_('Audio name'))
+
     audio_file = models.FileField(upload_to='audio-books/',
                                   verbose_name=_('Audiobook file'),
                                   help_text=_('Audiobook file'))
@@ -432,6 +433,7 @@ class AudioBook(models.Model):
     def audiofile(self):
         return f'<audio controls><source src="{self.audiofile_name()}" type="audio/mpeg"></audio>'
 
+    # todo: test this method
     def delete(self, using=None, keep_parents=False):
         if self.audio_file.name != '':
             try:
@@ -571,16 +573,12 @@ class Songs(models.Model):
                 'song_file': self.song_file.url.replace('/media/songs/', ''),
                 }
 
-    # @mark_safe
-    # def audi_song(self):
-    #     return f'<audio controls><source src="{settings.SONGS_STATIC_SERVER}{self.song_file.url}" type="audio/mpeg"></audio>'
-
     @mark_safe
     def audi_song(self):
         return f'<audio controls><source src="{self.song_file.url}" type="audio/mpeg"></audio>'
 
     def delete(self, using=None, keep_parents=False):
-        print(self, self.song_file.name)
+
         if self.song_file.name != '':
             try:
                 os.remove(os.path.join(settings.MEDIA_ROOT, self.song_file.name))

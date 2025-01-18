@@ -21,18 +21,17 @@ let songs: string
 
 if (process.env.NODE_ENV === 'development') {
     let server = 'localhost'
-    api = `http://${server}:8000/api/v1/`
-    audioBook = `http://${server}:8100/media/`
-    songs = `http://${server}:8100/media/songs/`
+    api = `http://${server}/api/v1/`
+    audioBook = `http://${server}/media/audio-books/`
+    songs = `http://${server}/media/songs/`
 
 } else {
     api = 'https://kjlc.karaites.org/api/v1/'
-    audioBook = 'https://kjlc.karaites.org/media/'
+    audioBook = 'https://kjlc.karaites.org/media/audio-books/'
     songs = 'https://kjlc.karaites.org/media/songs/'
 }
-// api = 'http://dev.karaites.org/api/v1/'
-// audioBook = 'http://localhost:8100/media/'
-// songs = 'http://localhost:8100/media/songs/'
+
+
 export const apiUrl = api
 export const audioBooksUrl = audioBook
 export const songsUrl = songs
