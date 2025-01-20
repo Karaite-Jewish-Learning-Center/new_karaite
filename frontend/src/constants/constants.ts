@@ -14,27 +14,10 @@ interface stringNumber {
     readonly [index: string]: number
 }
 
-let api: string
-let audioBook: string
-let songs: string
-
-
-if (process.env.NODE_ENV === 'development') {
-    let server = 'localhost'
-    api = `http://${server}/api/v1/`
-    audioBook = `http://${server}/media/audio-books/`
-    songs = `http://${server}/media/songs/`
-
-} else {
-    api = 'https://kjlc.karaites.org/api/v1/'
-    audioBook = 'https://kjlc.karaites.org/media/audio-books/'
-    songs = 'https://kjlc.karaites.org/media/songs/'
-}
-
-
-export const apiUrl = api
-export const audioBooksUrl = audioBook
-export const songsUrl = songs
+const domain = 'kjlc.karaites.org'
+export const  apiUrl =  `https://${domain}/api/v1/`
+export const audioBooksUrl = `https://${domain}/media/audio-books/`
+export const  songsUrl = `https://${domain}/media/songs/`
 
 // audio position in book data, see models.py
 export const AUDIO = 11
