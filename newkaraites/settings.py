@@ -74,18 +74,19 @@ TEMPLATES = [
     },
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT'),
+    }
+}
+DATABASES['default']['SSLMODE'] = 'require'
+
 WSGI_APPLICATION = 'newkaraites.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 
 # local dev environment
 if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
@@ -93,44 +94,14 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
     ALLOWED_HOSTS = ['*']
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DB_NAME'),
-            'USER': os.environ.get('DB_USER'),
-            'PASSWORD': os.environ.get('DB_PASSWORD'),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT'),
-        }
-    }
-    AUDIO_BOOKS_STATIC_SERVER = 'http://localhost:8100'
-    SONGS_STATIC_SERVER = 'http://localhost:8100'
-    DATABASES['default']['SSLMODE'] = 'require'
 
 # server dev environment
 elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125', 'dev.karaites.org', 'localhost:8100', '127.0.0.1']
+    ALLOWED_HOSTS = ['161.35.130.125', 'localhost:8000', '127.0.0.1']
     THUMBNAIL_DEBUG = DEBUG
 
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:8100",
-    ]
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'dev_test',
-            'USER': 'doadmin',
-            'PASSWORD': os.environ.get('DEV'),
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
-    AUDIO_BOOKS_STATIC_SERVER = 'http://dev.karaites.org'
-    SONGS_STATIC_SERVER = 'http://dev.karaites.org'
-    DATABASES['default']['SSLMODE'] = 'require'
 
     sys.stdout.write('DEV ENVIRONMENT')
 # server production environment
@@ -139,22 +110,6 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'PRO':
     DEBUG = False
     ALLOWED_HOSTS = ['161.35.130.125', 'kjlc.karaites.org', 'localhost', '127.0.0.1']
     THUMBNAIL_DEBUG = DEBUG
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'OPTIONS': {
-                'options': '-c search_path=production'
-            },
-            'NAME': 'karaites_test',
-            'USER': 'production',
-            'PASSWORD': os.environ['PRO'],
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
-    AUDIO_BOOKS_STATIC_SERVER = 'https://kjlc.karaites.org'
-    SONGS_STATIC_SERVER = 'https://kjlc.karaites.org'
     sys.stdout.write('PRODUCTION ENVIRONMENT')
 else:
     sys.stdout.write('NO ENVIRONMENT FOUND')
@@ -223,4 +178,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
 ]
