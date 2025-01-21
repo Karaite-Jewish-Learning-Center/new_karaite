@@ -8,6 +8,8 @@ data_experimental
 
 data_karaites
 
+static
+
 docs
 
 exported
@@ -19,4 +21,3 @@ Search_resources
 SQL
 
 tests
-

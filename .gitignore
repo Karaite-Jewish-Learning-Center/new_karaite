@@ -18,6 +18,7 @@ db
 
 var-17
 
+static
 static-django
 
 .pytest_cache
