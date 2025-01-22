@@ -27,4 +27,4 @@ static-django
 karaites/management/book_dumps/
 
 frontend/node_modules
-!/.env
+.env
