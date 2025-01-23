@@ -1,4 +1,4 @@
-import {makeAutoObservable, observable, toJS} from "mobx"
+import {makeAutoObservable, observable} from "mobx"
 
 
 const ENGLISH = 0

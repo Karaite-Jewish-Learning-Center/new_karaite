@@ -45,38 +45,25 @@ services:
     depends_on:
       - postgres
 
-
-  nginx-proxy:
-    image: nginx:latest
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./docker-config/nginx/nginx_development.conf:/etc/nginx/conf.d/default.conf
-      - ./static:/app/static:ro
-      - ./media:/app/media:ro
-      - ./scripts/certs:/etc/nginx/certs:ro
-    env_file:
-      - .env
-
   frontend:
     build:
       context: ./frontend
       dockerfile: DockerFile.dev
     volumes:
       - ./frontend:/app
-      - /app/node_modules  
+      - /app/node_modules
+      - ./docker-config/certs:/app/certs
     ports:
       - "3000:3000"
     environment:
       - WATCHPACK_POLLING=true  # Enables file watching in Docker
-      - REACT_APP_API_URL=http://localhost:8000  # Point to your Django backend
+      - HOST=0.0.0.0 # Allow the dev server to bind to containers
+      - REACT_APP_API_URL=https://kjlc.karaites.org
     profiles:
       - development
     depends_on:
-      - backend
-      - frontend
+      - postgres
+
 
   # Development-only services
   nginx-proxy:
@@ -89,9 +76,13 @@ services:
       - ./docker-config/nginx/nginx_development.conf:/etc/nginx/conf.d/default.conf
       - ./static:/app/static:ro
       - ./media:/app/media:ro
-      - ./scripts/certs:/etc/nginx/certs:ro
+      - ./docker-config/certs:/etc/nginx/certs:ro
     env_file:
       - .env
+    depends_on:
+      - postgres
+      - backend
+    restart: always
 
   # Production-only services
   nginx-proxy-prod:
@@ -112,6 +103,11 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     env_file:
       - .env
+    depends_on:
+      - postgres
+      - backend
+    restart: always
+
 
   letsencrypt:
     image: nginxproxy/acme-companion

@@ -94,14 +94,18 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
     ALLOWED_HOSTS = ['*']
+    sys.stdout.write('LOCAL ENVIRONMENT')
 
 # server dev environment
 elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125', 'localhost:8000', '127.0.0.1']
+    ALLOWED_HOSTS = ['161.35.130.125',
+                     'localhost:8000',
+                     'localhost:3000',
+                     '127.0.0.1',
+                     "kjlc.karaites.org"]
     THUMBNAIL_DEBUG = DEBUG
-
 
     sys.stdout.write('DEV ENVIRONMENT')
 # server production environment
@@ -182,4 +186,5 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
+    "http://localhost:3000",
 ]

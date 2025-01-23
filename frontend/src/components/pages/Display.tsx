@@ -23,7 +23,7 @@ const Display = () => {
 
                     <p className={classes.text}>
 
-                        The Karaite Jews of America welcomes you to our new platform: The Karaite Jewish Learning
+                        The Karaite Jews of America  welcomes you to our new platform: The Karaite Jewish Learning
                         Center.
                         Our goal is to bring all Karaite literature online. Equally as important, however, we want to
                         help
