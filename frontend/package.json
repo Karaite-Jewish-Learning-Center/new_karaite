@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "dependencies": {
         "@babel/plugin-proposal-decorators": "^7.16.4",
+        "@craco/craco": "^7.1.0",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "@material-ui/core": "^4.11.3",
@@ -15,6 +16,7 @@
         "@types/react-router-dom": "^5.3.3",
         "axios": "^0.21.1",
         "console-feed": "^3.2.2",
+        "dotenv": "^16.4.7",
         "gematriya": "^2.0.0",
         "global": "^4.4.0",
         "howler": "^2.2.3",
@@ -43,13 +45,13 @@
         "serve": "^13.0.2",
         "tss-react": "^4.4.2",
         "typescript": "^4.5.2",
-        "web-vitals": "^1.0.1",
-        "dotenv": "^16.4.7"
+        "web-vitals": "^1.0.1"
     },
     "license": "BSD-3-Clause",
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "craco start",
+        "build": "craco build",
+        "test": "craco test",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
