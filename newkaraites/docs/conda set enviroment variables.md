@@ -1,1 +1,0 @@
-conda env config vars set CONDA_DEFAULT_ENV="LOCAL"

@@ -1,0 +1,13 @@
+python 3.11.10
+
+# install on conda with
+```bash
+$ conda activate kjoa
+
+$ conda create -n python3110 python=3.11.10
+
+$ python
+Python 3.11.10 (main, Oct  3 2024, 02:26:51) [Clang 14.0.6 ] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> quit()
+```

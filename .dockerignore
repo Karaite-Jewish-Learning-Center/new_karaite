@@ -1,0 +1,16 @@
+database_upgrade
+node_modules
+data
+data_experimental
+data_karaites
+static
+docs
+exported
+audioProject
+Search_resources
+SQL
+tests
+/karaites/media/*
+/English_resources/*
+/Hebrew_resources/*
+__pycache__

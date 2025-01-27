@@ -1,0 +1,612 @@
+# @name get first level of bible books
+GET http://localhost:8000/api/v1/get-first-level/
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("Tanakh"), "Response body does not contain 'Tanakh'");
+        client.assert(responseBody.hasOwnProperty("Halakhah"), "Response body does not contain 'Halakhah'");
+        client.assert(responseBody.hasOwnProperty("Liturgy"), "Response body does not contain 'Liturgy'");
+        // test if values are the right types
+        client.assert(Array.isArray(responseBody['Tanakh']), "Tanakh is not an array");
+        client.assert(Array.isArray(responseBody['Halakhah']), "Halakhah is not an array");
+        client.assert(Array.isArray(responseBody['Liturgy']), "Liturgy is not an array");
+    });
+%}
+
+<> 2024-09-30T191253.200.json
+
+###
+
+// @name audio books
+//GET http://localhost:8000/api/v1/audio-book/23211/
+//ccept: application/json
+
+# @name karaites book
+GET http://localhost:8000/api/v1/get-karaites-book-chapter/Adderet Eliyahu/1/0/
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody[1].hasOwnProperty("book_id"), "Response body does not contain 'book_id'");
+        client.assert(responseBody[1].hasOwnProperty("book_first_level"), "Response body does not contain 'book_first_level'");
+        client.assert(responseBody[1].hasOwnProperty("book_language"), "Response body does not contain 'book_language'");
+        client.assert(responseBody[1].hasOwnProperty("book_classification"), "Response body does not contain 'book_classification'");
+        client.assert(responseBody[1].hasOwnProperty("author"), "Response body does not contain 'author'");
+        client.assert(responseBody[1].hasOwnProperty("book_title_en"), "Response body does not contain 'book_title_en'");
+        client.assert(responseBody[1].hasOwnProperty("book_title_he"), "Response body does not contain 'book_title_he'");
+        client.assert(responseBody[1].hasOwnProperty("table_book"), "Response body does not contain 'table_book'");
+        client.assert(responseBody[1].hasOwnProperty("columns"), "Response body does not contain 'columns'");
+        client.assert(responseBody[1].hasOwnProperty("columns_order"), "Response body does not contain 'columns_order'");
+        client.assert(responseBody[1].hasOwnProperty("toc_columns"), "Response body does not contain 'toc_columns'");
+        client.assert(responseBody[1].hasOwnProperty("toc"), "Response body does not contain 'toc'");
+        client.assert(responseBody[1].hasOwnProperty("intro"), "Response body does not contain 'intro'");
+        client.assert(responseBody[1].hasOwnProperty("direction"), "Response body does not contain 'direction'");
+        client.assert(responseBody[1].hasOwnProperty("remove_class"), "Response body does not contain 'remove_class'");
+        client.assert(responseBody[1].hasOwnProperty("remove_tags"), "Response body does not contain 'remove_tags'");
+        client.assert(responseBody[1].hasOwnProperty("multi_tables"), "Response body does not contain 'multi_tables'");
+        client.assert(responseBody[1].hasOwnProperty("songs_list"), "Response body does not contain 'songs_list'");
+        client.assert(responseBody[1].hasOwnProperty("buy_link"), "Response body does not contain 'buy_link'");
+        client.assert(responseBody[1].hasOwnProperty("index_lag"), "Response body does not contain 'index_lag'");
+        client.assert(responseBody[1].hasOwnProperty("better_book"), "Response body does not contain 'better_book'");
+        client.assert(responseBody[1].hasOwnProperty("occasion"), "Response body does not contain 'occasion'");
+        client.assert(responseBody[1].hasOwnProperty("display"), "Response body does not contain 'display'");
+
+        // test if values are the right types
+        client.assert(typeof responseBody[1]['book_id'] === "number", "book_id is not a number");
+        client.assert(typeof responseBody[1]['book_first_level'] === "string", "book_first_level is not a string");
+        client.assert(typeof responseBody[1]['book_language'] === "string", "book_language is not a string");
+        client.assert(typeof responseBody[1]['book_classification'] === "string", "book_classification is not a string");
+        client.assert(typeof responseBody[1]['author'] === "string", "author is not a string");
+        client.assert(typeof responseBody[1]['book_title_en'] === "string", "book_title_en is not a string");
+        client.assert(typeof responseBody[1]['book_title_he'] === "string", "book_title_he is not a string");
+        client.assert(typeof responseBody[1]['table_book'] === "boolean", "table_book is not a boolean");
+        client.assert(typeof responseBody[1]['columns'] === "number", "columns is not a number");
+        client.assert(typeof responseBody[1]['columns_order'] === "string", "columns_order is not a string");
+        client.assert(typeof responseBody[1]['toc_columns'] === "string", "toc_columns is not a string");
+        client.assert(Array.isArray(responseBody[1]['toc']), "toc is not an array");
+        client.assert(typeof responseBody[1]['intro'] === "string", "intro is not a string");
+        client.assert(typeof responseBody[1]['direction'] === "string", "direction is not a string");
+        client.assert(typeof responseBody[1]['remove_class'] === "string", "remove_class is not a string");
+        client.assert(typeof responseBody[1]['remove_tags'] === "string", "remove_tags is not a string");
+        client.assert(typeof responseBody[1]['multi_tables'] === "boolean", "multi_tables is not a boolean");
+        client.assert(Array.isArray(responseBody[1]['songs_list']), "songs_list is not an array");
+        client.assert(typeof responseBody[1]['buy_link'] === "string", "buy_link is not a string");
+        client.assert(typeof responseBody[1]['index_lag'] === "boolean", "index_lag is not a boolean");
+        client.assert(typeof responseBody[1]['better_book'] === "boolean", "better_book is not a boolean");
+        client.assert(responseBody[1]['occasion'] === null, "occasion is not null");
+        client.assert(typeof responseBody[1]['display'] === "string", "display is not a string");
+    });
+%}
+
+###
+
+// DEPRECATED ?
+// get karaites book details
+// GET http://localhost:8000/api/v1/get-karaites-book-details/
+
+###
+# @name TOC valid book name
+GET http://localhost:8000/api/v1/get-karaites-book-toc/Adderet%20Eliyahu/
+Accept: application/json
+
+> {%
+    client.test("Valid book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+    });
+%}
+
+###
+# @name TOC missing book name
+GET http://localhost:8000/api/v1/get-karaites-book-toc/
+Accept: application/json
+
+> {%
+    client.test("Missing book name", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message === "Need a book name.", "Expected message 'Need a book name.', but got " + responseBody.message);
+    });
+%}
+
+###
+# @name TOC non-existent book name
+GET http://localhost:8000/api/v1/get-karaites-book-toc/NonExistentBook/
+Accept: application/json
+
+> {%
+    client.test("Non-existent book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody) && responseBody.length === 0, "Expected an empty array, but got " + JSON.stringify(responseBody));
+    });
+%}
+
+###
+# @name get karaites book TOC
+GET http://localhost:8000/api/v1/get-karaites-book-toc/Adderet Eliyahu/
+
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody), "Response body is not an array");
+        client.assert(Array.isArray(responseBody[0]), "First element is not an array");
+        client.assert(Array.isArray(responseBody[1]), "Second element is not an array");
+        // test if values are the right types
+        client.assert(typeof responseBody[0][0] === "string", "First element's first value is not a string");
+        client.assert(typeof responseBody[1][0] === "string", "Second element's first value is not a string");
+        client.assert(typeof responseBody[0][1] === "string", "First element's second value is not a string");
+        client.assert(typeof responseBody[1][1] === "string", "Second element's second value is not a string");
+        client.assert(typeof responseBody[0][2] === "number", "First element's third value is not a number");
+        client.assert(typeof responseBody[1][2] === "number", "Second element's third value is not a number");
+    });
+
+%}
+
+###
+# @name get karaistes books by level
+GET http://localhost:8000/api/v1/get-karaites-books-by-level/Poetry/
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody[1].hasOwnProperty("book_id"), "Response body does not contain 'book_id'");
+        client.assert(responseBody[1].hasOwnProperty("book_first_level"), "Response body does not contain 'book_first_level'");
+        client.assert(responseBody[1].hasOwnProperty("book_language"), "Response body does not contain 'book_language'");
+        client.assert(responseBody[1].hasOwnProperty("book_classification"), "Response body does not contain 'book_classification'");
+        client.assert(responseBody[1].hasOwnProperty("author"), "Response body does not contain 'author'");
+        client.assert(responseBody[1].hasOwnProperty("book_title_en"), "Response body does not contain 'book_title_en'");
+        client.assert(responseBody[1].hasOwnProperty("book_title_he"), "Response body does not contain 'book_title_he'");
+        client.assert(responseBody[1].hasOwnProperty("table_book"), "Response body does not contain 'table_book'");
+        client.assert(responseBody[1].hasOwnProperty("columns"), "Response body does not contain 'columns'");
+        client.assert(responseBody[1].hasOwnProperty("columns_order"), "Response body does not contain 'columns_order'");
+        client.assert(responseBody[1].hasOwnProperty("toc_columns"), "Response body does not contain 'toc_columns'");
+        client.assert(responseBody[1].hasOwnProperty("toc"), "Response body does not contain 'toc'");
+        client.assert(responseBody[1].hasOwnProperty("intro"), "Response body does not contain 'intro'");
+        client.assert(responseBody[1].hasOwnProperty("direction"), "Response body does not contain 'direction'");
+        client.assert(responseBody[1].hasOwnProperty("remove_class"), "Response body does not contain 'remove_class'");
+        client.assert(responseBody[1].hasOwnProperty("remove_tags"), "Response body does not contain 'remove_tags'");
+        client.assert(responseBody[1].hasOwnProperty("multi_tables"), "Response body does not contain 'multi_tables'");
+        client.assert(responseBody[1].hasOwnProperty("songs_list"), "Response body does not contain 'songs_list'");
+        client.assert(responseBody[1].hasOwnProperty("buy_link"), "Response body does not contain 'buy_link'");
+        client.assert(responseBody[1].hasOwnProperty("index_lag"), "Response body does not contain 'index_lag'");
+        client.assert(responseBody[1].hasOwnProperty("better_book"), "Response body does not contain 'better_book'");
+        client.assert(responseBody[1].hasOwnProperty("occasion"), "Response body does not contain 'occasion'");
+        client.assert(responseBody[1].hasOwnProperty("display"), "Response body does not contain 'display'");
+
+        // test if values are the right types
+        client.assert(typeof responseBody[1]['book_id'] === "number", "book_id is not a number");
+        client.assert(typeof responseBody[1]['book_first_level'] === "string", "book_first_level is not a string");
+        client.assert(responseBody[1]['book_first_level'] === "Poetry", "book_first_level is not a 'Poetry'");
+        client.assert(typeof responseBody[1]['book_language'] === "string", "book_language is not a string");
+        client.assert(typeof responseBody[1]['book_classification'] === "string", "book_classification is not a string");
+        client.assert(typeof responseBody[1]['author'] === "string", "author is not a string");
+        client.assert(typeof responseBody[1]['book_title_en'] === "string", "book_title_en is not a string");
+        client.assert(typeof responseBody[1]['book_title_he'] === "string", "book_title_he is not a string");
+        client.assert(typeof responseBody[1]['table_book'] === "boolean", "table_book is not a boolean");
+        client.assert(typeof responseBody[1]['columns'] === "number", "columns is not a number");
+        client.assert(typeof responseBody[1]['columns_order'] === "string", "columns_order is not a string");
+        client.assert(typeof responseBody[1]['toc_columns'] === "string", "toc_columns is not a string");
+        client.assert(Array.isArray(responseBody[1]['toc']), "toc is not an array");
+        client.assert(typeof responseBody[1]['intro'] === "string", "intro is not a string");
+        client.assert(typeof responseBody[1]['direction'] === "string", "direction is not a string");
+        client.assert(typeof responseBody[1]['remove_class'] === "string", "remove_class is not a string");
+        client.assert(typeof responseBody[1]['remove_tags'] === "string", "remove_tags is not a string");
+        client.assert(typeof responseBody[1]['multi_tables'] === "boolean", "multi_tables is not a boolean");
+        client.assert(Array.isArray(responseBody[1]['songs_list']), "songs_list is not an array");
+        client.assert(typeof responseBody[1]['buy_link'] === "string", "buy_link is not a string");
+        client.assert(typeof responseBody[1]['index_lag'] === "boolean", "index_lag is not a boolean");
+        client.assert(typeof responseBody[1]['better_book'] === "boolean", "better_book is not a boolean");
+        client.assert(responseBody[1]['occasion'] === null, "occasion is not null");
+        client.assert(typeof responseBody[1]['display'] === "string", "display is not a string");
+    });
+%}
+
+###
+# @name get karaites book by level and classificaation
+GET http://localhost:8000/api/v1/get-karaites-books-by-level-and-classification/Poetry/
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody[1].hasOwnProperty("book_id"), "Response body does not contain 'book_id'");
+        client.assert(responseBody[1].hasOwnProperty("book_first_level"), "Response body does not contain 'book_first_level'");
+        client.assert(responseBody[1].hasOwnProperty("book_language"), "Response body does not contain 'book_language'");
+        client.assert(responseBody[1].hasOwnProperty("book_classification"), "Response body does not contain 'book_classification'");
+        client.assert(responseBody[1].hasOwnProperty("author"), "Response body does not contain 'author'");
+        client.assert(responseBody[1].hasOwnProperty("book_title_en"), "Response body does not contain 'book_title_en'");
+        client.assert(responseBody[1].hasOwnProperty("book_title_he"), "Response body does not contain 'book_title_he'");
+        client.assert(responseBody[1].hasOwnProperty("table_book"), "Response body does not contain 'table_book'");
+        client.assert(responseBody[1].hasOwnProperty("columns"), "Response body does not contain 'columns'");
+        client.assert(responseBody[1].hasOwnProperty("columns_order"), "Response body does not contain 'columns_order'");
+        client.assert(responseBody[1].hasOwnProperty("toc_columns"), "Response body does not contain 'toc_columns'");
+        client.assert(responseBody[1].hasOwnProperty("toc"), "Response body does not contain 'toc'");
+        client.assert(responseBody[1].hasOwnProperty("intro"), "Response body does not contain 'intro'");
+        client.assert(responseBody[1].hasOwnProperty("direction"), "Response body does not contain 'direction'");
+        client.assert(responseBody[1].hasOwnProperty("remove_class"), "Response body does not contain 'remove_class'");
+        client.assert(responseBody[1].hasOwnProperty("remove_tags"), "Response body does not contain 'remove_tags'");
+        client.assert(responseBody[1].hasOwnProperty("multi_tables"), "Response body does not contain 'multi_tables'");
+        client.assert(responseBody[1].hasOwnProperty("songs_list"), "Response body does not contain 'songs_list'");
+        client.assert(responseBody[1].hasOwnProperty("buy_link"), "Response body does not contain 'buy_link'");
+        client.assert(responseBody[1].hasOwnProperty("index_lag"), "Response body does not contain 'index_lag'");
+        client.assert(responseBody[1].hasOwnProperty("better_book"), "Response body does not contain 'better_book'");
+        client.assert(responseBody[1].hasOwnProperty("occasion"), "Response body does not contain 'occasion'");
+        client.assert(responseBody[1].hasOwnProperty("display"), "Response body does not contain 'display'");
+
+        // test if values are the right types
+        client.assert(typeof responseBody[1]['book_id'] === "number", "book_id is not a number");
+        client.assert(typeof responseBody[1]['book_first_level'] === "string", "book_first_level is not a string");
+        client.assert(responseBody[1]['book_first_level'] === "Poetry", "book_first_level is not a 'Poetry'");
+        client.assert(typeof responseBody[1]['book_language'] === "string", "book_language is not a string");
+        client.assert(typeof responseBody[1]['book_classification'] === "string", "book_classification is not a string");
+        client.assert(typeof responseBody[1]['author'] === "string", "author is not a string");
+        client.assert(typeof responseBody[1]['book_title_en'] === "string", "book_title_en is not a string");
+        client.assert(typeof responseBody[1]['book_title_he'] === "string", "book_title_he is not a string");
+        client.assert(typeof responseBody[1]['table_book'] === "boolean", "table_book is not a boolean");
+        client.assert(typeof responseBody[1]['columns'] === "number", "columns is not a number");
+        client.assert(typeof responseBody[1]['columns_order'] === "string", "columns_order is not a string");
+        client.assert(typeof responseBody[1]['toc_columns'] === "string", "toc_columns is not a string");
+        client.assert(Array.isArray(responseBody[1]['toc']), "toc is not an array");
+        client.assert(typeof responseBody[1]['intro'] === "string", "intro is not a string");
+        client.assert(typeof responseBody[1]['direction'] === "string", "direction is not a string");
+        client.assert(typeof responseBody[1]['remove_class'] === "string", "remove_class is not a string");
+        client.assert(typeof responseBody[1]['remove_tags'] === "string", "remove_tags is not a string");
+        client.assert(typeof responseBody[1]['multi_tables'] === "boolean", "multi_tables is not a boolean");
+        client.assert(Array.isArray(responseBody[1]['songs_list']), "songs_list is not an array");
+        client.assert(typeof responseBody[1]['buy_link'] === "string", "buy_link is not a string");
+        client.assert(typeof responseBody[1]['index_lag'] === "boolean", "index_lag is not a boolean");
+        client.assert(typeof responseBody[1]['better_book'] === "boolean", "better_book is not a boolean");
+        client.assert(responseBody[1]['occasion'] === null, "occasion is not null");
+        client.assert(typeof responseBody[1]['display'] === "string", "display is not a string");
+    });
+%}
+
+###
+# @name ValidBookName
+GET http://localhost:8000/api/v1/get-karaites-book-toc/Adderet%20Eliyahu/
+Accept: application/json
+
+> {%
+    client.test("Valid book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+    });
+%}
+
+###
+# @name MissingBookName
+GET http://localhost:8000/api/v1/get-karaites-book-toc/
+Accept: application/json
+
+> {%
+    client.test("Missing book name", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message === "Need a book name.", "Expected message 'Need a book name.', but got " + responseBody.message);
+    });
+%}
+
+###
+# @name NonExistentBookName
+GET http://localhost:8000/api/v1/get-karaites-book-toc/NonExistentBook/
+Accept: application/json
+
+> {%
+    client.test("Non-existent book name", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody) && responseBody.length === 0, "Expected an empty array, but got " + JSON.stringify(responseBody));
+    });
+%}
+
+###
+# @name ValidBookChapterVerse
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/0/
+Accept: application/json
+
+> {%
+    client.test("Valid book chapter verse", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+    });
+%}
+
+###
+# @name Missing Book Name Chapter Verse
+GET http://localhost:8000/api/v1/get-book-chapter/Nn/1/0/
+Accept: application/json
+
+> {%
+    client.test("Missing book name for chapter and verse", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message === "Can't find book: Nn", "Expected message 'Can\'t find book: Nn', but got " + responseBody.message);
+    });
+%}
+
+###
+# @name Invalid Book Chapter
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/999/0/
+Accept: application/json
+
+> {%
+    client.test("Invalid book chapter", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+        client.assert(responseBody.message.includes("Invalid chapter for the book"), "Expected invalid chapter message, but got " + responseBody.message);
+    });
+%}
+
+###
+# @name Invalid Book Verse
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/999/
+Accept: application/json
+
+#> {%
+#    client.test("Invalid book verse", function () {
+#        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+#        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+#        client.assert(responseBody.status === "false", "Expected status to be 'false', but got " + responseBody.status);
+#        client.assert(responseBody.message.includes("Invalid verse for the book"), "Expected invalid verse message, but got " + responseBody.message);
+#    });
+#%}
+###
+# @name get book chapter
+GET http://localhost:8000/api/v1/get-book-chapter/Genesis/1/0/
+
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("chapter"), "Response body does not contain 'chapter'");
+        client.assert(responseBody.hasOwnProperty("book"), "Response body does not contain 'book'");
+        client.assert(responseBody['book'].hasOwnProperty("book_title_en"), "Response body does not contain 'book_title_en");
+        client.assert(responseBody['book'].hasOwnProperty("book_title_he"), "Response body does not contain 'book_title_he");
+        client.assert(responseBody['book'].hasOwnProperty("chapters"), "Response body does not contain 'chapter'");
+        client.assert(responseBody['book'].hasOwnProperty("verses"), "Response body does not contain 'verses'");
+        client.assert(responseBody['book'].hasOwnProperty("total_verses"), "Response body does not contain 'total_verses'");
+        client.assert(responseBody['book'].hasOwnProperty("audio_books"), "Response body does not contain 'audio_books'");
+        // test if values are the right types
+        client.assert(typeof responseBody['book']['book_title_en'] === "string", "book_title_en is not a string");
+        client.assert(typeof responseBody['book']['book_title_he'] === "string", "book_title_he is not a string");
+        client.assert(typeof responseBody['book']['chapters'] === "number", "chapters is not a number");
+        client.assert(Array.isArray(responseBody['book']['verses']), "chapters is not an array");
+        client.assert(typeof responseBody['book']['total_verses'] === "number", "total_verses is not a number");
+        client.assert(typeof responseBody['book']['audio_books'] === "object", "audio_books is not an object");
+
+    });
+
+%}
+
+<> 2024-09-30T191253-1.200.json
+
+###
+
+# @name get bible references
+GET http://localhost:8000/api/v1/get-bible-references/(Isaiah 54:11)/
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody), "Response body is not an array");
+        client.assert(responseBody[0].hasOwnProperty("bible_ref_he"), "Response body does not contain 'bible_ref_he'");
+        client.assert(responseBody[0].hasOwnProperty("bible_ref_en"), "Response body does not contain 'bible_ref_en'");
+        client.assert(responseBody[0].hasOwnProperty("book_classification"), "Response body does not contain 'book_classification'");
+        client.assert(responseBody[0].hasOwnProperty("book_first_level"), "Response body does not contain 'book_first_level'");
+        client.assert(responseBody[0].hasOwnProperty("book_first_level_he"), "Response body does not contain 'book_first_level_he'");
+        // test if values are the right types
+        client.assert(typeof responseBody[0]['bible_ref_he'] === "string", "bible_ref_he is not a string");
+        client.assert(typeof responseBody[0]['bible_ref_en'] === "string", "bible_ref_en is not a string");
+        client.assert(typeof responseBody[0]['book_classification'] === "string", "book_classification is not a string");
+        client.assert(typeof responseBody[0]['book_first_level'] === "string", "book_first_level is not a string");
+        client.assert(typeof responseBody[0]['book_first_level_he'] === "string", "book_first_level_he is not a string");
+    });
+%}
+
+###
+# @ name get bible references with law
+GET http://localhost:8000/api/v1/get-bible-references/(Isaiah 54:11)/Polemics/
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(Array.isArray(responseBody), "Response body is not an array");
+        client.assert(responseBody[0].hasOwnProperty("bible_ref_he"), "Response body does not contain 'bible_ref_he'");
+        client.assert(responseBody[0].hasOwnProperty("bible_ref_en"), "Response body does not contain 'bible_ref_en'");
+        client.assert(responseBody[0].hasOwnProperty("book_classification"), "Response body does not contain 'book_classification'");
+        client.assert(responseBody[0].hasOwnProperty("book_first_level"), "Response body does not contain 'book_first_level'");
+        client.assert(responseBody[0].hasOwnProperty("book_first_level_he"), "Response body does not contain 'book_first_level_he'");
+        // test if values are the right types
+        client.assert(typeof responseBody[0]['bible_ref_he'] === "string", "bible_ref_he is not a string");
+        client.assert(typeof responseBody[0]['bible_ref_en'] === "string", "bible_ref_en is not a string");
+        client.assert(typeof responseBody[0]['book_classification'] === "string", "book_classification is not a string");
+        client.assert(typeof responseBody[0]['book_first_level'] === "string", "book_first_level is not a string");
+        client.assert(typeof responseBody[0]['book_first_level_he'] === "string", "book_first_level_he is not a string");
+        // test that the classification is correct
+        client.assert(responseBody[0]['book_classification'] === "Polemic", "book_classification is not 'Polemic'");
+        client.assert(responseBody[0]['book_first_level'] === "Polemics", "book_first_level is not 'Polemics'");
+    });
+%}
+
+###
+
+# @name get bible references halakhah
+GET http://localhost:8000/api/v1/get-references/Adderet Eliyahu/1/1/
+
+> {%
+    client.test("Request fails with error 400", function () {
+        client.assert(response.status === 400, "Expected status code 400, but got " + response.status);
+
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("status"), "Response body does not contain 'status'");
+        client.assert(responseBody.hasOwnProperty("message"), "Response body does not contain 'message'");
+        client.assert(responseBody['status'] === "false", "status is not false");
+        client.assert(responseBody['message'] === "Can't find book: Adderet Eliyahu", "message is not 'Can't find book: Adderet Eliyahu'");
+    });
+
+%}
+
+
+###
+
+# @name get bible references halakhah
+GET http://localhost:8000/api/v1/get-references/(Isaiah 54:11)/1/1/
+
+###
+# @name better format
+GET http://localhost:8000/api/v1/book/Addir Venora/
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody['details'].hasOwnProperty("book_id"), "Response body does not contain 'book_id'");
+        client.assert(responseBody['details'].hasOwnProperty("book_first_level"), "Response body does not contain 'book_first_level'");
+        client.assert(responseBody['details'].hasOwnProperty("book_language"), "Response body does not contain 'book_language'");
+        client.assert(responseBody['details'].hasOwnProperty("book_classification"), "Response body does not contain 'book_classification'");
+        client.assert(responseBody['details'].hasOwnProperty("author"), "Response body does not contain 'author'");
+        client.assert(responseBody['details'].hasOwnProperty("book_title_en"), "Response body does not contain 'book_title_en'");
+        client.assert(responseBody['details'].hasOwnProperty("book_title_he"), "Response body does not contain 'book_title_he'");
+        client.assert(responseBody['details'].hasOwnProperty("table_book"), "Response body does not contain 'table_book'");
+        client.assert(responseBody['details'].hasOwnProperty("columns"), "Response body does not contain 'columns'");
+        client.assert(responseBody['details'].hasOwnProperty("columns_order"), "Response body does not contain 'columns_order'");
+        client.assert(responseBody['details'].hasOwnProperty("toc_columns"), "Response body does not contain 'toc_columns'");
+        client.assert(responseBody['details'].hasOwnProperty("toc"), "Response body does not contain 'toc'");
+        client.assert(responseBody['details'].hasOwnProperty("intro"), "Response body does not contain 'intro'");
+        client.assert(responseBody['details'].hasOwnProperty("direction"), "Response body does not contain 'direction'");
+        client.assert(responseBody['details'].hasOwnProperty("remove_class"), "Response body does not contain 'remove_class'");
+        client.assert(responseBody['details'].hasOwnProperty("remove_tags"), "Response body does not contain 'remove_tags'");
+        client.assert(responseBody['details'].hasOwnProperty("multi_tables"), "Response body does not contain 'multi_tables'");
+        client.assert(responseBody['details'].hasOwnProperty("songs_list"), "Response body does not contain 'songs_list'");
+        client.assert(responseBody['details'].hasOwnProperty("buy_link"), "Response body does not contain 'buy_link'");
+        client.assert(responseBody['details'].hasOwnProperty("index_lag"), "Response body does not contain 'index_lag'");
+        client.assert(responseBody['details'].hasOwnProperty("better_book"), "Response body does not contain 'better_book'");
+        client.assert(responseBody['details'].hasOwnProperty("occasion"), "Response body does not contain 'occasion'");
+        client.assert(responseBody['details'].hasOwnProperty("display"), "Response body does not contain 'display'");
+
+        // test if values are the right types
+        client.assert(typeof responseBody['details']['book_id'] === "number", "book_id is not a number");
+        client.assert(typeof responseBody['details']['book_first_level'] === "string", "book_first_level is not a string");
+        client.assert(typeof responseBody['details']['book_language'] === "string", "book_language is not a string");
+        client.assert(typeof responseBody['details']['book_classification'] === "string", "book_classification is not a string");
+        client.assert(typeof responseBody['details']['author'] === "string", "author is not a string");
+        client.assert(typeof responseBody['details']['book_title_en'] === "string", "book_title_en is not a string");
+        client.assert(typeof responseBody['details']['book_title_he'] === "string", "book_title_he is not a string");
+        client.assert(typeof responseBody['details']['table_book'] === "boolean", "table_book is not a boolean");
+        client.assert(typeof responseBody['details']['columns'] === "number", "columns is not a number");
+        client.assert(typeof responseBody['details']['columns_order'] === "string", "columns_order is not a string");
+        client.assert(typeof responseBody['details']['toc_columns'] === "string", "toc_columns is not a string");
+        client.assert(Array.isArray(responseBody['details']['toc']), "toc is not an array");
+        client.assert(typeof responseBody['details']['intro'] === "string", "intro is not a string");
+        client.assert(typeof responseBody['details']['direction'] === "string", "direction is not a string");
+        client.assert(typeof responseBody['details']['remove_class'] === "string", "remove_class is not a string");
+        client.assert(typeof responseBody['details']['remove_tags'] === "string", "remove_tags is not a string");
+        client.assert(typeof responseBody['details']['multi_tables'] === "boolean", "multi_tables is not a boolean");
+        client.assert(Array.isArray(responseBody['details']['songs_list']), "songs_list is not an array");
+        client.assert(typeof responseBody['details']['buy_link'] === "string", "buy_link is not a string");
+        client.assert(typeof responseBody['details']['index_lag'] === "boolean", "index_lag is not a boolean");
+        client.assert(typeof responseBody['details']['better_book'] === "boolean", "better_book is not a boolean");
+        client.assert(typeof responseBody['details']['occasion'] === "string", "occasion is not null");
+        client.assert(typeof responseBody['details']['display'] === "string", "display is not a string");
+
+        // test that songs have and id song title and song file
+        if (responseBody['details']['songs_list'].length > 0) {
+            client.assert(responseBody['details']['songs_list'][0].hasOwnProperty("id"), "songs_list[0] does not contain 'id'");
+            client.assert(responseBody['details']['songs_list'][0].hasOwnProperty("song_title"), "songs_list[0] does not contain 'song_title'");
+            client.assert(responseBody['details']['songs_list'][0].hasOwnProperty("song_file"), "songs_list[0] does not contain 'song_file'");
+            client.assert(typeof responseBody['details']['songs_list'][0]['id'] === "number", "id is not a number");
+            client.assert(typeof responseBody['details']['songs_list'][0]['song_title'] === "string", "song_title is not a string");
+            client.assert(typeof responseBody['details']['songs_list'][0]['song_file'] === "string", "song_file is not a string");
+        }
+
+        // test that book_data  is an array of arrays
+        client.assert(Array.isArray(responseBody['book_data']), "data is not an array");
+        client.assert(Array.isArray(responseBody['book_data'][0]), "data[0] is not an array");
+        client.assert(Array.isArray(responseBody['book_data'][1]), "data[1] is not an array");
+        // that the first array has at least 14 elements
+        client.assert(responseBody['book_data'][0].length >= 14, "data[0] has less than 14 elements");
+
+    });
+%}
+
+###
+# @search no page is define should return the same as page 1
+GET http://localhost:8000/api/v1/search/god/
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("data"), "Response body does not contain 'data'");
+        client.assert(responseBody.hasOwnProperty("page"), "Response body does not contain 'page'");
+        client.assert(responseBody.hasOwnProperty("did_you_mean"), "Response body does not contain 'did_you_mean'");
+        client.assert(responseBody.hasOwnProperty("search_term"), "Response body does not contain 'search_term'");
+        // test if values are the right types
+        client.assert(Array.isArray(responseBody['data']), "data is not an array");
+        client.assert(typeof responseBody['page'] === "number", "page is not a number");
+        client.assert(typeof responseBody['did_you_mean'] === "boolean", "did_you_mean is not a boolean");
+        client.assert(typeof responseBody['search_term'] === "string", "search_term is not a string");
+    });
+
+%}
+
+<> 2024-09-30T191253-2.200.json
+
+
+
+###
+# @search
+GET http://localhost:8000/api/v1/search/god/1/
+accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("data"), "Response body does not contain 'data'");
+        client.assert(responseBody.hasOwnProperty("page"), "Response body does not contain 'page'");
+        client.assert(responseBody.hasOwnProperty("did_you_mean"), "Response body does not contain 'did_you_mean'");
+        client.assert(responseBody.hasOwnProperty("search_term"), "Response body does not contain 'search_term'");
+        // test if values are the right types
+        client.assert(Array.isArray(responseBody['data']), "data is not an array");
+        client.assert(typeof responseBody['page'] === "number", "page is not a number");
+        client.assert(typeof responseBody['did_you_mean'] === "boolean", "did_you_mean is not a boolean");
+        client.assert(typeof responseBody['search_term'] === "string", "search_term is not a string");
+    });
+
+%}
+
+<> 2024-09-30T191253-3.200.json
+
+###
+
+# @name test
+GET http://localhost:8000/api/v1/test/
+Accept: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Expected status code 200, but got " + response.status);
+        let responseBody = typeof response.body === "string" ? JSON.parse(response.body) : response.body;
+        client.assert(responseBody.hasOwnProperty("ok"), "Response body does not contain 'ok'");
+        client.assert(responseBody['ok'], "ok is not true");
+    });
+
+%}
+
+<> 2024-09-30T191253-4.200.json
+
+
