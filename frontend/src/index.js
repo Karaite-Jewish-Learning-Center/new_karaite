@@ -6,6 +6,24 @@ import {BrowserRouter} from 'react-router-dom'
 // import reportWebVitals from './reportWebVitals'
 //import "react-simple-keyboard/build/css/index.css";
 
+// Add debounce function
+const debounce = (fn, delay) => {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+};
+
+// Add error handler for ResizeObserver
+const reportError = console.error;
+console.error = (...args) => {
+  if (/ResizeObserver/.test(args[0])) {
+    return;
+  }
+  reportError(...args);
+};
+
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>

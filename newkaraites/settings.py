@@ -102,7 +102,7 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
 elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125',
+    ALLOWED_HOSTS = ['164.92.72.106',
                      'localhost:8000',
                      'localhost:3000',
                      '127.0.0.1',
@@ -114,7 +114,12 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 elif os.environ.get('CONDA_DEFAULT_ENV') == 'PRO':
 
     DEBUG = False
-    ALLOWED_HOSTS = ['161.35.130.125', 'kjlc.karaites.org', 'localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['164.92.72.106',
+                     'kjlc.karaites.org',
+                     'localhost',
+                     '127.0.0.1',
+                     "kjoa-backend-1"
+                     ]
     THUMBNAIL_DEBUG = DEBUG
     sys.stdout.write('PRODUCTION ENVIRONMENT')
 else:

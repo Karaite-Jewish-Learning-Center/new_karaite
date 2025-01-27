@@ -14,10 +14,22 @@ interface stringNumber {
     readonly [index: string]: number
 }
 
-const domain = 'kjlc.karaites.org'
-export const  apiUrl =  `https://${domain}/api/v1/`
-export const audioBooksUrl = `https://${domain}/media/audio-books/`
-export const  songsUrl = `https://${domain}/media/songs/`
+let domain: string
+let secure: string
+
+if (process.env.NODE_ENV === 'development') {
+    domain = 'localhost:8000'
+    secure = 'http'
+} else {
+    domain = 'kjlc.karaites.org'
+    secure = 'https'
+}
+
+console.log('domain', domain)
+
+export const  apiUrl =  `${secure}://${domain}/api/v1/`
+export const audioBooksUrl = `${secure}://${domain}/media/audio-books/`
+export const  songsUrl = `${secure}://${domain}/media/songs/`
 
 // audio position in book data, see models.py
 export const AUDIO = 11

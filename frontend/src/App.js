@@ -25,14 +25,14 @@ import Track from "./components/analytics/track";
 
 
 
-ReactGA.initialize("G-1JBZBTTCSV", {
-    // debug: true,
-    titleCase: false,
-    siteSpeedSampleRate: 100,
-    gaOptions: {
-        userId: 100
-    }
-});
+// ReactGA.initialize("G-1JBZBTTCSV", {
+//     // debug: true,
+//     titleCase: false,
+//     siteSpeedSampleRate: 100,
+//     gaOptions: {
+//         userId: 100
+//     }
+// });
 
 const NullComponent = () => null;
 
@@ -59,7 +59,7 @@ function App() {
                                 <BrowserRouter>
                                     <MyAppBar/>
                                     <Message/>
-                                    <LoadingSpin/>
+                                    {/*<LoadingSpin/>*/}
                                     <Track/>
                                     <Switch>
 
