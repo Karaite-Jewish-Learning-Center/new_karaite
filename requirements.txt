@@ -1,7 +1,7 @@
 #python==3.8
 Ipython
 Django==4.1
-psycopg2-binary
+psycopg2-binary==2.9.10
 django-cors-headers
 pytest-django
 pytest
@@ -24,3 +24,4 @@ jellyfish
 txtai~=4.3.1
 wget
 django-tinymce==4.1.0
+whitenoise==6.7.0

@@ -6,8 +6,7 @@ services:
     env_file:
       - .env
     volumes:
-      - postgres_data:/var/lib/postgresql/data/pgdata
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./var-17:/var/lib/postgresql/data/pgdata
       - ./docker-config/postgresql/pg_hba.conf:/var/lib/postgresql/data/pgdata/pg_hba.conf
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
@@ -29,7 +28,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: newkaraites/Dockerfile.prod
+      dockerfile: newkaraites/Dockerfile
     command: >
       bash -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn newkaraites.wsgi:application --bind 0.0.0.0:8000"
     restart: always
@@ -53,23 +52,33 @@ services:
       - postgres
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=PathPrefix(`/api`) || PathPrefix(`/admin`) || PathPrefix(`/static`) || PathPrefix(`/media`)"
-      - "traefik.http.services.backend.loadbalancer.server.port=8000"
-      - "traefik.http.routers.backend.tls=true"
-      - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.backend-api.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend-admin.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/admin`)"
+      - "traefik.http.routers.backend-static.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/static`)"
+      - "traefik.http.routers.backend-media.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/media`)"
+      - "traefik.http.routers.backend-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.backend-admin.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.backend-static.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.backend-media.tls.certresolver=letsencrypt"
+      - "traefik.http.services.backend-service.loadbalancer.server.port=8000"
+      - "traefik.http.middlewares.backend-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.middlewares.backend-headers.headers.customrequestheaders.X-Forwarded-Host=kjlc.karaites.org"
+      - "traefik.http.routers.backend-api.middlewares=backend-headers"
+      - "traefik.http.routers.backend-admin.middlewares=backend-headers"
+      - "traefik.http.routers.backend-static.middlewares=backend-headers"
+      - "traefik.http.routers.backend-media.middlewares=backend-headers"
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-    environment:
-      - NODE_ENV=production
+    volumes:
+      - ./frontend/build:/var/www
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
-      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.rule=Host(`kjlc.karaites.org`)"
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
     depends_on:
       - backend
 
@@ -77,23 +86,23 @@ services:
     image: traefik:v2.10
     container_name: traefik-prod
     command:
-      - "--api.insecure=false"
+      - "--log.level=DEBUG"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL}"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/acme.json"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=your@email.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/acme.json"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - acme_data:/acme.json
+      - ./letsencrypt/acme.json:/acme.json
     env_file:
       - .env
     depends_on:
@@ -104,4 +113,8 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
-  acme_data: 
+  acme_data:
+
+networks:
+  web:
+    driver: bridge 
