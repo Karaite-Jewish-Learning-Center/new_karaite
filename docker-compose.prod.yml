@@ -65,8 +65,8 @@ services:
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
+      context: .
+      dockerfile: frontendDockerfile.prod
     volumes:
       - ./frontend/build:/var/www
     labels:
