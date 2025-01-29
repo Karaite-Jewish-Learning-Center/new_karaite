@@ -178,7 +178,7 @@ if DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 CORS_ORIGIN_ALLOW_ALL = True
 
-STATIC_URL = '/static/'
+STATIC_URL = '/backend-static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
