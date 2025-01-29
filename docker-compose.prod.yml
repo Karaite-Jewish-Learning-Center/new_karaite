@@ -69,6 +69,7 @@ services:
       dockerfile: Dockerfile-frontend-prod.yml
     volumes:
       - ./frontend/build:/var/www
+      - ./serve.json:/app/serve.json
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`dev.karaites.org`)"
