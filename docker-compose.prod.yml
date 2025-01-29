@@ -54,14 +54,11 @@ services:
       - postgres
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`dev.karaites.org`) && PathPrefix(`/api`, `/admin`, `/static`, `/media`)"
+      - "traefik.http.routers.backend.rule=Host(`dev.karaites.org`) && PathPrefix(`/api`, `/admin`, `/backend-static`, `/media`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls=true"
       - "traefik.http.routers.backend.tls.certresolver=myresolver"
-      - "traefik.http.routers.backend-http.rule=Host(`dev.karaites.org`)"
-      - "traefik.http.routers.backend-http.entrypoints=web"
-      - "traefik.http.routers.backend-http.middlewares=redirect-to-https"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.backend.priority=2"
 
   frontend:
     build:
@@ -78,6 +75,13 @@ services:
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
       - "traefik.http.routers.frontend.priority=1"
+      - "traefik.http.middlewares.frontend-headers.headers.customResponseHeaders.Content-Type=application/javascript"
+      - "traefik.http.routers.frontend.middlewares=frontend-headers"
+      - "traefik.http.routers.frontend-static.rule=Host(`dev.karaites.org`) && PathPrefix(`/static`)"
+      - "traefik.http.routers.frontend-static.entrypoints=websecure"
+      - "traefik.http.routers.frontend-static.tls=true"
+      - "traefik.http.routers.frontend-static.service=frontend"
+      - "traefik.http.routers.frontend-static.priority=2"
     depends_on:
       - backend
 
