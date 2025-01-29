@@ -54,21 +54,14 @@ services:
       - postgres
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend-api.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.backend-admin.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/admin`)"
-      - "traefik.http.routers.backend-static.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/static`)"
-      - "traefik.http.routers.backend-media.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/media`)"
-      - "traefik.http.routers.backend-api.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.backend-admin.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.backend-static.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.backend-media.tls.certresolver=letsencrypt"
-      - "traefik.http.services.backend-service.loadbalancer.server.port=8000"
-      - "traefik.http.middlewares.backend-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.http.middlewares.backend-headers.headers.customrequestheaders.X-Forwarded-Host=kjlc.karaites.org"
-      - "traefik.http.routers.backend-api.middlewares=backend-headers"
-      - "traefik.http.routers.backend-admin.middlewares=backend-headers"
-      - "traefik.http.routers.backend-static.middlewares=backend-headers"
-      - "traefik.http.routers.backend-media.middlewares=backend-headers"
+      - "traefik.http.routers.backend.rule=Host(`dev.karaites.org`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls=true"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+      - "traefik.http.routers.backend-http.rule=Host(`dev.karaites.org`)"
+      - "traefik.http.routers.backend-http.entrypoints=web"
+      - "traefik.http.routers.backend-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   frontend:
     build:
@@ -78,7 +71,7 @@ services:
       - ./frontend/build:/var/www
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`kjlc.karaites.org`)"
+      - "traefik.http.routers.frontend.rule=Host(`dev.karaites.org`)"
       - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"
     depends_on:
@@ -88,17 +81,15 @@ services:
     image: traefik:v2.10
     container_name: traefik-prod
     command:
-      - "--log.level=DEBUG"
+      - "--log.level=INFO"
+      - "--api.insecure=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.letsencrypt.acme.email=your@email.com"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/acme.json"
-      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=your-sandro.fernandes@softrent.com.br"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
       - "443:443"
