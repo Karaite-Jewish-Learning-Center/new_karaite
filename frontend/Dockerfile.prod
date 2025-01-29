@@ -1,9 +1,0 @@
-# Build stage only
-FROM node:20-alpine as build
-
-WORKDIR /app
-COPY .frontend/package*.json ./
-RUN yarn install
-COPY . .
-RUN ["yarn", "build"]
-
