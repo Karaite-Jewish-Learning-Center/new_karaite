@@ -11,9 +11,9 @@ RUN yarn build
 FROM node:20-alpine
 WORKDIR /app
 COPY --from=build /app/build ./build
-COPY serve.json .
+COPY serve.json /app/serve.json
 RUN yarn global add serve
 EXPOSE 3000
 
-# Make sure serve.json is being used
-CMD ["serve", "-s", "build", "-l", "3000", "--cors", "--config", "./serve.json"]
+# Remove --config flag since serve will find it automatically in the working directory
+CMD ["serve", "-s", "build", "-l", "3000", "--cors", "--debug"]
