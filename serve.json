@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "**/*.js",
+      "source": "static/**/*.js",
       "headers": [
         {
           "key": "Content-Type",
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "source": "**/*.css",
+      "source": "static/**/*.css",
       "headers": [
         {
           "key": "Content-Type",
@@ -28,8 +28,17 @@
       ]
     }
   ],
-  "public": "build",
   "rewrites": [
-    { "source": "/**", "destination": "/index.html" }
-  ]
+    {
+      "source": "/static/**",
+      "destination": "/static/:splat"
+    },
+    {
+      "source": "/**",
+      "destination": "/index.html"
+    }
+  ],
+  "public": "build",
+  "cleanUrls": false,
+  "trailingSlash": false
 } 
