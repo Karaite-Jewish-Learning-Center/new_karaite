@@ -7,13 +7,13 @@ RUN yarn install
 COPY frontend/ .
 RUN yarn build
 
-# Use a lightweight server to serve static files
+# Use Node.js with Express to serve static files
 FROM node:20-alpine
 WORKDIR /app
 COPY --from=build /app/build ./build
-COPY serve.json /app/serve.json
-RUN yarn global add serve
+COPY server.js ./
+RUN yarn add express
+
 EXPOSE 3000
 
-# Remove --config flag since serve will find it automatically in the working directory
-CMD ["serve", "-s", "build", "-l", "3000", "--cors", "--debug"]
+CMD ["node", "server.js"]
