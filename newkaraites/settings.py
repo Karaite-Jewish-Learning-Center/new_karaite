@@ -107,7 +107,9 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
                      'localhost:8000',
                      'localhost:3000',
                      '127.0.0.1',
-                     "kjlc.karaites.org"]
+                     "kjlc.karaites.org",
+                     "dev.karaites.org"]
+    
     THUMBNAIL_DEBUG = DEBUG
 
     sys.stdout.write('DEV ENVIRONMENT')
@@ -119,7 +121,8 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'PRO':
                      'kjlc.karaites.org',
                      'localhost',
                      '127.0.0.1',
-                     "kjoa-backend-1"
+                     "kjoa-backend-1",
+                     'dev.kjlc.karaites.org'
                      ]
     THUMBNAIL_DEBUG = DEBUG
     sys.stdout.write('PRODUCTION ENVIRONMENT')
