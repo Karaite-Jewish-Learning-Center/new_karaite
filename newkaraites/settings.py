@@ -96,7 +96,13 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
 
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['164.92.72.106',
+                     'localhost:8000',
+                     'localhost:3000',
+                     '127.0.0.1',
+                     "kjlc.karaites.org",
+                     "dev.karaites.org"]
+
     sys.stdout.write('LOCAL ENVIRONMENT')
 
 # server dev environment
@@ -118,11 +124,11 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'PRO':
 
     DEBUG = False
     ALLOWED_HOSTS = ['164.92.72.106',
-                     'kjlc.karaites.org',
                      'localhost',
                      '127.0.0.1',
                      "kjoa-backend-1",
-                     'dev.kjlc.karaites.org'
+                     'kjlc.karaites.org',
+                     'dev.karaites.org'
                      ]
     THUMBNAIL_DEBUG = DEBUG
     sys.stdout.write('PRODUCTION ENVIRONMENT')
@@ -178,9 +184,9 @@ if DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 CORS_ORIGIN_ALLOW_ALL = True
 
-STATIC_URL = '/backend-static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'backend-static')
+STATIC_URL = '/backend-static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -21,8 +21,8 @@ if (process.env.NODE_ENV === 'development') {
     domain = 'localhost:8000'
     secure = 'http'
 } else {
-    domain = 'dev.karaites.org'
-    secure = 'https'
+    domain = 'kjlc.karaites.org'
+    secure = 'http'
 }
 
 console.log('domain', domain)
