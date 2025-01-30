@@ -1,7 +1,6 @@
-## Run docker compose with production profile
+## Run docker compose
 
-docker-compose --profile production up -d
+docker compose down
+docker system prune -f
+docker compose -f docker-compose.yml up -d --build
 
-## Run docker compose with development profile
-
-docker-compose --profile development up -d
