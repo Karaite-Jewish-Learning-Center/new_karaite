@@ -2,6 +2,13 @@ services:
   postgres:
     image: postgres:17
     container_name: postgres
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
     restart: always
     env_file:
       - .env
@@ -21,6 +28,12 @@ services:
     build:
       context: .
       dockerfile: dockerfile-backend.yml
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
     command: >
       bash -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn newkaraites.wsgi:application --bind 0.0.0.0:8000"
     restart: always
@@ -47,6 +60,12 @@ services:
   nginx-proxy:
     image: nginx:latest
     container_name: nginx-proxy
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     networks:
       - default
     ports:
