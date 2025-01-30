@@ -122,7 +122,7 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 # server production environment
 elif os.environ.get('CONDA_DEFAULT_ENV') == 'PRO':
 
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = ['164.92.72.106',
                      'localhost',
                      '127.0.0.1',
@@ -208,3 +208,21 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost:3000",
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': '/app/django-error.log',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'WARNING',
+    },
+}
