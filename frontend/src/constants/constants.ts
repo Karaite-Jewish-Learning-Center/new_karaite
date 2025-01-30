@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
     domain = 'localhost:8000'
     secure = 'http'
 } else {
-    domain = 'kjlc.karaites.org'
+    domain = 'dev.karaites.org'
     secure = 'http'
 }
 
