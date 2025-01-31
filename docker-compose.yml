@@ -63,7 +63,11 @@ services:
         reservations:
           memory: 512M
     command: >
-      bash -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn newkaraites.wsgi:application --bind 0.0.0.0:8000"
+      bash -c "
+        python manage.py collectstatic --noinput --clear &&
+        python manage.py migrate &&
+        gunicorn newkaraites.wsgi:application --bind 0.0.0.0:8000
+      "
     restart: always
     volumes:
       - ./backend-static:/app/backend-static
@@ -73,8 +77,8 @@ services:
     env_file:
       - .env
     environment:
-      - DEBUG=1
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+      - DEBUG=0
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,dev.karaites.org
       - SECRET_KEY=${SECRET_KEY}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
