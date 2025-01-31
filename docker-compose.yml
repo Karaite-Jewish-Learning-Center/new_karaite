@@ -86,7 +86,7 @@ services:
       - postgres
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`your-domain.com`) && PathPrefix(`/api`, `/admin`)"
+      - "traefik.http.routers.backend.rule=Host(`dev.karaites.org`) && PathPrefix(`/api`, `/admin`)"
       - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
 
