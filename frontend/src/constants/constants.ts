@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
     secure = 'http'
 } else {
     domain = 'dev.karaites.org'
-    secure = 'http'
+    secure = 'https'
 }
 
 console.log('domain', domain)
