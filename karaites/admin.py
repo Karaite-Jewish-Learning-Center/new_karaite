@@ -30,10 +30,10 @@ class KAdmin(admin.ModelAdmin):
 
     class Media:
         css = {
-            'all': (f'../{STATIC}/css/admin.css',
-                    f'../{STATIC}/css/tooltip.css',)
+            'all': (f'{STATIC}css/admin.css',
+                    f'{STATIC}css/tooltip.css',)
         }
-        js = (f'../{STATIC}/js/toggleFilterPanel.js',)
+        js = (f'{STATIC}js/toggleFilterPanel.js',)
 
 
 # actions
