@@ -18,7 +18,7 @@ db
 
 var-17
 
-/static/
+
 static-django
 
 .pytest_cache
@@ -30,4 +30,4 @@ frontend/node_modules
 .env
 .DS_Store
 /letsencrypt/
-/backend-static/
+/backend-static/!/karaites/media/
