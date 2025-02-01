@@ -5,9 +5,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256M
+          memory: 512M
         reservations:
-          memory: 128M
+          memory: 256M
     command:
       - "--api.insecure=false"
       - "--providers.docker=true"
@@ -30,13 +30,6 @@ services:
   postgres:
     image: postgres:17
     container_name: postgres
-    deploy:
-      resources:
-        limits:
-          memory: 1G
-        reservations:
-          memory: 512M
-
     restart: always
     env_file:
       - .env
