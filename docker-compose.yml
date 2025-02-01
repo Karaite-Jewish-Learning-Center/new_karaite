@@ -43,10 +43,11 @@ services:
     networks:
       - default
     healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:8080/ping"]
-      interval: 10s
-      timeout: 2s
+      test: ["CMD", "wget", "--no-check-certificate", "-q", "--spider", "http://localhost:8080/ping"]
+      interval: 30s
+      timeout: 5s
       retries: 3
+      start_period: 30s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.catch-all.rule=HostRegexp(`{host:.+}`)"
