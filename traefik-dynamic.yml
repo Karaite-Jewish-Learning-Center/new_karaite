@@ -1,0 +1,22 @@
+http:
+  middlewares:
+    default-host:
+      errors:
+        status:
+          - "404"
+        service: "error"
+        query: "/{status}.html"
+
+  routers:
+    catch-all:
+      rule: "HostRegexp(`{host:.+}`)"
+      priority: 1
+      service: error
+      middlewares:
+        - default-host
+
+  services:
+    error:
+      loadBalancer:
+        servers:
+          - url: "http://localhost" 
