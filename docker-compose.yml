@@ -36,6 +36,7 @@ services:
     volumes:
       - ./var-17:/var/lib/postgresql/data/pgdata
       - ./docker-config/postgresql/pg_hba.conf:/var/lib/postgresql/data/pgdata/pg_hba.conf
+      - ./docker-config/postgresql/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
 
