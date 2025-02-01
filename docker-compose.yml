@@ -58,6 +58,12 @@ services:
     image: postgres:17
     container_name: postgres
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
     env_file:
       - .env
     volumes:
