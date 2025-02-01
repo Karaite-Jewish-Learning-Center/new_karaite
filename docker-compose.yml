@@ -19,12 +19,13 @@ services:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.websecure.http.middlewares=default-host@file"
-      - "--entrypoints.web.http.middlewares=default-host@file"
+      - "--entrypoints.websecure.http.middlewares=block-domains@file,default-host@file"
+      - "--entrypoints.web.http.middlewares=block-domains@file,default-host@file"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencrypt.acme.email=sandro.fernandes@softrent.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--serverstransport.insecureskipverify=true"
     ports:
       - target: 80
         published: 80
