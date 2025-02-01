@@ -19,6 +19,8 @@ services:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.middlewares=default-host@file"
+      - "--entrypoints.web.http.middlewares=default-host@file"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencrypt.acme.email=sandro.fernandes@softrent.com"
@@ -36,6 +38,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik-dynamic.yml:/traefik-dynamic.yml"
     networks:
       - default
     healthcheck:
@@ -43,6 +46,12 @@ services:
       interval: 10s
       timeout: 2s
       retries: 3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.catch-all.rule=HostRegexp(`{host:.+}`)"
+      - "traefik.http.routers.catch-all.priority=1"
+      - "traefik.http.routers.catch-all.middlewares=default-errors"
+      - "traefik.http.middlewares.default-errors.errors.status=404"
 
   postgres:
     image: postgres:17
