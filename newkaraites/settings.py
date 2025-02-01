@@ -85,6 +85,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT'),
+        'CONN_MAX_AGE': 600,  # Keep connections for 10 minutes
     }
 }
 DATABASES['default']['SSLMODE'] = 'require'
