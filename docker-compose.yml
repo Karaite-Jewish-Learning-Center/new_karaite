@@ -93,6 +93,24 @@ services:
     depends_on:
       - postgres
 
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
   backend:
     build:
       context: .
@@ -129,6 +147,7 @@ services:
       - CONDA_DEFAULT_ENV=${CONDA_DEFAULT_ENV}
     depends_on:
       - postgres
+      - redis
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`dev.karaites.org`) && PathPrefix(`/api`, `/admin`)"
@@ -177,6 +196,7 @@ services:
 volumes:
   vhost:
   html:
+  redis-data:
 
 networks:
   default:
