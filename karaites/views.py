@@ -104,6 +104,8 @@ def book_chapter_verse(request, *args, **kwargs):
         return JsonResponse({'references': references}, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 def karaites_book_details(request, *args, **kwargs):
     """ get all books details"""
     response = []
@@ -152,12 +154,12 @@ def karaites_book_as_array(request, *args, **kwargs):
     return JsonResponse([book_paragraphs, book_details], safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetFirstLevel(View):
     """ Get first level classification"""
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         """ Get first level Law"""
         level = OrderedDict()
@@ -169,10 +171,11 @@ class GetFirstLevel(View):
         return JsonResponse(level, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetByLevel(View):
+
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
         if level is None:
@@ -183,10 +186,11 @@ class GetByLevel(View):
         return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level), safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetByLevelAndByClassification(View):
+
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
         if level is None:
@@ -203,31 +207,31 @@ class GetByLevelAndByClassification(View):
         return JsonResponse(books, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class BooksPresentation(View):
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request):
         return JsonResponse(Organization.get_list_of_books(), safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetBookAsArrayJson(View):
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
         return book_chapter_verse(request, *args, **kwargs)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class AudioBook(View):
     """ get audiobook start end times """
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         book_id = kwargs.get(' ', None)
         if book_id is None:
@@ -238,30 +242,30 @@ class AudioBook(View):
         return JsonResponse(audio, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetKaraitesAllBookDetails(View):
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'allBookDetails'})
         return karaites_book_details(request, *args, **kwargs)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetKaraitesBookAsArray(View):
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         return karaites_book_as_array(request, *args, **kwargs)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetTOC(View):
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         book = kwargs.get('book', None)
         if book is None:
@@ -277,13 +281,13 @@ class GetTOC(View):
         return JsonResponse(result, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetHalakhah(View):
     """
     """
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'halakhah'})
         return book_chapter_verse(request, *args, **kwargs)
@@ -299,14 +303,14 @@ class Test(View):
         return JsonResponse({"ok": True})
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class Book(View):
     """
        Get the liturgy book
     """
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         book_name = kwargs.get('book', None)
         if book_name is None:
@@ -358,14 +362,14 @@ SQL_PLAIN += """WHERE query @@ text_en_search  """
 SQL_PLAIN += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class Search(View):
     """
         search based on the autocomplete selected
     """
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
 
         search = kwargs.get('search', None)
@@ -435,14 +439,14 @@ class Search(View):
                                  'search_term': similar_search}, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetBiBleReferences(View):
     """
         search by bible reference
     """
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         reference = kwargs.get('reference', None)
         if reference is None:
@@ -453,14 +457,14 @@ class GetBiBleReferences(View):
         return JsonResponse(references, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
 class GetBiBleReferencesByLaw(View):
     """
         search by bible reference and classification
     """
 
     @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         reference = kwargs.get('reference', None)
         law = kwargs.get('law', None)
