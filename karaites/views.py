@@ -1,9 +1,12 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
 from ftlangdetect import detect
 from collections import OrderedDict
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 from django.views.generic import View
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 
 from .utils import (slug_back,
                     normalize_search,
@@ -44,6 +47,8 @@ def get_book_id(book):
     return book_title
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 def book_chapter_verse(request, *args, **kwargs):
     """ Do Book chapter and verse check"""
     book = kwargs.get('book', None)
@@ -108,6 +113,8 @@ def karaites_book_details(request, *args, **kwargs):
     return JsonResponse({'details': response}, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 def karaites_book_as_array(request, *args, **kwargs):
     """ Load Karaites book"""
 
@@ -145,6 +152,8 @@ def karaites_book_as_array(request, *args, **kwargs):
     return JsonResponse([book_paragraphs, book_details], safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetFirstLevel(View):
     """ Get first level classification"""
 
@@ -160,6 +169,8 @@ class GetFirstLevel(View):
         return JsonResponse(level, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetByLevel(View):
     @staticmethod
     def get(request, *args, **kwargs):
@@ -172,6 +183,8 @@ class GetByLevel(View):
         return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level), safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetByLevelAndByClassification(View):
     @staticmethod
     def get(request, *args, **kwargs):
@@ -190,6 +203,8 @@ class GetByLevelAndByClassification(View):
         return JsonResponse(books, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class BooksPresentation(View):
 
     @staticmethod
@@ -197,6 +212,8 @@ class BooksPresentation(View):
         return JsonResponse(Organization.get_list_of_books(), safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetBookAsArrayJson(View):
 
     @staticmethod
@@ -205,6 +222,8 @@ class GetBookAsArrayJson(View):
         return book_chapter_verse(request, *args, **kwargs)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class AudioBook(View):
     """ get audiobook start end times """
 
@@ -219,6 +238,8 @@ class AudioBook(View):
         return JsonResponse(audio, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetKaraitesAllBookDetails(View):
 
     @staticmethod
@@ -227,6 +248,8 @@ class GetKaraitesAllBookDetails(View):
         return karaites_book_details(request, *args, **kwargs)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetKaraitesBookAsArray(View):
 
     @staticmethod
@@ -234,6 +257,8 @@ class GetKaraitesBookAsArray(View):
         return karaites_book_as_array(request, *args, **kwargs)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetTOC(View):
 
     @staticmethod
@@ -252,6 +277,8 @@ class GetTOC(View):
         return JsonResponse(result, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetHalakhah(View):
     """
     """
@@ -272,6 +299,8 @@ class Test(View):
         return JsonResponse({"ok": True})
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class Book(View):
     """
        Get the liturgy book
@@ -329,6 +358,8 @@ SQL_PLAIN += """WHERE query @@ text_en_search  """
 SQL_PLAIN += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class Search(View):
     """
         search based on the autocomplete selected
@@ -404,6 +435,8 @@ class Search(View):
                                  'search_term': similar_search}, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetBiBleReferences(View):
     """
         search by bible reference
@@ -420,6 +453,8 @@ class GetBiBleReferences(View):
         return JsonResponse(references, safe=False)
 
 
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 class GetBiBleReferencesByLaw(View):
     """
         search by bible reference and classification

@@ -237,8 +237,8 @@ CACHES = {
     }
 }
 
-# Cache time to live is 15 minutes
-CACHE_TTL = 60 * 15
+# Cache time to live is 1 day
+CACHE_TTL = 60 * 60 * 24
 
 # Cache session backend
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
