@@ -68,6 +68,30 @@ services:
     expose:
       - 5432
 
+  postgres-backup:
+    image: prodrigestivill/postgres-backup-local
+    container_name: postgres-backup
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    volumes:
+      - ./database-backups:/backups
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - SCHEDULE=@daily                    # Backup every day
+      - BACKUP_KEEP_DAYS=7                 # Keep backups for 7 days
+      - BACKUP_KEEP_WEEKS=4                # Keep weekly backups for 4 weeks
+      - BACKUP_KEEP_MONTHS=6               # Keep monthly backups for 6 months
+      - HEALTHCHECK_PORT=8080
+    depends_on:
+      - postgres
 
   backend:
     build:
