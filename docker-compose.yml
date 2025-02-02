@@ -13,24 +13,16 @@ services:
           memory: 256M
     command:
       - "--log.level=DEBUG"
-      - "--api=true"
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--ping=true"
-      - "--ping.entrypoint=ping"
-      - "--entrypoints.ping.address=:8082"
+      - "--api.insecure=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.websecure.http.middlewares=block-domains@file,default-host@file"
-      - "--entrypoints.web.http.middlewares=block-domains@file,default-host@file"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencrypt.acme.email=sandro.fernandes@softrent.com"
       - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-      - "--serverstransport.insecureskipverify=true"
     ports:
       - target: 80
         published: 80
@@ -40,37 +32,22 @@ services:
         published: 443
         protocol: tcp
         mode: host
-      - "8082:8082"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik-dynamic.yml:/traefik-dynamic.yml"
     networks:
       - default
     healthcheck:
-      test: ["CMD", "wget", "--no-check-certificate", "-q", "--spider", "http://localhost:8082/ping"]
-      interval: 30s
-      timeout: 5s
+      test: ["CMD", "wget", "--spider", "http://localhost:8080/ping"]
+      interval: 10s
+      timeout: 2s
       retries: 3
-      start_period: 30s
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.catch-all.rule=HostRegexp(`{host:.+}`)"
-      - "traefik.http.routers.catch-all.priority=1"
-      - "traefik.http.routers.catch-all.middlewares=default-errors"
-      - "traefik.http.middlewares.default-errors.errors.status=404"
 
   postgres:
     image: postgres:17
     container_name: postgres
     restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-        reservations:
-          memory: 1G
     env_file:
       - .env
     volumes:
@@ -174,5 +151,4 @@ volumes:
 networks:
   default:
     name: nginx1_network
-
 
