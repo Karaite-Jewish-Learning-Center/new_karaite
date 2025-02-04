@@ -97,7 +97,6 @@ services:
       - DB_PORT=${DB_PORT}
       - CONDA_DEFAULT_ENV=${CONDA_DEFAULT_ENV}
     depends_on:
-      - postgres
       - redis
     labels:
       - "traefik.enable=true"
