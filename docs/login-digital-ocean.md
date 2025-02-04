@@ -15,7 +15,7 @@ $ ssh -i ~/.ssh/kjlc production@164.92.72.106
 
 ```bash
 
-$ ssh -i ~/.ssh/kjlc production@159.203.182.223
+$ ssh -i ~/.ssh/kjlc production@137.184.236.140
 
 ```
 
