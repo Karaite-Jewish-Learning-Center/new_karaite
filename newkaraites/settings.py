@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'django_extensions',
     'corsheaders',
-    'karaites',
+    'karaites.apps.KaraitesConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -116,7 +117,7 @@ elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
                      '127.0.0.1',
                      "kjlc.karaites.org",
                      "dev.karaites.org"]
-    
+
     THUMBNAIL_DEBUG = DEBUG
 
     sys.stdout.write('DEV ENVIRONMENT')
@@ -183,7 +184,6 @@ if DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 CORS_ORIGIN_ALLOW_ALL = True
-
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'backend-static')
 STATIC_URL = '/backend-static/'
