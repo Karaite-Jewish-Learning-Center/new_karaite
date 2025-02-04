@@ -126,7 +126,7 @@ services:
   backend:
     build: 
       context: .
-      dockerfile: Dockerfile-backend.yml
+      dockerfile: dockerfile-backend.yml
     deploy:
       resources:
         limits:
