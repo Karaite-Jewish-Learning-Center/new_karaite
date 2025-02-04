@@ -130,7 +130,6 @@ services:
     env_file:
       - .env
     depends_on:
-      - postgres
       - backend
     restart: always
 
@@ -146,7 +145,6 @@ services:
   #     - nginx-proxy
 
 volumes:
-  postgres_data:
   vhost:
   html:
   redis-data:
