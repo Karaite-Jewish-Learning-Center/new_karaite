@@ -13,9 +13,6 @@ import os
 import sys
 from pathlib import Path
 
-from django.conf.global_settings import STATICFILES_DIRS
-from django.utils.translation import gettext_lazy as _
-from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,8 +54,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
+
 
 ROOT_URLCONF = 'newkaraites.urls'
 
@@ -99,6 +97,7 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
     DEBUG = True
     THUMBNAIL_DEBUG = DEBUG
     ALLOWED_HOSTS = ['164.92.72.106',
+                     'localhost',
                      'localhost:8000',
                      'localhost:3000',
                      '127.0.0.1',
@@ -107,11 +106,35 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
 
     sys.stdout.write('LOCAL ENVIRONMENT')
 
+    # Add development-specific settings
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
+
+    # Configure Django Debug Toolbar
+    INTERNAL_IPS = [
+        '127.0.0.1',
+        'localhost',
+    ]
+
+    # Configure CORS for development
+    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOW_CREDENTIALS = True
+
+    # Configure Django to serve static files
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'frontend/build/static'),
+    ]
+
 # server dev environment
 elif os.environ.get('CONDA_DEFAULT_ENV') == 'DEV':
 
     DEBUG = False
     ALLOWED_HOSTS = ['164.92.72.106',
+                     'localhost',
                      'localhost:8000',
                      'localhost:3000',
                      '127.0.0.1',
@@ -160,8 +183,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = (
-    ('en', _('English')),
-    ('he', _('Hebrew'))
+    ('en', 'English'),
+    ('he', 'Hebrew')
 )
 TIME_ZONE = 'UTC'
 

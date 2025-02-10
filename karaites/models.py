@@ -5,11 +5,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .constants import (LANGUAGES,
-                        AUTOCOMPLETE_TYPE,
-                        REF_ERROR_CODE,
-                        VERSE_TABLE)
-
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
@@ -17,6 +12,10 @@ from .validatores.validators import validate_time
 from .utils import (convert_seconds_to_time,
                     convert_time_to_seconds,
                     slug_back)
+from .constants import (LANGUAGES,
+                        AUTOCOMPLETE_TYPE,
+                        REF_ERROR_CODE,
+                        VERSE_TABLE)
 
 VERSE = 4
 HEBREW = 0

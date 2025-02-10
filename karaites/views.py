@@ -1,13 +1,19 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from django.dispatch import receiver
 from ftlangdetect import detect
 from collections import OrderedDict
 from django.utils.translation import gettext as _
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
+from django.core.cache import cache
 from django.views.generic import View
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
-
+from django.utils.decorators import method_decorator
+from django.db.models.signals import post_save, post_delete
+from django.utils.cache import get_cache_key
+from django.core.cache.utils import make_template_fragment_key
+from django.utils import translation
 from .utils import (slug_back,
                     normalize_search,
                     prep_search,
@@ -26,7 +32,7 @@ from .models import (FirstLevel,
                      TableOfContents,
                      KaraitesBookDetails,
                      KaraitesBookAsArray,
-    # LiturgyBook,
+                     # LiturgyBook,
                      AutoComplete,
                      References)
 
@@ -47,8 +53,8 @@ def get_book_id(book):
     return book_title
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
+# @cache_page(settings.CACHE_TTL)
+# @vary_on_cookie
 def book_chapter_verse(request, *args, **kwargs):
     """ Do Book chapter and verse check"""
     book = kwargs.get('book', None)
@@ -104,8 +110,8 @@ def book_chapter_verse(request, *args, **kwargs):
         return JsonResponse({'references': references}, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
+# @cache_page(settings.CACHE_TTL)
+# @vary_on_cookie
 def karaites_book_details(request, *args, **kwargs):
     """ get all books details"""
     response = []
@@ -115,8 +121,8 @@ def karaites_book_details(request, *args, **kwargs):
     return JsonResponse({'details': response}, safe=False)
 
 
-@cache_page(settings.CACHE_TTL)
-@vary_on_cookie
+# @cache_page(settings.CACHE_TTL)
+# @vary_on_cookie
 def karaites_book_as_array(request, *args, **kwargs):
     """ Load Karaites book"""
 
@@ -154,28 +160,63 @@ def karaites_book_as_array(request, *args, **kwargs):
     return JsonResponse([book_paragraphs, book_details], safe=False)
 
 
+CACHE_KEY_PREFIX = 'first_level'
+CACHE_KEYS = set()  # Track all cache keys
+
+
 class GetFirstLevel(View):
     """ Get first level classification"""
 
-    @staticmethod
-    @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
-    def get(request, *args, **kwargs):
+    @method_decorator(cache_page(settings.CACHE_TTL))
+    @method_decorator(vary_on_cookie)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
         """ Get first level Law"""
         level = OrderedDict()
-        for first_level in FirstLevel.objects.all().values_list('first_level',
-                                                                'first_level_he',
-                                                                'break_on_classification',
-                                                                'url').order_by('order'):
+        for first_level in FirstLevel.objects.all().values_list(
+            'first_level', 'first_level_he', 'break_on_classification', 'url'
+        ).order_by('order'):
             level[first_level[3]] = first_level
+
         return JsonResponse(level, safe=False)
+
+
+@receiver(post_save, sender=FirstLevel)
+@receiver(post_delete, sender=FirstLevel)
+def handle_first_level_cache(sender, instance, **kwargs):
+    """Clear all first level related caches when model changes"""
+    if settings.DEBUG:
+        print('first_level cache invalidated')
+        print('kwargs', kwargs)
+        print('sender', sender)
+        print('instance', instance)
+        print('settings.LANGUAGES', settings.LANGUAGES)
+
+    # Create a dummy request object to generate the cache key
+    from django.http import HttpRequest
+    request = HttpRequest()
+    request.path = '/api/v1/get-first-level/'
+    request.META = {
+        'SERVER_NAME': 'localhost',
+        'SERVER_PORT': '8000',
+        'HTTP_HOST': 'localhost:8000',
+    }
+
+    page_key = get_cache_key(request)
+    print('page_key', page_key)
+    if page_key:
+        cache.delete(page_key)
+        # Clear the header cache
+        header_key = f'views.decorators.cache.cache_header..{page_key}'
+        cache.delete(header_key)
 
 
 class GetByLevel(View):
 
     @staticmethod
     @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
         if level is None:
@@ -183,14 +224,14 @@ class GetByLevel(View):
                                       'message': _(f'Missing mandatory parameter level.')},
                                 status=400)
 
-        return JsonResponse(KaraitesBookDetails.get_all_books_by_first_level(level), safe=False)
+        data = KaraitesBookDetails.get_all_books_by_first_level(level)
+        return JsonResponse(data, safe=False)
 
 
 class GetByLevelAndByClassification(View):
 
     @staticmethod
     @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
         if level is None:
@@ -210,8 +251,8 @@ class GetByLevelAndByClassification(View):
 class BooksPresentation(View):
 
     @staticmethod
-    @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
+    # @cache_page(settings.CACHE_TTL)
+    # @vary_on_cookie
     def get(request):
         return JsonResponse(Organization.get_list_of_books(), safe=False)
 
@@ -219,8 +260,8 @@ class BooksPresentation(View):
 class GetBookAsArrayJson(View):
 
     @staticmethod
-    @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
+    # @cache_page(settings.CACHE_TTL)
+    # @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
         return book_chapter_verse(request, *args, **kwargs)
@@ -230,8 +271,8 @@ class AudioBook(View):
     """ get audiobook start end times """
 
     @staticmethod
-    @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
+    # @cache_page(settings.CACHE_TTL)
+    # @vary_on_cookie
     def get(request, *args, **kwargs):
         book_id = kwargs.get(' ', None)
         if book_id is None:
@@ -245,8 +286,8 @@ class AudioBook(View):
 class GetKaraitesAllBookDetails(View):
 
     @staticmethod
-    @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
+    # @cache_page(settings.CACHE_TTL)
+    # @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'allBookDetails'})
         return karaites_book_details(request, *args, **kwargs)
