@@ -7,6 +7,7 @@ try:
 except:
     ENGLISH_DICTIONARY = {}
 
+
 def custom_sql(text, search):
     try:
         with connection.cursor() as cursor:
@@ -57,4 +58,3 @@ def similar_search_en(search):
             did_you_mean = True
 
     return did_you_mean, search
-

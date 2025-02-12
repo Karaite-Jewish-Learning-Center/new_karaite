@@ -160,19 +160,13 @@ def karaites_book_as_array(request, *args, **kwargs):
     return JsonResponse([book_paragraphs, book_details], safe=False)
 
 
-CACHE_KEY_PREFIX = 'first_level'
-CACHE_KEYS = set()  # Track all cache keys
-
-
 class GetFirstLevel(View):
     """ Get first level classification"""
 
-    @method_decorator(cache_page(settings.CACHE_TTL))
-    @method_decorator(vary_on_cookie)
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
+    @staticmethod
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
+    def get(request, *args, **kwargs):
         """ Get first level Law"""
         level = OrderedDict()
         for first_level in FirstLevel.objects.all().values_list(
@@ -183,34 +177,37 @@ class GetFirstLevel(View):
         return JsonResponse(level, safe=False)
 
 
-@receiver(post_save, sender=FirstLevel)
-@receiver(post_delete, sender=FirstLevel)
+# @receiver(post_save)
+# @receiver(post_delete)
 def handle_first_level_cache(sender, instance, **kwargs):
-    """Clear all first level related caches when model changes"""
+    """Clear all caches when model changes,
+       this works because the data almost static, the only changes are
+       made in the admin interface and with django commands.
+       If the data is changed in runtime, we need to find a way to invalidate the cache.
+    """
+
+    # Clear all caches
     if settings.DEBUG:
         print('first_level cache invalidated')
         print('kwargs', kwargs)
         print('sender', sender)
         print('instance', instance)
-        print('settings.LANGUAGES', settings.LANGUAGES)
 
-    # Create a dummy request object to generate the cache key
-    from django.http import HttpRequest
-    request = HttpRequest()
-    request.path = '/api/v1/get-first-level/'
-    request.META = {
-        'SERVER_NAME': 'localhost',
-        'SERVER_PORT': '8000',
-        'HTTP_HOST': 'localhost:8000',
-    }
-
-    page_key = get_cache_key(request)
-    print('page_key', page_key)
-    if page_key:
-        cache.delete(page_key)
-        # Clear the header cache
-        header_key = f'views.decorators.cache.cache_header..{page_key}'
-        cache.delete(header_key)
+    if sender in [FirstLevel,
+                  FullTextSearch,
+                  FullTextSearchHebrew,
+                  InvertedIndex,
+                  Organization,
+                  BookAsArray,
+                  BookAsArrayAudio,
+                  TableOfContents,
+                  KaraitesBookDetails,
+                  KaraitesBookAsArray,
+                  AutoComplete,
+                  References]:
+        # cache.clear()
+        # clear all except django sessions
+        pass
 
 
 class GetByLevel(View):
