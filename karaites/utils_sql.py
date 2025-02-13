@@ -1,5 +1,6 @@
 from django.db import connection
 from .models import EnglishWord
+from .constants import IGNORED_WORDS_RESPONSE
 
 # migrations fallback
 try:
@@ -45,6 +46,8 @@ def similar_search_en(search):
 
     for word in search.split(' '):
         print("Similar Search", word)
+        if word in IGNORED_WORDS_RESPONSE:
+            continue
         # is word misspelled?
         if word in ENGLISH_DICTIONARY:
             continue
@@ -56,5 +59,5 @@ def similar_search_en(search):
         for similar in find_similar_words(word):
             search = search.replace(word, similar[0])
             did_you_mean = True
-
+    print("did_you mean", did_you_mean, search)
     return did_you_mean, search

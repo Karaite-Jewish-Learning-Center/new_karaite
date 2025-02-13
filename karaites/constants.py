@@ -218,6 +218,122 @@ HEBREW_STOP_WORDS = {
 
 }
 
+IGNORED_WORDS_RESPONSE = {
+    "the": {
+        "definition": "The definite article used to specify a particular person, place, or thing.",
+        "message": "Your search term is too common and might not yield useful results. Try searching for specific book titles, authors, or topics instead."
+    },
+    "a": {
+        "definition": "An indefinite article used before words beginning with a consonant sound.",
+        "message": "This word is too general. Try specifying a book title, author, or subject for better results."
+    },
+    "an": {
+        "definition": "An indefinite article used before words beginning with a vowel sound.",
+        "message": "Common words like this don't refine search results well. Try using key terms from the book's title or a specific topic."
+    },
+    "and": {
+        "definition": "A conjunction used to connect words, clauses, or sentences.",
+        "message": "Using 'and' alone won’t narrow down your search. Consider adding a more descriptive keyword."
+    },
+    "but": {
+        "definition": "A conjunction used to introduce a contrast or exception.",
+        "message": "This word alone isn't helpful in searches. Try a more specific term or phrase."
+    },
+    "is": {
+        "definition": "A verb used to describe a state of being.",
+        "message": "This is a very common word and won't yield meaningful results. Try searching for a book title, author, or topic."
+    },
+    "are": {
+        "definition": "A verb used to describe a state of being for plural subjects.",
+        "message": "Common words like this are ignored in search. Try using a more specific query."
+    },
+    "in": {
+        "definition": "A preposition indicating location or inclusion within something.",
+        "message": "This preposition is too common to be useful in a search. Try specifying a book title or author instead."
+    },
+    "of": {
+        "definition": "A preposition used to show belonging or relation.",
+        "message": "Common words like 'of' don’t help refine search results. Try using a more unique term."
+    },
+    "with": {
+        "definition": "A preposition indicating association or possession.",
+        "message": "This word is ignored in search. Try including a book title, author, or topic for better results."
+    },
+    "on": {
+        "definition": "A preposition indicating position or subject matter.",
+        "message": "Common words like 'on' are ignored in search. Consider using a book title or a more specific term."
+    },
+    "at": {
+        "definition": "A preposition indicating location or time.",
+        "message": "This word is too general to improve search results. Try searching with more unique keywords."
+    },
+    "by": {
+        "definition": "A preposition indicating the agent performing an action.",
+        "message": "This preposition is too common for a meaningful search. Try specifying an author's name or book title."
+    },
+    "to": {
+        "definition": "A preposition indicating direction or purpose.",
+        "message": "Short words like 'to' don't refine search results well. Consider adding more descriptive terms."
+    },
+    "for": {
+        "definition": "A preposition indicating purpose or intended recipient.",
+        "message": "Common words like 'for' don't help in search. Try specifying a book title or topic instead."
+    },
+    "from": {
+        "definition": "A preposition indicating the source of something.",
+        "message": "This word alone won’t improve search accuracy. Consider adding an author's name or a subject."
+    },
+    "was": {
+        "definition": "A past tense form of 'to be.'",
+        "message": "Words like 'was' are ignored in search. Try searching for a book title, author, or subject instead."
+    },
+    "were": {
+        "definition": "A past tense form of 'to be' used with plural subjects.",
+        "message": "Common words like 'were' don’t refine search results. Try using a more descriptive query."
+    },
+    "can": {
+        "definition": "A modal verb used to express ability or possibility.",
+        "message": "Using 'can' alone won’t narrow down your search. Consider adding a specific keyword."
+    },
+    "will": {
+        "definition": "A modal verb used to express future intent or certainty.",
+        "message": "This word alone won’t yield useful search results. Try searching with a book title or author’s name."
+    },
+    "all": {
+        "definition": "A determiner referring to the entire quantity of something.",
+        "message": "General words like 'all' may not help refine search results. Try using a more specific keyword."
+    },
+    "most": {
+        "definition": "A superlative adjective meaning the greatest amount or number.",
+        "message": "This word is too vague for search. Try adding a book title, author, or topic."
+    },
+    "some": {
+        "definition": "A determiner meaning an unspecified amount.",
+        "message": "This word is too general for a meaningful search. Try specifying a title, author, or topic."
+    },
+    "not": {
+        "definition": "An adverb used to negate a verb.",
+        "message": "Using 'not' alone won’t provide useful results. Try a more specific keyword or phrase."
+    },
+    "now": {
+        "definition": "An adverb referring to the present moment.",
+        "message": "This word alone won’t refine your search. Try searching for a book title or author instead."
+    },
+    "why": {
+        "definition": "An interrogative word used to ask for a reason.",
+        "message": "General words like 'why' might not yield useful results. Try specifying a topic or book title."
+    },
+    "who": {
+        "definition": "An interrogative pronoun used to ask about a person.",
+        "message": "Common words like 'who' don’t refine search results well. Try searching for an author or book title."
+    },
+    "how": {
+        "definition": "An interrogative word used to ask about manner or method.",
+        "message": "This word alone may not give useful results. Try using more specific terms like book titles or authors."
+    },
+}
+
+
 AUTOCOMPLETE_TYPE = [
     ('B', 'Book'),
     ('V', 'Verse')

@@ -38,6 +38,7 @@ from .models import (FirstLevel,
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
+from .constants import IGNORED_WORDS_RESPONSE
 
 
 def get_book_id(book):
@@ -53,8 +54,8 @@ def get_book_id(book):
     return book_title
 
 
-# @cache_page(settings.CACHE_TTL)
-# @vary_on_cookie
+@cache_page(settings.CACHE_TTL)
+@vary_on_cookie
 def book_chapter_verse(request, *args, **kwargs):
     """ Do Book chapter and verse check"""
     book = kwargs.get('book', None)
@@ -214,6 +215,7 @@ class GetByLevel(View):
 
     @staticmethod
     @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
         if level is None:
@@ -229,6 +231,7 @@ class GetByLevelAndByClassification(View):
 
     @staticmethod
     @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         level = kwargs.get('level', None)
         if level is None:
@@ -248,8 +251,8 @@ class GetByLevelAndByClassification(View):
 class BooksPresentation(View):
 
     @staticmethod
-    # @cache_page(settings.CACHE_TTL)
-    # @vary_on_cookie
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request):
         return JsonResponse(Organization.get_list_of_books(), safe=False)
 
@@ -257,8 +260,8 @@ class BooksPresentation(View):
 class GetBookAsArrayJson(View):
 
     @staticmethod
-    # @cache_page(settings.CACHE_TTL)
-    # @vary_on_cookie
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'bookAsArray'})
         return book_chapter_verse(request, *args, **kwargs)
@@ -268,8 +271,8 @@ class AudioBook(View):
     """ get audiobook start end times """
 
     @staticmethod
-    # @cache_page(settings.CACHE_TTL)
-    # @vary_on_cookie
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         book_id = kwargs.get(' ', None)
         if book_id is None:
@@ -283,8 +286,8 @@ class AudioBook(View):
 class GetKaraitesAllBookDetails(View):
 
     @staticmethod
-    # @cache_page(settings.CACHE_TTL)
-    # @vary_on_cookie
+    @cache_page(settings.CACHE_TTL)
+    @vary_on_cookie
     def get(request, *args, **kwargs):
         kwargs.update({'model': 'allBookDetails'})
         return karaites_book_details(request, *args, **kwargs)
@@ -406,8 +409,6 @@ class Search(View):
     """
 
     @staticmethod
-    @cache_page(settings.CACHE_TTL)
-    @vary_on_cookie
     def get(request, *args, **kwargs):
 
         search = kwargs.get('search', None)
@@ -449,8 +450,21 @@ class Search(View):
             return JsonResponse({'data': items, 'page': page}, safe=False)
 
         else:
+
             search = normalize_search(search)
-            did_you_mean, similar_search = similar_search_en(search)
+            
+            if search in IGNORED_WORDS_RESPONSE:
+                items = [{'ref': '',
+                          'text': IGNORED_WORDS_RESPONSE[search]['message'],
+                          'path': ''
+                          }]
+                return JsonResponse({'data': items,
+                                     'page': page,
+                                     'did_you_mean': '',
+                                     'search_term': search},
+                                    safe=False)
+
+            did_you_mean,  similar_search = similar_search_en(search)
             search = prep_search(similar_search)
 
             # try phrase search
