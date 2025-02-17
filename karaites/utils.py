@@ -55,6 +55,11 @@ def only_english_stop_word(search):
     return False
 
 
+def remove_stop_words(search):
+    """ remove stop words from the search """
+    return ' '.join([word for word in search.split(' ') if word not in ENGLISH_STOP_WORDS])
+
+
 def prep_search(search):
     """ postgres full text search expect a normalized string
         all space are replaced by space&space

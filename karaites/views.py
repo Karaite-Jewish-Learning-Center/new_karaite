@@ -1,26 +1,24 @@
+from django.db.models import F
+from django.contrib.postgres.search import TrigramSimilarity
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.conf import settings
 from django.dispatch import receiver
 from ftlangdetect import detect
 from collections import OrderedDict
 from django.utils.translation import gettext as _
-from django.http import JsonResponse, HttpRequest
+from django.http import JsonResponse
 from django.core.cache import cache
 from django.views.generic import View
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
-from django.utils.decorators import method_decorator
 from django.db.models.signals import post_save, post_delete
-from django.utils.cache import get_cache_key
-from django.core.cache.utils import make_template_fragment_key
-from django.utils import translation
 from .utils import (slug_back,
                     normalize_search,
                     prep_search,
                     highlight_hebrew)
 
-from .utils_sql import (custom_sql,
-                        similar_search_en)
 
 from .models import (FirstLevel,
                      FullTextSearch,
@@ -34,6 +32,7 @@ from .models import (FirstLevel,
                      KaraitesBookAsArray,
                      # LiturgyBook,
                      AutoComplete,
+                     EnglishWord,
                      References)
 
 from hebrew import Hebrew
@@ -178,37 +177,14 @@ class GetFirstLevel(View):
         return JsonResponse(level, safe=False)
 
 
-# @receiver(post_save)
-# @receiver(post_delete)
-def handle_first_level_cache(sender, instance, **kwargs):
+@receiver(post_save)
+@receiver(post_delete)
+def clear_cache(sender, instance, **kwargs):
     """Clear all caches when model changes,
-       this works because the data almost static, the only changes are
-       made in the admin interface and with django commands.
-       If the data is changed in runtime, we need to find a way to invalidate the cache.
+       Session cache is not cleared because it uses django backend.db
     """
-
-    # Clear all caches
-    if settings.DEBUG:
-        print('first_level cache invalidated')
-        print('kwargs', kwargs)
-        print('sender', sender)
-        print('instance', instance)
-
-    if sender in [FirstLevel,
-                  FullTextSearch,
-                  FullTextSearchHebrew,
-                  InvertedIndex,
-                  Organization,
-                  BookAsArray,
-                  BookAsArrayAudio,
-                  TableOfContents,
-                  KaraitesBookDetails,
-                  KaraitesBookAsArray,
-                  AutoComplete,
-                  References]:
-        # cache.clear()
-        # clear all except django sessions
-        pass
+    print('Clearing cache')
+    cache.clear()
 
 
 class GetByLevel(View):
@@ -402,10 +378,45 @@ SQL_PLAIN += """FROM karaites_fulltextsearch, plainto_tsquery('{}') AS query """
 SQL_PLAIN += """WHERE query @@ text_en_search  """
 SQL_PLAIN += """ORDER BY rank DESC LIMIT {} OFFSET {}"""
 
+SQL_NON_STOP_WORDS = """
+SELECT id, 
+       path,
+       reference_en,
+       text_en,
+       ts_rank_cd(text_en_search, to_tsquery('public.english_with_stopwords', '{}')) AS rank
+FROM karaites_fulltextsearch
+WHERE to_tsquery('public.english_with_stopwords', '{}') @@ text_en_search
+ORDER BY rank DESC LIMIT {} OFFSET {}
+"""
+
+
+def highlight_text(text, search):
+    """
+        highlight the search term in the text
+    """
+    terms = search.split()
+    # the term is lower case but text can be capitalized
+    terms += [term.capitalize() for term in terms]
+    for term in terms:
+        text = text.replace(term, f'<b style="color:#F00">{term}</b>')
+    return text
+
+
+def spell_check(misspelled_word):
+    suggestions = EnglishWord.objects.annotate(
+        similarity=TrigramSimilarity('word', misspelled_word),
+        score=F('word_count') * TrigramSimilarity('word', misspelled_word)  # Combine frequency and similarity
+    ).filter(similarity__gt=0.3).order_by('-score')[:5]  # Adjust threshold and limit as needed
+
+    if settings.DEBUG:
+        print('suggestions', suggestions)
+    return suggestions
+
 
 class Search(View):
     """
-        search based on the autocomplete selected
+       Search for a word/words in the database
+       
     """
 
     @staticmethod
@@ -451,44 +462,51 @@ class Search(View):
 
         else:
 
-            search = normalize_search(search)
-            
-            if search in IGNORED_WORDS_RESPONSE:
-                items = [{'ref': '',
-                          'text': IGNORED_WORDS_RESPONSE[search]['message'],
-                          'path': ''
-                          }]
-                return JsonResponse({'data': items,
-                                     'page': page,
-                                     'did_you_mean': '',
-                                     'search_term': search},
-                                    safe=False)
+            search_normalized = normalize_search(search)
 
-            did_you_mean,  similar_search = similar_search_en(search)
-            search = prep_search(similar_search)
+            search_treated = prep_search(search_normalized)
+
+            if settings.DEBUG:
+                print("Search ", search)
+                print("Search normalized ", search_normalized)
+                print("Search treated ", search_treated)
+                print(f"Search treated after prep search:'{search_treated}'")
 
             # try phrase search
-            results = FullTextSearch.objects.raw(SQL_PHRASE.format(search, limit, offset))
-            print("1 Results ", len(results))
+            results = FullTextSearch.objects.raw(SQL_NON_STOP_WORDS.format(search_treated,
+                                                                           search_treated,
+                                                                           limit,
+                                                                           offset))
 
             if len(results) == 0:
-                # try word search
-                results = FullTextSearch.objects.raw(SQL_PLAIN.format(search, limit, offset))
-                print("2 Results ", len(results))
+                suggestions = spell_check(search)
+
+                # did_you_mean,  similar_search = similar_search_en(search)
+                # search = prep_search(similar_search)
+                # if settings.DEBUG:
+                #     print("First Results ", len(results), results)
+
+            # if len(results) == 0:
+            #     # try word search
+            #     results = FullTextSearch.objects.raw(SQL_PLAIN.format(search, limit, offset))
+            #     print("Second Results ", len(results))
             # avoid search by similar words since the cost of the query is high
             # from 0.012 ms to 0.600 ms on my machine
             # see similar_search_en for more details
 
             items = []
             for result in results:
+                print("Result.reference_en", result.reference_en)
+                print("Result.text_en", result.text_en)
+
                 items.append({'ref': result.reference_en,
-                              'text': (custom_sql(result.text_en, search)[0].replace('<b>', '<b style="color:#F00">'),),
+                              'text': highlight_text(result.text_en, search),
                               'path': result.path})
 
             return JsonResponse({'data': items,
                                  'page': page,
-                                 'did_you_mean': did_you_mean,
-                                 'search_term': similar_search}, safe=False)
+                                 'did_you_mean': '',
+                                 'search_term': search}, safe=False)
 
 
 class GetBiBleReferences(View):

@@ -1,4 +1,5 @@
 from django.db import connection
+from django.conf import settings
 from .models import EnglishWord
 from .constants import IGNORED_WORDS_RESPONSE
 
@@ -13,8 +14,11 @@ def custom_sql(text, search):
     try:
         with connection.cursor() as cursor:
             cursor.execute(
-                f"""Select ts_headline('english', '{text}', to_tsquery('english', '{search}'),'MaxFragments=3,ShortWord=0')""")
-            return cursor.fetchone()
+                f"""Select ts_headline('public.english_with_stopwords', '{text}', to_tsquery('public.english_with_stopwords', '{search}'),'MaxFragments=3,ShortWord=0')""")
+            data = cursor.fetchone()
+            if settings.DEBUG:
+                print("Custom SQL", data)
+            return data
     except Exception:
         return text
 

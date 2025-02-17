@@ -221,118 +221,117 @@ HEBREW_STOP_WORDS = {
 IGNORED_WORDS_RESPONSE = {
     "the": {
         "definition": "The definite article used to specify a particular person, place, or thing.",
-        "message": "Your search term is too common and might not yield useful results. Try searching for specific book titles, authors, or topics instead."
+        "message": "Your search term is too common. Instead of searching for 'the', try 'The Book of Genesis' to find relevant biblical texts."
     },
     "a": {
         "definition": "An indefinite article used before words beginning with a consonant sound.",
-        "message": "This word is too general. Try specifying a book title, author, or subject for better results."
+        "message": "This word is too general. Instead of 'a', try searching for 'A Psalm of David' for better results."
     },
     "an": {
         "definition": "An indefinite article used before words beginning with a vowel sound.",
-        "message": "Common words like this don't refine search results well. Try using key terms from the book's title or a specific topic."
+        "message": "Common words like this don't refine results well. Try searching for 'An Epistle to the Corinthians' instead."
     },
     "and": {
         "definition": "A conjunction used to connect words, clauses, or sentences.",
-        "message": "Using 'and' alone won’t narrow down your search. Consider adding a more descriptive keyword."
+        "message": "Using 'and' alone won’t narrow down your search. Try 'Heaven and Earth' for a more specific biblical reference."
     },
     "but": {
         "definition": "A conjunction used to introduce a contrast or exception.",
-        "message": "This word alone isn't helpful in searches. Try a more specific term or phrase."
+        "message": "This word alone isn't helpful. Search for 'But God remembered Noah' for better results."
     },
     "is": {
         "definition": "A verb used to describe a state of being.",
-        "message": "This is a very common word and won't yield meaningful results. Try searching for a book title, author, or topic."
+        "message": "This is too common. Try searching for 'The Lord is my shepherd' for more relevant biblical content."
     },
     "are": {
         "definition": "A verb used to describe a state of being for plural subjects.",
-        "message": "Common words like this are ignored in search. Try using a more specific query."
+        "message": "Common words like this are ignored. Use 'Blessed are the meek' instead."
     },
     "in": {
         "definition": "A preposition indicating location or inclusion within something.",
-        "message": "This preposition is too common to be useful in a search. Try specifying a book title or author instead."
+        "message": "This preposition is too common. Try 'In the beginning' for more specific results."
     },
     "of": {
         "definition": "A preposition used to show belonging or relation.",
-        "message": "Common words like 'of' don’t help refine search results. Try using a more unique term."
+        "message": "'Of' is too general. Try searching 'The Ten Commandments of God' for better results."
     },
     "with": {
         "definition": "A preposition indicating association or possession.",
-        "message": "This word is ignored in search. Try including a book title, author, or topic for better results."
+        "message": "This word is ignored. Use 'With God all things are possible' for more accurate results."
     },
     "on": {
         "definition": "A preposition indicating position or subject matter.",
-        "message": "Common words like 'on' are ignored in search. Consider using a book title or a more specific term."
+        "message": "'On' is too common. Try searching for 'Sermon on the Mount' instead."
     },
     "at": {
         "definition": "A preposition indicating location or time.",
-        "message": "This word is too general to improve search results. Try searching with more unique keywords."
+        "message": "'At' is too general. Use 'At the Last Supper' for more focused results."
     },
     "by": {
         "definition": "A preposition indicating the agent performing an action.",
-        "message": "This preposition is too common for a meaningful search. Try specifying an author's name or book title."
+        "message": "'By' is too common. Try 'By faith Abraham obeyed'."
     },
     "to": {
         "definition": "A preposition indicating direction or purpose.",
-        "message": "Short words like 'to' don't refine search results well. Consider adding more descriptive terms."
+        "message": "'To' is too common. Search for 'To everything there is a season' instead."
     },
     "for": {
         "definition": "A preposition indicating purpose or intended recipient.",
-        "message": "Common words like 'for' don't help in search. Try specifying a book title or topic instead."
+        "message": "'For' is too general. Try 'For God so loved the world' for better results."
     },
     "from": {
         "definition": "A preposition indicating the source of something.",
-        "message": "This word alone won’t improve search accuracy. Consider adding an author's name or a subject."
+        "message": "'From' alone won’t improve results. Use 'Man does not live by bread alone but from every word of God' instead."
     },
     "was": {
         "definition": "A past tense form of 'to be.'",
-        "message": "Words like 'was' are ignored in search. Try searching for a book title, author, or subject instead."
+        "message": "'Was' is too common. Try searching for 'The Word was with God'."
     },
     "were": {
         "definition": "A past tense form of 'to be' used with plural subjects.",
-        "message": "Common words like 'were' don’t refine search results. Try using a more descriptive query."
+        "message": "'Were' is too vague. Use 'Blessed are they which were called'."
     },
     "can": {
         "definition": "A modal verb used to express ability or possibility.",
-        "message": "Using 'can' alone won’t narrow down your search. Consider adding a specific keyword."
+        "message": "'Can' is too general. Try searching for 'Can two walk together except they be agreed?'."
     },
     "will": {
         "definition": "A modal verb used to express future intent or certainty.",
-        "message": "This word alone won’t yield useful search results. Try searching with a book title or author’s name."
+        "message": "'Will' alone won’t help. Try 'I will never leave you nor forsake you' instead."
     },
     "all": {
         "definition": "A determiner referring to the entire quantity of something.",
-        "message": "General words like 'all' may not help refine search results. Try using a more specific keyword."
+        "message": "'All' is too general. Search for 'All things work together for good'."
     },
     "most": {
         "definition": "A superlative adjective meaning the greatest amount or number.",
-        "message": "This word is too vague for search. Try adding a book title, author, or topic."
+        "message": "'Most' is vague. Use 'The most holy place' for better results."
     },
     "some": {
         "definition": "A determiner meaning an unspecified amount.",
-        "message": "This word is too general for a meaningful search. Try specifying a title, author, or topic."
+        "message": "'Some' is too general. Try 'Some fell upon stony places' instead."
     },
     "not": {
         "definition": "An adverb used to negate a verb.",
-        "message": "Using 'not' alone won’t provide useful results. Try a more specific keyword or phrase."
+        "message": "'Not' won’t help. Try searching 'Man shall not live by bread alone'."
     },
     "now": {
         "definition": "An adverb referring to the present moment.",
-        "message": "This word alone won’t refine your search. Try searching for a book title or author instead."
+        "message": "'Now' is too broad. Use 'Now faith is the substance of things hoped for'."
     },
     "why": {
         "definition": "An interrogative word used to ask for a reason.",
-        "message": "General words like 'why' might not yield useful results. Try specifying a topic or book title."
+        "message": "'Why' alone might not help. Try 'Why hast thou forsaken me?'."
     },
     "who": {
         "definition": "An interrogative pronoun used to ask about a person.",
-        "message": "Common words like 'who' don’t refine search results well. Try searching for an author or book title."
+        "message": "'Who' is too general. Search for 'Who do you say that I am?'."
     },
     "how": {
         "definition": "An interrogative word used to ask about manner or method.",
-        "message": "This word alone may not give useful results. Try using more specific terms like book titles or authors."
+        "message": "'How' alone is too vague. Try 'How long, O Lord, will you forget me?'."
     },
 }
-
 
 AUTOCOMPLETE_TYPE = [
     ('B', 'Book'),

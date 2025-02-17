@@ -6,9 +6,9 @@ from ...models import (KaraitesBookDetails,
                        FullTextSearch,
                        FullTextSearchHebrew,
                        BookAsArray)
-from .update_full_text_search_index import (update_full_text_search_index_english,
-                                            update_full_text_search_index_hebrew,
-                                            update_full_text_search_index_en_he)
+from .utils_update_full_text_search_index import (update_full_text_search_index_english,
+                                                  update_full_text_search_index_hebrew,
+                                                  update_full_text_search_index_en_he)
 
 from .populate_book_details import (BOOKS_TO_PROCESS,
                                     BOOKS_PATH)

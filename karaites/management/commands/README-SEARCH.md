@@ -1,4 +1,25 @@
 
+## Do this before running the command
+
+```sql
+
+CREATE TEXT SEARCH CONFIGURATION public.english_with_stopwords (COPY = pg_catalog.english);
+
+ALTER TEXT SEARCH CONFIGURATION public.english_with_stopwords
+ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, word, hword, hword_part
+WITH simple, english_stem;
+```
+
+```sql
+DROP TRIGGER content_search_update_en ON karaites_fulltextsearch;
+
+CREATE TRIGGER content_search_update_en
+BEFORE INSERT OR UPDATE
+ON karaites_fulltextsearch
+FOR EACH ROW
+EXECUTE FUNCTION tsvector_update_trigger(text_en_search, 'public.english_with_stopwords', text_en);
+```
+
 
 ```bash
 ./manage update_full_text_search

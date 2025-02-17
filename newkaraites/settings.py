@@ -264,8 +264,10 @@ CACHES = {
 CACHE_TTL = 60 * 60 * 24
 
 # Cache session backend
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_CACHE_ALIAS = "default"
 
+# Session TTL
+SESSION_COOKIE_AGE = 60 * 60 * 24
 if DEBUG:
     DATA_UPLOAD_MAX_NUMBER_FIELDS = 100_000
