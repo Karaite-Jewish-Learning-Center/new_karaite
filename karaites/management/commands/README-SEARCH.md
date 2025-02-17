@@ -17,7 +17,15 @@ CREATE TRIGGER content_search_update_en
 BEFORE INSERT OR UPDATE
 ON karaites_fulltextsearch
 FOR EACH ROW
-EXECUTE FUNCTION tsvector_update_trigger(text_en_search, 'public.english_with_stopwords', text_en);
+EXECUTE FUNCTION tsvector_update_trigger(text_en_search, 'public.public.hebrew', text_en);
+
+DROP TRIGGER content_search_update_he ON karaites_fulltextsearch_hebrew;
+
+CREATE TRIGGER content_search_update_en
+BEFORE INSERT OR UPDATE
+ON karaites_fulltextsearch_hebrew
+FOR EACH ROW
+EXECUTE FUNCTION tsvector_update_trigger(text_he_search, 'public.public.hebrew', text_he);
 ```
 
 
