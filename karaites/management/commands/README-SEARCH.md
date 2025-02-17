@@ -10,6 +10,7 @@ ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, word, hword, hword_par
 WITH simple, english_stem;
 ```
 
+
 ```sql
 DROP TRIGGER content_search_update_en ON karaites_fulltextsearch;
 
