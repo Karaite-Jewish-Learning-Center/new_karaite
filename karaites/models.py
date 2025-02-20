@@ -799,6 +799,9 @@ class Classification(models.Model):
                                               verbose_name=_("Classification Name Hebrew"),
                                               help_text=_("Classification Name Hebrew"))
 
+    order = models.IntegerField(default=0,
+                                help_text=_('Order classification'))
+
     def __str__(self):
         return self.classification_name
 
@@ -808,7 +811,7 @@ class Classification(models.Model):
 
     class Meta:
         verbose_name_plural = _('Classification')
-        ordering = ('classification_name',)
+        ordering = ('order', 'classification_name',)
 
 
 class KaraitesBookDetails(models.Model):
@@ -1104,20 +1107,31 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
+
+        if settings.DEBUG:
+            print(level)
+            print(classification)
+            print('--------------------------------')
+
         if not classification:
             book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
                                                               published=True).order_by('book_title_en')
         else:
             # Halakhah, Polemic
-            if level != 'Liturgy':
+            if level == 'Liturgy':
+                book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
+                                                                  published=True).order_by('book_classification__order',
+                                                                                           'order',
+                                                                                           'book_title_en')
+            elif level == 'Kedushot and Piyyutim La-Parashiyyot':
                 book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
                                                                   published=True).order_by('order',
                                                                                            'book_title_en',
                                                                                            'book_classification')
             else:
                 book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('first_level',
-                                                                                           'book_classification',
+                                                                  published=True).order_by('book_classification__order',
+                                                                                           'order',
                                                                                            'book_title_en')
 
         data = []
@@ -1227,6 +1241,7 @@ LIMIT = 100
 
 
 class KaraitesBookAsArray(models.Model):
+    """ Better books """
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
                              verbose_name=_('Karaite book details')
@@ -1698,3 +1713,58 @@ class MisspelledWord(models.Model):
     class Meta:
         verbose_name_plural = _('Misspelled words')
         ordering = ('misspelled_word',)
+
+
+class MenuItems(models.Model):
+    """Menu Items"""
+    menu_item = models.CharField(max_length=50,
+                                 default='',
+                                 verbose_name=_('Menu Item'))
+    complement = models.CharField(max_length=50,
+                                  default='',
+                                  verbose_name=_('Complement'))
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'))
+
+    def __str__(self):
+        return self.menu_item
+
+    class Meta:
+        verbose_name_plural = _('Menu Items')
+        ordering = ('order',)
+
+
+class Kedushot(models.Model):
+    """Kedushot and Piyyutim La-Parashiyyot"""
+    menu_title_left = models.CharField(max_length=50,
+                                       null=True,
+                                       blank=True,
+                                       default='',
+                                       verbose_name=_('Menu Title Left'))
+
+    menu_title_right = models.CharField(max_length=50,
+                                        null=True,
+                                        blank=True,
+                                        default='',
+                                        verbose_name=_('Menu Title Right'))
+
+    belongs_to = models.CharField(max_length=50,
+                                  null=True,
+                                  blank=True,
+                                  editable=False,
+                                  default='',
+                                  verbose_name=_('Belongs to'))
+
+    menu_items = models.ManyToManyField(MenuItems,
+                                        related_name='kedushot_menu_items',
+                                        verbose_name=_('Menu Items'))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'))
+
+    def __str__(self):
+        return self.menu_title_left
+
+    class Meta:
+        verbose_name_plural = _('Kedushot')
+        ordering = ('order',)

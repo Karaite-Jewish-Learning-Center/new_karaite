@@ -21,7 +21,7 @@ FOR EACH ROW
 EXECUTE FUNCTION tsvector_update_trigger(text_en_search, 'public.public.hebrew', text_en);
 ```
 
-### The Hebrew search in done base on a inverted index, since postgres suport for Hebrew is limited.
+### The Hebrew search in done base on a inverted index, since postgres support for Hebrew is limited.
 
 ```bash
 ./manage update_full_text_search

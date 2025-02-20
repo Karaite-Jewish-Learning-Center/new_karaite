@@ -18,7 +18,9 @@ from .models import (FirstLevel,
                      References,
                      FullTextSearch,
                      FullTextSearchHebrew,
-                     InvertedIndex)
+                     InvertedIndex,
+                     MenuItems,
+                     Kedushot)
 
 from django.conf import settings
 
@@ -103,6 +105,7 @@ admin.site.register(Parsha, ParshaAdmin)
 
 
 class AudioBookAdmin(KAdmin):
+    search_fields = ('audio_name',)
     list_display = ('audio_name', 'audiofile')
 
 
@@ -176,7 +179,9 @@ admin.site.register(Songs, SongsAdmin)
 
 class ClassificationAdmin(KAdmin):
     list_display = ('classification_name',
-                    'classification_name_he_html',)
+                    'classification_name_he_html',
+                    'order')
+    list_editable = ('order',)
 
 
 admin.site.register(Classification, ClassificationAdmin)
@@ -184,10 +189,12 @@ admin.site.register(Classification, ClassificationAdmin)
 
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
-    list_editable = ('published',)
+    list_editable = ('published', 'order')
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
                     'processed',
+                    'order',
+                    'published',
                     'book_title_en',
                     'book_title_he',
                     'author',
@@ -207,7 +214,6 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'buy_link',
                     'index_lang',
                     'intro_to_html',
-                    'published',
                     'better_book')
 
     list_filter = ('published', 'first_level',
@@ -380,3 +386,19 @@ class InvertedIndexAdmin(KAdmin):
 
 
 admin.site.register(InvertedIndex, InvertedIndexAdmin)
+
+
+class MenuItemsAdmin(KAdmin):
+    list_display = ('menu_item', 'complement', 'order')
+    list_editable = ('order',)
+
+
+admin.site.register(MenuItems, MenuItemsAdmin)
+
+
+class KedushotAdmin(KAdmin):
+    list_display = ('menu_title_left', 'menu_title_right', 'order', 'belongs_to')
+    list_editable = ('order',)
+
+
+admin.site.register(Kedushot, KedushotAdmin)

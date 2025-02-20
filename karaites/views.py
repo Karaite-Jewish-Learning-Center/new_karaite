@@ -37,7 +37,6 @@ from .models import (FirstLevel,
 
 from hebrew import Hebrew
 import hebrew_tokenizer as tokenizer
-from .constants import IGNORED_WORDS_RESPONSE
 
 
 def get_book_id(book):
@@ -416,7 +415,7 @@ def spell_check(misspelled_word):
 class Search(View):
     """
        Search for a word/words in the database
-       
+
     """
 
     @staticmethod
