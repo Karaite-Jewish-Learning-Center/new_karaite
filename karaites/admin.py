@@ -216,7 +216,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'intro_to_html',
                     'better_book')
 
-    list_filter = ('published', 'first_level',
+    list_filter = ('published', 'better_book', 'first_level',
                    'book_language', 'book_classification', 'book_title_en')
 
     actions = ['delete_selected', 'publish_selected']

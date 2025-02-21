@@ -1027,11 +1027,17 @@ class KaraitesBookDetails(models.Model):
                                       verbose_name=_('Better book'),
                                       help_text=_('This field is used to inform if the books is better book'))
 
-    occasion = models.CharField(max_length=100,
+    occasion = models.CharField(max_length=50,
                                 null=True,
                                 blank=True,
                                 verbose_name=_("Occasion"),
                                 help_text=_("Occasion"))
+
+    pattern = models.CharField(max_length=50,
+                               null=True,
+                               blank=True,
+                               verbose_name=_("Pattern"),
+                               help_text=_("Pattern"))
 
     # this field is used to inform if the book is a better book
     # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
@@ -1266,9 +1272,9 @@ class KaraitesBookAsArray(models.Model):
     # [paragraph English, 0,  paragraph Hebrew]
 
     # book details better_book is true
-    # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, arabic]
+    # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, comments, pattern, reserved, reserved, reserved, reserved, reserved    ]
     # these are grouped according to the song and xls file
-    #  filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '']
+    #  filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '0', '0', '0', '0', '0', '0' ,'0']
     book_text = ArrayField(ArrayField(models.TextField()),
                            default=list,
                            null=True,
