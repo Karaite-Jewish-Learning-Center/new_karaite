@@ -576,6 +576,14 @@ class Songs(models.Model):
     def audi_song(self):
         return f'<audio controls><source src="{self.song_file.url}" type="audio/mpeg"></audio>'
 
+    audi_song.short_description = 'Audio'
+
+    @mark_safe
+    def file_name(self):
+        return self.song_file.url.replace('/media/songs/', '')
+
+    file_name.short_description = 'File Name'
+
     def delete(self, using=None, keep_parents=False):
 
         if self.song_file.name != '':
@@ -1181,9 +1189,6 @@ class KaraitesBookDetails(models.Model):
                 os.remove(os.path.join(settings.MEDIA_ROOT, source))
             except FileNotFoundError:
                 pass
-        # remove songs
-        for song in self.songs.all():
-            song.delete()
         # delete record
         super(KaraitesBookDetails, self).delete(using, keep_parents)
 
@@ -1244,6 +1249,7 @@ class BooksFootNotes(models.Model):
 
 
 LIMIT = 100
+FILLER = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '0', '0', '0', '0', '0', '0', '0']
 
 
 class KaraitesBookAsArray(models.Model):

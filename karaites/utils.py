@@ -77,6 +77,9 @@ def highlight_hebrew(text_he, search_word_list):
 
 def convert_time_to_seconds(time):
     """ convert time to a float, values before decimal point are seconds, values after are milliseconds """
+    if time.lower() == 'no audio':
+        return 'No Audio'
+    time = time.replace(';', '')
     time_parts = list(map(float, time.split(':')))
     ms, seconds = modf(time_parts[2])
     return round(time_parts[0] * 3600 + time_parts[1] * 60 + seconds + ms, 2)
@@ -97,19 +100,30 @@ def convert_seconds_to_time(time):
 
 
 def convert_time_string(time_str):
+    """ convert time string to seconds """
+
     if not time_str:
         return 0
 
+    if time_str.lower() == 'no audio':
+        return 'No Audio'
+    time_str = time_str.replace(';', '')
+
     parts = time_str.split('.')
+
+    if len(parts) == 1:
+        parts = time_str.split(':')
+
     milliseconds = 0
     if len(parts) == 2:
         minutes, seconds = map(float, parts)
     elif len(parts) == 3:
         minutes, seconds, milliseconds = map(float, time_str.split('.'))
+    elif len(parts) == 4:
+        hours, minutes, seconds, milliseconds = map(float, time_str.split(':'))
     else:
         raise ValueError(f'Invalid time string: {time_str}')
 
-    print(minutes, seconds, milliseconds)
     return minutes * 60 + seconds + (float(f'0.{int(milliseconds)}'))
 
 

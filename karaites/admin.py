@@ -139,7 +139,7 @@ admin.site.register(BooksFootNotes, BookFootNotesAdmin)
 
 
 class SongsAdmin(KAdmin):
-    list_display = ('song_title', 'audi_song')
+    list_display = ('song_title', 'file_name', 'audi_song')
     search_fields = ('song_title',)
     actions = ['delete_selected']
 

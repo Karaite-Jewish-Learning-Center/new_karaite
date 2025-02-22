@@ -107,12 +107,12 @@ if os.environ.get('CONDA_DEFAULT_ENV') == 'LOCAL':
     sys.stdout.write('LOCAL ENVIRONMENT')
 
     # Add development-specific settings
-    INSTALLED_APPS += [
-        'debug_toolbar',
-    ]
-    MIDDLEWARE += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ]
+    # INSTALLED_APPS += [
+    #     'debug_toolbar',
+    # ]
+    # MIDDLEWARE += [
+    #     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # ]
 
     # Configure Django Debug Toolbar
     INTERNAL_IPS = [
@@ -242,7 +242,7 @@ LOGGING = {
         },
         'file': {
             'class': 'logging.FileHandler',
-            'filename': '/app/django-error.log',
+            'filename': f'{BASE_DIR}/django-error.log',
         },
     },
     'root': {

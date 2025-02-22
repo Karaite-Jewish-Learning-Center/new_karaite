@@ -5,7 +5,8 @@ from ...models import (Songs,
                        FirstLevel,
                        Classification,
                        KaraitesBookAsArray,
-                       KaraitesBookDetails)
+                       KaraitesBookDetails,
+                       FILLER)
 from ...utils import (Stack,
                       convert_time_string)
 
@@ -123,7 +124,7 @@ class Command(BaseCommand):
             spreadsheet_line = 1
             english_translation = []
             # use some empty lines on top to better display the text on the grid
-            filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '']
+            filler = FILLER
             # hebrew_text = [filler, filler, filler, filler]
             hebrew_text = []
             # audio_start
@@ -168,10 +169,18 @@ class Command(BaseCommand):
                     0,  # end of verse, section or subtext? No
                     0,  # filler
                     0,  # song end
-                    ""  # Arabic
+                    "",  # Comments
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
                 ])
 
-                english_translation.append(['', '', ws[f'L{row}'].value, '', '', songs_id, '', '', '', '', 0, 1, 0, ''])
+                english_translation.append(
+                    ['', '', ws[f'L{row}'].value, '', '', songs_id, '', '', '', '', 0, 1, 0, '0', '0', '0', '0', '0', '0', '0'])
 
                 # end of verse, section or subtext
                 end = ws[f'F{row}'].value
