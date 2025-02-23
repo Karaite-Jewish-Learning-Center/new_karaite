@@ -1065,6 +1065,11 @@ class KaraitesBookDetails(models.Model):
                                 verbose_name=_("Order"),
                                 help_text=_("Order"))
 
+    kedushot_order = models.CharField(max_length=3,
+                                      default='',
+                                      verbose_name=_("Kedushot order"),
+                                      help_text=_("Kedushot order"))
+
     def __str__(self):
         return self.book_title_en
 
@@ -1130,8 +1135,8 @@ class KaraitesBookDetails(models.Model):
             book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
                                                               published=True).order_by('book_title_en')
         else:
-            # Halakhah, Polemic
             if level == 'Liturgy':
+
                 # Get all books for this level, ordered by the order field
                 book_details = KaraitesBookDetails.objects.filter(
                     first_level__url=level,
@@ -1141,13 +1146,14 @@ class KaraitesBookDetails(models.Model):
                     'book_classification__order',  # Secondary sort by classification order
                     'book_title_en'  # Finally sort by title
                 )
-                
+
                 if settings.DEBUG:
                     print("Found books:")
                     for book in book_details:
                         print(f"Title: {book.book_title_en}, Order: {book.order}, Classification: {book.book_classification}")
 
             elif level == 'Kedushot and Piyyutim La-Parashiyyot':
+                ppp
                 book_details = KaraitesBookDetails.objects.filter(
                     first_level__url=level,
                     published=True
@@ -1425,7 +1431,7 @@ class KaraitesBookAsArray(models.Model):
     @staticmethod
     def get_book(book_name):
 
-        query_book_details = KaraitesBookDetails.objects.get(book_title_en=slug_back(book_name))
+        query_book_details = KaraitesBookDetails.objects.get(book_title_en=slug_back(book_name), published=True)
         query_book = KaraitesBookAsArray.objects.filter(book=query_book_details).order_by('book', 'line_number')
 
         songs = []
