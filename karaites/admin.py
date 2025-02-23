@@ -219,7 +219,7 @@ class KaraitesBookDetailsAdmin(KAdmin):
     list_filter = ('published', 'better_book', 'first_level',
                    'book_language', 'book_classification', 'book_title_en')
 
-    actions = ['delete_selected', 'publish_selected']
+    actions = ['delete_selected', 'publish_selected', 'unpublish_selected']
 
     def delete_selected(self, request, queryset):
         for obj in queryset:
@@ -245,6 +245,19 @@ class KaraitesBookDetailsAdmin(KAdmin):
         self.message_user(request, message)
 
     publish_selected.short_description = "Publish selected Karaites book details"
+
+    def unpublish_selected(self, request, queryset):
+        for obj in queryset:
+            obj.published = False
+            obj.save()
+
+        if queryset.count() == 1:
+            message = "1 Karaites book detail unpublished"
+        else:
+            message = "%s Karaites book details unpublished" % queryset.count()
+        self.message_user(request, message)
+
+    unpublish_selected.short_description = "Unpublish selected Karaites book details"
 
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
@@ -277,7 +290,7 @@ class DetailsProxyAdmin(KAdmin):
 
     list_editable = ('order',)
 
-    list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
+    list_filter = ('first_level', 'better_book', 'book_language', 'book_classification', 'book_title_en')
 
     # # don't allow changes on a proxy model, is just here to simplify data visualization
     # @staticmethod
@@ -327,7 +340,7 @@ class BetterBookFilter(admin.SimpleListFilter):
 class KaraitesBetterBooksAdmin(KAdmin):
     list_display = ('book', 'song', 'book_text', 'line_number', 'show_line_data', 'show_book_data')
     list_filter = (BetterBookFilter,)
-    search_fields = ('book', 'song')
+    search_fields = ('book__book_title_en', 'book__book_title_he')
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

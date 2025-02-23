@@ -1121,7 +1121,6 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
-
         if settings.DEBUG:
             print(level)
             print(classification)
@@ -1133,20 +1132,39 @@ class KaraitesBookDetails(models.Model):
         else:
             # Halakhah, Polemic
             if level == 'Liturgy':
-                book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('book_classification__order',
-                                                                                           'order',
-                                                                                           'book_title_en')
+                # Get all books for this level, ordered by the order field
+                book_details = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    published=True
+                ).order_by(
+                    'order',  # Primary sort by order (1000, 2000, etc)
+                    'book_classification__order',  # Secondary sort by classification order
+                    'book_title_en'  # Finally sort by title
+                )
+                
+                if settings.DEBUG:
+                    print("Found books:")
+                    for book in book_details:
+                        print(f"Title: {book.book_title_en}, Order: {book.order}, Classification: {book.book_classification}")
+
             elif level == 'Kedushot and Piyyutim La-Parashiyyot':
-                book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('order',
-                                                                                           'book_title_en',
-                                                                                           'book_classification')
+                book_details = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    published=True
+                ).order_by(
+                    'order',
+                    'book_title_en',
+                    'book_classification'
+                )
             else:
-                book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('book_classification__order',
-                                                                                           'order',
-                                                                                           'book_title_en')
+                book_details = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    published=True
+                ).order_by(
+                    'book_classification__order',
+                    'order',
+                    'book_title_en'
+                )
 
         data = []
         for details in book_details:
