@@ -39,6 +39,19 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """Import Kedushot and Piyyutim La-Parashiyyot sheets"""
+        File_Name = 0
+        Pattern = 1
+        Hebrew_Name = 2
+        English_Name = 3
+        In_Place_of = 4
+        Reciter = 5
+        Hebrew_Line = 6
+        Hebrew_Text = 7
+        English_Transliteration = 8
+        English_Translation = 9
+        Comments = 10
+        Time_Starting = 11
+        Time_Ending = 12
 
         # Wrap the entire operation in the disable_signals context manager
         with disable_signals(post_save, KaraitesBookDetails), \
@@ -66,19 +79,19 @@ class Command(BaseCommand):
                 # read the second  row
                 for row in ws.iter_rows(min_row=2, max_row=2, values_only=True):
                     # Unpack row values
-                    song_file = row[0].replace(' ', '_').replace('.mp3', '')+'.mp3'
-                    pattern = row[1] or ''
-                    hebrew_name = row[2] or ''
-                    english_name = row[3] or ''
-                    inplace_of = row[4]
-                    reciter = row[5]
-                    hebrew_line = row[6]
-                    hebrew_text = row[7]
-                    english_transliteration = row[8]
-                    english_translation = row[9]
-                    comments = row[10]
-                    audio_start = convert_time_string(row[11] or 0)
-                    audio_end = convert_time_string(row[12] or 0)
+                    song_file = row[File_Name].replace(' ', '_').replace('.mp3', '')+'.mp3'
+                    pattern = row[Pattern] or ''
+                    hebrew_name = row[Hebrew_Name] or ''
+                    english_name = row[English_Name] or ''
+                    inplace_of = row[In_Place_of]
+                    reciter = row[Reciter]
+                    hebrew_line = row[Hebrew_Line]
+                    hebrew_text = row[Hebrew_Text]
+                    english_transliteration = row[English_Transliteration]
+                    english_translation = row[English_Translation]
+                    comments = row[Comments]
+                    audio_start = convert_time_string(row[Time_Starting] or 0)
+                    audio_end = convert_time_string(row[Time_Ending] or 0)
 
                     if english_name == '':
                         english_name = hebrew_name
@@ -143,14 +156,14 @@ class Command(BaseCommand):
                         if row[7] is None:
                             break
 
-                        reciter = row[6]
-                        hebrew_line = row[7]
-                        hebrew_text = row[8]
-                        english_transliteration = row[9]
-                        english_translation = row[10]
-                        comments = row[11]
-                        audio_end = convert_time_string(row[12])
-
+                        reciter = row[Reciter]
+                        hebrew_line = row[Hebrew_Line]
+                        hebrew_text = row[Hebrew_Text]
+                        english_transliteration = row[English_Transliteration]
+                        english_translation = row[English_Translation]
+                        comments = row[Comments]
+                        audio_end = convert_time_string(row[Time_Ending])
+                        # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, comments, pattern, reserved, reserved, reserved, reserved, reserved    ]
                         KaraitesBookAsArray.objects.get_or_create(
                             book=instance,
                             song=song,
@@ -166,7 +179,12 @@ class Command(BaseCommand):
                                        break_point,
                                        song_ends,
                                        comments,
-                                       pattern
+                                       pattern,
+                                       0,
+                                       0,
+                                       0,
+                                       0,
+                                       0,
                                        ],
                             line_number=line_number,
                         )
@@ -211,17 +229,6 @@ class Command(BaseCommand):
                     book_details.kedushot_order = f'{row[0]}'.strip()
                     book_details.save()
                     self.stdout.write(f"Updated order for '{book_title}' to {order}")
-
-                # except KaraitesBookDetails.DoesNotExist:
-                #     try:
-                #         book_title = book_title.split(' ')[0].strip()
-                #         print("Try -2:", book_title)
-                #         book_details = KaraitesBookDetails.objects.get(
-                #             book_title_en__startswith=book_title, published=False)
-                #         book_details.order = order
-                #         book_details.kedushot_order = row[0].strip()
-                #         book_details.save()
-                #         self.stdout.write(f"Updated order for '{book_title}' to {order}")
 
                 except (KaraitesBookDetails.DoesNotExist, KaraitesBookDetails.MultipleObjectsReturned):
                     misses += 1

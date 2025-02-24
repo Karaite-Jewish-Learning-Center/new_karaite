@@ -2,6 +2,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from "react";
+import ReactGA from "react-ga";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Track from "./components/analytics/track";
 import LoadingSpin from "./components/general/LoadingSpin";
@@ -22,15 +23,14 @@ import ReferenceProvider from "./stores/references/referenceContext";
 import SpeechProvider from "./stores/ttspeechContext";
 
 
-
-// ReactGA.initialize("G-1JBZBTTCSV", {
-//     // debug: true,
-//     titleCase: false,
-//     siteSpeedSampleRate: 100,
-//     gaOptions: {
-//         userId: 100
-//     }
-// });
+ReactGA.initialize("G-1JBZBTTCSV", {
+    // debug: true,
+    titleCase: false,
+    siteSpeedSampleRate: 100,
+    gaOptions: {
+        userId: 100
+    }
+});
 
 const NullComponent = () => null;
 

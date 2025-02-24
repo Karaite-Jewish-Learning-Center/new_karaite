@@ -1337,6 +1337,7 @@ class KaraitesBookAsArray(models.Model):
 
         result = []
         for book in query:
+            print(book.book_text)
             result.append(book.book_text)
         return result
 
@@ -1432,8 +1433,9 @@ class KaraitesBookAsArray(models.Model):
     def get_book(book_name):
 
         query_book_details = KaraitesBookDetails.objects.get(book_title_en=slug_back(book_name), published=True)
+        print(query_book_details)
         query_book = KaraitesBookAsArray.objects.filter(book=query_book_details).order_by('book', 'line_number')
-
+        print(query_book)
         songs = []
         for song in query_book_details.songs.all():
             songs.append(song.to_json())
