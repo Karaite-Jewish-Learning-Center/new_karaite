@@ -837,9 +837,6 @@ class KaraitesBookDetails(models.Model):
                                             on_delete=models.DO_NOTHING,
                                             verbose_name=_('Classification'))
 
-    order = models.IntegerField(default=0,
-                                help_text=_('Order liturgy books'))
-
     book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
                                      verbose_name=_('Book language'))
@@ -1142,39 +1139,33 @@ class KaraitesBookDetails(models.Model):
                     first_level__url=level,
                     published=True
                 ).order_by(
-                    'order',  # Primary sort by order (1000, 2000, etc)
-                    'book_classification__order',  # Secondary sort by classification order
-                    'book_title_en'  # Finally sort by title
+                    'book_classification',
+                ).exclude(book_classification__classification_name='Shabbat Morning Services')
+
+                book_details_kedushot = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    book_classification__classification_name='Shabbat Morning Services',
+                    published=True
+                ).order_by(
+                    'order',
                 )
+                book_details = list(book_details) + list(book_details_kedushot)
+                Kedushot.objects.all()
 
                 if settings.DEBUG:
                     print("Found books:")
                     for book in book_details:
                         print(f"Title: {book.book_title_en}, Order: {book.order}, Classification: {book.book_classification}")
 
-            elif level == 'Kedushot and Piyyutim La-Parashiyyot':
-                ppp
-                book_details = KaraitesBookDetails.objects.filter(
-                    first_level__url=level,
-                    published=True
-                ).order_by(
-                    'order',
-                    'book_title_en',
-                    'book_classification'
-                )
-            else:
-                book_details = KaraitesBookDetails.objects.filter(
-                    first_level__url=level,
-                    published=True
-                ).order_by(
-                    'book_classification__order',
-                    'order',
-                    'book_title_en'
-                )
-
         data = []
         for details in book_details:
-            data.append(details.to_dic(details, []))
+            detail = details.to_dic(details, [])
+
+            if level == 'Liturgy':
+                for kedushot in Kedushot.objects.all():
+                    detail['kedushot'] = kedushot.to_dic(kedushot, [])
+            data.append(detail)
+
         return data
 
     @staticmethod
@@ -1755,10 +1746,10 @@ class MisspelledWord(models.Model):
 
 class MenuItems(models.Model):
     """Menu Items"""
-    menu_item = models.CharField(max_length=50,
+    menu_item = models.CharField(max_length=100,
                                  default='',
                                  verbose_name=_('Menu Item'))
-    complement = models.CharField(max_length=50,
+    complement = models.CharField(max_length=100,
                                   default='',
                                   verbose_name=_('Complement'))
     order = models.IntegerField(default=0,
@@ -1774,19 +1765,19 @@ class MenuItems(models.Model):
 
 class Kedushot(models.Model):
     """Kedushot and Piyyutim La-Parashiyyot"""
-    menu_title_left = models.CharField(max_length=50,
+    menu_title_left = models.CharField(max_length=100,
                                        null=True,
                                        blank=True,
                                        default='',
                                        verbose_name=_('Menu Title Left'))
 
-    menu_title_right = models.CharField(max_length=50,
+    menu_title_right = models.CharField(max_length=100,
                                         null=True,
                                         blank=True,
                                         default='',
                                         verbose_name=_('Menu Title Right'))
 
-    belongs_to = models.CharField(max_length=50,
+    belongs_to = models.CharField(max_length=100,
                                   null=True,
                                   blank=True,
                                   editable=False,

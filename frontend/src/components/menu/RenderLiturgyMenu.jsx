@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react'
 import Grid from "@material-ui/core/Grid";
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Filler from "../general/Filler.tsx";
-import {makeStyles} from "@material-ui/core/styles";
-import {capitalize, makeRandomKey} from "../../utils/utils";
-import {ToText} from "../general/ToText";
-import liturgyMenuItems from "./LiturgyItems";
-import ArrowButton from "./ArrowButton";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import IconButton from '@material-ui/core/IconButton';
+import { useState } from 'react';
+import { capitalize, makeRandomKey } from "../../utils/utils";
+import Filler from "../general/Filler.tsx";
+import { ToText } from "../general/ToText";
+import ArrowButton from "./ArrowButton";
+import liturgyMenuItems from "./LiturgyItems";
 
 
 export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => {
@@ -35,9 +35,12 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                 } else {
                     separator = ''
                 }
+                if(obj[key].book_classification === 'Shabbat Morning Services') {
+                    console.log('Found Shabbat Morning Services')
+                }
                 comp.push(
                     <Grid item xs={12} key={makeRandomKey()}>
-                        <ArrowButton direction={open[key]} onClick={() => onClickArrow(key)} saying={capitalize(separator)} style={classes.title}/>
+                        <ArrowButton direction={open[key]} onClick={() => onClickArrow(key)} saying={capitalize(separator)} style={classes.title} />
                         <div className={(open[key] ? classes.show : classes.hide)}>
                             {liturgyMenuItems(obj, classes, path, separator)}
                         </div>
@@ -56,12 +59,26 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         setOpen(Array.from({length: books.length}, i => i = true))
     }
     const CloseOpenALl = () => {
+        // Check if all values in the open array are true or false
+        const allOpen = Object.values(open).every(value => value === true);
+        const allClosed = Object.values(open).every(value => value === false);
+        
         return (
             <div className={classes.closeOpenAll}>
-                <IconButton  aria-label="open all" onClick={openAll}>
+                <IconButton  
+                    aria-label="open all" 
+                    onClick={openAll}
+                    disabled={allOpen}
+                    className={allOpen ? classes.disabledButton : ''}
+                >
                     <ArrowDropDownIcon/>
                 </IconButton>
-                <IconButton  aria-label="close all" onClick={closeAll}>
+                <IconButton  
+                    aria-label="close all" 
+                    onClick={closeAll}
+                    disabled={allClosed}
+                    className={allClosed ? classes.disabledButton : ''}
+                >
                     <ArrowDropUpIcon/>
                 </IconButton>
             </div>
@@ -170,5 +187,9 @@ const useStyles = makeStyles((theme) => ({
     closeOpenAll: {
         display: 'flex',
         justifyContent: 'flex-end',
+    },
+    disabledButton: {
+        opacity: 0.5,
+        cursor: 'not-allowed',
     }
 }));
