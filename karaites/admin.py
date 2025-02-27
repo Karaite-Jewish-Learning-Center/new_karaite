@@ -189,12 +189,18 @@ admin.site.register(Classification, ClassificationAdmin)
 
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
-    list_editable = ('published', 'order')
+    list_editable = ('published', 'order', 'kedushot_main_title', 'kedushot_title',
+                     'kedushot_sub_title', 'kedushot_expanded', 'kedushot_left')
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
                     'processed',
                     'order',
                     'published',
+                    'kedushot_main_title',
+                    'kedushot_title',
+                    'kedushot_sub_title',
+                    'kedushot_expanded',
+                    'kedushot_left',
                     'book_title_en',
                     'book_title_he',
                     'kedushot_order',

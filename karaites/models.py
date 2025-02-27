@@ -1064,8 +1064,40 @@ class KaraitesBookDetails(models.Model):
 
     kedushot_order = models.CharField(max_length=3,
                                       default='',
+                                      null=True,
+                                      blank=True,
                                       verbose_name=_("Kedushot order"),
                                       help_text=_("Kedushot order"))
+    kedushot_main_title = models.CharField(max_length=100,
+                                           default='',
+                                           null=True,
+                                           blank=True,
+                                           verbose_name=_("Kedushot Main Title"),
+                                           help_text=_("Kedushot Main Title"))
+    kedushot_title = models.CharField(max_length=100,
+                                      default='',
+                                      null=True,
+                                      blank=True,
+                                      verbose_name=_("Kedushot title"),
+                                      help_text=_("Kedushot title"))
+
+    kedushot_sub_title = models.CharField(max_length=100,
+                                          default='',
+                                          null=True,
+                                          blank=True,
+                                          verbose_name=_("Kedushot sub title"),
+                                          help_text=_("Kedushot sub title"))
+
+    kedushot_expanded = models.BooleanField(default=False,
+                                            verbose_name=_("Kedushot expanded"),
+                                            help_text=_("Kedushot expanded"))
+
+    kedushot_left = models.CharField(max_length=100,
+                                     default='',
+                                     null=True,
+                                     blank=True,
+                                     verbose_name=_("Kedushot left"),
+                                     help_text=_("Kedushot left"))
 
     def __str__(self):
         return self.book_title_en
@@ -1119,6 +1151,11 @@ class KaraitesBookDetails(models.Model):
             'better_book': details.better_book,
             'occasion': details.occasion,
             'display': details.display,
+            'kedushot_main_title': details.kedushot_main_title,
+            'kedushot_title': details.kedushot_title,
+            'kedushot_sub_title': details.kedushot_sub_title,
+            'kedushot_expanded': details.kedushot_expanded,
+            'kedushot_left': details.kedushot_left,
         }
 
     @staticmethod
@@ -1143,28 +1180,25 @@ class KaraitesBookDetails(models.Model):
                 ).exclude(book_classification__classification_name='Shabbat Morning Services')
 
                 book_details_kedushot = KaraitesBookDetails.objects.filter(
-                    first_level__url=level,
                     book_classification__classification_name='Shabbat Morning Services',
                     published=True
                 ).order_by(
                     'order',
                 )
-                book_details = list(book_details) + list(book_details_kedushot)
-                Kedushot.objects.all()
 
-                if settings.DEBUG:
-                    print("Found books:")
-                    for book in book_details:
-                        print(f"Title: {book.book_title_en}, Order: {book.order}, Classification: {book.book_classification}")
+                book_details = list(book_details) + list(book_details_kedushot)
+
+            else:
+                book_details = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    published=True
+                ).order_by(
+                    'order',
+                )
 
         data = []
         for details in book_details:
-            detail = details.to_dic(details, [])
-
-            if level == 'Liturgy':
-                for kedushot in Kedushot.objects.all():
-                    detail['kedushot'] = kedushot.to_dic(kedushot, [])
-            data.append(detail)
+            data.append(details.to_dic(details, []))
 
         return data
 
