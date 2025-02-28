@@ -33,7 +33,6 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         const keys = Object.keys(obj)
         let separator = ''
         let comp = []
-        let kedushot = []
 
         keys.forEach(key => {
             if (obj[key].book_classification !== separator) {
@@ -44,13 +43,13 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                     separator = ''
                 }
 
-               
+
                 if (obj[key].book_classification === 'Shabbat Morning Services') {
                     // Create groups based on kedushot_expanded
                     const shabbatItems = keys.filter(itemKey => 
                         obj[itemKey].book_classification === 'Shabbat Morning Services'
                     ).sort((a, b) => obj[a].order - obj[b].order); // Sort by order if available
-                    
+
                     // Find indices where kedushot_expanded is true
                     const groupBoundaries = [];
                     shabbatItems.forEach((itemKey, index) => {
@@ -58,7 +57,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                             groupBoundaries.push(index);
                         }
                     });
-                    
+
                     // If no boundaries found, treat all items as one group
                     if (groupBoundaries.length === 0) {
                         groupBoundaries.push(0);
@@ -66,7 +65,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                         // Ensure the first group starts at index 0
                         groupBoundaries.unshift(0);
                     }
-                    
+
                     // Create groups based on boundaries
                     const kedushotGroups = [];
                     for (let i = 0; i < groupBoundaries.length; i++) {
@@ -74,7 +73,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                         const endIdx = (i === groupBoundaries.length - 1) 
                             ? shabbatItems.length 
                             : groupBoundaries[i + 1];
-                        
+
                         if (startIdx < endIdx) {
                             const groupItems = shabbatItems.slice(startIdx, endIdx);
                             // Use the first item in the group for title and subtitle
@@ -87,7 +86,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                             });
                         }
                     }
-                    
+
                     // Create a component for the main Shabbat Morning Services section
                     comp.push(
                         <Grid item xs={12} key={makeRandomKey()}>
@@ -97,7 +96,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                                 {kedushotGroups.map((group, groupIndex) => {
                                     // Default to collapsed (false) if not explicitly set
                                     const isExpanded = expandedSections[groupIndex] === true;
-                                    
+
                                     return (
                                         <div key={makeRandomKey()} className={classes.kedushotContainer}>
                                             {group.mainTitle && (
@@ -105,21 +104,17 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                                                     {group.mainTitle}
                                                 </Typography>
                                             )}
-                                            <div className={classes.kedushotHeaderContainer}>
+                                            <div 
+                                                onClick={() => toggleSection(groupIndex)}
+                                                className={classes.kedushotHeaderContainer}
+                                            >
                                                 <Typography className={classes.kedushotHeader}>
                                                     <span className={classes.kedushotTitle}>{group.title}</span>
                                                     {group.subtitle && <span className={classes.kedushotSubtitle}>{group.subtitle}</span>}
-                                                </Typography>
-                                                <IconButton 
-                                                    className={classes.sectionToggleButton}
-                                                    onClick={() => toggleSection(groupIndex)}
-                                                    size="small"
-                                                >
                                                     {isExpanded ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-                                                </IconButton>
-                                                
+                                                </Typography>
                                             </div>
-                                           
+
                                             {/* Render the items for this group */}
                                             <div className={isExpanded ? classes.show : classes.hide}>
                                                 {liturgyMenuItems(
@@ -140,7 +135,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                             <hr className={classes.hr} />
                         </Grid>
                     );
-                 
+
                 } else {
                     comp.push(
                         <Grid item xs={12} key={makeRandomKey()}>
@@ -156,7 +151,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         })
         return comp
     }
-    
+
     const closeAll = () => {
         setOpen(Array.from({length: books.length}, i => i = false));
         // Also collapse all kedushot sections
@@ -167,7 +162,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         });
         setExpandedSections(allSectionsClosed);
     }
-    
+
     const openAll = () => {
         setOpen(Array.from({length: books.length}, i => i = true));
         // Also expand all kedushot sections
@@ -186,18 +181,18 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         const shabbatItems = keys.filter(itemKey => 
             obj[itemKey].book_classification === 'Shabbat Morning Services'
         );
-        
+
         // Count expanded items to determine group boundaries
         let groupCount = 0;
         let hasGroups = false;
-        
+
         shabbatItems.forEach(itemKey => {
             if (obj[itemKey].kedushot_expanded === true) {
                 groupCount++;
                 hasGroups = true;
             }
         });
-        
+
         // If no groups found, treat all as one group
         return hasGroups ? groupCount : (shabbatItems.length > 0 ? 1 : 0);
     }
@@ -206,7 +201,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         // Check if all values in the open array are true or false
         const allOpen = Object.values(open).every(value => value === true);
         const allClosed = Object.values(open).every(value => value === false);
-        
+
         return (
             <div className={classes.closeOpenAll}>
                 <IconButton  
@@ -269,14 +264,19 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
 const useStyles = makeStyles((theme) => ({
     container: {
         margin: 'auto',
-        maxWidth: '80%',
+
         height: '100%',
         fontSize: 18,
         fontFamily: 'SBL Hebrew',
     },
     title: {
-        marginLeft: 10,
         minHeight: 50,
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
+        '& h6': {
+            width: '100%',
+        },
     },
     bookTitle: {
         marginLeft: 30,
@@ -341,10 +341,9 @@ const useStyles = makeStyles((theme) => ({
         cursor: 'not-allowed',
     },
     kedushotContainer: {
-        marginLeft: 0,
-        marginTop: 15,
-        marginBottom: 15,
-        padding: 10,
+        marginTop: 20,
+        marginBottom: 20,
+        padding: '0 16px',
         position: 'relative',
     },
     kedushotHeaderContainer: {
@@ -352,6 +351,14 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 10,
+        cursor: 'pointer',
+        padding: '12px 16px',
+        borderRadius: '4px',
+        transition: 'all 0.2s ease',
+        '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            transform: 'translateX(4px)',
+        },
     },
     kedushotHeader: {
         fontWeight: 'bold',
@@ -359,6 +366,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
         flex: 1,
+        gap: '16px',
+        '& svg': {
+            marginLeft: '8px',
+        },
     },
     kedushotItem: {
         marginBottom: 8,
@@ -366,12 +377,13 @@ const useStyles = makeStyles((theme) => ({
     },
     kedushotTitle: {
         textAlign: 'left',
-        
+        flex: 1,
     },
     kedushotSubtitle: {
         fontSize: '0.9em',
         color: 'rgba(255, 255, 255, 0.85)',
         textAlign: 'right',
+        marginLeft: '16px',
     },
     kedushotSeparator: {
         borderLeft: '1px solid #ccc',
@@ -385,9 +397,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.2em',
         marginBottom: 10,
         textAlign: 'center',
-    },
-    sectionToggleButton: {
-        padding: 4,
     },
     kedushotLeft: {
         fontSize: '0.9em',

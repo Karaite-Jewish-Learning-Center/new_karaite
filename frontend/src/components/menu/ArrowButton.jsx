@@ -21,5 +21,12 @@ export default ArrowButton;
 const useStyles = makeStyles((theme) => ({
     pointer: {
         cursor: 'pointer',
+        padding: '12px 16px',
+        borderRadius: '4px',
+        transition: 'all 0.2s ease',
+        '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+            transform: 'translateX(4px)',
+        },
     },
 }));
