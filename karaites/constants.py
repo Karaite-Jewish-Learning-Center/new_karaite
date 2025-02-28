@@ -26,6 +26,7 @@ BOOK_CLASSIFICATION = [
     # liturgy
     ('10', 'Havdala Songs'),
     ('15', 'Passover Songs'),
+    ('14', 'Kedushot and Piyyutim La-Parashiyyot'),
     ('18', 'Purim Songs'),
     ('20', 'Prayers'),
     ('30', 'Shabbat Songs'),
@@ -217,6 +218,7 @@ ENGLISH_STOP_WORDS = {
 HEBREW_STOP_WORDS = {
 
 }
+
 
 AUTOCOMPLETE_TYPE = [
     ('B', 'Book'),

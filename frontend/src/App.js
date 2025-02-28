@@ -1,38 +1,36 @@
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import MyAppBar from "./components/menu/AppBar";
-import FirstLevel from "./components/menu/FirstLevel"
-import Tanakh from "./components/tanakh/Tanakh"
+import ReactGA from "react-ga";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Track from "./components/analytics/track";
+import LoadingSpin from "./components/general/LoadingSpin";
 import LoadBook from "./components/LoadBook";
-import {createTheme} from '@material-ui/core/styles'
-import {ThemeProvider} from '@material-ui/core/styles'
-import Display from "./components/pages/Display";
-import {TanakhBooksLink} from "./components/tanakh/TanakBooksLink";
-import SearchResults from "./components/pages/SearchResults";
-import StoreProvider from "./stores/context";
-import SpeechProvider from "./stores/ttspeechContext";
-import AudioBookProvider from "./stores/audioBookContext";
-import ReferenceProvider from "./stores/references/referenceContext";
-import MessageProvider from "./stores/messages/messageContext";
+import MyAppBar from "./components/menu/AppBar";
+import FirstLevel from "./components/menu/FirstLevel";
+import Second from "./components/menu/getMenuSecond";
 import Message from './components/messages/Message';
 import Acknowledgment from "./components/pages/Acknowledgments";
-import LoadingSpin from "./components/general/LoadingSpin";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Second from "./components/menu/getMenuSecond";
-import ReactGA from 'react-ga';
-import Track from "./components/analytics/track";
+import Display from "./components/pages/Display";
+import SearchResults from "./components/pages/SearchResults";
+import { TanakhBooksLink } from "./components/tanakh/TanakBooksLink";
+import Tanakh from "./components/tanakh/Tanakh";
+import AudioBookProvider from "./stores/audioBookContext";
+import StoreProvider from "./stores/context";
+import MessageProvider from "./stores/messages/messageContext";
+import ReferenceProvider from "./stores/references/referenceContext";
+import SpeechProvider from "./stores/ttspeechContext";
 
 
-
-// ReactGA.initialize("G-1JBZBTTCSV", {
-//     // debug: true,
-//     titleCase: false,
-//     siteSpeedSampleRate: 100,
-//     gaOptions: {
-//         userId: 100
-//     }
-// });
+ReactGA.initialize("G-1JBZBTTCSV", {
+    // debug: true,
+    titleCase: false,
+    siteSpeedSampleRate: 100,
+    gaOptions: {
+        userId: 100
+    }
+});
 
 const NullComponent = () => null;
 
@@ -59,7 +57,7 @@ function App() {
                                 <BrowserRouter>
                                     <MyAppBar/>
                                     <Message/>
-                                    {/*<LoadingSpin/>*/}
+                                    <LoadingSpin/>
                                     <Track/>
                                     <Switch>
 

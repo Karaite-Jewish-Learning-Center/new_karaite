@@ -1,12 +1,11 @@
-import {calculateItemNumber, makeBookUrl} from '../utils/utils';
 import {
+    betterBookUrl,
     bookChapterUrl,
     chaptersByBibleBook,
-    karaitesBookUrl,
-    betterBookUrl
+    karaitesBookUrl
 } from '../constants/constants';
-import {BookType} from '../types/commonTypes';
-import {toJS} from 'mobx';
+import { BookType } from '../types/commonTypes';
+import { calculateItemNumber, makeBookUrl } from '../utils/utils';
 
 
 const PARAGRAPHS = 0
@@ -35,7 +34,7 @@ const fetchData = async (paneNumber: number, store: any, message: any, url: stri
                     break
 
                 case 'better':
-
+                    debugger
                     store.setSongsBetter(data['songs'], paneNumber)
                     store.setBookDetailsBetter(data['details'], paneNumber)
                     store.setBookBetter(data['book_data'], paneNumber)

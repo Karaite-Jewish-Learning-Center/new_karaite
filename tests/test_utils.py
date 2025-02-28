@@ -52,7 +52,9 @@ def test_convert_time_to_seconds():
         ("24:00:01.001", 86401.001),
         ("00:00:00.01", 0.01),
         ("00:00:00:01", 0.01),
-
+        ("00:00:15:11", 15.0),
+        ("00;:00:00:00", 0),
+        ("no audio", 'No Audio'),
     ]
 
     # Iterate over the test cases and check if the actual output matches the expected output

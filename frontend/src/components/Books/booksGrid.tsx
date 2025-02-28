@@ -1,36 +1,29 @@
-import React, {FC, useContext, useRef, useState} from 'react'
-import {ListRange, TableVirtuoso} from 'react-virtuoso'
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import {storeContext} from "../../stores/context";
-import {observer} from 'mobx-react-lite'
-import {toJS} from 'mobx'
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { ListRange, TableVirtuoso } from 'react-virtuoso';
+import { storeContext } from "../../stores/context";
 
+import { Grid } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import {ClosePanes, RefClick} from '../../types/commonTypes';
-import {CloseButton} from "../buttons/CloseButton";
-import {Grid} from '@material-ui/core';
-import {InfoButton} from '../buttons/InfoButton';
-import {TocButton} from '../buttons/TocButton';
-import {BookButton} from '../buttons/BookButton';
-import {MusicSelect} from '../buttons/music-select';
-import {BuyButton} from '../buttons/BuyButton';
-import {AudioBookButton} from '../buttons/AudioBookButton';
-import {iOS, unslug} from '../../utils/utils';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
-    BETTER_START_AUDIO,
-    BETTER_END_AUDIO,
-    BETTER_AUDIO_BOOK_ID,
     SCROLL_LATENCY_MS,
     SCROLL_LATENCY_SECONDS,
-    songsUrl,
+    songsUrl
 } from "../../constants/constants";
-import {AudioBookContext} from '../../stores/audioBookContext';
+import { AudioBookContext } from '../../stores/audioBookContext';
+import { ClosePanes, RefClick } from '../../types/commonTypes';
+import { iOS } from '../../utils/utils';
+import { AudioBookButton } from '../buttons/AudioBookButton';
+import { BuyButton } from '../buttons/BuyButton';
+import { CloseButton } from "../buttons/CloseButton";
 
 const HEBREW = 0
 const TRANSLITERATION = 1
@@ -61,7 +54,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const [distanceFromTop, setDistanceFromTop] = useState(TOP_LINES)
     const virtuoso = useRef(null)
     const  hasSongs = store.hasSongsBetter(paneNumber)
-
+    
     if (bookData === undefined || bookData.length === 0) return null;
 
     const callFromEnded = () => {
@@ -153,8 +146,9 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         let found = index === currentIndex
         const hebrewLen = data[HEBREW].length > 0
         const transliterationLen = data[TRANSLITERATION].length > 0
+        const seeData = toJS(data)
+        debugger
         const englishLen = data[ENGLISH].length > 0
-
         if (hebrewLen || transliterationLen || englishLen) {
             const breakLine = (data[BREAK] === "1" ? classes.break : '')
             const highlight = (found ? classes.highlight : '')

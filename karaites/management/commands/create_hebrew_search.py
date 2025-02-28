@@ -1,10 +1,27 @@
 import sys
 from hebrew import Hebrew
+from contextlib import contextmanager
 import hebrew_tokenizer as tokenizer
 from django.core.management.base import BaseCommand
 from ...models import (FullTextSearchHebrew,
                        InvertedIndex)
 
+
+@contextmanager
+def disable_signals(signal, sender):
+    """
+        Disable signals for the given signal and sender
+        So that cache is not cleared at every save or delete
+    """
+    # Get all receivers for this signal and sender
+    receivers = signal.receivers[:]
+    # Disconnect all receivers
+    signal.receivers = []
+    try:
+        yield
+    finally:
+        # Restore original receivers
+        signal.receivers = receivers
 
 class Command(BaseCommand):
     help = 'Create Hebrew Index '

@@ -1,5 +1,7 @@
 from django.db import connection
+from django.conf import settings
 from .models import EnglishWord
+from .constants import IGNORED_WORDS_RESPONSE
 
 # migrations fallback
 try:
@@ -7,12 +9,16 @@ try:
 except:
     ENGLISH_DICTIONARY = {}
 
+
 def custom_sql(text, search):
     try:
         with connection.cursor() as cursor:
             cursor.execute(
-                f"""Select ts_headline('english', '{text}', to_tsquery('english', '{search}'),'MaxFragments=3,ShortWord=0')""")
-            return cursor.fetchone()
+                f"""Select ts_headline('public.english_with_stopwords', '{text}', to_tsquery('public.english_with_stopwords', '{search}'),'MaxFragments=3,ShortWord=0')""")
+            data = cursor.fetchone()
+            if settings.DEBUG:
+                print("Custom SQL", data)
+            return data
     except Exception:
         return text
 
@@ -44,6 +50,8 @@ def similar_search_en(search):
 
     for word in search.split(' '):
         print("Similar Search", word)
+        if word in IGNORED_WORDS_RESPONSE:
+            continue
         # is word misspelled?
         if word in ENGLISH_DICTIONARY:
             continue
@@ -55,6 +63,5 @@ def similar_search_en(search):
         for similar in find_similar_words(word):
             search = search.replace(word, similar[0])
             did_you_mean = True
-
+    print("did_you mean", did_you_mean, search)
     return did_you_mean, search
-

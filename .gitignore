@@ -18,11 +18,11 @@ db
 
 var-17
 
+.DS_Store
 
 static-django
 
 .pytest_cache
-.DS_Store
 .vscode
 karaites/management/book_dumps/
 
@@ -31,3 +31,13 @@ frontend/node_modules
 .DS_Store
 /letsencrypt/
 /backend-static/!/karaites/media/
+django-error.log
+django-error.log.1
+django-error.log.2
+django-error.log.3
+django-error.log.4
+django-error.log.5
+
+*backup.sql
+database-backup
+

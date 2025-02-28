@@ -5,11 +5,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.utils.safestring import mark_safe
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .constants import (LANGUAGES,
-                        AUTOCOMPLETE_TYPE,
-                        REF_ERROR_CODE,
-                        VERSE_TABLE)
-
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.auth.models import User
@@ -17,6 +12,10 @@ from .validatores.validators import validate_time
 from .utils import (convert_seconds_to_time,
                     convert_time_to_seconds,
                     slug_back)
+from .constants import (LANGUAGES,
+                        AUTOCOMPLETE_TYPE,
+                        REF_ERROR_CODE,
+                        VERSE_TABLE)
 
 VERSE = 4
 HEBREW = 0
@@ -577,6 +576,14 @@ class Songs(models.Model):
     def audi_song(self):
         return f'<audio controls><source src="{self.song_file.url}" type="audio/mpeg"></audio>'
 
+    audi_song.short_description = 'Audio'
+
+    @mark_safe
+    def file_name(self):
+        return self.song_file.url.replace('/media/songs/', '')
+
+    file_name.short_description = 'File Name'
+
     def delete(self, using=None, keep_parents=False):
 
         if self.song_file.name != '':
@@ -800,6 +807,9 @@ class Classification(models.Model):
                                               verbose_name=_("Classification Name Hebrew"),
                                               help_text=_("Classification Name Hebrew"))
 
+    order = models.IntegerField(default=0,
+                                help_text=_('Order classification'))
+
     def __str__(self):
         return self.classification_name
 
@@ -809,7 +819,7 @@ class Classification(models.Model):
 
     class Meta:
         verbose_name_plural = _('Classification')
-        ordering = ('classification_name',)
+        ordering = ('order', 'classification_name',)
 
 
 class KaraitesBookDetails(models.Model):
@@ -826,9 +836,6 @@ class KaraitesBookDetails(models.Model):
                                             blank=False,
                                             on_delete=models.DO_NOTHING,
                                             verbose_name=_('Classification'))
-
-    order = models.IntegerField(default=0,
-                                help_text=_('Order liturgy books'))
 
     book_language = models.CharField(max_length=8,
                                      choices=LANGUAGES,
@@ -1025,11 +1032,17 @@ class KaraitesBookDetails(models.Model):
                                       verbose_name=_('Better book'),
                                       help_text=_('This field is used to inform if the books is better book'))
 
-    occasion = models.CharField(max_length=100,
+    occasion = models.CharField(max_length=50,
                                 null=True,
                                 blank=True,
                                 verbose_name=_("Occasion"),
                                 help_text=_("Occasion"))
+
+    pattern = models.CharField(max_length=50,
+                               null=True,
+                               blank=True,
+                               verbose_name=_("Pattern"),
+                               help_text=_("Pattern"))
 
     # this field is used to inform if the book is a better book
     # text_hebrew, text_english, text_transliteration, header, bold | italic| underline| bold_italic
@@ -1048,6 +1061,43 @@ class KaraitesBookDetails(models.Model):
     order = models.IntegerField(default=0,
                                 verbose_name=_("Order"),
                                 help_text=_("Order"))
+
+    kedushot_order = models.CharField(max_length=3,
+                                      default='',
+                                      null=True,
+                                      blank=True,
+                                      verbose_name=_("Kedushot order"),
+                                      help_text=_("Kedushot order"))
+    kedushot_main_title = models.CharField(max_length=100,
+                                           default='',
+                                           null=True,
+                                           blank=True,
+                                           verbose_name=_("Kedushot Main Title"),
+                                           help_text=_("Kedushot Main Title"))
+    kedushot_title = models.CharField(max_length=100,
+                                      default='',
+                                      null=True,
+                                      blank=True,
+                                      verbose_name=_("Kedushot title"),
+                                      help_text=_("Kedushot title"))
+
+    kedushot_sub_title = models.CharField(max_length=100,
+                                          default='',
+                                          null=True,
+                                          blank=True,
+                                          verbose_name=_("Kedushot sub title"),
+                                          help_text=_("Kedushot sub title"))
+
+    kedushot_expanded = models.BooleanField(default=False,
+                                            verbose_name=_("Kedushot expanded"),
+                                            help_text=_("Kedushot expanded"))
+
+    kedushot_left = models.CharField(max_length=100,
+                                     default='',
+                                     null=True,
+                                     blank=True,
+                                     verbose_name=_("Kedushot left"),
+                                     help_text=_("Kedushot left"))
 
     def __str__(self):
         return self.book_title_en
@@ -1101,29 +1151,55 @@ class KaraitesBookDetails(models.Model):
             'better_book': details.better_book,
             'occasion': details.occasion,
             'display': details.display,
+            'kedushot_main_title': details.kedushot_main_title,
+            'kedushot_title': details.kedushot_title,
+            'kedushot_sub_title': details.kedushot_sub_title,
+            'kedushot_expanded': details.kedushot_expanded,
+            'kedushot_left': details.kedushot_left,
         }
 
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
+        if settings.DEBUG:
+            print(level)
+            print(classification)
+            print('--------------------------------')
+
         if not classification:
             book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
                                                               published=True).order_by('book_title_en')
         else:
-            # Halakhah, Polemic
-            if level != 'Liturgy':
-                book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('order',
-                                                                                           'book_title_en',
-                                                                                           'book_classification')
+            if level == 'Liturgy':
+
+                # Get all books for this level, ordered by the order field
+                book_details = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    published=True
+                ).order_by(
+                    'book_classification',
+                ).exclude(book_classification__classification_name='Shabbat Morning Services')
+
+                book_details_kedushot = KaraitesBookDetails.objects.filter(
+                    book_classification__classification_name='Shabbat Morning Services',
+                    published=True
+                ).order_by(
+                    'order',
+                )
+
+                book_details = list(book_details) + list(book_details_kedushot)
+
             else:
-                book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
-                                                                  published=True).order_by('first_level',
-                                                                                           'book_classification',
-                                                                                           'book_title_en')
+                book_details = KaraitesBookDetails.objects.filter(
+                    first_level__url=level,
+                    published=True
+                ).order_by(
+                    'order',
+                )
 
         data = []
         for details in book_details:
             data.append(details.to_dic(details, []))
+
         return data
 
     @staticmethod
@@ -1162,9 +1238,6 @@ class KaraitesBookDetails(models.Model):
                 os.remove(os.path.join(settings.MEDIA_ROOT, source))
             except FileNotFoundError:
                 pass
-        # remove songs
-        for song in self.songs.all():
-            song.delete()
         # delete record
         super(KaraitesBookDetails, self).delete(using, keep_parents)
 
@@ -1225,9 +1298,11 @@ class BooksFootNotes(models.Model):
 
 
 LIMIT = 100
+FILLER = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '0', '0', '0', '0', '0', '0', '0']
 
 
 class KaraitesBookAsArray(models.Model):
+    """ Better books """
     book = models.ForeignKey(KaraitesBookDetails,
                              on_delete=models.CASCADE,
                              verbose_name=_('Karaite book details')
@@ -1252,9 +1327,9 @@ class KaraitesBookAsArray(models.Model):
     # [paragraph English, 0,  paragraph Hebrew]
 
     # book details better_book is true
-    # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, arabic]
+    # [hebrew, transliteration, english, audio_start, audio_end, song_id, reciter, censored, line_number, break, song end, comments, pattern, reserved, reserved, reserved, reserved, reserved    ]
     # these are grouped according to the song and xls file
-    #  filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '']
+    #  filler = ['', '', '', '', '', '', '', '', 0, '', 0, 1, 0, '0', '0', '0', '0', '0', '0' ,'0']
     book_text = ArrayField(ArrayField(models.TextField()),
                            default=list,
                            null=True,
@@ -1287,6 +1362,7 @@ class KaraitesBookAsArray(models.Model):
 
         result = []
         for book in query:
+            print(book.book_text)
             result.append(book.book_text)
         return result
 
@@ -1381,9 +1457,10 @@ class KaraitesBookAsArray(models.Model):
     @staticmethod
     def get_book(book_name):
 
-        query_book_details = KaraitesBookDetails.objects.get(book_title_en=slug_back(book_name))
+        query_book_details = KaraitesBookDetails.objects.get(book_title_en=slug_back(book_name), published=True)
+        print(query_book_details)
         query_book = KaraitesBookAsArray.objects.filter(book=query_book_details).order_by('book', 'line_number')
-
+        print(query_book)
         songs = []
         for song in query_book_details.songs.all():
             songs.append(song.to_json())
@@ -1699,3 +1776,58 @@ class MisspelledWord(models.Model):
     class Meta:
         verbose_name_plural = _('Misspelled words')
         ordering = ('misspelled_word',)
+
+
+class MenuItems(models.Model):
+    """Menu Items"""
+    menu_item = models.CharField(max_length=100,
+                                 default='',
+                                 verbose_name=_('Menu Item'))
+    complement = models.CharField(max_length=100,
+                                  default='',
+                                  verbose_name=_('Complement'))
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'))
+
+    def __str__(self):
+        return self.menu_item
+
+    class Meta:
+        verbose_name_plural = _('Menu Items')
+        ordering = ('order',)
+
+
+class Kedushot(models.Model):
+    """Kedushot and Piyyutim La-Parashiyyot"""
+    menu_title_left = models.CharField(max_length=100,
+                                       null=True,
+                                       blank=True,
+                                       default='',
+                                       verbose_name=_('Menu Title Left'))
+
+    menu_title_right = models.CharField(max_length=100,
+                                        null=True,
+                                        blank=True,
+                                        default='',
+                                        verbose_name=_('Menu Title Right'))
+
+    belongs_to = models.CharField(max_length=100,
+                                  null=True,
+                                  blank=True,
+                                  editable=False,
+                                  default='',
+                                  verbose_name=_('Belongs to'))
+
+    menu_items = models.ManyToManyField(MenuItems,
+                                        related_name='kedushot_menu_items',
+                                        verbose_name=_('Menu Items'))
+
+    order = models.IntegerField(default=0,
+                                verbose_name=_('Order'))
+
+    def __str__(self):
+        return self.menu_title_left
+
+    class Meta:
+        verbose_name_plural = _('Kedushot')
+        ordering = ('order',)

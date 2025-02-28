@@ -998,6 +998,35 @@ LITURGY = (HAVDALA +
            TAMMUZ_AV_ECHA +
            WEDDING_SONGS)
 
+# this should be the list it self and the path
+BOOKS_TO_PROCESS = (COMMENTS,
+                    HALAKHAH,
+                    HAVDALA,
+                    PASSOVER_SONGS,
+                    PURIM_SONGS,
+                    PRAYERS,
+                    SHABBAT_SONGS,
+                    SUPPLEMENTAL,
+                    TAMMUZ_AV_ECHA,
+                    WEDDING_SONGS,
+                    POETRY_NON_LITURGICAL,
+                    EXHORTATORY,
+                    POLEMIC)
+
+BOOKS_PATH = ("Comments",
+              "Halakah",
+              "Havdala",
+              "Passover Songs",
+              "Purim Songs",
+              "Prayers",
+              "Shabbat Songs",
+              "Supplemental",
+              "Tammuz Av Echa",
+              "Wedding Songs",
+              "Poetry (Non-Liturgical)",
+              "Exhortatory",
+              "Polemic")
+
 
 class Command(BaseCommand):
     """ Populate book details. """

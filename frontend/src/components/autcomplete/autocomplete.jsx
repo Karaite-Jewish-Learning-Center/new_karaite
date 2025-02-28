@@ -1,17 +1,17 @@
-import React, {useState, useContext} from 'react'
-import TextField from '@material-ui/core/TextField'
-import Autocomplete from '@material-ui/lab/Autocomplete'
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useContext, useState } from 'react';
 //import {autocompleteUrl} from '../../constants/constants'
-import {storeContext} from '../../stores/context'
-import {messageContext} from "../../stores/messages/messageContext";
-import {useHistory} from 'react-router-dom'
-import {observer} from 'mobx-react-lite'
-import MenuBookIcon from '@material-ui/icons/MenuBook'
-import ImportContactsIcon from '@material-ui/icons/ImportContacts'
-import {parseEnglishRef} from '../../utils/parseBiblicalReference'
-import {validateBiblicalReference} from "../../utils/validateBiblicalReference";
-import {isABibleBook} from "../../utils/utils";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import { observer } from 'mobx-react-lite';
+import { useHistory } from 'react-router-dom';
+import { storeContext } from '../../stores/context';
+import { messageContext } from "../../stores/messages/messageContext";
+import { parseEnglishRef } from '../../utils/parseBiblicalReference';
+import { isABibleBook } from "../../utils/utils";
+import { validateBiblicalReference } from "../../utils/validateBiblicalReference";
 
 
 const AutoComplete = () => {
@@ -26,7 +26,7 @@ const AutoComplete = () => {
 
     let history = useHistory()
 
-    const showResults = () => {
+    const  showResults = () => {
         if (search.length === 0) return
 
         if (isABibleBook(search)) {

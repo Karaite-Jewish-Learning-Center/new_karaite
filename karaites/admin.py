@@ -18,7 +18,9 @@ from .models import (FirstLevel,
                      References,
                      FullTextSearch,
                      FullTextSearchHebrew,
-                     InvertedIndex)
+                     InvertedIndex,
+                     MenuItems,
+                     Kedushot)
 
 from django.conf import settings
 
@@ -103,6 +105,7 @@ admin.site.register(Parsha, ParshaAdmin)
 
 
 class AudioBookAdmin(KAdmin):
+    search_fields = ('audio_name',)
     list_display = ('audio_name', 'audiofile')
 
 
@@ -136,7 +139,7 @@ admin.site.register(BooksFootNotes, BookFootNotesAdmin)
 
 
 class SongsAdmin(KAdmin):
-    list_display = ('song_title', 'audi_song')
+    list_display = ('song_title', 'file_name', 'audi_song')
     search_fields = ('song_title',)
     actions = ['delete_selected']
 
@@ -176,7 +179,9 @@ admin.site.register(Songs, SongsAdmin)
 
 class ClassificationAdmin(KAdmin):
     list_display = ('classification_name',
-                    'classification_name_he_html',)
+                    'classification_name_he_html',
+                    'order')
+    list_editable = ('order',)
 
 
 admin.site.register(Classification, ClassificationAdmin)
@@ -184,12 +189,21 @@ admin.site.register(Classification, ClassificationAdmin)
 
 class KaraitesBookDetailsAdmin(KAdmin):
     save_on_top = True
-    list_editable = ('published',)
+    list_editable = ('published', 'order', 'kedushot_main_title', 'kedushot_title',
+                     'kedushot_sub_title', 'kedushot_expanded', 'kedushot_left')
     search_fields = ('book_title_en', 'book_title_he')
     list_display = ('user',
                     'processed',
+                    'order',
+                    'published',
+                    'kedushot_main_title',
+                    'kedushot_title',
+                    'kedushot_sub_title',
+                    'kedushot_expanded',
+                    'kedushot_left',
                     'book_title_en',
                     'book_title_he',
+                    'kedushot_order',
                     'author',
                     'first_level',
                     'book_classification',
@@ -207,13 +221,12 @@ class KaraitesBookDetailsAdmin(KAdmin):
                     'buy_link',
                     'index_lang',
                     'intro_to_html',
-                    'published',
                     'better_book')
 
-    list_filter = ('published', 'first_level',
+    list_filter = ('published', 'better_book', 'first_level',
                    'book_language', 'book_classification', 'book_title_en')
 
-    actions = ['delete_selected', 'publish_selected']
+    actions = ['delete_selected', 'publish_selected', 'unpublish_selected']
 
     def delete_selected(self, request, queryset):
         for obj in queryset:
@@ -240,6 +253,19 @@ class KaraitesBookDetailsAdmin(KAdmin):
 
     publish_selected.short_description = "Publish selected Karaites book details"
 
+    def unpublish_selected(self, request, queryset):
+        for obj in queryset:
+            obj.published = False
+            obj.save()
+
+        if queryset.count() == 1:
+            message = "1 Karaites book detail unpublished"
+        else:
+            message = "%s Karaites book details unpublished" % queryset.count()
+        self.message_user(request, message)
+
+    unpublish_selected.short_description = "Unpublish selected Karaites book details"
+
 
 admin.site.register(KaraitesBookDetails, KaraitesBookDetailsAdmin)
 
@@ -250,6 +276,7 @@ class DetailsProxyAdmin(KAdmin):
                     'processed',
                     'book_title_en',
                     'book_title_he',
+                    'kedushot_order',
                     'order',
                     'first_level',
                     'book_classification',
@@ -271,7 +298,7 @@ class DetailsProxyAdmin(KAdmin):
 
     list_editable = ('order',)
 
-    list_filter = ('first_level', 'book_language', 'book_classification', 'book_title_en')
+    list_filter = ('first_level', 'better_book', 'book_language', 'book_classification', 'book_title_en')
 
     # # don't allow changes on a proxy model, is just here to simplify data visualization
     # @staticmethod
@@ -321,7 +348,7 @@ class BetterBookFilter(admin.SimpleListFilter):
 class KaraitesBetterBooksAdmin(KAdmin):
     list_display = ('book', 'song', 'book_text', 'line_number', 'show_line_data', 'show_book_data')
     list_filter = (BetterBookFilter,)
-    search_fields = ('book', 'song')
+    search_fields = ('book__book_title_en', 'book__book_title_he')
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -380,3 +407,19 @@ class InvertedIndexAdmin(KAdmin):
 
 
 admin.site.register(InvertedIndex, InvertedIndexAdmin)
+
+
+class MenuItemsAdmin(KAdmin):
+    list_display = ('menu_item', 'complement', 'order')
+    list_editable = ('order',)
+
+
+admin.site.register(MenuItems, MenuItemsAdmin)
+
+
+class KedushotAdmin(KAdmin):
+    list_display = ('menu_title_left', 'menu_title_right', 'order', 'belongs_to')
+    list_editable = ('order',)
+
+
+admin.site.register(Kedushot, KedushotAdmin)
