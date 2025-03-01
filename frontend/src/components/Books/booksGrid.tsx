@@ -1,24 +1,24 @@
+import { Collapse, Grid, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { toJS } from 'mobx';
-import { observer } from 'mobx-react-lite';
-import React, { FC, useContext, useRef, useState } from 'react';
-import { ListRange, TableVirtuoso } from 'react-virtuoso';
-import { storeContext } from "../../stores/context";
-
-import { Grid } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import CommentIcon from '@material-ui/icons/Comment';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import React, { FC, useContext, useRef, useState } from 'react';
+import { ListRange, TableVirtuoso } from 'react-virtuoso';
 import {
     SCROLL_LATENCY_MS,
     SCROLL_LATENCY_SECONDS,
     songsUrl
 } from "../../constants/constants";
 import { AudioBookContext } from '../../stores/audioBookContext';
+import { storeContext } from "../../stores/context";
 import { ClosePanes, RefClick } from '../../types/commonTypes';
 import { iOS } from '../../utils/utils';
 import { AudioBookButton } from '../buttons/AudioBookButton';
@@ -28,11 +28,12 @@ import { CloseButton } from "../buttons/CloseButton";
 const HEBREW = 0
 const TRANSLITERATION = 1
 const ENGLISH = 2
-const QUAHAL = 6
+const RECITER = 6
 const BREAK = 10
 const FILLER = 11
+const PATTERN = 12
 const TOP_LINES = 0
-
+const COMMENTS = 11
 interface BooksInterface {
     paneNumber: number,
     bookData: any[]
@@ -53,8 +54,10 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [distanceFromTop, setDistanceFromTop] = useState(TOP_LINES)
     const virtuoso = useRef(null)
-    const  hasSongs = store.hasSongsBetter(paneNumber)
-    
+    const hasSongs = store.hasSongsBetter(paneNumber)
+    const data = toJS(bookData)
+    const [openComments, setOpenComments] = useState<{[key: number]: boolean}>({});
+    debugger
     if (bookData === undefined || bookData.length === 0) return null;
 
     const callFromEnded = () => {
@@ -62,8 +65,10 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         let currentItem = store.getCurrentItem(paneNumber)
         const len = bookData.length
         // skip english translation or any other that has filer = 1
+        
+       
         do
-            currentItem++
+             currentItem++
         while (currentItem < len && bookData[currentItem][FILLER] === "1")
 
         store.setCurrentItem(currentItem, paneNumber)
@@ -118,10 +123,6 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     let visibilityChanged = (range: ListRange) => {
         store.setGridVisibleRange(paneNumber, range.startIndex, range.endIndex)
     }
-    const onClose = () => {
-        audioBookStore.stop()
-        onClosePane(paneNumber)
-    }
     const onIntro = () => {
         // onIntroClick(paneNumber)
     }
@@ -134,35 +135,79 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     const onBuy = () => {
         // window.open(details.buy_link)
     }
+    const onClose = () => {
+        audioBookStore.stop()
+        onClosePane(paneNumber)
+    }
     const updateItemDistance = (i: number) => {
         store.setCurrentItem(i, paneNumber)
     }
     const onClick = (index: number) => {
         updateItemDistance(index)
     }
+    const toggleComment = (index: number) => {
+        setOpenComments(prev => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    };
     const ItemContent = (index: number, data: any) => {
         const currentIndex = store.getCurrentItem(paneNumber)
-        const startIndex = store.getGridVisibleRangeStart(paneNumber)
         let found = index === currentIndex
         const hebrewLen = data[HEBREW].length > 0
         const transliterationLen = data[TRANSLITERATION].length > 0
-        const seeData = toJS(data)
-        debugger
         const englishLen = data[ENGLISH].length > 0
+        const hasComment = data[COMMENTS] && data[COMMENTS].length > 0
+
         if (hebrewLen || transliterationLen || englishLen) {
             const breakLine = (data[BREAK] === "1" ? classes.break : '')
             const highlight = (found ? classes.highlight : '')
 
             if (hebrewLen && transliterationLen) {
-                console.log(data[QUAHAL],data[QUAHAL] === "Qahal"  )
-                const qahal = (data[QUAHAL] === "Qahal" ? classes.qahal : '')
+                const qahal = (data[RECITER] === "Qahal" ? classes.qahal : '')
 
                 return (
-                    <TableCell className={`${classes.tableCell} ${highlight}`}
-                               onClick={onClick.bind(this, index)}
-                    >
-                        <Typography className={`${classes.hebrew} ${breakLine} ${qahal}`}>{data[HEBREW]}</Typography>
-                        <Typography className={`${classes.transliteration} ${breakLine}  ${qahal}`}>{data[TRANSLITERATION]}</Typography>
+                    <TableCell className={`${classes.tableCell} ${highlight}`} onClick={onClick.bind(this, index)}>
+                        <div className={classes.rowContainer}>
+                             <div className={classes.mainContent}>
+                                <div className={classes.contentWrapper}>
+                                    <Typography className={`${classes.hebrew}`}>{data[HEBREW]}</Typography>
+                                    <Typography className={`${classes.transliteration} ${breakLine}`}>{data[TRANSLITERATION]}</Typography>
+                                </div>
+                                <Typography className={`${classes.english} ${breakLine} ${qahal}`}>{data[ENGLISH]}</Typography>
+                                
+                            </div>
+                            <div className={classes.reciterRow}>
+                                {data[RECITER] && (
+                                    <div className={classes.reciterContainer}>
+                                        <Typography className={classes.reciter}>{data[RECITER]}</Typography>
+                                    </div>
+                                )}
+                                {hasComment && (
+                                    <IconButton 
+                                        className={classes.commentButton}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleComment(index);
+                                        }}
+                                        size="small"
+                                    >
+                                        <CommentIcon fontSize="small" color={openComments[index] ? "primary" : "action"} />
+                                    </IconButton>
+                                )}
+                               
+                            </div>
+                             {hasComment && (
+                                     
+                                        <Collapse in={openComments[index]} timeout="auto" unmountOnExit>
+                                            <div className={classes.commentContainer}>
+                                                <Typography className={classes.comment}>{data[COMMENTS]}</Typography>
+                                            </div>
+                                        </Collapse>
+                                   
+                                )}
+                           
+                        </div>
                     </TableCell>
                 )
             } else {
@@ -187,33 +232,28 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
         <TableRow>
             <TableCell className={classes.header}>
                 <Grid container
-                      direction={direction}
                       className={classes.resources}
-                      justifyContent="flex-start"
+                      justifyContent="center"
                       alignItems="center"
                       spacing={1}>
 
-                    <Grid item xs={xsColumns1}>
-                        <p className={classes.pButtons}>
+                    <Grid item xs={12} className={classes.buttonContainer}>
+                        <div className={classes.pButtons}>
                             <CloseButton onClick={onClose}/>
-                            {/*<InfoButton onClick={onIntro}/>*/}
-                            {/*<TocButton onClick={onToc}/>*/}
-                            {/*<BookButton onClick={onBook}/>*/}
-                            {/*<BuyButton onClick={onBuy}/>*/}
                             {(hasSongs ? <AudioBookButton onClick={onAudioBookOnOff} onOff={audioBookPlaying} isSpeechError={false}/> : null)}
                             {(details.buy_link === '' ? null : <BuyButton onClick={onBuy}/>)}
-                        </p>
+                        </div>
                     </Grid>
 
-                    <Grid item xs={xsColumns1}>
-                        <Typography variant="h6" className={classes.hebrewTitle}>
-                            {details.book_title_he}
-                        </Typography>
-                        <Typography variant="h6" className={classes.englishTitle}>
-                            {details.book_title_en}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={xsColumns1}>
+                    <Grid item xs={12}>
+                        <div className={classes.titleContainer}>
+                            <Typography variant="h6" className={classes.hebrewTitle}>
+                                {details.book_title_he}
+                            </Typography>
+                            <Typography variant="h6" className={classes.englishTitle}>
+                                {details.book_title_en}
+                            </Typography>
+                        </div>
                     </Grid>
                 </Grid>
             </TableCell>
@@ -232,7 +272,7 @@ const BookGrid: FC<BooksInterface> = ({paneNumber, bookData, details, refClick, 
     // @ts-ignore
     return (
         <TableVirtuoso
-            className={classes.table}
+            className={classes.virtuosoTable}
             data={bookData}
             ref={virtuoso}
             // initialTopMostItemIndex={store.getCurrentItem(paneNumber)}
@@ -268,86 +308,193 @@ const useStyles = makeStyles((theme) => ({
     },
     tableCell: {
         width: '100%',
-        padding: 0,
+        padding: theme.spacing(1),
         border: 'none',
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(0.5),
+        },
+    },
+    rowContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        alignItems: 'center',
+    },
+    mainContent: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    contentWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        paddingBottom: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+    },
+    reciterContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        paddingBottom: theme.spacing(0.5),
     },
     highlight: {
-        backgroundColor: (theme.palette.type === 'light' ? '#11c4f114' : 'darkgrey'),
+        backgroundColor: (theme.palette.type === 'light' ? 'rgba(167, 176, 176, 0.42)' : 'rgba(211, 223, 223, 0.15)'),
     },
     paragraph: {
         width: '100%',
     },
     hebrew: {
         width: '50%',
-        float: 'left',
         fontFamily: 'SBL Hebrew',
         fontSize: 19,
         textAlign: 'right',
         direction: 'rtl',
         margin: 0,
-        padding: 1,
-        paddingRight: 10,
+        padding: theme.spacing(0.5),
+        paddingRight: theme.spacing(1),
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 17,
+        },
     },
     transliteration: {
         width: '50%',
-        float: 'left',
         textAlign: 'left',
         fontSize: 19,
         direction: 'ltr',
         margin: 0,
-        padding: 1,
-        paddingLeft: 10,
+        padding: theme.spacing(0.5),
+        paddingLeft: theme.spacing(1),
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 17,
+        },
     },
     english: {
+        width: '100%',
         textAlign: 'center',
         fontSize: 19,
-        color:  (theme.palette.type === 'light' ? '#575656FF' : '#C5C4C4FF'),
+        color: (theme.palette.type === 'light' ? '#575656FF' : '#C5C4C4FF'),
         direction: 'ltr',
         margin: 0,
-        padding: 1,
+        padding: theme.spacing(0.5),
+        marginTop: theme.spacing(0.5),
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 17,
+        },
     },
     break: {
-        paddingBottom: 15,
+        paddingBottom: theme.spacing(2),
     },
     header: {
         minWidth: '100%',
-        height: 50,
+        height: 'auto',
+        padding: theme.spacing(1),
         backgroundColor: (theme.palette.type === 'light' ? 'lightgrey' : '#444040'),
+    },
+    titleContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
     },
     hebrewTitle: {
         width: '50%',
-        float: 'left',
         textAlign: 'right',
         direction: 'rtl',
         fontFamily: 'SBL Hebrew',
         fontSize: 20,
-        paddingRight: 5,
-        whiteSpace: 'nowrap',
+        padding: theme.spacing(0.5),
+        paddingRight: theme.spacing(1),
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 18,
+        },
     },
     englishTitle: {
         width: '50%',
-        float: 'right',
         textAlign: 'left',
         direction: 'ltr',
         fontSize: 20,
-        paddingLeft: 5,
-        whiteSpace: 'nowrap',
+        padding: theme.spacing(0.5),
+        paddingLeft: theme.spacing(1),
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 18,
+        },
     },
     resources: {
         padding: 0,
         paddingTop: (iOS() ? 50 : 0),
         marginRight: 0,
-        minWidth: '100%',
+        width: '100%',
         minHeight: 60,
         margin: -12,
     },
     pButtons: {
         margin: 0,
         padding: 0,
-        whiteSpace: 'nowrap',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        [theme.breakpoints.up('sm')]: {
+            justifyContent: 'flex-start',
+        },
     },
     qahal: {
+        marginBottom: theme.spacing(2.5),
+    },
+    reciter: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: (theme.palette.type === 'light' ? '#575656FF' : '#C5C4C4FF'),
+        direction: 'ltr',
+        margin: 0,
+        padding: 0,
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 14,
+        },
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    virtuosoTable: {
+        width: '100%',
+        height: '100%',
+        overflowX: 'hidden',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '90%',
+        },
+    },
+    englishContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+    },
+    commentButton: {
+        padding: theme.spacing(0.25),
+        marginLeft: theme.spacing(1),
+    },
+    commentContainer: {
+        padding: theme.spacing(1),
+        borderRadius: theme.shape.borderRadius,
+        margin: theme.spacing(1, 0),
+    },
+    comment: {
+        width: '100%',
+        fontSize: 18,
         fontStyle: 'italic',
-        fontWeight: 'bold',
+        color: theme.palette.type === 'light' ? 'rgba(243, 9, 9, 0.98)' : 'rgba(216, 22, 22, 0.7)',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 14,
+        },
+    },
+    reciterRow: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: theme.spacing(1),
     },
 }))
