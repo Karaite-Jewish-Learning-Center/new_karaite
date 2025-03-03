@@ -26,11 +26,11 @@ const AutoComplete = () => {
 
     let history = useHistory()
 
-    const  showResults = () => {
+    const showResults = () => {
         if (search.length === 0) return
 
         if (isABibleBook(search)) {
-            const {refBook, refChapter, refVerse} = parseEnglishRef(search)
+            const { refBook, refChapter, refVerse } = parseEnglishRef(search)
 
             // show chapters menu
             if (refChapter === null && refVerse === null && refBook !== null) {
@@ -69,8 +69,8 @@ const AutoComplete = () => {
     }
 
     const onKeyUp = (event) => {
-        if (event.key === 'Enter' && search.length ===0) {
-           message.setMessage('Please enter a search term')
+        if (event.key === 'Enter' && search.length === 0) {
+            message.setMessage('Please enter a search term')
         }
         if (event.code === "Enter") {
             setIsOpen(() => false)
@@ -121,12 +121,12 @@ const AutoComplete = () => {
             onKeyUp={onKeyUp}
             onChange={onChange}
             getOptionLabel={(option) => option}
-            style={{width: 350, marginRight: 40}}
+            style={{ width: 350, marginRight: 40 }}
             inputValue={search}
             onInputChange={onInputChange}
             renderOption={(i) =>
                 <>
-                    {(options[i].c === 'V' ? <ImportContactsIcon/> : <MenuBookIcon/>)}
+                    {(options[i].c === 'V' ? <ImportContactsIcon /> : <MenuBookIcon />)}
                     <span>{' '}{options[i].w}</span>
                 </>
             }
