@@ -1,22 +1,19 @@
-import React, {useContext, FC} from 'react'
-import {makeStyles} from '@material-ui/core/styles'
-import {Grid} from '@material-ui/core';
-import {parseBiblicalReference} from '../utils/parseBiblicalReference';
-import {observer} from 'mobx-react-lite'
-import RightPane from './panes/RightPane';
-import RenderText from './tanakh/RenderText'
-import {makeRandomKey} from '../utils/utils';
-import {useHistory, useParams} from 'react-router-dom';
-import {storeContext} from "../stores/context";
-import {messageContext} from "../stores/messages/messageContext";
-import {translateMessage} from "./messages/translateMessages";
-import KaraitesBooks from "./karaites/karaitesBooks";
-import {useLocation} from "react-router-dom"
-import getBook from "./getBook";
-import {getFirstPart} from "../utils/utils";
-import {BookType, BibleReference} from "../types/commonTypes";
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { observer } from 'mobx-react-lite';
+import React, { FC, useContext, useEffect } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { storeContext } from "../stores/context";
+import { messageContext } from "../stores/messages/messageContext";
+import { BibleReference, BookType } from "../types/commonTypes";
+import { parseBiblicalReference } from '../utils/parseBiblicalReference';
+import { getFirstPart, makeRandomKey } from '../utils/utils';
 import BookGrid from './Books/booksGrid';
-import {toJS} from 'mobx'
+import getBook from "./getBook";
+import KaraitesBooks from "./karaites/karaitesBooks";
+import { translateMessage } from "./messages/translateMessages";
+import RightPane from './panes/RightPane';
+import RenderText from './tanakh/RenderText';
 
 interface BooksProps {
     type: BookType
@@ -47,6 +44,12 @@ const LoadBook: FC<BooksProps> = ({type}) => {
     const classes = useStyles()
 
     let history = useHistory()
+    
+    // Move getBook call to useEffect to prevent state updates during render
+    useEffect(() => {
+        getBook(book || '', +chapter, +verse, [], type, store, message)
+    }, [book, chapter, verse, type, store, message]);
+
     const onClosePane = (paneNumber: number) => {
         store.closePane(paneNumber)
 
@@ -158,8 +161,6 @@ const LoadBook: FC<BooksProps> = ({type}) => {
         }
         return jsx
     }
-
-    getBook(book || '', +chapter, +verse, [], type, store, message)
 
     if (store.getPanes().length === 0) return null
 

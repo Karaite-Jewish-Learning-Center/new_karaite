@@ -219,6 +219,7 @@ HEBREW_STOP_WORDS = {
 
 }
 
+IGNORED_WORDS_RESPONSE = {}
 
 AUTOCOMPLETE_TYPE = [
     ('B', 'Book'),

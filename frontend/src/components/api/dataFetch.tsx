@@ -3,8 +3,9 @@ export const fetchData = async (url: string): Promise<any> => {
     if (response.ok) {
         return await response.json()
     } else {
-        return Promise.reject('error')
+          return Promise.reject('error')
     }
+    
 }
 
 
