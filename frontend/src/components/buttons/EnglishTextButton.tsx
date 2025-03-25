@@ -1,14 +1,31 @@
+import { makeStyles, Tooltip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import TextFieldsIcon from '@material-ui/icons/TextFields';
 import { FC } from "react";
 import { ButtonPropsOnOff } from './types';
 
-export const EnglishTextButton: FC<ButtonPropsOnOff> = ({onClick, color="inherit", onOff}) =>
-  <IconButton 
-    aria-label="Toggle English Text"
-    component="span"
-    color={onOff ? "primary" : color}
-    onClick={onClick}
-  >
-    <TextFieldsIcon fontSize="small" />
-  </IconButton> 
+const useStyles = makeStyles((theme) => ({
+  englishText: {
+    fontSize: 18,
+    fontFamily: "SBL Hebrew",
+    color: ({ onOff }: { onOff: boolean }) => 
+      onOff 
+        ? theme.palette.type === 'dark' ? theme.palette.text.primary : theme.palette.text.primary
+        : theme.palette.action.disabled,
+  },
+}));
+
+export const EnglishTextButton: FC<ButtonPropsOnOff> = ({onClick, color="inherit", onOff}) => {
+  const classes = useStyles({ onOff });
+  return (
+  <Tooltip title="Toggle English Text">
+    <IconButton 
+      aria-label="Toggle English Text"
+      component="span"
+      color="inherit"
+      onClick={onClick}
+    >
+      <span className={classes.englishText}>E</span>
+    </IconButton> 
+  </Tooltip>
+  )
+}

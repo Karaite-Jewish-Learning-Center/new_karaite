@@ -1,4 +1,4 @@
-import { Collapse, Grid, IconButton, Tooltip } from "@material-ui/core";
+import { Collapse, Grid, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -68,14 +68,13 @@ const BookGrid: FC<BooksInterface> = ({
   const [openComments, setOpenComments] = useState<{ [key: number]: boolean }>(
     {}
   );
-  // Text visibility state (true = visible, false = hidden)
-  const [showHebrew, setShowHebrew] = useState(true);
-  const [showTransliteration, setShowTransliteration] = useState(true);
-  const [showEnglish, setShowEnglish] = useState(true);
-  
-  debugger;
-  if (bookData === undefined || bookData.length === 0) return null;
+  const [hebrewOn, setHebrewOn] = useState(true);
+  const [transliterationOn, setTransliterationOn] = useState(true);
+  const [englishOn, setEnglishOn] = useState(true);
 
+
+  if (bookData === undefined || bookData.length === 0) return null;
+ 
   const callFromEnded = () => {
     let currentItem = store.getCurrentItem(paneNumber);
     const len = bookData.length;
@@ -168,19 +167,7 @@ const BookGrid: FC<BooksInterface> = ({
       [index]: !prev[index],
     }));
   };
-
-  // Handler for toggling text visibility
-  const toggleHebrew = () => {
-    setShowHebrew(!showHebrew);
-  };
-
-  const toggleTransliteration = () => {
-    setShowTransliteration(!showTransliteration);
-  };
-
-  const toggleEnglish = () => {
-    setShowEnglish(!showEnglish);
-  };
+ 
 
   const ItemContent = (index: number, data: any) => {
     const currentIndex = store.getCurrentItem(paneNumber);
@@ -194,13 +181,9 @@ const BookGrid: FC<BooksInterface> = ({
       const breakLine = data[BREAK] === "1" ? classes.break : "";
       const highlight = found ? classes.highlight : "";
 
-      if (hebrewLen && transliterationLen) {
+      if ((hebrewLen && hebrewOn) || transliterationLen) {
         const qahal = data[RECITER] === "Qahal" ? classes.qahal : "";
         
-        // Calculate appropriate class for text width based on visibility
-        const hebrewClass = showHebrew && showTransliteration ? classes.halfWidth : classes.fullWidth;
-        const transliterationClass = showHebrew && showTransliteration ? classes.halfWidth : classes.fullWidth;
-
         return (
           <TableCell
             className={`${classes.tableCell} ${highlight}`}
@@ -209,20 +192,20 @@ const BookGrid: FC<BooksInterface> = ({
             <div className={classes.rowContainer}>
               <div className={classes.mainContent}>
                 <div className={classes.contentWrapper}>
-                  {showHebrew && (
-                    <Typography className={`${classes.hebrew} ${hebrewClass}`}>
-                      {data[HEBREW]}
-                    </Typography>
-                  )}
-                  {showTransliteration && (
+                    {hebrewOn && hebrewLen && (
+                      <Typography className={classes.hebrew}>
+                        {data[HEBREW]}
+                      </Typography>
+                    )}
                     <Typography
-                      className={`${classes.transliteration} ${transliterationClass} ${breakLine}`}
+                      className={`${classes.transliteration} ${
+                        hebrewOn ? classes.transliterationWithHebrew : classes.transliterationAlone
+                      } ${breakLine}`}
                     >
                       {data[TRANSLITERATION]}
                     </Typography>
-                  )}
                 </div>
-                {showEnglish && (
+                {englishOn && (
                   <Typography
                     className={`${classes.english} ${breakLine} ${qahal}`}
                   >
@@ -254,7 +237,7 @@ const BookGrid: FC<BooksInterface> = ({
                   </IconButton>
                 )}
               </div>
-              {hasComment && (
+              {hasComment && openComments[index] && (
                 <Collapse in={openComments[index]} timeout="auto" unmountOnExit>
                   <div className={classes.commentContainer}>
                     <Typography className={classes.comment}>
@@ -266,32 +249,15 @@ const BookGrid: FC<BooksInterface> = ({
             </div>
           </TableCell>
         );
-      } else {
-        return (
-          <TableCell
-            className={`${classes.tableCell} ${highlight}`}
-            onClick={onClick.bind(this, index)}
-          >
-            {showEnglish && (
-              <Typography
-                variant="body1"
-                className={`${classes.english} ${breakLine}`}
-              >
-                {data[ENGLISH]}
-              </Typography>
-            )}
-          </TableCell>
-        );
       }
-    } else {
-      return (
-        <TableCell className={classes.tableCell}>
-          <Typography variant="body1" className={classes.english}>
-            &nbsp;
-          </Typography>
-        </TableCell>
-      );
     }
+    return (
+      <TableCell className={classes.tableCell}>
+        <Typography variant="body1" className={classes.english}>
+          &nbsp;
+        </Typography>
+      </TableCell>
+    );
   };
   // @ts-ignore
   const fixedHeaderContent = () => (
@@ -315,32 +281,10 @@ const BookGrid: FC<BooksInterface> = ({
                 />
               ) : null}
               {details.buy_link === "" ? null : <BuyButton onClick={onBuy} />}
-              
-              <div className={classes.divider}></div>
-              
-              <Tooltip title="Hebrew Text">
-                <HebrewTextButton 
-                  onClick={toggleHebrew}
-                  onOff={showHebrew}
-                  isSpeechError={false}
-                />
-              </Tooltip>
-              
-              <Tooltip title="Transliteration">
-                <TransliterationButton 
-                  onClick={toggleTransliteration}
-                  onOff={showTransliteration}
-                  isSpeechError={false}
-                />
-              </Tooltip>
-              
-              <Tooltip title="English Translation">
-                <EnglishTextButton 
-                  onClick={toggleEnglish}
-                  onOff={showEnglish}
-                  isSpeechError={false}
-                />
-              </Tooltip>
+              <HebrewTextButton onClick={() => setHebrewOn(!hebrewOn)} onOff={hebrewOn} />
+               <EnglishTextButton onClick={() => setEnglishOn(!englishOn)} onOff={englishOn} />
+              <TransliterationButton onClick={() => setTransliterationOn(!transliterationOn)} onOff={transliterationOn} />
+             
             </div>
           </Grid>
 
@@ -431,6 +375,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     paddingBottom: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    justifyContent: "center",
   },
   reciterContainer: {
     display: "flex",
@@ -454,12 +399,13 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     padding: theme.spacing(0.5),
     paddingRight: theme.spacing(1),
+    width: "50%",
+    display: "flex",
     [theme.breakpoints.down("sm")]: {
       fontSize: 17,
     },
   },
   transliteration: {
-    textAlign: "left",
     fontSize: 19,
     direction: "ltr",
     margin: 0,
@@ -468,6 +414,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: 17,
     },
+  },
+  transliterationWithHebrew: {
+    textAlign: "left",
+    width: "50%",
+  },
+  transliterationAlone: {
+    textAlign: "center",
+    width: "100%",
   },
   english: {
     width: "100%",
