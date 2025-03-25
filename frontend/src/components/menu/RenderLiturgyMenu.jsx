@@ -4,29 +4,75 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { capitalize, makeRandomKey } from "../../utils/utils";
 import Filler from "../general/Filler.tsx";
 import { ToText } from "../general/ToText";
 import ArrowButton from "./ArrowButton";
+import ClearLiturgyLocalStorage from "./clearLiturgyLocalStorage";
 import liturgyMenuItems from "./LiturgyItems";
 
 
-export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => {
-    const [open, setOpen] = useState(Array.from({length: books.length}, i => i = false));
-    const [expandedSections, setExpandedSections] = useState({});
+export const RenderLiturgyMenu = ({ books, path, columns = 6, header = true }) => {
+    // Initialize state from localStorage or default values
+    const [open, setOpen] = useState(() => {
+        const saved = localStorage.getItem('liturgyMenuOpen');
+        return saved ? JSON.parse(saved) : Array.from({ length: books.length }, i => i = false);
+    });
+
+    const [expandedSections, setExpandedSections] = useState(() => {
+        const saved = localStorage.getItem('liturgyExpandedSections');
+        return saved ? JSON.parse(saved) : {};
+    });
+
     const classes = useStyles()
 
+    // Save scroll position when user scrolls
+    useEffect(() => {
+        const handleScroll = () => {
+            localStorage.setItem('liturgyScrollPosition', window.scrollY.toString());
+        };
+
+        const handleBeforeUnload = () => {
+            ClearLiturgyLocalStorage()
+        };
+
+        // Restore scroll position with a slight delay to ensure content is loaded
+        const savedScrollPosition = localStorage.getItem('liturgyScrollPosition');
+        if (savedScrollPosition) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: parseInt(savedScrollPosition),
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        // Add event listeners
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        // Cleanup - remove both event listeners
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []); // Empty dependency array means this runs once on mount
+
+    // Update localStorage when state changes
     const onClickArrow = key => {
-        //  change hide show class for element  id=key
-        setOpen({...open, [key]: !open[key]})
+        const newOpen = { ...open, [key]: !open[key] };
+        setOpen(newOpen);
+        localStorage.setItem('liturgyMenuOpen', JSON.stringify(newOpen));
     }
 
     const toggleSection = (sectionIndex) => {
-        setExpandedSections({
+        const newExpandedSections = {
             ...expandedSections,
             [sectionIndex]: !expandedSections[sectionIndex]
-        });
+        };
+        setExpandedSections(newExpandedSections);
+        localStorage.setItem('liturgyExpandedSections', JSON.stringify(newExpandedSections));
     };
 
     const classification = (obj) => {
@@ -46,7 +92,7 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
 
                 if (obj[key].book_classification === 'Shabbat Morning Services') {
                     // Create groups based on kedushot_expanded
-                    const shabbatItems = keys.filter(itemKey => 
+                    const shabbatItems = keys.filter(itemKey =>
                         obj[itemKey].book_classification === 'Shabbat Morning Services'
                     ).sort((a, b) => obj[a].order - obj[b].order); // Sort by order if available
 
@@ -70,8 +116,8 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                     const kedushotGroups = [];
                     for (let i = 0; i < groupBoundaries.length; i++) {
                         const startIdx = groupBoundaries[i];
-                        const endIdx = (i === groupBoundaries.length - 1) 
-                            ? shabbatItems.length 
+                        const endIdx = (i === groupBoundaries.length - 1)
+                            ? shabbatItems.length
                             : groupBoundaries[i + 1];
 
                         if (startIdx < endIdx) {
@@ -104,13 +150,26 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                                                     {group.mainTitle}
                                                 </Typography>
                                             )}
-                                            <div 
+                                            <div
                                                 onClick={() => toggleSection(groupIndex)}
                                                 className={classes.kedushotHeaderContainer}
                                             >
                                                 <Typography className={classes.kedushotHeader}>
-                                                    <span className={classes.kedushotTitle}>{group.title}</span>
-                                                    {group.subtitle && <span className={classes.kedushotSubtitle}>{group.subtitle}</span>}
+                                                    <div className={classes.kedushotContent}>
+                                                        <div className={classes.filler}>
+
+                                                        </div>
+                                                        <div className={classes.kedushotLeftSection}>
+                                                            <span className={classes.kedushotLeft}>{group.title}</span>
+                                                        </div>
+
+                                                        <div className={classes.kedushotMainSection}>
+                                                            {group.subtitle && <span className={classes.kedushotSubtitle}>{group.subtitle}</span>}
+                                                        </div>
+                                                        <div className={classes.filler1}>
+
+                                                        </div>
+                                                    </div>
                                                     {isExpanded ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                                                 </Typography>
                                             </div>
@@ -153,32 +212,36 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
     }
 
     const closeAll = () => {
-        setOpen(Array.from({length: books.length}, i => i = false));
-        // Also collapse all kedushot sections
+        const allClosed = Array.from({ length: books.length }, i => i = false);
+        setOpen(allClosed);
+        localStorage.setItem('liturgyMenuOpen', JSON.stringify(allClosed));
+
         const allSectionsClosed = {};
-        // Set all section keys to false (collapsed)
         Object.keys(expandedSections).forEach(key => {
             allSectionsClosed[key] = false;
         });
         setExpandedSections(allSectionsClosed);
+        localStorage.setItem('liturgyExpandedSections', JSON.stringify(allSectionsClosed));
     }
 
     const openAll = () => {
-        setOpen(Array.from({length: books.length}, i => i = true));
-        // Also expand all kedushot sections
+        const allOpen = Array.from({ length: books.length }, i => i = true);
+        setOpen(allOpen);
+        localStorage.setItem('liturgyMenuOpen', JSON.stringify(allOpen));
+
         const kedushotCount = getKedushotGroupsCount(books);
         const allSectionsOpen = {};
-        // Create an object with all section indices set to true (expanded)
         for (let i = 0; i < kedushotCount; i++) {
             allSectionsOpen[i] = true;
         }
         setExpandedSections(allSectionsOpen);
+        localStorage.setItem('liturgyExpandedSections', JSON.stringify(allSectionsOpen));
     }
 
     // Helper function to count kedushot groups
     const getKedushotGroupsCount = (obj) => {
         const keys = Object.keys(obj);
-        const shabbatItems = keys.filter(itemKey => 
+        const shabbatItems = keys.filter(itemKey =>
             obj[itemKey].book_classification === 'Shabbat Morning Services'
         );
 
@@ -204,21 +267,21 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
 
         return (
             <div className={classes.closeOpenAll}>
-                <IconButton  
-                    aria-label="open all" 
+                <IconButton
+                    aria-label="open all"
                     onClick={openAll}
                     disabled={allOpen}
                     className={allOpen ? classes.disabledButton : ''}
                 >
-                    <ArrowDropDownIcon/>
+                    <ArrowDropDownIcon />
                 </IconButton>
-                <IconButton  
-                    aria-label="close all" 
+                <IconButton
+                    aria-label="close all"
                     onClick={closeAll}
                     disabled={allClosed}
                     className={allClosed ? classes.disabledButton : ''}
                 >
-                    <ArrowDropUpIcon/>
+                    <ArrowDropUpIcon />
                 </IconButton>
             </div>
         )
@@ -230,10 +293,10 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
                 <Grid item>
                     <Typography className={classes.title} variant="h6" component="h2">{capitalize(path)}</Typography>
                     <Grid item>
-                        <ToText/>
-                        <CloseOpenALl/>
+                        <ToText />
+                        <CloseOpenALl />
                     </Grid>
-                    <hr className={classes.hr}/>
+                    <hr className={classes.hr} />
                 </Grid>
 
                 <Grid container spacing={2}>
@@ -246,13 +309,13 @@ export const RenderLiturgyMenu = ({books, path, columns = 6, header = true}) => 
         <div>
             <div className={classes.container}>
                 <Grid container
-                      spacing={2}
-                      direction="column"
-                      justifyContent="space-evenly"
-                      alignItems="center"
+                    spacing={2}
+                    direction="column"
+                    justifyContent="space-evenly"
+                    alignItems="center"
                 >
-                    <Filler xs={12}/>
-                    <LiturgyMenu/>
+                    <Filler xs={12} />
+                    <LiturgyMenu />
                 </Grid>
             </div>
 
@@ -292,7 +355,7 @@ const useStyles = makeStyles((theme) => ({
         padding: 0,
         width: 'auto',
     },
-    hr2: {      
+    hr2: {
         padding: 0,
         marginBottom: 20,
         width: 'auto',
@@ -347,9 +410,6 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
     },
     kedushotHeaderContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         marginBottom: 10,
         cursor: 'pointer',
         padding: '12px 16px',
@@ -365,8 +425,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        flex: 1,
-        gap: '16px',
+        width: '100%',
         '& svg': {
             marginLeft: '8px',
         },
@@ -376,14 +435,12 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: 10,
     },
     kedushotTitle: {
-        textAlign: 'left',
-        flex: 1,
+        color: 'red',
+        flex: '0 0 auto',
     },
     kedushotSubtitle: {
-        fontSize: '0.9em',
-        color: 'rgba(255, 255, 255, 0.85)',
-        textAlign: 'right',
-        marginLeft: '16px',
+        fontSize: '.9em',
+        flex: '0 0 auto',
     },
     kedushotSeparator: {
         borderLeft: '1px solid #ccc',
@@ -401,6 +458,32 @@ const useStyles = makeStyles((theme) => ({
     kedushotLeft: {
         fontSize: '0.9em',
         fontStyle: 'italic',
-        color: 'rgba(255, 255, 255, 0.85)',
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+    kedushotContent: {
+        display: 'flex',
+        alignItems: 'center',
+        flex: 1,
+        gap: '16px',
+    },
+    kedushotLeftSection: {
+        width: '50%',
+        textAlign: 'left',
+    },
+    kedushotMainSection: {
+        display: 'flex',
+        alignItems: 'left',
+        justifyContent: 'right',
+        maxWidth: '20%',
+        textAlign: 'left',
+        gap: '16px',
+        flex: 1,
+    },
+    filler: {
+        width: '25%',
+    },
+    filler1: {
+        width: '10%',
     },
 }));

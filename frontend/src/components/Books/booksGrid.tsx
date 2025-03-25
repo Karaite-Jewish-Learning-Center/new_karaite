@@ -1,4 +1,4 @@
-import { Collapse, Grid, IconButton } from "@material-ui/core";
+import { Collapse, Grid, IconButton, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -24,6 +24,9 @@ import { iOS } from "../../utils/utils";
 import { AudioBookButton } from "../buttons/AudioBookButton";
 import { BuyButton } from "../buttons/BuyButton";
 import { CloseButton } from "../buttons/CloseButton";
+import { EnglishTextButton } from "../buttons/EnglishTextButton";
+import { HebrewTextButton } from "../buttons/HebrewTextButton";
+import { TransliterationButton } from "../buttons/TransliterationButton";
 
 const HEBREW = 0;
 const TRANSLITERATION = 1;
@@ -65,6 +68,11 @@ const BookGrid: FC<BooksInterface> = ({
   const [openComments, setOpenComments] = useState<{ [key: number]: boolean }>(
     {}
   );
+  // Text visibility state (true = visible, false = hidden)
+  const [showHebrew, setShowHebrew] = useState(true);
+  const [showTransliteration, setShowTransliteration] = useState(true);
+  const [showEnglish, setShowEnglish] = useState(true);
+  
   debugger;
   if (bookData === undefined || bookData.length === 0) return null;
 
@@ -160,6 +168,20 @@ const BookGrid: FC<BooksInterface> = ({
       [index]: !prev[index],
     }));
   };
+
+  // Handler for toggling text visibility
+  const toggleHebrew = () => {
+    setShowHebrew(!showHebrew);
+  };
+
+  const toggleTransliteration = () => {
+    setShowTransliteration(!showTransliteration);
+  };
+
+  const toggleEnglish = () => {
+    setShowEnglish(!showEnglish);
+  };
+
   const ItemContent = (index: number, data: any) => {
     const currentIndex = store.getCurrentItem(paneNumber);
     let found = index === currentIndex;
@@ -174,6 +196,10 @@ const BookGrid: FC<BooksInterface> = ({
 
       if (hebrewLen && transliterationLen) {
         const qahal = data[RECITER] === "Qahal" ? classes.qahal : "";
+        
+        // Calculate appropriate class for text width based on visibility
+        const hebrewClass = showHebrew && showTransliteration ? classes.halfWidth : classes.fullWidth;
+        const transliterationClass = showHebrew && showTransliteration ? classes.halfWidth : classes.fullWidth;
 
         return (
           <TableCell
@@ -183,20 +209,26 @@ const BookGrid: FC<BooksInterface> = ({
             <div className={classes.rowContainer}>
               <div className={classes.mainContent}>
                 <div className={classes.contentWrapper}>
-                  <Typography className={`${classes.hebrew}`}>
-                    {data[HEBREW]}
-                  </Typography>
-                  <Typography
-                    className={`${classes.transliteration} ${breakLine}`}
-                  >
-                    {data[TRANSLITERATION]}
-                  </Typography>
+                  {showHebrew && (
+                    <Typography className={`${classes.hebrew} ${hebrewClass}`}>
+                      {data[HEBREW]}
+                    </Typography>
+                  )}
+                  {showTransliteration && (
+                    <Typography
+                      className={`${classes.transliteration} ${transliterationClass} ${breakLine}`}
+                    >
+                      {data[TRANSLITERATION]}
+                    </Typography>
+                  )}
                 </div>
-                <Typography
-                  className={`${classes.english} ${breakLine} ${qahal}`}
-                >
-                  {data[ENGLISH]}
-                </Typography>
+                {showEnglish && (
+                  <Typography
+                    className={`${classes.english} ${breakLine} ${qahal}`}
+                  >
+                    {data[ENGLISH]}
+                  </Typography>
+                )}
               </div>
               <div className={classes.reciterRow}>
                 {data[RECITER] && (
@@ -240,12 +272,14 @@ const BookGrid: FC<BooksInterface> = ({
             className={`${classes.tableCell} ${highlight}`}
             onClick={onClick.bind(this, index)}
           >
-            <Typography
-              variant="body1"
-              className={`${classes.english} ${breakLine}`}
-            >
-              {data[ENGLISH]}
-            </Typography>
+            {showEnglish && (
+              <Typography
+                variant="body1"
+                className={`${classes.english} ${breakLine}`}
+              >
+                {data[ENGLISH]}
+              </Typography>
+            )}
           </TableCell>
         );
       }
@@ -281,6 +315,32 @@ const BookGrid: FC<BooksInterface> = ({
                 />
               ) : null}
               {details.buy_link === "" ? null : <BuyButton onClick={onBuy} />}
+              
+              <div className={classes.divider}></div>
+              
+              <Tooltip title="Hebrew Text">
+                <HebrewTextButton 
+                  onClick={toggleHebrew}
+                  onOff={showHebrew}
+                  isSpeechError={false}
+                />
+              </Tooltip>
+              
+              <Tooltip title="Transliteration">
+                <TransliterationButton 
+                  onClick={toggleTransliteration}
+                  onOff={showTransliteration}
+                  isSpeechError={false}
+                />
+              </Tooltip>
+              
+              <Tooltip title="English Translation">
+                <EnglishTextButton 
+                  onClick={toggleEnglish}
+                  onOff={showEnglish}
+                  isSpeechError={false}
+                />
+              </Tooltip>
             </div>
           </Grid>
 
@@ -387,7 +447,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   hebrew: {
-    width: "50%",
     fontFamily: "SBL Hebrew",
     fontSize: 19,
     textAlign: "right",
@@ -400,7 +459,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   transliteration: {
-    width: "50%",
     textAlign: "left",
     fontSize: 19,
     direction: "ltr",
@@ -476,6 +534,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     display: "flex",
     flexWrap: "wrap",
+    alignItems: "center",
     justifyContent: "center",
     [theme.breakpoints.up("sm")]: {
       justifyContent: "flex-start",
@@ -542,5 +601,22 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: theme.spacing(1),
+  },
+  divider: {
+    height: 24,
+    width: 1,
+    margin: theme.spacing(0, 1),
+    backgroundColor: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.23)" : "rgba(255, 255, 255, 0.23)",
+    display: "inline-block",
+    alignSelf: "center",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+  halfWidth: {
+    width: "50%",
+  },
+  fullWidth: {
+    width: "100%",
   },
 }));

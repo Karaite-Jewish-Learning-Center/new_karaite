@@ -1,23 +1,16 @@
-import React, {useContext, useEffect, useRef, useState, useCallback} from 'react'
-import {Virtuoso} from 'react-virtuoso'
+import { observer } from 'mobx-react-lite'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { Virtuoso } from 'react-virtuoso'
+import { DELAY_TO_START_NEXT_SENTENCE, SCROLL_LATENCY_MS, versesByBibleBook } from "../../constants/constants"
+import { AudioBookContext } from "../../stores/audioBookContext"
+import { storeContext } from "../../stores/context"
+import { messageContext } from "../../stores/messages/messageContext"
+import { speechContext } from "../../stores/ttspeechContext"
 import ChapterHeaderVerse from './ChapterHeaderVerse'
 import RenderHeader from './RenderHeader'
-import {observer} from 'mobx-react-lite'
-import {storeContext} from "../../stores/context";
-import {AudioBookContext} from "../../stores/audioBookContext";
-import {speechContext} from "../../stores/ttspeechContext";
-import {audioBooksUrl, versesByBibleBook} from "../../constants/constants";
-import {
-    START_AUDIO_BOOK,
-    AUDIO_BOOK_ID,
-    SCROLL_LATENCY_MS,
-    SCROLL_LATENCY_SECONDS,
-    DELAY_TO_START_NEXT_SENTENCE
-} from "../../constants/constants";
-import {messageContext} from "../../stores/messages/messageContext";
 
 
-const RenderTextGrid = ({paneNumber, onClosePane}) => {
+const RenderTextGrid = ({ paneNumber, onClosePane }) => {
     const store = useContext(storeContext)
     const speech = useContext(speechContext)
     const audioBookStore = useContext(AudioBookContext)
@@ -26,7 +19,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
     const [speaking, setSpeaking] = useState(false)
     const [audioBookPlaying, setAudioBookPlaying] = useState(false)
     const [flip, setFlip] = useState([false, false])
-    const [gridVisibleRange, setGridVisibleRange] = useState({startIndex: 0, endIndex: 0})
+    const [gridVisibleRange, setGridVisibleRange] = useState({ startIndex: 0, endIndex: 0 })
     const virtuoso = useRef(null)
 
     const callFromEnded = useCallback(() => {
@@ -175,23 +168,23 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
             gridVisibleRange={gridVisibleRange}
             paneNumber={paneNumber}
             audioBookPlaying={audioBookPlaying}
-            speaking={speaking}/>
+            speaking={speaking} />
 
     let currentChapter = calculateCurrentChapter()
 
     return (
         <>
             <RenderHeader book={book}
-                          paneNumber={paneNumber}
-                          chapter={currentChapter}
-                          onClosePane={onClosePane}
-                          isSpeechError={speech.getVoicesStatusError()}
-                          onSpeakOnOffHe={onSpeakOnOffHe}
-                          onSpeakOnOffEn={onSpeakOnOffEn}
-                          flip={flip}
-                // onAudioBookOnOff={onAudioBookOnOff}
-                // audioBookPlaying={audioBookPlaying}
-                // isAudioBook={store.isAudioBook(paneNumber)}
+                paneNumber={paneNumber}
+                chapter={currentChapter}
+                onClosePane={onClosePane}
+                isSpeechError={speech.getVoicesStatusError()}
+                onSpeakOnOffHe={onSpeakOnOffHe}
+                onSpeakOnOffEn={onSpeakOnOffEn}
+                flip={flip}
+            // onAudioBookOnOff={onAudioBookOnOff}
+            // audioBookPlaying={audioBookPlaying}
+            // isAudioBook={store.isAudioBook(paneNumber)}
 
             />
             {/* must update current item when click on torah Portions */}
@@ -204,7 +197,7 @@ const RenderTextGrid = ({paneNumber, onClosePane}) => {
                 components={{
                     Footer: () => {
                         return (
-                            <div style={{padding: '1rem', textAlign: 'center'}}>
+                            <div style={{ padding: '1rem', textAlign: 'center' }}>
                                 Book end.
                             </div>
                         )

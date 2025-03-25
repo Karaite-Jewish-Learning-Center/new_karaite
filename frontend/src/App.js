@@ -36,15 +36,26 @@ const NullComponent = () => null;
 
 function App() {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme:dark)');
+    const [themeMode, setThemeMode] = React.useState(() => {
+        const savedTheme = localStorage.getItem('themeMode');
+        return savedTheme || (prefersDarkMode ? 'dark' : 'light');
+    });
+
     const theme = React.useMemo(
         () =>
             createTheme({
                 palette: {
-                    type: prefersDarkMode ? 'dark' : 'light',
+                    type: themeMode,
                 },
             }),
-        [prefersDarkMode],
+        [themeMode],
     );
+
+    const toggleTheme = () => {
+        const newTheme = themeMode === 'light' ? 'dark' : 'light';
+        setThemeMode(newTheme);
+        localStorage.setItem('themeMode', newTheme);
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -55,7 +66,7 @@ function App() {
                         <MessageProvider>
                             <ReferenceProvider>
                                 <BrowserRouter>
-                                    <MyAppBar/>
+                                    <MyAppBar themeMode={themeMode} onThemeToggle={toggleTheme}/>
                                     <Message/>
                                     <LoadingSpin/>
                                     <Track/>

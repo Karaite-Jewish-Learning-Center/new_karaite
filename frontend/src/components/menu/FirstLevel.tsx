@@ -1,11 +1,12 @@
-import React, {useContext} from 'react'
-import {Link} from 'react-router-dom'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import {storeContext} from "../../stores/context";
-import {referenceContext} from "../../stores/references/referenceContext";
-import {makeStyles} from '@material-ui/core/styles'
-import {observer} from 'mobx-react-lite';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { observer } from 'mobx-react-lite';
+import { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { storeContext } from "../../stores/context";
+import { referenceContext } from "../../stores/references/referenceContext";
+import ClearLiturgyLocalStorage from './clearLiturgyLocalStorage';
 
 const HEBREW = 1
 const ENGLISH = 0
@@ -17,7 +18,11 @@ const FirstLevel = () => {
     const classes = useStyles()
 
     store.resetPanes()
-
+    useEffect(() => {
+        // this does not work when navigate to another page
+        // work for page refresh
+        ClearLiturgyLocalStorage()
+    }, [])
     if (classification === null) return null;
 
     const levels = Object.keys(classification).map(key =>
@@ -34,7 +39,7 @@ const FirstLevel = () => {
             </div>
             <hr/>
         </Grid>)
-
+    
     return (
         <div className={classes.root}>
             <Grid container item xl={6} lg={6} md={6} sm={6} xs={12}

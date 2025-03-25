@@ -1,19 +1,17 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import { Hidden, Typography } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import { Link } from 'react-router-dom';
+import AutoComplete from '../autcomplete/autocomplete';
 
-import {Hidden, Typography} from '@material-ui/core';
-import {Link} from 'react-router-dom';
-import AutoComplete from '../autcomplete/autocomplete'
-
-
-export default function PrimarySearchAppBar({theme}) {
-
+export default function PrimarySearchAppBar({ themeMode, onThemeToggle }) {
     const classes = useStyles();
 
     return (
-
         <AppBar position="fixed" color="default">
             <Toolbar>
                 <Typography className={classes.name} component="h3">
@@ -30,21 +28,19 @@ export default function PrimarySearchAppBar({theme}) {
                         <Link className={classes.link} to="/acknowledgments/">Acknowledgments</Link>
                     </Typography>
                 </Hidden>
-                {/*<Typography component="h3">*/}
-                {/*    <Link className={classes.link} to="/"><SearchIcon /></Link>*/}
-                {/*</Typography>*/}
 
                 <div className={classes.sectionDesktop}>
-                    <AutoComplete/>
-
+                    <AutoComplete />
+                    <IconButton
+                        color="inherit"
+                        onClick={onThemeToggle}
+                        className={classes.themeButton}
+                    >
+                        {themeMode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                    </IconButton>
                 </div>
-                {/*<div className={classes.sectionMobile}>*/}
-                {/*    <AutoComplete/>*/}
-                {/*    */}
-                {/*</div>*/}
             </Toolbar>
         </AppBar>
-
     );
 }
 
@@ -53,25 +49,11 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         justifyContent: 'flex-end',
         display: 'flex',
-        // [theme.breakpoints.down('xl')]: {
-        //     display: 'flex',
-        // },
-        // [theme.breakpoints.down('sm')]: {
-        //     display: 'none',
-        // }
+        alignItems: 'center',
     },
-    // sectionMobile: {
-    //     flexGrow: 1,
-    //     justifyContent: 'flex-end',
-    //     [theme.breakpoints.down('xl')]: {
-    //         display: 'none',
-    //     },
-    //     [theme.breakpoints.down('sm')]: {
-    //         display: 'flex',
-    //     },
-    // },
-
-
+    themeButton: {
+        marginLeft: theme.spacing(2),
+    },
     name: {
         fontSize: 24,
     },
@@ -80,5 +62,4 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 10,
         marginTop: 2,
     },
-
 }));
