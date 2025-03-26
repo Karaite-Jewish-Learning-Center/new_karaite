@@ -191,19 +191,21 @@ const BookGrid: FC<BooksInterface> = ({
           >
             <div className={classes.rowContainer}>
               <div className={classes.mainContent}>
-                <div className={classes.contentWrapper}>
+                <div className={`${classes.contentWrapper} ${!transliterationOn && !hebrewOn ? classes.contentWrapperCentered : ''}`}>
                     {hebrewOn && hebrewLen && (
-                      <Typography className={classes.hebrew}>
+                      <Typography className={`${classes.hebrew} ${!transliterationOn ? classes.fullWidth : ''}`}>
                         {data[HEBREW]}
                       </Typography>
                     )}
-                    <Typography
-                      className={`${classes.transliteration} ${
-                        hebrewOn ? classes.transliterationWithHebrew : classes.transliterationAlone
-                      } ${breakLine}`}
-                    >
-                      {data[TRANSLITERATION]}
-                    </Typography>
+                    {transliterationOn && transliterationLen && (
+                      <Typography
+                        className={`${classes.transliteration} ${
+                          hebrewOn ? classes.transliterationWithHebrew : classes.transliterationAlone
+                        } ${breakLine}`}
+                      >
+                        {data[TRANSLITERATION]}
+                      </Typography>
+                    )}
                 </div>
                 {englishOn && (
                   <Typography
@@ -216,8 +218,8 @@ const BookGrid: FC<BooksInterface> = ({
               <div className={classes.reciterRow}>
                 {data[RECITER] && (
                   <div className={classes.reciterContainer}>
-                    <Typography className={classes.reciter}>
-                      {data[RECITER]}
+                    <Typography className={classes.filler}>
+                      {/* {data[RECITER]} */}
                     </Typography>
                   </div>
                 )}
@@ -375,6 +377,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     paddingBottom: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    justifyContent: "space-between",
+  },
+  contentWrapperCentered: {
     justifyContent: "center",
   },
   reciterContainer: {
@@ -572,5 +577,10 @@ const useStyles = makeStyles((theme) => ({
   },
   fullWidth: {
     width: "100%",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  filler: {
+    minHeight: 20
   },
 }));
