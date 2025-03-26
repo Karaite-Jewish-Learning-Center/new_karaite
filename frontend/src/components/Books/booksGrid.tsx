@@ -24,6 +24,9 @@ import { iOS } from "../../utils/utils";
 import { AudioBookButton } from "../buttons/AudioBookButton";
 import { BuyButton } from "../buttons/BuyButton";
 import { CloseButton } from "../buttons/CloseButton";
+import { EnglishTextButton } from "../buttons/EnglishTextButton";
+import { HebrewTextButton } from "../buttons/HebrewTextButton";
+import { TransliterationButton } from "../buttons/TransliterationButton";
 
 const HEBREW = 0;
 const TRANSLITERATION = 1;
@@ -65,9 +68,13 @@ const BookGrid: FC<BooksInterface> = ({
   const [openComments, setOpenComments] = useState<{ [key: number]: boolean }>(
     {}
   );
-  debugger;
-  if (bookData === undefined || bookData.length === 0) return null;
+  const [hebrewOn, setHebrewOn] = useState(true);
+  const [transliterationOn, setTransliterationOn] = useState(true);
+  const [englishOn, setEnglishOn] = useState(true);
 
+
+  if (bookData === undefined || bookData.length === 0) return null;
+ 
   const callFromEnded = () => {
     let currentItem = store.getCurrentItem(paneNumber);
     const len = bookData.length;
@@ -160,6 +167,8 @@ const BookGrid: FC<BooksInterface> = ({
       [index]: !prev[index],
     }));
   };
+ 
+
   const ItemContent = (index: number, data: any) => {
     const currentIndex = store.getCurrentItem(paneNumber);
     let found = index === currentIndex;
@@ -172,9 +181,9 @@ const BookGrid: FC<BooksInterface> = ({
       const breakLine = data[BREAK] === "1" ? classes.break : "";
       const highlight = found ? classes.highlight : "";
 
-      if (hebrewLen && transliterationLen) {
+      if ((hebrewLen && hebrewOn) || transliterationLen) {
         const qahal = data[RECITER] === "Qahal" ? classes.qahal : "";
-
+        
         return (
           <TableCell
             className={`${classes.tableCell} ${highlight}`}
@@ -182,27 +191,35 @@ const BookGrid: FC<BooksInterface> = ({
           >
             <div className={classes.rowContainer}>
               <div className={classes.mainContent}>
-                <div className={classes.contentWrapper}>
-                  <Typography className={`${classes.hebrew}`}>
-                    {data[HEBREW]}
-                  </Typography>
-                  <Typography
-                    className={`${classes.transliteration} ${breakLine}`}
-                  >
-                    {data[TRANSLITERATION]}
-                  </Typography>
+                <div className={`${classes.contentWrapper} ${!transliterationOn && !hebrewOn ? classes.contentWrapperCentered : ''}`}>
+                    {hebrewOn && hebrewLen && (
+                      <Typography className={`${classes.hebrew} ${!transliterationOn ? classes.fullWidth : ''}`}>
+                        {data[HEBREW]}
+                      </Typography>
+                    )}
+                    {transliterationOn && transliterationLen && (
+                      <Typography
+                        className={`${classes.transliteration} ${
+                          hebrewOn ? classes.transliterationWithHebrew : classes.transliterationAlone
+                        } ${breakLine}`}
+                      >
+                        {data[TRANSLITERATION]}
+                      </Typography>
+                    )}
                 </div>
-                <Typography
-                  className={`${classes.english} ${breakLine} ${qahal}`}
-                >
-                  {data[ENGLISH]}
-                </Typography>
+                {englishOn && (
+                  <Typography
+                    className={`${classes.english} ${breakLine} ${qahal}`}
+                  >
+                    {data[ENGLISH]}
+                  </Typography>
+                )}
               </div>
               <div className={classes.reciterRow}>
                 {data[RECITER] && (
                   <div className={classes.reciterContainer}>
-                    <Typography className={classes.reciter}>
-                      {data[RECITER]}
+                    <Typography className={classes.filler}>
+                      {/* {data[RECITER]} */}
                     </Typography>
                   </div>
                 )}
@@ -222,7 +239,7 @@ const BookGrid: FC<BooksInterface> = ({
                   </IconButton>
                 )}
               </div>
-              {hasComment && (
+              {hasComment && openComments[index] && (
                 <Collapse in={openComments[index]} timeout="auto" unmountOnExit>
                   <div className={classes.commentContainer}>
                     <Typography className={classes.comment}>
@@ -234,30 +251,15 @@ const BookGrid: FC<BooksInterface> = ({
             </div>
           </TableCell>
         );
-      } else {
-        return (
-          <TableCell
-            className={`${classes.tableCell} ${highlight}`}
-            onClick={onClick.bind(this, index)}
-          >
-            <Typography
-              variant="body1"
-              className={`${classes.english} ${breakLine}`}
-            >
-              {data[ENGLISH]}
-            </Typography>
-          </TableCell>
-        );
       }
-    } else {
-      return (
-        <TableCell className={classes.tableCell}>
-          <Typography variant="body1" className={classes.english}>
-            &nbsp;
-          </Typography>
-        </TableCell>
-      );
     }
+    return (
+      <TableCell className={classes.tableCell}>
+        <Typography variant="body1" className={classes.english}>
+          &nbsp;
+        </Typography>
+      </TableCell>
+    );
   };
   // @ts-ignore
   const fixedHeaderContent = () => (
@@ -281,6 +283,10 @@ const BookGrid: FC<BooksInterface> = ({
                 />
               ) : null}
               {details.buy_link === "" ? null : <BuyButton onClick={onBuy} />}
+              <HebrewTextButton onClick={() => setHebrewOn(!hebrewOn)} onOff={hebrewOn} />
+               <EnglishTextButton onClick={() => setEnglishOn(!englishOn)} onOff={englishOn} />
+              <TransliterationButton onClick={() => setTransliterationOn(!transliterationOn)} onOff={transliterationOn} />
+             
             </div>
           </Grid>
 
@@ -371,6 +377,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     paddingBottom: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    justifyContent: "space-between",
+  },
+  contentWrapperCentered: {
+    justifyContent: "center",
   },
   reciterContainer: {
     display: "flex",
@@ -387,7 +397,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   hebrew: {
-    width: "50%",
     fontFamily: "SBL Hebrew",
     fontSize: 19,
     textAlign: "right",
@@ -395,13 +404,13 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     padding: theme.spacing(0.5),
     paddingRight: theme.spacing(1),
+    width: "50%",
+    display: "flex",
     [theme.breakpoints.down("sm")]: {
       fontSize: 17,
     },
   },
   transliteration: {
-    width: "50%",
-    textAlign: "left",
     fontSize: 19,
     direction: "ltr",
     margin: 0,
@@ -410,6 +419,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: 17,
     },
+  },
+  transliterationWithHebrew: {
+    textAlign: "left",
+    width: "50%",
+  },
+  transliterationAlone: {
+    textAlign: "center",
+    width: "100%",
   },
   english: {
     width: "100%",
@@ -476,6 +493,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     display: "flex",
     flexWrap: "wrap",
+    alignItems: "center",
     justifyContent: "center",
     [theme.breakpoints.up("sm")]: {
       justifyContent: "flex-start",
@@ -542,5 +560,27 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: theme.spacing(1),
+  },
+  divider: {
+    height: 24,
+    width: 1,
+    margin: theme.spacing(0, 1),
+    backgroundColor: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.23)" : "rgba(255, 255, 255, 0.23)",
+    display: "inline-block",
+    alignSelf: "center",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+  halfWidth: {
+    width: "50%",
+  },
+  fullWidth: {
+    width: "100%",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  filler: {
+    minHeight: 20
   },
 }));

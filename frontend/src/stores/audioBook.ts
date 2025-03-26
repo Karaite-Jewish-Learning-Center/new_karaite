@@ -1,5 +1,5 @@
-import {makeAutoObservable, observable} from "mobx"
-import {CallBack} from '../types/commonTypes';
+import { makeAutoObservable, observable } from "mobx";
+import { CallBack } from '../types/commonTypes';
 
 
 class AudioBook {
@@ -11,7 +11,7 @@ class AudioBook {
     ended = () => {}
     loading: boolean = false
     playing: boolean = false
-
+    startTime: number = 0
     constructor() {
         makeAutoObservable(this, {
             audio: observable,
@@ -50,6 +50,7 @@ class AudioBook {
             ended =()=>{}): void => {
         this.callback = onUpdate
         this.ended = ended
+        this.startTime = start
         this.audio.currentTime = start
         this.audio.play()
         this.playing = true
@@ -63,7 +64,7 @@ class AudioBook {
         this.callback = () => {}
         this.audio.pause()
         this.ready = false
-        this.audio.currentTime = 0
+        this.audio.currentTime = this.startTime
         this.playing = false
     }
 

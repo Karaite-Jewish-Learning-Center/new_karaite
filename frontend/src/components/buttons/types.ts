@@ -1,5 +1,5 @@
-import {MouseEventHandler} from "react";
-import {PropTypes} from "@material-ui/core";
+import { PropTypes } from "@material-ui/core";
+import { MouseEventHandler } from "react";
 
 export interface ButtonProps {
     onClick: MouseEventHandler;
@@ -17,7 +17,7 @@ export interface ButtonPropsOnOff {
     onClick: MouseEventHandler;
     color?: PropTypes.Color;
     onOff: boolean;
-    isSpeechError: boolean;
+    isSpeechError?: boolean;
 }
 
 interface song {
