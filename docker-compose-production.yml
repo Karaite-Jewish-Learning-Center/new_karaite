@@ -146,7 +146,7 @@ services:
       - .env
     environment:
       - DEBUG=0
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,dev.karaites.org
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,kjlc.karaites.org
       - SECRET_KEY=${SECRET_KEY}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
@@ -159,7 +159,7 @@ services:
       - redis
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`dev.karaites.org`) && PathPrefix(`/api`, `/admin`)"
+      - "traefik.http.routers.backend.rule=Host(`kjlc.karaites.org`) && PathPrefix(`/api`, `/admin`)"
       - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
 
@@ -174,7 +174,7 @@ services:
           memory: 128M
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`dev.karaites.org`)"
+      - "traefik.http.routers.nginx.rule=Host(`kjlc.karaites.org`)"
       - "traefik.http.routers.nginx.tls.certresolver=letsencrypt"
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
     expose:
