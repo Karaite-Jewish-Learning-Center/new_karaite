@@ -71,6 +71,20 @@ class AudioBook {
     cancel = (): void => {
         this.stop()
     }
+
+    reset = (): void => {
+        this.stop()
+        this.ready = false
+        this.startTime = 0
+    }
+
+    resume = (): void => {
+        if (!this.playing) {
+            this.audio.play()
+            this.playing = true
+        }
+    }
+
     getIsPlaying = (): boolean => this.playing
 }
 
