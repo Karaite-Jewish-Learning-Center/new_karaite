@@ -289,7 +289,7 @@ export const RenderLiturgyMenu = ({ books, path, columns = 6, header = true }) =
 
     const LiturgyMenu = () => {
         return (
-            <Grid item xs={6} sm={columns}>
+            <Grid item xs={12} sm={columns}>
                 <Grid item>
                     <Typography className={classes.title} variant="h6" component="h2">{capitalize(path)}</Typography>
                     <Grid item>
@@ -327,10 +327,14 @@ export const RenderLiturgyMenu = ({ books, path, columns = 6, header = true }) =
 const useStyles = makeStyles((theme) => ({
     container: {
         margin: 'auto',
-
         height: '100%',
         fontSize: 18,
         fontFamily: 'SBL Hebrew',
+        // breakpoint for mobile
+        [theme.breakpoints.down('sm')]: {
+            padding: 10,
+        },
+
     },
     title: {
         minHeight: 50,

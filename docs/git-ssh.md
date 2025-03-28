@@ -13,7 +13,7 @@ $ ssh-keygen -t rsa -b 4096 -C "
 ```txt
 Host *
   AddKeysToAgent yes
-  User sandro.fernandes@softrent.com.br
+  User user@email.com
   IdentityFile ~/.ssh/key for the site
 
 ServerAliveInterval 50

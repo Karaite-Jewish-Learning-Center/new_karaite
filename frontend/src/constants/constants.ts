@@ -20,11 +20,11 @@ let secure: string
 if (process.env.NODE_ENV === 'development') {
     domain = 'localhost:8000'
     secure = 'http'
-} 
+} else {
 
-domain = 'kjlc.karaites.org'
-secure = 'https'
-
+    domain = 'kjlc.karaites.org'
+    secure = 'https'
+}
 
 export const  apiUrl =  `${secure}://${domain}/api/v1/`
 export const audioBooksUrl = `${secure}://${domain}/media/audio-books/`

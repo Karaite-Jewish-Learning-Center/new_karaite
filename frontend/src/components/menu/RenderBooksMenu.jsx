@@ -1,15 +1,13 @@
-import React from 'react'
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { capitalize, liturgyUrl, makeRandomKey } from "../../utils/utils";
+import { MusicBadge } from "../bages/musicBadge";
 import Filler from "../general/Filler.tsx";
-import {makeStyles} from "@material-ui/core/styles";
-import {capitalize, makeRandomKey} from "../../utils/utils";
-import {ToText} from "../general/ToText";
-import {MusicBadge} from "../bages/musicBadge";
-import {liturgyUrl} from "../../utils/utils";
+import { ToText } from "../general/ToText";
 
-export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
+export const RenderBooksMenu = ({ books, path, columns = 6, header = true }) => {
 
     const classes = useStyles()
 
@@ -28,7 +26,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
                 }
                 comp.push(
                     <Grid item xs={12} key={makeRandomKey()}>
-                        <hr className={classes.hr}/>
+                        <hr className={classes.hr} />
                         <Typography variant="h6" className={classes.title}>
                             {capitalize(separator)}
                         </Typography>
@@ -42,17 +40,17 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
             comp.push(
                 <Link to={url} key={makeRandomKey()}>
                     <div className={classes.item}>
-                    <span className={classes.left}>
-                        <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
-                    </span>
+                        <span className={classes.left}>
+                            <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
+                        </span>
                         <span className={classes.note}>
-                         <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book}/>
-                    </span>
+                            <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book} />
+                        </span>
                         <span className={classes.right}>
-                        <Typography className={classes.bookTitleEn}>
-                            {obj[key].book_title_en}
-                        </Typography>
-                    </span>
+                            <Typography className={classes.bookTitleEn}>
+                                {obj[key].book_title_en}
+                            </Typography>
+                        </span>
                     </div>
                 </Link>
             )
@@ -60,7 +58,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
         })
         comp.push(
             <Grid item xs={12} key={makeRandomKey()}>
-                <hr className={classes.hr}/>
+                <hr className={classes.hr} />
                 <Typography variant="h6" className={classes.title}>
                 </Typography>
             </Grid>
@@ -74,7 +72,7 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
             <Grid item>
                 <Typography className={classes.title} variant="h6" component="h2">{capitalize(path)}</Typography>
             </Grid>
-            <ToText/>
+            <ToText />
             <Grid container spacing={2}>
                 {populate(books)}
             </Grid>
@@ -83,12 +81,12 @@ export const RenderBooksMenu = ({books, path, columns = 6, header = true}) => {
 
     return (<div className={classes.container}>
         <Grid container
-              direction="column"
-              justifycontent="space-evenly"
-              alignItems="center">
-            <Filler xs={12}/>
-            <MainMenu/>
-            <Filler xs={12}/>
+            direction="column"
+            justifycontent="space-evenly"
+            alignItems="center">
+            <Filler xs={12} />
+            <MainMenu />
+            <Filler xs={12} />
         </Grid>
     </div>)
 
