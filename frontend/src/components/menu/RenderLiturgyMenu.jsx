@@ -156,9 +156,7 @@ export const RenderLiturgyMenu = ({ books, path, columns = 6, header = true }) =
                                             >
                                                 <Typography className={classes.kedushotHeader}>
                                                     <div className={classes.kedushotContent}>
-                                                        <div className={classes.filler}>
 
-                                                        </div>
                                                         <div className={classes.kedushotLeftSection}>
                                                             <span className={classes.kedushotLeft}>{group.title}</span>
                                                         </div>
@@ -166,9 +164,7 @@ export const RenderLiturgyMenu = ({ books, path, columns = 6, header = true }) =
                                                         <div className={classes.kedushotMainSection}>
                                                             {group.subtitle && <span className={classes.kedushotSubtitle}>{group.subtitle}</span>}
                                                         </div>
-                                                        <div className={classes.filler1}>
 
-                                                        </div>
                                                     </div>
                                                     {isExpanded ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
                                                 </Typography>
@@ -470,19 +466,21 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         flex: 1,
         gap: '16px',
+
     },
     kedushotLeftSection: {
         width: '50%',
-        textAlign: 'left',
+        textAlign: 'center',
+
     },
     kedushotMainSection: {
         display: 'flex',
         alignItems: 'left',
-        justifyContent: 'right',
-        maxWidth: '20%',
+        justifyContent: 'center',
         textAlign: 'left',
         gap: '16px',
         flex: 1,
+
     },
     filler: {
         width: '25%',
