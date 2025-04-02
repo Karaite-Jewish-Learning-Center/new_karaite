@@ -1160,41 +1160,21 @@ class KaraitesBookDetails(models.Model):
 
     @staticmethod
     def get_all_books_by_first_level(level, classification=False):
-        if settings.DEBUG:
-            print(level)
-            print(classification)
-            print('--------------------------------')
-
+       
         if not classification:
             book_details = KaraitesBookDetails.objects.filter(first_level__url=level,
                                                               published=True).order_by('book_title_en')
         else:
             if level == 'Liturgy':
 
-                # Get all books for this level, ordered by the order field
                 book_details = KaraitesBookDetails.objects.filter(
                     first_level__url=level,
-                    published=True
-                ).order_by(
-                    'book_classification',
-                ).exclude(book_classification__classification_name='Shabbat Morning Services')
-
-                book_details_kedushot = KaraitesBookDetails.objects.filter(
-                    book_classification__classification_name='Shabbat Morning Services',
-                    published=True
-                ).order_by(
-                    'order',
-                )
-
-                book_details = list(book_details) + list(book_details_kedushot)
-
+                    published=True).order_by('book_classification')
+              
             else:
                 book_details = KaraitesBookDetails.objects.filter(
                     first_level__url=level,
-                    published=True
-                ).order_by(
-                    'order',
-                )
+                    published=True).order_by('order')
 
         data = []
         for details in book_details:

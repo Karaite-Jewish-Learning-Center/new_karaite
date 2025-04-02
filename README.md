@@ -22,21 +22,18 @@
     - Python
     - Django
     - PostgreSQL
+    - Redis
     - Nginx
     - Gunicorn
     - React
     - Material-UI
-
+    - Docker
 
 # How to run the project:
 
-    - Clone the project
-    - Create a virtual environment ( conda or venv )
-    - Create a database in PostgreSQL ( more on this later )
-    - Install the dependencies ( pip install -r requirements.txt )
-    - Run the server ( python manage.py runserver )
-    - Run the frontend (yarn startLocal )
-    - Access the project in the browser
+    - Use docker docker-compose-development.yml for local development.
+    - Use docker docker-compose-production.yml for production
+
 
 # Future
     
@@ -45,11 +42,10 @@
     - Add more features.
     - Improve the search engine.
     - Improve the user experience.
-    - Dockerize the project? 
     - Add more tests.
     - Add more comments.
 
-    - Use AI to read the text outloud.
+    - Add audio for all books and songs.
     - Use AI to anwser questions about the text.
     - Use AI to translate the text.
     - Use AI to summarize the text.
