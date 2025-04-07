@@ -1,4 +1,0 @@
-tls:
-  certificates:
-    - certFile: /etc/certs/karaites.crt
-      keyFile: /etc/certs/karaites.key 
