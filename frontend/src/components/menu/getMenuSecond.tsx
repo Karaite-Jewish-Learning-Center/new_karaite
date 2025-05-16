@@ -46,6 +46,7 @@ export const Second = () => {
 
     useEffect(() => {
         dataFetch<DataDetails>(`${karaitesBookByLevelAndClassification}${path}/`).then(data => {
+            debugger
             setBooks(data)
             setShowBooks(data.length > 0)
         }).catch((e) => {

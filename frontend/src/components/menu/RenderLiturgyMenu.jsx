@@ -95,7 +95,7 @@ export const RenderLiturgyMenu = ({ books, path, columns = 6, header = true }) =
                     const shabbatItems = keys.filter(itemKey =>
                         obj[itemKey].book_classification === 'Shabbat Morning Services'
                     ).sort((a, b) => obj[a].order - obj[b].order); // Sort by order if available
-
+                    debugger
                     // Find indices where kedushot_expanded is true
                     const groupBoundaries = [];
                     shabbatItems.forEach((itemKey, index) => {
