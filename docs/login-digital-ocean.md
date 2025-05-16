@@ -3,15 +3,7 @@
 #### Ask Shawn for the kjlc_develop key
 
 
-#### old server
-
-```bash
-
-$ ssh -i ~/.ssh/kjlc production@164.92.72.106
-
-```
-
-#### New server 
+#### Server 
 
 ```bash
 

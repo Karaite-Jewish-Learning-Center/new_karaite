@@ -1166,11 +1166,10 @@ class KaraitesBookDetails(models.Model):
                                                               published=True).order_by('book_title_en')
         else:
             if level == 'Liturgy':
-
                 book_details = KaraitesBookDetails.objects.filter(
                     first_level__url=level,
-                    published=True).order_by('book_classification')
-              
+                    published=True).order_by('book_classification', 'order')
+                print(book_details)
             else:
                 book_details = KaraitesBookDetails.objects.filter(
                     first_level__url=level,
@@ -1199,7 +1198,7 @@ class KaraitesBookDetails(models.Model):
         self.book_title_unslug = self.book_title_en
         # if cron_schedule is passed as a kwarg, then set it to the value of cron_schedule
         # else True
-        self.cron_schedule = kwargs.get('cron_schedule', True)
+        # self.cron_schedule = kwargs.get('cron_schedule', True)
         kwargs = {}
         super(KaraitesBookDetails, self).save(*args, **kwargs)
 
