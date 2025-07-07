@@ -39,9 +39,9 @@ export const makeBookUrl = (url: string, book: string, chapter: number, first: s
 
 export const makeRandomKey = (): string => `k-${Math.random() * 10000000000}`
 
-export const slug = (str: string): string => str.replaceAll(' ', '-')
+export const slug = (str: string): string => str.replaceAll(' ', '_')
 
-export const unslug = (str: string): string => str.replaceAll('-', ' ')
+export const unslug = (str: string): string => str.replaceAll('_', ' ')
 
 export const underLine = (str: string): string => str.replaceAll(' ', '_')
 

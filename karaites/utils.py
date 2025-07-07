@@ -23,11 +23,11 @@ def clear_terminal_line():
 
 
 def slug(string):
-    return string.replace(' ', '-')
+    return string.replace(' ', '_')
 
 
 def slug_back(string):
-    return string.replace('-', ' ')
+    return string.replace('_', ' ')
 
 
 def replace_punctuation_marks(s):
