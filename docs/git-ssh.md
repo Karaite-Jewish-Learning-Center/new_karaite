@@ -3,7 +3,7 @@
 
 # Generate a new ssh key
 ```zsh
-$ ssh-keygen -t rsa -b 4096 -C "
+$ ssh-keygen -t rsa -b 4096 -C 
 
 ```
 

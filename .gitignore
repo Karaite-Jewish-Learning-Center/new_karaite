@@ -42,3 +42,4 @@ django-error.log.5
 
 *backup.sql
 database-backup
+frontend/cypress/videos/*.mp4
