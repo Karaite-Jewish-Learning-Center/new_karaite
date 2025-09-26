@@ -34,6 +34,7 @@ BOOK_CLASSIFICATION = [
     ('45', 'Tammuz/Av/Echa'),
     ('47', 'Yom Kippur'),
     ('50', 'Wedding Songs'),
+    ('52', 'Yom Kippur Songs'),
     # poetry
     ('55', 'Poetry'),
     # Polemic
