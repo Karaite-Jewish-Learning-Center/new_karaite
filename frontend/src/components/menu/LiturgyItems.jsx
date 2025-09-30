@@ -12,7 +12,9 @@ const liturgyMenuItems = (obj, classes, path, classifications) => {
         if (classifications === obj[key].book_classification) {
             const url = liturgyUrl(obj[key].book_title_en, obj[key].better_book, path)
             const isShabbatSection = classifications === 'Shabbat Morning Services';
-            
+            if(classifications === 'Yom Kippur') {
+                debugger
+            }
             comp.push(
                 <Link to={url} key={makeRandomKey()}>
                     <div className={classes.item} >
@@ -20,7 +22,7 @@ const liturgyMenuItems = (obj, classes, path, classifications) => {
                                 <Typography className={classes.bookTitleHe}>{obj[key].book_title_he}</Typography>
                             </span>
                             <span className={classes.note}>
-                                <MusicBadge length={obj[key].songs_list.length} audio={obj[key].better_book}/>
+                                <MusicBadge length={obj[key].songs_list.length} audio={obj[key].songs_list.length > 0}/>
                             </span>
                             <span className={classes.right}>
                                 <Typography className={classes.bookTitleEn}>

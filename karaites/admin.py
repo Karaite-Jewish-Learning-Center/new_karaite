@@ -348,7 +348,7 @@ class BetterBookFilter(admin.SimpleListFilter):
 class KaraitesBetterBooksAdmin(KAdmin):
     list_display = ('book', 'song', 'book_text', 'line_number', 'show_line_data', 'show_book_data')
     list_filter = (BetterBookFilter,)
-    search_fields = ('book__book_title_en', 'book__book_title_he')
+    search_fields = ('book__book_title_en', 'book__book_title_he','book_text' )
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

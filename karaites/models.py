@@ -1378,17 +1378,22 @@ class KaraitesBookAsArray(models.Model):
         hebrew = self.book_text[0]
         transliteration = self.book_text[1]
         english = self.book_text[2]
+        comments = self.book_text[9] if len(self.book_text) > 9 else ''
+        # comments = self.book_text[11]
         # audio_start = self.book_text[3]
         # audio_end = self.book_text[4]
         # reciter = self.book_text[5]
         # censored = self.book_text[6]
         # line_number = self.book_text[7]
 
+
         html = '<div style="display:flex">'
         html += f'<span dir="rtl" style="width:50%;inline:block;margin:5px; text-align:right">{hebrew}</span>'
         html += f'<span dir="ltr" style="width:50%;inline:block;margin:5px; text-align:left">{transliteration}</span>'
         html += f'</div>'
         html += f'<span dir="ltr" style="text-align:center">{english}</span>'
+        html += '<br/>'
+        html += f'<span style="font-size:small">{comments}</span>'
 
         return html
 

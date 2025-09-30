@@ -175,7 +175,7 @@ const BookGrid: FC<BooksInterface> = ({
     const hebrewLen = data[HEBREW].length > 0;
     const transliterationLen = data[TRANSLITERATION].length > 0;
     const englishLen = data[ENGLISH].length > 0;
-    const hasComment = data[COMMENTS] && data[COMMENTS].length > 0;
+    const hasComment = data[COMMENTS] && data[COMMENTS].length > 4;
 
     if (hebrewLen || transliterationLen || englishLen) {
       const breakLine = data[BREAK] === "1" ? classes.break : "";

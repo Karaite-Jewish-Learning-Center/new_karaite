@@ -109,6 +109,11 @@ def convert_time_string(time_str):
         return 'No Audio'
     time_str = time_str.replace(';', '')
 
+    # is there a  dot on time string
+
+    if time_str.find('.') < 0:
+        time_str = time_str + '.00'
+
     parts = time_str.split('.')
 
     if len(parts) == 1:
@@ -122,10 +127,10 @@ def convert_time_string(time_str):
     elif len(parts) == 4:
         hours, minutes, seconds, milliseconds = map(float, time_str.split(':'))
     else:
+
         raise ValueError(f'Invalid time string: {time_str}')
 
     return minutes * 60 + seconds + (float(f'0.{int(milliseconds)}'))
-
 
 # implement a stack class
 class Stack():
