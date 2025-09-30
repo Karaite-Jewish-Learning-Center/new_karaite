@@ -2,7 +2,6 @@ database_upgrade
 node_modules
 data
 data_experimental
-data_karaites
 static
 docs
 exported
