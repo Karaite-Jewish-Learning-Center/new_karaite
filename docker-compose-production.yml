@@ -163,6 +163,16 @@ services:
       - "traefik.http.routers.backend.tls.certresolver=letsencrypt"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: sh -c "yarn build"
+    volumes:
+      - ./frontend/build:/app/build
+    environment:
+      - NODE_ENV=production
+
   nginx-proxy:
     image: nginx:latest
     container_name: nginx-proxy
