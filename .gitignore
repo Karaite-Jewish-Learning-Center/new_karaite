@@ -8,6 +8,7 @@ data/*
 data_experimental
 
 exported
+backend-static
 
 database_upgrade
 db
