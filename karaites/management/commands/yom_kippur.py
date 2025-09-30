@@ -86,7 +86,7 @@ class Command(BaseCommand):
             hebrew_name = ws['C2'].value
             english_name = ws['D2'].value
             song_file = ws['A2'].value
-            has_times = ws['P2'].value is  not None and isinstance(ws['P2'].value, (float, int))
+            has_times = isinstance(ws['P2'].value, (float, int))
 
             if song_file is not None:
                song_file = song_file.replace('.', '')
