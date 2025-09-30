@@ -72,6 +72,7 @@ class Command(BaseCommand):
         path = Path() / 'data_karaites/HTML/Liturgy/Yom Kippur/'
         order = 1000
         for book in books:
+            songs = None
             file_name = path / book
 
             wb = load_workbook(file_name)
@@ -112,10 +113,9 @@ class Command(BaseCommand):
             liturgy_details.save()
             order += 1000
 
-            if has_times:
+            if has_times and song_file is not None:
                 song = self.save_song(english_name, song_file, path)
-                if song is not None:
-                    liturgy_details.songs.add(song)
+                liturgy_details.songs.add(song)
 
             row = 2
             line_number = 0
