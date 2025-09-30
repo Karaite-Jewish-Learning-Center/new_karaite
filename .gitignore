@@ -7,10 +7,6 @@ data/
 data/*
 data_experimental
 
-data_karaites
-
-data_karaites/*
-
 exported
 
 database_upgrade
