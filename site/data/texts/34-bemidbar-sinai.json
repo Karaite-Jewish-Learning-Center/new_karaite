@@ -1,0 +1,174 @@
+{
+  "id": "34-bemidbar-sinai",
+  "title_en": "Bemidbar Sinai",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "בָּרוּךְ  אֵל, אֲשֶׁר אֵין תִּכְלָה לְמַהֲלָלוֹ.",
+      "transliteration": "Barukh El asher en tikhla lemahalalo.",
+      "english": "Blessed is God, whose praise has no end.",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 15.17
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  הַבֹּחֵר בְּיִשְׂרָאֵל, לִהְיוֹתָם מְנָת חֶבְלוֹ.",
+      "transliteration": "Barukh habboḥer beYisra’el, lihyotam menat ḥevlo.",
+      "english": "Blessed is the one who chose Israel, for them to be the portion of His lot.",
+      "comments": "",
+      "timing": {
+        "start": 15.17,
+        "end": 27.6
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  רְבִיד תְּהִלָּה שָׂם לוֹ, וְהִגְדִּילוֹ.",
+      "transliteration": "Barukh revid tehilla sam lo, vehiḡdilo.",
+      "english": "Blessed is [the one who] gave them a necklace of praise, and made them great.",
+      "comments": "",
+      "timing": {
+        "start": 27.6,
+        "end": 43.5
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  נָתַן קוֹלוֹ לִפְנֵי חֵילוֹ.",
+      "transliteration": "Barukh natan ḳolo lifnē ḥelo.",
+      "english": "Blessed is [the one who] sent forth His voice in front of His army.",
+      "comments": "",
+      "timing": {
+        "start": 43.5,
+        "end": 54.67
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ גָּזַר: יִהְיֶה נִפְקָד יֹצֵא צָבָא בְּדִגְלוֹ.",
+      "transliteration": "Barukh gazar: Yihyē nifḳad yotsē tsava bediḡlo.",
+      "english": "Blessed is [the one who] decreed: each one who goes out to battle shall be counted, in accordance with his [tribe’s] banner.",
+      "comments": "",
+      "timing": {
+        "start": 54.67,
+        "end": 71.3
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  אָמַר: מִבֶּן עֶשְׂרִים עַד חֲמִשִּׁים יִסְבֹּל עֻלּוֹ.",
+      "transliteration": "Barukh amar: Mibben ‘esrim ‘ad ben ḥamish’shim yisbol ‘ullo.",
+      "english": "Blessed is [the one who] said: [each man] shall bear his burden, from [age] twenty to fifty.",
+      "comments": "",
+      "timing": {
+        "start": 71.3,
+        "end": 84.37
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  הוֹרָה לוֹ בְּכָל־דָּבָר וְהִשְׂכִּילוֹ.",
+      "transliteration": "Barukh hora lo bekhol davar vehiskilo.",
+      "english": "Blessed is [the one who] instructed them regarding every matter, and enlightened them.",
+      "comments": "",
+      "timing": {
+        "start": 84.37,
+        "end": 99.73
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  בֵּין מַחֲנַֽיִם שָׂם לֵוִי וְהִגְבִּילוֹ.",
+      "transliteration": "Barukh ben maḥanayim sam Levi vehiḡbilo.",
+      "english": "Blessed is [the one who] placed Levi between two camps and bounded them.",
+      "comments": "",
+      "timing": {
+        "start": 99.73,
+        "end": 112.33
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  לְקָחוֹ תַּֽחַת בְּכוֹרֵי יִשְׂרָאֵל, וְהוֹד יָקָר הִנְחִילוֹ.",
+      "transliteration": "Barukh leḳaḥo taḥat bekhorē Yisra’el, vehod yaḳar hinḥilo.",
+      "english": "Blessed is [the one who] took them instead of the firstborns of Israel, and gave them glorious splendor as an inheritance.",
+      "comments": "",
+      "timing": {
+        "start": 112.33,
+        "end": 128.37
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ שָׂם מִשְׁמַרְתָּם כְּלֵי הֵיכָלוֹ.",
+      "transliteration": "Barukh sam mishmartam kelē hekhalo.",
+      "english": "Blessed is  [the one who] gave His temple’s vessels into their custody.",
+      "comments": "",
+      "timing": {
+        "start": 128.37,
+        "end": 140.53
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  חִלְּקָם לְשָׁרֵת בְּאָהֳלוֹ.",
+      "transliteration": "Barukh ḥilleḳam lesharet be’aholo,",
+      "english": "Blessed is [the one who] made it their portion to serve in His tent.",
+      "comments": "",
+      "timing": {
+        "start": 140.53,
+        "end": 154.7
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  לָשֵׂאת הָאָרוֹן בַּכָּתֵף הֱכִינָם, וְלֹא יִגְּעוּ לוֹ.",
+      "transliteration": "Barukh laset ha’aron bakkatef hekhinam, velo yigge‘u lo.",
+      "english": "Blessed is [the one who] appointed them to bear the Ark on their shoulders, without [directly] touching it.",
+      "comments": "",
+      "timing": {
+        "start": 154.7,
+        "end": 167.53
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  מְנָעָם מִלִּרְאוֹת כְבַלַּע אֶת־הַקֹּֽדֶשׁ, בְּחֶבְיוֹן גָּדְלוֹ.",
+      "transliteration": "Barukh mena‘am millir’ot kevalla‘ et haḳḳodesh, beḥevyon godlo.",
+      "english": "Blessed is [the one who] prevented them from seeing the holy, [lest they] be swallowed up by His concealed greatness.",
+      "comments": "",
+      "timing": {
+        "start": 167.53,
+        "end": 183.5
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ  כִּי אֵין מִי יְמַלֵּל עֹז מִפְעָלוֹ.",
+      "transliteration": "Barukh ki en mi yemallel ‘oz mif‘alo.",
+      "english": "Blessed is [He]; indeed, no one can express His mighty deeds,",
+      "comments": "",
+      "timing": {
+        "start": 183.5,
+        "end": 192.27
+      }
+    },
+    {
+      "hebrew": "קהל: בָּרוּךְ  עֹשֶׂה נִפְלָאוֹת בְּעֹז חֵילוֹ.",
+      "transliteration": "Ḳahal: Barukh ‘osē nifla’ot be‘oz ḥelo.",
+      "english": "Cong. Blessed is [the one who] performs miracles with His mighty army.",
+      "comments": "",
+      "timing": {
+        "start": 192.27,
+        "end": 203.07
+      }
+    },
+    {
+      "hebrew": "חזן: וּבָר֤וּךְ ׀ שֵׁ֥ם כְּבוֹד֗וֹ לְע֫וֹלָ֥ם וְיִמָּלֵ֣א כְ֭בוֹד֖וֹ אֶת־כָּל־הָאָ֗רֶץ אָ֘מֵ֥ן ׀ וְאָמֵֽן: (תהלים עב:יט)",
+      "transliteration": "Ḥazzan: Uvarukh, shem kevodo le‘olam veyimmale’ khevodo et kol ha’arets amen, ve’amen:",
+      "english": "Cantor. And blessed be His glorious name forever, and may His Glory fill the whole land, Amen and Amen. (Ps. 72:19)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: בָּר֥וּךְ כְּבֽוֹד־יו֖י מִמְּקוֹמֽוֹ: (יחזקאל ג:יב)",
+      "transliteration": "Ḳahal: Barukh kevod Adonai mimmeḳomo:",
+      "english": "Cong. Blessed is Adonai’s Glory from His place. (Ezek. 3:12)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/34-bemidbar-sinai.mp3",
+  "author_en": "Aaron ben Joseph"
+}

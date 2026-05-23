@@ -1,0 +1,306 @@
+{
+  "id": "16-vayhi-beshallaḥ",
+  "title_en": "Vayhi Beshallaḥ",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "קהל: מִ֭י כַּיו֣י אֱלֹהֵ֑ינוּ הַֽמַּגְבִּיהִ֥י לָשָֽׁבֶת׃ הַמַּשְׁפִּילִ֥י לִרְא֑וֹת בַּשָּׁמַ֥יִם וּבָאָֽרֶץ: (תהלים קיג:ה-ו)",
+      "transliteration": "Ḳahal: Mi kadonai elohenu hammaḡbihi lashavet: hammashpili lir’ot bash’shamayim uva’arets:",
+      "english": "Cong. Who is like Adonai our God, who makes His seat high up, yet lowers Himself to look upon heaven and earth? (Ps. 113:5–6)",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 12.63
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   אֲשֶׁר מִיַּד פַּרְעֹה שִׁלְּחָֽנוּ.",
+      "transliteration": "Mi kadonai asher miyyad Par‘o shilleḥanu.",
+      "english": "Who is like Adonai, who sent us forth out of Pharaoh’s hand?",
+      "comments": "",
+      "timing": {
+        "start": 12.63,
+        "end": 28.47
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי  הַמּוֹלִיכֵֽנוּ בַמִּדְבָּר, וּבֶעָנָן הִנְחָֽנוּ.",
+      "transliteration": "Mi kadonai hammolikhenu vammidbar, uve‘anan hinḥanu.",
+      "english": "Who is like Adonai, who led us in the wilderness, and guided us with the cloud?",
+      "comments": "",
+      "timing": {
+        "start": 28.47,
+        "end": 43.4
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי  רָם וְנִשָּׂא, דֶּֽרֶךְ פְּלִשְׁתִּים לֹא נָחָֽנוּ.",
+      "transliteration": "Mi kadonai ram venissa, derekh Pelishtim lo naḥanu.",
+      "english": "Who is like Adonai, lofty and high, who did not direct us along the way of the Philistines?",
+      "comments": "",
+      "timing": {
+        "start": 43.4,
+        "end": 60.2
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי  נְכוֹחָה יִשְּׁרָֽנוּ לְהַחֲיוֹת רוּחֵֽנוּ.",
+      "transliteration": "Mi kadonai nekhoḥa yish’sheranu lehaḥayot ruḥenu.",
+      "english": "Who is like Adonai, who had us walk straight, to keep our spirit alive?",
+      "comments": "",
+      "timing": {
+        "start": 60.2,
+        "end": 74.1
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   חֲמֻשִׁים מִנּוֹף הֶעֱלָֽנוּ.",
+      "transliteration": "Mi kadonai ḥamushim minnof he‘elanu.",
+      "english": "Who is like Adonai, who brought us armed out of Nof?",
+      "comments": "Nof. Egypt.",
+      "timing": {
+        "start": 74.1,
+        "end": 89.5
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   חִזֵּק לֵב צָר לְרָדְפֵֽנוּ.",
+      "transliteration": "Mi kadonai ḥizzek lev tsar lerodfenu.",
+      "english": "Who is like Adonai, who strengthened the enemy’s heart, to chase us?",
+      "comments": "",
+      "timing": {
+        "start": 89.5,
+        "end": 101.7
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   אָמַר \"הִתְיַצְּבוּ!\", וְלֹא הֶאֱבִיד נִצְחֵֽנוּ.",
+      "transliteration": "Mi kadonai amar “hityats’tsevu!” Velo he’evid nits’ḥenu.",
+      "english": "Who is like Adonai, who said: “Stand your ground!”, and did not let our continuity perish.",
+      "comments": "",
+      "timing": {
+        "start": 101.7,
+        "end": 119.23
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   בָּקַע יָם וְהֶעֱבִירָֽנוּ.",
+      "transliteration": "Mi kadonai baḳa‘ yam vehe‘eviranu.",
+      "english": "Who is like Adonai, who split the Sea, and passed us through it?",
+      "comments": "",
+      "timing": {
+        "start": 119.23,
+        "end": 131.1
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   שָׂם מַאֲפֵל בֵּינֵֽינוּ וּבֵין צָרֵֽינוּ.",
+      "transliteration": "Mi kadonai sam ma’afel benenu uven tsarenu.",
+      "english": "Who is like Adonai, who placed darkness between us and our enemies?",
+      "comments": "",
+      "timing": {
+        "start": 131.1,
+        "end": 146.13
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הִשְׁקִיף, וַיָּֽהָם אֶת־מַחֲנֵה אֹיְבֵֽינוּ.",
+      "transliteration": "Mi kadonai hishkif, vayyahom et maḥanē oyevenu.",
+      "english": "Who is like Adonai, who looked down, and confounded our enemies’ camp?",
+      "comments": "",
+      "timing": {
+        "start": 146.13,
+        "end": 161.2
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   נִעֲרָם בַּיָּם, וְרָאוּ עֵינֵֽינוּ.",
+      "transliteration": "Mi kadonai ni‘aram bayyam, vera’u ‘enenu.",
+      "english": "Who is like Adonai, who tossed them around in the Sea, which our eyes saw?",
+      "comments": "",
+      "timing": {
+        "start": 161.2,
+        "end": 179.17
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הִמְתִּיק בְּעֵץ מַר מֵימֵֽינוּ.",
+      "transliteration": "Mi kadonai himtiḳ be‘ets mar memenu.",
+      "english": "Who is like Adonai, who sweetened our waters with bitter wood?",
+      "comments": "",
+      "timing": {
+        "start": 179.17,
+        "end": 192.77
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   אִם נַאֲזִין לְמִצְוֹתָיו, יְהִי רֹפְאֵנוּ.",
+      "transliteration": "Mi kadonai im na’azin lemitsvotav, yehi rof’enu.",
+      "english": "Who is like Adonai, who will be our healer if we listen to His commandments?",
+      "comments": "",
+      "timing": {
+        "start": 192.77,
+        "end": 212.0
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   דַּלְתֵי שָׁמַֽיִם פָּתַח בַּעֲדֵֽנוּ.",
+      "transliteration": "Mi kadonai daltē shamayim pataḥ ba‘adenu.",
+      "english": "Who is like Adonai, who opened the gates of heaven on our behalf?",
+      "comments": "",
+      "timing": {
+        "start": 212.0,
+        "end": 225.1
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הִמְטִיר מָן מַאֲכָֽלֵנוּ.",
+      "transliteration": "Mi kadonai himtir man ma’akhalenu.",
+      "english": "Who is like Adonai, who rained down manna as our food?",
+      "comments": "",
+      "timing": {
+        "start": 225.1,
+        "end": 241.0
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   לְהָכִין לֶֽחֶם מִשְׁנֶה בַּשִּׁשִּׁי צִוָּֽנוּ.",
+      "transliteration": "Mi kadonai lehakhin leḥem mishnē bash’shish’shi tsivvanu.",
+      "english": "Who is like Adonai, who commanded us to prepare a double portion of bread on Friday?",
+      "comments": "",
+      "timing": {
+        "start": 241.0,
+        "end": 256.7
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   בִּגְלַל שַׁבָּת הֵכִין צָרְכֵֽנוּ.",
+      "transliteration": "Mi kadonai biḡlal shabbat hekhin tsorkhenu.",
+      "english": "Who is like Adonai, who prepared our needs on account of the Sabbath?",
+      "comments": "",
+      "timing": {
+        "start": 256.7,
+        "end": 272.47
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   שְׂלָו הֶאֱכִילָֽנוּ.",
+      "transliteration": "Mi kadonai selav he’ekhilanu.",
+      "english": "Who is like Adonai, who fed us quail?",
+      "comments": "",
+      "timing": {
+        "start": 272.47,
+        "end": 286.3
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   בָּקַע צוּר, וּמַֽיִם הִשְׁקָֽנוּ.",
+      "transliteration": "Mi kadonai baḳa‘ tsur umayim hishḳanu.",
+      "english": "Who is like Adonai, who split a rock, and gave us water?",
+      "comments": "",
+      "timing": {
+        "start": 286.3,
+        "end": 301.27
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   צִוָּה לִמְחוֹת זֵֽכֶר עֲמָלֵק שֹׂטְנֵֽנוּ.",
+      "transliteration": "Mi kadonai tsivva limḥot zekher ‘amaleḳ sotenenu.",
+      "english": "Who is like Adonai, who commanded to blot out the name of Amalek, our adversary?",
+      "comments": "",
+      "timing": {
+        "start": 301.27,
+        "end": 312.7
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   אָמַר לְהִלָּחֵם בּוֹ רֹאשׁ נְבִיאֵֽנוּ.",
+      "transliteration": "Mi kadonai amar lehillaḥem bo rosh nevi’enu",
+      "english": "Who is like Adonai, who said [to] the head of our prophets to fight against [Amalek]?",
+      "comments": "The head of our prophets. Moses.",
+      "timing": {
+        "start": 312.7,
+        "end": 328.5
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   גָּזַר לְהִלָּחֵם בּוֹ עַד בֹּא מְשִׁיחֵֽנוּ.",
+      "transliteration": "Mi kadonai gazar lehillaḥem bo ‘ad bo meshiḥenu.",
+      "english": "Who is like Adonai, who decreed to fight against [Amalek] until the coming of our Messiah?",
+      "comments": "",
+      "timing": {
+        "start": 328.5,
+        "end": 340.53
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   שָׂם כָּל־יָקָר נִכְחֵֽנוּ.",
+      "transliteration": "Mi kadonai sam kol yaḳar nikh’ḥenu.",
+      "english": "Who is like Adonai, who placed all glory in front of us?",
+      "comments": "",
+      "timing": {
+        "start": 340.53,
+        "end": 354.33
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   אִשֵּׁר אָרְחֵֽנוּ.",
+      "transliteration": "Mi kadonai ish’sher orḥenu.",
+      "english": "Who is like Adonai, who made our path firm?",
+      "comments": "",
+      "timing": {
+        "start": 354.33,
+        "end": 367.63
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   יֶאֱסֹף נִדָּחֵֽינוּ.",
+      "transliteration": "Mi kadonai ye’esof niddaḥenu.",
+      "english": "Who is like Adonai, who will gather in our scattered people?",
+      "comments": "",
+      "timing": {
+        "start": 367.63,
+        "end": 375.57
+      }
+    },
+    {
+      "hebrew": "קהל: מִי כַּיוי   יִקְרָא דְרוֹר, פְּקַח־קֹחֵֽנוּ.",
+      "transliteration": "Ḳahal: Mi kadonai yiḳra deror, peḳaḥ ḳoḥenu.",
+      "english": "Cong. Who is like Adonai, who will proclaim liberty, to release us [from exile]?",
+      "comments": "",
+      "timing": {
+        "start": 375.57,
+        "end": 387.67
+      }
+    },
+    {
+      "hebrew": "חזן: כִּ֥י מִי־אֵ֖ל מִבַּלְעֲדֵ֣י יו֑י וּמִ֥י צ֖וּר מִבַּלְעֲדֵ֥י אֱלֹהֵֽינוּ: (שמואל ב כב:לב)",
+      "transliteration": "Ḥazzan: Ki mi el mibbal‘adē Adonai umi tsur mibbal‘adē elohenu:",
+      "english": "Cantor. For who is God besides Adonai, and who is a rock besides our God? (2 Sam. 22:32)",
+      "comments": ""
+    },
+    {
+      "hebrew": "כִּ֤י מִ֣י אֱ֭ל֖וֹהַּ מִבַּלְעֲדֵ֣י יו֑י וּמִי־צ֝֗וּר זוּלָתִ֥י אֱלֹהֵֽינוּ: (תהלים יח:לב)",
+      "transliteration": "Ki mi Elo’ah mibbal‘adē Adonai umi tsur zulati elohenu:",
+      "english": "For who is God besides Adonai, and who is a rock other than our God? (Ps. 18:32)",
+      "comments": ""
+    },
+    {
+      "hebrew": "אֵֽין־קָד֥וֹשׁ כַּיו֖י כִּי־אֵ֣ין בִּלְתֶּ֑ךָ וְאֵ֥ין צ֖וּר כֵּֽאלֹהֵֽינוּ: (שמואל א ב:ב)",
+      "transliteration": "En ḳadosh kadonai ki en biltekha ve’en tsur kelohenu:",
+      "english": "There is none holy like Adonai, for there is none besides You; and there is no rock like our God. (1 Sam. 2:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל: (תהלים כב:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Congregation: And You are Holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/16-vayhi-beshallaḥ.mp3",
+  "author_en": "Aaron ben Joseph"
+}

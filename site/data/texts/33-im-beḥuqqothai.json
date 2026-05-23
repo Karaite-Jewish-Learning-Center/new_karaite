@@ -1,0 +1,310 @@
+{
+  "id": "33-im-beḥuqqothai",
+  "title_en": "Im Beḥuqqothai",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אַנְשֵׁי אֱמוּנָה, בְּתוֹרַת אֵל תִּדְרֹֽכוּ,",
+      "transliteration": "Anshē emuna, betorat El tidrokhu,",
+      "english": "People of faith, you should walk in [accordance with] God’s Torah,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 14.63
+      }
+    },
+    {
+      "hebrew": "אֲזַי לַחֲזוֹת בְּנֹֽעַם יוי תִּזְכּוּ.",
+      "transliteration": "Azai laḥazot beno‘am Adonai tizku,",
+      "english": "Then you will merit to see Adonai’s sweetness.",
+      "comments": "",
+      "timing": {
+        "start": 14.63,
+        "end": 26.1
+      }
+    },
+    {
+      "hebrew": "שְׂאוּ יְדֵיכֶם קֹֽדֶשׁ, וְשֵׁם יוי בָּרְכוּ.",
+      "transliteration": "Se’u yedekhem ḳodesh, veshem Adonai barekhu.",
+      "english": "Lift up your hands in holiness, and render blessing unto Adonai’s name.",
+      "comments": "",
+      "timing": {
+        "start": 26.1,
+        "end": 33.43
+      }
+    },
+    {
+      "hebrew": "קהל: אֲנִי יוי אֱלֹהֵיכֶם; בְּחֻקֹּתַי לֵֽכוּ.  (אין במקרא)",
+      "transliteration": "Ḳahal: Ani Adonai elohekhem; beḥuḳḳotai lekhu.",
+      "english": "Cong. I am Adonai your God; walk in My ways.   (Not in Scripture)",
+      "comments": "",
+      "timing": {
+        "start": 33.43,
+        "end": 41.7
+      }
+    },
+    {
+      "hebrew": "הִנֵּה מָה רַב טוּבוֹ אֲשֶׁר צָפַן",
+      "transliteration": "Hinnē mah rav tuvo asher tsafan",
+      "english": "See, how great is His goodness, which he has hidden away",
+      "comments": "",
+      "timing": {
+        "start": 41.7,
+        "end": 54.03
+      }
+    },
+    {
+      "hebrew": "לְשֹׁמְרֵי בְרִיתוֹ וְלִמְטַהֲרֵי גוּפָן.",
+      "transliteration": "Leshomerē verito velimtaharē ḡufan.",
+      "english": "For those who observe His covenant and purify their body.",
+      "comments": "",
+      "timing": {
+        "start": 54.03,
+        "end": 60.43
+      }
+    },
+    {
+      "hebrew": "וּבֹזֵי דְבָרָיו יִהְיוּ לְשֹׁד וּלְכָפָן,",
+      "transliteration": "Uvozē devarav yihyu leshod ulkhafan,",
+      "english": "[But] those who spurn His words will [experience] devastation and famine,",
+      "comments": "",
+      "timing": {
+        "start": 60.43,
+        "end": 71.67
+      }
+    },
+    {
+      "hebrew": "קהל: וַיָּֽשֶׁב עֲלֵיהֶם אֹפָן.    (ישעיה לג:י)",
+      "transliteration": "Ḳahal: Vayyashev ‘alehem ofan.",
+      "english": "Cong. And He turns the wheel over them.    (Prov. 20:26)",
+      "comments": "",
+      "timing": {
+        "start": 71.67,
+        "end": 78.1
+      }
+    },
+    {
+      "hebrew": "רַחֲצוּ הַלֵּב וְטַהֲרוּ כַפָּֽיִם,",
+      "transliteration": "Raḥatsu hallev vetaharu khappayim,",
+      "english": "Clean your heart, and purify your hands,",
+      "comments": "",
+      "timing": {
+        "start": 78.1,
+        "end": 92.73
+      }
+    },
+    {
+      "hebrew": "שִׁמְרוּ בְחֹק הוּחַק בְּלֻחוֹתָֽיִם.",
+      "transliteration": "Shimru veḥoḳ huḥaḳ beluḥotayim.",
+      "english": "Observe the law that is inscribed on the two tablets.",
+      "comments": "",
+      "timing": {
+        "start": 92.73,
+        "end": 103.5
+      }
+    },
+    {
+      "hebrew": "וְאִם כֹּה תַעֲשׂוּ, טוּבְכֶם יִהְיֶה כִפְלָֽיִם –",
+      "transliteration": "Ve’im ko ta‘asu, tuvekhem yihyē khiflayim –",
+      "english": "And if you do so, your good [fortune] will be double—",
+      "comments": "",
+      "timing": {
+        "start": 103.5,
+        "end": 109.5
+      }
+    },
+    {
+      "hebrew": "קהל: כֹּל מִשְׁעַן לֶֽחֶם וְכֹל מִשְׁעַן מָֽיִם.  (משלי כ:כו)",
+      "transliteration": "Ḳahal: kol mish‘an leḥem vekhol mish‘an mayim.",
+      "english": "Cong. [You will have] every staff of bread, and every staff of water. (Isa. 3:1)",
+      "comments": "",
+      "timing": {
+        "start": 109.5,
+        "end": 118.2
+      }
+    },
+    {
+      "hebrew": "נְתִיב יֹֽשֶׁר בַּחֲרוּ לָכֶם:",
+      "transliteration": "Netiv yosher baḥaru lakhem:",
+      "english": "Choose for yourselves the path of uprightness;",
+      "comments": "",
+      "timing": {
+        "start": 118.2,
+        "end": 131.67
+      }
+    },
+    {
+      "hebrew": "בְּסֻלַּם הָאֱמוּנָה הַעֲלוּ מַחְשְׁבוֹתֵיכֶם;",
+      "transliteration": "Besullam ha’emuna ha‘alu maḥ’shevotekhem;",
+      "english": "Have your thoughts ascend the ladder of faith;",
+      "comments": "",
+      "timing": {
+        "start": 131.67,
+        "end": 145.0
+      }
+    },
+    {
+      "hebrew": "בְּהַדְרַת קֹֽדֶשׁ שִֽׂימוּ מְגַמַּתְכֶם –",
+      "transliteration": "Behadrat ḳodesh simu meḡammatkhem –",
+      "english": "Turn your faces to the beauty of holiness—",
+      "comments": "",
+      "timing": {
+        "start": 145.0,
+        "end": 150.4
+      }
+    },
+    {
+      "hebrew": "קהל: וְלֹא תִגְעַל נַפְשִׁי אֶתְכֶם.   (ויקרא כו:יא)",
+      "transliteration": "Ḳahal: Velo tiḡ‘al nafshi etkhem.",
+      "english": "Cong. And My soul will not despise you.    (Lev. 26:11)",
+      "comments": "",
+      "timing": {
+        "start": 150.4,
+        "end": 157.37
+      }
+    },
+    {
+      "hebrew": "חֲסוּ בְצִלּוֹ, בְּנֵי אֵיתָנִים!",
+      "transliteration": "Ḥasu vetsillo, benē etanim!",
+      "english": "Take refuge in His shade, children of the mighty!",
+      "comments": "Children of the mighty. Descendants of the patriarchs.",
+      "timing": {
+        "start": 157.37,
+        "end": 171.3
+      }
+    },
+    {
+      "hebrew": "פְּדוּת קָרְבָה, וּבָאָה שַׁבָּת וְיוֹבֵל לְנֶאֱמָנִים.",
+      "transliteration": "Pedut ḳarevah, uva’a shabbat veyovel lene’emanim.",
+      "english": "Redemption is near, and the Sabbath and Jubilee are coming for the faithful.",
+      "comments": "",
+      "timing": {
+        "start": 171.3,
+        "end": 183.07
+      }
+    },
+    {
+      "hebrew": "יֵֽצֶר סָמוּךְ אֶצֹּר, וְאֶקְרָא דְרוֹר לַבָּנִים,",
+      "transliteration": "Yetser samukh ets’tsor, ve’eḳra deror labbanim,",
+      "english": "I will soon besiege the [evil] inclination, and proclaim liberty for [My] children,",
+      "comments": "",
+      "timing": {
+        "start": 183.07,
+        "end": 189.2
+      }
+    },
+    {
+      "hebrew": "קהל: וְזָכַרְתִּי לָהֶם בְּרִית רִאשׁוֹנִים.  (ויקרא כו:מה)",
+      "transliteration": "Ḳahal: Vezakharti lahem berit rishonim.",
+      "english": "Cong. And I will remember for them [My] covenant with the ancients.  (Lev. 26:45)",
+      "comments": "",
+      "timing": {
+        "start": 189.2,
+        "end": 196.67
+      }
+    },
+    {
+      "hebrew": "זֶֽרַע יְדִידַי, הִתְאַזֵּר עֹז לְחַדֵּשׁ,",
+      "transliteration": "Zera‘ yediday, hitazzar ‘oz leḥaddesh,",
+      "english": "Children of my beloved ones, gird yourself with strength, to renew [yourselves],",
+      "comments": "",
+      "timing": {
+        "start": 196.67,
+        "end": 210.63
+      }
+    },
+    {
+      "hebrew": "עֶֽרֶךְ נַפְשְׁךָ כְּעֶֽרֶךְ מַלְאֲכֵי רוּם לְקַדֵּשׁ,",
+      "transliteration": "Erekh nafshekha ke‘erekh malakhē rum leḳaddesh,",
+      "english": "Your life is as valuable as the angels on high, [in its ability] to sanctify,",
+      "comments": "",
+      "timing": {
+        "start": 210.63,
+        "end": 222.0
+      }
+    },
+    {
+      "hebrew": "לְהִדָּמוֹת בְּחַיּוֹת הַקֹּֽדֶשׁ,",
+      "transliteration": "Lehiddamot beḥayyot haḳḳodesh,",
+      "english": "To be similar to the holy creatures [of heaven],",
+      "comments": "",
+      "timing": {
+        "start": 222.0,
+        "end": 226.53
+      }
+    },
+    {
+      "hebrew": "קהל: וְכָל־עֶרְכְּךָ יִהְיֶה בְּשֶֽׁקֶל הַקֹּֽדֶשׁ.  (ויקרא כז:כה)",
+      "transliteration": "Ḳahal: Vekhol ‘erkekha yihyē besheḳel haḳḳodesh.",
+      "english": "Cong. And all your value will be in the holy sheqel.  (Lev. 27:25)",
+      "comments": "",
+      "timing": {
+        "start": 226.53,
+        "end": 235.13
+      }
+    },
+    {
+      "hebrew": "קְרָאתִֽיךָ בְצֶֽדֶק נֵֽצֶר נֶאֱמָנָי,",
+      "transliteration": "Ḳeratikha vetsedeḳ netser ne’emanay,",
+      "english": "I have called you, justly, the scion of My faithful ones,",
+      "comments": "",
+      "timing": {
+        "start": 235.13,
+        "end": 250.67
+      }
+    },
+    {
+      "hebrew": "הִמְשַׁלְתִּֽיךָ כְּמוֹ כוֹכְבֵי מְעוֹנָי.",
+      "transliteration": "Himshiltikha kemo khokevē me‘onay.",
+      "english": "I have compared you to the stars of My heaven.",
+      "comments": "",
+      "timing": {
+        "start": 250.67,
+        "end": 260.8
+      }
+    },
+    {
+      "hebrew": "בַּעַדְךָ אַכְחִיד כָּל־גּוֹי מִלְּפָנָי,",
+      "transliteration": "Ba‘adkha akh’ḥid kol goy millefanay,",
+      "english": "On your behalf, I will destroy every [other] nation before Me,",
+      "comments": "",
+      "timing": {
+        "start": 260.8,
+        "end": 268.67
+      }
+    },
+    {
+      "hebrew": "קהל: עַתָּה אָקוּם יֹאמַר יוי.   (ישעיה לג:י)",
+      "transliteration": "Ḳahal: ‘atta aḳum yomar Adonai.",
+      "english": "Cong. Now I shall arise, says Adonai.    (Isa. 33:10)",
+      "comments": "",
+      "timing": {
+        "start": 268.67,
+        "end": 278.6
+      }
+    },
+    {
+      "hebrew": "חזן: עַתָּ֥ה אָק֖וּם יֹאמַ֣ר יו֑י עַתָּה֙ אֵֽרוֹמָ֔ם עַתָּ֖ה אֶנָּשֵֽׂא:",
+      "transliteration": "Ḥazzan: ‘atta aḳum yomar Adonai ‘atta eromam ‘atta ennasseh:",
+      "english": "Cantor. Now I shall arise, says Adonai; now I shall be elevated, now I shall be lofty. (Isa. 33:10)",
+      "comments": ""
+    },
+    {
+      "hebrew": "וַיִּגְבַּ֛הּ יו֥י צְבָא֖וֹת בַּמִּשְׁפָּ֑ט וְהָאֵ֙ל הַקָּד֔וֹשׁ נִקְדָּ֖שׁ בִּצְדָקָֽה:",
+      "transliteration": "Vayiḡbah Adonai tseva’ot bammishpat veha’el haḳḳadosh niḳdash bitsdaḳah:",
+      "english": "And Adonai Ẓeva’oth is towering high in justice; and the holy God is sanctified in righteousness. (Isa. 5:16)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    },
+    {
+      "hebrew": "קהל: קָד֖וֹשׁ קָד֛וֹשׁ קָד֖וֹשׁ יו֣י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ:",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Cong. Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:3)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/33-im-beḥuqqothai.mp3",
+  "author_en": "Aaron ben Joseph"
+}

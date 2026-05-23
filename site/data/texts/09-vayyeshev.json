@@ -1,0 +1,304 @@
+{
+  "id": "09-vayyeshev",
+  "title_en": "Vayyeshev",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אִישׁ חָלָק יָשַׁב בִּמְגוּרֵי אָבִיו, שָׁקֵט וְשַׁאֲנָן,",
+      "transliteration": "Ish ḥalaḳ yashav bimḡurē aviv, shaḳet vesha’anan,",
+      "english": "The smooth man settled in his father’s [land of] sojourning, serenely and tranquilly,",
+      "comments": "The smooth man. Jacob.",
+      "timing": {
+        "start": 0,
+        "end": 17.7
+      }
+    },
+    {
+      "hebrew": "שָׁתוּל עַל פַּלְגֵי מָֽיִם, כְּעֵץ רָטוֹב וְרַעֲנָן,",
+      "transliteration": "Shatul ‘al palḡē mayim, ke‘ets ratov vera‘anan,",
+      "english": "Putting down roots along streams of water, like a tree that is moist and supple,",
+      "comments": "",
+      "timing": {
+        "start": 17.7,
+        "end": 31.03
+      }
+    },
+    {
+      "hebrew": "עִם יְלָדָיו, אֲשֶׁר יוי לוֹ חָנָן,",
+      "transliteration": "‘im yeladav, asher Adonai lo ḥanan,",
+      "english": "With his children, with which Adonai had graced him,",
+      "comments": "",
+      "timing": {
+        "start": 31.03,
+        "end": 37.13
+      }
+    },
+    {
+      "hebrew": "קהל: יֹשֵׁב בְּסֵֽתֶר עֶלְיוֹן בְּצֵל שַׁדַּי יִתְלוֹנָן.   (תהלים צא:א)",
+      "transliteration": "Ḳahal: Yoshev beseter ‘elyon betsel Shaddai yitlonan",
+      "english": "Cong. He dwelled in the shadow of the High One; he took refuge in the shade of Shaddai. (Ps. 91:1)",
+      "comments": "",
+      "timing": {
+        "start": 37.13,
+        "end": 46.3
+      }
+    },
+    {
+      "hebrew": "הִפְלִיא בֶן זְקֻנִים לַחֲזוֹת חֶזְיוֹנוֹת, כִּי יוי הֱעִירוֹ,",
+      "transliteration": "Hifli ven zeḳunim laḥazot ḥezyonot, ki Adonai he‘iro,",
+      "english": "The son who acted beyond his years wondrously saw visions, for Adonai inspired him,",
+      "comments": "The son who acted old. Joseph.",
+      "timing": {
+        "start": 46.3,
+        "end": 65.0
+      }
+    },
+    {
+      "hebrew": "וַיְהִי הוּא מְסַפֵּר חֲלוֹם וּמַזְכִּירוֹ.",
+      "transliteration": "Vayhi hu mesapper ḥalom umazkiro.",
+      "english": "And he would recount and mention his dream.",
+      "comments": "",
+      "timing": {
+        "start": 65.0,
+        "end": 76.6
+      }
+    },
+    {
+      "hebrew": "שְׂנֵאֽוּהוּ אֶחָיו, וְאָבִיו שָׁמַר אֶת־הַדָּבָר וְהִסְתִּירוֹ –",
+      "transliteration": "Sene’uhu eḥav, ve’aviv shamar et haddavar vehistiro",
+      "english": "His brothers hated him, and his father kept the matter and concealed it—",
+      "comments": "",
+      "timing": {
+        "start": 76.6,
+        "end": 84.3
+      }
+    },
+    {
+      "hebrew": "קהל: אֶת־מִסְפַּר הַחֲלוֹם וְאֶת־שִׁבְרוֹ.    (שופטים ז:טו)",
+      "transliteration": "Ḳahal: Et mispar haḥalom ve’et shivro.",
+      "english": "Cong. The account of the dream and its interpretation.  (Judg. 7:15)",
+      "comments": "",
+      "timing": {
+        "start": 84.3,
+        "end": 93.07
+      }
+    },
+    {
+      "hebrew": "רְאוֹת שְׁלוֹם אֶחָיו הָלַךְ, גְּזֵרַת אָבִיו לְהַשְׁלִים.",
+      "transliteration": "Re’ot shalom eḥav halakh, gezerat aviv lehashlim.",
+      "english": "He went to see how his brothers were doing, to fulfill his father’s instruction.",
+      "comments": "",
+      "timing": {
+        "start": 93.07,
+        "end": 110.27
+      }
+    },
+    {
+      "hebrew": "יָעֲצוּ אֶחָיו לְתִתּוֹ כְּאַחַד הַחֲלָלִים.",
+      "transliteration": "Ya‘atsu eḥav letitto ke’aḥad haḥalalim.",
+      "english": "His brothers advised to turn him into a corpse, like any other.",
+      "comments": "",
+      "timing": {
+        "start": 110.27,
+        "end": 122.27
+      }
+    },
+    {
+      "hebrew": "רְאוּבֵן הִצִּילוֹ, וִיהוּדָה בְּנִיבוֹ יַרְנִין מִלִּים:",
+      "transliteration": "Re’uven hits’tsilo vihuda benivo yarnin millim:",
+      "english": "Reuben rescued him, and Judah spoke nasty words:",
+      "comments": "",
+      "timing": {
+        "start": 122.27,
+        "end": 129.03
+      }
+    },
+    {
+      "hebrew": "קהל: לְכוּ וְנִמְכְּרֶֽנּוּ לַיִּשְׁמְעֵאלִים.",
+      "transliteration": "Ḳahal: Lekhu venimkerennu layYishme‘elim",
+      "english": "Cong. Come, let us sell him to the Ishmaelites.   (Gen. 37:27)",
+      "comments": "",
+      "timing": {
+        "start": 129.03,
+        "end": 137.2
+      }
+    },
+    {
+      "hebrew": "נָאֲמוּ אֶחָיו אַחֲרֵי מָכְרוּ בְּעֶשְׂרִים כָּֽסֶף,",
+      "transliteration": "Na’amu eḥav, aḥarē makheru be‘esrim kasef,",
+      "english": "His brothers said, after selling [him] for twenty pieces of silver,",
+      "comments": "",
+      "timing": {
+        "start": 137.2,
+        "end": 153.8
+      }
+    },
+    {
+      "hebrew": "לִכְרֹת בְּרִית, לְבַל יֵצֵא הַסּוֹד – \"כֹּה יוי יוֹסֵף!\"",
+      "transliteration": "Likhrot berit, leval yetsē hassod – “Ko Adonai Yosef!”",
+      "english": "That they would make a pact so the secret would not get out—“So may God continue to do!”",
+      "comments": "So may God continue to do. An expression indicating an oath.",
+      "timing": {
+        "start": 153.8,
+        "end": 166.73
+      }
+    },
+    {
+      "hebrew": "לֹא כֵן, בַּדָּם לְרַמּוֹת אֲבִיהֶם, יָעֲצוּ בְּתֽוֹסֶף.",
+      "transliteration": "Lo khen, baddam lerammot avihem, ya‘atsu betosef.",
+      "english": "They took counsel, further, to deceive their father with blood, [to convince him what was] not so.",
+      "comments": "",
+      "timing": {
+        "start": 166.73,
+        "end": 173.77
+      }
+    },
+    {
+      "hebrew": "קהל: לְעֶֽבֶד נִמְכַּר יוֹסֵף.      (תהלים קה:יז)",
+      "transliteration": "Ḳahal: Le‘eved nimkar Yosef",
+      "english": "Cong. He was sold as a slave, Joseph.     (Ps. 105:17)",
+      "comments": "",
+      "timing": {
+        "start": 173.77,
+        "end": 181.13
+      }
+    },
+    {
+      "hebrew": "קָנָֽהוּ פּוֹטִיפַר בְּדָמִים יְקָרִים.",
+      "transliteration": "Ḳanahu Potifar bedamim yeḳarim.",
+      "english": "Potiphar bought him, at great cost.",
+      "comments": "",
+      "timing": {
+        "start": 181.13,
+        "end": 196.17
+      }
+    },
+    {
+      "hebrew": "שָֽׂמָה עֵינֶֽיהָ אֵֽשֶׁת אֲדֹנָיו לוֹ, וַתַּפְחִידֵֽהוּ בִּדְבָרִים.",
+      "transliteration": "Sama ‘eneha eshet adonav lo, vattafḥidehu bidvarim.",
+      "english": "[Joseph]’s master’s wife set her eyes on him, and she verbally intimidated him.",
+      "comments": "",
+      "timing": {
+        "start": 196.17,
+        "end": 209.6
+      }
+    },
+    {
+      "hebrew": "וְהוּא אָמַר: \"אֵיךְ אֶחֱטָא לְמַשְׁפִּיל וּמֵרִים?\"",
+      "transliteration": "Vehu amar: “Ekh eḥta lemashpil umerim?”",
+      "english": "But [Joseph] said: “How can I sin against the One who brings [people] down and raises [them] up?”",
+      "comments": "",
+      "timing": {
+        "start": 209.6,
+        "end": 216.1
+      }
+    },
+    {
+      "hebrew": "קהל: יוי מַתִּיר אֲסוּרִים.     (תהלים קמו:ז)",
+      "transliteration": "Ḳahal: Adonai mattir asurim.",
+      "english": "Cong. Adonai releases the bound.     (Ps. 146:7)",
+      "comments": "",
+      "timing": {
+        "start": 216.1,
+        "end": 223.07
+      }
+    },
+    {
+      "hebrew": "לְבֵית הַסֹּֽהַר אֲדֹנָיו נְתָנָֽהוּ,",
+      "transliteration": "Levet hassohar adonav netanahu,",
+      "english": "His master put him in the prison,",
+      "comments": "",
+      "timing": {
+        "start": 223.07,
+        "end": 236.63
+      }
+    },
+    {
+      "hebrew": "וְשָׁם שָׂרֵי אֲסִירֵי פַרְעֹה חֲלוֹם סִפְּרֽוּהוּ.",
+      "transliteration": "Vesham sarē asirē far‘o ḥalom sipperuhu.",
+      "english": "Where the imprisoned ministers of Pharaoh told him a dream.",
+      "comments": "",
+      "timing": {
+        "start": 236.63,
+        "end": 247.63
+      }
+    },
+    {
+      "hebrew": "וּלְהַזְכִּירוֹ לְפַרְעֹה שַׂר הַמַּשְׁקִים בִּקֵּשׁ, וַיִּשְׁכָּחֵֽהוּ,",
+      "transliteration": "Ulhazkiro lefar‘o sar hammashḳim biḳḳesh, vayyishkaḥehu,",
+      "english": "And he asked the minister of stewards to mention him to Pharaoh, but he forgot him,",
+      "comments": "",
+      "timing": {
+        "start": 247.63,
+        "end": 254.73
+      }
+    },
+    {
+      "hebrew": "קהל: עַד עֵת בֹּא דְבָרוֹ, אִמְרַת יוי צְרָפָֽתְהוּ.  (תהלים קה:יט)",
+      "transliteration": "Ḳahal: ‘ad ‘et bo devaro, imrat Adonai tserafatehu.",
+      "english": "Cong. Until the time when his case came, [when] Adonai’s utterance brought it to completion.        (Ps. 105:19)",
+      "comments": "",
+      "timing": {
+        "start": 254.73,
+        "end": 264.03
+      }
+    },
+    {
+      "hebrew": "קָרוֹב יוי לַכֹּל, אַךְ בֶּאֱמֶת קֹרְאָיו.",
+      "transliteration": "Ḳarov Adonai lakkol, akh be’emet ḳore’av.",
+      "english": "Adonai is close to all, as long as they call out to Him honestly.",
+      "comments": "",
+      "timing": {
+        "start": 264.03,
+        "end": 280.47
+      }
+    },
+    {
+      "hebrew": "רְצוֹנָם יַעֲשֶׂה, וְכֹל אֲשֶׁר לִבָּם יְאָו.",
+      "transliteration": "Retsonam ya‘asē, vekhol asher libbam ye’av.",
+      "english": "He carries out their will, and whatever their heart desires.",
+      "comments": "",
+      "timing": {
+        "start": 280.47,
+        "end": 295.2
+      }
+    },
+    {
+      "hebrew": "אוֹתוֹת בְּכָל־יוֹם יְחַדֵּשׁ לִבְרוּאָיו,",
+      "transliteration": "Otot bekhol yom yeḥaddesh livru’av,",
+      "english": "He makes new wonders every day, for his creations,",
+      "comments": "",
+      "timing": {
+        "start": 295.2,
+        "end": 303.4
+      }
+    },
+    {
+      "hebrew": "קהל: אַךְ קָרוֹב לִירֵאָיו.     (תהלים פה:י)",
+      "transliteration": "Ḳahal: Akh ḳarov lire’av.",
+      "english": "Cong. Indeed, He is close to those who fear Him.   (Ps. 85:10)",
+      "comments": "",
+      "timing": {
+        "start": 303.4,
+        "end": 313.53
+      }
+    },
+    {
+      "hebrew": "חזן: אַ֤ךְ קָר֣וֹב לִירֵאָ֣יו יִשְׁע֑וֹ לִשְׁכֹּ֖ן כָּב֣וֹד בְּאַרְצֵֽנוּ: (תהלים פה:י)",
+      "transliteration": "Ḥazzan: Akh ḳarov lire’av yish‘o lishkon kavod be’artsenu:",
+      "english": "Cantor: Indeed, His rescue is close to those who fear Him, such that His Glory will dwell in our land. (Ps. 85:10)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: בָּר֥וּךְ כְּבֽוֹד־יו֖י מִמְּקוֹמֽוֹ: (יחזקאל ג:יב)",
+      "transliteration": "Ḳahal: Barukh kevod Adonai mimmeḳomo:",
+      "english": "Congregation: Blessed is Adonai’s Glory from His place. (Ezek. 3:12)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/09-vayyeshev.mp3",
+  "author_en": "Aaron ben Joseph"
+}

@@ -1,0 +1,294 @@
+{
+  "id": "17-vayyishma-yithro",
+  "title_en": "Vayyishma' Yithro",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֵלִי, שִׁמְעֲךָ שָׁמְעוּ רְחוֹקִים, וְרָגְזוּ וְחָלוּ,",
+      "transliteration": "Eli, shim‘akha shame‘u reḥoḳim, veraḡezu veḥalu,",
+      "english": "My God, distant [individuals] heard about Your fame, and trembled and quaked,",
+      "comments": "Distant [individuals]. Although this is in the plural, it refers here specifically to Jethro.",
+      "timing": {
+        "start": 0,
+        "end": 17.0
+      }
+    },
+    {
+      "hebrew": "הִתְלוֹנֵן בְּצִלְּךָ – וְאֶל טוּבְךָ יִשְׁאָלוּ.",
+      "transliteration": "Hitlonen betsillekha – ve’el tuvekha yishalu.",
+      "english": "[Wanting] to dwell in Your shade—and they asked for Your goodness.",
+      "comments": "",
+      "timing": {
+        "start": 17.0,
+        "end": 29.37
+      }
+    },
+    {
+      "hebrew": "רְצוֹנְךָ לַעֲשׂוֹת שָׂמְחוּ וַיִּצְהָלוּ.",
+      "transliteration": "Retsonekha la‘asot sameḥu vayyits’halu.",
+      "english": "To do Your will they rejoiced and were glad.",
+      "comments": "",
+      "timing": {
+        "start": 29.37,
+        "end": 44.1
+      }
+    },
+    {
+      "hebrew": "נְדָבוֹת וְשַׁי יוֹבִֽילוּ.",
+      "transliteration": "Nedavot veshai yovilu.",
+      "english": "They brought donations and gifts.",
+      "comments": "",
+      "timing": {
+        "start": 44.1,
+        "end": 54.2
+      }
+    },
+    {
+      "hebrew": "שָׂשִׂים וְגַם שְׂמֵחִים, פְּנֵי אֵל יְחַלּוּ.",
+      "transliteration": "Sasim veḡam semeḥim, penē el yeḥallu.",
+      "english": "Being happy and joyous, they beseeched God.",
+      "comments": "",
+      "timing": {
+        "start": 54.2,
+        "end": 69.43
+      }
+    },
+    {
+      "hebrew": "בְּעֹז מַתַּת דָּת יָגִֽילוּ.",
+      "transliteration": "Be‘oz mattat dat yaḡilu.",
+      "english": "They rejoiced in the might of the giving of the Law.",
+      "comments": "",
+      "timing": {
+        "start": 69.43,
+        "end": 78.67
+      }
+    },
+    {
+      "hebrew": "מַה נַּעֲלָה חֹֽדֶשׁ שְׁלִישִׁי, בּוֹ אָהָֽלוּ",
+      "transliteration": "Ma na‘ala ḥodesh shelishi, bo ahalu",
+      "english": "How exalted is the third month, in which at Mount Sinai they—",
+      "comments": "",
+      "timing": {
+        "start": 78.67,
+        "end": 94.17
+      }
+    },
+    {
+      "hebrew": "יִשְׂרָאֵל בְּהַר סִינָי, וּבְשֵׁם אֱלֹהִים דָּגָֽלוּ.",
+      "transliteration": "Yisra’el behar Sinay, uvshem Elohim daḡlu.",
+      "english": "Israel—pitched tents, and hoisted their banner in God’s name.",
+      "comments": "",
+      "timing": {
+        "start": 94.17,
+        "end": 107.23
+      }
+    },
+    {
+      "hebrew": "וּמֹשֶׁה עָלָה [אֶל] הָאֱלֹהִים, וְקָרָא אֶל הַשָּׁמַֽיִם, וְנָגֹֽלּוּ;",
+      "transliteration": "UMoshe ‘ala el ha’Elohim, veḳara el hash’shamayim, venaḡollu;",
+      "english": "Moses ascended to God, and He called to the heavens, and they were rolled up;",
+      "comments": "",
+      "timing": {
+        "start": 107.23,
+        "end": 125.27
+      }
+    },
+    {
+      "hebrew": "וַעֲנָנֵי הַכָּבוֹד אֹתוֹ עַל כַּפַּֽיִם קִבֵּֽלוּ.",
+      "transliteration": "Va‘ananei hakkavod oto ‘al kappayim ḳibbelu.",
+      "english": "And the Clouds of Glory accepted [Moses] with open arms.",
+      "comments": "",
+      "timing": {
+        "start": 125.27,
+        "end": 136.13
+      }
+    },
+    {
+      "hebrew": "וַיִּקְרָא אֵלָיו יוי: \"בָּנַי בְּרַעְיוֹנַי עָלוּ.",
+      "transliteration": "Vayyiḳra elav Adonai: “Banai bera‘yonai ‘alu.",
+      "english": "And Adonai called out to him: “My children have arisen in My thoughts.",
+      "comments": "",
+      "timing": {
+        "start": 136.13,
+        "end": 152.47
+      }
+    },
+    {
+      "hebrew": "כֹּה תֹאמַר לָהֶם: רָזֵי תוֹרָתִי יִנְחָֽלוּ.",
+      "transliteration": "Koh tomar lahem: Razē torati yinḥalu.",
+      "english": "Say thus to them: They will inherit the secrets of my Torah.",
+      "comments": "",
+      "timing": {
+        "start": 152.47,
+        "end": 167.33
+      }
+    },
+    {
+      "hebrew": "יְבָרְרוּ סִיג לֵב, וְצֶֽדֶק יִפְעָֽלוּ.\"",
+      "transliteration": "Yevareru siḡ lev vetsedeḳ yif‘alu.”",
+      "english": "They will refine the dross of their heart, and act righteously.”",
+      "comments": "",
+      "timing": {
+        "start": 167.33,
+        "end": 181.43
+      }
+    },
+    {
+      "hebrew": "וְכָל־הָעָם כְּאֶחָד \"נַעֲשֶׂה!\" בָּרוּר מִלֵּֽלוּ.",
+      "transliteration": "Vekhol ha‘am ke’eḥad “na‘aseh!” Barur millelu.",
+      "english": "And the whole people, as one, clearly said: “We will do!”",
+      "comments": "",
+      "timing": {
+        "start": 181.43,
+        "end": 194.1
+      }
+    },
+    {
+      "hebrew": "צִוָּם הֱיוֹת נְכוֹנִים, בְּאִשָּׁה לְבַל יְגֹאָֽלוּ.",
+      "transliteration": "Tsivvam heyot nekhonim, be’ish’shal leval yeḡoalu.",
+      "english": "He commanded them to be prepared, and not be defiled by [intercourse with] women.",
+      "comments": "",
+      "timing": {
+        "start": 194.1,
+        "end": 210.3
+      }
+    },
+    {
+      "hebrew": "עֲלוֹת בָּהָר וּנְגֹֽעַ בְּקָצֵֽהוּ – פֶּן יִשָּֽׁלוּ,",
+      "transliteration": "‘alot bahar unḡo’a‘ beḳatsehu – pen yish’shallu,",
+      "english": "And so that they would not make the mistake of climbing the mountain or touching its edge,",
+      "comments": "",
+      "timing": {
+        "start": 210.3,
+        "end": 225.33
+      }
+    },
+    {
+      "hebrew": "הִתְיַצֵּב בָּהָר חָמַד אֱלֹהִים, גְּבוּל יַגְבִּֽילוּ.",
+      "transliteration": "Hityats’tsev bahar ḥamad Elohim, gevul yaḡbilu.",
+      "english": "They should make a boundary, [to prevent them from] stepping foot on the mountain that God desires.",
+      "comments": "",
+      "timing": {
+        "start": 225.33,
+        "end": 240.23
+      }
+    },
+    {
+      "hebrew": "לִפְנֵי סִינַי כָּל־הַר וְגִבְעָה יִשְׁפָּֽלוּ.",
+      "transliteration": "Lifnē har Sinai kol har veḡiv‘a yishpalu.",
+      "english": "Before Sinai, every mountain and hill was made low.",
+      "comments": "",
+      "timing": {
+        "start": 240.23,
+        "end": 250.8
+      }
+    },
+    {
+      "hebrew": "שָׁקַד מֹשֶׁה בְּחֶבְיוֹן, וְאוֹר פָּנָיו יָהֵֽלּוּ,",
+      "transliteration": "Shaḳad Moshē beḥevyon ‘oz ve’or panav yahellu,",
+      "english": "Moses stood diligently at the concealed place, and the light of his face gleamed;",
+      "comments": "",
+      "timing": {
+        "start": 250.8,
+        "end": 267.0
+      }
+    },
+    {
+      "hebrew": "לֵאוֹר בְּאוֹר רַעְיוֹנָיו הִשְׂכִּֽילוּ.",
+      "transliteration": "Le’or be’or ra‘yonav hiskilu.",
+      "english": "His thoughts were full of understanding, [such that] they were illuminated in light.",
+      "comments": "",
+      "timing": {
+        "start": 267.0,
+        "end": 276.33
+      }
+    },
+    {
+      "hebrew": "עֶֽשֶׂר דִּבְּרוֹת מִלְּשׁוֹנוֹ נִגְלוּ.",
+      "transliteration": "Eser dibberot milleshono niḡlo",
+      "english": "Ten Utterances were disclosed by His tongue.",
+      "comments": "",
+      "timing": {
+        "start": 276.33,
+        "end": 290.53
+      }
+    },
+    {
+      "hebrew": "רָאוּ עַם יוי כָּבוֹד, וְנִבְהָֽלוּ.",
+      "transliteration": "Ra’u ‘am Adonai kavod, venivhalu.",
+      "english": "Adonai’s people saw His Glory, and they were stunned.",
+      "comments": "",
+      "timing": {
+        "start": 290.53,
+        "end": 301.67
+      }
+    },
+    {
+      "hebrew": "נָֽעוּ וּמֵרָחוֹק עָמָֽדוּ, כִּי לֹא יָכִֽילוּ.",
+      "transliteration": "Na‘u umeraḥoḳ ‘amadu, ki lo yakhilu.",
+      "english": "They shook, and stood from afar, for they were not able [to stand closer].",
+      "comments": "",
+      "timing": {
+        "start": 301.67,
+        "end": 316.33
+      }
+    },
+    {
+      "hebrew": "עוֹ[ל] מַלְכוּתוֹ בָּם בְּאַהֲבָה סָבָֽלוּ.",
+      "transliteration": "‘ol malkhuto bam be’ahava savalu.",
+      "english": "They lovingly bore the yoke of His kingdom.",
+      "comments": "",
+      "timing": {
+        "start": 316.33,
+        "end": 327.67
+      }
+    },
+    {
+      "hebrew": "עָנוּ: \"דַּבֵּר אַתָּה עִמָּֽנוּ\", כִּי לֹא יָכֹֽלוּ",
+      "transliteration": "‘anu: “Dabber atta ‘immanu”, ki lo yakholu",
+      "english": "They called out [to Moses]: “You speak with us,” for they were not able",
+      "comments": "",
+      "timing": {
+        "start": 327.67,
+        "end": 338.7
+      }
+    },
+    {
+      "hebrew": "שְׁמֽוֹעַ מִפִּי יוי, פֶּן יְאֻכָּֽלוּ.",
+      "transliteration": "Shamo’a‘ mippi Adonai, pen ye’ukkalu.",
+      "english": "To hear from Adonai’s mouth, lest they be consumed.",
+      "comments": "",
+      "timing": {
+        "start": 338.7,
+        "end": 347.13
+      }
+    },
+    {
+      "hebrew": "עַתָּה בְגָלוּתָם, לְבַד לַיוי יוֹחִֽילוּ,",
+      "transliteration": "‘atta veḡalutam, levad la’Adonai yoḥilu,",
+      "english": "Now, in their exile, they put their hope in Adonai alone,",
+      "comments": "",
+      "timing": {
+        "start": 347.13,
+        "end": 358.23
+      }
+    },
+    {
+      "hebrew": "חזן׃ לְגָאֳלָם מִיַּד צָר – וּבַיוי יִצְדְּקוּ וְיִתְהַלָּֽלוּ.",
+      "transliteration": "Ḥazzan: Leḡa’olam miyyad tsar – uva’Adonai yitsdeḳu veyit’hallalu.",
+      "english": "Cantor: To redeem them from the enemy—and they are justified and glorified through Adonai.",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְׂרָאֵֽל׃ (ישעיה מז:ד)",
+      "transliteration": "Ḳahal: Go’alenu Adonai tseva’ot ḳedosh Yisra’el:",
+      "english": "Congregation: Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/17-vayyishma-yithro.mp3",
+  "author_en": "Aaron ben Joseph"
+}

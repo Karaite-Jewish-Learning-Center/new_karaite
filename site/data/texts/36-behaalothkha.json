@@ -1,0 +1,274 @@
+{
+  "id": "36-behaalothkha",
+  "title_en": "Beha‘alothkha",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "קהל:וְאֶל־מִ֖י תְּדַמְּי֣וּן אֵ֑ל וּמַה־דְּמ֖וּת תַּ֥עַרְכוּ לֽוֹ: (ישעיהו מ:יח)",
+      "transliteration": "Ḳahal: Ve’el mi tedammeyun El uma demut ta‘arkhu lo:",
+      "english": "Cong.And to whom could you compare God; and what comparison could you make to Him? (Isa. 40:18)",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 5.17
+      }
+    },
+    {
+      "hebrew": "קהל:לְמִ֥י תְדַמְּי֖וּנִי וְתַשְׁו֑וּ וְתַמְשִׁל֖וּנִי וְנִדְמֶֽה: (ישעיהו מו:ה)",
+      "transliteration": "Ḳahal: Lemi tedammeyuni vetashvu vetamshiluni venidmeh:",
+      "english": "Cong.To whom could you compare Me, and declare Me similar; or liken Me, such that we could be compared? (Isa. 46:5)",
+      "comments": "",
+      "timing": {
+        "start": 5.17,
+        "end": 10.07
+      }
+    },
+    {
+      "hebrew": "קהל:וְאֶל־מִ֥י תְדַמְּי֖וּנִי וְאֶשְׁוֶ֑ה יֹאמַ֖ר קָדֽוֹשׁ: (ישעיהו מ:כה)",
+      "transliteration": "Ḳahal: Ve’el mi tedammeyuni ve’eshvē yomar Ḳadosh:",
+      "english": "Cong.And to whom could you compare Me, that I would be similar to them—says the holy One. (Isa. 40:25)",
+      "comments": "",
+      "timing": {
+        "start": 10.07,
+        "end": 19.1
+      }
+    },
+    {
+      "hebrew": "אָמַר אֲדֹנֵי הָאֲדֹנִים –",
+      "transliteration": "Amar adonē ha’adonim –",
+      "english": "Says the Lord of lords,",
+      "comments": "",
+      "timing": {
+        "start": 19.1,
+        "end": 32.17
+      }
+    },
+    {
+      "hebrew": "הַמֵּסִיר אֲפֵר מֵעַל עֵינֵי רַעְיוֹנִים,",
+      "transliteration": "Hammesir afer me‘al ‘enē ra‘yonim,",
+      "english": "Who removes the veil from the mind’s eye,",
+      "comments": "",
+      "timing": {
+        "start": 32.17,
+        "end": 43.53
+      }
+    },
+    {
+      "hebrew": "רַב עֲלִילִיָּה, וְרָזֵי דָתוֹ צְפוּנִים –",
+      "transliteration": "Rav ‘aliliyya, verazē dato tsefunim –",
+      "english": "The one great in deed, and the secrets of whose law are concealed:",
+      "comments": "",
+      "timing": {
+        "start": 43.53,
+        "end": 57.13
+      }
+    },
+    {
+      "hebrew": "נֵרוֹת מְנוֹרָה יָאִֽירוּ לְמוּל שֻׁלְחַן הַפָּנִים.",
+      "transliteration": "Nerot menorah ya’iru lemul shulkhan happanim.",
+      "english": "The Menorah’s lamps should give light, facing the Table of Showing.",
+      "comments": "Table of Showing. Where the Showbread is placed.",
+      "timing": {
+        "start": 57.13,
+        "end": 69.0
+      }
+    },
+    {
+      "hebrew": "לְוִיִּם יִטָּהֲרוּ, וְיִהְיוּ לְאַהֲרֹן וּלְבָנָיו נְתוּנִים,",
+      "transliteration": "Leviyyim yittaharu, veyihyu le’Aharon ulvanav netunim,",
+      "english": "The Levites should purify themselves, and be given to Aaron and his sons;",
+      "comments": "",
+      "timing": {
+        "start": 69.0,
+        "end": 83.5
+      }
+    },
+    {
+      "hebrew": "מִבֶּן חָמֵשׁ וְעֶשְׂרִים עַד חֲמִשִּׁים, לַעֲבֹד יִהְיוּ מְמֻנִּים;",
+      "transliteration": "Mibben ḥamesh ve‘esrim ‘ad ben ḥamish’shim, la‘avod yihyu memunnim;",
+      "english": "They should be appointed to work from age twenty-five to fifty,",
+      "comments": "",
+      "timing": {
+        "start": 83.5,
+        "end": 97.3
+      }
+    },
+    {
+      "hebrew": "אַחֲרֵי כֵן בְּבֵית יוי שָׁרִים וְנוֹגְנִים.",
+      "transliteration": "Aḥarē khen bevet Adonai sharim venoḡenim.",
+      "english": "After which they should sing and make music in Adonai’s house.",
+      "comments": "",
+      "timing": {
+        "start": 97.3,
+        "end": 112.23
+      }
+    },
+    {
+      "hebrew": "חֶֽסֶד אֵל פָּרוּשׂ לְעַמּוֹ – סְכָכָם בַּעֲנָנִים;",
+      "transliteration": "Ḥesed El parus le‘ammo – sekhakham ba‘ananim;",
+      "english": "God’s mercy is spread out over His people—He sheltered them in clouds;",
+      "comments": "",
+      "timing": {
+        "start": 112.23,
+        "end": 125.6
+      }
+    },
+    {
+      "hebrew": "עַל־פִּי יוי נֹסְעִים, וְעַל־פִּי יוי חֹנִים.",
+      "transliteration": "‘al pi Adonai nose‘im, ve‘al pi Adonai ḥonim.",
+      "english": "They would travel at Adonai’s command, and camp at Adonai’s command.",
+      "comments": "",
+      "timing": {
+        "start": 125.6,
+        "end": 140.7
+      }
+    },
+    {
+      "hebrew": "וּבִנְסֹֽעַ הָאָרֹן, יֹאמַר מֹשֶׁה בְּרִנּוּנִים:",
+      "transliteration": "Uvinso’a‘ ha’aron, yomar Moshē berinnunim:",
+      "english": "And when the Ark would travel Moses would say, in song:",
+      "comments": "",
+      "timing": {
+        "start": 140.7,
+        "end": 153.33
+      }
+    },
+    {
+      "hebrew": "\"קוּמָה יוי, וְיָפֽוּצוּ אוֹיְבִים וְשׂוֹטְנִים!\"",
+      "transliteration": "“Ḳuma Adonai, veyafutsu oyevim vesotenim!”",
+      "english": "“Rise up, Adonai, and may the enemies and foes be scattered!”",
+      "comments": "",
+      "timing": {
+        "start": 153.33,
+        "end": 168.17
+      }
+    },
+    {
+      "hebrew": "וּבְנֻחֹה יֹאמַר: \"שׁוּבָה יוי רִבְבוֹת מַמְלֶֽכֶת כֹּהֲנִים!\"",
+      "transliteration": "Uvnuḥo yomar: “Shuva Adonai riv’vot mamlekhet kohanim!”",
+      "english": "And when it would rest, he would say: “Return, Adonai, [among] the myriads of the Kingdom of Priests.”",
+      "comments": "Kingdom of Priests. The Israelite nation.",
+      "timing": {
+        "start": 168.17,
+        "end": 182.27
+      }
+    },
+    {
+      "hebrew": "וְאֵשׁ אָכְלָה עַם מִתְאוֹנְנִים,",
+      "transliteration": "Ve’esh okhla ‘am mit’onenim,",
+      "english": "A fire consumed the people who were complaining.",
+      "comments": "",
+      "timing": {
+        "start": 182.27,
+        "end": 195.4
+      }
+    },
+    {
+      "hebrew": "וְכִרְאוֹת נְבִיא אֵל, רֹאשׁ לְמַאֲמִינִים,",
+      "transliteration": "Vekhir’ot nevi El, rosh lema’aminim,",
+      "english": "And when God’s prophet, the head of all believers, saw",
+      "comments": "",
+      "timing": {
+        "start": 195.4,
+        "end": 205.13
+      }
+    },
+    {
+      "hebrew": "רַעְיוֹן אֱנוֹשׁ תַּאֲוַת דְּאָבָה וְדִמְיוֹנִים –",
+      "transliteration": "Ra‘yon enosh ta’avat de’ava vedimyonim ‘",
+      "english": "That human thoughts were [occupied with] lugubrious cravings and imaginings,",
+      "comments": "",
+      "timing": {
+        "start": 205.13,
+        "end": 217.27
+      }
+    },
+    {
+      "hebrew": "בִּקֵּשׁ מֵאֵל הֱיוֹת מַנְהִיגִים מְזֻמָּנִים,",
+      "transliteration": "Biḳḳesh me’El heyot manhiḡim mezummanim,",
+      "english": "He asked God for leaders to be appointed,",
+      "comments": "",
+      "timing": {
+        "start": 217.27,
+        "end": 229.07
+      }
+    },
+    {
+      "hebrew": "נֶאֱמַר לוֹ לֶאֱסֹף שִׁבְעִים זְקֵנִים.",
+      "transliteration": "Ne’emar lo le’esof shiv‘im zeḳenim.",
+      "english": "And was told to gather seventy elders.",
+      "comments": "",
+      "timing": {
+        "start": 229.07,
+        "end": 241.7
+      }
+    },
+    {
+      "hebrew": "וּמֵהוֹדוֹ חֲנָנָם הוֹד מַעֲדַנִּים.",
+      "transliteration": "Umehodo ḥananam hod madannim.",
+      "english": "[God] graciously gave them of his splendor—pleasurable splendor.",
+      "comments": "",
+      "timing": {
+        "start": 241.7,
+        "end": 254.13
+      }
+    },
+    {
+      "hebrew": "הוּא בֶאֱמֶת  עֹשֶׂה שָׁלוֹם בָּעֶלְיוֹנִים.",
+      "transliteration": "Hu ve’emet ‘osē shalom ba‘elyonim.",
+      "english": "He, indeed,  makes peace on high.",
+      "comments": "",
+      "timing": {
+        "start": 254.13,
+        "end": 266.67
+      }
+    },
+    {
+      "hebrew": "הוּא בֶאֱמֶת מַשְׁגִּֽיחַ גַּם בַּתַּחְתּוֹנִים.",
+      "transliteration": "Hu ve’emet mashgi’aḥ gam battaḥtonim",
+      "english": "He, indeed,  also supervises [the earth] down below.",
+      "comments": "",
+      "timing": {
+        "start": 266.67,
+        "end": 276.5
+      }
+    },
+    {
+      "hebrew": "הוּא בֶאֱמֶת  לָרִאשֹׁנִים וְגַם לָאַחֲרֹנִים.",
+      "transliteration": "Hu ve’emet larishonim veḡam la’aḥaronim.",
+      "english": "He, indeed,  [has done so] for the earlier [generations], and also for the later [ones].",
+      "comments": "",
+      "timing": {
+        "start": 276.5,
+        "end": 284.43
+      }
+    },
+    {
+      "hebrew": "קהל: הַכֹּל יוֹדֽוּהוּ וְהַכֹּל יְשַׁבְּחֽוּהוּ וְהַכֹּל לְהַקְדִּישׁוֹ עוֹנִים:",
+      "transliteration": "Ḳahal: Hakkol yoduhu vehakkol yeshabbeḥuhu vehakkol lehaḳdisho ‘onim:",
+      "english": "Cong. All acknowledge Him, and all praise Him, and all raise their voices to declare His holiness:",
+      "comments": "",
+      "timing": {
+        "start": 284.43,
+        "end": 296.6
+      }
+    },
+    {
+      "hebrew": "חזן: אֵֽין־קָד֥וֹשׁ כַּיו֖י כִּי־אֵ֣ין בִּלְתֶּ֑ךָ וְאֵ֥ין צ֖וּר כֵּֽאלֹהֵֽינוּ: (שמואל א ב:ב)",
+      "transliteration": "Ḥazzan: en ḳadosh ka’Adonai ki en biltekha ve’en tsur kelohenu:",
+      "english": "Cantor. There is none holy like Adonai, for there is none but You; and there is no rock like our God. (1 Sam. 2:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל: (תהלים כב:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Cong. And You are holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/36-behaalothkha.mp3",
+  "author_en": "Aaron ben Joseph"
+}

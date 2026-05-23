@@ -1,0 +1,11 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Chatbot virtual env
+site/chatbot/venv/
+
+# Large audio files can be tracked with Git LFS if needed
+# audio/*.mp3

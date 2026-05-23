@@ -1,0 +1,324 @@
+{
+  "id": "54-vezoth-habberakha",
+  "title_en": "Vezoth Haberakha",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אִישׁ אֱלֹהִים בֵּרַךְ לְשִׁבְטֵי יְשֻׁרוּן הַבְּרוּרִים.",
+      "transliteration": "Ish Elohim berakh leshivtē Yeshurun habberurim.",
+      "english": "The man of God blessed the chosen tribes of Jeshurun.",
+      "comments": "The man of God. Moses.\nJeshurun. The Israelites.",
+      "timing": {
+        "start": 0,
+        "end": 15.37
+      }
+    },
+    {
+      "hebrew": "הִנֵּה מְטַר תּוֹכֵחָה וְטַל בְּרָכָה פִּיו וּלְשׁוֹנוֹ מַמְטִירִים.",
+      "transliteration": "Hinnē metar tokheḥa vetal berakha piv ulshono mamtirim,",
+      "english": "Behold, his mouth and tongue precipitated rain of rebuke and dew of blessing.",
+      "comments": "",
+      "timing": {
+        "start": 15.37,
+        "end": 31.07
+      }
+    },
+    {
+      "hebrew": "רֹאשׁ דְּבָרָיו \"יוי\", אֲשֶׁר \"בָּא בְסִינַי\" בְּהוֹד וַהֲדָרִים,",
+      "transliteration": "Rosh devarav “Adonai”, asher “ba veSinay” behod vahadarim,",
+      "english": "The first of his words was “Adonai,” who “came from Sinai,” in splendor and beauty,",
+      "comments": "",
+      "timing": {
+        "start": 31.07,
+        "end": 48.47
+      }
+    },
+    {
+      "hebrew": "נִחַל לְעַמּוֹ תּוֹרָה – צֶֽדֶק וּמִשְׁפָּט וּמֵישָׁרִים.",
+      "transliteration": "Niḥal le‘ammo tora – tsedeḳ umishpat umesharim.",
+      "english": "And gave the Torah as an inheritance to His people—righteousness and justice and uprightness.",
+      "comments": "",
+      "timing": {
+        "start": 48.47,
+        "end": 62.73
+      }
+    },
+    {
+      "hebrew": "בָּרֵךְ יְבָרֵךְ לְבָנָיו הַיְקָרִים.",
+      "transliteration": "Barekh yevarekh levanav hayeḳarim.",
+      "english": "Moses blessed, yes, blessed, His dear children.",
+      "comments": "",
+      "timing": {
+        "start": 62.73,
+        "end": 77.23
+      }
+    },
+    {
+      "hebrew": "יְחִי רְאוּבֵן וְאַל יָמוֹת כְּמוֹת סוֹרְרִים,",
+      "transliteration": "Yehi Reuven ve’al yamot kemot sorerim",
+      "english": "May Reuben live, and not die like those who go astray,",
+      "comments": "",
+      "timing": {
+        "start": 77.23,
+        "end": 89.53
+      }
+    },
+    {
+      "hebrew": "וּמְתָיו לֹא יִפָּקְדוּ מִסְּפוּרִים.",
+      "transliteration": "Umtav lo yippaḳedu missefurim",
+      "english": "And may his men not be lost and uncountable.",
+      "comments": "",
+      "timing": {
+        "start": 89.53,
+        "end": 104.23
+      }
+    },
+    {
+      "hebrew": "וְזֹאת לִיהוּדָה: וְעֵֽזֶר יוי יִהְיֶה לּוֹ מִצָּרִים.",
+      "transliteration": "Vezot lihuda ve‘ezer Adonai yihyē lo mits’tsarim.",
+      "english": "And this for Judah: May Adonai be a help for him from foes.",
+      "comments": "",
+      "timing": {
+        "start": 104.23,
+        "end": 118.1
+      }
+    },
+    {
+      "hebrew": "וּלְלֵוִי אָמַר: נֹשֵֹא תֻמִּים וְאוּרִים,",
+      "transliteration": "Ul’Levi amar: Nosē tummim ve’urim,",
+      "english": "And regarding Levi he said: The bearer of the Tummim and Urim,",
+      "comments": "",
+      "timing": {
+        "start": 118.1,
+        "end": 132.43
+      }
+    },
+    {
+      "hebrew": "יִמְחַץ מָתְנֵי קָמָיו, וְלֹא יְקוּמוּן סֹרְרִים.",
+      "transliteration": "Yimḥatz matanē ḳamav, velo yeḳumun sorerim.",
+      "english": "May he crush the loins of his foes, and may those who stray not stand up [again].",
+      "comments": "",
+      "timing": {
+        "start": 132.43,
+        "end": 145.37
+      }
+    },
+    {
+      "hebrew": "וּבִנְיָמִין יְדִיד אֵל, שָׁכַן בְּמִשְׁכְּנֵי אֵל הַטְּהוֹרִים,",
+      "transliteration": "Uvinyamin Yedid El, shakhan bemishkenē El hattehorim,",
+      "english": "And Benjamin, God’s beloved, dwells in God’s pure dwelling places,",
+      "comments": "",
+      "timing": {
+        "start": 145.37,
+        "end": 162.03
+      }
+    },
+    {
+      "hebrew": "וּלְיוֹסֵף אָמַר: תְּבֹרַךְ אַרְצוֹ, וְלוֹ מִשְׁפַּט בְּכוֹרִים.",
+      "transliteration": "UlYosef amar: tevorakh artso, velo mishpat bekhorim.",
+      "english": "And regarding Joseph he said: May his land be blessed, and his is the right of the firstborn.",
+      "comments": "",
+      "timing": {
+        "start": 162.03,
+        "end": 176.0
+      }
+    },
+    {
+      "hebrew": "וּזְבוּלוּן יִשְׂמַח בְּנֹֽפֶת צוּף נְהָרִים,",
+      "transliteration": "UZevulun yismaḥ benofet tsuf neharim,",
+      "english": "And Zebulun shall rejoice in flowing rivers of honey,",
+      "comments": "",
+      "timing": {
+        "start": 176.0,
+        "end": 190.17
+      }
+    },
+    {
+      "hebrew": "וְיִשָֹּשכָר בְּאֹהָלָיו, יֹדְעֵי בִינָה בְמֶחְקָרִים.",
+      "transliteration": "VeYissakhar be’ohalav , yode‘ē vina vemeḥḳarim.",
+      "english": "And Issachar in his tents, with insight in [his] studies.",
+      "comments": "",
+      "timing": {
+        "start": 190.17,
+        "end": 203.7
+      }
+    },
+    {
+      "hebrew": "וְגָד כְּלָבִיא יִשְׁכֹּן, וְיִטְרֹף כַּכְּפִירִים.",
+      "transliteration": "veḠad kelavi yishkon, veyitrof kakkefirim.",
+      "english": "And Gad will dwell like a lion, and tear prey as whelps do.",
+      "comments": "",
+      "timing": {
+        "start": 203.7,
+        "end": 218.77
+      }
+    },
+    {
+      "hebrew": "וְדָן כְּגוּר אַרְיֵה, יְרַד בַּגִּבּוֹרִים!",
+      "transliteration": "veDan keḡur aryē, yerad baggibborim!",
+      "english": "And Dan, like a lion’s whelp, dominate among the mighty.",
+      "comments": "",
+      "timing": {
+        "start": 218.77,
+        "end": 230.77
+      }
+    },
+    {
+      "hebrew": "וְנַפְתָּלִי שְׂבַע רָצוֹן יִהְיֶה, בְּאֵין מַחְסֹרִים.",
+      "transliteration": "VeNaftali seva‘ ratson yihyē, be’en maḥsorim.",
+      "english": "And Naphtali will be satiated with contentment, lacking nothing.",
+      "comments": "",
+      "timing": {
+        "start": 230.77,
+        "end": 246.73
+      }
+    },
+    {
+      "hebrew": "וְאָשֵׁר מִבָּנִים בָּרוּךְ – יְהִי רְצוּי אֶחָיו הַכְּשֵׁרִים.",
+      "transliteration": "Ve’Asher mibbanim barukh – yehi retsuy eḥav hakkesherim.",
+      "english": "And Asher, blessed among the sons—may he be favored among his brothers, the fit.",
+      "comments": "",
+      "timing": {
+        "start": 246.73,
+        "end": 260.63
+      }
+    },
+    {
+      "hebrew": "וַיַּֽעַל נְבִיא יוי אֶל הַר הָעֲבָרִים,",
+      "transliteration": "Vayya‘al nevi Adonai el har ha‘avarim,",
+      "english": "Now Adonai’s prophet ascended to Mount Abarim,",
+      "comments": "",
+      "timing": {
+        "start": 260.63,
+        "end": 277.7
+      }
+    },
+    {
+      "hebrew": "וַיָּֽמָת שָׁם, בִּנְשִׁיקַת אַדִּיר הָאַדִּירִים.",
+      "transliteration": "Vayyamot sham binshiḳat addir ha’addirim,",
+      "english": "And he died there, from the kiss of the noblest of the noble.",
+      "comments": "The noblest of the noble. God.",
+      "timing": {
+        "start": 277.7,
+        "end": 291.57
+      }
+    },
+    {
+      "hebrew": "וַיִּקְבֹּר אֹתוֹ בְּמָר־דְּרוֹר, מְקוֹם אַבְקַת עֲפָרִים.",
+      "transliteration": "Vayyiḳbor oto bemor deror meḳom avḳat ‘afarim.",
+      "english": "[God] buried him there, in pure musk, instead of dust.",
+      "comments": "",
+      "timing": {
+        "start": 291.57,
+        "end": 307.1
+      }
+    },
+    {
+      "hebrew": "כִּי מִי כְמֹשֶׁה מִכָּל־הַיְצוּרִים?",
+      "transliteration": "Ki mi kheMoshē mikkol haytsurim?",
+      "english": "For who is like Moses, out of all creations?",
+      "comments": "",
+      "timing": {
+        "start": 307.1,
+        "end": 317.8
+      }
+    },
+    {
+      "hebrew": "יְדָעוֹ יוי פָּנִים אֶל פָּנִים מְאִירִים.",
+      "transliteration": "Yeda‘o Adonai panim el panim me’irim.",
+      "english": "Adonai knew him, face to shining face.",
+      "comments": "",
+      "timing": {
+        "start": 317.8,
+        "end": 332.63
+      }
+    },
+    {
+      "hebrew": "בְּרֵאשִׁית וְאֵֽלֶּה שְׁמוֹת קָרָא, וְדִבֶּר – אֵֽלֶּה הַדְּבָרִים.",
+      "transliteration": "Bereshit ve’ellē shemot ḳara, vedibber – ellē haddevarim.",
+      "english": "Genesis and Exodus he called out, and he spoke these words.",
+      "comments": "",
+      "timing": {
+        "start": 332.63,
+        "end": 346.33
+      }
+    },
+    {
+      "hebrew": "אֵיךְ יִמְתַּק, בְּהֶבְדֵּל אוֹרוֹ, אוֹר שְׁנֵי אוֹרִים?",
+      "transliteration": "Ekh yimtaḳ, behevdel oro, or shenē orim?",
+      "english": "When separated from his light, how can the light of the two [heavenly] luminaries be sweet?",
+      "comments": "",
+      "timing": {
+        "start": 346.33,
+        "end": 362.57
+      }
+    },
+    {
+      "hebrew": "קוֹל לְפָנָיו קֹרֵא: \"פִּתְחוּ שְׁעָרִים!",
+      "transliteration": "Ḳol lefanav ḳoreh: “Pit’ḥu she‘arim!",
+      "english": "A voice calls out before him: “Open the gates!",
+      "comments": "",
+      "timing": {
+        "start": 362.57,
+        "end": 376.33
+      }
+    },
+    {
+      "hebrew": "יָבֹא זַךְ, נֶאֱצָל מִבֵּין שְׁנֵי הַמְּאוֹרִים!\"",
+      "transliteration": "Yavo zakh, ne’etsal mibben shenē hamme’orim!”",
+      "english": "Let the pure one come, the one more ennobled out of the two luminaries!”",
+      "comments": "",
+      "timing": {
+        "start": 376.33,
+        "end": 391.77
+      }
+    },
+    {
+      "hebrew": "יְדִידַי, קַדְּשׁוּ לָאֵל, הַבֹּחֵר לוֹ מִבְּחוּרִים,",
+      "transliteration": "Yedidai, ḳaddeshu la’el habboḥer lo mibbeḥurim,",
+      "english": "My friends, declare the sanctity of God, who chose him out of the chosen ones,",
+      "comments": "",
+      "timing": {
+        "start": 391.77,
+        "end": 404.33
+      }
+    },
+    {
+      "hebrew": "בְּשִׁלּוּשׁ \"קָדוֹשׁ\", בְּמַהֲלָל וְשִׁירִים,",
+      "transliteration": "Beshillush “ḳadosh”, bemahalal veshirim,",
+      "english": "With the threefold “Holy!”, with praise and songs,",
+      "comments": "",
+      "timing": {
+        "start": 404.33,
+        "end": 412.77
+      }
+    },
+    {
+      "hebrew": "קהל: וְאִמְרוּ בְּפַֽחַד וּמוֹרָא יֹשֵׁב עַל כֵּס, מְהֻדָּר בַּהֲדָרִים.",
+      "transliteration": "Ḳahal: Yoshev ‘al kes, mehuddar bahadarim.",
+      "english": "Cong. The one seated on the throne, glorified in beauty.",
+      "comments": "",
+      "timing": {
+        "start": 412.77,
+        "end": 424.13
+      }
+    },
+    {
+      "hebrew": "חזן: יֹשֵׁ֥ב עַל־כִּסֵּ֖א רָ֣ם וְנִשָּׂ֑א וְשׁוּלָ֖יו מְלֵאִ֥ים אֶת־הַֽהֵיכָֽל: שְׂרָפִ֨ים עֹֽמְדִ֤ים ׀ מִמַּ֙עַל֙ ל֔וֹ שֵׁ֧שׁ כְּנָפַ֛יִם שֵׁ֥שׁ כְּנָפַ֖יִם לְאֶחָ֑ד בִּשְׁתַּ֣יִם ׀ יְכַסֶּ֣ה פָנָ֗יו וּבִשְׁתַּ֛יִם יְכַסֶּ֥ה רַגְלָ֖יו וּבִשְׁתַּ֥יִם יְעוֹפֵֽף: וְקָרָ֨א זֶ֤ה אֶל־זֶה֙ וְאָמַ֔ר",
+      "transliteration": "Ḥazzan: Yoshev ‘al kissē ram venissa veshulav mele’im et hahekhal: Serafim ‘omedim, mimma‘al lo shesh kenafayim shesh kenafayim le’eḥad bishtayim, yekhassē fanav uvishtayim yekhassē raḡlav uvishtayim ye‘ofef: Veḳara zē el zē ve’amar",
+      "english": "Cantor. [He is] seated on a throne, high and lofty, with His coattails filling the Temple. Seraphim were standing above Him, each one with six wings; with two [wings] they would cover their faces, and with two they would cover their legs, and with two they would fly. And they would call out, this one to that one, and say:",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ קָד֛וֹשׁ קָד֖וֹשׁ יו֣י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ: (ישעיהו ו:א-ג)",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Congregation: Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:1–3)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/54-vezoth-habberakha.mp3",
+  "author_en": "Aaron ben Joseph"
+}

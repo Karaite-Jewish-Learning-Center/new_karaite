@@ -1,0 +1,224 @@
+{
+  "id": "45-vaethḥannan",
+  "title_en": "Va’ethḥannan",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֲדֹנָי אֱלֹהִים, אַתָּה הַחִלּֽוֹתָ לְהַרְאוֹת לִי שַׁעֲרֵי גְבוֹהִים,",
+      "transliteration": "Adonai Elohim, atta haḥillota lehar’ot li sha‘arē ḡevohim,",
+      "english": "“Adonai, God, You have begun to show me the gates of the heights,",
+      "comments": "Adonai. This first stanza presents Moses’s prayer to God to enter the Land of Israel, paraphrased from the opening verses of our parasha (Deut. 3:23–25).",
+      "timing": {
+        "start": 0,
+        "end": 18.0
+      }
+    },
+    {
+      "hebrew": "הֶעֱמַדְתַּֽנִי בְּחֶבְיוֹן עוֹז, וְחָזִֽיתִי נְגוֹהִים.",
+      "transliteration": "He‘emadtani beḥevyon ‘oz, veḥaziti neḡohim.",
+      "english": "You have let me stand in the hidden place of Your might, and I have seen [its] radiance.",
+      "comments": "",
+      "timing": {
+        "start": 18.0,
+        "end": 31.0
+      }
+    },
+    {
+      "hebrew": "אֶעְבְּרָה נָּא וְאֶרְאֶה אֶֽרֶץ רוֹאֶֽיהָ תְמֵהִים –",
+      "transliteration": "E‘ebra na ve’er’ē erets ro’eha temehim –",
+      "english": "Let me cross over, please, and see the Land [that inspires] all who see it [to] marvel”—",
+      "comments": "",
+      "timing": {
+        "start": 31.0,
+        "end": 37.77
+      }
+    },
+    {
+      "hebrew": "קהל: תְּפִלָּה לְמֹשֶׁה אִישׁ הָאֱלֹהִים.  (תהלים צ:א)",
+      "transliteration": "Ḳahal: Tefilla leMoshē Ish ha’Elohim.",
+      "english": "Cong. A prayer of Moses, the man of God.    (Ps. 90:1)",
+      "comments": "",
+      "timing": {
+        "start": 37.77,
+        "end": 45.8
+      }
+    },
+    {
+      "hebrew": "הִקְדַּשְׁתִּֽיךָ מִבֶּֽטֶן, וּמִשְׁחָר לְךָ מֵרָֽחֶם.",
+      "transliteration": "Hiḳdashtikha mibbeten, umish’ḥar lekha meraḥem.",
+      "english": "“I have sanctified you since the belly, and from your dawn, from the womb.",
+      "comments": "I have sanctified you. This stanza and the next are God’s response to Moses.",
+      "timing": {
+        "start": 45.8,
+        "end": 62.13
+      }
+    },
+    {
+      "hebrew": "עַתָּה הֶֽרֶף מִלְּהִתְחַנֵּן – תִּזְכּוֹר רַחֵם.",
+      "transliteration": "‘atta heref millehit’ḥannen – tizkor raḥem.",
+      "english": "[But] now, leave off supplicating ‘Remember to have mercy!’”",
+      "comments": "",
+      "timing": {
+        "start": 62.13,
+        "end": 76.4
+      }
+    },
+    {
+      "hebrew": "כִּי אֵל עֶלְיוֹן לֹא אָדָם הוּא לְהִנָּחֵם –",
+      "transliteration": "Ki El ‘elyon lo adam hu lehinnaḥem –",
+      "english": "For El ‘Elyon is not a human being, that He would reconsider—",
+      "comments": "El ‘Elyon. A name for God; traditional English: “the most high God.”",
+      "timing": {
+        "start": 76.4,
+        "end": 82.07
+      }
+    },
+    {
+      "hebrew": "קהל: וְגַם נֶֽצַח יִשְׂרָאֵל לֹא יְשַׁקֵּר וְלֹא יִנָּחֵם. (שמואל א טו:כד)",
+      "transliteration": "Ḳahal: Veḡam netsaḥ Yisra’el lo yeshaḳḳer velo yinnaḥem.",
+      "english": "Cong. And Israel’s Eternal One does not lie, and does not reconsider. (1 Sam. 15:24)",
+      "comments": "",
+      "timing": {
+        "start": 82.07,
+        "end": 91.23
+      }
+    },
+    {
+      "hebrew": "רֹאשׁ הַפִּסְגָּה עֲלֵה, וּרְאֵה אֶת־הָאָֽרֶץ מִמְּרוֹמוֹ,",
+      "transliteration": "Rosh happisga ‘alē ur’ē et ha’arets mimmeromo,",
+      "english": "“Ascend to the top of the summit, and see the Land from its high point;",
+      "comments": "",
+      "timing": {
+        "start": 91.23,
+        "end": 107.0
+      }
+    },
+    {
+      "hebrew": "נִשְׁבַּֽעְתִּי לָתֵת אוֹתָהּ לְזֶֽרַע אֵיתָן, אֱלֹהָיו עִמּוֹ.",
+      "transliteration": "Nishba‘ti latet otah lezera‘ etan, elohav ‘immo,",
+      "english": "I have sworn to give it to the descendants of Ethan, whose God is with them.",
+      "comments": "Ethan. Abraham.",
+      "timing": {
+        "start": 107.0,
+        "end": 121.6
+      }
+    },
+    {
+      "hebrew": "וְקַח אֶת־יְהוֹשֻֽׁעַ וְחַזְּקֵֽהוּ וְאַמְּצֵֽהוּ, כִּי לְנָגִיד אֲשִׂימוֹ –",
+      "transliteration": "Veḳaḥ et Yehoshu’a‘ veḥazzeḳehu ve’ammetsehu, ki lenaḡid asimo –",
+      "english": "Take Joshua, and strengthen and fortify him, for I will place him as a leader”—",
+      "comments": "",
+      "timing": {
+        "start": 121.6,
+        "end": 129.77
+      }
+    },
+    {
+      "hebrew": "קהל: וַיְצַוֵּֽהוּ יוי לְנָגִיד עַל עַמּוֹ.  (שמואל א יג:יד)",
+      "transliteration": "Ḳahal: Vaytsavvehu Adonai lenaḡid ‘al ‘ammo.",
+      "english": "Cong. Adonai has commanded him [to be] a leader over His people. (1 Sam. 13:14)",
+      "comments": "",
+      "timing": {
+        "start": 129.77,
+        "end": 138.57
+      }
+    },
+    {
+      "hebrew": "נִיבוֹ לֹא חָשַׂךְ מֵעֲרוֹךְ לָֽנוּ אִמְרֵי מַמְתַקָּיו,",
+      "transliteration": "Nivo lo ḥasakh me‘arokh lanu imrē mamtaḳḳav,",
+      "english": "[God] did not refrain from setting out His word, His sweet utterances, for us.",
+      "comments": "He did not refrain. These final two stanzas are the narrator’s words, praising God and praying for the messianic age.",
+      "timing": {
+        "start": 138.57,
+        "end": 154.13
+      }
+    },
+    {
+      "hebrew": "וַיְגַל עֵין לִבֵּֽנוּ, בְּהַשְׁווֹת בְּרִיאַת אֲרָקָיו וּשְׁחָקָיו",
+      "transliteration": "Vayḡal ‘en libbenu, behashvot beri’at araḳav ush’ḥaḳav",
+      "english": "And He uncovered our mind’s eye, in making the creation of earth and heaven equal to",
+      "comments": "",
+      "timing": {
+        "start": 154.13,
+        "end": 168.4
+      }
+    },
+    {
+      "hebrew": "כִּיצִיאַת מִצְרַֽיִם, וְעָלֶֽיהָ יִסַּד רֹב מִצְוֹתָיו וְחֻקָּיו,",
+      "transliteration": "Kitsi’at Mitsrayim, va‘aleha yissad rov mitsvotav veḥuḳḳav,",
+      "english": "The Exodus from Egypt, upon which He established most of His commandments and statutes,",
+      "comments": "",
+      "timing": {
+        "start": 168.4,
+        "end": 176.63
+      }
+    },
+    {
+      "hebrew": "קהל: צַו לָצָו קַו לָקָו.    (ישעיהו כח:י)",
+      "transliteration": "Ḳahal: Tsav latsav ḳav laḳav.",
+      "english": "Cong. Precept by precept, line by line.     (Isa. 28:10)",
+      "comments": "",
+      "timing": {
+        "start": 176.63,
+        "end": 183.73
+      }
+    },
+    {
+      "hebrew": "הֱבִיאַֽנִי בְּמַצְרֵף הָאֱמוּנָה, וְהוֹרַֽנִי הָאֲמִתִּי הַמְיֻחָד,",
+      "transliteration": "Hevi’ani bematsref ha’emuna, vehorani ha’amitti hamyuḥad,",
+      "english": "He brought me through the crucible of faith, and taught me the true One, the unique One:",
+      "comments": "",
+      "timing": {
+        "start": 183.73,
+        "end": 199.47
+      }
+    },
+    {
+      "hebrew": "הָיָה וְהוֹיֶה וְיִהְיֶה; יֶשְׁנוֹ, וְלֹא יִכְחַד.",
+      "transliteration": "Haya vehoyē veyihyeh; yeshno, velo yikh’ḥad.",
+      "english": "He was, is, and will be; he exists, and will never be non-existent.",
+      "comments": "",
+      "timing": {
+        "start": 199.47,
+        "end": 212.23
+      }
+    },
+    {
+      "hebrew": "יַהֲפֹךְ אֶל עַמִּים שָׂפָה בְרוּרָה לְעָבְדוֹ יַֽחַד,",
+      "transliteration": "Yahafokh el ‘ammim safa verura le‘ovdo yaḥad,",
+      "english": "He will transform nations [to speak] pure language, to worship Him together,",
+      "comments": "",
+      "timing": {
+        "start": 212.23,
+        "end": 222.27
+      }
+    },
+    {
+      "hebrew": "קהל: בַּיּוֹם הַהוּא יִהְיֶה יוי אֶחָד וּשְׁמוֹ אֶחָד. (זכריה יד:ט)",
+      "transliteration": "Ḳahal: Bayyom hahu yihyē Adonai eḥad ushmo eḥad.",
+      "english": "Cong. On that day, Adonai will be one, and His name will be one. (Zech. 14:9)",
+      "comments": ""
+    },
+    {
+      "hebrew": "חזן: וְהָיָ֧ה יו֛י לְמֶ֖לֶךְ עַל־כָּל־הָאָ֑רֶץ בַּיּ֣וֹם הַה֗וּא יִֽהְיֶ֧ה יו֛י אֶחָ֖ד וּשְׁמ֥וֹ אֶחָֽד׃ (זכריה יד:ט]",
+      "transliteration": "Ḥazzan: Vehaya Adonai lemelekh ‘al kol ha’arets bayyom hahu yihyē Adonai eḥad ushmo eḥad:",
+      "english": "Cantor: And Adonai will be king over the entire world; on that day, Adonai will be one, and His name one. (Zech. 14:9)",
+      "comments": "",
+      "timing": {
+        "start": 222.27,
+        "end": 236.3
+      }
+    },
+    {
+      "hebrew": "קהל: שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד׃ (דברים ו:ד)",
+      "transliteration": "Ḳahal: Shema‘ Yisra’el Adonai elohenu Adonai, eḥad:",
+      "english": "Cong. Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)",
+      "comments": "Adonai on His own. The translation follows Sefer Ha-mivḥar on Deuteronomy 6:4: “The meaning is that He is one, and does not need any second one.”"
+    }
+  ],
+  "audio": "audio/45-vaethḥannan.mp3",
+  "author_en": "Aaron ben Joseph"
+}

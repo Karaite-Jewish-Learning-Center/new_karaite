@@ -1,0 +1,306 @@
+{
+  "id": "03-lekh-lekha",
+  "title_en": "Lekh Lekha",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֲדוֹן כָּל־הַבְּרִיאוֹת, הַנִּשְׂגָּב בְּהוֹדוֹ,",
+      "transliteration": "Adon kol habberi’ot, hannisgav behodo,",
+      "english": "O Lord of all created things, who is noble in His splendor,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.4
+      }
+    },
+    {
+      "hebrew": "הַמֵּנִֽיעַ פַּלְכֵי רוּם, וְלֹא מִשְּׁשָׁם יָדוֹ.",
+      "transliteration": "Hammeni’a‘ palkhē rum, velo mish’shesham yado.",
+      "english": "Who moves the heavenly regions without touching them.",
+      "comments": "",
+      "timing": {
+        "start": 16.4,
+        "end": 30.03
+      }
+    },
+    {
+      "hebrew": "רָזִים מְגַלֶּה, וּמִי יֹדֵעַ סוֹדוֹ?",
+      "transliteration": "Razim meḡallē, umi yode’a‘ sodo?",
+      "english": "He reveals mysteries, and who knows His secret?",
+      "comments": "",
+      "timing": {
+        "start": 30.03,
+        "end": 46.4
+      }
+    },
+    {
+      "hebrew": "נְהוֹרָה עִמֵּהּ שְׁרֵא, וְאֵין בִּלְעָדוֹ.",
+      "transliteration": "Nehora ‘immē sherē, ve’en bil‘ado.",
+      "english": "Light dwells with Him, and there is nothing aside from Him.",
+      "comments": "",
+      "timing": {
+        "start": 46.4,
+        "end": 60.13
+      }
+    },
+    {
+      "hebrew": "בָּחַר לְאַב הָמוֹן יְדִידוֹ,",
+      "transliteration": "Baḥar le’av hamon yedido,",
+      "english": "He chose the father of a multitude, His beloved,",
+      "comments": "Father of a multitude. Abraham.",
+      "timing": {
+        "start": 60.13,
+        "end": 75.3
+      }
+    },
+    {
+      "hebrew": "וְהוֹצִיאוֹ מֵאוּר כַּשְׂדִּים, וְהֵכִין צַעֲדוֹ,",
+      "transliteration": "Vehotsi’o me’Ur Kasdim vehekhin tsa‘ado,",
+      "english": "And took him out of Ur Kasdim, and made his footsteps straight,",
+      "comments": "",
+      "timing": {
+        "start": 75.3,
+        "end": 88.4
+      }
+    },
+    {
+      "hebrew": "כִּי אִבַּד צַלְמֵי שְׂכִיָּה בְּכָל־מְאֹדוֹ.",
+      "transliteration": "Ki ibbad tsalmē sekhiyya bekhol me’odo",
+      "english": "For he had destroyed the crafted idols with all his might.",
+      "comments": "",
+      "timing": {
+        "start": 88.4,
+        "end": 102.33
+      }
+    },
+    {
+      "hebrew": "פְּרִי פִיו עֵץ חַיִּים, וְלֹקֵֽחַ נְפָשׁוֹת בְּלִמּוּדוֹ.",
+      "transliteration": "Peri piv ‘ets ḥayyim, veloḳe’aḥ nefashot belimmudo.",
+      "english": "The fruit of his mouth was a tree of life, and he acquired souls through his instruction.",
+      "comments": "",
+      "timing": {
+        "start": 102.33,
+        "end": 116.6
+      }
+    },
+    {
+      "hebrew": "וְהָפְרַע פָּרַע מוּסָר, רָאוּ עֵינָיו פִּידוֹ,",
+      "transliteration": "Vehofra‘ para‘ musar, ra’u ‘enav pido,",
+      "english": "Hofra‘ suffered rebuke, and his eyes saw his [own] destruction,",
+      "comments": "Hofra‘. Pharaoh.",
+      "timing": {
+        "start": 116.6,
+        "end": 134.77
+      }
+    },
+    {
+      "hebrew": "כִּי בְאֵֽשֶׁת חֵיקוֹ שָׁלַח יָדוֹ.",
+      "transliteration": "Ki ve’eshet ḥeḳo shalaḥ yado.",
+      "english": "For he had set his hand on [Abraham’s] bosom wife.",
+      "comments": "",
+      "timing": {
+        "start": 134.77,
+        "end": 147.57
+      }
+    },
+    {
+      "hebrew": "וּבַבֹּֽקֶר הִתְחַנֵּן לוֹ, וְיִסּוּרָיו הִגִּידוֹ.",
+      "transliteration": "Uvabboḳer hit’ḥannen lo, vissurav higgido.",
+      "english": "And in the morning, he beseeched [Abraham], and told him of his sufferings.",
+      "comments": "",
+      "timing": {
+        "start": 147.57,
+        "end": 165.17
+      }
+    },
+    {
+      "hebrew": "וּבְהִקָּבֵץ חֲמֵֽשֶׁת נְסִיכִים, כָּל־אִישׁ בְּהִתְעַתְּדוֹ,",
+      "transliteration": "Uvehiḳḳavets ḥameshet nesikhim, kol ish behit‘attedo,",
+      "english": "When the five princes gathered together, each one being prepared,",
+      "comments": "",
+      "timing": {
+        "start": 165.17,
+        "end": 179.23
+      }
+    },
+    {
+      "hebrew": "וְהֵרִיק חֲנִיכָיו, וְהִצִּיל לוֹט חֲמוּדוֹ.",
+      "transliteration": "Vehareḳ ḥanikhav, vehits’tsil lot ḥamudo",
+      "english": "[Abraham] unsheathed [his weapons for] his retainers, and rescued Lot, who was dear to him.",
+      "comments": "",
+      "timing": {
+        "start": 179.23,
+        "end": 193.17
+      }
+    },
+    {
+      "hebrew": "וּמַלְכִּי־צֶֽדֶק בֵּרְכוֹ לְאֵל עֶלְיוֹן אֲשֶׁר סְעָדוֹ,",
+      "transliteration": "UMalki’tsedeḳ berekho l’El ‘elyon asher se‘ado,",
+      "english": "And Melchizedek blessed [Abraham] unto El ‘Elyon, who had helped [Abraham],",
+      "comments": "El ‘Elyon. A name for God; traditional English: “the most high God.”",
+      "timing": {
+        "start": 193.17,
+        "end": 209.47
+      }
+    },
+    {
+      "hebrew": "וּמִגֵּן צָרָיו בְּיָדוֹ, וְכָל־שֹׁדְדוֹ.",
+      "transliteration": "Umiggen tsarav be’yado, vekhol shodedo.",
+      "english": "And had delivered his enemies, and all who would plunder him, into his hand.",
+      "comments": "",
+      "timing": {
+        "start": 209.47,
+        "end": 226.3
+      }
+    },
+    {
+      "hebrew": "הָיָה דְבַר יוי אֵלָיו בַּמַּחֲזֶה לְהַפְקִידוֹ,",
+      "transliteration": "Haya devar Adonai elav bammaḥazē lehafḳido,",
+      "english": "Adonai’s word came to [Abraham] in a vision, to instruct him,",
+      "comments": "",
+      "timing": {
+        "start": 226.3,
+        "end": 242.53
+      }
+    },
+    {
+      "hebrew": "סוֹד קִצִּים לְחַוּוֹת לוֹ וּלְהַגִּידוֹ;",
+      "transliteration": "Sod ḳits’tsim leḥavvot lo ulhaggido;",
+      "english": "To inform him and tell him the secret of the end-times;",
+      "comments": "",
+      "timing": {
+        "start": 242.53,
+        "end": 256.47
+      }
+    },
+    {
+      "hebrew": "וְתַרְדֵּמָה נָפְלָה עָלָיו לְהַרְעִידוֹ.",
+      "transliteration": "Vetardema nafela ‘alav lehar‘ido.",
+      "english": "[When] a deep sleep fell upon him, to make him tremble.",
+      "comments": "",
+      "timing": {
+        "start": 256.47,
+        "end": 268.47
+      }
+    },
+    {
+      "hebrew": "תָּמִים קְרָאוֹ, וּבְמָסֽוֹרֶת הַבְּרִית הֱבִיאוֹ, חוֹתַם עֵדוֹ.",
+      "transliteration": "Tamim ḳera’o uvmasoret habberit hevi’o ḥotam ‘edo.",
+      "english": "[God] called him unblemished, and brought him into the tradition of the covenant, the seal of His witness,",
+      "comments": "",
+      "timing": {
+        "start": 268.47,
+        "end": 284.57
+      }
+    },
+    {
+      "hebrew": "וּלְהַרְחִיק אָמָה וּבְנָהּ מִיִּצְחָק לְהַפְרִידוֹ,",
+      "transliteration": "Ulharḥiḳ ama uvnah miyYits’ḥaḳ lehafrido,",
+      "english": "And [He instructed him] to distance the handmaiden and her son from Isaac, to separate him—",
+      "comments": "The handmaiden and her son. Hagar and Ishmael.",
+      "timing": {
+        "start": 284.57,
+        "end": 297.67
+      }
+    },
+    {
+      "hebrew": "כִּי בְיִצְחָק לְבַדּוֹ יִקָּרֵא זַרְעוֹ לְהָלִיץ בַּעֲדוֹ.",
+      "transliteration": "Ki veYits’ḥaḳ levaddo yiḳḳarē zar‘o lehalits ba‘ado.",
+      "english": "For in Isaac alone will [Abraham’s descendants] be called his progeny, such that [Abraham] can advocate for [his offspring].",
+      "comments": "",
+      "timing": {
+        "start": 297.67,
+        "end": 312.73
+      }
+    },
+    {
+      "hebrew": "וְהִנֵּה תִּפָּקֵד עֲקֶֽרֶת הַבַּֽיִת בְּבֵן יַקִּיר, אֱלֹהִים חֲמָדוֹ –",
+      "transliteration": "Vehinnē tippaḳed ‘aḳeret habbayit beven yaḳḳir, Elohim ḥamado –",
+      "english": "Behold, the barren woman of the house will be taken account of with a dear son, whom God loves—",
+      "comments": "The barren woman of the house. Sarah.",
+      "timing": {
+        "start": 312.73,
+        "end": 327.3
+      }
+    },
+    {
+      "hebrew": "בִּשֵּׂר לְאַבְרָהָם, אִישׁ חֲסִידוֹ.",
+      "transliteration": "Bisser le’Avraham ish ḥasido.",
+      "english": "[All this] He announced to Abraham, his pious man.",
+      "comments": "",
+      "timing": {
+        "start": 327.3,
+        "end": 341.27
+      }
+    },
+    {
+      "hebrew": "וַיָּֽמָל יְלִיד בַּֽיִת וּמִקְנַת כֶּֽסֶף בְּשָׁקְדוֹ,",
+      "transliteration": "Vayyamol yelid bayit umiḳnat kesef beshoḳdo,",
+      "english": "He circumcised all born in his house, and all [the slaves whom he had] acquired with silver, diligently;",
+      "comments": "",
+      "timing": {
+        "start": 341.27,
+        "end": 354.07
+      }
+    },
+    {
+      "hebrew": "וַיַּֽעַשׂ רְצוֹן אֵל, וּבְכָל־לֵב עֲבָדוֹ.",
+      "transliteration": "Vayya‘as retson El, uvekhol lev ‘avado.",
+      "english": "He did God’s will, and served him with his whole heart.",
+      "comments": "",
+      "timing": {
+        "start": 354.07,
+        "end": 365.63
+      }
+    },
+    {
+      "hebrew": "שָׂמַח לִבּוֹ וַיָּֽגֶל כְּבוֹדוֹ.",
+      "transliteration": "Samaḥ libbo vayyaḡel kevodo.",
+      "english": "His heart rejoiced, and his soul was glad.",
+      "comments": "",
+      "timing": {
+        "start": 365.63,
+        "end": 374.6
+      }
+    },
+    {
+      "hebrew": "קהל: אָב לְבָנִים יוֹדִֽיעַ אֲמִתּוֹ וְיֵיחוּדוֹ.",
+      "transliteration": "Ḳahal: Av levanim yodi’a‘ amitto viyeḥudo",
+      "english": "Cong. The father informed his children of His truth and oneness.",
+      "comments": "",
+      "timing": {
+        "start": 374.6,
+        "end": 385.73
+      }
+    },
+    {
+      "hebrew": "חזן: חַ֥י חַ֛י ה֥וּא יוֹדֶ֖ךָ כָּמ֣וֹנִי הַיּ֑וֹם אָ֣ב לְבָנִ֔ים יוֹדִ֖יעַ אֶל־אֲמִתֶּֽךָ: (ישעיהו לח:יט)",
+      "transliteration": "Ḥazzan: Ḥai Ḥai hu yodekha kamoni hayyom av levanim yodi’a‘ el amittekha:",
+      "english": "Cantor: Each and every living thing will acknowledge You, like me, today; [every] father will inform his children of Your truth. (Isa. 38:19)",
+      "comments": ""
+    },
+    {
+      "hebrew": "חַי־֖יו֖י וּבָר֣וּךְ צוּרִ֑י וְ֝יָר֗וּם אֱלוֹהֵ֣י יִשְׁעִֽי: (תהלים יח:מז)",
+      "transliteration": "Ḥai Adonai uvarukh tsuri veyarum elohē yish‘i:",
+      "english": "Adonai lives, and my Rock is blessed; and may the God of my rescue be lofty. (Ps. 18:47)",
+      "comments": ""
+    },
+    {
+      "hebrew": "רֽוֹמְמ֡וּ יוי אֱלֹהֵ֗ינוּ וְ֭הִֽשְׁתַּֽחֲו֖וּ לַֽהֲדֹ֥ם רַגְלָ֗יו קָד֥וֹשׁ הֽוּא: (תהלים צט:ה)",
+      "transliteration": "Romemu Adonai elohenu vehishtaḥavi lahadom raḡlav ḳadosh hu:",
+      "english": "Declare the loftiness of Adonai our God, and prostrate yourselves to his footstool—holy is He! (Ps. 99:5)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ ׀ קָד֛וֹשׁ קָד֖וֹשׁ יו֣י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ: (ישעיהו ו:ג)",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Congregation: Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:3)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/03-lekh-lekha.mp3",
+  "author_en": "Aaron ben Joseph"
+}

@@ -1,0 +1,224 @@
+{
+  "id": "44-ellé-haddevarim",
+  "title_en": "Ellé Haddevarim",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אוֹמֵן אֱמֽוּנַת אֹֽמֶן בְּפִיו, בְּקוּמוֹ וּבְשִׁבְתּוֹ,",
+      "transliteration": "Omen emunat omen befiv, beḳumo uvshivto,",
+      "english": "The nurse had steadfast faithfulness in his mouth, when he arose and when he sat down,",
+      "comments": "The nurse. Moses.\nSteadfast faithfulness. The Torah.",
+      "timing": {
+        "start": 0,
+        "end": 16.17
+      }
+    },
+    {
+      "hebrew": "בְּשָׁכְבוֹ וּבְלֶכְתּוֹ – בַּעֲלוֹתוֹ בְסִינַי וּבְרִדְתּוֹ.",
+      "transliteration": "Beshokhvo uvlekhto – ba‘aloto veSinai uvridto.",
+      "english": "And when he lay down and when he walked—in his ascent to Sinai, and in his descent.",
+      "comments": "",
+      "timing": {
+        "start": 16.17,
+        "end": 29.53
+      }
+    },
+    {
+      "hebrew": "חֵֽשֶׁק יְדִידוּתָהּ בְּקִרְבּוֹ, וְלֶאֱכוֹל הִיא פִתּוֹ –",
+      "transliteration": "Ḥesheḳ yedidutah beḳirbo, vele’ekhol hi fitto –",
+      "english": "Inside him, he desired its belovedness, and it was his bread for eating—",
+      "comments": "",
+      "timing": {
+        "start": 29.53,
+        "end": 36.67
+      }
+    },
+    {
+      "hebrew": "קהל: כַּאֲשֶׁר הָיְתָה בְאָמְנָה אִתּוֹ.  (אסתר ב:כ)",
+      "transliteration": "Ḳahal: Ka’asher hayeta ve’omna itto.",
+      "english": "Cong. As it was when he was being brought up by it.   (Esth. 2:20)",
+      "comments": "",
+      "timing": {
+        "start": 36.67,
+        "end": 45.23
+      }
+    },
+    {
+      "hebrew": "הֵא גְדוּדֵי רַעְיוֹנָיו תָּמִיד לְגַלּוֹת רְמִיזוֹת,",
+      "transliteration": "Hē ḡedudē ra‘yonav tamid leḡallot remizot,",
+      "english": "Behold, his legion thoughts would constantly reveal hints,",
+      "comments": "",
+      "timing": {
+        "start": 45.23,
+        "end": 61.43
+      }
+    },
+    {
+      "hebrew": "כִּי שִׂכְלוֹ הוּכַן בְּפוּךְ הַמַּחֲזֶה, הוֹד לַחֲזוֹת.",
+      "transliteration": "Ki sikhlo hukhan befukh hammaḥazē, hod laḥazot.",
+      "english": "For his intelligence was prepared with the kohl of vision, to behold the splendor.",
+      "comments": "",
+      "timing": {
+        "start": 61.43,
+        "end": 75.73
+      }
+    },
+    {
+      "hebrew": "עוֹד הוֹסִיף אִמְרֵי אֵל בְּפֶֽשֶׁר, כָּזֹאת וְכָזֹאת,",
+      "transliteration": "‘od hosif imrē El befesher, kazot vekhazot,",
+      "english": "Moreover, he increased God’s words with explanation, thus and so—",
+      "comments": "",
+      "timing": {
+        "start": 75.73,
+        "end": 82.77
+      }
+    },
+    {
+      "hebrew": "קהל: הוֹאִיל מֹשֶׁה בֵּאֵר אֶת־הַתּוֹרָה הַזֹּאת. (דברים א:ה)",
+      "transliteration": "Ḳahal: Ho’il Moshē be’er et hattora hazzot.",
+      "english": "Cong. Moses began to elucidate this Torah.     (Deut. 1:5)",
+      "comments": "",
+      "timing": {
+        "start": 82.77,
+        "end": 91.8
+      }
+    },
+    {
+      "hebrew": "רָדָה בְיַעֲרַת הַדְּבַשׁ, אִמְרֵי נֹֽעַם לְגַבֵּר,",
+      "transliteration": "Rada veya‘arat haddevash, imrē no‘am leḡabber,",
+      "english": "He scooped up the honeycomb, to enhance the sweet words,",
+      "comments": "",
+      "timing": {
+        "start": 91.8,
+        "end": 108.7
+      }
+    },
+    {
+      "hebrew": "מִצְוֹת גְּלוּיוֹת עִם נִסְתָּרוֹת לְחַבֵּר.",
+      "transliteration": "Mitsvot geluyot ‘im nistarot leḥabber.",
+      "english": "To unite the revealed commandments with the concealed ones.",
+      "comments": "",
+      "timing": {
+        "start": 108.7,
+        "end": 123.37
+      }
+    },
+    {
+      "hebrew": "וְעִמָּהֶן דִּבְרֵי תוֹכָחָה אֶל בְּנֵי יִשְׂרָאֵל דִּבֵּר:",
+      "transliteration": "Ve‘immahen divrē tokhaḥa el benē Yisra’el dibber:",
+      "english": "And along with [the commandments], he spoke words of rebuke to the Israelites:",
+      "comments": "",
+      "timing": {
+        "start": 123.37,
+        "end": 130.3
+      }
+    },
+    {
+      "hebrew": "קהל: שִׁמְעוּ כִּי נְגִידִים אֲדַבֵּר.   (משלי ח:ו)",
+      "transliteration": "Ḳahal: Shim‘u ki neḡidim adabber.",
+      "english": "Cong. “Listen, for I shall speak noble words.”    (Prov. 8:6)",
+      "comments": "",
+      "timing": {
+        "start": 130.3,
+        "end": 138.4
+      }
+    },
+    {
+      "hebrew": "נְפָשׁוֹת הֶחֱיָה בְּלֶֽקַח טוֹב וְאוֹר עֵינַֽיִם,",
+      "transliteration": "Nefashot heḥeya beleḳaḥ tov ve’or ‘enayim,",
+      "english": "He brought life to souls, with good learning and light [for] the eyes;",
+      "comments": "",
+      "timing": {
+        "start": 138.4,
+        "end": 154.8
+      }
+    },
+    {
+      "hebrew": "לְהַיְשִׁיר שִׁגְיוֹנֵי לֵב דִּבֶּר פַּעֲמַֽיִם.",
+      "transliteration": "Lehayshir shiḡyonē lev dibber pa‘amayim.",
+      "english": "To straighten the heart’s mistakes, he spoke twice.",
+      "comments": "",
+      "timing": {
+        "start": 154.8,
+        "end": 166.67
+      }
+    },
+    {
+      "hebrew": "וּבְאֵזוֹר בִּינָה שִׁנֵּס מָתְנַֽיִם –",
+      "transliteration": "Uv’ezor bina shinnes motnayim –",
+      "english": "And with the belt of understanding, he girded his loins—",
+      "comments": "",
+      "timing": {
+        "start": 166.67,
+        "end": 172.5
+      }
+    },
+    {
+      "hebrew": "קהל: מֵאֵת יוי מִן הַשָּׁמָֽיִם.   (בראשית יט:יד)",
+      "transliteration": "Ḳahal: Me’et Adonai min hash’shamayim.",
+      "english": "Cong. From Adonai, from heaven.     (Gen. 19:14)",
+      "comments": "",
+      "timing": {
+        "start": 172.5,
+        "end": 180.27
+      }
+    },
+    {
+      "hebrew": "הֶחֱלִיץ עַצְמוֹתֵֽינוּ בְּעוֹז הוֹדוֹ,",
+      "transliteration": "Heḥelits ‘astmotenu be‘oz hodo,",
+      "english": "[God] strengthened our bones, with the might of His splendor,",
+      "comments": "",
+      "timing": {
+        "start": 180.27,
+        "end": 193.4
+      }
+    },
+    {
+      "hebrew": "בֶּאֱמוֹר כִּי יוי הוּא הַנִּלְחָם לָכֶם לְבַדּוֹ.",
+      "transliteration": "Be’emor ki Adonai hu hannilḥam lakhem levaddo,",
+      "english": "When [Moses] said that Adonai was the One who alone fights for you.",
+      "comments": "",
+      "timing": {
+        "start": 193.4,
+        "end": 204.63
+      }
+    },
+    {
+      "hebrew": "יְקַיֵּם אֹֽמֶר מַלְכּוֹ וּמַגִּידוֹ:",
+      "transliteration": "Yeḳayyem omer malko umaggido:",
+      "english": "May He fulfill the statement of His king, His spokesman:",
+      "comments": "",
+      "timing": {
+        "start": 204.63,
+        "end": 212.2
+      }
+    },
+    {
+      "hebrew": "קהל: כִּי בָנָה יוי צִיּוֹן, נִרְאָה בִּכְבוֹדוֹ. (תהלים קב:יז)",
+      "transliteration": "Ḳahal: Ki vana Adonai tsiyyon, nir’a bikhvodo.",
+      "english": "Cong. For Adonai has built Zion; He has appeared in His Glory. (Ps. 102:17)",
+      "comments": "",
+      "timing": {
+        "start": 212.2,
+        "end": 224.0
+      }
+    },
+    {
+      "hebrew": "[חזן: כִּֽי־בָנָ֣ה יו֣י צִיּ֑וֹן נִ֝רְאָ֗ה בִּכְבוֹדֽוֹ: (תהלים קב:יז)]",
+      "transliteration": "Ḥazzan: Ki vana Adonai tsiyyon, nir’a bikhvodo:",
+      "english": "Cantor: For Adonai has built Zion; He has appeared in His Glory. (Ps. 102:17)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: בָּר֥וּךְ כְּבֽוֹד־יו֖י מִמְּקוֹמֽוֹ: (יחזקאל ג:יב)",
+      "transliteration": "Ḳahal: Barukh kevod Adonai mimmeḳomo:",
+      "english": "Cong. Blessed is Adonai’s Glory from His place. (Ezek. 3:12)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/44-ellé-haddevarim.mp3",
+  "author_en": "Aaron ben Joseph"
+}

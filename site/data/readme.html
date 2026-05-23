@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ali ibn Suleiman, Commentary on Genesis</title>
+<style>
+:root {
+  --text: #222;
+  --muted: #555;
+  --rule: #e2e2e2;
+  --section: #f4f4f4;
+  --link: #0563c1;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, "Charter", "Iowan Old Style", Georgia, serif;
+  max-width: 760px;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem 4rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2.25rem 0 0.5rem;
+  padding: 0.35rem 0.6rem;
+  background: var(--section);
+  border-radius: 3px;
+}
+h3 {
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 600;
+  margin: 1.5rem 0 0.25rem;
+}
+p { margin: 0.6rem 0; }
+ul { padding-left: 1.25rem; margin: 0.6rem 0; }
+li { margin: 0.35rem 0; }
+em.translit { font-style: italic; }
+.subtitle {
+  font-style: italic;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+.sources { font-size: 0.9rem; }
+.sources li { margin: 0.25rem 0; }
+
+/* Glossary table */
+table.glossary {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.glossary th {
+  text-align: left;
+  background: var(--section);
+  padding: 0.55rem 0.6rem;
+  border-bottom: 2px solid var(--rule);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.glossary td {
+  padding: 0.65rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.glossary tr.section td {
+  background: var(--section);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.7rem 0.6rem;
+}
+.glossary .term {
+  font-style: italic;
+  font-weight: 600;
+  width: 26%;
+}
+.glossary .term.subentry {
+  padding-left: 1.5rem;
+  font-weight: 500;
+}
+.glossary .term.subentry::before {
+  content: "↳ ";
+  color: var(--muted);
+  margin-right: 0.15rem;
+}
+.glossary .arabic {
+  font-family: "Geeza Pro", "Amiri", "Scheherazade", "Times New Roman", serif;
+  direction: rtl;
+  text-align: right;
+  font-size: 1.2rem;
+  width: 22%;
+  white-space: nowrap;
+}
+.glossary .definition { width: 52%; }
+
+/* Read Me page — links */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul.start-links { list-style: none; padding-left: 0; }
+ul.start-links li {
+  margin: 0.65rem 0;
+  padding: 0.65rem 0.9rem;
+  background: var(--section);
+  border-radius: 4px;
+}
+ul.start-links a {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+ul.start-links .descr {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+  font-weight: normal;
+}
+ul.chapter-grid {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.4rem 0.6rem;
+  margin-top: 1rem;
+}
+ul.chapter-grid li { margin: 0; }
+ul.chapter-grid a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-align: center;
+  font-weight: 500;
+}
+ul.chapter-grid a:hover {
+  background: var(--section);
+  text-decoration: none;
+}
+
+/* Sponsor line */
+.sponsor {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0.25rem 0 1.5rem;
+}
+
+/* Support / donation block */
+.support {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  background: var(--section);
+  border-radius: 4px;
+}
+.support p { margin: 0.4rem 0; }
+.donate-button {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.7rem 1.25rem;
+  background: var(--link);
+  color: white !important;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.donate-button:hover {
+  background: #034a99;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<!--
+  CMS CHEATSHEET — please read before uploading.
+
+  1. Sponsor line: replace {{SPONSOR_NAME}} with the donor family's name
+     once a sponsor is found, or delete the entire .sponsor paragraph if
+     the edition is unsponsored.
+
+  2. Chapter links: replace {{GENESIS_N_URL}} placeholders with the URL
+     your CMS assigns to each chapter. For example:
+
+         href="{{GENESIS_1_URL}}"   →   href="/commentary/genesis-1"
+         href="{{GENESIS_2_URL}}"   →   href="/commentary/genesis-2"
+         ... and so on for all 28 chapters.
+
+  3. Intro / Glossary links: introduction.html and glossary.html use
+     relative paths and will work if all three files live in the same
+     directory. If you upload them into the CMS as separate pages,
+     replace those hrefs with their CMS URLs too.
+-->
+
+<h1>Ali ibn Suleiman, <em>Commentary on Genesis</em></h1>
+<p class="subtitle">English translation of the Genesis portion of ʿAlī ibn Sulaymān al-Muqaddasī's Pentateuch commentary, edited by Solomon L. Skoss (Philadelphia, 1928).</p>
+<p class="sponsor">Sponsored by the {{SPONSOR_NAME}} family.</p>
+<p>ʿAlī ibn Sulaymān (Hebrew: <em>Eli ben Shelomo</em>) was one of the last great Karaite scholars of medieval Jerusalem. He flourished in the closing decades of the eleventh century and continued working into the early twelfth; a note in his own hand is dated to 1103 CE. Sometime before the First Crusade reached Jerusalem in 1099 he left the city — almost certainly for Fustat (Old Cairo) — and he was among the last of the <em>avelei Tziyon</em>, the Karaite community that had made Jerusalem the spiritual and intellectual center of Karaite Judaism for two centuries.</p>
+<p>The commentary translated here is Ali's <em>intizāʿ</em> (digest) of Abū ʾl-Faraj Hārūn's abridgement of Joseph ibn Nūḥ's Pentateuch commentary — three layers of a Karaite Bible-reading tradition that did not survive the Crusader sack. The Genesis portion was edited and published by Solomon L. Skoss in 1928; Skoss's text is the base for this translation.</p>
+<h2>Where to start</h2>
+<ul class="start-links">
+  <li><a href="introduction.html">Read the Introduction</a><span class="descr">Who Ali was, what the commentary is, the Karaite intellectual frame, and how this edition was made.</span></li>
+  <li><a href="glossary.html">Browse the Glossary</a><span class="descr">Recurring technical Arabic vocabulary in Ali's footnotes — <em>kalām</em>, hermeneutics, grammar, and the Karaite dialectical formulae.</span></li>
+</ul>
+<h2>Chapters</h2>
+<p>Ali's commentary is selective: he treats 28 of Genesis's 50 chapters and skips the rest. The chapter list jumps where Ali does.</p>
+<ul class="chapter-grid">
+  <li><a href="{{GENESIS_1_URL}}">Genesis 1</a></li>
+  <li><a href="{{GENESIS_2_URL}}">Genesis 2</a></li>
+  <li><a href="{{GENESIS_3_URL}}">Genesis 3</a></li>
+  <li><a href="{{GENESIS_4_URL}}">Genesis 4</a></li>
+  <li><a href="{{GENESIS_6_URL}}">Genesis 6</a></li>
+  <li><a href="{{GENESIS_9_URL}}">Genesis 9</a></li>
+  <li><a href="{{GENESIS_10_URL}}">Genesis 10</a></li>
+  <li><a href="{{GENESIS_11_URL}}">Genesis 11</a></li>
+  <li><a href="{{GENESIS_12_URL}}">Genesis 12</a></li>
+  <li><a href="{{GENESIS_15_URL}}">Genesis 15</a></li>
+  <li><a href="{{GENESIS_17_URL}}">Genesis 17</a></li>
+  <li><a href="{{GENESIS_18_URL}}">Genesis 18</a></li>
+  <li><a href="{{GENESIS_22_URL}}">Genesis 22</a></li>
+  <li><a href="{{GENESIS_23_URL}}">Genesis 23</a></li>
+  <li><a href="{{GENESIS_24_URL}}">Genesis 24</a></li>
+  <li><a href="{{GENESIS_25_URL}}">Genesis 25</a></li>
+  <li><a href="{{GENESIS_27_URL}}">Genesis 27</a></li>
+  <li><a href="{{GENESIS_28_URL}}">Genesis 28</a></li>
+  <li><a href="{{GENESIS_30_URL}}">Genesis 30</a></li>
+  <li><a href="{{GENESIS_32_URL}}">Genesis 32</a></li>
+  <li><a href="{{GENESIS_35_URL}}">Genesis 35</a></li>
+  <li><a href="{{GENESIS_37_URL}}">Genesis 37</a></li>
+  <li><a href="{{GENESIS_38_URL}}">Genesis 38</a></li>
+  <li><a href="{{GENESIS_41_URL}}">Genesis 41</a></li>
+  <li><a href="{{GENESIS_44_URL}}">Genesis 44</a></li>
+  <li><a href="{{GENESIS_46_URL}}">Genesis 46</a></li>
+  <li><a href="{{GENESIS_47_URL}}">Genesis 47</a></li>
+  <li><a href="{{GENESIS_50_URL}}">Genesis 50</a></li>
+</ul>
+<h2>Contact</h2>
+<p>Questions or corrections about the translation: <a href="mailto:info@thekaraitepress.com">info@thekaraitepress.com</a>.</p>
+<h2>Support this project</h2>
+<div class="support">
+<p>This translation is offered freely as part of the ongoing work of The Karaite Press to make medieval Karaite scholarship accessible in English. If you would like to support the continuation of this work, please consider making a donation.</p>
+<p><a class="donate-button" href="https://the-karaite-press.myshopify.com/pages/donate">Donate to The Karaite Press →</a></p>
+</div>
+</body>
+</html>

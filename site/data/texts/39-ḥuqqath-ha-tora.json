@@ -1,0 +1,270 @@
+{
+  "id": "39-ḥuqqath-ha-tora",
+  "title_en": "Ḥuqqath Ha-tora",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אָמוֹן הָיְתָה תּוֹרָה אֵֽצֶל נוֹרָא וְאָיוֹם",
+      "transliteration": "Amon hayta tora etsel nora ve’ayom",
+      "english": "The Torah was nurtured in the bosom of the awesome, formidable One,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.43
+      }
+    },
+    {
+      "hebrew": "מְשַׂחֶֽקֶת לְפָנָיו בְּכָל־יוֹם.",
+      "transliteration": "Mesaḥeḳet lefanav bekhol yom.",
+      "english": "Playing in front of Him every day.",
+      "comments": "",
+      "timing": {
+        "start": 16.43,
+        "end": 27.37
+      }
+    },
+    {
+      "hebrew": "אֹמֶֽרֶת: שַׁעֲשׁוּעַי לִבְנֵי אָדָם פִּדְיוֹם –",
+      "transliteration": "Omeret: “Sha‘ashu‘ai livnē adam pidyom –",
+      "english": "She says: “My delights are a redemption for people—",
+      "comments": "",
+      "timing": {
+        "start": 27.37,
+        "end": 33.4
+      }
+    },
+    {
+      "hebrew": "קהל: וָאֶהְיֶה שַׁעֲשׁוּעִים יוֹם יוֹם.\"     (משלי ח:ל)",
+      "transliteration": "Ḳahal: va’ehyē sha‘ashu‘im yom yom.”",
+      "english": "Cong. And I was a delight every single day.”  (Prov. 8:30)",
+      "comments": "",
+      "timing": {
+        "start": 33.4,
+        "end": 41.07
+      }
+    },
+    {
+      "hebrew": "הנֵּה חֻקַּת פָּרָה אֲדֻמָּה – בָּא דְבָרָהּ",
+      "transliteration": "Hinnē ḥuḳḳat para adumma – ba devarah",
+      "english": "Behold, the statute of the Red Cow—its purpose is",
+      "comments": "",
+      "timing": {
+        "start": 41.07,
+        "end": 58.2
+      }
+    },
+    {
+      "hebrew": "לְטַהֵר טְמֵאֵי נֶֽפֶשׁ; נִשְׂרֶֽפֶת עִם עוֹרָהּ.",
+      "transliteration": "Letaher teme’ē nefesh; nisrefet ‘im ‘orah.",
+      "english": "To purify those rendered impure by the dead; it is burned along with its hide.",
+      "comments": "",
+      "timing": {
+        "start": 58.2,
+        "end": 70.2
+      }
+    },
+    {
+      "hebrew": "נְתוּנָה לִסְגַן כֹּהֲנִים עַד גָּמְרָהּ.",
+      "transliteration": "Netuna lisḡan kohanim ‘ad gomrah.",
+      "english": "It is given to the deputy priest, until he has completed it[s ritual].",
+      "comments": "",
+      "timing": {
+        "start": 70.2,
+        "end": 76.3
+      }
+    },
+    {
+      "hebrew": "קהל: אָז רָאָהּ וַיְסַפְּרָהּ הֱכִינָהּ וְגַם חֲקָרָהּ.   (איוב כח:כז)",
+      "transliteration": "Ḳahal: Az ra’ah vaysapperah hekhinah veḡam ḥaḳarah.",
+      "english": "Cong. Then He saw it and took account of it; prepared it and investigated it. (Job 28:27)",
+      "comments": "",
+      "timing": {
+        "start": 76.3,
+        "end": 86.13
+      }
+    },
+    {
+      "hebrew": "רָם סוֹדָהּ, כִּי מְטַמְּאָה וּמְטַהֶֽרֶת;",
+      "transliteration": "Ram sodah ki metamme’a umtaheret;",
+      "english": "Its mystery is sublime, for it renders impure and pure;",
+      "comments": "",
+      "timing": {
+        "start": 86.13,
+        "end": 103.23
+      }
+    },
+    {
+      "hebrew": "מֵעֵין כָּל־שֵֽׂכֶל יְדִיעָתָהּ נִסְתֶּֽרֶת.",
+      "transliteration": "Me‘en kol sekhel yedi‘atah nisteret.",
+      "english": "Knowledge of it is concealed from the grasp of every intellect.",
+      "comments": "",
+      "timing": {
+        "start": 103.23,
+        "end": 114.23
+      }
+    },
+    {
+      "hebrew": "שְׁלִישִׁי וּשְׁבִיעִי לְהַזָּאָה מְסֻדֶּֽרֶת,",
+      "transliteration": "Shelishi ushvi‘i lehazza’a mesudderet,",
+      "english": "[Its law] is set up such that the third and seventh days are for sprinkling,",
+      "comments": "",
+      "timing": {
+        "start": 114.23,
+        "end": 120.07
+      }
+    },
+    {
+      "hebrew": "קהל: וְהָיְתָה לַעֲדַת בְּנֵי יִשְׂרָאֵל לְמִשְׁמֶֽרֶת.   (במדבר יט:ט)",
+      "transliteration": "Ḳahal: Vehayta la‘adat benē Yisra’el lemishmeret.",
+      "english": "Cong. And it shall be for the community of the Israelites for keeping. (Num. 19:9)",
+      "comments": "",
+      "timing": {
+        "start": 120.07,
+        "end": 129.3
+      }
+    },
+    {
+      "hebrew": "נִצְמְדוּ יִשְׂרָאֵל, וַיָּרִֽיבוּ אֶת רֹעָם וְצִירָם,",
+      "transliteration": "Nitsmedu Yisra’el, vayyarivu et ro‘am vetsiram,",
+      "english": "The Israelites were yoked, and they quarreled with their shepherd and emissary,",
+      "comments": "Shepherd and emissary. God and Moses.",
+      "timing": {
+        "start": 129.3,
+        "end": 145.63
+      }
+    },
+    {
+      "hebrew": "כִּי צָמְאוּ הֵם וּבְעִירָם.",
+      "transliteration": "Ki tsame’u hem uv‘iram.",
+      "english": "For they and their animals were thirsty.",
+      "comments": "",
+      "timing": {
+        "start": 145.63,
+        "end": 154.47
+      }
+    },
+    {
+      "hebrew": "הִבְדִּֽילוּ בֵּינוֹ וּבֵין כַּוָּנַת חֶזְיוֹנָם, בְּדַבְּרָם.",
+      "transliteration": "Hivdilu beno uven kavvanat ḥezyonam, bedabberam.",
+      "english": "They made a separation between Him and the intention of their vision, when they spoke.",
+      "comments": "",
+      "timing": {
+        "start": 154.47,
+        "end": 160.8
+      }
+    },
+    {
+      "hebrew": "קהל: וַיַּקְצִֽיפוּ עַל מֵי מְרִיבָה וַיֵּֽרַע לְמֹשֶׁה בַּעֲבוּרָם. (תהלים קו:לב)",
+      "transliteration": "Ḳahal: Vayyaḳtsifu ‘al mē meriva, vayyera‘ leMoshē ba‘avuram.",
+      "english": "Cong. And it went badly for Moses on their account.  (Ps. 106:32)",
+      "comments": "",
+      "timing": {
+        "start": 160.8,
+        "end": 171.07
+      }
+    },
+    {
+      "hebrew": "הוֹסִֽיפוּ עוֹד פָּנִים לְגַלֵּה,",
+      "transliteration": "Hosifu ‘od panim leḡallē,",
+      "english": "[The people] went on to reveal [their] face,",
+      "comments": "",
+      "timing": {
+        "start": 171.07,
+        "end": 185.77
+      }
+    },
+    {
+      "hebrew": "וְשֻׁלְּחוּ בָם נְחָשִׁים, עַם רַב לְכַלֵּה.",
+      "transliteration": "Veshulleḥu vam neḥashim, ‘am rav lekhalleh.",
+      "english": "And serpents were released against them, to wipe out the populous nation.",
+      "comments": "",
+      "timing": {
+        "start": 185.77,
+        "end": 197.77
+      }
+    },
+    {
+      "hebrew": "וּפִלֵּל מֹשֶׁה, וּנְחַשׁ נְחֹשֶׁת לְנֵס הוֹדִיעוֹ עֲמֻקּוֹת מְגַלֵּה,",
+      "transliteration": "Ufillel Moshē, unḥash neḥoshet lenes hodi‘o ‘amuḳḳot meḡalleh,",
+      "english": "Moses prayed, and the One who reveals hidden things informed him [to make] a bronze serpent as a signpost,",
+      "comments": "",
+      "timing": {
+        "start": 197.77,
+        "end": 206.2
+      }
+    },
+    {
+      "hebrew": "קהל: לְהַפְלִיא אֶת־הָעָם הַזֶּה הַפְלֵא וָפֶֽלֶא.  (ישעיהו כט:יד)",
+      "transliteration": "Ḳahal: Lehafli et ha‘am hazzē haflē vafeleh.",
+      "english": "Cong. To perform miracles for this nation, miracle upon miracle. (Isa. 29:14)",
+      "comments": "",
+      "timing": {
+        "start": 206.2,
+        "end": 214.5
+      }
+    },
+    {
+      "hebrew": "הֻכָּה סִיחוֹן, וְנִשְׂגַּב יוי לְבַדּוֹ,",
+      "transliteration": "Hukka Siḥon, venisgav Adonai levaddo,",
+      "english": "Siḥon was beaten, and Adonai alone was lofty,",
+      "comments": "",
+      "timing": {
+        "start": 214.5,
+        "end": 230.6
+      }
+    },
+    {
+      "hebrew": "כִּי לְכָל־גּוֹי שְׂאֵת אֵל וּפַחְדוֹ.",
+      "transliteration": "Ki khol goy se’et El ufaḥado.",
+      "english": "For God’s terror and dread was upon every nation.",
+      "comments": "",
+      "timing": {
+        "start": 230.6,
+        "end": 241.1
+      }
+    },
+    {
+      "hebrew": "נָתַן אַרְצָם לְנַחֲלָה, לְיִשְׂרָאֵל עַבְדּוֹ,",
+      "transliteration": "Natan artsam lenaḥala, leYisra’el ‘avdo,",
+      "english": "He gave their land as an inheritance, to Israel His servant,",
+      "comments": "",
+      "timing": {
+        "start": 241.1,
+        "end": 248.77
+      }
+    },
+    {
+      "hebrew": "קהל: כִּי לְעוֹלָם חַסְדּוֹ.      (תהלים קלו:כב)",
+      "transliteration": "Ḳahal: Ki le‘olam ḥasdo.",
+      "english": "Cong. For His mercy is eternal.    (Ps. 136:22)",
+      "comments": "",
+      "timing": {
+        "start": 248.77,
+        "end": 257.1
+      }
+    },
+    {
+      "hebrew": "חזן: אַ֤ךְ ׀ ט֣וֹב וָחֶ֣סֶד יִ֭רְדְּפ֖וּנִי כָּל־יְמֵ֣י חַיָּ֑י וְשַׁבְתִּ֖י בְּבֵית־יו֗י לְאֹ֣רֶךְ יָמִֽים: (תהלים כג:ו)",
+      "transliteration": "Ḥazzan: Akh tov vaḥesed yirdefuni kol yemē ḥayyai veshavti bevet Adonai le’orekh yamim:",
+      "english": "Cantor: Only goodness and mercy will pursue me all my days, and I shall dwell in Adonai’s house for many long days. (Ps. 23:6)",
+      "comments": ""
+    },
+    {
+      "hebrew": "אַ֤ךְ קָר֣וֹב לִירֵאָ֣יו יִשְׁע֑וֹ לִשְׁכֹּ֖ן כָּב֣וֹד בְּאַרְצֵֽנוּ: (תהלים פה:י)",
+      "transliteration": "Akh ḳarov lire’av yish‘o lishkon kavod be’artsenu:",
+      "english": "Indeed, His rescue is close to those who fear Him, such that His Glory will dwell in our land. (Ps. 85:10)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: בָּר֥וּךְ כְּבֽוֹד־יו֖י מִמְּקוֹמֽוֹ: (יחזקאל ג:יב)",
+      "transliteration": "Ḳahal: Barukh kevod Adonai mimmeḳomo:",
+      "english": "Cong.: Blessed is Adonai’s Glory from His place. (Ezek. 3:12)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/39-ḥuqqath-ha-tora.mp3",
+  "author_en": "Aaron ben Joseph"
+}

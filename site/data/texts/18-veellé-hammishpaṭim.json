@@ -1,0 +1,394 @@
+{
+  "id": "18-veellé-hammishpaṭim",
+  "title_en": "Ve’ellé Hammishpaṭim",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אַתָּה כּוֹנַֽנְתָּ לְזֶֽרַע אֱמוּנֶֽיךָ צֶֽדֶק וּמֵשָׁרִים,",
+      "transliteration": "Atta konanta lezera‘ emunekha tsedeḳ umesharim,",
+      "english": "You established justice and uprightness for the progeny of Your faithful,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 17.3
+      }
+    },
+    {
+      "hebrew": "הוֹדַֽעְתָּ לָהֶם מִצְוֹת וּמִשְׁפָּטִים יְשָׁרִים.",
+      "transliteration": "Hoda‘ta lahem mitsvot umishpatim yesharim.",
+      "english": "You informed them of commandments and upright statutes.",
+      "comments": "",
+      "timing": {
+        "start": 17.3,
+        "end": 28.77
+      }
+    },
+    {
+      "hebrew": "רָאמוֹת וְגָבִישׁ לֹא יַעַרְכוּם, וּמִפְּנִינִים יְקָרִים,",
+      "transliteration": "Ramot veḡavish lo ya‘arkhum, umippeninim yeḳarim,",
+      "english": "[The precious stones] ramoth and gavish cannot approximate them; they are more precious than pearls.",
+      "comments": "Ramoth and gavish. Unidentified precious stones.",
+      "timing": {
+        "start": 28.77,
+        "end": 45.33
+      }
+    },
+    {
+      "hebrew": "נֶאֱמָנִים וּצְרוּפִים כַּזָּהָב בְּכוּרִים.",
+      "transliteration": "Ne’emanim utsrufim kazzahav bekhurim.",
+      "english": "They are reliable, and refined like gold in crucibles.",
+      "comments": "",
+      "timing": {
+        "start": 45.33,
+        "end": 56.8
+      }
+    },
+    {
+      "hebrew": "[רָזֵיהֶם] מִגִּנְזֵיהֶם חֶֽסֶד לֶאֱנוֹשׁ מוֹרִים.",
+      "transliteration": "Razehem migginzehem ḥesed le’enosh morim.",
+      "english": "Their secrets, from their treasures, teach lovingkindness to humanity.",
+      "comments": "",
+      "timing": {
+        "start": 56.8,
+        "end": 72.03
+      }
+    },
+    {
+      "hebrew": "כִּי יִקְנֶה אִישׁ עֶֽבֶד מֵעִבְרִים,",
+      "transliteration": "Ki yiḳnē ish ‘eved me‘ivrim,",
+      "english": "When a man buys a slave from among the Hebrews,",
+      "comments": "",
+      "timing": {
+        "start": 72.03,
+        "end": 82.6
+      }
+    },
+    {
+      "hebrew": "אֲשֶׁר מָֽכוּ אוֹ בִגְנֵבָתָם נִמְכָּרִים –",
+      "transliteration": "Asher makhu o viḡnevatam nimkarim –",
+      "english": "[People] who have fallen [on hard times], or been sold [as punishment] for theft,",
+      "comments": "",
+      "timing": {
+        "start": 82.6,
+        "end": 97.6
+      }
+    },
+    {
+      "hebrew": "שֵׁשׁ שָׁנִים בְּיַד אֲדֹנֵיהֶם יִהְיוּ נִמְסָרִים,",
+      "transliteration": "Shesh shanim beyad ‘adonehem yihyu nimsarim,",
+      "english": "For six years shall they be given into their masters’ hand,",
+      "comments": "",
+      "timing": {
+        "start": 97.6,
+        "end": 111.67
+      }
+    },
+    {
+      "hebrew": "וּבַשְּׁבִיעִית יֵצְאוּ לַחָפְשִׁי וּדְרוֹרִים.",
+      "transliteration": "Uvash’shivi‘it yetse’u laḥofshi udrorim.",
+      "english": "And in the seventh, they shall go out to freedom and liberty.",
+      "comments": "",
+      "timing": {
+        "start": 111.67,
+        "end": 125.37
+      }
+    },
+    {
+      "hebrew": "וְכִי יְשַׁלְּחוּם, לֹא יֵצְאוּ רֵקִים וּנְעוּרִים,",
+      "transliteration": "Vekhi yeshalleḥum, lo yetse’u reḳim un‘urim,",
+      "english": "And when they send them out, they should not go out empty-handed and destitute,",
+      "comments": "",
+      "timing": {
+        "start": 125.37,
+        "end": 136.57
+      }
+    },
+    {
+      "hebrew": "רַק בְּמֵיטַב מָנוֹת וְאֶשְׁכָּרִים.",
+      "transliteration": "Raḳ bemetav manot ve’eshkarim.",
+      "english": "But rather with the best portions and gifts.",
+      "comments": "",
+      "timing": {
+        "start": 136.57,
+        "end": 150.53
+      }
+    },
+    {
+      "hebrew": "וְאִם אַהֲבַת אֲדֹנֵיהֶם [יֹאמְרוּ] בְּמַאֲמָרִים –",
+      "transliteration": "Ve’im ahavat adonehem yomeru bema’amarim –",
+      "english": "But if they profess love for their masters,",
+      "comments": "",
+      "timing": {
+        "start": 150.53,
+        "end": 166.2
+      }
+    },
+    {
+      "hebrew": "יִרְצְעוּם בַּמַּרְצֵֽעַ, וְעַד עוֹלָם הֵם נֶעֱצָרִים.",
+      "transliteration": "Yirtse‘um bammartse’a‘, ve‘ad ‘olam hem ne‘etsarim.",
+      "english": "Then [the masters] should pierce them with an awl, and they will be retained forever.",
+      "comments": "",
+      "timing": {
+        "start": 166.2,
+        "end": 181.33
+      }
+    },
+    {
+      "hebrew": "וְיֶֽתֶר דִּינִים קַלִּים וַחֲמוּרִים:",
+      "transliteration": "Veyeter dinim ḳallim vaḥamurim:",
+      "english": "And [there are] other laws, both light and severe:",
+      "comments": "",
+      "timing": {
+        "start": 181.33,
+        "end": 193.1
+      }
+    },
+    {
+      "hebrew": "נֶֽפֶשׁ תַּֽחַת נָֽפֶשׁ וּשְׁבָרִים תַּֽחַת שְׁבָרִים,",
+      "transliteration": "Nefesh taḥat nefesh ushvarim taḥat shevarim,",
+      "english": "A life for a life, and damages for damages,",
+      "comments": "",
+      "timing": {
+        "start": 193.1,
+        "end": 207.33
+      }
+    },
+    {
+      "hebrew": "וְדִין תָּם וּמוּעָד בַּשְּׁוָרִים,",
+      "transliteration": "Vedin tam umu‘ad bash’shevarim,",
+      "english": "And the laws of oxen, docile and dangerous,",
+      "comments": "",
+      "timing": {
+        "start": 207.33,
+        "end": 216.67
+      }
+    },
+    {
+      "hebrew": "וּפֹתֵֽחַ בּוֹר וְנָפַל שָֽׁמָּה שׁוֹר אוֹ חֲמֹרִים,",
+      "transliteration": "Ufote’aḥ bor venafal shamma shor o ḥamorim,",
+      "english": "And [of] someone who opens up a pit, into which fall oxen or asses.",
+      "comments": "",
+      "timing": {
+        "start": 216.67,
+        "end": 231.37
+      }
+    },
+    {
+      "hebrew": "וְגֹנֵב שׁוֹר וּטְבָחוֹ – יְשַׁלֵּם חֲמֵֽשֶׁת בְּקָרִים,",
+      "transliteration": "Veḡonev shor utvaḥo – yeshallem ḥameshet beḳarim,",
+      "english": "And if one steals an ox, and slaughters it, one must pay back five head of cattle,",
+      "comments": "",
+      "timing": {
+        "start": 231.37,
+        "end": 244.1
+      }
+    },
+    {
+      "hebrew": "וְאַרְבַּע צֹאן תַּֽחַת שֵׂיוֹת הַנִּמְכָּרִים.",
+      "transliteration": "Ve’arba‘ tson taḥat seyot hannimkarim.",
+      "english": "And four of sheep for sheep that have been sold.",
+      "comments": "",
+      "timing": {
+        "start": 244.1,
+        "end": 258.07
+      }
+    },
+    {
+      "hebrew": "וְאַרְבָּעָה שֹׁמְרִים נִזְכָּרִים,",
+      "transliteration": "Ve’arba‘a shomerim nizkarim,",
+      "english": "And four [types of] guardians are mentioned,",
+      "comments": "",
+      "timing": {
+        "start": 258.07,
+        "end": 267.47
+      }
+    },
+    {
+      "hebrew": "וַאֲבוֹת נְזִיקִים כְּמוֹ הֵם סְדוּרִים.",
+      "transliteration": "Va’avot neziḳim kemo hem sedurim.",
+      "english": "And, similarly, [four] major categories of torts are listed.",
+      "comments": "",
+      "timing": {
+        "start": 267.47,
+        "end": 279.6
+      }
+    },
+    {
+      "hebrew": "לֹא יַעֲלֶה בְּפִֽינוּ שֵׁם אֱלֹהִים אֲחֵרִים.",
+      "transliteration": "Lo ya‘alē befinu shem elohim aḥerim.",
+      "english": "The names of other gods may not be mentioned in our mouths.",
+      "comments": "",
+      "timing": {
+        "start": 279.6,
+        "end": 291.2
+      }
+    },
+    {
+      "hebrew": "וְאֶל מֹשֶׁה אָמַר יֹצֵר הָרִים",
+      "transliteration": "Ve’el Moshē amar yotser harim",
+      "english": "To Moses, the creator of mountains said",
+      "comments": "",
+      "timing": {
+        "start": 291.2,
+        "end": 301.7
+      }
+    },
+    {
+      "hebrew": "לַעֲלוֹת, וְעִמּוֹ מִקְצֵה יִשְׂרָאֵל הַבְּרוּרִים.",
+      "transliteration": "La‘alot ve‘immo miḳtsē Yisra’el habberurim.",
+      "english": "To ascend, and with him some of the Israelites, the pure ones.",
+      "comments": "",
+      "timing": {
+        "start": 301.7,
+        "end": 312.47
+      }
+    },
+    {
+      "hebrew": "וְנִגַּשׁ מֹשֶׁה לְבַדּוֹ לְעֹשֵׂה אוֹרִים.",
+      "transliteration": "Veniggash Moshē levaddo le‘osē orim.",
+      "english": "And Moses alone came near to the maker of luminaries.",
+      "comments": "",
+      "timing": {
+        "start": 312.47,
+        "end": 327.47
+      }
+    },
+    {
+      "hebrew": "וּמֵשִׁיב לָעָם דְּבַר יוי, בְּהוֹד וַהֲדָרִים.",
+      "transliteration": "Umeshiv la‘am devar Adonai, behod vahadarim.",
+      "english": "He brought back Adonai’s word to the people, gloriously and beautifully,",
+      "comments": "",
+      "timing": {
+        "start": 327.47,
+        "end": 341.63
+      }
+    },
+    {
+      "hebrew": "וַיֹּאמְרוּ: \"נַעֲשֶׂה וְנִשְׁמַע כָּל־הַדְּבָרִים!\"",
+      "transliteration": "Vayyomeru: “Na‘asē venishma‘ kol haddevarim!”",
+      "english": "And they said: “We will do and we will hear all the words!”",
+      "comments": "",
+      "timing": {
+        "start": 341.63,
+        "end": 355.6
+      }
+    },
+    {
+      "hebrew": "אֲזַי כָּרֹת כָּרַת עִמָּם בְּרִית, כִּבְרִית הַבְּתָרִים.",
+      "transliteration": "Azai karot karat ‘immam berit, kivrit habbetarim.",
+      "english": "Then He indeed made a covenant with them, like the Covenant Between the Pieces.",
+      "comments": "",
+      "timing": {
+        "start": 355.6,
+        "end": 368.67
+      }
+    },
+    {
+      "hebrew": "וְזִקְנֵי יִשְׂרָאֵל הַכְּשֵׁרִים",
+      "transliteration": "Veziḳnē Yisra’el hakkesherim",
+      "english": "And the upright elders of Israel",
+      "comments": "",
+      "timing": {
+        "start": 368.67,
+        "end": 382.67
+      }
+    },
+    {
+      "hebrew": "חָזוּ כָבוֹד, וְתַֽחַת רַגְלָיו כְּמַעֲשֵׂה לִבְנַת הַסַּפִּירִים.",
+      "transliteration": "Ḥazu khavod, vetaḥat raḡlav kema‘asē livnat hassappirim.",
+      "english": "Saw the Glory, and under His legs was like something made of lapis-lazuli brick.",
+      "comments": "",
+      "timing": {
+        "start": 382.67,
+        "end": 396.0
+      }
+    },
+    {
+      "hebrew": "אַךְ נֶאֱמַן בַּֽיִת עָלָה בְּרֹאשׁ הָרִים,",
+      "transliteration": "Akh ne’eman bayit ‘ala berosh harim,",
+      "english": "But the faithful one of His house ascended to the top of the mountain,",
+      "comments": "The faithful one of His house. Moses.",
+      "timing": {
+        "start": 396.0,
+        "end": 408.6
+      }
+    },
+    {
+      "hebrew": "לְהוֹרִיד לֻחֹת מִמַּחְצַב הַיָּקָר גְּזוּרִים.",
+      "transliteration": "Lehorid luḥot mimmaḥtsav hayyaḳar gezurim.",
+      "english": "To bring down the tablets, which were cut out of the hewing of splendor.",
+      "comments": "",
+      "timing": {
+        "start": 408.6,
+        "end": 419.6
+      }
+    },
+    {
+      "hebrew": "וַיְהִי בָהָר יָמִים סְפוּרִים,",
+      "transliteration": "Vayhi vahar yamim sefurim,",
+      "english": "And he was on the mountain for a number of days,",
+      "comments": "",
+      "timing": {
+        "start": 419.6,
+        "end": 432.8
+      }
+    },
+    {
+      "hebrew": "נִגְלוּ אֵלָיו צְפוּנֵי סְתוּרִים.",
+      "transliteration": "Niḡlu elav tsefunē seturim.",
+      "english": "And concealed mysteries were revealed to him.",
+      "comments": "",
+      "timing": {
+        "start": 432.8,
+        "end": 442.77
+      }
+    },
+    {
+      "hebrew": "מַהְלְכִים לוֹ עִם מַלְאֲכֵי עֹז מִתְאַזְּרִים,",
+      "transliteration": "Mahlekhim lo ‘im mal’akhē ‘oz mit’azzerim,",
+      "english": "He made his way among the angels, who are girded in might,",
+      "comments": "",
+      "timing": {
+        "start": 442.77,
+        "end": 453.2
+      }
+    },
+    {
+      "hebrew": "שֵׁם יוי תָּמִיד מַאֲדִירִים,",
+      "transliteration": "Shem Adonai tamid ma’adirim,",
+      "english": "Who constantly declare that Adonai’s name is noble,",
+      "comments": "",
+      "timing": {
+        "start": 453.2,
+        "end": 460.7
+      }
+    },
+    {
+      "hebrew": "קהל: זֶה לָזֶה | קֹרְאִים וְאֹמְרִים",
+      "transliteration": "Ḳahal: Zē lazē, ḳore’im ve’omerim",
+      "english": "Congregation: [As they] call out to one another, saying:",
+      "comments": "",
+      "timing": {
+        "start": 460.7,
+        "end": 471.0
+      }
+    },
+    {
+      "hebrew": "חזן: וְקָרָ֨א זֶ֤ה אֶל־זֶה֙ וְאָמַ֔ר",
+      "transliteration": "Ḥazzan: Veḳara zē el zē ve’amar",
+      "english": "Cantor. They call out to one another, saying:",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ ׀ קָד֛וֹשׁ קָד֖וֹשׁ יו֥י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ: (ישעיהו ו:ג)",
+      "transliteration": "Ḳahal: Ḳadosh, Ḳadosh Ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Congregation: Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:3)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/18-veellé-hammishpaṭim.mp3",
+  "author_en": "Aaron ben Joseph"
+}

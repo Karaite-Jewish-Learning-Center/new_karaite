@@ -1,0 +1,224 @@
+{
+  "id": "53-haazinu",
+  "title_en": "53 Ha’azinu",
+  "title_he": "Ha'azinu",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "מִי כָמֽוֹךָ אַדִּיר וְנוֹרָא, אֱלֹהֵי עוֹלָם?",
+      "transliteration": "Mi khamokha addir venora, elohē ‘olam?",
+      "english": "Who is like You, Noble and awesome, eternal God?",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 14.17
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ הַמַּגִּיד מֵרֵאשִׁית אַחֲרִית, וּמְגַלֶּה מִקֶּֽדֶם כָּל־נֶעְלָם?",
+      "transliteration": "Mi khamokha hammaggid mereshit aḥarit, umḡallē miḳḳedem kol ne‘lam?",
+      "english": "Who is like You, Who foretells the end at the beginning, and reveals the unknown from the start?",
+      "comments": "",
+      "timing": {
+        "start": 14.17,
+        "end": 29.3
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ רֹאשׁ דְּבָרְךָ אֱמֶת, בְּפִי כָל־הַיְצוּר כֻּלָּם.",
+      "transliteration": "Mi khamokha rosh devarekha emet, befi khol haytsur kullam.",
+      "english": "Who is like You? The beginning of Your word is truth, in the mouth of every single creature.",
+      "comments": "",
+      "timing": {
+        "start": 29.3,
+        "end": 47.03
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ נֶאֶמְנוּ עֵדֶֽיךָ, הֵעַֽדְתָּ לִבְנֵי חָלַם וְהִנֵּה סֻלָּם.",
+      "transliteration": "Mi khamokha ne’emnu ‘edekha, he‘adta livnē ḥalam vehinnē sullam.",
+      "english": "Who is like You? Your witnesses are faithful, whom You had testify for the children of the one who dreamed of a ladder.",
+      "comments": "",
+      "timing": {
+        "start": 47.03,
+        "end": 61.53
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ בְּסַהֲדוֹ עַתָּה מִקֶּֽדֶם הִמְשִׁילָם.",
+      "transliteration": "Mi khamokha besahado ‘atta miḳḳedem himshilam.",
+      "english": "Who is like You? In His call to testimony now, [He called the ones to whom] He had compared [the Israelites] long ago.",
+      "comments": "",
+      "timing": {
+        "start": 61.53,
+        "end": 77.4
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ נֶאְדַּֽרְתָּ בְמַעֲשֶֹֽיךָ, בִּפְרָטָם וּבִכְלָלָם.",
+      "transliteration": "Mi khamokha ne’darta vema‘asekha, bifratam uvikhlalam.",
+      "english": "Who is like You? You are ennobled by Your deeds, in their specifics and in general.",
+      "comments": "",
+      "timing": {
+        "start": 77.4,
+        "end": 91.37
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ יִעֵד עֵדִים נֶאֱמָנִים, בְּלִי נִשְׁמָע קוֹלָם.",
+      "transliteration": "Mi khamokha yi‘ed ‘edim ne’emanim, beli nishma‘ ḳolam.",
+      "english": "Who is like You? He designated faithful witnesses, their voice inaudible.",
+      "comments": "",
+      "timing": {
+        "start": 91.37,
+        "end": 107.47
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ וְאֶֽרֶץ נָתְנָה יְבוּלָהּ, וְהַשָּׁמַֽיִם יִתְּנוּ טַלָּם.",
+      "transliteration": "Mi khamokha ve’erets natena yevulah vehash’shamayim yittenu tallam.",
+      "english": "Who is like You? The land gives forth its produce, and heaven gives forth its dew.",
+      "comments": "",
+      "timing": {
+        "start": 107.47,
+        "end": 124.7
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ סִבַּֽבְתָּ אוֹתוֹתֶֽיךָ עַל־פְּנֵי תֵבֵל לְפָעֳלָם.",
+      "transliteration": "Mi khamokha sibbavta ototekha ‘al penē tevel lefa‘olam.",
+      "english": "Who is like You? You made Your wonders come about, on the face of the earth, to put them into effect.",
+      "comments": "",
+      "timing": {
+        "start": 124.7,
+        "end": 141.53
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ פֹּדֶה עַמְּךָ, וּמִבֵּית עֲבָדִים גְּאָלָם.",
+      "transliteration": "Mi khamokha podē ‘ammekha, umibbet ‘avadim ge’alam.",
+      "english": "Who is like You? Deliverer of Your people, who redeemed them from the house of bondage.",
+      "comments": "",
+      "timing": {
+        "start": 141.53,
+        "end": 154.2
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ בְּאֶֽרֶץ מִדְבָּר פִּנִּֽיתָ מַסְלוּלָם.",
+      "transliteration": "Mi khamokha be’erets midbar pinnita maslulam.",
+      "english": "Who is like You? In the wilderness land, You cleared their path.",
+      "comments": "",
+      "timing": {
+        "start": 154.2,
+        "end": 170.43
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ וּבְתֹֽהוּ יְלֵל יְשִׁימוֹן הָיָה שִׁמְשָׁם וְצִלָּם.",
+      "transliteration": "Mi khamokha uvtohu yelel yehsimon haya shimsham vetsillam.",
+      "english": "Who is like You? In the howling waste of the desert, He was their sun and their shade.",
+      "comments": "",
+      "timing": {
+        "start": 170.43,
+        "end": 184.47
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ יָדַע מַה יַּעֲשֹוּ בְּמַעְבָּדָם וּבְמִפְעָלָם.",
+      "transliteration": "Mi khamokha yada‘ ma ya‘asu bema‘bdam uvmif‘alam.",
+      "english": "Who is like You? He knew what they would do in their actions and deeds.",
+      "comments": "",
+      "timing": {
+        "start": 184.47,
+        "end": 201.47
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ מְפַזֵּר בְּאַרְבַּע פֵּאוֹת חֵילָם.",
+      "transliteration": "Mi khamokha mefazzer be’arba‘ pe’ot ḥelam.",
+      "english": "Who is like You? He dispersed their legions to the four corners [of the earth].",
+      "comments": "",
+      "timing": {
+        "start": 201.47,
+        "end": 214.03
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ יִרְאֶה עָנְיָם לְעֵת תָּמוּט רַגְלָם.",
+      "transliteration": "Mi khamokha yir’ē onyam le‘et tamut raḡlam.",
+      "english": "Who is like You? He sees their affliction when their leg falters.",
+      "comments": "",
+      "timing": {
+        "start": 214.03,
+        "end": 229.4
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ יַרְנִֽינוּ גוֹיִם עַמּוֹ, וְיִשְׁתַּחֲווּ לְמוּלָם.",
+      "transliteration": "Mi khamokha yarninu ḡoyim ‘ammo, veyishtaḥavu lemulam.",
+      "english": "Who is like You? Nations will gladden His people, and prostrate themselves to them.",
+      "comments": "",
+      "timing": {
+        "start": 229.4,
+        "end": 244.73
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ אֹמֵר וְגֹמֵר בִּכְלָלָם?",
+      "transliteration": "Mi khamokha omer veḡomer bikhlalam?",
+      "english": "Who is like You, Who speaks and decrees definitively?",
+      "comments": "",
+      "timing": {
+        "start": 244.73,
+        "end": 259.3
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ חוֹתָמְךָ נִכָּר, וְאַתָּה גֹּאֲלָם?",
+      "transliteration": "Mi khamokha ḥotamekha nikkar, ve’atta go’alam?",
+      "english": "Who is like You, You whose seal is recognizable, and You are their redeemer?",
+      "comments": "",
+      "timing": {
+        "start": 259.3,
+        "end": 272.6
+      }
+    },
+    {
+      "hebrew": "מִי כָמֽוֹךָ יֹאמְרוּ בְשִׁיר הִלּוּלָם:",
+      "transliteration": "Mi khamokha yomeru veshir hillulam:",
+      "english": "Who is like You? They say in their song of praise:",
+      "comments": "",
+      "timing": {
+        "start": 272.6,
+        "end": 281.2
+      }
+    },
+    {
+      "hebrew": "קהל: מִי כָמֽוֹךָ אֲשֶׁר מִיַּד צָר גְּאָלָם?",
+      "transliteration": "Ḳahal: Mi khamokha asher miyyad tsar ge’alam.",
+      "english": "Cong. Who is like You, Who redeemed them from the foe’s hand?",
+      "comments": "",
+      "timing": {
+        "start": 281.2,
+        "end": 290.8
+      }
+    },
+    {
+      "hebrew": "חזן: יֹ֭אמְר֖וּ גְּאוּלֵ֣י יו֑י אֲשֶׁ֥ר גְּ֝אָלָ֗ם מִיַּד־צָֽר:",
+      "transliteration": "Ḥazzan: Yomeru ge’ulē Adonai asher ge’alam miyyad tsar:",
+      "english": "Cantor: Let those redeemed by Adonai say that He has redeemed them from the enemy’s hand. (Ps. 107:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְֹרָאֵֽל:",
+      "transliteration": "Ḳahal: Go’alenu Adonai tseva’ot ḳedosh Yisra’el:",
+      "english": "Congregation: Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/53-haazinu.mp3",
+  "author_en": "Aaron ben Joseph"
+}

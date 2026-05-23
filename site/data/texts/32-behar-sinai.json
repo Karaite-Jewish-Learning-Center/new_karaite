@@ -1,0 +1,220 @@
+{
+  "id": "32-behar-sinai",
+  "title_en": "Behar Sinai",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֵין כָּמֽוֹךָ גֹּאֵל יִשְׂרָאֵל, דָּר בַּשְּׁחָקִים,",
+      "transliteration": "En Kamokha go’el Yisra’el, dar bash’sheḥaḳim,",
+      "english": "None is like You, redeemer of Israel, who dwells in heaven!",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.07
+      }
+    },
+    {
+      "hebrew": "הוֹרֵֽיתָ לָּֽנוּ בְּהַר סִינַי מִצְוֹת וְחֻקִּים,",
+      "transliteration": "Horeta lanu behar Sinai mitsvot veḥuḳḳim,",
+      "english": "You taught us commandments and statutes on Mount Sinai,",
+      "comments": "",
+      "timing": {
+        "start": 16.07,
+        "end": 28.27
+      }
+    },
+    {
+      "hebrew": "רְפוּאוֹת לֵב הֵם, רְצוֹן הָאֵל מְפִיקִים.",
+      "transliteration": "Refu’ot lev hem, retson ha’el mefiḳim.",
+      "english": "Which are healing for the heart, and express God’s will.",
+      "comments": "",
+      "timing": {
+        "start": 28.27,
+        "end": 43.53
+      }
+    },
+    {
+      "hebrew": "נֹֽפֶת יִטְּפוּ, וּמִדְּבַשׁ הֵם מְתוּקִים.",
+      "transliteration": "Nofet Yittafu, umiddevash hem metuḳim.",
+      "english": "They drip comb honey and are sweeter than nectar.",
+      "comments": "",
+      "timing": {
+        "start": 43.53,
+        "end": 56.03
+      }
+    },
+    {
+      "hebrew": "בְּמַעֲבֵה הַחֶֽסֶד וְהָרַחֲמִים יְצוּקִים.",
+      "transliteration": "Bema‘avē haḥesed veharaḥamim yetsuḳim.",
+      "english": "They are firmly founded in the most excellent mercy and compassion.",
+      "comments": "",
+      "timing": {
+        "start": 56.03,
+        "end": 67.67
+      }
+    },
+    {
+      "hebrew": "קֵרַבְתָּֽנוּ לַעֲבוֹדָתְךָ, חֻקֶּֽיךָ לְהָקִים.",
+      "transliteration": "Ḳeravtanu la‘avodatekha, ḥuḳḳekha lehaḳim.",
+      "english": "You have brought us near to serve You, to uphold Your statutes.",
+      "comments": "",
+      "timing": {
+        "start": 67.67,
+        "end": 81.5
+      }
+    },
+    {
+      "hebrew": "שֵׁשׁ שָׁנִים נִזְרַע בַּאֲרָקִים,",
+      "transliteration": "Shesh shanim nizra‘ ba’araḳim,",
+      "english": "Six years may we sow the land,",
+      "comments": "",
+      "timing": {
+        "start": 81.5,
+        "end": 95.6
+      }
+    },
+    {
+      "hebrew": "וְהַשְּׁבִיעִית שַׁבָּת לַיוי, אֹהֵב צַדִּיקִים;",
+      "transliteration": "Vehash’shevi‘it shabbat la’Adonai, ohev tsaddiḳim;",
+      "english": "And the seventh is a Sabbath unto Adonai, who loves the righteous;",
+      "comments": "",
+      "timing": {
+        "start": 95.6,
+        "end": 108.73
+      }
+    },
+    {
+      "hebrew": "תְּבוּאָתָהּ לְכָל־חַי, מְלֵאִים וְרֵיקִים.",
+      "transliteration": "Tevu’atah lekhol ḥay, mele’im vereḳim.",
+      "english": "Its produce is for every living thing, whether full or empty.",
+      "comments": "",
+      "timing": {
+        "start": 108.73,
+        "end": 124.4
+      }
+    },
+    {
+      "hebrew": "וּלְקַדֵּשׁ שְׁנַת הַחֲמִשִּׁים נִהְיֶה עֹסְקִים,",
+      "transliteration": "Ulḳaddesh shenat haḥamish’shim nihyē ‘oseḳim,",
+      "english": "We should be occupied with sanctifying the fiftieth year,",
+      "comments": "",
+      "timing": {
+        "start": 124.4,
+        "end": 136.03
+      }
+    },
+    {
+      "hebrew": "לִקְרֹא דְרוֹר, אִישׁ לְמִשְׁפַּחְתּוֹ מְחַבְּקִים;",
+      "transliteration": "Liḳro deror, ish lemishpaḥto meḥabbeḳim;",
+      "english": "To proclaim liberty, [such that] each man will embrace his clan;",
+      "comments": "",
+      "timing": {
+        "start": 136.03,
+        "end": 150.37
+      }
+    },
+    {
+      "hebrew": "יוֹבֵל הִיא, לְהוֹבִיל לַאֲחֻזָּתָם רְחוֹקִים.",
+      "transliteration": "Yovel hu, lehovil la’aḥuzzatam reḥoḳim.",
+      "english": "It is a Jubilee, to lead the displaced [back] to their inheritance.",
+      "comments": "",
+      "timing": {
+        "start": 150.37,
+        "end": 162.53
+      }
+    },
+    {
+      "hebrew": "וּמֶֽכֶר וְקִנְיָן בְּיֹֽשֶׁר מַחֲזִיקִים,",
+      "transliteration": "Umekher veḳinyan beyosher maḥaziḳim,",
+      "english": "We must hold fast to uprightness in buying and selling,",
+      "comments": "",
+      "timing": {
+        "start": 162.53,
+        "end": 177.27
+      }
+    },
+    {
+      "hebrew": "וּמָךְ וְדָל – אִיֹש כְּפִי כֹחוֹ לָהֶם מַעֲנִיקִים,",
+      "transliteration": "Umakh vedal – ish kefi khoḥo lahem ma‘aniḳim,",
+      "english": "And give gifts—each according to one’s means—to the indigent and poor,",
+      "comments": "",
+      "timing": {
+        "start": 177.27,
+        "end": 189.63
+      }
+    },
+    {
+      "hebrew": "וְלִנְטֹשׁ מַשָּׂא כָל־יָד מִמְּצוּקִים.",
+      "transliteration": "Velintosh massa khol yad mimmetsuḳim.",
+      "english": "And dismiss [anyone] in difficulty from giving us a hand.",
+      "comments": "",
+      "timing": {
+        "start": 189.63,
+        "end": 202.67
+      }
+    },
+    {
+      "hebrew": "מַה נִּפְלְאוּ דִּבְרֵי אֵל, בְּצֶֽדֶק חֲקוּקִים;",
+      "transliteration": "Ma nifle’u divrē El, betsedeḳ ḥaḳuḳim;",
+      "english": "How wondrous are God’s words, which are inscribed in justice;",
+      "comments": "",
+      "timing": {
+        "start": 202.67,
+        "end": 213.63
+      }
+    },
+    {
+      "hebrew": "רַחֲמָיו לֹא כָלוּ מֵאֲשֶׁר בּוֹ דְבֵקִים,",
+      "transliteration": "Raḥamav lo khalu me’asher bo deveḳim,",
+      "english": "His compassion is never depleted for those who cling to Him,",
+      "comments": "",
+      "timing": {
+        "start": 213.63,
+        "end": 226.23
+      }
+    },
+    {
+      "hebrew": "וְלֹא יִתַּֽמּוּ, לִגְאֹל בָּנָיו הָעֲשׁוּקִים",
+      "transliteration": "Velo yittammu, liḡ’ol banav ha‘ashuḳim",
+      "english": "And it will never be insufficient to redeem His oppressed children",
+      "comments": "",
+      "timing": {
+        "start": 226.23,
+        "end": 235.5
+      }
+    },
+    {
+      "hebrew": "קהל: מִיַּד עֹשְׁקֵיהֶם, בְּכָל־עֵת לָהֶם מְצִיקִים.",
+      "transliteration": "Ḳahal: Miyyad ‘osheḳehem, bekhol ‘et lahem metsiḳim.",
+      "english": "Cong. From the hand of their oppressors, who distress them at all times.",
+      "comments": "",
+      "timing": {
+        "start": 235.5,
+        "end": 247.7
+      }
+    },
+    {
+      "hebrew": "חזן: וְאָז –",
+      "transliteration": "Ḥazzan: Ve’az –",
+      "english": "Cantor. And then—",
+      "comments": ""
+    },
+    {
+      "hebrew": "יֹ֭אמְר֖וּ גְּאוּלֵ֣י יו֑י אֲשֶׁ֥ר גְּ֝אָלָ֗ם מִיַּד־צָֽר: (תהלים קז:ב)",
+      "transliteration": "Yomeru ge’ulē Adonai asher ge’alam miyyad tsar:",
+      "english": "Those redeemed by Adonai will say that He has redeemed them from the hand of the enemy. (Ps. 107:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְׂרָאֵֽל: (ישעיה מז:ד)",
+      "transliteration": "Ḳahal: Go’alenu Adonai tseva’ot shemo ḳedosh Yisra’el:",
+      "english": "Cong. Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/32-behar-sinai.mp3",
+  "author_en": "Aaron ben Joseph"
+}

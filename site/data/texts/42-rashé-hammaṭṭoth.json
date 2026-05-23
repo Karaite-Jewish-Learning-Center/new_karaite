@@ -1,0 +1,230 @@
+{
+  "id": "42-rashé-hammaṭṭoth",
+  "title_en": "Rashé Hammaṭṭoth",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֱלֹהַי, מַה־נּוֹרָא מַעֲשֶׂיךָ לַיֹּדְעִים,",
+      "transliteration": "Elohay, ma nora ma‘asekha layyode‘im,",
+      "english": "My God, how awesome are Your deeds for those who know [them];",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 14.3
+      }
+    },
+    {
+      "hebrew": "הוֹד וְהָדָר יְשַׁוּוּ לְחֹקְרָם, וּבִלְבָבוֹ שַׁעֲשׁוּעִים.",
+      "transliteration": "Hod vehadar yeshavvu leḥoḳram, uvilvavo sha‘ashu‘im.",
+      "english": "They place splendor and glory on the one who studies them, and delight in their heart.",
+      "comments": "",
+      "timing": {
+        "start": 14.3,
+        "end": 27.27
+      }
+    },
+    {
+      "hebrew": "רָזֵי דָתְךָ – הִנֵּה מַה טּוֹב וּמַה נָּעִים!",
+      "transliteration": "Razē datekha – hinnē ma tov uma na‘im!",
+      "english": "The mysteries of Your Law—behold, how good and sweet they are!",
+      "comments": "",
+      "timing": {
+        "start": 27.27,
+        "end": 39.57
+      }
+    },
+    {
+      "hebrew": "נוֹדְרֵי נְדָרִים, וְלֶאְסוֹר אִסָּר נִשְׁבָּעִים,",
+      "transliteration": "Noderē nedarim, vele’sor issar nishba‘im,",
+      "english": "Those who vow vows, and make oaths to impose deprivations [on themselves],",
+      "comments": "",
+      "timing": {
+        "start": 39.57,
+        "end": 51.33
+      }
+    },
+    {
+      "hebrew": "לֹא יַחֵֽלּוּ דִבְרֵיהֶם, מִפִּיהֶם נִשְׁמָעִים.",
+      "transliteration": "Lo yaḥellu divrehem, mippihem nishma‘im.",
+      "english": "Must not profane their words, which are heard from their mouths;",
+      "comments": "",
+      "timing": {
+        "start": 51.33,
+        "end": 65.17
+      }
+    },
+    {
+      "hebrew": "מוֹצָא שִׂפְתֵיהֶם יַעֲשׂוּ, בְּלִי רֽוּחַ עִוְעִים,",
+      "transliteration": "Motsa siftehem ya‘asu, beli ru’aḥ ‘iv‘im,",
+      "english": "They must do what comes out of their lips, with no spirit of confusion,",
+      "comments": "",
+      "timing": {
+        "start": 65.17,
+        "end": 76.57
+      }
+    },
+    {
+      "hebrew": "וּבְמֵימֵי אֱמוּנָה יִהְיוּ נְטוּעִים.",
+      "transliteration": "Uvmemē emuna yihyu netu‘im.",
+      "english": "And they shall be [firmly] planted in the waters of faithfulness.",
+      "comments": "",
+      "timing": {
+        "start": 76.57,
+        "end": 88.53
+      }
+    },
+    {
+      "hebrew": "וְנִדְרֵי נָשִׁים – אָב וּבַֽעַל אִם יְנִיאוּם, יִהְיוּ כַּאֲפָעִים;",
+      "transliteration": "Venidrē nashim – av uva‘al im yeni’um, yihyi ka’afa‘im;",
+      "english": "Women’s vows—if the father or husband abrogates them, they shall be null;",
+      "comments": "",
+      "timing": {
+        "start": 88.53,
+        "end": 101.37
+      }
+    },
+    {
+      "hebrew": "אַף יָפֵֽרוּ אֹתָם, בְּשָׁמְעָם לִרְגָעִים;",
+      "transliteration": "Af yaferu otam, beshom‘am lirḡa‘im;",
+      "english": "Indeed, [the husband or father] may annul them, when they hear them for a moment;",
+      "comments": "",
+      "timing": {
+        "start": 101.37,
+        "end": 114.37
+      }
+    },
+    {
+      "hebrew": "מִלְּבַד נִדְרֵי אַלְמָנָה וּגְרוּשָׁה, בַּל יִהְיוּ גְרוּעִים,",
+      "transliteration": "Millevad nidrē almana uḡrusha, bal yihyu ḡeru‘im,",
+      "english": "Except the vows of the widow and divorcée, which must not be withheld;",
+      "comments": "",
+      "timing": {
+        "start": 114.37,
+        "end": 125.33
+      }
+    },
+    {
+      "hebrew": "כֹּל אֲשֶׁר אָסְרוּ עַל נַפְשָׁן – תְּקוּעִים.",
+      "transliteration": "Kol asher aseru ‘al nafshan – teḳu‘im.",
+      "english": "Whatever they have deprived themselves of—they are stuck with.",
+      "comments": "",
+      "timing": {
+        "start": 125.33,
+        "end": 135.73
+      }
+    },
+    {
+      "hebrew": "מַה נִּפְלְאוּ חֻקֵּי אֵל תְּמִים דֵּעִים,",
+      "transliteration": "Ma nifle’u ḥuḳḳē El temim de‘im,",
+      "english": "How wondrous are the statutes of God, who is perfect in knowledge,",
+      "comments": "",
+      "timing": {
+        "start": 135.73,
+        "end": 148.13
+      }
+    },
+    {
+      "hebrew": "הַמַּעֲמִיק מִשְׁפְּטֵי עֵדוֹתָיו לָעָם בּוֹ נוֹשָׁעִים,",
+      "transliteration": "Hamma‘amiḳ mishpetē ‘edotav la‘am bo nosha‘im,",
+      "english": "Who makes profound testimonial statutes for the nation that is rescued by Him,",
+      "comments": "",
+      "timing": {
+        "start": 148.13,
+        "end": 161.63
+      }
+    },
+    {
+      "hebrew": "וְנִטְעֵי דְרָכָיו לַעֲרוּגַת בֹּֽשֶׂם זְרוּעִים.",
+      "transliteration": "Venit‘ē derakhav la‘aruḡat bosem zeru‘im.",
+      "english": "And the saplings of whose pathways are planted for the spice beds.",
+      "comments": "",
+      "timing": {
+        "start": 161.63,
+        "end": 172.43
+      }
+    },
+    {
+      "hebrew": "וְלִנְקוֹם נִקְמַת מִדְיָנִים, חַטָּאִים וְרָעִים,",
+      "transliteration": "Velinḳom niḳmat Midyanim, ḥatta’im vera‘im,",
+      "english": "To wreak vengeance against the Midianites, the sinful and evil people,",
+      "comments": "",
+      "timing": {
+        "start": 172.43,
+        "end": 184.77
+      }
+    },
+    {
+      "hebrew": "צִוָּה יוי לְעַמּוֹ לְהֵחָלֵץ, וּלְהִתְיַצֵּב בְּכוֹבָעִים.",
+      "transliteration": "Tsivva Adonai le‘ammo leheḥalets, ulhityats’tsev bekhova‘im.",
+      "english": "Adonai commanded [His people] to be drafted, and to stand ready with helmets.",
+      "comments": "",
+      "timing": {
+        "start": 184.77,
+        "end": 198.8
+      }
+    },
+    {
+      "hebrew": "יִדְרֹךְ עַל בָּמֳתֵי מְרֵעִים.",
+      "transliteration": "Yidrokh ‘al bamotē mere‘im.",
+      "english": "He trod over the backs of the evildoers.",
+      "comments": "",
+      "timing": {
+        "start": 198.8,
+        "end": 210.0
+      }
+    },
+    {
+      "hebrew": "גֹּאֲלָם חָזָק, יוי, לְגָֽאֳלָם מִיַּד רְשָׁעִים,",
+      "transliteration": "Go’alam ḥazaḳ, Adonai, leḡa’olam miyyad resha‘im,",
+      "english": "Their redeemer, Adonai, is strong, to redeem them from the hand of the wicked,",
+      "comments": "",
+      "timing": {
+        "start": 210.0,
+        "end": 221.13
+      }
+    },
+    {
+      "hebrew": "וּבְיָדוֹ לָתֵת כָּל־צַר וְאֹויֵב נִכְנָעִים,",
+      "transliteration": "Uvyado latet kol tsar ve’oyev nikhna‘im,",
+      "english": "And it is in His power to make every foe and enemy submissive,",
+      "comments": "",
+      "timing": {
+        "start": 221.13,
+        "end": 228.67
+      }
+    },
+    {
+      "hebrew": "קהל: וְלִשְׁלֹֽחַ פְּדוּת לְבָנָיו, וְאַהֲבָה תְכַסֶּה עַל־כָּל־פְּשָׁעִים.",
+      "transliteration": "Ḳahal: Velishlo’aḥ pedut levanav, ve’ahava tekhassē ‘al kol pesha‘im.",
+      "english": "Cong. And to send deliverance to His children, and [to give] love to cover up all sins.",
+      "comments": "",
+      "timing": {
+        "start": 228.67,
+        "end": 242.17
+      }
+    },
+    {
+      "hebrew": "חזן: פְּד֤וּת שָׁ֘לַ֤ח לְעַמּ֗וֹ צִוָּה־לְעוֹלָ֥ם בְּרִית֑וֹ קָד֖וֹשׁ וְנוֹרָ֣א שְׁמֽוֹ: (תהלים קיא:ט)",
+      "transliteration": "Ḥazzan: Pedut shalaḥ le‘ammo tsivva le‘olam berito ḳadosh venora shemo:",
+      "english": "Cantor. He sent deliverance to His people; He commanded His covenant forever; holy and awesome is His name! (Ps. 111:9)",
+      "comments": ""
+    },
+    {
+      "hebrew": "צַהֲלִ֥י וָרֹ֖נִּי יוֹשֶׁ֣בֶת צִיּ֑וֹן כִּי־גָד֥וֹל בְּקִרְבֵּ֖ךְ קְד֥וֹשׁ יִשְׂרָאֵֽל׃ (ישעיהו יב:ו)",
+      "transliteration": "Tsahali varonni yoshevet tsiyyon ki ḡadol beḳirbekh ḳedosh Yisra’el:",
+      "english": "Rejoice and sing out, dweller of Zion, for the Holy One of Israel is great in Thy midst! (Isa. 12:6)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְׂרָאֵֽל: (ישעיהו מז:ד)",
+      "transliteration": "Ḳahal: Go’alenu Adonai tseva’ot shemo ḳedosh Yisra’el:",
+      "english": "Cong. Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/42-rashé-hammaṭṭoth.mp3",
+  "author_en": "Aaron ben Joseph"
+}

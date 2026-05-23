@@ -1,0 +1,224 @@
+{
+  "id": "41-pinḥas",
+  "title_en": "Pinḥas",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "יִתְגַּדַּל  אֵל עֶלְיוֹן, הַשָּׂם לִירֵאָיו עֵינוֹ.",
+      "transliteration": "Yitgaddal El Elyon, Hassam lire’av ‘eno.",
+      "english": "Magnified be El ‘Elyon, who casts His gaze on those that fear Him.",
+      "comments": "El ‘Elyon. A name for God. Traditional English: “the most high God.”",
+      "timing": {
+        "start": 0,
+        "end": 15.23
+      }
+    },
+    {
+      "hebrew": "יִתְקַדַּשׁ  הַנֹּתֵן חַיִּים וְשָׁלוֹם לְפִינְחָס כֹּהֲנוֹ.",
+      "transliteration": "Yitḳaddash hannoten ḥayyim veshalom lefinḥas kohano.",
+      "english": "Sanctified be the One who gave life and peace to Phineas, His priest.",
+      "comments": "",
+      "timing": {
+        "start": 15.23,
+        "end": 28.8
+      }
+    },
+    {
+      "hebrew": "יִתְעַלֶּה  רוֹצֶה בוֹ, כִּי מִלֵּא רְצוֹנוֹ.",
+      "transliteration": "Yit‘allē rotsē vo, ki millē retsono.",
+      "english": "Elevated be the One who was pleased with him, for he had fulfilled His will.",
+      "comments": "",
+      "timing": {
+        "start": 28.8,
+        "end": 43.03
+      }
+    },
+    {
+      "hebrew": "יִתְפָּאַר  נוֹשֵׂא לוֹ וְהֵשִׁיב אֵת חֲרוֹנוֹ.",
+      "transliteration": "Yitpa’ar nose lo veheshiv et ḥarono.",
+      "english": "Glorified be the One who pardoned him, whose wrath he averted.",
+      "comments": "",
+      "timing": {
+        "start": 43.03,
+        "end": 55.03
+      }
+    },
+    {
+      "hebrew": "וְכִפֶּר עַל בְּנֵי יִשְׂרָאֵל, [עַם] מַרְעִיתוֹ וְצֹאנוֹ.",
+      "transliteration": "Vekhipper ‘al benē Yisra’el, ‘am mar‘ito vetsono.",
+      "english": "And he atoned for the Israelites, the people He shepherds, His flock.",
+      "comments": "",
+      "timing": {
+        "start": 55.03,
+        "end": 68.53
+      }
+    },
+    {
+      "hebrew": "כָּרַת בְּרִית בֵּינוֹ לְבֵינוֹ,",
+      "transliteration": "Karat berit beno leveno,",
+      "english": "[God] made a covenant between Himself and him,",
+      "comments": "",
+      "timing": {
+        "start": 68.53,
+        "end": 80.43
+      }
+    },
+    {
+      "hebrew": "לְעוֹלָם תִּהְיֶה לּוֹ כְהֻנָּה, לִבְנוֹ וּלְנִינוֹ.",
+      "transliteration": "Le‘olam tihyē lo khehunna, livno ulnino.",
+      "english": "That his priesthood would be eternal, for his sons and descendants.",
+      "comments": "",
+      "timing": {
+        "start": 80.43,
+        "end": 95.03
+      }
+    },
+    {
+      "hebrew": "בֵּית־אֵל יְהַלֵּךְ, וְיַחֲזֵק יַד יְמִינוֹ,",
+      "transliteration": "Bet’El yehallekh, veyaḥazeḳ yad yemino,",
+      "english": "He went to Bethel, and [God] held his right hand tight.",
+      "comments": "",
+      "timing": {
+        "start": 95.03,
+        "end": 105.7
+      }
+    },
+    {
+      "hebrew": "שֵׁם אֵל עֲדָנָיו, וְזִכְרוֹ תַּֽחַת לְשׁוֹנוֹ.",
+      "transliteration": "Shem El ‘adanav, vezikhro taḥat leshono.",
+      "english": "God’s name is his delight, and mention of Him is under his tongue.",
+      "comments": "",
+      "timing": {
+        "start": 105.7,
+        "end": 119.73
+      }
+    },
+    {
+      "hebrew": "וּבְקִרְבּוֹ הֲדַר אֵל, וּבִלְבָבוֹ גְאוֹנוֹ.",
+      "transliteration": "Uvḳirbo hadar el, uvilvavo ḡeono.",
+      "english": "Within him is God’s beauty, and in his heart is His pride.",
+      "comments": "",
+      "timing": {
+        "start": 119.73,
+        "end": 132.07
+      }
+    },
+    {
+      "hebrew": "יִתְהַדַּר וְיִתְנַשֵּׂא מֶֽלֶךְ יִשְׂרָאֵל וְקֹנוֹ,",
+      "transliteration": "Yit’haddar veyitnassē melekh veḳono,",
+      "english": "Beautified and uplifted be Israel’s king, their maker,",
+      "comments": "",
+      "timing": {
+        "start": 132.07,
+        "end": 146.8
+      }
+    },
+    {
+      "hebrew": "הַמַּעֲנִיק רָזֵי תוֹרָתוֹ לְעַם הֲמוֹנוֹ.",
+      "transliteration": "Hamma‘aniḳ razē torato le‘am hamono.",
+      "english": "Who has bequeathed the secrets of His Torah to the masses of His people.",
+      "comments": "",
+      "timing": {
+        "start": 146.8,
+        "end": 158.43
+      }
+    },
+    {
+      "hebrew": "הַשָּׂם תַּֽחַת נְבִיאוֹ, יְהוֹשֻֽׁעַ לְרֹעֶה זִמְּנוֹ.",
+      "transliteration": "Hassam taḥat nevi’o, Yehoshu’a‘ lero‘ē zimmeno.",
+      "english": "He gave a replacement for His prophet, appointing Joshua as shepherd.",
+      "comments": "His prophet. Moses.",
+      "timing": {
+        "start": 158.43,
+        "end": 174.03
+      }
+    },
+    {
+      "hebrew": "שֹׁמֵר אֲדֹנָיו יְכֻבַּד, וְיַעֲמֹד עַל כַּנּוֹ;",
+      "transliteration": "Shomer adonav yeḥubbad, veya‘amod ‘al kanno;",
+      "english": "He who guarded his master was shown honor, and stood in his position;",
+      "comments": "",
+      "timing": {
+        "start": 174.03,
+        "end": 187.4
+      }
+    },
+    {
+      "hebrew": "הֶעֱנִיקוֹ מֵהוֹד רַבּוֹ וְאוֹנוֹ.",
+      "transliteration": "He‘eniḳo mehod rabbo ve’ono.",
+      "english": "He bequeathed him some of his master’s glory and strength.",
+      "comments": "",
+      "timing": {
+        "start": 187.4,
+        "end": 201.37
+      }
+    },
+    {
+      "hebrew": "וְכָל־טוּב חִדֵּשׁ בִּזְמַנּוֹ,",
+      "transliteration": "Vekhol tuv ḥiddesh bizmanno,",
+      "english": "And [God] designated a good thing for each occasion,",
+      "comments": "",
+      "timing": {
+        "start": 201.37,
+        "end": 211.17
+      }
+    },
+    {
+      "hebrew": "חֹֽדֶשׁ וְשַׁבָּת וְיוֹם מוֹעֵד – עוֹלַת קָרְבָּנוֹ.",
+      "transliteration": "Ḥodesh veshabbat veyom mo‘ed – ‘olat ḳorbano.",
+      "english": "New Moon, Sabbath, and holidays—burnt offerings.",
+      "comments": "",
+      "timing": {
+        "start": 211.17,
+        "end": 223.37
+      }
+    },
+    {
+      "hebrew": "אֵין כֵּאלֹהֵֽינוּ. מֹשֵׁל כֹּל מִמְּעוֹנוֹ,",
+      "transliteration": "En kelohenu, moshel kol mimme‘ono,",
+      "english": "None is like our God, Who rules over everything from His heaven,",
+      "comments": "",
+      "timing": {
+        "start": 223.37,
+        "end": 235.2
+      }
+    },
+    {
+      "hebrew": "אֵין כַּאדֹנֵֽינוּ, וּמִי יַעֲשֶׂה כִּרְצוֹנוֹ?",
+      "transliteration": "En kadonenu, umi ya‘asē kirtsono?",
+      "english": "None is like our Lord, And who can do according to their [own] wish?",
+      "comments": "",
+      "timing": {
+        "start": 235.2,
+        "end": 243.23
+      }
+    },
+    {
+      "hebrew": "קהל:וְאֵין צוּר בִּלְעָדָיו, וּמִי יֶשְׁנוֹ?",
+      "transliteration": "Ḳahal: Ve’en tsur bil‘adav, umi yeshno?",
+      "english": "Cong. And there is no rock aside from Him. Who could there be?",
+      "comments": "",
+      "timing": {
+        "start": 243.23,
+        "end": 252.53
+      }
+    },
+    {
+      "hebrew": "חזן: אֵֽין־קָד֥וֹשׁ כַּיו֖י כִּי־אֵ֣ין בִּלְתֶּ֑ךָ וְאֵ֥ין צ֖וּר כֵּֽאלֹהֵֽינוּ: (שמואל א ב:ב)",
+      "transliteration": "Ḥazzan: En ḳadosh ka’Adonai ki en biltekha ve’en tsur kelohenu:",
+      "english": "Cantor. There is none holy like Adonai, for there is none but You; and there is no rock like our God. (1 Sam. 2:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל: (תהלים כב:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Congregation: And You are holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/41-pinḥas.mp3",
+  "author_en": "Aaron ben Joseph"
+}

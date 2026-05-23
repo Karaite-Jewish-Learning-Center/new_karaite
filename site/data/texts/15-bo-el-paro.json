@@ -1,0 +1,282 @@
+{
+  "id": "15-bo-el-paro",
+  "title_en": "Bo El Par'o",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אַתָּה נֶאֱמַן בֵּיתִי; אַל תִּירָא, אֲנִי עֲזַרְתִּֽיךָ.",
+      "transliteration": "Atta ne’eman beti; al tira, ani ‘azartikha.",
+      "english": "“You are the faithful one of My house; fear not, for I have helped you.",
+      "comments": "You are. This is God’s speech to Moses (up to line 10).",
+      "timing": {
+        "start": 0,
+        "end": 16.23
+      }
+    },
+    {
+      "hebrew": "אֲנִי יוי קְרָאתִֽיךָ בְצֶֽדֶק, וּבִימִינִי תְמַכְתִּֽיךָ.",
+      "transliteration": "Ani Adonai ḳeratikha vetsedeḳ, uvimini temakhtikha.",
+      "english": "I, Adonai, have called you to do righteousness, and have supported you with My right hand.",
+      "comments": "",
+      "timing": {
+        "start": 16.23,
+        "end": 28.63
+      }
+    },
+    {
+      "hebrew": "בְּטֶֽרֶם אֶצָּרְךָ בַבֶּֽטֶן יְדַעְתִּֽיךָ,",
+      "transliteration": "Beterem ets’tsorkha vabbeten yeda‘tikha,",
+      "english": "When I had not yet formed you in the belly, I knew you,",
+      "comments": "",
+      "timing": {
+        "start": 28.63,
+        "end": 34.37
+      }
+    },
+    {
+      "hebrew": "קהל: וּבְטֶֽרֶם תֵּצֵא מֵרֶֽחֶם הִקְדַּשְׁתִּֽיךָ, נָבִיא לַגּוֹיִם נְתַתִּֽיךָ.  (ירמיהו א:ה)",
+      "transliteration": "Ḳahal: Uvterem tetsē mereḥem hiḳdashtikha, navi laggoyim netattikha.",
+      "english": "Cong. And when you had not yet left the womb, I consecrated you, and made you a prophet for the nations.      (Jer. 1:5)",
+      "comments": "",
+      "timing": {
+        "start": 34.37,
+        "end": 44.77
+      }
+    },
+    {
+      "hebrew": "הַשְׁכֵּם וּבֹא אֶל חָפְרַע אֲשֶׁר מִלִּין הִגְבִּיר.",
+      "transliteration": "Hashkem uvo el hofra‘ asher millin hiḡbir.",
+      "english": "“Rise early, and go to Hofra‘, who has spoken excessively.",
+      "comments": "Hofra‘. Pharaoh.",
+      "timing": {
+        "start": 44.77,
+        "end": 60.67
+      }
+    },
+    {
+      "hebrew": "הִכְבַּדְתִּי אֶת־לִבּוֹ וְלֵב עֲבָדָיו כַּבִּיר,",
+      "transliteration": "Hikhbadti et libbo velev ‘avadav kabbir,",
+      "english": "I have made his heart heavy, and the heart of his servants, which is excessively inflated,",
+      "comments": "",
+      "timing": {
+        "start": 60.67,
+        "end": 71.33
+      }
+    },
+    {
+      "hebrew": "לְמַֽעַן שִׁתִי אֹתֹתַי אֵֽלֶּה בְּקִרְבּוֹ – הֲתֻלִים מַחְבִּיר.",
+      "transliteration": "Lema‘an shiti ototai ellē beḳirbo – hatulim maḥbir.",
+      "english": "In order to place these miracles of Mine in his midst—[for] he composes taunts.",
+      "comments": "",
+      "timing": {
+        "start": 71.33,
+        "end": 78.43
+      }
+    },
+    {
+      "hebrew": "קהל: הֶֽבֶל יִפְצֶה פִֽיהוּ, בִּבְלִי דַֽעַת מִלִּין יַ[כְ]בִּיר.   (איוב לה:טז)",
+      "transliteration": "Ḳahal: Hevel yiftsē fihu, bivli da‘at millin yakhbir.",
+      "english": "Cong. His mouth speaks  folly; he mindlessly spews words. (Job 35:16)",
+      "comments": "",
+      "timing": {
+        "start": 78.43,
+        "end": 87.0
+      }
+    },
+    {
+      "hebrew": "רְבוֹת מוֹפְתַי בּוֹ, הִקְשֵֽׁיתִי אֶת־לִבּוֹ,",
+      "transliteration": "Revot mofetai bo, hiḳsheti et libbo,",
+      "english": "“To multiply My wonders against him, I have hardened his heart,",
+      "comments": "",
+      "timing": {
+        "start": 87.0,
+        "end": 101.5
+      }
+    },
+    {
+      "hebrew": "עֲדֵי יִלְבַּשׁ קְלָלָה כְמַדּוֹ, וְתָבוֹא כַמַּֽיִם בְּקִרְבּוֹ.",
+      "transliteration": "‘adē yilbash ḳelala khemaddo, vetavo khammayim beḳirbo.",
+      "english": "Until he wears a curse as his garment, and it enters him like water.”",
+      "comments": "",
+      "timing": {
+        "start": 101.5,
+        "end": 114.7
+      }
+    },
+    {
+      "hebrew": "בְּנֶֽגַע עֲשִׂירִי יְבַעֲתוֹ; קָדַם וְהִתְרָהוּ עוֹדֶֽנוּ בְאִבּוֹ:",
+      "transliteration": "Beneḡa‘ ‘asiri yeva‘ato; ḳadam vehitrahu ‘odenu ve’ibbo:",
+      "english": "[God] intimidated [Pharaoh] with the tenth plague; He first warned him, when he was still very green:",
+      "comments": "[God] intimidated [Pharaoh]. Here begins the narration, after the conclusion of God’s speech to Moses.",
+      "timing": {
+        "start": 114.7,
+        "end": 122.27
+      }
+    },
+    {
+      "hebrew": "קהל: וּמַלְאָךְ אַכְזָרִי יְשֻׁלַּח בּוֹ.      (משלי יז:יא)",
+      "transliteration": "Ḳahal: Umalakh akhzari yeshullaḥ bo.",
+      "english": "Cong. [That] a cruel angel would be dispatched against him.  (Prov. 17:11)",
+      "comments": "",
+      "timing": {
+        "start": 122.27,
+        "end": 128.57
+      }
+    },
+    {
+      "hebrew": "נִיסָן בְּנִסִּים נוֹרָאִים וּפְלָאִים מְחֻדָּשִׁים",
+      "transliteration": "Nisan benissim nora’im ufla’im meḥuddashim",
+      "english": "Nisan, with awesome miracles and newly made wonders,",
+      "comments": "",
+      "timing": {
+        "start": 128.57,
+        "end": 144.6
+      }
+    },
+    {
+      "hebrew": "מְשַׂמֵּֽחַ בְּיָמָיו אֱלֹהִים וַאֲנָשִׁים.",
+      "transliteration": "Mesamme’aḥ beyamav Elohim va’anashim.",
+      "english": "Makes God and people happy in its days.",
+      "comments": "",
+      "timing": {
+        "start": 144.6,
+        "end": 158.07
+      }
+    },
+    {
+      "hebrew": "צִוָּה יוי לְזֶֽרַע יְשֻׁרוּן, עַם קְדֹשִׁים:",
+      "transliteration": "Tsivva Adonai lezera‘ Yeshurun, ‘am ḳedoshim:",
+      "english": "Adonai commanded the progeny of Jeshurun, the nation of holy people:",
+      "comments": "Jeshurun. The Israelites.",
+      "timing": {
+        "start": 158.07,
+        "end": 164.07
+      }
+    },
+    {
+      "hebrew": "קהל: הַחֹֽדֶשׁ הַזֶּה לָכֶם רֹאשׁ חֳדָשִׁים.     (שמות יב:ב)",
+      "transliteration": "Ḳahal: Haḥodesh hazzē lakhem rosh ḥodashim.",
+      "english": "Cong. This month shall be for you the first of months.   (Exod. 12:2)",
+      "comments": "",
+      "timing": {
+        "start": 164.07,
+        "end": 171.53
+      }
+    },
+    {
+      "hebrew": "אוֹצַר לוּדִים בְּצֵאת יִשְׂרָאֵל לִשְׁאוֹל מָלֹךְ,",
+      "transliteration": "Otsar ludim betset Yisra’el lish’ol malokh,",
+      "english": "When Israel left, they decided to ask for the riches of the Lydians;",
+      "comments": "Ludites. The Egyptians (literally “Lydians”).",
+      "timing": {
+        "start": 171.53,
+        "end": 185.6
+      }
+    },
+    {
+      "hebrew": "כֶּֽסֶף וְזָהָב וּבִגְדֵי רִקְמָה לָקַח – וַיֵּֽלֶךְ הָלֹךְ.",
+      "transliteration": "Kesef vezahav uviḡdē riḳma laḳaḥ – vayyelekh halokh.",
+      "english": "Silver and gold and embroidered garments they took and went on their way.",
+      "comments": "",
+      "timing": {
+        "start": 185.6,
+        "end": 199.5
+      }
+    },
+    {
+      "hebrew": "נָשָׂא אֶת־בְּצֵקוֹ בְּשִׂמְחָה לַהֲלֹךְ,",
+      "transliteration": "Nassa et betseḳo besimḥa lahalokh,",
+      "english": "They carried their dough gaily, as they walked,",
+      "comments": "",
+      "timing": {
+        "start": 199.5,
+        "end": 205.0
+      }
+    },
+    {
+      "hebrew": "קהל: כִּי מִבֵּית הַסּוּרִים יָצָא לִמְלֹךְ.     (קהלת ד:יד)",
+      "transliteration": "Ḳahal: Ki mibbet hassurim yatsa limlokh.",
+      "english": "Cong. For they were leaving prison to be kings! (Eccl. 4:14)",
+      "comments": "",
+      "timing": {
+        "start": 205.0,
+        "end": 211.27
+      }
+    },
+    {
+      "hebrew": "לֵיל בּוֹ נָסַע – בְּאֹתוֹ לֵיל כָּרַת יוי בְּרִיתָם;",
+      "transliteration": "Lel bo nasa‘ – be’oto lel karat Adaony beritam;",
+      "english": "On the night they traveled—that very same night—Adonai had made a covenant with them;",
+      "comments": "",
+      "timing": {
+        "start": 211.27,
+        "end": 228.0
+      }
+    },
+    {
+      "hebrew": "עוֹד הוּא קָבֽוּעַ וְשָׁמוּר לְחֵרוּתָם,",
+      "transliteration": "‘od hu ḳavu’a‘ veshamur leḥerutam,",
+      "english": "[The night] is still established and preserved for their freedom,",
+      "comments": "",
+      "timing": {
+        "start": 228.0,
+        "end": 237.67
+      }
+    },
+    {
+      "hebrew": "שִׁמֻּרִים לְכָל־בְּנֵי יִשְׂרָאֵל לְדֹרֹתָם –",
+      "transliteration": "Shimmurim lekhol benē Yisra’el ledorotam –",
+      "english": "Protection for the Israelites, for all their generations—",
+      "comments": "",
+      "timing": {
+        "start": 237.67,
+        "end": 245.47
+      }
+    },
+    {
+      "hebrew": "קהל: הָרֹפֵא לִשְׁבֽוּרֵי לֵב וּמְחַבֵּשׁ לְעַצְּבוֹתָם.",
+      "transliteration": "Ḳahal: Harofē lishvurē lev umḥabbesh le‘ats’tsevotam.",
+      "english": "Cong. [He] heals the brokenhearted, and bandages their sorrow. (Ps. 147:3)",
+      "comments": "",
+      "timing": {
+        "start": 245.47,
+        "end": 256.3
+      }
+    },
+    {
+      "hebrew": "חזן: כִּ֛י נַ֥עַר יִשְׂרָאֵ֖ל וָאֹֽהֲבֵ֑הוּ וּמִמִּצְרַ֖יִם קָרָ֥אתִי לִבְנִֽי: (הושע יא:א)",
+      "transliteration": "Ḥazzan: Ki na‘ar Yisra’el va’ohavehu umimMitsrayim ḳarati livni:",
+      "english": "Cantor. For Israel is a child, and I have loved him; and I called my son out of Egypt. (Hos. 11:1)",
+      "comments": ""
+    },
+    {
+      "hebrew": "כִּ֛י חֵ֥לֶק יו֖י עַמּ֑וֹ יַֽעֲקֹ֖ב חֶ֥בֶל נַֽחֲלָתֽוֹ: (דברים לב:ט)",
+      "transliteration": "Ki ḥeleḳ Adonai ‘ammo Ya‘aḳov ḥevel naḥalato:",
+      "english": "For Adonai is His people’s lot; Jacob is the portion of His inheritance. (Deut. 32:9)",
+      "comments": ""
+    },
+    {
+      "hebrew": "כִּֽי־יַֽעֲקֹ֗ב בָּחַ֣ר ל֣וֹ יָ֑הּ יִ֝שְׂרָאֵ֗ל לִסְגֻלָּתֽוֹ: (תהלים קלה:ד)",
+      "transliteration": "Ki Ya‘aḳov baḥar lo Yah Yisrae’el lisḡullato:",
+      "english": "For Yah has chosen Jacob, Israel for His treasured [people]. (Ps. 135:4)",
+      "comments": ""
+    },
+    {
+      "hebrew": "שְׁמַ֤ע אֵלַי֙ יַֽעֲקֹ֔ב וְיִשְׂרָאֵ֖ל מְקֹֽרָאִ֑י אֲנִי־הוּא֙ אֲנִ֣י רִאשׁ֔וֹן אַ֖ף אֲנִ֥י אַֽחֲרֽוֹן: (ישעיהו מח:יב)",
+      "transliteration": "Shema‘ elai Ya‘aḳov veYisra’el meḳora’i ani hu ani rishon af ani aḥaron:",
+      "english": "Hear me, Jacob, and Israel, who are called by Me: I am He, I am the first, and I am also the last. (Isa. 48:12)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד: (דברים ו:ד)",
+      "transliteration": "Ḳahal: Shema‘ Yisra’el Adonai Elohenu Adonai, eḥad:",
+      "english": "Cong. Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)",
+      "comments": "Adonai on His own. The translation follows Sefer Ha-mivḥar on Deuteronomy 6:4: “The meaning is that He is one and does not need any second one.”"
+    }
+  ],
+  "audio": "audio/15-bo-el-paro.mp3",
+  "author_en": "Aaron ben Joseph"
+}

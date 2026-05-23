@@ -1,0 +1,202 @@
+{
+  "id": "vehahochma",
+  "title_en": "Vehahochma",
+  "title_he": "",
+  "category": "Liturgy",
+  "source": "Vehahochma.xlsx",
+  "content": [
+    {
+      "hebrew": "וְֽ֭הַחׇכְמָה מֵאַ֣יִן תִּמָּצֵ֑א",
+      "transliteration": "Vehaḥochma me’ayin timmatsē,",
+      "english": "But wisdom, where shall it be found?"
+    },
+    {
+      "hebrew": "וְאֵ֥י זֶ֝֗ה מְק֣וֹם בִּינָֽה׃*",
+      "transliteration": "*ve’ē zē meḳom bina.",
+      "english": "And where is the place of understanding? (Job 28:12)"
+    },
+    {
+      "hebrew": "לֹא־יָדַ֣ע אֱנ֣וֹשׁ עֶרְכָּ֑הּ",
+      "transliteration": "Lo yada‘ enosh ‘erkah,",
+      "english": "Humanity knows not the price thereof;"
+    },
+    {
+      "hebrew": "וְלֹ֥א תִ֝מָּצֵ֗א בְּאֶ֣רֶץ הַחַיִּֽים׃*",
+      "transliteration": "*velo timmatsē be’erets haḥayyim.",
+      "english": "neither is it found in the land of the living. (Job 28:13)"
+    },
+    {
+      "hebrew": "תְּה֣וֹם אָ֭מַר לֹ֣א בִי־הִ֑יא",
+      "transliteration": "Tehom amar lo vi hi,",
+      "english": "The deep says: ‘It is not in me’;"
+    },
+    {
+      "hebrew": "וְיָ֥ם אָ֝מַ֗ר אֵ֣ין עִמָּדִֽי׃*",
+      "transliteration": "*veyam amar en ‘immadi.",
+      "english": "and the sea says: ‘It is not with me.’ (Job 28:14)"
+    },
+    {
+      "hebrew": "לֹֽא־יֻתַּ֣ן סְג֣וֹר תַּחְתֶּ֑יהָ",
+      "transliteration": "Lo yuttan seḡor taḥteha,",
+      "english": "It cannot be gotten for gold,"
+    },
+    {
+      "hebrew": "וְלֹ֥א יִ֝שָּׁקֵ֗ל כֶּ֣סֶף מְחִירָֽהּ׃*",
+      "transliteration": "*velo yish-shaḳel kesef meḥirah.",
+      "english": "neither shall silver be weighed for the price thereof. (Job 28:15)"
+    },
+    {
+      "hebrew": "לֹֽא־תְ֭סֻלֶּה בְּכֶ֣תֶם אוֹפִ֑יר",
+      "transliteration": "Lo tesullē bechetem ofir,",
+      "english": "It cannot be valued with the gold of Ophir,"
+    },
+    {
+      "hebrew": "בְּשֹׁ֖הַם יָקָ֣ר וְסַפִּֽיר׃*",
+      "transliteration": "*beshoham yaḳar vesappir.",
+      "english": "with the precious onyx, or the sapphire. (Job 28:16)"
+    },
+    {
+      "hebrew": "לֹא־יַעַרְכֶ֣נָּה זָ֭הָב וּזְכוֹכִ֑ית",
+      "transliteration": "Lo ya‘archenna zahav uzchochit,",
+      "english": "Gold and glass cannot equal it;"
+    },
+    {
+      "hebrew": "וּתְמ֖וּרָתָ֣הּ כְּלִי־פָֽז׃*",
+      "transliteration": "*utmuratah keli faz.",
+      "english": "either shall the exchange thereof be vessels of fine gold. (Job 28:17)"
+    },
+    {
+      "hebrew": "רָאמ֣וֹת וְ֭גָבִישׁ לֹ֣א יִזָּכֵ֑ר",
+      "transliteration": "Ramot veḡavish lo yizzacher,",
+      "english": "No mention shall be made of coral or of crystal;"
+    },
+    {
+      "hebrew": "וּמֶ֥שֶׁךְ חׇ֝כְמָ֗ה מִפְּנִינִֽים׃*",
+      "transliteration": "*umeshech ḥochma mippeninim.",
+      "english": "yea, the price of wisdom is above rubies. (Job 28:18)"
+    },
+    {
+      "hebrew": "לֹֽא־יַ֭עַרְכֶנָּה פִּטְדַת־כּ֑וּשׁ",
+      "transliteration": "Lo ya‘archenna pitdat kush,",
+      "english": "The topaz of Ethiopia shall not equal it,"
+    },
+    {
+      "hebrew": "בְּכֶ֥תֶם טָ֝ה֗וֹר לֹ֣א תְסֻלֶּֽה׃*",
+      "transliteration": "*bechetem tahor lo tesullē.",
+      "english": "either shall it be valued with pure gold. (Job 28:19)"
+    },
+    {
+      "hebrew": "וְֽ֭הַחׇכְמָה מֵאַ֣יִן תָּב֑וֹא",
+      "transliteration": "Vehaḥochma me’ayin tavo,",
+      "english": "From where, then does wisdom come?"
+    },
+    {
+      "hebrew": "וְאֵ֥י זֶ֝֗ה מְק֣וֹם בִּינָֽה׃*",
+      "transliteration": "*ve’ē ze meḳom bina.",
+      "english": "And where is the place of understanding? (Job 28:20)"
+    },
+    {
+      "hebrew": "וְֽ֭נֶעֶלְמָה מֵעֵינֵ֣י כׇל־חָ֑י",
+      "transliteration": "Vene‘elma me‘ēnē chol ḥai,",
+      "english": "Seeing that is hid from the eyes of all living,"
+    },
+    {
+      "hebrew": "וּמֵע֖וֹף הַשָּׁמַ֣יִם נִסְתָּֽרָה׃*",
+      "transliteration": "*ume‘of hash-shamayim nistara.",
+      "english": "and kept close from the birds of the air. (Job 28:21)"
+    },
+    {
+      "hebrew": "אֲבַדּ֣וֹן וָ֭מָוֶת אָ֣מְר֑וּ",
+      "transliteration": "Avaddon vamavet ameru,",
+      "english": "Destruction and Death say:"
+    },
+    {
+      "hebrew": "בְּ֝אׇזְנֵ֗ינוּ שָׁמַ֥עְנוּ שִׁמְעָֽהּ׃*",
+      "transliteration": "*be’oznenu shama‘nu shim‘ah.",
+      "english": "‘We have heard a rumor thereof with our ears.’ (Job 28:22)"
+    },
+    {
+      "hebrew": "אֱ֭לֹהִים הֵבִ֣ין דַּרְכָּ֑הּ",
+      "transliteration": "Elohim hevin darkah,",
+      "english": "God understands the its way,"
+    },
+    {
+      "hebrew": "וְ֝ה֗וּא יָדַ֥ע אֶת־מְקוֹמָֽהּ׃*",
+      "transliteration": "*vehu yada‘ et meḳomah.",
+      "english": "and He knows its the place. (Job 28:23)"
+    },
+    {
+      "hebrew": "כִּי־ה֭וּא לִקְצוֹת־הָאָ֣רֶץ יַבִּ֑יט",
+      "transliteration": "Ki hu liḳtsot ha’arets yabbit,",
+      "english": "For He looks to the ends of the earth,"
+    },
+    {
+      "hebrew": "תַּ֖חַת כׇּל־הַשָּׁמַ֣יִם יִרְאֶֽה׃*",
+      "transliteration": "*taḥat kol hash-shamayim yir’ē.",
+      "english": "and sees under the whole heaven; (Job 28:24)"
+    },
+    {
+      "hebrew": "לַעֲשׂ֣וֹת לָר֣וּחַ מִשְׁקָ֑ל",
+      "transliteration": "La‘asot laruwaḥ mishḳal,",
+      "english": "When He makes a weight for the wind,"
+    },
+    {
+      "hebrew": "וּ֝מַ֗יִם תִּכֵּ֥ן בְּמִדָּֽה׃*",
+      "transliteration": "*umayim tikken bemidda.",
+      "english": "and metes out the waters by measure. (Job 28:25)"
+    },
+    {
+      "hebrew": "בַּעֲשֹׂת֣וֹ לַמָּטָ֣ר חֹ֑ק",
+      "transliteration": "Ba‘asoto lammatar ḥoḳ,",
+      "english": "When He made a decree for the rain,"
+    },
+    {
+      "hebrew": "וְ֝דֶ֗רֶךְ לַחֲזִ֥יז קֹלֽוֹת׃*",
+      "transliteration": "*vederech laḥaziz ḳolot.",
+      "english": "and a way for the storm of thunders; (Job 28:26)"
+    },
+    {
+      "hebrew": "אָ֣ז רָ֭אָהּ וַֽיְסַפְּרָ֑הּ",
+      "transliteration": "Az ra’ah vaysapperah,",
+      "english": "Then did He see it, and declare it;"
+    },
+    {
+      "hebrew": "הֱ֝כִינָ֗הּ וְגַם־חֲקָרָֽהּ׃*",
+      "transliteration": "*hechinah veḡam ḥaḳarah.",
+      "english": "He established it, yea, and searched it out. (Job 28:27)"
+    },
+    {
+      "hebrew": "וַיֹּ֤אמֶר ׀ לָאָדָ֗ם הֵ֤ן יִרְאַ֣ת אֲ֭דֹנָי הִ֣יא חׇכְמָ֑ה",
+      "transliteration": "Vayyomer la’adam, hen yir’at adonai hi ḥochma,",
+      "english": "And unto humanity He said: ‘Behold, the fear of the Lord, that is wisdom;"
+    },
+    {
+      "hebrew": "וְס֖וּר מֵרָ֣ע בִּינָֽה׃*",
+      "transliteration": "*vesor mera‘ bina.",
+      "english": "and to depart from evil is understanding.’ (Job 28:28)"
+    },
+    {
+      "hebrew": "רֵ֘אשִׁ֤ית חׇכְמָ֨ה ׀ יִרְאַ֬ת יְהֹוָ֗ה שֵׂ֣כֶל ט֭וֹב לְכׇל־עֹֽשֵׂיהֶ֑ם",
+      "transliteration": "Reshit ḥochma yir’at adonai, sechel tov lechol ‘osehem,",
+      "english": "The fear of Adonai is the beginning of wisdom; all those that do them have a good understanding;"
+    },
+    {
+      "hebrew": "תְּ֝הִלָּת֗וֹ עֹמֶ֥דֶת לָעַֽד׃*",
+      "transliteration": "*tehillato ‘omedet la‘ad.",
+      "english": "His praise endures for ever. (Psalms 111:10)"
+    }
+  ],
+  "subcategory": "General",
+  "introduction": "Introduction\n\nName: והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē\n\nIntroduction:\n\nThis text is taken from Job 28:12–28, followed by Psalms 111:10. The Job passage is a hymn in praise of Wisdom; because Jewish tradition understands “Wisdom” throughout Job and Proverbs to refer to the Torah, this means that the Job passage is understood as a hymn in praise of the Torah. Thus, it is appropriate to read on Shabbat Bereshit, before we start to read of the whole Torah from the beginning, as well as on the weeks when we read the Ten Commandments, which were the occasion par excellence of divine revelation of Torah. The one line from Psalms, recited after the Job passage, also speaks of wisdom, and thus is an appropriate conclusion to the passage.\n\nName: והחכמה מאין תמצא, Vehaḥochma Me’ayin Timmatsē\n\nCategory: Liturgy\n\nSub-Category: Biblical verses\n\nGenre: Introduction to Torah-reading\n\nOccasion: Shabbat Bereshit, Shabbat Yitro, Shabbat Va’etḥannan\n\nComposer: N/A (Biblical Verses)\n\nLiturgical Slot: Before the beginning of the parasha (Shabbat Bereshit); in the middle of the parasha, before the reading of the Ten Commandments (Shabbat Yitro, Shabbat Va’etḥannan)\n\nSource: Vilna Siddur, Volume 1, page 407\n\nCantorial Notes: The individual reciting this passage traditionally reads the opening part of each sentence, and the congregation responds with the closing portions. The congregation’s response begins with each asterisk.",
+  "audio": "audio/vehahochma-original.mp3",
+  "audioTracks": [
+    {
+      "url": "audio/vehahochma-original.mp3",
+      "label": "Original"
+    },
+    {
+      "url": "audio/vehahochma-violin-and-piano.mp3",
+      "label": "Violin & Piano"
+    }
+  ]
+}

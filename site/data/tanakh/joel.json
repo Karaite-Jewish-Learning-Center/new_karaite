@@ -1,0 +1,393 @@
+{
+  "id": "joel",
+  "title_en": "Joel",
+  "title_he": "יואל",
+  "section": "Prophets",
+  "chapters": [
+    {
+      "chapter": 1,
+      "verses": [
+        {
+          "verse": 1,
+          "hebrew": "דְּבַר־יְהוָה אֲשֶׁר הָיָה אֶל־יוֹאֵל בֶּן־פְּתוּאֵל׃",
+          "english": "The word of the Lord that came to Yo᾽el the son of Petu᾽el."
+        },
+        {
+          "verse": 2,
+          "hebrew": "שִׁמְעוּ־זֹאת הַזְּקֵנִים וְהַאֲזִינוּ כֹּל יוֹשְׁבֵי הָאָרֶץ הֶהָיְתָה זֹּאת בִּימֵיכֶם וְאִם בִּימֵי אֲבֹתֵיכֶם׃",
+          "english": "Hear this, you old men, and give ear, all you inhabitants of the land. Has such a thing been in your days, or even in the days of your fathers?"
+        },
+        {
+          "verse": 3,
+          "hebrew": "עָלֶיהָ לִבְנֵיכֶם סַפֵּרוּ וּבְנֵיכֶם לִבְנֵיהֶם וּבְנֵיהֶם לְדוֹר אַחֵר׃",
+          "english": "Tell your children of it, and let your children tell their children, and their children another generation."
+        },
+        {
+          "verse": 4,
+          "hebrew": "יֶתֶר הַגָּזָם אָכַל הָאַרְבֶּה וְיֶתֶר הָאַרְבֶּה אָכַל הַיָּלֶק וְיֶתֶר הַיֶּלֶק אָכַל הֶחָסִיל׃",
+          "english": "That which the cutting locust has left, the swarming locust has eaten; and that which the swarming locust has left, the hopping locust has eaten; and that which the hopping locust has left, the destroying locust has eaten."
+        },
+        {
+          "verse": 5,
+          "hebrew": "הָקִיצוּ שִׁכּוֹרִים וּבְכוּ וְהֵילִלוּ כָּל־שֹׁתֵי יָיִן עַל־עָסִיס כִּי נִכְרַת מִפִּיכֶם׃",
+          "english": "Awake, drunkards, and weep; and howl, all you drinkers of wine, because of the sweet wine; for it is cut off from your mouth."
+        },
+        {
+          "verse": 6,
+          "hebrew": "כִּי־גוֹי עָלָה עַל־אַרְצִי עָצוּם וְאֵין מִסְפָּר שִׁנָּיו שִׁנֵּי אַרְיֵה וּמְתַלְּעוֹת לָבִיא לוֹ׃",
+          "english": "For a nation is come up upon my land, mighty, and without number, whose teeth are the teeth of a lion, and he has the fangs of a lioness."
+        },
+        {
+          "verse": 7,
+          "hebrew": "שָׂם גַּפְנִי לְשַׁמָּה וּתְאֵנָתִי לִקְצָפָה חָשֹׂף חֲשָׂפָהּ וְהִשְׁלִיךְ הִלְבִּינוּ שָׂרִיגֶיהָ׃",
+          "english": "He has laid my vine waste, and splintered my fig tree: he has made it clean bare, and cast it down; its branches are made white."
+        },
+        {
+          "verse": 8,
+          "hebrew": "אֱלִי כִּבְתוּלָה חֲגֻרַת־שַׂק עַל־בַּעַל נְעוּרֶיהָ׃",
+          "english": "Lament like a virgin girded with sackcloth for the husband of her youth."
+        },
+        {
+          "verse": 9,
+          "hebrew": "הָכְרַת מִנְחָה וָנֶסֶךְ מִבֵּית יְהוָה אָבְלוּ הַכֹּהֲנִים מְשָׁרְתֵי יְהוָה׃",
+          "english": "The meal offering and the drink offering is cut off from the house of the Lord; the priests, the Lord’s ministers, mourn."
+        },
+        {
+          "verse": 10,
+          "hebrew": "שֻׁדַּד שָׂדֶה אָבְלָה אֲדָמָה כִּי שֻׁדַּד דָּגָן הוֹבִישׁ תִּירוֹשׁ אֻמְלַל יִצְהָר׃",
+          "english": "The field is wasted, the land mourns; for the corn is wasted: the new wine is dried up, the oil languishes."
+        },
+        {
+          "verse": 11,
+          "hebrew": "הֹבִישׁוּ אִכָּרִים הֵילִילוּ כֹּרְמִים עַל־חִטָּה וְעַל־שְׂעֹרָה כִּי אָבַד קְצִיר שָׂדֶה׃",
+          "english": "Be ashamed, O you farmers; wail, O you vinedressers, for the wheat and for the barley; because the harvest of the field is perished."
+        },
+        {
+          "verse": 12,
+          "hebrew": "הַגֶּפֶן הוֹבִישָׁה וְהַתְּאֵנָה אֻמְלָלָה רִמּוֹן גַּם־תָּמָר וְתַפּוּחַ כָּל־עֲצֵי הַשָּׂדֶה יָבֵשׁוּ כִּי־הֹבִישׁ שָׂשׂוֹן מִן־בְּנֵי אָדָם׃",
+          "english": "The vine is dried up, and the fig tree languishes; the pomegranate tree, the palm tree also, and the apple tree, all the trees of the field, are withered because joy is withered away from the sons of men."
+        },
+        {
+          "verse": 13,
+          "hebrew": "חִגְרוּ וְסִפְדוּ הַכֹּהֲנִים הֵילִילוּ מְשָׁרְתֵי מִזְבֵּחַ בֹּאוּ לִינוּ בַשַּׂקִּים מְשָׁרְתֵי אֱלֹהָי כִּי נִמְנַע מִבֵּית אֱלֹהֵיכֶם מִנְחָה וָנָסֶךְ׃",
+          "english": "Gird yourselves, and lament, you priests: wail, you ministers of the altar: come, lie all night in sackcloth, you ministers of my God: for the meal offering and the drink offering is withheld from the house of your God."
+        },
+        {
+          "verse": 14,
+          "hebrew": "קַדְּשׁוּ־צוֹם קִרְאוּ עֲצָרָה אִסְפוּ זְקֵנִים כֹּל יֹשְׁבֵי הָאָרֶץ בֵּית יְהוָה אֱלֹהֵיכֶם וְזַעֲקוּ אֶל־יְהוָה׃",
+          "english": "Sanctify a fast, call a solemn assembly, gather the elders and all the inhabitants of the land into the house of the Lord your God, and cry to the Lord."
+        },
+        {
+          "verse": 15,
+          "hebrew": "אֲהָהּ לַיּוֹם כִּי קָרוֹב יוֹם יְהוָה וּכְשֹׁד מִשַׁדַּי יָבוֹא׃",
+          "english": "Alas for the day! for the day of the Lord is at hand, and as a destruction from the Almighty shall it come."
+        },
+        {
+          "verse": 16,
+          "hebrew": "הֲלוֹא נֶגֶד עֵינֵינוּ אֹכֶל נִכְרָת מִבֵּית אֱלֹהֵינוּ שִׂמְחָה וָגִיל׃",
+          "english": "Is not the food cut off before our eyes, joy and gladness from the house of our God?"
+        },
+        {
+          "verse": 17,
+          "hebrew": "עָבְשׁוּ פְרֻדוֹת תַּחַת מֶגְרְפֹתֵיהֶם נָשַׁמּוּ אֹצָרוֹת נֶהֶרְסוּ מַמְּגֻרוֹת כִּי הֹבִישׁ דָּגָן׃",
+          "english": "The seed shrivels under their clods, the garners are laid desolate, the barns are broken down; for the corn is withered."
+        },
+        {
+          "verse": 18,
+          "hebrew": "מַה־נֶּאֶנְחָה בְהֵמָה נָבֹכוּ עֶדְרֵי בָקָר כִּי אֵין מִרְעֶה לָהֶם גַּם־עֶדְרֵי הַצֹּאן נֶאְשָׁמוּ׃",
+          "english": "How do the beasts groan! the herds of cattle are perplexed, because they have no pasture; yea, the flocks of sheep are made desolate."
+        },
+        {
+          "verse": 19,
+          "hebrew": "אֵלֶיךָ יְהוָה אֶקְרָא כִּי אֵשׁ אָכְלָה נְאוֹת מִדְבָּר וְלֶהָבָה לִהֲטָה כָּל־עֲצֵי הַשָּׂדֶה׃",
+          "english": "O Lord, to thee do I cry: for the fire has devoured the pastures of the wilderness, and the flame has burned all the trees of the field."
+        },
+        {
+          "verse": 20,
+          "hebrew": "גַּם־בַּהֲמוֹת שָׂדֶה תַּעֲרוֹג אֵלֶיךָ כִּי יָבְשׁוּ אֲפִיקֵי מָיִם וְאֵשׁ אָכְלָה נְאוֹת הַמִּדְבָּר׃",
+          "english": "Even beasts of the field cry to Thee: for the water courses are dried up, and the fire has devoured the pastures of the wilderness."
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "verses": [
+        {
+          "verse": 1,
+          "hebrew": "תִּקְעוּ שׁוֹפָר בְּצִיּוֹן וְהָרִיעוּ בְּהַר קָדְשִׁי יִרְגְּזוּ כֹּל יֹשְׁבֵי הָאָרֶץ כִּי־בָא יוֹם־יְהוָה כִּי קָרוֹב׃",
+          "english": "Blow the shofar in Żiyyon, and sound an alarm in my holy mountain: let all the inhabitants of the land tremble: for the day of the Lord comes, for it is near at hand;"
+        },
+        {
+          "verse": 2,
+          "hebrew": "יוֹם חֹשֶׁךְ וַאֲפֵלָה יוֹם עָנָן וַעֲרָפֶל כְּשַׁחַר פָּרֻשׂ עַל־הֶהָרִים עַם רַב וְעָצוּם כָּמֹהוּ לֹא נִהְיָה מִן־הָעוֹלָם וְאַחֲרָיו לֹא יוֹסֵף עַד־שְׁנֵי דּוֹר וָדוֹר׃",
+          "english": "a day of darkness and of gloom, a day of clouds and of thick darkness. Like twilight spread over the mountains, a great people and a mighty; there has not been ever the like, nor shall there be any more such after them, to the years of many generations."
+        },
+        {
+          "verse": 3,
+          "hebrew": "לְפָנָיו אָכְלָה אֵשׁ וְאַחֲרָיו תְּלַהֵט לֶהָבָה כְּגַן־עֵדֶן הָאָרֶץ לְפָנָיו וְאַחֲרָיו מִדְבַּר שְׁמָמָה וְגַם־פְּלֵיטָה לֹא־הָיְתָה לּוֹ׃",
+          "english": "A fire devours before them; and behind them blazes a flame: the land is like the garden of ῾Eden before them, and behind them a desolate wilderness; and nothing escapes them."
+        },
+        {
+          "verse": 4,
+          "hebrew": "כְּמַרְאֵה סוּסִים מַרְאֵהוּ וּכְפָרָשִׁים כֵּן יְרוּצוּן׃",
+          "english": "The appearance of them is like the appearance of horses; and as horsemen, so do they run."
+        },
+        {
+          "verse": 5,
+          "hebrew": "כְּקוֹל מַרְכָּבוֹת עַל־רָאשֵׁי הֶהָרִים יְרַקֵּדוּן כְּקוֹל לַהַב אֵשׁ אֹכְלָה קָשׁ כְּעַם עָצוּם עֱרוּךְ מִלְחָמָה׃",
+          "english": "Like the noise of chariots on the tops of mountains they leap; like the noise of a flame of fire that devours the stubble, like a strong people set in battle array."
+        },
+        {
+          "verse": 6,
+          "hebrew": "מִפָּנָיו יָחִילוּ עַמִּים כָּל־פָּנִים קִבְּצוּ פָארוּר׃",
+          "english": "At their presence the peoples are in anguish: all faces are covered with blackness."
+        },
+        {
+          "verse": 7,
+          "hebrew": "כְּגִבּוֹרִים יְרֻצוּן כְּאַנְשֵׁי מִלְחָמָה יַעֲלוּ חוֹמָה וְאִישׁ בִּדְרָכָיו יֵלֵכוּן וְלֹא יְעַבְּטוּן אֹרְחוֹתָם׃",
+          "english": "They run like mighty men; they climb the wall like men of war; and they march everyone on his ways; and they do not break their ranks:"
+        },
+        {
+          "verse": 8,
+          "hebrew": "וְאִישׁ אָחִיו לֹא יִדְחָקוּן גֶּבֶר בִּמְסִלָּתוֹ יֵלֵכוּן וּבְעַד הַשֶּׁלַח יִפֹּלוּ לֹא יִבְצָעוּ׃",
+          "english": "nor does one thrust another; they walk everyone in his path: and they burst through the weapons; they are not wounded."
+        },
+        {
+          "verse": 9,
+          "hebrew": "בָּעִיר יָשֹׁקּוּ בַּחוֹמָה יְרֻצוּן בַּבָּתִּים יַעֲלוּ בְּעַד הַחַלּוֹנִים יָבֹאוּ כַּגַּנָּב׃",
+          "english": "They run to and fro in the city; they run upon the wall, they climb up into the houses; they enter in at the windows like a thief."
+        },
+        {
+          "verse": 10,
+          "hebrew": "לְפָנָיו רָגְזָה אֶרֶץ רָעֲשׁוּ שָׁמָיִם שֶׁמֶשׁ וְיָרֵחַ קָדָרוּ וְכוֹכָבִים אָסְפוּ נָגְהָם׃",
+          "english": "The earth quakes before them; the heavens tremble: the sun and the moon are darkened, and the stars withdraw their shining:"
+        },
+        {
+          "verse": 11,
+          "hebrew": "וַיהוָה נָתַן קוֹלוֹ לִפְנֵי חֵילוֹ כִּי רַב מְאֹד מַחֲנֵהוּ כִּי עָצוּם עֹשֵׂה דְבָרוֹ כִּי־גָדוֹל יוֹם־יְהוָה וְנוֹרָא מְאֹד וּמִי יְכִילֶנּוּ׃",
+          "english": "and the Lord utters his voice before his army: for his camp is very great: for he who executes his word is strong: for the day of the Lord is great and very terrible; and who can abide it?"
+        },
+        {
+          "verse": 12,
+          "hebrew": "וְגַם־עַתָּה נְאֻם־יְהוָה שֻׁבוּ עָדַי בְּכָל־לְבַבְכֶם וּבְצוֹם וּבְבְכִי וּבְמִסְפֵּד׃",
+          "english": "Yet even now, says the Lord, turn to me with all your heart, and with fasting, and with weeping, and with mourning:"
+        },
+        {
+          "verse": 13,
+          "hebrew": "וְקִרְעוּ לְבַבְכֶם וְאַל־בִּגְדֵיכֶם וְשׁוּבוּ אֶל־יְהוָה אֱלֹהֵיכֶם כִּי־חַנּוּן וְרַחוּם הוּא אֶרֶךְ אַפַּיִם וְרַב־חֶסֶד וְנִחָם עַל־הָרָעָה׃",
+          "english": "and rend your hearts, and not your garments, and turn to the Lord your God: for he is gracious and merciful, slow to anger, and great in love, and repents of evil."
+        },
+        {
+          "verse": 14,
+          "hebrew": "מִי יוֹדֵעַ יָשׁוּב וְנִחָם וְהִשְׁאִיר אַחֲרָיו בְּרָכָה מִנְחָה וָנֶסֶךְ לַיהוָה אֱלֹהֵיכֶם׃",
+          "english": "Who knows whether he will not turn and relent, and leave a blessing behind him; a meal offering and a drink offering for the Lord your God?"
+        },
+        {
+          "verse": 15,
+          "hebrew": "תִּקְעוּ שׁוֹפָר בְּצִיּוֹן קַדְּשׁוּ־צוֹם קִרְאוּ עֲצָרָה׃",
+          "english": "Blow the shofar in Żiyyon, sanctify a fast, call a solemn assembly:"
+        },
+        {
+          "verse": 16,
+          "hebrew": "אִסְפוּ־עָם קַדְּשׁוּ קָהָל קִבְצוּ זְקֵנִים אִסְפוּ עוֹלָלִים וְיֹנְקֵי שָׁדָיִם יֵצֵא חָתָן מֵחֶדְרוֹ וְכַלָּה מֵחֻפָּתָהּ׃",
+          "english": "gather the people, sanctify the congregation, assemble the elders, gather the children, and those who suck the breasts: let the bridegroom go forth from his chamber, and the bride out of her pavilion."
+        },
+        {
+          "verse": 17,
+          "hebrew": "בֵּין הָאוּלָם וְלַמִּזְבֵּחַ יִבְכּוּ הַכֹּהֲנִים מְשָׁרְתֵי יְהוָה וְיֹאמְרוּ חוּסָה יְהוָה עַל־עַמֶּךָ וְאַל־תִּתֵּן נַחֲלָתְךָ לְחֶרְפָּה לִמְשָׁל־בָּם גּוֹיִם לָמָּה יֹאמְרוּ בָעַמִּים אַיֵּה אֱלֹהֵיהֶם׃",
+          "english": "Let the priests, the ministers of the Lord, weep between the porch and the altar, and let them say, Spare thy people, O Lord, and give not Thy heritage to reproach, that the nations should rule over them: why should they say among the peoples, Where is their God?"
+        },
+        {
+          "verse": 18,
+          "hebrew": "וַיְקַנֵּא יְהוָה לְאַרְצוֹ וַיַּחְמֹל עַל־עַמּוֹ׃",
+          "english": "Then the Lord was zealous for his land, and pitied his people."
+        },
+        {
+          "verse": 19,
+          "hebrew": "וַיַּעַן יְהוָה וַיֹּאמֶר לְעַמּוֹ הִנְנִי שֹׁלֵחַ לָכֶם אֶת־הַדָּגָן וְהַתִּירוֹשׁ וְהַיִּצְהָר וּשְׂבַעְתֶּם אֹתוֹ וְלֹא־אֶתֵּן אֶתְכֶם עוֹד חֶרְפָּה בַּגּוֹיִם׃",
+          "english": "And the Lord answered and said to his people, Behold, I will send you corn, and wine, and oil, and you shall be satisfied therewith: and I will no more make you a reproach among the nations:"
+        },
+        {
+          "verse": 20,
+          "hebrew": "וְאֶת־הַצְּפוֹנִי אַרְחִיק מֵעֲלֵיכֶם וְהִדַּחְתִּיו אֶל־אֶרֶץ צִיָּה וּשְׁמָמָה אֶת־פָּנָיו אֶל־הַיָּם הַקַּדְמֹנִי וְסֹפוֹ אֶל־הַיָּם הָאַחֲרוֹן וְעָלָה בָאְשׁוֹ וְתַעַל צַחֲנָתוֹ כִּי הִגְדִּיל לַעֲשׂוֹת׃",
+          "english": "but I will remove far off from you the northern one, and will drive him into a barren and desolate land, with his face towards the eastern sea, and his hinder part toward the western sea, and his foulness shall come up, and his ill savour shall ascend, though he has done great things."
+        },
+        {
+          "verse": 21,
+          "hebrew": "אַל־תִּירְאִי אֲדָמָה גִּילִי וּשְׂמָחִי כִּי־הִגְדִּיל יְהוָה לַעֲשׂוֹת׃",
+          "english": "Fear not, O land; be glad and rejoice: for the Lord will do greater things."
+        },
+        {
+          "verse": 22,
+          "hebrew": "אַל־תִּירְאוּ בַּהֲמוֹת שָׂדַי כִּי דָשְׁאוּ נְאוֹת מִדְבָּר כִּי־עֵץ נָשָׂא פִרְיוֹ תְּאֵנָה וָגֶפֶן נָתְנוּ חֵילָם׃",
+          "english": "Be not afraid, O beasts of the field: for the pastures of the wilderness shall spring, for the tree bears its fruit, the fig tree and the vine do yield their strength."
+        },
+        {
+          "verse": 23,
+          "hebrew": "וּבְנֵי צִיּוֹן גִּילוּ וְשִׂמְחוּ בַּיהוָה אֱלֹהֵיכֶם כִּי־נָתַן לָכֶם אֶת־הַמּוֹרֶה לִצְדָקָה וַיּוֹרֶד לָכֶם גֶּשֶׁם מוֹרֶה וּמַלְקוֹשׁ בָּרִאשׁוֹן׃",
+          "english": "Be glad then, you children of Żiyyon, and rejoice in the Lord your God: for he has given you the former rain in due measure, and he has brought down for you the rain in the first month, the former rain, and the latter rain."
+        },
+        {
+          "verse": 24,
+          "hebrew": "וּמָלְאוּ הַגֳּרָנוֹת בָּר וְהֵשִׁיקוּ הַיְקָבִים תִּירוֹשׁ וְיִצְהָר׃",
+          "english": "And the floors shall be full of wheat, and the vats shall overflow with wine and oil."
+        },
+        {
+          "verse": 25,
+          "hebrew": "וְשִׁלַּמְתִּי לָכֶם אֶת־הַשָּׁנִים אֲשֶׁר אָכַל הָאַרְבֶּה הַיֶּלֶק וְהֶחָסִיל וְהַגָּזָם חֵילִי הַגָּדוֹל אֲשֶׁר שִׁלַּחְתִּי בָּכֶם׃",
+          "english": "And I will restore to you the years that the locust has eaten, the hopping locust, and the destroying locust, and the cutting locust, my great army which I sent among you."
+        },
+        {
+          "verse": 26,
+          "hebrew": "וַאֲכַלְתֶּם אָכוֹל וְשָׂבוֹעַ וְהִלַּלְתֶּם אֶת־שֵׁם יְהוָה אֱלֹהֵיכֶם אֲשֶׁר־עָשָׂה עִמָּכֶם לְהַפְלִיא וְלֹא־יֵבֹשׁוּ עַמִּי לְעוֹלָם׃",
+          "english": "And you shall eat in plenty, and be satisfied, and praise the name of the Lord your God, who has dealt wondrously with you: and my people shall never be ashamed."
+        },
+        {
+          "verse": 27,
+          "hebrew": "וִידַעְתֶּם כִּי בְקֶרֶב יִשְׂרָאֵל אָנִי וַאֲנִי יְהוָה אֱלֹהֵיכֶם וְאֵין עוֹד וְלֹא־יֵבֹשׁוּ עַמִּי לְעוֹלָם׃",
+          "english": "And you shall know that I am in the midst of Yisra᾽el, and that I am the Lord your God, and there it is none else: and my people shall never be ashamed."
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "verses": [
+        {
+          "verse": 1,
+          "hebrew": "וְהָיָה אַחֲרֵי־כֵן אֶשְׁפּוֹךְ אֶת־רוּחִי עַל־כָּל־בָּשָׂר וְנִבְּאוּ בְּנֵיכֶם וּבְנוֹתֵיכֶם זִקְנֵיכֶם חֲלֹמוֹת יַחֲלֹמוּן בַּחוּרֵיכֶם חֶזְיֹנוֹת יִרְאוּ׃",
+          "english": "And it shall come to pass afterwards, that I will pour out my spirit upon all flesh; and your sons and your daughters shall prophesy; your old men shall dream dreams, your young men shall see visions:"
+        },
+        {
+          "verse": 2,
+          "hebrew": "וְגַם עַל־הָעֲבָדִים וְעַל־הַשְּׁפָחוֹת בַּיָּמִים הָהֵמָּה אֶשְׁפּוֹךְ אֶת־רוּחִי׃",
+          "english": "and also upon the servants and upon the handmaids in those days will I pour out my spirit."
+        },
+        {
+          "verse": 3,
+          "hebrew": "וְנָתַתִּי מוֹפְתִים בַּשָּׁמַיִם וּבָאָרֶץ דָּם וָאֵשׁ וְתִימֲרוֹת עָשָׁן׃",
+          "english": "And I will exhibit wonders in the heavens and on the earth, blood, and fire, and pillars of smoke."
+        },
+        {
+          "verse": 4,
+          "hebrew": "הַשֶּׁמֶשׁ יֵהָפֵךְ לְחֹשֶׁךְ וְהַיָּרֵחַ לְדָם לִפְנֵי בּוֹא יוֹם יְהוָה הַגָּדוֹל וְהַנּוֹרָא׃",
+          "english": "The sun shall be turned into darkness, and the moon into blood, before the coming of the great and the terrible day of the Lord."
+        },
+        {
+          "verse": 5,
+          "hebrew": "וְהָיָה כֹּל אֲשֶׁר־יִקְרָא בְּשֵׁם יְהוָה יִמָּלֵט כִּי בְּהַר־צִיּוֹן וּבִירוּשָׁלִַם תִּהְיֶה פְלֵיטָה כַּאֲשֶׁר אָמַר יְהוָה וּבַשְּׂרִידִים אֲשֶׁר יְהוָה קֹרֵא׃",
+          "english": "And it shall come to pass, that whoever shall call on the name of the Lord shall be delivered: for in mount Żiyyon and in Yerushalayim there shall be those that escape, as the Lord has said, and among the remnant those whom the Lord shall call."
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "verses": [
+        {
+          "verse": 1,
+          "hebrew": "כִּי הִנֵּה בַּיָּמִים הָהֵמָּה וּבָעֵת הַהִיא אֲשֶׁר אשוב [אָשִׁיב] אֶת־שְׁבוּת יְהוּדָה וִירוּשָׁלִָם׃",
+          "english": "For, behold, in those days, and in that time, when I shall bring back the captivity of Yehuda and Yerushalayim,"
+        },
+        {
+          "verse": 2,
+          "hebrew": "וְקִבַּצְתִּי אֶת־כָּל־הַגּוֹיִם וְהוֹרַדְתִּים אֶל־עֵמֶק יְהוֹשָׁפָט וְנִשְׁפַּטְתִּי עִמָּם שָׁם עַל־עַמִּי וְנַחֲלָתִי יִשְׂרָאֵל אֲשֶׁר פִּזְּרוּ בַגּוֹיִם וְאֶת־אַרְצִי חִלֵּקוּ׃",
+          "english": "I will also gather all nations, and will bring them down into the valley of Yehoshafat, and will enter into judgment with them there for my people and for my heritage Yisra᾽el, whom they have scattered among the nations, and have divided up my land."
+        },
+        {
+          "verse": 3,
+          "hebrew": "וְאֶל־עַמִּי יַדּוּ גוֹרָל וַיִּתְּנוּ הַיֶּלֶד בַּזּוֹנָה וְהַיַּלְדָּה מָכְרוּ בַיַּיִן וַיִּשְׁתּוּ׃",
+          "english": "And they have cast lots for my people; and have given a boy for a harlot, and sold a girl for wine, that they might drink."
+        },
+        {
+          "verse": 4,
+          "hebrew": "וְגַם מָה־אַתֶּם לִי צֹר וְצִידוֹן וְכֹל גְּלִילוֹת פְּלָשֶׁת הַגְּמוּל אַתֶּם מְשַׁלְּמִים עָלָי וְאִם־גֹּמְלִים אַתֶּם עָלַי קַל מְהֵרָה אָשִׁיב גְּמֻלְכֶם בְּרֹאשְׁכֶם׃",
+          "english": "Moreover, what are you to me, O Żor and Żidon, and all the provinces of Peleshet? will you render retribution on my behalf? and if you render retribution on my behalf, swiftly and speedily will I return your retribution upon your own head."
+        },
+        {
+          "verse": 5,
+          "hebrew": "אֲשֶׁר־כַּסְפִּי וּזְהָבִי לְקַחְתֶּם וּמַחֲמַדַּי הַטֹּבִים הֲבֵאתֶם לְהֵיכְלֵיכֶם׃",
+          "english": "Because you have taken my silver and my gold, and have carried into your temples my goodly treasures:"
+        },
+        {
+          "verse": 6,
+          "hebrew": "וּבְנֵי יְהוּדָה וּבְנֵי יְרוּשָׁלִַם מְכַרְתֶּם לִבְנֵי הַיְּוָנִים לְמַעַן הַרְחִיקָם מֵעַל גְּבוּלָם׃",
+          "english": "the children also of Yehuda and the children of Yerushalayim have you sold to the children of the Yevanim that you might remove them far from their border."
+        },
+        {
+          "verse": 7,
+          "hebrew": "הִנְנִי מְעִירָם מִן־הַמָּקוֹם אֲשֶׁר־מְכַרְתֶּם אֹתָם שָׁמָּה וַהֲשִׁבֹתִי גְמֻלְכֶם בְּרֹאשְׁכֶם׃",
+          "english": "Behold, I will raise them out of the place to which you have sold them, and will return your retribution upon your own head:"
+        },
+        {
+          "verse": 8,
+          "hebrew": "וּמָכַרְתִּי אֶת־בְּנֵיכֶם וְאֶת־בְּנוֹתֵיכֶם בְּיַד בְּנֵי יְהוּדָה וּמְכָרוּם לִשְׁבָאיִם אֶל־גּוֹי רָחוֹק כִּי יְהוָה דִּבֵּר׃",
+          "english": "and I will sell your sons and your daughters into the hand of the children of Yehuda, and they shall sell them to the Shevayim, to a people far off: for the Lord has spoken it."
+        },
+        {
+          "verse": 9,
+          "hebrew": "קִרְאוּ־זֹאת בַּגּוֹיִם קַדְּשׁוּ מִלְחָמָה הָעִירוּ הַגִּבּוֹרִים יִגְּשׁוּ יַעֲלוּ כֹּל אַנְשֵׁי הַמִּלְחָמָה׃",
+          "english": "Proclaim this among the nations; Prepare war, stir up the mighty men, let all the men of war draw near; let them come up:"
+        },
+        {
+          "verse": 10,
+          "hebrew": "כֹּתּוּ אִתֵּיכֶם לַחֲרָבוֹת וּמַזְמְרֹתֵיכֶם לִרְמָחִים הַחַלָּשׁ יֹאמַר גִּבּוֹר אָנִי׃",
+          "english": "beat your ploughshares into swords, and your pruning-hooks into spears: let the weak say, I am strong."
+        },
+        {
+          "verse": 11,
+          "hebrew": "עוּשׁוּ וָבֹאוּ כָל־הַגּוֹיִם מִסָּבִיב וְנִקְבָּצוּ שָׁמָּה הַנְחַת יְהוָה גִּבּוֹרֶיךָ׃",
+          "english": "Hasten, and come, all you nations, and gather yourselves together round about: cause Thy mighty ones to come down there, O Lord."
+        },
+        {
+          "verse": 12,
+          "hebrew": "יֵעוֹרוּ וְיַעֲלוּ הַגּוֹיִם אֶל־עֵמֶק יְהוֹשָׁפָט כִּי שָׁם אֵשֵׁב לִשְׁפֹּט אֶת־כָּל־הַגּוֹיִם מִסָּבִיב׃",
+          "english": "Let the nations be stirred up, and come up to the valley of Yehoshafat: for there will I sit to judge all the nations round about."
+        },
+        {
+          "verse": 13,
+          "hebrew": "שִׁלְחוּ מַגָּל כִּי בָשַׁל קָצִיר בֹּאוּ רְדוּ כִּי־מָלְאָה גַּת הֵשִׁיקוּ הַיְקָבִים כִּי רַבָּה רָעָתָם׃",
+          "english": "Put in the sickle, for the harvest is ripe: come, tread down; for the press is full, the vats overflow; for their wickedness is great."
+        },
+        {
+          "verse": 14,
+          "hebrew": "הֲמוֹנִים הֲמוֹנִים בְּעֵמֶק הֶחָרוּץ כִּי קָרוֹב יוֹם יְהוָה בְּעֵמֶק הֶחָרוּץ׃",
+          "english": "Multitudes, multitudes in the valley of decision: for the day of the Lord is near in the valley of decision."
+        },
+        {
+          "verse": 15,
+          "hebrew": "שֶׁמֶשׁ וְיָרֵחַ קָדָרוּ וְכוֹכָבִים אָסְפוּ נָגְהָם׃",
+          "english": "The sun and the moon are darkened, and the stars withdraw their shining."
+        },
+        {
+          "verse": 16,
+          "hebrew": "וַיהוָה מִצִּיּוֹן יִשְׁאָג וּמִירוּשָׁלִַם יִתֵּן קוֹלוֹ וְרָעֲשׁוּ שָׁמַיִם וָאָרֶץ וַיהוָה מַחֲסֶה לְעַמּוֹ וּמָעוֹז לִבְנֵי יִשְׂרָאֵל׃",
+          "english": "And the Lord roars out of Żiyyon, and utters his voice from Yerushalayim; and the heavens and the earth shake: but the Lord will be a shelter for his people, and a stronghold for the children of Yisra᾽el."
+        },
+        {
+          "verse": 17,
+          "hebrew": "וִידַעְתֶּם כִּי אֲנִי יְהוָה אֱלֹהֵיכֶם שֹׁכֵן בְּצִיּוֹן הַר־קָדְשִׁי וְהָיְתָה יְרוּשָׁלִַם קֹדֶשׁ וְזָרִים לֹא־יַעַבְרוּ־בָהּ עוֹד׃",
+          "english": "So shall you know that I am the Lord your God dwelling in Żiyyon, my holy mountain: then shall Yerushalayim be holy, and no strangers shall pass through her any more."
+        },
+        {
+          "verse": 18,
+          "hebrew": "וְהָיָה בַיּוֹם הַהוּא יִטְּפוּ הֶהָרִים עָסִיס וְהַגְּבָעוֹת תֵּלַכְנָה חָלָב וְכָל־אֲפִיקֵי יְהוּדָה יֵלְכוּ מָיִם וּמַעְיָן מִבֵּית יְהוָה יֵצֵא וְהִשְׁקָה אֶת־נַחַל הַשִּׁטִּים׃",
+          "english": "And it shall come to pass on that day, that the mountains shall drop down sweet wine, and the hills shall flow with milk, and all the water courses of Yehuda shall flow with water, and a fountain shall issue from the house of the Lord, and shall water the valley of Shittim."
+        },
+        {
+          "verse": 19,
+          "hebrew": "מִצְרַיִם לִשְׁמָמָה תִהְיֶה וֶאֱדוֹם לְמִדְבַּר שְׁמָמָה תִּהְיֶה מֵחֲמַס בְּנֵי יְהוּדָה אֲשֶׁר־שָׁפְכוּ דָם־נָקִיא בְּאַרְצָם׃",
+          "english": "Miżrayim shall be a desolation, and Edom shall be a desolate wilderness, for the violence done to the children of Yehuda, because they have shed innocent blood in their land."
+        },
+        {
+          "verse": 20,
+          "hebrew": "וִיהוּדָה לְעוֹלָם תֵּשֵׁב וִירוּשָׁלִַם לְדוֹר וָדוֹר׃",
+          "english": "But Yehuda shall remain for ever, and Yerushalayim from generation to generation."
+        },
+        {
+          "verse": 21,
+          "hebrew": "וְנִקֵּיתִי דָּמָם לֹא־נִקֵּיתִי וַיהוָה שֹׁכֵן בְּצִיּוֹן׃",
+          "english": "And though I have acquitted them, those who shed their blood I have not acquitted; and the Lord will dwell in Żiyyon."
+        }
+      ]
+    }
+  ]
+}

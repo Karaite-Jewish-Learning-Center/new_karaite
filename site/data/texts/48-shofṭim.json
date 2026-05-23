@@ -1,0 +1,304 @@
+{
+  "id": "48-shofṭim",
+  "title_en": "Shofṭim",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֶהֱבוּ אֶת־יוי, דּוֹר יְשָׁרִים,",
+      "transliteration": "Ehevu et Adonai dor yesharim,",
+      "english": "Love Adonai, generation of the upright,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 14.07
+      }
+    },
+    {
+      "hebrew": "הִתְקוֹשְׁשׁוּ וָקֽוֹשּׁוּ, וְאֶחֱזוּ צֶֽדֶק וּמִשְׁפָּט וּמֵישָׁרִים.",
+      "transliteration": "Hitḳosheshu vaḳosh’shu, ve’eḥezu tsedeḳ umishpat mesharim.",
+      "english": "Gather yourselves, yes, gather, and take hold of righteousness, justness, and uprightness.",
+      "comments": "",
+      "timing": {
+        "start": 14.07,
+        "end": 27.17
+      }
+    },
+    {
+      "hebrew": "רְצוֹן אֵל עֲשׂוּ, וּתְנוּ בַּשְּׁעָרִים",
+      "transliteration": "Retson El ‘asu, utnu bash’she‘arim",
+      "english": "Do God’s will, and place at the gates",
+      "comments": "",
+      "timing": {
+        "start": 27.17,
+        "end": 40.2
+      }
+    },
+    {
+      "hebrew": "נֶאֶמְנֵי לֵב – שֹׁפְטִים וְשֹׁטְרִים.",
+      "transliteration": "Ne’emanē lev – shofetim veshoterim.",
+      "english": "Judges and officers, who are faithful in their hearts.",
+      "comments": "",
+      "timing": {
+        "start": 40.2,
+        "end": 51.27
+      }
+    },
+    {
+      "hebrew": "בְּיֹֽשֶׁר יִרְדְּפוּ, וְלֹא יִהְיוּ פָּנִים מַכִּירִים.",
+      "transliteration": "Beyosher yirdefu, velo yihyu panim makkirim.",
+      "english": "They should pursue [justice] uprightly, and not show partiality.",
+      "comments": "",
+      "timing": {
+        "start": 51.27,
+        "end": 65.53
+      }
+    },
+    {
+      "hebrew": "נְשֹׂא שֹֽׁחַד יִמְאָֽסוּ, פֶּן יְמַשְּׁשׁוּ קִיר כְּמוֹ עִוְרִים,",
+      "transliteration": "Neso shoḥad yim’asu, pen yemash’sheshu ḳir kemo ‘ivrim,",
+      "english": "They should despise the taking of bribes, lest they fumble around walls like the blind,",
+      "comments": "",
+      "timing": {
+        "start": 65.53,
+        "end": 78.43
+      }
+    },
+    {
+      "hebrew": "וִיסַלְּפוּ דִּבְרֵי צַדִּיקִים וּבְרוּרִים.",
+      "transliteration": "Visallefu divrē tsaddiḳim uvrurim.",
+      "english": "And pervert the words of the righteous and the blameless.",
+      "comments": "",
+      "timing": {
+        "start": 78.43,
+        "end": 92.5
+      }
+    },
+    {
+      "hebrew": "וְיַשְׁבִּֽיתוּ מַצֵּבָה וְחַמָּנִים וַאֲשֵׁרִים;",
+      "transliteration": "Veyashbitu mats’tseva vaḥammanim va’asherim;",
+      "english": "[The Israelites] must get rid of all standing-pillars, ḥammanim, and asherim;",
+      "comments": "Ḥammanim and asherim. Items associated with idolatry.",
+      "timing": {
+        "start": 92.5,
+        "end": 105.0
+      }
+    },
+    {
+      "hebrew": "וְעֹבֵד צְבָא שָׁמַֽיִם, וּמִשְׁתַּחֲוֶה לֵאלֹהִים אֲחֵרִים,",
+      "transliteration": "Ve‘oved tseva shamayim, umishtaḥavē le’Elohim aḥerim,",
+      "english": "And whoever worships the host of heaven, and prostrates to foreign deities,",
+      "comments": "",
+      "timing": {
+        "start": 105.0,
+        "end": 120.23
+      }
+    },
+    {
+      "hebrew": "יִסָּקֵל, עַל־פִּי עֵדִים כְּשֵׁרִים.",
+      "transliteration": "Yissaḳel, ‘al pi ‘edim kesherim.",
+      "english": "Shall be stoned, according to the word of [two] valid witnesses.",
+      "comments": "",
+      "timing": {
+        "start": 120.23,
+        "end": 130.37
+      }
+    },
+    {
+      "hebrew": "וּפִלְאֵי מִשְׁפָּטִים חֲמוּרִים,",
+      "transliteration": "Ufil’ē mishpatim ḥamurim,",
+      "english": "Extraordinary [cases] of severe laws,",
+      "comments": "",
+      "timing": {
+        "start": 130.37,
+        "end": 142.8
+      }
+    },
+    {
+      "hebrew": "בֵּין דִּין לְדִין – רִיבוֹת דְּבָרִים,",
+      "transliteration": "Ben din ledin – rivot devarim,",
+      "english": "Whatever the case—quarrels regarding anything,",
+      "comments": "",
+      "timing": {
+        "start": 142.8,
+        "end": 152.63
+      }
+    },
+    {
+      "hebrew": "יוּבְאוּ לְחַכְמֵי מֶחְקָרִים.",
+      "transliteration": "Yuve’u leḥakhmē meḥḳarim.",
+      "english": "Shall be brought to wise sages.",
+      "comments": "",
+      "timing": {
+        "start": 152.63,
+        "end": 167.2
+      }
+    },
+    {
+      "hebrew": "וּמֶֽלֶךְ יִשְׂרָאֵל לֹא יִהְיֶה מֵאֲנָשִׁים נָכְרִים.",
+      "transliteration": "Umelekh Yisra’el lo yihyē me’anashim nokhrim.",
+      "english": "The king of Israel shall not be from foreign men.",
+      "comments": "",
+      "timing": {
+        "start": 167.2,
+        "end": 179.43
+      }
+    },
+    {
+      "hebrew": "וְלֹא יִמָּצְאוּ בְּיִשְׂרָאֵל יַלְדֵיהֶם בָּאֵשׁ מַעֲבִירִים,",
+      "transliteration": "Velo yimmatse’u beYisra’el yaldehem ba’esh ma‘avirim,",
+      "english": "There shall not be found among Israel those who pass their children through fire,",
+      "comments": "",
+      "timing": {
+        "start": 179.43,
+        "end": 196.2
+      }
+    },
+    {
+      "hebrew": "וְשֹׁאֵל אוֹב וְיִדְּעֹנִי, וְחֹבֵר חֲבָרִים.",
+      "transliteration": "Vesho’el ov veyidde‘oni, veḥover ḥavarim.",
+      "english": "Consult ghosts or lots, or whisper charms.",
+      "comments": "",
+      "timing": {
+        "start": 196.2,
+        "end": 209.0
+      }
+    },
+    {
+      "hebrew": "נָבִיא מִבֵּינָיו יָקִים יוי, מַגִּיד נִסְתָּרִים.",
+      "transliteration": "Navi mibbanav yaḳim Adonai, maggid nistarim.",
+      "english": "Adonai will raise a prophet from among them, who will tell secret things.",
+      "comments": "",
+      "timing": {
+        "start": 209.0,
+        "end": 224.4
+      }
+    },
+    {
+      "hebrew": "וּבְמִלְחֶֽמֶת רְשׁוּת לֹא יֵצְאוּ חֲמִשָּׁה נִסְפָּרִים,",
+      "transliteration": "Uvmilḥemet reshut lo yetse’u ḥamish’sha nisparim,",
+      "english": "To a volitional battle, the five enumerated shall not go;",
+      "comments": "",
+      "timing": {
+        "start": 224.4,
+        "end": 236.47
+      }
+    },
+    {
+      "hebrew": "כִּי בְמִלְחֶֽמֶת חוֹבָה יֵצֵא חָתָן מֵחֲדָרִים.",
+      "transliteration": "Ki vemilḥmet ḥova yetsē ḥatan meḥadarim.",
+      "english": "But to an obligatory battle, [even] a groom shall go from his [marital] chamber.",
+      "comments": "",
+      "timing": {
+        "start": 236.47,
+        "end": 251.57
+      }
+    },
+    {
+      "hebrew": "וְלִקְרֹא בְשָׁלוֹם לְכָל־עָרִים,",
+      "transliteration": "Veliḳro veshalom lekhol ‘arim,",
+      "english": "[The Israelites] shall call to [offer] peace to all cities,",
+      "comments": "",
+      "timing": {
+        "start": 251.57,
+        "end": 261.47
+      }
+    },
+    {
+      "hebrew": "וְאִם לֹא יַשְׁלִֽימוּ – יֻכּוּ הַזְּכָרִים.",
+      "transliteration": "Ve’im lo yashlimu – yukku hazzekharim.",
+      "english": "And if [the inhabitants of the city] do not make peace, then all the males shall be smitten.",
+      "comments": "",
+      "timing": {
+        "start": 261.47,
+        "end": 275.27
+      }
+    },
+    {
+      "hebrew": "וְחָלָל נִמְצָא בֵּין הַכְּפָרִים,",
+      "transliteration": "Veḥalal nimtsa ben hakkefarim,",
+      "english": "[If] a corpse is found between towns,",
+      "comments": "",
+      "timing": {
+        "start": 275.27,
+        "end": 286.17
+      }
+    },
+    {
+      "hebrew": "עִיר הַקְּרוֹבָה בֶּחָלָל – זְקֵנֶֽיהָ יִקְחוּ עֶגְלַת בְּקָרִים,",
+      "transliteration": "‘ir haḳḳerova beḥalal – zeḳeneha yiḳḥu ‘eḡlat beḳarim,",
+      "english": "The elders of the city nearest to the corpse shall take a female calf of the cattle,",
+      "comments": "",
+      "timing": {
+        "start": 286.17,
+        "end": 301.43
+      }
+    },
+    {
+      "hebrew": "לֹא מָשְׁכָה בְעֹל, וְאִם הֵרִים.",
+      "transliteration": "Lo mashekha ve‘ol, ve’im herim.",
+      "english": "Which has never pulled a yoke, even if it has lifted one.",
+      "comments": "",
+      "timing": {
+        "start": 301.43,
+        "end": 311.3
+      }
+    },
+    {
+      "hebrew": "וְהַשֵּׁם יְבַעֵר דַּם הַנָּקִי, אִם נַעֲשֶׂה דַּרְכֵי בָרִים.",
+      "transliteration": "Vehash’shem yeva‘er dam hannaḳi, im na‘asē darkhē varim.",
+      "english": "And the Name will purge the blood of the innocent [victim], if we act in ways of purity.",
+      "comments": "The Name. Hebrew ha-shem, an epithet for God.",
+      "timing": {
+        "start": 311.3,
+        "end": 325.63
+      }
+    },
+    {
+      "hebrew": "אֵין כָּאֵל, יְשֻׁרוּן! וּמִי כָמֹֽהוּ מוֹרֶה מִמּוֹרִים?",
+      "transliteration": "En ka’El Yeshurun! Umi khamohu morē mimmorim?",
+      "english": "There is none like God, O Jeshurun! What teacher, of [all] teachers, is like Him?",
+      "comments": "Jeshurun. The Israelites.",
+      "timing": {
+        "start": 325.63,
+        "end": 337.43
+      }
+    },
+    {
+      "hebrew": "נְשַׁבְּחֶֽנּוּ בִּזְמִירוֹת וְשִׁירִים –",
+      "transliteration": "Neshabbeḥennu bizmirot veshirim –",
+      "english": "Let us praise Him with hymns and songs—",
+      "comments": "",
+      "timing": {
+        "start": 337.43,
+        "end": 345.67
+      }
+    },
+    {
+      "hebrew": "קהל: כִּי גָבַהּ בִּצְדָקָה, מַשְׁפִּיל וּמֵרִים.",
+      "transliteration": "Ḳahal: Ki ḡavah bitsdaḳa, mashpil umerim.",
+      "english": "Cong. For He is lofty in justice; He brings down and raises up.",
+      "comments": "",
+      "timing": {
+        "start": 345.67,
+        "end": 355.67
+      }
+    },
+    {
+      "hebrew": "חזן: וַיִּגְבַּ֛הּ יו֥י צְבָא֖וֹת בַּמִּשְׁפָּ֑ט וְהָאֵל֙ הַקָּד֔וֹשׁ נִקְדָּ֖שׁ בִּצְדָקָֽה:",
+      "transliteration": "Ḥazzan: Vayyiḡbah Adonai tseva’ot bammishpat veha’el haḳḳadosh niḳdash bitsdaḳa:",
+      "english": "Cantor. And Adonai Ẓeva’oth is towering high in justice; and the holy God is sanctified in righteousness. (Isa. 5:16)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ ׀ קָד֛וֹשׁ קָד֖וֹשׁ יו֥י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ:",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Cong. Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:3)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/48-shofṭim.mp3",
+  "author_en": "Aaron ben Joseph"
+}

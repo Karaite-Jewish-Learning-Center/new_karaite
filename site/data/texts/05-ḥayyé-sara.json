@@ -1,0 +1,344 @@
+{
+  "id": "05-ḥayyé-sara",
+  "title_en": "Ḥayyé Sara",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֵל אֶחָד, אֶהְיֶה אֲשֶׁר אֶהְיֶה,",
+      "transliteration": "El eḥad, ehyē asher ehyē,",
+      "english": "The One God, Ehyé Asher Ehyé,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.3
+      }
+    },
+    {
+      "hebrew": "מוֹרִישׁ וּמַעֲשִׁיר, מֵמִית וּמְחַיֶּה.",
+      "transliteration": "Morish uma‘ashir, memit umḥayyeh.",
+      "english": "Impoverishes and enriches, brings death and life!",
+      "comments": "",
+      "timing": {
+        "start": 16.3,
+        "end": 29.2
+      }
+    },
+    {
+      "hebrew": "הוּא אֱלֹהִים חַיִּים וּמֶֽלֶךְ עוֹלָם,",
+      "transliteration": "Hu elohim ḥayyim umelekh ‘olam,",
+      "english": "He is the living God and eternal king,",
+      "comments": "",
+      "timing": {
+        "start": 29.2,
+        "end": 45.67
+      }
+    },
+    {
+      "hebrew": "וּמַעֲשֵׂה יָדָיו כֻּלָּם.",
+      "transliteration": "uma‘asē Yadav kullam.",
+      "english": "And all are the work of His hands.",
+      "comments": "",
+      "timing": {
+        "start": 45.67,
+        "end": 56.33
+      }
+    },
+    {
+      "hebrew": "רָשׁ וְעָשִׁיר, הֵֽלֶךְ וּמֶֽלֶךְ,",
+      "transliteration": "Rash ve‘ashir, helekh umelekh,",
+      "english": "Poor and rich, wayfarer and king—",
+      "comments": "",
+      "timing": {
+        "start": 56.33,
+        "end": 72.63
+      }
+    },
+    {
+      "hebrew": "הַכֹּל אֶל מָקוֹם אֶחָד הֹלֵךְ.",
+      "transliteration": "Hakkol el maḳom eḥad holekh.",
+      "english": "All go to the same place.",
+      "comments": "",
+      "timing": {
+        "start": 72.63,
+        "end": 85.53
+      }
+    },
+    {
+      "hebrew": "נֶֽפֶשׁ צַדִּיקִים הִיא הָעֹלָה לְמַֽעְלָה,",
+      "transliteration": "Nefesh tsaddiḳim hi ha‘ola lema‘la,",
+      "english": "The soul of the righteous rises up,",
+      "comments": "",
+      "timing": {
+        "start": 85.53,
+        "end": 102.4
+      }
+    },
+    {
+      "hebrew": "אַךְ רְשָׁעִים יָשֽׁוּבוּ לִשְׁאֹֽלָה.",
+      "transliteration": "Akh resha‘im yashuvu lish’ola.",
+      "english": "But [that of] the wicked will return to She’ol.",
+      "comments": "",
+      "timing": {
+        "start": 102.4,
+        "end": 117.63
+      }
+    },
+    {
+      "hebrew": "חַי וְקַיָּם וְיָכוֹל",
+      "transliteration": "Ḥai veḳayyam veyakhol",
+      "english": "The living and enduring and powerful One",
+      "comments": "",
+      "timing": {
+        "start": 117.63,
+        "end": 132.47
+      }
+    },
+    {
+      "hebrew": "בֵּרַךְ אֶת־אַבְרָהָם בַּכֹּל.",
+      "transliteration": "Berakh et Avraham bakkol.",
+      "english": "Blessed Abraham in everything.",
+      "comments": "",
+      "timing": {
+        "start": 132.47,
+        "end": 144.03
+      }
+    },
+    {
+      "hebrew": "קָרָא לְעַבְדּוֹ זְקַן בֵּיתוֹ,",
+      "transliteration": "Ḳara le‘avdo zeḳan beto,",
+      "english": "[Abraham] called his servant, the eldest of his household,",
+      "comments": "",
+      "timing": {
+        "start": 144.03,
+        "end": 159.73
+      }
+    },
+    {
+      "hebrew": "וְהִכְנִיסוֹ בִּשְׁבוּעַת אָלָתוֹ׃",
+      "transliteration": "Vehikhniso bishvu‘at alato:",
+      "english": "And brought him into his curse-oath:",
+      "comments": "",
+      "timing": {
+        "start": 159.73,
+        "end": 173.07
+      }
+    },
+    {
+      "hebrew": "\"לֹא תִקַּח אִשָּׁה מִבְּנוֹת כְּנַֽעַן",
+      "transliteration": "“Lo tiḳḳaḥ ish’sha mibbenot Kena‘an",
+      "english": "“Take no wife from the daughters of Canaan",
+      "comments": "",
+      "timing": {
+        "start": 173.07,
+        "end": 190.33
+      }
+    },
+    {
+      "hebrew": "לִבְנִי לְיִצְחָק – יַֽעַן וּבְיַֽעַן.\"",
+      "transliteration": "Livni leYits’ḥaḳ ‘ ya‘an uvya‘an.”",
+      "english": "For my son, for Isaac, because, because….”",
+      "comments": "",
+      "timing": {
+        "start": 190.33,
+        "end": 202.73
+      }
+    },
+    {
+      "hebrew": "וַיֵּֽלֶךְ הָעֶֽבֶד, וְכָל־טוּב אֲדֹנָיו בְּיָדוֹ,",
+      "transliteration": "Vayyelekh ha‘eved vekhol tuv adonav beyado,",
+      "english": "The servant set out, with all his master’s bounty inhis hand,",
+      "comments": "",
+      "timing": {
+        "start": 202.73,
+        "end": 218.23
+      }
+    },
+    {
+      "hebrew": "וּבִקֵּשׁ לַיוי בְּכָל־מְאֹדוֹ׃",
+      "transliteration": "Uviḳḳesh la’Adonai bekhol me’odo:",
+      "english": "And he asked God, with all his might:",
+      "comments": "",
+      "timing": {
+        "start": 218.23,
+        "end": 233.6
+      }
+    },
+    {
+      "hebrew": "\"הַקְרֵה נָא, נוֹרָא וְאָיוֹם,",
+      "transliteration": "“Haḳrē na, nora ve’ayom,",
+      "english": "“Let there appear for me, awesome and formidable One,",
+      "comments": "",
+      "timing": {
+        "start": 233.6,
+        "end": 248.17
+      }
+    },
+    {
+      "hebrew": "יַעֲלַת חֵן לְפָנַי הַיּוֹם.",
+      "transliteration": "ya‘alat ḥen lefanai hayyom",
+      "english": "A charming woman before me today.",
+      "comments": "",
+      "timing": {
+        "start": 248.17,
+        "end": 260.27
+      }
+    },
+    {
+      "hebrew": "הִנֵּה אָנֹכִי נִצָּב עַל עֵין הַמָּֽיִם,",
+      "transliteration": "Hinnē anokhi nits’tsav ‘al ‘en hammayim,",
+      "english": "Behold, I am standing at the water-spring;",
+      "comments": "",
+      "timing": {
+        "start": 260.27,
+        "end": 276.57
+      }
+    },
+    {
+      "hebrew": "וְהָיְתָה הַנַּעֲרָה יְפַת עֵינָֽיִם –",
+      "transliteration": "Vehayetah hanne‘ara yefat ‘enayim –",
+      "english": "And it will be that the girl with beautiful eyes—",
+      "comments": "",
+      "timing": {
+        "start": 276.57,
+        "end": 289.47
+      }
+    },
+    {
+      "hebrew": "אֲשֶׁר אֹמַר אֵלֶֽיהָ: ’הַשְׁקִינִי!‘,",
+      "transliteration": "Asher omar eleha: ‘hashḳini!’",
+      "english": "To whom I say: ‘Give me drink!’",
+      "comments": "",
+      "timing": {
+        "start": 289.47,
+        "end": 299.0
+      }
+    },
+    {
+      "hebrew": "וְאָמְרָה: ’שְׁתֵה מַֽיִם מְקוֹם יֵינִי‘ –",
+      "transliteration": "Ve’amerah: ‘Shetē mayim meḳom yeni’",
+      "english": "And she says: ‘Drink water, at the place of my wine’—",
+      "comments": "",
+      "timing": {
+        "start": 299.0,
+        "end": 311.63
+      }
+    },
+    {
+      "hebrew": "אוֹתָהּ הוֹכַֽחְתָּ לְעַבְדֶּֽךָ,",
+      "transliteration": "Otah hokhaḥta le‘avdekha,",
+      "english": "She is the one whom You have demonstrated for Your servant,",
+      "comments": "",
+      "timing": {
+        "start": 311.63,
+        "end": 328.67
+      }
+    },
+    {
+      "hebrew": "וּבָהּ הִרְבִּֽיתָ עִם אֲדֹנִי חַסְדֶּֽךָ.\"",
+      "transliteration": "Uvah hirbeta ‘im adoni ḥasdekha.”",
+      "english": "And through her have You done great kindness for my master.”",
+      "comments": "",
+      "timing": {
+        "start": 328.67,
+        "end": 339.43
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ רְצוֹן יְרֵאָיו יַעֲשֶׂה,",
+      "transliteration": "Barukh retson yere’av ya‘asē,",
+      "english": "Blessed is the One who fulfills the will of those who fear Him,",
+      "comments": "",
+      "timing": {
+        "start": 339.43,
+        "end": 352.7
+      }
+    },
+    {
+      "hebrew": "מָעֹז לַדַּל וּלְאֶבְיוֹן מַחְסֶה.",
+      "transliteration": "Ma‘oz laddal ul’evyon maḥseh.",
+      "english": "Who is a stronghold for the indigent, and a refuge for the poor.",
+      "comments": "",
+      "timing": {
+        "start": 352.7,
+        "end": 364.2
+      }
+    },
+    {
+      "hebrew": "וּמֵאֵת יוי כָּל־דָּבָר –",
+      "transliteration": "Ume’et Adonai kol davar –",
+      "english": "And everything comes from Adonai—",
+      "comments": "",
+      "timing": {
+        "start": 364.2,
+        "end": 373.4
+      }
+    },
+    {
+      "hebrew": "לְהִתְחַבֵּר מֻפְרָד וּלְהִפָּרֵד מְחֻבָּר.",
+      "transliteration": "Lehit’ḥabber mufrad ulhippared meḥubbar.",
+      "english": "Whether the uniting of the separated, or the separation of the united.",
+      "comments": "",
+      "timing": {
+        "start": 373.4,
+        "end": 386.63
+      }
+    },
+    {
+      "hebrew": "יִמְלֹךְ יוי לְעוֹלָם,",
+      "transliteration": "Yimlokh Adonai le‘olam,",
+      "english": "Adonai reigns forever,",
+      "comments": "",
+      "timing": {
+        "start": 386.63,
+        "end": 401.33
+      }
+    },
+    {
+      "hebrew": "חֹקֵר כָּל־סָתוּם וְיֹדֵֽעַ כָּל־נֶעְלָם.",
+      "transliteration": "Ḥoḳer kol satum veyode’a‘ kol ne‘elam.",
+      "english": "He examines everything hidden, and knows everything concealed.",
+      "comments": "",
+      "timing": {
+        "start": 401.33,
+        "end": 413.57
+      }
+    },
+    {
+      "hebrew": "אֲדוֹן הַשָּׁלוֹם וּבַֽעַל הָרַחֲמִים,",
+      "transliteration": "Adon hash’shalom uva‘al haraḥamim,",
+      "english": "Master of peace, Lord of mercy,",
+      "comments": "",
+      "timing": {
+        "start": 413.57,
+        "end": 421.23
+      }
+    },
+    {
+      "hebrew": "קהל: מַלְכוּתְךָ מַלְכוּת כָּל־עוֹלָמִים.",
+      "transliteration": "Ḳahal: Malḥutekha malkhut kol ‘olamim.",
+      "english": "Cong.Your kingdom is a kingdom for all eternity!",
+      "comments": "",
+      "timing": {
+        "start": 421.23,
+        "end": 432.23
+      }
+    },
+    {
+      "hebrew": "חזן: וְהָיָ֧ה יו֛י לְמֶ֖לֶךְ עַל־כָּל־הָאָ֑רֶץ בַּיּ֣וֹם הַה֗וּא יִֽהְיֶ֧ה יו֛י אֶחָ֖ד וּשְׁמ֥וֹ אֶחָֽד׃ (זכריה יד:ט)",
+      "transliteration": "Ḥazzan: Vehaya Adonai lemelekh ‘al kol ha’arets bayyom hahu yihyē Adonai eḥad ushmo eḥad:",
+      "english": "Cantor: And Adonai will be king over the entire world; on that day, Adonai will be one, and His name one. (Zech. 14:9)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד׃ (דברים ו:ד)",
+      "transliteration": "Ḳahal: Shema‘ Yisra’el Adonai elohenu Adonai, eḥad:",
+      "english": "Cong. Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)",
+      "comments": "Adonai our God is Adonai on His own. The translation follows Sefer Ha-mivḥar, on Deuteronomy 6:4: “The meaning is that He is one and does not need any second one.”"
+    }
+  ],
+  "audio": "audio/05-ḥayyé-sara.mp3",
+  "author_en": "Aaron ben Joseph"
+}

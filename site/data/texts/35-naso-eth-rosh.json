@@ -1,0 +1,224 @@
+{
+  "id": "35-naso-eth-rosh",
+  "title_en": "Naso Eth Rosh",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֲדֹנָי נָתַן אֹֽמֶר לְהַקְדִּישׁ קְרוּאָיו,",
+      "transliteration": "Adonai natan omer lehaḳdish ḳeru’av,",
+      "english": "Adonai spoke to sanctify [the people] called by Him,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.13
+      }
+    },
+    {
+      "hebrew": "הֱיוֹת בְּנֵי לֵוִי לַעֲבוֹדַת הַמִּשְׁכָּן וּלְמַשָּׂאָיו.",
+      "transliteration": "Heyot benē Levi la‘avodat hammishkan ulmassa’av.",
+      "english": "For the Levites to be [working] in the service of the Tabernacle and carrying it.",
+      "comments": "",
+      "timing": {
+        "start": 16.13,
+        "end": 29.23
+      }
+    },
+    {
+      "hebrew": "רוֹמְמוֹת אֵל בִּגְרוֹנָם – לְבַד בִּצְבָאָיו.",
+      "transliteration": "Romemot El biḡronam – levad bitsva’av.",
+      "english": "Praises of God were in their throats—alone among His hosts.",
+      "comments": "",
+      "timing": {
+        "start": 29.23,
+        "end": 43.73
+      }
+    },
+    {
+      "hebrew": "נַפְשָׁם תֶּחֱזֶה מַלְאֲכוּת אֵל וּפְלָאָיו.",
+      "transliteration": "Nafsham teḥezē mal‘akhut El ufla’av.",
+      "english": "They oversaw God’s work and His wonders.",
+      "comments": "",
+      "timing": {
+        "start": 43.73,
+        "end": 55.8
+      }
+    },
+    {
+      "hebrew": "עַל־פִּי יוי נִפְקָֽדוּ בְּמוֹצָא הַמִּשְׁכָּן וּמוֹבָאָיו.",
+      "transliteration": "‘Al pi Adonai nifḳadu bemotsa hammishkan umova’av.",
+      "english": "They were commanded by Adonai, regarding bringing the Tabernacle in and out.",
+      "comments": "",
+      "timing": {
+        "start": 55.8,
+        "end": 73.13
+      }
+    },
+    {
+      "hebrew": "אֲזַי שֻׁלְּחוּ מִמַּחֲנֵה יוי טְמֵאָיו –",
+      "transliteration": "Azai shulleḥu mimmaḥanē Adonai teme’av –",
+      "english": "Then all impure people were sent out from Adonai’s camp—",
+      "comments": "",
+      "timing": {
+        "start": 73.13,
+        "end": 84.73
+      }
+    },
+    {
+      "hebrew": "טְמֵא מֵת, וְצָרֽוּעַ, וְזָב מִתַּחֲלוּאָיו.",
+      "transliteration": "Temē met, vetsaru’a‘ vezav mittaḥalu’av.",
+      "english": "[Anyone] impure from corpse [contamination], or a leper, or a zav in his illness.",
+      "comments": "",
+      "timing": {
+        "start": 84.73,
+        "end": 96.03
+      }
+    },
+    {
+      "hebrew": "בְּחֹק אֵל נִמְצָא חֵן לְמוֹצְאָיו.",
+      "transliteration": "Beḥoḳ El nimtsa ḥen lemotse’av.",
+      "english": "In accordance with God’s law, those who find Him are appreciated.",
+      "comments": "",
+      "timing": {
+        "start": 96.03,
+        "end": 107.33
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי, הַמְגַלֶּה סוֹד אָדָם וּמַחֲבוֹאָיו –",
+      "transliteration": "Mi ka’Adonai hamḡallē sod adam umaḥavo’av –",
+      "english": "Who is like Adonai, who reveals people’s secrets and hidden things?",
+      "comments": "",
+      "timing": {
+        "start": 107.33,
+        "end": 123.13
+      }
+    },
+    {
+      "hebrew": "כִּי תִשְׂטֶה אֵֽשֶׁת אִישׁ לְזָר, בַּחֲטָאָיו,",
+      "transliteration": "Ki tistē eshet ish lezar beḥata’av,",
+      "english": "When a man’s wife strays [to lie] with a strange man, in his sins,",
+      "comments": "",
+      "timing": {
+        "start": 123.13,
+        "end": 134.67
+      }
+    },
+    {
+      "hebrew": "אוֹ עָבַר עָלָיו רֽוּחַ קִנְאָה, הֲגַם אֶל מַרְאָיו,",
+      "transliteration": "O ‘avar ‘alav ru’aḥ ḳin’a, haḡam el mar’av,",
+      "english": "Or a jealous spirit overtakes him, even at a mere glimpse,",
+      "comments": "",
+      "timing": {
+        "start": 134.67,
+        "end": 150.03
+      }
+    },
+    {
+      "hebrew": "לַהֲבִיאָהּ אֶל הַכֹּהֵן עִם קָרְבָּנָהּ יְאָו,",
+      "transliteration": "Lahavi’ah el hakkohen ‘im ḳorbanah ye’av,",
+      "english": "[He should] take her to the priest, with her sacrifice that [God] desires,",
+      "comments": "",
+      "timing": {
+        "start": 150.03,
+        "end": 162.6
+      }
+    },
+    {
+      "hebrew": "וּמֵי תוֹכֵחָה יַשְׁקֶֽנָּה, עִם אָלַת מִקְרָאָיו:",
+      "transliteration": "Umē tokheḥa yashḳenna, ‘im alat miḳra’av:",
+      "english": "And [the priest] will force her to drink waters of rebuke with the curses that he recites:",
+      "comments": "",
+      "timing": {
+        "start": 162.6,
+        "end": 177.73
+      }
+    },
+    {
+      "hebrew": "אִם טְמֵאָה הִיא – יֵרָאֶה בְּבֶֽטֶן וְיָרֵךְ סוֹד הַמַּֽיִם וּמוֹרָאָיו,",
+      "transliteration": "Im teme’a hi – yera’ē beveten veyarekh sod hammayim umora’av,",
+      "english": "If she is impure, then the water’s fearsome secret will appear in [her] belly and thigh,",
+      "comments": "",
+      "timing": {
+        "start": 177.73,
+        "end": 191.5
+      }
+    },
+    {
+      "hebrew": "וְאִם טְהוֹרָה הִיא – תֵּלֵד זֶֽרַע, אַנְשֵׁי אֵל וִירֵאָיו.",
+      "transliteration": "Ve’im tehora hi – teled zera‘, anshē El vire’av.",
+      "english": "And if she is pure, then she will give birth to offspring—men of God, who fear Him.",
+      "comments": "",
+      "timing": {
+        "start": 191.5,
+        "end": 206.8
+      }
+    },
+    {
+      "hebrew": "כִּי יוי הֵקִים לְיִשְׂרָאֵל נְזִירָיו וּנְבִיאָיו,",
+      "transliteration": "Ki Adonai heḳim leYisra’el nezirav unvi’av,",
+      "english": "For Adonai has raised up for Israel His Nazarites and prophets,",
+      "comments": "",
+      "timing": {
+        "start": 206.8,
+        "end": 220.17
+      }
+    },
+    {
+      "hebrew": "שָׁתוּ מִמְּקוֹר אוֹרוֹ וַיֵּאֽוֹרוּ רֹאָיו.",
+      "transliteration": "Shatu mimmeḳor oro vayye’oru ro’av.",
+      "english": "Who drink from the fountain of His light, and, beholding Him, are enlightened.",
+      "comments": "",
+      "timing": {
+        "start": 220.17,
+        "end": 233.67
+      }
+    },
+    {
+      "hebrew": "וַיַּחְנְכוּ בֵיתוֹ שְׁנֵים עָשָׂר נְשִׂיאָיו.",
+      "transliteration": "Vayyaḥnekhu veto shenem ‘asar nesi’av.",
+      "english": "Twelve chieftains dedicated His house.",
+      "comments": "",
+      "timing": {
+        "start": 233.67,
+        "end": 245.23
+      }
+    },
+    {
+      "hebrew": "מִי כְּגוֹי יִשְׂרָאֵל, חָקוּק בְּכֵס אֵל, וּצְבָאָיו?",
+      "transliteration": "Mi keḡoy Yisra’el, ḥaḳuḳ bekhes El, utsva’av?",
+      "english": "Who is like the Israelite nation, inscribed on God’s throne, and His army?",
+      "comments": "",
+      "timing": {
+        "start": 245.23,
+        "end": 254.2
+      }
+    },
+    {
+      "hebrew": "קהל: כִּי יַעֲקֹב בָּחַר לוֹ יָהּ מִכָּל־בְּרוּאָיו.",
+      "transliteration": "Ḳahal: Ki Ya‘aḳov baḥar lo Yah mikkol beru’av.",
+      "english": "Cong. For Yah has chosen Jacob out of all His creations.",
+      "comments": "",
+      "timing": {
+        "start": 254.2,
+        "end": 264.27
+      }
+    },
+    {
+      "hebrew": "חזן: שְׁמַ֤ע אֵלַי֙ יַֽעֲקֹ֔ב וְיִשְׂרָאֵ֖ל מְקֹֽרָאִ֑י אֲנִי־הוּא֙ אֲנִ֣י רִאשׁ֔וֹן אַ֖ף אֲנִ֥י אַֽחֲרֽוֹן: (ישעיהו מח:יב)",
+      "transliteration": "Ḥazzan: Shema‘ elai Ya‘aḳov veYisra’el meḳora’i ani hu ani rishon af ani aḥaron:",
+      "english": "Cantor: Listen to Me, Jacob, and Israel, who are called by Me: I am the first, and I am the last. (Isa. 48:12)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד: (דברים ו:ד)",
+      "transliteration": "Ḳahal: Shema‘ Yisra’el Adonai elohenu Adonai, eḥad:",
+      "english": "Cong: Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)",
+      "comments": "Adonai on His own. The translation follows Sefer Ha-mivḥar, on Deuteronomy 6:4: “The meaning is that He is one and does not need any second one.”"
+    }
+  ],
+  "audio": "audio/35-naso-eth-rosh.mp3",
+  "author_en": "Aaron ben Joseph"
+}

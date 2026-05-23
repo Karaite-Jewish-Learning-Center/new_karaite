@@ -1,0 +1,92 @@
+# Karaite Texts Library - Open Items
+
+## Data Issues
+
+### Incomplete Texts (Missing Content)
+- [ ] **Gan Eden** (`gan-eden.json`) - Only 6 stub entries, needs full content
+- [ ] **An Essay on the Obligation of Prayer** (`an-essay-on-the-obligation-of-prayer.json`) - Very few entries
+- [ ] **Vehoshia** (`vehoshia.json`) - Very few entries
+
+### Missing English Translations
+- [ ] **Adderet Eliyahu** (`adderet-eliyahu.json`) - 3170/3209 entries missing English (99%)
+- [ ] **Adderet Eliyahu Appendices** (`adderet-eliyahu-appendices.json`) - 99/103 entries missing English (96%)
+- [ ] **Yeriot Shelomo Volume 2** (`shelomo-afeida-hakohen_yeriot-shelomo_volume-2.json`) - 25/25 missing English (100%)
+
+### Data Quality / Alignment Issues
+- [ ] Review all texts for Hebrew/English alignment issues
+- [ ] Check for Hebrew text incorrectly parsed as transliteration
+- [ ] Royal Attire - verify footnotes are displaying correctly
+
+---
+
+## Features
+
+### Tabled / Future Enhancements
+- [ ] **Comments Side Panel** - Display comments/footnotes in a side panel instead of inline (instead of current popup)
+- [ ] **Biblical Verse Linking** - Extend to more texts (currently implemented for Adderet Eliyahu and Ma'aravi)
+- [ ] **Verse Citation Cross-References** - When clicking a verse in Tanakh, show all places it's cited in Karaite texts
+- [ ] **Deep Links to Citations** - Links from Tanakh should go directly to the paragraph where verse is cited
+
+### Chatbot
+- [x] RAG server implemented (`site/chatbot/rag_server.py`)
+- [x] Chat widget integrated (`site/js/chat-widget.js`)
+- [x] Embeddings index built (2454 chunks)
+- [ ] Consider cloud deployment for public access (currently localhost only)
+
+### Audio
+- [x] Audio sync working for texts with timing markers
+- [ ] **Multiple recordings per song** - Some songs have multiple versions (e.g., traditional + alternative melodies)
+  - Shabbat Menuha - needs traditional melody AND Hallelujah tune version
+  - Matsa Ish-sha Matsa Tov - should have multiple recordings
+  - Toggle between versions not working properly
+- [ ] **Audio sync for more songs** - Many songs have recordings but no timing markers
+  - Option: Use Whisper AI to auto-generate timing (cost consideration)
+  - Option: Manual timing entry
+- [ ] Track down additional song versions and add to `/audio` directory
+
+---
+
+## UI/Display
+
+### Completed
+- [x] Line numbers display (Sefer Milhamot) - right-aligned
+- [x] Footnote markers - accent color, smaller size
+- [x] Hebrew footnotes - proper RTL formatting
+- [x] Mixed English/Hebrew content detection
+- [x] TOC navigation with section links
+- [x] Kitab al-Anwar multi-section layout (Intro + 9 translation sections)
+- [x] Ma'aravi multi-section layout (Intro + Text + Appendices)
+
+### Potential Improvements
+- [ ] Mobile responsive improvements
+- [ ] Print stylesheet
+- [ ] Dark mode refinements
+
+### Tanakh
+- [x] Full Tanakh with Hebrew and English translation
+- [x] Books displayed right-to-left (Genesis/Bereshit on right)
+- [ ] Link verses to where they're cited in Karaite texts (cross-reference feature)
+
+---
+
+## Technical Debt
+- [ ] Consolidate conversion scripts (multiple Python scripts for different sources)
+- [ ] Add automated tests for conversion scripts
+- [ ] Document Excel/XML source format requirements
+
+---
+
+## Content Stats
+- **Total texts in catalog**: 131
+- **Total JSON files**: 133
+- **Chatbot index**: 2454 searchable chunks
+
+---
+
+---
+
+## Notes
+
+- Session `374864e6-9a58-4ac4-8d84-c911c582ac1a` was for the **old Django-based KJLC system** (`/Users/shawn/knowledge-chatbot/documents/new_karaite/`), not this static site. Issues from that session (Hebrew title fixes, etc.) apply to the old system.
+
+*Last updated: 2026-05-19*

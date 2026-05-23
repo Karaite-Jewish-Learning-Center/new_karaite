@@ -1,0 +1,344 @@
+{
+  "id": "13-veellé-shemoth",
+  "title_en": "Ve’ellé Shemoth",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "גֹּאֲלֵֽנוּ גֹּאֵל יִשְׂרָאֵל, נֶאֱמָן בִּדְבָרָיו,",
+      "transliteration": "Go’alenu go’el Yisra’el, ne’eman bidvarav,",
+      "english": "Our redeemer, the redeemer of Israel, who is faithful in His words,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 15.03
+      }
+    },
+    {
+      "hebrew": "זָכַר בְּרִית אֲשֶׁר כָּרַת לִבְחִירָיו,",
+      "transliteration": "Zakhar berit asher karat livḥirav,",
+      "english": "Remembered the covenant that He had made with His chosen ones,",
+      "comments": "",
+      "timing": {
+        "start": 15.03,
+        "end": 25.0
+      }
+    },
+    {
+      "hebrew": "לְהָפִיק תְּקוּמָה לְעַמּוֹ מִיַּד צֹרְרָיו,",
+      "transliteration": "Lehafiḳ teḳuma le‘ammo miyyad tsorerav,",
+      "english": "To grant His people the power to stand from the hand of their foes.",
+      "comments": "",
+      "timing": {
+        "start": 25.0,
+        "end": 31.1
+      }
+    },
+    {
+      "hebrew": "קהל: וַיֶּֽפֶר אֶת־עַמּוֹ מְאֹד וַיַּעֲצִמֵֽהוּ מִצָּרָיו.   (תהלים קה:כד)",
+      "transliteration": "Ḳahal: Vayyafer et ‘ammo me’od vayya‘atsimehu mits’tsarav.",
+      "english": "Cong. He made His people multiply greatly, and He made them more formidable than their enemies.       (Ps. 105:24)",
+      "comments": "",
+      "timing": {
+        "start": 31.1,
+        "end": 39.7
+      }
+    },
+    {
+      "hebrew": "אֲזַי בְּקוּם מֶֽלֶךְ חָדָשׁ בְּזַעְמוֹ,",
+      "transliteration": "Azai beḳum melekh ḥadash beza‘mo,",
+      "english": "Then, when a new king arose, enraged,",
+      "comments": "",
+      "timing": {
+        "start": 39.7,
+        "end": 54.33
+      }
+    },
+    {
+      "hebrew": "וַיֹּֽאמֶר אֶל עַמּוֹ: \"הָֽבָה נִתְחַכְּמָה לְיִשְׂרָאֵל, וְנַכְחִיד שְׁמוֹ;",
+      "transliteration": "Vayyomer el ‘ammo. “Hava nit’ḥakkema leYisra’el venakh’ḥid shemo;",
+      "english": "He said to his people: “Come on, let us act craftily towards Israel, and destroy their name;",
+      "comments": "",
+      "timing": {
+        "start": 54.33,
+        "end": 66.67
+      }
+    },
+    {
+      "hebrew": "נַעֲבִידֵֽהוּ בְּפֶֽרֶךְ, וְלֹא יַעֲמֹד בּוֹ טַעְמוֹ.\"",
+      "transliteration": "Na‘avidehu befarekh, velo ya‘amod bo ta‘mo.”",
+      "english": "Let us enslave them with crushing [labor], so that they will lose their taste.”",
+      "comments": "",
+      "timing": {
+        "start": 66.67,
+        "end": 72.63
+      }
+    },
+    {
+      "hebrew": "קהל: הָפַךְ לִבָּם לִשְׂנֹא עַמּוֹ.      (תהלים קה:כה)",
+      "transliteration": "Ḳahal: Hafakh libbam lisno ‘ammo.",
+      "english": "Cong. [God] turned their heart to hate His people. (Ps. 105:25)",
+      "comments": "",
+      "timing": {
+        "start": 72.63,
+        "end": 79.6
+      }
+    },
+    {
+      "hebrew": "הִנֵּה יַלְדֵי עַמְרָם, מַחְצַב הַכְּתָמִים,",
+      "transliteration": "Hinnē yaldē ‘amram, maḥtsav hakketamim,",
+      "english": "Behold, Amram’s children, the mine of gold,",
+      "comments": "",
+      "timing": {
+        "start": 79.6,
+        "end": 94.6
+      }
+    },
+    {
+      "hebrew": "נִמְשְׁחוּ לְבַשֵּׂר עֲנָוִים, וּלְהַחֲיוֹת לֵב עֲגוּמִים,",
+      "transliteration": "Nimsheḥu levasser ‘anavim, ulehaḥayot lev ‘aḡumim,",
+      "english": "Were anointed to give tidings to the meek, and to revive the heart of the forlorn,",
+      "comments": "",
+      "timing": {
+        "start": 94.6,
+        "end": 107.53
+      }
+    },
+    {
+      "hebrew": "לְהָשִׁיב אָחֹר יְמִין קֹסְמִים,",
+      "transliteration": "Lehashiv aḥor yemin ḳosemim,",
+      "english": "To turn back the right hand of sorcerers,",
+      "comments": "",
+      "timing": {
+        "start": 107.53,
+        "end": 112.57
+      }
+    },
+    {
+      "hebrew": "קהל: לַעֲשׂוֹת נְקָמָה בַּגּוֹיִם, תּוֹכֵחוֹת בַּלְאֻמִּים.   (תהלים קמט:ז)",
+      "transliteration": "Ḳahal: La‘asot neḳama baggoyim, tokheḥot bal’ummim.",
+      "english": "Cong. To perform vengeance against the nations, acts of rebuke against the peoples. (Ps. 149:7)",
+      "comments": "",
+      "timing": {
+        "start": 112.57,
+        "end": 120.7
+      }
+    },
+    {
+      "hebrew": "רֹעֶה, בְּנָשְׂאוֹ עַֽיִן, וַיֶּחֱזֶה:",
+      "transliteration": "Ro‘ē, benos’o ‘ayin, vayyeḥezeh:",
+      "english": "When the shepherd raised his eyes, he saw:",
+      "comments": "The shepherd. Moses.",
+      "timing": {
+        "start": 120.7,
+        "end": 136.33
+      }
+    },
+    {
+      "hebrew": "הַסְּנֶה בֹּעֵר, וְלֹא יְאֻכַּל – תָּמַהּ עַל הַמַּחֲזֶה!",
+      "transliteration": "Hassenē bo‘er, velo ye’ukkal – tamah ‘al hammaḥazeh!",
+      "english": "The bush was burning, but not consumed—he marveled at this sight!",
+      "comments": "",
+      "timing": {
+        "start": 136.33,
+        "end": 151.7
+      }
+    },
+    {
+      "hebrew": "וַיֹּֽאמֶר בְּלִבּוֹ לָדַֽעַת מַה זֶּה וְעַל מַה זֶּה:",
+      "transliteration": "Vayyomer belibbo lada‘at ma zē ve‘al ma zeh:",
+      "english": "He said in his heart [that he would strive] to know what this all was:",
+      "comments": "",
+      "timing": {
+        "start": 151.7,
+        "end": 157.33
+      }
+    },
+    {
+      "hebrew": "קהל: \"אָסוּרָה נָּא וְאֶרְאֶה אֶת־הַמַּרְאֶה הַגָּדוֹל הַזֶּה.\"  (שמות ג:ג)",
+      "transliteration": "Ḳahal: “Asura na ve’erē et hammar’ē haggadol hazzeh.”",
+      "english": "Cong. “Let me now turn and observe this great apparition!”  (Exod. 3:3)",
+      "comments": "",
+      "timing": {
+        "start": 157.33,
+        "end": 165.27
+      }
+    },
+    {
+      "hebrew": "נַֽעַל בְּהוֹצִיאוֹ מֵעַל רַגְלָֽיִם,",
+      "transliteration": "Na‘al behotsi’o me‘al raḡlayim,",
+      "english": "When he removed his shoe from his feet,",
+      "comments": "",
+      "timing": {
+        "start": 165.27,
+        "end": 180.57
+      }
+    },
+    {
+      "hebrew": "קוֹל יוי שָׁמְעוּ אָזְנָֽיִם:",
+      "transliteration": "Ḳol Adonai shame‘u oznayim:",
+      "english": "His ears heard Adonai’s voice:",
+      "comments": "",
+      "timing": {
+        "start": 180.57,
+        "end": 191.7
+      }
+    },
+    {
+      "hebrew": "\"צַעֲקַת עַמִּי עָלְתָה עַד לַשָּׁמָֽיִם",
+      "transliteration": "“Tsa‘aḳat ‘ammi ‘aletah ‘ad lash’shamayim",
+      "english": "“My people’s cry has ascended to heaven,",
+      "comments": "",
+      "timing": {
+        "start": 191.7,
+        "end": 197.0
+      }
+    },
+    {
+      "hebrew": "קהל: וָאֵרֵד לְהַצִּילוֹ מִיַּד מִצְרָיִם.\"    (שמות ג:ח)",
+      "transliteration": "Ḳahal: Va’ered lehats’tsilo miyyad Mitsrayim.”",
+      "english": "Cong. And I will descend to rescue them from the hand of Egypt.” (Exod. 3:8)",
+      "comments": "",
+      "timing": {
+        "start": 197.0,
+        "end": 204.37
+      }
+    },
+    {
+      "hebrew": "שְׁנֵי אוֹרִים אִישׁ בְּאָחִֽיהוּ יְדֻבָּֽקוּ,",
+      "transliteration": "Shenē orim ish be’aḥihu yedubbaḳu,",
+      "english": "The two lights will be united, each man to his brother;",
+      "comments": "The two lights. Probably Moses and Aaron.",
+      "timing": {
+        "start": 204.37,
+        "end": 221.0
+      }
+    },
+    {
+      "hebrew": "וּמוֹטָה מֵעַל צַוְּארֵי עַמִּי יְנַתֵּֽקוּ,",
+      "transliteration": "Umota me‘al tsavverē ‘ammi yenatteḳu,",
+      "english": "They will remove the yoke from My people’s neck,",
+      "comments": "",
+      "timing": {
+        "start": 221.0,
+        "end": 229.8
+      }
+    },
+    {
+      "hebrew": "וְדִבְרֵי פִי בְּמוֹצָא שְׁמִי יַצְדִּֽיקוּ,",
+      "transliteration": "Vedivrē fi bemotsa shemi yatsdiḳu,",
+      "english": "And they will justify the words of My mouth, when My name is uttered.",
+      "comments": "",
+      "timing": {
+        "start": 229.8,
+        "end": 235.23
+      }
+    },
+    {
+      "hebrew": "קהל: חֶֽסֶד וֶאֱמֶת נִפְגָּֽשׁוּ, צֶֽדֶק וְשָׁלוֹם נָשָֽׁקוּ.   (תהלים פה:יא)",
+      "transliteration": "Ḳahal: Ḥesed ve’emet nifgashu, tsedeḳ veshalom nashaḳu.",
+      "english": "Cong. Kindness and truth meet; righteousness and peace kiss.  (Ps. 85:11)",
+      "comments": "",
+      "timing": {
+        "start": 235.23,
+        "end": 243.77
+      }
+    },
+    {
+      "hebrew": "אֲזַי נוֹדַע בְּשֵׁם מוֹרֶה הָיָה וְהוֹיֶה וְיִהְיֶה,",
+      "transliteration": "Azai noda‘ beshem morē hayah vehoyē veyihyeh,",
+      "english": "Then, He became known by the name that means “Was, is, and will be.”",
+      "comments": "",
+      "timing": {
+        "start": 243.77,
+        "end": 262.2
+      }
+    },
+    {
+      "hebrew": "הוּא הַמַּעֲלֶה וּמוֹרִיד, מֵמִית וּמְחַיֶּה.",
+      "transliteration": "Hu hamma‘alē umorid, memit umḥayyeh.",
+      "english": "He is the One who raises up and brings down, brings death and life.",
+      "comments": "",
+      "timing": {
+        "start": 262.2,
+        "end": 273.27
+      }
+    },
+    {
+      "hebrew": "וְלֹא נוֹדָע מְקוֹמוֹ אַיֵּה:",
+      "transliteration": "Velo noda‘ meḳomo ayyeh:",
+      "english": "His place is not known, where He is –",
+      "comments": "",
+      "timing": {
+        "start": 273.27,
+        "end": 277.77
+      }
+    },
+    {
+      "hebrew": "קהל: אֶהְיֶה אֲשֶׁר אֶהְיֶה.      (שמות ג:יד)",
+      "transliteration": "Ḳahal: Ehyē asher ehyeh.",
+      "english": "Cong. Ehyé Asher Ehyé.      (Exod. 3:14)",
+      "comments": "",
+      "timing": {
+        "start": 277.77,
+        "end": 283.47
+      }
+    },
+    {
+      "hebrew": "אֶהְיֶה – וְאֵין סוֹף לְגָדְלוֹ.",
+      "transliteration": "Ehyē – ve’en sof leḡodlo.",
+      "english": "Ehyé—there is no end to His greatness.",
+      "comments": "",
+      "timing": {
+        "start": 283.47,
+        "end": 294.67
+      }
+    },
+    {
+      "hebrew": "הַמִּתְגָּאֶה בְּרִבְבוֹת קֹֽדֶשׁ, בְּעֹז חֵילוֹ.",
+      "transliteration": "Hammitga’ē beriv’vot ḳodesh, be‘oz ḥelo.",
+      "english": "He is proud amongst the holy myriads in His mighty strength.",
+      "comments": "Holy myriads. The angels.",
+      "timing": {
+        "start": 294.67,
+        "end": 307.8
+      }
+    },
+    {
+      "hebrew": "הַמִּתְנַשֵּׂא בְּכִסֵּא כֵּס הֵיכָלוֹ –",
+      "transliteration": "Hammitnassē bekhissē kes hekhalo –",
+      "english": "He is elevated on His throne, the throne of His [heavenly] Temple—",
+      "comments": "",
+      "timing": {
+        "start": 307.8,
+        "end": 315.67
+      }
+    },
+    {
+      "hebrew": "קהל: שְׂרָפִים עֹמְדִים מִמַּֽעַל לוֹ.     (ישעיה ו:ב)",
+      "transliteration": "Ḳahal: Serafim ‘omedim mimma‘al lo.",
+      "english": "Cong. Seraphim stand above Him.     (Isa. 6:2)",
+      "comments": "",
+      "timing": {
+        "start": 315.67,
+        "end": 325.27
+      }
+    },
+    {
+      "hebrew": "חזן: שְׂרָפִ֨ים עֹֽמְדִ֤ים ׀ מִמַּ֨עַל֙ ל֔וֹ שֵׁ֧שׁ כְּנָפַ֛יִם שֵׁ֥שׁ כְּנָפַ֖יִם לְאֶחָ֑ד בִּשְׁתַּ֣יִם ׀ יְכַסֶּ֣ה פָנָ֗יו וּבִשְׁתַּ֛יִם יְכַסֶּ֥ה רַגְלָ֖יו וּבִשְׁתַּ֥יִם יְעוֹפֵֽף: וְקָרָ֨א זֶ֤ה אֶל־זֶה֙ וְאָמַ֔ר",
+      "transliteration": "Ḥazzan: Serafim ‘omedim, mimma‘al lo shesh kenafayim shesh kenafayim le’eḥad bishtayim, yekhassē fanav uvishtayim yekhassē raḡlav uvishtayim ye‘ofef: Veḳara zē el zē ve’amar",
+      "english": "Cantor: Seraphim were standing above Him, each one with six wings; with two [wings] they would cover their faces, and with two they would cover their legs, and with two they would fly. And they would call out, this one to that one, and say:",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ ׀ קָד֛וֹשׁ קָד֖וֹשׁ יו֣י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ:",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Congregation: Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:2–3)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/13-veellé-shemoth.mp3",
+  "author_en": "Aaron ben Joseph"
+}

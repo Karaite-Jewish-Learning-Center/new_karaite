@@ -1,0 +1,208 @@
+{
+  "id": "26-vayhi-bayyom-hashemini",
+  "title_en": "Vayhi Bayyom Hashemini",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אַתָּה קָדוֹשׁ וְנוֹרָא, עוֹז הִתְאַזַּֽרְתָּ.",
+      "transliteration": "Atta ḳadosh venora, ‘oz hit’azzarta.",
+      "english": "You are holy and awesome, and are girded in might.",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 15.4
+      }
+    },
+    {
+      "hebrew": "אַתָּה הוֹפַֽעְתָּ שְׁכִינָתְךָ בְּמִשְׁכָּן בָּחַֽרְתָּ.",
+      "transliteration": "Atta hofa‘ta shekhinatekha bemishkan baḥarta.",
+      "english": "You made Your presence appear in the Tabernacle, which You chose.",
+      "comments": "",
+      "timing": {
+        "start": 15.4,
+        "end": 28.47
+      }
+    },
+    {
+      "hebrew": "אַתָּה רָצִֽיתָ עַמְּךָ וְאֹתוֹ הֶאֱמַֽרְתָּ.",
+      "transliteration": "Atta ratsita ‘ammekha ve’oto he’emarta.",
+      "english": "You have desired Your people, and made them glorious.",
+      "comments": "",
+      "timing": {
+        "start": 28.47,
+        "end": 43.0
+      }
+    },
+    {
+      "hebrew": "אַתָּה נוֹחֲלֵי דָתְךָ – בְּכֹהֲנֵי קְדֻשָּׁה אֹתָם פֵּאַֽרְתָּ.",
+      "transliteration": "Atta noḥalē datekha – bekhohanē ḳedush’sha otam pe’arta.",
+      "english": "You have rendered glory unto them that inherit Your law, by [giving them] priests of holiness.",
+      "comments": "",
+      "timing": {
+        "start": 43.0,
+        "end": 57.03
+      }
+    },
+    {
+      "hebrew": "אַתָּה בְּשִׁבְעַת יְמֵי מִלּוּאִים אֹתָם סָפַֽרְתָּ.",
+      "transliteration": "Atta beshiv‘at yemē millu’im otam safarta.",
+      "english": "You counted seven days of inauguration [for] them.",
+      "comments": "",
+      "timing": {
+        "start": 57.03,
+        "end": 72.57
+      }
+    },
+    {
+      "hebrew": "אַתָּה כֹּהֲנֶֽיךָ הִלְבַּֽשְׁתָּ בִּגְדֵי יֶֽשַׁע, וְנֵֽזֶר בְּרֹאשָׁם עִטַּֽרְתָּ.",
+      "transliteration": "Atta kohanekha hilbashta biḡdē yesha‘, venezer berosham ‘ittarta.",
+      "english": "You clothed Your priests in garments of success, and crowned their heads with a diadem.",
+      "comments": "",
+      "timing": {
+        "start": 72.57,
+        "end": 86.73
+      }
+    },
+    {
+      "hebrew": "אַתָּה בַּשְּׁמִינִי לְהַקְרִיב קָרְבָּנָם הִזְכַּֽרְתָּ.",
+      "transliteration": "Atta bash’shemini lehaḳriv ḳorbanam hizkarta.",
+      "english": "You notified them to offer their sacrifice on the eighth day.",
+      "comments": "",
+      "timing": {
+        "start": 86.73,
+        "end": 101.1
+      }
+    },
+    {
+      "hebrew": "אַתָּה כְּבוֹדְךָ אֲלֵיהֶם הִרְאִֽיתָ וְהֶאֱדַֽרְתָּ.",
+      "transliteration": "Atta kevodekha alehem hir’ita vehe’edarta.",
+      "english": "You showed Your Glory to them and ennobled it.",
+      "comments": "",
+      "timing": {
+        "start": 101.1,
+        "end": 117.0
+      }
+    },
+    {
+      "hebrew": "אַתָּה אֵשׁ לֶאֱכוֹל הָעוֹלָה מִמְּרוֹמִים גָּזַֽרְתָּ.",
+      "transliteration": "Atta esh le’ekhol ha‘ola mimmeromim gazarta.",
+      "english": "You decreed a fire to consume the burnt offering from on high.",
+      "comments": "",
+      "timing": {
+        "start": 117.0,
+        "end": 129.17
+      }
+    },
+    {
+      "hebrew": "אַתָּה נָדָב וַאֲבִיהוּא – בְּהַקְרִיבָם אֵשׁ זָרָה הֶעְדַּֽרְתָּ.",
+      "transliteration": "Atta Nadav va’Avihu – behaḳrivam esh zara he‘darta.",
+      "english": "You annihilated Nadab and Abihu, when they offered a foreign fire.",
+      "comments": "",
+      "timing": {
+        "start": 129.17,
+        "end": 142.43
+      }
+    },
+    {
+      "hebrew": "אַתָּה יַֽיִן וְשֵׁכָר לְבַל יִשְׁתּוּ בְּשָׁעַת עֲבוֹדָה הִזְהַֽרְתָּ.",
+      "transliteration": "Atta yayin veshekhar leval yishtu besha‘at ‘avoda hizharta.",
+      "english": "You admonished them not to drink wine or strong drink at the time of their service.",
+      "comments": "",
+      "timing": {
+        "start": 142.43,
+        "end": 159.0
+      }
+    },
+    {
+      "hebrew": "אַתָּה לְהַבְדִּיל בֵּין קֹֽדֶשׁ לְחוֹל אָמַֽרְתָּ.",
+      "transliteration": "Atta lehavdil ben ḳodesh leḥol amarta.",
+      "english": "You said to distinguish between holy and profane.",
+      "comments": "",
+      "timing": {
+        "start": 159.0,
+        "end": 170.2
+      }
+    },
+    {
+      "hebrew": "אַתָּה לְהוֹרוֹת בֵּין טָמֵא לְטָהוֹר אֲשֶׁר טִהַֽרְתָּ.",
+      "transliteration": "Atta lehorot ben tamē letahor asher tiharta.",
+      "english": "You [commanded the priests] to give instruction [to distinguish] between the impure and the pure that You have made pure.",
+      "comments": "",
+      "timing": {
+        "start": 170.2,
+        "end": 183.57
+      }
+    },
+    {
+      "hebrew": "אַתָּה בְּסִימְנֵי אוֹת הוֹרֵֽיתָ כַּאֲשֶׁר דִּבַּֽרְתָּ.",
+      "transliteration": "Atta besimenē ot horeta ka’asher dibbarta.",
+      "english": "You taught the marks and signs, as You have spoken [them].",
+      "comments": "",
+      "timing": {
+        "start": 183.57,
+        "end": 196.63
+      }
+    },
+    {
+      "hebrew": "אַתָּה לְבַל יְשַׁקְּצוּ נַפְשָׁם, בָּנֶֽיךָ הֶאֱמַֽרְתָּ.",
+      "transliteration": "Atta leval yeshaḳḳetsu nafsham banekha he’emarta.",
+      "english": "You said to Your children that they should not make themselves vile.",
+      "comments": "",
+      "timing": {
+        "start": 196.63,
+        "end": 212.27
+      }
+    },
+    {
+      "hebrew": "אַתָּה קִדַּֽשְׁתָּ לְעַמְּךָ בְּמִצְוֹת, וְהִגְבַּֽרְתָּ.",
+      "transliteration": "Atta ḳiddashta le‘ammekh bemitsvot, vehiḡbarta,",
+      "english": "You have sanctified Your people with commandments, and made them strong.",
+      "comments": "",
+      "timing": {
+        "start": 212.27,
+        "end": 224.07
+      }
+    },
+    {
+      "hebrew": "אַתָּה אֶחָד, וְהֵם גּוֹי אֶחָד הוֹתַֽרְתָּ.",
+      "transliteration": "Atta eḥad, vehem goy eḥad hotarta.",
+      "english": "You are one, and they are one nation, which you have preserved.",
+      "comments": "",
+      "timing": {
+        "start": 224.07,
+        "end": 236.6
+      }
+    },
+    {
+      "hebrew": "קהל: אַתָּה נוֹרָא, וְכֻלָּם יָצַֽרְתָּ, וְלֹא נוֹצַֽרְתָּ.",
+      "transliteration": "Ḳahal: Atta nora vekhullam yatsarta, velo notsarta.",
+      "english": "Cong. You are awesome, and You created all, but You were not created.",
+      "comments": "",
+      "timing": {
+        "start": 236.6,
+        "end": 245.13
+      }
+    },
+    {
+      "hebrew": "חזן: וְאַתָּה־ה֑וּא וּ֝שְׁנוֹתֶ֗יךָ לֹ֣א יִתָּֽמּוּ׃ (תהלים קב:כח)",
+      "transliteration": "Ḥazzan: Ve’atta hu ushnotekha lo yittammu:",
+      "english": "Cantor. And You are He, whose days will never end. (Ps. 102:28)",
+      "comments": "",
+      "timing": {
+        "start": 245.13,
+        "end": 254.63
+      }
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל: (תהלים כב:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Cong. And You are holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/26-vayhi-bayyom-hashemini.mp3",
+  "author_en": "Aaron ben Joseph"
+}

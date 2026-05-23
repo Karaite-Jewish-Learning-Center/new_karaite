@@ -1,0 +1,424 @@
+{
+  "id": "04-vayyera",
+  "title_en": "Vayyera",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֵיתָן, אַחַר כְּלוֹת בְּרִיתוֹ וּבְרִית כָּל־הֲמוֹנָיו,",
+      "transliteration": "Etan, aḥar kelot berito uvrit kol hamonav,",
+      "english": "Ethan—after the conclusion of his covenant [of circumcision], and that of all his multitudes,",
+      "comments": "Ethan. Abraham.",
+      "timing": {
+        "start": 0,
+        "end": 17.8
+      }
+    },
+    {
+      "hebrew": "הָרְאָה אֵלָיו יוי בְּמַרְאוֹת חֶזְיוֹנָיו.",
+      "transliteration": "Haroh elav Adonai bemarot ḥezyonav.",
+      "english": "Adonai appeared to him in visions, appearances.",
+      "comments": "",
+      "timing": {
+        "start": 17.8,
+        "end": 31.7
+      }
+    },
+    {
+      "hebrew": "רָחַשׁ לְבָבוֹ וְנָשָׂא עֵינָיו.",
+      "transliteration": "Raḥash levavo venasa ‘enav.",
+      "english": "His heart was astir, and he lifted up his eyes.",
+      "comments": "",
+      "timing": {
+        "start": 31.7,
+        "end": 48.13
+      }
+    },
+    {
+      "hebrew": "נוֹדְעוּ אֵלָיו שְׁלֹשָׁה אֲנָשִׁים אֱמוּנָיו;",
+      "transliteration": "Node‘u elav shelosha anashim emunav;",
+      "english": "He noticed three men, His faithful ones;",
+      "comments": "",
+      "timing": {
+        "start": 48.13,
+        "end": 60.73
+      }
+    },
+    {
+      "hebrew": "רָץ לִקְרָאתָם בְּטוּב רַעְיוֹנָיו,",
+      "transliteration": "Rats liḳratam betuv ra‘yonav,",
+      "english": "He ran to greet them, with good thoughts,",
+      "comments": "",
+      "timing": {
+        "start": 60.73,
+        "end": 77.13
+      }
+    },
+    {
+      "hebrew": "הִרְבָּה אֲלֵיהֶם תַּחֲנוּנָיו בְּמֵיטַב הֶגְיוֹנָיו,",
+      "transliteration": "Hirba alehem taḥanunav bemetav heḡyonav,",
+      "english": "He greatly entreated them, with the best of intentions.",
+      "comments": "",
+      "timing": {
+        "start": 77.13,
+        "end": 90.8
+      }
+    },
+    {
+      "hebrew": "מְעַט הִזְכִּיר וְהִרְבָּה עֲדָנָיו.",
+      "transliteration": "Me‘at hizkir vehirba ‘adanav.",
+      "english": "He mentioned little, but had many delicacies prepared.",
+      "comments": "",
+      "timing": {
+        "start": 90.8,
+        "end": 105.8
+      }
+    },
+    {
+      "hebrew": "מַטְמוּנֵי סוֹד גִּלּוּ לוֹ, וּמַצְפֻּנָיו:",
+      "transliteration": "Matmunē sod gillu lo umatspunav:",
+      "english": "They revealed concealed secrets to him, and esoterica:",
+      "comments": "",
+      "timing": {
+        "start": 105.8,
+        "end": 119.13
+      }
+    },
+    {
+      "hebrew": "אֶחָד בִּשְּׂרוֹ כִּי יוֹלִיד בֵּן לִזְקוּנָיו,",
+      "transliteration": "Eḥad bissero ki yolid ben lizḳunav,",
+      "english": "One announced to him that he would sire a son in his old age,",
+      "comments": "",
+      "timing": {
+        "start": 119.13,
+        "end": 135.17
+      }
+    },
+    {
+      "hebrew": "וּשְׁנֵיהֶם לְהַפֵּךְ סְדוֹם וּלְהַצִּיל לוֹט מִיַּד מַשְׂטִינָיו.",
+      "transliteration": "Ushnehem lehappekh sedom ulhats’tsil Lot miyyad mastinav.",
+      "english": "And two of them [went] to overturn Sodom, and rescue Lot from the hands of his enemies.",
+      "comments": "",
+      "timing": {
+        "start": 135.17,
+        "end": 153.6
+      }
+    },
+    {
+      "hebrew": "אָז קָרַב אַב הָמוֹן לָדַֽעַת רָז וְעִנְיָנָיו׃",
+      "transliteration": "Az ḳarav Av Hamon lada‘at raz ve‘inyanav:",
+      "english": "Then the father of a multitude drew near, to know the secret and its details:",
+      "comments": "Father of a multitude. Abraham.",
+      "timing": {
+        "start": 153.6,
+        "end": 169.73
+      }
+    },
+    {
+      "hebrew": "? \"הַאֵין מִבְדָּל בֵּין עִקֵּשׁ לְנָבָר, בְּמִשְׁפְּטֵי אֵל וְדִינָיו",
+      "transliteration": "“Ha’en mivdal ben ‘iḳḳesh lenavar, bemishpetē El vedinav?",
+      "english": "“Is there no distinction between perverse and pure, in God’s judgments and rulings?",
+      "comments": "",
+      "timing": {
+        "start": 169.73,
+        "end": 188.23
+      }
+    },
+    {
+      "hebrew": "וְעֵינֵי יוי הֵֽמָּה מְשׁוֹטְטוֹת, וְהַכֹּל גָּלוּי לְפָנָיו!\"",
+      "transliteration": "Ve‘enē Adonai hemma meshotetot, vehakkol galuy lefanav!”",
+      "english": "But Adonai’s eyes scan [the world], and everything is revealed to Him!”",
+      "comments": "",
+      "timing": {
+        "start": 188.23,
+        "end": 208.2
+      }
+    },
+    {
+      "hebrew": "וּמֵחֲמִשִּׁים עַד עֲשָׂרָה הָיוּ מִבְחָנָיו,",
+      "transliteration": "Umeḥamish’shim ‘ad ‘asara hayu mivḥanav,",
+      "english": "And [Abraham] examined if there were fifty, [even down] to ten,",
+      "comments": "",
+      "timing": {
+        "start": 208.2,
+        "end": 222.2
+      }
+    },
+    {
+      "hebrew": "הֱיוֹת לְכָל־עִיר שְׁנַֽיִם מִנֶּאֱמָנָיו.",
+      "transliteration": "Heyot lekhol ‘ir shenayim minne’emanav.",
+      "english": "[That is, if] there were [even] two of [God’s] faithful in each city [of the five].",
+      "comments": "",
+      "timing": {
+        "start": 222.2,
+        "end": 235.17
+      }
+    },
+    {
+      "hebrew": "וְלֹא נִמְצָא יְרֵא יוי, מְמַלֵּא רְצוֹנָיו.",
+      "transliteration": "Velo nimtsa yerē Adonai, memallē retsonav.",
+      "english": "But no one was found who feared Adonai, who fulfilled His will.",
+      "comments": "",
+      "timing": {
+        "start": 235.17,
+        "end": 252.27
+      }
+    },
+    {
+      "hebrew": "אֲזַי הִשְׁחִית הַמָּקוֹם בְּכַֽעַס חֲרוֹנָיו.",
+      "transliteration": "Azai hish’ḥit hammaḳom bekha‘as ḥaronav.",
+      "english": "Then He destroyed the place, with His raging anger,",
+      "comments": "",
+      "timing": {
+        "start": 252.27,
+        "end": 269.6
+      }
+    },
+    {
+      "hebrew": "וְשִׁלַּח לוֹט מִתּוֹךְ הַהֲפֵכָה, כִּי יָקְרָה נַפְשׁוֹ בְּעֵינָיו.",
+      "transliteration": "Veshillaḥ Lot mittokh hahafekha, ki yaḳera nafsho be‘enav.",
+      "english": "And sent out Lot from the midst of the upheaval, for his life was dear in His eyes.",
+      "comments": "",
+      "timing": {
+        "start": 269.6,
+        "end": 288.03
+      }
+    },
+    {
+      "hebrew": "וּבְחֶשְׁקוֹ אֲבִימֶֽלֶךְ אֲהוּבַת רֵֽעַ – קוֹל פְּחָדִים בְּאָזְנָיו!",
+      "transliteration": "Uvḥeshḳo Avimelekh ahuvat re’a‘ – ḳol peḥadim be’oznav!",
+      "english": "When Abimelech desired the beloved of [God’s] friend, there was a fearsome voice in his ears—",
+      "comments": "The beloved of [God’s] friend. Sarah, the beloved of God’s friend Abraham.",
+      "timing": {
+        "start": 288.03,
+        "end": 306.23
+      }
+    },
+    {
+      "hebrew": "כְּמֶֽלֶךְ כְּהֵֽלֶךְ, כָּעֶֽבֶד כַּאדֹנָיו,",
+      "transliteration": "Kemelekh kehelekh, ka‘eved kadonav,",
+      "english": "Wayfarer and king, servant and master,",
+      "comments": "",
+      "timing": {
+        "start": 306.23,
+        "end": 318.1
+      }
+    },
+    {
+      "hebrew": "יִסָּֽפוּ, אִם לֹא יָשִׁיב אֵֽשֶׁת הַנָּבִיא אֶל מְלוֹנָיו.",
+      "transliteration": "Yissafu, im lo yashiv eshet hannavi el melonav.",
+      "english": "Would perish, if [Abimelech] would not return the prophet’s wife to his lodgings.",
+      "comments": "",
+      "timing": {
+        "start": 318.1,
+        "end": 333.33
+      }
+    },
+    {
+      "hebrew": "וַיוי פָּקַד אֶת־שָׂרָה מִמְּכוֹן מְעוֹנָיו,",
+      "transliteration": "Va’Adonai paḳad et Sara mimmekhon me‘onav",
+      "english": "And Adonai took note of Sarah, from the place of His [heavenly] abode,",
+      "comments": "",
+      "timing": {
+        "start": 333.33,
+        "end": 349.5
+      }
+    },
+    {
+      "hebrew": "וַתֵּֽלֶד בֵּן כַּאֲשֶׁר דִּבֵּר אֱלֹהִים בִּזְמַנָּיו.",
+      "transliteration": "Vatteled ben ka’asher dibber Elohim bizmannav.",
+      "english": "And she gave birth to a son in his [due] time, as God had said.",
+      "comments": "",
+      "timing": {
+        "start": 349.5,
+        "end": 365.47
+      }
+    },
+    {
+      "hebrew": "וְהִרְחִיק אָמָה וּבְנָהּ מִמִּבְחַר פְּנִינָיו.",
+      "transliteration": "Vehirḥiḳ ama uvnah mimmivḥar peninav.",
+      "english": "And he distanced the handmaiden and her son from his select pearls.",
+      "comments": "The handmaiden and her son. Hagar and Ishmael.",
+      "timing": {
+        "start": 365.47,
+        "end": 382.57
+      }
+    },
+    {
+      "hebrew": "וּבִבְנוֹ יְחִידוֹ נֻסָּה בְנִסְיוֹנָיו,",
+      "transliteration": "Uvivno yeḥido nussa venisyonav,",
+      "english": "And [Abraham] was tested, among his tests, with his only son—",
+      "comments": "",
+      "timing": {
+        "start": 382.57,
+        "end": 398.4
+      }
+    },
+    {
+      "hebrew": "לְהַעֲלֹתוֹ אֶל הַר הַמּוֹריה יַחְשְׁבֵֽהוּ לוֹ כְּצֹאנָיו.",
+      "transliteration": "Leha‘a lot el har hamMoriyya yaḥ’shevehu lo ketsonav.",
+      "english": "To bring him up to Mount Moriah, and consider him like his sheep.",
+      "comments": "Mount Mor. Mount Sinai.",
+      "timing": {
+        "start": 398.4,
+        "end": 413.4
+      }
+    },
+    {
+      "hebrew": "וּמֵרֹב אַהֲבָתוֹ לְצוּרוֹ הִשְׁכִּים וְשִׁנֵּס מָתְנָיו.",
+      "transliteration": "Umerov ahavato letsuro hishkim veshinnes motnav.",
+      "english": "And due to his great love for his Rock, he rose early and girded his loins;",
+      "comments": "",
+      "timing": {
+        "start": 413.4,
+        "end": 432.63
+      }
+    },
+    {
+      "hebrew": "וּבְבוֹאוֹ בִּמְקוֹם הַקֹּֽדֶשׁ, וּשְׁנֵי נְעָרָיו לְפָנָיו,",
+      "transliteration": "Uv’vo’o bimḳom haḳḳodesh, ushnei ne‘arav lefanav",
+      "english": "And when he reached the place of holiness, with his two [attending] young men before him,",
+      "comments": "",
+      "timing": {
+        "start": 432.63,
+        "end": 446.13
+      }
+    },
+    {
+      "hebrew": "הוֹשִׁיבָם עִם הַחֲמוֹר, פֶּן יֵדְעוּ צְפוּנָיו.",
+      "transliteration": "Hoshivam ‘im haḥamor, pen yed‘u tsefunav.",
+      "english": "He had them stay with the ass, lest they know his secret [designs].",
+      "comments": "",
+      "timing": {
+        "start": 446.13,
+        "end": 462.2
+      }
+    },
+    {
+      "hebrew": "וְהָאָב עִם בְּנוֹ הָלַךְ לְהַפְקִיד פִּקְדוֹנָיו;",
+      "transliteration": "Veha’av ‘im beno halakh lehafḳid piḳdonav;",
+      "english": "The father walked with his son, to give back his charge.",
+      "comments": "",
+      "timing": {
+        "start": 462.2,
+        "end": 475.27
+      }
+    },
+    {
+      "hebrew": "עֲקָדוֹ, וְשָׂם הַמַּאֲכֶֽלֶת עַל צַוְּארוֹנָיו.",
+      "transliteration": "‘aḳado vesam hamma’akhelet ‘al tsavveronav.",
+      "english": "He bound him, and placed the knife at his neck.",
+      "comments": "",
+      "timing": {
+        "start": 475.27,
+        "end": 492.2
+      }
+    },
+    {
+      "hebrew": "קוֹל מִמְּרוֹמִים שָׁמְעוּ אָזְנָיו׃",
+      "transliteration": "Ḳol mimmeromim shame‘u oznav:",
+      "english": "His ears heard a voice from on high:",
+      "comments": "",
+      "timing": {
+        "start": 492.2,
+        "end": 508.37
+      }
+    },
+    {
+      "hebrew": "\"אַל תִּשְׁלַח יָדְךָ אֶל הַנַּֽעַר, כִּי עָצְמוּ שְׂשׂוֹנָיו!",
+      "transliteration": "“Al tishlaḥ yadekha el hanna‘ar, ki ‘atsemu sesonav!",
+      "english": "“Do not set your hand against the boy; rather, his joy has become great.",
+      "comments": "",
+      "timing": {
+        "start": 508.37,
+        "end": 526.6
+      }
+    },
+    {
+      "hebrew": "זֶה עֶֽשֶׂר פְּעָמִים נִסִּיתִֽיךָ; עַתָּה יִכָּתֵב זִכְרוֹנְךָ וְזִכְרוֹנָיו.\"",
+      "transliteration": "Zē ‘eser pe‘amim nissitikha; ‘atta yikkatev zikhronekha vezikhronav.”",
+      "english": "I have tested you these ten times; now you and he will be memorialized in writing.”",
+      "comments": "",
+      "timing": {
+        "start": 526.6,
+        "end": 545.33
+      }
+    },
+    {
+      "hebrew": "אַחַר כָּל־זֶה נָשָׂא אִישׁוֹנָיו,",
+      "transliteration": "Aḥar kol zē nasa ishonav,",
+      "english": "After all this, he lifted up his eyes,",
+      "comments": "",
+      "timing": {
+        "start": 545.33,
+        "end": 559.43
+      }
+    },
+    {
+      "hebrew": "וַיַּרְא אַֽיִל אַחַר נֶאֱחַז בַּסְּבַךְ בְּקַרְנָיו;",
+      "transliteration": "Vayar ayil aḥar ne’eḥaz bassevakh beḳarnav;",
+      "english": "And he saw, behind, a ram, entangled in the thicket by its horns;",
+      "comments": "",
+      "timing": {
+        "start": 559.43,
+        "end": 572.4
+      }
+    },
+    {
+      "hebrew": "וְתַֽחַת בְּנוֹ הֶעֶלָֽהוּ לְעֹלָה, וְחֹק זֶה הוּחַק לְבָנָיו׃",
+      "transliteration": "Vetaḥat beno he‘elahu le‘ola, veḥoḳ zē huḥaḳ levanav:",
+      "english": "He offered it as a burnt offering instead of his son, and this decree was inscribed for his children:",
+      "comments": "",
+      "timing": {
+        "start": 572.4,
+        "end": 589.7
+      }
+    },
+    {
+      "hebrew": "זְכוּתוֹ תַּשִּׂיג לִבְנֵי בָנָיו,",
+      "transliteration": "Zekhuto tassiḡ livnē vanav,",
+      "english": "That his merit would reach his children’s children,",
+      "comments": "",
+      "timing": {
+        "start": 589.7,
+        "end": 600.8
+      }
+    },
+    {
+      "hebrew": "וְיִבָּנֶה מִקְדַּשׁ אֵל עַל יֹֽשֶׁר אֲבָנָיו.",
+      "transliteration": "Veyibbanē miḳdash el ‘al yosher avanav.",
+      "english": "And God’s Temple would be built upon the stones of his righteousness.",
+      "comments": "",
+      "timing": {
+        "start": 600.8,
+        "end": 610.73
+      }
+    },
+    {
+      "hebrew": "קהל: מְקוֹם אֲבָנָיו יִהְיוּ סַפִּירִים בְּבִנְיָנָיו.",
+      "transliteration": "Ḳahal: Meḳom avanav yihyu sappirim bevinyanav.",
+      "english": "Cong. May the places of his stones be of lapis lazuli when they are built.",
+      "comments": "",
+      "timing": {
+        "start": 610.73,
+        "end": 623.43
+      }
+    },
+    {
+      "hebrew": "חזן: כִּֽי־בָנָ֣ה יו֣י צִיּ֑וֹן נִ֝רְאָ֗ה בִּכְבוֹדֽוֹ׃ (תהלים קב:יז)",
+      "transliteration": "Ḥazzan: Ki vana Adonai tsiyyon nir’a bikhvodo:",
+      "english": "Cantor: For Adonai has built Zion, he has appeared in His Glory. (Ps. 102:17)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: בָּר֥וּךְ כְּבֽוֹד־יו֖י מִמְּקוֹמֽוֹ׃ (יחזקאל ג:יב)",
+      "transliteration": "Ḳahal: Barukh kevod Adonai mimmeḳomo:",
+      "english": "Cong. Blessed is Adonai’s Glory from His place. (Ezek. 3:12)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/04-vayyera.mp3",
+  "author_en": "Aaron ben Joseph"
+}

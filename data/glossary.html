@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ali ibn Suleiman, Commentary on Genesis — Glossary</title>
+<style>
+:root {
+  --text: #222;
+  --muted: #555;
+  --rule: #e2e2e2;
+  --section: #f4f4f4;
+  --link: #0563c1;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, "Charter", "Iowan Old Style", Georgia, serif;
+  max-width: 760px;
+  margin: 2.5rem auto;
+  padding: 0 1.25rem 4rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2.25rem 0 0.5rem;
+  padding: 0.35rem 0.6rem;
+  background: var(--section);
+  border-radius: 3px;
+}
+h3 {
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 600;
+  margin: 1.5rem 0 0.25rem;
+}
+p { margin: 0.6rem 0; }
+ul { padding-left: 1.25rem; margin: 0.6rem 0; }
+li { margin: 0.35rem 0; }
+em.translit { font-style: italic; }
+.subtitle {
+  font-style: italic;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+.sources { font-size: 0.9rem; }
+.sources li { margin: 0.25rem 0; }
+
+/* Glossary table */
+table.glossary {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.glossary th {
+  text-align: left;
+  background: var(--section);
+  padding: 0.55rem 0.6rem;
+  border-bottom: 2px solid var(--rule);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.glossary td {
+  padding: 0.65rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.glossary tr.section td {
+  background: var(--section);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.7rem 0.6rem;
+}
+.glossary .term {
+  font-style: italic;
+  font-weight: 600;
+  width: 26%;
+}
+.glossary .term.subentry {
+  padding-left: 1.5rem;
+  font-weight: 500;
+}
+.glossary .term.subentry::before {
+  content: "↳ ";
+  color: var(--muted);
+  margin-right: 0.15rem;
+}
+.glossary .arabic {
+  font-family: "Geeza Pro", "Amiri", "Scheherazade", "Times New Roman", serif;
+  direction: rtl;
+  text-align: right;
+  font-size: 1.2rem;
+  width: 22%;
+  white-space: nowrap;
+}
+.glossary .definition { width: 52%; }
+
+/* Read Me page — links */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul.start-links { list-style: none; padding-left: 0; }
+ul.start-links li {
+  margin: 0.65rem 0;
+  padding: 0.65rem 0.9rem;
+  background: var(--section);
+  border-radius: 4px;
+}
+ul.start-links a {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+ul.start-links .descr {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+  font-weight: normal;
+}
+ul.chapter-grid {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.4rem 0.6rem;
+  margin-top: 1rem;
+}
+ul.chapter-grid li { margin: 0; }
+ul.chapter-grid a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-align: center;
+  font-weight: 500;
+}
+ul.chapter-grid a:hover {
+  background: var(--section);
+  text-decoration: none;
+}
+
+/* Sponsor line */
+.sponsor {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin: 0.25rem 0 1.5rem;
+}
+
+/* Support / donation block */
+.support {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  background: var(--section);
+  border-radius: 4px;
+}
+.support p { margin: 0.4rem 0; }
+.donate-button {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.7rem 1.25rem;
+  background: var(--link);
+  color: white !important;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.donate-button:hover {
+  background: #034a99;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+<h1>Glossary</h1>
+<p class="subtitle">Recurring technical Arabic vocabulary in Ali's footnotes. Compiled from 615 footnotes across all 28 chapters.</p>
+<table class="glossary">
+  <thead><tr><th class='term'>Term</th><th class='arabic'>Arabic</th><th class='definition'>Definition</th></tr></thead>
+  <tbody>
+    <tr class="section"><td colspan="3">A. Kalām &amp; theology</td></tr>
+    <tr><td class="term">al-taklīf</td><td class="arabic">التكليف</td><td class="definition">"[legal] obligation" The kalām category of acts that fall under divine command rather than mere permission. The cluster of doctrines around <em>taklīf</em> is the central Muʿtazilite-Karaite ethical framework Ali presupposes throughout.</td></tr>
+    <tr><td class="term subentry">taklīf lā yuṭāq</td><td class="arabic">تكليف لا يطاق</td><td class="definition">"an obligation that cannot be borne"; the classical category of "imposition beyond capacity," rejected as theologically impossible by the Muʿtazila (and so by Ali).</td></tr>
+    <tr><td class="term">al-mukallaf / al-mukallafīn</td><td class="arabic">المكلَّف / المكلَّفين</td><td class="definition">"The [morally] obligated, the one legally charged, the [responsible] agent." The standard Muʿtazilite designation for the class of rational creatures upon whom religious obligation falls.</td></tr>
+    <tr><td class="term">qādir and mutamakkin</td><td class="arabic">قادر and متمكِّن</td><td class="definition">A paired kalām formula for the preconditions of moral accountability: <em>qādir</em> is "capable" (granted the ability to act), <em>mutamakkin</em> is "enabled, in firm possession of the power to act" (unobstructed in the exercise of that ability). Together they constitute the kalām conditions that must be satisfied before <em>taklīf</em> can rightly attach to an agent.</td></tr>
+    <tr><td class="term">al-ʿāda</td><td class="arabic">العادة</td><td class="definition">"[established] custom / regular course of nature" The kalām term for the ordinary order of nature as God's habitual mode of acting (<em>al-ʿādāt al-ilāhiyya</em>). For Ash'arites this language replaces nature-causality outright; for the Muʿtazilī-leaning Karaites the picture is softer, but the regularity is still a <em>divine</em> habit, not an intrinsic necessity.</td></tr>
+    <tr><td class="term subentry">naqḍ ʿāda</td><td class="arabic">نقض عادة</td><td class="definition">"breach of custom"; the standard kalām/uṣūl designation of the miraculous as a punctuated interruption of the regularity God customarily maintains.</td></tr>
+    <tr><td class="term">al-ṣalāḥ</td><td class="arabic">الصلاح</td><td class="definition">"right action, [moral] soundness" In the Muʿtazilite kalām that informs much Karaite theology, the ethically right course of action. Distinguished from <strong>al-aṣlaḥ</strong> (الأصلح), "the [ethically] optimal" — the doctrine that God must will the most salutary outcome for His creatures.</td></tr>
+    <tr><td class="term">al-taʿlīl</td><td class="arabic">التعليل</td><td class="definition">"providing the rationale, [stating the] efficient cause" The uṣūl al-fiqh term for indicating the legal reason behind a ruling. Karaite hermeneutics widely admits <em>taʿlīl</em> of biblical commandments where the text yields a discernible rationale.</td></tr>
+    <tr><td class="term">al-shubha</td><td class="arabic">الشبهة</td><td class="definition">"[evidential] doubt, [the appearance of warrant]" The uṣūl al-fiqh category of the apparent-but-unsound reason that mitigates culpability. An agent acting under genuine <em>shubha</em> is not held fully responsible for what would otherwise be a wrong.</td></tr>
+    <tr><td class="term">al-tawfīq</td><td class="arabic">التوفيق</td><td class="definition">"[divine] success-granting, [the] gracious-aid" The kalām term for the divine assistance that conduces to the agent's right action — contrasted with <strong>khidhlān</strong> (خذلان, "abandonment"), God's withholding of that aid.</td></tr>
+    <tr><td class="term">ʿilm / ʿulūm</td><td class="arabic">علم / علوم</td><td class="definition">"knowledge" / "[branches of] knowledge" Propositional knowledge; in some contexts the cognitive faculties God implants. Often paired or contrasted with <strong>qudar</strong> (قُدَر), the [granted] capacities for action — the standard kalām pair: God endows each <em>mukallaf</em> with the <em>ʿulūm</em> and <em>qudar</em> required to discharge what He commands.</td></tr>
+    <tr><td class="term">manzila</td><td class="arabic">منزلة</td><td class="definition">"rank, station" Technical kalām term for the moral-ontological status of an agent. The Muʿtazilite slogan <em>al-manzila bayna al-manzilatayn</em> ("the position between the two positions") refers to their intermediate status of the grave sinner — neither believer nor unbeliever. Ali uses <em>manzila</em> generally for moral standing.</td></tr>
+    <tr><td class="term">qabīḥ</td><td class="arabic">قبيح</td><td class="definition">"[ethically] ugly, [morally] foul" The Muʿtazilite-Karaite category of objective moral wrongness — paired with <strong>ḥasan</strong> ("[ethically] good"). Acts are <em>qabīḥ</em> in themselves, not merely because God has forbidden them; this is the cornerstone of the Muʿtazilite-Karaite rejection of divine-command voluntarism.</td></tr>
+    <tr><td class="term">al-rasūl</td><td class="arabic">الرسول</td><td class="definition">"the messenger" Ali's regular designation for Moses, usually with the honorific <em>ʿalayhi al-salām</em> "peace be upon him."</td></tr>
+    <tr class="section"><td colspan="3">B. Hermeneutics &amp; epistemology</td></tr>
+    <tr><td class="term">ḥaqīqa and majāz</td><td class="arabic">حقيقة and مجاز</td><td class="definition">"literal / figurative sense" The fundamental Arabic-rhetoric/uṣūl pair: <em>ḥaqīqa</em> is the primary lexical sense of an expression; <em>majāz</em> the metaphorical or extended sense. A central Karaite hermeneutic distinction, developed especially by Abū l-Faraj Hārūn.</td></tr>
+    <tr><td class="term">al-ẓāhir</td><td class="arabic">الظاهر</td><td class="definition">"the plain [sense], the manifest reading" The surface meaning of the text. Standardly contrasts with <strong>al-bāṭin</strong> ("the hidden, interior") and with <strong>majāz</strong>.</td></tr>
+    <tr><td class="term">taʾwīl</td><td class="arabic">تأويل</td><td class="definition">"interpretation, esoteric reading" The principled departure from <em>al-ẓāhir</em> when reason or another verse forbids the literal reading. Karaite <em>taʾwīl</em> is reason-constrained: it is admissible only where it is <em>required</em>, never as a default-mode of reading.</td></tr>
+    <tr><td class="term">samʿ / ʿaql</td><td class="arabic">سمع / عقل</td><td class="definition">"revealed report / reason" The Karaite-Muʿtazilite epistemological distinction between truths accessible to the unaided intellect (<strong>ʿaqlan</strong>) and those given only by authoritative transmission (<strong>samʿan</strong>). Many religious obligations (e.g., specific ritual forms) are <em>samʿī</em>; the existence of God and the wrongness of injustice are <em>ʿaqlī</em>.</td></tr>
+    <tr><td class="term subentry">sharʿī</td><td class="arabic">شرعي</td><td class="definition">"legal, [pertaining to] revealed Law"; the technical pair <em>lughawī / sharʿī</em> (lexical / legal) is a standard Karaite analytic distinction for whether a term's reference is fixed by language or by revelation.</td></tr>
+    <tr><td class="term">al-aqrab</td><td class="arabic">الأقرب</td><td class="definition">"the most plausible [reading]" Ali's signature marker for his own preferred reading after surveying alternatives. Contrasts with <strong>baʿīd</strong> (بعيد) — "improbable, far-fetched."</td></tr>
+    <tr><td class="term">qiyās</td><td class="arabic">قياس</td><td class="definition">"analogy" The rule of regular morphological/conceptual parallelism — central Karaite hermeneutic-grammatical category. Where attested, an analogical inference is guaranteed by the regular pattern, even where not directly attested (adverb: <strong>qiyāsan</strong> قياساً, "by analogy").</td></tr>
+    <tr><td class="term">dalāla</td><td class="arabic">دلالة</td><td class="definition">"[conventional] indication" The kalām/uṣūl term for the relation by which an expression indicates its meaning. Ali invokes <em>dalāla</em> in arguments that God <em>cannot</em> speak ambiguously where comprehension is required: the very purpose of revealed address presupposes a stable <em>dalāla</em> — and so [[taʾkhīr-al-bayān]] is ruled out in the strong form.</td></tr>
+    <tr><td class="term">taʾkhīr al-bayān</td><td class="arabic">تأخير البيان</td><td class="definition">"delaying of clarification" The uṣūl al-fiqh problem of whether a divine pronouncement may issue ambiguously and only later be clarified. The Karaites and the Muʿtazila reject this in the strong form: any ambiguity at the time-of-need would be a defect in divine speech.</td></tr>
+    <tr><td class="term">istithnāʾ</td><td class="arabic">استثناء</td><td class="definition">"[an] unstated condition, [implicit] exception" The uṣūl al-fiqh term for an unspoken qualifying clause that, if operative, would restrict an otherwise unconditional pronouncement. Ali uses <em>istithnāʾ</em> to argue that <em>some</em> apparent divine breaches of promise are actually the operation of an implicit conditional.</td></tr>
+    <tr><td class="term">mafsada</td><td class="arabic">مفسدة</td><td class="definition">"corruption, [thing that] produces harm" The legal-theoretical category of an act that yields net evil. Paired conceptually with <strong>maṣlaḥa</strong> (مصلحة) — the act that yields net benefit.</td></tr>
+    <tr><td class="term">amāra</td><td class="arabic">أمارة</td><td class="definition">"sign, indicator" The diagnostic feature by which one identifies a particular semantic value of a polysemous form. Used by Ali both for textual signs (an <em>amāra</em> in the verse pointing to one reading over another) and for evidential signs in argument.</td></tr>
+    <tr><td class="term">fī al-taḥqīq</td><td class="arabic">في التحقيق</td><td class="definition">"in actual fact" Pairs with <strong>al-ẓāhir</strong> as the level of underlying truth opposed to the surface impression. Where the <em>ẓāhir</em> of a verse says X but <em>fī al-taḥqīq</em> the matter is Y, Ali is signaling that the apparent reading is misleading.</td></tr>
+    <tr><td class="term">maʿrifa</td><td class="arabic">معرفة</td><td class="definition">"[discursive] understanding" In kalām: the cognitive grasp of a particular, often distinguished from <em>ʿilm</em> (propositional knowledge). <strong>Watch the polysemy:</strong> in grammatical contexts (e.g., Gen 9:228) <em>maʿrifa</em> means "[grammatically] definite" — a noun made determinate by the article, construct, or pronominal suffix, as opposed to <strong>nakira</strong> (نكرة, "indefinite").</td></tr>
+    <tr><td class="term">masʾala</td><td class="arabic">مسألة</td><td class="definition">"question, dialectical problem" The Karaite dialectical-question marker that opens a hypothetical objection answered below. Closely linked to the <strong>in qīla / kāna al-jawāb</strong> formula (see Dialectic).</td></tr>
+    <tr class="section"><td colspan="3">C. Grammar (<em>naḥw</em>)</td></tr>
+    <tr><td class="term">fiʿl mā lam yusamma fāʿiluhu</td><td class="arabic">فعل ما لم يسمَّ فاعله</td><td class="definition">"A verb whose agent is not named" — the standard Arabic-grammar term for the morphological passive (e.g., <em>ḍuriba</em>). Karaite grammarians use this designation for the Hebrew <em>niphal / puʿal / hophʿal</em> forms.</td></tr>
+    <tr><td class="term">wāw al-ʿaṭf</td><td class="arabic">واو العطف</td><td class="definition">"the <em>vāv</em> of conjunction" The standard Arabic-grammar designation for the coordinating <em>vāv</em>, taken over for Hebrew morphology. To be distinguished sharply from the <strong>nāqila</strong> (see below).</td></tr>
+    <tr><td class="term">nāqila</td><td class="arabic">ناقلة</td><td class="definition">"transferring, [tense-]shifting [<em>vāv</em>]" The Karaite grammatical doctrine of the <em>vāv</em>-conversive that toggles the apparent tense of a Hebrew verb. See al-Kāfī §§ on this device. The <em>vāv</em> is one of Ali's standing concerns; he is careful to distinguish <em>wāw al-ʿaṭf</em> from <em>nāqila</em> even when the surface form is identical.</td></tr>
+    <tr><td class="term">ẓarf</td><td class="arabic">ظرف</td><td class="definition">"temporal/locative adverb" The Arabic grammatical category of the temporal complement — equivalent to Hebrew <em>mafʿūl fīhi</em> in Abū l-Faraj's typology.</td></tr>
+    <tr><td class="term">waṣf</td><td class="arabic">وصف</td><td class="definition">"descriptive attribute / qualifier" The Arabic-grammar term for a qualifying expression. In analyzing an <em>iḍāfa</em> (genitive construction), interpreting the dependent term as a <em>waṣf</em> means it describes the head's own quality rather than relating it to a distinct entity.</td></tr>
+    <tr><td class="term">jins</td><td class="arabic">جنس</td><td class="definition">"genus, generic kind" Pairs with <strong>nawʿ</strong> (نوع), "species, particular kind." A foundational distinction for class-membership arguments.</td></tr>
+    <tr><td class="term">al-ḍamīr</td><td class="arabic">الضمير</td><td class="definition">"the pronoun" The Karaite-<em>naḥw</em> term covering both independent and bound pronouns — including bound personal-elements of verb prefixes and pronominal suffixes whose antecedent must be identified.</td></tr>
+    <tr><td class="term">amr</td><td class="arabic">أمر</td><td class="definition">"imperative" The standard Arabic-grammar term, applied here to Hebrew morphology.</td></tr>
+    <tr><td class="term">ḥukm</td><td class="arabic">حكم</td><td class="definition">"rule, regulation" The regular syntactic/semantic behavior of a lexeme. <strong>Watch the polysemy:</strong> <em>ḥukm</em> also means "ruling, judgment" (as in Gen 9:228 where Hebrew <em>ba-adam</em> is read as a substantive denoting human judicial agency).</td></tr>
+    <tr><td class="term">taqdīr</td><td class="arabic">تقدير</td><td class="definition">"supplied/virtual reading" The standard Arabic-grammar term for grammatically-required elements that must be understood without being expressed. Adverb: <strong>taqdīran</strong> (تقديراً), "by way of supplied/virtual reading" — as a notional supplement rather than as an actually-asserted reality. (Ali also uses <em>taqdīr</em> in its lexical sense "proportioning, measuring out," especially when recovering the etymological sense of <em>khalq</em> "creation" from classical Arab lexicography.)</td></tr>
+    <tr><td class="term">qibla</td><td class="arabic">قبلة</td><td class="definition">"acceptance, [direction-of-prayer]" The Qurʾānic/kalām term for the place to which acceptable prayer is directed. Ali uses <em>qibla</em> in this hierocentric sense in his treatment of Abraham's altar (Gen 22) and Jacob's stone (Gen 28).</td></tr>
+    <tr><td class="term">maḥaṭṭ</td><td class="arabic">محطّ</td><td class="definition">"central [clause], [pivot] point" The rhetorical/syntactic term for the load-bearing element of a multi- clause expression — the clause on which the meaning ultimately settles.</td></tr>
+    <tr class="section"><td colspan="3">D. Dialectical signature formulae</td></tr>
+    <tr><td class="term">qīla / wa-qīla</td><td class="arabic">قيل / وقيل</td><td class="definition">"it is said / and it has been said" Introduces an attributed prior view (often one Ali will reject). Cf. CONVENTIONS § Karaite signature formulae.</td></tr>
+    <tr><td class="term">in qīla … kāna al-jawāb</td><td class="arabic">إن قيل … كان الجواب</td><td class="definition">"if it be said … the answer is" The two halves of the Karaite <strong>masʾala</strong> (problem-and-answer) dialectic: a hypothetical objection followed by Ali's reply. The <em>masʾala</em> dialectic is the unit of argument throughout Ali's commentary.</td></tr>
+    <tr><td class="term">yajrī majrā</td><td class="arabic">يجري مجرى</td><td class="definition">"runs the course of, functions as" Ali's signature subsumption-formula bringing a Hebrew construction under a categorial rubric. Inflected forms: <em>yajrī majrāhumā</em> "runs the course of the two of them" (used for paired constructions).</td></tr>
+  </tbody>
+</table>
+</body>
+</html>

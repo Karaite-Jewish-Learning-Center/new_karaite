@@ -1,0 +1,256 @@
+{
+  "id": "51-attem-niẓẓavim",
+  "title_en": "Attem Niẓẓavim",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אַתָּה אֵל מִתְנַשֵּׂא, וְיֹשֵׁב בְּכִסֵּא מַמְלָכָה,",
+      "transliteration": "Atta el mitnassē, veyoshev bekhissē mamlakha,",
+      "english": "You are the uplifted God, seated on the throne of kingship,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 14.67
+      }
+    },
+    {
+      "hebrew": "הַמַּצִּיב לְעַמְּךָ, מַעֲרָכָה לִקְרַאת מַעֲרָכָה:",
+      "transliteration": "Hammats’tsiv le‘ammekha, ma‘arakha liḳrat ma‘arakha:",
+      "english": "[You] who have Your people stand, formation facing formation:",
+      "comments": "",
+      "timing": {
+        "start": 14.67,
+        "end": 28.13
+      }
+    },
+    {
+      "hebrew": "רָאשֵׁיכֶם, שִׁבְטֵיכֶם, זִקְנֵיכֶם – עֵדָה מִימֵי בְרֵאשִׁית נִמְשָׁכָה,",
+      "transliteration": "Rashekhem, shivtekhem, ziḳnekhem – ‘eda mimē vereshit nimshakha,",
+      "english": "Your heads [of] your tribes, your elders [of] the congregation that has been drawn forth since the time of creation,",
+      "comments": "",
+      "timing": {
+        "start": 28.13,
+        "end": 43.6
+      }
+    },
+    {
+      "hebrew": "נִצְּבוּ כֻלָּם, טַף וְאִשָּׁה, חֹטֵב עֵצִים וְשֹׁאֵב מֵימֵי בְרֵכָה.",
+      "transliteration": "Nits’tsevu khullam, taf ve’ish’sha, ḥotev ‘etsim vesho’ev memē verekha.",
+      "english": "They are all standing, children and women, woodchoppers and drawers of water from pools.",
+      "comments": "",
+      "timing": {
+        "start": 43.6,
+        "end": 58.1
+      }
+    },
+    {
+      "hebrew": "לַעֲבֹר בִּבְרִית שָׂם לָהֶם עֲרוּכָה,",
+      "transliteration": "La‘avor bivrit sam lahem ‘arukha,",
+      "english": "He gave them a fully drawn-up covenant into which to induct [them],",
+      "comments": "",
+      "timing": {
+        "start": 58.1,
+        "end": 70.77
+      }
+    },
+    {
+      "hebrew": "לְמַֽעַן הָקִים אוֹתָם לוֹ לְעַם, נַחֲלָה בְרוּכָה.",
+      "transliteration": "Lema‘an haḳim lo le‘am, naḥala verukha.",
+      "english": "In order to establish them as His people, [His] blessed inheritance.",
+      "comments": "",
+      "timing": {
+        "start": 70.77,
+        "end": 83.57
+      }
+    },
+    {
+      "hebrew": "לְיֶשְׁנוֹ וְלַדֹּרוֹת הַבָּאוֹת אַחֲרֵיהֶם, [בְּרִיתוֹ] נִמְשָׁכָה.",
+      "transliteration": "Leyeshno veladdorot habba’ot aḥarehem, berito nimshakha.",
+      "english": "To those who are present, and [also] to the generations to come after them, His covenant extends.",
+      "comments": "",
+      "timing": {
+        "start": 83.57,
+        "end": 96.47
+      }
+    },
+    {
+      "hebrew": "וַאֲשֶׁר נַפְשׁוֹ בַּיוי נְבוּכָה,",
+      "transliteration": "Va’asher nafsho ba’Adonai nevukha,",
+      "english": "And as for one whose soul is astray regarding Adonai,",
+      "comments": "",
+      "timing": {
+        "start": 96.47,
+        "end": 107.33
+      }
+    },
+    {
+      "hebrew": "וְהִתְבָּרֵךְ בִּלְבָבוֹ לֵאמֹר: \"שָׁלוֹם יִהְיֶה לִּי, בְּלִי פִרְכָה,",
+      "transliteration": "Vehitbarekh bilvavo lemor: “Shalom yihyē li, beli firkha,",
+      "english": "Who blesses themself in their heart, saying, “I will have it well, with nothing broken,",
+      "comments": "",
+      "timing": {
+        "start": 107.33,
+        "end": 120.77
+      }
+    },
+    {
+      "hebrew": "כִּי בִשְׁרִירוּת לִבִּי אֶתְהַלְּכָה\",",
+      "transliteration": "Ki vishrirut libbi et’hallekha”,",
+      "english": "For I will follow the obduracy of my heart,”",
+      "comments": "",
+      "timing": {
+        "start": 120.77,
+        "end": 131.3
+      }
+    },
+    {
+      "hebrew": "לְמַֽעַן סְפוֹת הָרָוָה עִם הַנִּזְעָכָה.",
+      "transliteration": "Lema‘an sefot harav ‘im hanniz‘akha.",
+      "english": "In order to add the satiated to the thirsty—",
+      "comments": "",
+      "timing": {
+        "start": 131.3,
+        "end": 144.6
+      }
+    },
+    {
+      "hebrew": "יֶעְשַׁן אַף יוי, וַחֲמָתוֹ בּוֹ נִתָּכָה,",
+      "transliteration": "Ye‘shan af Adonai, vaḥamato bo nittekha,",
+      "english": "Adonai’s wrath will smolder, His rage will be poured out upon them,",
+      "comments": "",
+      "timing": {
+        "start": 144.6,
+        "end": 156.57
+      }
+    },
+    {
+      "hebrew": "וְהִבְדִּילוֹ יוי לְרָעָה, מֵאֵין אֲרוּכָה,",
+      "transliteration": "Vehivdilo Adonai lera‘a, me’en arukha,",
+      "english": "And Adonai will separate them for irremediable ill,",
+      "comments": "",
+      "timing": {
+        "start": 156.57,
+        "end": 168.77
+      }
+    },
+    {
+      "hebrew": "כִּי פָנָה מִנְּוַת אוֹרָה אֶל חֲשֵׁכָה.",
+      "transliteration": "Ki fana minnevat ora el ḥashekha.",
+      "english": "For they have turned away from the beauty of light to darkness.",
+      "comments": "",
+      "timing": {
+        "start": 168.77,
+        "end": 179.63
+      }
+    },
+    {
+      "hebrew": "אַחֲלֵי אֱנוֹשׁ קֶֽשֶׁת תְּעוּדַת דָּתוֹ דְרוּכָה,",
+      "transliteration": "Aḥalē enosh ḳeshet te‘udat dato derukha,",
+      "english": "Happy is the person whose bow is always drawn for the testimony of their Law,",
+      "comments": "",
+      "timing": {
+        "start": 179.63,
+        "end": 193.3
+      }
+    },
+    {
+      "hebrew": "וְחֶשְׁקָתוֹ לְאֵל עָל תְּמוּכָה,",
+      "transliteration": "Veḥeshḳato le’El ‘al temukha,",
+      "english": "Whose yearning rests on God, the One on high,",
+      "comments": "",
+      "timing": {
+        "start": 193.3,
+        "end": 204.1
+      }
+    },
+    {
+      "hebrew": "וִימִינוֹ בִּימִין אֵל סְמוּכָה,",
+      "transliteration": "Vimino bimin El semukha,",
+      "english": "Whose right hand is supported by God’s right hand,",
+      "comments": "",
+      "timing": {
+        "start": 204.1,
+        "end": 215.77
+      }
+    },
+    {
+      "hebrew": "וְתָמִיד לִבּוֹ בַּעֲבֹדָתוֹ כַּמַּֽיִם יִשְׁפְּכָה.",
+      "transliteration": "Vetamid libbo ba‘avodato kammayim yishpekha.",
+      "english": "And who constantly pours out their heart, in service of Him.",
+      "comments": "",
+      "timing": {
+        "start": 215.77,
+        "end": 228.17
+      }
+    },
+    {
+      "hebrew": "כִּי מִי דוֹמֶה לּוֹ? וְלַיוי הַמְּלוּכָה,",
+      "transliteration": "Ki mi domē lo? Vela’Adonai hammelukha,",
+      "english": "For who is similar to Him? To Adonai is the kingship!",
+      "comments": "",
+      "timing": {
+        "start": 228.17,
+        "end": 242.8
+      }
+    },
+    {
+      "hebrew": "וּמְלַאכְתּוֹ בֶּאֱמֶת הִיא הַמְּלָאכָה –",
+      "transliteration": "Umelakhto be’emet hi hammelakha –",
+      "english": "His activity is what is truly activity—",
+      "comments": "",
+      "timing": {
+        "start": 242.8,
+        "end": 253.7
+      }
+    },
+    {
+      "hebrew": "מַעֲלֶה וּמוֹרִיד, וּבְיָדוֹ הַמַּסֵּכָה הַנְּסוּכָה,",
+      "transliteration": "Ma‘alē umorid, uvyado hammassekha hannesukha,",
+      "english": "He raises up and brings down, and in His hand is the blanket spread out,",
+      "comments": "",
+      "timing": {
+        "start": 253.7,
+        "end": 262.6
+      }
+    },
+    {
+      "hebrew": "קהל: וּמִי כָמֹֽהוּ, מְרוֹמַם עַל כָּל־תְּהִלָּה וּבְרָכָה?",
+      "transliteration": "Ḳahal: Umi khamohu, meromam ‘al kol tehilla uverakha?",
+      "english": "Cong. And who is like Him, lofty over all blessing and praise?",
+      "comments": "",
+      "timing": {
+        "start": 262.6,
+        "end": 272.73
+      }
+    },
+    {
+      "hebrew": "חזן: כִּ֥י מִי־אֵ֖ל מִבַּלְעֲדֵ֣י יו֑י וּמִ֥י צ֖וּר מִבַּלְעֲדֵ֥י אֱלֹהֵֽינוּ: (שמואל ב ככ:לב)",
+      "transliteration": "Ḥazzan: Ki mi el mibbal‘adē Adonai umi tsur mibbal‘adē elohenu:",
+      "english": "Cantor. For who is God besides Adonai, and who is a rock besides our God? (2 Sam.22:32)",
+      "comments": ""
+    },
+    {
+      "hebrew": "כִּ֤י מִ֣י אֱ֭לוֹהַּ מִבַּלְעֲדֵ֣י יו֑י וּמִי־צ֝֗וּר זוּלָתִ֥י אֱלֹהֵֽינוּ: (תהלים יח:לב)",
+      "transliteration": "Ki mi Elo’ah mibbal‘adē Adonai umi tsur zulati elohenu:",
+      "english": "For who is God besides Adonai, and who is a rock other than our God? (Ps. 18:32)",
+      "comments": ""
+    },
+    {
+      "hebrew": "אֵֽין־קָד֥וֹשׁ כַּיו֖י כִּי־אֵ֣ין בִּלְתֶּ֑ךָ וְאֵ֥ין צ֖וּר כֵּֽאלֹהֵֽינוּ: (שמואל א ב:ב)",
+      "transliteration": "En ḳadosh ka’Adonai ki en biltekha ve’en tsur kelohenu:",
+      "english": "There is none holy like Adonai, for there is none besides You; and there is no rock like our God. (1 Sam. 2:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל: (תהלים כב:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Congregation: And You are holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/51-attem-niẓẓavim.mp3",
+  "author_en": "Aaron ben Joseph"
+}

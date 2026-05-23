@@ -1,0 +1,350 @@
+{
+  "id": "21-ki-thissa",
+  "title_en": "Ki Thissa",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אָז בְּהַר הַמּוֹר, קָרָא אֵל לְעָנָו,",
+      "transliteration": "Az behar hammor, ḳara El le‘anav,",
+      "english": "Then, on Mount Mor, God called to the humble one,",
+      "comments": "Mount Mor. Mount Sinai.\nThe humble one. Moses.",
+      "timing": {
+        "start": 0,
+        "end": 15.43
+      }
+    },
+    {
+      "hebrew": "הַצִּיר הַנֶּאֱמָן, לָשֵׂאת רֹאשׁ אֱמוּנָיו;",
+      "transliteration": "Hats’tsir hanne’eman, laset rosh emunav;",
+      "english": "The faithful emissary, to take a census of His faithful;",
+      "comments": "",
+      "timing": {
+        "start": 15.43,
+        "end": 26.6
+      }
+    },
+    {
+      "hebrew": "רָאשֵׁי בְשָׂמִים עֲשׂוֹת שֶֽׁמֶן לְמִשְׁחַת כֹּהֲנָיו;",
+      "transliteration": "Rashē vesamim ‘asot shemen lemish’ḥat kohanav;",
+      "english": "And to make the finest spices into an oil, for anointing His priests;",
+      "comments": "",
+      "timing": {
+        "start": 26.6,
+        "end": 42.33
+      }
+    },
+    {
+      "hebrew": "נָטָף וּשְׁחֵֽלֶת וְחֶלְבְּנָה, סַמֵּי עֲדָנָיו,",
+      "transliteration": "Nataf ush’ḥelet veḥelbena, sammē ‘adanav,",
+      "english": "And naṭaf, sheḥeleth, and ḥelbena as the spices for His delight,",
+      "comments": "Naṭaf, sheḥeleth, and ḥelbena. Various aromatic substances.",
+      "timing": {
+        "start": 42.33,
+        "end": 54.2
+      }
+    },
+    {
+      "hebrew": "וּלְבוֹנָה זַכָּה, לִרְקֽוֹחַ קְטוֹרָה – תָּפִיק רְצוֹנָיו.",
+      "transliteration": "Ulvona zakka, lirko’aḥ ḳetora – tafiḳ retsonav.",
+      "english": "And pure frankincense, for mixing into incense—it will bring forth satisfaction for Him.",
+      "comments": "",
+      "timing": {
+        "start": 54.2,
+        "end": 69.8
+      }
+    },
+    {
+      "hebrew": "הִנֵּה בְצַלְאֵל עִם כָּל־נְבוֹנָיו,",
+      "transliteration": "Hinnē vetsalel ‘im kol nevonav,",
+      "english": "Behold, Bezalel, with all his knowledgeable [associates],",
+      "comments": "",
+      "timing": {
+        "start": 69.8,
+        "end": 80.43
+      }
+    },
+    {
+      "hebrew": "מָלֵא חָכְמָה לַעֲשׂוֹת בַּזָּהָב וּבַאֲבָנָיו,",
+      "transliteration": "Malē ḥokhma la‘asot bazzahav uva’avanav,",
+      "english": "Is full of wisdom, to work with gold and stone,",
+      "comments": "",
+      "timing": {
+        "start": 80.43,
+        "end": 96.47
+      }
+    },
+    {
+      "hebrew": "וּבַחֲרֹֽשֶׁת עֵץ, וּלְתַקֵּן כֶּֽסֶף אֲדָנָיו,",
+      "transliteration": "Uvaḥaroshet ‘ets, ultaḳḳen kesef adanav,",
+      "english": "And in woodcarving, and preparing silver for sockets,",
+      "comments": "",
+      "timing": {
+        "start": 96.47,
+        "end": 107.57
+      }
+    },
+    {
+      "hebrew": "אֹֽהֶל מוֹעֵד וְכֵלָיו, כִּיּוֹר וְכַנָּיו.",
+      "transliteration": "Ohel mo‘ed vekhelav, kiyyor vekhannav.",
+      "english": "And [building] the Tent of Meeting, and [fashioning] its vessels, [and] the laver with its base.",
+      "comments": "",
+      "timing": {
+        "start": 107.57,
+        "end": 123.07
+      }
+    },
+    {
+      "hebrew": "וּכְכַלּוֹתוֹ לְדַבֵּר בָּהָר, בֵּינוֹ לְבֵינָיו,",
+      "transliteration": "Ukh’khalloto ledabber bahar, beno levenav,",
+      "english": "When He finished speaking on the mountain, one on one,",
+      "comments": "",
+      "timing": {
+        "start": 123.07,
+        "end": 136.5
+      }
+    },
+    {
+      "hebrew": "נָתַן לוֹ שְׁנֵי לֻחוֹת אֲבָנָיו.",
+      "transliteration": "Natan lo shenē luḥot avanav.",
+      "english": "He gave him His two stone tablets.",
+      "comments": "",
+      "timing": {
+        "start": 136.5,
+        "end": 151.3
+      }
+    },
+    {
+      "hebrew": "וְכִרְאוֹת הָעָם כִּי בֹשֵׁשׁ מֹשֶׁה בַּעֲנָנָיו,",
+      "transliteration": "Vekhir’ot ha‘am ki voshesh Moshē ba‘ananav,",
+      "english": "And when the people saw that Moses was tarrying in the clouds,",
+      "comments": "",
+      "timing": {
+        "start": 151.3,
+        "end": 164.03
+      }
+    },
+    {
+      "hebrew": "נִקְהֲלוּ לְאַהֲרֹן כָּל־הֲמוֹנָיו.",
+      "transliteration": "Niḳhalu le’Aharon kol hamonav.",
+      "english": "The throngs all gathered around Aaron.",
+      "comments": "",
+      "timing": {
+        "start": 164.03,
+        "end": 178.17
+      }
+    },
+    {
+      "hebrew": "\"קוּם עֲשֵׂה לָנוּ אֱלֹהִים, כִּי מֹשֶׁה אֵינָיו!\"",
+      "transliteration": "“Ḳum ‘asē lanu elohim, ki Moshē enav!”",
+      "english": "“Arise, make us gods, for Moses is no longer!”",
+      "comments": "",
+      "timing": {
+        "start": 178.17,
+        "end": 191.4
+      }
+    },
+    {
+      "hebrew": "הֵמִֽירוּ כְבוֹדָם [בְּשׁוֹר], רַבּוּ קְלוֹנָיו.",
+      "transliteration": "Hemiru khevodam beshor, rabbu ḳelonav.",
+      "english": "They exchanged their Glory for an ox—such a profound disgrace.",
+      "comments": "",
+      "timing": {
+        "start": 191.4,
+        "end": 203.13
+      }
+    },
+    {
+      "hebrew": "\"לֶךְ־רֵד, עָנָו, כִּי שִׁחֵת עַמְּךָ, וְעָצְמוּ זְדוֹנָיו;",
+      "transliteration": "“Lekh red, ‘anav, ki shiḥet ‘ammekha, ve‘atsemu zedonav;",
+      "english": "“Go, descend, humble one, for your people have acted corruptly, and their crime is great;",
+      "comments": "",
+      "timing": {
+        "start": 203.13,
+        "end": 219.2
+      }
+    },
+    {
+      "hebrew": "הַנִּֽיחָה לִּי, וְיִרְאוּ כִּידוֹ עֵינָיו.\"",
+      "transliteration": "Hanniḥa li veyir’u kido ‘enav.”",
+      "english": "Leave me alone, and may their eyes see their destruction!”",
+      "comments": "",
+      "timing": {
+        "start": 219.2,
+        "end": 232.57
+      }
+    },
+    {
+      "hebrew": "וַיֶּעְתַּר מֹשֶׁה אֶל יוי, וַיְחַל פָּנָיו.",
+      "transliteration": "Vayye‘tar Moshē el Adonai, vayḥal panav.",
+      "english": "Moses prayed to Adonai, and beseeched His presence.",
+      "comments": "",
+      "timing": {
+        "start": 232.57,
+        "end": 244.3
+      }
+    },
+    {
+      "hebrew": "וַיִּנָּֽחֶם יוי, וְשָׁב מֵחֲרוֹנָיו.",
+      "transliteration": "Vayyinaḥem Adonai, veshav meḥaronav.",
+      "english": "And Adonai changed His mind, and let go of His rage.",
+      "comments": "",
+      "timing": {
+        "start": 244.3,
+        "end": 255.63
+      }
+    },
+    {
+      "hebrew": "וַיַּעֲמֹד מֹשֶׁה בְּשַֽׁעַר מַחֲנָיו,",
+      "transliteration": "Vayya‘amod Moshē besha‘ar maḥanav,",
+      "english": "Moses stood at the entrance to the camp,",
+      "comments": "",
+      "timing": {
+        "start": 255.63,
+        "end": 265.43
+      }
+    },
+    {
+      "hebrew": "וַיֹּֽאמֶר: \"מִי לַיוי – יְשַׁנֵּס מָתְנָיו!",
+      "transliteration": "Vayyomer: “Mi La’Adonai – yeshannes motnav!",
+      "english": "And he said: “Whoever is for Adonai—gird his loins!",
+      "comments": "",
+      "timing": {
+        "start": 265.43,
+        "end": 279.73
+      }
+    },
+    {
+      "hebrew": "יְמַלֵּא יָדוֹ הַיּוֹם – אָב לְבָנָיו.\"",
+      "transliteration": "Yemallē yado hayyom – av levanav.”",
+      "english": "And inaugurate himself today—even a father [should kill] his sons.”",
+      "comments": "",
+      "timing": {
+        "start": 279.73,
+        "end": 289.6
+      }
+    },
+    {
+      "hebrew": "וַיֵּאָסְפוּ אֵלָיו כָּל־בְּנֵי לֵוִי, נֶאֱמָנָיו.",
+      "transliteration": "Vayye’asefu elav kol benē Levi, ne’emanav.",
+      "english": "And all the Levites, His faithful ones, gathered around him.",
+      "comments": "",
+      "timing": {
+        "start": 289.6,
+        "end": 302.4
+      }
+    },
+    {
+      "hebrew": "וּמֹשֶׁה לָקַח אֶת־הָאֹֽהֶל, וְנָטָֽהוּ לוֹ מִחוּץ לַמַּחֲנֶה, מְלוֹנָיו,",
+      "transliteration": "UMoshē laḳaḥ et ha’ohel, venatahu lo miḥuts lammaḥanē, melonav,",
+      "english": "Moses would take the tent, and spread it out outside the camp, as his dwelling place,",
+      "comments": "",
+      "timing": {
+        "start": 302.4,
+        "end": 316.37
+      }
+    },
+    {
+      "hebrew": "יֵלֵךְ שָׁם כָּל־מְבַקֵּשׁ יוי בְּרַעְיוֹנָיו.",
+      "transliteration": "Yelekh sham kol mevaḳḳesh Adonai bera‘yonav.",
+      "english": "And whoever sought Adonai in their thoughts would go there.",
+      "comments": "",
+      "timing": {
+        "start": 316.37,
+        "end": 331.23
+      }
+    },
+    {
+      "hebrew": "תָּאַב לְהַשִּׂיג סוֹד אֵל וּצְפוּנָיו,",
+      "transliteration": "Ta’av lehassiḡ sod El utsfunav,",
+      "english": "[Moses] yearned to attain God’s mystery, His secrets,",
+      "comments": "",
+      "timing": {
+        "start": 331.23,
+        "end": 341.4
+      }
+    },
+    {
+      "hebrew": "וַיַּעֲבֹר יוי עַל פָּנָיו,",
+      "transliteration": "Vayya‘avor Adonai ‘al panav,",
+      "english": "[So] Adonai passed in front of his face,",
+      "comments": "",
+      "timing": {
+        "start": 341.4,
+        "end": 352.0
+      }
+    },
+    {
+      "hebrew": "בָּקַע רָקִֽיעַ וַעֲנָנָיו,",
+      "transliteration": "Baḳa‘ raḳi’a‘ va‘ananav,",
+      "english": "Bursting through the heavens and their clouds,",
+      "comments": "",
+      "timing": {
+        "start": 352.0,
+        "end": 360.3
+      }
+    },
+    {
+      "hebrew": "וְהֶרְאָֽהוּ אֲחוֹרָיו, וַיַּרְא נוֹרָאוֹת בְּעֵינָיו.",
+      "transliteration": "Veher’ahu aḥorav, vayyar nora’ot be‘enav.",
+      "english": "And He showed him His back, and [Moses] saw awesome sights.",
+      "comments": "",
+      "timing": {
+        "start": 360.3,
+        "end": 376.13
+      }
+    },
+    {
+      "hebrew": "קָרַן עוֹר פָּנָיו, כִּי יָרֵא מֵהַבִּיט הַשְּׁכִינָה בְּאִישׁוֹנָיו.",
+      "transliteration": "Ḳaran ‘or panav ki yarē mehabbit hash’shekhina be’ishonav.",
+      "english": "[Then] the skin of his face gleamed, for he was afraid to gaze at the divine presence with his eyes.",
+      "comments": "",
+      "timing": {
+        "start": 376.13,
+        "end": 387.8
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ אֲשֶׁר בְּחָרוֹ, וְגִלָּה לוֹ חֶזְיוֹנָיו,",
+      "transliteration": "Barukh asher beḥaro veḡilla lo ḥezyonav,",
+      "english": "Blessed is the One who chose him, and revealed visions to him,",
+      "comments": "",
+      "timing": {
+        "start": 387.8,
+        "end": 396.57
+      }
+    },
+    {
+      "hebrew": "קהל: צֶֽדֶק וּמֵשָׁרִים, מִשְׁפְּטֵי אֵל וְדִינָיו.",
+      "transliteration": "Ḳahal: Tsedeḳ umesharim mishpetē El vedinav.",
+      "english": "Cong. [And revealed] justice and righteousness, divine statutes and rules.",
+      "comments": "",
+      "timing": {
+        "start": 396.57,
+        "end": 407.23
+      }
+    },
+    {
+      "hebrew": "חזן: הַכֹּל יוֹדֽוּהוּ וִישַׁבְּחֽוּהוּ וְיַקְדִּישֽׁוּהוּ וְיֹאמְרוּ:",
+      "transliteration": "Ḥazzan: Hakkol yoduhu vishabbeḥuhu veyaḳdishuhu veyomeru:",
+      "english": "Cantor. All acknowledge Him, and praise Him, and declare His holiness, and say:",
+      "comments": ""
+    },
+    {
+      "hebrew": "אֵֽין־קָד֥וֹשׁ כַּיו֖י כִּי־אֵ֣ין בִּלְתֶּ֑ךָ וְאֵ֥ין צ֖וּר כֵּֽאלֹהֵֽינוּ: (שמואל א ב:ב)",
+      "transliteration": "En ḳadosh ka’Adonai ki en biltekha ve’en tsur kelohenu:",
+      "english": "There is none holy like Adonai, for there is none but You; and there is no rock like our God. (1 Sam. 2:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל: (תהלים ככ:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Cong. And You are Holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/21-ki-thissa.mp3",
+  "author_en": "Aaron ben Joseph"
+}

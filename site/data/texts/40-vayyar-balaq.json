@@ -1,0 +1,230 @@
+{
+  "id": "40-vayyar-balaq",
+  "title_en": "Vayyar Bakak",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "מִי כַּיוי   אֲשֶׁר לֹא יָכִֽילוּ גוֹיִם זַעְמוֹ?",
+      "transliteration": "Mi ka’Adonai asher lo yakhilu ḡoyim za‘mo?",
+      "english": "Who is like Adonai, whose rage nations cannot withstand?",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.5
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הַמֵּפִיר עֲצַת בָּלָק, וְשִׁנָּה טַעְמוֹ?",
+      "transliteration": "Mi ka’Adonai hammefir ‘atsat Balaḳ, veshinna ta‘mo?",
+      "english": "Who is like Adonai, who thwarted Balak’s plot, and changed his intention?",
+      "comments": "",
+      "timing": {
+        "start": 16.5,
+        "end": 29.43
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   רָב תָּמִיד רִיבֵי עַמּוֹ?",
+      "transliteration": "Mi ka’Adonai rav tamid rivē ‘ammo?",
+      "english": "Who is like Adonai, [who] constantly fights His people’s fights?",
+      "comments": "",
+      "timing": {
+        "start": 29.43,
+        "end": 44.27
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   נָתַן בְּפִי בִלְעָם נֹאֲמוֹ?",
+      "transliteration": "Mi ka’Adonai natan befi vil‘am no’amo?",
+      "english": "Who is like Adonai, [who] placed His speech in Balaam’s mouth?",
+      "comments": "",
+      "timing": {
+        "start": 44.27,
+        "end": 56.07
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   רָאָה לִבּוֹ נָבוֹךְ, וְהֵחֵל לְפַעֲמוֹ?",
+      "transliteration": "Mi ka’Adonai ra’a libbo navokh, veheḥel lefa‘amo?",
+      "english": "Who is like Adonai, [who] saw that [Balaam’s] heart was confused, and began to kick him?",
+      "comments": "",
+      "timing": {
+        "start": 56.07,
+        "end": 73.23
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   בְּקוֹל פְּחָדִים קִדְּמוֹ?",
+      "transliteration": "Mi ka’Adonai beḳol peḥadim ḳiddemo?",
+      "english": "Who is like Adonai, [who] preceded him with a fearsome voice?",
+      "comments": "",
+      "timing": {
+        "start": 73.23,
+        "end": 86.5
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   פָּתַח פִּי אֲתוֹנוֹ וְהִכְלִימוֹ?",
+      "transliteration": "Mi ka’Adonai pataḥ pi atono vehikhlimo?",
+      "english": "Who is like Adonai, [who] opened the mouth of his she-ass, and humiliated him?",
+      "comments": "",
+      "timing": {
+        "start": 86.5,
+        "end": 100.8
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   גִּלָּה עֵינָיו וֶהֱקִיצוֹ מֵחֲלוֹמוֹ?",
+      "transliteration": "Mi ka’Adonai gilla ‘enav veheḳitso meḥalomo?",
+      "english": "Who is like Adonai, [who] unveiled his eyes, and woke him from his dream?",
+      "comments": "",
+      "timing": {
+        "start": 100.8,
+        "end": 113.23
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   לְבָרֵךְ אֶת־יִשְׂרָאֵל הָפַךְ זְמָמוֹ?",
+      "transliteration": "Mi ka’Adonai levarekh et Yisra’el hafakh zemamo?",
+      "english": "Who is like Adonai, [who] turned his plot into a blessing for Israel?",
+      "comments": "",
+      "timing": {
+        "start": 113.23,
+        "end": 129.13
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   לְדַבֵּר עֲתִידוֹת הֶעֱרִימוֹ?",
+      "transliteration": "Mi ka’Adonai ledabber ‘atidot he‘erimo?",
+      "english": "Who is like Adonai, [who] gave [Balaam] wisdom to tell the future?",
+      "comments": "",
+      "timing": {
+        "start": 129.13,
+        "end": 140.8
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הֵשִׁיק לְאֹהֲבָיו נֹעֲמוֹ?",
+      "transliteration": "Mi ka’Adonai heshiḳ le’ohavav no‘amo?",
+      "english": "Who is like Adonai, [who] inundated those who love Him with sweetness?",
+      "comments": "",
+      "timing": {
+        "start": 140.8,
+        "end": 154.47
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   מַשְׁגִּֽיחַ לְדָרֵי הֲדוֹמוֹ?",
+      "transliteration": "Mi ka’Adonai mashgi’aḥ ledarē hadomo?",
+      "english": "Who is like Adonai, [who] watches out for those who dwell on His footstool?",
+      "comments": "His footstool. The earth.",
+      "timing": {
+        "start": 154.47,
+        "end": 166.2
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   גִּלָּה מִשְׁפָּטָיו מִמְּרוֹמוֹ?",
+      "transliteration": "Mi ka’Adonai gilla mishpatav mimmeromo?",
+      "english": "Who is like Adonai, [who] revealed His laws from on high?",
+      "comments": "",
+      "timing": {
+        "start": 166.2,
+        "end": 180.77
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   אֲשֶׁר אֵין תִּכְלָה לְתַעֲצוּמוֹ?",
+      "transliteration": "Mi ka’Adonai asher en tikhla leta‘atsumo?",
+      "english": "Who is like Adonai, whose mightiness has no limit?",
+      "comments": "",
+      "timing": {
+        "start": 180.77,
+        "end": 193.43
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   לֹא נוֹדָע מְקוֹמוֹ?",
+      "transliteration": "Mi ka’Adonai lo noda‘ meḳomo?",
+      "english": "Who is like Adonai, [whose] place is unknown?",
+      "comments": "",
+      "timing": {
+        "start": 193.43,
+        "end": 207.67
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הֵרִים לְפִינְחָס, כִּי יָדַע שְׁמוֹ?",
+      "transliteration": "Mi ka’Adonai herim lefineḥas, ki yada‘ shemo?",
+      "english": "Who is like Adonai, [who] raised up Phineas, for He knew his name?",
+      "comments": "",
+      "timing": {
+        "start": 207.67,
+        "end": 219.67
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   הִרְבָּה לְדֹר וָדֹר שְׁלוֹמוֹ?",
+      "transliteration": "Mi ka’Adonai hirba ledor vador shelomo?",
+      "english": "Who is like Adonai, [who] gave him great peace, for generation after generation?",
+      "comments": "",
+      "timing": {
+        "start": 219.67,
+        "end": 235.3
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   לִכְהֻנַּת עוֹלָם שָׂמוֹ?",
+      "transliteration": "Mi ka’Adonai likhunnat ‘olam samo?",
+      "english": "Who is like Adonai, [who] set him for an eternal priesthood?",
+      "comments": "",
+      "timing": {
+        "start": 235.3,
+        "end": 247.37
+      }
+    },
+    {
+      "hebrew": "מִי כַּיוי   בָּחַר בְּיַעֲקֹב, יוי אֱלֹהָיו עִמּוֹ?",
+      "transliteration": "Mi ka’Adonai baḥar beYa‘aḳov, Adonai elohav ‘immo?",
+      "english": "Who is like Adonai, [who] chose Jacob—Adonai his God is with him?",
+      "comments": "",
+      "timing": {
+        "start": 247.37,
+        "end": 256.47
+      }
+    },
+    {
+      "hebrew": "קהל: מִי כַּיוי   הִגִּיד בְּכִתְבֵי חוֹתָמוֹ?",
+      "transliteration": "Ḳahal: Mi ka’Adonai higgid bekhitvē ḥotamo?",
+      "english": "Cong. Who is like Adonai, [who] informed [us] in the writings bearing His seal?",
+      "comments": "",
+      "timing": {
+        "start": 256.47,
+        "end": 267.6
+      }
+    },
+    {
+      "hebrew": "חזן: כִּֽי־יַֽעֲקֹ֗ב בָּחַ֣ר ל֣וֹ יָ֑הּ יִ֝שְׂרָאֵ֗ל לִסְגֻלָּתֽוֹ: (תהלים קלה:ד)",
+      "transliteration": "Ḥazzan: Ki Ya‘aḳov baḥar lo Yah Yisra’el lisḡullato:",
+      "english": "Cantor. For Yah has chosen Jacob, Israel for His treasured [people]. (Ps. 135:4)",
+      "comments": ""
+    },
+    {
+      "hebrew": "שְׁמַ֤ע אֵלַי֙ יַֽעֲקֹ֔ב וְיִשְׂרָאֵ֖ל מְקֹֽרָאִ֑י אֲנִי־הוּא֙ אֲנִ֣י רִאשׁ֔וֹן אַ֖ף אֲנִ֥י אַֽחֲרֽוֹן: (ישעיהו מח:יב)",
+      "transliteration": "Shema‘ elai Ya‘aḳov veYisra’el meḳora’i ani hu ani rishon af ani aḥaron:",
+      "english": "Hear me Jacob, and Israel who are called by Me: I am He, I am the first, and I am also the last. (Isa. 48:12)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד: (דברים ו:ד)",
+      "transliteration": "Ḳahal: Shema‘ Yisra’el Adonai elohenu Adonai, eḥad:",
+      "english": "Cong. Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)",
+      "comments": "Adonai on His own. The translation follows Sefer Ha-mivḥar, on Deuteronomy 6:4: “The meaning is that He is one and does not need any second one.”"
+    }
+  ],
+  "audio": "audio/40-vayyar-balaq.mp3",
+  "author_en": "Aaron ben Joseph"
+}

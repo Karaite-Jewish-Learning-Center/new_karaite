@@ -1,0 +1,224 @@
+{
+  "id": "43-ellé-masé",
+  "title_en": "Elle Mas'é",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אוֹתוֹת אֱלֹהֵֽינוּ מֵעוֹלָם נוֹדָֽעוּ,",
+      "transliteration": "Otot Elohenu me‘olam noda‘u,",
+      "english": "Our God’s miracles have been known forever,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 13.13
+      }
+    },
+    {
+      "hebrew": "הוּחַֽקּוּ בְּמִכְתַּב אֵל, דָּת וָדִין הוֹדִֽיעוּ.",
+      "transliteration": "Huḥaḳḳu bemikhtav El, dat vadin hodi‘u.",
+      "english": "They are inscribed in God’s writing, and teach statutes and laws.",
+      "comments": "",
+      "timing": {
+        "start": 13.13,
+        "end": 24.63
+      }
+    },
+    {
+      "hebrew": "רַחֲבַת בִּינַת מוֹצָא וּמַסָּע סוֹד לַמְּבִינִים יַבִּֽיעוּ.",
+      "transliteration": "Raḥavat binat motsa umassa‘ sod lammevinim yabbi‘u.",
+      "english": "The expansiveness of understanding the departure points and journeys [is because] they express a secret to the discerning.",
+      "comments": "",
+      "timing": {
+        "start": 24.63,
+        "end": 39.43
+      }
+    },
+    {
+      "hebrew": "נִתְכְּנוּ סִבּוֹת בָּם, מֵאֲשֶׁר נִשְׁמָֽעוּ,",
+      "transliteration": "Nitkenu sibbot bam, me’asher nishma‘u,",
+      "english": "They have intended reasons, more than can be heard,",
+      "comments": "",
+      "timing": {
+        "start": 39.43,
+        "end": 50.67
+      }
+    },
+    {
+      "hebrew": "לִבְנֵי אֵל אֲשֶׁר מִיַּד צָר נוֹשָֽׁעוּ.",
+      "transliteration": "Livnē El asher miyyad tsar nosha‘u,",
+      "english": "For the children of God, who were rescued from the hand of the foe.",
+      "comments": "",
+      "timing": {
+        "start": 50.67,
+        "end": 64.23
+      }
+    },
+    {
+      "hebrew": "עַל־פִּי יוי חָנוּ, וְעַל־פִּי יוי נָסָֽעוּ.",
+      "transliteration": "‘al pi Adonai ḥanu, ve‘al pi Adonai nasa‘u.",
+      "english": "At Adonai’s order they camped, and at Adonai’s order they travelled.",
+      "comments": "",
+      "timing": {
+        "start": 64.23,
+        "end": 75.73
+      }
+    },
+    {
+      "hebrew": "עָנָו אָמַר מִפִּי יוי: מַהֲלַל אֵל תַּבִּֽיעוּ!",
+      "transliteration": "‘anav amar mippi Adonai: Mahalal El tabbi‘u!",
+      "english": "The meek one said, at Adonai’s order: “Express praise of God!",
+      "comments": "The meek one. Moses.",
+      "timing": {
+        "start": 75.73,
+        "end": 89.63
+      }
+    },
+    {
+      "hebrew": "הֵן קָרְבוּ יְמֵי הַבְּשׂוֹרוֹת, וְגַם הִגִּֽיעוּ.",
+      "transliteration": "Hen ḳarevu yemē habbesorot veḡam higgi‘u.",
+      "english": "For the days of tidings are near, they have indeed arrived.”",
+      "comments": "",
+      "timing": {
+        "start": 89.63,
+        "end": 100.6
+      }
+    },
+    {
+      "hebrew": "תְּנוּ עָרִים לַלְוִיִּם, וּמִגְרְשֵׁיהֶן תּוֹפִֽיעוּ.",
+      "transliteration": "Tenu ‘arim lalviyyim, umiḡreshehen tofi‘u.",
+      "english": "Give cities to the Levites, and make their pasturage prominent.",
+      "comments": "",
+      "timing": {
+        "start": 100.6,
+        "end": 113.67
+      }
+    },
+    {
+      "hebrew": "כִּי תוֹרִֽישׁוּ יֹשְׁבֵי כְנַֽעַן וְגַם תַּכְנִֽיעוּ.",
+      "transliteration": "Ki torishu yoshevē khena‘an veḡam takhni‘u.",
+      "english": "When you dispossess the inhabitants of Canaan and make them submit,",
+      "comments": "",
+      "timing": {
+        "start": 113.67,
+        "end": 124.4
+      }
+    },
+    {
+      "hebrew": "וְעָרֵי מִקְלָט, נְוֵה צֶֽדֶק, תַּרְגִּֽיעוּ,",
+      "transliteration": "Ve‘arē miḳlat, nevē tsedeḳ, targi‘u,",
+      "english": "You should make calm asylum cities, dwellings of righteousness,",
+      "comments": "",
+      "timing": {
+        "start": 124.4,
+        "end": 135.5
+      }
+    },
+    {
+      "hebrew": "שָׁם יָנֽוּסוּ שֹֽׁגְגִים, אֲשֶׁר שָׁגוּ וְגַם הִרְשִֽׁיעוּ –",
+      "transliteration": "Sham yanusu shoḡeḡim, asher shaḡu veḡam hirshi‘u –",
+      "english": "To which accidental [killers], who have had accidents but also done wrong, should flee,",
+      "comments": "",
+      "timing": {
+        "start": 135.5,
+        "end": 149.1
+      }
+    },
+    {
+      "hebrew": "לְהִנָּצֵל מִגֹּאֲלֵי דָם, שֵׁן חָרְקוּ וְרֹאשׁ הֵנִֽיעוּ.",
+      "transliteration": "Lehinnatsel miggo’alē dam, shen ḥarḳu verosh heni‘u.",
+      "english": "In order to be spared from blood-avengers, who gnash their teeth and wag their heads.",
+      "comments": "",
+      "timing": {
+        "start": 149.1,
+        "end": 163.53
+      }
+    },
+    {
+      "hebrew": "וְכֹֽפֶר לֹא תִקְחוּ מֵאֲשֶׁר בְּזָדוֹן לַהֲרֹג פָּשָֽׁעוּ,",
+      "transliteration": "Vekhofer lo tiḳḥu me’asher bezadon laharoḡ pasha‘u,",
+      "english": "[But] you may not take any ransom from those who have willfully committed the crime of murder,",
+      "comments": "",
+      "timing": {
+        "start": 163.53,
+        "end": 176.5
+      }
+    },
+    {
+      "hebrew": "וְכֵן לַנָּס לָשֶֽׁבֶת בְּאַרְצוֹ לֹא תִשְׁמָֽעוּ.",
+      "transliteration": "Vekhen lannas lashevet be’artso lo tishma‘u.",
+      "english": "Nor may you listen to a fugitive, to [let them] dwell in their own land.",
+      "comments": "",
+      "timing": {
+        "start": 176.5,
+        "end": 189.57
+      }
+    },
+    {
+      "hebrew": "וְאִישׁ בְּנַחֲלָתוֹ יִדְבְּקוּ וְלֹא יִגְרָֽעוּ.",
+      "transliteration": "Ve’ish benaḥalato yidbaḳu velo yiḡra‘u.",
+      "english": "Each man shall cling to his inheritance, and they shall not take it away.",
+      "comments": "",
+      "timing": {
+        "start": 189.57,
+        "end": 200.0
+      }
+    },
+    {
+      "hebrew": "מַה נִּמְלְצוּ לְחִכִּי אֲמָרֶֽיךָ, אֲשֶׁר שָׂשׂוֹן לְנַפְשִׁי הִשְׂבִּֽיעוּ.",
+      "transliteration": "Ma nimletsu leḥiḳḳi amarekha, asher sason lenafshi hisbi‘u.",
+      "english": "How sweet Your utterances are to my palate, which satisfy my soul with joy.",
+      "comments": "",
+      "timing": {
+        "start": 200.0,
+        "end": 215.37
+      }
+    },
+    {
+      "hebrew": "הוֹגֵי [דָתְךָ] יָגִֽילוּ וְיִשְׁתַּעֲשָֽׁעוּ,",
+      "transliteration": "Hoḡē datekha yaḡilu veyishta‘asha‘u,",
+      "english": "Those who delve into Your Law will experience gladness and delight,",
+      "comments": "",
+      "timing": {
+        "start": 215.37,
+        "end": 225.5
+      }
+    },
+    {
+      "hebrew": "שִׁלּוּשׁ קְדֻשָּׁתְךָ כַּשְּׂרָפִים יַשְׁמִֽיעוּ,",
+      "transliteration": "Shillush ḳedush’shatekha kasserafim yashmi‘u,",
+      "english": "And they will announce Your threefold holiness, like the seraphim,",
+      "comments": "",
+      "timing": {
+        "start": 225.5,
+        "end": 233.47
+      }
+    },
+    {
+      "hebrew": "קהל: וּמִתְנַשֵּׂא בַּכִּסֵּא, וְכֹל עוֹשֶׂה בַּפֶּה יָרִֽיעוּ.",
+      "transliteration": "Ḳahal: Umitnassē bakkissē, vekhol ‘osē bappē yari‘u.",
+      "english": "Cong. And they will shout with their mouths, [acclaiming] the One who is elevated on the Throne, the maker of everything.",
+      "comments": "",
+      "timing": {
+        "start": 233.47,
+        "end": 244.3
+      }
+    },
+    {
+      "hebrew": "חזן: יֹשֵׁ֥ב עַל־כִּסֵּ֖א רָ֣ם וְנִשָּׂ֑א וְשׁוּלָ֖יו מְלֵאִ֥ים אֶת־הַהֵיכָֽל: שְׂרָפִ֨ים עֹֽמְדִ֤ים ׀ מִמַּ֙עַל֙ ל֔וֹ ׀ שֵׁ֧שׁ כְּנָפַ֛יִם שֵׁ֥שׁ כְּנָפַ֖יִם לְאֶחָ֑ד בִּשְׁתַּ֣יִם ׀ יְכַסֶּ֣ה פָנָ֗יו וּבִשְׁתַּ֛יִם יְכַסֶּ֥ה רַגְלָ֖יו וּבִשְׁתַּ֥יִם יְעוֹפֵֽף: וְקָרָ֨א זֶ֤ה אֶל־זֶה֙ וְאָמַ֔ר",
+      "transliteration": "Ḥazzan: Yoshev ‘al kissē ram venissa veshulav mele’im et hahekhal: Serafim omedim, mimma‘al lo shesh kenafayim shesh kenafayim le’eḥad bishtayim, yekhassē fanav uvishtayim yekhassē raḡlav uvishtayim ye‘ofef: Veḳara zē el zē ve’amar",
+      "english": "Cantor. [He is] seated on a throne, high and lofty, with His coattails filling the Temple. Seraphim were standing above Him, each one with six wings; with two [wings] they would cover their faces, and with two they would cover their legs, and with two they would fly. And they would call out, this one to that one, and say:",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ ׀ קָד֛וֹשׁ קָד֖וֹשׁ יו֣י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ: (ישעיהו ו:א-ג)",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Congregation: Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:1–3)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/43-ellé-masé.mp3",
+  "author_en": "Aaron ben Joseph"
+}

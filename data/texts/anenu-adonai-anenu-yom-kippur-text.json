@@ -1,0 +1,132 @@
+{
+  "id": "anenu-adonai-anenu-yom-kippur-text",
+  "title_en": "‘Anenu",
+  "title_he": "עֲנֵנוּ",
+  "category": "Liturgy",
+  "subcategory": "Yom Kippur",
+  "content": [
+    {
+      "hebrew": "עֲנֵנוּ יוָי עֲנֵנוּ.",
+      "transliteration": "‘Anenu adonai ‘anenu.",
+      "english": "Answer us, O Adonai, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ אֲדוֹנֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu adonenu ‘anenu.",
+      "english": "Answer us, O our lord, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ אָבִינוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu avinu ‘anenu.",
+      "english": "Answer us, O our father, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ בּוֹרְאֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu bore’enu ‘anenu.",
+      "english": "Answer us, O our creator, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ גּוֹאֲלֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu go’alenu ‘anenu.",
+      "english": "Answer us, O our redeemer, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ דּוֹרְשֵׁנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu doreshenu ‘anenu.",
+      "english": "Answer us, O you that seek our [wellbeing], answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ הוֹדֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu hodenu ‘anenu.",
+      "english": "Answer us, O our splendor, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ וַהֲדָרֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu vahadarenu ‘anenu.",
+      "english": "Answer us, O you who are also our beauty, answer us!",
+      "comments": "The English word \"also\" here translates the Hebrew letter vav, meaning \"and\"; the poet begins the word with the prefix vav for the sake of the acrostic, because hardly any Hebrew words begin with the letter vav other than the prefix vav."
+    },
+    {
+      "hebrew": "עֲנֵנוּ זֹכְרֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu zocherenu ‘anenu.",
+      "english": "Answer us, O you that remember us, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ חֹנְנֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu ḥonenenu ‘anenu.",
+      "english": "Answer us, O you that are kind to us, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ טוֹבֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu tovenu ‘anenu.",
+      "english": "Answer us, O our good one, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ יוֹצְרֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu yotserenu ‘anenu.",
+      "english": "Answer us, O you that have fashioned us, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ כַּבִּירֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu kabbirenu ‘anenu.",
+      "english": "Answer us, O our great one, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ לֹחֲמֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu loḥamenu ‘anenu.",
+      "english": "Answer us, O our warrior, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ מִשְׂגַּבֵּנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu misgabbenu ‘anenu.",
+      "english": "Answer us, O our stronghold, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ נֹעֲמֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu no‘amenu ‘anenu.",
+      "english": "Answer us, O our sweet one, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ סֹמְכֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu somechenu ‘anenu.",
+      "english": "Answer us, O our supporter, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ עוֹזְרֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu ‘ozerenu ‘anenu.",
+      "english": "Answer us, O our helper, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ פּוֹדֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu podenu ‘anenu.",
+      "english": "Answer us, O our ransomer, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ צוּרֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu tsurenu ‘anenu.",
+      "english": "Answer us, O our rock, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ קְדוֹשֵׁנו עֲנֵנוּ.ּ",
+      "transliteration": "‘Anenu ḳedoshenu ‘anenu.",
+      "english": "Answer us, O our holy one, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ רֹמְמֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu romemenu ‘anenu.",
+      "english": "Answer us, O you who uplift us, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ שֹׁמְרֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu shomerenu ‘anenu.",
+      "english": "Answer us, O our watcher, answer us!"
+    },
+    {
+      "hebrew": "עֲנֵנוּ תֹּמְכֵנוּ עֲנֵנוּ.",
+      "transliteration": "‘Anenu tomechenu ‘anenu.",
+      "english": "Answer us, O you who prop us up, answer us!"
+    }
+  ],
+  "source_file": "Anenu Adonai Anenu (Yom Kippur).xlsx",
+  "source_sheet": "Text"
+}

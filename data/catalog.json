@@ -1,0 +1,538 @@
+{
+  "categories": {
+    "Liturgy": {
+      "subcategories": {
+        "Shabbat Morning Services": [
+          "kedushot-and-piyyut-parasha-atta-qadosh",
+          "kedushot-and-piyyut-parasha-essa-lamerahoq",
+          "kedushot-and-piyyut-parasha-el-mistatter",
+          "kedushot-and-piyyut-parasha-adir-venora",
+          "kedushot-and-piyyut-parasha-ehad-elohenu",
+          "kedushot-and-piyyut-parasha-bereshit",
+          "kedushot-and-piyyut-parasha-noah"
+        ],
+        "Tammuz Av Echa": [
+          "efratim-yeḳarim"
+        ],
+        "Yom Kippur": [
+          "anenu-adonai-anenu-yom-kippur-text",
+          "anenu-el-hai-vekayyam-text",
+          "ase-lemaan-shimcha-haggadol-text",
+          "berogez-rahem-tizkor-yom-kippur-text",
+          "el-rahum-shemach-yom-kippur-text",
+          "elohē-yisrael-al-tishkaḥ-yisrael-text",
+          "adon-nora-text",
+          "anenu-adonai-anenu-yom-kippur-text",
+          "anenu-el-hai-vekayyam-text",
+          "ase-lemaan-shimcha-haggadol-text",
+          "berogez-rahem-tizkor-yom-kippur-text",
+          "el-rahum-shemach-yom-kippur-text",
+          "elohe-yisrael-al-tishkah-yisrael-yom-kippur-text",
+          "emet-hael-text",
+          "rahum-im-atta-lo-terahem-text",
+          "rahum-vehannun-rahem-alenu-text",
+          "yetsav-hael-vehagoel-text"
+        ]
+      },
+      "texts": [
+        "adon-yeshuot",
+        "afas-aron",
+        "al-ahavatecha",
+        "amen-yehi-ratson",
+        "anochi-anochi",
+        "ashir-beshir-ḥadash",
+        "ashir-beshira-el-nora-tehillot",
+        "ashir-leel-elyon",
+        "atsili-qum-qera",
+        "azkir-tehillot",
+        "ekkon-lemmul-shabbat",
+        "en-kelohenu",
+        "esmaḥ-beshir-ḥadash",
+        "essa-bechos-yesha",
+        "et-kos-yeshuot",
+        "evyon-asher",
+        "ezkor-lemitsvat-melech",
+        "eḳra-leel-elyon",
+        "hodu-leel-deot",
+        "laḥatani-mivḥar-banai",
+        "lutski-prayer-for-a-time-of-plague",
+        "malé-olam-kevod-yofi",
+        "matsa-ish-sha-matsa-tov",
+        "mitsvat-yesod-shabbat",
+        "mizmor-leyom-shabbat",
+        "odecha-el-ki-noraot",
+        "odé-leel-maḥsi",
+        "ori-yeḥidati",
+        "shabbat-menuḥa",
+        "shiru-am-zakkai",
+        "simhu-bene-el-neeman",
+        "vehahochma",
+        "vehoshia",
+        "yah-zimrati",
+        "yahid-beolamo",
+        "yatsar-hael",
+        "yerivai-veoyevai",
+        "yeter-peletat-am",
+        "yona-leedech-rei",
+        "yonat-elem"
+      ]
+    }
+  },
+  "texts": [
+    {
+      "id": "kedushot-and-piyyut-parasha-atta-qadosh",
+      "title_en": "Atta Qadosh",
+      "title_he": "אַתָּה קָדוֹשׁ",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "kedushot-and-piyyut-parasha-essa-lamerahoq",
+      "title_en": "Essa Lamerahoq",
+      "title_he": "אֶשָּׂא לְמֵרָחוֹק",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "kedushot-and-piyyut-parasha-el-mistatter",
+      "title_en": "El Mistatter",
+      "title_he": "אֵל מִסְתַּתֵּר",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "kedushot-and-piyyut-parasha-adir-venora",
+      "title_en": "Addir Venora",
+      "title_he": "אַדִּיר וְנוֹרָא",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "kedushot-and-piyyut-parasha-ehad-elohenu",
+      "title_en": "Eḥad elohenu",
+      "title_he": "אֶחָד אֱלֹהֵֽינוּ",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "kedushot-and-piyyut-parasha-bereshit",
+      "title_en": "Poem for Parashat Genesis First Kedusha (Ve'atta Qadosh)",
+      "title_he": "פיוט לפרשת בראשית קדושה ראשונה (ואתה קדוש)",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "kedushot-and-piyyut-parasha-noah",
+      "title_en": "Poem for Parashat Toledoth Noah Second Qedusha (Go'alenu)",
+      "title_he": "פיוט לפרשת תולדות נח קדושה שנייה (גואלנו)",
+      "category": "Liturgy",
+      "subcategory": "Shabbat Morning Services"
+    },
+    {
+      "id": "efratim-yeḳarim",
+      "title_en": "Efratim yeḳarim",
+      "title_he": "אֶפְרָתִים יְקָרִים",
+      "category": "Liturgy",
+      "subcategory": "Tammuz Av Echa"
+    },
+    {
+      "id": "anenu-adonai-anenu-yom-kippur-text",
+      "title_en": "‘Anenu",
+      "title_he": "עֲנֵנוּ",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "anenu-el-hai-vekayyam-text",
+      "title_en": "‘Anenu el ḥai veḳayyam",
+      "title_he": "עֲנֵנוּ אֵל חַי וְקַיָּם",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "ase-lemaan-shimcha-haggadol-text",
+      "title_en": "‘Asē lema‘an",
+      "title_he": "עֲשֵׂה לְמַעַן",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "berogez-rahem-tizkor-yom-kippur-text",
+      "title_en": "Beroḡez raḥem tizkor.",
+      "title_he": "בְּרֹגֶז רַחֵם תִּזְכֹּר",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "el-rahum-shemach-yom-kippur-text",
+      "title_en": "Text",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "elohē-yisrael-al-tishkaḥ-yisrael-text",
+      "title_en": "Elohē yisra’el al tishkaḥ yisra’el.",
+      "title_he": "אֱלֹהֵי יִשְׂרָאֵל אַל תִּשְׁכַּח יִשְׂרָאֵל",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "adon-yeshuot",
+      "title_en": "Adon Yeshu'ot",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "afas-aron",
+      "title_en": "Afas Aron",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "al-ahavatecha",
+      "title_en": "Al ahavatecha",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "amen-yehi-ratson",
+      "title_en": "Amen Yehi Ratson",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "anochi-anochi",
+      "title_en": "Anochi Anochi",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "ashir-beshir-ḥadash",
+      "title_en": "Ashir Beshir Ḥadash",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "ashir-beshira-el-nora-tehillot",
+      "title_en": "Ashir Beshira El Nora Tehillot",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "ashir-leel-elyon",
+      "title_en": "Ashir Le’el ‘Elyon",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "atsili-qum-qera",
+      "title_en": "Atsili Qum Qera",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "azkir-tehillot",
+      "title_en": "Azkir Tehillot",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "ekkon-lemmul-shabbat",
+      "title_en": "Ekkon Lemmul Shabbat",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "en-kelohenu",
+      "title_en": "En Kelohenu",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "esmaḥ-beshir-ḥadash",
+      "title_en": "Esmaḥ Beshir Ḥadash",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "essa-bechos-yesha",
+      "title_en": "Essa Bechos Yesha‘",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "et-kos-yeshuot",
+      "title_en": "Et Kos Yeshu‘ot",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "evyon-asher",
+      "title_en": "Evyon Asher",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "ezkor-lemitsvat-melech",
+      "title_en": "Ezkor Lemitsvat Melech",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "eḳra-leel-elyon",
+      "title_en": "Eḳra Le’el ‘Elyon",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "hodu-leel-deot",
+      "title_en": "Hodu Le'El Deot",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "laḥatani-mivḥar-banai",
+      "title_en": "Laḥatani Mivḥar Banai",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "lutski-prayer-for-a-time-of-plague",
+      "title_en": "Lutski Prayer for a Time of Plague",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "malé-olam-kevod-yofi",
+      "title_en": "Malé ‘Olam Kevod Yofi",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "matsa-ish-sha-matsa-tov",
+      "title_en": "Matsa Ish-sha Matsa Tov",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "mitsvat-yesod-shabbat",
+      "title_en": "Mitsvat Yesod Shabbat",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "mizmor-leyom-shabbat",
+      "title_en": "Mizmor Leyom Shabbat",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "odecha-el-ki-noraot",
+      "title_en": "Odecha El Ki Noraot",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "odé-leel-maḥsi",
+      "title_en": "Odé Le’el Maḥsi",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "ori-yeḥidati",
+      "title_en": "Ori Yeḥidati",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "shabbat-menuḥa",
+      "title_en": "Shabbat Menuḥa",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "shiru-am-zakkai",
+      "title_en": "Shiru Am Zakkai",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "simhu-bene-el-neeman",
+      "title_en": "Simhu Bene El Ne'eman ",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "vehahochma",
+      "title_en": "Vehahochma",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "vehoshia",
+      "title_en": "Vehoshia",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yah-zimrati",
+      "title_en": "Yah Zimrati",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yahid-beolamo",
+      "title_en": "Yahid Be'olamo",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yatsar-hael",
+      "title_en": "Yatsar Ha’el",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yerivai-veoyevai",
+      "title_en": "Yerivai Ve’oyevai",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yeter-peletat-am",
+      "title_en": "Yeter Peletat ‘Am",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yona-leedech-rei",
+      "title_en": "Yona Le'edech Re'i",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "yonat-elem",
+      "title_en": "Yonat Elem",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": ""
+    },
+    {
+      "id": "adon-nora-text",
+      "title_en": "Adon Nora",
+      "title_he": "אֲדוֹן נוֹרָא",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "anenu-adonai-anenu-yom-kippur-text",
+      "title_en": "‘Anenu",
+      "title_he": "עֲנֵנוּ",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "anenu-el-hai-vekayyam-text",
+      "title_en": "‘Anenu el ḥai veḳayyam",
+      "title_he": "עֲנֵנוּ אֵל חַי וְקַיָּם",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "ase-lemaan-shimcha-haggadol-text",
+      "title_en": "‘Asē lema‘an",
+      "title_he": "עֲשֵׂה לְמַעַן",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "berogez-rahem-tizkor-yom-kippur-text",
+      "title_en": "Beroḡez raḥem tizkor.",
+      "title_he": "בְּרֹגֶז רַחֵם תִּזְכֹּר",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "el-rahum-shemach-yom-kippur-text",
+      "title_en": "Text",
+      "title_he": "",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "elohe-yisrael-al-tishkah-yisrael-yom-kippur-text",
+      "title_en": "Elohē yisra’el al tishkaḥ yisra’el.",
+      "title_he": "אֱלֹהֵי יִשְׂרָאֵל אַל תִּשְׁכַּח יִשְׂרָאֵל",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "emet-hael-text",
+      "title_en": "Emet Ha’el",
+      "title_he": "אֱמֶת הָאֵל",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "rahum-im-atta-lo-terahem-text",
+      "title_en": "Raḥum im atta lo teraḥem",
+      "title_he": "רַחוּם אִם אַתָּה לֹא תְרַחֵם",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "rahum-vehannun-rahem-alenu-text",
+      "title_en": "Keshe‘anita",
+      "title_he": "כְּשֶׁעָנִיתָ",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    },
+    {
+      "id": "yetsav-hael-vehagoel-text",
+      "title_en": "Yetsav Ha’el",
+      "title_he": "יְצַו הָאֵל",
+      "category": "Liturgy",
+      "subcategory": "Yom Kippur"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "kedushot-and-piyyut-parasha-ehad-elohenu",
+  "title_en": "Eḥad elohenu",
+  "title_he": "אֶחָד אֱלֹהֵֽינוּ",
+  "category": "Liturgy",
+  "subcategory": "Shabbat Morning Services",
+  "content": [
+    {
+      "hebrew": "אֶחָד אֱלֹהֵֽינוּ, וְלֹא יַגִּיעֽוּהוּ רַעְיוֹנִים;",
+      "transliteration": "Eḥad elohenu, velo yaggi‘uhu ra‘yonim;",
+      "english": "Our God is one, and thoughts cannot attain Him:"
+    },
+    {
+      "hebrew": "הַמְכַלֶּה יָמִים, וְיָמָיו בְּלֹא זְמַנִּים.",
+      "transliteration": "Hamechallé yamim, veyamav belo zemannim.",
+      "english": "He lives out days, and His days are timeless."
+    },
+    {
+      "hebrew": "רִאשׁוֹן לְכָל־רִאשׁוֹן, וְאַחֲרוֹן לְכָל־אַחֲרֹנִים;",
+      "transliteration": "Rishon lechol rishon, ve’aḥaron lechol aḥaronim;",
+      "english": "He is the first of all first things, and the last of all last things."
+    },
+    {
+      "hebrew": "נֹשֵׂא כָּל־מָקוֹם, וְלֹא יִמָּצֵא אָחוֹר וּפָנִים.",
+      "transliteration": "Nosé kol maḳom, velo yimmatsé aḥor ufanim.",
+      "english": "He bears every place, yet He cannot be found, [from] the back or the front."
+    },
+    {
+      "hebrew": "דִּגְלֵי שְׁחָקָיו יְפָאֲרוּ לוֹ בְּרִנּוּנִים,",
+      "transliteration": "Diḡlé sheḥaḳav yefa’aru lo berinnunim.",
+      "english": "His heavenly bannered [hosts] glorify Him in joyous songs;"
+    },
+    {
+      "hebrew": "יְהַדְּרֽוּהוּ יְפָאֲרֽוּהוּ חַיּוֹת וְאוֹפַנִּים.",
+      "transliteration": "Yehadderuhu yefa’aruhu ḥayyot ve’ofannim:",
+      "english": "Creatures and ofannim beautify Him, glorify Him;",
+      "comments": "Ofannin. Type of angel"
+    },
+    {
+      "hebrew": "כְּרוּבָיו וְשַׂרְפֵי לֶהָבָיו וְשִׁנְאָנִים",
+      "transliteration": "Keruvav vesarfé lehavav, veshinanim:",
+      "english": "His cherubim, and His burning seraphim, and shin’anim,",
+      "comments": "Shinanim. Type of angel."
+    },
+    {
+      "hebrew": "עִם חַיּוֹת הַמֶּרְכָּבָה לְהַקְדִּישׁוֹ פֹּנִים.",
+      "transliteration": "‘im ḥayyot hammerkava lehaḳdisho ponim:",
+      "english": "With the creatures of the Chariot, turn to sanctify Him."
+    },
+    {
+      "hebrew": "נֶעְלָם מִכֹּל וּסְבִיבָיו חֹנִים,",
+      "transliteration": "Ne‘lam mikkol usvivav ḥonim,",
+      "english": "He is concealed from all; around Him they camp."
+    },
+    {
+      "hebrew": "דֹּרְשִׁים מְבַקְשִׁים עֶלְיוֹנִים וְתַחְתּוֹנִים.",
+      "transliteration": "Doreshim mevaḳshim ‘elyonim vetaḥtonim:",
+      "english": "Those on high and on low seek, strive [to find Him];"
+    },
+    {
+      "hebrew": "יִשְׂרָאֵל עַם קְרוֹבוֹ לְיַחֲדוֹ בְּשִׁיר עֹנִים.",
+      "transliteration": "Yisra’el ‘am ḳerovo leyaḥado veshir ‘onim.",
+      "english": "Israel, the people close to Him, respond with song, to declare His oneness."
+    },
+    {
+      "hebrew": "שְׁמַ֤ע אֵלַי֙ יַֽעֲקֹ֔ב וְיִשְׂרָאֵ֖ל מְקֹרָאִ֑י אֲנִי־הוּא֙ אֲנִ֣י רִאשׁ֔וֹן אַ֖ף אֲנִ֥י אַחֲרֽוֹן׃ (ישעיהו מח:יב)",
+      "transliteration": "Shema‘ elai Ya‘aḳov veYisra’el meḳora’i ani hu ani rishon af ani aḥaron:",
+      "english": "Hear me, Jacob, and Israel, who are called by Me: I am He, I am the first; and I am also the last. (Isa. 48:12)"
+    },
+    {
+      "hebrew": "שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד׃ (דברים ו:ד)",
+      "transliteration": "Shema' yisrael Adonai elohenu Adonai eḥad.",
+      "english": "Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)"
+    }
+  ],
+  "source_file": "Kedushot and Piyyut Parasha.xlsx",
+  "source_sheet": "Ehad Elohenu"
+}

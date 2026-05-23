@@ -1,0 +1,304 @@
+{
+  "id": "20-veatta-teẓavvé",
+  "title_en": "Ve’atta Teẓavvé",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אֵל עֶלְיוֹן, דּוֹבֵר צֶֽדֶק מַגִּיד מֵישָׁרִים,",
+      "transliteration": "El ‘elyon, dover tsedeḳ maggid mesharim,",
+      "english": "El ‘Elyon, who speaks justice, and says righteous words,",
+      "comments": "El ‘Elyon. A name for God; traditional English “the most high God.”",
+      "timing": {
+        "start": 0,
+        "end": 16.13
+      }
+    },
+    {
+      "hebrew": "הוֹרָה לְנֶאֱמַן בֵּיתוֹ לְצַוּוֹת זֶֽרַע יְשָׁרִים,",
+      "transliteration": "Hora lene’eman beto letsavvot zera‘ yesharim,",
+      "english": "Instructed the faithful one of His house to command the progeny of the upright",
+      "comments": "The faithful one of His house. Moses.",
+      "timing": {
+        "start": 16.13,
+        "end": 28.77
+      }
+    },
+    {
+      "hebrew": "רַצֵּי כֶֽסֶף יִתְּנוּ לְהָכִין שֶֽׁמֶן זֵיתִים זַכִּים וּבָרִים,",
+      "transliteration": "Rats’tsē khesef yittenu lehakhin shemen zetim zakkim uvarim,",
+      "english": "That they should give offerings of silver to prepare pure, clean olive oil,",
+      "comments": "",
+      "timing": {
+        "start": 28.77,
+        "end": 45.67
+      }
+    },
+    {
+      "hebrew": "נֵר לְהַעֲלוֹת מֵעֶֽרֶב עַד בְּקָרִים.",
+      "transliteration": "Ner leha‘a lot me‘erev ‘ad beḳarim.",
+      "english": "To have a lamp lit from evening until morning;",
+      "comments": "",
+      "timing": {
+        "start": 45.67,
+        "end": 56.77
+      }
+    },
+    {
+      "hebrew": "וּבָחוֹר לְאַהֲרֹן וּלְבָנָיו לְכַהֵן, וְלִהְיוֹתָם בְּרוּרִים,",
+      "transliteration": "Uvaḥor le’Aharon ulvanav lekhahen, velihyotam berurim,",
+      "english": "And to choose Aaron and his sons to serve as priests, and for them to be distinct,",
+      "comments": "",
+      "timing": {
+        "start": 56.77,
+        "end": 70.47
+      }
+    },
+    {
+      "hebrew": "וְלַעֲשׂוֹת לָהֶם בִּגְדֵי קֹֽדֶשׁ, לְכָבוֹד וַהֲדָרִים:",
+      "transliteration": "Vela‘asot lahem biḡdē ḳodesh, lekhavod vahadarim:",
+      "english": "And to make them holy vestments, for glory and beauty:",
+      "comments": "",
+      "timing": {
+        "start": 70.47,
+        "end": 85.8
+      }
+    },
+    {
+      "hebrew": "כְּתֹֽנֶת תַּשְׁבֵּץ, וּמְעִיל – רִמּוֹן וּפַעֲמוֹן בּוֹ סְדוּרִים,",
+      "transliteration": "Ketonet tashbets, um‘il – rimmon ufa‘amon bo sedurim,",
+      "english": "An inlaid tunic, and a coat with pomegranates and bells arranged on it;",
+      "comments": "",
+      "timing": {
+        "start": 85.8,
+        "end": 102.17
+      }
+    },
+    {
+      "hebrew": "וּמִצְנֶֽפֶת וְצִיץ זָהָב – כְּמִין כְּתָרִים,",
+      "transliteration": "Umitsnefet vetsits zahav – kemin ketarim,",
+      "english": "A turban, and a golden ẓiẓ—like a crown;",
+      "comments": "Ẓiẓ. A diadem.",
+      "timing": {
+        "start": 102.17,
+        "end": 113.53
+      }
+    },
+    {
+      "hebrew": "וְאַבְנֵט – כְּמִין חֲגוֹר וֶאֱזוֹרִים,",
+      "transliteration": "Ve’avnet – kemin ḥaḡor ve’ezorim,",
+      "english": "And an avneṭ—like a belt, a girdle;",
+      "comments": "Avneṭ. A sash.",
+      "timing": {
+        "start": 113.53,
+        "end": 127.27
+      }
+    },
+    {
+      "hebrew": "וְאֵפוֹד – בִּשְׁתֵּי כְתֵפָיו אֲבָנִים יְקָרִים,",
+      "transliteration": "Ve’efod – bishtē khetefav avanim yeḳarim,",
+      "english": "And an ephod, with precious stones on its two shoulders,",
+      "comments": "",
+      "timing": {
+        "start": 127.27,
+        "end": 138.77
+      }
+    },
+    {
+      "hebrew": "חֲקוּקִים בָּם שְׁמוֹת תְּרֵי עָשָׂר, לִהְיוֹתָם נִזְכָּרִים",
+      "transliteration": "Ḥaḳuḳim bam shemot terē ‘asar, lihyotam nizkarim",
+      "english": "In which the names of the twelve [tribes] are inscribed, so that they will be remembered",
+      "comments": "",
+      "timing": {
+        "start": 138.77,
+        "end": 155.1
+      }
+    },
+    {
+      "hebrew": "לִפְנֵי אֵל, יוֹצֵר הָרִים;",
+      "transliteration": "Lifnē El, yotser harim;",
+      "english": "By God, sculptor of mountains;",
+      "comments": "",
+      "timing": {
+        "start": 155.1,
+        "end": 166.37
+      }
+    },
+    {
+      "hebrew": "וְחֹֽשֶׁן מִשְׁפָּט בְּאַרְבָּעָה טוּרִים,",
+      "transliteration": "Veḥoshen mishpat be’arba‘a turim,",
+      "english": "And a breastplate of justice, with four rows,",
+      "comments": "",
+      "timing": {
+        "start": 166.37,
+        "end": 178.3
+      }
+    },
+    {
+      "hebrew": "וְלָתֵת בּוֹ אֶת־הַתֻּמִּים וְאֶת־הָאוּרִים,",
+      "transliteration": "Velatet bo et hattummim ve’et ha’urim,",
+      "english": "And to place the Tummim and Urim in it,",
+      "comments": "",
+      "timing": {
+        "start": 178.3,
+        "end": 188.33
+      }
+    },
+    {
+      "hebrew": "יָעִיר לֵב הַכֹּהֵן לְהַבְדִּיל אֱמֶת מִשְּׁקָרִים,",
+      "transliteration": "Ya‘ir lev hakkohen lehavdil emet mish’sheḳarim,",
+      "english": "To awaken the priest’s heart to distinguish truth from lies,",
+      "comments": "",
+      "timing": {
+        "start": 188.33,
+        "end": 204.0
+      }
+    },
+    {
+      "hebrew": "וּלְהוֹפִֽיעַ לַשֹּׁאֵל דְּבָרִים נִסְתָּרִים –",
+      "transliteration": "Ulhofi’a‘ lash’sho’el devarim nistarim –",
+      "english": "And to make hidden matters appear to the questioner—",
+      "comments": "",
+      "timing": {
+        "start": 204.0,
+        "end": 214.2
+      }
+    },
+    {
+      "hebrew": "וְכָל־אֵֽלּוּ בְּעִנְיָנִים פְּלָאִים, לֹא יְדָעוּם הַיְהִירִים;",
+      "transliteration": "Vekhol ellu be‘inyanim pela’im lo yeda‘um hayhirim;",
+      "english": "All these regard wondrous things, which the haughty do not know;",
+      "comments": "",
+      "timing": {
+        "start": 214.2,
+        "end": 231.77
+      }
+    },
+    {
+      "hebrew": "וּמִכְנְסֵי בַד לְכַסּוֹת בְּשַׂר מַעְרִים,",
+      "transliteration": "Umikhnesē vad lekhassot besar ma‘rim,",
+      "english": "And linen trousers, to cover their procreative flesh,",
+      "comments": "",
+      "timing": {
+        "start": 231.77,
+        "end": 242.07
+      }
+    },
+    {
+      "hebrew": "וְהָיוּ לְאַהֲרֹן וּלְבָנָיו הַכְּשֵׁרִים,",
+      "transliteration": "Vehayu le’Aharon ulvanav hakkesherim,",
+      "english": "Which will be for Aaron and his sons, the upright ones,",
+      "comments": "",
+      "timing": {
+        "start": 242.07,
+        "end": 255.07
+      }
+    },
+    {
+      "hebrew": "בְּבֹאָם לְשָׁרֵת, וְלִהְיוֹתָם מַקְטִירִים.",
+      "transliteration": "Bevo’am lesharet, velihyotam maḳtirim.",
+      "english": "When they come to serve, and to offer incense.",
+      "comments": "",
+      "timing": {
+        "start": 255.07,
+        "end": 265.57
+      }
+    },
+    {
+      "hebrew": "שִׁבְעַת יָמִים לְמַלֵּא בָם יָדָם יִהְיוּ סְפוּרִים,",
+      "transliteration": "Shiv‘at yamim lemallē vam yadam yihyu sefurim,",
+      "english": "Seven days shall be counted, to inaugurate them through [these vestments],",
+      "comments": "",
+      "timing": {
+        "start": 265.57,
+        "end": 281.2
+      }
+    },
+    {
+      "hebrew": "וּפַר חַטָּאת לַיּוֹם, עַל הַכִּפּוּרִים,",
+      "transliteration": "Ufar ḥattat layyom, ‘al hakkippurim,",
+      "english": "And there should be an ox for the sin offering each day, to atone,",
+      "comments": "",
+      "timing": {
+        "start": 281.2,
+        "end": 290.7
+      }
+    },
+    {
+      "hebrew": "וּלְחַטֵּא אֶת־הַמִּזְבֵּחַ – וְאָז יַעֲלוּ עָלָיו פָּרִים.",
+      "transliteration": "Ulḥattē et hammizbe’aḥ – ve’az ya‘alu ‘alav parim.",
+      "english": "And he-goats to atone for the altar—and then, oxen may be offered on it.",
+      "comments": "",
+      "timing": {
+        "start": 290.7,
+        "end": 303.1
+      }
+    },
+    {
+      "hebrew": "וּלְמִזְבַּח הַקְּטֹֽרֶת – לְבַל יַעֲלוּ עָלָיו עוֹלָה וָנֶֽסֶךְ יִהְיוּ נִזְהָרִים.",
+      "transliteration": "Ulmizbaḥ haḳḳetoret – leval ya‘alu ‘alav ‘ola vanesekh yihyu nizharim.",
+      "english": "And the incense altar—they should be warned not to offer burnt offerings or libations on it.",
+      "comments": "",
+      "timing": {
+        "start": 303.1,
+        "end": 317.7
+      }
+    },
+    {
+      "hebrew": "נִזְכֶּה עוֹד חֲזוֹת מִקְדָּשׁוֹ מְיֻסָּד בַּסַּפִּירִים,",
+      "transliteration": "Nizkē ‘od ḥazot miḳdasho meyussad bassappirim,",
+      "english": "May we again merit seeing His Temple, constructed with lapis lazuli,",
+      "comments": "",
+      "timing": {
+        "start": 317.7,
+        "end": 331.33
+      }
+    },
+    {
+      "hebrew": "וְהַכֹּהֲנִים בְּשֵׁרוּתָם, וְהַלְוִיִּם שָׁרִים וְשֹׁעֲרִים,",
+      "transliteration": "Vehakkohanim besherutam, vehalviyyim sharim vesho‘arim,",
+      "english": "And the priests in their service, and the Levites singing and operating the gates!",
+      "comments": "",
+      "timing": {
+        "start": 331.33,
+        "end": 343.47
+      }
+    },
+    {
+      "hebrew": "וְהָיָה יוי לְמֶֽלֶךְ, וּמִגַּעֲרָתוֹ יִמַּֽסּוּ הָרִים!",
+      "transliteration": "Vehaya Adonai lemelekh, umigga‘arato yimmassu harim!",
+      "english": "And Adonai will be king, and the mountains will melt from His rebuke!",
+      "comments": "",
+      "timing": {
+        "start": 343.47,
+        "end": 353.0
+      }
+    },
+    {
+      "hebrew": "קהל: בַּיּוֹם הַהוּא יִהְיֶה יוי אֶחָד מְאֻשָּׁר בְּסִפּוּרִים.",
+      "transliteration": "Ḳahal: Bayyom hahu yihyē Adonai eḥad me’ush’shar besippurim.",
+      "english": "Cong. On that day, Adonai will be one, acclaimed with tales.",
+      "comments": "",
+      "timing": {
+        "start": 353.0,
+        "end": 364.6
+      }
+    },
+    {
+      "hebrew": "חזן: וְהָיָ֧ה יו֛י לְמֶ֖לֶךְ עַל־כָּל־הָאָ֑רֶץ בַּיּ֣וֹם הַה֗וּא יִֽהְיֶ֧ה יו֛י אֶחָ֖ד וּשְׁמ֥וֹ אֶחָֽד: (זכריה יד:ט)",
+      "transliteration": "Ḥazzan: Vehaya Adonai lemelekh ‘al kol ha’arets bayyom hahu yihyē Adonai eḥad ushmo eḥad:",
+      "english": "Cantor. And Adonai will be king over the entire world; on that day, Adonai will be one, and His name one. (Zech. 14:9)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: שְׁמַ֖ע יִשְׂרָאֵ֑ל יו֥י אֱלֹהֵ֖ינוּ יו֥י ׀ אֶחָֽד: (דברים ו:ד)",
+      "transliteration": "Ḳahal: Shema‘ Yisra’el Adonai elohenu Adonai, eḥad:",
+      "english": "Cong. Hear O Israel, Adonai our God is Adonai on His own. (Deut. 6:4)",
+      "comments": "Adonai on His own. The translation follows Sefer Ha-mivḥar on Deuteronomy 6:4: “The meaning is that He is one, and does not need any second one.”"
+    }
+  ],
+  "audio": "audio/20-veatta-teẓavvé.mp3",
+  "author_en": "Aaron ben Joseph"
+}

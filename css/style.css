@@ -1,0 +1,476 @@
+/* Karaite Texts - Minimal Static Site CSS */
+/* Designed to be simple, readable, and easy to fork */
+
+:root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Frank Ruhl Libre', 'SBL Hebrew', 'Times New Roman', serif;
+    
+    --bg: #ffffff;
+    --bg-alt: #f8f9fa;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --highlight: #fef3c7;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #111827;
+        --bg-alt: #1f2937;
+        --text: #f3f4f6;
+        --text-muted: #9ca3af;
+        --border: #374151;
+        --accent: #60a5fa;
+        --highlight: #4338ca33;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Layout */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.site-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.site-nav a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+    color: var(--text);
+}
+
+/* Main content */
+main {
+    padding: 40px 0 80px;
+}
+
+/* Home page */
+.hero {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Category list */
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    transition: background 0.15s;
+}
+
+.category-item:hover {
+    background: var(--bg-alt);
+    text-decoration: none;
+}
+
+.category-name-he {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    direction: rtl;
+    color: var(--text-muted);
+}
+
+.category-name-en {
+    font-size: 1.1rem;
+    color: var(--text);
+}
+
+/* Text list */
+.text-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.text-item:first-child {
+    border-top: 1px solid var(--border);
+}
+
+.text-item:hover {
+    background: var(--bg-alt);
+}
+
+.text-title-he {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    direction: rtl;
+    unicode-bidi: isolate;
+    min-width: 150px;
+    text-align: right;
+}
+
+.text-title-en {
+    font-size: 1.1rem;
+    color: var(--text);
+    min-width: 200px;
+    text-align: left;
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+.back-link:hover {
+    color: var(--text);
+}
+
+/* Page title */
+.page-title {
+    font-size: 1.75rem;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+/* Reader page */
+.reader-header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+}
+
+.reader-title-he {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    direction: rtl;
+    margin-bottom: 8px;
+}
+
+.reader-title-en {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+/* Toggle buttons */
+.reader-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.toggle-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+}
+
+.toggle-btn:hover {
+    background: var(--bg-alt);
+}
+
+.toggle-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Tabs */
+.reader-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.95rem;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.tab-btn:hover {
+    color: var(--text);
+}
+
+.tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Introduction */
+.introduction {
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.introduction p {
+    margin-bottom: 1em;
+}
+
+.metadata {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.metadata-item {
+    margin-bottom: 12px;
+}
+
+.metadata-label {
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.about-author {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+}
+
+.about-author h3 {
+    margin-bottom: 12px;
+}
+
+/* Text content - the main reader */
+.text-content {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.9;
+}
+
+.verse {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.verse:last-child {
+    border-bottom: none;
+}
+
+.verse-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 8px;
+}
+
+.verse-hebrew {
+    flex: 1;
+    direction: rtl;
+    text-align: right;
+    font-family: var(--font-serif);
+}
+
+.verse-transliteration {
+    flex: 1;
+    text-align: left;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.verse-english {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 8px;
+}
+
+/* Highlight current verse (for audio sync) */
+.verse.current {
+    background: var(--highlight);
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
+}
+
+/* Hide columns */
+.hide-hebrew .verse-hebrew {
+    display: none;
+}
+
+.hide-transliteration .verse-transliteration {
+    display: none;
+}
+
+.hide-english .verse-english {
+    display: none;
+}
+
+/* Single column layout when others hidden */
+.hide-hebrew .verse-row,
+.hide-transliteration .verse-row {
+    justify-content: center;
+}
+
+.hide-hebrew.hide-transliteration .verse-row {
+    display: none;
+}
+
+/* Audio player */
+.audio-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    margin-bottom: 32px;
+}
+
+.audio-player button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.audio-player button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+    
+    .verse-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .verse-hebrew,
+    .verse-transliteration {
+        text-align: center;
+    }
+    
+    .verse-hebrew {
+        direction: rtl;
+    }
+    
+    .text-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .text-title-he,
+    .text-title-en {
+        text-align: center;
+        min-width: auto;
+    }
+    
+    .reader-controls {
+        flex-wrap: wrap;
+    }
+}

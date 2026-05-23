@@ -1,0 +1,222 @@
+{
+  "id": "08-vayyishlaḥ",
+  "title_en": "Vayyishlaḥ",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אִישׁ תָּם, בְּלֶכְתּוֹ בְּמַהֲלָכָיו,",
+      "transliteration": "Ish tam belekhto bemahalakhav,",
+      "english": "When the mild man was going on his path,",
+      "comments": "The mild man. Jacob.",
+      "timing": {
+        "start": 0,
+        "end": 15.3
+      }
+    },
+    {
+      "hebrew": "הוֹאִיל לִשְׁלֹֽחַ לְעֵשָׂו אָחִיו מַלְאָכָיו,",
+      "transliteration": "Ho’il lishlo’aḥ le‘Esav aḥiv mal’akhav,",
+      "english": "He decided to send messengers to his brother Esau,",
+      "comments": "",
+      "timing": {
+        "start": 15.3,
+        "end": 27.03
+      }
+    },
+    {
+      "hebrew": "רְאוֹת מַחְשְׁבוֹת לִבּוֹ וּדְרָכָיו.",
+      "transliteration": "Re’ot maḥ’shevot libbo udrakhav.",
+      "english": "To see his heart’s thoughts and his ways.",
+      "comments": "",
+      "timing": {
+        "start": 27.03,
+        "end": 36.8
+      }
+    },
+    {
+      "hebrew": "נִמְצָא נֹקֵם וְנֹטֵר וְעֹמֵד בַּהֲפָכָיו,",
+      "transliteration": "Nimtsa noḳem venoter ve‘omed bahafakhav,",
+      "english": "He turned out to be vindictive and vengeful, and steadfast in his deviousness,",
+      "comments": "",
+      "timing": {
+        "start": 36.8,
+        "end": 49.47
+      }
+    },
+    {
+      "hebrew": "בָּא לְעֻמָּתוֹ עִם אַרְבַּע מֵאוֹת חֲנִיכָיו.",
+      "transliteration": "Ba le‘ummato ‘im arba‘ me’ot ḥanikhav.",
+      "english": "And was coming to face [Jacob] with four hundred retainers.",
+      "comments": "",
+      "timing": {
+        "start": 49.47,
+        "end": 65.0
+      }
+    },
+    {
+      "hebrew": "נִיבוֹ שָׁפַךְ חָלָק לְמֵכִין צַעֲדֵי הֲלִיכָיו:",
+      "transliteration": "Nivo shafakh ḥalaḳ lemekhin tsa‘adē halikhav:",
+      "english": "The smooth man poured out his verbal expression to the One who made his strides firm:",
+      "comments": "The smooth man. Jacob.",
+      "timing": {
+        "start": 65.0,
+        "end": 76.67
+      }
+    },
+    {
+      "hebrew": "\"יוֹדֵֽעַ סִתְרֵי לֵב וּמַעֲרָכָיו,",
+      "transliteration": "“Yode’a‘ sitrē lev uma‘arakhav,",
+      "english": "“You, who know the heart’s secrets and designs,",
+      "comments": "",
+      "timing": {
+        "start": 76.67,
+        "end": 89.37
+      }
+    },
+    {
+      "hebrew": "וְקָרוֹב לְכָל־דֹּרְשָׁיו וְחֹכָיו –",
+      "transliteration": "Veḳarov lekhol doreshav veḥokhav –",
+      "english": "And are close to all who seek You and await You —",
+      "comments": "",
+      "timing": {
+        "start": 89.37,
+        "end": 100.1
+      }
+    },
+    {
+      "hebrew": "סְפֹר נֹאדִי, וְהַצִּילֵֽנִי מִיַּד שָׂעִיר וּמִיַּד נְסִיכָיו,",
+      "transliteration": "Sefor nodi, vehats’tsileni miyyad sa‘ir umiyyad nesikhav,",
+      "english": "Count my wanderings, and rescue me from the hand of the hairy man and that of his princes,",
+      "comments": "The hairy man. Esau.",
+      "timing": {
+        "start": 100.1,
+        "end": 117.5
+      }
+    },
+    {
+      "hebrew": "פֶּן יָבוֹא וְהִכַּֽנִי, בְּזֵדוּת וְגֵאוּת אֲבָכָיו.\"",
+      "transliteration": "Pen yavo vehikkani, bezedut veḡeut avakhav.”",
+      "english": "Lest he come and smite me, wantonly and with high haughtiness.”",
+      "comments": "",
+      "timing": {
+        "start": 117.5,
+        "end": 130.07
+      }
+    },
+    {
+      "hebrew": "וְדֹרוֹן שָׁלַח לוֹ, בַּחֲמֵֽשֶׁת עֲרוּכָיו,",
+      "transliteration": "Vedoron shalaḥ lo, baḥameshet ‘arukhav,",
+      "english": "And [Jacob] sent him a gift, arranged in five tranches.",
+      "comments": "",
+      "timing": {
+        "start": 130.07,
+        "end": 146.1
+      }
+    },
+    {
+      "hebrew": "וַיָּֽשַׂר אֶל מַלְאָךְ, וַיִּגַּע בְּכַף יְרֵכָיו,",
+      "transliteration": "Vayyasar el mal’akh vayyigga‘ bekhaf yerekhav,",
+      "english": "He overpowered an angel, who struck him in his hip-socket,",
+      "comments": "",
+      "timing": {
+        "start": 146.1,
+        "end": 157.67
+      }
+    },
+    {
+      "hebrew": "זֵֽכֶר לְדֹר אַחֲרוֹן, זֶֽרַע בְּרוּכָיו.",
+      "transliteration": "Zekher ledor aḥaron, zera‘ berukhav.",
+      "english": "An allusion to the final generation, his blessed progeny.",
+      "comments": "",
+      "timing": {
+        "start": 157.67,
+        "end": 173.53
+      }
+    },
+    {
+      "hebrew": "בָּרוּךְ הַמַּשְׁלִים רְצוֹן יְרֵאָיו, וּמִלֵּא כָּל־צֳרָכָיו.",
+      "transliteration": "Barukh hammashlim retson yere‘av, umillē kol tsorakhav.",
+      "english": "Blessed is the One who fulfills the will of those who fear Him, and supplied all [Jacob’s] needs.",
+      "comments": "",
+      "timing": {
+        "start": 173.53,
+        "end": 190.17
+      }
+    },
+    {
+      "hebrew": "מְהֵרָה יִמְלֹךְ עָלֵינוּ, וְיִירְשׁוּ אֶֽרֶץ מְבֹרָכָיו.",
+      "transliteration": "Mehera yimlokh ‘alenu, veyireshu erets mevorakhav.",
+      "english": "May He soon reign over us, and may His blessed ones inherit the earth.",
+      "comments": "",
+      "timing": {
+        "start": 190.17,
+        "end": 207.43
+      }
+    },
+    {
+      "hebrew": "מַלְכוּת זָדוֹן תֵּעָקֵר, בְּמַאֲמַר הַמְגַלְגֵּל פְּלָכָיו,",
+      "transliteration": "<Malkhut zadon te‘aḳer, bema’amar hamḡalgel pelakhav,",
+      "english": "May the criminal state be uprooted, by the utterance of the One who revolves His [heavenly] regions,",
+      "comments": ""
+    },
+    {
+      "hebrew": "וְעֵשָׂיו יֹאבַד – הוּא וַאֲלוּפָיו וּמְלָכָיו.",
+      "transliteration": "Ve‘Esav yovad – hu va’alufav umlakhav.",
+      "english": "And may Esau perish—he, his chieftains, and his kings.",
+      "comments": ""
+    },
+    {
+      "hebrew": "וְנָשָׂא הַשָּׂעִיר אֶת־כָּל־עֲוֹנוֹת תָּם וּמְבוּכָיו.",
+      "transliteration": "Venasa hassa‘ir et kol ‘avonot tam umvukhav.>",
+      "english": "And may the hairy man bear all the sins of the mild man, and his horrors.",
+      "comments": ""
+    },
+    {
+      "hebrew": "וְאָז נַקְדִּישׁ וּנְפָאֵר לְקֹנֵֽנוּ בְּיִרְאָה וּבְאֵימָה",
+      "transliteration": "Ve’az naḳdish unfa’er leḳonenu beyir’a uv’ema",
+      "english": "And then we shall declare our maker’s holiness and glory, with fear and trembling—",
+      "comments": "",
+      "timing": {
+        "start": 207.43,
+        "end": 208.0
+      }
+    },
+    {
+      "hebrew": "שֵׁם הַמֶּֽלֶךְ הַמְפוֹאָר הַגָּדוֹל וְהַנּוֹרָא, בְּנִיב שָׂפָה בְרוּרָה, כְּמַלְאֲכֵי רוּמָה,",
+      "transliteration": "Shem hammelekh hamfo’ar haggadol vehannora, beniv safa verura, kemalakhē ruma,",
+      "english": "[Sanctifying] the name of the king who is glorified, great, and awesome—with articulate eloquence, like the angels on high,",
+      "comments": "",
+      "timing": {
+        "start": 208.0,
+        "end": 221.0
+      }
+    },
+    {
+      "hebrew": "קהל: הַמְקַבְּלִים עֹל מַלְכוּתוֹ, וְנֹתְנִים רְשׁוּת זֶה לָזֶה, לְהַקְדִּישׁוֹ וּלְהַעֲרִיצוֹ.",
+      "transliteration": "Ḳahal: hameḳabbelim ‘ol malkhuto, venotenim reshut zē lazē, lehaḳdisho ulha‘aritso.",
+      "english": "Cong.Who accept the yoke of His kingdom, and give permission to one another to declare His holiness and adulation.",
+      "comments": "",
+      "timing": {
+        "start": 221.0,
+        "end": 233.0
+      }
+    },
+    {
+      "hebrew": "חזן: כָּאָמוּר: ישֵׁ֥ב עַל־כִּסֵּ֖א רָ֣ם וְנִשָּׂ֑א וְשׁוּלָ֖יו מְלֵאִ֥ים אֶת־הַהֵיכָֽל: שְׂרָפִ֨ים עֹֽמְדִ֤ים ׀ מִמַּ֨עַל֙ ל֔וֹ שֵׁ֧שׁ כְּנָפַ֛יִם שֵׁ֥שׁ כְּנָפַ֖יִם לְאֶחָ֑ד בִּשְׁתַּ֣יִם ׀ יְכַסֶּ֣ה פָנָ֗יו וּבִשְׁתַּ֛יִם יְכַסֶּ֥ה רַגְלָ֖יו וּבִשְׁתַּ֥יִם יְעוֹפֵֽף: וְקָרָ֨א זֶ֤ה אֶל־זֶה֙ וְאָמַ֔ר",
+      "transliteration": "Ḥazzan: Ka’amur: yoshev ‘al kissē ram venissa veshulav mele’im et hahekhal: Serafim ‘omedim, mimma‘al lo shesh kenafayim shesh kenafayim le’eḥad 0 bishtayim, yekhassē fanav uvishtayim yekhassē raḡlav uvishtayim ye‘ofef: Veḳara zē el zē ve’amar",
+      "english": "Cantor: As it is written: Seated on a throne, high and lofty, with His coattails filling the Temple. Seraphim were standing above Him, each one with six wings; with two [wings] they would cover their faces, and with two they would cover their legs, and with two they would fly. And they would call out, this one to that one, and say:",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: קָד֧וֹשׁ ׀ קָד֛וֹשׁ קָד֖וֹשׁ יו֣י צְבָא֑וֹת מְלֹ֥א כָל־הָאָ֖רֶץ כְּבוֹדֽוֹ:",
+      "transliteration": "Ḳahal: Ḳadosh, ḳadosh ḳadosh Adonai tseva’ot melo khol ha’arets kevodo:",
+      "english": "Congregation: Holy, holy, holy is Adonai Ẓeva’oth; the entire world is full of His Glory. (Isa. 6:1–3)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/08-vayyishlaḥ.mp3",
+  "author_en": "Aaron ben Joseph"
+}

@@ -1,0 +1,191 @@
+{
+  "id": "vehahochma",
+  "title_en": "Vehahochma",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "",
+  "content": [
+    {
+      "hebrew": "Vehaḥochma me’ayin timmatsē,",
+      "transliteration": "וְֽ֭הַחׇכְמָה מֵאַ֣יִן תִּמָּצֵ֑א",
+      "english": "But wisdom, where shall it be found?"
+    },
+    {
+      "hebrew": "*ve’ē zē meḳom bina.",
+      "transliteration": "וְאֵ֥י זֶ֝֗ה מְק֣וֹם בִּינָֽה׃*",
+      "english": "And where is the place of understanding? (Job 28:12)"
+    },
+    {
+      "hebrew": "Lo yada‘ enosh ‘erkah,",
+      "transliteration": "לֹא־יָדַ֣ע אֱנ֣וֹשׁ עֶרְכָּ֑הּ",
+      "english": "Humanity knows not the price thereof;"
+    },
+    {
+      "hebrew": "*velo timmatsē be’erets haḥayyim.",
+      "transliteration": "וְלֹ֥א תִ֝מָּצֵ֗א בְּאֶ֣רֶץ הַחַיִּֽים׃*",
+      "english": "neither is it found in the land of the living. (Job 28:13)"
+    },
+    {
+      "hebrew": "Tehom amar lo vi hi,",
+      "transliteration": "תְּה֣וֹם אָ֭מַר לֹ֣א בִי־הִ֑יא",
+      "english": "The deep says: ‘It is not in me’;"
+    },
+    {
+      "hebrew": "*veyam amar en ‘immadi.",
+      "transliteration": "וְיָ֥ם אָ֝מַ֗ר אֵ֣ין עִמָּדִֽי׃*",
+      "english": "and the sea says: ‘It is not with me.’ (Job 28:14)"
+    },
+    {
+      "hebrew": "Lo yuttan seḡor taḥteha,",
+      "transliteration": "לֹֽא־יֻתַּ֣ן סְג֣וֹר תַּחְתֶּ֑יהָ",
+      "english": "It cannot be gotten for gold,"
+    },
+    {
+      "hebrew": "*velo yish-shaḳel kesef meḥirah.",
+      "transliteration": "וְלֹ֥א יִ֝שָּׁקֵ֗ל כֶּ֣סֶף מְחִירָֽהּ׃*",
+      "english": "neither shall silver be weighed for the price thereof. (Job 28:15)"
+    },
+    {
+      "hebrew": "Lo tesullē bechetem ofir,",
+      "transliteration": "לֹֽא־תְ֭סֻלֶּה בְּכֶ֣תֶם אוֹפִ֑יר",
+      "english": "It cannot be valued with the gold of Ophir,"
+    },
+    {
+      "hebrew": "*beshoham yaḳar vesappir.",
+      "transliteration": "בְּשֹׁ֖הַם יָקָ֣ר וְסַפִּֽיר׃*",
+      "english": "with the precious onyx, or the sapphire. (Job 28:16)"
+    },
+    {
+      "hebrew": "Lo ya‘archenna zahav uzchochit,",
+      "transliteration": "לֹא־יַעַרְכֶ֣נָּה זָ֭הָב וּזְכוֹכִ֑ית",
+      "english": "Gold and glass cannot equal it;"
+    },
+    {
+      "hebrew": "*utmuratah keli faz.",
+      "transliteration": "וּתְמ֖וּרָתָ֣הּ כְּלִי־פָֽז׃*",
+      "english": "either shall the exchange thereof be vessels of fine gold. (Job 28:17)"
+    },
+    {
+      "hebrew": "Ramot veḡavish lo yizzacher,",
+      "transliteration": "רָאמ֣וֹת וְ֭גָבִישׁ לֹ֣א יִזָּכֵ֑ר",
+      "english": "No mention shall be made of coral or of crystal;"
+    },
+    {
+      "hebrew": "*umeshech ḥochma mippeninim.",
+      "transliteration": "וּמֶ֥שֶׁךְ חׇ֝כְמָ֗ה מִפְּנִינִֽים׃*",
+      "english": "yea, the price of wisdom is above rubies. (Job 28:18)"
+    },
+    {
+      "hebrew": "Lo ya‘archenna pitdat kush,",
+      "transliteration": "לֹֽא־יַ֭עַרְכֶנָּה פִּטְדַת־כּ֑וּשׁ",
+      "english": "The topaz of Ethiopia shall not equal it,"
+    },
+    {
+      "hebrew": "*bechetem tahor lo tesullē.",
+      "transliteration": "בְּכֶ֥תֶם טָ֝ה֗וֹר לֹ֣א תְסֻלֶּֽה׃*",
+      "english": "either shall it be valued with pure gold. (Job 28:19)"
+    },
+    {
+      "hebrew": "Vehaḥochma me’ayin tavo,",
+      "transliteration": "וְֽ֭הַחׇכְמָה מֵאַ֣יִן תָּב֑וֹא",
+      "english": "From where, then does wisdom come?"
+    },
+    {
+      "hebrew": "*ve’ē ze meḳom bina.",
+      "transliteration": "וְאֵ֥י זֶ֝֗ה מְק֣וֹם בִּינָֽה׃*",
+      "english": "And where is the place of understanding? (Job 28:20)"
+    },
+    {
+      "hebrew": "Vene‘elma me‘ēnē chol ḥai,",
+      "transliteration": "וְֽ֭נֶעֶלְמָה מֵעֵינֵ֣י כׇל־חָ֑י",
+      "english": "Seeing that is hid from the eyes of all living,"
+    },
+    {
+      "hebrew": "*ume‘of hash-shamayim nistara.",
+      "transliteration": "וּמֵע֖וֹף הַשָּׁמַ֣יִם נִסְתָּֽרָה׃*",
+      "english": "and kept close from the birds of the air. (Job 28:21)"
+    },
+    {
+      "hebrew": "Avaddon vamavet ameru,",
+      "transliteration": "אֲבַדּ֣וֹן וָ֭מָוֶת אָ֣מְר֑וּ",
+      "english": "Destruction and Death say:"
+    },
+    {
+      "hebrew": "*be’oznenu shama‘nu shim‘ah.",
+      "transliteration": "בְּ֝אׇזְנֵ֗ינוּ שָׁמַ֥עְנוּ שִׁמְעָֽהּ׃*",
+      "english": "‘We have heard a rumor thereof with our ears.’ (Job 28:22)"
+    },
+    {
+      "hebrew": "Elohim hevin darkah,",
+      "transliteration": "אֱ֭לֹהִים הֵבִ֣ין דַּרְכָּ֑הּ",
+      "english": "God understands the its way,"
+    },
+    {
+      "hebrew": "*vehu yada‘ et meḳomah.",
+      "transliteration": "וְ֝ה֗וּא יָדַ֥ע אֶת־מְקוֹמָֽהּ׃*",
+      "english": "and He knows its the place. (Job 28:23)"
+    },
+    {
+      "hebrew": "Ki hu liḳtsot ha’arets yabbit,",
+      "transliteration": "כִּי־ה֭וּא לִקְצוֹת־הָאָ֣רֶץ יַבִּ֑יט",
+      "english": "For He looks to the ends of the earth,"
+    },
+    {
+      "hebrew": "*taḥat kol hash-shamayim yir’ē.",
+      "transliteration": "תַּ֖חַת כׇּל־הַשָּׁמַ֣יִם יִרְאֶֽה׃*",
+      "english": "and sees under the whole heaven; (Job 28:24)"
+    },
+    {
+      "hebrew": "La‘asot laruwaḥ mishḳal,",
+      "transliteration": "לַעֲשׂ֣וֹת לָר֣וּחַ מִשְׁקָ֑ל",
+      "english": "When He makes a weight for the wind,"
+    },
+    {
+      "hebrew": "*umayim tikken bemidda.",
+      "transliteration": "וּ֝מַ֗יִם תִּכֵּ֥ן בְּמִדָּֽה׃*",
+      "english": "and metes out the waters by measure. (Job 28:25)"
+    },
+    {
+      "hebrew": "Ba‘asoto lammatar ḥoḳ,",
+      "transliteration": "בַּעֲשֹׂת֣וֹ לַמָּטָ֣ר חֹ֑ק",
+      "english": "When He made a decree for the rain,"
+    },
+    {
+      "hebrew": "*vederech laḥaziz ḳolot.",
+      "transliteration": "וְ֝דֶ֗רֶךְ לַחֲזִ֥יז קֹלֽוֹת׃*",
+      "english": "and a way for the storm of thunders; (Job 28:26)"
+    },
+    {
+      "hebrew": "Az ra’ah vaysapperah,",
+      "transliteration": "אָ֣ז רָ֭אָהּ וַֽיְסַפְּרָ֑הּ",
+      "english": "Then did He see it, and declare it;"
+    },
+    {
+      "hebrew": "*hechinah veḡam ḥaḳarah.",
+      "transliteration": "הֱ֝כִינָ֗הּ וְגַם־חֲקָרָֽהּ׃*",
+      "english": "He established it, yea, and searched it out. (Job 28:27)"
+    },
+    {
+      "hebrew": "Vayyomer la’adam, hen yir’at adonai hi ḥochma,",
+      "transliteration": "וַיֹּ֤אמֶר ׀ לָאָדָ֗ם הֵ֤ן יִרְאַ֣ת אֲ֭דֹנָי הִ֣יא חׇכְמָ֑ה",
+      "english": "And unto humanity He said: ‘Behold, the fear of the Lord, that is wisdom;"
+    },
+    {
+      "hebrew": "*vesor mera‘ bina.",
+      "transliteration": "וְס֖וּר מֵרָ֣ע בִּינָֽה׃*",
+      "english": "and to depart from evil is understanding.’ (Job 28:28)"
+    },
+    {
+      "hebrew": "Reshit ḥochma yir’at adonai, sechel tov lechol ‘osehem,",
+      "transliteration": "רֵ֘אשִׁ֤ית חׇכְמָ֨ה ׀ יִרְאַ֬ת יְהֹוָ֗ה שֵׂ֣כֶל ט֭וֹב לְכׇל־עֹֽשֵׂיהֶ֑ם",
+      "english": "The fear of Adonai is the beginning of wisdom; all those that do them have a good understanding;"
+    },
+    {
+      "hebrew": "*tehillato ‘omedet la‘ad.",
+      "transliteration": "תְּ֝הִלָּת֗וֹ עֹמֶ֥דֶת לָעַֽד׃*",
+      "english": "His praise endures for ever. (Psalms 111:10)"
+    }
+  ],
+  "source_file": "Vehahochma.xlsx",
+  "source_sheet": "Sheet1"
+}

@@ -1,0 +1,220 @@
+{
+  "id": "31-emor-el-ha-kohanim",
+  "title_en": "Emor El Ha-kohanim",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אָכֵן אֵין כֵּאלֹהֵֽינו, וְאֵין צוּר כַּאדֹנֵֽינוּ,",
+      "transliteration": "Akhen en kelohenu, ve’en tsur kadonenu,",
+      "english": "Indeed, none is like our God and no rock like our Lord,",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 16.5
+      }
+    },
+    {
+      "hebrew": "הַמְעַטְּרֵֽנוּ חֶֽסֶד וְרַחֲמִים, וְהֵאִיר עֵינֵֽינוּ.",
+      "transliteration": "Ham‘atterenu ḥesed veraḥamim, vehe’ir ‘enenu.",
+      "english": "Who has crowned us with mercy and compassion, and has given light to our eyes.",
+      "comments": "",
+      "timing": {
+        "start": 16.5,
+        "end": 29.47
+      }
+    },
+    {
+      "hebrew": "רָדִֽינוּ בְיַעְרַת דָּתוֹ; דְּבַשׁ וְחָלָב תַּֽחַת לְשׁוֹנֵֽנוּ.",
+      "transliteration": "Radinu veya‘rat dato; devash veḥalav taḥat leshonenu.",
+      "english": "We have taken of the honeycomb of His law; honey and milk are under our tongue.",
+      "comments": "",
+      "timing": {
+        "start": 29.47,
+        "end": 46.47
+      }
+    },
+    {
+      "hebrew": "נְתִיב יֹֽשֶׁר הוֹרָֽנוּ, וְשִׁנֵּס מָתְנֵֽינוּ.",
+      "transliteration": "Netiv yosher horanu, veshinnes motnenu.",
+      "english": "He has shown us the way of uprightness, and girded our loins.",
+      "comments": "",
+      "timing": {
+        "start": 46.47,
+        "end": 59.17
+      }
+    },
+    {
+      "hebrew": "בִּנְאוֹת שֵֽׂכֶל הִרְבִּיצָֽנוּ, וּבְצֵל חָכְמָה שָׂם מְלוֹנֵֽנוּ.",
+      "transliteration": "Bin’ot sekhel hirbitsanu, uvtsel ḥokhma sam melonenu.",
+      "english": "He has laid us down in the dwellings of understanding, and he has placed our lodging in the shadow of wisdom.",
+      "comments": "",
+      "timing": {
+        "start": 59.17,
+        "end": 75.5
+      }
+    },
+    {
+      "hebrew": "חָסְנֵֽנוּ הִרְבָּה, וְקִדֵּשׁ קְדֻשָּׁה יְתֵרָה לְכֹהֲנֵֽינוּ.",
+      "transliteration": "Ḥosnenu hirba, veḳiddesh ḳedush’sha yetera lekhohanenu,",
+      "english": "He has increased our strength, and sanctified our priests with especial sanctity;",
+      "comments": "",
+      "timing": {
+        "start": 75.5,
+        "end": 89.07
+      }
+    },
+    {
+      "hebrew": "וּכְבוֹד יוי הָיָה מְאוֹרָם, לִרְעוֹת עֶדְרֵי הֲמוֹנֵֽנוּ.",
+      "transliteration": "Ukhvod Adonai haya me’oram, lir‘ot ‘edrē hamonenu,",
+      "english": "Adonai’s Glory has been their light, [by which] to shepherd our teeming flocks.",
+      "comments": "",
+      "timing": {
+        "start": 89.07,
+        "end": 104.57
+      }
+    },
+    {
+      "hebrew": "הֵם הָיוּ מְשָׁרְתֵי יוי, לְהָפִיק רְצוֹנֵֽנוּ.",
+      "transliteration": "Hem hayu mesharetē Adonai, lehafiḳ retsonenu.",
+      "english": "They were the ones serving Adonai, to carry out our will.",
+      "comments": "",
+      "timing": {
+        "start": 104.57,
+        "end": 119.3
+      }
+    },
+    {
+      "hebrew": "לֹא יִגְּעוּ לְנֶֽפֶשׁ מֵת לְבֵינֵֽנוּ,",
+      "transliteration": "Lo yigge‘u lenefesh met levenenu",
+      "english": "They may not touch any person that is dead, among us,",
+      "comments": "",
+      "timing": {
+        "start": 119.3,
+        "end": 131.27
+      }
+    },
+    {
+      "hebrew": "כִּי אִם לִשְׁאֵרָם הַקָּרוֹב אֲלֵיהֶם, לְעֵינֵֽינוּ,",
+      "transliteration": "ki im liseram haḳarov alehem, le‘enenu,",
+      "english": "Other than their relatives, who are close to them, as we see,",
+      "comments": "",
+      "timing": {
+        "start": 131.27,
+        "end": 143.23
+      }
+    },
+    {
+      "hebrew": "וְזוֹנָה וַחֲלָלָה וּגְרוּשָׁה – לְבַל יִקְחוּ בְּפָנֵֽינוּ.",
+      "transliteration": "Vezona vaḥalala uḡrusha – leval yiḳḥu befanenu.",
+      "english": "And they may not take [as wives] a zona, ḥalala, or divorcée, in our presence.",
+      "comments": "Zona, ḥalala. Women who are not allowed to marry priests due to certain sexual improprieties, whether in the own pasts or their parents’.",
+      "timing": {
+        "start": 143.23,
+        "end": 159.57
+      }
+    },
+    {
+      "hebrew": "וְנִמְשָׁח בָּרֹאשׁ, מְכַפֵּר זְדוֹנֵֽינוּ,",
+      "transliteration": "Venimshaḥ barosh mekhapper zedonenu,",
+      "english": "The one whose head is anointed, who atones for our wanton sins,",
+      "comments": "",
+      "timing": {
+        "start": 159.57,
+        "end": 171.0
+      }
+    },
+    {
+      "hebrew": "לְכָל־מֵת לֹא יָבוֹא, וּבְתוּלָה יִקַּח מִבֵּינֵֽינוּ.",
+      "transliteration": "Lekhol met lo yavo uvtula yiḳḳaḥ mibbenenu.",
+      "english": "May not encounter any corpse, and must take [as a wife] a virgin from among us.",
+      "comments": "",
+      "timing": {
+        "start": 171.0,
+        "end": 188.77
+      }
+    },
+    {
+      "hebrew": "יִהְיוּ בְלִי מוּם, וְכֵן יִהְיוּ קָרְבָּנֵֽינוּ.",
+      "transliteration": "Yihyu veli mum, vekhen ḳorbanenu.",
+      "english": "[The priests] must be without blemish, and so must our sacrifices.",
+      "comments": "",
+      "timing": {
+        "start": 188.77,
+        "end": 199.73
+      }
+    },
+    {
+      "hebrew": "עָלְתָה מַעֲלָתָם כְּמוֹ כּוֹכְבֵי מְעוֹנֵֽנוּ.",
+      "transliteration": "‘aleta ma‘alatam kemo kokhevē me‘onenu.",
+      "english": "Their level is lofty, like the stars of our sky.",
+      "comments": "",
+      "timing": {
+        "start": 199.73,
+        "end": 212.0
+      }
+    },
+    {
+      "hebrew": "יִתְעַלֶּה וְיִתְרוֹמַם אֲשֶׁר תּוֹרָתוֹ חֲנָנָֽנוּ,",
+      "transliteration": "Yit‘allē vitromam asher torato ḥanananu,",
+      "english": "May [God] be lofty and elevated, He who has graced us with His Torah,",
+      "comments": "",
+      "timing": {
+        "start": 212.0,
+        "end": 227.37
+      }
+    },
+    {
+      "hebrew": "וּמוֹעֲדֵי שִׂמְחָה וּמִקְרָאֵי קֹֽדֶשׁ נָתַן לָֽנוּ.",
+      "transliteration": "Umo‘adē simḥa umiḳra’ē ḳodesh natan lanu.",
+      "english": "And has given us festivals of joy and sanctified convocations.",
+      "comments": "",
+      "timing": {
+        "start": 227.37,
+        "end": 238.67
+      }
+    },
+    {
+      "hebrew": "לְדֹר וָדֹר נַגִּיד גָּדְלוֹ בְּפִֽינוּ, אָב לְבָנֵֽינוּ,",
+      "transliteration": "Ledor vador naggid godlo befinu, av levanenu,",
+      "english": "From generation to generation shall we tell of His greatness, with our mouths, fathers to children,",
+      "comments": "",
+      "timing": {
+        "start": 238.67,
+        "end": 247.8
+      }
+    },
+    {
+      "hebrew": "קהל: נוֹדֶה לְמַלְכֵּֽנוּ נוֹדֶה לְמוֹשִׁיעֵֽנוּ – כִּי מִי כְקוֹנֵֽנוּ?",
+      "transliteration": "Ḳahal: Nodē lemalkenu nodē lemoshi‘enu – ki mi kheḳonenu?",
+      "english": "Cong. We give acknowledgement to our king, we give acknowledgement to our rescuer—for who is like our maker?",
+      "comments": "",
+      "timing": {
+        "start": 247.8,
+        "end": 258.67
+      }
+    },
+    {
+      "hebrew": "חזן: כִּ֥י מִי־אֵ֖ל מִבַּלְֽעֲדֵ֣י יו֑י וּמִ֥י צ֖וּר מִבַּלְֽעֲדֵ֥י אֱלֹהֵֽינוּ: (שמואל ב ככ:לב)",
+      "transliteration": "Ḥazzan: Ki mi el mibbal‘adē Adonai umi tsur mibbal‘adē elohenu:",
+      "english": "Cantor. For who is God besides Adonai, and who is a rock besides our God? (2 Sam. 22:32)",
+      "comments": ""
+    },
+    {
+      "hebrew": "[אֵֽין־קָד֥וֹשׁ כַּיוי כִּי־אֵ֣ין בִּלְתֶּ֑ךָ וְאֵ֥ין צ֖וּר כֵּֽאלֹהֵֽינוּ: (שמואל א ב:ב)]",
+      "transliteration": "En Ḳadosh ka’Adonai ki en biltekha ve’en tsur kelohenu:",
+      "english": "There is none holy like Adonai, for there is none besides You; and there is no rock like our God. (1 Sam. 2:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: וְאַתָּ֥ה קָד֑וֹשׁ י֝וֹשֵׁ֗ב תְּהִלּ֥וֹת יִשְׂרָאֵֽל:  (תהלים כב:ד)",
+      "transliteration": "Ḳahal: Ve’atta ḳadosh yoshev tehillot Yisra’el:",
+      "english": "Cong. And You are holy, enthroned on Israel’s praises. (Ps. 22:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/31-emor-el-ha-kohanim.mp3",
+  "author_en": "Aaron ben Joseph"
+}

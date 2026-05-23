@@ -1,0 +1,254 @@
+{
+  "id": "02-noah",
+  "title_en": "Toledoth Noaḥ",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "יְהִ֤י שֵׁ֣ם יו֣י מְבֹרָ֑ךְ מֵֽ֝עַתָּ֗ה וְעַד־עוֹלָֽם: (תהלים קיג:ב) מִמִּזְרַח־שֶׁ֥מֶשׁ עַד־מְבוֹא֑וֹ מְ֝הֻלָּ֗ל שֵׁ֣ם יוָֽי: (תהלים קיג:ג) יו֖י לַמַּבּ֣וּל יָשָׁ֑ב וַיֵּ֥שֶׁב י֜ו֗י מֶ֣לֶךְ לְעוֹלָֽם: (תהלים כט:י)",
+      "transliteration": "Yehi shem adonai mevorach me‘atta ve‘ad ‘olam: Mimmizraḥ shemesh ‘ad mevo’o mehullal shem Adonai: Adonai lammabbul yashav vayyeshev adonai melech le‘olam:",
+      "english": "May Adonai’s name be blessed from now until eternity. (Ps. 113:2) From the place of the sun’s rising until that of its setting, praised is Adonai’s name. (Ps. 113:3) Adonai was enthroned at the flood, and Adonai remains enthroned as king forever. (Ps. 29:10)",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 17.6
+      }
+    },
+    {
+      "hebrew": "אֵל מֶֽלֶךְ, הַיֹּשְׁבִי בַּשָּׁמָֽיִם,",
+      "transliteration": "El melech, hayyoshev bash-shamayim,",
+      "english": "O God, O king, who dwells in heaven,",
+      "comments": "",
+      "timing": {
+        "start": 17.6,
+        "end": 32.67
+      }
+    },
+    {
+      "hebrew": "הַמַּשְׁגִּֽיחַ מִמְּכוֹן שִׁבְתּוֹ סַרְעַפָּֽיִם,",
+      "transliteration": "Hammashgiyaḥ mimmechon shivto sar‘appayim,",
+      "english": "Who looks out from the place of His habitation at [people’s] thoughts,",
+      "comments": "",
+      "timing": {
+        "start": 32.67,
+        "end": 45.67
+      }
+    },
+    {
+      "hebrew": "רֹצֶה יְרֵאָיו וּבֹחֵר נְקִי כַפָּֽיִם.",
+      "transliteration": "Rotsé yere’av uvoḥer neḳi chappayim.",
+      "english": "Who is pleased with those that fear Him, and chooses the innocent.",
+      "comments": "",
+      "timing": {
+        "start": 45.67,
+        "end": 61.27
+      }
+    },
+    {
+      "hebrew": "נִמְצָא וְלֹא בִמְצִיאוּת, חַי וְלֹא בְחַיִּים,",
+      "transliteration": "Nimtsa velo vimtsi’ut, ḥai velo veḥayyim,",
+      "english": "He exists, but outside existence; is alive, but not in life;",
+      "comments": "",
+      "timing": {
+        "start": 61.27,
+        "end": 74.7
+      }
+    },
+    {
+      "hebrew": "גִּבּוֹר וְלֹא בִגְבוּרָה, וּמִשְׁפָּטָיו בֶּאֱמֶת עֲשׂוּיִם.",
+      "transliteration": "Gibbor velo viḡvura, umishpatav be’emet ‘asuyim.",
+      "english": "Is mighty, but not in might—and His judgments are made in truth.",
+      "comments": "",
+      "timing": {
+        "start": 74.7,
+        "end": 95.53
+      }
+    },
+    {
+      "hebrew": "תְּמִים דֵּעִים, וּמִבַּלְעָדָיו לֹא קְנוּיִם.",
+      "transliteration": "Temim de‘im, umibbal‘adav lo ḳenuyim.",
+      "english": "He is perfect in His thoughts, and without Him nothing can be created.",
+      "comments": "",
+      "timing": {
+        "start": 95.53,
+        "end": 108.17
+      }
+    },
+    {
+      "hebrew": "הַמֵּנִֽיחַ לְנֹֽחַ וּבָנָיו, וְהוֹצִיא צִדְקוֹ כַּצָּהֳרָֽיִם.",
+      "transliteration": "Hammeniyaḥ leNowaḥ uvanav, vehotsi tsidḳo kats-tsahorayim.",
+      "english": "[He is] the One who gave rest to Noah and his sons, and brought out his righteousness like broad daylight.",
+      "comments": "",
+      "timing": {
+        "start": 108.17,
+        "end": 126.2
+      }
+    },
+    {
+      "hebrew": "וְגִלָּה לוֹ סוֹדוֹ לְהָבִיא אִתּוֹ מִכָּל־חַי שְׁנַֽיִם שְׁנָֽיִם.",
+      "transliteration": "Veḡilla lo sodo lehavi itto kol ḥai shenayim shenayim.",
+      "english": "He revealed His secret to him—that he should bring two [specimens] of every living thing with him.",
+      "comments": "",
+      "timing": {
+        "start": 126.2,
+        "end": 140.6
+      }
+    },
+    {
+      "hebrew": "וְזֶֽרֶם הֶעֱבִיר, וּמָחָה אֶת־כָּל־הַיְקוּם מִתַּֽחַת הַשָּׁמָֽיִם,",
+      "transliteration": "Vezerem he‘evir umaḥa et kol haiḳum mittaḥat hash-shamayim,",
+      "english": "And he brought a deluge over [the world], and wiped out all that existed under heaven,",
+      "comments": "",
+      "timing": {
+        "start": 140.6,
+        "end": 160.13
+      }
+    },
+    {
+      "hebrew": "וַיִשָּֽׁאֶר אַךְ נֹֽחַ וַאֲשֶׁר אִתּוֹ מִשְּׁטִיפַת הַמָּֽיִם.",
+      "transliteration": "Vayyish-shaer ach Nowaḥ va’asher itto mish-shetifat hammayim.",
+      "english": "Such that only Noah, and those who were with him, survived the downpour of water.",
+      "comments": "",
+      "timing": {
+        "start": 160.13,
+        "end": 173.67
+      }
+    },
+    {
+      "hebrew": "וַיָּֽקֶם יוי עֵדוּת הַקֶּֽשֶׁת לָעֵינָֽיִם,",
+      "transliteration": "Vayyaḳem adonai ‘edut haḳḳeshet la‘enayim,",
+      "english": "Adonai established the visible testimony of the rainbow—",
+      "comments": "",
+      "timing": {
+        "start": 173.67,
+        "end": 190.47
+      }
+    },
+    {
+      "hebrew": "לֹא תָקוּם צָרָה זוֹ עוֹד פַּעֲמָֽיִם.",
+      "transliteration": "Lo taḳum tsara zo ‘od pa‘amayim.",
+      "english": "That such a tragedy would not recur a second time.",
+      "comments": "",
+      "timing": {
+        "start": 190.47,
+        "end": 203.13
+      }
+    },
+    {
+      "hebrew": "יְמֵי הָאָֽרֶץ יֵחָלְקוּ לְאַרְבַּעְתָּֽיִם.",
+      "transliteration": "Yemé ha’arets yeḥaleḳu le’arba’tayim.",
+      "english": "The years of the earth will be divided into four.",
+      "comments": "",
+      "timing": {
+        "start": 203.13,
+        "end": 218.63
+      }
+    },
+    {
+      "hebrew": "וַיִּהְיוּ שָׂפָה אַחַת כָּל־גּוֹיִם;",
+      "transliteration": "Vayyihyu safa aḥat kol goyim;",
+      "english": "All the nations were [of] a single language;",
+      "comments": "",
+      "timing": {
+        "start": 218.63,
+        "end": 230.5
+      }
+    },
+    {
+      "hebrew": "נוֹעֲדוּ בְּנוֹת מִגְדָּל וְרֹאשׁוֹ בַשָּׁמָיִם.",
+      "transliteration": "No‘adu benot miḡdal verosho vash-shamayim.",
+      "english": "They assembled together to build a tower, with its head in heaven.",
+      "comments": "",
+      "timing": {
+        "start": 230.5,
+        "end": 247.77
+      }
+    },
+    {
+      "hebrew": "וְנָאַם הַשֵּׁם: \"הָֽבָה נֵרְדָה, וְנָבְלָה שָׁם שְׂפָתָֽיִם!\"",
+      "transliteration": "Vena’am hash-shem: “hava nereda, venavela sham sefatayim!”",
+      "english": "But the Name said: “Come, let us go down and mix up their languages!”",
+      "comments": "",
+      "timing": {
+        "start": 247.77,
+        "end": 264.5
+      }
+    },
+    {
+      "hebrew": "וּמִשָּׁם הֱפִיצָם, וּמִבְּנוֹת רָפוּ יָדָיִם.",
+      "transliteration": "Umish-sham hefitsam, umibbenot rafu yadayim.",
+      "english": "And from there He dispersed them, and their hands became too weak to build.",
+      "comments": "",
+      "timing": {
+        "start": 264.5,
+        "end": 281.67
+      }
+    },
+    {
+      "hebrew": "זָרַח אֶזְרָח כְּאוֹר שֶֽׁמֶשׁ בַּאֲרַם נַהֲרָֽיִם,",
+      "transliteration": "Zaraḥ ezraḥ ke’or shemesh ba’aram naharayim,",
+      "english": "The Ezraḥ shone like sunlight, in Aram Between the Rivers,",
+      "comments": "",
+      "timing": {
+        "start": 281.67,
+        "end": 296.47
+      }
+    },
+    {
+      "hebrew": "עֲדֵי הֵאִיר מְאוֹר חַמָּה לְשִׁבְעָתָֽיִם.",
+      "transliteration": "‘Adé he’ir me’or ḥamma leshiv‘atayim.",
+      "english": "Until he was seven times as bright as the sun’s light.",
+      "comments": "",
+      "timing": {
+        "start": 296.47,
+        "end": 313.2
+      }
+    },
+    {
+      "hebrew": "וְלִישׁוּעַת אֵל שִׁנֵּס מָתְנָֽיִם,",
+      "transliteration": "Velishu‘at El shinnes motnayim",
+      "english": "He girded his loins, [looking forward] to God’s rescue—",
+      "comments": "",
+      "timing": {
+        "start": 313.2,
+        "end": 325.2
+      }
+    },
+    {
+      "hebrew": "וּקְדוֹשׁ יִשְׂרָאֵל גְּאָלוֹ, וַיֶּֽרֶב אוֹתֹתָיו כִּפְלֵי כִפְלָֽיִם.",
+      "transliteration": "Uḳdosh Yisra’el ge’alo, vayyarev ototav kiflé chiflayim.",
+      "english": "And the Holy One of Israel redeemed him, and made His wonders many, doubled and redoubled.",
+      "comments": "",
+      "timing": {
+        "start": 325.2,
+        "end": 344.33
+      }
+    },
+    {
+      "hebrew": "כֵּן יִגְאַל זַרְעוֹ מִכָּל־גּוֹי וְעַם צִיִּים,",
+      "transliteration": "Ken yiḡal zar‘o mikkol goy ve‘am tsiyyim,",
+      "english": "So may He redeem his progeny, from every nation and from the boat peoples,",
+      "comments": "",
+      "timing": {
+        "start": 344.33,
+        "end": 358.33
+      }
+    },
+    {
+      "hebrew": "וְנֹאמַר: בָּרוּךְ גֹּאֵל יִשְׂרָאֵל, עֲמוּסֵי מֵעָֽיִם.",
+      "transliteration": "Venomar: Baruch go’el Yisra’el, ‘amusé me‘ayim:",
+      "english": "And let us say: Blessed is the redeemer of Israel, who have been carried [by Him ever since] the womb.",
+      "comments": ""
+    },
+    {
+      "hebrew": "גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְׂרָאֵֽל: (ישעיה מז:ד)",
+      "transliteration": "Go’alenu adonai tseva’ot shemo ḳedosh Yisra’el:",
+      "english": "Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": ""
+    }
+  ],
+  "audio": "audio/02-noah.mp3",
+  "author_en": "Aaron ben Joseph"
+}

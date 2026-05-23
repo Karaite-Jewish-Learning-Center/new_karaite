@@ -1,0 +1,196 @@
+{
+  "id": "47-reé",
+  "title_en": "Re'é",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "אַתָּה קָדוֹשׁ, יוֹשֵׁב תְּהִלּוֹת בְּנֵי אֵיתָן,",
+      "transliteration": "Atta ḳadosh, yoshev tehillot benē etan,",
+      "english": "You are holy, enthroned on the praises of the children of Ethan,",
+      "comments": "Ethan. Abraham.",
+      "timing": {
+        "start": 0,
+        "end": 14.53
+      }
+    },
+    {
+      "hebrew": "הַמְבָרֵר נַפְשׁוֹת יְרֵאֶֽיךָ, וּמַעְגַּל נְתִיבָתָן.",
+      "transliteration": "Hamvarer nafshot yere’ekha, uma‘gal netivatan.",
+      "english": "[You] who refine the souls of those who fear You, and [smooth] their path, their way.",
+      "comments": "",
+      "timing": {
+        "start": 14.53,
+        "end": 27.67
+      }
+    },
+    {
+      "hebrew": "רָאֽוּךָ מַּֽיִם, יָחִֽילוּ; רִצַּֽצְתָּ רָאשֵׁי לִוְיָתָן.",
+      "transliteration": "Ra’ukha mayim, yaḥilu; rits’tsatsta rashē livyatan.",
+      "english": "Waters see You, and tremble; You have crushed Leviathan’s heads.",
+      "comments": "",
+      "timing": {
+        "start": 27.67,
+        "end": 43.2
+      }
+    },
+    {
+      "hebrew": "נָתַֽתָּ עַל־יְדֵי עָנָו תּוֹרוֹת כְּהִלְכָתָן.",
+      "transliteration": "Natata ‘al yedē ‘anav torot kehilkhatan.",
+      "english": "You gave teachings, specifying their laws, through the hands of the meek one.",
+      "comments": "The meek one. Moses."
+    },
+    {
+      "hebrew": "בְּרָכָה וּקְלָלָה לִפְנֵי בְחִירָיו נָתָן:",
+      "transliteration": "Berakha uḳlala lifnē veḥirav natan:",
+      "english": "He presented His chosen ones with a blessing and a curse:",
+      "comments": "",
+      "timing": {
+        "start": 43.2,
+        "end": 69.77
+      }
+    },
+    {
+      "hebrew": "אִם יִשְׁמְעוּ, יִהְיוּ כְּמֹצֵא אֶחָיו בְּדֹתָן;",
+      "transliteration": "‘im yishme‘u, yihyu kemotsē eḥav beDotan;",
+      "english": "If they listen, they will be like the one who found his brothers in Dothan;",
+      "comments": "",
+      "timing": {
+        "start": 69.77,
+        "end": 81.23
+      }
+    },
+    {
+      "hebrew": "וְאִם יֶחְדָּֽלוּ, יִהְיוּ כַּאֲבִירָם וְדָתָן.",
+      "transliteration": "Ve’im yeḥdalu, yihyu ka’Aviram veDatan.",
+      "english": "But if they fail to do so, they will be like Abiram and Dathan.",
+      "comments": "",
+      "timing": {
+        "start": 81.23,
+        "end": 95.7
+      }
+    },
+    {
+      "hebrew": "עַל הַר גְּרִזִים בְּרָכוֹת וְעֵדוּתָן,",
+      "transliteration": "‘al har Gerizim berakho ve‘edutan,",
+      "english": "On Mount Gerizim are the blessings, and their testimony,",
+      "comments": "",
+      "timing": {
+        "start": 95.7,
+        "end": 107.37
+      }
+    },
+    {
+      "hebrew": "וְעַל הַר עֵיבָל קְלָלוֹת עִם תְּעוּדָתָן.",
+      "transliteration": "Ve’al har ‘eval ḳelalot ‘im te‘udatan.",
+      "english": "And on Mount Ebal are the curses, with their attestation.",
+      "comments": "",
+      "timing": {
+        "start": 107.37,
+        "end": 121.63
+      }
+    },
+    {
+      "hebrew": "אַחֲלֵי נְפָשׁוֹת בָּחֲרוּ יֹֽשֶׁר לְעֻמָּתָן;",
+      "transliteration": "Aḥalē nefashot baḥaru yosher le‘ummatan;",
+      "english": "Happy are the people who choose to keep uprightness in their sight;",
+      "comments": "",
+      "timing": {
+        "start": 121.63,
+        "end": 133.33
+      }
+    },
+    {
+      "hebrew": "עָזְבוּ שְׁאוֹל, בְּכֹֽשֶׁר מְסִלּוֹתָן,",
+      "transliteration": "‘azevu she’ol, bekhosher mesillotan,",
+      "english": "They have abandoned She’ol, through the fitness of their path,",
+      "comments": "",
+      "timing": {
+        "start": 133.33,
+        "end": 147.37
+      }
+    },
+    {
+      "hebrew": "וְכָתְבוּ לָהּ גֵּט כְּרִיתוּתָן.",
+      "transliteration": "Vekhatevu lah get keritutan.",
+      "english": "And they have written her their writ of divorce.",
+      "comments": "",
+      "timing": {
+        "start": 147.37,
+        "end": 158.0
+      }
+    },
+    {
+      "hebrew": "וְתַֽחַת מְשׁוּבָתָן, תְּשׁוּבָתָן.",
+      "transliteration": "Vetaḥat meshuvatan, teshuvatan.",
+      "english": "Instead of their rebellion is their repentance.",
+      "comments": "",
+      "timing": {
+        "start": 158.0,
+        "end": 168.33
+      }
+    },
+    {
+      "hebrew": "עֲרוּגַת בֹּֽשֶׂם רֵיחָן, כְּגַן בִּיתָן.",
+      "transliteration": "‘aruḡat bosem reḥan, keḡan bitan.",
+      "english": "Their scent is like a spice bed, like a palace garden.",
+      "comments": "",
+      "timing": {
+        "start": 168.33,
+        "end": 179.43
+      }
+    },
+    {
+      "hebrew": "עַתָּה קְהִלּוֹתֶֽיךָ, בְּשִׁירֵי תְהִלּוֹתָן,",
+      "transliteration": "‘atta ḳehillotekha, beshirē tehillotan,",
+      "english": "Now, Your communities, in their songs of praise,",
+      "comments": "",
+      "timing": {
+        "start": 179.43,
+        "end": 189.43
+      }
+    },
+    {
+      "hebrew": "תְּבַקֵּֽשְׁנָה מִגָּלוּתָן גְּאֻלָּתָן.",
+      "transliteration": "Tevaḳḳeshna miggalutan ge’ullatan,",
+      "english": "Beg for their redemption, out of their exile.",
+      "comments": "",
+      "timing": {
+        "start": 189.43,
+        "end": 197.6
+      }
+    },
+    {
+      "hebrew": "קהל: בְּמִשְׁכְּנֵי עֶלְיוֹן תִּדְרְשׁוּ תָּמִיד פְּדוּתָן.",
+      "transliteration": "Ḳahal: Bemishkenē ‘elyon tidreshu tamid pedutan.",
+      "english": "Cong. In the dwellings of the Holy One, you constantly seek their deliverance.",
+      "comments": "You. The worshipers in the synagogue.",
+      "timing": {
+        "start": 197.6,
+        "end": 208.23
+      }
+    },
+    {
+      "hebrew": "חזן: פְּד֤וּת ׀ שָׁ֘לַ֤ח לְעַמּ֗וֹ צִוּה לְעוֹלָ֥ם בְּרִית֑וֹ קָד֖וֹשׁ וְנוֹרָ֣א שְׁמֽוֹ:",
+      "transliteration": "Ḥazzan: Pedut, shalaḥ le‘ammo tsivva le‘olam berito ḳadosh venora shemo:",
+      "english": "Cantor. He sent deliverance to His people; He commanded His covenant forever; holy and awesome is His name! (Ps. 111:9)",
+      "comments": ""
+    },
+    {
+      "hebrew": "צַֽהֲלִ֥י וָרֹ֖נִּי יוֹשֶׁ֣בֶת צִיּ֑וֹן כִּֽי־גָד֥וֹל בְּקִרְבֵּ֖ךְ קְד֥וֹשׁ יִשְׂרָאֵֽל׃",
+      "transliteration": "Tsahali varonni yoshevet tsiyyon ki ḡadol beḳirbekh ḳedosh Yisra’el:",
+      "english": "Rejoice and sing out, dweller of Zion, for the Holy One of Israel is great in Your midst! (Isa. 12:6)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְׂרָאֵֽל:",
+      "transliteration": "Ḳahal: Go’alenu Adonai tseva’ot shemo ḳedosh Yisra’el:",
+      "english": "Cong. Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/47-reé.mp3",
+  "author_en": "Aaron ben Joseph"
+}

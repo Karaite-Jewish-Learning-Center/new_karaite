@@ -1,0 +1,554 @@
+{
+  "id": "12-vayḥi",
+  "title_en": "Vayḥi",
+  "title_he": "",
+  "category": "Liturgy",
+  "subcategory": "Torah Portions",
+  "source": "kedushot.xlsx",
+  "content": [
+    {
+      "hebrew": "בְּהַנְחֵ֤ל עֶלְיוֹן֙ גּוֹיִ֔ם בְּהַפְרִיד֖וֹ בְּנֵ֣י אָדָ֑ם יַצֵּב֙ גְּבֻלֹ֣ת עַמִּ֔ים לְמִסְפַּ֖ר בְּנֵ֥י יִשְׂרָאֵֽל: (דברים לב:ז)",
+      "transliteration": "Behanḥel ‘elyon goyim behafrido benē adam yats’tsev gevult ‘ammim lemispar benē Yisra’el:",
+      "english": "When the One on high gave inheritances to the nations, when he separated people [into nations]; he set the borders of peoples in accordance with the number of the sons of Israel. (Deut. 32:7)",
+      "comments": "",
+      "timing": {
+        "start": 0,
+        "end": 13.7
+      }
+    },
+    {
+      "hebrew": "אַתָּה הִצַּֽבְתָּ גְּבֻלֹת עַמִּים לְמִסְפַּר בְּנֵי יִשְׂרָאֵל וְתוֹלְדֹתָם;",
+      "transliteration": "Atta hits’tsavta gevulot ‘ammim lemispar benē Yirsa’el vetoledotam;",
+      "english": "You set the borders of peoples in accordance with the number of the sons of Israel and their descendants;",
+      "comments": "",
+      "timing": {
+        "start": 13.7,
+        "end": 32.53
+      }
+    },
+    {
+      "hebrew": "הַמֵּעִיר רֽוּחַ יַעֲקֹב, לֵאמֹר לְבָנָיו רֵאשִׁיתָם וְאַחֲרִיתָם.",
+      "transliteration": "Hamme‘ir ru’aḥ Ya‘aḳov, lemor levanav reshitam ve’aḥaritam.",
+      "english": "[You who] roused Jacob’s spirit to tell his sons their beginnings and endings.",
+      "comments": "",
+      "timing": {
+        "start": 32.53,
+        "end": 47.63
+      }
+    },
+    {
+      "hebrew": "דִּבְרֵי חֵן בְּמַעֲבֵה הַנְּבוּאָה, יְצוּקִים בִּמְלִיצָתָם –",
+      "transliteration": "Divrē ḥen bema‘avē hannevu’a, yetsuḳim bimlitsatam –",
+      "english": "[Jacob’s] graceful words [were] thick with prophecy, well founded in their locution—",
+      "comments": "",
+      "timing": {
+        "start": 47.63,
+        "end": 54.63
+      }
+    },
+    {
+      "hebrew": "קהל: וְזֹאת אֲשֶׁר דִּבֶּר לָהֶם אֲבִיהֶם וַיְבָֽרֶךְ אוֹתָם, אִישׁ אֲשֶׁר כְּבִרְכָתוֹ בֵּרַךְ אֹתָם.        (בראשית מט:כח)",
+      "transliteration": "Ḳahal: Vezot asher dibber lahem avihem vayvarekh otam, ish asher kevirkhato berakh otam:",
+      "english": "Cong. And this is what their father said to them, and he blessed them; he blessed each man in accordance with his [particular] blessing.    (Gen. 49:28)",
+      "comments": "",
+      "timing": {
+        "start": 54.63,
+        "end": 67.57
+      }
+    },
+    {
+      "hebrew": "הוֹכִֽיחַ רְאוּבֵן וְקִבֵּל, וַיַּֽעַל עַל מִבְצְרֵי מְזִמּוֹת רָמוֹת,",
+      "transliteration": "Hokhi’aḥ Re’uven veḳibbel, vayya‘al ‘al mivtserē mezimmot ramot,",
+      "english": "He rebuked Reuben, and he accepted, and ascended the fortresses of lofty thoughts.",
+      "comments": "",
+      "timing": {
+        "start": 67.57,
+        "end": 84.53
+      }
+    },
+    {
+      "hebrew": "וַיִּטֹּשׁ בְּכוֹרָה מַלְכוּת וּכְהֻנָּה, לְהַחֲלִיץ הָעֲצָמוֹת,",
+      "transliteration": "Vayyittosh bekhora malkhut ukhehunna, lehaḥalits ha‘atsamot,",
+      "english": "He gave up the birthright, the kingship, and the priesthood, in order to strengthen [his] essence,",
+      "comments": "",
+      "timing": {
+        "start": 84.53,
+        "end": 97.33
+      }
+    },
+    {
+      "hebrew": "לְמַֽעַן הֱיוֹת נִשְׁמָתוֹ צְרוּרָה בִּצְרוֹר חַיֵּי הַנְּשָׁמוֹת –",
+      "transliteration": "Lema‘an heyot nishmato tserura bitsror ḥayyē hanneshamot –",
+      "english": "So that his soul be bound up in the bundle of the life of souls—",
+      "comments": "",
+      "timing": {
+        "start": 97.33,
+        "end": 104.23
+      }
+    },
+    {
+      "hebrew": "קהל: יְחִי רְאוּבֵן וְאַל יָמֹת.       (דברים לג:ו)",
+      "transliteration": "Ḳahal: Yeḥi Re’uven ve’al yamot",
+      "english": "Cong. May Reuben live, and not die!     (Deut. 33:6)",
+      "comments": "",
+      "timing": {
+        "start": 104.23,
+        "end": 111.47
+      }
+    },
+    {
+      "hebrew": "רָאָה לְהָפִיץ שִׁמְעוֹן וְלֵוִי בֵּינוֹת יִשְׂרָאֵל, בְּאַהֲבָה,",
+      "transliteration": "Ra’a lehafits Shim‘on veLevi benot Yisra’el be’ahava,",
+      "english": "He saw fit to disperse Simeon and Levi amongst Israel, out of love,",
+      "comments": "",
+      "timing": {
+        "start": 111.47,
+        "end": 129.33
+      }
+    },
+    {
+      "hebrew": "כִּי לִבָּם כַּיָּם סֹעֵר, וּכְאֵשׁ בֹּעֵר לֶהָבָה.",
+      "transliteration": "Ki libbam kayyam so‘er, ukh’esh bo‘er lehava.",
+      "english": "For their heart raged like the sea, and burned like an inferno.",
+      "comments": "",
+      "timing": {
+        "start": 129.33,
+        "end": 140.6
+      }
+    },
+    {
+      "hebrew": "אֲחֵי עֵצָה קְצוּבָה, וַחֲלוּצֵי צָבָא,",
+      "transliteration": "Aḥē ‘etsa ḳetsuva, vaḥalutsē tsava,",
+      "english": "Brothers in their decisive counsel, and first into the fray,",
+      "comments": "",
+      "timing": {
+        "start": 140.6,
+        "end": 146.43
+      }
+    },
+    {
+      "hebrew": "קהל: יִרְדֹּף אֶחָד אֶֽלֶף, וּשְׁנַֽיִם יָנִֽיסוּ רְבָבָה.   (דברים לב:ל)",
+      "transliteration": "Ḳahal: Yirdof eḥad elef, ushnayim yanisu revava.",
+      "english": "Cong. One could chase a thousand [men], and two could rout a myriad. (Deut. 32:30)",
+      "comments": "",
+      "timing": {
+        "start": 146.43,
+        "end": 155.53
+      }
+    },
+    {
+      "hebrew": "נֶחְמָד בְּנֹֽעַם הֶגְיוֹנוֹ וְקוֹל דְּבָרוֹ,",
+      "transliteration": "Neḥmad beno‘am heḡyono veḳol devaro,",
+      "english": "Pleasing in his mellifluous speech, and the tone of his words,",
+      "comments": "",
+      "timing": {
+        "start": 155.53,
+        "end": 171.8
+      }
+    },
+    {
+      "hebrew": "יְהוּדָה – יוֹדֽוּהוּ אֶחָיו: \"זֶה אֲשֶׁר בְּחָרוֹ צוּרוֹ.\"",
+      "transliteration": "Yehuda – yoduhu eḥav: “Zē asher beḥaro tsuro.”",
+      "english": "Judah—his brothers acknowledge him: “This is the one whose Rock has chosen him.”",
+      "comments": "",
+      "timing": {
+        "start": 171.8,
+        "end": 185.1
+      }
+    },
+    {
+      "hebrew": "עַד עֵת בֹּא דְבָרוֹ, אָז יִגָּלֶה אוֹרוֹ,",
+      "transliteration": "‘ad ‘et bo devaro, az yiggalē oro,",
+      "english": "Until the prophecy about him is realized, then his light will be revealed,",
+      "comments": "",
+      "timing": {
+        "start": 185.1,
+        "end": 190.47
+      }
+    },
+    {
+      "hebrew": "קהל: אִישׁ אֲשֶׁר הַמֶּֽלֶךְ חָפֵץ בִּיקָרוֹ.    (אסתר ו:ז)",
+      "transliteration": "Ḳahal: Ish asher hammelekh ḥafets biḳaro.",
+      "english": "Cong. The man whom the king wants to honor.   (Esth. 6:7)",
+      "comments": "",
+      "timing": {
+        "start": 190.47,
+        "end": 198.1
+      }
+    },
+    {
+      "hebrew": "בְּחִיר אֵל, זְבוּלֻן, הַמַּחֲזִיק חֶֽרֶב וְכִידוֹן,",
+      "transliteration": "Beḥir el, Zevulun, hammaḥaziḳ ḥerev vekhidon,",
+      "english": "God’s chosen one, Zebulun, who brandishes sword and spear,",
+      "comments": "",
+      "timing": {
+        "start": 198.1,
+        "end": 214.77
+      }
+    },
+    {
+      "hebrew": "לַעֲקֹר בּוֹ אִישׁ רִיב וְאִישׁ מָדוֹן,",
+      "transliteration": "La‘aḳor bo ish riv ve’ish madon,",
+      "english": "With which to uproot any opponent or combatant,",
+      "comments": "",
+      "timing": {
+        "start": 214.77,
+        "end": 225.1
+      }
+    },
+    {
+      "hebrew": "חֵרֵף נַפְשׁוֹ לָמוּת, לְבַל יִשְׁלֹט בּוֹ אִישׁ זָדוֹן –",
+      "transliteration": "Ḥeref nafsho lamut leval yishlot bo ish zadon –",
+      "english": "Spurns his own life, to die, lest any wicked man have dominion over him—",
+      "comments": "",
+      "timing": {
+        "start": 225.1,
+        "end": 231.07
+      }
+    },
+    {
+      "hebrew": "קהל: וְהוּא לְחוֹף אֳנִיּוֹת וְיַרְכָתוֹ עַל צִידוֹן.   (בראשית מט:יג)",
+      "transliteration": "Ḳahal: Vehu leḥof oniyyot veyarkhato ‘al tsidon.",
+      "english": "Cong. And he [dwells] at the docks, and his border is at Sidon. (Gen. 49:13)",
+      "comments": "",
+      "timing": {
+        "start": 231.07,
+        "end": 240.33
+      }
+    },
+    {
+      "hebrew": "נָטָה יִשָּׂשכָר שִׁכְמוֹ לִסְבֹּל, וְלָן בֵּין שְׁפַתָּֽיִם,",
+      "transliteration": "Natah Yissakhar shikhmo lisbol, velan ben shefattayim,",
+      "english": "Issachar lowered his shoulder to carry a burden, and dwelled between the stoves,",
+      "comments": "",
+      "timing": {
+        "start": 240.33,
+        "end": 259.33
+      }
+    },
+    {
+      "hebrew": "כִּי רָאָה הָאָֽרֶץ אֶֽרֶץ רַחֲבַת יָדָֽיִם.",
+      "transliteration": "Ki ra’a ha’arets erets raḥavat yadayim.",
+      "english": "For he saw that the Land was expansive.",
+      "comments": "",
+      "timing": {
+        "start": 259.33,
+        "end": 272.57
+      }
+    },
+    {
+      "hebrew": "בָּחַר לָשֶֽׁבֶת בְּפֶֽתַח עֵינָיִם,",
+      "transliteration": "Baḥar lashevet befetaḥ ‘enayim,",
+      "english": "He chose to dwell in a place in public view,",
+      "comments": "",
+      "timing": {
+        "start": 272.57,
+        "end": 277.77
+      }
+    },
+    {
+      "hebrew": "קהל: רֹבֵץ בֵּין הַמִּשְׁפְּתָֽיִם.      (בראשית מט:יד)",
+      "transliteration": "Ḳahal: Rovets ben hammishpetayim:",
+      "english": "Cong. Crouching between the stoves.     (Gen. 49:14)",
+      "comments": "",
+      "timing": {
+        "start": 277.77,
+        "end": 284.47
+      }
+    },
+    {
+      "hebrew": "יָדִין דָּן עַמּוֹ, כְּאַחַד שִׁבְטֵי אֱמוּנָי,",
+      "transliteration": "Yadin Dan ‘ammo ke’aḥad shivtē emunay,",
+      "english": "Dan will judge his people, as one of the tribes of my faithful,",
+      "comments": "",
+      "timing": {
+        "start": 284.47,
+        "end": 299.27
+      }
+    },
+    {
+      "hebrew": "וּמֵחֲלָצָיו יֵצֵא נְזִיר יוי,",
+      "transliteration": "Umeḥalatsav yetsē nezir Adonai,",
+      "english": "And from his loins will issue a Nazarite of Adonai,",
+      "comments": "",
+      "timing": {
+        "start": 299.27,
+        "end": 309.43
+      }
+    },
+    {
+      "hebrew": "וְהוּא יָחֵל לְהוֹשִֽׁיעַ אֶת־יִשְׂרָאֵל מִיַּד מַשְׂטִינָי –",
+      "transliteration": "Vehu yaḥel lehoshi’a‘ et Yisra’el miyyad mastinay",
+      "english": "Who will begin to rescue Israel from the hand of My enemies—",
+      "comments": "",
+      "timing": {
+        "start": 309.43,
+        "end": 316.07
+      }
+    },
+    {
+      "hebrew": "קהל: לִישׁוּעָתְךָ קִוִּֽיתִי יוי.      (בראשית מט:יח)",
+      "transliteration": "Ḳahal: Lishu‘atekha ḳivviti Adonai.",
+      "english": "Cong. I await Your rescue, O Adonai!     (Gen. 49:18)",
+      "comments": "",
+      "timing": {
+        "start": 316.07,
+        "end": 323.33
+      }
+    },
+    {
+      "hebrew": "וּמִי יָגוּד לְגָד? וְגָד דְּבָרָיו לֹא יְסַלֵּף.",
+      "transliteration": "Umi yaḡud leḠad? VeḠad devarav lo yesallef.",
+      "english": "Who will amass against Gad? For Gad will not pervert his words.",
+      "comments": "",
+      "timing": {
+        "start": 323.33,
+        "end": 339.73
+      }
+    },
+    {
+      "hebrew": "וְאֹיְבוֹ לְנֶגְדּוֹ מְקוֹם פָּנִים עֹֽרֶף יְחַלֵּף.",
+      "transliteration": "Ve’oyevo leneḡdo meḳom panim ‘oref yeḥallef.",
+      "english": "And his enemy, when facing him, will turn tail, exchanging face for nape.",
+      "comments": "",
+      "timing": {
+        "start": 339.73,
+        "end": 354.33
+      }
+    },
+    {
+      "hebrew": "פָּנָיו כִּפְנֵי אַרְיֵה, בָּא לְמִלְחָמָה, בְּלִי שָׂכָר וְחֶֽלֶף.",
+      "transliteration": "Panav kifnē aryē, ba lemilḥama, beli sakhar veḥelef.",
+      "english": "His face is leonine; he goes to war, without any [expectation of] reward or compensation.",
+      "comments": "",
+      "timing": {
+        "start": 354.33,
+        "end": 361.6
+      }
+    },
+    {
+      "hebrew": "קהל: אֵֽלֶּה מִבְּנֵי גָד רָאשֵׁי הַצָּבָא: אֶחָד לְמֵאָה הַקָּטֹן, וְהַגָּדוֹל לָאֶֽלֶף.       (דברי הימים א יב:טו)",
+      "transliteration": "Ḳahal: Ellē mibbenē Ḡad rashē hats’tsava: Eḥad leme’a haḳḳaton, vehaggadol la’elef.",
+      "english": "Cong. These are of the sons of Gad, military commanders—the junior for a hundred [men], and the senior for a thousand.    (1 Chr. 12:15)",
+      "comments": "",
+      "timing": {
+        "start": 361.6,
+        "end": 373.17
+      }
+    },
+    {
+      "hebrew": "סְבִיבוֹת אָשֵׁר הוֹן וָעֹֽשֶׁר.",
+      "transliteration": "Sevivot Asher hon va‘osher.",
+      "english": "Asher will be surrounded by riches and wealth,",
+      "comments": "",
+      "timing": {
+        "start": 373.17,
+        "end": 388.1
+      }
+    },
+    {
+      "hebrew": "צֶֽדֶק יָלִין בְּקִרְבּוֹ, תֹּם וָיֹֽשֶׁר.",
+      "transliteration": "Tsedeḳ yalin beḳirbo, tov vayosher.",
+      "english": "Righteousness will dwell in his midst, blamelessness and uprightness.",
+      "comments": "",
+      "timing": {
+        "start": 388.1,
+        "end": 400.4
+      }
+    },
+    {
+      "hebrew": "שֶֽׁמֶן וּקְטֹֽרֶת בִּגְבוּלוֹ בְּכֹֽשֶׁר.",
+      "transliteration": "Shemen uḳtoret biḡvulo bekhosher.",
+      "english": "Oil and incense will fittingly be within his border,",
+      "comments": "",
+      "timing": {
+        "start": 400.4,
+        "end": 405.6
+      }
+    },
+    {
+      "hebrew": "קהל: בָּרוּךְ מִבָּנִים אָשֵׁר.      (דברים לג:כד)",
+      "transliteration": "Ḳahal: Barukh mibbanim Asher.",
+      "english": "Cong. Blessed among sons is Asher.     (Deut. 33:24)",
+      "comments": "",
+      "timing": {
+        "start": 405.6,
+        "end": 412.63
+      }
+    },
+    {
+      "hebrew": "פִּנַּת יִקְרַת, עֲשִׂירִי, אֶשְׁכֹּל הַכֹּֽפֶר,",
+      "transliteration": "Pinnat yiḳrat ‘asiri, eshkol hakkofer,",
+      "english": "The glorious cornerstone, the tenth [son], the cluster of henna,",
+      "comments": "",
+      "timing": {
+        "start": 412.63,
+        "end": 427.33
+      }
+    },
+    {
+      "hebrew": "שְׂבַע רָצוֹן, וְעִם גִּבּוֹרֵי חַֽיִל יִסָּפֵר;",
+      "transliteration": "Seva‘ ratson, ve‘im gibborē ḥayil yissafer;",
+      "english": "Satiated with contentment, and numbered among the mighty warriors;",
+      "comments": "",
+      "timing": {
+        "start": 427.33,
+        "end": 439.1
+      }
+    },
+    {
+      "hebrew": "נִצְחוֹן הַמִּלְחָמָה! יֹצֵא וָבָא וּמְסַפֵּר –",
+      "transliteration": "Nits’ḥon hammilḥama! Yotsē vava umsapper –",
+      "english": "Victory in battle! He will sally forth and return to tell [of his victories]—",
+      "comments": "",
+      "timing": {
+        "start": 439.1,
+        "end": 445.17
+      }
+    },
+    {
+      "hebrew": "קהל: נַפְתָּלִי אַיָּלָה שְׁלֻחָה הַנֹּתֵן אִמְרֵי שָֽׁפֶר.   (בראשית מט:כא)",
+      "transliteration": "Ḳahal: Naftali ayyala sheluḥa hannoten imrē shafer.",
+      "english": "Cong. Naphtali is a fleety roe, who expresses beautiful words.  (Gen. 49:21)",
+      "comments": "",
+      "timing": {
+        "start": 445.17,
+        "end": 454.07
+      }
+    },
+    {
+      "hebrew": "נִמְשָׁל בְּשׁוֹר, חָרֵד בִּדְבַר יוי וְחֶפְצוֹ,",
+      "transliteration": "Nimshal beshor, ḥared bidvar Adonai veḥeftso,",
+      "english": "The one compared to an ox, who reverentially obeyed Adonai’s word and will,",
+      "comments": "The one compared to an ox. Joseph.",
+      "timing": {
+        "start": 454.07,
+        "end": 470.67
+      }
+    },
+    {
+      "hebrew": "כְּגֶֽפֶן פֹּרָת, [אָ]רְכוּ פֹארוֹתָיו עֲלֵי שׁוּר, לְאַמְּצוֹ.",
+      "transliteration": "Keḡefen porat, arekhu forotav ‘alē shur, le’ammetso.",
+      "english": "Like a fruitful vine, his tendrils extended out over a wall, to strengthen him.",
+      "comments": "",
+      "timing": {
+        "start": 470.67,
+        "end": 485.1
+      }
+    },
+    {
+      "hebrew": "אֶל הַשֵּׁם יִתְפַּלֵּל כָּל־חָסִיד לְעֵת מְצוֹא.",
+      "transliteration": "El hash’shem yitpallel kol ḥasid le‘et metso.",
+      "english": "Every pious person prays to the Name at the time when [He] is found.",
+      "comments": "The Name. An epithet for God.",
+      "timing": {
+        "start": 485.1,
+        "end": 490.67
+      }
+    },
+    {
+      "hebrew": "קהל: וּלְיוֹסֵף אָמַר: מְבֹרֶֽכֶת יוי אַרְצוֹ.   (דברים לג:יג)",
+      "transliteration": "Ḳahal: UlYosef amar: Mevorekhet Adonai artso.",
+      "english": "Cong. And to Joseph he said that his land was blessed by Adonai.  (Deut. 33:13)",
+      "comments": "",
+      "timing": {
+        "start": 490.67,
+        "end": 498.43
+      }
+    },
+    {
+      "hebrew": "בִּנְיָמִן יְבֹרַךְ בְּשֵׁם כְּלָיוֹת חֹקֵר,",
+      "transliteration": "Binyamin yevorakh beshem kelayot ḥoḳer,",
+      "english": "Benjamin will be blessed in the name of the One who examines innermost thoughts,",
+      "comments": "",
+      "timing": {
+        "start": 498.43,
+        "end": 514.8
+      }
+    },
+    {
+      "hebrew": "חֶבְלוֹ עַל אַדְמַת הַקֹּֽדֶשׁ לְבַקֵּר.",
+      "transliteration": "Ḥevlo ‘al admat haḳḳodesh levaḳḳer.",
+      "english": "Such that [He] will visit his territory of holy soil.",
+      "comments": "",
+      "timing": {
+        "start": 514.8,
+        "end": 524.13
+      }
+    },
+    {
+      "hebrew": "רֹאשׁ וָסוֹף עֵינֵי אֹיְבָיו יְנַקֵּר –",
+      "transliteration": "Rosh vasof ‘enē oyevav yenaḳḳer –",
+      "english": "At the beginning, and at the end, he will put out the eyes of his enemies—",
+      "comments": "",
+      "timing": {
+        "start": 524.13,
+        "end": 529.33
+      }
+    },
+    {
+      "hebrew": "קהל: בִּנְיָמִין זְאֵב יִטְרָף בַּבֹּֽקֶר.     (בראשית מט:כז)",
+      "transliteration": "Ḳahal: Binyamin ze’ev yitraf babboḳer.",
+      "english": "Cong. Benjamin is a tearing wolf in the morning.    (Gen. 49:27)",
+      "comments": "",
+      "timing": {
+        "start": 529.33,
+        "end": 536.63
+      }
+    },
+    {
+      "hebrew": "עֹז לְךָ אֱלֹהִים! גַּאֲוָתְךָ עַל יִשְׂרָאֵל עַמֶּֽךָ,",
+      "transliteration": "‘oz lekha Elohim ga’avatekha ‘al Yisra’el ‘ammekha,",
+      "english": "God, strength is Yours! Your pride is over Your people Israel,",
+      "comments": "",
+      "timing": {
+        "start": 536.63,
+        "end": 553.73
+      }
+    },
+    {
+      "hebrew": "וְעֻזְּךָ בַּשְּׁחָקִים, שְׁמֵי שָׁמֶֽיךָ.",
+      "transliteration": "Ve‘uzzekha bash’sheḥaḳim, shemē shamekha.",
+      "english": "And Your strength is in the heavens, Your highest skies.",
+      "comments": "",
+      "timing": {
+        "start": 553.73,
+        "end": 564.2
+      }
+    },
+    {
+      "hebrew": "גָּנוֹן וְהִצִּיל זֶֽרַע יְדִידֶֽיךָ, לְמַֽעַן רַחֲמֶֽיךָ,",
+      "transliteration": "Ganon vehits’tsil zera‘ yedidekha, lema‘an raḥamekha,",
+      "english": "Protect and rescue the progeny of Your dear ones, for the sake of Your mercy;",
+      "comments": "",
+      "timing": {
+        "start": 564.2,
+        "end": 572.8
+      }
+    },
+    {
+      "hebrew": "קהל: אַתָּה יוי אָבִֽינוּ; גֹּאֲלֵֽנוּ מֵעוֹלָם שְׁמֶֽךָ.   (ע\"פ ישעיהו סג:טז)",
+      "transliteration": "Ḳahal: Atta Adonai avinu, go’alenu me‘olam shemekha.",
+      "english": "Cong. You, God, are our father; You have always been our redeemer! (cf. Isa. 63:16)",
+      "comments": "",
+      "timing": {
+        "start": 572.8,
+        "end": 583.37
+      }
+    },
+    {
+      "hebrew": "חזן: יֹ֭אמְר֖וּ גְּאוּלֵ֣י יו֑י אֲשֶׁ֥ר גְּ֝אָלָ֗ם מִיַּד־צָֽר: (תהלים קז:ב)",
+      "transliteration": "Ḥazzan: Yomeru ge’ulē Adonai asher ge’alam miyyad tsar:",
+      "english": "Cantor: Let those redeemed by Adonai say that He has redeemed them from the enemy’s hand. (Ps. 107:2)",
+      "comments": ""
+    },
+    {
+      "hebrew": "קהל: גֹּֽאֲלֵ֕נוּ יו֥י צְבָא֖וֹת שְׁמ֑וֹ קְד֖וֹשׁ יִשְׂרָאֵֽל: (ישעיה מז:ד)",
+      "transliteration": "Ḳahal: Go’alenu Adonai tseva’ot shemo ḳedosh Yisra’el:",
+      "english": "Congregation: Our redeemer, Adonai Ẓeva’oth is His name, the Holy One of Israel. (Isa. 47:4)",
+      "comments": "Adonai Ẓeva’oth. A common name for God in Scripture; traditional English: “the Lord of Hosts.”"
+    }
+  ],
+  "audio": "audio/12-vayḥi.mp3",
+  "author_en": "Aaron ben Joseph"
+}

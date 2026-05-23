@@ -1,0 +1,1035 @@
+{
+  "Comments": {
+    "General": [
+      {
+        "id": "ali-ibn-suleiman-genesis",
+        "title_en": "Commentary on Genesis",
+        "title_he": "פירוש על בראשית",
+        "author_en": "Ali ibn Suleiman",
+        "author_he": "עלי אבן סלימאן",
+        "has_intro": true,
+        "sections": [
+          "intro",
+          "glossary",
+          "commentary"
+        ]
+      },
+      {
+        "id": "deuteronomy-keter-torah",
+        "title_en": "Deuteronomy - Keter Torah",
+        "title_he": "דברים - כתר תורה",
+        "has_intro": false
+      }
+    ]
+  },
+  "Exhortatory": {
+    "General": [
+      {
+        "id": "1-foreword",
+        "title_en": "The Sayings of Moshe",
+        "title_he": "אמרות משה",
+        "has_intro": true
+      }
+    ]
+  },
+  "Halakhah": {
+    "General": [
+      {
+        "id": "adderet-eliyahu",
+        "title_en": "Adderet Eliyahu",
+        "title_he": "אדרת אליהו",
+        "has_intro": false
+      },
+      {
+        "id": "adderet-eliyahu-appendices",
+        "title_en": "Adderet Eliyahu - Appendices",
+        "title_he": "אדרת אליהו - נספחים",
+        "has_intro": false
+      },
+      {
+        "id": "an-essay-on-the-obligation-of-prayer",
+        "title_en": "An Essay on the Obligation of Prayer",
+        "title_he": "הַצָּעָה בְּחִיּוּב הַתְּפִלָּה",
+        "has_intro": true
+      },
+      {
+        "id": "gan-eden",
+        "title_en": "Gan Eden",
+        "title_he": "גן עדן",
+        "has_intro": true
+      },
+      {
+        "id": "kitab-al-anwar",
+        "title_en": "Kitāb al-Anwār wa-l-Marāqib (The Book of Lights and Watchtowers)",
+        "title_he": "ספר האורות והמגדלים",
+        "author_en": "Yaʿqūb al-Qirqisānī",
+        "author_he": "יעקב אלקרקסאני",
+        "has_intro": true,
+        "sections": [
+          "intro",
+          "text"
+        ]
+      },
+      {
+        "id": "maaravi",
+        "title_en": "The Six Principles of Faith and Laws of Slaughter",
+        "title_he": "העקאיד אלסתה ושרוט אלדבאחה",
+        "has_intro": true,
+        "sections": [
+          "intro",
+          "text",
+          "appendices"
+        ]
+      },
+      {
+        "id": "palanquin",
+        "title_en": "The Palanquin",
+        "title_he": "ספר אפריון עשה לו",
+        "has_intro": true,
+        "author_en": "[1] Ḥakham Solomon ben Aaron has been referred to (at least in one manuscript) as He-­ḥakham Ha-­kolel, a title that generally refers to someone who possesses great knowledge in the fields of liberal arts, humanities, philosophy and or medicine – in addition to knowledge of religious matters.[2] As this attribution suggests, he was among the most prominent Karaite sages of his time. Ḥakham Solomon ben Aaron was born in 1650 in the city of Paswoł in the Lithuanian district of Panėvežys. In the early 1700s, he and his family moved to the city of Troki, which was subsequently devastated by a plague in 1710. The plague took the lives of Ḥakham Solomon ben Aaron’s wife and their two sons: Mordecai and Simḥa. A prolific poet, he wrote elegies lamenting the destruction caused by the plague. One such poem, “A‘orer Levavi Leqonen” (“I stir up my heart to lament”), commemorates the victims of the plague, and appears in the Vilna edition of the Karaite prayer book.[3] This prayer book also contains a song for the Sabbath, written by Ḥakham Solomon ben Aaron in memory of his son, Mordecai.[4] After the plague, Ḥakham Solomon ben Aaron moved for a short time to the city of Vilna, where he served as the head of the Beth Din. In 1719, he returned to Troki. Like his contemporary Ḥakham Mordecai ben Nisan, Ḥakham Solomon ben Aaron received significant attention from Christian Hebraists.[5] Appiryon ‘Asa Lo itself was written in response to questions posed by Johann Uppendorff, a Swedish professor at the University of Riga. In addition to Appiryon ‘Asa Lo, Ḥakham Solomon ben Aaron wrote at least two other polemical works: one on the relations between Karaites and Rabbanites; and the other, a refutation of Christianity. It should be noted that Ḥakham Solomon ben Aaron wrote two distinct versions of Appiryon ‘Asa Lo. It appears that the shorter one, upon which this publication is based, was written for a Christian Hebraist audience; while the more extensive one was likely written later and intended for Karaite consumption. About this Edition: This edition is the only known English-­language translation of either version of Ḥakham Solomon ben Aaron’s Appiryon ‘Asa Lo.[6] This work, like Ḥakham Mordecai ben Nisan’s Levush Malkhuth,[7] first came to light in academic circles in 1866, when Adolf Neubauer published an unvocalized text of the shorter version, after his examination of previously unpublished Karaite manuscripts in the Russian National Library in Saint Petersburg.[8] In 1956, the nascent Karaite community in Israel published an unvocalized Hebrew version of Levush Malkhuth together with the short version of Appiryon ‘Asa Lo. It appears that the only substantive differences that the Karaite community introduced in Appiryon ‘Asa Lo are that they consistently changed any references to Rabbanites to say “our brothers the Rabbanites,” and often changed references to “Karaite sages” to say “our sages.”[9] About the Hebrew Text: This edition of Ḥakham Solomon ben Aaron’s Appiryon ‘Asa Lo is based on Neubauer’s 1866 publication. We have normalized the Hebrew spelling to fit the standard in vocalized Hebrew texts. In addition, we have made the following changes from Neubauer’s text: (i) addition of paragraph breaks in a number of places, to make the changes in topic easier for the reader to follow; (ii) correction of clear typographical errors; and (iii) in two places, changing a Biblical quotation to fit our text of Scripture. We have included an appendix of these three types of changes for those interested in reviewing them. Finally, the table of contents in ed. Neubauer reverses the order of chapters 23 and 24 from how they appear in the actual text; in our edition, we have changed the table of contents to fit the text. As with our publication of Levush Malkhuth/Royal Attire, the reader should be assured that these adaptations do not impact the substance of Appiryon ‘Asa Lo. Academics will take comfort in the fact that Neubauer’s publication of Appiryon ‘Asa Lo is available online at Archive.org.[10] Scholars can compare any variations in this edition from Neubauer’s publication. In order to assist this type of comparison, this edition contains bracketed, superscripted page numbers corresponding to the page number in Neubauer’s publication, like so: {2} or {ב}. Appendix As noted in the introduction, we have made several changes to Neubauer’s edition of Appiryon ‘Asa Lo. We have catalogued those changes here (referring to pagination of the typeset edition): (i) Addition of Paragraph Breaks: P. 18 ולהבין שנות דור ודור P. 36 פצע ולא מילה P. 40 ובעבור אלו הב׳ פעלות נאמר שנית P. 40 אבות מלאכות כאשר הם ידועים בספרי החכמים P. 44 הכבוי בשבת מלאכה P. 52 בספרי הקראים ימצא P. 56 החקים האלה (דברים טז:יב) P. 58 מתרים בפסח P. 76 ועניני התפלות ידוע בסדור P. 90 מרובות מהפרשיות וע״כ נהגו זה המנהג P. 98 ונשלמה פרים שפתינו P. 98 דבקותו לש\"ית P. 102: before each of the principles of faith in chapter 16 P. 116 פתיל תכלת ולא הודו להם חכמינו P. 118 יישר ארחותיך P. 120 וטומאת יום לבד P. 124 כפל שמונים יום P. 126 ממאמר במים יובא P. 132 הדם אשר בכל הגוף P. 136 ובספרי השחיטות של חכמינו P. 140 והם סנפיר וקשקשת P. 142 הקצף והלכלוך P. 144 מקילים כאשר נתבאר למעלה P. 156: before each of the six types of forbidden sexual relationships listed in chapter 22 P. 164 תעבור הבכורה P. 164 ומוהרה המאוחר מנכסיו (ii) Correction of Clear Typographical Errors: P. 2 המתששלת, which we have fixed to המשתלשלת P. 10 והחלקין, which we have fixed to והחלוקין, as it appears correctly in the title at the head of that chapter P. 24 כמוכן in a single word, which we have fixed to כמו כן P. 30 סבב הירושה, which we have fixed to סבל P. 50 האצטגניניס, which we have fixed to האצטגנינים P. 52 קצת הראייה, which we have fixed to קשת הראייה (see our explanation in footnote 24) P. 74 ישרל, which we have fixed to ישראל P. 74 כ\"ט, which we have fixed to בט' (for 9 Tammuz is the date given by Scripture (Jeremiah 39:2) for the breaching of the city walls, and the traditional Karaite date for the Fast of Tammuz, and, moreover, even our author says below that the summer mourning period begins on 9 Tammuz) P. 84 התנאים, which we have fixed to התאנים P. 122 וצריכה, which we have fixed to צריכה P. 124 החפירות, which we have fixed to החפורות P. 130 יוהוא ענין השחיטה, and we have fixed the first word to והוא P. 148 שיר המעלות של קנ״ו, which we have fixed to קכ\"ו (for our Bible contains only 150 Psalms; t is clear from MS New York JTS 3325, of the long version of Appiryon ‘Asa Lo, that the correct reading is קכ\"ו) P. 162 אין לן אב, and we have fixed the middle word to לו (iii) Correcting of Biblical Quotations P. 32 Ed. Neubauer prints בשור וחמור, whereas the Biblical text has בשור ובחמר. We have fixed this quotation to fit the Biblical text, though we have kept the version of ed. Neubauer later in the sentence, where the verse is discussed. P. 104 Ed. Neubauer prints לבני ישראל; we have fixed this to לפני בני ישראל, in accordance with the Biblical text."
+      },
+      {
+        "id": "royal-attire",
+        "title_en": "Royal Attire",
+        "title_he": "ספר לבוש מלכות",
+        "has_intro": true
+      },
+      {
+        "id": "shehita",
+        "title_en": "Ritual Slaughter",
+        "title_he": "ענין השחיטה",
+        "has_intro": true
+      },
+      {
+        "id": "shelomo-afeida-hakohen_yeriot-shelomo_volume-1",
+        "title_en": "Yeriot Shelomo Volume 1",
+        "title_he": "יריעות שלמה א'",
+        "has_intro": false
+      },
+      {
+        "id": "shelomo-afeida-hakohen_yeriot-shelomo_volume-2",
+        "title_en": "Yeriot Shelomo Volume 2",
+        "title_he": "יריעות שלמה ב'",
+        "has_intro": false
+      }
+    ]
+  },
+  "Liturgy": {
+    "Havdala Songs": [
+      {
+        "id": "essa-bechos-yesha",
+        "title_en": "Essa Bechos Yesha‘",
+        "title_he": "אשא בכוס ישע",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Zeraḥ ben Natan"
+      },
+      {
+        "id": "et-kos-yeshuot",
+        "title_en": "Et Kos Yeshu‘ot",
+        "title_he": "את כוס ישועות",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yosef ben Shemu’el Rodi"
+      },
+      {
+        "id": "malé-olam-kevod-yofi",
+        "title_en": "Malé ‘Olam Kevod Yofi",
+        "title_he": "מלא עולם כבוד יופי",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Mordochai ben Ya‘aḳov ben Shemu’el Politi (?)"
+      }
+    ],
+    "Passover Songs": [
+      {
+        "id": "azkir-tehillot",
+        "title_en": "Azkir Tehillot",
+        "title_he": "אזכיר תהלות",
+        "has_intro": true,
+        "author_en": "Yosef bar Yitsḥaḳ"
+      },
+      {
+        "id": "hodu-leel-deot",
+        "title_en": "Hodu Le'El Deot",
+        "title_he": "הודו לאל דעות",
+        "has_intro": true
+      },
+      {
+        "id": "odecha-el-ki-noraot",
+        "title_en": "Odecha El Ki Noraot",
+        "title_he": "אוֹדְךָ אֵל כִּי נוֹרָאוֹת",
+        "has_intro": true
+      },
+      {
+        "id": "yahid-beolamo",
+        "title_en": "Yahid Be'olamo",
+        "title_he": "יחיד בעולמו",
+        "has_intro": true
+      },
+      {
+        "id": "yonat-elem",
+        "title_en": "Yonat Elem",
+        "title_he": "יונת אלם",
+        "has_intro": true
+      }
+    ],
+    "Prayers": [
+      {
+        "id": "en-kelohenu",
+        "title_en": "En Kelohenu",
+        "title_he": "אין כאלהינו",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "lutski-prayer-for-a-time-of-plague",
+        "title_en": "Lutski Prayer for a Time of Plague",
+        "title_he": "בקשה לאמרו בזמן המגפה",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Simḥa Yitsḥaḳ Lutski"
+      }
+    ],
+    "Purim Songs": [
+      {
+        "id": "adon-yeshuot",
+        "title_en": "Adon Yeshu'ot",
+        "title_he": "אדון ישועות",
+        "has_intro": true
+      },
+      {
+        "id": "shiru-am-zakkai",
+        "title_en": "Shiru Am Zakkai",
+        "title_he": "שירו עם זכאי",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "simhu-bene-el-neeman",
+        "title_en": "Simhu Bene El Ne'eman ",
+        "title_he": "שמחו בני אל נאמן",
+        "has_intro": true,
+        "hasAudio": true
+      }
+    ],
+    "Shabbat Morning Services": [
+      {
+        "id": "d-adir-venora",
+        "title_en": "Addir Venora",
+        "title_he": "אַדִּיר וְנוֹרָא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "a-atta-qadosh",
+        "title_en": "Atta Qadosh",
+        "title_he": "אַתָּה קָדוֹשׁ",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "c-el-mistatter",
+        "title_en": "El Mistatter",
+        "title_he": "אֵל מִסְתַּתֵּר",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "b-essa-lamerahoq",
+        "title_en": "Essa Lamerahoq",
+        "title_he": "אֶשָּׂא לְמֵרָחוֹק",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "e-ehad-elohenu",
+        "title_en": "Eḥad Elohenu",
+        "title_he": "אֶחָד אֱלֹהֵֽינוּ",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      }
+    ],
+    "Shabbat Songs": [
+      {
+        "id": "al-ahavatecha",
+        "title_en": "Al ahavatecha",
+        "title_he": "על אהבתך",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "anochi-anochi",
+        "title_en": "Anochi Anochi",
+        "title_he": "אנכי אנכי",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "ashir-beshir-ḥadash",
+        "title_en": "Ashir Beshir Ḥadash",
+        "title_he": "אשיר בשיר חדש",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yosef ben Nisan Poziemski"
+      },
+      {
+        "id": "ashir-beshira-el-nora-tehillot",
+        "title_en": "Ashir Beshira El Nora Tehillot",
+        "title_he": "אשיר בשירה אל נורא תהלות",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Avraham ben Yoshiyahu Ha-rofé"
+      },
+      {
+        "id": "ashir-leel-elyon",
+        "title_en": "Ashir Le’el ‘Elyon",
+        "title_he": "אשיר לאל עליון",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yehuda ben Zerubbavel"
+      },
+      {
+        "id": "atsili-qum-qera",
+        "title_en": "Atsili Qum Qera",
+        "title_he": "אצילי קום קרא",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Abraham"
+      },
+      {
+        "id": "esmaḥ-beshir-ḥadash",
+        "title_en": "Esmaḥ Beshir Ḥadash",
+        "title_he": "אשמח בשיר חדש",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Ezra ben Nisan Ha-rofé"
+      },
+      {
+        "id": "evyon-asher",
+        "title_en": "Evyon Asher",
+        "title_he": "אביון אשר",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Anatoli (ben Joseph?)"
+      },
+      {
+        "id": "ezkor-lemitsvat-melech",
+        "title_en": "Ezkor Lemitsvat Melech",
+        "title_he": "אזכור למצות מלך",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Shelomo ben Aharon"
+      },
+      {
+        "id": "eḳra-leel-elyon",
+        "title_en": "Eḳra Le’el ‘Elyon",
+        "title_he": "אקרא לאל עליון",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "R. Abraham ben Mordochai"
+      },
+      {
+        "id": "odé-leel-maḥsi",
+        "title_en": "Odé Le’el Maḥsi",
+        "title_he": "אודה לאל מחסי",
+        "has_intro": true,
+        "author_en": "Yitsḥaḳ ben Avraham"
+      },
+      {
+        "id": "ori-yeḥidati",
+        "title_en": "Ori Yeḥidati",
+        "title_he": "אורי יחידתי",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Mordochai Sultansky"
+      },
+      {
+        "id": "vehahochma",
+        "title_en": "Vehahochma",
+        "title_he": "והחכמה",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "vehoshia",
+        "title_en": "Vehoshia",
+        "title_he": "והושיעה",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "yah-zimrati",
+        "title_en": "Yah Zimrati",
+        "title_he": "יה זמרתי",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yehuda (otherwise unknown)"
+      },
+      {
+        "id": "yatsar-hael",
+        "title_en": "Yatsar Ha’el",
+        "title_he": "יצר האל",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Ya‘aḳov (otherwise unknown)"
+      },
+      {
+        "id": "yerivai-veoyevai",
+        "title_en": "Yerivai Ve’oyevai",
+        "title_he": "יריבי ואויבי",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yisra’el ben Shemu’el Ha-ma‘aravi Ha-dayyan"
+      },
+      {
+        "id": "yeter-peletat-am",
+        "title_en": "Yeter Peletat ‘Am",
+        "title_he": "יתר פליטת עם",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yosef ben Yeshu‘a"
+      },
+      {
+        "id": "ekkon-lemmul-shabbat",
+        "title_en": "Ekkon Lemmul Shabbat",
+        "title_he": "אכון למול שבת",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Yosef ben Yitsḥaḳ Itson"
+      },
+      {
+        "id": "mitsvat-yesod-shabbat",
+        "title_en": "Mitsvat Yesod Shabbat",
+        "title_he": "מצות יסוד שבת",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Moshe Beghi"
+      },
+      {
+        "id": "mizmor-leyom-shabbat",
+        "title_en": "Mizmor Leyom Shabbat",
+        "title_he": "מזמור ליום השבת",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Shelomo ben Aharon"
+      },
+      {
+        "id": "shabbat-menuḥa",
+        "title_en": "Shabbat Menuḥa",
+        "title_he": "שבת מנוחה",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Simḥa son of Shelomo Ha-ḳusdini"
+      }
+    ],
+    "Supplemental Readings for specific Torah portions": [
+      {
+        "id": "07b-vayyeẓé-by-abraham-ben-ju",
+        "title_en": "(Supplemental) Vayetze (by Abraham ben Judah)",
+        "title_he": "ויצא (אברהם בן יהודה)",
+        "has_intro": false
+      },
+      {
+        "id": "53-haazinu",
+        "title_en": "Piyyut: 53 Ha’azinu",
+        "title_he": "Ha'azinu",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "51-attem-niẓẓavim",
+        "title_en": "Piyyut: Attem Niẓẓavim",
+        "title_he": "נצבים",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "29-aḥaré-moth",
+        "title_en": "Piyyut: Aḥaré Moth",
+        "title_he": "אחרי מות",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "32-behar-sinai",
+        "title_en": "Piyyut: Behar Sinai",
+        "title_he": "בהר",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "36-behaalothkha",
+        "title_en": "Piyyut: Beha‘alothkha",
+        "title_he": "בהעלותך",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "34-bemidbar-sinai",
+        "title_en": "Piyyut: Bemidbar Sinai",
+        "title_he": "במדבר",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "01-bereshit",
+        "title_en": "Piyyut: Bereshit",
+        "title_he": "בראשית",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "15-bo-el-paro",
+        "title_en": "Piyyut: Bo El Par'o",
+        "title_he": "בא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "43-ellé-masé",
+        "title_en": "Piyyut: Elle Mas'é",
+        "title_he": "מסעי",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "23-ellé-fequdé",
+        "title_en": "Piyyut: Ellé Fequdé",
+        "title_he": "פקודי",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "44-ellé-haddevarim",
+        "title_en": "Piyyut: Ellé Haddevarim",
+        "title_he": "דברים",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "31-emor-el-ha-kohanim",
+        "title_en": "Piyyut: Emor El Ha-kohanim",
+        "title_he": "אמור",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "33-im-beḥuqqothai",
+        "title_en": "Piyyut: Im Beḥuqqothai",
+        "title_he": "בחקותי",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "27-isha-ki-thazria",
+        "title_en": "Piyyut: Isha Ki Thazria‘",
+        "title_he": "תזריע",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "49-ki-theẓé",
+        "title_en": "Piyyut: Ki Theẓé",
+        "title_he": "כי תצא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "21-ki-thissa",
+        "title_en": "Piyyut: Ki Thissa",
+        "title_he": "כי תשא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "03-lekh-lekha",
+        "title_en": "Piyyut: Lekh Lekha",
+        "title_he": "לך לך",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "35-naso-eth-rosh",
+        "title_en": "Piyyut: Naso Eth Rosh",
+        "title_he": "נשא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "41-pinḥas",
+        "title_en": "Piyyut: Pinḥas",
+        "title_he": "פינחס",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "30-qedoshim-tihyu",
+        "title_en": "Piyyut: Qedoshim Tihyu",
+        "title_he": "קדושים",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "42-rashé-hammaṭṭoth",
+        "title_en": "Piyyut: Rashé Hammaṭṭoth",
+        "title_he": "מטות",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "47-reé",
+        "title_en": "Piyyut: Re'é",
+        "title_he": "ראה",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "37-shelaḥ-lekha",
+        "title_en": "Piyyut: Shelaḥ Lekha",
+        "title_he": "שלח",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "48-shofṭim",
+        "title_en": "Piyyut: Shofṭim",
+        "title_he": "שופטים",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "06-toldoth-yiẓḥaq",
+        "title_en": "Piyyut: Toldoth Yiẓḥaq",
+        "title_he": "תולדות",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "02-noah",
+        "title_en": "Piyyut: Toledoth Noaḥ",
+        "title_he": "נח",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "14-vaera",
+        "title_en": "Piyyut: Va'era",
+        "title_he": "וארא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "26-vayhi-bayyom-hashemini",
+        "title_en": "Piyyut: Vayhi Bayyom Hashemini",
+        "title_he": "שמיני",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "16-vayhi-beshallaḥ",
+        "title_en": "Piyyut: Vayhi Beshallaḥ",
+        "title_he": "בשלח",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "10-vayhi-miqqeẓ",
+        "title_en": "Piyyut: Vayhi Miqqeẓ",
+        "title_he": "מקץ",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "22-vayyaqhel",
+        "title_en": "Piyyut: Vayyaqhel",
+        "title_he": "ויקהל",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "40-vayyar-balaq",
+        "title_en": "Piyyut: Vayyar Bakak",
+        "title_he": "בלק",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "52b-vayyelekh-by-joseph-ben-m",
+        "title_en": "Piyyut: Vayyelekh - by Joseph ben Mordecai",
+        "title_he": "וילך (יוסף בן מרדכי)",
+        "has_intro": false
+      },
+      {
+        "id": "52a-vayyelekh-by-yiẓḥaq-ben-s",
+        "title_en": "Piyyut: Vayyelekh - by Yiẓḥaq ben Shelom",
+        "title_he": "וילך (יצחק בן שלום)",
+        "has_intro": false,
+        "hasAudio": true
+      },
+      {
+        "id": "04-vayyera",
+        "title_en": "Piyyut: Vayyera",
+        "title_he": "וירא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "09-vayyeshev",
+        "title_en": "Piyyut: Vayyeshev",
+        "title_he": "וישב",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "07a-vayyeẓé",
+        "title_en": "Piyyut: Vayyeẓé",
+        "title_he": "ויצא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "11-vayyiggash",
+        "title_en": "Piyyut: Vayyigash",
+        "title_he": "ויגש",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "38-vayyiqqaḥ-qoraḥ",
+        "title_en": "Piyyut: Vayyiqqaḥ Qoraḥ",
+        "title_he": "קרח",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "24-vayyiqra",
+        "title_en": "Piyyut: Vayyiqra",
+        "title_he": "ויקרא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "08-vayyishlaḥ",
+        "title_en": "Piyyut: Vayyishlaḥ",
+        "title_he": "וישלח",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "17-vayyishma-yithro",
+        "title_en": "Piyyut: Vayyishma' Yithro",
+        "title_he": "יתרו",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "12-vayḥi",
+        "title_en": "Piyyut: Vayḥi",
+        "title_he": "ויחי",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "45-vaethḥannan",
+        "title_en": "Piyyut: Va’ethḥannan",
+        "title_he": "ואתחנן",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "50-vehaya-ki-thavo",
+        "title_en": "Piyyut: Vehaya Ki Thavo",
+        "title_he": "כי תבוא",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "46-vehaya-eqev",
+        "title_en": "Piyyut: Vehaya ‘Eqev",
+        "title_he": "עקב",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "19-veyiqḥu-li-teruma",
+        "title_en": "Piyyut: Veyiqḥu Li Teruma",
+        "title_he": "תרומה",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "54-vezoth-habberakha",
+        "title_en": "Piyyut: Vezoth Haberakha",
+        "title_he": "וזאת הברכה",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "20-veatta-teẓavvé",
+        "title_en": "Piyyut: Ve’atta Teẓavvé",
+        "title_he": "תצוה",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "18-veellé-hammishpaṭim",
+        "title_en": "Piyyut: Ve’ellé Hammishpaṭim",
+        "title_he": "משפטים",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "13-veellé-shemoth",
+        "title_en": "Piyyut: Ve’ellé Shemoth",
+        "title_he": "שמות",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "28-zoth-tihyé",
+        "title_en": "Piyyut: Zoth Tihyé",
+        "title_he": "מצורע",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "05-ḥayyé-sara",
+        "title_en": "Piyyut: Ḥayyé Sara",
+        "title_he": "חיי שרה",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "39-ḥuqqath-ha-tora",
+        "title_en": "Piyyut: Ḥuqqath Ha-tora",
+        "title_he": "חקת",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      },
+      {
+        "id": "25-ẓav-eth-aharon",
+        "title_en": "Piyyut: Ẓav Eth Aharon",
+        "title_he": "צו",
+        "has_intro": false,
+        "hasAudio": true,
+        "author_en": "Aaron ben Joseph"
+      }
+    ],
+    "Tammuz/Av/Echa": [
+      {
+        "id": "afas-aron",
+        "title_en": "Afas Aron",
+        "title_he": "אפס ארון",
+        "has_intro": true,
+        "hasAudio": true
+      },
+      {
+        "id": "anuna",
+        "title_en": "Anuna",
+        "title_he": "אנונה",
+        "has_intro": false
+      },
+      {
+        "id": "efratim_yeqarim",
+        "title_en": "Efratim_Yeqarim",
+        "title_he": "אפרתים יקרים",
+        "has_intro": false,
+        "hasAudio": true
+      },
+      {
+        "id": "shavat-mesosi",
+        "title_en": "Shavat Mesosi",
+        "title_he": "שבת משושי",
+        "has_intro": false
+      },
+      {
+        "id": "yona-leedech-rei",
+        "title_en": "Yona Le'edech Re'i",
+        "title_he": "יונה לעדך ראי",
+        "has_intro": true
+      }
+    ],
+    "Wedding Songs": [
+      {
+        "id": "amen-yehi-ratson",
+        "title_en": "Amen Yehi Ratson",
+        "title_he": "אמן יהי רצון",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Aharon ben Yosef"
+      },
+      {
+        "id": "laḥatani-mivḥar-banai",
+        "title_en": "Laḥatani Mivḥar Banai",
+        "title_he": "לחתני מבחר בני",
+        "has_intro": true,
+        "hasAudio": true,
+        "author_en": "Simḥa Yitsḥaḳ ben Moshe Lutski"
+      },
+      {
+        "id": "matsa-ish-sha-matsa-tov",
+        "title_en": "Matsa Ish-sha Matsa Tov",
+        "title_he": "מצא אשה מצא טוב",
+        "has_intro": true,
+        "hasAudio": true
+      }
+    ],
+    "Yom Kippur": [
+      {
+        "id": "adon-nora",
+        "title_en": "Adon Nora",
+        "title_he": "אדון נורא",
+        "has_intro": false
+      },
+      {
+        "id": "anenu-adonai-anenu-yom-kippur",
+        "title_en": "Anenu Adonai Anenu (Yom Kippur)",
+        "title_he": "עננו ה' עננו",
+        "has_intro": false,
+        "hasAudio": true
+      },
+      {
+        "id": "anenu-el-hai-vekayyam",
+        "title_en": "Anenu El Hai Vekayyam",
+        "title_he": "עננו אל חי וקים",
+        "has_intro": false,
+        "hasAudio": true
+      },
+      {
+        "id": "ase-lemaan-shimcha-haggadol",
+        "title_en": "Ase Lema'an Shimcha Haggadol",
+        "title_he": "עשה למען שמך הגדול",
+        "has_intro": false
+      },
+      {
+        "id": "berogez-rahem-tizkor-yom-kippur",
+        "title_en": "Berogez Rahem Tizkor (yom kippur)",
+        "title_he": "ברוגז רחם תזכור",
+        "has_intro": false,
+        "hasAudio": true
+      },
+      {
+        "id": "el-rahum-shemach-yom-kippur",
+        "title_en": "El Rahum Shemach (Yom Kippur)",
+        "title_he": "אל רחום שמך",
+        "has_intro": false,
+        "hasAudio": true
+      },
+      {
+        "id": "elohe-yisrael-al-tishkah-yisrael-yom-kippur",
+        "title_en": "Elohe Yisrael Al Tishkah Yisrael (Yom Kippur)",
+        "title_he": "אלהי ישראל אל תשכח ישראל",
+        "has_intro": false
+      },
+      {
+        "id": "elohē-yisrael-al-tishkaḥ-yisrael",
+        "title_en": "Elohē yisra’el al tishkaḥ yisra’el",
+        "title_he": "אלהי ישראל אל תשכח ישראל",
+        "has_intro": false
+      },
+      {
+        "id": "emet-hael",
+        "title_en": "Emet Ha'el",
+        "title_he": "אמת האל",
+        "has_intro": false
+      },
+      {
+        "id": "rahum-im-atta-lo-terahem",
+        "title_en": "Rahum Im Atta Lo Terahem",
+        "title_he": "רחום אם אתה לא תרחם",
+        "has_intro": false
+      },
+      {
+        "id": "rahum-vehannun-rahem-alenu",
+        "title_en": "Rahum Vehannun Rahem Alenu",
+        "title_he": "רחום וחנון רחם עלינו",
+        "has_intro": false
+      },
+      {
+        "id": "yetsav-hael-vehagoel",
+        "title_en": "Yetsav Ha'el Vehago'el",
+        "title_he": "יצו האל והגואל",
+        "has_intro": false
+      }
+    ]
+  },
+  "Other": {
+    "General": [
+      {
+        "id": "rosh-pinna",
+        "title_en": "Rosh Pinna",
+        "title_he": "ראש פנה",
+        "has_intro": false
+      }
+    ]
+  },
+  "Polemics": {
+    "General": [
+      {
+        "id": "sefer-milhamot",
+        "title_en": "Sefer Milhamot",
+        "title_he": "ספר מלחמות ה'",
+        "has_intro": true,
+        "author_en": "Salmon ben Yeruḥim"
+      }
+    ]
+  }
+}
