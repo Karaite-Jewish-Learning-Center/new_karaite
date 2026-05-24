@@ -603,8 +603,8 @@ function showHome() {
     
     document.getElementById('app').innerHTML = `
         <div class="home-hero">
-            <h1>ספרית הקראים</h1>
-            <p class="subtitle">Karaite Jewish Texts Library</p>
+            <h1>מרכז הלימוד היהודי הקראי</h1>
+            <p class="subtitle">Karaite Jewish Learning Center</p>
             <p class="description">
                 A comprehensive collection of Karaite Jewish texts including the complete Tanakh,
                 liturgy, halakhah, biblical commentaries, and poetry. Texts are presented in Hebrew 
