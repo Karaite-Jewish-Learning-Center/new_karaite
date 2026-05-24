@@ -1,41 +1,35 @@
 # KJLC Deployment Guide
 
-## Server Details
-- **IP**: 137.184.236.140
-- **Host**: DigitalOcean Droplet "Karaites"
-- **Domain**: kjlc.karaites.org
-- **SSH**: `ssh root@137.184.236.140`
+## Quick Deploy (2 steps)
 
-## Architecture
-- **Traefik** handles SSL and routing
-- **nginx-proxy** serves static files
-- Files location: `/home/production/new_karaite_old/frontend/build/`
-- Docker network: `nginx1_network`
-
-## Deploying Updates
-
-### 1. Push changes to GitHub
+### 1. Push to GitHub (from your Mac)
 ```bash
 cd /Users/shawn/karaite-texts
 git add .
 git commit -m "Your commit message"
-git push origin main
+git push
 ```
 
-### 2. SSH to server
+### 2. Deploy via DigitalOcean Console
+1. Go to digitalocean.com → Karaites droplet → Access → **Launch Droplet Console**
+2. Run these two commands:
+
 ```bash
-ssh root@137.184.236.140
+cd /home/production/new_karaite && git pull
 ```
-Password: (the one you set during root password reset)
 
-### 3. Pull and copy files
 ```bash
-cd /home/production/new_karaite
-git pull origin main
-cp -r /home/production/new_karaite/site/* /home/production/new_karaite_old/frontend/build/
+docker cp site/. nginx-proxy:/usr/share/nginx/html/
 ```
 
-That's it! Changes should be live immediately.
+Done! Site is live at https://kjlc.karaites.org
+
+---
+
+## Server Details
+- **IP**: 137.184.236.140
+- **Domain**: kjlc.karaites.org
+- **Console**: DigitalOcean → Karaites droplet → Access → Launch Droplet Console
 
 ## Troubleshooting
 
