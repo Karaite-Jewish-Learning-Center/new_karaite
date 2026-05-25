@@ -17,6 +17,7 @@ let audioPlayer = null;
 let isPlaying = false;
 let currentVerseIndex = -1;
 let animationFrameId = null;
+let clickToPlayMode = false; // When true, clicking verse note icons plays that verse
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
@@ -704,7 +705,7 @@ let shabbatMorningData = null;
 async function loadShabbatMorningData() {
     if (shabbatMorningData) return shabbatMorningData;
     try {
-        const response = await fetch('data/shabbat-morning-services.json');
+        const response = await fetch('data/shabbat-morning-services.json?v=' + Date.now());
         shabbatMorningData = await response.json();
     } catch (e) {
         shabbatMorningData = null;
@@ -767,8 +768,25 @@ async function showLiturgy() {
 }
 
 // Render Shabbat Morning Services with Kedushot and Torah portions
+//
+// DATA MODEL NOTES (see DATA_MODEL.md for full documentation):
+// 
+// 1. "Poems for the Weekly Torah Portion" (torahPortions):
+//    - These are the PRIMARY piyyutim for each parasha (e.g., "Piyyut: Bereshit")
+//    - Authored by Aaron ben Joseph, one per Torah portion
+//    - Displayed organized by book of the Torah (Genesis, Exodus, etc.)
+//    - Data source: shabbat-morning-services.json -> data['Poems for the Weekly Torah Portion']
+//    - Text lookup: catalog['Liturgy']['Supplemental Readings for specific Torah portions']
+//
+// 2. Weekly Kedushot (qedushaOrder):
+//    - Five rotating Kedushot used throughout the year
+//    - Not tied to specific parashot
+//
+// Note: Some texts may be "recited on" a parasha (e.g., Vehahochma recited on Bereshit)
+// but are NOT the designated piyyut for that parasha. These are separate texts that
+// use the recited_on_parasha field in their JSON to indicate the association.
+//
 function renderShabbatMorningServices(smsData, kedushtItems) {
-    console.log("renderShabbatMorningServices called!");
     const weeklyPoems = smsData.data['Poems for the Weekly Sabbath'] || [];
     const torahPortions = smsData.data['Poems for the Weekly Torah Portion'] || [];
     
@@ -935,7 +953,7 @@ function showAllTexts() {
     window.allTextsByCategory = textsByCategory;
     
     // Build HTML grouped by category
-    const categoryOrder = ['Liturgy', 'Halakhah', 'Comments', 'Exhortatory', 'Polemics', 'Other'];
+    const categoryOrder = ['Liturgy', 'Halakhah', 'Commentary', 'Exhortatory', 'Polemics', 'Other'];
     const categoriesHtml = categoryOrder
         .filter(cat => textsByCategory[cat] && textsByCategory[cat].length > 0)
         .map(cat => buildCategoryTable(cat, textsByCategory[cat]))
@@ -1089,10 +1107,10 @@ function renderText() {
     // Build controls
     const hasComments = currentContent.some(v => v.comments);
     const commentsModeSelect = hasComments ? `
-        <select class="comments-mode-select" onchange="setCommentsMode(this.value)" title="Comments display mode">
-            <option value="inline-english" ${commentsMode === 'inline-english' ? 'selected' : ''}>Comments: Under English</option>
-            <option value="inline-full" ${commentsMode === 'inline-full' ? 'selected' : ''}>Comments: Full Width</option>
-            <option value="panel" ${commentsMode === 'panel' ? 'selected' : ''}>Comments: Side Panel</option>
+        <select class="comments-mode-select" onchange="setCommentsMode(this.value)" title="KJLC Notes display mode">
+            <option value="inline-english" ${commentsMode === 'inline-english' ? 'selected' : ''}>KJLC Notes: Under English</option>
+            <option value="inline-full" ${commentsMode === 'inline-full' ? 'selected' : ''}>KJLC Notes: Full Width</option>
+            <option value="panel" ${commentsMode === 'panel' ? 'selected' : ''}>KJLC Notes: Side Panel</option>
         </select>
     ` : '';
     const controlsHtml = `
@@ -1100,7 +1118,7 @@ function renderText() {
         <button class="toggle-btn ${showTransliteration ? 'active' : ''}" onclick="toggleColumn('transliteration')">Transliteration</button>
         <button class="toggle-btn ${showEnglish ? 'active' : ''}" onclick="toggleColumn('english')">English</button>
         ${hasArabic ? `<button class="toggle-btn ${showArabic ? 'active' : ''}" onclick="toggleColumn('arabic')">Arabic</button>` : ''}
-        ${hasComments ? `<button class="toggle-btn ${showComments ? 'active' : ''}" onclick="toggleColumn('comments')">Comments</button>` : ''}
+        ${hasComments ? `<button class="toggle-btn ${showComments ? 'active' : ''}" onclick="toggleColumn('comments')">KJLC Notes</button>` : ''}
         ${commentsModeSelect}
     `;
     
@@ -1137,6 +1155,11 @@ function renderText() {
                     </div>
                 </div>
                 <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+                <button class="audio-btn click-to-play-btn ${clickToPlayMode ? 'active' : ''}" onclick="toggleClickToPlayMode()" title="Click-to-play mode: click verse icons to play">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                </button>
                 ${trackSelectorHtml}
             </div>
         `;
@@ -1189,7 +1212,8 @@ function renderText() {
             const isHebrewFootnote = v.hebrew && /^\[\d+\]/.test(v.hebrew) && !hebrewHasEnglish;
             
             const hasComment = showComments && v.comments;
-            const commentHtml = hasComment ? formatComments(v.comments) : '';
+            const isLiturgyOrCommentary = currentText.category === 'Liturgy' || currentText.category === 'Comments' || currentText.category === 'Commentary';
+            const commentHtml = hasComment ? formatComments(v.comments, isLiturgyOrCommentary) : '';
             const showCommentColumn = commentsMode === 'panel' && showComments;
             // Detect if comments are primarily Hebrew (RTL) - check for Hebrew chars vs Latin chars
             const commentsAreHebrew = hasComment && isHebrewText(v.comments);
@@ -1198,8 +1222,8 @@ function renderText() {
                 <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${showCommentColumn ? 'with-comment-col' : ''}" 
                      data-index="${i}" 
                      ${v.section_id ? `id="${v.section_id}"` : ''}
-                     ${hasTiming ? `data-start="${v.timing.start}" data-end="${v.timing.end}"` : ''}
-                     ${hasTiming ? `onclick="seekToVerse(${i})"` : ''}>
+                     ${hasTiming ? `data-start="${v.timing.start}" data-end="${v.timing.end}"` : ''}>
+                    ${hasTiming ? `<span class="verse-play-icon" style="${clickToPlayMode ? '' : 'display:none'}" onclick="seekToVerse(${i}); event.stopPropagation();" title="Play from here">♪</span>` : ''}
                     ${showHebrew && v.hebrew && !isMixedEnglish ? `
                         <div class="verse-hebrew">${formatText(v.hebrew)}</div>
                     ` : ''}
@@ -1272,21 +1296,26 @@ function renderText() {
 }
 
 // Format comments/footnotes - keeps [n] as styled inline number instead of superscript
-function formatComments(text) {
+// boldTerms: if true, highlights the term being defined (for Liturgy/Commentary)
+function formatComments(text, boldTerms = false) {
     if (!text) return '';
     
     // Escape HTML first
     text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     
-    // Highlight term being defined before em-dash (—) for each numbered footnote
-    // Pattern: "¹ term (arabic) — definition" or "1 term — definition"
-    // Handle superscript numbers (¹²³⁴⁵⁶⁷⁸⁹⁰) and regular numbers at start of footnotes
-    text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+|^\d+)\s+([^—\n]+)\s*—/gm, '$1 <span class="comment-term">$2</span> —');
-    
-    // Also highlight term before period or colon if no em-dash (fallback for simpler comments)
-    // Only apply if no em-dash in text and no comment-term already added
-    if (!text.includes('—') && !text.includes('comment-term')) {
-        text = text.replace(/^([^.:\n]+)([.:])/, '<span class="comment-term">$1</span>$2');
+    // Only apply term highlighting for Liturgy and Commentary (poems, Torah commentary)
+    // Books (Halakhah, Polemics, etc.) use scholarly footnotes that shouldn't be bolded
+    if (boldTerms) {
+        // Highlight term being defined before em-dash (—) for each numbered footnote
+        // Pattern: "¹ term (arabic) — definition" or "1 term — definition"
+        // Handle superscript numbers (¹²³⁴⁵⁶⁷⁸⁹⁰) and regular numbers at start of footnotes
+        text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+|^\d+)\s+([^—\n]+)\s*—/gm, '$1 <span class="comment-term">$2</span> —');
+        
+        // Also highlight term before period or colon if no em-dash (fallback for simpler comments)
+        // Only apply if no em-dash in text and no comment-term already added
+        if (!text.includes('—') && !text.includes('comment-term')) {
+            text = text.replace(/^([^.:\n]+)([.:])/, '<span class="comment-term">$1</span>$2');
+        }
     }
     
     // Format footnote numbers [n] as styled inline numbers at start of each note
@@ -1575,7 +1604,7 @@ function initAudioPlayer() {
     const firstVerseStart = currentText.content[0]?.timing?.start || 0;
     
     audioPlayer = new Audio(currentText.audio);
-    audioPlayer.preload = 'metadata';
+    audioPlayer.preload = 'auto';
     isPlaying = false;
     currentVerseIndex = -1;
     audioPlayer._firstVerseStart = firstVerseStart;
@@ -1673,13 +1702,36 @@ function seekToVerse(index) {
     
     const verse = currentText.content[index];
     if (verse && verse.timing) {
-        audioPlayer.currentTime = verse.timing.start;
-        if (!isPlaying) {
+        const targetTime = verse.timing.start;
+        
+        // Check if target time is within duration
+        if (targetTime > audioPlayer.duration) return;
+        
+        // Use seeked event to ensure seek completes before playing
+        const onSeeked = () => {
+            audioPlayer.removeEventListener('seeked', onSeeked);
             audioPlayer.play();
             isPlaying = true;
             updatePlayButton();
-        }
+        };
+        
+        audioPlayer.addEventListener('seeked', onSeeked);
+        audioPlayer.currentTime = targetTime;
     }
+}
+
+// Toggle click-to-play mode
+function toggleClickToPlayMode() {
+    clickToPlayMode = !clickToPlayMode;
+    // Update button state
+    const btn = document.querySelector('.click-to-play-btn');
+    if (btn) {
+        btn.classList.toggle('active', clickToPlayMode);
+    }
+    // Toggle visibility of verse play icons without re-initializing audio
+    document.querySelectorAll('.verse-play-icon').forEach(icon => {
+        icon.style.display = clickToPlayMode ? '' : 'none';
+    });
 }
 
 let lastHighlightTime = 0;

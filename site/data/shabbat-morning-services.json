@@ -21,37 +21,37 @@
         "order": 8000,
         "menu_items": [
           {
-            "menu_item": "Bereshit",
+            "menu_item": "Piyyut: Bereshit",
             "complement": "Atta Qadosh",
             "order": 9000
           },
           {
-            "menu_item": "Toledoth Noaḥ",
+            "menu_item": "Piyyut: Toledoth Noaḥ",
             "complement": "Essa Lemeraḥoq",
             "order": 10000
           },
           {
-            "menu_item": "Lekh Lekha",
+            "menu_item": "Piyyut: Lekh Lekha",
             "complement": "El Mistatter",
             "order": 11000
           },
           {
-            "menu_item": "Vayyera",
+            "menu_item": "Piyyut: Vayyera",
             "complement": "Addir Ve-nora",
             "order": 12000
           },
           {
-            "menu_item": "Ḥayyé Sara",
+            "menu_item": "Piyyut: Ḥayyé Sara",
             "complement": "Eḥad Elohenu",
             "order": 13000
           },
           {
-            "menu_item": "Toldoth Yiẓḥaq",
+            "menu_item": "Piyyut: Toldoth Yiẓḥaq",
             "complement": "Atta Qadosh",
             "order": 14000
           },
           {
-            "menu_item": "Vayyeẓé",
+            "menu_item": "Piyyut: Vayyeẓé",
             "complement": "Essa Lemeraḥoq",
             "order": 15000
           },
@@ -61,27 +61,27 @@
             "order": 16000
           },
           {
-            "menu_item": "Vayyishlaḥ",
+            "menu_item": "Piyyut: Vayyishlaḥ",
             "complement": "El Mistatter",
             "order": 17000
           },
           {
-            "menu_item": "Vayyeshev",
+            "menu_item": "Piyyut: Vayyeshev",
             "complement": "Addir Ve-nora",
             "order": 18000
           },
           {
-            "menu_item": "Vayhi Miqqeẓ",
+            "menu_item": "Piyyut: Vayhi Miqqeẓ",
             "complement": "Eḥad Elohenu",
             "order": 19000
           },
           {
-            "menu_item": "Vayyigash",
+            "menu_item": "Piyyut: Vayyigash",
             "complement": "Atta Qadosh",
             "order": 20000
           },
           {
-            "menu_item": "Vayḥi",
+            "menu_item": "Piyyut: Vayḥi",
             "complement": "Essa Lemeraḥoq",
             "order": 21000
           }
@@ -94,57 +94,57 @@
         "order": 22000,
         "menu_items": [
           {
-            "menu_item": "Ve’ellé Shemoth",
+            "menu_item": "Piyyut: Ve’ellé Shemoth",
             "complement": "El Mistatter",
             "order": 23000
           },
           {
-            "menu_item": "Va'era",
+            "menu_item": "Piyyut: Va'era",
             "complement": "Addir Ve-nora",
             "order": 24000
           },
           {
-            "menu_item": "Bo El Par'o",
+            "menu_item": "Piyyut: Bo El Par'o",
             "complement": "Eḥad Elohenu",
             "order": 25000
           },
           {
-            "menu_item": "Vayhi Beshallaḥ",
+            "menu_item": "Piyyut: Vayhi Beshallaḥ",
             "complement": "Atta Qadosh",
             "order": 26000
           },
           {
-            "menu_item": "Vayyishma' Yithro",
+            "menu_item": "Piyyut: Vayyishma' Yithro",
             "complement": "Essa Lemeraḥoq",
             "order": 27000
           },
           {
-            "menu_item": "Ve’ellé Hammishpaṭim",
+            "menu_item": "Piyyut: Ve’ellé Hammishpaṭim",
             "complement": "El Mistatter",
             "order": 28000
           },
           {
-            "menu_item": "Veyiqḥu Li Teruma",
+            "menu_item": "Piyyut: Veyiqḥu Li Teruma",
             "complement": "Addir Ve-nora",
             "order": 29000
           },
           {
-            "menu_item": "Ve’atta Teẓavvé",
+            "menu_item": "Piyyut: Ve’atta Teẓavvé",
             "complement": "Eḥad Elohenu",
             "order": 30000
           },
           {
-            "menu_item": "Ki Thissa",
+            "menu_item": "Piyyut: Ki Thissa",
             "complement": "Atta Qadosh",
             "order": 31000
           },
           {
-            "menu_item": "Vayyaqhel",
+            "menu_item": "Piyyut: Vayyaqhel",
             "complement": "Essa Lemeraḥoq",
             "order": 32000
           },
           {
-            "menu_item": "Ellé Fequdé",
+            "menu_item": "Piyyut: Ellé Fequdé",
             "complement": "El Mistatter",
             "order": 33000
           }
@@ -157,52 +157,52 @@
         "order": 34000,
         "menu_items": [
           {
-            "menu_item": "Vayyiqra",
+            "menu_item": "Piyyut: Vayyiqra",
             "complement": "Addir Ve-nora",
             "order": 35000
           },
           {
-            "menu_item": "Ẓav Eth Aharon",
+            "menu_item": "Piyyut: Ẓav Eth Aharon",
             "complement": "Eḥad Elohenu",
             "order": 36000
           },
           {
-            "menu_item": "Vayhi Bayyom Hashemini",
+            "menu_item": "Piyyut: Vayhi Bayyom Hashemini",
             "complement": "Atta Qadosh",
             "order": 37000
           },
           {
-            "menu_item": "Isha Ki Thazria‘",
+            "menu_item": "Piyyut: Isha Ki Thazria‘",
             "complement": "Essa Lemeraḥoq",
             "order": 38000
           },
           {
-            "menu_item": "Zoth Tihyé",
+            "menu_item": "Piyyut: Zoth Tihyé",
             "complement": "El Mistatter",
             "order": 39000
           },
           {
-            "menu_item": "Aḥaré Moth",
+            "menu_item": "Piyyut: Aḥaré Moth",
             "complement": "Addir Ve-nora",
             "order": 40000
           },
           {
-            "menu_item": "Qedoshim Tihyu",
+            "menu_item": "Piyyut: Qedoshim Tihyu",
             "complement": "Eḥad Elohenu",
             "order": 41000
           },
           {
-            "menu_item": "Emor El Ha-kohanim",
+            "menu_item": "Piyyut: Emor El Ha-kohanim",
             "complement": "Atta Qadosh",
             "order": 42000
           },
           {
-            "menu_item": "Behar Sinai",
+            "menu_item": "Piyyut: Behar Sinai",
             "complement": "Essa Lemeraḥoq",
             "order": 43000
           },
           {
-            "menu_item": "Im Beḥuqqothai",
+            "menu_item": "Piyyut: Im Beḥuqqothai",
             "complement": "El Mistatter",
             "order": 44000
           }
@@ -215,52 +215,52 @@
         "order": 45000,
         "menu_items": [
           {
-            "menu_item": "Bemidbar Sinai",
+            "menu_item": "Piyyut: Bemidbar Sinai",
             "complement": "Addir Ve-nora",
             "order": 46000
           },
           {
-            "menu_item": "Naso Eth Rosh",
+            "menu_item": "Piyyut: Naso Eth Rosh",
             "complement": "Eḥad Elohenu",
             "order": 47000
           },
           {
-            "menu_item": "Beha‘alothkha",
+            "menu_item": "Piyyut: Beha‘alothkha",
             "complement": "Atta Qadosh",
             "order": 48000
           },
           {
-            "menu_item": "Shelaḥ Lekha",
+            "menu_item": "Piyyut: Shelaḥ Lekha",
             "complement": "Essa Lemeraḥoq",
             "order": 49000
           },
           {
-            "menu_item": "Vayyiqqaḥ Qoraḥ",
+            "menu_item": "Piyyut: Vayyiqqaḥ Qoraḥ",
             "complement": "El Mistatter",
             "order": 50000
           },
           {
-            "menu_item": "Ḥuqqath Ha-tora",
+            "menu_item": "Piyyut: Ḥuqqath Ha-tora",
             "complement": "Addir Ve-nora",
             "order": 51000
           },
           {
-            "menu_item": "Vayyar Bakak",
+            "menu_item": "Piyyut: Vayyar Bakak",
             "complement": "Eḥad Elohenu",
             "order": 52000
           },
           {
-            "menu_item": "Pinḥas",
+            "menu_item": "Piyyut: Pinḥas",
             "complement": "Atta Qadosh",
             "order": 53000
           },
           {
-            "menu_item": "Rashé Hammaṭṭoth",
+            "menu_item": "Piyyut: Rashé Hammaṭṭoth",
             "complement": "Essa Lemeraḥoq",
             "order": 54000
           },
           {
-            "menu_item": "Elle Mas'é",
+            "menu_item": "Piyyut: Elle Mas'é",
             "complement": "El Mistatter",
             "order": 55000
           }
@@ -273,62 +273,62 @@
         "order": 56000,
         "menu_items": [
           {
-            "menu_item": "Ellé Haddevarim",
+            "menu_item": "Piyyut: Ellé Haddevarim",
             "complement": "Addir Ve-nora",
             "order": 57000
           },
           {
-            "menu_item": "Va’ethḥannan",
+            "menu_item": "Piyyut: Va’ethḥannan",
             "complement": "Eḥad Elohenu",
             "order": 58000
           },
           {
-            "menu_item": "Vehaya ‘Eqev",
+            "menu_item": "Piyyut: Vehaya ‘Eqev",
             "complement": "Atta Qadosh",
             "order": 59000
           },
           {
-            "menu_item": "Re'é",
+            "menu_item": "Piyyut: Re'é",
             "complement": "Essa Lemeraḥoq",
             "order": 60000
           },
           {
-            "menu_item": "Shofṭim",
+            "menu_item": "Piyyut: Shofṭim",
             "complement": "El Mistatter",
             "order": 61000
           },
           {
-            "menu_item": "Ki Theẓé",
+            "menu_item": "Piyyut: Ki Theẓé",
             "complement": "Addir Ve-nora",
             "order": 62000
           },
           {
-            "menu_item": "Vehaya Ki Thavo",
+            "menu_item": "Piyyut: Vehaya Ki Thavo",
             "complement": "Eḥad Elohenu",
             "order": 63000
           },
           {
-            "menu_item": "Attem Niẓẓavim",
+            "menu_item": "Piyyut: Attem Niẓẓavim",
             "complement": "Atta Qadosh",
             "order": 64000
           },
           {
-            "menu_item": "Vayyelekh - by Yiẓḥaq ben Shelom",
+            "menu_item": "Piyyut: Vayyelekh - by Yiẓḥaq ben Shelom",
             "complement": "Atta Qadosh",
             "order": 65000
           },
           {
-            "menu_item": "Vayyelekh - by Joseph ben Mordecai",
+            "menu_item": "Piyyut: Vayyelekh - by Joseph ben Mordecai",
             "complement": "Eḥad Elohenu",
             "order": 66000
           },
           {
-            "menu_item": "Ha'azinu",
+            "menu_item": "Piyyut: 53 Ha’azinu",
             "complement": "Essa Lemeraḥoq",
             "order": 67000
           },
           {
-            "menu_item": "Vezoth Haberakha",
+            "menu_item": "Piyyut: Vezoth Haberakha",
             "complement": "El Mistatter",
             "order": 68000
           }

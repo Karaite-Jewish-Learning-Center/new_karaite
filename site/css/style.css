@@ -728,7 +728,9 @@ main {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-lg);
     padding: var(--space-lg) 0;
+    padding-left: 28px;
     border-bottom: 1px solid var(--border-light);
+    position: relative;
 }
 
 .verse:last-child {
@@ -1250,6 +1252,42 @@ sup.footnote-num {
 
 .audio-btn:active {
     transform: scale(0.95);
+}
+
+/* Click-to-play mode toggle button */
+.click-to-play-btn {
+    width: 36px;
+    height: 36px;
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+.click-to-play-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--accent);
+}
+
+.click-to-play-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Per-verse play icon */
+.verse-play-icon {
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    user-select: none;
+}
+
+.verse-play-icon:hover {
+    opacity: 1;
 }
 
 .audio-progress-container {

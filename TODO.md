@@ -22,7 +22,7 @@
 ## Features
 
 ### Tabled / Future Enhancements
-- [ ] **Comments Side Panel** - Display comments/footnotes in a side panel instead of inline (instead of current popup)
+- [ ] **KJLC Notes Side Panel** - Display KJLC Notes/footnotes in a side panel instead of inline (instead of current popup)
 - [ ] **Biblical Verse Linking** - Extend to more texts (currently implemented for Adderet Eliyahu and Ma'aravi)
 - [ ] **Verse Citation Cross-References** - When clicking a verse in Tanakh, show all places it's cited in Karaite texts
 - [ ] **Deep Links to Citations** - Links from Tanakh should go directly to the paragraph where verse is cited
