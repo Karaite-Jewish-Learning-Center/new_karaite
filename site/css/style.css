@@ -2445,3 +2445,39 @@ a.bible-ref:hover {
         right: 0;
     }
 }
+
+/* Torah audio sync in the Tanakh viewer */
+.tanakh-audio-player {
+    margin: var(--space-md) 0 var(--space-lg);
+}
+
+.audio-segment-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: var(--space-xs) var(--space-sm);
+    white-space: nowrap;
+}
+
+.tanakh-verse.has-timing {
+    position: relative;
+    cursor: default;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.tanakh-verse.has-timing:hover {
+    background: var(--bg-tertiary);
+}
+
+.tanakh-verse .verse-play-icon {
+    left: -24px;
+}
+
+.tanakh-verse.playing {
+    background: rgba(139, 90, 43, 0.1);
+    border-left: 4px solid var(--accent);
+    padding-left: calc(var(--space-md) - 4px);
+}
+
+[data-theme="dark"] .tanakh-verse.playing {
+    background: rgba(196, 154, 108, 0.15);
+}

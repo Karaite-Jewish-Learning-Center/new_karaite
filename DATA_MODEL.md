@@ -26,6 +26,39 @@ The actual biblical text, including the Torah (Five Books of Moses), Nevi'im (Pr
 - **Display**: Accessible via "Tanakh" in the navigation
 - **Structure**: Organized by book and chapter
 
+### Torah audio sync fields (Genesis only at present)
+
+`convert_torah_markers.py` reads `Torah Audio Recording Markers.xlsx` and merges per-verse audio data into `site/data/tanakh/<book>.json`. Verses that have markers gain:
+
+```json
+{
+  "verse": 1,
+  "hebrew": "...",
+  "english": "...",
+  "audio": "audio/torah/01-bereshit-1-cohen.mp3",
+  "timing": { "start": 0.0, "end": 8.0 },
+  "aliyah": "1. Cohen",
+  "parasha": "Bereshit"
+}
+```
+
+Each chapter object that has any audio also gets:
+
+```json
+{
+  "chapter": 2,
+  "audioSegments": [
+    { "label": "Bereshit · 1. Cohen", "url": "audio/torah/01-bereshit-1-cohen.mp3" },
+    { "label": "Bereshit · 2. Levi",  "url": "audio/torah/01-bereshit-2-levi.mp3" }
+  ],
+  "verses": [ ... ]
+}
+```
+
+The Tanakh viewer renders the standard audio toolbar (play/pause, progress, click-to-play `♪` icons) when `audioSegments` is present. Each verse div carries `data-audio` plus `data-start`/`data-end` (seconds). Clicking a verse's `♪` swaps the player to that verse's MP3 if needed and seeks to the marker. Highlight-while-playing only applies to verses whose `audio` matches the active source.
+
+To add new books: populate the corresponding sheet in the xlsx (`File name`, `Torah Portion`, `Traditional Shabbat Aliyah`, `Chapter`, `Verse`, `Time Starts`, `Time Ends` in SMPTE `HH:MM:SS:FF` at 30 fps), drop the MP3s into `Combined Parashiot by Aliya Folder/`, and re-run `venv/bin/python convert_torah_markers.py`.
+
 The Torah is divided into 54 weekly portions (parashot) read throughout the year:
 
 | Parasha | Torah Text | Book |

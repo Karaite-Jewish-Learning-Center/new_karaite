@@ -35,6 +35,7 @@
 
 ### Audio
 - [x] Audio sync working for texts with timing markers
+- [x] Torah audio sync in Tanakh viewer - Genesis chapters 1-17 (Bereshit, Noach, Lech Lecha) playable with verse-by-verse timing from `Torah Audio Recording Markers.xlsx`. Other Torah books are stubbed - drop their markers into the same xlsx and re-run `convert_torah_markers.py`.
 - [ ] **Multiple recordings per song** - Some songs have multiple versions (e.g., traditional + alternative melodies)
   - Shabbat Menuha - needs traditional melody AND Hallelujah tune version
   - Matsa Ish-sha Matsa Tov - should have multiple recordings
@@ -42,6 +43,7 @@
 - [ ] **Audio sync for more songs** - Many songs have recordings but no timing markers
   - Option: Use Whisper AI to auto-generate timing (cost consideration)
   - Option: Manual timing entry
+- [ ] Fill in Exodus / Leviticus / Numbers / Deuteronomy markers in `Torah Audio Recording Markers.xlsx` and re-run `convert_torah_markers.py`
 - [ ] Track down additional song versions and add to `/audio` directory
 
 ---

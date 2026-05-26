@@ -9,3 +9,7 @@ site/chatbot/venv/
 
 # Large audio files can be tracked with Git LFS if needed
 # audio/*.mp3
+
+# Source MP3s (input material, not deployed). The deployed copies live in
+# site/audio/torah/ and are committed.
+Combined Parashiot by Aliya Folder/

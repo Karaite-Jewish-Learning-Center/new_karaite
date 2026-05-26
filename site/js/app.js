@@ -19,6 +19,11 @@ let currentVerseIndex = -1;
 let animationFrameId = null;
 let clickToPlayMode = false; // When true, clicking verse note icons plays that verse
 
+// Tanakh-specific audio state (Torah readings split across aliyah MP3s).
+let tanakhAudioMode = false;
+let tanakhCurrentSegmentUrl = null;
+let tanakhActiveVerseNum = -1;
+
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     // Load catalog
@@ -1901,17 +1906,34 @@ async function showTanakh() {
     `;
 }
 
+const tanakhBookCache = new Map();
+
 async function showTanakhBook(bookId, chapter = 1) {
     window.location.hash = `tanakh/${bookId}/${chapter}`;
-    
+
+    if (currentBook?.id === bookId) {
+        currentChapter = chapter;
+        renderTanakhChapter();
+        return;
+    }
+
+    if (tanakhBookCache.has(bookId)) {
+        currentBook = tanakhBookCache.get(bookId);
+        currentChapter = chapter;
+        renderTanakhChapter();
+        return;
+    }
+
     document.getElementById('app').innerHTML = `
         <div class="loading"><div class="spinner"></div></div>
     `;
-    
+
     try {
         const response = await fetch(`data/tanakh/${bookId}.json`);
         if (!response.ok) throw new Error('Book not found');
-        currentBook = await response.json();
+        const book = await response.json();
+        tanakhBookCache.set(bookId, book);
+        currentBook = book;
         currentChapter = chapter;
         renderTanakhChapter();
     } catch (error) {
@@ -1942,15 +1964,57 @@ async function renderTanakhChapter() {
         `<option value="${c.chapter}" ${c.chapter === currentChapter ? 'selected' : ''}>Chapter ${c.chapter}</option>`
     ).join('');
     
+    const audioSegments = chapter.audioSegments || [];
+    const hasAudio = audioSegments.length > 0;
+    let audioToolbarHtml = '';
+    if (hasAudio) {
+        const trackSelectorHtml = audioSegments.length > 1 ? `
+            <select class="audio-track-select" onchange="tanakhSwitchSegment(this.value)" title="Select aliyah">
+                ${audioSegments.map(s => `<option value="${s.url}">${s.label}</option>`).join('')}
+            </select>
+        ` : `<span class="audio-segment-label">${audioSegments[0].label}</span>`;
+        audioToolbarHtml = `
+            <div class="audio-player tanakh-audio-player">
+                <button class="audio-btn play-btn" onclick="toggleAudio()" title="Play/Pause">
+                    <svg class="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="icon-pause" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="display:none">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
+                </button>
+                <div class="audio-progress-container" onclick="seekAudio(event)">
+                    <div class="audio-progress-bar">
+                        <div class="audio-progress" id="audioProgress"></div>
+                    </div>
+                </div>
+                <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+                <button class="audio-btn click-to-play-btn ${clickToPlayMode ? 'active' : ''}" onclick="toggleClickToPlayMode()" title="Click-to-play mode: click verse icons to play">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                </button>
+                ${trackSelectorHtml}
+            </div>
+        `;
+    }
+    
     // Verses with cross-reference indicators
     // Layout: Hebrew (left) | verse number (center) | English (right)
     const versesHtml = chapter.verses.map(v => {
         const refKey = `${currentBook.id}:${currentChapter}:${v.verse}`;
         const refs = citationsIndex?.verse_refs?.[refKey] || [];
         const hasRefs = refs.length > 0;
-        
+        const verseHasAudio = !!(v.audio && v.timing);
+        const playIconHtml = verseHasAudio
+            ? `<span class="verse-play-icon" style="${clickToPlayMode ? '' : 'display:none'}" onclick="tanakhSeekToVerse(${v.verse}); event.stopPropagation();" title="Play from here">♪</span>`
+            : '';
+        const audioAttrs = verseHasAudio
+            ? `data-audio="${v.audio}" data-start="${v.timing.start}" data-end="${v.timing.end}"`
+            : '';
         return `
-            <div class="tanakh-verse ${hasRefs ? 'has-refs' : ''}" id="verse-${v.verse}">
+            <div class="tanakh-verse ${hasRefs ? 'has-refs' : ''} ${verseHasAudio ? 'has-timing' : ''}" id="verse-${v.verse}" data-verse-num="${v.verse}" ${audioAttrs}>
+                ${playIconHtml}
                 <div class="verse-hebrew">${v.hebrew}</div>
                 <span class="verse-num" ${hasRefs ? `onclick="toggleVerseRefs('${refKey}', ${v.verse})" title="${refs.length} citation${refs.length > 1 ? 's' : ''}"` : ''}>${v.verse}${hasRefs ? '<span class="ref-indicator">*</span>' : ''}</span>
                 <div class="verse-english">${v.english}</div>
@@ -1986,6 +2050,8 @@ async function renderTanakhChapter() {
                 </button>
             </div>
             
+            ${audioToolbarHtml}
+            
             <div class="tanakh-content">
                 ${versesHtml}
             </div>
@@ -2001,6 +2067,13 @@ async function renderTanakhChapter() {
             </div>
         </div>
     `;
+
+    if (hasAudio) {
+        initTanakhAudio();
+    } else {
+        teardownAudioPlayer();
+        tanakhAudioMode = false;
+    }
 }
 
 function prevChapter() {
@@ -2017,6 +2090,154 @@ function nextChapter() {
 
 function goToChapter(chapter) {
     showTanakhBook(currentBook.id, parseInt(chapter));
+}
+
+// ========================================
+// TANAKH AUDIO SYNC (Torah readings)
+// ========================================
+
+function initTanakhAudio() {
+    const chapter = currentBook?.chapters.find(c => c.chapter === currentChapter);
+    const segments = chapter?.audioSegments || [];
+    if (!segments.length) {
+        teardownAudioPlayer();
+        tanakhAudioMode = false;
+        tanakhCurrentSegmentUrl = null;
+        return;
+    }
+    tanakhAudioMode = true;
+    loadTanakhSegment(segments[0].url, { autoplay: false, seekTo: null });
+}
+
+function teardownAudioPlayer() {
+    if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.src = '';
+        audioPlayer.load();
+        audioPlayer = null;
+    }
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
+    isPlaying = false;
+    tanakhActiveVerseNum = -1;
+    clearTanakhHighlight();
+}
+
+function loadTanakhSegment(url, { autoplay = false, seekTo = null } = {}) {
+    if (!url) return;
+    const wasPlaying = isPlaying;
+    if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.src = '';
+        audioPlayer.load();
+    }
+    audioPlayer = new Audio(url);
+    audioPlayer.preload = 'auto';
+    isPlaying = false;
+    tanakhCurrentSegmentUrl = url;
+    tanakhActiveVerseNum = -1;
+    clearTanakhHighlight();
+
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        updateAudioTime();
+        if (typeof seekTo === 'number' && !Number.isNaN(seekTo)) {
+            audioPlayer.currentTime = Math.min(seekTo, audioPlayer.duration || seekTo);
+        }
+        if (autoplay || wasPlaying) {
+            audioPlayer.play();
+            isPlaying = true;
+            updatePlayButton();
+        }
+    });
+    audioPlayer.addEventListener('timeupdate', () => {
+        updateAudioProgress();
+        highlightCurrentTanakhVerse();
+    });
+    audioPlayer.addEventListener('ended', () => {
+        isPlaying = false;
+        updatePlayButton();
+        clearTanakhHighlight();
+    });
+    audioPlayer.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
+    });
+
+    // Reflect the active segment in the dropdown.
+    const select = document.querySelector('.tanakh-audio-player .audio-track-select');
+    if (select) select.value = url;
+}
+
+function tanakhSeekToVerse(verseNum) {
+    const verseEl = document.querySelector(`.tanakh-verse[data-verse-num="${verseNum}"]`);
+    if (!verseEl) return;
+    const url = verseEl.getAttribute('data-audio');
+    const start = parseFloat(verseEl.getAttribute('data-start'));
+    if (!url || Number.isNaN(start)) return;
+    if (url !== tanakhCurrentSegmentUrl) {
+        loadTanakhSegment(url, { autoplay: true, seekTo: start });
+        return;
+    }
+    if (!audioPlayer) return;
+    const playFromHere = () => {
+        if (audioPlayer.duration && start > audioPlayer.duration) return;
+        audioPlayer.currentTime = start;
+        audioPlayer.play();
+        isPlaying = true;
+        updatePlayButton();
+    };
+    if (audioPlayer.readyState >= 1) {
+        playFromHere();
+    } else {
+        const onReady = () => {
+            audioPlayer.removeEventListener('loadedmetadata', onReady);
+            playFromHere();
+        };
+        audioPlayer.addEventListener('loadedmetadata', onReady);
+    }
+}
+
+function tanakhSwitchSegment(url) {
+    if (!url || url === tanakhCurrentSegmentUrl) return;
+    // Seek to the first verse of this segment.
+    const firstVerseEl = document.querySelector(`.tanakh-verse[data-audio="${url}"]`);
+    const seekTo = firstVerseEl ? parseFloat(firstVerseEl.getAttribute('data-start')) : 0;
+    loadTanakhSegment(url, { autoplay: false, seekTo: Number.isNaN(seekTo) ? 0 : seekTo });
+}
+
+function highlightCurrentTanakhVerse() {
+    if (!audioPlayer || !tanakhAudioMode) return;
+    const now = Date.now();
+    if (now - lastHighlightTime < 250) return;
+    lastHighlightTime = now;
+
+    const t = audioPlayer.currentTime;
+    let activeVerseNum = -1;
+    document.querySelectorAll(`.tanakh-verse[data-audio="${tanakhCurrentSegmentUrl}"]`).forEach(el => {
+        const start = parseFloat(el.getAttribute('data-start'));
+        const end = parseFloat(el.getAttribute('data-end'));
+        if (!Number.isNaN(start) && !Number.isNaN(end) && t >= start && t < end) {
+            activeVerseNum = parseInt(el.getAttribute('data-verse-num'), 10);
+        }
+    });
+    if (activeVerseNum !== tanakhActiveVerseNum) {
+        clearTanakhHighlight();
+        tanakhActiveVerseNum = activeVerseNum;
+        if (activeVerseNum > 0) {
+            const el = document.querySelector(`.tanakh-verse[data-verse-num="${activeVerseNum}"]`);
+            if (el) {
+                el.classList.add('playing');
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    }
+}
+
+function clearTanakhHighlight() {
+    document.querySelectorAll('.tanakh-verse.playing').forEach(el => {
+        el.classList.remove('playing');
+    });
 }
 
 // ========================================
