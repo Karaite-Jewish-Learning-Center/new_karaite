@@ -1343,25 +1343,27 @@ function renderText() {
     
     document.getElementById('app').innerHTML = `
         <div class="reader-container">
-            <div class="breadcrumb" style="margin-bottom: var(--space-lg);">
-                <a href="#" onclick="showHome(); return false;">Home</a>
-                <span>›</span>
-                <a href="#" onclick="showCategory('${currentText.category}'); return false;">${currentText.category}</a>
-                <span>›</span>
-                <span>${currentText.title_en}</span>
-            </div>
-            
-            <div class="reader-header">
-                ${currentText.title_he ? `<h1 class="title-he">${currentText.title_he}</h1>` : ''}
-                <h2 class="title-en">${currentText.title_en}</h2>
-            </div>
-            
-            <div class="reader-toolbar">
-                <div class="reader-tabs">
-                    ${tabsHtml}
+            <div class="reader-sticky">
+                <div class="breadcrumb">
+                    <a href="#" onclick="showHome(); return false;">Home</a>
+                    <span>›</span>
+                    <a href="#" onclick="showCategory('${currentText.category}'); return false;">${currentText.category}</a>
+                    <span>›</span>
+                    <span>${currentText.title_en}</span>
                 </div>
-                <div class="reader-controls">
-                    ${controlsHtml}
+                
+                <div class="reader-header">
+                    ${currentText.title_he ? `<h1 class="title-he">${currentText.title_he}</h1>` : ''}
+                    <h2 class="title-en">${currentText.title_en}</h2>
+                </div>
+                
+                <div class="reader-toolbar">
+                    <div class="reader-tabs">
+                        ${tabsHtml}
+                    </div>
+                    <div class="reader-controls">
+                        ${controlsHtml}
+                    </div>
                 </div>
             </div>
             
@@ -2254,29 +2256,31 @@ async function renderTanakhChapter() {
     
     document.getElementById('app').innerHTML = `
         <div class="reader-container tanakh-reader">
-            <div class="breadcrumb" style="margin-bottom: var(--space-lg);">
-                <a href="#" onclick="showHome(); return false;">Home</a>
-                <span>›</span>
-                <a href="#" onclick="showTanakh(); return false;">Tanakh</a>
-                <span>›</span>
-                <span>${currentBook.title_en}</span>
-            </div>
-            
-            <div class="reader-header">
-                <h1 class="title-he">${currentBook.title_he}</h1>
-                <h2 class="title-en">${currentBook.title_en}</h2>
-            </div>
-            
-            <div class="tanakh-nav">
-                <button class="nav-btn" onclick="prevChapter()" ${currentChapter <= 1 ? 'disabled' : ''}>
-                    ← Previous
-                </button>
-                <select class="chapter-select" onchange="goToChapter(this.value)">
-                    ${chapterOptions}
-                </select>
-                <button class="nav-btn" onclick="nextChapter()" ${currentChapter >= totalChapters ? 'disabled' : ''}>
-                    Next →
-                </button>
+            <div class="reader-sticky">
+                <div class="breadcrumb">
+                    <a href="#" onclick="showHome(); return false;">Home</a>
+                    <span>›</span>
+                    <a href="#" onclick="showTanakh(); return false;">Tanakh</a>
+                    <span>›</span>
+                    <span>${currentBook.title_en}</span>
+                </div>
+                
+                <div class="reader-header">
+                    <h1 class="title-he">${currentBook.title_he}</h1>
+                    <h2 class="title-en">${currentBook.title_en}</h2>
+                </div>
+                
+                <div class="tanakh-nav">
+                    <button class="nav-btn" onclick="prevChapter()" ${currentChapter <= 1 ? 'disabled' : ''}>
+                        ← Previous
+                    </button>
+                    <select class="chapter-select" onchange="goToChapter(this.value)">
+                        ${chapterOptions}
+                    </select>
+                    <button class="nav-btn" onclick="nextChapter()" ${currentChapter >= totalChapters ? 'disabled' : ''}>
+                        Next →
+                    </button>
+                </div>
             </div>
             
             ${audioToolbarHtml}
@@ -2541,14 +2545,28 @@ function getBookId(bookName) {
 }
 
 async function showVersePopup(bookId, chapter, verse) {
-    // Load the verse from Tanakh
+    // Load the full chapter and scroll to the target verse
     try {
         const response = await fetch(`data/tanakh/${bookId}.json`);
         const book = await response.json();
         const chapterData = book.chapters.find(c => c.chapter === chapter);
         if (!chapterData) return;
-        const verseData = chapterData.verses.find(v => v.verse === verse);
-        if (!verseData) return;
+        
+        const verseNum = parseInt(verse);
+        
+        // Build all verses HTML with the target verse highlighted
+        const versesHtml = chapterData.verses.map(v => {
+            const isTarget = v.verse === verseNum;
+            return `
+                <div class="context-verse ${isTarget ? 'target-verse' : ''}" id="panel-verse-${v.verse}" onclick="closeSidePanel(); window.location.hash='tanakh/${bookId}/${chapter}#verse-${v.verse}';">
+                    <span class="context-verse-num">${v.verse}</span>
+                    <div class="context-verse-text">
+                        <div class="context-hebrew">${v.hebrew}</div>
+                        <div class="context-english">${v.english}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
         
         // Load cross-references
         await loadCitationsIndex();
@@ -2579,21 +2597,31 @@ async function showVersePopup(bookId, chapter, verse) {
                 <h3>${book.title_en} ${chapter}:${verse}</h3>
                 <button class="panel-close" onclick="closeSidePanel()">×</button>
             </div>
-            <div class="panel-content">
-                <div class="panel-hebrew">${verseData.hebrew}</div>
-                <div class="panel-english">${verseData.english}</div>
+            <div class="panel-content panel-scrollable">
+                <div class="context-verses">
+                    ${versesHtml}
+                </div>
+                ${refsHtml}
             </div>
-            ${refsHtml}
             <div class="panel-footer">
                 <a href="#tanakh/${bookId}/${chapter}#verse-${verse}" class="panel-link" onclick="closeSidePanel();">
-                    Open in Tanakh →
+                    Read full chapter →
                 </a>
             </div>
         `;
         document.body.appendChild(panel);
         
-        // Trigger animation
-        requestAnimationFrame(() => panel.classList.add('open'));
+        // Trigger animation and scroll to target verse
+        requestAnimationFrame(() => {
+            panel.classList.add('open');
+            // Scroll to target verse within the panel
+            setTimeout(() => {
+                const targetEl = panel.querySelector(`#panel-verse-${verseNum}`);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ block: 'center', behavior: 'auto' });
+                }
+            }, 50);
+        });
     } catch (e) {
         console.error('Failed to load verse:', e);
     }

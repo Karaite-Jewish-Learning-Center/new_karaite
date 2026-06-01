@@ -633,9 +633,33 @@ main {
 
 .reader-header {
     text-align: center;
-    margin-bottom: var(--space-2xl);
-    padding-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    margin-bottom: 0;
+}
+
+/* Sticky wrapper for header + toolbar */
+.reader-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+    padding: var(--space-md) 0;
+    margin-bottom: var(--space-lg);
     border-bottom: 1px solid var(--border);
+}
+
+.reader-sticky .breadcrumb {
+    margin-bottom: var(--space-sm);
+}
+
+.reader-sticky .reader-toolbar {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.reader-sticky .tanakh-nav {
+    margin-bottom: 0;
 }
 
 .reader-header .title-he {
@@ -2705,14 +2729,20 @@ sup.fn-marker:hover {
     text-decoration: underline;
 }
 
-/* Duplicate content (like "1864") - center it */
+/* Duplicate content (like "1864") - center it, show only once */
 .verse.duplicate-content {
+    display: block;
     text-align: center;
 }
 
-.verse.duplicate-content .verse-hebrew,
-.verse.duplicate-content .verse-english {
+.verse.duplicate-content .verse-hebrew {
     text-align: center;
+    direction: ltr;
+}
+
+.verse.duplicate-content .verse-right,
+.verse.duplicate-content .verse-english {
+    display: none;
 }
 
 /* Two-pane layout with positioned notes */
@@ -2795,4 +2825,57 @@ sup.fn-marker:hover {
     .sticky-notes-panel {
         display: none;
     }
+}
+
+/* Context verses in side panel */
+.context-verses {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.context-verse {
+    display: flex;
+    gap: 0.75em;
+    padding: 0.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.context-verse:hover {
+    background: var(--bg-tertiary);
+}
+
+.context-verse.target-verse {
+    background: var(--accent-light, rgba(139, 90, 43, 0.1));
+    border-left: 3px solid var(--accent);
+    padding-left: calc(0.5em - 3px);
+}
+
+.context-verse-num {
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 1.5em;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.context-verse-text {
+    flex: 1;
+}
+
+.context-hebrew {
+    font-family: var(--font-hebrew);
+    direction: rtl;
+    text-align: right;
+    color: var(--hebrew-color);
+    margin-bottom: 0.25em;
+    font-size: 1.1em;
+}
+
+.context-english {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    line-height: 1.4;
 }
