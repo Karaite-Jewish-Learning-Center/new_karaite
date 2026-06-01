@@ -1107,6 +1107,9 @@ function renderText() {
         if (hasIntro) {
             tabsHtml += `<button class="tab-btn ${currentTab === 'intro' ? 'active' : ''}" onclick="switchTab('intro')">Introduction</button>`;
         }
+        if (currentText.glossary && currentText.glossary.length > 0) {
+            tabsHtml += `<button class="tab-btn ${currentTab === 'glossary' ? 'active' : ''}" onclick="switchTab('glossary')">Glossary</button>`;
+        }
     }
     
     // Build controls
@@ -1201,6 +1204,25 @@ function renderText() {
                 ${formatIntroduction(currentText.introduction)}
             </div>
         `;
+    }
+    // Glossary tab
+    else if (currentTab === 'glossary' && currentText.glossary && currentText.glossary.length > 0) {
+        contentHtml = `
+            <div class="glossary">
+                <h2>Glossary of Terms</h2>
+                <div class="glossary-list">
+                    ${currentText.glossary.map(term => `
+                        <div class="glossary-entry">
+                            <div class="glossary-term">
+                                <span class="glossary-hebrew">${term.hebrew}</span>
+                                ${term.transliteration ? `<span class="glossary-translit">(${term.transliteration})</span>` : ''}
+                            </div>
+                            <div class="glossary-definition">${term.definition}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
     } else if (currentTab !== 'toc') {
         const verses = currentContent.map((v, i) => {
             const showRight = showTransliteration || showEnglish;
@@ -1213,18 +1235,21 @@ function renderText() {
             const isEnglishOnly = v.english_only === true || (!v.hebrew && v.english && !hasLineNumber);
             const isHebrewOnly = v.hebrew && !v.english && !v.transliteration && !hebrewHasEnglish;
             const isMixedEnglish = hebrewHasEnglish && !v.english;  // English in hebrew field
+            // Check if Hebrew and English are identical (like "1864") - should be centered
+            const isDuplicateContent = v.hebrew && v.english && v.hebrew.trim() === v.english.trim();
             // Check if this is a Hebrew footnote (starts with [number])
             const isHebrewFootnote = v.hebrew && /^\[\d+\]/.test(v.hebrew) && !hebrewHasEnglish;
             
             const hasComment = showComments && v.comments;
-            const isLiturgyOrCommentary = currentText.category === 'Liturgy' || currentText.category === 'Comments' || currentText.category === 'Commentary';
-            const commentHtml = hasComment ? formatComments(v.comments, isLiturgyOrCommentary) : '';
+            // Apply term highlighting for categories with structured footnotes (incipit — definition format)
+            const shouldHighlightTerms = currentText.category === 'Liturgy' || currentText.category === 'Comments' || currentText.category === 'Commentary' || currentText.category === 'Halakhah';
+            const commentHtml = hasComment ? formatComments(v.comments, shouldHighlightTerms) : '';
             const showCommentColumn = commentsMode === 'panel' && showComments;
             // Detect if comments are primarily Hebrew (RTL) - check for Hebrew chars vs Latin chars
             const commentsAreHebrew = hasComment && isHebrewText(v.comments);
             
             return `
-                <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${showCommentColumn ? 'with-comment-col' : ''}" 
+                <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${isDuplicateContent ? 'duplicate-content' : ''} ${showCommentColumn ? 'with-comment-col' : ''}" 
                      data-index="${i}" 
                      ${v.section_id ? `id="${v.section_id}"` : ''}
                      ${hasTiming ? `data-start="${v.timing.start}" data-end="${v.timing.end}"` : ''}>
@@ -1261,7 +1286,59 @@ function renderText() {
             `;
         }).join('');
         
-        contentHtml = `<div class="text-content ${commentsMode === 'panel' && showComments ? 'with-comments-column' : ''}">${verses}</div>`;
+        // For panel mode, create a two-pane layout with positioned notes
+        // In panel mode, remove the inline comments from verses
+        if (commentsMode === 'panel' && showComments) {
+            // Re-render verses without inline comments for panel mode
+            const versesNoInline = currentContent.map((v, i) => {
+                const showRight = showTransliteration || showEnglish;
+                const singleColumn = !showHebrew || !showRight;
+                const hasTiming = v.timing;
+                const hebrewHasEnglish = v.hebrew && /[a-zA-Z]{3,}/.test(v.hebrew);
+                const hasLineNumber = v.english && /^\d{1,4}$/.test(v.english.trim());
+                const isEnglishOnly = v.english_only === true || (!v.hebrew && v.english && !hasLineNumber);
+                const isHebrewOnly = v.hebrew && !v.english && !v.transliteration && !hebrewHasEnglish;
+                const isMixedEnglish = hebrewHasEnglish && !v.english;
+                const isHebrewFootnote = v.hebrew && /^\[\d+\]/.test(v.hebrew) && !hebrewHasEnglish;
+                const isDuplicateContent = v.hebrew && v.english && v.hebrew.trim() === v.english.trim();
+                
+                return `
+                    <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${isDuplicateContent ? 'duplicate-content' : ''}" 
+                         data-index="${i}" 
+                         ${v.section_id ? `id="${v.section_id}"` : ''}
+                         ${hasTiming ? `data-start="${v.timing.start}" data-end="${v.timing.end}"` : ''}>
+                        ${hasTiming ? `<span class="verse-play-icon" style="${clickToPlayMode ? '' : 'display:none'}" onclick="seekToVerse(${i}); event.stopPropagation();" title="Play from here">♪</span>` : ''}
+                        ${showHebrew && v.hebrew && !isMixedEnglish ? `
+                            <div class="verse-hebrew">${formatText(v.hebrew)}</div>
+                        ` : ''}
+                        ${isMixedEnglish && v.hebrew ? `
+                            <div class="verse-mixed-content">${formatText(v.hebrew)}</div>
+                        ` : ''}
+                        ${showRight || isEnglishOnly ? `
+                            <div class="verse-right">
+                                ${showTransliteration && v.transliteration ? `
+                                    <div class="verse-transliteration">${formatText(v.transliteration)}</div>
+                                ` : ''}
+                                ${(showEnglish || isEnglishOnly) && v.english ? `
+                                    <div class="verse-english">${formatText(v.english)}</div>
+                                ` : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+            
+            contentHtml = `
+                <div class="text-with-notes-panel">
+                    <div class="text-content">${versesNoInline}</div>
+                    <div class="sticky-notes-panel">
+                        <div class="sticky-notes-inner"></div>
+                    </div>
+                </div>
+            `;
+        } else {
+            contentHtml = `<div class="text-content">${verses}</div>`;
+        }
     }
     
     document.getElementById('app').innerHTML = `
@@ -1298,6 +1375,11 @@ function renderText() {
     if (hasAudio && currentTab === 'text') {
         initAudioPlayer();
     }
+    
+    // Initialize sticky notes tracking if in panel mode
+    if (commentsMode === 'panel' && showComments) {
+        initStickyNotesTracking();
+    }
 }
 
 // Format comments/footnotes - keeps [n] as styled inline number instead of superscript
@@ -1314,7 +1396,9 @@ function formatComments(text, boldTerms = false) {
         // Highlight term being defined before em-dash (—) for each numbered footnote
         // Pattern: "¹ term (arabic) — definition" or "1 term — definition"
         // Handle superscript numbers (¹²³⁴⁵⁶⁷⁸⁹⁰) and regular numbers at start of footnotes
-        text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+|^\d+)\s+([^—\n]+)\s*—/gm, '$1 <span class="comment-term">$2</span> —');
+        // Wrap both the number and the term in styled spans
+        text = text.replace(/^(\d+)\s+([^—\n]+)\s*—/gm, '<span class="comment-num">$1</span> <span class="comment-term">$2</span> —');
+        text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)\s+([^—\n]+)\s*—/gm, '<span class="comment-num">$1</span> <span class="comment-term">$2</span> —');
         
         // Also highlight term before period or colon if no em-dash (fallback for simpler comments)
         // Only apply if no em-dash in text and no comment-term already added
@@ -1387,6 +1471,12 @@ function formatText(text, makeCitationsLinks = true) {
     
     // Footnote references: [n] - wrap in RTL-aware span for proper positioning in Hebrew text
     text = text.replace(/\[(\d+)\]/g, '<sup class="footnote-num">$1</sup>');
+    
+    // Footnote markers: {{fn:N}} - convert to styled superscript with data attribute
+    text = text.replace(/\{\{fn:(\d+)\}\}/g, '<sup class="fn-marker" data-fn="$1">$1</sup>');
+    
+    // Unicode superscript numbers (¹²³⁴⁵⁶⁷⁸⁹⁰) - style with theme color
+    text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)/g, '<span class="footnote-marker">$1</span>');
     
     // Make biblical citations clickable
     if (makeCitationsLinks) {
@@ -1565,6 +1655,145 @@ function setCommentsMode(mode) {
     commentsMode = mode;
     localStorage.setItem('commentsMode', mode);
     renderText();
+}
+
+// Toggle comment expand/collapse in side panel
+function toggleCommentExpand(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('.toggle-icon');
+    if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.textContent = '▼';
+    } else {
+        content.classList.add('collapsed');
+        icon.textContent = '▶';
+    }
+}
+
+// Position notes in side panel aligned with their footnote markers
+function initStickyNotesTracking() {
+    const panel = document.querySelector('.sticky-notes-panel');
+    if (!panel) return;
+    
+    const contentArea = document.querySelector('.text-content');
+    if (!contentArea) return;
+    
+    // Find all footnote markers and position their notes
+    const markers = document.querySelectorAll('.fn-marker[data-fn]');
+    const notesInner = panel.querySelector('.sticky-notes-inner');
+    if (!notesInner) return;
+    
+    // Clear existing positioned notes
+    notesInner.innerHTML = '';
+    notesInner.style.position = 'relative';
+    
+    // Track which footnotes we've already added (avoid duplicates)
+    const addedFns = new Set();
+    
+    markers.forEach(marker => {
+        const fnNum = marker.dataset.fn;
+        
+        // Skip if we've already added this footnote number
+        if (addedFns.has(fnNum)) return;
+        addedFns.add(fnNum);
+        
+        const verse = marker.closest('.verse');
+        if (!verse) return;
+        
+        const verseIndex = verse.dataset.index;
+        const verseData = currentText.content[verseIndex];
+        if (!verseData || !verseData.comments) return;
+        
+        // Get marker position relative to content area
+        const markerTop = marker.offsetTop + verse.offsetTop;
+        
+        // Format the note
+        const shouldHighlightTerms = currentText.category === 'Liturgy' || currentText.category === 'Comments' || currentText.category === 'Commentary' || currentText.category === 'Halakhah';
+        const formatted = formatComments(verseData.comments, shouldHighlightTerms);
+        
+        // Extract the incipit (the Hebrew word being commented on) for collapsed preview
+        // Pattern: "1 word — definition" - extract "word"
+        const incipitMatch = verseData.comments.match(/^\d+\s+([^\s—]+)/);
+        const incipit = incipitMatch ? incipitMatch[1] : '';
+        
+        // Create note element
+        const note = document.createElement('div');
+        note.className = 'positioned-note collapsed';
+        note.style.top = `${markerTop}px`;
+        note.innerHTML = `
+            <div class="note-toggle" onclick="toggleNote(this)">
+                <span class="toggle-icon">▶</span>
+                <span class="note-num">${fnNum}</span>
+                <span class="note-incipit">${incipit}</span>
+            </div>
+            <div class="note-content">${formatted}</div>
+        `;
+        
+        notesInner.appendChild(note);
+    });
+}
+
+function toggleNote(toggle) {
+    const note = toggle.closest('.positioned-note');
+    const icon = toggle.querySelector('.toggle-icon');
+    if (note.classList.contains('collapsed')) {
+        note.classList.remove('collapsed');
+        icon.textContent = '▼';
+    } else {
+        note.classList.add('collapsed');
+        icon.textContent = '▶';
+    }
+}
+
+// Show footnote in fixed side panel
+function showFootnotePopover(marker, fnNum) {
+    // Find the verse containing this marker
+    const verse = marker.closest('.verse');
+    if (!verse) return;
+    
+    // Get the comments for this verse
+    const verseIndex = parseInt(verse.dataset.index);
+    if (!currentText || !currentText.content[verseIndex]) return;
+    
+    const comments = currentText.content[verseIndex].comments;
+    if (!comments) return;
+    
+    // Format the content
+    const shouldHighlightTerms = currentText.category === 'Liturgy' || currentText.category === 'Comments' || currentText.category === 'Commentary' || currentText.category === 'Halakhah';
+    const formattedContent = formatComments(comments, shouldHighlightTerms);
+    
+    // Get or create the fixed side panel
+    let panel = document.querySelector('.footnote-side-panel');
+    if (!panel) {
+        panel = document.createElement('div');
+        panel.className = 'footnote-side-panel';
+        document.body.appendChild(panel);
+    }
+    
+    // Get marker position to align panel content
+    const markerRect = marker.getBoundingClientRect();
+    const panelTop = markerRect.top + window.scrollY - 20;
+    
+    panel.innerHTML = `
+        <button class="panel-close" onclick="closeFootnotePanel()">×</button>
+        <div class="panel-header">Note ${fnNum}</div>
+        <div class="panel-content">${formattedContent}</div>
+    `;
+    
+    panel.style.top = `${Math.max(100, panelTop)}px`;
+    panel.classList.add('open');
+    
+    // Highlight the active marker
+    document.querySelectorAll('.fn-marker.active').forEach(m => m.classList.remove('active'));
+    marker.classList.add('active');
+}
+
+function closeFootnotePanel() {
+    const panel = document.querySelector('.footnote-side-panel');
+    if (panel) {
+        panel.classList.remove('open');
+    }
+    document.querySelectorAll('.fn-marker.active').forEach(m => m.classList.remove('active'));
 }
 
 // Navigate to a specific section from TOC

@@ -779,20 +779,21 @@ main {
     margin-top: var(--space-md);
 }
 
-/* Verse with comment column (3-column layout) */
+/* Verse with comment column - notes below verse */
 .verse.with-comment-col {
-    grid-template-columns: 1fr 1fr 280px;
+    grid-template-columns: 1fr 1fr;
 }
 
-/* Comment column */
+/* Comment column - full width below verse content */
 .verse-comment-col {
+    grid-column: 1 / -1;
     font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--text-muted);
+    line-height: 1.6;
+    color: var(--text-secondary);
     padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-xs);
     background: var(--bg-tertiary);
-    border-radius: 6px;
-    align-self: start;
+    border-left: 3px solid var(--accent);
     direction: ltr;
     text-align: left;
 }
@@ -800,9 +801,12 @@ main {
 .verse-comment-col.rtl-comments {
     direction: rtl;
     text-align: right;
+    border-left: none;
+    border-right: 3px solid var(--accent);
 }
+
 .verse-comment-col:empty {
-    background: transparent;
+    display: none;
 }
 
 /* Comments mode dropdown */
@@ -2480,4 +2484,315 @@ a.bible-ref:hover {
 
 [data-theme="dark"] .tanakh-verse.playing {
     background: rgba(196, 154, 108, 0.15);
+}
+
+/* Glossary styles */
+.glossary {
+    padding: var(--space-lg);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.glossary h2 {
+    margin-bottom: var(--space-lg);
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: var(--space-sm);
+}
+
+.glossary-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.glossary-entry {
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--accent);
+}
+
+.glossary-term {
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.glossary-hebrew {
+    font-family: var(--font-hebrew);
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    direction: rtl;
+}
+
+.glossary-translit {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.glossary-definition {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .glossary {
+        padding: var(--space-md);
+    }
+    
+    .glossary-hebrew {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Superscript footnote markers in text */
+.verse-hebrew sup,
+.verse-english sup,
+.verse-content sup {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Style inline superscript numbers (¹²³⁴⁵⁶⁷⁸⁹) */
+.verse-hebrew,
+.verse-english,
+.verse-content {
+    /* Use regex in JS to wrap superscripts, but also style Unicode superscripts */
+}
+
+/* Unicode superscript footnote markers (¹²³⁴⁵⁶⁷⁸⁹⁰) in text */
+.footnote-marker {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Also style comment-num with accent color */
+.comment-num {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Footnote marker in text - regular numbers as superscript */
+sup.fn-marker {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.7em;
+    vertical-align: super;
+}
+
+/* Collapsible comments in side panel */
+.comment-collapsible {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+
+.comment-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--accent);
+    font-size: 0.8em;
+    flex-shrink: 0;
+    width: 1.2em;
+    height: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2em;
+}
+
+.comment-toggle:hover {
+    color: var(--accent-dark);
+}
+
+.toggle-icon {
+    transition: transform 0.2s;
+}
+
+.comment-content {
+    flex: 1;
+    line-height: 1.5;
+}
+
+.comment-content.collapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 3em;
+}
+
+
+
+/* Fixed footnote side panel */
+.footnote-side-panel {
+    position: absolute;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 1em;
+    font-size: 0.9em;
+    line-height: 1.6;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+}
+
+.footnote-side-panel.open {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.panel-close {
+    position: absolute;
+    top: 0.3em;
+    right: 0.5em;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0;
+    line-height: 1;
+}
+
+.panel-close:hover {
+    color: var(--text-primary);
+}
+
+.panel-header {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-content {
+    color: var(--text-secondary);
+}
+
+/* Active footnote marker */
+sup.fn-marker.active {
+    background: var(--accent);
+    color: white;
+    padding: 0 0.2em;
+    border-radius: 2px;
+}
+
+/* Make footnote markers clickable */
+sup.fn-marker {
+    cursor: pointer;
+}
+
+sup.fn-marker:hover {
+    text-decoration: underline;
+}
+
+/* Duplicate content (like "1864") - center it */
+.verse.duplicate-content {
+    text-align: center;
+}
+
+.verse.duplicate-content .verse-hebrew,
+.verse.duplicate-content .verse-english {
+    text-align: center;
+}
+
+/* Two-pane layout with positioned notes */
+.text-with-notes-panel {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--space-md);
+    align-items: start;
+    position: relative;
+}
+
+.text-with-notes-panel .text-content {
+    min-width: 0;
+}
+
+.sticky-notes-panel {
+    position: relative;
+    min-height: 100%;
+}
+
+.sticky-notes-inner {
+    position: relative;
+}
+
+/* Positioned note - aligned with footnote marker */
+.positioned-note {
+    position: absolute;
+    left: 0;
+    right: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 0 4px 4px 0;
+}
+
+.note-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    cursor: pointer;
+}
+
+.note-toggle:hover {
+    text-decoration: underline;
+}
+
+.toggle-icon {
+    font-size: 0.7em;
+    color: var(--accent);
+}
+
+.note-num {
+    font-size: 0.9em;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.note-incipit {
+    font-family: var(--font-hebrew);
+    color: var(--accent);
+    font-weight: 600;
+    direction: rtl;
+}
+
+.note-content {
+    margin-top: var(--space-xs);
+    color: var(--text-secondary);
+}
+
+.positioned-note.collapsed .note-content {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .text-with-notes-panel {
+        grid-template-columns: 1fr;
+    }
+    .sticky-notes-panel {
+        display: none;
+    }
 }
