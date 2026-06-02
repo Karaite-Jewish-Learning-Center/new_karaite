@@ -1341,6 +1341,9 @@ function renderText() {
         }
     }
     
+    const isPiyyutParasha = currentText.category === 'Liturgy' && catalog?.Liturgy?.['Supplemental Readings for specific Torah portions']?.some(t => t.id === currentText.id);
+    const displayTitle = isPiyyutParasha ? `Piyyut Parasha: ${currentText.title_en}` : currentText.title_en;
+    
     document.getElementById('app').innerHTML = `
         <div class="reader-container">
             <div class="reader-sticky">
@@ -1349,12 +1352,12 @@ function renderText() {
                     <span>›</span>
                     <a href="#" onclick="showCategory('${currentText.category}'); return false;">${currentText.category}</a>
                     <span>›</span>
-                    <span>${currentText.title_en}</span>
+                    <span>${displayTitle}</span>
                 </div>
                 
                 <div class="reader-header">
                     ${currentText.title_he ? `<h1 class="title-he">${currentText.title_he}</h1>` : ''}
-                    <h2 class="title-en">${currentText.title_en}</h2>
+                    <h2 class="title-en">${displayTitle}</h2>
                 </div>
                 
                 <div class="reader-toolbar">
