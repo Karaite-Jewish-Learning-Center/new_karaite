@@ -857,7 +857,7 @@ function renderShabbatMorningServices(smsData, kedushtItems) {
             return `
                 <a class="sms-item sms-torah-item" href="#" onclick="showText('${textId}'); return false;">
                     <span class="audio-icon">${hasAudio ? '♪' : ''}</span>
-                    <span class="sms-en">${item.menu_item}</span>
+                    <span class="sms-en">${item.menu_item.replace('Piyyut: ', 'Piyyut Parasha: ')}</span>
                     <span class="sms-complement">- ${item.complement}</span>
                 </a>
             `;
