@@ -3,7 +3,7 @@
 ## Data Issues
 
 ### Incomplete Texts (Missing Content)
-- [ ] **Gan Eden** (`gan-eden.json`) - Only 6 stub entries, needs full content
+- [x] **Gan Eden** (`gan-eden.json`) - COMPLETE: 1117 entries, 101 glossary terms, 126 footnotes
 - [ ] **An Essay on the Obligation of Prayer** (`an-essay-on-the-obligation-of-prayer.json`) - Very few entries
 - [ ] **Vehoshia** (`vehoshia.json`) - Very few entries
 
@@ -21,11 +21,13 @@
 
 ## Features
 
-### Tabled / Future Enhancements
-- [ ] **KJLC Notes Side Panel** - Display KJLC Notes/footnotes in a side panel instead of inline (instead of current popup)
-- [ ] **Biblical Verse Linking** - Extend to more texts (currently implemented for Adderet Eliyahu and Ma'aravi)
-- [ ] **Verse Citation Cross-References** - When clicking a verse in Tanakh, show all places it's cited in Karaite texts
-- [ ] **Deep Links to Citations** - Links from Tanakh should go directly to the paragraph where verse is cited
+### Completed
+- [x] **KJLC Notes Side Panel** - Positioned notes at footnote marker Y-level with collapsible headers showing Hebrew incipit
+- [x] **Biblical Verse Linking** - Works across all texts via `formatText()` pattern detection
+- [x] **Verse Citation Cross-References** - Full bidirectional index: 27K+ citations from 108 texts, 8.5K unique verse keys
+- [x] **Deep Links to Citations** - Side panel shows full chapter context, click to navigate to verse in Tanakh
+- [x] **Sticky Header** - Reader header/toolbar stays fixed while scrolling
+- [x] **Piyyut Parasha Renaming** - Torah portion piyyutim display as "Piyyut Parasha: Name"
 
 ### Chatbot
 - [x] RAG server implemented (`site/chatbot/rag_server.py`)
@@ -67,9 +69,18 @@
 ### Tanakh
 - [x] Full Tanakh with Hebrew and English translation
 - [x] Books displayed right-to-left (Genesis/Bereshit on right)
-- [ ] Link verses to where they're cited in Karaite texts (cross-reference feature)
+- [x] Link verses to where they're cited in Karaite texts (cross-reference feature)
+- [x] Torah audio sync: Genesis chapters 1-17 with verse-by-verse timing
+- [ ] Torah audio sync: Exodus, Leviticus, Numbers, Deuteronomy (stubbed, needs markers)
 
 ---
+
+## Documentation
+- [x] **ARCHITECTURE.md** - Full app architecture, rendering pipeline, state management
+- [x] **CONVERTERS.md** - All Python conversion scripts documented
+- [x] **DEPLOYMENT.md** - Netlify deployment process (updated from DigitalOcean)
+- [x] **AGENTS.md** - UX conventions, gotchas, footnote placeholder system
+- [ ] Consider adding inline JSDoc comments to app.js key functions
 
 ## Technical Debt
 - [ ] Consolidate conversion scripts (multiple Python scripts for different sources)

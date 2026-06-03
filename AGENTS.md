@@ -42,7 +42,46 @@ If audio seeking suddenly stops working in dev, the first thing to check is whet
 
 Filename normalization in the converter is by `(parasha-number, aliyah-number)` because the xlsx and disk disagree on transliteration (`Noah` vs `Noach`, `Lehc` vs `Lech`, `Yisre'eli` vs `Yisre_eli`) and on whether `.mp3` is included.
 
+## Drive → GitHub auto-sync
+
+`.github/workflows/sync-torah-audio.yml` pulls MP3s from Google Drive via a
+service account, runs the converter + audit, and opens a PR. One-time setup
+is documented at `.github/workflows/SETUP-sync-torah-audio.md` (requires two
+GitHub secrets: `GDRIVE_SA_KEY` and `GDRIVE_FOLDER_ID`). Trigger manually
+from the Actions tab; runs in ~5–15 min; never pushes directly to a branch
+— always opens a PR for human review.
+
+## Footnote Placeholder Convention (`{{fn:N}}`)
+
+Footnote markers in text JSON use a placeholder syntax that gets converted to HTML at render time:
+
+```json
+{
+  "hebrew": "מילה {{fn:1}} מילה אחרת",
+  "english": "word {{fn:1}} another word"
+}
+```
+
+The `formatText()` function in `app.js` converts `{{fn:N}}` to `<sup class="fn-marker" data-fn="N">N</sup>`.
+
+**Why not store raw `<sup>` in JSON?** Because the JSON gets HTML-escaped when rendered, causing the tags to appear as literal text. The placeholder system ensures clean JSON data that gets processed at render time.
+
+**Always use `{{fn:N}}` for footnote markers in text content.**
+
+## Push to `feature/may-2026-updates`, NOT `main`
+
+Netlify is configured to watch `feature/may-2026-updates` for auto-deploy. Pushing to `main` will NOT trigger a deploy.
+
+```bash
+# CORRECT:
+git push origin HEAD:feature/may-2026-updates
+
+# WRONG (won't deploy):
+git push origin main
+```
+
 ## Don'ts
 
 - Don't auto-modify the xlsx or the source MP3 folder. Treat them as user-owned input.
 - Don't ship debug `console.log` calls in `site/js/app.js`. The two pre-existing ones (search-index ready, track switching) predate everything else and can stay; new ones added during debugging must be removed.
+- Don't use `python -m http.server` for local development. Use `range_server.py` instead (see above).
