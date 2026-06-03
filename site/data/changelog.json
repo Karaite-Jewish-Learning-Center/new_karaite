@@ -1,0 +1,39 @@
+[
+  {
+    "date": "2026-06-02",
+    "changes": [
+      "Added Gan Eden by Aaron ben Elijah — 1117 entries with Hebrew/English, 101 glossary terms, 126 footnotes",
+      "Added sticky header on text reader — title, tabs, and controls stay visible while scrolling",
+      "Added side panel footnotes — KJLC Notes appear in a right panel positioned at the footnote marker level, with collapsible headers showing the Hebrew incipit",
+      "Added verse context popups — clicking a Tanakh citation opens the full chapter with the target verse highlighted",
+      "Renamed Torah portion piyyutim to 'Piyyut Parasha: Name' in lists and page titles"
+    ]
+  },
+  {
+    "date": "2026-05-25",
+    "changes": [
+      "Added bidirectional Tanakh citation cross-references — 27,000+ citations linking Karaite texts to Scripture",
+      "Added KJLC Notes display modes — inline under English, full width, or side panel",
+      "Added click-to-play audio mode for texts with recordings",
+      "Added Shabbat Morning Services structured layout with Kedushot and Torah portions"
+    ]
+  },
+  {
+    "date": "2026-05-15",
+    "changes": [
+      "Added full-text search with fuzzy matching and Hebrew/English diacritic normalization",
+      "Added dark mode toggle",
+      "Added 'All Texts' page with sortable tables by Hebrew, title, and author",
+      "Added table of contents navigation for multi-section texts"
+    ]
+  },
+  {
+    "date": "2026-05-01",
+    "changes": [
+      "Initial launch of Karaite Texts Library",
+      "Complete Tanakh with Hebrew and English",
+      "132 Karaite texts across Liturgy, Halakhah, Commentary, and more",
+      "Audio sync for selected songs and Torah portions"
+    ]
+  }
+]

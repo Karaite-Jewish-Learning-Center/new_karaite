@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await showTanakhBook(bookId, chapter);
             } else if (hash === 'tanakh') {
                 await showTanakh();
+            } else if (hash === 'changelog') {
+                await showChangelog();
             } else {
                 showHome();
             }
@@ -91,6 +93,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             await showTanakhBook(bookId, chapter);
         } else if (hash === 'tanakh') {
             await showTanakh();
+        } else if (hash === 'changelog') {
+            await showChangelog();
         } else {
             showHome();
         }
@@ -641,6 +645,47 @@ function showHome() {
                 </div>
             </a>
             ${categoriesHtml}
+        </div>
+    `;
+}
+
+// Show changelog
+async function showChangelog() {
+    window.location.hash = 'changelog';
+
+    let changelog = [];
+    try {
+        const response = await fetch('data/changelog.json');
+        if (response.ok) {
+            changelog = await response.json();
+        }
+    } catch (e) {
+        console.error('Failed to load changelog:', e);
+    }
+
+    const entriesHtml = changelog.map(entry => {
+        const changesHtml = entry.changes.map(change => `
+            <li>${change}</li>
+        `).join('');
+        return `
+            <div class="changelog-entry">
+                <h3 class="changelog-date">${entry.date}</h3>
+                <ul class="changelog-list">${changesHtml}</ul>
+            </div>
+        `;
+    }).join('');
+
+    document.getElementById('app').innerHTML = `
+        <div class="reader-container">
+            <div class="breadcrumb" style="margin-bottom: var(--space-lg);">
+                <a href="#" onclick="showHome(); return false;">Home</a>
+                <span>›</span>
+                <span>What's New</span>
+            </div>
+            <h1 class="changelog-title">What's New</h1>
+            <div class="changelog-content">
+                ${entriesHtml}
+            </div>
         </div>
     `;
 }

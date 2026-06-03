@@ -2879,3 +2879,58 @@ sup.fn-marker:hover {
     font-size: 0.9em;
     line-height: 1.4;
 }
+
+/* ========================================
+   CHANGELOG
+   ======================================== */
+
+.changelog-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.changelog-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.changelog-entry {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.changelog-entry:last-child {
+    border-bottom: none;
+}
+
+.changelog-date {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 var(--space-md);
+}
+
+.changelog-list {
+    margin: 0;
+    padding-left: var(--space-lg);
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.changelog-list li {
+    margin-bottom: var(--space-sm);
+}
+
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
