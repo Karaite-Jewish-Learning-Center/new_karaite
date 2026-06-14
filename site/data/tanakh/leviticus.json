@@ -10,47 +10,110 @@
         {
           "verse": 1,
           "hebrew": "וַיִּקְרָ֖א אֶל־מֹשֶׁ֑ה וַיְדַבֵּ֤ר יְהֹוָה֙ אֵלָ֔יו מֵאֹ֥הֶל מוֹעֵ֖ד לֵאמֹֽר׃",
-          "english": "[GOD] called to Moses and spoke to him from the Tent of Meeting, saying:"
+          "english": "[GOD] called to Moses and spoke to him from the Tent of Meeting, saying:",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 13.333
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 2,
           "hebrew": "דַּבֵּ֞ר אֶל־בְּנֵ֤י יִשְׂרָאֵל֙ וְאָמַרְתָּ֣ אֲלֵהֶ֔ם אָדָ֗ם כִּֽי־יַקְרִ֥יב מִכֶּ֛ם קׇרְבָּ֖ן לַֽיהֹוָ֑ה מִן־הַבְּהֵמָ֗ה מִן־הַבָּקָר֙ וּמִן־הַצֹּ֔אן תַּקְרִ֖יבוּ אֶת־קׇרְבַּנְכֶֽם׃",
-          "english": "Speak to the Israelite people, and say to them:When any of you presents an offering of cattle to GOD: You shall choose your offering from the herd or from the flock."
+          "english": "Speak to the Israelite people, and say to them:When any of you presents an offering of cattle to GOD: You shall choose your offering from the herd or from the flock.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 13.333,
+            "end": 49.333
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 3,
           "hebrew": "אִם־עֹלָ֤ה קׇרְבָּנוֹ֙ מִן־הַבָּקָ֔ר זָכָ֥ר תָּמִ֖ים יַקְרִיבֶ֑נּוּ אֶל־פֶּ֜תַח אֹ֤הֶל מוֹעֵד֙ יַקְרִ֣יב אֹת֔וֹ לִרְצֹנ֖וֹ לִפְנֵ֥י יְהֹוָֽה׃",
-          "english": "If your offering is a burnt offering from the herd, you shall make your offering a male without blemish. You shall bring it to the entrance of the Tent of Meeting, for acceptance in your behalf before GOD."
+          "english": "If your offering is a burnt offering from the herd, you shall make your offering a male without blemish. You shall bring it to the entrance of the Tent of Meeting, for acceptance in your behalf before GOD.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 49.333,
+            "end": 73.033
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 4,
           "hebrew": "וְסָמַ֣ךְ יָד֔וֹ עַ֖ל רֹ֣אשׁ הָעֹלָ֑ה וְנִרְצָ֥ה ל֖וֹ לְכַפֵּ֥ר עָלָֽיו׃",
-          "english": "You shall lay a hand upon the head of the burnt offering, that it may be acceptable in your behalf, in expiation for you."
+          "english": "You shall lay a hand upon the head of the burnt offering, that it may be acceptable in your behalf, in expiation for you.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 73.033,
+            "end": 82.433
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 5,
           "hebrew": "וְשָׁחַ֛ט אֶת־בֶּ֥ן הַבָּקָ֖ר לִפְנֵ֣י יְהֹוָ֑ה וְ֠הִקְרִ֠יבוּ בְּנֵ֨י אַהֲרֹ֤ן הַכֹּֽהֲנִים֙ אֶת־הַדָּ֔ם וְזָרְק֨וּ אֶת־הַדָּ֤ם עַל־הַמִּזְבֵּ֙חַ֙ סָבִ֔יב אֲשֶׁר־פֶּ֖תַח אֹ֥הֶל מוֹעֵֽד׃",
-          "english": "The bull shall be slaughtered before GOD; and Aaron’s sons, the priests, shall offer the blood, dashing the blood against all sides of the altar that is at the entrance of the Tent of Meeting."
+          "english": "The bull shall be slaughtered before GOD; and Aaron’s sons, the priests, shall offer the blood, dashing the blood against all sides of the altar that is at the entrance of the Tent of Meeting.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 82.433,
+            "end": 111.767
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 6,
           "hebrew": "וְהִפְשִׁ֖יט אֶת־הָעֹלָ֑ה וְנִתַּ֥ח אֹתָ֖הּ לִנְתָחֶֽיהָ׃",
-          "english": "The burnt offering shall be flayed and cut up into sections."
+          "english": "The burnt offering shall be flayed and cut up into sections.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 111.767,
+            "end": 119.133
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 7,
           "hebrew": "וְ֠נָתְנ֠וּ בְּנֵ֨י אַהֲרֹ֧ן הַכֹּהֵ֛ן אֵ֖שׁ עַל־הַמִּזְבֵּ֑חַ וְעָרְכ֥וּ עֵצִ֖ים עַל־הָאֵֽשׁ׃",
-          "english": "The sons of Aaron the priest shall put fire on the altar and lay out wood upon the fire;"
+          "english": "The sons of Aaron the priest shall put fire on the altar and lay out wood upon the fire;",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 119.133,
+            "end": 134.133
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 8,
           "hebrew": "וְעָרְכ֗וּ בְּנֵ֤י אַהֲרֹן֙ הַכֹּ֣הֲנִ֔ים אֵ֚ת הַנְּתָחִ֔ים אֶת־הָרֹ֖אשׁ וְאֶת־הַפָּ֑דֶר עַל־הָעֵצִים֙ אֲשֶׁ֣ר עַל־הָאֵ֔שׁ אֲשֶׁ֖ר עַל־הַמִּזְבֵּֽחַ׃",
-          "english": "and Aaron’s sons, the priests, shall lay out the sections, with the head and the suet, on the wood that is on the fire upon the altar."
+          "english": "and Aaron’s sons, the priests, shall lay out the sections, with the head and the suet, on the wood that is on the fire upon the altar.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 134.133,
+            "end": 159.767
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 9,
           "hebrew": "וְקִרְבּ֥וֹ וּכְרָעָ֖יו יִרְחַ֣ץ בַּמָּ֑יִם וְהִקְטִ֨יר הַכֹּהֵ֤ן אֶת־הַכֹּל֙ הַמִּזְבֵּ֔חָה עֹלָ֛ה אִשֵּׁ֥ה רֵֽיחַ־נִיח֖וֹחַ לַֽיהֹוָֽה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Its entrails and legs shall be washed with water, and the priest shall turn the whole into smoke on the altar as a burnt offering, an offering by fire of pleasing odor to GOD."
+          "english": "Its entrails and legs shall be washed with water, and the priest shall turn the whole into smoke on the altar as a burnt offering, an offering by fire of pleasing odor to GOD.",
+          "audio": "audio/torah/24-vaikra-1-cohen.mp3",
+          "timing": {
+            "start": 159.767,
+            "end": 180.7
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaikra"
         },
         {
           "verse": 10,
@@ -150,6 +213,10 @@
         }
       ],
       "audioSegments": [
+        {
+          "label": "Vaikra · 1. Cohen",
+          "url": "audio/torah/24-vaikra-1-cohen.mp3"
+        },
         {
           "label": "Vaikra · 2. Levi",
           "url": "audio/torah/24-vaikra-2-levi.mp3"
@@ -2264,123 +2331,296 @@
         {
           "verse": 14,
           "hebrew": "וַיַּגֵּ֕שׁ אֵ֖ת פַּ֣ר הַֽחַטָּ֑את וַיִּסְמֹ֨ךְ אַהֲרֹ֤ן וּבָנָיו֙ אֶת־יְדֵיהֶ֔ם עַל־רֹ֖אשׁ פַּ֥ר הַֽחַטָּֽאת׃",
-          "english": "He led forward the bull of purgation offering. Aaron and his sons laid their hands upon the head of the bull of purgation offering,"
+          "english": "He led forward the bull of purgation offering. Aaron and his sons laid their hands upon the head of the bull of purgation offering,",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 17.533
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 15,
           "hebrew": "וַיִּשְׁחָ֗ט וַיִּקַּ֨ח מֹשֶׁ֤ה אֶת־הַדָּם֙ וַ֠יִּתֵּ֠ן עַל־קַרְנ֨וֹת הַמִּזְבֵּ֤חַ סָבִיב֙ בְּאֶצְבָּע֔וֹ וַיְחַטֵּ֖א אֶת־הַמִּזְבֵּ֑חַ וְאֶת־הַדָּ֗ם יָצַק֙ אֶל־יְס֣וֹד הַמִּזְבֵּ֔חַ וַֽיְקַדְּשֵׁ֖הוּ לְכַפֵּ֥ר עָלָֽיו׃",
-          "english": "and it was slaughtered. Moses took the blood and with his finger put some on each of the horns of the altar, cleansing the altar; then he poured out the blood at the base of the altar. Thus he consecrated it in order to make expiation upon it."
+          "english": "and it was slaughtered. Moses took the blood and with his finger put some on each of the horns of the altar, cleansing the altar; then he poured out the blood at the base of the altar. Thus he consecrated it in order to make expiation upon it.",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 17.533,
+            "end": 54.633
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 16,
           "hebrew": "וַיִּקַּ֗ח אֶֽת־כׇּל־הַחֵ֘לֶב֮ אֲשֶׁ֣ר עַל־הַקֶּ֒רֶב֒ וְאֵת֙ יֹתֶ֣רֶת הַכָּבֵ֔ד וְאֶת־שְׁתֵּ֥י הַכְּלָיֹ֖ת וְאֶֽת־חֶלְבְּהֶ֑ן וַיַּקְטֵ֥ר מֹשֶׁ֖ה הַמִּזְבֵּֽחָה׃",
-          "english": "Moses then took all the fat that was about the entrails, and the protuberance of the liver, and the two kidneys and their fat, and turned them into smoke on the altar."
+          "english": "Moses then took all the fat that was about the entrails, and the protuberance of the liver, and the two kidneys and their fat, and turned them into smoke on the altar.",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 54.633,
+            "end": 77.4
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 17,
           "hebrew": "וְאֶת־הַפָּ֤ר וְאֶת־עֹרוֹ֙ וְאֶת־בְּשָׂר֣וֹ וְאֶת־פִּרְשׁ֔וֹ שָׂרַ֣ף בָּאֵ֔שׁ מִח֖וּץ לַֽמַּחֲנֶ֑ה כַּאֲשֶׁ֛ר צִוָּ֥ה יְהֹוָ֖ה אֶת־מֹשֶֽׁה׃",
-          "english": "The rest of the bull, its hide, its flesh, and its dung, he put to the fire outside the camp—as GOD had commanded Moses."
+          "english": "The rest of the bull, its hide, its flesh, and its dung, he put to the fire outside the camp—as GOD had commanded Moses.",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 77.4,
+            "end": 96.433
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 18,
           "hebrew": "וַיַּקְרֵ֕ב אֵ֖ת אֵ֣יל הָעֹלָ֑ה וַֽיִּסְמְכ֞וּ אַהֲרֹ֧ן וּבָנָ֛יו אֶת־יְדֵיהֶ֖ם עַל־רֹ֥אשׁ הָאָֽיִל׃",
-          "english": "Then he brought forward the ram of burnt offering. Aaron and his sons laid their hands upon the ram’s head,"
+          "english": "Then he brought forward the ram of burnt offering. Aaron and his sons laid their hands upon the ram’s head,",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 96.433,
+            "end": 115.3
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 19,
           "hebrew": "וַיִּשְׁחָ֑ט וַיִּזְרֹ֨ק מֹשֶׁ֧ה אֶת־הַדָּ֛ם עַל־הַמִּזְבֵּ֖חַ סָבִֽיב׃",
-          "english": "and it was slaughtered. Moses dashed the blood against all sides of the altar."
+          "english": "and it was slaughtered. Moses dashed the blood against all sides of the altar.",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 115.3,
+            "end": 124.267
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 20,
           "hebrew": "וְאֶ֨ת־הָאַ֔יִל נִתַּ֖ח לִנְתָחָ֑יו וַיַּקְטֵ֤ר מֹשֶׁה֙ אֶת־הָרֹ֔אשׁ וְאֶת־הַנְּתָחִ֖ים וְאֶת־הַפָּֽדֶר׃",
-          "english": "The ram was cut up into sections and Moses turned the head, the sections, and the suet into smoke on the altar;"
+          "english": "The ram was cut up into sections and Moses turned the head, the sections, and the suet into smoke on the altar;",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 124.267,
+            "end": 138.7
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 21,
           "hebrew": "וְאֶת־הַקֶּ֥רֶב וְאֶת־הַכְּרָעַ֖יִם רָחַ֣ץ בַּמָּ֑יִם וַיַּקְטֵר֩ מֹשֶׁ֨ה אֶת־כׇּל־הָאַ֜יִל הַמִּזְבֵּ֗חָה עֹלָ֨ה ה֤וּא לְרֵֽיחַ־נִיחֹ֙חַ֙ אִשֶּׁ֥ה הוּא֙ לַיהֹוָ֔ה כַּאֲשֶׁ֛ר צִוָּ֥ה יְהֹוָ֖ה אֶת־מֹשֶֽׁה׃",
-          "english": "Moses washed the entrails and the legs with water and turned all of the ram into smoke. That was a burnt offering for a pleasing odor, an offering by fire to GOD—as GOD had commanded Moses."
+          "english": "Moses washed the entrails and the legs with water and turned all of the ram into smoke. That was a burnt offering for a pleasing odor, an offering by fire to GOD—as GOD had commanded Moses.",
+          "audio": "audio/torah/25-tzav-5-yisreeli.mp3",
+          "timing": {
+            "start": 138.7,
+            "end": 172.267
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 22,
           "hebrew": "וַיַּקְרֵב֙ אֶת־הָאַ֣יִל הַשֵּׁנִ֔י אֵ֖יל הַמִּלֻּאִ֑ים וַֽיִּסְמְכ֞וּ אַהֲרֹ֧ן וּבָנָ֛יו אֶת־יְדֵיהֶ֖ם עַל־רֹ֥אשׁ הָאָֽיִל׃",
-          "english": "He brought forward the second ram, the ram of ordination. Aaron and his sons laid their hands upon the ram’s head,"
+          "english": "He brought forward the second ram, the ram of ordination. Aaron and his sons laid their hands upon the ram’s head,",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 20.067
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 23,
           "hebrew": "וַיִּשְׁחָ֓ט&thinsp;׀ וַיִּקַּ֤ח מֹשֶׁה֙ מִדָּמ֔וֹ וַיִּתֵּ֛ן עַל־תְּנ֥וּךְ אֹֽזֶן־אַהֲרֹ֖ן הַיְמָנִ֑ית וְעַל־בֹּ֤הֶן יָדוֹ֙ הַיְמָנִ֔ית וְעַל־בֹּ֥הֶן רַגְל֖וֹ הַיְמָנִֽית׃",
-          "english": "and it was slaughtered. Moses took some of its blood and put it on the ridge of Aaron’s right ear, and on the thumb of his right hand, and on the big toe of his right foot."
+          "english": "and it was slaughtered. Moses took some of its blood and put it on the ridge of Aaron’s right ear, and on the thumb of his right hand, and on the big toe of his right foot.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 20.067,
+            "end": 45.067
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 24,
           "hebrew": "וַיַּקְרֵ֞ב אֶת־בְּנֵ֣י אַהֲרֹ֗ן וַיִּתֵּ֨ן מֹשֶׁ֤ה מִן־הַדָּם֙ עַל־תְּנ֤וּךְ אׇזְנָם֙ הַיְמָנִ֔ית וְעַל־בֹּ֤הֶן יָדָם֙ הַיְמָנִ֔ית וְעַל־בֹּ֥הֶן רַגְלָ֖ם הַיְמָנִ֑ית וַיִּזְרֹ֨ק מֹשֶׁ֧ה אֶת־הַדָּ֛ם עַל־הַֽמִּזְבֵּ֖חַ סָבִֽיב׃",
-          "english": "Moses then brought forward the sons of Aaron, and put some of the blood on the ridges of their right ears, and on the thumbs of their right hands, and on the big toes of their right feet; and the rest of the blood Moses dashed against every side of the altar."
+          "english": "Moses then brought forward the sons of Aaron, and put some of the blood on the ridges of their right ears, and on the thumbs of their right hands, and on the big toes of their right feet; and the rest of the blood Moses dashed against every side of the altar.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 45.067,
+            "end": 84.2
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 25,
           "hebrew": "וַיִּקַּ֞ח אֶת־הַחֵ֣לֶב וְאֶת־הָֽאַלְיָ֗ה וְאֶֽת־כׇּל־הַחֵ֘לֶב֮ אֲשֶׁ֣ר עַל־הַקֶּ֒רֶב֒ וְאֵת֙ יֹתֶ֣רֶת הַכָּבֵ֔ד וְאֶת־שְׁתֵּ֥י הַכְּלָיֹ֖ת וְאֶֽת־חֶלְבְּהֶ֑ן וְאֵ֖ת שׁ֥וֹק הַיָּמִֽין׃",
-          "english": "He took the fat—the broad tail, all the fat about the entrails, the protuberance of the liver, and the two kidneys and their fat—and the right thigh."
+          "english": "He took the fat—the broad tail, all the fat about the entrails, the protuberance of the liver, and the two kidneys and their fat—and the right thigh.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 84.2,
+            "end": 113.667
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 26,
           "hebrew": "וּמִסַּ֨ל הַמַּצּ֜וֹת אֲשֶׁ֣ר&thinsp;׀ לִפְנֵ֣י יְהֹוָ֗ה לָ֠קַ֠ח חַלַּ֨ת מַצָּ֤ה אַחַת֙ וְֽחַלַּ֨ת לֶ֥חֶם שֶׁ֛מֶן אַחַ֖ת וְרָקִ֣יק אֶחָ֑ד וַיָּ֙שֶׂם֙ עַל־הַ֣חֲלָבִ֔ים וְעַ֖ל שׁ֥וֹק הַיָּמִֽין׃",
-          "english": "From the basket of unleavened bread that was before GOD, he took one cake of unleavened bread, one cake of oil bread, and one wafer, and placed them on the fat parts and on the right thigh."
+          "english": "From the basket of unleavened bread that was before GOD, he took one cake of unleavened bread, one cake of oil bread, and one wafer, and placed them on the fat parts and on the right thigh.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 113.667,
+            "end": 148.633
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 27,
           "hebrew": "וַיִּתֵּ֣ן אֶת־הַכֹּ֔ל עַ֚ל כַּפֵּ֣י אַהֲרֹ֔ן וְעַ֖ל כַּפֵּ֣י בָנָ֑יו וַיָּ֧נֶף אֹתָ֛ם תְּנוּפָ֖ה לִפְנֵ֥י יְהֹוָֽה׃",
-          "english": "He placed all these on the palms of Aaron and on the palms of his sons, and elevated them as an elevation offering before GOD."
+          "english": "He placed all these on the palms of Aaron and on the palms of his sons, and elevated them as an elevation offering before GOD.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 148.633,
+            "end": 164.367
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 28,
           "hebrew": "וַיִּקַּ֨ח מֹשֶׁ֤ה אֹתָם֙ מֵעַ֣ל כַּפֵּיהֶ֔ם וַיַּקְטֵ֥ר הַמִּזְבֵּ֖חָה עַל־הָעֹלָ֑ה מִלֻּאִ֥ים הֵם֙ לְרֵ֣יחַ נִיחֹ֔חַ אִשֶּׁ֥ה ה֖וּא לַיהֹוָֽה׃",
-          "english": "Then Moses took them from their hands and turned them into smoke on the altar with the burnt offering. This was an ordination offering for a pleasing odor; it was an offering by fire to GOD."
+          "english": "Then Moses took them from their hands and turned them into smoke on the altar with the burnt offering. This was an ordination offering for a pleasing odor; it was an offering by fire to GOD.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 164.367,
+            "end": 183.767
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 29,
           "hebrew": "וַיִּקַּ֤ח מֹשֶׁה֙ אֶת־הֶ֣חָזֶ֔ה וַיְנִיפֵ֥הוּ תְנוּפָ֖ה לִפְנֵ֣י יְהֹוָ֑ה מֵאֵ֣יל הַמִּלֻּאִ֗ים לְמֹשֶׁ֤ה הָיָה֙ לְמָנָ֔ה כַּאֲשֶׁ֛ר צִוָּ֥ה יְהֹוָ֖ה אֶת־מֹשֶֽׁה׃",
-          "english": "Moses took the breast and elevated it as an elevation offering before GOD; it was Moses’ portion of the ram of ordination—as GOD had commanded Moses."
+          "english": "Moses took the breast and elevated it as an elevation offering before GOD; it was Moses’ portion of the ram of ordination—as GOD had commanded Moses.",
+          "audio": "audio/torah/25-tzav-6-yisreeli.mp3",
+          "timing": {
+            "start": 183.767,
+            "end": 214.2
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 30,
           "hebrew": "וַיִּקַּ֨ח מֹשֶׁ֜ה מִשֶּׁ֣מֶן הַמִּשְׁחָ֗ה וּמִן־הַדָּם֮ אֲשֶׁ֣ר עַל־הַמִּזְבֵּ֒חַ֒ וַיַּ֤ז עַֽל־אַהֲרֹן֙ עַל־בְּגָדָ֔יו וְעַל־בָּנָ֛יו וְעַל־בִּגְדֵ֥י בָנָ֖יו אִתּ֑וֹ וַיְקַדֵּ֤שׁ אֶֽת־אַהֲרֹן֙ אֶת־בְּגָדָ֔יו וְאֶת־בָּנָ֛יו וְאֶת־בִּגְדֵ֥י בָנָ֖יו אִתּֽוֹ׃",
-          "english": "And Moses took some of the anointing oil and some of the blood that was on the altar and sprinkled it upon Aaron and upon his vestments, and also upon his sons and upon their vestments. Thus he consecrated Aaron and his vestments, and also his sons and their vestments."
+          "english": "And Moses took some of the anointing oil and some of the blood that was on the altar and sprinkled it upon Aaron and upon his vestments, and also upon his sons and upon their vestments. Thus he consecrated Aaron and his vestments, and also his sons and their vestments.",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 38.633
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 31,
           "hebrew": "וַיֹּ֨אמֶר מֹשֶׁ֜ה אֶל־אַהֲרֹ֣ן וְאֶל־בָּנָ֗יו בַּשְּׁל֣וּ אֶת־הַבָּשָׂר֮ פֶּ֣תַח אֹ֣הֶל מוֹעֵד֒ וְשָׁם֙ תֹּאכְל֣וּ אֹת֔וֹ וְאֶ֨ת־הַלֶּ֔חֶם אֲשֶׁ֖ר בְּסַ֣ל הַמִּלֻּאִ֑ים כַּאֲשֶׁ֤ר צִוֵּ֙יתִי֙ לֵאמֹ֔ר אַהֲרֹ֥ן וּבָנָ֖יו יֹאכְלֻֽהוּ׃",
-          "english": "Moses said to Aaron and his sons: Boil the flesh at the entrance of the Tent of Meeting and eat it there with the bread that is in the basket of ordination—as I commanded:, “I have been commanded”; cf. below, v. 35 and 10.13. Aaron and his sons shall eat it;"
+          "english": "Moses said to Aaron and his sons: Boil the flesh at the entrance of the Tent of Meeting and eat it there with the bread that is in the basket of ordination—as I commanded:, “I have been commanded”; cf. below, v. 35 and 10.13. Aaron and his sons shall eat it;",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 38.633,
+            "end": 75.767
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 32,
           "hebrew": "וְהַנּוֹתָ֥ר בַּבָּשָׂ֖ר וּבַלָּ֑חֶם בָּאֵ֖שׁ תִּשְׂרֹֽפוּ׃",
-          "english": "and what is left over of the flesh and the bread you shall consume in fire."
+          "english": "and what is left over of the flesh and the bread you shall consume in fire.",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 75.767,
+            "end": 82.667
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 33,
           "hebrew": "וּמִפֶּ֩תַח֩ אֹ֨הֶל מוֹעֵ֜ד לֹ֤א תֵֽצְאוּ֙ שִׁבְעַ֣ת יָמִ֔ים עַ֚ד י֣וֹם מְלֹ֔את יְמֵ֖י מִלֻּאֵיכֶ֑ם כִּ֚י שִׁבְעַ֣ת יָמִ֔ים יְמַלֵּ֖א אֶת־יֶדְכֶֽם׃",
-          "english": "You shall not go outside the entrance of the Tent of Meeting for seven days, until the day that your period of ordination is completed. For your ordination will require seven days."
+          "english": "You shall not go outside the entrance of the Tent of Meeting for seven days, until the day that your period of ordination is completed. For your ordination will require seven days.",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 82.667,
+            "end": 106.0
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 34,
           "hebrew": "כַּאֲשֶׁ֥ר עָשָׂ֖ה בַּיּ֣וֹם הַזֶּ֑ה צִוָּ֧ה יְהֹוָ֛ה לַעֲשֹׂ֖ת לְכַפֵּ֥ר עֲלֵיכֶֽם׃",
-          "english": "Everything done today, GOD has commanded to be done [seven days], to make expiation for you."
+          "english": "Everything done today, GOD has commanded to be done [seven days], to make expiation for you.",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 106.0,
+            "end": 116.333
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 35,
           "hebrew": "וּפֶ֩תַח֩ אֹ֨הֶל מוֹעֵ֜ד תֵּשְׁב֨וּ יוֹמָ֤ם וָלַ֙יְלָה֙ שִׁבְעַ֣ת יָמִ֔ים וּשְׁמַרְתֶּ֛ם אֶת־מִשְׁמֶ֥רֶת יְהֹוָ֖ה וְלֹ֣א תָמ֑וּתוּ כִּי־כֵ֖ן צֻוֵּֽיתִי׃",
-          "english": "You shall remain at the entrance of the Tent of Meeting day and night for seven days, keeping GOD’s charge—that you may not die—for so I have been commanded."
+          "english": "You shall remain at the entrance of the Tent of Meeting day and night for seven days, keeping GOD’s charge—that you may not die—for so I have been commanded.",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 116.333,
+            "end": 137.1
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         },
         {
           "verse": 36,
           "hebrew": "וַיַּ֥עַשׂ אַהֲרֹ֖ן וּבָנָ֑יו אֵ֚ת כׇּל־הַדְּבָרִ֔ים אֲשֶׁר־צִוָּ֥ה יְהֹוָ֖ה בְּיַד־מֹשֶֽׁה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "And Aaron and his sons did all the things that GOD had commanded through Moses."
+          "english": "And Aaron and his sons did all the things that GOD had commanded through Moses.",
+          "audio": "audio/torah/25-tzav-7-yisreeli.mp3",
+          "timing": {
+            "start": 137.1,
+            "end": 149.5
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Tzav"
         }
       ],
       "audioSegments": [
         {
           "label": "Tzav · 4. Yisre'eli",
           "url": "audio/torah/25-tzav-4-yisreeli.mp3"
+        },
+        {
+          "label": "Tzav · 5. Yisre'eli",
+          "url": "audio/torah/25-tzav-5-yisreeli.mp3"
+        },
+        {
+          "label": "Tzav · 6. Yisre'eli",
+          "url": "audio/torah/25-tzav-6-yisreeli.mp3"
+        },
+        {
+          "label": "Tzav · 7. Yisre'eli",
+          "url": "audio/torah/25-tzav-7-yisreeli.mp3"
         }
       ]
     },
@@ -2390,7 +2630,14 @@
         {
           "verse": 1,
           "hebrew": "וַֽיְהִי֙ בַּיּ֣וֹם הַשְּׁמִינִ֔י קָרָ֣א מֹשֶׁ֔ה לְאַהֲרֹ֖ן וּלְבָנָ֑יו וּלְזִקְנֵ֖י יִשְׂרָאֵֽל׃",
-          "english": "On the eighth day Moses called Aaron and his sons, and the elders of Israel."
+          "english": "On the eighth day Moses called Aaron and his sons, and the elders of Israel.",
+          "audio": "audio/torah/26-shemini-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 13.267
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Shemini"
         },
         {
           "verse": 2,
@@ -2407,7 +2654,14 @@
         {
           "verse": 3,
           "hebrew": "וְאֶל־בְּנֵ֥י יִשְׂרָאֵ֖ל תְּדַבֵּ֣ר לֵאמֹ֑ר קְח֤וּ שְׂעִיר־עִזִּים֙ לְחַטָּ֔את וְעֵ֨גֶל וָכֶ֧בֶשׂ בְּנֵי־שָׁנָ֛ה תְּמִימִ֖ם לְעֹלָֽה׃",
-          "english": "And speak to the Israelites, saying: Take a he-goat for a purgation offering; a calf and a lamb, yearlings without blemish, for a burnt offering;"
+          "english": "And speak to the Israelites, saying: Take a he-goat for a purgation offering; a calf and a lamb, yearlings without blemish, for a burnt offering;",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 51.1
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Shemini"
         },
         {
           "verse": 4,
@@ -2472,7 +2726,14 @@
         {
           "verse": 9,
           "hebrew": "וַ֠יַּקְרִ֠בוּ בְּנֵ֨י אַהֲרֹ֣ן אֶת־הַדָּם֮ אֵלָיו֒ וַיִּטְבֹּ֤ל אֶצְבָּעוֹ֙ בַּדָּ֔ם וַיִּתֵּ֖ן עַל־קַרְנ֣וֹת הַמִּזְבֵּ֑חַ וְאֶת־הַדָּ֣ם יָצַ֔ק אֶל־יְס֖וֹד הַמִּזְבֵּֽחַ׃",
-          "english": "Aaron’s sons brought the blood to him; he dipped his finger in the blood and put it on the horns of the altar; and he poured out the rest of the blood at the base of the altar."
+          "english": "Aaron’s sons brought the blood to him; he dipped his finger in the blood and put it on the horns of the altar; and he poured out the rest of the blood at the base of the altar.",
+          "audio": "audio/torah/34-bamidbar-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 187.1
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Shemini"
         },
         {
           "verse": 10,
@@ -2501,7 +2762,14 @@
         {
           "verse": 12,
           "hebrew": "וַיִּשְׁחַ֖ט אֶת־הָעֹלָ֑ה וַ֠יַּמְצִ֠אוּ בְּנֵ֨י אַהֲרֹ֤ן אֵלָיו֙ אֶת־הַדָּ֔ם וַיִּזְרְקֵ֥הוּ עַל־הַמִּזְבֵּ֖חַ סָבִֽיב׃",
-          "english": "Then he slaughtered the burnt offering. Aaron’s sons passed the blood to him, and he dashed it against all sides of the altar."
+          "english": "Then he slaughtered the burnt offering. Aaron’s sons passed the blood to him, and he dashed it against all sides of the altar.",
+          "audio": "audio/torah/37-shelach-lecha-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 232.2
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Shemini"
         },
         {
           "verse": 13,
@@ -2518,7 +2786,14 @@
         {
           "verse": 14,
           "hebrew": "וַיִּרְחַ֥ץ אֶת־הַקֶּ֖רֶב וְאֶת־הַכְּרָעָ֑יִם וַיַּקְטֵ֥ר עַל־הָעֹלָ֖ה הַמִּזְבֵּֽחָה׃",
-          "english": "He washed the entrails and the legs, and turned them into smoke on the altar with the burnt offering."
+          "english": "He washed the entrails and the legs, and turned them into smoke on the altar with the burnt offering.",
+          "audio": "audio/torah/39-hukat-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 255.067
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Shemini"
         },
         {
           "verse": 15,
@@ -2583,7 +2858,14 @@
         {
           "verse": 20,
           "hebrew": "וַיָּשִׂ֥ימוּ אֶת־הַחֲלָבִ֖ים עַל־הֶחָז֑וֹת וַיַּקְטֵ֥ר הַחֲלָבִ֖ים הַמִּזְבֵּֽחָה׃",
-          "english": "They laid these fat parts over the breasts; and Aaron turned the fat parts into smoke on the altar,"
+          "english": "They laid these fat parts over the breasts; and Aaron turned the fat parts into smoke on the altar,",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 67.5
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Shemini"
         },
         {
           "verse": 21,
@@ -2612,7 +2894,14 @@
         {
           "verse": 23,
           "hebrew": "וַיָּבֹ֨א מֹשֶׁ֤ה וְאַהֲרֹן֙ אֶל־אֹ֣הֶל מוֹעֵ֔ד וַיֵּ֣צְא֔וּ וַֽיְבָרְכ֖וּ אֶת־הָעָ֑ם וַיֵּרָ֥א כְבוֹד־יְהֹוָ֖ה אֶל־כׇּל־הָעָֽם׃",
-          "english": "Moses and Aaron then went inside the Tent of Meeting. When they came out, they blessed the people; and the Presence of GOD appeared to all the people."
+          "english": "Moses and Aaron then went inside the Tent of Meeting. When they came out, they blessed the people; and the Presence of GOD appeared to all the people.",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 124.2
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Shemini"
         },
         {
           "verse": 24,
@@ -2630,7 +2919,15 @@
       "audioSegments": [
         {
           "label": "Shemini · 1. Cohen",
+          "url": "audio/torah/26-shemini-1-cohen.mp3"
+        },
+        {
+          "label": "Shemini · 1. Cohen",
           "url": "audio/torah/27-tazria-1-cohen.mp3"
+        },
+        {
+          "label": "Shemini · 1. Cohen",
+          "url": "audio/torah/28-metzora-1-cohen.mp3"
         },
         {
           "label": "Shemini · 1. Cohen",
@@ -2654,6 +2951,10 @@
         },
         {
           "label": "Shemini · 1. Cohen",
+          "url": "audio/torah/34-bamidbar-1-cohen.mp3"
+        },
+        {
+          "label": "Shemini · 1. Cohen",
           "url": "audio/torah/35-naso-1-cohen.mp3"
         },
         {
@@ -2662,7 +2963,15 @@
         },
         {
           "label": "Shemini · 1. Cohen",
+          "url": "audio/torah/37-shelach-lecha-1-cohen.mp3"
+        },
+        {
+          "label": "Shemini · 1. Cohen",
           "url": "audio/torah/38-korach-1-cohen.mp3"
+        },
+        {
+          "label": "Shemini · 1. Cohen",
+          "url": "audio/torah/39-hukat-1-cohen.mp3"
         },
         {
           "label": "Shemini · 1. Cohen",
@@ -2686,11 +2995,19 @@
         },
         {
           "label": "Shemini · 2. Levi",
+          "url": "audio/torah/29-acharey-mot-2-levi.mp3"
+        },
+        {
+          "label": "Shemini · 2. Levi",
           "url": "audio/torah/30-kedoshim-2-levi.mp3"
         },
         {
           "label": "Shemini · 2. Levi",
           "url": "audio/torah/31-emor-2-levi.mp3"
+        },
+        {
+          "label": "Shemini · 2. Levi",
+          "url": "audio/torah/32-behar-sinay-2-levi.mp3"
         },
         {
           "label": "Shemini · 3. Yisre'eli",
@@ -4392,62 +4709,146 @@
         {
           "verse": 1,
           "hebrew": "וַיְדַבֵּ֥ר יְהֹוָ֖ה אֶל־מֹשֶׁ֥ה לֵּאמֹֽר׃",
-          "english": "GOD spoke to Moses, saying:"
+          "english": "GOD spoke to Moses, saying:",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 5.0
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 2,
           "hebrew": "זֹ֤את תִּֽהְיֶה֙ תּוֹרַ֣ת הַמְּצֹרָ֔ע בְּי֖וֹם טׇהֳרָת֑וֹ וְהוּבָ֖א אֶל־הַכֹּהֵֽן׃",
-          "english": "This shall be the ritual for a leper, a person afflicted with ṣaraʻath; see note at 13.3. at the time of being purified.When it has been reported to the priest,"
+          "english": "This shall be the ritual for a leper, a person afflicted with ṣaraʻath; see note at 13.3. at the time of being purified.When it has been reported to the priest,",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 5.0,
+            "end": 18.333
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 3,
           "hebrew": "וְיָצָא֙ הַכֹּהֵ֔ן אֶל־מִח֖וּץ לַֽמַּחֲנֶ֑ה וְרָאָה֙ הַכֹּהֵ֔ן וְהִנֵּ֛ה נִרְפָּ֥א נֶֽגַע־הַצָּרַ֖עַת מִן־הַצָּרֽוּעַ׃",
-          "english": "the priest shall go outside the camp. If the priest sees that the leper has been healed of the scaly affection,"
+          "english": "the priest shall go outside the camp. If the priest sees that the leper has been healed of the scaly affection,",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 18.333,
+            "end": 37.133
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 4,
           "hebrew": "וְצִוָּה֙ הַכֹּהֵ֔ן וְלָקַ֧ח לַמִּטַּהֵ֛ר שְׁתֵּֽי־צִפֳּרִ֥ים חַיּ֖וֹת טְהֹר֑וֹת וְעֵ֣ץ אֶ֔רֶז וּשְׁנִ֥י תוֹלַ֖עַת וְאֵזֹֽב׃",
-          "english": "the priest shall order two live pure birds, cedar wood, crimson stuff, and hyssop to be brought for the one to be purified."
+          "english": "the priest shall order two live pure birds, cedar wood, crimson stuff, and hyssop to be brought for the one to be purified.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 37.133,
+            "end": 55.7
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 5,
           "hebrew": "וְצִוָּה֙ הַכֹּהֵ֔ן וְשָׁחַ֖ט אֶת־הַצִּפּ֣וֹר הָאֶחָ֑ת אֶל־כְּלִי־חֶ֖רֶשׂ עַל־מַ֥יִם חַיִּֽים׃",
-          "english": "The priest shall order one of the birds slaughtered over fresh water in an earthen vessel;"
+          "english": "The priest shall order one of the birds slaughtered over fresh water in an earthen vessel;",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 55.7,
+            "end": 68.2
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 6,
           "hebrew": "אֶת־הַצִּפֹּ֤ר הַֽחַיָּה֙ יִקַּ֣ח אֹתָ֔הּ וְאֶת־עֵ֥ץ הָאֶ֛רֶז וְאֶת־שְׁנִ֥י הַתּוֹלַ֖עַת וְאֶת־הָאֵזֹ֑ב וְטָבַ֨ל אוֹתָ֜ם וְאֵ֣ת&thinsp;׀ הַצִּפֹּ֣ר הַֽחַיָּ֗ה בְּדַם֙ הַצִּפֹּ֣ר הַשְּׁחֻטָ֔ה עַ֖ל הַמַּ֥יִם הַֽחַיִּֽים׃",
-          "english": "and he shall take the live bird, along with the cedar wood, the crimson stuff, and the hyssop, and dip them together with the live bird in the blood of the bird that was slaughtered over the fresh water."
+          "english": "and he shall take the live bird, along with the cedar wood, the crimson stuff, and the hyssop, and dip them together with the live bird in the blood of the bird that was slaughtered over the fresh water.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 68.2,
+            "end": 101.533
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 7,
           "hebrew": "וְהִזָּ֗ה עַ֧ל הַמִּטַּהֵ֛ר מִן־הַצָּרַ֖עַת שֶׁ֣בַע פְּעָמִ֑ים וְטִ֣הֲר֔וֹ וְשִׁלַּ֛ח אֶת־הַצִּפֹּ֥ר הַֽחַיָּ֖ה עַל־פְּנֵ֥י הַשָּׂדֶֽה׃",
-          "english": "He shall then sprinkle it seven times on the one to be purified of the eruption and effect the purification; and he shall set the live bird free in the open country."
+          "english": "He shall then sprinkle it seven times on the one to be purified of the eruption and effect the purification; and he shall set the live bird free in the open country.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 101.533,
+            "end": 123.433
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 8,
           "hebrew": "וְכִבֶּס֩ הַמִּטַּהֵ֨ר אֶת־בְּגָדָ֜יו וְגִלַּ֣ח אֶת־כׇּל־שְׂעָר֗וֹ וְרָחַ֤ץ בַּמַּ֙יִם֙ וְטָהֵ֔ר וְאַחַ֖ר יָב֣וֹא אֶל־הַֽמַּחֲנֶ֑ה וְיָשַׁ֛ב מִח֥וּץ לְאׇהֳל֖וֹ שִׁבְעַ֥ת יָמִֽים׃",
-          "english": "The one to be purified shall wash their clothes, shave off all their hair, and bathe in water—and then they shall be pure. After that, the person may enter camp but must remain outside their tent seven days."
+          "english": "The one to be purified shall wash their clothes, shave off all their hair, and bathe in water—and then they shall be pure. After that, the person may enter camp but must remain outside their tent seven days.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 123.433,
+            "end": 152.367
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 9,
           "hebrew": "וְהָיָה֩ בַיּ֨וֹם הַשְּׁבִיעִ֜י יְגַלַּ֣ח אֶת־כׇּל־שְׂעָר֗וֹ אֶת־רֹאשׁ֤וֹ וְאֶת־זְקָנוֹ֙ וְאֵת֙ גַּבֹּ֣ת עֵינָ֔יו וְאֶת־כׇּל־שְׂעָר֖וֹ יְגַלֵּ֑חַ וְכִבֶּ֣ס אֶת־בְּגָדָ֗יו וְרָחַ֧ץ אֶת־בְּשָׂר֛וֹ בַּמַּ֖יִם וְטָהֵֽר׃",
-          "english": "On the seventh day they shall shave off all their hair—of head, beard [if any], and eyebrows. Having shaved off all their hair, they shall wash their clothes and bathe in water—and then they shall be pure."
+          "english": "On the seventh day they shall shave off all their hair—of head, beard [if any], and eyebrows. Having shaved off all their hair, they shall wash their clothes and bathe in water—and then they shall be pure.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 152.367,
+            "end": 187.667
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 10,
           "hebrew": "וּבַיּ֣וֹם הַשְּׁמִינִ֗י יִקַּ֤ח שְׁנֵֽי־כְבָשִׂים֙ תְּמִימִ֔ם וְכַבְשָׂ֥ה אַחַ֛ת בַּת־שְׁנָתָ֖הּ תְּמִימָ֑ה וּשְׁלֹשָׁ֣ה עֶשְׂרֹנִ֗ים סֹ֤לֶת מִנְחָה֙ בְּלוּלָ֣ה בַשֶּׁ֔מֶן וְלֹ֥ג אֶחָ֖ד שָֽׁמֶן׃",
-          "english": "On the eighth day they shall take two male lambs without blemish, one ewe lamb in its first year without blemish, three-tenths of a measure of choice flour with oil mixed in for a grain offering, and one log of oil."
+          "english": "On the eighth day they shall take two male lambs without blemish, one ewe lamb in its first year without blemish, three-tenths of a measure of choice flour with oil mixed in for a grain offering, and one log of oil.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 187.667,
+            "end": 220.733
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 11,
           "hebrew": "וְהֶעֱמִ֞יד הַכֹּהֵ֣ן הַֽמְטַהֵ֗ר אֵ֛ת הָאִ֥ישׁ הַמִּטַּהֵ֖ר וְאֹתָ֑ם לִפְנֵ֣י יְהֹוָ֔ה פֶּ֖תַח אֹ֥הֶל מוֹעֵֽד׃",
-          "english": "These shall be presented before GOD, along with the person to be purified, at the entrance of the Tent of Meeting, by the priest who performs the purification."
+          "english": "These shall be presented before GOD, along with the person to be purified, at the entrance of the Tent of Meeting, by the priest who performs the purification.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 220.733,
+            "end": 242.367
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 12,
           "hebrew": "וְלָקַ֨ח הַכֹּהֵ֜ן אֶת־הַכֶּ֣בֶשׂ הָאֶחָ֗ד וְהִקְרִ֥יב אֹת֛וֹ לְאָשָׁ֖ם וְאֶת־לֹ֣ג הַשָּׁ֑מֶן וְהֵנִ֥יף אֹתָ֛ם תְּנוּפָ֖ה לִפְנֵ֥י יְהֹוָֽה׃",
-          "english": "The priest shall take one of the male lambs and offer it with the log of oil as a reparation offering, and he shall elevate them as an elevation offering before GOD."
+          "english": "The priest shall take one of the male lambs and offer it with the log of oil as a reparation offering, and he shall elevate them as an elevation offering before GOD.",
+          "audio": "audio/torah/28-metzora-1-cohen.mp3",
+          "timing": {
+            "start": 242.367,
+            "end": 265.667
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Metzora"
         },
         {
           "verse": 13,
@@ -4991,6 +5392,10 @@
         }
       ],
       "audioSegments": [
+        {
+          "label": "Metzora · 1. Cohen",
+          "url": "audio/torah/28-metzora-1-cohen.mp3"
+        },
         {
           "label": "Metzora · 2. Levi",
           "url": "audio/torah/28-metzora-2-levi.mp3"
@@ -5634,93 +6039,224 @@
         {
           "verse": 18,
           "hebrew": "וְיָצָ֗א אֶל־הַמִּזְבֵּ֛חַ אֲשֶׁ֥ר לִפְנֵֽי־יְהֹוָ֖ה וְכִפֶּ֣ר עָלָ֑יו וְלָקַ֞ח מִדַּ֤ם הַפָּר֙ וּמִדַּ֣ם הַשָּׂעִ֔יר וְנָתַ֛ן עַל־קַרְנ֥וֹת הַמִּזְבֵּ֖חַ סָבִֽיב׃",
-          "english": "he shall go out to the altar that is before GOD and purge it: he shall take some of the blood of the bull and of the goat and apply it to each of the horns of the altar;"
+          "english": "he shall go out to the altar that is before GOD and purge it: he shall take some of the blood of the bull and of the goat and apply it to each of the horns of the altar;",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 32.6
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 19,
           "hebrew": "וְהִזָּ֨ה עָלָ֧יו מִן־הַדָּ֛ם בְּאֶצְבָּע֖וֹ שֶׁ֣בַע פְּעָמִ֑ים וְטִהֲר֣וֹ וְקִדְּשׁ֔וֹ מִטֻּמְאֹ֖ת בְּנֵ֥י יִשְׂרָאֵֽל׃",
-          "english": "and the rest of the blood he shall sprinkle on it with his finger seven times. Thus he shall purify it of the defilement of the Israelites and consecrate it."
+          "english": "and the rest of the blood he shall sprinkle on it with his finger seven times. Thus he shall purify it of the defilement of the Israelites and consecrate it.",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 32.6,
+            "end": 48.567
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 20,
           "hebrew": "וְכִלָּה֙ מִכַּפֵּ֣ר אֶת־הַקֹּ֔דֶשׁ וְאֶת־אֹ֥הֶל מוֹעֵ֖ד וְאֶת־הַמִּזְבֵּ֑חַ וְהִקְרִ֖יב אֶת־הַשָּׂעִ֥יר הֶחָֽי׃",
-          "english": "When he has finished purging the Shrine, the Tent of Meeting, and the altar, the live goat shall be brought forward."
+          "english": "When he has finished purging the Shrine, the Tent of Meeting, and the altar, the live goat shall be brought forward.",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 48.567,
+            "end": 61.8
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 21,
           "hebrew": "וְסָמַ֨ךְ אַהֲרֹ֜ן אֶת־שְׁתֵּ֣י יָדָ֗ו עַ֣ל רֹ֣אשׁ הַשָּׂעִיר֮ הַחַי֒ וְהִתְוַדָּ֣ה עָלָ֗יו אֶת־כׇּל־עֲוֺנֹת֙ בְּנֵ֣י יִשְׂרָאֵ֔ל וְאֶת־כׇּל־פִּשְׁעֵיהֶ֖ם לְכׇל־חַטֹּאתָ֑ם וְנָתַ֤ן אֹתָם֙ עַל־רֹ֣אשׁ הַשָּׂעִ֔יר וְשִׁלַּ֛ח בְּיַד־אִ֥ישׁ עִתִּ֖י הַמִּדְבָּֽרָה׃",
-          "english": "Aaron shall lay both his hands upon the head of the live goat and confess over it all the iniquities and transgressions of the Israelites, whatever their sins, putting them on the head of the goat; and it shall be sent off to the wilderness through a designated uncertain. agent."
+          "english": "Aaron shall lay both his hands upon the head of the live goat and confess over it all the iniquities and transgressions of the Israelites, whatever their sins, putting them on the head of the goat; and it shall be sent off to the wilderness through a designated uncertain. agent.",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 61.8,
+            "end": 106.467
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 22,
           "hebrew": "וְנָשָׂ֨א הַשָּׂעִ֥יר עָלָ֛יו אֶת־כׇּל־עֲוֺנֹתָ֖ם אֶל־אֶ֣רֶץ גְּזֵרָ֑ה וְשִׁלַּ֥ח אֶת־הַשָּׂעִ֖יר בַּמִּדְבָּֽר׃",
-          "english": "Thus the goat shall carry on it all their iniquities to an inaccessible region; and the goat shall be set free in the wilderness."
+          "english": "Thus the goat shall carry on it all their iniquities to an inaccessible region; and the goat shall be set free in the wilderness.",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 106.467,
+            "end": 119.133
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 23,
           "hebrew": "וּבָ֤א אַהֲרֹן֙ אֶל־אֹ֣הֶל מוֹעֵ֔ד וּפָשַׁט֙ אֶת־בִּגְדֵ֣י הַבָּ֔ד אֲשֶׁ֥ר לָבַ֖שׁ בְּבֹא֣וֹ אֶל־הַקֹּ֑דֶשׁ וְהִנִּיחָ֖ם שָֽׁם׃",
-          "english": "And Aaron shall go into the Tent of Meeting, take off the linen vestments that he put on when he entered the Shrine, and leave them there."
+          "english": "And Aaron shall go into the Tent of Meeting, take off the linen vestments that he put on when he entered the Shrine, and leave them there.",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 119.133,
+            "end": 137.433
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 24,
           "hebrew": "וְרָחַ֨ץ אֶת־בְּשָׂר֤וֹ בַמַּ֙יִם֙ בְּמָק֣וֹם קָד֔וֹשׁ וְלָבַ֖שׁ אֶת־בְּגָדָ֑יו וְיָצָ֗א וְעָשָׂ֤ה אֶת־עֹֽלָתוֹ֙ וְאֶת־עֹלַ֣ת הָעָ֔ם וְכִפֶּ֥ר בַּעֲד֖וֹ וּבְעַ֥ד הָעָֽם׃",
-          "english": "He shall bathe in water in the holy precinct and put on his vestments; then he shall come out and offer his burnt offering and the burnt offering of the people, making expiation for himself and for the people."
+          "english": "He shall bathe in water in the holy precinct and put on his vestments; then he shall come out and offer his burnt offering and the burnt offering of the people, making expiation for himself and for the people.",
+          "audio": "audio/torah/29-acharey-mot-2-levi.mp3",
+          "timing": {
+            "start": 137.433,
+            "end": 166.4
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 25,
           "hebrew": "וְאֵ֛ת חֵ֥לֶב הַֽחַטָּ֖את יַקְטִ֥יר הַמִּזְבֵּֽחָה׃",
-          "english": "The fat of the purgation offering he shall turn into smoke on the altar."
+          "english": "The fat of the purgation offering he shall turn into smoke on the altar.",
+          "audio": "audio/torah/29-acharey-mot-3-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 7.7
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 26,
           "hebrew": "וְהַֽמְשַׁלֵּ֤חַ אֶת־הַשָּׂעִיר֙ לַֽעֲזָאזֵ֔ל יְכַבֵּ֣ס בְּגָדָ֔יו וְרָחַ֥ץ אֶת־בְּשָׂר֖וֹ בַּמָּ֑יִם וְאַחֲרֵי־כֵ֖ן יָב֥וֹא אֶל־הַֽמַּחֲנֶֽה׃",
-          "english": "The one who set the Azazel-goat free shall wash their clothes and bathe in water—and after that may reenter the camp."
+          "english": "The one who set the Azazel-goat free shall wash their clothes and bathe in water—and after that may reenter the camp.",
+          "audio": "audio/torah/29-acharey-mot-3-yisreeli.mp3",
+          "timing": {
+            "start": 7.7,
+            "end": 27.0
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 27,
           "hebrew": "וְאֵת֩ פַּ֨ר הַֽחַטָּ֜את וְאֵ֣ת&thinsp;׀ שְׂעִ֣יר הַֽחַטָּ֗את אֲשֶׁ֨ר הוּבָ֤א אֶת־דָּמָם֙ לְכַפֵּ֣ר בַּקֹּ֔דֶשׁ יוֹצִ֖יא אֶל־מִח֣וּץ לַֽמַּחֲנֶ֑ה וְשָׂרְפ֣וּ בָאֵ֔שׁ אֶת־עֹרֹתָ֥ם וְאֶת־בְּשָׂרָ֖ם וְאֶת־פִּרְשָֽׁם׃",
-          "english": "The bull of purgation offering and the goat of purgation offering whose blood was brought in to purge the Shrine shall be taken outside the camp; and their hides, flesh, and dung shall be consumed in fire."
+          "english": "The bull of purgation offering and the goat of purgation offering whose blood was brought in to purge the Shrine shall be taken outside the camp; and their hides, flesh, and dung shall be consumed in fire.",
+          "audio": "audio/torah/29-acharey-mot-3-yisreeli.mp3",
+          "timing": {
+            "start": 27.0,
+            "end": 58.167
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 28,
           "hebrew": "וְהַשֹּׂרֵ֣ף אֹתָ֔ם יְכַבֵּ֣ס בְּגָדָ֔יו וְרָחַ֥ץ אֶת־בְּשָׂר֖וֹ בַּמָּ֑יִם וְאַחֲרֵי־כֵ֖ן יָב֥וֹא אֶל־הַֽמַּחֲנֶֽה׃",
-          "english": "The one who burned them shall wash their clothes and bathe in water—and after that may re-enter the camp."
+          "english": "The one who burned them shall wash their clothes and bathe in water—and after that may re-enter the camp.",
+          "audio": "audio/torah/29-acharey-mot-3-yisreeli.mp3",
+          "timing": {
+            "start": 58.167,
+            "end": 71.567
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 29,
           "hebrew": "וְהָיְתָ֥ה לָכֶ֖ם לְחֻקַּ֣ת עוֹלָ֑ם בַּחֹ֣דֶשׁ הַ֠שְּׁבִיעִ֠י בֶּֽעָשׂ֨וֹר לַחֹ֜דֶשׁ תְּעַנּ֣וּ אֶת־נַפְשֹֽׁתֵיכֶ֗ם וְכׇל־מְלָאכָה֙ לֹ֣א תַעֲשׂ֔וּ הָֽאֶזְרָ֔ח וְהַגֵּ֖ר הַגָּ֥ר בְּתוֹכְכֶֽם׃",
-          "english": "And this shall be to you a law for all time: In the seventh month, on the tenth day of the month, you shall practice self-denial; and you shall do no manner of work, neither the citizen nor the alien who resides among you."
+          "english": "And this shall be to you a law for all time: In the seventh month, on the tenth day of the month, you shall practice self-denial; and you shall do no manner of work, neither the citizen nor the alien who resides among you.",
+          "audio": "audio/torah/29-acharey-mot-3-yisreeli.mp3",
+          "timing": {
+            "start": 71.567,
+            "end": 101.533
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 30,
           "hebrew": "כִּֽי־בַיּ֥וֹם הַזֶּ֛ה יְכַפֵּ֥ר עֲלֵיכֶ֖ם לְטַהֵ֣ר אֶתְכֶ֑ם מִכֹּל֙ חַטֹּ֣אתֵיכֶ֔ם לִפְנֵ֥י יְהֹוָ֖ה תִּטְהָֽרוּ׃",
-          "english": "For on this day atonement shall be made for you to purify you of all your sins; you shall be pure before GOD."
+          "english": "For on this day atonement shall be made for you to purify you of all your sins; you shall be pure before GOD.",
+          "audio": "audio/torah/29-acharey-mot-3-yisreeli.mp3",
+          "timing": {
+            "start": 101.533,
+            "end": 118.033
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 31,
           "hebrew": "שַׁבַּ֨ת שַׁבָּת֥וֹן הִיא֙ לָכֶ֔ם וְעִנִּיתֶ֖ם אֶת־נַפְשֹׁתֵיכֶ֑ם חֻקַּ֖ת עוֹלָֽם׃",
-          "english": "It shall be a sabbath of complete rest for you, and you shall practice self-denial; it is a law for all time."
+          "english": "It shall be a sabbath of complete rest for you, and you shall practice self-denial; it is a law for all time.",
+          "audio": "audio/torah/29-acharey-mot-4-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 11.433
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 32,
           "hebrew": "וְכִפֶּ֨ר הַכֹּהֵ֜ן אֲשֶׁר־יִמְשַׁ֣ח אֹת֗וֹ וַאֲשֶׁ֤ר יְמַלֵּא֙ אֶת־יָד֔וֹ לְכַהֵ֖ן תַּ֣חַת אָבִ֑יו וְלָבַ֛שׁ אֶת־בִּגְדֵ֥י הַבָּ֖ד בִּגְדֵ֥י הַקֹּֽדֶשׁ׃",
-          "english": "The priest who has been anointed and ordained to serve as priest in place of his father shall make expiation. He shall put on the linen vestments, the sacral vestments."
+          "english": "The priest who has been anointed and ordained to serve as priest in place of his father shall make expiation. He shall put on the linen vestments, the sacral vestments.",
+          "audio": "audio/torah/29-acharey-mot-4-yisreeli.mp3",
+          "timing": {
+            "start": 11.433,
+            "end": 37.767
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 33,
           "hebrew": "וְכִפֶּר֙ אֶת־מִקְדַּ֣שׁ הַקֹּ֔דֶשׁ וְאֶת־אֹ֧הֶל מוֹעֵ֛ד וְאֶת־הַמִּזְבֵּ֖חַ יְכַפֵּ֑ר וְעַ֧ל הַכֹּהֲנִ֛ים וְעַל־כׇּל־עַ֥ם הַקָּהָ֖ל יְכַפֵּֽר׃",
-          "english": "He shall purge the innermost Shrine; he shall purge the Tent of Meeting and the altar; and he shall make expiation for the priests and for all the people of the congregation."
+          "english": "He shall purge the innermost Shrine; he shall purge the Tent of Meeting and the altar; and he shall make expiation for the priests and for all the people of the congregation.",
+          "audio": "audio/torah/29-acharey-mot-4-yisreeli.mp3",
+          "timing": {
+            "start": 37.767,
+            "end": 59.1
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 34,
           "hebrew": "וְהָֽיְתָה־זֹּ֨את לָכֶ֜ם לְחֻקַּ֣ת עוֹלָ֗ם לְכַפֵּ֞ר עַל־בְּנֵ֤י יִשְׂרָאֵל֙ מִכׇּל־חַטֹּאתָ֔ם אַחַ֖ת בַּשָּׁנָ֑ה וַיַּ֕עַשׂ כַּאֲשֶׁ֛ר צִוָּ֥ה יְהֹוָ֖ה אֶת־מֹשֶֽׁה׃&nbsp;{פ}",
-          "english": "This shall be to you a law for all time: to make atonement for the Israelites for all their sins once a year.And Moses did as GOD had commanded him."
+          "english": "This shall be to you a law for all time: to make atonement for the Israelites for all their sins once a year.And Moses did as GOD had commanded him.",
+          "audio": "audio/torah/29-acharey-mot-4-yisreeli.mp3",
+          "timing": {
+            "start": 59.1,
+            "end": 96.333
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Acharey Mot"
         }
       ],
       "audioSegments": [
         {
           "label": "Acharey Mot · 1. Cohen",
           "url": "audio/torah/29-acharey-mot-1-cohen.mp3"
+        },
+        {
+          "label": "Acharey Mot · 2. Levi",
+          "url": "audio/torah/29-acharey-mot-2-levi.mp3"
+        },
+        {
+          "label": "Acharey Mot · 3. Yisre'eli",
+          "url": "audio/torah/29-acharey-mot-3-yisreeli.mp3"
+        },
+        {
+          "label": "Acharey Mot · 4. Yisre'eli",
+          "url": "audio/torah/29-acharey-mot-4-yisreeli.mp3"
         }
       ]
     },
@@ -5993,133 +6529,316 @@
         {
           "verse": 6,
           "hebrew": "אִ֥ישׁ אִישׁ֙ אֶל־כׇּל־שְׁאֵ֣ר בְּשָׂר֔וֹ לֹ֥א תִקְרְב֖וּ לְגַלּ֣וֹת עֶרְוָ֑ה אֲנִ֖י יְהֹוָֽה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Not even one of you shall come near anyone of his own flesh to uncover nakedness: I am GOD."
+          "english": "Not even one of you shall come near anyone of his own flesh to uncover nakedness: I am GOD.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 11.3
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 7,
           "hebrew": "עֶרְוַ֥ת אָבִ֛יךָ וְעֶרְוַ֥ת אִמְּךָ֖ לֹ֣א תְגַלֵּ֑ה אִמְּךָ֣ הִ֔וא לֹ֥א תְגַלֶּ֖ה עֶרְוָתָֽהּ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Your father’s nakedness, that is, the nakedness of your mother, you shall not uncover; she is your mother—you shall not uncover her nakedness."
+          "english": "Your father’s nakedness, that is, the nakedness of your mother, you shall not uncover; she is your mother—you shall not uncover her nakedness.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 11.3,
+            "end": 23.767
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 8,
           "hebrew": "עֶרְוַ֥ת אֵֽשֶׁת־אָבִ֖יךָ לֹ֣א תְגַלֵּ֑ה עֶרְוַ֥ת אָבִ֖יךָ הִֽוא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Do not uncover the nakedness of your father’s wife; it is the nakedness of your father."
+          "english": "Do not uncover the nakedness of your father’s wife; it is the nakedness of your father.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 23.767,
+            "end": 30.633
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 9,
           "hebrew": "עֶרְוַ֨ת אֲחֽוֹתְךָ֤ בַת־אָבִ֙יךָ֙ א֣וֹ בַת־אִמֶּ֔ךָ מוֹלֶ֣דֶת בַּ֔יִת א֖וֹ מוֹלֶ֣דֶת ח֑וּץ לֹ֥א תְגַלֶּ֖ה עֶרְוָתָֽן׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "The nakedness of your sister—your father’s daughter or your mother’s, whether born into the household or outside—do not uncover their nakedness."
+          "english": "The nakedness of your sister—your father’s daughter or your mother’s, whether born into the household or outside—do not uncover their nakedness.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 30.633,
+            "end": 49.333
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 10,
           "hebrew": "עֶרְוַ֤ת בַּת־בִּנְךָ֙ א֣וֹ בַֽת־בִּתְּךָ֔ לֹ֥א תְגַלֶּ֖ה עֶרְוָתָ֑ן כִּ֥י עֶרְוָתְךָ֖ הֵֽנָּה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "The nakedness of your son’s daughter, or of your daughter’s daughter—do not uncover their nakedness; for their nakedness is yours."
+          "english": "The nakedness of your son’s daughter, or of your daughter’s daughter—do not uncover their nakedness; for their nakedness is yours.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 49.333,
+            "end": 62.333
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 11,
           "hebrew": "עֶרְוַ֨ת בַּת־אֵ֤שֶׁת אָבִ֙יךָ֙ מוֹלֶ֣דֶת אָבִ֔יךָ אֲחוֹתְךָ֖ הִ֑וא לֹ֥א תְגַלֶּ֖ה עֶרְוָתָֽהּ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "The nakedness of your father’s wife’s daughter, who was born into your father’s household—she is your sister; do not uncover her nakedness."
+          "english": "The nakedness of your father’s wife’s daughter, who was born into your father’s household—she is your sister; do not uncover her nakedness.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 62.333,
+            "end": 77.3
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 12,
           "hebrew": "עֶרְוַ֥ת אֲחוֹת־אָבִ֖יךָ לֹ֣א תְגַלֵּ֑ה שְׁאֵ֥ר אָבִ֖יךָ הִֽוא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Do not uncover the nakedness of your father’s sister; she is your father’s flesh."
+          "english": "Do not uncover the nakedness of your father’s sister; she is your father’s flesh.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 77.3,
+            "end": 83.7
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 13,
           "hebrew": "עֶרְוַ֥ת אֲחֽוֹת־אִמְּךָ֖ לֹ֣א תְגַלֵּ֑ה כִּֽי־שְׁאֵ֥ר אִמְּךָ֖ הִֽוא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Do not uncover the nakedness of your mother’s sister; for she is your mother’s flesh."
+          "english": "Do not uncover the nakedness of your mother’s sister; for she is your mother’s flesh.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 83.7,
+            "end": 90.633
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 14,
           "hebrew": "עֶרְוַ֥ת אֲחִֽי־אָבִ֖יךָ לֹ֣א תְגַלֵּ֑ה אֶל־אִשְׁתּוֹ֙ לֹ֣א תִקְרָ֔ב דֹּדָֽתְךָ֖ הִֽוא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Do not uncover the nakedness of your father’s brother: do not approach his wife; she is your aunt."
+          "english": "Do not uncover the nakedness of your father’s brother: do not approach his wife; she is your aunt.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 90.633,
+            "end": 101.667
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 15,
           "hebrew": "עֶרְוַ֥ת כַּלָּֽתְךָ֖ לֹ֣א תְגַלֵּ֑ה אֵ֤שֶׁת בִּנְךָ֙ הִ֔וא לֹ֥א תְגַלֶּ֖ה עֶרְוָתָֽהּ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Do not uncover the nakedness of your daughter-in-law: she is your son’s wife; you shall not uncover her nakedness."
+          "english": "Do not uncover the nakedness of your daughter-in-law: she is your son’s wife; you shall not uncover her nakedness.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 101.667,
+            "end": 114.133
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 16,
           "hebrew": "עֶרְוַ֥ת אֵֽשֶׁת־אָחִ֖יךָ לֹ֣א תְגַלֵּ֑ה עֶרְוַ֥ת אָחִ֖יךָ הִֽוא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Do not uncover the nakedness of your brother’s wife; it is the nakedness of your brother."
+          "english": "Do not uncover the nakedness of your brother’s wife; it is the nakedness of your brother.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 114.133,
+            "end": 120.7
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 17,
           "hebrew": "עֶרְוַ֥ת אִשָּׁ֛ה וּבִתָּ֖הּ לֹ֣א תְגַלֵּ֑ה אֶֽת־בַּת־בְּנָ֞הּ וְאֶת־בַּת־בִּתָּ֗הּ לֹ֤א תִקַּח֙ לְגַלּ֣וֹת עֶרְוָתָ֔הּ שַׁאֲרָ֥ה הֵ֖נָּה זִמָּ֥ה הִֽוא׃",
-          "english": "Do not uncover the nakedness of a woman and her daughter; nor shall you take to wife her son’s daughter or her daughter’s daughter and uncover her nakedness: they are kindred; it is depravity."
+          "english": "Do not uncover the nakedness of a woman and her daughter; nor shall you take to wife her son’s daughter or her daughter’s daughter and uncover her nakedness: they are kindred; it is depravity.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 120.7,
+            "end": 147.2
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 18,
           "hebrew": "וְאִשָּׁ֥ה אֶל־אֲחֹתָ֖הּ לֹ֣א תִקָּ֑ח לִצְרֹ֗ר לְגַלּ֧וֹת עֶרְוָתָ֛הּ עָלֶ֖יהָ בְּחַיֶּֽיהָ׃",
-          "english": "Do not take to wife a woman as a rival to her sister and uncover her nakedness in the other’s lifetime."
+          "english": "Do not take to wife a woman as a rival to her sister and uncover her nakedness in the other’s lifetime.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 147.2,
+            "end": 163.267
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 19,
           "hebrew": "וְאֶל־אִשָּׁ֖ה בְּנִדַּ֣ת טֻמְאָתָ֑הּ לֹ֣א תִקְרַ֔ב לְגַלּ֖וֹת עֶרְוָתָֽהּ׃",
-          "english": "Do not come near a woman during her menstrual period of impurity to uncover her nakedness."
+          "english": "Do not come near a woman during her menstrual period of impurity to uncover her nakedness.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 163.267,
+            "end": 172.233
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 20,
           "hebrew": "וְאֶל־אֵ֙שֶׁת֙ עֲמִֽיתְךָ֔ לֹא־תִתֵּ֥ן שְׁכׇבְתְּךָ֖ לְזָ֑רַע לְטׇמְאָה־בָֽהּ׃",
-          "english": "Do not have carnal relations with your neighbor’s wife and defile yourself with her."
+          "english": "Do not have carnal relations with your neighbor’s wife and defile yourself with her.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 172.233,
+            "end": 185.167
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 21,
           "hebrew": "וּמִֽזַּרְעֲךָ֥ לֹא־תִתֵּ֖ן לְהַעֲבִ֣יר לַמֹּ֑לֶךְ וְלֹ֧א תְחַלֵּ֛ל אֶת־שֵׁ֥ם אֱלֹהֶ֖יךָ אֲנִ֥י יְהֹוָֽה׃",
-          "english": "Do not allow any of your offspring to be offered up to Molech, and do not profane the name of your God: I am the ETERNAL."
+          "english": "Do not allow any of your offspring to be offered up to Molech, and do not profane the name of your God: I am the ETERNAL.",
+          "audio": "audio/torah/29-acharey-mot-6-yisreeli.mp3",
+          "timing": {
+            "start": 185.167,
+            "end": 198.133
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 22,
           "hebrew": "וְאֶ֨ת־זָכָ֔ר לֹ֥א תִשְׁכַּ֖ב מִשְׁכְּבֵ֣י אִשָּׁ֑ה תּוֹעֵבָ֖ה הִֽוא׃",
-          "english": "Do not lie with a male as one lies with a woman; it is an abhorrence."
+          "english": "Do not lie with a male as one lies with a woman; it is an abhorrence.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 9.033
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 23,
           "hebrew": "וּבְכׇל־בְּהֵמָ֛ה לֹא־תִתֵּ֥ן שְׁכׇבְתְּךָ֖ לְטׇמְאָה־בָ֑הּ וְאִשָּׁ֗ה לֹֽא־תַעֲמֹ֞ד לִפְנֵ֧י בְהֵמָ֛ה לְרִבְעָ֖הּ תֶּ֥בֶל הֽוּא׃",
-          "english": "Do not have carnal relations with any animal and defile yourself thereby. Likewise, a woman shall not lend herself to an animal to mate with it; it is perversion."
+          "english": "Do not have carnal relations with any animal and defile yourself thereby. Likewise, a woman shall not lend herself to an animal to mate with it; it is perversion.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 9.033,
+            "end": 33.567
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 24,
           "hebrew": "אַל־תִּֽטַּמְּא֖וּ בְּכׇל־אֵ֑לֶּה כִּ֤י בְכׇל־אֵ֙לֶּה֙ נִטְמְא֣וּ הַגּוֹיִ֔ם אֲשֶׁר־אֲנִ֥י מְשַׁלֵּ֖חַ מִפְּנֵיכֶֽם׃",
-          "english": "Do not defile yourselves in any of those ways, for it is by such that the nations that I am casting out before you defiled themselves."
+          "english": "Do not defile yourselves in any of those ways, for it is by such that the nations that I am casting out before you defiled themselves.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 33.567,
+            "end": 49.233
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 25,
           "hebrew": "וַתִּטְמָ֣א הָאָ֔רֶץ וָאֶפְקֹ֥ד עֲוֺנָ֖הּ עָלֶ֑יהָ וַתָּקִ֥א הָאָ֖רֶץ אֶת־יֹשְׁבֶֽיהָ׃",
-          "english": "Thus the land became defiled; and I called it to account for its iniquity, and the land spewed out its inhabitants."
+          "english": "Thus the land became defiled; and I called it to account for its iniquity, and the land spewed out its inhabitants.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 49.233,
+            "end": 60.0
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 26,
           "hebrew": "וּשְׁמַרְתֶּ֣ם אַתֶּ֗ם אֶת־חֻקֹּתַי֙ וְאֶת־מִשְׁפָּטַ֔י וְלֹ֣א תַעֲשׂ֔וּ מִכֹּ֥ל הַתּוֹעֵבֹ֖ת הָאֵ֑לֶּה הָֽאֶזְרָ֔ח וְהַגֵּ֖ר הַגָּ֥ר בְּתוֹכְכֶֽם׃",
-          "english": "But you must keep My laws and My rules, and you must not do any of those abhorrent things, neither the citizen nor the stranger who resides among you;"
+          "english": "But you must keep My laws and My rules, and you must not do any of those abhorrent things, neither the citizen nor the stranger who resides among you;",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 60.0,
+            "end": 82.467
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 27,
           "hebrew": "כִּ֚י אֶת־כׇּל־הַתּוֹעֵבֹ֣ת הָאֵ֔ל עָשׂ֥וּ אַנְשֵֽׁי־הָאָ֖רֶץ אֲשֶׁ֣ר לִפְנֵיכֶ֑ם וַתִּטְמָ֖א הָאָֽרֶץ׃",
-          "english": "for all those abhorrent things were done by the people who were in the land before you, and the land became defiled."
+          "english": "for all those abhorrent things were done by the people who were in the land before you, and the land became defiled.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 82.467,
+            "end": 93.567
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 28,
           "hebrew": "וְלֹֽא־תָקִ֤יא הָאָ֙רֶץ֙ אֶתְכֶ֔ם בְּטַֽמַּאֲכֶ֖ם אֹתָ֑הּ כַּאֲשֶׁ֥ר קָאָ֛ה אֶת־הַגּ֖וֹי אֲשֶׁ֥ר לִפְנֵיכֶֽם׃",
-          "english": "So let not the land spew you out for defiling it, as it spewed out the nation that came before you."
+          "english": "So let not the land spew you out for defiling it, as it spewed out the nation that came before you.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 93.567,
+            "end": 111.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 29,
           "hebrew": "כִּ֚י כׇּל־אֲשֶׁ֣ר יַעֲשֶׂ֔ה מִכֹּ֥ל הַתּוֹעֵבֹ֖ת הָאֵ֑לֶּה וְנִכְרְת֛וּ הַנְּפָשׁ֥וֹת הָעֹשֹׂ֖ת מִקֶּ֥רֶב עַמָּֽם׃",
-          "english": "All who do any of those abhorrent things—such persons shall be cut off from among their people."
+          "english": "All who do any of those abhorrent things—such persons shall be cut off from among their people.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 111.167,
+            "end": 125.667
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         },
         {
           "verse": 30,
           "hebrew": "וּשְׁמַרְתֶּ֣ם אֶת־מִשְׁמַרְתִּ֗י לְבִלְתִּ֨י עֲשׂ֜וֹת מֵחֻקּ֤וֹת הַתּֽוֹעֵבֹת֙ אֲשֶׁ֣ר נַעֲשׂ֣וּ לִפְנֵיכֶ֔ם וְלֹ֥א תִֽטַּמְּא֖וּ בָּהֶ֑ם אֲנִ֖י יְהֹוָ֥ה אֱלֹהֵיכֶֽם׃&nbsp;{פ}",
-          "english": "You shall keep My charge not to engage in any of the abhorrent practices that were carried on before you, and you shall not defile yourselves through them: I the ETERNAL am your God."
+          "english": "You shall keep My charge not to engage in any of the abhorrent practices that were carried on before you, and you shall not defile yourselves through them: I the ETERNAL am your God.",
+          "audio": "audio/torah/29-acharey-mot-7-yisreeli.mp3",
+          "timing": {
+            "start": 125.667,
+            "end": 151.7
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Acharey Mot"
         }
       ],
       "audioSegments": [
         {
           "label": "Acharey Mot · 5. Yisre'eli",
           "url": "audio/torah/29-acharey-mot-5-yisreeli.mp3"
+        },
+        {
+          "label": "Acharey Mot · 6. Yisre'eli",
+          "url": "audio/torah/29-acharey-mot-6-yisreeli.mp3"
+        },
+        {
+          "label": "Acharey Mot · 7. Yisre'eli",
+          "url": "audio/torah/29-acharey-mot-7-yisreeli.mp3"
         }
       ]
     },
@@ -6357,67 +7076,158 @@
         {
           "verse": 20,
           "hebrew": "וְ֠אִ֠ישׁ כִּֽי־יִשְׁכַּ֨ב אֶת־אִשָּׁ֜ה שִׁכְבַת־זֶ֗רַע וְהִ֤וא שִׁפְחָה֙ נֶחֱרֶ֣פֶת לְאִ֔ישׁ וְהׇפְדֵּה֙ לֹ֣א נִפְדָּ֔תָה א֥וֹ חֻפְשָׁ֖הֿ לֹ֣א נִתַּן־לָ֑הּ בִּקֹּ֧רֶת תִּהְיֶ֛ה לֹ֥א יוּמְת֖וּ כִּי־לֹ֥א חֻפָּֽשָׁה׃",
-          "english": "If a man has carnal relations with a woman who is a slave and has been designated for another man, but has not been redeemed or given her freedom, there shall be an indemnity; they shall not, however, be put to death, since she has not been freed."
+          "english": "If a man has carnal relations with a woman who is a slave and has been designated for another man, but has not been redeemed or given her freedom, there shall be an indemnity; they shall not, however, be put to death, since she has not been freed.",
+          "audio": "audio/torah/30-kedoshim-3-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 38.5
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 21,
           "hebrew": "וְהֵבִ֤יא אֶת־אֲשָׁמוֹ֙ לַֽיהֹוָ֔ה אֶל־פֶּ֖תַח אֹ֣הֶל מוֹעֵ֑ד אֵ֖יל אָשָֽׁם׃",
-          "english": "But he must bring to the entrance of the Tent of Meeting, as his reparation offering to GOD, a ram of reparation offering."
+          "english": "But he must bring to the entrance of the Tent of Meeting, as his reparation offering to GOD, a ram of reparation offering.",
+          "audio": "audio/torah/30-kedoshim-3-yisreeli.mp3",
+          "timing": {
+            "start": 38.5,
+            "end": 52.167
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 22,
           "hebrew": "וְכִפֶּר֩ עָלָ֨יו הַכֹּהֵ֜ן בְּאֵ֤יל הָֽאָשָׁם֙ לִפְנֵ֣י יְהֹוָ֔ה עַל־חַטָּאת֖וֹ אֲשֶׁ֣ר חָטָ֑א וְנִסְלַ֣ח ל֔וֹ מֵחַטָּאת֖וֹ אֲשֶׁ֥ר חָטָֽא׃&nbsp;{פ}",
-          "english": "With the ram of reparation offering the priest shall make expiation for him before GOD for the sin that he committed; and the sin that he committed will be forgiven him."
+          "english": "With the ram of reparation offering the priest shall make expiation for him before GOD for the sin that he committed; and the sin that he committed will be forgiven him.",
+          "audio": "audio/torah/30-kedoshim-3-yisreeli.mp3",
+          "timing": {
+            "start": 52.167,
+            "end": 76.1
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 23,
           "hebrew": "וְכִי־תָבֹ֣אוּ אֶל־הָאָ֗רֶץ וּנְטַעְתֶּם֙ כׇּל־עֵ֣ץ מַאֲכָ֔ל וַעֲרַלְתֶּ֥ם עׇרְלָת֖וֹ אֶת־פִּרְי֑וֹ שָׁלֹ֣שׁ שָׁנִ֗ים יִהְיֶ֥ה לָכֶ֛ם עֲרֵלִ֖ים לֹ֥א יֵאָכֵֽל׃",
-          "english": "When you enter the land and plant any tree for food, you shall regard its fruit as forbidden. Three years it shall be forbidden, commonly “to be uncircumcised.” for you, not to be eaten."
+          "english": "When you enter the land and plant any tree for food, you shall regard its fruit as forbidden. Three years it shall be forbidden, commonly “to be uncircumcised.” for you, not to be eaten.",
+          "audio": "audio/torah/30-kedoshim-3-yisreeli.mp3",
+          "timing": {
+            "start": 76.1,
+            "end": 103.733
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 24,
           "hebrew": "וּבַשָּׁנָה֙ הָרְבִיעִ֔ת יִהְיֶ֖ה כׇּל־פִּרְי֑וֹ קֹ֥דֶשׁ הִלּוּלִ֖ים לַיהֹוָֽה׃",
-          "english": "In the fourth year all its fruit shall be set aside for jubilation before GOD;"
+          "english": "In the fourth year all its fruit shall be set aside for jubilation before GOD;",
+          "audio": "audio/torah/30-kedoshim-3-yisreeli.mp3",
+          "timing": {
+            "start": 103.733,
+            "end": 114.7
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 25,
           "hebrew": "וּבַשָּׁנָ֣ה הַחֲמִישִׁ֗ת תֹּֽאכְלוּ֙ אֶת־פִּרְי֔וֹ לְהוֹסִ֥יף לָכֶ֖ם תְּבוּאָת֑וֹ אֲנִ֖י יְהֹוָ֥ה אֱלֹהֵיכֶֽם׃",
-          "english": "and only in the fifth year may you use its fruit—that its yield to you may be increased: I the ETERNAL am your God."
+          "english": "and only in the fifth year may you use its fruit—that its yield to you may be increased: I the ETERNAL am your God.",
+          "audio": "audio/torah/30-kedoshim-3-yisreeli.mp3",
+          "timing": {
+            "start": 114.7,
+            "end": 133.2
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 26,
           "hebrew": "לֹ֥א תֹאכְל֖וּ עַל־הַדָּ֑ם לֹ֥א תְנַחֲשׁ֖וּ וְלֹ֥א תְעוֹנֵֽנוּ׃",
-          "english": "You shall not eat anything with its blood. You shall not practice divination or soothsaying."
+          "english": "You shall not eat anything with its blood. You shall not practice divination or soothsaying.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 8.0
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 27,
           "hebrew": "לֹ֣א תַקִּ֔פוּ פְּאַ֖ת רֹאשְׁכֶ֑ם וְלֹ֣א תַשְׁחִ֔ית אֵ֖ת פְּאַ֥ת זְקָנֶֽךָ׃",
-          "english": "You [men] shall not round off the side-growth on your head, or destroy the side-growth of your beard."
+          "english": "You [men] shall not round off the side-growth on your head, or destroy the side-growth of your beard.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 8.0,
+            "end": 20.267
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 28,
           "hebrew": "וְשֶׂ֣רֶט לָנֶ֗פֶשׁ לֹ֤א תִתְּנוּ֙ בִּבְשַׂרְכֶ֔ם וּכְתֹ֣בֶת קַֽעֲקַ֔ע לֹ֥א תִתְּנ֖וּ בָּכֶ֑ם אֲנִ֖י יְהֹוָֽה׃",
-          "english": "You shall not make gashes in your flesh for the dead, or incise any marks on yourselves: I am GOD."
+          "english": "You shall not make gashes in your flesh for the dead, or incise any marks on yourselves: I am GOD.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 20.267,
+            "end": 42.1
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 29,
           "hebrew": "אַל־תְּחַלֵּ֥ל אֶֽת־בִּתְּךָ֖ לְהַזְנוֹתָ֑הּ וְלֹא־תִזְנֶ֣ה הָאָ֔רֶץ וּמָלְאָ֥ה הָאָ֖רֶץ זִמָּֽה׃",
-          "english": "Do not degrade your daughter and make her a prostitute, lest the land fall into prostitution and the land be filled with depravity."
+          "english": "Do not degrade your daughter and make her a prostitute, lest the land fall into prostitution and the land be filled with depravity.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 42.1,
+            "end": 53.633
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 30,
           "hebrew": "אֶת־שַׁבְּתֹתַ֣י תִּשְׁמֹ֔רוּ וּמִקְדָּשִׁ֖י תִּירָ֑אוּ אֲנִ֖י יְהֹוָֽה׃",
-          "english": "You shall keep My sabbaths and venerate My sanctuary: I am GOD."
+          "english": "You shall keep My sabbaths and venerate My sanctuary: I am GOD.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 53.633,
+            "end": 63.567
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 31,
           "hebrew": "אַל־תִּפְנ֤וּ אֶל־הָאֹבֹת֙ וְאֶל־הַיִּדְּעֹנִ֔ים אַל־תְּבַקְשׁ֖וּ לְטׇמְאָ֣ה בָהֶ֑ם אֲנִ֖י יְהֹוָ֥ה אֱלֹהֵיכֶֽם׃",
-          "english": "Do not turn to ghosts and do not inquire of familiar spirits, to be defiled by them: I the ETERNAL am your God."
+          "english": "Do not turn to ghosts and do not inquire of familiar spirits, to be defiled by them: I the ETERNAL am your God.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 63.567,
+            "end": 79.433
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 32,
           "hebrew": "מִפְּנֵ֤י שֵׂיבָה֙ תָּק֔וּם וְהָדַרְתָּ֖ פְּנֵ֣י זָקֵ֑ן וְיָרֵ֥אתָ מֵּאֱלֹהֶ֖יךָ אֲנִ֥י יְהֹוָֽה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "You shall rise before the aged and show deference to the old; you shall fear your God: I am the ETERNAL."
+          "english": "You shall rise before the aged and show deference to the old; you shall fear your God: I am the ETERNAL.",
+          "audio": "audio/torah/30-kedoshim-4-yisreeli.mp3",
+          "timing": {
+            "start": 79.433,
+            "end": 95.6
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 33,
@@ -6490,6 +7300,14 @@
           "url": "audio/torah/30-kedoshim-2-levi.mp3"
         },
         {
+          "label": "Kedoshim · 3. Yisre'eli",
+          "url": "audio/torah/30-kedoshim-3-yisreeli.mp3"
+        },
+        {
+          "label": "Kedoshim · 4. Yisre'eli",
+          "url": "audio/torah/30-kedoshim-4-yisreeli.mp3"
+        },
+        {
           "label": "Kedoshim · 5. Yisre'eli",
           "url": "audio/torah/30-kedoshim-5-yisreeli.mp3"
         }
@@ -6501,137 +7319,336 @@
         {
           "verse": 1,
           "hebrew": "וַיְדַבֵּ֥ר יְהֹוָ֖ה אֶל־מֹשֶׁ֥ה לֵּאמֹֽר׃",
-          "english": "And GOD spoke to Moses:"
+          "english": "And GOD spoke to Moses:",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 4.767
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 2,
           "hebrew": "וְאֶל־בְּנֵ֣י יִשְׂרָאֵל֮ תֹּאמַר֒ אִ֣ישׁ אִישׁ֩ מִבְּנֵ֨י יִשְׂרָאֵ֜ל וּמִן־הַגֵּ֣ר&thinsp;׀ הַגָּ֣ר בְּיִשְׂרָאֵ֗ל אֲשֶׁ֨ר יִתֵּ֧ן מִזַּרְע֛וֹ לַמֹּ֖לֶךְ מ֣וֹת יוּמָ֑ת עַ֥ם הָאָ֖רֶץ יִרְגְּמֻ֥הוּ בָאָֽבֶן׃",
-          "english": "Say further to the Israelite people:Anyone among the Israelites, or among the strangers residing in Israel, who gives any offspring to Molech, shall be put to death; the people of the land shall pelt them with stones."
+          "english": "Say further to the Israelite people:Anyone among the Israelites, or among the strangers residing in Israel, who gives any offspring to Molech, shall be put to death; the people of the land shall pelt them with stones.",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 4.767,
+            "end": 37.1
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 3,
           "hebrew": "וַאֲנִ֞י אֶתֵּ֤ן אֶת־פָּנַי֙ בָּאִ֣ישׁ הַה֔וּא וְהִכְרַתִּ֥י אֹת֖וֹ מִקֶּ֣רֶב עַמּ֑וֹ כִּ֤י מִזַּרְעוֹ֙ נָתַ֣ן לַמֹּ֔לֶךְ לְמַ֗עַן טַמֵּא֙ אֶת־מִקְדָּשִׁ֔י וּלְחַלֵּ֖ל אֶת־שֵׁ֥ם קׇדְשִֽׁי׃",
-          "english": "And I will set My face against [that party], whom I will cut off from among their kin for having given offspring to Molech and so defiled My sanctuary and profaned My holy name."
+          "english": "And I will set My face against [that party], whom I will cut off from among their kin for having given offspring to Molech and so defiled My sanctuary and profaned My holy name.",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 37.1,
+            "end": 75.167
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 4,
           "hebrew": "וְאִ֡ם הַעְלֵ֣ם יַעְלִ֩ימֽוּ֩ עַ֨ם הָאָ֜רֶץ אֶת־עֵֽינֵיהֶם֙ מִן־הָאִ֣ישׁ הַה֔וּא בְּתִתּ֥וֹ מִזַּרְע֖וֹ לַמֹּ֑לֶךְ לְבִלְתִּ֖י הָמִ֥ית אֹתֽוֹ׃",
-          "english": "And if the people of the land should shut their eyes to that party’s giving offspring to Molech, and should not put them to death,"
+          "english": "And if the people of the land should shut their eyes to that party’s giving offspring to Molech, and should not put them to death,",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 75.167,
+            "end": 96.133
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 5,
           "hebrew": "וְשַׂמְתִּ֨י אֲנִ֧י אֶת־פָּנַ֛י בָּאִ֥ישׁ הַה֖וּא וּבְמִשְׁפַּחְתּ֑וֹ וְהִכְרַתִּ֨י אֹת֜וֹ וְאֵ֣ת&thinsp;׀ כׇּל־הַזֹּנִ֣ים אַחֲרָ֗יו לִזְנ֛וֹת אַחֲרֵ֥י הַמֹּ֖לֶךְ מִקֶּ֥רֶב עַמָּֽם׃",
-          "english": "I Myself will set My face against not only that party but also their clan; and I will cut them off from among their people—all who follow in going astray after Molech."
+          "english": "I Myself will set My face against not only that party but also their clan; and I will cut them off from among their people—all who follow in going astray after Molech.",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 96.133,
+            "end": 125.133
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 6,
           "hebrew": "וְהַנֶּ֗פֶשׁ אֲשֶׁ֨ר תִּפְנֶ֤ה אֶל־הָֽאֹבֹת֙ וְאֶל־הַיִּדְּעֹנִ֔ים לִזְנֹ֖ת אַחֲרֵיהֶ֑ם וְנָתַתִּ֤י אֶת־פָּנַי֙ בַּנֶּ֣פֶשׁ הַהִ֔וא וְהִכְרַתִּ֥י אֹת֖וֹ מִקֶּ֥רֶב עַמּֽוֹ׃",
-          "english": "And if any person turns to ghosts and familiar spirits and goes astray after them, I will set My face against that person—and I will cut them off from among their kin."
+          "english": "And if any person turns to ghosts and familiar spirits and goes astray after them, I will set My face against that person—and I will cut them off from among their kin.",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 125.133,
+            "end": 154.433
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 7,
           "hebrew": "וְהִ֨תְקַדִּשְׁתֶּ֔ם וִהְיִיתֶ֖ם קְדֹשִׁ֑ים כִּ֛י אֲנִ֥י יְהֹוָ֖ה אֱלֹהֵיכֶֽם׃",
-          "english": "You shall sanctify yourselves and be holy, for I the ETERNAL am your God."
+          "english": "You shall sanctify yourselves and be holy, for I the ETERNAL am your God.",
+          "audio": "audio/torah/30-kedoshim-6-yisreeli.mp3",
+          "timing": {
+            "start": 154.433,
+            "end": 168.3
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 8,
           "hebrew": "וּשְׁמַרְתֶּם֙ אֶת־חֻקֹּתַ֔י וַעֲשִׂיתֶ֖ם אֹתָ֑ם אֲנִ֥י יְהֹוָ֖ה מְקַדִּשְׁכֶֽם׃",
-          "english": "You shall faithfully observe My laws: I GOD make you holy."
+          "english": "You shall faithfully observe My laws: I GOD make you holy.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 12.2
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 9,
           "hebrew": "כִּֽי־אִ֣ישׁ אִ֗ישׁ אֲשֶׁ֨ר יְקַלֵּ֧ל אֶת־אָבִ֛יו וְאֶת־אִמּ֖וֹ מ֣וֹת יוּמָ֑ת אָבִ֧יו וְאִמּ֛וֹ קִלֵּ֖ל דָּמָ֥יו בּֽוֹ׃",
-          "english": "Regarding anyone who insults their father or their mother: they shall be put to death; they have insulted their father and their mother—and the bloodguilt is theirs."
+          "english": "Regarding anyone who insults their father or their mother: they shall be put to death; they have insulted their father and their mother—and the bloodguilt is theirs.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 12.2,
+            "end": 33.6
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 10,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֤ר יִנְאַף֙ אֶת־אֵ֣שֶׁת אִ֔ישׁ אֲשֶׁ֥ר יִנְאַ֖ף אֶת־אֵ֣שֶׁת רֵעֵ֑הוּ מֽוֹת־יוּמַ֥ת הַנֹּאֵ֖ף וְהַנֹּאָֽפֶת׃",
-          "english": "If a man commits adultery with a married woman—committing adultery with another man’s wife—the adulterer and the adulteress shall be put to death."
+          "english": "If a man commits adultery with a married woman—committing adultery with another man’s wife—the adulterer and the adulteress shall be put to death.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 33.6,
+            "end": 53.233
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 11,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֤ר יִשְׁכַּב֙ אֶת־אֵ֣שֶׁת אָבִ֔יו עֶרְוַ֥ת אָבִ֖יו גִּלָּ֑ה מֽוֹת־יוּמְת֥וּ שְׁנֵיהֶ֖ם דְּמֵיהֶ֥ם בָּֽם׃",
-          "english": "If a man lies with his father’s wife, it is the nakedness of his father that he has uncovered; the two shall be put to death—and the bloodguilt is theirs."
+          "english": "If a man lies with his father’s wife, it is the nakedness of his father that he has uncovered; the two shall be put to death—and the bloodguilt is theirs.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 53.233,
+            "end": 72.4
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 12,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֤ר יִשְׁכַּב֙ אֶת־כַּלָּת֔וֹ מ֥וֹת יוּמְת֖וּ שְׁנֵיהֶ֑ם תֶּ֥בֶל עָשׂ֖וּ דְּמֵיהֶ֥ם בָּֽם׃",
-          "english": "If a man lies with his daughter-in-law, both of them shall be put to death; they have committed incest—and the bloodguilt is theirs."
+          "english": "If a man lies with his daughter-in-law, both of them shall be put to death; they have committed incest—and the bloodguilt is theirs.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 72.4,
+            "end": 91.233
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 13,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֨ר יִשְׁכַּ֤ב אֶת־זָכָר֙ מִשְׁכְּבֵ֣י אִשָּׁ֔ה תּוֹעֵבָ֥ה עָשׂ֖וּ שְׁנֵיהֶ֑ם מ֥וֹת יוּמָ֖תוּ דְּמֵיהֶ֥ם בָּֽם׃",
-          "english": "If a man lies with a male as one lies with a woman, the two of them have done an abhorrent thing; they shall be put to death—and the bloodguilt is theirs."
+          "english": "If a man lies with a male as one lies with a woman, the two of them have done an abhorrent thing; they shall be put to death—and the bloodguilt is theirs.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 91.233,
+            "end": 111.067
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 14,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֨ר יִקַּ֧ח אֶת־אִשָּׁ֛ה וְאֶת־אִמָּ֖הּ זִמָּ֣ה הִ֑וא בָּאֵ֞שׁ יִשְׂרְפ֤וּ אֹתוֹ֙ וְאֶתְהֶ֔ן וְלֹא־תִהְיֶ֥ה זִמָּ֖ה בְּתוֹכְכֶֽם׃",
-          "english": "If a man marries a woman and her mother, it is depravity; both he and they shall be put to the fire, that there be no depravity among you."
+          "english": "If a man marries a woman and her mother, it is depravity; both he and they shall be put to the fire, that there be no depravity among you.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 111.067,
+            "end": 140.433
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 15,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֨ר יִתֵּ֧ן שְׁכׇבְתּ֛וֹ בִּבְהֵמָ֖ה מ֣וֹת יוּמָ֑ת וְאֶת־הַבְּהֵמָ֖ה תַּהֲרֹֽגוּ׃",
-          "english": "If a man has carnal relations with an animal, he shall be put to death; and you shall kill the animal."
+          "english": "If a man has carnal relations with an animal, he shall be put to death; and you shall kill the animal.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 140.433,
+            "end": 157.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 16,
           "hebrew": "וְאִשָּׁ֗ה אֲשֶׁ֨ר תִּקְרַ֤ב אֶל־כׇּל־בְּהֵמָה֙ לְרִבְעָ֣הֿ אֹתָ֔הּ וְהָרַגְתָּ֥ אֶת־הָאִשָּׁ֖ה וְאֶת־הַבְּהֵמָ֑ה מ֥וֹת יוּמָ֖תוּ דְּמֵיהֶ֥ם בָּֽם׃",
-          "english": "If a woman approaches any animal to mate with it, you shall kill the woman and the animal; they shall be put to death—and the bloodguilt is theirs."
+          "english": "If a woman approaches any animal to mate with it, you shall kill the woman and the animal; they shall be put to death—and the bloodguilt is theirs.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 157.167,
+            "end": 179.3
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 17,
           "hebrew": "וְאִ֣ישׁ אֲשֶׁר־יִקַּ֣ח אֶת־אֲחֹת֡וֹ בַּת־אָבִ֣יו א֣וֹ בַת־אִ֠מּ֠וֹ וְרָאָ֨ה אֶת־עֶרְוָתָ֜הּ וְהִֽיא־תִרְאֶ֤ה אֶת־עֶרְוָתוֹ֙ חֶ֣סֶד ה֔וּא וְנִ֨כְרְת֔וּ לְעֵינֵ֖י בְּנֵ֣י עַמָּ֑ם עֶרְוַ֧ת אֲחֹת֛וֹ גִּלָּ֖ה עֲוֺנ֥וֹ יִשָּֽׂא׃",
-          "english": "If a man marries his sister, the daughter of either his father or his mother, so that he sees her nakedness and she sees his nakedness, it is a disgrace; they shall be excommunicated in the sight of their kinsfolk. He has uncovered the nakedness of his sister, he shall bear the guilt."
+          "english": "If a man marries his sister, the daughter of either his father or his mother, so that he sees her nakedness and she sees his nakedness, it is a disgrace; they shall be excommunicated in the sight of their kinsfolk. He has uncovered the nakedness of his sister, he shall bear the guilt.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 179.3,
+            "end": 215.367
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 18,
           "hebrew": "וְ֠אִ֠ישׁ אֲשֶׁר־יִשְׁכַּ֨ב אֶת־אִשָּׁ֜ה דָּוָ֗ה וְגִלָּ֤ה אֶת־עֶרְוָתָהּ֙ אֶת־מְקֹרָ֣הּ הֶֽעֱרָ֔ה וְהִ֕וא גִּלְּתָ֖ה אֶת־מְק֣וֹר דָּמֶ֑יהָ וְנִכְרְת֥וּ שְׁנֵיהֶ֖ם מִקֶּ֥רֶב עַמָּֽם׃",
-          "english": "If a man lies with a woman during her menstrual condition and uncovers her nakedness, he has laid bare her flow and she has exposed her blood flow; both of them shall be cut off from among their people."
+          "english": "If a man lies with a woman during her menstrual condition and uncovers her nakedness, he has laid bare her flow and she has exposed her blood flow; both of them shall be cut off from among their people.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 215.367,
+            "end": 247.533
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 19,
           "hebrew": "וְעֶרְוַ֨ת אֲח֧וֹת אִמְּךָ֛ וַאֲח֥וֹת אָבִ֖יךָ לֹ֣א תְגַלֵּ֑ה כִּ֧י אֶת־שְׁאֵר֛וֹ הֶעֱרָ֖ה עֲוֺנָ֥ם יִשָּֽׂאוּ׃",
-          "english": "You shall not uncover the nakedness of your mother’s sister or of your father’s sister, for that is laying bare one’s own flesh; they shall bear the guilt."
+          "english": "You shall not uncover the nakedness of your mother’s sister or of your father’s sister, for that is laying bare one’s own flesh; they shall bear the guilt.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 247.533,
+            "end": 264.7
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 20,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֤ר יִשְׁכַּב֙ אֶת־דֹּ֣דָת֔וֹ עֶרְוַ֥ת דֹּד֖וֹ גִּלָּ֑ה חֶטְאָ֥ם יִשָּׂ֖אוּ עֲרִירִ֥ים יָמֻֽתוּ׃",
-          "english": "If a man lies with his uncle’s wife, it is his uncle’s nakedness that he has uncovered. They shall bear the guilt: they shall die childless."
+          "english": "If a man lies with his uncle’s wife, it is his uncle’s nakedness that he has uncovered. They shall bear the guilt: they shall die childless.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 264.7,
+            "end": 284.0
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 21,
           "hebrew": "וְאִ֗ישׁ אֲשֶׁ֥ר יִקַּ֛ח אֶת־אֵ֥שֶׁת אָחִ֖יו נִדָּ֣ה הִ֑וא עֶרְוַ֥ת אָחִ֛יו גִּלָּ֖ה עֲרִירִ֥ים יִהְיֽוּ׃",
-          "english": "If a man marries the wife of his brother, it is indecency. It is the nakedness of his brother that he has uncovered; they shall remain childless."
+          "english": "If a man marries the wife of his brother, it is indecency. It is the nakedness of his brother that he has uncovered; they shall remain childless.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 284.0,
+            "end": 302.233
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 22,
           "hebrew": "וּשְׁמַרְתֶּ֤ם אֶת־כׇּל־חֻקֹּתַי֙ וְאֶת־כׇּל־מִשְׁפָּטַ֔י וַעֲשִׂיתֶ֖ם אֹתָ֑ם וְלֹא־תָקִ֤יא אֶתְכֶם֙ הָאָ֔רֶץ אֲשֶׁ֨ר אֲנִ֜י מֵבִ֥יא אֶתְכֶ֛ם שָׁ֖מָּה לָשֶׁ֥בֶת בָּֽהּ׃",
-          "english": "You shall faithfully observe all My laws and all My regulations, lest the land to which I bring you to settle in spew you out."
+          "english": "You shall faithfully observe all My laws and all My regulations, lest the land to which I bring you to settle in spew you out.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 302.233,
+            "end": 331.633
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 23,
           "hebrew": "וְלֹ֤א תֵֽלְכוּ֙ בְּחֻקֹּ֣ת הַגּ֔וֹי אֲשֶׁר־אֲנִ֥י מְשַׁלֵּ֖חַ מִפְּנֵיכֶ֑ם כִּ֤י אֶת־כׇּל־אֵ֙לֶּה֙ עָשׂ֔וּ וָאָקֻ֖ץ בָּֽם׃",
-          "english": "You shall not follow the practices of the nation that I am driving out before you. For it is because they did all these things that I abhorred them"
+          "english": "You shall not follow the practices of the nation that I am driving out before you. For it is because they did all these things that I abhorred them",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 331.633,
+            "end": 355.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 24,
           "hebrew": "וָאֹמַ֣ר לָכֶ֗ם אַתֶּם֮ תִּֽירְשׁ֣וּ אֶת־אַדְמָתָם֒ וַאֲנִ֞י אֶתְּנֶ֤נָּה לָכֶם֙ לָרֶ֣שֶׁת אֹתָ֔הּ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָ֑שׁ אֲנִי֙ יְהֹוָ֣ה אֱלֹֽהֵיכֶ֔ם אֲשֶׁר־הִבְדַּ֥לְתִּי אֶתְכֶ֖ם מִן־הָֽעַמִּֽים׃",
-          "english": "and said to you: You shall possess their land, for I will give it to you to possess, a land flowing with milk and honey. I the ETERNAL am your God who has set you apart from other peoples."
+          "english": "and said to you: You shall possess their land, for I will give it to you to possess, a land flowing with milk and honey. I the ETERNAL am your God who has set you apart from other peoples.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 355.167,
+            "end": 394.667
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 25,
           "hebrew": "וְהִבְדַּלְתֶּ֞ם בֵּֽין־הַבְּהֵמָ֤ה הַטְּהֹרָה֙ לַטְּמֵאָ֔ה וּבֵין־הָע֥וֹף הַטָּמֵ֖א לַטָּהֹ֑ר וְלֹֽא־תְשַׁקְּצ֨וּ אֶת־נַפְשֹֽׁתֵיכֶ֜ם בַּבְּהֵמָ֣ה וּבָע֗וֹף וּבְכֹל֙ אֲשֶׁ֣ר תִּרְמֹ֣שׂ הָֽאֲדָמָ֔ה אֲשֶׁר־הִבְדַּ֥לְתִּי לָכֶ֖ם לְטַמֵּֽא׃",
-          "english": "So you shall set apart the pure animal from the impure, the impure bird from the pure. You shall not draw abomination upon yourselves through that which I have set apart for you to treat as impure—[whether] animal or bird or anything with which the ground is alive."
+          "english": "So you shall set apart the pure animal from the impure, the impure bird from the pure. You shall not draw abomination upon yourselves through that which I have set apart for you to treat as impure—[whether] animal or bird or anything with which the ground is alive.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 394.667,
+            "end": 431.467
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 26,
           "hebrew": "וִהְיִ֤יתֶם לִי֙ קְדֹשִׁ֔ים כִּ֥י קָד֖וֹשׁ אֲנִ֣י יְהֹוָ֑ה וָאַבְדִּ֥ל אֶתְכֶ֛ם מִן־הָֽעַמִּ֖ים לִהְי֥וֹת לִֽי׃",
-          "english": "You shall be holy to Me, for I GOD am holy, and I have set you apart from other peoples to be Mine."
+          "english": "You shall be holy to Me, for I GOD am holy, and I have set you apart from other peoples to be Mine.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 431.467,
+            "end": 449.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
         },
         {
           "verse": 27,
           "hebrew": "וְאִ֣ישׁ אֽוֹ־אִשָּׁ֗ה כִּי־יִהְיֶ֨ה בָהֶ֥ם א֛וֹב א֥וֹ יִדְּעֹנִ֖י מ֣וֹת יוּמָ֑תוּ בָּאֶ֛בֶן יִרְגְּמ֥וּ אֹתָ֖ם דְּמֵיהֶ֥ם בָּֽם׃&nbsp;{פ}",
-          "english": "A man or a woman who has a ghost or a familiar spirit shall be put to death; they shall be pelted with stones—and the bloodguilt is theirs."
+          "english": "A man or a woman who has a ghost or a familiar spirit shall be put to death; they shall be pelted with stones—and the bloodguilt is theirs.",
+          "audio": "audio/torah/30-kedoshim-7-yisreeli.mp3",
+          "timing": {
+            "start": 449.167,
+            "end": 469.8
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Kedoshim"
+        }
+      ],
+      "audioSegments": [
+        {
+          "label": "Kedoshim · 6. Yisre'eli",
+          "url": "audio/torah/30-kedoshim-6-yisreeli.mp3"
+        },
+        {
+          "label": "Kedoshim · 7. Yisre'eli",
+          "url": "audio/torah/30-kedoshim-7-yisreeli.mp3"
         }
       ]
     },
@@ -8345,137 +9362,326 @@
         {
           "verse": 14,
           "hebrew": "וְכִֽי־תִמְכְּר֤וּ מִמְכָּר֙ לַעֲמִיתֶ֔ךָ א֥וֹ קָנֹ֖ה מִיַּ֣ד עֲמִיתֶ֑ךָ אַל־תּוֹנ֖וּ אִ֥ישׁ אֶת־אָחִֽיו׃",
-          "english": "When you sell property to your neighbor, or buy any from your neighbor, you shall not wrong one another."
+          "english": "When you sell property to your neighbor, or buy any from your neighbor, you shall not wrong one another.",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 14.467
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 15,
           "hebrew": "בְּמִסְפַּ֤ר שָׁנִים֙ אַחַ֣ר הַיּוֹבֵ֔ל תִּקְנֶ֖ה מֵאֵ֣ת עֲמִיתֶ֑ךָ בְּמִסְפַּ֥ר שְׁנֵֽי־תְבוּאֹ֖ת יִמְכׇּר־לָֽךְ׃",
-          "english": "In buying from your neighbor, you shall deduct only for the number of years since the jubilee; and in selling to you, you shall be charged only for the remaining crop years:"
+          "english": "In buying from your neighbor, you shall deduct only for the number of years since the jubilee; and in selling to you, you shall be charged only for the remaining crop years:",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 14.467,
+            "end": 29.033
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 16,
           "hebrew": "לְפִ֣י&thinsp;׀ רֹ֣ב הַשָּׁנִ֗ים תַּרְבֶּה֙ מִקְנָת֔וֹ וּלְפִי֙ מְעֹ֣ט הַשָּׁנִ֔ים תַּמְעִ֖יט מִקְנָת֑וֹ כִּ֚י מִסְפַּ֣ר תְּבוּאֹ֔ת ה֥וּא מֹכֵ֖ר לָֽךְ׃",
-          "english": "the more such years, the higher the price you pay; the fewer such years, the lower the price; for what is being sold to you is a number of harvests."
+          "english": "the more such years, the higher the price you pay; the fewer such years, the lower the price; for what is being sold to you is a number of harvests.",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 29.033,
+            "end": 52.8
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 17,
           "hebrew": "וְלֹ֤א תוֹנוּ֙ אִ֣ישׁ אֶת־עֲמִית֔וֹ וְיָרֵ֖אתָ מֵֽאֱלֹהֶ֑יךָ כִּ֛י אֲנִ֥י יְהֹוָ֖ה אֱלֹהֵיכֶֽם׃",
-          "english": "Do not wrong one another, but fear your God; for I the ETERNAL am your God."
+          "english": "Do not wrong one another, but fear your God; for I the ETERNAL am your God.",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 52.8,
+            "end": 68.2
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 18,
           "hebrew": "וַעֲשִׂיתֶם֙ אֶת־חֻקֹּתַ֔י וְאֶת־מִשְׁפָּטַ֥י תִּשְׁמְר֖וּ וַעֲשִׂיתֶ֣ם אֹתָ֑ם וִֽישַׁבְתֶּ֥ם עַל־הָאָ֖רֶץ לָבֶֽטַח׃",
-          "english": "You shall observe My laws and faithfully keep My rules, that you may live upon the land in security;"
+          "english": "You shall observe My laws and faithfully keep My rules, that you may live upon the land in security;",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 68.2,
+            "end": 81.8
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 19,
           "hebrew": "וְנָתְנָ֤ה הָאָ֙רֶץ֙ פִּרְיָ֔הּ וַאֲכַלְתֶּ֖ם לָשֹׂ֑בַע וִֽישַׁבְתֶּ֥ם לָבֶ֖טַח עָלֶֽיהָ׃",
-          "english": "the land shall yield its fruit and you shall eat your fill, and you shall live upon it in security."
+          "english": "the land shall yield its fruit and you shall eat your fill, and you shall live upon it in security.",
+          "audio": "audio/torah/32-behar-sinay-2-levi.mp3",
+          "timing": {
+            "start": 81.8,
+            "end": 98.2
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 20,
           "hebrew": "וְכִ֣י תֹאמְר֔וּ מַה־נֹּאכַ֖ל בַּשָּׁנָ֣ה הַשְּׁבִיעִ֑ת הֵ֚ן לֹ֣א נִזְרָ֔ע וְלֹ֥א נֶאֱסֹ֖ף אֶת־תְּבוּאָתֵֽנוּ׃",
-          "english": "And should you ask, “What are we to eat in the seventh year, if we may neither sow nor gather in our crops?”"
+          "english": "And should you ask, “What are we to eat in the seventh year, if we may neither sow nor gather in our crops?”",
+          "audio": "audio/torah/32-behar-sinay-3-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 14.167
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 21,
           "hebrew": "וְצִוִּ֤יתִי אֶת־בִּרְכָתִי֙ לָכֶ֔ם בַּשָּׁנָ֖ה הַשִּׁשִּׁ֑ית וְעָשָׂת֙ אֶת־הַתְּבוּאָ֔ה לִשְׁלֹ֖שׁ הַשָּׁנִֽים׃",
-          "english": "I will ordain My blessing for you in the sixth year, so that it shall yield a crop sufficient for three years."
+          "english": "I will ordain My blessing for you in the sixth year, so that it shall yield a crop sufficient for three years.",
+          "audio": "audio/torah/32-behar-sinay-3-yisreeli.mp3",
+          "timing": {
+            "start": 14.167,
+            "end": 31.3
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 22,
           "hebrew": "וּזְרַעְתֶּ֗ם אֵ֚ת הַשָּׁנָ֣ה הַשְּׁמִינִ֔ת וַאֲכַלְתֶּ֖ם מִן־הַתְּבוּאָ֣ה יָשָׁ֑ן עַ֣ד&thinsp;׀ הַשָּׁנָ֣ה הַתְּשִׁיעִ֗ת עַד־בּוֹא֙ תְּב֣וּאָתָ֔הּ תֹּאכְל֖וּ יָשָֽׁן׃",
-          "english": "When you sow in the eighth year, you will still be eating old grain of that crop; you will be eating the old until the ninth year, until its crops come in."
+          "english": "When you sow in the eighth year, you will still be eating old grain of that crop; you will be eating the old until the ninth year, until its crops come in.",
+          "audio": "audio/torah/32-behar-sinay-3-yisreeli.mp3",
+          "timing": {
+            "start": 31.3,
+            "end": 57.433
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 23,
           "hebrew": "וְהָאָ֗רֶץ לֹ֤א תִמָּכֵר֙ לִצְמִתֻ֔ת כִּי־לִ֖י הָאָ֑רֶץ כִּֽי־גֵרִ֧ים וְתוֹשָׁבִ֛ים אַתֶּ֖ם עִמָּדִֽי׃",
-          "english": "But the land must not be sold beyond reclaim, for the land is Mine; you are but strangers resident with Me."
+          "english": "But the land must not be sold beyond reclaim, for the land is Mine; you are but strangers resident with Me.",
+          "audio": "audio/torah/32-behar-sinay-3-yisreeli.mp3",
+          "timing": {
+            "start": 57.433,
+            "end": 77.533
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 24,
           "hebrew": "וּבְכֹ֖ל אֶ֣רֶץ אֲחֻזַּתְכֶ֑ם גְּאֻלָּ֖ה תִּתְּנ֥וּ לָאָֽרֶץ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Throughout the land that you hold, you must provide for the redemption of the land."
+          "english": "Throughout the land that you hold, you must provide for the redemption of the land.",
+          "audio": "audio/torah/32-behar-sinay-3-yisreeli.mp3",
+          "timing": {
+            "start": 77.533,
+            "end": 86.8
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 25,
           "hebrew": "כִּֽי־יָמ֣וּךְ אָחִ֔יךָ וּמָכַ֖ר מֵאֲחֻזָּת֑וֹ וּבָ֤א גֹֽאֲלוֹ֙ הַקָּרֹ֣ב אֵלָ֔יו וְגָאַ֕ל אֵ֖ת מִמְכַּ֥ר אָחִֽיו׃",
-          "english": "If one of your kin is in straits and has to sell part of a holding, the nearest redeemer shall come and redeem what that relative has sold."
+          "english": "If one of your kin is in straits and has to sell part of a holding, the nearest redeemer shall come and redeem what that relative has sold.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 20.367
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 26,
           "hebrew": "וְאִ֕ישׁ כִּ֛י לֹ֥א יִֽהְיֶה־לּ֖וֹ גֹּאֵ֑ל וְהִשִּׂ֣יגָה יָד֔וֹ וּמָצָ֖א כְּדֵ֥י גְאֻלָּתֽוֹ׃",
-          "english": "Regarding anyone who has no one to be redeemer but prospers and acquires enough to redeem with:"
+          "english": "Regarding anyone who has no one to be redeemer but prospers and acquires enough to redeem with:",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 20.367,
+            "end": 35.733
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 27,
           "hebrew": "וְחִשַּׁב֙ אֶת־שְׁנֵ֣י מִמְכָּר֔וֹ וְהֵשִׁיב֙ אֶת־הָ֣עֹדֵ֔ף לָאִ֖ישׁ אֲשֶׁ֣ר מָֽכַר־ל֑וֹ וְשָׁ֖ב לַאֲחֻזָּתֽוֹ׃",
-          "english": "the years since its sale shall be computed and the difference shall be refunded to the party to whom it was sold, so that [the seller] returns to their holding."
+          "english": "the years since its sale shall be computed and the difference shall be refunded to the party to whom it was sold, so that [the seller] returns to their holding.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 35.733,
+            "end": 52.067
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 28,
           "hebrew": "וְאִ֨ם לֹֽא־מָצְאָ֜ה יָד֗וֹ דֵּי֮ הָשִׁ֣יב לוֹ֒ וְהָיָ֣ה מִמְכָּר֗וֹ בְּיַד֙ הַקֹּנֶ֣ה אֹת֔וֹ עַ֖ד שְׁנַ֣ת הַיּוֹבֵ֑ל וְיָצָא֙ בַּיֹּבֵ֔ל וְשָׁ֖ב לַאֲחֻזָּתֽוֹ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "If [the seller] lacks sufficient means to recover it, what was sold shall remain with the purchaser until the jubilee; in the jubilee year it shall be released, so that they return to their holding."
+          "english": "If [the seller] lacks sufficient means to recover it, what was sold shall remain with the purchaser until the jubilee; in the jubilee year it shall be released, so that they return to their holding.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 52.067,
+            "end": 86.2
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 29,
           "hebrew": "וְאִ֗ישׁ כִּֽי־יִמְכֹּ֤ר בֵּית־מוֹשַׁב֙ עִ֣יר חוֹמָ֔ה וְהָיְתָה֙ גְּאֻלָּת֔וֹ עַד־תֹּ֖ם שְׁנַ֣ת מִמְכָּר֑וֹ יָמִ֖ים תִּהְיֶ֥ה גְאֻלָּתֽוֹ׃",
-          "english": "Regarding anyone who sells a dwelling house in a walled city: It may be redeemed until a year has elapsed since its sale; the redemption period shall be a year."
+          "english": "Regarding anyone who sells a dwelling house in a walled city: It may be redeemed until a year has elapsed since its sale; the redemption period shall be a year.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 86.2,
+            "end": 108.233
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 30,
           "hebrew": "וְאִ֣ם לֹֽא־יִגָּאֵ֗ל עַד־מְלֹ֣את לוֹ֮ שָׁנָ֣ה תְמִימָה֒ וְ֠קָ֠ם הַבַּ֨יִת אֲשֶׁר־בָּעִ֜יר אֲשֶׁר־[ל֣וֹ] (לא) חֹמָ֗ה לַצְּמִיתֻ֛ת לַקֹּנֶ֥ה אֹת֖וֹ לְדֹרֹתָ֑יו לֹ֥א יֵצֵ֖א בַּיֹּבֵֽל׃",
-          "english": "If it is not redeemed before a full year has elapsed, the house in the walled city shall pass to the purchaser beyond reclaim throughout the ages; it shall not be released in the jubilee."
+          "english": "If it is not redeemed before a full year has elapsed, the house in the walled city shall pass to the purchaser beyond reclaim throughout the ages; it shall not be released in the jubilee.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 108.233,
+            "end": 141.633
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 31,
           "hebrew": "וּבָתֵּ֣י הַחֲצֵרִ֗ים אֲשֶׁ֨ר אֵין־לָהֶ֤ם חֹמָה֙ סָבִ֔יב עַל־שְׂדֵ֥ה הָאָ֖רֶץ יֵחָשֵׁ֑ב גְּאֻלָּה֙ תִּהְיֶה־לּ֔וֹ וּבַיֹּבֵ֖ל יֵצֵֽא׃",
-          "english": "But houses in villages that have no encircling walls shall be classed as open country: they may be redeemed, and they shall be released through the jubilee."
+          "english": "But houses in villages that have no encircling walls shall be classed as open country: they may be redeemed, and they shall be released through the jubilee.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 141.633,
+            "end": 165.033
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 32,
           "hebrew": "וְעָרֵי֙ הַלְוִיִּ֔ם בָּתֵּ֖י עָרֵ֣י אֲחֻזָּתָ֑ם גְּאֻלַּ֥ת עוֹלָ֖ם תִּהְיֶ֥ה לַלְוִיִּֽם׃",
-          "english": "As for the cities of Levi, the houses in the cities it holds: Levi shall forever have the right of redemption."
+          "english": "As for the cities of Levi, the houses in the cities it holds: Levi shall forever have the right of redemption.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 165.033,
+            "end": 176.8
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 33,
           "hebrew": "וַאֲשֶׁ֤ר יִגְאַל֙ מִן־הַלְוִיִּ֔ם וְיָצָ֧א מִמְכַּר־בַּ֛יִת וְעִ֥יר אֲחֻזָּת֖וֹ בַּיֹּבֵ֑ל כִּ֣י בָתֵּ֞י עָרֵ֣י הַלְוִיִּ֗ם הִ֚וא אֲחֻזָּתָ֔ם בְּת֖וֹךְ בְּנֵ֥י יִשְׂרָאֵֽל׃",
-          "english": "Such property as may be redeemed from Levi—houses sold in a city it holds—shall be released through the jubilee; for the houses in the cities of Levi are its holding among the Israelites."
+          "english": "Such property as may be redeemed from Levi—houses sold in a city it holds—shall be released through the jubilee; for the houses in the cities of Levi are its holding among the Israelites.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 176.8,
+            "end": 207.533
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 34,
           "hebrew": "וּֽשְׂדֵ֛ה מִגְרַ֥שׁ עָרֵיהֶ֖ם לֹ֣א יִמָּכֵ֑ר כִּֽי־אֲחֻזַּ֥ת עוֹלָ֛ם ה֖וּא לָהֶֽם׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "But the unenclosed land about its cities cannot be sold, for that is its holding for all time."
+          "english": "But the unenclosed land about its cities cannot be sold, for that is its holding for all time.",
+          "audio": "audio/torah/32-behar-sinay-4-yisreeli.mp3",
+          "timing": {
+            "start": 207.533,
+            "end": 222.167
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 35,
           "hebrew": "וְכִֽי־יָמ֣וּךְ אָחִ֔יךָ וּמָ֥טָה יָד֖וֹ עִמָּ֑ךְ וְהֶֽחֱזַ֣קְתָּ בּ֔וֹ גֵּ֧ר וְתוֹשָׁ֛ב וָחַ֖י עִמָּֽךְ׃",
-          "english": "If your kin, being in straits, come under your authority, and are held by you as though resident aliens, let them live by your side:"
+          "english": "If your kin, being in straits, come under your authority, and are held by you as though resident aliens, let them live by your side:",
+          "audio": "audio/torah/32-behar-sinay-5-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 16.133
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 36,
           "hebrew": "אַל־תִּקַּ֤ח מֵֽאִתּוֹ֙ נֶ֣שֶׁךְ וְתַרְבִּ֔ית וְיָרֵ֖אתָ מֵֽאֱלֹהֶ֑יךָ וְחֵ֥י אָחִ֖יךָ עִמָּֽךְ׃",
-          "english": "do not exact advance or accrued interest, but fear your God. Let your kin live by your side as such."
+          "english": "do not exact advance or accrued interest, but fear your God. Let your kin live by your side as such.",
+          "audio": "audio/torah/32-behar-sinay-5-yisreeli.mp3",
+          "timing": {
+            "start": 16.133,
+            "end": 29.467
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 37,
           "hebrew": "אֶ֨ת־כַּסְפְּךָ֔ לֹֽא־תִתֵּ֥ן ל֖וֹ בְּנֶ֑שֶׁךְ וּבְמַרְבִּ֖ית לֹא־תִתֵּ֥ן אׇכְלֶֽךָ׃",
-          "english": "Do not lend your money at advance interest, nor give your food at accrued interest."
+          "english": "Do not lend your money at advance interest, nor give your food at accrued interest.",
+          "audio": "audio/torah/32-behar-sinay-5-yisreeli.mp3",
+          "timing": {
+            "start": 29.467,
+            "end": 39.567
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 38,
           "hebrew": "אֲנִ֗י יְהֹוָה֙ אֱלֹ֣הֵיכֶ֔ם אֲשֶׁר־הוֹצֵ֥אתִי אֶתְכֶ֖ם מֵאֶ֣רֶץ מִצְרָ֑יִם לָתֵ֤ת לָכֶם֙ אֶת־אֶ֣רֶץ כְּנַ֔עַן לִהְי֥וֹת לָכֶ֖ם לֵאלֹהִֽים׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "I am the ETERNAL your God, who brought you out of the land of Egypt, to give you the land of Canaan, to be your God."
+          "english": "I am the ETERNAL your God, who brought you out of the land of Egypt, to give you the land of Canaan, to be your God.",
+          "audio": "audio/torah/32-behar-sinay-5-yisreeli.mp3",
+          "timing": {
+            "start": 39.567,
+            "end": 64.4
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 39,
           "hebrew": "וְכִֽי־יָמ֥וּךְ אָחִ֛יךָ עִמָּ֖ךְ וְנִמְכַּר־לָ֑ךְ לֹא־תַעֲבֹ֥ד בּ֖וֹ עֲבֹ֥דַת עָֽבֶד׃",
-          "english": "If your kin under you continue in straits and must be given over to you, do not subject them to the treatment of a slave."
+          "english": "If your kin under you continue in straits and must be given over to you, do not subject them to the treatment of a slave.",
+          "audio": "audio/torah/32-behar-sinay-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 10.567
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 40,
           "hebrew": "כְּשָׂכִ֥יר כְּתוֹשָׁ֖ב יִהְיֶ֣ה עִמָּ֑ךְ עַד־שְׁנַ֥ת הַיֹּבֵ֖ל יַעֲבֹ֥ד עִמָּֽךְ׃",
-          "english": "Remaining with you as a hired or bound laborer, they shall serve with you only until the jubilee year."
+          "english": "Remaining with you as a hired or bound laborer, they shall serve with you only until the jubilee year.",
+          "audio": "audio/torah/32-behar-sinay-6-yisreeli.mp3",
+          "timing": {
+            "start": 10.567,
+            "end": 18.633
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Behar Sinay"
         },
         {
           "verse": 41,
@@ -8662,6 +9868,26 @@
         {
           "label": "Behar Sinay · 1. Cohen",
           "url": "audio/torah/32-behar-sinay-1-cohen.mp3"
+        },
+        {
+          "label": "Behar Sinay · 2. Levi",
+          "url": "audio/torah/32-behar-sinay-2-levi.mp3"
+        },
+        {
+          "label": "Behar Sinay · 3. Yisre'eli",
+          "url": "audio/torah/32-behar-sinay-3-yisreeli.mp3"
+        },
+        {
+          "label": "Behar Sinay · 4. Yisre'eli",
+          "url": "audio/torah/32-behar-sinay-4-yisreeli.mp3"
+        },
+        {
+          "label": "Behar Sinay · 5. Yisre'eli",
+          "url": "audio/torah/32-behar-sinay-5-yisreeli.mp3"
+        },
+        {
+          "label": "Behar Sinay · 6. Yisre'eli",
+          "url": "audio/torah/32-behar-sinay-6-yisreeli.mp3"
         },
         {
           "label": "Behar Sinay · 6. Yisre'eli",

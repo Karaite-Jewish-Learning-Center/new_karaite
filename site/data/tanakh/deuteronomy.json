@@ -10,57 +10,134 @@
         {
           "verse": 1,
           "hebrew": "אֵ֣לֶּה הַדְּבָרִ֗ים אֲשֶׁ֨ר דִּבֶּ֤ר מֹשֶׁה֙ אֶל־כׇּל־יִשְׂרָאֵ֔ל בְּעֵ֖בֶר הַיַּרְדֵּ֑ן בַּמִּדְבָּ֡ר בָּֽעֲרָבָה֩ מ֨וֹל ס֜וּף בֵּֽין־פָּארָ֧ן וּבֵֽין־תֹּ֛פֶל וְלָבָ֥ן וַחֲצֵרֹ֖ת וְדִ֥י זָהָֽב׃",
-          "english": "These are the words that Moses addressed to all Israel on the other side of the Jordan.—Through the wilderness, in the Arabah near Suph, between Paran and Tophel, Laban, Hazeroth, and Di-zahab,"
+          "english": "These are the words that Moses addressed to all Israel on the other side of the Jordan.—Through the wilderness, in the Arabah near Suph, between Paran and Tophel, Laban, Hazeroth, and Di-zahab,",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 34.167
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 2,
           "hebrew": "אַחַ֨ד עָשָׂ֥ר יוֹם֙ מֵֽחֹרֵ֔ב דֶּ֖רֶךְ הַר־שֵׂעִ֑יר עַ֖ד קָדֵ֥שׁ בַּרְנֵֽעַ׃",
-          "english": "it is eleven days from Horeb to Kadesh-barnea by the Mount Seir route.—"
+          "english": "it is eleven days from Horeb to Kadesh-barnea by the Mount Seir route.—",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 34.167,
+            "end": 47.0
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 3,
           "hebrew": "וַֽיְהִי֙ בְּאַרְבָּעִ֣ים שָׁנָ֔ה בְּעַשְׁתֵּֽי־עָשָׂ֥ר חֹ֖דֶשׁ בְּאֶחָ֣ד לַחֹ֑דֶשׁ דִּבֶּ֤ר מֹשֶׁה֙ אֶל־בְּנֵ֣י יִשְׂרָאֵ֔ל כְּ֠כֹ֠ל אֲשֶׁ֨ר צִוָּ֧ה יְהֹוָ֛ה אֹת֖וֹ אֲלֵהֶֽם׃",
-          "english": "It was in the fortieth year, on the first day of the eleventh month, that Moses addressed the Israelites in accordance with the instructions that GOD had given him for them,"
+          "english": "It was in the fortieth year, on the first day of the eleventh month, that Moses addressed the Israelites in accordance with the instructions that GOD had given him for them,",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 47.0,
+            "end": 75.367
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 4,
           "hebrew": "אַחֲרֵ֣י הַכֹּת֗וֹ אֵ֚ת סִיחֹן֙ מֶ֣לֶךְ הָֽאֱמֹרִ֔י אֲשֶׁ֥ר יוֹשֵׁ֖ב בְּחֶשְׁבּ֑וֹן וְאֵ֗ת ע֚וֹג מֶ֣לֶךְ הַבָּשָׁ֔ן אֲשֶׁר־יוֹשֵׁ֥ב בְּעַשְׁתָּרֹ֖ת בְּאֶדְרֶֽעִי׃",
-          "english": "after he had defeated Sihon king of the Amorites, who dwelt in Heshbon, and King Og of Bashan, who dwelt at Ashtaroth [and] Edrei."
+          "english": "after he had defeated Sihon king of the Amorites, who dwelt in Heshbon, and King Og of Bashan, who dwelt at Ashtaroth [and] Edrei.",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 75.367,
+            "end": 103.5
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 5,
           "hebrew": "בְּעֵ֥בֶר הַיַּרְדֵּ֖ן בְּאֶ֣רֶץ מוֹאָ֑ב הוֹאִ֣יל מֹשֶׁ֔ה בֵּאֵ֛ר אֶת־הַתּוֹרָ֥ה הַזֹּ֖את לֵאמֹֽר׃",
-          "english": "On the other side of the Jordan, in the land of Moab, Moses undertook to expound this Teaching. He said:"
+          "english": "On the other side of the Jordan, in the land of Moab, Moses undertook to expound this Teaching. He said:",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 103.5,
+            "end": 116.033
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 6,
           "hebrew": "יְהֹוָ֧ה אֱלֹהֵ֛ינוּ דִּבֶּ֥ר אֵלֵ֖ינוּ בְּחֹרֵ֣ב לֵאמֹ֑ר רַב־לָכֶ֥ם שֶׁ֖בֶת בָּהָ֥ר הַזֶּֽה׃",
-          "english": "The ETERNAL our God spoke to us at Horeb, saying: You have stayed long enough at this mountain."
+          "english": "The ETERNAL our God spoke to us at Horeb, saying: You have stayed long enough at this mountain.",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 116.033,
+            "end": 128.433
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 7,
           "hebrew": "פְּנ֣וּ&thinsp;׀ וּסְע֣וּ לָכֶ֗ם וּבֹ֨אוּ הַ֥ר הָֽאֱמֹרִי֮ וְאֶל־כׇּל־שְׁכֵנָיו֒ בָּעֲרָבָ֥ה בָהָ֛ר וּבַשְּׁפֵלָ֥ה וּבַנֶּ֖גֶב וּבְח֣וֹף הַיָּ֑ם אֶ֤רֶץ הַֽכְּנַעֲנִי֙ וְהַלְּבָנ֔וֹן עַד־הַנָּהָ֥ר הַגָּדֹ֖ל נְהַר־פְּרָֽת׃",
-          "english": "Start out and make your way to the hill country of the Amorites and to all their neighbors in the Arabah, the hill country, the Shephelah, the Negeb, the seacoast, the land of the Canaanites, and the Lebanon, as far as the Great River, the river Euphrates."
+          "english": "Start out and make your way to the hill country of the Amorites and to all their neighbors in the Arabah, the hill country, the Shephelah, the Negeb, the seacoast, the land of the Canaanites, and the Lebanon, as far as the Great River, the river Euphrates.",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 128.433,
+            "end": 161.767
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 8,
           "hebrew": "רְאֵ֛ה נָתַ֥תִּי לִפְנֵיכֶ֖ם אֶת־הָאָ֑רֶץ בֹּ֚אוּ וּרְשׁ֣וּ אֶת־הָאָ֔רֶץ אֲשֶׁ֣ר נִשְׁבַּ֣ע יְ֠הֹוָ֠ה לַאֲבֹ֨תֵיכֶ֜ם לְאַבְרָהָ֨ם לְיִצְחָ֤ק וּֽלְיַעֲקֹב֙ לָתֵ֣ת לָהֶ֔ם וּלְזַרְעָ֖ם אַחֲרֵיהֶֽם׃",
-          "english": "See, I place the land at your disposal. Go, take possession of the land that GOD swore to your fathers Abraham, Isaac, and Jacob, to assign to them and to their heirs after them."
+          "english": "See, I place the land at your disposal. Go, take possession of the land that GOD swore to your fathers Abraham, Isaac, and Jacob, to assign to them and to their heirs after them.",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 161.767,
+            "end": 192.8
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 9,
           "hebrew": "וָאֹמַ֣ר אֲלֵכֶ֔ם בָּעֵ֥ת הַהִ֖וא לֵאמֹ֑ר לֹא־אוּכַ֥ל לְבַדִּ֖י שְׂאֵ֥ת אֶתְכֶֽם׃",
-          "english": "Thereupon I said to you, “I cannot bear the burden of you by myself."
+          "english": "Thereupon I said to you, “I cannot bear the burden of you by myself.",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 192.8,
+            "end": 202.567
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 10,
           "hebrew": "יְהֹוָ֥ה אֱלֹהֵיכֶ֖ם הִרְבָּ֣ה אֶתְכֶ֑ם וְהִנְּכֶ֣ם הַיּ֔וֹם כְּכוֹכְבֵ֥י הַשָּׁמַ֖יִם לָרֹֽב׃",
-          "english": "The ETERNAL your God has multiplied you until you are today as numerous as the stars in the sky.—"
+          "english": "The ETERNAL your God has multiplied you until you are today as numerous as the stars in the sky.—",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 202.567,
+            "end": 213.0
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 11,
           "hebrew": "יְהֹוָ֞ה אֱלֹהֵ֣י אֲבֽוֹתֵכֶ֗ם יֹסֵ֧ף עֲלֵיכֶ֛ם כָּכֶ֖ם אֶ֣לֶף פְּעָמִ֑ים וִיבָרֵ֣ךְ אֶתְכֶ֔ם כַּאֲשֶׁ֖ר דִּבֶּ֥ר לָכֶֽם׃",
-          "english": "May the ETERNAL, the God of your ancestors, increase your numbers a thousandfold, and bless you as promised.—"
+          "english": "May the ETERNAL, the God of your ancestors, increase your numbers a thousandfold, and bless you as promised.—",
+          "audio": "audio/torah/44-devarim-1-cohen.mp3",
+          "timing": {
+            "start": 213.0,
+            "end": 238.0
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Devarim"
         },
         {
           "verse": 12,
@@ -484,6 +561,10 @@
         }
       ],
       "audioSegments": [
+        {
+          "label": "Devarim · 1. Cohen",
+          "url": "audio/torah/44-devarim-1-cohen.mp3"
+        },
         {
           "label": "Devarim · 2. Levi",
           "url": "audio/torah/44-devarim-2-levi.mp3"
@@ -1231,37 +1312,86 @@
         {
           "verse": 23,
           "hebrew": "וָאֶתְחַנַּ֖ן אֶל־יְהֹוָ֑ה בָּעֵ֥ת הַהִ֖וא לֵאמֹֽר׃",
-          "english": "I pleaded with GOD at that time, saying,"
+          "english": "I pleaded with GOD at that time, saying,",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 7.0
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 24,
           "hebrew": "אֲדֹנָ֣י יֱהֹוִ֗ה אַתָּ֤ה הַֽחִלּ֙וֹתָ֙ לְהַרְא֣וֹת אֶֽת־עַבְדְּךָ֔ אֶ֨ת־גׇּדְלְךָ֔ וְאֶת־יָדְךָ֖ הַחֲזָקָ֑ה אֲשֶׁ֤ר מִי־אֵל֙ בַּשָּׁמַ֣יִם וּבָאָ֔רֶץ אֲשֶׁר־יַעֲשֶׂ֥ה כְמַעֲשֶׂ֖יךָ וְכִגְבוּרֹתֶֽךָ׃",
-          "english": "“O my Sovereign GOD, You who let Your servant see the first works of Your greatness and Your mighty hand, You whose powerful deeds no god in heaven or on earth can equal!"
+          "english": "“O my Sovereign GOD, You who let Your servant see the first works of Your greatness and Your mighty hand, You whose powerful deeds no god in heaven or on earth can equal!",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 7.0,
+            "end": 41.167
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 25,
           "hebrew": "אֶעְבְּרָה־נָּ֗א וְאֶרְאֶה֙ אֶת־הָאָ֣רֶץ הַטּוֹבָ֔ה אֲשֶׁ֖ר בְּעֵ֣בֶר הַיַּרְדֵּ֑ן הָהָ֥ר הַטּ֛וֹב הַזֶּ֖ה וְהַלְּבָנֹֽן׃",
-          "english": "Let me, I pray, cross over and see the good land on the other side of the Jordan, that good hill country, and the Lebanon.”"
+          "english": "Let me, I pray, cross over and see the good land on the other side of the Jordan, that good hill country, and the Lebanon.”",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 41.167,
+            "end": 61.2
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 26,
           "hebrew": "וַיִּתְעַבֵּ֨ר יְהֹוָ֥ה בִּי֙ לְמַ֣עַנְכֶ֔ם וְלֹ֥א שָׁמַ֖ע אֵלָ֑י וַיֹּ֨אמֶר יְהֹוָ֤ה אֵלַי֙ רַב־לָ֔ךְ אַל־תּ֗וֹסֶף דַּבֵּ֥ר אֵלַ֛י ע֖וֹד בַּדָּבָ֥ר הַזֶּֽה׃",
-          "english": "But GOD was wrathful with me on your account and would not listen to me. GOD said to me, “Enough! Never speak to Me of this matter again!"
+          "english": "But GOD was wrathful with me on your account and would not listen to me. GOD said to me, “Enough! Never speak to Me of this matter again!",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 61.2,
+            "end": 89.533
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 27,
           "hebrew": "עֲלֵ֣ה&thinsp;׀ רֹ֣אשׁ הַפִּסְגָּ֗ה וְשָׂ֥א עֵינֶ֛יךָ יָ֧מָּה וְצָפֹ֛נָה וְתֵימָ֥נָה וּמִזְרָ֖חָה וּרְאֵ֣ה בְעֵינֶ֑יךָ כִּי־לֹ֥א תַעֲבֹ֖ר אֶת־הַיַּרְדֵּ֥ן הַזֶּֽה׃",
-          "english": "Go up to the summit of Pisgah and gaze about, to the west, the north, the south, and the east. Look at it well, for you shall not go across yonder Jordan."
+          "english": "Go up to the summit of Pisgah and gaze about, to the west, the north, the south, and the east. Look at it well, for you shall not go across yonder Jordan.",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 89.533,
+            "end": 112.033
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 28,
           "hebrew": "וְצַ֥ו אֶת־יְהוֹשֻׁ֖עַ וְחַזְּקֵ֣הוּ וְאַמְּצֵ֑הוּ כִּי־ה֣וּא יַעֲבֹ֗ר לִפְנֵי֙ הָעָ֣ם הַזֶּ֔ה וְהוּא֙ יַנְחִ֣יל אוֹתָ֔ם אֶת־הָאָ֖רֶץ אֲשֶׁ֥ר תִּרְאֶֽה׃",
-          "english": "Give Joshua his instructions, and imbue him with strength and courage, for he shall go across at the head of this people, and he shall allot to them the land that you may only see.”"
+          "english": "Give Joshua his instructions, and imbue him with strength and courage, for he shall go across at the head of this people, and he shall allot to them the land that you may only see.”",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 112.033,
+            "end": 135.0
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 29,
           "hebrew": "וַנֵּ֣שֶׁב בַּגָּ֔יְא מ֖וּל בֵּ֥ית פְּעֽוֹר׃&nbsp;{פ}",
-          "english": "Meanwhile we stayed on in the valley near Beth-peor."
+          "english": "Meanwhile we stayed on in the valley near Beth-peor.",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 135.0,
+            "end": 141.567
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         }
       ],
       "audioSegments": [
@@ -1272,6 +1402,10 @@
         {
           "label": "Devarim · 7. Yisre'eli",
           "url": "audio/torah/44-devarim-7-yisreeli.mp3"
+        },
+        {
+          "label": "Vaetchanan · 1. Cohen",
+          "url": "audio/torah/45-vaetchanan-1-cohen.mp3"
         }
       ]
     },
@@ -1281,42 +1415,98 @@
         {
           "verse": 1,
           "hebrew": "וְעַתָּ֣ה יִשְׂרָאֵ֗ל שְׁמַ֤ע אֶל־הַֽחֻקִּים֙ וְאֶל־הַמִּשְׁפָּטִ֔ים אֲשֶׁ֧ר אָֽנֹכִ֛י מְלַמֵּ֥ד אֶתְכֶ֖ם לַעֲשׂ֑וֹת לְמַ֣עַן תִּֽחְי֗וּ וּבָאתֶם֙ וִֽירִשְׁתֶּ֣ם אֶת־הָאָ֔רֶץ אֲשֶׁ֧ר יְהֹוָ֛ה אֱלֹהֵ֥י אֲבֹתֵיכֶ֖ם נֹתֵ֥ן לָכֶֽם׃",
-          "english": "And now, O Israel, give heed to the laws and rules that I am instructing you to observe, so that you may live to enter and occupy the land that the ETERNAL, the God of your fathers, is giving you."
+          "english": "And now, O Israel, give heed to the laws and rules that I am instructing you to observe, so that you may live to enter and occupy the land that the ETERNAL, the God of your fathers, is giving you.",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 141.567,
+            "end": 178.3
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 2,
           "hebrew": "לֹ֣א תֹסִ֗פוּ עַל־הַדָּבָר֙ אֲשֶׁ֤ר אָנֹכִי֙ מְצַוֶּ֣ה אֶתְכֶ֔ם וְלֹ֥א תִגְרְע֖וּ מִמֶּ֑נּוּ לִשְׁמֹ֗ר אֶת־מִצְוֺת֙ יְהֹוָ֣ה אֱלֹֽהֵיכֶ֔ם אֲשֶׁ֥ר אָנֹכִ֖י מְצַוֶּ֥ה אֶתְכֶֽם׃",
-          "english": "You shall not add anything to what I command you or take anything away from it, but keep the commandments of the ETERNAL your God that I enjoin upon you."
+          "english": "You shall not add anything to what I command you or take anything away from it, but keep the commandments of the ETERNAL your God that I enjoin upon you.",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 178.3,
+            "end": 209.467
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 3,
           "hebrew": "עֵֽינֵיכֶם֙ הָֽרֹא֔וֹת אֵ֛ת אֲשֶׁר־עָשָׂ֥ה יְהֹוָ֖ה בְּבַ֣עַל פְּע֑וֹר כִּ֣י כׇל־הָאִ֗ישׁ אֲשֶׁ֤ר הָלַךְ֙ אַחֲרֵ֣י בַֽעַל־פְּע֔וֹר הִשְׁמִיד֛וֹ יְהֹוָ֥ה אֱלֹהֶ֖יךָ מִקִּרְבֶּֽךָ׃",
-          "english": "You saw with your own eyes what GOD did in the matter of Baal-peor, that the ETERNAL your God wiped out from among you every person who followed Baal-peor;"
+          "english": "You saw with your own eyes what GOD did in the matter of Baal-peor, that the ETERNAL your God wiped out from among you every person who followed Baal-peor;",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 209.467,
+            "end": 239.3
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 4,
           "hebrew": "וְאַתֶּם֙ הַדְּבֵקִ֔ים בַּיהֹוָ֖ה אֱלֹהֵיכֶ֑ם חַיִּ֥ים כֻּלְּכֶ֖ם הַיּֽוֹם׃",
-          "english": "while you, who held fast to the ETERNAL your God, are all alive today."
+          "english": "while you, who held fast to the ETERNAL your God, are all alive today.",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 239.3,
+            "end": 250.1
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 5,
           "hebrew": "רְאֵ֣ה&thinsp;׀ לִמַּ֣דְתִּי אֶתְכֶ֗ם חֻקִּים֙ וּמִשְׁפָּטִ֔ים כַּאֲשֶׁ֥ר צִוַּ֖נִי יְהֹוָ֣ה אֱלֹהָ֑י לַעֲשׂ֣וֹת כֵּ֔ן בְּקֶ֣רֶב הָאָ֔רֶץ אֲשֶׁ֥ר אַתֶּ֛ם בָּאִ֥ים שָׁ֖מָּה לְרִשְׁתָּֽהּ׃",
-          "english": "See, I have imparted to you laws and rules, as the ETERNAL my God has commanded me, for you to abide by in the land that you are about to enter and occupy."
+          "english": "See, I have imparted to you laws and rules, as the ETERNAL my God has commanded me, for you to abide by in the land that you are about to enter and occupy.",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 250.1,
+            "end": 276.2
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 6,
           "hebrew": "וּשְׁמַרְתֶּם֮ וַעֲשִׂיתֶם֒ כִּ֣י הִ֤וא חׇכְמַתְכֶם֙ וּבִ֣ינַתְכֶ֔ם לְעֵינֵ֖י הָעַמִּ֑ים אֲשֶׁ֣ר יִשְׁמְע֗וּן אֵ֚ת כׇּל־הַחֻקִּ֣ים הָאֵ֔לֶּה וְאָמְר֗וּ רַ֚ק עַם־חָכָ֣ם וְנָב֔וֹן הַגּ֥וֹי הַגָּד֖וֹל הַזֶּֽה׃",
-          "english": "Observe them faithfully, for that will be proof of your wisdom and discernment to other peoples, who on hearing of all these laws will say, “Surely, that great nation is a wise and discerning people.”"
+          "english": "Observe them faithfully, for that will be proof of your wisdom and discernment to other peoples, who on hearing of all these laws will say, “Surely, that great nation is a wise and discerning people.”",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 276.2,
+            "end": 312.133
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 7,
           "hebrew": "כִּ֚י מִי־ג֣וֹי גָּד֔וֹל אֲשֶׁר־ל֥וֹ אֱלֹהִ֖ים קְרֹבִ֣ים אֵלָ֑יו כַּיהֹוָ֣ה אֱלֹהֵ֔ינוּ בְּכׇל־קׇרְאֵ֖נוּ אֵלָֽיו׃",
-          "english": "For what great nation is there that has a god so close at hand as is the ETERNAL our God whenever we call?"
+          "english": "For what great nation is there that has a god so close at hand as is the ETERNAL our God whenever we call?",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 312.133,
+            "end": 325.767
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 8,
           "hebrew": "וּמִי֙ גּ֣וֹי גָּד֔וֹל אֲשֶׁר־ל֛וֹ חֻקִּ֥ים וּמִשְׁפָּטִ֖ים צַדִּיקִ֑ם כְּכֹל֙ הַתּוֹרָ֣ה הַזֹּ֔את אֲשֶׁ֧ר אָנֹכִ֛י נֹתֵ֥ן לִפְנֵיכֶ֖ם הַיּֽוֹם׃",
-          "english": "Or what great nation has laws and rules as perfect as all this Teaching that I set before you this day?"
+          "english": "Or what great nation has laws and rules as perfect as all this Teaching that I set before you this day?",
+          "audio": "audio/torah/45-vaetchanan-1-cohen.mp3",
+          "timing": {
+            "start": 325.767,
+            "end": 350.2
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 9,
@@ -1573,108 +1763,260 @@
         {
           "verse": 30,
           "hebrew": "בַּצַּ֣ר לְךָ֔ וּמְצָא֕וּךָ כֹּ֖ל הַדְּבָרִ֣ים הָאֵ֑לֶּה בְּאַחֲרִית֙ הַיָּמִ֔ים וְשַׁבְתָּ֙ עַד־יְהֹוָ֣ה אֱלֹהֶ֔יךָ וְשָׁמַעְתָּ֖ בְּקֹלֽוֹ׃",
-          "english": "when you are in distress because all these things have befallen you and, in the end, return to and obey the ETERNAL your God."
+          "english": "when you are in distress because all these things have befallen you and, in the end, return to and obey the ETERNAL your God.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 24.533
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 31,
           "hebrew": "כִּ֣י אֵ֤ל רַחוּם֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ לֹ֥א יַרְפְּךָ֖ וְלֹ֣א יַשְׁחִיתֶ֑ךָ וְלֹ֤א יִשְׁכַּח֙ אֶת־בְּרִ֣ית אֲבֹתֶ֔יךָ אֲשֶׁ֥ר נִשְׁבַּ֖ע לָהֶֽם׃",
-          "english": "For the ETERNAL your God is a compassionate God, who will not fail you nor let you perish. The covenant made on oath with your fathers will not be forgotten."
+          "english": "For the ETERNAL your God is a compassionate God, who will not fail you nor let you perish. The covenant made on oath with your fathers will not be forgotten.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 24.533,
+            "end": 47.6
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 32,
           "hebrew": "כִּ֣י שְׁאַל־נָא֩ לְיָמִ֨ים רִֽאשֹׁנִ֜ים אֲשֶׁר־הָי֣וּ לְפָנֶ֗יךָ לְמִן־הַיּוֹם֙ אֲשֶׁר֩ בָּרָ֨א אֱלֹהִ֤ים&thinsp;׀&thinsp;אָדָם֙ עַל־הָאָ֔רֶץ וּלְמִקְצֵ֥ה הַשָּׁמַ֖יִם וְעַד־קְצֵ֣ה הַשָּׁמָ֑יִם הֲנִֽהְיָ֗ה כַּדָּבָ֤ר הַגָּדוֹל֙ הַזֶּ֔ה א֖וֹ הֲנִשְׁמַ֥ע כָּמֹֽהוּ׃",
-          "english": "You have but to inquire about bygone ages that came before you, ever since God created humankind on earth, from one end of heaven to the other: has anything as grand as this ever happened, or has its like ever been known?"
+          "english": "You have but to inquire about bygone ages that came before you, ever since God created humankind on earth, from one end of heaven to the other: has anything as grand as this ever happened, or has its like ever been known?",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 47.6,
+            "end": 89.667
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 33,
           "hebrew": "הֲשָׁ֣מַֽע עָם֩ ק֨וֹל אֱלֹהִ֜ים מְדַבֵּ֧ר מִתּוֹךְ־הָאֵ֛שׁ כַּאֲשֶׁר־שָׁמַ֥עְתָּ אַתָּ֖ה וַיֶּֽחִי׃",
-          "english": "Has any people heard the voice of a god speaking out of a fire, as you have, and survived?"
+          "english": "Has any people heard the voice of a god speaking out of a fire, as you have, and survived?",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 89.667,
+            "end": 105.0
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 34,
           "hebrew": "א֣וֹ&thinsp;׀ הֲנִסָּ֣ה אֱלֹהִ֗ים לָ֠ב֠וֹא לָקַ֨חַת ל֣וֹ גוֹי֮ מִקֶּ֣רֶב גּוֹי֒ בְּמַסֹּת֩ בְּאֹתֹ֨ת וּבְמוֹפְתִ֜ים וּבְמִלְחָמָ֗ה וּבְיָ֤ד חֲזָקָה֙ וּבִזְר֣וֹעַ נְטוּיָ֔ה וּבְמוֹרָאִ֖ים גְּדֹלִ֑ים כְּ֠כֹ֠ל אֲשֶׁר־עָשָׂ֨ה לָכֶ֜ם יְהֹוָ֧ה אֱלֹהֵיכֶ֛ם בְּמִצְרַ֖יִם לְעֵינֶֽיךָ׃",
-          "english": "Or has any deity ventured to go and take one nation from the midst of another by prodigious acts, by signs and portents, by war, by a mighty hand and an outstretched arm and awesome power, as the ETERNAL your God did for you in Egypt before your very eyes?"
+          "english": "Or has any deity ventured to go and take one nation from the midst of another by prodigious acts, by signs and portents, by war, by a mighty hand and an outstretched arm and awesome power, as the ETERNAL your God did for you in Egypt before your very eyes?",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 105.0,
+            "end": 158.2
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 35,
           "hebrew": "אַתָּה֙ הׇרְאֵ֣תָ לָדַ֔עַת כִּ֥י יְהֹוָ֖ה ה֣וּא הָאֱלֹהִ֑ים אֵ֥ין ע֖וֹד מִלְּבַדּֽוֹ׃",
-          "english": "It has been clearly demonstrated to you that the ETERNAL alone is God; there is none else."
+          "english": "It has been clearly demonstrated to you that the ETERNAL alone is God; there is none else.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 158.2,
+            "end": 170.1
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 36,
           "hebrew": "מִן־הַשָּׁמַ֛יִם הִשְׁמִֽיעֲךָ֥ אֶת־קֹל֖וֹ לְיַסְּרֶ֑ךָּ וְעַל־הָאָ֗רֶץ הֶרְאֲךָ֙ אֶת־אִשּׁ֣וֹ הַגְּדוֹלָ֔ה וּדְבָרָ֥יו שָׁמַ֖עְתָּ מִתּ֥וֹךְ הָאֵֽשׁ׃",
-          "english": "From the heavens you could hear the divine voice to discipline you; on earth you could see the great divine fire; and from amidst that fire you heard God’s words."
+          "english": "From the heavens you could hear the divine voice to discipline you; on earth you could see the great divine fire; and from amidst that fire you heard God’s words.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 170.1,
+            "end": 190.267
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 37,
           "hebrew": "וְתַ֗חַת כִּ֤י אָהַב֙ אֶת־אֲבֹתֶ֔יךָ וַיִּבְחַ֥ר בְּזַרְע֖וֹ אַחֲרָ֑יו וַיּוֹצִֽאֲךָ֧ בְּפָנָ֛יו בְּכֹח֥וֹ הַגָּדֹ֖ל מִמִּצְרָֽיִם׃",
-          "english": "And out of love for your ancestors, [God] chose their heirs after them—directly leading you out of Egypt with great might,"
+          "english": "And out of love for your ancestors, [God] chose their heirs after them—directly leading you out of Egypt with great might,",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 190.267,
+            "end": 212.767
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 38,
           "hebrew": "לְהוֹרִ֗ישׁ גּוֹיִ֛ם גְּדֹלִ֧ים וַעֲצֻמִ֛ים מִמְּךָ֖ מִפָּנֶ֑יךָ לַהֲבִֽיאֲךָ֗ לָֽתֶת־לְךָ֧ אֶת־אַרְצָ֛ם נַחֲלָ֖ה כַּיּ֥וֹם הַזֶּֽה׃",
-          "english": "to drive from your path nations greater and more populous than you, to take you into their land and assign it to you as a heritage, as is still the case."
+          "english": "to drive from your path nations greater and more populous than you, to take you into their land and assign it to you as a heritage, as is still the case.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 212.767,
+            "end": 239.633
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 39,
           "hebrew": "וְיָדַעְתָּ֣ הַיּ֗וֹם וַהֲשֵׁבֹתָ֮ אֶל־לְבָבֶ֒ךָ֒ כִּ֤י יְהֹוָה֙ ה֣וּא הָֽאֱלֹהִ֔ים בַּשָּׁמַ֣יִם מִמַּ֔עַל וְעַל־הָאָ֖רֶץ מִתָּ֑חַת אֵ֖ין עֽוֹד׃",
-          "english": "Know therefore this day and keep in mind that the ETERNAL alone is God in heaven above and on earth below; there is no other."
+          "english": "Know therefore this day and keep in mind that the ETERNAL alone is God in heaven above and on earth below; there is no other.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 239.633,
+            "end": 268.4
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 40,
           "hebrew": "וְשָׁמַרְתָּ֞ אֶת־חֻקָּ֣יו וְאֶת־מִצְוֺתָ֗יו אֲשֶׁ֨ר אָנֹכִ֤י מְצַוְּךָ֙ הַיּ֔וֹם אֲשֶׁר֙ יִיטַ֣ב לְךָ֔ וּלְבָנֶ֖יךָ אַחֲרֶ֑יךָ וּלְמַ֨עַן תַּאֲרִ֤יךְ יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁ֨ר יְהֹוָ֧ה אֱלֹהֶ֛יךָ נֹתֵ֥ן לְךָ֖ כׇּל־הַיָּמִֽים׃&nbsp;{פ}",
-          "english": "Observe God’s laws and commandments, which I enjoin upon you this day, that it may go well with you and your children after you, and that you may long remain in the land that the ETERNAL your God is assigning to you for all time."
+          "english": "Observe God’s laws and commandments, which I enjoin upon you this day, that it may go well with you and your children after you, and that you may long remain in the land that the ETERNAL your God is assigning to you for all time.",
+          "audio": "audio/torah/45-vaetchanan-3-yisreeli.mp3",
+          "timing": {
+            "start": 268.4,
+            "end": 312.3
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 41,
           "hebrew": "אָ֣ז יַבְדִּ֤יל מֹשֶׁה֙ שָׁלֹ֣שׁ עָרִ֔ים בְּעֵ֖בֶר הַיַּרְדֵּ֑ן מִזְרְחָ֖ה שָֽׁמֶשׁ׃",
-          "english": "Then Moses set aside three cities on the east side of the Jordan"
+          "english": "Then Moses set aside three cities on the east side of the Jordan",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 14.133
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 42,
           "hebrew": "לָנֻ֨ס שָׁ֜מָּה רוֹצֵ֗חַ אֲשֶׁ֨ר יִרְצַ֤ח אֶת־רֵעֵ֙הוּ֙ בִּבְלִי־דַ֔עַת וְה֛וּא לֹא־שֹׂנֵ֥א ל֖וֹ מִתְּמֹ֣ל שִׁלְשֹׁ֑ם וְנָ֗ס אֶל־אַחַ֛ת מִן־הֶעָרִ֥ים הָאֵ֖ל וָחָֽי׃",
-          "english": "to which a manslayer could escape, one who unwittingly slew another person without having been an enemy in the past; that person could flee to one of these cities and live:"
+          "english": "to which a manslayer could escape, one who unwittingly slew another person without having been an enemy in the past; that person could flee to one of these cities and live:",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 14.133,
+            "end": 47.233
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 43,
           "hebrew": "אֶת־בֶּ֧צֶר בַּמִּדְבָּ֛ר בְּאֶ֥רֶץ הַמִּישֹׁ֖ר לָרֽאוּבֵנִ֑י וְאֶת־רָאמֹ֤ת בַּגִּלְעָד֙ לַגָּדִ֔י וְאֶת־גּוֹלָ֥ן בַּבָּשָׁ֖ן לַֽמְנַשִּֽׁי׃",
-          "english": "Bezer, in the wilderness in the Tableland, belonging to the Reubenites; Ramoth, in Gilead, belonging to the Gadites; and Golan, in Bashan, belonging to the Manassites."
+          "english": "Bezer, in the wilderness in the Tableland, belonging to the Reubenites; Ramoth, in Gilead, belonging to the Gadites; and Golan, in Bashan, belonging to the Manassites.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 47.233,
+            "end": 66.7
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 44,
           "hebrew": "וְזֹ֖את הַתּוֹרָ֑ה אֲשֶׁר־שָׂ֣ם מֹשֶׁ֔ה לִפְנֵ֖י בְּנֵ֥י יִשְׂרָאֵֽל׃",
-          "english": "This is the Teaching that Moses set before the Israelites:"
+          "english": "This is the Teaching that Moses set before the Israelites:",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 66.7,
+            "end": 76.633
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 45,
           "hebrew": "אֵ֚לֶּה הָֽעֵדֹ֔ת וְהַֽחֻקִּ֖ים וְהַמִּשְׁפָּטִ֑ים אֲשֶׁ֨ר דִּבֶּ֤ר מֹשֶׁה֙ אֶל־בְּנֵ֣י יִשְׂרָאֵ֔ל בְּצֵאתָ֖ם מִמִּצְרָֽיִם׃",
-          "english": "these are the decrees, laws, and rules that Moses addressed to the people of Israel, after they had left Egypt,"
+          "english": "these are the decrees, laws, and rules that Moses addressed to the people of Israel, after they had left Egypt,",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 76.633,
+            "end": 94.7
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 46,
           "hebrew": "בְּעֵ֨בֶר הַיַּרְדֵּ֜ן בַּגַּ֗יְא מ֚וּל בֵּ֣ית פְּע֔וֹר בְּאֶ֗רֶץ סִיחֹן֙ מֶ֣לֶךְ הָֽאֱמֹרִ֔י אֲשֶׁ֥ר יוֹשֵׁ֖ב בְּחֶשְׁבּ֑וֹן אֲשֶׁ֨ר הִכָּ֤ה מֹשֶׁה֙ וּבְנֵ֣י יִשְׂרָאֵ֔ל בְּצֵאתָ֖ם מִמִּצְרָֽיִם׃",
-          "english": "beyond the Jordan, in the valley at Beth-peor, in the land of King Sihon of the Amorites, who dwelt in Heshbon, whom Moses and the Israelites defeated after they had left Egypt."
+          "english": "beyond the Jordan, in the valley at Beth-peor, in the land of King Sihon of the Amorites, who dwelt in Heshbon, whom Moses and the Israelites defeated after they had left Egypt.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 94.7,
+            "end": 128.7
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 47,
           "hebrew": "וַיִּֽירְשׁ֨וּ אֶת־אַרְצ֜וֹ וְאֶת־אֶ֣רֶץ&thinsp;׀ ע֣וֹג מֶֽלֶךְ־הַבָּשָׁ֗ן שְׁנֵי֙ מַלְכֵ֣י הָֽאֱמֹרִ֔י אֲשֶׁ֖ר בְּעֵ֣בֶר הַיַּרְדֵּ֑ן מִזְרַ֖ח שָֽׁמֶשׁ׃",
-          "english": "They had taken possession of his country and that of King Og of Bashan—the two kings of the Amorites—which were on the east side of the Jordan"
+          "english": "They had taken possession of his country and that of King Og of Bashan—the two kings of the Amorites—which were on the east side of the Jordan",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 128.7,
+            "end": 151.233
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 48,
           "hebrew": "מֵעֲרֹעֵ֞ר אֲשֶׁ֨ר עַל־שְׂפַת־נַ֧חַל אַרְנֹ֛ן וְעַד־הַ֥ר שִׂיאֹ֖ן ה֥וּא חֶרְמֽוֹן׃",
-          "english": "from Aroer on the banks of the wadi Arnon, as far as Mount Sion, that is, Hermon;"
+          "english": "from Aroer on the banks of the wadi Arnon, as far as Mount Sion, that is, Hermon;",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 151.233,
+            "end": 167.0
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 49,
           "hebrew": "וְכׇל־הָ֨עֲרָבָ֜ה עֵ֤בֶר הַיַּרְדֵּן֙ מִזְרָ֔חָה וְעַ֖ד יָ֣ם הָעֲרָבָ֑ה תַּ֖חַת אַשְׁדֹּ֥ת הַפִּסְגָּֽה׃&nbsp;{פ}",
-          "english": "also the whole Arabah on the east side of the Jordan, as far as the Sea of the Arabah, at the foot of the slopes of Pisgah."
+          "english": "also the whole Arabah on the east side of the Jordan, as far as the Sea of the Arabah, at the foot of the slopes of Pisgah.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 167.0,
+            "end": 185.167
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         }
       ],
       "audioSegments": [
         {
+          "label": "Vaetchanan · 1. Cohen",
+          "url": "audio/torah/45-vaetchanan-1-cohen.mp3"
+        },
+        {
           "label": "Vaetchanan · 2. Levi",
           "url": "audio/torah/45-vaetchanan-2-levi.mp3"
+        },
+        {
+          "label": "Vaetchanan · 3. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-3-yisreeli.mp3"
+        },
+        {
+          "label": "Vaetchanan · 4. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-4-yisreeli.mp3"
         }
       ]
     },
@@ -1684,152 +2026,372 @@
         {
           "verse": 1,
           "hebrew": "וַיִּקְרָ֣א מֹשֶׁה֮ אֶל־כׇּל־יִשְׂרָאֵל֒ וַיֹּ֣אמֶר אֲלֵהֶ֗ם שְׁמַ֤ע יִשְׂרָאֵל֙ אֶת־הַחֻקִּ֣ים וְאֶת־הַמִּשְׁפָּטִ֔ים אֲשֶׁ֧ר אָנֹכִ֛י דֹּבֵ֥ר בְּאׇזְנֵיכֶ֖ם הַיּ֑וֹם וּלְמַדְתֶּ֣ם אֹתָ֔ם וּשְׁמַרְתֶּ֖ם לַעֲשֹׂתָֽם׃",
-          "english": "Moses summoned all the Israelites and said to them: Hear, O Israel, the laws and rules that I proclaim to you this day! Study them and observe them faithfully!"
+          "english": "Moses summoned all the Israelites and said to them: Hear, O Israel, the laws and rules that I proclaim to you this day! Study them and observe them faithfully!",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 185.167,
+            "end": 218.467
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 2,
           "hebrew": "יְהֹוָ֣ה אֱלֹהֵ֗ינוּ כָּרַ֥ת עִמָּ֛נוּ בְּרִ֖ית בְּחֹרֵֽב׃",
-          "english": "The ETERNAL our God made a covenant with us at Horeb."
+          "english": "The ETERNAL our God made a covenant with us at Horeb.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 218.467,
+            "end": 229.533
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 3,
           "hebrew": "לֹ֣א אֶת־אֲבֹתֵ֔ינוּ כָּרַ֥ת יְהֹוָ֖ה אֶת־הַבְּרִ֣ית הַזֹּ֑את כִּ֣י אִתָּ֔נוּ אֲנַ֨חְנוּ אֵ֥לֶּה פֹ֛ה הַיּ֖וֹם כֻּלָּ֥נוּ חַיִּֽים׃",
-          "english": "It was not with our ancestors that GOD made this covenant, but with us, the living, every one of us who is here today."
+          "english": "It was not with our ancestors that GOD made this covenant, but with us, the living, every one of us who is here today.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 229.533,
+            "end": 246.4
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 4,
           "hebrew": "פָּנִ֣ים&thinsp;׀ בְּפָנִ֗ים דִּבֶּ֨ר יְהֹוָ֧ה עִמָּכֶ֛ם בָּהָ֖ר מִתּ֥וֹךְ הָאֵֽשׁ׃",
-          "english": "Face to face GOD spoke to you on the mountain out of the fire—"
+          "english": "Face to face GOD spoke to you on the mountain out of the fire—",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 246.4,
+            "end": 260.567
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 5,
           "hebrew": "אָ֠נֹכִ֠י עֹמֵ֨ד בֵּין־יְהֹוָ֤ה וּבֵֽינֵיכֶם֙ בָּעֵ֣ת הַהִ֔וא לְהַגִּ֥יד לָכֶ֖ם אֶת־דְּבַ֣ר יְהֹוָ֑ה כִּ֤י יְרֵאתֶם֙ מִפְּנֵ֣י הָאֵ֔שׁ וְלֹֽא־עֲלִיתֶ֥ם בָּהָ֖ר לֵאמֹֽר׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "I stood between GOD and you at that time to convey GOD’s words to you, for you were afraid of the fire and did not go up the mountain—saying:"
+          "english": "I stood between GOD and you at that time to convey GOD’s words to you, for you were afraid of the fire and did not go up the mountain—saying:",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 260.567,
+            "end": 289.067
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 6,
           "hebrew": "אָֽנֹכִ֖י֙ יְהֹוָ֣ה אֱלֹהֶ֑֔יךָ אֲשֶׁ֧ר הוֹצֵאתִ֛יךָ מֵאֶ֥רֶץ מִצְרַ֖יִם מִבֵּ֣֥ית עֲבָדִ֑͏ֽים׃",
-          "english": "I the ETERNAL am your God who brought you out of the land of Egypt, the house of bondage:"
+          "english": "I the ETERNAL am your God who brought you out of the land of Egypt, the house of bondage:",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 289.067,
+            "end": 302.367
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 7,
           "hebrew": "לֹ֣א־יִהְיֶ֥͏ֽה־לְךָ֛֩ אֱלֹהִ֥֨ים אֲחֵרִ֖֜ים עַל־פָּנָֽ͏ַ֗י׃",
-          "english": "You shall have no other gods beside Me."
+          "english": "You shall have no other gods beside Me.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 302.367,
+            "end": 309.667
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 8,
           "hebrew": "לֹֽ֣א־תַעֲשֶֽׂ֨ה־לְךָ֥֣ פֶ֣֙סֶל֙&thinsp;׀&thinsp;כׇּל־תְּמוּנָ֔֡ה אֲשֶׁ֤֣ר בַּשָּׁמַ֣֙יִם֙&thinsp;׀&thinsp;מִמַּ֔֡עַל וַאֲשֶׁ֥ר֩ בָּאָ֖֨רֶץ מִתָּ֑͏ַ֜חַת וַאֲשֶׁ֥ר בַּמַּ֖֣יִם&thinsp;׀ מִתַּ֥֣חַת לָאָֽ֗רֶץ׃",
-          "english": "You shall not make for yourself a sculptured image, any likeness of what is in the heavens above, or on the earth below, or in the waters below the earth."
+          "english": "You shall not make for yourself a sculptured image, any likeness of what is in the heavens above, or on the earth below, or in the waters below the earth.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 309.667,
+            "end": 334.267
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 9,
           "hebrew": "לֹא־תִשְׁתַּחֲוֶ֥֣ה לָהֶ֖ם֮ וְלֹ֣א תׇעׇבְדֵ֑ם֒ כִּ֣י אָנֹכִ֞י יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ אֵ֣ל קַנָּ֔א פֹּ֠קֵ֠ד עֲוֺ֨ן אָב֧וֹת עַל־בָּנִ֛ים וְעַל־שִׁלֵּשִׁ֥ים וְעַל־רִבֵּעִ֖ים לְשֹׂנְאָֽ֑י׃",
-          "english": "You shall not bow down to them or serve them. For I the ETERNAL your God am an impassioned God, visiting the guilt of the parents upon the children, upon the third and upon the fourth generations of those who reject Me,"
+          "english": "You shall not bow down to them or serve them. For I the ETERNAL your God am an impassioned God, visiting the guilt of the parents upon the children, upon the third and upon the fourth generations of those who reject Me,",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 334.267,
+            "end": 365.3
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 10,
           "hebrew": "וְעֹ֥֤שֶׂה חֶ֖֙סֶד֙ לַֽאֲלָפִ֑֔ים לְאֹהֲבַ֖י וּלְשֹׁמְרֵ֥י (מצותו) [מִצְוֺתָֽי]׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "but showing kindness to the thousandth generation of those who love Me and keep My commandments."
+          "english": "but showing kindness to the thousandth generation of those who love Me and keep My commandments.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 365.3,
+            "end": 374.033
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 11,
           "hebrew": "לֹ֥א תִשָּׂ֛א אֶת־שֵֽׁם־יְהֹוָ֥ה אֱלֹהֶ֖יךָ לַשָּׁ֑וְא כִּ֣י לֹ֤א יְנַקֶּה֙ יְהֹוָ֔ה אֵ֛ת אֲשֶׁר־יִשָּׂ֥א אֶת־שְׁמ֖וֹ לַשָּֽׁוְא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "You shall not swear falsely by the name of the ETERNAL your God; for GOD will not clear one who swears falsely by that name."
+          "english": "You shall not swear falsely by the name of the ETERNAL your God; for GOD will not clear one who swears falsely by that name.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 374.033,
+            "end": 393.133
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 12,
           "hebrew": "שָׁמ֛֣וֹר אֶת־י֥וֹם֩ הַשַּׁבָּ֖֨ת לְקַדְּשׁ֑֜וֹ כַּאֲשֶׁ֥ר צִוְּךָ֖֣&thinsp;׀ יְהֹוָ֥֣ה אֱלֹהֶֽ֗יךָ׃",
-          "english": "Observe the sabbath day and keep it holy, as the ETERNAL your God has commanded you."
+          "english": "Observe the sabbath day and keep it holy, as the ETERNAL your God has commanded you.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 393.133,
+            "end": 403.8
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 13,
           "hebrew": "שֵׁ֤֣שֶׁת יָמִ֣ים֙ תַּֽעֲבֹ֔ד֮ וְעָשִׂ֖֣יתָ כׇּֿל־מְלַאכְתֶּֽךָ֒׃",
-          "english": "Six days you shall labor and do all your work,"
+          "english": "Six days you shall labor and do all your work,",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 403.8,
+            "end": 414.4
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 14,
           "hebrew": "וְי֨וֹם֙ הַשְּׁבִיעִ֔֜י שַׁבָּ֖֣ת&thinsp;׀ לַיהֹוָ֣ה אֱלֹהֶ֑֗יךָ לֹ֣א תַעֲשֶׂ֣ה כׇל־מְלָאכָ֡ה אַתָּ֣ה וּבִנְךָֽ־וּבִתֶּ֣ךָ וְעַבְדְּךָֽ־וַ֠אֲמָתֶ֠ךָ וְשׁוֹרְךָ֨ וַחֲמֹֽרְךָ֜ וְכׇל־בְּהֶמְתֶּ֗ךָ וְגֵֽרְךָ֙ אֲשֶׁ֣ר בִּשְׁעָרֶ֔יךָ לְמַ֗עַן יָנ֛וּחַ עַבְדְּךָ֥ וַאֲמָתְךָ֖ כָּמֽ֑וֹךָ׃",
-          "english": "but the seventh day is a sabbath of the ETERNAL your God; you shall not do any work—you, your son or your daughter, your male or female slave, your ox or your donkey, or any of your cattle, or the stranger in your settlements, so that your male and female slave may rest as you do."
+          "english": "but the seventh day is a sabbath of the ETERNAL your God; you shall not do any work—you, your son or your daughter, your male or female slave, your ox or your donkey, or any of your cattle, or the stranger in your settlements, so that your male and female slave may rest as you do.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 414.4,
+            "end": 460.133
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 15,
           "hebrew": "וְזָכַרְתָּ֗֞ כִּ֣י־עֶ֤֥בֶד הָיִ֣֙יתָ֙&thinsp;׀ בְּאֶ֣רֶץ מִצְרַ֔֗יִם וַיֹּצִ֨אֲךָ֜֩ יְהֹוָ֤֨ה אֱלֹהֶ֤֙יךָ֙ מִשָּׁ֔ם֙ בְּיָ֥֤ד חֲזָקָ֖ה֙ וּבִזְרֹ֣עַ נְטוּיָ֑֔ה עַל־כֵּ֗ן צִוְּךָ֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ לַעֲשׂ֖וֹת אֶת־י֥וֹם הַשַּׁבָּֽת׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Remember that you were a slave in the land of Egypt and the ETERNAL your God freed you from there with a mighty hand and an outstretched arm; therefore the ETERNAL your God has commanded you to observe the sabbath day."
+          "english": "Remember that you were a slave in the land of Egypt and the ETERNAL your God freed you from there with a mighty hand and an outstretched arm; therefore the ETERNAL your God has commanded you to observe the sabbath day.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 460.133,
+            "end": 501.4
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 16,
           "hebrew": "כַּבֵּ֤ד אֶת־אָבִ֙יךָ֙ וְאֶת־אִמֶּ֔ךָ כַּאֲשֶׁ֥ר צִוְּךָ֖ יְהֹוָ֣ה אֱלֹהֶ֑יךָ לְמַ֣עַן&thinsp;׀ יַאֲרִיכֻ֣ן יָמֶ֗יךָ וּלְמַ֙עַן֙ יִ֣יטַב לָ֔ךְ עַ֚ל הָֽאֲדָמָ֔ה אֲשֶׁר־יְהֹוָ֥ה אֱלֹהֶ֖יךָ נֹתֵ֥ן לָֽךְ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Honor your father and your mother, as the ETERNAL your God has commanded you, that you may long endure, and that you may fare well, in the land that the ETERNAL your God is assigning to you."
+          "english": "Honor your father and your mother, as the ETERNAL your God has commanded you, that you may long endure, and that you may fare well, in the land that the ETERNAL your God is assigning to you.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 501.4,
+            "end": 535.667
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 17,
           "hebrew": "לֹ֥֖א תִּֿרְצָ֖͏ֽח׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְלֹ֣֖א תִּֿנְאָ֑͏ֽף׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְלֹ֣֖א תִּֿגְנֹֽ֔ב׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְלֹֽא־תַעֲנֶ֥ה בְרֵֽעֲךָ֖ עֵ֥ד שָֽׁוְא׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "You shall not murder.You shall not commit adultery.You shall not steal.You shall not bear false witness against your neighbor."
+          "english": "You shall not murder.You shall not commit adultery.You shall not steal.You shall not bear false witness against your neighbor.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 535.667,
+            "end": 548.7
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 18,
           "hebrew": "וְלֹ֥א תַחְמֹ֖ד אֵ֣שֶׁת רֵעֶ֑ךָ&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְלֹ֨א תִתְאַוֶּ֜ה בֵּ֣ית רֵעֶ֗ךָ שָׂדֵ֜הוּ וְעַבְדּ֤וֹ וַאֲמָתוֹ֙ שׁוֹר֣וֹ וַחֲמֹר֔וֹ וְכֹ֖ל אֲשֶׁ֥ר לְרֵעֶֽךָ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "You shall not covet your neighbor’s wife. And you shall not crave your neighbor’s house, or field, or male or female slave, or ox, or donkey, or anything that is your neighbor’s."
+          "english": "You shall not covet your neighbor’s wife. And you shall not crave your neighbor’s house, or field, or male or female slave, or ox, or donkey, or anything that is your neighbor’s.",
+          "audio": "audio/torah/45-vaetchanan-4-yisreeli.mp3",
+          "timing": {
+            "start": 548.7,
+            "end": 577.6
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 19,
           "hebrew": "אֶֽת־הַדְּבָרִ֣ים הָאֵ֡לֶּה דִּבֶּר֩ יְהֹוָ֨ה אֶל־כׇּל־קְהַלְכֶ֜ם בָּהָ֗ר מִתּ֤וֹךְ הָאֵשׁ֙ הֶֽעָנָ֣ן וְהָֽעֲרָפֶ֔ל ק֥וֹל גָּד֖וֹל וְלֹ֣א יָסָ֑ף וַֽיִּכְתְּבֵ֗ם עַל־שְׁנֵי֙ לֻחֹ֣ת אֲבָנִ֔ים וַֽיִּתְּנֵ֖ם אֵלָֽי׃",
-          "english": "GOD spoke those words—those and no more—to your whole congregation at the mountain, with a mighty voice out of the fire and the dense clouds. After inscribing them on two tablets of stone, [God] gave them to me."
+          "english": "GOD spoke those words—those and no more—to your whole congregation at the mountain, with a mighty voice out of the fire and the dense clouds. After inscribing them on two tablets of stone, [God] gave them to me.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 38.2
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 20,
           "hebrew": "וַיְהִ֗י כְּשׇׁמְעֲכֶ֤ם אֶת־הַקּוֹל֙ מִתּ֣וֹךְ הַחֹ֔שֶׁךְ וְהָהָ֖ר בֹּעֵ֣ר בָּאֵ֑שׁ וַתִּקְרְב֣וּן אֵלַ֔י כׇּל־רָאשֵׁ֥י שִׁבְטֵיכֶ֖ם וְזִקְנֵיכֶֽם׃",
-          "english": "When you heard the voice out of the darkness, while the mountain was ablaze with fire, you came up to me, all your tribal heads and elders,"
+          "english": "When you heard the voice out of the darkness, while the mountain was ablaze with fire, you came up to me, all your tribal heads and elders,",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 38.2,
+            "end": 60.267
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 21,
           "hebrew": "וַתֹּאמְר֗וּ הֵ֣ן הֶרְאָ֜נוּ יְהֹוָ֤ה אֱלֹהֵ֙ינוּ֙ אֶת־כְּבֹד֣וֹ וְאֶת־גׇּדְל֔וֹ וְאֶת־קֹל֥וֹ שָׁמַ֖עְנוּ מִתּ֣וֹךְ הָאֵ֑שׁ הַיּ֤וֹם הַזֶּה֙ רָאִ֔ינוּ כִּֽי־יְדַבֵּ֧ר אֱלֹהִ֛ים אֶת־הָֽאָדָ֖ם וָחָֽי׃",
-          "english": "and said, “The ETERNAL our God has just shown us a majestic Presence, and we have heard God’s voice out of the fire; we have seen this day that humankind may live though addressed by God."
+          "english": "and said, “The ETERNAL our God has just shown us a majestic Presence, and we have heard God’s voice out of the fire; we have seen this day that humankind may live though addressed by God.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 60.267,
+            "end": 94.233
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 22,
           "hebrew": "וְעַתָּה֙ לָ֣מָּה נָמ֔וּת כִּ֣י תֹֽאכְלֵ֔נוּ הָאֵ֥שׁ הַגְּדֹלָ֖ה הַזֹּ֑את אִם־יֹסְפִ֣ים&thinsp;׀ אֲנַ֗חְנוּ לִ֠שְׁמֹ֠עַ אֶת־ק֨וֹל יְהֹוָ֧ה אֱלֹהֵ֛ינוּ ע֖וֹד וָמָֽתְנוּ׃",
-          "english": "Let us not die, then, for this fearsome fire will consume us; if we hear the voice of the ETERNAL our God any longer, we shall die."
+          "english": "Let us not die, then, for this fearsome fire will consume us; if we hear the voice of the ETERNAL our God any longer, we shall die.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 94.233,
+            "end": 122.7
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 23,
           "hebrew": "כִּ֣י מִ֣י כׇל־בָּשָׂ֡ר אֲשֶׁ֣ר שָׁמַ֣ע קוֹל֩ אֱלֹהִ֨ים חַיִּ֜ים מְדַבֵּ֧ר מִתּוֹךְ־הָאֵ֛שׁ כָּמֹ֖נוּ וַיֶּֽחִי׃",
-          "english": "For what mortal ever heard the voice of the living God speak out of the fire, as we did, and lived?"
+          "english": "For what mortal ever heard the voice of the living God speak out of the fire, as we did, and lived?",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 122.7,
+            "end": 139.467
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 24,
           "hebrew": "קְרַ֤ב אַתָּה֙ וּֽשְׁמָ֔ע אֵ֛ת כׇּל־אֲשֶׁ֥ר יֹאמַ֖ר יְהֹוָ֣ה אֱלֹהֵ֑ינוּ וְאַ֣תְּ&thinsp;׀ תְּדַבֵּ֣ר אֵלֵ֗ינוּ אֵת֩ כׇּל־אֲשֶׁ֨ר יְדַבֵּ֜ר יְהֹוָ֧ה אֱלֹהֵ֛ינוּ אֵלֶ֖יךָ וְשָׁמַ֥עְנוּ וְעָשִֽׂינוּ׃",
-          "english": "You go closer and hear all that the ETERNAL our God says, and then you tell us everything that the ETERNAL our God tells you, and we will willingly do it.”"
+          "english": "You go closer and hear all that the ETERNAL our God says, and then you tell us everything that the ETERNAL our God tells you, and we will willingly do it.”",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 139.467,
+            "end": 171.633
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 25,
           "hebrew": "וַיִּשְׁמַ֤ע יְהֹוָה֙ אֶת־ק֣וֹל דִּבְרֵיכֶ֔ם בְּדַבֶּרְכֶ֖ם אֵלָ֑י וַיֹּ֨אמֶר יְהֹוָ֜ה אֵלַ֗י שָׁ֠מַ֠עְתִּי אֶת־ק֨וֹל דִּבְרֵ֜י הָעָ֤ם הַזֶּה֙ אֲשֶׁ֣ר דִּבְּר֣וּ אֵלֶ֔יךָ הֵיטִ֖יבוּ כׇּל־אֲשֶׁ֥ר דִּבֵּֽרוּ׃",
-          "english": "GOD heard the plea that you made to me, and GOD said to me, “I have heard the plea that this people made to you; they did well to speak thus."
+          "english": "GOD heard the plea that you made to me, and GOD said to me, “I have heard the plea that this people made to you; they did well to speak thus.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 171.633,
+            "end": 208.767
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 26,
           "hebrew": "מִֽי־יִתֵּ֡ן וְהָיָה֩ לְבָבָ֨ם זֶ֜ה לָהֶ֗ם לְיִרְאָ֥ה אֹתִ֛י וְלִשְׁמֹ֥ר אֶת־כׇּל־מִצְוֺתַ֖י כׇּל־הַיָּמִ֑ים לְמַ֨עַן יִיטַ֥ב לָהֶ֛ם וְלִבְנֵיהֶ֖ם לְעֹלָֽם׃",
-          "english": "May they always be of such mind, to revere Me and follow all My commandments, that it may go well with them and with their children forever!"
+          "english": "May they always be of such mind, to revere Me and follow all My commandments, that it may go well with them and with their children forever!",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 208.767,
+            "end": 234.367
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 27,
           "hebrew": "לֵ֖ךְ אֱמֹ֣ר לָהֶ֑ם שׁ֥וּבוּ לָכֶ֖ם לְאׇהֳלֵיכֶֽם׃",
-          "english": "Go, say to them, ‘Return to your tents.’"
+          "english": "Go, say to them, ‘Return to your tents.’",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 234.367,
+            "end": 241.1
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 28,
           "hebrew": "וְאַתָּ֗ה פֹּה֮ עֲמֹ֣ד עִמָּדִי֒ וַאֲדַבְּרָ֣ה אֵלֶ֗יךָ אֵ֧ת כׇּל־הַמִּצְוָ֛ה וְהַחֻקִּ֥ים וְהַמִּשְׁפָּטִ֖ים אֲשֶׁ֣ר תְּלַמְּדֵ֑ם וְעָשׂ֣וּ בָאָ֔רֶץ אֲשֶׁ֧ר אָנֹכִ֛י נֹתֵ֥ן לָהֶ֖ם לְרִשְׁתָּֽהּ׃",
-          "english": "But you remain here with Me, and I will give you the whole Instruction—the laws and the rules—that you shall impart to them, for them to observe in the land that I am giving them to possess.”"
+          "english": "But you remain here with Me, and I will give you the whole Instruction—the laws and the rules—that you shall impart to them, for them to observe in the land that I am giving them to possess.”",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 241.1,
+            "end": 274.733
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 29,
           "hebrew": "וּשְׁמַרְתֶּ֣ם לַעֲשׂ֔וֹת כַּאֲשֶׁ֥ר צִוָּ֛ה יְהֹוָ֥ה אֱלֹהֵיכֶ֖ם אֶתְכֶ֑ם לֹ֥א תָסֻ֖רוּ יָמִ֥ין וּשְׂמֹֽאל׃",
-          "english": "Be careful, then, to do as the ETERNAL your God has commanded you. Do not turn aside to the right or to the left:"
+          "english": "Be careful, then, to do as the ETERNAL your God has commanded you. Do not turn aside to the right or to the left:",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 274.733,
+            "end": 287.7
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 30,
           "hebrew": "בְּכׇל־הַדֶּ֗רֶךְ אֲשֶׁ֨ר צִוָּ֜ה יְהֹוָ֧ה אֱלֹהֵיכֶ֛ם אֶתְכֶ֖ם תֵּלֵ֑כוּ לְמַ֤עַן תִּֽחְיוּן֙ וְט֣וֹב לָכֶ֔ם וְהַאֲרַכְתֶּ֣ם יָמִ֔ים בָּאָ֖רֶץ אֲשֶׁ֥ר תִּֽירָשֽׁוּן׃",
-          "english": "follow only the path that the ETERNAL your God has enjoined upon you, so that you may thrive and that it may go well with you, and that you may long endure in the land you are to possess."
+          "english": "follow only the path that the ETERNAL your God has enjoined upon you, so that you may thrive and that it may go well with you, and that you may long endure in the land you are to possess.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 287.7,
+            "end": 315.767
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
+        }
+      ],
+      "audioSegments": [
+        {
+          "label": "Vaetchanan · 4. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-4-yisreeli.mp3"
+        },
+        {
+          "label": "Vaetchanan · 5. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-5-yisreeli.mp3"
         }
       ]
     },
@@ -1839,127 +2401,312 @@
         {
           "verse": 1,
           "hebrew": "וְזֹ֣את הַמִּצְוָ֗ה הַֽחֻקִּים֙ וְהַמִּשְׁפָּטִ֔ים אֲשֶׁ֥ר צִוָּ֛ה יְהֹוָ֥ה אֱלֹהֵיכֶ֖ם לְלַמֵּ֣ד אֶתְכֶ֑ם לַעֲשׂ֣וֹת בָּאָ֔רֶץ אֲשֶׁ֥ר אַתֶּ֛ם עֹבְרִ֥ים שָׁ֖מָּה לְרִשְׁתָּֽהּ׃",
-          "english": "And this is the Instruction—the laws and the rules—that the ETERNAL your God has commanded [me] to impart to you, to be observed in the land that you are about to cross into and occupy,"
+          "english": "And this is the Instruction—the laws and the rules—that the ETERNAL your God has commanded [me] to impart to you, to be observed in the land that you are about to cross into and occupy,",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 315.767,
+            "end": 342.367
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 2,
           "hebrew": "לְמַ֨עַן תִּירָ֜א אֶת־יְהֹוָ֣ה אֱלֹהֶ֗יךָ לִ֠שְׁמֹ֠ר אֶת־כׇּל־חֻקֹּתָ֣יו וּמִצְוֺתָיו֮ אֲשֶׁ֣ר אָנֹכִ֣י מְצַוֶּ֒ךָ֒ אַתָּה֙ וּבִנְךָ֣ וּבֶן־בִּנְךָ֔ כֹּ֖ל יְמֵ֣י חַיֶּ֑יךָ וּלְמַ֖עַן יַאֲרִכֻ֥ן יָמֶֽיךָ׃",
-          "english": "so that you, your children, and your children’s children may revere the ETERNAL your God and follow, as long as you live, all the laws and commandments that I enjoin upon you, to the end that you may long endure."
+          "english": "so that you, your children, and your children’s children may revere the ETERNAL your God and follow, as long as you live, all the laws and commandments that I enjoin upon you, to the end that you may long endure.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 342.367,
+            "end": 375.167
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 3,
           "hebrew": "וְשָׁמַעְתָּ֤ יִשְׂרָאֵל֙ וְשָׁמַרְתָּ֣ לַעֲשׂ֔וֹת אֲשֶׁר֙ יִיטַ֣ב לְךָ֔ וַאֲשֶׁ֥ר תִּרְבּ֖וּן מְאֹ֑ד כַּאֲשֶׁר֩ דִּבֶּ֨ר יְהֹוָ֜ה אֱלֹהֵ֤י אֲבֹתֶ֙יךָ֙ לָ֔ךְ אֶ֛רֶץ זָבַ֥ת חָלָ֖ב וּדְבָֽשׁ׃&nbsp;{פ}",
-          "english": "Obey, O Israel, willingly and faithfully, that it may go well with you and that you may increase greatly [in] a land flowing with milk and honey, as the ETERNAL, the God of your ancestors, spoke to you."
+          "english": "Obey, O Israel, willingly and faithfully, that it may go well with you and that you may increase greatly [in] a land flowing with milk and honey, as the ETERNAL, the God of your ancestors, spoke to you.",
+          "audio": "audio/torah/45-vaetchanan-5-yisreeli.mp3",
+          "timing": {
+            "start": 375.167,
+            "end": 409.633
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 4,
           "hebrew": "שְׁמַ֖ע יִשְׂרָאֵ֑ל יְהֹוָ֥ה אֱלֹהֵ֖ינוּ יְהֹוָ֥ה&thinsp;׀&thinsp;אֶחָֽד׃",
-          "english": "Hear, O Israel! The ETERNAL is our God, the ETERNAL alone."
+          "english": "Hear, O Israel! The ETERNAL is our God, the ETERNAL alone.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 9.0
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 5,
           "hebrew": "וְאָ֣הַבְתָּ֔ אֵ֖ת יְהֹוָ֣ה אֱלֹהֶ֑יךָ בְּכׇל־לְבָבְךָ֥ וּבְכׇל־נַפְשְׁךָ֖ וּבְכׇל־מְאֹדֶֽךָ׃",
-          "english": "You shall love the ETERNAL your God with all your heart and with all your soul and with all your might."
+          "english": "You shall love the ETERNAL your God with all your heart and with all your soul and with all your might.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 9.0,
+            "end": 21.233
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 6,
           "hebrew": "וְהָי֞וּ הַדְּבָרִ֣ים הָאֵ֗לֶּה אֲשֶׁ֨ר אָנֹכִ֧י מְצַוְּךָ֛ הַיּ֖וֹם עַל־לְבָבֶֽךָ׃",
-          "english": "Take to heart these instructions with which I charge you this day."
+          "english": "Take to heart these instructions with which I charge you this day.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 21.233,
+            "end": 40.6
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 7,
           "hebrew": "וְשִׁנַּנְתָּ֣ם לְבָנֶ֔יךָ וְדִבַּרְתָּ֖ בָּ֑ם בְּשִׁבְתְּךָ֤ בְּבֵיתֶ֙ךָ֙ וּבְלֶכְתְּךָ֣ בַדֶּ֔רֶךְ וּֽבְשׇׁכְבְּךָ֖ וּבְקוּמֶֽךָ׃",
-          "english": "Impress them upon your children. Recite them when you stay at home and when you are away, when you lie down and when you get up."
+          "english": "Impress them upon your children. Recite them when you stay at home and when you are away, when you lie down and when you get up.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 40.6,
+            "end": 58.533
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 8,
           "hebrew": "וּקְשַׁרְתָּ֥ם לְא֖וֹת עַל־יָדֶ֑ךָ וְהָי֥וּ לְטֹטָפֹ֖ת בֵּ֥ין עֵינֶֽיךָ׃",
-          "english": "Bind them as a sign on your hand and let them serve as a symbol on your forehead;"
+          "english": "Bind them as a sign on your hand and let them serve as a symbol on your forehead;",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 58.533,
+            "end": 66.3
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 9,
           "hebrew": "וּכְתַבְתָּ֛ם עַל־מְזֻז֥וֹת בֵּיתֶ֖ךָ וּבִשְׁעָרֶֽיךָ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "inscribe them on the doorposts of your house and on your gates."
+          "english": "inscribe them on the doorposts of your house and on your gates.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 66.3,
+            "end": 74.0
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 10,
           "hebrew": "וְהָיָ֞ה כִּ֥י יְבִיאֲךָ֣&thinsp;׀ יְהֹוָ֣ה אֱלֹהֶ֗יךָ אֶל־הָאָ֜רֶץ אֲשֶׁ֨ר נִשְׁבַּ֧ע לַאֲבֹתֶ֛יךָ לְאַבְרָהָ֛ם לְיִצְחָ֥ק וּֽלְיַעֲקֹ֖ב לָ֣תֶת לָ֑ךְ עָרִ֛ים גְּדֹלֹ֥ת וְטֹבֹ֖ת אֲשֶׁ֥ר לֹא־בָנִֽיתָ׃",
-          "english": "When the ETERNAL your God brings you into the land that was sworn to your fathers Abraham, Isaac, and Jacob, to be assigned to you—great and flourishing cities that you did not build,"
+          "english": "When the ETERNAL your God brings you into the land that was sworn to your fathers Abraham, Isaac, and Jacob, to be assigned to you—great and flourishing cities that you did not build,",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 74.0,
+            "end": 107.433
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 11,
           "hebrew": "וּבָ֨תִּ֜ים מְלֵאִ֣ים כׇּל־טוּב֮ אֲשֶׁ֣ר לֹא־מִלֵּ֒אתָ֒ וּבֹרֹ֤ת חֲצוּבִים֙ אֲשֶׁ֣ר לֹא־חָצַ֔בְתָּ כְּרָמִ֥ים וְזֵיתִ֖ים אֲשֶׁ֣ר לֹא־נָטָ֑עְתָּ וְאָכַלְתָּ֖ וְשָׂבָֽעְתָּ׃",
-          "english": "houses full of all good things that you did not fill, hewn cisterns that you did not hew, vineyards and olive groves that you did not plant—and you eat your fill,"
+          "english": "houses full of all good things that you did not fill, hewn cisterns that you did not hew, vineyards and olive groves that you did not plant—and you eat your fill,",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 107.433,
+            "end": 132.533
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 12,
           "hebrew": "הִשָּׁ֣מֶר לְךָ֔ פֶּן־תִּשְׁכַּ֖ח אֶת־יְהֹוָ֑ה אֲשֶׁ֧ר הוֹצִֽיאֲךָ֛ מֵאֶ֥רֶץ מִצְרַ֖יִם מִבֵּ֥ית עֲבָדִֽים׃",
-          "english": "take heed that you do not forget GOD, who freed you from the land of Egypt, the house of bondage."
+          "english": "take heed that you do not forget GOD, who freed you from the land of Egypt, the house of bondage.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 132.533,
+            "end": 147.267
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 13,
           "hebrew": "אֶת־יְהֹוָ֧ה אֱלֹהֶ֛יךָ תִּירָ֖א וְאֹת֣וֹ תַעֲבֹ֑ד וּבִשְׁמ֖וֹ תִּשָּׁבֵֽעַ׃",
-          "english": "Revere only the ETERNAL your God; worship [God] alone; swear only by God’s name."
+          "english": "Revere only the ETERNAL your God; worship [God] alone; swear only by God’s name.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 147.267,
+            "end": 158.467
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 14,
           "hebrew": "לֹ֣א תֵֽלְכ֔וּן אַחֲרֵ֖י אֱלֹהִ֣ים אֲחֵרִ֑ים מֵאֱלֹהֵי֙ הָֽעַמִּ֔ים אֲשֶׁ֖ר סְבִיבוֹתֵיכֶֽם׃",
-          "english": "Do not follow other gods, any gods of the peoples about you—"
+          "english": "Do not follow other gods, any gods of the peoples about you—",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 158.467,
+            "end": 173.267
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 15,
           "hebrew": "כִּ֣י אֵ֥ל קַנָּ֛א יְהֹוָ֥ה אֱלֹהֶ֖יךָ בְּקִרְבֶּ֑ךָ פֶּן־יֶ֠חֱרֶ֠ה אַף־יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ בָּ֔ךְ וְהִשְׁמִ֣ידְךָ֔ מֵעַ֖ל פְּנֵ֥י הָאֲדָמָֽה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "for the ETERNAL your God in your midst is an impassioned God—lest the anger of the ETERNAL your God blaze forth against you, wiping you off the face of the earth."
+          "english": "for the ETERNAL your God in your midst is an impassioned God—lest the anger of the ETERNAL your God blaze forth against you, wiping you off the face of the earth.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 173.267,
+            "end": 198.6
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 16,
           "hebrew": "לֹ֣א תְנַסּ֔וּ אֶת־יְהֹוָ֖ה אֱלֹהֵיכֶ֑ם כַּאֲשֶׁ֥ר נִסִּיתֶ֖ם בַּמַּסָּֽה׃",
-          "english": "Do not try the ETERNAL your God, as you did at Massah."
+          "english": "Do not try the ETERNAL your God, as you did at Massah.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 198.6,
+            "end": 208.367
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 17,
           "hebrew": "שָׁמ֣וֹר תִּשְׁמְר֔וּן אֶת־מִצְוֺ֖ת יְהֹוָ֣ה אֱלֹהֵיכֶ֑ם וְעֵדֹתָ֥יו וְחֻקָּ֖יו אֲשֶׁ֥ר צִוָּֽךְ׃",
-          "english": "Be sure to keep the commandments, decrees, and laws that the ETERNAL your God has enjoined upon you."
+          "english": "Be sure to keep the commandments, decrees, and laws that the ETERNAL your God has enjoined upon you.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 208.367,
+            "end": 219.667
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 18,
           "hebrew": "וְעָשִׂ֛יתָ הַיָּשָׁ֥ר וְהַטּ֖וֹב בְּעֵינֵ֣י יְהֹוָ֑ה לְמַ֙עַן֙ יִ֣יטַב לָ֔ךְ וּבָ֗אתָ וְיָֽרַשְׁתָּ֙ אֶת־הָאָ֣רֶץ הַטֹּבָ֔ה אֲשֶׁר־נִשְׁבַּ֥ע יְהֹוָ֖ה לַאֲבֹתֶֽיךָ׃",
-          "english": "Do what is right and good in the sight of GOD, that it may go well with you and that you may be able to possess the good land that the ETERNAL your God promised on oath to your fathers,"
+          "english": "Do what is right and good in the sight of GOD, that it may go well with you and that you may be able to possess the good land that the ETERNAL your God promised on oath to your fathers,",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 219.667,
+            "end": 245.367
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 19,
           "hebrew": "לַהֲדֹ֥ף אֶת־כׇּל־אֹיְבֶ֖יךָ מִפָּנֶ֑יךָ כַּאֲשֶׁ֖ר דִּבֶּ֥ר יְהֹוָֽה׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "and that all your enemies may be driven out before you, as GOD has spoken."
+          "english": "and that all your enemies may be driven out before you, as GOD has spoken.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 245.367,
+            "end": 253.533
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 20,
           "hebrew": "כִּֽי־יִשְׁאָלְךָ֥ בִנְךָ֛ מָחָ֖ר לֵאמֹ֑ר מָ֣ה הָעֵדֹ֗ת וְהַֽחֻקִּים֙ וְהַמִּשְׁפָּטִ֔ים אֲשֶׁ֥ר צִוָּ֛ה יְהֹוָ֥ה אֱלֹהֵ֖ינוּ אֶתְכֶֽם׃",
-          "english": "When, in time to come, your children ask you, “What mean the decrees, laws, and rules that the ETERNAL our God has enjoined upon you?”"
+          "english": "When, in time to come, your children ask you, “What mean the decrees, laws, and rules that the ETERNAL our God has enjoined upon you?”",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 253.533,
+            "end": 276.4
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 21,
           "hebrew": "וְאָמַרְתָּ֣ לְבִנְךָ֔ עֲבָדִ֛ים הָיִ֥ינוּ לְפַרְעֹ֖ה בְּמִצְרָ֑יִם וַיֹּצִיאֵ֧נוּ יְהֹוָ֛ה מִמִּצְרַ֖יִם בְּיָ֥ד חֲזָקָֽה׃",
-          "english": "you shall say to your children, “We were slaves to Pharaoh in Egypt and GOD freed us from Egypt with a mighty hand."
+          "english": "you shall say to your children, “We were slaves to Pharaoh in Egypt and GOD freed us from Egypt with a mighty hand.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 276.4,
+            "end": 293.367
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 22,
           "hebrew": "וַיִּתֵּ֣ן יְהֹוָ֡ה אוֹתֹ֣ת וּ֠מֹפְתִ֠ים גְּדֹלִ֨ים וְרָעִ֧ים&thinsp;׀&thinsp;בְּמִצְרַ֛יִם בְּפַרְעֹ֥ה וּבְכׇל־בֵּית֖וֹ לְעֵינֵֽינוּ׃",
-          "english": "GOD wrought before our eyes marvelous and destructive signs and portents in Egypt—against Pharaoh and all his household—"
+          "english": "GOD wrought before our eyes marvelous and destructive signs and portents in Egypt—against Pharaoh and all his household—",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 293.367,
+            "end": 310.333
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 23,
           "hebrew": "וְאוֹתָ֖נוּ הוֹצִ֣יא מִשָּׁ֑ם לְמַ֙עַן֙ הָבִ֣יא אֹתָ֔נוּ לָ֤תֶת לָ֙נוּ֙ אֶת־הָאָ֔רֶץ אֲשֶׁ֥ר נִשְׁבַּ֖ע לַאֲבֹתֵֽינוּ׃",
-          "english": "and freed us from there, in order to take us and give us the land promised on oath to our fathers."
+          "english": "and freed us from there, in order to take us and give us the land promised on oath to our fathers.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 310.333,
+            "end": 332.433
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 24,
           "hebrew": "וַיְצַוֵּ֣נוּ יְהֹוָ֗ה לַעֲשׂוֹת֙ אֶת־כׇּל־הַחֻקִּ֣ים הָאֵ֔לֶּה לְיִרְאָ֖ה אֶת־יְהֹוָ֣ה אֱלֹהֵ֑ינוּ לְט֥וֹב לָ֙נוּ֙ כׇּל־הַיָּמִ֔ים לְחַיֹּתֵ֖נוּ כְּהַיּ֥וֹם הַזֶּֽה׃",
-          "english": "Then the ETERNAL commanded us to observe all these laws, to revere the ETERNAL our God, for our lasting good and for our survival, as is now the case."
+          "english": "Then the ETERNAL commanded us to observe all these laws, to revere the ETERNAL our God, for our lasting good and for our survival, as is now the case.",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 332.433,
+            "end": 357.5
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 25,
           "hebrew": "וּצְדָקָ֖ה תִּֽהְיֶה־לָּ֑נוּ כִּֽי־נִשְׁמֹ֨ר לַעֲשׂ֜וֹת אֶת־כׇּל־הַמִּצְוָ֣ה הַזֹּ֗את לִפְנֵ֛י יְהֹוָ֥ה אֱלֹהֵ֖ינוּ כַּאֲשֶׁ֥ר צִוָּֽנוּ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "It will be therefore to our merit before the ETERNAL our God to observe faithfully this whole Instruction, as we have been commanded.”"
+          "english": "It will be therefore to our merit before the ETERNAL our God to observe faithfully this whole Instruction, as we have been commanded.”",
+          "audio": "audio/torah/45-vaetchanan-6-yisreeli.mp3",
+          "timing": {
+            "start": 357.5,
+            "end": 378.267
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Vaetchanan"
+        }
+      ],
+      "audioSegments": [
+        {
+          "label": "Vaetchanan · 5. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-5-yisreeli.mp3"
+        },
+        {
+          "label": "Vaetchanan · 6. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-6-yisreeli.mp3"
         }
       ]
     },
@@ -1969,57 +2716,134 @@
         {
           "verse": 1,
           "hebrew": "כִּ֤י יְבִֽיאֲךָ֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ אֶל־הָאָ֕רֶץ אֲשֶׁר־אַתָּ֥ה בָא־שָׁ֖מָּה לְרִשְׁתָּ֑הּ וְנָשַׁ֣ל גּֽוֹיִם־רַבִּ֣ים&thinsp;׀&thinsp;מִפָּנֶ֡יךָ הַֽחִתִּי֩ וְהַגִּרְגָּשִׁ֨י וְהָאֱמֹרִ֜י וְהַכְּנַעֲנִ֣י וְהַפְּרִזִּ֗י וְהַֽחִוִּי֙ וְהַיְבוּסִ֔י שִׁבְעָ֣ה גוֹיִ֔ם רַבִּ֥ים וַעֲצוּמִ֖ים מִמֶּֽךָּ׃",
-          "english": "When the ETERNAL your God brings you to the land that you are about to enter and possess, and dislodges many nations before you—the Hittites, Girgashites, Amorites, Canaanites, Perizzites, Hivites, and Jebusites, seven nations much larger than you—"
+          "english": "When the ETERNAL your God brings you to the land that you are about to enter and possess, and dislodges many nations before you—the Hittites, Girgashites, Amorites, Canaanites, Perizzites, Hivites, and Jebusites, seven nations much larger than you—",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 45.767
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 2,
           "hebrew": "וּנְתָנָ֞ם יְהֹוָ֧ה אֱלֹהֶ֛יךָ לְפָנֶ֖יךָ וְהִכִּיתָ֑ם הַחֲרֵ֤ם תַּחֲרִים֙ אֹתָ֔ם לֹא־תִכְרֹ֥ת לָהֶ֛ם בְּרִ֖ית וְלֹ֥א תְחׇנֵּֽם׃",
-          "english": "and the ETERNAL your God delivers them to you and you defeat them, you must doom them to destruction: grant them no terms and give them no quarter."
+          "english": "and the ETERNAL your God delivers them to you and you defeat them, you must doom them to destruction: grant them no terms and give them no quarter.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 45.767,
+            "end": 71.633
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 3,
           "hebrew": "וְלֹ֥א תִתְחַתֵּ֖ן בָּ֑ם בִּתְּךָ֙ לֹא־תִתֵּ֣ן לִבְנ֔וֹ וּבִתּ֖וֹ לֹא־תִקַּ֥ח לִבְנֶֽךָ׃",
-          "english": "You shall not intermarry with them: do not give your daughters to their sons or take their daughters for your sons."
+          "english": "You shall not intermarry with them: do not give your daughters to their sons or take their daughters for your sons.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 71.633,
+            "end": 83.6
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 4,
           "hebrew": "כִּֽי־יָסִ֤יר אֶת־בִּנְךָ֙ מֵֽאַחֲרַ֔י וְעָבְד֖וּ אֱלֹהִ֣ים אֲחֵרִ֑ים וְחָרָ֤ה אַף־יְהֹוָה֙ בָּכֶ֔ם וְהִשְׁמִידְךָ֖ מַהֵֽר׃",
-          "english": "For they will turn your children away from Me to worship other gods, and GOD’s anger will blaze forth against you, promptly wiping you out."
+          "english": "For they will turn your children away from Me to worship other gods, and GOD’s anger will blaze forth against you, promptly wiping you out.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 83.6,
+            "end": 104.8
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 5,
           "hebrew": "כִּֽי־אִם־כֹּ֤ה תַעֲשׂוּ֙ לָהֶ֔ם מִזְבְּחֹתֵיהֶ֣ם תִּתֹּ֔צוּ וּמַצֵּבֹתָ֖ם תְּשַׁבֵּ֑רוּ וַאֲשֵֽׁירֵהֶם֙ תְּגַדֵּע֔וּן וּפְסִילֵיהֶ֖ם תִּשְׂרְפ֥וּן בָּאֵֽשׁ׃",
-          "english": "Instead, this is what you shall do to them: you shall tear down their altars, smash their pillars, cut down their sacred posts, and consign their images to the fire."
+          "english": "Instead, this is what you shall do to them: you shall tear down their altars, smash their pillars, cut down their sacred posts, and consign their images to the fire.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 104.8,
+            "end": 127.3
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 6,
           "hebrew": "כִּ֣י עַ֤ם קָדוֹשׁ֙ אַתָּ֔ה לַיהֹוָ֖ה אֱלֹהֶ֑יךָ בְּךָ֞ בָּחַ֣ר&thinsp;׀ יְהֹוָ֣ה אֱלֹהֶ֗יךָ לִהְי֥וֹת לוֹ֙ לְעַ֣ם סְגֻלָּ֔ה מִכֹּל֙ הָֽעַמִּ֔ים אֲשֶׁ֖ר עַל־פְּנֵ֥י הָאֲדָמָֽה׃",
-          "english": "For you are a people consecrated to the ETERNAL your God: of all the peoples on earth, the ETERNAL your God chose you to be the treasured one."
+          "english": "For you are a people consecrated to the ETERNAL your God: of all the peoples on earth, the ETERNAL your God chose you to be the treasured one.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 127.3,
+            "end": 160.2
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 7,
           "hebrew": "לֹ֣א מֵֽרֻבְּכֶ֞ם מִכׇּל־הָֽעַמִּ֗ים חָשַׁ֧ק יְהֹוָ֛ה בָּכֶ֖ם וַיִּבְחַ֣ר בָּכֶ֑ם כִּֽי־אַתֶּ֥ם הַמְעַ֖ט מִכׇּל־הָעַמִּֽים׃",
-          "english": "It is not because you are the most numerous of peoples that GOD grew attached to you and chose you—indeed, you are the smallest of peoples;"
+          "english": "It is not because you are the most numerous of peoples that GOD grew attached to you and chose you—indeed, you are the smallest of peoples;",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 160.2,
+            "end": 181.533
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 8,
           "hebrew": "כִּי֩ מֵאַהֲבַ֨ת יְהֹוָ֜ה אֶתְכֶ֗ם וּמִשׇּׁמְר֤וֹ אֶת־הַשְּׁבֻעָה֙ אֲשֶׁ֤ר נִשְׁבַּע֙ לַאֲבֹ֣תֵיכֶ֔ם הוֹצִ֧יא יְהֹוָ֛ה אֶתְכֶ֖ם בְּיָ֣ד חֲזָקָ֑ה וַֽיִּפְדְּךָ֙ מִבֵּ֣ית עֲבָדִ֔ים מִיַּ֖ד פַּרְעֹ֥ה מֶֽלֶךְ־מִצְרָֽיִם׃",
-          "english": "but it was because GOD favored you and kept the oath made to your fathers that GOD freed you with a mighty hand and rescued you from the house of bondage, from the power of Pharaoh king of Egypt."
+          "english": "but it was because GOD favored you and kept the oath made to your fathers that GOD freed you with a mighty hand and rescued you from the house of bondage, from the power of Pharaoh king of Egypt.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 181.533,
+            "end": 217.767
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 9,
           "hebrew": "וְיָ֣דַעְתָּ֔ כִּֽי־יְהֹוָ֥ה אֱלֹהֶ֖יךָ ה֣וּא הָֽאֱלֹהִ֑ים הָאֵל֙ הַֽנֶּאֱמָ֔ן שֹׁמֵ֧ר הַבְּרִ֣ית וְהַחֶ֗סֶד לְאֹהֲבָ֛יו וּלְשֹׁמְרֵ֥י מִצְוֺתָ֖ו לְאֶ֥לֶף דּֽוֹר׃",
-          "english": "Know, therefore, that only the ETERNAL your God is God, the steadfast God who keeps this covenant faithfully to the thousandth generation of those who show love and keep the commandments,"
+          "english": "Know, therefore, that only the ETERNAL your God is God, the steadfast God who keeps this covenant faithfully to the thousandth generation of those who show love and keep the commandments,",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 217.767,
+            "end": 243.5
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 10,
           "hebrew": "וּמְשַׁלֵּ֧ם לְשֹׂנְאָ֛יו אֶל־פָּנָ֖יו לְהַאֲבִיד֑וֹ לֹ֤א יְאַחֵר֙ לְשֹׂ֣נְא֔וֹ אֶל־פָּנָ֖יו יְשַׁלֶּם־לֽוֹ׃",
-          "english": "but who instantly requites with destruction those who are disloyal—never slow with those who are disloyal, but requiting them instantly."
+          "english": "but who instantly requites with destruction those who are disloyal—never slow with those who are disloyal, but requiting them instantly.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 243.5,
+            "end": 260.733
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 11,
           "hebrew": "וְשָׁמַרְתָּ֨ אֶת־הַמִּצְוָ֜ה וְאֶת־הַֽחֻקִּ֣ים וְאֶת־הַמִּשְׁפָּטִ֗ים אֲשֶׁ֨ר אָנֹכִ֧י מְצַוְּךָ֛ הַיּ֖וֹם לַעֲשׂוֹתָֽם׃&nbsp;{פ}",
-          "english": "Therefore, observe faithfully the Instruction—the laws and the rules—with which I charge you today."
+          "english": "Therefore, observe faithfully the Instruction—the laws and the rules—with which I charge you today.",
+          "audio": "audio/torah/45-vaetchanan-7-yisreeli.mp3",
+          "timing": {
+            "start": 260.733,
+            "end": 282.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Vaetchanan"
         },
         {
           "verse": 12,
@@ -2204,6 +3028,10 @@
       ],
       "audioSegments": [
         {
+          "label": "Vaetchanan · 7. Yisre'eli",
+          "url": "audio/torah/45-vaetchanan-7-yisreeli.mp3"
+        },
+        {
           "label": "Ekev · 1. Cohen",
           "url": "audio/torah/46-ekev-1-cohen.mp3"
         }
@@ -2335,58 +3163,132 @@
         {
           "verse": 11,
           "hebrew": "הִשָּׁ֣מֶר לְךָ֔ פֶּן־תִּשְׁכַּ֖ח אֶת־יְהֹוָ֣ה אֱלֹהֶ֑יךָ לְבִלְתִּ֨י שְׁמֹ֤ר מִצְוֺתָיו֙ וּמִשְׁפָּטָ֣יו וְחֻקֹּתָ֔יו אֲשֶׁ֛ר אָנֹכִ֥י מְצַוְּךָ֖ הַיּֽוֹם׃",
-          "english": "Take care lest you forget the ETERNAL your God and fail to keep the commandments, rules, and laws that I enjoin upon you today."
+          "english": "Take care lest you forget the ETERNAL your God and fail to keep the commandments, rules, and laws that I enjoin upon you today.",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 22.1
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 12,
           "hebrew": "פֶּן־תֹּאכַ֖ל וְשָׂבָ֑עְתָּ וּבָתִּ֥ים טֹבִ֛ים תִּבְנֶ֖ה וְיָשָֽׁבְתָּ׃",
-          "english": "When you have eaten your fill, and have built fine houses to live in,"
+          "english": "When you have eaten your fill, and have built fine houses to live in,",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 22.1,
+            "end": 31.8
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 13,
           "hebrew": "וּבְקָֽרְךָ֤ וְצֹֽאנְךָ֙ יִרְבְּיֻ֔ן וְכֶ֥סֶף וְזָהָ֖ב יִרְבֶּה־לָּ֑ךְ וְכֹ֥ל אֲשֶׁר־לְךָ֖ יִרְבֶּֽה׃",
-          "english": "and your herds and flocks have multiplied, and your silver and gold have increased, and everything you own has prospered,"
+          "english": "and your herds and flocks have multiplied, and your silver and gold have increased, and everything you own has prospered,",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 31.8,
+            "end": 46.767
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 14,
           "hebrew": "וְרָ֖ם לְבָבֶ֑ךָ וְשָֽׁכַחְתָּ֙ אֶת־יְהֹוָ֣ה אֱלֹהֶ֔יךָ הַמּוֹצִיאֲךָ֛ מֵאֶ֥רֶץ מִצְרַ֖יִם מִבֵּ֥ית עֲבָדִֽים׃",
-          "english": "beware lest; moved down from v. 12 for clarity. your heart grow haughty and you forget the ETERNAL your God—who freed you from the land of Egypt, the house of bondage;"
+          "english": "beware lest; moved down from v. 12 for clarity. your heart grow haughty and you forget the ETERNAL your God—who freed you from the land of Egypt, the house of bondage;",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 46.767,
+            "end": 62.267
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 15,
           "hebrew": "הַמּוֹלִ֨יכְךָ֜ בַּמִּדְבָּ֣ר&thinsp;׀ הַגָּדֹ֣ל וְהַנּוֹרָ֗א נָחָ֤שׁ&thinsp;׀&thinsp;שָׂרָף֙ וְעַקְרָ֔ב וְצִמָּא֖וֹן אֲשֶׁ֣ר אֵֽין־מָ֑יִם הַמּוֹצִ֤יא לְךָ֙ מַ֔יִם מִצּ֖וּר הַֽחַלָּמִֽישׁ׃",
-          "english": "who led you through the great and terrible wilderness with its seraph serpents and scorpions, a parched land with no water in it, who brought forth water for you from the flinty rock;"
+          "english": "who led you through the great and terrible wilderness with its seraph serpents and scorpions, a parched land with no water in it, who brought forth water for you from the flinty rock;",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 62.267,
+            "end": 93.633
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 16,
           "hebrew": "הַמַּאֲכִ֨לְךָ֥ מָן֙ בַּמִּדְבָּ֔ר אֲשֶׁ֥ר לֹא־יָדְע֖וּן אֲבֹתֶ֑יךָ לְמַ֣עַן עַנֹּֽתְךָ֗ וּלְמַ֙עַן֙ נַסֹּתֶ֔ךָ לְהֵיטִֽבְךָ֖ בְּאַחֲרִיתֶֽךָ׃",
-          "english": "who fed you in the wilderness with manna, which your ancestors had never known, in order to test you by hardships only to benefit you in the end—"
+          "english": "who fed you in the wilderness with manna, which your ancestors had never known, in order to test you by hardships only to benefit you in the end—",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 93.633,
+            "end": 119.267
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 17,
           "hebrew": "וְאָמַרְתָּ֖ בִּלְבָבֶ֑ךָ כֹּחִי֙ וְעֹ֣צֶם יָדִ֔י עָ֥שָׂה לִ֖י אֶת־הַחַ֥יִל הַזֶּֽה׃",
-          "english": "and you say to yourselves, “My own power and the might of my own hand have won this wealth for me.”"
+          "english": "and you say to yourselves, “My own power and the might of my own hand have won this wealth for me.”",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 119.267,
+            "end": 131.1
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 18,
           "hebrew": "וְזָֽכַרְתָּ֙ אֶת־יְהֹוָ֣ה אֱלֹהֶ֔יךָ כִּ֣י ה֗וּא הַנֹּתֵ֥ן לְךָ֛ כֹּ֖חַ לַעֲשׂ֣וֹת חָ֑יִל לְמַ֨עַן הָקִ֧ים אֶת־בְּרִית֛וֹ אֲשֶׁר־נִשְׁבַּ֥ע לַאֲבֹתֶ֖יךָ כַּיּ֥וֹם הַזֶּֽה׃&nbsp;{פ}",
-          "english": "Remember that it is the ETERNAL your God who gives you the power to get wealth, in fulfillment of the covenant made on oath with your fathers, as is still the case."
+          "english": "Remember that it is the ETERNAL your God who gives you the power to get wealth, in fulfillment of the covenant made on oath with your fathers, as is still the case.",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 131.1,
+            "end": 157.4
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 19,
           "hebrew": "וְהָיָ֗ה אִם־שָׁכֹ֤חַ תִּשְׁכַּח֙ אֶת־יְהֹוָ֣ה אֱלֹהֶ֔יךָ וְהָֽלַכְתָּ֗ אַחֲרֵי֙ אֱלֹהִ֣ים אֲחֵרִ֔ים וַעֲבַדְתָּ֖ם וְהִשְׁתַּחֲוִ֣יתָ לָהֶ֑ם הַעִדֹ֤תִי בָכֶם֙ הַיּ֔וֹם כִּ֥י אָבֹ֖ד תֹּאבֵדֽוּן׃",
-          "english": "If you do forget the ETERNAL your God and follow other gods to serve them or bow down to them, I warn you this day that you shall certainly perish;"
+          "english": "If you do forget the ETERNAL your God and follow other gods to serve them or bow down to them, I warn you this day that you shall certainly perish;",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 157.4,
+            "end": 193.5
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 20,
           "hebrew": "כַּגּוֹיִ֗ם אֲשֶׁ֤ר יְהֹוָה֙ מַאֲבִ֣יד מִפְּנֵיכֶ֔ם כֵּ֖ן תֹּאבֵד֑וּן עֵ֚קֶב לֹ֣א תִשְׁמְע֔וּן בְּק֖וֹל יְהֹוָ֥ה אֱלֹהֵיכֶֽם׃&nbsp;{פ}",
-          "english": "like the nations that GOD will cause to perish before you, so shall you perish—because you did not heed the ETERNAL your God."
+          "english": "like the nations that GOD will cause to perish before you, so shall you perish—because you did not heed the ETERNAL your God.",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 193.5,
+            "end": 215.8
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         }
       ],
       "audioSegments": [
         {
           "label": "Ekev · 1. Cohen",
           "url": "audio/torah/46-ekev-1-cohen.mp3"
+        },
+        {
+          "label": "Ekev · 2. Levi",
+          "url": "audio/torah/46-ekev-2-levi.mp3"
         }
       ]
     },
@@ -2396,27 +3298,62 @@
         {
           "verse": 1,
           "hebrew": "שְׁמַ֣ע יִשְׂרָאֵ֗ל אַתָּ֨ה עֹבֵ֤ר הַיּוֹם֙ אֶת־הַיַּרְדֵּ֔ן לָבֹא֙ לָרֶ֣שֶׁת גּוֹיִ֔ם גְּדֹלִ֥ים וַעֲצֻמִ֖ים מִמֶּ֑ךָּ עָרִ֛ים גְּדֹלֹ֥ת וּבְצֻרֹ֖ת בַּשָּׁמָֽיִם׃",
-          "english": "Hear, O Israel! You are about to cross the Jordan to go in and dispossess nations greater and more populous than you: great cities with walls sky-high;"
+          "english": "Hear, O Israel! You are about to cross the Jordan to go in and dispossess nations greater and more populous than you: great cities with walls sky-high;",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 215.8,
+            "end": 241.567
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 2,
           "hebrew": "עַֽם־גָּד֥וֹל וָרָ֖ם בְּנֵ֣י עֲנָקִ֑ים אֲשֶׁ֨ר אַתָּ֤ה יָדַ֙עְתָּ֙ וְאַתָּ֣ה שָׁמַ֔עְתָּ מִ֣י יִתְיַצֵּ֔ב לִפְנֵ֖י בְּנֵ֥י עֲנָֽק׃",
-          "english": "a people great and tall, the Anakites, of whom you have knowledge; for you have heard it said, “Who can stand up to the children of Anak?”"
+          "english": "a people great and tall, the Anakites, of whom you have knowledge; for you have heard it said, “Who can stand up to the children of Anak?”",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 241.567,
+            "end": 262.033
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 3,
           "hebrew": "וְיָדַעְתָּ֣ הַיּ֗וֹם כִּי֩ יְהֹוָ֨ה אֱלֹהֶ֜יךָ הֽוּא־הָעֹבֵ֤ר לְפָנֶ֙יךָ֙ אֵ֣שׁ אֹֽכְלָ֔ה ה֧וּא יַשְׁמִידֵ֛ם וְה֥וּא יַכְנִיעֵ֖ם לְפָנֶ֑יךָ וְהֽוֹרַשְׁתָּ֤ם וְהַֽאֲבַדְתָּם֙ מַהֵ֔ר כַּאֲשֶׁ֛ר דִּבֶּ֥ר יְהֹוָ֖ה לָֽךְ׃",
-          "english": "Know then this day that none other than the ETERNAL your God is crossing at your head, a devouring fire; it is [God] who will wipe them out—subduing them before you, that you may quickly dispossess and destroy them, as GOD promised you."
+          "english": "Know then this day that none other than the ETERNAL your God is crossing at your head, a devouring fire; it is [God] who will wipe them out—subduing them before you, that you may quickly dispossess and destroy them, as GOD promised you.",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 262.033,
+            "end": 300.7
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 4,
           "hebrew": "אַל־תֹּאמַ֣ר בִּלְבָבְךָ֗ בַּהֲדֹ֣ף יְהֹוָה֩ אֱלֹהֶ֨יךָ אֹתָ֥ם&thinsp;׀&thinsp;מִלְּפָנֶ֘יךָ֮ לֵאמֹר֒ בְּצִדְקָתִי֙ הֱבִיאַ֣נִי יְהֹוָ֔ה לָרֶ֖שֶׁת אֶת־הָאָ֣רֶץ הַזֹּ֑את וּבְרִשְׁעַת֙ הַגּוֹיִ֣ם הָאֵ֔לֶּה יְהֹוָ֖ה מוֹרִישָׁ֥ם מִפָּנֶֽיךָ׃",
-          "english": "And when the ETERNAL your God has thrust them from your path, say not to yourselves, “GOD has enabled us to possess this land because of our virtues”; it is rather because of the wickedness of those nations that GOD is dispossessing them before you."
+          "english": "And when the ETERNAL your God has thrust them from your path, say not to yourselves, “GOD has enabled us to possess this land because of our virtues”; it is rather because of the wickedness of those nations that GOD is dispossessing them before you.",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 300.7,
+            "end": 334.433
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 5,
           "hebrew": "לֹ֣א בְצִדְקָתְךָ֗ וּבְיֹ֙שֶׁר֙ לְבָ֣בְךָ֔ אַתָּ֥ה בָ֖א לָרֶ֣שֶׁת אֶת־אַרְצָ֑ם כִּ֞י בְּרִשְׁעַ֣ת&thinsp;׀ הַגּוֹיִ֣ם הָאֵ֗לֶּה יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ מוֹרִישָׁ֣ם מִפָּנֶ֔יךָ וּלְמַ֜עַן הָקִ֣ים אֶת־הַדָּבָ֗ר אֲשֶׁ֨ר נִשְׁבַּ֤ע יְהֹוָה֙ לַאֲבֹתֶ֔יךָ לְאַבְרָהָ֥ם לְיִצְחָ֖ק וּֽלְיַעֲקֹֽב׃",
-          "english": "It is not because of your virtues and your rectitude that you will be able to possess their country; but it is because of their wickedness that the ETERNAL your God is dispossessing those nations before you, and in order to fulfill the oath that GOD made to your fathers Abraham, Isaac, and Jacob."
+          "english": "It is not because of your virtues and your rectitude that you will be able to possess their country; but it is because of their wickedness that the ETERNAL your God is dispossessing those nations before you, and in order to fulfill the oath that GOD made to your fathers Abraham, Isaac, and Jacob.",
+          "audio": "audio/torah/46-ekev-2-levi.mp3",
+          "timing": {
+            "start": 334.433,
+            "end": 391.167
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Ekev"
         },
         {
           "verse": 6,
@@ -2708,6 +3645,10 @@
         }
       ],
       "audioSegments": [
+        {
+          "label": "Ekev · 2. Levi",
+          "url": "audio/torah/46-ekev-2-levi.mp3"
+        },
         {
           "label": "Ekev · 3. Yisre'eli",
           "url": "audio/torah/46-ekev-3-yisreeli.mp3"
@@ -9125,72 +10066,170 @@
         {
           "verse": 15,
           "hebrew": "כִּֽי־אַתֶּ֣ם יְדַעְתֶּ֔ם אֵ֥ת אֲשֶׁר־יָשַׁ֖בְנוּ בְּאֶ֣רֶץ מִצְרָ֑יִם וְאֵ֧ת אֲשֶׁר־עָבַ֛רְנוּ בְּקֶ֥רֶב הַגּוֹיִ֖ם אֲשֶׁ֥ר עֲבַרְתֶּֽם׃",
-          "english": "Well you know that we dwelt in the land of Egypt and that we passed through the midst of various other nations;"
+          "english": "Well you know that we dwelt in the land of Egypt and that we passed through the midst of various other nations;",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 17.8
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 16,
           "hebrew": "וַתִּרְאוּ֙ אֶת־שִׁקּ֣וּצֵיהֶ֔ם וְאֵ֖ת גִּלֻּלֵיהֶ֑ם עֵ֣ץ וָאֶ֔בֶן כֶּ֥סֶף וְזָהָ֖ב אֲשֶׁ֥ר עִמָּהֶֽם׃",
-          "english": "and you have seen the detestable things and the fetishes of wood and stone, silver and gold, that they keep."
+          "english": "and you have seen the detestable things and the fetishes of wood and stone, silver and gold, that they keep.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 17.8,
+            "end": 33.033
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 17,
           "hebrew": "פֶּן־יֵ֣שׁ בָּ֠כֶ֠ם אִ֣ישׁ אֽוֹ־אִשָּׁ֞ה א֧וֹ מִשְׁפָּחָ֣ה אוֹ־שֵׁ֗בֶט אֲשֶׁר֩ לְבָב֨וֹ פֹנֶ֤ה הַיּוֹם֙ מֵעִם֙ יְהֹוָ֣ה אֱלֹהֵ֔ינוּ לָלֶ֣כֶת לַעֲבֹ֔ד אֶת־אֱלֹהֵ֖י הַגּוֹיִ֣ם הָהֵ֑ם פֶּן־יֵ֣שׁ בָּכֶ֗ם שֹׁ֛רֶשׁ פֹּרֶ֥ה רֹ֖אשׁ וְלַעֲנָֽה׃",
-          "english": "Perchance there is among you some man or woman, or some clan or tribe, whose heart is even now turning away from the ETERNAL our God to go and worship the gods of those nations—perchance there is among you a stock sprouting poison weed and wormwood."
+          "english": "Perchance there is among you some man or woman, or some clan or tribe, whose heart is even now turning away from the ETERNAL our God to go and worship the gods of those nations—perchance there is among you a stock sprouting poison weed and wormwood.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 33.033,
+            "end": 78.767
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 18,
           "hebrew": "וְהָיָ֡ה בְּשׇׁמְעוֹ֩ אֶת־דִּבְרֵ֨י הָאָלָ֜ה הַזֹּ֗את וְהִתְבָּרֵ֨ךְ בִּלְבָב֤וֹ לֵאמֹר֙ שָׁל֣וֹם יִֽהְיֶה־לִּ֔י כִּ֛י בִּשְׁרִר֥וּת לִבִּ֖י אֵלֵ֑ךְ לְמַ֛עַן סְפ֥וֹת הָרָוָ֖ה אֶת־הַצְּמֵאָֽה׃",
-          "english": "When hearing the words of these sanctions, they may imagine a special immunity, thinking, “I shall be safe, though I follow my own willful heart”—to the utter ruin of moist and dry alike."
+          "english": "When hearing the words of these sanctions, they may imagine a special immunity, thinking, “I shall be safe, though I follow my own willful heart”—to the utter ruin of moist and dry alike.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 78.767,
+            "end": 113.3
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 19,
           "hebrew": "לֹא־יֹאבֶ֣ה יְהֹוָה֮ סְלֹ֣חַֽ לוֹ֒ כִּ֣י אָ֠ז יֶעְשַׁ֨ן אַף־יְהֹוָ֤ה וְקִנְאָתוֹ֙ בָּאִ֣ישׁ הַה֔וּא וְרָ֤בְצָה בּוֹ֙ כׇּל־הָ֣אָלָ֔ה הַכְּתוּבָ֖ה בַּסֵּ֣פֶר הַזֶּ֑ה וּמָחָ֤ה יְהֹוָה֙ אֶת־שְׁמ֔וֹ מִתַּ֖חַת הַשָּׁמָֽיִם׃",
-          "english": "GOD will never forgive them. Rather, GOD’s anger and passion will rage against them, till every sanction recorded in this book comes down upon them, and GOD blots out their name from under heaven."
+          "english": "GOD will never forgive them. Rather, GOD’s anger and passion will rage against them, till every sanction recorded in this book comes down upon them, and GOD blots out their name from under heaven.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 113.3,
+            "end": 154.367
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 20,
           "hebrew": "וְהִבְדִּיל֤וֹ יְהֹוָה֙ לְרָעָ֔ה מִכֹּ֖ל שִׁבְטֵ֣י יִשְׂרָאֵ֑ל כְּכֹל֙ אָל֣וֹת הַבְּרִ֔ית הַכְּתוּבָ֕ה בְּסֵ֥פֶר הַתּוֹרָ֖ה הַזֶּֽה׃",
-          "english": "[As for such a clan or tribe,] GOD will single it out from all the tribes of Israel for misfortune, in accordance with all the sanctions of the covenant recorded in this book of Teaching."
+          "english": "[As for such a clan or tribe,] GOD will single it out from all the tribes of Israel for misfortune, in accordance with all the sanctions of the covenant recorded in this book of Teaching.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 154.367,
+            "end": 177.2
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 21,
           "hebrew": "וְאָמַ֞ר הַדּ֣וֹר הָאַחֲר֗וֹן בְּנֵיכֶם֙ אֲשֶׁ֤ר יָק֙וּמוּ֙ מֵאַ֣חֲרֵיכֶ֔ם וְהַ֨נׇּכְרִ֔י אֲשֶׁ֥ר יָבֹ֖א מֵאֶ֣רֶץ רְחוֹקָ֑ה וְ֠רָא֠וּ אֶת־מַכּ֞וֹת הָאָ֤רֶץ הַהִוא֙ וְאֶת־תַּ֣חֲלֻאֶ֔יהָ אֲשֶׁר־חִלָּ֥ה יְהֹוָ֖ה בָּֽהּ׃",
-          "english": "And later generations will ask—the children who succeed you, and foreigners who come from distant lands and see the plagues and diseases that GOD has inflicted upon that land,"
+          "english": "And later generations will ask—the children who succeed you, and foreigners who come from distant lands and see the plagues and diseases that GOD has inflicted upon that land,",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 177.2,
+            "end": 223.7
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 22,
           "hebrew": "גׇּפְרִ֣ית וָמֶ֘לַח֮ שְׂרֵפָ֣ה כׇל־אַרְצָהּ֒ לֹ֤א תִזָּרַע֙ וְלֹ֣א תַצְמִ֔חַ וְלֹא־יַעֲלֶ֥ה בָ֖הּ כׇּל־עֵ֑שֶׂב כְּֽמַהְפֵּכַ֞ת סְדֹ֤ם וַעֲמֹרָה֙ אַדְמָ֣ה (וצביים) [וּצְבוֹיִ֔ם] אֲשֶׁר֙ הָפַ֣ךְ יְהֹוָ֔ה בְּאַפּ֖וֹ וּבַחֲמָתֽוֹ׃",
-          "english": "all its soil devastated by sulfur and salt, beyond sowing and producing, no grass growing in it, just like the upheaval of Sodom and Gomorrah, Admah and Zeboiim, which GOD overthrew in fierce anger—"
+          "english": "all its soil devastated by sulfur and salt, beyond sowing and producing, no grass growing in it, just like the upheaval of Sodom and Gomorrah, Admah and Zeboiim, which GOD overthrew in fierce anger—",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 223.7,
+            "end": 264.0
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 23,
           "hebrew": "וְאָֽמְרוּ֙ כׇּל־הַגּוֹיִ֔ם עַל־מֶ֨ה עָשָׂ֧ה יְהֹוָ֛ה כָּ֖כָה לָאָ֣רֶץ הַזֹּ֑את מֶ֥ה חֳרִ֛י הָאַ֥ף הַגָּד֖וֹל הַזֶּֽה׃",
-          "english": "all nations will ask, “Why did GOD do thus to this land? Wherefore that awful wrath?”"
+          "english": "all nations will ask, “Why did GOD do thus to this land? Wherefore that awful wrath?”",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 264.0,
+            "end": 283.233
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 24,
           "hebrew": "וְאָ֣מְר֔וּ עַ֚ל אֲשֶׁ֣ר עָזְב֔וּ אֶת־בְּרִ֥ית יְהֹוָ֖ה אֱלֹהֵ֣י אֲבֹתָ֑ם אֲשֶׁר֙ כָּרַ֣ת עִמָּ֔ם בְּהוֹצִיא֥וֹ אֹתָ֖ם מֵאֶ֥רֶץ מִצְרָֽיִם׃",
-          "english": "They will be told, “Because they forsook the covenant that the ETERNAL, God of their ancestors, made with them upon freeing them from the land of Egypt;"
+          "english": "They will be told, “Because they forsook the covenant that the ETERNAL, God of their ancestors, made with them upon freeing them from the land of Egypt;",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 283.233,
+            "end": 302.233
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 25,
           "hebrew": "וַיֵּלְכ֗וּ וַיַּֽעַבְדוּ֙ אֱלֹהִ֣ים אֲחֵרִ֔ים וַיִּֽשְׁתַּחֲו֖וּ לָהֶ֑ם אֱלֹהִים֙ אֲשֶׁ֣ר לֹֽא־יְדָע֔וּם וְלֹ֥א חָלַ֖ק לָהֶֽם׃",
-          "english": "they turned to the service of other gods and worshiped them, gods whom they had not experienced and who had not been allotted to them."
+          "english": "they turned to the service of other gods and worshiped them, gods whom they had not experienced and who had not been allotted to them.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 302.233,
+            "end": 323.367
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 26,
           "hebrew": "וַיִּחַר־אַ֥ף יְהֹוָ֖ה בָּאָ֣רֶץ הַהִ֑וא לְהָבִ֤יא עָלֶ֙יהָ֙ אֶת־כׇּל־הַקְּלָלָ֔ה הַכְּתוּבָ֖ה בַּסֵּ֥פֶר הַזֶּֽה׃",
-          "english": "So GOD was incensed at that land and brought upon it all the curses recorded in this book."
+          "english": "So GOD was incensed at that land and brought upon it all the curses recorded in this book.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 323.367,
+            "end": 339.733
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 27,
           "hebrew": "וַיִּתְּשֵׁ֤ם יְהֹוָה֙ מֵעַ֣ל אַדְמָתָ֔ם בְּאַ֥ף וּבְחֵמָ֖ה וּבְקֶ֣צֶף גָּד֑וֹל וַיַּשְׁלִכֵ֛ם אֶל־אֶ֥רֶץ אַחֶ֖רֶת כַּיּ֥וֹם הַזֶּֽה׃",
-          "english": "GOD uprooted them from their soil in anger, fury, and great wrath, and cast them into another land, as is still the case.”"
+          "english": "GOD uprooted them from their soil in anger, fury, and great wrath, and cast them into another land, as is still the case.”",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 339.733,
+            "end": 358.7
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 28,
           "hebrew": "הַנִּ֨סְתָּרֹ֔ת לַיהֹוָ֖ה אֱלֹהֵ֑ינוּ וְהַנִּגְלֹ֞ת לָ֤ׄנׄוּׄ וּׄלְׄבָׄנֵ֙ׄיׄנׄוּ֙ׄ עַׄד־עוֹלָ֔ם לַעֲשׂ֕וֹת אֶת־כׇּל־דִּבְרֵ֖י הַתּוֹרָ֥ה הַזֹּֽאת׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Concealed acts concern the ETERNAL our God; but with overt acts, it is for us and our children ever to apply all the provisions of this Teaching."
+          "english": "Concealed acts concern the ETERNAL our God; but with overt acts, it is for us and our children ever to apply all the provisions of this Teaching.",
+          "audio": "audio/torah/51-nitzavim-3-yisreeli.mp3",
+          "timing": {
+            "start": 358.7,
+            "end": 389.467
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Nitzavim"
         }
       ],
       "audioSegments": [
@@ -9205,6 +10244,10 @@
         {
           "label": "Nitzavim · 2. Levi",
           "url": "audio/torah/51-nitzavim-2-levi.mp3"
+        },
+        {
+          "label": "Nitzavim · 3. Yisre'eli",
+          "url": "audio/torah/51-nitzavim-3-yisreeli.mp3"
         }
       ]
     },
@@ -9214,32 +10257,74 @@
         {
           "verse": 1,
           "hebrew": "וְהָיָה֩ כִֽי־יָבֹ֨אוּ עָלֶ֜יךָ כׇּל־הַדְּבָרִ֣ים הָאֵ֗לֶּה הַבְּרָכָה֙ וְהַקְּלָלָ֔ה אֲשֶׁ֥ר נָתַ֖תִּי לְפָנֶ֑יךָ וַהֲשֵׁבֹתָ֙ אֶל־לְבָבֶ֔ךָ בְּכׇ֨ל־הַגּוֹיִ֔ם אֲשֶׁ֧ר הִדִּיחֲךָ֛ יְהֹוָ֥ה אֱלֹהֶ֖יךָ שָֽׁמָּה׃",
-          "english": "When all these things befall you—the blessing and the curse that I have set before you—and you take them to heart amidst the various nations to which the ETERNAL your God has banished you,"
+          "english": "When all these things befall you—the blessing and the curse that I have set before you—and you take them to heart amidst the various nations to which the ETERNAL your God has banished you,",
+          "audio": "audio/torah/51-nitzavim-4-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 36.3
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 2,
           "hebrew": "וְשַׁבְתָּ֞ עַד־יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ וְשָׁמַעְתָּ֣ בְקֹל֔וֹ כְּכֹ֛ל אֲשֶׁר־אָנֹכִ֥י מְצַוְּךָ֖ הַיּ֑וֹם אַתָּ֣ה וּבָנֶ֔יךָ בְּכׇל־לְבָבְךָ֖ וּבְכׇל־נַפְשֶֽׁךָ׃",
-          "english": "and you return to the ETERNAL your God, and you and your children heed God’s command with all your heart and soul, just as I enjoin upon you this day,"
+          "english": "and you return to the ETERNAL your God, and you and your children heed God’s command with all your heart and soul, just as I enjoin upon you this day,",
+          "audio": "audio/torah/51-nitzavim-4-yisreeli.mp3",
+          "timing": {
+            "start": 36.3,
+            "end": 65.2
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 3,
           "hebrew": "וְשָׁ֨ב יְהֹוָ֧ה אֱלֹהֶ֛יךָ אֶת־שְׁבוּתְךָ֖ וְרִחֲמֶ֑ךָ וְשָׁ֗ב וְקִבֶּצְךָ֙ מִכׇּל־הָ֣עַמִּ֔ים אֲשֶׁ֧ר הֱפִֽיצְךָ֛ יְהֹוָ֥ה אֱלֹהֶ֖יךָ שָֽׁמָּה׃",
-          "english": "then the ETERNAL your God will restore your fortunes and take you back in love. You will be brought together again from all the peoples where the ETERNAL your God has scattered you."
+          "english": "then the ETERNAL your God will restore your fortunes and take you back in love. You will be brought together again from all the peoples where the ETERNAL your God has scattered you.",
+          "audio": "audio/torah/51-nitzavim-4-yisreeli.mp3",
+          "timing": {
+            "start": 65.2,
+            "end": 91.2
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 4,
           "hebrew": "אִם־יִהְיֶ֥ה נִֽדַּחֲךָ֖ בִּקְצֵ֣ה הַשָּׁמָ֑יִם מִשָּׁ֗ם יְקַבֶּצְךָ֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ וּמִשָּׁ֖ם יִקָּחֶֽךָ׃",
-          "english": "Even if your outcasts are at the ends of the world, from there the ETERNAL your God will gather you—from there you will be fetched."
+          "english": "Even if your outcasts are at the ends of the world, from there the ETERNAL your God will gather you—from there you will be fetched.",
+          "audio": "audio/torah/51-nitzavim-4-yisreeli.mp3",
+          "timing": {
+            "start": 91.2,
+            "end": 110.0
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 5,
           "hebrew": "וֶהֱבִיאֲךָ֞ יְהֹוָ֣ה אֱלֹהֶ֗יךָ אֶל־הָאָ֛רֶץ אֲשֶׁר־יָרְשׁ֥וּ אֲבֹתֶ֖יךָ וִֽירִשְׁתָּ֑הּ וְהֵיטִֽבְךָ֥ וְהִרְבְּךָ֖ מֵאֲבֹתֶֽיךָ׃",
-          "english": "And the ETERNAL your God will bring you to the land that your ancestors possessed, and you shall possess it; and you will be made more prosperous and more numerous than your ancestors."
+          "english": "And the ETERNAL your God will bring you to the land that your ancestors possessed, and you shall possess it; and you will be made more prosperous and more numerous than your ancestors.",
+          "audio": "audio/torah/51-nitzavim-4-yisreeli.mp3",
+          "timing": {
+            "start": 110.0,
+            "end": 132.8
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 6,
           "hebrew": "וּמָ֨ל יְהֹוָ֧ה אֱלֹהֶ֛יךָ אֶת־לְבָבְךָ֖ וְאֶת־לְבַ֣ב זַרְעֶ֑ךָ לְאַהֲבָ֞ה אֶת־יְהֹוָ֧ה אֱלֹהֶ֛יךָ בְּכׇל־לְבָבְךָ֥ וּבְכׇל־נַפְשְׁךָ֖ לְמַ֥עַן חַיֶּֽיךָ׃",
-          "english": "Then the ETERNAL your God will open up your heart and the hearts of your offspring—to love the ETERNAL your God with all your heart and soul, in order that you may live."
+          "english": "Then the ETERNAL your God will open up your heart and the hearts of your offspring—to love the ETERNAL your God with all your heart and soul, in order that you may live.",
+          "audio": "audio/torah/51-nitzavim-4-yisreeli.mp3",
+          "timing": {
+            "start": 132.8,
+            "end": 159.033
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 7,
@@ -9292,58 +10377,140 @@
         {
           "verse": 11,
           "hebrew": "כִּ֚י הַמִּצְוָ֣ה הַזֹּ֔את אֲשֶׁ֛ר אָנֹכִ֥י מְצַוְּךָ֖ הַיּ֑וֹם לֹא־נִפְלֵ֥את הִוא֙ מִמְּךָ֔ וְלֹ֥א רְחֹקָ֖ה הִֽוא׃",
-          "english": "Surely, this Instruction that I enjoin upon you this day is not too baffling for you, nor is it beyond reach."
+          "english": "Surely, this Instruction that I enjoin upon you this day is not too baffling for you, nor is it beyond reach.",
+          "audio": "audio/torah/51-nitzavim-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 17.467
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 12,
           "hebrew": "לֹ֥א בַשָּׁמַ֖יִם הִ֑וא לֵאמֹ֗ר מִ֣י יַעֲלֶה־לָּ֤נוּ הַשָּׁמַ֙יְמָה֙ וְיִקָּחֶ֣הָ לָּ֔נוּ וְיַשְׁמִעֵ֥נוּ אֹתָ֖הּ וְנַעֲשֶֽׂנָּה׃",
-          "english": "It is not in the heavens, that you should say, “Who among us can go up to the heavens and get it for us and impart it to us, that we may observe it?”"
+          "english": "It is not in the heavens, that you should say, “Who among us can go up to the heavens and get it for us and impart it to us, that we may observe it?”",
+          "audio": "audio/torah/51-nitzavim-6-yisreeli.mp3",
+          "timing": {
+            "start": 17.467,
+            "end": 39.333
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 13,
           "hebrew": "וְלֹא־מֵעֵ֥בֶר לַיָּ֖ם הִ֑וא לֵאמֹ֗ר מִ֣י יַעֲבׇר־לָ֜נוּ אֶל־עֵ֤בֶר הַיָּם֙ וְיִקָּחֶ֣הָ לָּ֔נוּ וְיַשְׁמִעֵ֥נוּ אֹתָ֖הּ וְנַעֲשֶֽׂנָּה׃",
-          "english": "Neither is it beyond the sea, that you should say, “Who among us can cross to the other side of the sea and get it for us and impart it to us, that we may observe it?”"
+          "english": "Neither is it beyond the sea, that you should say, “Who among us can cross to the other side of the sea and get it for us and impart it to us, that we may observe it?”",
+          "audio": "audio/torah/51-nitzavim-6-yisreeli.mp3",
+          "timing": {
+            "start": 39.333,
+            "end": 62.367
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 14,
           "hebrew": "כִּֽי־קָר֥וֹב אֵלֶ֛יךָ הַדָּבָ֖ר מְאֹ֑ד בְּפִ֥יךָ וּבִֽלְבָבְךָ֖ לַעֲשֹׂתֽוֹ׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "No, the thing is very close to you, in your mouth and in your heart, to observe it."
+          "english": "No, the thing is very close to you, in your mouth and in your heart, to observe it.",
+          "audio": "audio/torah/51-nitzavim-6-yisreeli.mp3",
+          "timing": {
+            "start": 62.367,
+            "end": 74.4
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 15,
           "hebrew": "רְאֵ֨ה נָתַ֤תִּי לְפָנֶ֙יךָ֙ הַיּ֔וֹם אֶת־הַֽחַיִּ֖ים וְאֶת־הַטּ֑וֹב וְאֶת־הַמָּ֖וֶת וְאֶת־הָרָֽע׃",
-          "english": "See, I set before you this day life and prosperity, death and adversity."
+          "english": "See, I set before you this day life and prosperity, death and adversity.",
+          "audio": "audio/torah/51-nitzavim-7-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 15.2
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 16,
           "hebrew": "אֲשֶׁ֨ר אָנֹכִ֣י מְצַוְּךָ֮ הַיּוֹם֒ לְאַהֲבָ֞ה אֶת־יְהֹוָ֤ה אֱלֹהֶ֙יךָ֙ לָלֶ֣כֶת בִּדְרָכָ֔יו וְלִשְׁמֹ֛ר מִצְוֺתָ֥יו וְחֻקֹּתָ֖יו וּמִשְׁפָּטָ֑יו וְחָיִ֣יתָ וְרָבִ֔יתָ וּבֵֽרַכְךָ֙ יְהֹוָ֣ה אֱלֹהֶ֔יךָ בָּאָ֕רֶץ אֲשֶׁר־אַתָּ֥ה בָא־שָׁ֖מָּה לְרִשְׁתָּֽהּ׃",
-          "english": "For I command you this day, to love the ETERNAL your God, to walk in God’s ways, and to keep God’s commandments, laws, and rules—that you may thrive and increase, and that the ETERNAL your God may bless you in the land that you are about to enter and possess."
+          "english": "For I command you this day, to love the ETERNAL your God, to walk in God’s ways, and to keep God’s commandments, laws, and rules—that you may thrive and increase, and that the ETERNAL your God may bless you in the land that you are about to enter and possess.",
+          "audio": "audio/torah/51-nitzavim-7-yisreeli.mp3",
+          "timing": {
+            "start": 15.2,
+            "end": 60.467
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 17,
           "hebrew": "וְאִם־יִפְנֶ֥ה לְבָבְךָ֖ וְלֹ֣א תִשְׁמָ֑ע וְנִדַּחְתָּ֗ וְהִֽשְׁתַּחֲוִ֛יתָ לֵאלֹהִ֥ים אֲחֵרִ֖ים וַעֲבַדְתָּֽם׃",
-          "english": "But if your heart turns away and you give no heed, and are lured into the worship and service of other gods,"
+          "english": "But if your heart turns away and you give no heed, and are lured into the worship and service of other gods,",
+          "audio": "audio/torah/51-nitzavim-7-yisreeli.mp3",
+          "timing": {
+            "start": 60.467,
+            "end": 76.467
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 18,
           "hebrew": "הִגַּ֤דְתִּי לָכֶם֙ הַיּ֔וֹם כִּ֥י אָבֹ֖ד תֹּאבֵד֑וּן לֹא־תַאֲרִיכֻ֤ן יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁ֨ר אַתָּ֤ה עֹבֵר֙ אֶת־הַיַּרְדֵּ֔ן לָב֥וֹא שָׁ֖מָּה לְרִשְׁתָּֽהּ׃",
-          "english": "I declare to you this day that you shall certainly perish; you shall not long endure on the soil that you are crossing the Jordan to enter and possess."
+          "english": "I declare to you this day that you shall certainly perish; you shall not long endure on the soil that you are crossing the Jordan to enter and possess.",
+          "audio": "audio/torah/51-nitzavim-7-yisreeli.mp3",
+          "timing": {
+            "start": 76.467,
+            "end": 104.533
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 19,
           "hebrew": "הַעִדֹ֨תִי בָכֶ֣ם הַיּוֹם֮ אֶת־הַשָּׁמַ֣יִם וְאֶת־הָאָ֒רֶץ֒ הַחַיִּ֤ים וְהַמָּ֙וֶת֙ נָתַ֣תִּי לְפָנֶ֔יךָ הַבְּרָכָ֖ה וְהַקְּלָלָ֑ה וּבָֽחַרְתָּ֙ בַּחַיִּ֔ים לְמַ֥עַן תִּֽחְיֶ֖ה אַתָּ֥ה וְזַרְעֶֽךָ׃",
-          "english": "I call heaven and earth to witness against you this day: I have put before you life and death, blessing and curse. Choose life—if you and your offspring would live—"
+          "english": "I call heaven and earth to witness against you this day: I have put before you life and death, blessing and curse. Choose life—if you and your offspring would live—",
+          "audio": "audio/torah/51-nitzavim-7-yisreeli.mp3",
+          "timing": {
+            "start": 104.533,
+            "end": 134.633
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Nitzavim"
         },
         {
           "verse": 20,
           "hebrew": "לְאַֽהֲבָה֙ אֶת־יְהֹוָ֣ה אֱלֹהֶ֔יךָ לִשְׁמֹ֥עַ בְּקֹל֖וֹ וּלְדׇבְקָה־ב֑וֹ כִּ֣י ה֤וּא חַיֶּ֙יךָ֙ וְאֹ֣רֶךְ יָמֶ֔יךָ לָשֶׁ֣בֶת עַל־הָאֲדָמָ֗ה אֲשֶׁר֩ נִשְׁבַּ֨ע יְהֹוָ֧ה לַאֲבֹתֶ֛יךָ לְאַבְרָהָ֛ם לְיִצְחָ֥ק וּֽלְיַעֲקֹ֖ב לָתֵ֥ת לָהֶֽם׃&nbsp;{פ}",
-          "english": "by loving the ETERNAL your God, by heeding God’s commands, and by holding fast to [God]. For thereby you shall have life and shall long endure upon the soil that GOD swore to your fathers Abraham, Isaac, and Jacob, to give to them."
+          "english": "by loving the ETERNAL your God, by heeding God’s commands, and by holding fast to [God]. For thereby you shall have life and shall long endure upon the soil that GOD swore to your fathers Abraham, Isaac, and Jacob, to give to them.",
+          "audio": "audio/torah/51-nitzavim-7-yisreeli.mp3",
+          "timing": {
+            "start": 134.633,
+            "end": 175.1
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Nitzavim"
         }
       ],
       "audioSegments": [
         {
+          "label": "Nitzavim · 4. Yisre'eli",
+          "url": "audio/torah/51-nitzavim-4-yisreeli.mp3"
+        },
+        {
           "label": "Nitzavim · 5. Yisre'eli",
           "url": "audio/torah/51-nitzavim-5-yisreeli.mp3"
+        },
+        {
+          "label": "Nitzavim · 6. Yisre'eli",
+          "url": "audio/torah/51-nitzavim-6-yisreeli.mp3"
+        },
+        {
+          "label": "Nitzavim · 7. Yisre'eli",
+          "url": "audio/torah/51-nitzavim-7-yisreeli.mp3"
         }
       ]
     },
@@ -9892,202 +11059,482 @@
         {
           "verse": 13,
           "hebrew": "יַרְכִּבֵ֙הוּ֙ עַל־[בָּ֣מֳתֵי] (במותי) אָ֔רֶץ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וַיֹּאכַ֖ל תְּנוּבֹ֣ת שָׂדָ֑י וַיֵּנִקֵ֤הֽוּ דְבַשׁ֙ מִסֶּ֔לַע&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְשֶׁ֖מֶן מֵחַלְמִ֥ישׁ צֽוּר׃",
-          "english": "[God] set them atop the highlands,To feast on the yield of the earth;Nursing them with honey from the crag,And oil from the flinty rock,"
+          "english": "[God] set them atop the highlands,To feast on the yield of the earth;Nursing them with honey from the crag,And oil from the flinty rock,",
+          "audio": "audio/torah/53-haazinu-3-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 21.3
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 14,
           "hebrew": "חֶמְאַ֨ת בָּקָ֜ר וַחֲלֵ֣ב צֹ֗אן&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;עִם־חֵ֨לֶב כָּרִ֜ים וְאֵילִ֤ים בְּנֵֽי־בָשָׁן֙ וְעַתּוּדִ֔ים&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;עִם־חֵ֖לֶב כִּלְי֣וֹת חִטָּ֑ה וְדַם־עֵנָ֖ב תִּשְׁתֶּה־חָֽמֶר׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Curd of kine and milk of flocks;With the best of lambs,And rams of Bashan, and he-goats;With the very finest wheat—And foaming grape-blood was your drink."
+          "english": "Curd of kine and milk of flocks;With the best of lambs,And rams of Bashan, and he-goats;With the very finest wheat—And foaming grape-blood was your drink.",
+          "audio": "audio/torah/53-haazinu-3-yisreeli.mp3",
+          "timing": {
+            "start": 21.3,
+            "end": 48.8
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 15,
           "hebrew": "וַיִּשְׁמַ֤ן יְשֻׁרוּן֙ וַיִּבְעָ֔ט שָׁמַ֖נְתָּ עָבִ֣יתָ כָּשִׂ֑יתָ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וַיִּטֹּשׁ֙ אֱל֣וֹהַּ עָשָׂ֔הוּ וַיְנַבֵּ֖ל צ֥וּר יְשֻׁעָתֽוֹ׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "So Jeshurun grew fat and kicked—You grew fat and gross and coarse uncertain.—They forsook the God who made themAnd spurned the Rock of their support."
+          "english": "So Jeshurun grew fat and kicked—You grew fat and gross and coarse uncertain.—They forsook the God who made themAnd spurned the Rock of their support.",
+          "audio": "audio/torah/53-haazinu-3-yisreeli.mp3",
+          "timing": {
+            "start": 48.8,
+            "end": 69.6
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 16,
           "hebrew": "יַקְנִאֻ֖הוּ בְּזָרִ֑ים בְּתוֹעֵבֹ֖ת יַכְעִיסֻֽהוּ׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "They kindled wrath with alien things,Provoked anger with abominations."
+          "english": "They kindled wrath with alien things,Provoked anger with abominations.",
+          "audio": "audio/torah/53-haazinu-3-yisreeli.mp3",
+          "timing": {
+            "start": 69.6,
+            "end": 77.4
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 17,
           "hebrew": "יִזְבְּח֗וּ לַשֵּׁדִים֙ לֹ֣א אֱלֹ֔הַּ אֱלֹהִ֖ים לֹ֣א יְדָע֑וּם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;חֲדָשִׁים֙ מִקָּרֹ֣ב בָּ֔אוּ לֹ֥א שְׂעָר֖וּם אֲבֹתֵיכֶֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "They sacrificed to demons, no-gods,Gods they had never known,New ones, who came but lately,Who stirred not your forebears’ fears. suggests the rendering “Whom your forebears did not know.”"
+          "english": "They sacrificed to demons, no-gods,Gods they had never known,New ones, who came but lately,Who stirred not your forebears’ fears. suggests the rendering “Whom your forebears did not know.”",
+          "audio": "audio/torah/53-haazinu-3-yisreeli.mp3",
+          "timing": {
+            "start": 77.4,
+            "end": 99.5
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 18,
           "hebrew": "צ֥וּר יְלָדְךָ֖ תֶּ֑שִׁי וַתִּשְׁכַּ֖ח אֵ֥ל מְחֹלְלֶֽךָ׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "You neglected the Rock who begot you,Forgot the God who labored to bring you forth."
+          "english": "You neglected the Rock who begot you,Forgot the God who labored to bring you forth.",
+          "audio": "audio/torah/53-haazinu-3-yisreeli.mp3",
+          "timing": {
+            "start": 99.5,
+            "end": 109.567
+          },
+          "aliyah": "3. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 19,
           "hebrew": "וַיַּ֥רְא יְהֹוָ֖ה וַיִּנְאָ֑ץ מִכַּ֥עַס בָּנָ֖יו וּבְנֹתָֽיו׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "GOD saw and was vexedAnd spurned these sons and daughters."
+          "english": "GOD saw and was vexedAnd spurned these sons and daughters.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 8.367
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 20,
           "hebrew": "וַיֹּ֗אמֶר אַסְתִּ֤ירָה פָנַי֙ מֵהֶ֔ם אֶרְאֶ֖ה מָ֣ה אַחֲרִיתָ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;כִּ֣י ד֤וֹר תַּהְפֻּכֹת֙ הֵ֔מָּה בָּנִ֖ים לֹא־אֵמֻ֥ן בָּֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "[God] said:I will hide My countenance from them,And see how they fare in the end.For they are a treacherous breed,Children with no loyalty in them."
+          "english": "[God] said:I will hide My countenance from them,And see how they fare in the end.For they are a treacherous breed,Children with no loyalty in them.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 8.367,
+            "end": 34.633
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 21,
           "hebrew": "הֵ֚ם קִנְא֣וּנִי בְלֹא־אֵ֔ל כִּעֲס֖וּנִי בְּהַבְלֵיהֶ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וַֽאֲנִי֙ אַקְנִיאֵ֣ם בְּלֹא־עָ֔ם בְּג֥וֹי נָבָ֖ל אַכְעִיסֵֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "They incensed Me with no-gods,Vexed Me with their futilities; I’ll incense them with a no-folk,Vex them with a nation of fools."
+          "english": "They incensed Me with no-gods,Vexed Me with their futilities; I’ll incense them with a no-folk,Vex them with a nation of fools.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 34.633,
+            "end": 51.433
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 22,
           "hebrew": "כִּי־אֵשׁ֙ קָדְחָ֣ה בְאַפִּ֔י וַתִּיקַ֖ד עַד־שְׁא֣וֹל תַּחְתִּ֑ית&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וַתֹּ֤אכַל אֶ֙רֶץ֙ וִֽיבֻלָ֔הּ וַתְּלַהֵ֖ט מוֹסְדֵ֥י הָרִֽים׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "For a fire has flared in My wrathAnd burned to the bottom of Sheol,Has consumed the earth and its increase,Eaten down to the base of the hills."
+          "english": "For a fire has flared in My wrathAnd burned to the bottom of Sheol,Has consumed the earth and its increase,Eaten down to the base of the hills.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 51.433,
+            "end": 71.333
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 23,
           "hebrew": "אַסְפֶּ֥ה עָלֵ֖ימוֹ רָע֑וֹת חִצַּ֖י אֲכַלֶּה־בָּֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "I will sweep misfortunes on them,Use up My arrows on them:"
+          "english": "I will sweep misfortunes on them,Use up My arrows on them:",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 71.333,
+            "end": 78.8
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 24,
           "hebrew": "מְזֵ֥י רָעָ֛ב וּלְחֻ֥מֵי רֶ֖שֶׁף וְקֶ֣טֶב מְרִירִ֑י&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְשֶׁן־בְּהֵמֹת֙ אֲשַׁלַּח־בָּ֔ם עִם־חֲמַ֖ת זֹחֲלֵ֥י עָפָֽר׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Wasting famine, ravaging plague,Deadly pestilence, and fanged beastsWill I let loose against them,With venomous creepers in dust."
+          "english": "Wasting famine, ravaging plague,Deadly pestilence, and fanged beastsWill I let loose against them,With venomous creepers in dust.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 78.8,
+            "end": 96.6
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 25,
           "hebrew": "מִחוּץ֙ תְּשַׁכֶּל־חֶ֔רֶב וּמֵחֲדָרִ֖ים אֵימָ֑ה גַּם־בָּחוּר֙ גַּם־בְּתוּלָ֔ה יוֹנֵ֖ק עִם־אִ֥ישׁ שֵׂיבָֽה׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "The sword shall deal death without,As shall the terror within,To youth and maiden alike,The suckling as well as the aged."
+          "english": "The sword shall deal death without,As shall the terror within,To youth and maiden alike,The suckling as well as the aged.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 96.6,
+            "end": 113.6
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 26,
           "hebrew": "אָמַ֖רְתִּי אַפְאֵיהֶ֑ם אַשְׁבִּ֥יתָה מֵאֱנ֖וֹשׁ זִכְרָֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "I might have reduced them to naught, uncertain. Made their memory cease among humankind,"
+          "english": "I might have reduced them to naught, uncertain. Made their memory cease among humankind,",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 113.6,
+            "end": 121.4
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 27,
           "hebrew": "לוּלֵ֗י כַּ֤עַס אוֹיֵב֙ אָג֔וּר פֶּֽן־יְנַכְּר֖וּ צָרֵ֑ימוֹ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;פֶּן־יֹֽאמְרוּ֙ יָדֵ֣נוּ רָ֔מָה וְלֹ֥א יְהֹוָ֖ה פָּעַ֥ל כׇּל־זֹֽאת׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "But for fear of the taunts of the foe,Their enemies who might misjudgeAnd say, “Our own hand has prevailed;None of this was wrought by GOD!”"
+          "english": "But for fear of the taunts of the foe,Their enemies who might misjudgeAnd say, “Our own hand has prevailed;None of this was wrought by GOD!”",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 121.4,
+            "end": 145.233
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 28,
           "hebrew": "כִּי־ג֛וֹי אֹבַ֥ד עֵצ֖וֹת הֵ֑מָּה וְאֵ֥ין בָּהֶ֖ם תְּבוּנָֽה׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "For they are a folk void of sense,Lacking in all discernment."
+          "english": "For they are a folk void of sense,Lacking in all discernment.",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 145.233,
+            "end": 154.1
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 29,
           "hebrew": "ל֥וּ חָכְמ֖וּ יַשְׂכִּ֣ילוּ זֹ֑את יָבִ֖ינוּ לְאַחֲרִיתָֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Were they wise, they would think upon this,Gain insight into their future:"
+          "english": "Were they wise, they would think upon this,Gain insight into their future:",
+          "audio": "audio/torah/53-haazinu-4-yisreeli.mp3",
+          "timing": {
+            "start": 154.1,
+            "end": 163.4
+          },
+          "aliyah": "4. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 30,
           "hebrew": "אֵיכָ֞ה יִרְדֹּ֤ף אֶחָד֙ אֶ֔לֶף וּשְׁנַ֖יִם יָנִ֣יסוּ רְבָבָ֑ה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;אִם־לֹא֙ כִּֽי־צוּרָ֣ם מְכָרָ֔ם וַֽיהֹוָ֖ה הִסְגִּירָֽם׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "“How could one have routed a thousand,Or two put ten thousand to flight,Unless their Rock had sold them, GOD had given them up?”"
+          "english": "“How could one have routed a thousand,Or two put ten thousand to flight,Unless their Rock had sold them, GOD had given them up?”",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 24.533
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 31,
           "hebrew": "כִּ֛י לֹ֥א כְצוּרֵ֖נוּ צוּרָ֑ם וְאֹיְבֵ֖ינוּ פְּלִילִֽים׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "For their rock is not like our Rock,In our enemies’ own estimation. (“own estimation”) see Exod. 21.22; cf. Gen. 48.11."
+          "english": "For their rock is not like our Rock,In our enemies’ own estimation. (“own estimation”) see Exod. 21.22; cf. Gen. 48.11.",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 24.533,
+            "end": 33.633
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 32,
           "hebrew": "כִּֽי־מִגֶּ֤פֶן סְדֹם֙ גַּפְנָ֔ם וּמִשַּׁדְמֹ֖ת עֲמֹרָ֑ה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;עֲנָבֵ֙מוֹ֙ עִנְּבֵי־ר֔וֹשׁ אַשְׁכְּלֹ֥ת מְרֹרֹ֖ת לָֽמוֹ׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Ah! The vine for them is from Sodom,From the vineyards of Gomorrah;The grapes for them are poison,A bitter growth their clusters."
+          "english": "Ah! The vine for them is from Sodom,From the vineyards of Gomorrah;The grapes for them are poison,A bitter growth their clusters.",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 33.633,
+            "end": 54.1
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 33,
           "hebrew": "חֲמַ֥ת תַּנִּינִ֖ם יֵינָ֑ם וְרֹ֥אשׁ פְּתָנִ֖ים אַכְזָֽר׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Their wine is the venom of asps,The pitiless poison of vipers."
+          "english": "Their wine is the venom of asps,The pitiless poison of vipers.",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 54.1,
+            "end": 61.2
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 34,
           "hebrew": "הֲלֹא־ה֖וּא כָּמֻ֣ס עִמָּדִ֑י חָת֖וּם בְּאוֹצְרֹתָֽי׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Lo, I have it all put away,Sealed up in My storehouses,"
+          "english": "Lo, I have it all put away,Sealed up in My storehouses,",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 61.2,
+            "end": 68.8
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 35,
           "hebrew": "לִ֤י נָקָם֙ וְשִׁלֵּ֔ם לְעֵ֖ת תָּמ֣וּט רַגְלָ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;כִּ֤י קָרוֹב֙ י֣וֹם אֵידָ֔ם וְחָ֖שׁ עֲתִדֹ֥ת לָֽמוֹ׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "To be My vengeance and recompense,At the time that their foot falters.Yea, their day of disaster is near,And destiny rushes upon them."
+          "english": "To be My vengeance and recompense,At the time that their foot falters.Yea, their day of disaster is near,And destiny rushes upon them.",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 68.8,
+            "end": 88.733
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 36,
           "hebrew": "כִּֽי־יָדִ֤ין יְהֹוָה֙ עַמּ֔וֹ וְעַל־עֲבָדָ֖יו יִתְנֶחָ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;כִּ֤י יִרְאֶה֙ כִּֽי־אָ֣זְלַת יָ֔ד וְאֶ֖פֶס עָצ֥וּר וְעָזֽוּב׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "For GOD will vindicate this peopleAnd take revenge for these servants,Upon seeing that their might is gone,And neither bond nor free is left."
+          "english": "For GOD will vindicate this peopleAnd take revenge for these servants,Upon seeing that their might is gone,And neither bond nor free is left.",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 88.733,
+            "end": 109.567
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 37,
           "hebrew": "וְאָמַ֖ר אֵ֣י אֱלֹהֵ֑ימוֹ צ֖וּר חָסָ֥יוּ בֽוֹ׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "[God] will say: Where are their gods,The rock in whom they sought refuge,"
+          "english": "[God] will say: Where are their gods,The rock in whom they sought refuge,",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 109.567,
+            "end": 116.5
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 38,
           "hebrew": "אֲשֶׁ֨ר חֵ֤לֶב זְבָחֵ֙ימוֹ֙ יֹאכֵ֔לוּ יִשְׁתּ֖וּ יֵ֣ין נְסִיכָ֑ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;יָק֙וּמוּ֙ וְיַעְזְרֻכֶ֔ם יְהִ֥י עֲלֵיכֶ֖ם סִתְרָֽה׃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Who ate the fat of their offeringsAnd drank their libation wine?Let them rise up to your help,And let them be a shield unto you!"
+          "english": "Who ate the fat of their offeringsAnd drank their libation wine?Let them rise up to your help,And let them be a shield unto you!",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 116.5,
+            "end": 139.6
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 39,
           "hebrew": "רְא֣וּ&thinsp;׀ עַתָּ֗ה כִּ֣י אֲנִ֤י אֲנִי֙ ה֔וּא וְאֵ֥ין אֱלֹהִ֖ים עִמָּדִ֑י&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;אֲנִ֧י אָמִ֣ית וַאֲחַיֶּ֗ה מָחַ֙צְתִּי֙ וַאֲנִ֣י אֶרְפָּ֔א&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְאֵ֥ין מִיָּדִ֖י מַצִּֽיל׃",
-          "english": "See, then, that I, I am the One;There is no god beside Me.I deal death and give life;I wounded and I will heal:None can deliver from My hand."
+          "english": "See, then, that I, I am the One;There is no god beside Me.I deal death and give life;I wounded and I will heal:None can deliver from My hand.",
+          "audio": "audio/torah/53-haazinu-5-yisreeli.mp3",
+          "timing": {
+            "start": 139.6,
+            "end": 175.067
+          },
+          "aliyah": "5. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 40,
           "hebrew": "כִּֽי־אֶשָּׂ֥א אֶל־שָׁמַ֖יִם יָדִ֑י&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְאָמַ֕רְתִּי חַ֥י אָנֹכִ֖י לְעֹלָֽם׃",
-          "english": "Lo, I raise My hand to heavenAnd say: As I live forever,"
+          "english": "Lo, I raise My hand to heavenAnd say: As I live forever,",
+          "audio": "audio/torah/53-haazinu-6-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 13.033
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 41,
           "hebrew": "אִם־שַׁנּוֹתִי֙ בְּרַ֣ק חַרְבִּ֔י&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְתֹאחֵ֥ז בְּמִשְׁפָּ֖ט יָדִ֑י אָשִׁ֤יב נָקָם֙ לְצָרָ֔י&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְלִמְשַׂנְאַ֖י אֲשַׁלֵּֽם׃",
-          "english": "When I whet My flashing bladeAnd My hand lays hold on judgment,Vengeance will I wreak on My foes,Will I deal to those who reject Me."
+          "english": "When I whet My flashing bladeAnd My hand lays hold on judgment,Vengeance will I wreak on My foes,Will I deal to those who reject Me.",
+          "audio": "audio/torah/53-haazinu-6-yisreeli.mp3",
+          "timing": {
+            "start": 13.033,
+            "end": 32.4
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 42,
           "hebrew": "אַשְׁכִּ֤יר חִצַּי֙ מִדָּ֔ם&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְחַרְבִּ֖י תֹּאכַ֣ל בָּשָׂ֑ר מִדַּ֤ם חָלָל֙ וְשִׁבְיָ֔ה&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;מֵרֹ֖אשׁ פַּרְע֥וֹת אוֹיֵֽב׃",
-          "english": "I will make My arrows drunk with blood—As My sword devours flesh—Blood of the slain and the captiveFrom the long-haired enemy chiefs."
+          "english": "I will make My arrows drunk with blood—As My sword devours flesh—Blood of the slain and the captiveFrom the long-haired enemy chiefs.",
+          "audio": "audio/torah/53-haazinu-6-yisreeli.mp3",
+          "timing": {
+            "start": 32.4,
+            "end": 52.767
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 43,
           "hebrew": "הַרְנִ֤ינוּ גוֹיִם֙ עַמּ֔וֹ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;כִּ֥י דַם־עֲבָדָ֖יו יִקּ֑וֹם וְנָקָם֙ יָשִׁ֣יב לְצָרָ֔יו&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;וְכִפֶּ֥ר אַדְמָת֖וֹ עַמּֽוֹ׃&nbsp;{פ}",
-          "english": "O nations, acclaim this people!For [God] will avenge the blood of these servants,Wreak vengeance on opponents,And cleanse this people’s land. “tears” suggests the rendering “And wipe away the tears of God’s people.” Cf. Isa. 25.8."
+          "english": "O nations, acclaim this people!For [God] will avenge the blood of these servants,Wreak vengeance on opponents,And cleanse this people’s land. “tears” suggests the rendering “And wipe away the tears of God’s people.” Cf. Isa. 25.8.",
+          "audio": "audio/torah/53-haazinu-6-yisreeli.mp3",
+          "timing": {
+            "start": 52.767,
+            "end": 74.1
+          },
+          "aliyah": "6. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 44,
           "hebrew": "וַיָּבֹ֣א מֹשֶׁ֗ה וַיְדַבֵּ֛ר אֶת־כׇּל־דִּבְרֵ֥י הַשִּׁירָֽה־הַזֹּ֖את בְּאׇזְנֵ֣י הָעָ֑ם ה֖וּא וְהוֹשֵׁ֥עַ בִּן־נֽוּן׃",
-          "english": "Moses came, together with Hosea son of Nun, and recited all the words of this poem in the hearing of the people."
+          "english": "Moses came, together with Hosea son of Nun, and recited all the words of this poem in the hearing of the people.",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 17.633
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 45,
           "hebrew": "וַיְכַ֣ל מֹשֶׁ֗ה לְדַבֵּ֛ר אֶת־כׇּל־הַדְּבָרִ֥ים הָאֵ֖לֶּה אֶל־כׇּל־יִשְׂרָאֵֽל׃",
-          "english": "And when Moses finished reciting all these words to all Israel,"
+          "english": "And when Moses finished reciting all these words to all Israel,",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 17.633,
+            "end": 31.4
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 46,
           "hebrew": "וַיֹּ֤אמֶר אֲלֵהֶם֙ שִׂ֣ימוּ לְבַבְכֶ֔ם לְכׇ֨ל־הַדְּבָרִ֔ים אֲשֶׁ֧ר אָנֹכִ֛י מֵעִ֥יד בָּכֶ֖ם הַיּ֑וֹם אֲשֶׁ֤ר תְּצַוֻּם֙ אֶת־בְּנֵיכֶ֔ם לִשְׁמֹ֣ר לַעֲשׂ֔וֹת אֶת־כׇּל־דִּבְרֵ֖י הַתּוֹרָ֥ה הַזֹּֽאת׃",
-          "english": "he said to them: Take to heart all the words with which I have warned you this day. Enjoin them upon your children, that they may observe faithfully all the terms of this Teaching."
+          "english": "he said to them: Take to heart all the words with which I have warned you this day. Enjoin them upon your children, that they may observe faithfully all the terms of this Teaching.",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 31.4,
+            "end": 62.1
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 47,
           "hebrew": "כִּ֠י לֹא־דָבָ֨ר רֵ֥ק הוּא֙ מִכֶּ֔ם כִּי־ה֖וּא חַיֵּיכֶ֑ם וּבַדָּבָ֣ר הַזֶּ֗ה תַּאֲרִ֤יכוּ יָמִים֙ עַל־הָ֣אֲדָמָ֔ה אֲשֶׁ֨ר אַתֶּ֜ם עֹבְרִ֧ים אֶת־הַיַּרְדֵּ֛ן שָׁ֖מָּה לְרִשְׁתָּֽהּ׃&nbsp;{פ}",
-          "english": "For this is not a trifling thing for you: it is your very life; through it you shall long endure on the land that you are to possess upon crossing the Jordan."
+          "english": "For this is not a trifling thing for you: it is your very life; through it you shall long endure on the land that you are to possess upon crossing the Jordan.",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 62.1,
+            "end": 96.7
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 48,
           "hebrew": "וַיְדַבֵּ֤ר יְהֹוָה֙ אֶל־מֹשֶׁ֔ה בְּעֶ֛צֶם הַיּ֥וֹם הַזֶּ֖ה לֵאמֹֽר׃",
-          "english": "That very day GOD spoke to Moses:"
+          "english": "That very day GOD spoke to Moses:",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 96.7,
+            "end": 111.533
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 49,
           "hebrew": "עֲלֵ֡ה אֶל־הַר֩ הָעֲבָרִ֨ים הַזֶּ֜ה הַר־נְב֗וֹ אֲשֶׁר֙ בְּאֶ֣רֶץ מוֹאָ֔ב אֲשֶׁ֖ר עַל־פְּנֵ֣י יְרֵח֑וֹ וּרְאֵה֙ אֶת־אֶ֣רֶץ כְּנַ֔עַן אֲשֶׁ֨ר אֲנִ֥י נֹתֵ֛ן לִבְנֵ֥י יִשְׂרָאֵ֖ל לַאֲחֻזָּֽה׃",
-          "english": "Ascend these heights of Abarim to Mount Nebo, which is in the land of Moab facing Jericho, and view the land of Canaan, which I am giving the Israelites as their holding."
+          "english": "Ascend these heights of Abarim to Mount Nebo, which is in the land of Moab facing Jericho, and view the land of Canaan, which I am giving the Israelites as their holding.",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 111.533,
+            "end": 147.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 50,
           "hebrew": "וּמֻ֗ת בָּהָר֙ אֲשֶׁ֤ר אַתָּה֙ עֹלֶ֣ה שָׁ֔מָּה וְהֵאָסֵ֖ף אֶל־עַמֶּ֑יךָ כַּֽאֲשֶׁר־מֵ֞ת אַהֲרֹ֤ן אָחִ֙יךָ֙ בְּהֹ֣ר הָהָ֔ר וַיֵּאָ֖סֶף אֶל־עַמָּֽיו׃",
-          "english": "You shall die on the mountain that you are about to ascend, and shall be gathered to your kin, as your brother Aaron died on Mount Hor and was gathered to his kin;"
+          "english": "You shall die on the mountain that you are about to ascend, and shall be gathered to your kin, as your brother Aaron died on Mount Hor and was gathered to his kin;",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 147.167,
+            "end": 182.167
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 51,
           "hebrew": "עַל֩ אֲשֶׁ֨ר מְעַלְתֶּ֜ם בִּ֗י בְּתוֹךְ֙ בְּנֵ֣י יִשְׂרָאֵ֔ל בְּמֵֽי־מְרִיבַ֥ת קָדֵ֖שׁ מִדְבַּר־צִ֑ן עַ֣ל אֲשֶׁ֤ר לֹֽא־קִדַּשְׁתֶּם֙ אוֹתִ֔י בְּת֖וֹךְ בְּנֵ֥י יִשְׂרָאֵֽל׃",
-          "english": "for you both broke faith with Me among the Israelite people, at the Waters of Meribath-kadesh in the wilderness of Zin, by failing to uphold My sanctity among the Israelite people."
+          "english": "for you both broke faith with Me among the Israelite people, at the Waters of Meribath-kadesh in the wilderness of Zin, by failing to uphold My sanctity among the Israelite people.",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 182.167,
+            "end": 209.3
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         },
         {
           "verse": 52,
           "hebrew": "כִּ֥י מִנֶּ֖גֶד תִּרְאֶ֣ה אֶת־הָאָ֑רֶץ וְשָׁ֙מָּה֙ לֹ֣א תָב֔וֹא אֶל־הָאָ֕רֶץ אֲשֶׁר־אֲנִ֥י נֹתֵ֖ן לִבְנֵ֥י יִשְׂרָאֵֽל׃&nbsp;{פ}",
-          "english": "You may view the land from a distance, but you shall not enter it—the land that I am giving to the Israelite people."
+          "english": "You may view the land from a distance, but you shall not enter it—the land that I am giving to the Israelite people.",
+          "audio": "audio/torah/53-haazinu-7-yisreeli.mp3",
+          "timing": {
+            "start": 209.3,
+            "end": 230.733
+          },
+          "aliyah": "7. Yisre'eli",
+          "parasha": "Haazinu"
         }
       ],
       "audioSegments": [
@@ -10098,6 +11545,26 @@
         {
           "label": "Haazinu · 2. Levi",
           "url": "audio/torah/53-haazinu-2-levi.mp3"
+        },
+        {
+          "label": "Haazinu · 3. Yisre'eli",
+          "url": "audio/torah/53-haazinu-3-yisreeli.mp3"
+        },
+        {
+          "label": "Haazinu · 4. Yisre'eli",
+          "url": "audio/torah/53-haazinu-4-yisreeli.mp3"
+        },
+        {
+          "label": "Haazinu · 5. Yisre'eli",
+          "url": "audio/torah/53-haazinu-5-yisreeli.mp3"
+        },
+        {
+          "label": "Haazinu · 6. Yisre'eli",
+          "url": "audio/torah/53-haazinu-6-yisreeli.mp3"
+        },
+        {
+          "label": "Haazinu · 7. Yisre'eli",
+          "url": "audio/torah/53-haazinu-7-yisreeli.mp3"
         }
       ]
     },
@@ -10107,62 +11574,146 @@
         {
           "verse": 1,
           "hebrew": "וְזֹ֣את הַבְּרָכָ֗ה אֲשֶׁ֨ר בֵּרַ֥ךְ מֹשֶׁ֛ה אִ֥ישׁ הָאֱלֹהִ֖ים אֶת־בְּנֵ֣י יִשְׂרָאֵ֑ל לִפְנֵ֖י מוֹתֽוֹ׃",
-          "english": "This is the blessing with which Moses, the agent of God, bade the Israelites farewell before he died."
+          "english": "This is the blessing with which Moses, the agent of God, bade the Israelites farewell before he died.",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 16.7
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 2,
           "hebrew": "וַיֹּאמַ֗ר יְהֹוָ֞ה מִסִּינַ֥י בָּא֙ וְזָרַ֤ח מִשֵּׂעִיר֙ לָ֔מוֹ הוֹפִ֙יעַ֙ מֵהַ֣ר פָּארָ֔ן וְאָתָ֖ה מֵרִבְבֹ֣ת קֹ֑דֶשׁ מִימִינ֕וֹ (אשדת) [אֵ֥שׁ דָּ֖ת] לָֽמוֹ׃",
-          "english": "He said: GOD came from Sinai,And shone upon them from Seir—Appearing from Mount Paran,And approaching from Ribeboth-kodesh, Lightning flashing at them from [God’s] right. uncertain, perhaps a place name."
+          "english": "He said: GOD came from Sinai,And shone upon them from Seir—Appearing from Mount Paran,And approaching from Ribeboth-kodesh, Lightning flashing at them from [God’s] right. uncertain, perhaps a place name.",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 16.7,
+            "end": 55.333
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 3,
           "hebrew": "אַ֚ף חֹבֵ֣ב עַמִּ֔ים כׇּל־קְדֹשָׁ֖יו בְּיָדֶ֑ךָ וְהֵם֙ תֻּכּ֣וּ לְרַגְלֶ֔ךָ יִשָּׂ֖א מִדַּבְּרֹתֶֽיךָ׃",
-          "english": "Lover, indeed, of the people,Their hallowed are all in Your hand.They followed in Your steps,Accepting Your pronouncements,"
+          "english": "Lover, indeed, of the people,Their hallowed are all in Your hand.They followed in Your steps,Accepting Your pronouncements,",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 55.333,
+            "end": 71.4
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 4,
           "hebrew": "תּוֹרָ֥ה צִוָּה־לָ֖נוּ מֹשֶׁ֑ה מוֹרָשָׁ֖ה קְהִלַּ֥ת יַעֲקֹֽב׃",
-          "english": "When Moses charged us with the TeachingAs the heritage of the congregation of Jacob."
+          "english": "When Moses charged us with the TeachingAs the heritage of the congregation of Jacob.",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 71.4,
+            "end": 78.767
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 5,
           "hebrew": "וַיְהִ֥י בִישֻׁר֖וּן מֶ֑לֶךְ בְּהִתְאַסֵּף֙ רָ֣אשֵׁי עָ֔ם יַ֖חַד שִׁבְטֵ֥י יִשְׂרָאֵֽל׃",
-          "english": "Then [God] became King in Jeshurun, When the heads of the people assembled,The tribes of Israel together."
+          "english": "Then [God] became King in Jeshurun, When the heads of the people assembled,The tribes of Israel together.",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 78.767,
+            "end": 90.2
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 6,
           "hebrew": "יְחִ֥י רְאוּבֵ֖ן וְאַל־יָמֹ֑ת וִיהִ֥י מְתָ֖יו מִסְפָּֽר׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "May Reuben live and not die,Though few be his numbers."
+          "english": "May Reuben live and not die,Though few be his numbers.",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 90.2,
+            "end": 97.433
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 7,
           "hebrew": "וְזֹ֣את לִיהוּדָה֮ וַיֹּאמַר֒ שְׁמַ֤ע יְהֹוָה֙ ק֣וֹל יְהוּדָ֔ה וְאֶל־עַמּ֖וֹ תְּבִיאֶ֑נּוּ יָדָיו֙ רָ֣ב ל֔וֹ וְעֵ֥זֶר מִצָּרָ֖יו תִּהְיֶֽה׃&nbsp;{פ}",
-          "english": "And this he said of Judah:Hear, O ETERNAL One, the voice of JudahAnd restore him to his people.Though his own hands strive for him, with pathaḥ) “Make his hands strong for him.” Cf. rabbeh, Judg. 9.29. Help him against his foes."
+          "english": "And this he said of Judah:Hear, O ETERNAL One, the voice of JudahAnd restore him to his people.Though his own hands strive for him, with pathaḥ) “Make his hands strong for him.” Cf. rabbeh, Judg. 9.29. Help him against his foes.",
+          "audio": "audio/torah/54-vezot-haberacha-1-cohen.mp3",
+          "timing": {
+            "start": 97.433,
+            "end": 123.667
+          },
+          "aliyah": "1. Cohen",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 8,
           "hebrew": "וּלְלֵוִ֣י אָמַ֔ר תֻּמֶּ֥יךָ וְאוּרֶ֖יךָ לְאִ֣ישׁ חֲסִידֶ֑ךָ אֲשֶׁ֤ר נִסִּיתוֹ֙ בְּמַסָּ֔ה תְּרִיבֵ֖הוּ עַל־מֵ֥י מְרִיבָֽה׃",
-          "english": "And of Levi he said:Let Your Thummim and UrimBe with Your faithful one,Whom You tested at Massah,Challenged at the Waters of Meribah;"
+          "english": "And of Levi he said:Let Your Thummim and UrimBe with Your faithful one,Whom You tested at Massah,Challenged at the Waters of Meribah;",
+          "audio": "audio/torah/54-vezot-haberacha-2-levi.mp3",
+          "timing": {
+            "start": 0.0,
+            "end": 17.667
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 9,
           "hebrew": "הָאֹמֵ֞ר לְאָבִ֤יו וּלְאִמּוֹ֙ לֹ֣א רְאִיתִ֔יו וְאֶת־אֶחָיו֙ לֹ֣א הִכִּ֔יר וְאֶת־בָּנָ֖ו לֹ֣א יָדָ֑ע כִּ֤י שָֽׁמְרוּ֙ אִמְרָתֶ֔ךָ וּבְרִיתְךָ֖ יִנְצֹֽרוּ׃",
-          "english": "Who said of his father and mother,“I consider them not.”His brothers he disregarded,Ignored his own children.Your precepts alone they observed,And kept Your covenant."
+          "english": "Who said of his father and mother,“I consider them not.”His brothers he disregarded,Ignored his own children.Your precepts alone they observed,And kept Your covenant.",
+          "audio": "audio/torah/54-vezot-haberacha-2-levi.mp3",
+          "timing": {
+            "start": 17.667,
+            "end": 48.067
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 10,
           "hebrew": "יוֹר֤וּ מִשְׁפָּטֶ֙יךָ֙ לְיַֽעֲקֹ֔ב וְתוֹרָתְךָ֖ לְיִשְׂרָאֵ֑ל יָשִׂ֤ימוּ קְטוֹרָה֙ בְּאַפֶּ֔ךָ וְכָלִ֖יל עַֽל־מִזְבְּחֶֽךָ׃",
-          "english": "They shall teach Your laws to JacobAnd Your instructions to Israel.They shall offer You incense to savor And whole-offerings on Your altar."
+          "english": "They shall teach Your laws to JacobAnd Your instructions to Israel.They shall offer You incense to savor And whole-offerings on Your altar.",
+          "audio": "audio/torah/54-vezot-haberacha-2-levi.mp3",
+          "timing": {
+            "start": 48.067,
+            "end": 70.367
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 11,
           "hebrew": "בָּרֵ֤ךְ יְהֹוָה֙ חֵיל֔וֹ וּפֹ֥עַל יָדָ֖יו תִּרְצֶ֑ה מְחַ֨ץ מׇתְנַ֧יִם קָמָ֛יו וּמְשַׂנְאָ֖יו מִן־יְקוּמֽוּן׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Bless, O ETERNAL One, his substance,And favor his undertakings.Smite the loins of his foes;Let his enemies rise no more."
+          "english": "Bless, O ETERNAL One, his substance,And favor his undertakings.Smite the loins of his foes;Let his enemies rise no more.",
+          "audio": "audio/torah/54-vezot-haberacha-2-levi.mp3",
+          "timing": {
+            "start": 70.367,
+            "end": 89.533
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 12,
           "hebrew": "לְבִנְיָמִ֣ן אָמַ֔ר יְדִ֣יד יְהֹוָ֔ה יִשְׁכֹּ֥ן לָבֶ֖טַח עָלָ֑יו חֹפֵ֤ף עָלָיו֙ כׇּל־הַיּ֔וֹם וּבֵ֥ין כְּתֵפָ֖יו שָׁכֵֽן׃&nbsp;{ס}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
-          "english": "Of Benjamin he said:Beloved of GOD,He rests securely close by,Ever protected,As he rests between God’s shoulders."
+          "english": "Of Benjamin he said:Beloved of GOD,He rests securely close by,Ever protected,As he rests between God’s shoulders.",
+          "audio": "audio/torah/54-vezot-haberacha-2-levi.mp3",
+          "timing": {
+            "start": 89.533,
+            "end": 109.733
+          },
+          "aliyah": "2. Levi",
+          "parasha": "Vezot Haberacha"
         },
         {
           "verse": 13,
@@ -10370,6 +11921,14 @@
         }
       ],
       "audioSegments": [
+        {
+          "label": "Vezot Haberacha · 1. Cohen",
+          "url": "audio/torah/54-vezot-haberacha-1-cohen.mp3"
+        },
+        {
+          "label": "Vezot Haberacha · 2. Levi",
+          "url": "audio/torah/54-vezot-haberacha-2-levi.mp3"
+        },
         {
           "label": "Vezot Haberacha · 3. Yisre'eli",
           "url": "audio/torah/54-vezot-haberacha-3-yisreeli.mp3"

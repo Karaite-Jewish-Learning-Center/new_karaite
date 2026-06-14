@@ -21,7 +21,7 @@ import openpyxl
 
 ROOT = Path(__file__).resolve().parent
 XLSX_PATH = ROOT / "Updated Torah Audio Recordings Markers.xlsx"
-SOURCE_AUDIO_DIR = ROOT / "Combined Parashiot by Aliya Folder"
+SOURCE_AUDIO_DIR = ROOT / "All Torah Portions Recordings"
 SITE_AUDIO_DIR = ROOT / "site" / "audio" / "torah"
 TANAKH_DIR = ROOT / "site" / "data" / "tanakh"
 
@@ -96,36 +96,63 @@ def slugify_audio_name(disk_filename: str) -> str:
 
 
 _disk_index: dict[str, str] | None = None
+_site_index: dict[str, str] | None = None
+
+_SLUG_RE = re.compile(r"^(\d+)[a-z]?-.+?-(\d+)-(?:cohen|levi|yisreeli)\.mp3$", re.IGNORECASE)
 
 
 def _get_disk_index() -> dict[str, str]:
     global _disk_index
     if _disk_index is None:
         idx: dict[str, str] = {}
-        for p in SOURCE_AUDIO_DIR.iterdir():
-            if p.is_file() and p.suffix.lower() == ".mp3":
-                idx[normalize_key(p.name)] = p.name
+        if SOURCE_AUDIO_DIR.exists():
+            for p in SOURCE_AUDIO_DIR.iterdir():
+                if p.is_file() and p.suffix.lower() == ".mp3":
+                    idx[normalize_key(p.name)] = p.name
         _disk_index = idx
     return _disk_index
+
+
+def _get_site_index() -> dict[str, str]:
+    """Index already-slugified MP3s under site/audio/torah/ by (parsha, aliyah)."""
+    global _site_index
+    if _site_index is None:
+        idx: dict[str, str] = {}
+        if SITE_AUDIO_DIR.exists():
+            for p in SITE_AUDIO_DIR.iterdir():
+                if not p.is_file() or p.suffix.lower() != ".mp3":
+                    continue
+                m = _SLUG_RE.match(p.name)
+                if m:
+                    key = f"{int(m.group(1)):02d}-{int(m.group(2))}"
+                    idx[key] = p.name
+        _site_index = idx
+    return _site_index
 
 
 def copy_audio(xlsx_filename: str) -> str | None:
     """Copy the MP3 into site/audio/torah/ with a slugified name; return slug.
 
-    Returns None if no matching MP3 exists on disk (recording not yet provided).
+    Falls back to using an already-slugified file under site/audio/torah/
+    when the source folder no longer holds the original recording.
+    Returns None only when neither location has the recording.
     """
-    disk_index = _get_disk_index()
     key = normalize_key(xlsx_filename)
+    disk_index = _get_disk_index()
     disk_name = disk_index.get(key)
-    if disk_name is None:
-        return None
-    src = SOURCE_AUDIO_DIR / disk_name
-    SITE_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
-    slug = slugify_audio_name(disk_name)
-    dst = SITE_AUDIO_DIR / slug
-    if not dst.exists() or dst.stat().st_size != src.stat().st_size:
-        shutil.copy2(src, dst)
-    return slug
+    if disk_name is not None:
+        src = SOURCE_AUDIO_DIR / disk_name
+        SITE_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+        slug = slugify_audio_name(disk_name)
+        dst = SITE_AUDIO_DIR / slug
+        if not dst.exists() or dst.stat().st_size != src.stat().st_size:
+            shutil.copy2(src, dst)
+        return slug
+    site_index = _get_site_index()
+    existing_slug = site_index.get(key)
+    if existing_slug is not None:
+        return existing_slug
+    return None
 
 
 def parse_sheet(ws) -> list[dict]:

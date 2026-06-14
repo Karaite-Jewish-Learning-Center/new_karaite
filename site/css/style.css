@@ -94,7 +94,7 @@ body {
 .navbar {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
     padding: var(--space-md) var(--space-xl);
@@ -640,7 +640,7 @@ main {
 /* Sticky wrapper for header + toolbar */
 .reader-sticky {
     position: sticky;
-    top: 0;
+    top: var(--navbar-height, 64px);
     z-index: 100;
     background: var(--bg-primary);
     padding: var(--space-md) 0;
@@ -1316,6 +1316,11 @@ sup.footnote-num {
 
 .verse-play-icon:hover {
     opacity: 1;
+}
+
+.verse-play-icon.is-playing {
+    opacity: 1;
+    color: var(--accent);
 }
 
 .audio-progress-container {

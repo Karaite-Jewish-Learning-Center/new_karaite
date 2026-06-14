@@ -24,8 +24,16 @@ let tanakhAudioMode = false;
 let tanakhCurrentSegmentUrl = null;
 let tanakhActiveVerseNum = -1;
 
+function syncNavbarHeight() {
+    const nav = document.querySelector('.navbar');
+    if (!nav) return;
+    document.documentElement.style.setProperty('--navbar-height', `${nav.offsetHeight}px`);
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
+    syncNavbarHeight();
+    window.addEventListener('resize', syncNavbarHeight);
     // Load catalog
     try {
         const response = await fetch('data/catalog.json');
@@ -1941,6 +1949,25 @@ function updatePlayButton() {
         playIcon.style.display = isPlaying ? 'none' : 'block';
         pauseIcon.style.display = isPlaying ? 'block' : 'none';
     }
+    updateVersePlayIcons();
+}
+
+function updateVersePlayIcons() {
+    document.querySelectorAll('.verse-play-icon').forEach(icon => {
+        const tanakhVerseEl = icon.closest('.tanakh-verse');
+        const textVerseEl = icon.closest('.verse');
+        let isActive = false;
+        if (tanakhVerseEl) {
+            const num = parseInt(tanakhVerseEl.getAttribute('data-verse-num'), 10);
+            isActive = isPlaying && num === tanakhActiveVerseNum;
+        } else if (textVerseEl) {
+            const idx = parseInt(textVerseEl.getAttribute('data-index'), 10);
+            isActive = isPlaying && idx === currentVerseIndex;
+        }
+        icon.textContent = isActive ? '\u23F8' : '\u266A';
+        icon.classList.toggle('is-playing', isActive);
+        icon.setAttribute('title', isActive ? 'Pause' : 'Play from here');
+    });
 }
 
 function updateAudioProgress() {
@@ -1983,22 +2010,28 @@ function seekAudio(event) {
 
 function seekToVerse(index) {
     if (!audioPlayer || !currentText) return;
-    
+
+    if (isPlaying && index === currentVerseIndex) {
+        audioPlayer.pause();
+        isPlaying = false;
+        updatePlayButton();
+        return;
+    }
+
     const verse = currentText.content[index];
     if (verse && verse.timing) {
         const targetTime = verse.timing.start;
-        
-        // Check if target time is within duration
+
         if (targetTime > audioPlayer.duration) return;
-        
-        // Use seeked event to ensure seek completes before playing
+
         const onSeeked = () => {
             audioPlayer.removeEventListener('seeked', onSeeked);
             audioPlayer.play();
             isPlaying = true;
+            currentVerseIndex = index;
             updatePlayButton();
         };
-        
+
         audioPlayer.addEventListener('seeked', onSeeked);
         audioPlayer.currentTime = targetTime;
     }
@@ -2073,6 +2106,7 @@ function highlightCurrentVerse() {
                 verseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
+        updateVersePlayIcons();
     }
 }
 
@@ -2080,6 +2114,7 @@ function clearHighlight() {
     document.querySelectorAll('.verse.playing').forEach(el => {
         el.classList.remove('playing');
     });
+    updateVersePlayIcons();
 }
 
 function switchAudioTrack(index) {
@@ -2456,6 +2491,14 @@ function tanakhSeekToVerse(verseNum) {
     const url = verseEl.getAttribute('data-audio');
     const start = parseFloat(verseEl.getAttribute('data-start'));
     if (!url || Number.isNaN(start)) return;
+
+    if (audioPlayer && isPlaying && verseNum === tanakhActiveVerseNum && url === tanakhCurrentSegmentUrl) {
+        audioPlayer.pause();
+        isPlaying = false;
+        updatePlayButton();
+        return;
+    }
+
     if (url !== tanakhCurrentSegmentUrl) {
         loadTanakhSegment(url, { autoplay: true, seekTo: start });
         return;
@@ -2466,6 +2509,7 @@ function tanakhSeekToVerse(verseNum) {
         audioPlayer.currentTime = start;
         audioPlayer.play();
         isPlaying = true;
+        tanakhActiveVerseNum = verseNum;
         updatePlayButton();
     };
     if (audioPlayer.readyState >= 1) {
@@ -2512,6 +2556,7 @@ function highlightCurrentTanakhVerse() {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
+        updateVersePlayIcons();
     }
 }
 
@@ -2519,6 +2564,7 @@ function clearTanakhHighlight() {
     document.querySelectorAll('.tanakh-verse.playing').forEach(el => {
         el.classList.remove('playing');
     });
+    updateVersePlayIcons();
 }
 
 // ========================================
