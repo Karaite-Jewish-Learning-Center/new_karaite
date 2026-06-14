@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-06-14",
+    "changes": [
+      "Completed Torah audio sync — full per-verse playback and timing across all five books of the Torah (Genesis, Exodus, Leviticus, Numbers, Deuteronomy), with chapter-level segments and parasha/aliyah metadata",
+      "Per-verse play icon is now a play/pause toggle — clicking the active verse pauses, the indicator follows along during playback, and resets when the main play button pauses or a segment ends",
+      "Global navbar stays visible while reading — the chapter sticky header now docks beneath the top navigation instead of covering it"
+    ]
+  },
+  {
     "date": "2026-06-02",
     "changes": [
       "Added Gan Eden by Aaron ben Elijah — 1117 entries with Hebrew/English, 101 glossary terms, 126 footnotes",

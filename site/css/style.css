@@ -1442,18 +1442,70 @@ sup.footnote-num {
 
 .tanakh-reader .reader-header {
     text-align: center;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-sm);
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.tanakh-reader .reader-header .title-he {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.tanakh-reader .reader-header .title-en {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--text-muted);
 }
 
 .tanakh-nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
-    padding: var(--space-md);
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
     background: var(--bg-secondary);
-    border-radius: 8px;
+    border-radius: 6px;
+}
+
+.tanakh-reader .reader-sticky {
+    padding: var(--space-sm) 0;
+    margin-bottom: var(--space-sm);
+}
+
+.tanakh-reader .reader-sticky .breadcrumb {
+    margin-bottom: var(--space-xs);
+    font-size: 0.85rem;
+}
+
+.tanakh-reader .tanakh-audio-player {
+    margin: var(--space-xs) 0 var(--space-md);
+}
+
+.tanakh-reader .tanakh-audio-player .audio-player {
+    padding: var(--space-xs) var(--space-md);
+    margin-top: 0;
+}
+
+.tanakh-reader .tanakh-audio-player .audio-btn {
+    width: 36px;
+    height: 36px;
+}
+
+.tanakh-reader .nav-btn {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.85rem;
+}
+
+.tanakh-reader .chapter-select {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.85rem;
 }
 
 .tanakh-nav.bottom-nav {
