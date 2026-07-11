@@ -152,7 +152,13 @@ renderText() {
 
     // 3. Format comments based on category
     //    - Liturgy/Commentary → highlight term before period/colon
-    //    - Halakhah/Other → plain scholarly footnotes
+    //    - Halakhah/General/Polemics/Exhortatory → plain scholarly footnotes
+
+    // 3b. Diglot-image books (layout === "diglot-image"):
+    //    - Text tab dispatches to renderDiglotArticle() per article
+    //    - Cover-left / caption-right row + one scan-left / paragraphs-right
+    //      row per facsimile scan
+    //    - no_column_toggles hides the Hebrew/Transliteration/English toggle buttons
 
     // 4. Build tabs HTML (Text, Introduction, Appendices, Contents)
 
@@ -298,7 +304,7 @@ Comments can be in two styles, determined by the text's category:
 ```
 The term before the em-dash is highlighted. Used for `category === 'Liturgy' || 'Commentary'`.
 
-**Scholarly Footnote Style** (Halakhah, Polemics, Exhortatory, Other):
+**Scholarly Footnote Style** (Halakhah, Polemics, Exhortatory, General):
 ```
 [1] Charles XII (reigned 1697–1718).
 [9] Babovich uses the Egyptian Arabic form...

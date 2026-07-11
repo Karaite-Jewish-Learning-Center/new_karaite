@@ -81,7 +81,7 @@ def determine_category(path, name):
     elif 'exhort' in path_str:
         return 'Exhortatory', None
     else:
-        return 'Other', None
+        return 'General', None
 
 
 def parse_kedushot_xlsx():

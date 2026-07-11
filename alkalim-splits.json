@@ -1,0 +1,10 @@
+{
+  "_comment": "Manual paragraph-index split points for multi-scan articles. Each key is a section_id (chap-1..chap-30). The value is a list of paragraph indices where the next scan begins. Length must equal (num_scans - 1). Omit a section to fall back to an even split. Values are clamped by the converter if out of range.",
+  "chap-4": [13],
+  "chap-7": [3],
+  "chap-10": [7],
+  "chap-15": [14],
+  "chap-18": [6],
+  "chap-23": [8],
+  "chap-26": [10]
+}

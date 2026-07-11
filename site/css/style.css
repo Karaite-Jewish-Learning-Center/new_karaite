@@ -2991,3 +2991,101 @@ sup.fn-marker:hover {
 .footer a:hover {
     text-decoration: underline;
 }
+
+/* Al-Kalim (diglot-image) layout: image on left, translation on right */
+.text-content.diglot-image {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+.ak-article {
+    margin: 0 0 var(--space-xl) 0;
+    padding: var(--space-lg) 0;
+    border-top: 2px solid var(--border);
+}
+.ak-article:first-child { border-top: none; }
+.ak-issue-banner {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 0 var(--space-md);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.ak-title {
+    text-align: center;
+    font-size: 1.35rem;
+    margin: var(--space-md) 0 var(--space-xs);
+    color: var(--text-primary);
+    font-style: italic;
+}
+.ak-byline {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0 0 var(--space-md);
+    font-style: italic;
+}
+.ak-cover-row, .ak-scan-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+    margin: var(--space-md) 0;
+}
+.ak-left {
+    position: sticky;
+    top: calc(var(--navbar-height, 64px) + 200px);
+    align-self: start;
+}
+.ak-left img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.ak-right {
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+.ak-cover-caption {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin: 0;
+}
+.ak-para {
+    margin: 0 0 var(--space-md);
+}
+.ak-para .fmt-center {
+    text-align: center;
+    font-weight: 600;
+    margin: var(--space-md) 0 var(--space-xs);
+}
+.ak-para .fmt-frontmatter {
+    white-space: pre-line;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    margin: 0 0 var(--space-xs);
+}
+.ak-note {
+    margin-top: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--bg-secondary, #f7f5ef);
+    border-left: 3px solid var(--accent, #a4243b);
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    border-radius: 2px;
+}
+@media (max-width: 900px) {
+    .ak-cover-row, .ak-scan-row {
+        grid-template-columns: 1fr;
+    }
+    .ak-left {
+        position: static;
+    }
+    .ak-left img {
+        max-height: 60vh;
+        object-fit: contain;
+    }
+}

@@ -80,6 +80,42 @@ git push origin HEAD:feature/may-2026-updates
 git push origin main
 ```
 
+## Diglot-image layout (al-Kalim et al.)
+
+Some HTML-sourced books (starting with `al-kalim`) ship with facsimile page scans instead of a Hebrew original, and render as image-left / translation-right. To opt in, the text JSON sets two flags at the top level:
+
+```json
+{
+  "layout": "diglot-image",
+  "no_column_toggles": true,
+  "sections": {
+    "text": { "articles": [ /* article objects, not `content` */ ] }
+  }
+}
+```
+
+Under this layout the Text tab is rendered by `renderDiglotArticle()` in `site/js/app.js` (grid rows: cover-left/caption-right, then scan-left/paragraphs-right per scan). The Hebrew/Transliteration/English toggle buttons are hidden when `no_column_toggles` is true; only the Notes toggle remains if any paragraph has `comments`. The Introduction tab still uses the standard verse-list renderer.
+
+Article objects live under `sections.text.articles`, each with `section_id`, `issue_banner`, `cover_image`, `cover_caption`, `title`, `byline`, and one or more `scans: [{ image, paragraphs: [{ english, comments? }, ...] }]`.
+
+## Placeholder markers for HTML-sourced text
+
+`formatText()` in `site/js/app.js` recognizes a growing family of `{{name:...}}` placeholders that survive HTML-escape and get rewritten at render time. This is deliberate: the JSON stays escape-safe, and the converter can emit intent without embedding raw HTML that would be shown literally.
+
+- `{{fn:N}}` → `<sup class="fn-marker" data-fn="N">N</sup>` (footnote reference)
+- `{{em:text}}` → `<em>text</em>` (converters flatten nested `<em>`)
+- `{{center:text}}` → `<div class="fmt-center">text</div>`
+- `{{frontmatter:text}}` → `<div class="fmt-frontmatter">text</div>` (preserves `\n` via `white-space: pre-line`)
+- `{{hN:text}}` → `<div class="fmt-heading fmt-heading-hN">text</div>`
+
+Use these instead of raw HTML when writing new converters. If you need a new marker, add it to both `formatText()` and the appropriate `.fmt-*` CSS class.
+
+## Categories & top-nav
+
+Catalog categories live at the top level of `site/data/catalog.json`. The current set is `Commentary`, `Exhortatory`, `Halakhah`, `Liturgy`, `Polemics`, and `General`. The navbar links in `site/index.html` mirror this, and `categoryOrder` in `site/js/app.js` controls the order on the "All Texts" page.
+
+`General` used to be called `Other`. If you find leftover references to the old name in new converters or fallback strings, rename them: the string appears as a category value in each text JSON's `category` field.
+
 ## Don'ts
 
 - Don't auto-modify the xlsx or the source MP3 folder. Treat them as user-owned input.

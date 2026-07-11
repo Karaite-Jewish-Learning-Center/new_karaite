@@ -10,6 +10,8 @@
 |--------|-------|--------|---------|
 | `convert_torah_markers.py` | `Torah Audio Recording Markers.xlsx` + MP3s | `site/data/tanakh/*.json` + `site/audio/torah/*.mp3` | Torah audio sync data |
 | `convert_gan_eden.py` | `gan-eden-v1.1.xlsx` | `site/data/texts/gan-eden.json` | Gan Eden text with glossary/footnotes |
+| `convert_maaravi.py` | `maaravi-*.xml` | `site/data/texts/maaravi.json` | Al-Maghribi's Creed & Slaughter (XML source) |
+| `convert_alkalim.py` | `alkalim-export/alkalim-export.html` + PNGs | `site/data/texts/al-kalim.json` + `site/assets/alkalim/*.jpg` | Al-Kalim magazine (HTML source, diglot-image layout) |
 | `build_citations.py` | `site/data/texts/*.json` + `site/data/tanakh/*.json` | `site/data/citations.json` | Bidirectional citation index |
 | `audit_torah_markers.py` | `site/data/tanakh/*.json` + MP3s | Console report | Validates audio timing |
 | `audit_text_sheets.py` | Text JSON files | Console report | Validates text-only Torah sheets |
@@ -126,6 +128,87 @@ venv/bin/python convert_gan_eden.py
 
 ---
 
+## `convert_alkalim.py`
+
+**Purpose**: Converts the al-Kalim magazine HTML export into a diglot-image text JSON, and downsizes the accompanying PNG scans into JPEGs for the site.
+
+### Input
+
+- **`alkalim-export/alkalim-export.html`** — one self-contained HTML file with:
+  - Editor's introduction
+  - 30 article translations (each preceded by an `<h1>` issue banner, cover image, `<h2>` title, `<h3>` byline, and one or more `<p><img>` facsimile scans)
+  - `<section class="footnotes"><ol>` at the bottom
+- **`alkalim-export/*.png`** — 66 magazine covers + article page scans
+
+### Output
+
+- `site/data/texts/al-kalim.json` — includes `layout: "diglot-image"` and `no_column_toggles: true`; text section uses `articles[]` (not `content[]`)
+- `site/assets/alkalim/*.jpg` — 66 images, max 1600px, JPEG quality 85
+
+### Multi-page article splits
+
+Articles that ran across two magazine pages have two facsimile scans (e.g. `04-text-1.png` + `04-text-2.png`). Paragraph-to-scan alignment is controlled by `alkalim-splits.json`:
+
+```json
+{
+  "chap-4": [13],
+  "chap-7": [3]
+}
+```
+
+Each entry is a list of paragraph indices where the *next* scan begins. Length must equal `(num_scans - 1)`. Out-of-range values are clamped; missing entries fall back to an even split.
+
+### HTML → JSON rewrites
+
+- `<sup class="fnref"><a href="#fnN">N</a></sup>` → `{{fn:N}}` (footnote reference)
+- `<em>foo</em>` → `{{em:foo}}` (nested `<em>` flattened)
+- `<div class="center">text</div>` → `{{center:text}}`
+- `<p class="frontmatter">text</p>` → `{{frontmatter:text}}` (preserves `\n`)
+- `<span class="label"></span>` stripped
+
+For every paragraph that contains `{{fn:N}}`, the matching footnote text is attached to that paragraph's `comments` field.
+
+### Image conversion
+
+Uses macOS `sips` (built-in) to convert PNG → JPEG at max 1600px, quality 85. Cached by mtime so re-runs skip unchanged files. On non-macOS hosts, replace `sips` with Pillow or `cwebp` in `convert_images()`.
+
+### Running
+
+```bash
+cd /Users/shawn/karaite-texts
+python3 convert_alkalim.py               # JSON + images (66 files, ~1 min)
+python3 convert_alkalim.py --skip-images # JSON only, seconds
+```
+
+### Reusing for other HTML-sourced books
+
+The paths are constants at the top of the file (`SRC_HTML`, `SRC_DIR`, `OUT_JSON`, `ASSETS_DIR`, `SPLITS_JSON`, `ASSETS_URL_PREFIX`). For the next book with the same HTML shape, either copy the script and change those six lines plus the `id`/`title`/`category` in `main()`, or refactor them into CLI flags.
+
+---
+
+## `convert_maaravi.py`
+
+**Purpose**: Converts the four al-Maghribi XML files into a single text JSON with intro / main text / appendices sections.
+
+### Input
+
+- `maaravi-hebrew.xml`, `maaravi-english.xml`, `maaravi-intro-appendices.xml`, `maaravi-notes.xml` (repo root)
+
+### Output
+
+- `site/data/texts/maaravi.json`
+
+### Notes
+
+- Hebrew and English paragraph IDs don't match, so paragraphs are paired by sequential index after consolidating continuation `<p>` elements into their headings.
+- Hard-coded special cases handle transitions (Six Tenets → Slaughter Regulations) and translator-inserted English titles with no Hebrew equivalent (marked `english_only: true`).
+- Footnote text from `maaravi-notes.xml` is attached via the English paragraphs' `<ref id="…">` markers.
+- `get_section_id()` and `get_intro_section_id()` map first-line English text to stable anchor IDs used by the TOC.
+
+If you re-generate this after upstream XML edits, spot-check the Tenet/Chapter alignment before shipping; the sequential pairing is fragile.
+
+---
+
 ## `build_citations.py`
 
 **Purpose**: Scans all text files and Tanakh books to build a bidirectional citation index.
@@ -235,4 +318,4 @@ Scripts are designed to be idempotent — running them multiple times produces t
 
 ---
 
-*Last updated: 2026-06-02*
+*Last updated: 2026-07-11*

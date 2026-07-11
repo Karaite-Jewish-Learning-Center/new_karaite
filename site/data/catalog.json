@@ -1011,8 +1011,18 @@
       }
     ]
   },
-  "Other": {
+  "General": {
     "General": [
+      {
+        "id": "al-kalim",
+        "title_en": "Al-Kalim: Selections from a Karaite Magazine of Cairo (1945-1956)",
+        "title_he": "",
+        "has_intro": true,
+        "sections": [
+          "intro",
+          "text"
+        ]
+      },
       {
         "id": "rosh-pinna",
         "title_en": "Rosh Pinna",

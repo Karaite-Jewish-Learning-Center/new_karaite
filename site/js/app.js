@@ -1011,7 +1011,7 @@ function showAllTexts() {
     window.allTextsByCategory = textsByCategory;
     
     // Build HTML grouped by category
-    const categoryOrder = ['Liturgy', 'Halakhah', 'Commentary', 'Exhortatory', 'Polemics', 'Other'];
+    const categoryOrder = ['Liturgy', 'Halakhah', 'Commentary', 'Exhortatory', 'Polemics', 'General'];
     const categoriesHtml = categoryOrder
         .filter(cat => textsByCategory[cat] && textsByCategory[cat].length > 0)
         .map(cat => buildCategoryTable(cat, textsByCategory[cat]))
@@ -1103,6 +1103,13 @@ async function showText(textId) {
         const response = await fetch(`data/texts/${textId}.json`);
         if (!response.ok) throw new Error('Text not found');
         currentText = await response.json();
+        // Reset to a tab that exists on this text
+        const validTabs = new Set(['text']);
+        if (currentText.sections?.intro) validTabs.add('intro');
+        if (currentText.sections?.appendices) validTabs.add('appendices');
+        if (currentText.toc && currentText.toc.length > 0) validTabs.add('toc');
+        if (currentText.glossary?.length) validTabs.add('glossary');
+        if (!validTabs.has(currentTab)) currentTab = 'text';
         renderText();
     } catch (error) {
         console.error('Failed to load text:', error);
@@ -1118,6 +1125,37 @@ async function showText(textId) {
 }
 
 // Render text
+function renderDiglotArticle(article) {
+    const commentsAreOn = showComments;
+    const paragraphHtml = (p) => {
+        const commentHtml = (commentsAreOn && p.comments) ? `<div class="ak-note">${formatComments(p.comments)}</div>` : '';
+        return `<p class="ak-para">${formatText(p.english || '')}${commentHtml}</p>`;
+    };
+    const scanRowsHtml = (article.scans || []).map(scan => `
+        <div class="ak-scan-row">
+            <div class="ak-left">${scan.image ? `<img src="${scan.image}" alt="Facsimile scan" loading="lazy">` : ''}</div>
+            <div class="ak-right">
+                ${(scan.paragraphs || []).map(paragraphHtml).join('')}
+            </div>
+        </div>
+    `).join('');
+    const coverRowHtml = article.cover_image ? `
+        <div class="ak-cover-row">
+            <div class="ak-left"><img src="${article.cover_image}" alt="Magazine cover" loading="lazy"></div>
+            <div class="ak-right"><p class="ak-cover-caption">${formatText(article.cover_caption || '')}</p></div>
+        </div>
+    ` : '';
+    return `
+        <section class="ak-article" id="${article.section_id}">
+            <h2 class="ak-issue-banner">${formatText(article.issue_banner || '')}</h2>
+            ${coverRowHtml}
+            ${article.title ? `<h3 class="ak-title">${formatText(article.title)}</h3>` : ''}
+            ${article.byline ? `<p class="ak-byline">${formatText(article.byline)}</p>` : ''}
+            ${scanRowsHtml}
+        </section>
+    `;
+}
+
 function renderText() {
     if (!currentText) return;
     
@@ -1125,6 +1163,8 @@ function renderText() {
     const hasSections = currentText.sections;
     const hasIntro = hasSections ? currentText.sections.intro : currentText.introduction;
     const hasAppendices = hasSections && currentText.sections.appendices;
+    const isDiglotImage = currentText.layout === 'diglot-image';
+    const noColumnToggles = currentText.no_column_toggles === true;
     
     // Get current content based on tab
     let currentContent = currentText.content;
@@ -1134,9 +1174,10 @@ function renderText() {
         } else if (currentTab === 'appendices' && currentText.sections.appendices) {
             currentContent = currentText.sections.appendices.content;
         } else if (currentText.sections.text) {
-            currentContent = currentText.sections.text.content;
+            currentContent = currentText.sections.text.content || [];
         }
     }
+    if (!currentContent) currentContent = [];
     
     const hasArabic = currentContent.some(v => v.arabic);
     const hasAudio = currentText.audio;
@@ -1166,7 +1207,14 @@ function renderText() {
     }
     
     // Build controls
-    const hasComments = currentContent.some(v => v.comments);
+    let hasComments = currentContent.some(v => v.comments);
+    if (isDiglotImage && currentTab === 'text' && currentText.sections?.text?.articles) {
+        hasComments = currentText.sections.text.articles.some(a =>
+            a.scans && a.scans.some(s =>
+                s.paragraphs && s.paragraphs.some(p => p.comments)
+            )
+        );
+    }
     const commentsModeSelect = hasComments ? `
         <select class="comments-mode-select" onchange="setCommentsMode(this.value)" title="KJLC Notes display mode">
             <option value="inline-english" ${commentsMode === 'inline-english' ? 'selected' : ''}>KJLC Notes: Under English</option>
@@ -1174,7 +1222,9 @@ function renderText() {
             <option value="panel" ${commentsMode === 'panel' ? 'selected' : ''}>KJLC Notes: Side Panel</option>
         </select>
     ` : '';
-    const controlsHtml = `
+    const controlsHtml = noColumnToggles ? `
+        ${hasComments ? `<button class="toggle-btn ${showComments ? 'active' : ''}" onclick="toggleColumn('comments')">Notes</button>` : ''}
+    ` : `
         <button class="toggle-btn ${showHebrew ? 'active' : ''}" onclick="toggleColumn('hebrew')">Hebrew</button>
         <button class="toggle-btn ${showTransliteration ? 'active' : ''}" onclick="toggleColumn('transliteration')">Transliteration</button>
         <button class="toggle-btn ${showEnglish ? 'active' : ''}" onclick="toggleColumn('english')">English</button>
@@ -1249,6 +1299,12 @@ function renderText() {
                 `).join('')}
             </div>
         `;
+    }
+    // Diglot-image layout (al-Kalim etc.): image on left, translation on right
+    else if (isDiglotImage && currentTab === 'text' && currentText.sections?.text?.articles) {
+        contentHtml = `<div class="text-content diglot-image">${
+            currentText.sections.text.articles.map(renderDiglotArticle).join('')
+        }</div>`;
     }
     // Legacy intro format
     else if (currentTab === 'intro' && !hasSections && hasIntro) {
@@ -1532,6 +1588,14 @@ function formatText(text, makeCitationsLinks = true) {
     
     // Footnote markers: {{fn:N}} - convert to styled superscript with data attribute
     text = text.replace(/\{\{fn:(\d+)\}\}/g, '<sup class="fn-marker" data-fn="$1">$1</sup>');
+    
+    // Inline emphasis: {{em:...}} (used by HTML-sourced texts like al-Kalim)
+    text = text.replace(/\{\{em:([^}]+)\}\}/g, '<em>$1</em>');
+    
+    // Block-level source markers used by al-Kalim converter
+    text = text.replace(/\{\{center:([^}]+)\}\}/g, '<div class="fmt-center">$1</div>');
+    text = text.replace(/\{\{frontmatter:([^}]+)\}\}/g, '<div class="fmt-frontmatter">$1</div>');
+    text = text.replace(/\{\{h(\d):([^}]+)\}\}/g, '<div class="fmt-heading fmt-heading-h$1">$2</div>');
     
     // Unicode superscript numbers (¹²³⁴⁵⁶⁷⁸⁹⁰) - style with theme color
     text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)/g, '<span class="footnote-marker">$1</span>');

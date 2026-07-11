@@ -289,17 +289,84 @@ Used when comments are full explanatory notes, not term definitions.
 
 **Display**: Plain text, no term highlighting.
 
-**Applies to**: `category: "Halakhah"`, `category: "Polemics"`, `category: "Exhortatory"`, `category: "Other"`
+**Applies to**: `category: "Halakhah"`, `category: "Polemics"`, `category: "Exhortatory"`, `category: "General"`
 
 ### Determining Style for New Texts
 
 When adding a new text, scan the comments to determine which style applies:
 
 1. **If comments consistently define individual words/phrases** (e.g., "Hofra'. Pharaoh." or "Mount Mor. Mount Sinai.") → Use Liturgy/Commentary category
-2. **If comments are full explanatory sentences** (e.g., "[1] This refers to the historical context..." or scholarly footnotes) → Use Halakhah/Polemics/Other category
+2. **If comments are full explanatory sentences** (e.g., "[1] This refers to the historical context..." or scholarly footnotes) → Use Halakhah/Polemics/General category
 
 The `isLiturgyOrCommentary` flag is passed to `formatComments()` based on the text's category.
 
 ---
 
-*Last updated: 2026-05-25*
+## Diglot-image layout (image-left / translation-right)
+
+Some books are sourced from HTML plus a folder of facsimile page scans rather than from a Hebrew XML/Excel source. Al-Kalim is the first of these. To render facsimile-on-the-left, translation-on-the-right, the text JSON sets:
+
+```json
+{
+  "id": "al-kalim",
+  "layout": "diglot-image",
+  "no_column_toggles": true,
+  "category": "General",
+  "sections": {
+    "intro": { "title_en": "Introduction", "content": [ /* standard verse entries */ ] },
+    "text": {
+      "title_en": "Selections",
+      "articles": [
+        {
+          "section_id": "chap-1",
+          "chapter_num": 1,
+          "issue_banner": "{{em:Al-Kalim}}, Issue 1 (February 16, 1945)",
+          "cover_image": "assets/alkalim/01-cover.jpg",
+          "cover_caption": "On the cover: ...",
+          "title": "Article title",
+          "byline": "Date; issue N, p. X",
+          "scans": [
+            {
+              "image": "assets/alkalim/01-text.jpg",
+              "paragraphs": [
+                { "hebrew": "", "transliteration": "", "english": "...{{fn:3}}",
+                  "english_only": true,
+                  "comments": "[3] Footnote text..." }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+Key differences from the standard shape:
+
+- `sections.text.articles[]` replaces `sections.text.content[]`.
+- Paragraphs live under each article's `scans[i].paragraphs`, not directly on the section.
+- Introduction still uses the standard `sections.intro.content` array of verse entries.
+- Images are referenced by URL string; the reader renders them, they do not sit inside any verse.
+- Rendering is handled by `renderDiglotArticle()` in `site/js/app.js` when `layout === "diglot-image"`. Column toggles (Hebrew / Transliteration / English) are hidden when `no_column_toggles` is true.
+
+## Placeholder markers in text content
+
+Text JSON avoids inline HTML because `formatText()` HTML-escapes on the way to the DOM. Instead, converters emit `{{name:...}}` placeholders that `formatText()` rewrites to the appropriate markup at render time.
+
+| Placeholder | Rendered as | Notes |
+|-------------|-------------|-------|
+| `{{fn:N}}` | `<sup class="fn-marker" data-fn="N">N</sup>` | Footnote marker |
+| `{{em:text}}` | `<em>text</em>` | Inline emphasis (no nesting) |
+| `{{center:text}}` | `<div class="fmt-center">text</div>` | Centered block |
+| `{{frontmatter:text}}` | `<div class="fmt-frontmatter">text</div>` | Preserves `\n` via `white-space: pre-line` |
+| `{{hN:text}}` | `<div class="fmt-heading fmt-heading-hN">text</div>` | Heading marker |
+| `{{bible:text}}` | `<span class="fmt-bible">text</span>` | Biblical quote |
+| `{{header:text}}` | `<div class="fmt-header">text</div>` | Legacy header style |
+| `{{quote:text}}` | `<blockquote>text</blockquote>` | Blockquote |
+
+If you add a new placeholder, add both the `formatText()` rewrite and a matching `.fmt-*` CSS rule.
+
+---
+
+*Last updated: 2026-07-11*
