@@ -1122,6 +1122,28 @@ sup.footnote-num {
     font-weight: 600; 
     margin: var(--space-lg) 0 var(--space-md);
 }
+.fmt-center {
+    text-align: center;
+    font-weight: 600;
+    margin: var(--space-md) 0 var(--space-xs);
+}
+.fmt-frontmatter {
+    white-space: pre-line;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    margin: var(--space-md) 0;
+    text-align: center;
+}
+.fmt-heading {
+    font-weight: 600;
+    margin: var(--space-md) 0 var(--space-xs);
+}
+.fmt-heading-h3 {
+    font-size: 1.05em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
 
 /* ========================================
    FOOTER
