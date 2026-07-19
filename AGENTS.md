@@ -107,6 +107,10 @@ Article objects live under `sections.text.articles`, each with `section_id`, `is
 - `{{center:text}}` → `<div class="fmt-center">text</div>`
 - `{{frontmatter:text}}` → `<div class="fmt-frontmatter">text</div>` (preserves `\n` via `white-space: pre-line`)
 - `{{hN:text}}` → `<div class="fmt-heading fmt-heading-hN">text</div>`
+- `{{sc:text}}` → `<span class="fmt-sc">text</span>` (small caps)
+- `{{he:text}}` → `<span class="fmt-he" dir="rtl">text</span>` (inline Hebrew snippet in an English body)
+
+Entries in a text JSON's `content` array can also opt into a linear figure by setting `{"figure": true, "image": "...", "caption": "...", "english_only": true}`; the reader emits a `<figure class="text-figure">` with lazy-loaded image and optional caption. Used by the Crimean Karaites monograph.
 
 Use these instead of raw HTML when writing new converters. If you need a new marker, add it to both `formatText()` and the appropriate `.fmt-*` CSS class.
 

@@ -1024,6 +1024,18 @@
         ]
       },
       {
+        "id": "crimean-karaites",
+        "title_en": "The Crimean Karaites: History and Literary Heritage",
+        "title_he": "",
+        "author_en": "Golda Akhiezer",
+        "has_intro": true,
+        "sections": [
+          "intro",
+          "text",
+          "appendices"
+        ]
+      },
+      {
         "id": "rosh-pinna",
         "title_en": "Rosh Pinna",
         "title_he": "ראש פנה",

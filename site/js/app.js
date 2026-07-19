@@ -1334,6 +1334,15 @@ function renderText() {
         `;
     } else if (currentTab !== 'toc') {
         const verses = currentContent.map((v, i) => {
+            if (v.figure === true && v.image) {
+                const captionHtml = v.caption ? `<figcaption>${formatText(v.caption)}</figcaption>` : '';
+                return `
+                    <figure class="text-figure" data-index="${i}" ${v.section_id ? `id="${v.section_id}"` : ''}>
+                        <img src="${v.image}" alt="${(v.caption || '').replace(/"/g, '&quot;')}" loading="lazy">
+                        ${captionHtml}
+                    </figure>
+                `;
+            }
             const showRight = showTransliteration || showEnglish;
             const singleColumn = !showHebrew || !showRight;
             const hasTiming = v.timing;
@@ -1400,6 +1409,15 @@ function renderText() {
         if (commentsMode === 'panel' && showComments) {
             // Re-render verses without inline comments for panel mode
             const versesNoInline = currentContent.map((v, i) => {
+                if (v.figure === true && v.image) {
+                    const captionHtml = v.caption ? `<figcaption>${formatText(v.caption)}</figcaption>` : '';
+                    return `
+                        <figure class="text-figure" data-index="${i}" ${v.section_id ? `id="${v.section_id}"` : ''}>
+                            <img src="${v.image}" alt="${(v.caption || '').replace(/"/g, '&quot;')}" loading="lazy">
+                            ${captionHtml}
+                        </figure>
+                    `;
+                }
                 const showRight = showTransliteration || showEnglish;
                 const singleColumn = !showHebrew || !showRight;
                 const hasTiming = v.timing;
@@ -1503,7 +1521,12 @@ function formatComments(text, boldTerms = false) {
     
     // Escape HTML first
     text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    
+
+    // Inline typographic markers from the source (italic titles, small-caps, Hebrew snippets)
+    text = text.replace(/\{\{em:([^}]+)\}\}/g, '<em>$1</em>');
+    text = text.replace(/\{\{sc:([^}]+)\}\}/g, '<span class="fmt-sc">$1</span>');
+    text = text.replace(/\{\{he:([^}]+)\}\}/g, '<span class="fmt-he" dir="rtl">$1</span>');
+
     // Only apply term highlighting for Liturgy and Commentary (poems, Torah commentary)
     // Books (Halakhah, Polemics, etc.) use scholarly footnotes that shouldn't be bolded
     if (boldTerms) {
@@ -1596,6 +1619,8 @@ function formatText(text, makeCitationsLinks = true) {
     text = text.replace(/\{\{center:([^}]+)\}\}/g, '<div class="fmt-center">$1</div>');
     text = text.replace(/\{\{frontmatter:([^}]+)\}\}/g, '<div class="fmt-frontmatter">$1</div>');
     text = text.replace(/\{\{h(\d):([^}]+)\}\}/g, '<div class="fmt-heading fmt-heading-h$1">$2</div>');
+    text = text.replace(/\{\{sc:([^}]+)\}\}/g, '<span class="fmt-sc">$1</span>');
+    text = text.replace(/\{\{he:([^}]+)\}\}/g, '<span class="fmt-he" dir="rtl">$1</span>');
     
     // Unicode superscript numbers (¹²³⁴⁵⁶⁷⁸⁹⁰) - style with theme color
     text = text.replace(/([¹²³⁴⁵⁶⁷⁸⁹⁰]+)/g, '<span class="footnote-marker">$1</span>');
