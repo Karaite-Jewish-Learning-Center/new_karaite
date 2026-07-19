@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await showTanakh();
             } else if (hash === 'changelog') {
                 await showChangelog();
+            } else if (hash.startsWith('search/')) {
+                const q = decodeURIComponent(hash.slice(7));
+                await showSearchResultsPage(q);
             } else {
                 showHome();
             }
@@ -124,6 +127,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             await showTanakh();
         } else if (hash === 'changelog') {
             await showChangelog();
+        } else if (hash.startsWith('search/')) {
+            const q = decodeURIComponent(hash.slice(7));
+            await showSearchResultsPage(q);
         } else {
             showHome();
         }
@@ -140,6 +146,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 let searchIndex = null;
 let fullTextIndex = null;
 let searchReady = false;
+let searchMode = localStorage.getItem('searchMode') || 'page'; // 'page' | 'panel'
+let panelSearchQuery = '';
+
+function setSearchMode(mode) {
+    if (mode !== 'page' && mode !== 'panel') return;
+    searchMode = mode;
+    localStorage.setItem('searchMode', mode);
+    const badge = document.getElementById('searchModeBadge');
+    if (badge) badge.textContent = mode === 'panel' ? 'Panel' : 'Page';
+    document.querySelectorAll('.search-mode-toggle button').forEach((b) => {
+        b.classList.toggle('active', b.dataset.mode === mode);
+    });
+}
+
+function openSearchFor(query) {
+    if (!query) return;
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    if (searchResults) {
+        searchResults.classList.remove('visible');
+        searchResults.innerHTML = '';
+    }
+    if (searchMode === 'panel') {
+        openSearchPanel(query);
+        if (searchInput) searchInput.blur();
+    } else {
+        closeSearchPanel();
+        window.location.hash = 'search/' + encodeURIComponent(query);
+    }
+}
 
 async function initSearch() {
     const searchInput = document.getElementById('searchInput');
@@ -187,11 +223,13 @@ async function initSearch() {
             e.preventDefault();
             selectedIndex = Math.max(selectedIndex - 1, -1);
             updateSelectedResult();
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        } else if (e.key === 'Enter') {
             e.preventDefault();
-            const result = currentResults[selectedIndex];
-            if (result) {
-                navigateToResult(result);
+            if (selectedIndex >= 0) {
+                const result = currentResults[selectedIndex];
+                if (result) navigateToResult(result);
+            } else {
+                openSearchFor(searchInput.value.trim());
             }
         } else if (e.key === 'Escape') {
             searchResults.innerHTML = '';
@@ -229,9 +267,9 @@ async function initSearch() {
 
 function buildSearchIndex() {
     if (!catalog) return;
-    
+
     searchIndex = [];
-    
+
     // Index all texts from catalog
     for (const [category, subcats] of Object.entries(catalog)) {
         for (const [subcat, texts] of Object.entries(subcats)) {
@@ -248,48 +286,199 @@ function buildSearchIndex() {
             }
         }
     }
+
+    // Also index every Tanakh book so search covers Scripture as well as
+    // the anthology. The book list mirrors what showTanakh() lists.
+    for (const book of TANAKH_BOOKS) {
+        searchIndex.push({
+            id: book.id,
+            title_en: book.title_en,
+            title_he: book.title_he || '',
+            category: 'Tanakh',
+            subcategory: book.section || 'Tanakh',
+            type: 'tanakh'
+        });
+    }
+}
+
+// Master list of Tanakh books (id + display names + section). Kept next to
+// the search indexer because both the indexer and the Tanakh browser use it.
+const TANAKH_BOOKS = [
+    { id: 'genesis', title_en: 'Genesis', title_he: 'בראשית', section: 'Torah' },
+    { id: 'exodus', title_en: 'Exodus', title_he: 'שמות', section: 'Torah' },
+    { id: 'leviticus', title_en: 'Leviticus', title_he: 'ויקרא', section: 'Torah' },
+    { id: 'numbers', title_en: 'Numbers', title_he: 'במדבר', section: 'Torah' },
+    { id: 'deuteronomy', title_en: 'Deuteronomy', title_he: 'דברים', section: 'Torah' },
+    { id: 'joshua', title_en: 'Joshua', title_he: 'יהושע', section: 'Prophets' },
+    { id: 'judges', title_en: 'Judges', title_he: 'שופטים', section: 'Prophets' },
+    { id: '1-samuel', title_en: '1 Samuel', title_he: 'שמואל א', section: 'Prophets' },
+    { id: '2-samuel', title_en: '2 Samuel', title_he: 'שמואל ב', section: 'Prophets' },
+    { id: '1-kings', title_en: '1 Kings', title_he: 'מלכים א', section: 'Prophets' },
+    { id: '2-kings', title_en: '2 Kings', title_he: 'מלכים ב', section: 'Prophets' },
+    { id: 'isaiah', title_en: 'Isaiah', title_he: 'ישעיהו', section: 'Prophets' },
+    { id: 'jeremiah', title_en: 'Jeremiah', title_he: 'ירמיהו', section: 'Prophets' },
+    { id: 'ezekiel', title_en: 'Ezekiel', title_he: 'יחזקאל', section: 'Prophets' },
+    { id: 'hosea', title_en: 'Hosea', title_he: 'הושע', section: 'Prophets' },
+    { id: 'joel', title_en: 'Joel', title_he: 'יואל', section: 'Prophets' },
+    { id: 'amos', title_en: 'Amos', title_he: 'עמוס', section: 'Prophets' },
+    { id: 'obadiah', title_en: 'Obadiah', title_he: 'עובדיה', section: 'Prophets' },
+    { id: 'jonah', title_en: 'Jonah', title_he: 'יונה', section: 'Prophets' },
+    { id: 'micah', title_en: 'Micah', title_he: 'מיכה', section: 'Prophets' },
+    { id: 'nahum', title_en: 'Nahum', title_he: 'נחום', section: 'Prophets' },
+    { id: 'habakkuk', title_en: 'Habakkuk', title_he: 'חבקוק', section: 'Prophets' },
+    { id: 'zephaniah', title_en: 'Zephaniah', title_he: 'צפניה', section: 'Prophets' },
+    { id: 'haggai', title_en: 'Haggai', title_he: 'חגי', section: 'Prophets' },
+    { id: 'zechariah', title_en: 'Zechariah', title_he: 'זכריה', section: 'Prophets' },
+    { id: 'malachi', title_en: 'Malachi', title_he: 'מלאכי', section: 'Prophets' },
+    { id: 'psalms', title_en: 'Psalms', title_he: 'תהלים', section: 'Writings' },
+    { id: 'proverbs', title_en: 'Proverbs', title_he: 'משלי', section: 'Writings' },
+    { id: 'job', title_en: 'Job', title_he: 'איוב', section: 'Writings' },
+    { id: 'song-of-songs', title_en: 'Song of Songs', title_he: 'שיר השירים', section: 'Writings' },
+    { id: 'ruth', title_en: 'Ruth', title_he: 'רות', section: 'Writings' },
+    { id: 'lamentations', title_en: 'Lamentations', title_he: 'איכה', section: 'Writings' },
+    { id: 'ecclesiastes', title_en: 'Ecclesiastes', title_he: 'קהלת', section: 'Writings' },
+    { id: 'esther', title_en: 'Esther', title_he: 'אסתר', section: 'Writings' },
+    { id: 'daniel', title_en: 'Daniel', title_he: 'דניאל', section: 'Writings' },
+    { id: 'ezra', title_en: 'Ezra', title_he: 'עזרא', section: 'Writings' },
+    { id: 'nehemiah', title_en: 'Nehemiah', title_he: 'נחמיה', section: 'Writings' },
+    { id: '1-chronicles', title_en: '1 Chronicles', title_he: 'דברי הימים א', section: 'Writings' },
+    { id: '2-chronicles', title_en: '2 Chronicles', title_he: 'דברי הימים ב', section: 'Writings' },
+];
+
+// Collect every english/hebrew string from a text file regardless of layout
+// (flat content, sections, diglot articles/scans, footnotes, captions).
+function collectSearchableText(data) {
+    const parts = [];
+    const walk = (node) => {
+        if (!node) return;
+        if (Array.isArray(node)) {
+            node.forEach(walk);
+            return;
+        }
+        if (typeof node !== 'object') return;
+        for (const key of ['hebrew', 'english', 'transliteration', 'arabic',
+                            'comments', 'caption', 'title', 'byline', 'introduction']) {
+            const v = node[key];
+            if (typeof v === 'string' && v) parts.push(v);
+        }
+        for (const arrKey of ['content', 'articles', 'scans', 'paragraphs']) {
+            if (Array.isArray(node[arrKey])) walk(node[arrKey]);
+        }
+        if (node.sections && typeof node.sections === 'object') {
+            for (const sec of Object.values(node.sections)) walk(sec);
+        }
+    };
+    walk(data);
+    return parts.join(' ');
+}
+
+// Same walk but returns verse-shaped units, each tagged with the section it
+// came from and its index inside that section's ordered content array. This
+// lets a search result jump the reader straight to the matched paragraph.
+function collectSearchableUnits(data) {
+    const units = [];
+    const captureContent = (arr, sectionName) => {
+        if (!Array.isArray(arr)) return;
+        arr.forEach((node, i) => {
+            if (!node || typeof node !== 'object') return;
+            const unit = { _section: sectionName, _index: i };
+            let has = false;
+            for (const key of ['hebrew', 'english', 'transliteration', 'arabic',
+                                'comments', 'caption', 'section_id']) {
+                if (typeof node[key] === 'string' && node[key]) {
+                    unit[key] = node[key];
+                    if (['hebrew', 'english', 'transliteration', 'arabic',
+                         'comments', 'caption'].includes(key)) has = true;
+                }
+            }
+            if (has) units.push(unit);
+        });
+    };
+    if (Array.isArray(data.content)) captureContent(data.content, 'text');
+    if (data.sections && typeof data.sections === 'object') {
+        for (const [name, sec] of Object.entries(data.sections)) {
+            if (!sec) continue;
+            if (Array.isArray(sec.content)) captureContent(sec.content, name);
+            if (Array.isArray(sec.articles)) {
+                sec.articles.forEach((article, ai) => {
+                    (article.scans || []).forEach((scan, si) => {
+                        (scan.paragraphs || []).forEach((p, pi) => {
+                            const unit = {
+                                _section: name,
+                                _article: ai,
+                                _scan: si,
+                                _index: pi,
+                            };
+                            let has = false;
+                            for (const key of ['english', 'comments']) {
+                                if (typeof p[key] === 'string' && p[key]) {
+                                    unit[key] = p[key];
+                                    has = true;
+                                }
+                            }
+                            if (has) units.push(unit);
+                        });
+                    });
+                });
+            }
+        }
+    }
+    return units;
 }
 
 async function loadFullTextIndex() {
     if (!searchIndex) return;
-    
+
     fullTextIndex = {};
-    
-    // Load all text files in parallel (batched)
+
     const batchSize = 20;
     for (let i = 0; i < searchIndex.length; i += batchSize) {
         const batch = searchIndex.slice(i, i + batchSize);
         await Promise.all(batch.map(async (entry) => {
+            const url = entry.type === 'tanakh'
+                ? `data/tanakh/${entry.id}.json`
+                : `data/texts/${entry.id}.json`;
             try {
-                const response = await fetch(`data/texts/${entry.id}.json`);
-                if (response.ok) {
-                    const data = await response.json();
-                    // Build searchable text from content
-                    let fullText = '';
-                    if (data.content) {
-                        for (const verse of data.content) {
-                            if (verse.hebrew) fullText += verse.hebrew + ' ';
-                            if (verse.english) fullText += verse.english + ' ';
-                            if (verse.transliteration) fullText += verse.transliteration + ' ';
+                const response = await fetch(url);
+                if (!response.ok) return;
+                const data = await response.json();
+                let fullText;
+                let units;
+                if (entry.type === 'tanakh') {
+                    const chunks = [];
+                    const flat = [];
+                    for (const ch of data.chapters || []) {
+                        for (const v of ch.verses || []) {
+                            if (v.hebrew) chunks.push(v.hebrew);
+                            if (v.english) chunks.push(v.english);
+                            flat.push({
+                                hebrew: v.hebrew || '',
+                                english: v.english || '',
+                                chapter: ch.chapter,
+                                verse: v.verse
+                            });
                         }
                     }
-                    if (data.introduction) {
-                        fullText += data.introduction + ' ';
-                    }
-                    fullTextIndex[entry.id] = {
-                        text: fullText.toLowerCase(),
-                        textNormalized: normalizeForSearch(fullText),
-                        content: data.content || []
-                    };
+                    fullText = chunks.join(' ');
+                    units = flat;
+                } else {
+                    fullText = collectSearchableText(data);
+                    units = collectSearchableUnits(data);
                 }
+                fullTextIndex[entry.id] = {
+                    text: fullText.toLowerCase(),
+                    textNormalized: normalizeForSearch(fullText),
+                    content: units,
+                    type: entry.type
+                };
             } catch (e) {
-                // Skip files that don't exist
+                // Skip missing files quietly
             }
         }));
     }
-    
+
     searchReady = true;
-    console.log('Full text search index ready:', Object.keys(fullTextIndex).length, 'texts');
+    console.log('Full text search index ready:', Object.keys(fullTextIndex).length, 'documents');
 }
 
 // Generate transliteration variants for fuzzy matching
@@ -389,7 +578,7 @@ function fuzzyMatch(text, query, variants) {
     return { matched: false, exact: false };
 }
 
-async function performSearch(query) {
+async function performSearch(query, limit = 10) {
     if (!searchIndex) return [];
     
     const lowerQuery = query.toLowerCase();
@@ -457,10 +646,27 @@ async function performSearch(query) {
             }
             
             if (matched) {
-                // Find snippet with context
+                const hit = indexed.content.find((u) => {
+                    if (u.english && fuzzyMatch(u.english, query, variants).matched) return true;
+                    if (u.hebrew && u.hebrew.includes(query)) return true;
+                    if (u.transliteration && fuzzyMatch(u.transliteration, query, variants).matched) return true;
+                    if (u.comments && fuzzyMatch(u.comments, query, variants).matched) return true;
+                    if (u.caption && fuzzyMatch(u.caption, query, variants).matched) return true;
+                    return false;
+                });
                 const snippet = findSnippetFuzzy(indexed.content, query, variants);
+                const extra = {};
+                if (entry.type === 'tanakh' && hit && hit.chapter) {
+                    extra.chapter = hit.chapter;
+                } else if (entry.type === 'text' && hit) {
+                    if (hit._section) extra.hitSection = hit._section;
+                    if (typeof hit._index === 'number') extra.hitIndex = hit._index;
+                    if (hit.section_id) extra.hitSectionId = hit.section_id;
+                }
+                if (query) extra.hitQuery = query;
                 results.push({
                     ...entry,
+                    ...extra,
                     score: exact ? 50 : 40,
                     matchType: 'content',
                     snippet
@@ -472,9 +678,8 @@ async function performSearch(query) {
     
     // Sort by score descending
     results.sort((a, b) => b.score - a.score);
-    
-    // Return top 10 results
-    return results.slice(0, 10);
+
+    return Number.isFinite(limit) ? results.slice(0, limit) : results;
 }
 
 function findSnippet(content, query) {
@@ -483,29 +688,20 @@ function findSnippet(content, query) {
 
 function findSnippetFuzzy(content, query, variants) {
     if (!content || !content.length) return '';
-    
-    // Search through verses for a match
+    const fields = ['english', 'transliteration', 'arabic', 'comments', 'caption', 'hebrew'];
     for (const verse of content) {
-        // Check English first
-        if (verse.english) {
-            const match = fuzzyMatch(verse.english, query, variants);
-            if (match.matched) {
-                return extractSnippetFuzzy(verse.english, query, variants);
-            }
-        }
-        // Then Hebrew
-        if (verse.hebrew && verse.hebrew.includes(query)) {
-            return extractSnippetFuzzy(verse.hebrew, query, variants);
-        }
-        // Then transliteration
-        if (verse.transliteration) {
-            const match = fuzzyMatch(verse.transliteration, query, variants);
-            if (match.matched) {
-                return extractSnippetFuzzy(verse.transliteration, query, variants);
+        for (const field of fields) {
+            const value = verse[field];
+            if (typeof value !== 'string' || !value) continue;
+            if (field === 'hebrew') {
+                if (value.includes(query)) return extractSnippetFuzzy(value, query, variants);
+            } else {
+                if (fuzzyMatch(value, query, variants).matched) {
+                    return extractSnippetFuzzy(value, query, variants);
+                }
             }
         }
     }
-    
     return '';
 }
 
@@ -580,8 +776,21 @@ function renderSearchResults(results, query) {
     
     // Store results globally for onclick access
     window.searchResultsData = results;
-    
-    searchResults.innerHTML = html;
+
+    window._pendingSearchQuery = query;
+    const seeAllHtml = `
+        <div class="search-see-all">
+            <button class="search-see-all-btn" onclick="openSearchFor(window._pendingSearchQuery)">
+                See all results in <span id="searchModeBadge">${searchMode === 'panel' ? 'Panel' : 'Page'}</span> ▸
+            </button>
+            <div class="search-mode-toggle" title="Choose how full results open">
+                <button data-mode="page" class="${searchMode === 'page' ? 'active' : ''}" onclick="setSearchMode('page'); event.stopPropagation();">Page</button>
+                <button data-mode="panel" class="${searchMode === 'panel' ? 'active' : ''}" onclick="setSearchMode('panel'); event.stopPropagation();">Panel</button>
+            </div>
+        </div>
+    `;
+
+    searchResults.innerHTML = html + seeAllHtml;
     searchResults.classList.add('visible');
 }
 
@@ -600,8 +809,225 @@ function navigateToResult(result) {
     searchResults.classList.remove('visible');
     
     if (result.type === 'text') {
+        pendingReaderNavigation = {
+            section: result.hitSection,
+            index: result.hitIndex,
+            sectionId: result.hitSectionId,
+            query: result.hitQuery,
+        };
         showText(result.id);
+    } else if (result.type === 'tanakh') {
+        pendingTanakhVerse = null;
+        // Find the verse number of the actual hit inside the chapter to scroll to.
+        const indexed = fullTextIndex && fullTextIndex[result.id];
+        const chapter = result.chapter || 1;
+        if (indexed && result.hitQuery) {
+            const q = result.hitQuery;
+            const variants = getSearchVariants(q);
+            const hit = indexed.content.find((u) => {
+                if (u.chapter !== chapter) return false;
+                if (u.english && fuzzyMatch(u.english, q, variants).matched) return true;
+                if (u.hebrew && u.hebrew.includes(q)) return true;
+                return false;
+            });
+            if (hit && hit.verse) pendingTanakhVerse = hit.verse;
+        }
+        showTanakhBook(result.id, chapter);
     }
+}
+
+let pendingTanakhVerse = null;
+function applyPendingTanakhScroll() {
+    if (!pendingTanakhVerse) return;
+    const verseNum = pendingTanakhVerse;
+    pendingTanakhVerse = null;
+    setTimeout(() => {
+        const el = document.querySelector(`.tanakh-verse[data-verse-num="${verseNum}"]`);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('search-hit-highlight');
+            setTimeout(() => el.classList.remove('search-hit-highlight'), 2400);
+        }
+    }, 80);
+}
+
+let pendingReaderNavigation = null;
+
+function applyPendingReaderNavigation() {
+    if (!pendingReaderNavigation) return;
+    const nav = pendingReaderNavigation;
+    pendingReaderNavigation = null;
+    // If the hit is on a different tab than the current one, switch tabs and
+    // re-render so the target paragraph exists in the DOM.
+    const sectionExists = nav.section === 'text'
+        || (currentText && currentText.sections && currentText.sections[nav.section]);
+    if (nav.section && currentTab !== nav.section && sectionExists) {
+        currentTab = nav.section;
+        pendingReaderNavigation = nav; // reapply after re-render
+        renderText();
+        return;
+    }
+    setTimeout(() => {
+        let target = null;
+        if (nav.sectionId) {
+            target = document.getElementById(nav.sectionId);
+        }
+        if (!target && typeof nav.index === 'number') {
+            target = document.querySelector(`.verse[data-index="${nav.index}"], .text-figure[data-index="${nav.index}"]`);
+        }
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.classList.add('search-hit-highlight');
+            setTimeout(() => target.classList.remove('search-hit-highlight'), 2400);
+        }
+    }, 60);
+}
+
+// ---- Full-page search results ---------------------------------------------
+
+async function waitForSearchReady(maxMs = 6000) {
+    const start = Date.now();
+    while (!searchReady && Date.now() - start < maxMs) {
+        await new Promise((r) => setTimeout(r, 100));
+    }
+}
+
+function searchResultCardHtml(r, index, query) {
+    const titleHtml = highlightMatch(r.title_en || '(untitled)', query);
+    const heHtml = r.title_he ? `<span class="search-result-hebrew">${r.title_he}</span>` : '';
+    const snippetHtml = r.snippet
+        ? `<div class="search-result-snippet">${highlightMatch(r.snippet, query)}</div>`
+        : '';
+    const chapterHint = r.type === 'tanakh' && r.chapter
+        ? ` <span class="search-match-type">chapter ${r.chapter}</span>` : '';
+    const matchLabel = r.matchType === 'content'
+        ? '<span class="search-match-type">in text</span>' : '';
+    const meta = r.type === 'tanakh'
+        ? `Tanakh › ${r.subcategory}`
+        : `${r.category}${r.subcategory !== 'General' ? ' › ' + r.subcategory : ''}`;
+    return `
+        <div class="search-page-card" onclick="navigateToResult(window._pageSearchResults[${index}])">
+            <div class="search-result-title">${titleHtml}${heHtml}${matchLabel}${chapterHint}</div>
+            <div class="search-result-meta">${meta}</div>
+            ${snippetHtml}
+        </div>
+    `;
+}
+
+async function showSearchResultsPage(query) {
+    closeSearchPanel();
+    const app = document.getElementById('app');
+    app.innerHTML = `
+        <div class="search-page">
+            <div class="breadcrumb">
+                <a href="#" onclick="showHome(); return false;">Home</a>
+                <span>›</span>
+                <span>Search</span>
+            </div>
+            <h1 class="search-page-title">Search results for &ldquo;${query}&rdquo;</h1>
+            <div class="search-page-status">Indexing…</div>
+        </div>
+    `;
+    await waitForSearchReady();
+    const results = await performSearch(query, Infinity);
+    window._pageSearchResults = results;
+    const byType = { text: [], tanakh: [] };
+    results.forEach((r) => { (byType[r.type] || (byType[r.type] = [])).push(r); });
+    const sections = [];
+    if (byType.text.length) {
+        sections.push(`
+            <section class="search-page-section">
+                <h2>Texts <span class="search-page-count">${byType.text.length}</span></h2>
+                ${byType.text.map((r) => searchResultCardHtml(r, results.indexOf(r), query)).join('')}
+            </section>
+        `);
+    }
+    if (byType.tanakh.length) {
+        sections.push(`
+            <section class="search-page-section">
+                <h2>Tanakh <span class="search-page-count">${byType.tanakh.length}</span></h2>
+                ${byType.tanakh.map((r) => searchResultCardHtml(r, results.indexOf(r), query)).join('')}
+            </section>
+        `);
+    }
+    const body = results.length
+        ? sections.join('')
+        : `<div class="search-page-empty">No results for &ldquo;${query}&rdquo;.</div>`;
+    app.innerHTML = `
+        <div class="search-page">
+            <div class="breadcrumb">
+                <a href="#" onclick="showHome(); return false;">Home</a>
+                <span>›</span>
+                <span>Search</span>
+            </div>
+            <h1 class="search-page-title">Search results for &ldquo;${query}&rdquo;
+                <span class="search-page-total">${results.length} match${results.length === 1 ? '' : 'es'}</span>
+            </h1>
+            ${body}
+        </div>
+    `;
+}
+
+// ---- Side-panel search ---------------------------------------------------
+
+function ensureSearchPanel() {
+    let panel = document.getElementById('searchPanel');
+    if (panel) return panel;
+    panel = document.createElement('aside');
+    panel.id = 'searchPanel';
+    panel.className = 'search-panel';
+    panel.innerHTML = `
+        <header class="search-panel-header">
+            <div class="search-panel-title">
+                <strong>Search</strong>
+                <span class="search-panel-query"></span>
+            </div>
+            <button class="search-panel-close" onclick="closeSearchPanel()" title="Close">×</button>
+        </header>
+        <div class="search-panel-body"></div>
+    `;
+    document.body.appendChild(panel);
+    return panel;
+}
+
+async function openSearchPanel(query) {
+    panelSearchQuery = query;
+    const panel = ensureSearchPanel();
+    panel.querySelector('.search-panel-query').textContent = `"${query}"`;
+    panel.querySelector('.search-panel-body').innerHTML = '<div class="search-page-status">Indexing…</div>';
+    document.body.classList.add('search-panel-open');
+    await waitForSearchReady();
+    const results = await performSearch(query, Infinity);
+    window._panelSearchResults = results;
+    const items = results.map((r, i) => {
+        const titleHtml = highlightMatch(r.title_en || '(untitled)', query);
+        const heHtml = r.title_he ? `<span class="search-result-hebrew">${r.title_he}</span>` : '';
+        const snippetHtml = r.snippet
+            ? `<div class="search-result-snippet">${highlightMatch(r.snippet, query)}</div>` : '';
+        const chapterHint = r.type === 'tanakh' && r.chapter
+            ? ` <span class="search-match-type">ch. ${r.chapter}</span>` : '';
+        const matchLabel = r.matchType === 'content'
+            ? '<span class="search-match-type">in text</span>' : '';
+        return `
+            <div class="search-panel-item" onclick="navigateToResult(window._panelSearchResults[${i}])">
+                <div class="search-result-title">${titleHtml}${heHtml}${matchLabel}${chapterHint}</div>
+                <div class="search-result-meta">
+                    ${r.type === 'tanakh' ? 'Tanakh › ' + r.subcategory
+                                          : r.category + (r.subcategory !== 'General' ? ' › ' + r.subcategory : '')}
+                </div>
+                ${snippetHtml}
+            </div>
+        `;
+    }).join('');
+    panel.querySelector('.search-panel-body').innerHTML = results.length
+        ? `<div class="search-panel-count">${results.length} result${results.length === 1 ? '' : 's'}</div>${items}`
+        : `<div class="search-page-empty">No results.</div>`;
+}
+
+function closeSearchPanel() {
+    const panel = document.getElementById('searchPanel');
+    if (panel) panel.remove();
+    document.body.classList.remove('search-panel-open');
 }
 
 // Count total texts
@@ -1388,7 +1814,7 @@ function renderText() {
             const commentsAreHebrew = hasComment && isHebrewText(v.comments);
             
             return `
-                <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${isDuplicateContent ? 'duplicate-content' : ''} ${showCommentColumn ? 'with-comment-col' : ''}" 
+                <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${isDuplicateContent ? 'duplicate-content' : ''} ${showCommentColumn ? 'with-comment-col' : ''} ${v.blockquote ? 'is-blockquote' : ''}" 
                      data-index="${i}" 
                      ${v.section_id ? `id="${v.section_id}"` : ''}
                      ${hasTiming ? `data-start="${v.timing.start}" data-end="${v.timing.end}"` : ''}>
@@ -1451,7 +1877,7 @@ function renderText() {
                 const isDuplicateContent = v.hebrew && v.english && v.hebrew.trim() === v.english.trim();
                 
                 return `
-                    <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${isDuplicateContent ? 'duplicate-content' : ''}" 
+                    <div class="verse ${singleColumn ? 'single-column' : ''} ${hasTiming ? 'has-timing' : ''} ${isEnglishOnly ? 'english-only' : ''} ${isHebrewOnly ? 'hebrew-only' : ''} ${isMixedEnglish ? 'mixed-english' : ''} ${isHebrewFootnote ? 'hebrew-footnote' : ''} ${hasLineNumber ? 'has-line-number' : ''} ${isDuplicateContent ? 'duplicate-content' : ''} ${v.blockquote ? 'is-blockquote' : ''}" 
                          data-index="${i}" 
                          ${v.section_id ? `id="${v.section_id}"` : ''}
                          ${hasTiming ? `data-start="${v.timing.start}" data-end="${v.timing.end}"` : ''}>
@@ -1534,6 +1960,7 @@ function renderText() {
         initStickyNotesTracking();
     }
     _readerStickyApply();
+    applyPendingReaderNavigation();
 }
 
 // Format comments/footnotes - keeps [n] as styled inline number instead of superscript
@@ -2502,6 +2929,7 @@ async function renderTanakhChapter() {
         tanakhAudioMode = false;
     }
     _readerStickyApply();
+    applyPendingTanakhScroll();
 }
 
 function prevChapter() {

@@ -234,6 +234,11 @@ def _postprocess_inline(text):
         line = re.sub(r"[ \t\r]+", " ", line).strip()
         cleaned.append(line)
     text = "\n".join(cleaned).strip()
+    # Strip stray LaTeX spacing artifacts (`to15pt`, `to12pt`, etc.) that the
+    # source ebook left in the body copy. They abut real text, so replace with
+    # a single space and collapse any doubled spaces.
+    text = re.sub(r"\s*to\d+pt\s*", " ", text)
+    text = re.sub(r"[ \t]{2,}", " ", text)
     # If a trailing whitespace inside <i>...</i> got trimmed away, restore a
     # single space between an em wrapper and the character that follows it.
     text = re.sub(r"(\}\})([A-Za-z0-9(\[])", r"\1 \2", text)
@@ -572,7 +577,9 @@ def blocks_to_entries(blocks, notes, running_caption_next=False):
 
         if kind == "blockquote":
             text = b["text"].strip()
-            entries.append(_english_only_entry(f"{{{{quote:{text}}}}}", notes))
+            entry = _english_only_entry(text, notes)
+            entry["blockquote"] = True
+            entries.append(entry)
             i += 1
             continue
 
