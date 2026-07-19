@@ -30,10 +30,31 @@ function syncNavbarHeight() {
     document.documentElement.style.setProperty('--navbar-height', `${nav.offsetHeight}px`);
 }
 
+let _readerStickyApply = () => {};
+function initReaderStickyCollapse() {
+    const COLLAPSE_AT = 24;
+    let ticking = false;
+    _readerStickyApply = () => {
+        const collapsed = window.scrollY > COLLAPSE_AT;
+        document.querySelectorAll('.reader-sticky').forEach((el) => {
+            el.classList.toggle('is-scrolled', collapsed);
+        });
+        ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(_readerStickyApply);
+            ticking = true;
+        }
+    }, { passive: true });
+    _readerStickyApply();
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     syncNavbarHeight();
     window.addEventListener('resize', syncNavbarHeight);
+    initReaderStickyCollapse();
     // Load catalog
     try {
         const response = await fetch('data/catalog.json');
@@ -1512,6 +1533,7 @@ function renderText() {
     if (commentsMode === 'panel' && showComments) {
         initStickyNotesTracking();
     }
+    _readerStickyApply();
 }
 
 // Format comments/footnotes - keeps [n] as styled inline number instead of superscript
@@ -2479,6 +2501,7 @@ async function renderTanakhChapter() {
         teardownAudioPlayer();
         tanakhAudioMode = false;
     }
+    _readerStickyApply();
 }
 
 function prevChapter() {

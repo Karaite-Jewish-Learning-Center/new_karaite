@@ -677,6 +677,62 @@ main {
     margin: 0;
 }
 
+/* Compact one-line header when the page has scrolled. Hebrew is pinned to the
+   left, English to the right. Breadcrumb tucks away to save vertical space. */
+.reader-sticky.is-scrolled {
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+.reader-sticky.is-scrolled .breadcrumb {
+    display: none;
+}
+.reader-sticky.is-scrolled .reader-header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    text-align: left;
+}
+.reader-sticky.is-scrolled .reader-header .title-he {
+    font-size: 1.3rem;
+    margin: 0;
+    line-height: 1.2;
+    flex: 0 1 auto;
+    text-align: left;
+}
+.reader-sticky.is-scrolled .reader-header .title-en {
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.2;
+    flex: 0 1 auto;
+    text-align: right;
+}
+/* If a text has no Hebrew title, keep the English title left-aligned. */
+.reader-sticky.is-scrolled .reader-header:not(:has(.title-he)) .title-en {
+    text-align: left;
+}
+@media (max-width: 600px) {
+    .reader-sticky.is-scrolled .reader-header .title-he { font-size: 1.1rem; }
+    .reader-sticky.is-scrolled .reader-header .title-en { font-size: 0.9rem; }
+}
+/* Boost specificity so the collapse also wins inside the Tanakh reader,
+   which has its own header sizing. */
+.tanakh-reader .reader-sticky.is-scrolled .reader-header {
+    justify-content: space-between;
+}
+.tanakh-reader .reader-sticky.is-scrolled .reader-header .title-he {
+    font-size: 1.15rem;
+    text-align: left;
+}
+.tanakh-reader .reader-sticky.is-scrolled .reader-header .title-en {
+    font-size: 0.9rem;
+    text-align: right;
+}
+
 .toggle-btn {
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--border);
